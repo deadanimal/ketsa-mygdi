@@ -1,0 +1,1723 @@
+<div class="header pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-dark d-inline-block mb-0">Pengisian Metadata</h6>
+
+                    <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class=" breadcrumb-item">
+                                <a href="javascript:void(0)"> <i class="fas fa-edit text-dark"> </i> </a>
+                            </li>
+                            <li aria-current="page" class="breadcrumb-item active">
+                                Metadata
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-xl-2 order-xl-2">
+           <!-- <div class="card card-profile">
+                <img alt="Image placeholder" class="card-img-top" src="assets/img/theme/img-1-1000x600.jpg" />
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image">
+                            <a>
+                                <img class="rounded-circle" src="assets/img/default/avatar.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-sm btn-info mr-4" href="javascript:void(0)">
+                            Connect
+                        </a>
+
+                        <a class="btn btn-sm btn-default float-right" href="javascript:void(0)">
+                            Message
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body pt-0">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-profile-stats d-flex justify-content-center">
+                                <div>
+                                    <span class="heading"> 22 </span>
+
+                                    <span class="description"> Friends </span>
+                                </div>
+
+                                <div>
+                                    <span class="heading"> 10 </span>
+
+                                    <span class="description"> Photos </span>
+                                </div>
+
+                                <div>
+                                    <span class="heading"> 89 </span>
+
+                                    <span class="description"> Comments </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <h5 class="h3">
+                            Ali Imran<span class=" font-weight-light"> , 27 </span>
+                        </h5>
+
+                        <div class="h5 font-weight-300">
+                            <i class="fas fa-location-arrow mr-2"> </i> Ampang, Kuala Lumpur
+                        </div>
+
+                        <div class="h5 mt-4">
+                            <i class="fas fa-briefcase mr-2"> </i> IT Manager
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="col-xl-12 order-xl-1">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            
+                            <div class=" form-inline">
+                                <label for="category"class="mb-0 mr-2 " style="font-weight: bold;">Category :</label>
+                
+                                <select class=" form-control form-control-sm" id="category" [(ngModel)]="selectedCat">
+                                  <option *ngFor=" let c of categoryList">{{c.name}}</option>
+    
+                                </select>
+                              </div>
+                        </div>
+
+                        <div class="col-4 text-right">
+                            <!--<a  *ngIf="!editEnabled"  class="btn btn-sm btn-primary" href="javascript:void(0)">
+                                Settings
+                            </a>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form  *ngIf="selectedCat === 'Dataset'">
+                        <!-- <h6 class="heading-small text-muted mb-4">Maklumat Pengguna</h6> -->
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12 ml-auto">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button 
+                                                        aria-controls="collapseOne"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed1" 
+                                                        (click)="isCollapsed1 = !isCollapsed1"
+                                                        id="collapseOne"
+                                                        type="button">
+                                                        1.<span class="tab"></span>GENERAL INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div 
+                                                aria-labelledby="headingOne"
+                                                class="show"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed1"
+                                                id="collapseOne">
+                                                <div class="acard-body opacity-8">
+                                                    <p align="justify" style="text-align:justify">
+                                                    XCESS Portal is an SSM Product Portal that provides online services to supply company and business information registered with SSM.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTwo">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTwo"
+                                                        class="btn btn-link w-100 text-ssm text-left collapsed"
+                                                        [attr.aria-expanded]="!isCollapsed2"
+                                                        (click)="isCollapsed2 = !isCollapsed2"
+                                                        id="collapseTwo"
+                                                        type="button">
+                                                        2.<span class="tab"></span>IDENTIFICATION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div 
+                                                aria-labelledby="headingTwo"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed2"
+                                                id="collapseTwo">
+                                                <div class="acard-body opacity-8">                                        
+                                                        <p align="justify" style="text-align:justify">
+                                                            The XCESS portal can be used on 1 January 2021.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingThree">
+                                                <h5 class="mb-0">
+                                                    <button 
+                                                        aria-controls="collapseThree"
+                                                        class="btn btn-link w-100 text-ssm text-left collapsed"
+                                                        [attr.aria-expanded]="!isCollapsed3"
+                                                        (click)="isCollapsed3 = !isCollapsed3"
+                                                        id="collapseThree"
+                                                        type="button">
+                                                        3.<span class="tab"></span>TOPIC CATEGORY
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div aria-labelledby="headingThree" data-parent="#accordionExample" [isAnimated]="true"
+                                                [collapse]="isCollapsed3" id="collapseThree">
+                                                <div class="acard-body opacity-8">
+                                                   <p>(a) Open the internet browser and type https://ssm4u.com.my.</p>
+                                                   <p>(b) Click “REGISTER” to register and obtain your user ID.</p>
+                                                   <p>(c) Click “SIGN IN” and key in the user ID and password if the user is a registered user of SSM4U.</p>
+                                                   <p>(d) Click icon “XCESS PORTAL”. </p>
+                                                   <p>Skrin Portal XCESS akan dipaparkan.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFour">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFour"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed4"
+                                                        (click)="isCollapsed4 = !isCollapsed4"
+                                                        id="collapseFour"
+                                                        type="button">
+                                                        4.<span class="tab"></span>SPATIAL DOMAIN
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFour"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed4"
+                                                id="collapseFour">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Documents and products available are:</p>
+            
+                                                    <p>(a)  Comapany and Business Profile</p> 
+                                                    <p>(b)	Statutory Document Forms & Images</p> 
+                                                    <p>(c)	Financial Historical/Comparison</p>
+                                                    <p>(d)	Certificate of Incorporation/Registration</p>
+                                                    <p>(e)	Particular of Directors/Officers</p>
+                                                    <p>(f)	Particular of Share Holders</p>
+                                                    <p>(g)	Particular of Registered Address</p>
+                                                    <p>(h)	Particular Change of Name</p>
+                                                    <p>(i)	Particular of Conversion</p>
+                                                    <p>(j)	Particular of Company Secretary</p>
+                                                    <p>(k)	Audit Firm Profile</p>
+                                                    <p>(l)	Company Listing (Bulk Purchase)</p>
+                                                    <p>(m)	Personal Involvement</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFive">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFive"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed5"
+                                                        (click)="isCollapsed5 = !isCollapsed5"
+                                                        id="collapseFive"
+                                                        type="button">
+                                                        5.<span class="tab"></span>BROWSING INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFive"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed5"
+                                                id="collapseFive">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Customers can refer to the Price Schedule available in the XCESS Portal.</p>
+                                                    <p>The price is based on the Companies Regulations 2017, Companies Act 2016.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingSix">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseSix"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed6"
+                                                        (click)="isCollapsed6 = !isCollapsed6"
+                                                        id="collapseSix"
+                                                        type="button">
+                                                        6.<span class="tab"></span>DISTRIBUTION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingSix"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed6"
+                                                id="collapseSix">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Customers can refer to the XCESS Portal manual which can be found on the XCESS Portal.</p>
+            
+                                                    <p>Customers may contact SSM Contact Centre at 03-77214000 / fax 03-77214001 / email to <i>enquiry@ssm.com.my</i>&nbsp; for further explanation.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingSeven">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseSeven"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed7"
+                                                        (click)="isCollapsed7 = !isCollapsed7"
+                                                        id="collapseSeven"
+                                                        type="button">
+                                                        7.<span class="tab"></span>DATA SET IDENTIFICATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingSeven"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed7"
+                                                id="collapseSeven">
+                                                <div class="acard-body opacity-8">
+                                                    <p>SSM Product Portal is best viewed using Chrome latest version, Mozilla latest version and Internet Explorer latest version.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingEight">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseEight"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed8"
+                                                        (click)="isCollapsed8 = !isCollapsed8"
+                                                        id="collapseEight"
+                                                        type="button">
+                                                        8.<span class="tab"></span>REFERENCE SYSTEM INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingEight"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed8"
+                                                id="collapseEight">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingNine">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseNine"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed9"
+                                                        (click)="isCollapsed9 = !isCollapsed9"
+                                                        id="collapseNine"
+                                                        type="button">
+                                                        9.<span class="tab"></span>CONTRAINTS
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingNine"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed9"
+                                                id="collapseNine">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTen"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed10"
+                                                        (click)="isCollapsed10 = !isCollapsed10"
+                                                        id="collapseTen"
+                                                        type="button">
+                                                        10.<span class="tab1"></span>DATA QUALITY
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingTen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed10"
+                                                id="collapseTen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4" /> 
+
+                        <div class="text-right">
+                            <a 
+                                
+                                class="btn btn-default text-white btn-icon btn-3" 
+                                (click)="toggleEdit()"> 
+                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                                <span class="btn-inner--text">Tambah</span>
+                            </a>
+                            <a 
+                                
+                                class="btn btn-success text-white btn-icon btn-3" 
+                                (click)="confirm()"> 
+                                <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
+                                <span class="btn-inner--text">Simpan</span>
+                            </a>
+                            <a
+                                
+                                class="btn btn-danger text-white btn-icon btn-3" 
+                                (click)="toggleEdit()"> 
+                                <span class="btn-inner--icon"><i class="fa fa-paper-plane"></i></span>
+                                <span class="btn-inner--text">Hantar</span>
+                            </a>
+                        </div>
+
+                    </form>
+                    <form  *ngIf="selectedCat === 'Services'">
+                        <!-- <h6 class="heading-small text-muted mb-4">Maklumat Pengguna</h6> -->
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12 ml-auto">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button 
+                                                        aria-controls="collapseOne"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed1" 
+                                                        (click)="isCollapsed1 = !isCollapsed1"
+                                                        id="collapseOne"
+                                                        type="button">
+                                                        1.<span class="tab"></span>GENERAL INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div 
+                                                aria-labelledby="headingOne"
+                                                class="show"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed1"
+                                                id="collapseOne">
+                                                <div class="acard-body opacity-8">
+                                                    <p align="justify" style="text-align:justify">
+                                                    XCESS Portal is an SSM Product Portal that provides online services to supply company and business information registered with SSM.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTwo">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTwo"
+                                                        class="btn btn-link w-100 text-ssm text-left collapsed"
+                                                        [attr.aria-expanded]="!isCollapsed2"
+                                                        (click)="isCollapsed2 = !isCollapsed2"
+                                                        id="collapseTwo"
+                                                        type="button">
+                                                        2.<span class="tab"></span>IDENTIFICATION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div 
+                                                aria-labelledby="headingTwo"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed2"
+                                                id="collapseTwo">
+                                                <div class="acard-body opacity-8">                                        
+                                                        <p align="justify" style="text-align:justify">
+                                                            The XCESS portal can be used on 1 January 2021.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingThree">
+                                                <h5 class="mb-0">
+                                                    <button 
+                                                        aria-controls="collapseThree"
+                                                        class="btn btn-link w-100 text-ssm text-left collapsed"
+                                                        [attr.aria-expanded]="!isCollapsed3"
+                                                        (click)="isCollapsed3 = !isCollapsed3"
+                                                        id="collapseThree"
+                                                        type="button">
+                                                        3.<span class="tab"></span>TOPIC CATEGORY
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div aria-labelledby="headingThree" data-parent="#accordionExample" [isAnimated]="true"
+                                                [collapse]="isCollapsed3" id="collapseThree">
+                                                <div class="acard-body opacity-8">
+                                                   <p>(a) Open the internet browser and type https://ssm4u.com.my.</p>
+                                                   <p>(b) Click “REGISTER” to register and obtain your user ID.</p>
+                                                   <p>(c) Click “SIGN IN” and key in the user ID and password if the user is a registered user of SSM4U.</p>
+                                                   <p>(d) Click icon “XCESS PORTAL”. </p>
+                                                   <p>Skrin Portal XCESS akan dipaparkan.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFour">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFour"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed4"
+                                                        (click)="isCollapsed4 = !isCollapsed4"
+                                                        id="collapseFour"
+                                                        type="button">
+                                                        4.<span class="tab"></span>SPATIAL DOMAIN
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFour"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed4"
+                                                id="collapseFour">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Documents and products available are:</p>
+            
+                                                    <p>(a)  Comapany and Business Profile</p> 
+                                                    <p>(b)	Statutory Document Forms & Images</p> 
+                                                    <p>(c)	Financial Historical/Comparison</p>
+                                                    <p>(d)	Certificate of Incorporation/Registration</p>
+                                                    <p>(e)	Particular of Directors/Officers</p>
+                                                    <p>(f)	Particular of Share Holders</p>
+                                                    <p>(g)	Particular of Registered Address</p>
+                                                    <p>(h)	Particular Change of Name</p>
+                                                    <p>(i)	Particular of Conversion</p>
+                                                    <p>(j)	Particular of Company Secretary</p>
+                                                    <p>(k)	Audit Firm Profile</p>
+                                                    <p>(l)	Company Listing (Bulk Purchase)</p>
+                                                    <p>(m)	Personal Involvement</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFive">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFive"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed5"
+                                                        (click)="isCollapsed5 = !isCollapsed5"
+                                                        id="collapseFive"
+                                                        type="button">
+                                                        5.<span class="tab"></span>BROWSING INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFive"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed5"
+                                                id="collapseFive">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Customers can refer to the Price Schedule available in the XCESS Portal.</p>
+                                                    <p>The price is based on the Companies Regulations 2017, Companies Act 2016.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingSix">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseSix"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed6"
+                                                        (click)="isCollapsed6 = !isCollapsed6"
+                                                        id="collapseSix"
+                                                        type="button">
+                                                        6.<span class="tab"></span>DISTRIBUTION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingSix"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed6"
+                                                id="collapseSix">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Customers can refer to the XCESS Portal manual which can be found on the XCESS Portal.</p>
+            
+                                                    <p>Customers may contact SSM Contact Centre at 03-77214000 / fax 03-77214001 / email to <i>enquiry@ssm.com.my</i>&nbsp; for further explanation.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingSeven">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseSeven"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed7"
+                                                        (click)="isCollapsed7 = !isCollapsed7"
+                                                        id="collapseSeven"
+                                                        type="button">
+                                                        7.<span class="tab"></span>DATA SET IDENTIFICATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingSeven"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed7"
+                                                id="collapseSeven">
+                                                <div class="acard-body opacity-8">
+                                                    <p>SSM Product Portal is best viewed using Chrome latest version, Mozilla latest version and Internet Explorer latest version.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingEight">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseEight"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed8"
+                                                        (click)="isCollapsed8 = !isCollapsed8"
+                                                        id="collapseEight"
+                                                        type="button">
+                                                        8.<span class="tab"></span>REFERENCE SYSTEM INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingEight"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed8"
+                                                id="collapseEight">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingNine">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseNine"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed9"
+                                                        (click)="isCollapsed9 = !isCollapsed9"
+                                                        id="collapseNine"
+                                                        type="button">
+                                                        9.<span class="tab"></span>CONTRAINTS
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingNine"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed9"
+                                                id="collapseNine">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTen"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed10"
+                                                        (click)="isCollapsed10 = !isCollapsed10"
+                                                        id="collapseTen"
+                                                        type="button">
+                                                        10.<span class="tab1"></span>DATA QUALITY
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingTen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed10"
+                                                id="collapseTen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4" /> 
+
+                        <div class="text-right">
+                            <a 
+                                
+                                class="btn btn-default text-white btn-icon btn-3" 
+                                (click)="toggleEdit()"> 
+                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                                <span class="btn-inner--text">Tambah</span>
+                            </a>
+                            <a 
+                                
+                                class="btn btn-success text-white btn-icon btn-3" 
+                                (click)="confirm()"> 
+                                <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
+                                <span class="btn-inner--text">Simpan</span>
+                            </a>
+                            <a
+                                
+                                class="btn btn-danger text-white btn-icon btn-3" 
+                                (click)="toggleEdit()"> 
+                                <span class="btn-inner--icon"><i class="fa fa-paper-plane"></i></span>
+                                <span class="btn-inner--text">Hantar</span>
+                            </a>
+                        </div>
+
+                    </form>
+                    
+                    <form  *ngIf="selectedCat === 'Imagery'">
+                        <!-- <h6 class="heading-small text-muted mb-4">Maklumat Pengguna</h6> -->
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12 ml-auto">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button 
+                                                        aria-controls="collapseOne"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed1" 
+                                                        (click)="isCollapsed1 = !isCollapsed1"
+                                                        id="collapseOne"
+                                                        type="button">
+                                                        1.<span class="tab"></span>GENERAL INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div 
+                                                aria-labelledby="headingOne"
+                                                class="show"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed1"
+                                                id="collapseOne">
+                                                <div class="acard-body opacity-8">
+                                                    <p align="justify" style="text-align:justify">
+                                                    XCESS Portal is an SSM Product Portal that provides online services to supply company and business information registered with SSM.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTwo">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTwo"
+                                                        class="btn btn-link w-100 text-ssm text-left collapsed"
+                                                        [attr.aria-expanded]="!isCollapsed2"
+                                                        (click)="isCollapsed2 = !isCollapsed2"
+                                                        id="collapseTwo"
+                                                        type="button">
+                                                        2.<span class="tab"></span>IDENTIFICATION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div 
+                                                aria-labelledby="headingTwo"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed2"
+                                                id="collapseTwo">
+                                                <div class="acard-body opacity-8">                                        
+                                                        <p align="justify" style="text-align:justify">
+                                                            The XCESS portal can be used on 1 January 2021.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingThree">
+                                                <h5 class="mb-0">
+                                                    <button 
+                                                        aria-controls="collapseThree"
+                                                        class="btn btn-link w-100 text-ssm text-left collapsed"
+                                                        [attr.aria-expanded]="!isCollapsed3"
+                                                        (click)="isCollapsed3 = !isCollapsed3"
+                                                        id="collapseThree"
+                                                        type="button">
+                                                        3.<span class="tab"></span>TOPIC CATEGORY
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div aria-labelledby="headingThree" data-parent="#accordionExample" [isAnimated]="true"
+                                                [collapse]="isCollapsed3" id="collapseThree">
+                                                <div class="acard-body opacity-8">
+                                                   <p>(a) Open the internet browser and type https://ssm4u.com.my.</p>
+                                                   <p>(b) Click “REGISTER” to register and obtain your user ID.</p>
+                                                   <p>(c) Click “SIGN IN” and key in the user ID and password if the user is a registered user of SSM4U.</p>
+                                                   <p>(d) Click icon “XCESS PORTAL”. </p>
+                                                   <p>Skrin Portal XCESS akan dipaparkan.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFour">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFour"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed4"
+                                                        (click)="isCollapsed4 = !isCollapsed4"
+                                                        id="collapseFour"
+                                                        type="button">
+                                                        4.<span class="tab"></span>NOMINAL RESOLUTION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFour"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed4"
+                                                id="collapseFour">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Documents and products available are:</p>
+            
+                                                    <p>(a)  Comapany and Business Profile</p> 
+                                                    <p>(b)	Statutory Document Forms & Images</p> 
+                                                    <p>(c)	Financial Historical/Comparison</p>
+                                                    <p>(d)	Certificate of Incorporation/Registration</p>
+                                                    <p>(e)	Particular of Directors/Officers</p>
+                                                    <p>(f)	Particular of Share Holders</p>
+                                                    <p>(g)	Particular of Registered Address</p>
+                                                    <p>(h)	Particular Change of Name</p>
+                                                    <p>(i)	Particular of Conversion</p>
+                                                    <p>(j)	Particular of Company Secretary</p>
+                                                    <p>(k)	Audit Firm Profile</p>
+                                                    <p>(l)	Company Listing (Bulk Purchase)</p>
+                                                    <p>(m)	Personal Involvement</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFive">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFive"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed5"
+                                                        (click)="isCollapsed5 = !isCollapsed5"
+                                                        id="collapseFive"
+                                                        type="button">
+                                                        5.<span class="tab"></span>PROCESS STEP INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFive"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed5"
+                                                id="collapseFive">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Customers can refer to the Price Schedule available in the XCESS Portal.</p>
+                                                    <p>The price is based on the Companies Regulations 2017, Companies Act 2016.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingSix">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseSix"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed6"
+                                                        (click)="isCollapsed6 = !isCollapsed6"
+                                                        id="collapseSix"
+                                                        type="button">
+                                                        6.<span class="tab"></span>SPATIAL REPRESENTATION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingSix"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed6"
+                                                id="collapseSix">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Customers can refer to the XCESS Portal manual which can be found on the XCESS Portal.</p>
+            
+                                                    <p>Customers may contact SSM Contact Centre at 03-77214000 / fax 03-77214001 / email to <i>enquiry@ssm.com.my</i>&nbsp; for further explanation.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingSeven">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseSeven"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed7"
+                                                        (click)="isCollapsed7 = !isCollapsed7"
+                                                        id="collapseSeven"
+                                                        type="button">
+                                                        7.<span class="tab"></span>CONTENT INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingSeven"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed7"
+                                                id="collapseSeven">
+                                                <div class="acard-body opacity-8">
+                                                    <p>SSM Product Portal is best viewed using Chrome latest version, Mozilla latest version and Internet Explorer latest version.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingEight">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseEight"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed8"
+                                                        (click)="isCollapsed8 = !isCollapsed8"
+                                                        id="collapseEight"
+                                                        type="button">
+                                                        8.<span class="tab"></span>AQCUISITION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingEight"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed8"
+                                                id="collapseEight">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingNine">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseNine"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed9"
+                                                        (click)="isCollapsed9 = !isCollapsed9"
+                                                        id="collapseNine"
+                                                        type="button">
+                                                        9.<span class="tab"></span>SPATIAL DOMAIN
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingNine"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed9"
+                                                id="collapseNine">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTen"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed10"
+                                                        (click)="isCollapsed10 = !isCollapsed10"
+                                                        id="collapseTen"
+                                                        type="button">
+                                                        10.<span class="tab1"></span>BROWSING INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingTen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed10"
+                                                id="collapseTen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingEleven">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseEleven"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed11"
+                                                        (click)="isCollapsed11 = !isCollapsed11"
+                                                        id="collapseEleven"
+                                                        type="button">
+                                                        11.<span class="tab1"></span>DISTRIBUTION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingEleven"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed11"
+                                                id="collapseEleven">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTwelve">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTwelve"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed12"
+                                                        (click)="isCollapsed12 = !isCollapsed12"
+                                                        id="collapseTwelve"
+                                                        type="button">
+                                                        12.<span class="tab1"></span>DATA SET IDENTIFICATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingTwelve"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed12"
+                                                id="collapseTwelve">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingThirteen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTwelve"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed13"
+                                                        (click)="isCollapsed13 = !isCollapsed13"
+                                                        id="collapseThirteen"
+                                                        type="button">
+                                                        13.<span class="tab1"></span>REFERENCE SYSTEM INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingThirteen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed13"
+                                                id="collapseThirteen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFourteen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFourteen"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed14"
+                                                        (click)="isCollapsed14 = !isCollapsed14"
+                                                        id="collapseFourteen"
+                                                        type="button">
+                                                        14.<span class="tab1"></span>CONSTRAINTS
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFourteen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed14"
+                                                id="collapseFourteen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFifteen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFifteen"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed15"
+                                                        (click)="isCollapsed15 = !isCollapsed15"
+                                                        id="collapseFifteen"
+                                                        type="button">
+                                                        15.<span class="tab1"></span>DATA QUALITY
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFifteen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed15"
+                                                id="collapseFifteen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4" /> 
+
+                        <div class="text-right">
+                            <a 
+                                
+                                class="btn btn-default text-white btn-icon btn-3" 
+                                (click)="toggleEdit()"> 
+                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                                <span class="btn-inner--text">Tambah</span>
+                            </a>
+                            <a 
+                                
+                                class="btn btn-success text-white btn-icon btn-3" 
+                                (click)="confirm()"> 
+                                <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
+                                <span class="btn-inner--text">Simpan</span>
+                            </a>
+                            <a
+                                
+                                class="btn btn-danger text-white btn-icon btn-3" 
+                                (click)="toggleEdit()"> 
+                                <span class="btn-inner--icon"><i class="fa fa-paper-plane"></i></span>
+                                <span class="btn-inner--text">Hantar</span>
+                            </a>
+                        </div>
+
+                    </form>
+                    <form  *ngIf="selectedCat === 'Gridded'">
+                        <!-- <h6 class="heading-small text-muted mb-4">Maklumat Pengguna</h6> -->
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12 ml-auto">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button 
+                                                        aria-controls="collapseOne"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed1" 
+                                                        (click)="isCollapsed1 = !isCollapsed1"
+                                                        id="collapseOne"
+                                                        type="button">
+                                                        1.<span class="tab"></span>GENERAL INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div 
+                                                aria-labelledby="headingOne"
+                                                class="show"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed1"
+                                                id="collapseOne">
+                                                <div class="acard-body opacity-8">
+                                                    <p align="justify" style="text-align:justify">
+                                                    XCESS Portal is an SSM Product Portal that provides online services to supply company and business information registered with SSM.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTwo">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTwo"
+                                                        class="btn btn-link w-100 text-ssm text-left collapsed"
+                                                        [attr.aria-expanded]="!isCollapsed2"
+                                                        (click)="isCollapsed2 = !isCollapsed2"
+                                                        id="collapseTwo"
+                                                        type="button">
+                                                        2.<span class="tab"></span>IDENTIFICATION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div 
+                                                aria-labelledby="headingTwo"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed2"
+                                                id="collapseTwo">
+                                                <div class="acard-body opacity-8">                                        
+                                                        <p align="justify" style="text-align:justify">
+                                                            The XCESS portal can be used on 1 January 2021.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingThree">
+                                                <h5 class="mb-0">
+                                                    <button 
+                                                        aria-controls="collapseThree"
+                                                        class="btn btn-link w-100 text-ssm text-left collapsed"
+                                                        [attr.aria-expanded]="!isCollapsed3"
+                                                        (click)="isCollapsed3 = !isCollapsed3"
+                                                        id="collapseThree"
+                                                        type="button">
+                                                        3.<span class="tab"></span>TOPIC CATEGORY
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div aria-labelledby="headingThree" data-parent="#accordionExample" [isAnimated]="true"
+                                                [collapse]="isCollapsed3" id="collapseThree">
+                                                <div class="acard-body opacity-8">
+                                                   <p>(a) Open the internet browser and type https://ssm4u.com.my.</p>
+                                                   <p>(b) Click “REGISTER” to register and obtain your user ID.</p>
+                                                   <p>(c) Click “SIGN IN” and key in the user ID and password if the user is a registered user of SSM4U.</p>
+                                                   <p>(d) Click icon “XCESS PORTAL”. </p>
+                                                   <p>Skrin Portal XCESS akan dipaparkan.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFour">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFour"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed4"
+                                                        (click)="isCollapsed4 = !isCollapsed4"
+                                                        id="collapseFour"
+                                                        type="button">
+                                                        4.<span class="tab"></span>NOMINAL RESOLUTION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFour"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed4"
+                                                id="collapseFour">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Documents and products available are:</p>
+            
+                                                    <p>(a)  Comapany and Business Profile</p> 
+                                                    <p>(b)	Statutory Document Forms & Images</p> 
+                                                    <p>(c)	Financial Historical/Comparison</p>
+                                                    <p>(d)	Certificate of Incorporation/Registration</p>
+                                                    <p>(e)	Particular of Directors/Officers</p>
+                                                    <p>(f)	Particular of Share Holders</p>
+                                                    <p>(g)	Particular of Registered Address</p>
+                                                    <p>(h)	Particular Change of Name</p>
+                                                    <p>(i)	Particular of Conversion</p>
+                                                    <p>(j)	Particular of Company Secretary</p>
+                                                    <p>(k)	Audit Firm Profile</p>
+                                                    <p>(l)	Company Listing (Bulk Purchase)</p>
+                                                    <p>(m)	Personal Involvement</p>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFive">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFive"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed5"
+                                                        (click)="isCollapsed5 = !isCollapsed5"
+                                                        id="collapseFive"
+                                                        type="button">
+                                                        5.<span class="tab"></span>PROCESS STEP INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFive"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed5"
+                                                id="collapseFive">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Customers can refer to the Price Schedule available in the XCESS Portal.</p>
+                                                    <p>The price is based on the Companies Regulations 2017, Companies Act 2016.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingSix">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseSix"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed6"
+                                                        (click)="isCollapsed6 = !isCollapsed6"
+                                                        id="collapseSix"
+                                                        type="button">
+                                                        6.<span class="tab"></span>SPATIAL REPRESENTATION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingSix"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed6"
+                                                id="collapseSix">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Customers can refer to the XCESS Portal manual which can be found on the XCESS Portal.</p>
+            
+                                                    <p>Customers may contact SSM Contact Centre at 03-77214000 / fax 03-77214001 / email to <i>enquiry@ssm.com.my</i>&nbsp; for further explanation.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingSeven">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseSeven"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed7"
+                                                        (click)="isCollapsed7 = !isCollapsed7"
+                                                        id="collapseSeven"
+                                                        type="button">
+                                                        7.<span class="tab"></span>CONTENT INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingSeven"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed7"
+                                                id="collapseSeven">
+                                                <div class="acard-body opacity-8">
+                                                    <p>SSM Product Portal is best viewed using Chrome latest version, Mozilla latest version and Internet Explorer latest version.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingEight">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseEight"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed8"
+                                                        (click)="isCollapsed8 = !isCollapsed8"
+                                                        id="collapseEight"
+                                                        type="button">
+                                                        8.<span class="tab"></span>AQCUISITION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingEight"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed8"
+                                                id="collapseEight">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingNine">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseNine"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed9"
+                                                        (click)="isCollapsed9 = !isCollapsed9"
+                                                        id="collapseNine"
+                                                        type="button">
+                                                        9.<span class="tab"></span>SPATIAL DOMAIN
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingNine"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed9"
+                                                id="collapseNine">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTen"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed10"
+                                                        (click)="isCollapsed10 = !isCollapsed10"
+                                                        id="collapseTen"
+                                                        type="button">
+                                                        10.<span class="tab1"></span>BROWSING INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingTen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed10"
+                                                id="collapseTen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingEleven">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseEleven"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed11"
+                                                        (click)="isCollapsed11 = !isCollapsed11"
+                                                        id="collapseEleven"
+                                                        type="button">
+                                                        11.<span class="tab1"></span>DISTRIBUTION INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingEleven"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed11"
+                                                id="collapseEleven">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingTwelve">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTwelve"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed12"
+                                                        (click)="isCollapsed12 = !isCollapsed12"
+                                                        id="collapseTwelve"
+                                                        type="button">
+                                                        12.<span class="tab1"></span>DATA SET IDENTIFICATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingTwelve"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed12"
+                                                id="collapseTwelve">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingThirteen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseTwelve"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed13"
+                                                        (click)="isCollapsed13 = !isCollapsed13"
+                                                        id="collapseThirteen"
+                                                        type="button">
+                                                        13.<span class="tab1"></span>REFERENCE SYSTEM INFORMATION
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingThirteen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed13"
+                                                id="collapseThirteen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFourteen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFourteen"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed14"
+                                                        (click)="isCollapsed14 = !isCollapsed14"
+                                                        id="collapseFourteen"
+                                                        type="button">
+                                                        14.<span class="tab1"></span>CONSTRAINTS
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFourteen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed14"
+                                                id="collapseFourteen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="acard">
+                                            <div class="acard-header" id="headingFifteen">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        aria-controls="collapseFifteen"
+                                                        class="btn btn-link w-100 text-ssm text-left"
+                                                        [attr.aria-expanded]="!isCollapsed15"
+                                                        (click)="isCollapsed15 = !isCollapsed15"
+                                                        id="collapseFifteen"
+                                                        type="button">
+                                                        15.<span class="tab1"></span>DATA QUALITY
+                                                        <i class=" float-right pt-1"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                aria-labelledby="headingFifteen"
+                                                data-parent="#accordionExample"
+                                                [isAnimated]="true"
+                                                [collapse]="isCollapsed15"
+                                                id="collapseFifteen">
+                                                <div class="acard-body opacity-8">
+                                                    <p>Refund application is only allowed if there is an error of information or data on the document / product that has been purchased.</p>
+            
+                                                    <p>Any inquiries and complaints on this matter should be submitted to <i>enquiry@ssm.com.my</i> &nbsp; for the further action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4" /> 
+
+                        <div class="text-right">
+                            <a 
+                                
+                                class="btn btn-default text-white btn-icon btn-3" 
+                                (click)="toggleEdit()"> 
+                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                                <span class="btn-inner--text">Tambah</span>
+                            </a>
+                            <a 
+                                
+                                class="btn btn-success text-white btn-icon btn-3" 
+                                (click)="confirm()"> 
+                                <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
+                                <span class="btn-inner--text">Simpan</span>
+                            </a>
+                            <a
+                                
+                                class="btn btn-danger text-white btn-icon btn-3" 
+                                (click)="toggleEdit()"> 
+                                <span class="btn-inner--icon"><i class="fa fa-paper-plane"></i></span>
+                                <span class="btn-inner--text">Hantar</span>
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

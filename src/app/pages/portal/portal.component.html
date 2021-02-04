@@ -1,0 +1,161 @@
+
+<nav class="navbar navbar-horizontal navbar-expand-lg fixed-top navbar-dark" style="background-color: #FFAD29; ">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/dashboards/dashboard']">
+      <img src="assets/img/logo/mygdi-logo.png"/>
+    </a>
+    <a [routerLink]="['/dashboards/dashboard']">MyGeo Explorer</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar-collapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+      <span class="navbar-toggler-icon fg-dark"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      id="collapseBasic" [collapse]="isCollapsed">
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a style="color: black;" [routerLink]="['/dashboards/dashboard']">
+              <img src="assets/img/logo/mygdi-logo.png"/>MyGeo Explorer
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbar-collapse"
+              aria-controls="navbar-collapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              (click)="isCollapsed = !isCollapsed">
+              <span></span> <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav ml-lg-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLink]="['/auth/login']">
+            <span class="nav-link-inner--text">LOG MASUK</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLink]="['/auth/register']">
+            <span class="nav-link-inner--text">DAFTAR</span>
+          </a>
+        </li>
+        <li class="nav-item">
+            <a
+              class="nav-link help"
+              routerLinkActive="active"
+              [routerLink]="['/auth/login']">
+              <span class="nav-link-inner--text "><img height="30" src="assets/img/icons/common/faq-black-icon.png"/></span>
+              
+            </a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <section class="mt-6" style="background-image: url('assets/img/theme/global.png');"> 
+    <div class="container-fluid">
+      <div class="row row-grid align-items-center">
+        <div class="col-md-2 order-md-3 mt-4 float-right">
+          <div class="form-group">
+            <div class="card bcard square rounded-circle mr-4 mt-4 float-right">
+              <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
+                <img height="50" src="assets/img/icons/common/metadata.png"/>
+              </div>
+              <h4 class="text-white text-center mt-2">Metadata</h4>
+            </div>
+            <div class="card gcard square rounded-circle mr-4 mt-4 float-right">
+              <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
+                <img height="50" src="assets/img/icons/common/dataapp.png"/>
+              </div>
+              <h4 class="text-white text-center mt-2">Permohonan Data Asas</h4>
+            </div>
+            <div class="card rcard square rounded-circle mr-4 mt-4 float-right">
+              <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
+                <img height="50" src="assets/img/icons/common/tutorial.png"/>
+              </div>
+              <h4 class="text-white text-center mt-2">Tutorial</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 order-md-2">
+          
+        </div>
+        
+        <div class="col-md-3 order-md-1 d-block">
+          <div class="card ml-4" style="width: fit-content; height:auto; background-color: rgba(255, 255, 255, 0.253);">
+            <div class="card-header">
+              <h2 class=" mr-4 mt-3 text-yellow"><i class="fa fa-bullhorn fa-spin"></i> Pengumuman</h2>
+            </div>
+            <div class="card-body scroll">
+              <div class="pl-md-2">
+                  <span style="color:#FFE802;">1 JAN 2021</span>
+                  <p class="text-white">Makluman: <br>
+                  Selamat tahun baru kepada semua pengguna MyGeo Explorer</p>
+                  <span style="color:#FFE802;">25 DIS 2020</span>
+                  <p class="text-white">Peringatan: <br>
+                  Agensi hendaklah mengemaskini metadata masing-masing</p>
+                  <span style="color:#FFE802;">23 DIS 2020</span>
+                  <p class="text-white">Metadata Baharu: <br>
+                  Grid for Climate Change Projection for Peninsular Malaysia</p>
+                  <span style="color:#FFE802;">21 DIS 2020</span>
+                  <p class="text-white">Pengemaskinian: <br>
+                  Climate Change Projection for Peninsular Malaysia (2010-2099)</p>
+                  <span style="color:#FFE802;">18 DIS 2020</span>
+                  <p class="text-white">Metadata Baharu: Taman Laut Negeri Terengganu</p> <br>
+              </div>
+            </div>
+            <div class="card-footer">
+              <a [routerLink]="['/widgets']"
+                  class="font-weight-bold text-orange float-right">Papar Semua >></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer " style="background: #0A80B6;">
+		<div class="container-fluid">
+			<div class="row align-items-center justify-content-xl-between ">
+				<div class="col-xl-6">
+					<div class="copyright text-xl-left text-white ">
+						Penafian | Penyataan Privasi <br>
+						Hakcipta Terpelihara
+						&copy; {{ test | date: "yyyy" }}. Pusat Geospatial Malaysia.<br>
+						<br>
+						Jumlah Pelawat: 
+						<span style="color:#FFE802;">1,098,034</span>
+					</div>
+				</div>
+				<div class="col-xl-6">
+					<div class="copyright text-xl-right text-white">
+						Sebarang pertanyaan, boleh menghubungi:<br>
+						<br>
+						<i class="fas fa-envelope"></i>	
+						adminexplorer@ketsa.gov.my<br>
+						Masa Operasi: 8.00 Pagi - 5.00 Petang
+					</div>
+				</div>
+		</div>
+		</div>
+		
+	</footer>

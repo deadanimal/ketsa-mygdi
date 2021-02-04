@@ -1,0 +1,23 @@
+
+
+  .card-header
+{
+    margin-bottom: 0;
+    padding: 0.1rem .1rem;
+
+    border-bottom: 1px solid rgba(0, 0, 0, .05); 
+    background-color: #fff;
+}
+.card-header:first-child
+{
+    border-radius: calc(.375rem - 1px) calc(.375rem - 1px) 0 0;
+}
+.card-header + .list-group .list-group-item:first-child
+{
+    border-top: 0;
+}
+
+.card
+{
+    margin-bottom: 0;
+}
