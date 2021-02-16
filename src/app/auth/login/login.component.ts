@@ -21,11 +21,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   loginFormMessages = {
     'username': [
-      { type: 'required', message: 'Masukkan ID pengguna' },
+      { type: 'required', message: '**Masukkan ID pengguna' },
       { type: 'email', message: 'Masukkan emel yang sah'}
     ],
     'password': [
-      { type: 'required', message: 'Masukkan kata laluan' },
+      { type: 'required', message: '**Masukkan kata laluan' },
       { type: 'minLength', message: 'Password must have at least 8 characters' }
     ]
   }
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       return this.router.navigate(['/auth/register'])
     }
     else if (path == 'dashboard-admin') {
-      return this.router.navigate(['/admin/dashboard'])
+      return this.router.navigate(['/global/profile'])
     }
     else if (path == 'dashboard-user') {
       return this.router.navigate(['/user/dashboard'])

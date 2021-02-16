@@ -1,25 +1,47 @@
 <ngx-loading-bar></ngx-loading-bar>
 <section class="bgg"> 
-    <div class="container-fluid p-8">
+    <div class="container-fluid">
       <div class="row row-grid align-items-center">
-        <div class="col-md-6 order-md-3 float-right">
-          
+        <div class="col-md-2 order-md-3 float-right">
+            <div class="form-group">
+                <div class="card bcard square rounded-circle mr-4 mt-4 float-right">
+                  <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
+                    <img height="50" src="assets/img/icons/common/metadata.png"/>
+                  </div>
+                  <h4 class="text-yellow text-center mt-2">Metadata</h4>
+                </div>
+                <div class="card gcard square rounded-circle mr-4 mt-4 float-right">
+                  <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
+                    <img height="50" src="assets/img/icons/common/dataapp.png"/>
+                  </div>
+                  <h4 class="text-yellow text-center mt-2">Data Asas</h4>
+                </div>
+                <div class="card rcard square rounded-circle mr-4 mt-4 float-right">
+                  <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
+                    <img height="50" src="assets/img/icons/common/tutorial.png"/>
+                  </div>
+                  <h4 class="text-yellow text-center mt-2">Tutorial</h4>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-4 order-md-2">
+
         </div>
         
-        <div class="col-md-5 order-md-1">
-            <div class="card mt-3 ">
+        <div class="col-md-6 order-md-1 p-8">
+            <div class="card" style="background-color: rgba(255, 255, 255, 0.2);">
                 
                 <div class="card-body px-lg-5 py-lg-5">
                     <!--<div class="logo-box">
                         <img class="logo" [src]="">
                     </div>-->
-                    <div class="text-white">
+                    <div class="text-white" style="font-size: 17px;">
                         <span>Maklumat geospatial kini dihujung jari anda.</span><br>
                         <span>Log Masuk.</span>
                     <br><br>
                     </div>
-                    <div>
-                        <a class="text-yellow mb-4" (click)="navigatePage('register')">
+                    <div class="mb-4">
+                        <a class="text-yellow" (click)="navigatePage('register')">
                             Pengguna Baru? Daftar sekarang.
                         </a>
                     </div>
@@ -42,7 +64,7 @@
                             </div>
                             <ng-container *ngFor="let message of loginFormMessages.username">
                                 <div *ngIf="loginForm.get('username').hasError(message.type) && (loginForm.get('username').dirty || loginForm.get('username').touched)">
-                                    <p class="error-message text-red"><span>{{ message.message }}</span></p>
+                                    <p class="error-message text-orange"><span>{{ message.message }}</span></p>
                                 </div>
                             </ng-container>
                         </div>
@@ -66,7 +88,7 @@
                             <div class="validation-errors">
                                 <ng-container *ngFor="let message of loginFormMessages.password">
                                     <div *ngIf="loginForm.get('password').hasError(message.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
-                                        <p class="error-message text-red"><span>{{ message.message }}</span></p>
+                                        <p class="error-message text-orange"><span>{{ message.message }}</span></p>
                                     </div>
                                 </ng-container>
                             </div>

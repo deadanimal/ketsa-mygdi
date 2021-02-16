@@ -82,7 +82,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/helpdesk',
-    title: 'Logout',
+    title: 'Log Keluar',
     type: 'link',
     icontype: 'fas fa-door-open text-black'
   },
