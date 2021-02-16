@@ -21,11 +21,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   loginFormMessages = {
     'username': [
-      { type: 'required', message: 'Email is required' },
-      { type: 'email', message: 'Please enter a valid email'}
+      { type: 'required', message: 'Masukkan ID pengguna' },
+      { type: 'email', message: 'Masukkan emel yang sah'}
     ],
     'password': [
-      { type: 'required', message: 'Password is required' },
+      { type: 'required', message: 'Masukkan kata laluan' },
       { type: 'minLength', message: 'Password must have at least 8 characters' }
     ]
   }
@@ -84,8 +84,8 @@ export class LoginComponent implements OnInit {
   }
 
   successMessage() {
-    let title = 'Success'
-    let message = 'Loging in right now'
+    let title = 'Berjaya'
+    let message = 'Log masuk sekarang'
     this.notifyService.openToastr(title, message)
   }
 

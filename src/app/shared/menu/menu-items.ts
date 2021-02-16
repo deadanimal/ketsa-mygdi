@@ -26,7 +26,7 @@ export interface ChildrenItems2 {
 // Menu Items
 export const ROUTES: RouteInfo[] = [
   {
-    path: '/admin/dashboard',
+    path: '/portal/',
     title: 'Utama',
     type: 'link',
     icontype: 'fas fa-home text-teal'
@@ -75,7 +75,7 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fas fa-edit text-pink'
   },
   {
-    path: '/helpdesk',
+    path: '/admin/tabledata',
     title: 'Senarai Metadata',
     type: 'link',
     icontype: 'fas fa-list-ul text-indigo'

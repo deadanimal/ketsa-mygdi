@@ -13,7 +13,7 @@ a:hover
 {
     text-decoration: none; 
 
-    color:rgb(255, 255, 255);
+    color:rgb(133, 133, 133);
 }
 
 a:not([href]):not([tabindex])
@@ -133,7 +133,7 @@ a:not([href]):not([tabindex]):focus
   }
 
   .scroll {
-    max-height: 500px;
+    max-height: 480px;
     overflow-y: scroll;
 }
 
@@ -149,17 +149,25 @@ a:not([href]):not([tabindex]):focus
   }
   .card-header
 {
-    margin-bottom: 0;
+    margin-top: 0;
     padding: 1.25rem 1.5rem;
     
     border-bottom: 1px solid rgba(255, 255, 255, 0); 
     background-color: #fff0;
 }
 
+.card {
+    border-radius: 0;
+}
+
+.card-body {
+    font-size: 90%;
+}
+
 .card-footer
 {
     padding: 1.25rem 1.5rem;
-    height: 50px;
+    height: 80px;
     border-top: 0px solid rgba(255, 255, 255, 0); 
     background-color: #fff0;
 }
@@ -170,7 +178,7 @@ a:not([href]):not([tabindex]):focus
 
     display: flex;
 
-    padding: 0.5rem 0.5rem; 
+    padding: 0; 
 
     flex-wrap: wrap;
     align-items: center;
@@ -183,12 +191,21 @@ a:not([href]):not([tabindex]):focus
     url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
 }
 
-.accordion .card-header:after {
-    font-family: 'FontAwesome';  
-    content: "\f068";
-    float: right; 
+
+.footer { 
+    position: absolute; 
+    left: 0 ; right: 0; bottom: 0; 
+    padding: 1rem;
 }
-.accordion .card-header.collapsed:after {
-    /* symbol for "collapsed" panels */
-    content: "\f067"; 
+
+.text-bold { 
+    font-weight: 600;
+}
+
+.bgg {
+    background-image: url('src/assets/img/theme/global.png');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

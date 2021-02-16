@@ -49,6 +49,24 @@ export class ProfileComponent implements OnInit {
   confirm() {
     swal.fire({
       title: "Pengesahan",
+      text: "Adakah anda pasti untuk menukar gambar profil ini?",
+      type: "info",
+      buttonsStyling: false,
+      confirmButtonClass: "btn btn-info",
+      confirmButtonText: "Pasti",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-danger",
+      cancelButtonText: "Batal"
+    }).then((result) => {
+      if (result.value) {
+        this.edit()
+      }
+    })
+  }
+
+  confirmSave() {
+    swal.fire({
+      title: "Pengesahan",
       text: "Adakah anda pasti untuk menyimpan maklumat yang disunting ini?",
       type: "info",
       buttonsStyling: false,

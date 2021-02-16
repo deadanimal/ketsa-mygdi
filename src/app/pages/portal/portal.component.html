@@ -1,10 +1,10 @@
 
-<nav class="navbar navbar-horizontal navbar-expand-lg fixed-top navbar-dark" style="background-color: #FFAD29; ">
-  <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="['/dashboards/dashboard']">
+<nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark" style="background-color: #FFAD29; ">
+  <div class="container row-grid">
+    <a class="navbar-brand" [routerLink]="['/portal']">
       <img src="assets/img/logo/mygdi-logo.png"/>
     </a>
-    <a [routerLink]="['/dashboards/dashboard']">MyGeo Explorer</a>
+    <a [routerLink]="['/portal']">MyGeo Explorer</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -47,7 +47,7 @@
             class="nav-link"
             routerLinkActive="active"
             [routerLink]="['/auth/login']">
-            <span class="nav-link-inner--text">LOG MASUK</span>
+            <span class="nav-link-inner--text text-bold">LOG MASUK</span>
           </a>
         </li>
         <li class="nav-item">
@@ -55,7 +55,7 @@
             class="nav-link"
             routerLinkActive="active"
             [routerLink]="['/auth/register']">
-            <span class="nav-link-inner--text">DAFTAR</span>
+            <span class="nav-link-inner--text text-bold">DAFTAR</span>
           </a>
         </li>
         <li class="nav-item">
@@ -72,28 +72,28 @@
   </div>
 </nav>
 
-  <section class="mt-6" style="background-image: url('assets/img/theme/global.png');"> 
+  <section class="bgg"> 
     <div class="container-fluid">
       <div class="row row-grid align-items-center">
-        <div class="col-md-2 order-md-3 mt-4 float-right">
+        <div class="col-md-2 order-md-3 float-right">
           <div class="form-group">
             <div class="card bcard square rounded-circle mr-4 mt-4 float-right">
               <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
                 <img height="50" src="assets/img/icons/common/metadata.png"/>
               </div>
-              <h4 class="text-white text-center mt-2">Metadata</h4>
+              <h4 class="text-yellow text-center mt-2">Metadata</h4>
             </div>
             <div class="card gcard square rounded-circle mr-4 mt-4 float-right">
               <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
                 <img height="50" src="assets/img/icons/common/dataapp.png"/>
               </div>
-              <h4 class="text-white text-center mt-2">Permohonan Data Asas</h4>
+              <h4 class="text-yellow text-center mt-2">Data Asas</h4>
             </div>
             <div class="card rcard square rounded-circle mr-4 mt-4 float-right">
               <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
                 <img height="50" src="assets/img/icons/common/tutorial.png"/>
               </div>
-              <h4 class="text-white text-center mt-2">Tutorial</h4>
+              <h4 class="text-yellow text-center mt-2">Tutorial</h4>
             </div>
           </div>
         </div>
@@ -101,10 +101,10 @@
           
         </div>
         
-        <div class="col-md-3 order-md-1 d-block">
+        <div class="col-md-3 order-md-1">
           <div class="card ml-4" style="width: fit-content; height:auto; background-color: rgba(255, 255, 255, 0.253);">
             <div class="card-header">
-              <h2 class=" mr-4 mt-3 text-yellow"><i class="fa fa-bullhorn fa-spin"></i> Pengumuman</h2>
+              <h2 class=" mr-4 mt-2 text-yellow"><i class="fa fa-bullhorn fa-spin"></i> Pengumuman</h2>
             </div>
             <div class="card-body scroll">
               <div class="pl-md-2">
