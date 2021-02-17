@@ -1,35 +1,24 @@
 <ngx-loading-bar></ngx-loading-bar>
-<section class="bgg"> 
-    <div class="container-fluid">
-      <div class="row row-grid align-items-center">
-        <div class="col-md-2 order-md-3 float-right">
-            <div class="form-group">
-                <div class="card bcard square rounded-circle mr-4 mt-4 float-right">
-                  <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
-                    <img height="50" src="assets/img/icons/common/metadata.png"/>
-                  </div>
-                  <h4 class="text-yellow text-center mt-2">Metadata</h4>
-                </div>
-                <div class="card gcard square rounded-circle mr-4 mt-4 float-right">
-                  <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
-                    <img height="50" src="assets/img/icons/common/dataapp.png"/>
-                  </div>
-                  <h4 class="text-yellow text-center mt-2">Data Asas</h4>
-                </div>
-                <div class="card rcard square rounded-circle mr-4 mt-4 float-right">
-                  <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
-                    <img height="50" src="assets/img/icons/common/tutorial.png"/>
-                  </div>
-                  <h4 class="text-yellow text-center mt-2">Tutorial</h4>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-4 order-md-2">
-
-        </div>
-        
-        <div class="col-md-6 order-md-1 p-8">
-            <div class="card" style="background-color: rgba(255, 255, 255, 0.2);">
+<div class="content-wrapper bgg" style="min-height: 680px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark"></h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+  
+    <!-- Main content -->
+    <div class="content p-2">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- /.col-md-6 -->
+          <div class="col-lg-5">
+            <div class="card mt-7 ml-6" style="background-color: rgba(255, 255, 255, 0.2);">
                 
                 <div class="card-body px-lg-5 py-lg-5">
                     <!--<div class="logo-box">
@@ -68,7 +57,7 @@
                                 </div>
                             </ng-container>
                         </div>
-
+            
                         <div class="form-group" [ngClass]="{ focused: focusPassword === true }">
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
@@ -93,9 +82,9 @@
                                 </ng-container>
                             </div>
                         </div>
-
+            
                     </form>
-
+            
                     <div class="row align-items-center">
                         <div class="col-6 order-2">
                            <!-- <div class="custom-control custom-control-alternative custom-checkbox">
@@ -118,7 +107,33 @@
                     </div>
                 </div>
             </div> 
+          </div>
+          <div class="col-lg-5"></div>
+          <div class="col-lg-2">
+            <div class="form-group mt-7">
+              <div class="card bcard square rounded-circle mr-4 mt-4 float-right">
+                <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
+                  <img height="50" src="assets/img/icons/common/metadata.png"/>
+                </div>
+                <h4 class="text-yellow text-center mt-2">Metadata</h4>
+              </div>
+              <div class="card gcard square rounded-circle mr-4 mt-4 float-right">
+                <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
+                  <img height="50" src="assets/img/icons/common/dataapp.png"/>
+                </div>
+                <h4 class="text-yellow text-center mt-2">Data Asas</h4>
+              </div>
+              <div class="card rcard square rounded-circle mr-4 mt-4 float-right">
+                <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
+                  <img height="50" src="assets/img/icons/common/tutorial.png"/>
+                </div>
+                <h4 class="text-yellow text-center mt-2">Tutorial</h4>
+              </div>
+          </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+
+

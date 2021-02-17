@@ -189,7 +189,7 @@ a:not([href]):not([tabindex]):focus
 
 
 .footer { 
-    position: absolute; 
+    position: relative;
     left: 0 ; right: 0; bottom: 0; 
     padding: 1rem;
 }

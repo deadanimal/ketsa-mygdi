@@ -64,11 +64,54 @@
   </div>
 </nav>
 
-  <section class="bgg"> 
+<div class="content-wrapper bgg" style="min-height: 641px;">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
     <div class="container-fluid">
-      <div class="row row-grid align-items-center">
-        <div class="col-md-2 order-md-3 float-right">
-          <div class="form-group">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark"></h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content p-2">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- /.col-md-6 -->
+        <div class="col-lg-3">
+          <div class="card" style="background-color: rgba(255, 255, 255, 0.2);">
+            <div class="card-header">
+              <h3 class="card-title m-0"><span style="color:#FFE802;">Pengumuman</span></h3>
+            </div>
+            <div class="card-body scroll">
+              <span style="color:#FFE802;">1 JAN 2021</span>
+              <p class="text-white">Makluman: <br>
+              Selamat tahun baru kepada semua pengguna MyGeo Explorer</p>
+              <span style="color:#FFE802;">25 DIS 2020</span>
+              <p class="text-white">Peringatan: <br>
+              Agensi hendaklah mengemaskini metadata masing-masing</p>
+              <span style="color:#FFE802;">23 DIS 2020</span>
+              <p class="text-white">Metadata Baharu: <br>
+              Grid for Climate Change Projection for Peninsular Malaysia</p>
+              <span style="color:#FFE802;">21 DIS 2020</span>
+              <p class="text-white">Pengemaskinian: <br>
+              Climate Change Projection for Peninsular Malaysia (2010-2099)</p>
+              <span style="color:#FFE802;">18 DIS 2020</span>
+              <p class="text-white">Metadata Baharu: Taman Laut Negeri Terengganu</p> <br>
+            </div>
+            <div class="card-footer">
+              <a [routerLink]="['/widgets']"
+                  class="font-weight-bold text-orange float-right">Papar Semua >></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7"></div>
+        <div class="col-lg-2">
+          <div class="form-group mt-7">
             <div class="card bcard square rounded-circle mr-4 mt-4 float-right">
               <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
                 <img height="50" src="assets/img/icons/common/metadata.png"/>
@@ -87,45 +130,13 @@
               </div>
               <h4 class="text-yellow text-center mt-2">Tutorial</h4>
             </div>
-          </div>
         </div>
-        <div class="col-md-7 order-md-2">
-          
-        </div>
-        
-        <div class="col-md-3 order-md-1">
-          <div class="card ml-4" style="width: fit-content; height:auto; background-color: rgba(255, 255, 255, 0.253);">
-            <div class="card-header">
-              <h2 class=" mr-4 mt-2 text-yellow"><i class="fa fa-bullhorn fa-spin"></i> Pengumuman</h2>
-            </div>
-            <div class="card-body scroll">
-              <div class="pl-md-2">
-                  <span style="color:#FFE802;">1 JAN 2021</span>
-                  <p class="text-white">Makluman: <br>
-                  Selamat tahun baru kepada semua pengguna MyGeo Explorer</p>
-                  <span style="color:#FFE802;">25 DIS 2020</span>
-                  <p class="text-white">Peringatan: <br>
-                  Agensi hendaklah mengemaskini metadata masing-masing</p>
-                  <span style="color:#FFE802;">23 DIS 2020</span>
-                  <p class="text-white">Metadata Baharu: <br>
-                  Grid for Climate Change Projection for Peninsular Malaysia</p>
-                  <span style="color:#FFE802;">21 DIS 2020</span>
-                  <p class="text-white">Pengemaskinian: <br>
-                  Climate Change Projection for Peninsular Malaysia (2010-2099)</p>
-                  <span style="color:#FFE802;">18 DIS 2020</span>
-                  <p class="text-white">Metadata Baharu: Taman Laut Negeri Terengganu</p> <br>
-              </div>
-            </div>
-            <div class="card-footer">
-              <a [routerLink]="['/widgets']"
-                  class="font-weight-bold text-orange float-right">Papar Semua >></a>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-  </section>
-  <footer class="footer " style="background: #0A80B6;">
+  </div>
+</div>
+  <footer class="footer" style="background: #0A80B6;">
 		<div class="container-fluid">
 			<div class="row align-items-center justify-content-xl-between ">
 				<div class="col-xl-6">
@@ -149,5 +160,5 @@
 				</div>
 		</div>
 		</div>
-		
 	</footer>
+  
