@@ -26,6 +26,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
+
 @NgModule({
   imports: [
     AppRoutingModule,
@@ -51,7 +52,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   declarations: [
     AppComponent, 
     AdminLayoutComponent, 
-    AuthLayoutComponent, DashboardComponent,
+    AuthLayoutComponent, DashboardComponent, 
   ],
   providers: [
     /* Uncomment this to use interceptor

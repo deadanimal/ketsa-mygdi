@@ -1,0 +1,111 @@
+<nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark" style="background-color: #FFAD29;">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/portal']">
+        <img src="assets/img/logo/mygdi-logo.png"/>
+        <span class="text-dark"> MyGeo Explorer</span>
+      </a>
+     
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbar-collapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+          <span class="navbar-toggler-icon fg-dark"></span>
+        </button>
+      <div
+        class="collapse navbar-collapse"
+        id="collapseBasic" [collapse]="isCollapsed">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a [routerLink]="['/portal']">
+                <img src="assets/img/logo/mygdi-logo.png"/>MyGeo Explorer
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button
+                type="button"
+                class="navbar-toggler"
+                data-toggle="collapse"
+                data-target="#navbar-collapse"
+                aria-controls="navbar-collapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                (click)="isCollapsed = !isCollapsed">
+                <span></span> <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+            
+            <ul class="navbar-nav align-items-center ml-md-auto">
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    routerLinkActive="active"
+                    [routerLink]="['/auth/login']">
+                    <span class="nav-link-inner--text text-bold">DAFTAR | LOG MASUK</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                      class="nav-link nav-link-icon"
+                      routerLinkActive="active"
+                      [routerLink]="['/faq']">
+                      <i class="fa fa-question-circle"></i>
+                      <span class="nav-link-inner--text text-bold">FAQ</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown" dropdown>
+                  <a
+                    class="nav-link nav-link-icon"
+                    data-toggle="dropdown"
+                    href="javascript:;"
+                    dropdownToggle
+                    role="button"
+                  >
+                    <i class="fas fa-bars"> </i>
+                    <span class="nav-link-inner--text d-lg-none"> Lain-lain </span>
+                  </a>
+                  <div
+                    aria-labelledby="navbarDropdownMenuLink"
+                    class="dropdown-menu"
+                    *dropdownMenu
+                  >
+                    <a class="dropdown-item"  [routerLink]="['/examples/account-settings']">
+                      <i class="text-muted"> </i> MyGeo Explorer
+                    </a>
+                    <a class="dropdown-item" [routerLink]="['/userguide']">
+                      <i class="text-danger"> </i> Panduan Pengguna
+                    </a>
+                    <a class="dropdown-item" [routerLink]="['/feedback']">
+                      <i class="text-pink"> </i> Maklum Balas
+                    </a>
+                    <a class="dropdown-item" [routerLink]="['/contactus']">
+                      <i class="text-info"> </i> Hubungi Kami
+                    </a>
+                  </div>
+                </li>
+                <li class="nav-item d-lg-none">
+					<!-- Sidenav toggler -->
+					<div 
+						class="sidenav-toggler sidenav-toggler-dark"
+						data-action="sidenav-pin"
+						data-target="#mySidenav" 
+						(click)="openSidebar()"
+					>
+						<div class="sidenav-toggler-inner">
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+						</div>
+					</div>
+				</li>
+            </ul>
+      </div>
+    </div>
+  </nav>

@@ -1,7 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { ROUTES, ROUTESUSER } from '../../shared/menu/menu-items';
+import {
+  Router,
+  Event,
+  NavigationStart,
+  NavigationEnd,
+  NavigationError,
+} from "@angular/router";
+import { ROUTES, ROUTESPENGESAH, ROUTESUSER } from '../../shared/menu/menu-items';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { JwtService } from "src/app/shared/handler/jwt/jwt.service";
+
+
 
 var misc: any = {
   sidebar_mini_active: true
@@ -19,6 +28,7 @@ export class SidebarComponent implements OnInit {
   public menu;
 
   constructor(
+    private jwtService: JwtService,
     private authService: AuthService,
     private router: Router
   ) { }
@@ -30,10 +40,30 @@ export class SidebarComponent implements OnInit {
     else if (this.authService.userRole == 2) {
       this.menu = ROUTESUSER
     }
+    else if (this.authService.userRole == 3) {
+      this.menu = ROUTESPENGESAH
+    }
     this.menuItems = this.menu.filter(menuItem => menuItem);
     this.router.events.subscribe(event => {
       this.isCollapsed = true;
     });
+  }
+
+  navigatePage(path: String) {
+    if (path == "notifications") {
+      return this.router.navigate(["/global/notifications"]);
+    } else if (path == "profile") {
+      return this.router.navigate(["/global/profile"]);
+    } else if (path == "settings") {
+      return this.router.navigate(["/global/settings"]);
+    } else if (path == "home") {
+      return this.router.navigate(["/auth/login"]);
+    }
+  }
+
+  logout() {
+    this.jwtService.destroyToken();
+    this.navigatePage("home");
   }
 
   onMouseEnterSidenav() {

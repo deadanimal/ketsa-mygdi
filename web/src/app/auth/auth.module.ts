@@ -1,10 +1,12 @@
+import { ComponentsModule } from '../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { 
   BsDropdownModule, 
   ProgressbarModule,
-  TooltipModule
+  TooltipModule,
+  ModalModule
 } from 'ngx-bootstrap';
 
 import { LoadingBarModule } from '@ngx-loading-bar/core';
@@ -29,7 +31,9 @@ import { ForgotComponent } from './forgot/forgot.component';
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
     LoadingBarModule,
-    RouterModule.forChild(AuthRoutes)
+    RouterModule.forChild(AuthRoutes),
+    ComponentsModule,
+    ModalModule.forRoot(),
   ]
 })
 export class AuthModule { }

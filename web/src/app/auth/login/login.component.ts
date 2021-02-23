@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, OnDestroy, NgZone, TemplateRef } from '@angular/core';
+import swal from 'sweetalert2';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MocksService } from 'src/app/shared/services/mocks/mocks.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { NotifyService } from 'src/app/shared/handler/notify/notify.service';
+import * as moment from 'moment';
+import { User } from 'src/assets/mock/admin-user/users.model'
+
 
 @Component({
   selector: 'app-login',
@@ -11,9 +18,40 @@ import { NotifyService } from 'src/app/shared/handler/notify/notify.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  
   // Image
   imgLogo = 'assets/img/logo/prototype-logo.png'
+
+  // Modal
+  modal: BsModalRef;
+  modalConfig = {
+    keyboard: true,
+    class: "modal-dialog-centered modal-lg"
+  };
+
+  // Form
+  registerForm: FormGroup
+  registerFormMessages = {
+    'name': [
+      { type: 'required', message: 'Name is required' }
+    ],
+    'nric': [
+      { type: 'required', message: 'NRIC is required' }
+    ],
+    'email': [
+      { type: 'required', message: 'Email is required' },
+      { type: 'email', message: 'A valid email is required' }
+    ],
+    'password1': [
+      { type: 'required', message: 'Password is required' },
+      { type: 'minLength', message: 'Password must have at least 8 characters' }
+    ],
+    'password2': [
+      { type: 'required', message: 'Password is required' },
+      { type: 'minLength', message: 'Password must have at least 8 characters' }
+    ]
+  }
+
 
   // Form
   focusUsername
@@ -25,18 +63,24 @@ export class LoginComponent implements OnInit {
       { type: 'email', message: 'Masukkan emel yang sah'}
     ],
     'password': [
-      { type: 'required', message: '**Masukkan kata laluan' },
+      { type: 'required', message: 'Password is required' },
       { type: 'minLength', message: 'Password must have at least 8 characters' }
     ]
   }
 
+  
   constructor(
+    
     private authService: AuthService,
     private notifyService: NotifyService,
     private formBuilder: FormBuilder,
     private loadingBar: LoadingBarService,
-    private router: Router
+    private router: Router,
+    private mockService: MocksService,
+    private modalService: BsModalService,
+    private zone: NgZone
   ) { }
+  
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -49,7 +93,18 @@ export class LoginComponent implements OnInit {
         Validators.minLength(8)
       ]))
     })
+
+    this.registerForm = this.formBuilder.group({
+      name: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.email
+      ]))
+    })
   }
+
 
   login() {
     this.loadingBar.start()
@@ -61,6 +116,10 @@ export class LoginComponent implements OnInit {
     }
     else if (this.loginForm.value.username == 'user') {
       this.authService.userRole = 2
+      this.navigatePage('dashboard-user')
+    }
+    else if (this.loginForm.value.username == 'user2') {
+      this.authService.userRole = 3
       this.navigatePage('dashboard-user')
     }
   }
@@ -75,11 +134,11 @@ export class LoginComponent implements OnInit {
     else  if (path == 'register') {
       return this.router.navigate(['/auth/register'])
     }
+    else if (path == 'dashboard-user') {
+      return this.router.navigate(['/admin/dashboard'])
+    }
     else if (path == 'dashboard-admin') {
       return this.router.navigate(['/global/profile'])
-    }
-    else if (path == 'dashboard-user') {
-      return this.router.navigate(['/user/dashboard'])
     }
   }
 
@@ -87,6 +146,49 @@ export class LoginComponent implements OnInit {
     let title = 'Berjaya'
     let message = 'Log masuk sekarang'
     this.notifyService.openToastr(title, message)
+  }
+
+  openModal(modalRef: TemplateRef<any>) {
+    this.modal = this.modalService.show(modalRef, this.modalConfig);
+  }
+
+  closeModal() {
+    this.modal.hide()
+    this.registerForm.reset()
+  }
+
+  confirm() {
+    swal.fire({
+      title: "Pengesahan",
+      text: "Anda pasti untuk mendaftar pengguna baru ini?",
+      type: "info",
+      buttonsStyling: false,
+      confirmButtonClass: "btn btn-info",
+      confirmButtonText: "Pasti",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-danger",
+      cancelButtonText: "Batal"
+    }).then((result) => {
+      if (result.value) {
+        this.register()
+      }
+    })
+  }
+
+  register() {
+    swal.fire({
+      title: "Berjaya",
+      text: "Pengguna baru telah didaftar!",
+      type: "success",
+      buttonsStyling: false,
+      confirmButtonClass: "btn btn-success",
+      confirmButtonText: "Tutup"
+    }).then((result) => {
+      if (result.value) {
+        this.modal.hide()
+        this.registerForm.reset()
+      }
+    })
   }
 
 }

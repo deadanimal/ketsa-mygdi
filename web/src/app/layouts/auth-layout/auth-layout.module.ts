@@ -1,3 +1,4 @@
+import { ComponentsModule } from '../../components/components.module';
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -13,7 +14,8 @@ import { RegisterComponent } from "../../examples/examples/register/register.com
   imports: [
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
-    FormsModule
+    FormsModule,
+    ComponentsModule
   ],
   declarations: [
     LoginComponent,

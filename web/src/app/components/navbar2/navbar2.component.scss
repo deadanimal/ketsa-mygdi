@@ -1,0 +1,210 @@
+a
+{
+    text-decoration: none;
+
+    color: black;
+    background-color: transparent;
+
+    -webkit-text-decoration-skip: objects;
+}
+a:hover
+{
+    text-decoration: none; 
+
+    color: rgb(65, 65, 65);
+}
+
+a:not([href]):not([tabindex])
+{
+    text-decoration: none; 
+
+    color: inherit;
+}
+a:not([href]):not([tabindex]):hover,
+a:not([href]):not([tabindex]):focus
+{
+    text-decoration: none; 
+
+    color: inherit;
+}
+a:not([href]):not([tabindex]):focus
+{
+    outline: 0;
+}
+
+.navbar-dark .navbar-nav .nav-link
+{
+    color: rgba(0, 0, 0, 0.95);
+}
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus
+{
+    color: rgba(65, 65, 65, 0.65);
+}
+.navbar-dark .navbar-nav .nav-link.disabled
+{
+    color: rgba(255, 255, 255, .25);
+}
+
+.navbar-dark .navbar-nav .show > .nav-link,
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .nav-link.active
+{
+    color: rgba(34, 34, 34, 0.65);
+}
+
+.navbar
+{
+    position: relative;
+
+    display: flex;
+
+    padding: .5rem .5rem; 
+
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fixed-top
+{
+    position: fixed;
+    z-index: 1030; 
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.square
+{
+    width: 100px;
+    height: 100px;
+}
+
+.auto          { cursor: auto; }
+.default       { cursor: default; }
+.none          { cursor: none; }
+.context-menu  { cursor: context-menu; }
+.help          { cursor: help; }
+.pointer       { cursor: pointer; }
+.progress      { cursor: progress; }
+.wait          { cursor: wait; }
+.cell          { cursor: cell; }
+.crosshair     { cursor: crosshair; }
+.text          { cursor: text; }
+.vertical-text { cursor: vertical-text; }
+.alias         { cursor: alias; }
+.copy          { cursor: copy; }
+.move          { cursor: move; }
+.no-drop       { cursor: no-drop; }
+.not-allowed   { cursor: not-allowed; }
+.all-scroll    { cursor: all-scroll; }
+.col-resize    { cursor: col-resize; }
+.row-resize    { cursor: row-resize; }
+.n-resize      { cursor: n-resize; }
+.e-resize      { cursor: e-resize; }
+.s-resize      { cursor: s-resize; }
+.w-resize      { cursor: w-resize; }
+.ns-resize     { cursor: ns-resize; }
+.ew-resize     { cursor: ew-resize; }
+.ne-resize     { cursor: ne-resize; }
+.nw-resize     { cursor: nw-resize; }
+.se-resize     { cursor: se-resize; }
+.sw-resize     { cursor: sw-resize; }
+.nesw-resize   { cursor: nesw-resize; }
+.nwse-resize   { cursor: nwse-resize; }
+
+.bcard:hover {
+    background-color: #6bcffd;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .rcard:hover {
+    background-color: #fd6b6b;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .gcard:hover {
+    background-color: #7cfd6b;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .scroll {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroll::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scroll {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .card-header
+{
+    margin-top: 0;
+    padding: 1.25rem 1.5rem;
+    
+    border-bottom: 1px solid rgba(255, 255, 255, 0); 
+    background-color: #fff0;
+}
+
+.card {
+    border-radius: 0.75;
+    
+}
+
+.card-body {
+    font-size: 90%;
+}
+
+.card-footer
+{
+    padding: 1.25rem 1.5rem;
+    height: 60px;
+    border-top: 0px solid rgba(255, 255, 255, 0); 
+    background-color: #fff0;
+}
+
+.navbar
+{
+    
+    display: flex;
+
+    padding: 0; 
+
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-dark .navbar-toggler-icon
+{
+    background-image: 
+    url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
+}
+
+
+.footer { 
+    
+    left: 0 ; right: 0; bottom: 0; 
+    padding: 1rem;
+}
+
+.text-bold { 
+    font-weight: 600;
+}
+
+.bgg {
+    background-image: url('src/assets/img/theme/global.png');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

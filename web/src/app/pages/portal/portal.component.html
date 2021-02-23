@@ -1,70 +1,5 @@
-
-<nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark" style="background-color: #FFAD29; ">
-  <div class="container">
-    <a class="navbar-brand" [routerLink]="['/portal']">
-      <img src="assets/img/logo/mygdi-logo.png"/>
-    </a>
-    <a [routerLink]="['/portal']">MyGeo Explorer</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbar-collapse"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-      (click)="isCollapsed = !isCollapsed"
-      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-      <span class="navbar-toggler-icon fg-dark"></span>
-    </button>
-    <div
-      class="collapse navbar-collapse"
-      id="collapseBasic" [collapse]="isCollapsed">
-      <div class="navbar-collapse-header">
-        <div class="row">
-          <div class="col-6 collapse-brand">
-            <a style="color: black;" [routerLink]="['/portal']">
-              <img src="assets/img/logo/mygdi-logo.png"/>MyGeo Explorer
-            </a>
-          </div>
-          <div class="col-6 collapse-close">
-            <button
-              type="button"
-              class="navbar-toggler"
-              data-toggle="collapse"
-              data-target="#navbar-collapse"
-              aria-controls="navbar-collapse"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-              (click)="isCollapsed = !isCollapsed">
-              <span></span> <span></span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <ul class="navbar-nav ml-lg-auto">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/auth/login']">
-            <span class="nav-link-inner--text text-bold">DAFTAR | LOG MASUK</span>
-          </a>
-        </li>
-        <li class="nav-item">
-            <a
-              class="nav-link help"
-              routerLinkActive="active"
-              [routerLink]="['/auth/login']">
-              <span class="nav-link-inner--text "><img height="30" src="assets/img/icons/common/faq-black-icon.png"/></span>
-              
-            </a>
-          </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="content-wrapper bgg" style="min-height: 641px;">
+<app-navbar2></app-navbar2>
+<div class="content-wrapper bgg" style="min-height: 670px;">
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
@@ -136,29 +71,5 @@
     </div>
   </div>
 </div>
-  <footer class="footer" style="background: #0A80B6;">
-		<div class="container-fluid">
-			<div class="row align-items-center justify-content-xl-between ">
-				<div class="col-xl-6">
-					<div class="copyright text-xl-left text-white ">
-						Penafian | Penyataan Privasi <br>
-						Hakcipta Terpelihara
-						&copy; {{ test | date: "yyyy" }}. Pusat Geospatial Malaysia.<br>
-						<br>
-						Jumlah Pelawat: 
-						<span style="color:#FFE802;">1,098,034</span>
-					</div>
-				</div>
-				<div class="col-xl-6">
-					<div class="copyright text-xl-right text-white">
-						Sebarang pertanyaan, boleh menghubungi:<br>
-						<br>
-						<i class="fas fa-envelope"></i>	
-						adminexplorer@ketsa.gov.my<br>
-						Masa Operasi: 8.00 Pagi - 5.00 Petang
-					</div>
-				</div>
-		</div>
-		</div>
-	</footer>
-  
+
+<app-footer2></app-footer2>

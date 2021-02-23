@@ -81,7 +81,79 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fas fa-list-ul text-indigo'
   },
   {
+    path: '/auth/login', /*add destroy token*/
+    title: 'Log Keluar',
+    type: 'link',
+    icontype: 'fas fa-door-open text-black'
+  },
+  
+  
+];
+
+export const ROUTESPENGESAH: RouteInfo[] = [
+  {
+    path: '/portal/',
+    title: 'Utama',
+    type: 'link',
+    icontype: 'fas fa-home text-teal'
+  },
+  {
+    path: '/global/profile',
+    title: 'Profil',
+    type: 'link',
+    icontype: 'fas fa-user text-blue'
+  },
+  {
+    path: '/user/dashboard',
+    title: 'Dashboard',
+    type: 'link',
+    icontype: 'fas fa-desktop text-warning'
+  },
+  /*{
+    path: '/admin/management',
+    title: 'Management',
+    type: 'sub',
+    icontype: 'fas fa-file-invoice text-purple',
+    collapse: 'management',
+    isCollapsed: true,
+    children: [
+      { path: 'audit-trails', title: 'Audit Trails', type: 'link' },
+      { path: 'user', title: 'User', type: 'link' }
+    ]
+  },
+  /*{
+    path: '/admin/report',
+    title: 'Reporting',
+    type: 'link',
+    icontype: 'fas fa-chart-bar text-red'
+  },
+  
+  {
     path: '/helpdesk',
+    title: 'Helpdesk',
+    type: 'link',
+    icontype: 'fas fa-life-ring text-blue'
+  },
+  {
+    path: '/audit',
+    title: 'Audit Trail',
+    type: 'link',
+    icontype: 'fas fa-braille text-indigo'
+  }*/
+  {
+    path: '/user/metadata',
+    title: 'Pengesahanan',
+    type: 'link',
+    icontype: 'fas fa-edit text-pink'
+  },
+  {
+    path: '/admin/tabledata',
+    title: 'Senarai Metadata',
+    type: 'link',
+    icontype: 'fas fa-list-ul text-indigo'
+  },
+  {
+    path: '/auth/login', /*add destroy token*/
     title: 'Log Keluar',
     type: 'link',
     icontype: 'fas fa-door-open text-black'

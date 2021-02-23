@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { PresentationComponent } from './examples/presentation/presentation.component';
-import { PortalComponent } from './pages/portal/portal.component';
+
 
 const routes: Routes = [
   {

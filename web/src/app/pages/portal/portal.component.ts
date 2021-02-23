@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
+import { Router, NavigationEnd } from "@angular/router";
 
 @Component({
   selector: "app-portal",
@@ -10,7 +11,16 @@ export class PortalComponent implements OnInit {
   oneAtATime = true;
   test: Date = new Date();
   isCollapsed = true;
-  constructor() {}
-
+  constructor(private router: Router) {
+    router.events.subscribe(val => {
+      this.isCollapsed = true;
+    });
+  }
+  mobileView(){
+    if (window.innerWidth < 992) {
+        return true;
+    }
+    return false;
+  }
   ngOnInit() {}
 }

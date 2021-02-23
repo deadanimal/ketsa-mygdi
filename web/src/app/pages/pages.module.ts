@@ -15,15 +15,21 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
+import { ComponentsModule } from "../components/components.module";
 import { RouterModule } from '@angular/router';
 import { PagesRoutes } from './pages.routing';
 import { HomeComponent } from './home/home.component';
 import { PortalComponent } from './portal/portal.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { UserguideComponent } from './userguide/userguide.component';
+import { ContactusComponent } from './contactus/contactus.component';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
-  declarations: [HomeComponent,PortalComponent],
+  declarations: [HomeComponent,PortalComponent, FeedbackComponent, UserguideComponent, ContactusComponent, FaqComponent,],
   imports: [
     CommonModule,
+    ComponentsModule,
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
     BsDatepickerModule.forRoot(),

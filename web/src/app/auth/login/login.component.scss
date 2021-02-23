@@ -15,7 +15,7 @@ a:hover
 {
     text-decoration: none; 
 
-    color:rgb(73, 73, 73);
+    color:rgb(65, 65, 65);
 }
 
 a:not([href]):not([tabindex])
@@ -216,4 +216,17 @@ a:not([href]):not([tabindex]):focus
 .bg-primary {
     background-color: #0A80B6 !important;
     border-color: #0A80B6;
+}
+
+.modal-content {
+    width: 500px;
+}
+
+.error-message {
+    color: #f5365c;
+    text-align: right;
+    font-size: 0.8em;
+    padding-top: 5px;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
