@@ -3,7 +3,6 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { PortalComponent } from './portal/portal.component';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { FeedbackComponent } from './feedback/feedback.component';
 import { UserguideComponent } from './userguide/userguide.component';
 
 export const PagesRoutes: Routes = [
@@ -17,10 +16,6 @@ export const PagesRoutes: Routes = [
             {
                 path: 'portal',
                 component: PortalComponent
-            },
-            {
-                path: 'feedback',
-                component: FeedbackComponent
             },
             {
                 path: 'userguide',

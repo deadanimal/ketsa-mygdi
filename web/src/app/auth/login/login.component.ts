@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   loginFormMessages = {
     'username': [
-      { type: 'required', message: '**Masukkan ID pengguna' },
+      { type: 'required', message: 'Masukkan ID pengguna' },
       { type: 'email', message: 'Masukkan emel yang sah'}
     ],
     'password': [
@@ -96,6 +96,15 @@ export class LoginComponent implements OnInit {
 
     this.registerForm = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      nric: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      password1: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      password2: new FormControl('', Validators.compose([
         Validators.required
       ])),
       email: new FormControl('', Validators.compose([
@@ -135,7 +144,7 @@ export class LoginComponent implements OnInit {
       return this.router.navigate(['/auth/register'])
     }
     else if (path == 'dashboard-user') {
-      return this.router.navigate(['/admin/dashboard'])
+      return this.router.navigate(['/user/dashboard'])
     }
     else if (path == 'dashboard-admin') {
       return this.router.navigate(['/global/profile'])
@@ -161,7 +170,7 @@ export class LoginComponent implements OnInit {
     swal.fire({
       title: "Pengesahan",
       text: "Anda pasti untuk mendaftar pengguna baru ini?",
-      type: "info",
+      type: "warning",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-info",
       confirmButtonText: "Pasti",
@@ -177,9 +186,9 @@ export class LoginComponent implements OnInit {
 
   register() {
     swal.fire({
-      title: "Berjaya",
-      text: "Pengguna baru telah didaftar!",
-      type: "success",
+      title: "Dalam proses",
+      text: "Pendaftaran pengguna baru dalam proses.",
+      type: "info",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-success",
       confirmButtonText: "Tutup"

@@ -35,10 +35,10 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.userRole == 1) {
-      this.menu = ROUTES
+      this.menu = ROUTESUSER
     }
     else if (this.authService.userRole == 2) {
-      this.menu = ROUTESUSER
+      this.menu = ROUTES
     }
     else if (this.authService.userRole == 3) {
       this.menu = ROUTESPENGESAH

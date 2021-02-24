@@ -20,13 +20,12 @@ import { RouterModule } from '@angular/router';
 import { PagesRoutes } from './pages.routing';
 import { HomeComponent } from './home/home.component';
 import { PortalComponent } from './portal/portal.component';
-import { FeedbackComponent } from './feedback/feedback.component';
 import { UserguideComponent } from './userguide/userguide.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
-  declarations: [HomeComponent,PortalComponent, FeedbackComponent, UserguideComponent, ContactusComponent, FaqComponent,],
+  declarations: [HomeComponent,PortalComponent, UserguideComponent, ContactusComponent, FaqComponent,],
   imports: [
     CommonModule,
     ComponentsModule,

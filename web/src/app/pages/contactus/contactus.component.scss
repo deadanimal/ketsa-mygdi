@@ -11,3 +11,10 @@
     background-color: #0A80B6 !important;
     border-color: #0A80B6;
 }
+
+.card {
+    border-radius: 0;
+    bottom: 100px;
+    left: 0; right: 0;
+    position: absolute;
+}
