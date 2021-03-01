@@ -29,6 +29,7 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
 
   // Table
   tableEntries: number = 5;
+  selected: any[] = [];
   tableSelected: any[] = [];
   tableTemp = [];
   tableActiveRow: any;
@@ -88,6 +89,28 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
         Validators.email
       ]))
     })
+  }
+
+  entriesChange($event) {
+    this.tableEntries = $event.target.value;
+  }
+  filterTable($event) {
+    let val = $event.target.value;
+    this.tableTemp = this.tableRows.filter(function(d) {
+      for (var key in d) {
+        if (d[key].toLowerCase().indexOf(val) !== -1) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+  onSelect({ selected }) {
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
+  }
+  onActivate(event) {
+    this.tableActiveRow = event.row;
   }
 
   ngOnDestroy() {

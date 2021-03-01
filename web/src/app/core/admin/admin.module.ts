@@ -20,6 +20,11 @@ import { ManagementAuditComponent } from './management-audit/management-audit.co
 import { ManagementUserComponent } from './management-user/management-user.component';
 import { ReportComponent } from './report/report.component';
 import { DatatableComponent } from './datatable/datatable.component';
+import { ManagementPortalComponent } from './management-portal/management-portal.component';
+import { ManagementFaqComponent } from './management-faq/management-faq.component';
+import { ManagementAnnoucementComponent } from './management-annoucement/management-annoucement.component';
+import { ManagementUserguideComponent } from './management-userguide/management-userguide.component';
+import { ManagementDisclaimerComponent } from './management-disclaimer/management-disclaimer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,12 @@ import { DatatableComponent } from './datatable/datatable.component';
     ManagementAuditComponent,
     ManagementUserComponent,
     ReportComponent,
-    DatatableComponent
+    DatatableComponent,
+    ManagementPortalComponent,
+    ManagementFaqComponent,
+    ManagementAnnoucementComponent,
+    ManagementUserguideComponent,
+    ManagementDisclaimerComponent
   ],
   imports: [
     CommonModule,

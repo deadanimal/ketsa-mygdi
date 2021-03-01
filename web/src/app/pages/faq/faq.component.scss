@@ -223,7 +223,7 @@ a:not([href]):not([tabindex]):focus
 
     border: 1px solid rgba(0, 0, 0, .05);
     border-radius: .5rem; 
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     background-clip: border-box;
 }
 .acard > hr
@@ -281,7 +281,7 @@ a:not([href]):not([tabindex]):focus
     padding: .1rem .1rem;
     border-radius: .5rem; 
     border-bottom: 1px solid rgba(0, 0, 0, .05); 
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(240, 240, 240);
 }
 .acard-header:first-child
 {

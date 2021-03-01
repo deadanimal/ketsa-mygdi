@@ -1,9 +1,9 @@
 /* Generated using nucleoapp.com */
-/* --------------------------------
+/* 
 
 Icon colors
 
--------------------------------- */
+ */
 
 .icon {
   display: inline-block;
@@ -23,11 +23,11 @@ Icon colors
   stroke: #7ea6f6;
 }
 
-/* --------------------------------
+/* 
 
 Change icon size
 
--------------------------------- */
+ */
 
 .icon-xs {
   height: 0.5em;
@@ -49,11 +49,11 @@ Change icon size
   width: 2em;
 }
 
-/* -------------------------------- 
+/*  
 
 Align icon and text 
 
--------------------------------- */
+ */
 
 .icon-text-aligner {
   /* add this class to parent element that contains icon + text */
@@ -75,11 +75,11 @@ Align icon and text
   stroke: currentColor;
 }
 
-/* -------------------------------- 
+/*  
 
 Icon reset values - used to enable color customizations
 
--------------------------------- */
+ */
 
 .icon {
   fill: currentColor;
@@ -99,7 +99,7 @@ Icon reset values - used to enable color customizations
   fill: none;
 }
 
-/* -------------------------------- 
+/*  
 
 Stroke effects - Nucleo outline icons
 
@@ -107,7 +107,7 @@ Stroke effects - Nucleo outline icons
 - 24px, 32px icons -> up to 2px stroke
 - 48px, 64px icons -> up to 4px stroke
 
--------------------------------- */
+ */
 
 .icon-outline.icon-stroke-1 {
   stroke-width: 1px;

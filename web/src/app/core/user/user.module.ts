@@ -18,9 +18,11 @@ import { RouterModule } from '@angular/router';
 import { UserRoutes } from './user.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MetadataComponent } from './metadata/metadata.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SemakanComponent } from './semakan/semakan.component';
 
 @NgModule({
-  declarations: [DashboardComponent, MetadataComponent],
+  declarations: [DashboardComponent, MetadataComponent, ProfileComponent, SemakanComponent],
   imports: [
     CommonModule,
     CollapseModule.forRoot(),

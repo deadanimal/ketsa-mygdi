@@ -1,0 +1,129 @@
+<div class="header pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-dark d-inline-block mb-0">Soalan Lazim</h6>
+
+                    <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class=" breadcrumb-item">
+                                <a href="javascript:void(0)"> <i class="fas fa-users text-dark"> </i> </a>
+                            </li>
+                            <li aria-current="page" class="breadcrumb-item active">
+                                Konfigurasi Soalan Lazim
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a 
+                        *ngIf="!editEnabled"
+                        class="btn btn-default btn-sm text-white btn-icon btn-3" 
+                        (click)="toggleEdit()"> 
+                        <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                        <span class="btn-inner--text">Tambah</span>
+                    </a>
+                    <a
+                        *ngIf="editEnabled"
+                        class="btn btn-danger btn-sm text-white btn-icon btn-3" 
+                        (click)="toggleEdit()"> 
+                        <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
+                        <span class="btn-inner--text">Balik</span>
+                    </a>
+                    <a 
+                        *ngIf="editEnabled"
+                        class="btn btn-success btn-sm text-white btn-icon btn-3" 
+                        (click)="confirmSave()"> 
+                        <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
+                        <span class="btn-inner--text">Simpan</span>
+                    </a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-xl-7 order-xl-2">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <h3 class="text-white mb-0">Perincian Soalan dan Jawapan</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-control-label">Soalan</label>
+                        <input 
+                          class="form-control"
+                          placeholder=""
+                          formControlName="name"
+                          type="text"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Jawapan</label>
+                        <form><div id="quill" data-toggle="quill"></div></form>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-xl-5 order-xl-1">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <div class="form-inline">
+                                <label class="form-control-label mr-4">Kategori</label>
+                                <select class="form-control custom-select py-0">
+                                    <option hidden selected>Pilih Kategori</option>
+                                    <option>Report 1</option>
+                                    <option>Report 2</option>
+                                    <option>Report 3</option>
+                                    <option>Report 4</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-4 text-right">
+                            <!--<a  *ngIf="!editEnabled"  class="btn btn-sm btn-primary" href="javascript:void(0)">
+                                Settings
+                            </a>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h3 class="text-center">Senarai Soalan</h3>
+                    <div class="dataTables_wrapper py-4">
+                        <ngx-datatable
+                            class="bootstrap selection-cell"
+                            [columnMode]="'force'"
+                            [headerHeight]="50"
+                            [footerHeight]="50"
+                            [rowHeight]="'auto'"
+                            [limit]="entries != -1 ? entries : undefined"
+                            [rows]="temp"
+                            [selected]="selected"
+                            [selectionType]="'single'"
+                            (activate)="onActivate($event)"
+                            
+                            >
+                          <ngx-datatable-column name="No" [width]="100">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                              {{rowIndex+1}}
+                            </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Soalan" [width]="450"></ngx-datatable-column>
+                          
+                          
+                        </ngx-datatable>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

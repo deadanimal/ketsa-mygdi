@@ -6,7 +6,7 @@ import {
   NavigationEnd,
   NavigationError,
 } from "@angular/router";
-import { ROUTES, ROUTESPENGESAH, ROUTESUSER } from '../../shared/menu/menu-items';
+import { ROUTESADMIN, ROUTESPENGESAH, ROUTESUSER } from '../../shared/menu/menu-items';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { JwtService } from "src/app/shared/handler/jwt/jwt.service";
 
@@ -35,10 +35,10 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.userRole == 1) {
-      this.menu = ROUTESUSER
+      this.menu = ROUTESADMIN
     }
     else if (this.authService.userRole == 2) {
-      this.menu = ROUTES
+      this.menu = ROUTESUSER
     }
     else if (this.authService.userRole == 3) {
       this.menu = ROUTESPENGESAH
@@ -53,7 +53,7 @@ export class SidebarComponent implements OnInit {
     if (path == "notifications") {
       return this.router.navigate(["/global/notifications"]);
     } else if (path == "profile") {
-      return this.router.navigate(["/global/profile"]);
+      return this.router.navigate(["/user/profile"]);
     } else if (path == "settings") {
       return this.router.navigate(["/global/settings"]);
     } else if (path == "home") {

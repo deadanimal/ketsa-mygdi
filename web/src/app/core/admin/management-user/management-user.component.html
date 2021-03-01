@@ -3,26 +3,24 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-dark d-inline-block mb-0">User</h6>
+                    <h6 class="h2 text-dark d-inline-block mb-0">Pengguna</h6>
 
                     <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                             <li class=" breadcrumb-item">
-                                <a href="javascript:void(0)"> <i class="fas fa-file-invoice text-dark"> </i> </a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="javascript:void(0)" class="text-dark"> Management </a>
+                                <a href="javascript:void(0)"> <i class="fas fa-user-cog text-dark"></i> </a>
                             </li>
                             <li aria-current="page" class="breadcrumb-item active">
-                                User
+                                Pengurusan Pengguna
                             </li>
                         </ol>
                     </nav>
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
-					<a class="btn btn-sm btn-neutral" (click)="openModal(createUser)">
-						Create
+					<a class="btn btn-sm btn-default text-white" (click)="openModal(createUser)">
+						<i class="fas fa-plus"> </i> 
+                        Pengguna Baru
 					</a>
 				</div>
             </div>
@@ -64,10 +62,10 @@
                                         class="form-control form-control-sm"
                                         (change)="entriesChange($event)"
                                     >
-                                        <option value="10" [selected]="entries==5">5</option>
-                                        <option value="25" [selected]="entries==10">10</option>
-                                        <option value="50" [selected]="entries==15">15</option>
-                                        <option value="-1" [selected]="entries==-1">All</option>
+                                        <option value="5" [selected]="tableEntries==5">5</option>
+                                        <option value="10" [selected]="tableEntries==10">10</option>
+                                        <option value="15" [selected]="tableEntries==15">15</option>
+                                        <option value="-1" [selected]="tableEntries==-1">All</option>
                                     </select>
                                     records
                                 </label>
@@ -130,8 +128,8 @@
                                 <span>Status</span>
                             </ng-template>
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <span *ngIf="row.is_active == 'Active'" class="badge badge-pill badge-success">Active</span>
-                                <span *ngIf="row.is_active == 'Inactive'" class="badge badge-pill badge-warning">Inactive</span>
+                                <a *ngIf="row.is_active == 'Active'" class="badge badge-pill badge-success">Active</a>
+                                <a *ngIf="row.is_active == 'Inactive'" class="badge badge-pill badge-warning">Inactive</a>
                             </ng-template>
                         </ngx-datatable-column>
                     </ngx-datatable>
@@ -144,7 +142,7 @@
 <ng-template #createUser>
     <div class="modal-header bg-default">
         <h6 class="modal-title text-white my-auto" id="modal-title-default">
-            Create New User
+            Tambah Pengguna Baru
         </h6>
 
         <button
@@ -161,7 +159,7 @@
     <div class="modal-body">
         <form [formGroup]="registerForm">
             <div class="form-group">
-                <label class="form-control-label">Name</label>
+                <label class="form-control-label">Nama</label>
                 <input 
                   class="form-control"
                   placeholder="Enter name"
@@ -175,7 +173,16 @@
                 </ng-container>
             </div>
             <div class="form-group">
-                <label class="form-control-label">Email</label>
+                <label class="form-control-label">Peranan</label>
+                <select class="form-control custom-select py-0" id="input-peranan">
+                    <option selected disabled hidden class="text-muted">Pilih Peranan </option>
+                    <option value="penerbit">Penerbit Metadata</option>
+                    <option value="pengesah">Pengesah Metadata</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Emel</label>
                 <input 
                   class="form-control"
                   placeholder="Enter email"
@@ -198,7 +205,7 @@
             (click)="confirm()"
             [disabled]="!registerForm.valid"
         >
-            Create
+            Tambah
         </button>
 
         <button
@@ -207,7 +214,7 @@
             type="button"
             (click)="closeModal()"
         >
-            Close
+            Tutup
         </button>
     </div>
 </ng-template>

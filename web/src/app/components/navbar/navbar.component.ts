@@ -91,7 +91,7 @@ export class NavbarComponent implements OnInit {
     if (path == "notifications") {
       return this.router.navigate(["/global/notifications"]);
     } else if (path == "profile") {
-      return this.router.navigate(["/global/profile"]);
+      return this.router.navigate(["/user/profile"]);
     } else if (path == "settings") {
       return this.router.navigate(["/global/settings"]);
     } else if (path == "home") {

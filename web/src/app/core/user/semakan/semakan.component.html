@@ -3,7 +3,7 @@
       <div class=" header-body">
         <div class=" row align-items-center py-4">
           <div class=" col-lg-6 col-7">
-            <h6 class=" h2 d-inline-block mb-0">Senarai Metadata</h6>
+            <h6 class=" h2 d-inline-block mb-0">Semakan Metadata</h6>
   
             <nav
               aria-label="breadcrumb"
@@ -87,21 +87,19 @@
               [rows]="temp"
               (activate)="onActivate($event)">
 
-              <ngx-datatable-column name="Bil" [width]="80">
+              <ngx-datatable-column name="Bil" [width]="100">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
                   {{rowIndex+1}}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="Metadata" [width]="300"></ngx-datatable-column>
-              <ngx-datatable-column name="Kategori" [width]="100"></ngx-datatable-column>
-              <ngx-datatable-column name="Status" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Metadata" [width]="400"></ngx-datatable-column>
+              <ngx-datatable-column name="Kategori" [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Tarikh" [width]="200"></ngx-datatable-column>
               <ngx-datatable-column name="Tindakan" [width]="200">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a class="text-green" href=""><i class="fas fa-eye mr-3"></i></a>
-                    <a href=""><i class="fas fa-edit mr-3"></i></a>
-                    <a class="text-warning" href=""><i class="fas fa-trash-alt"></i></a>
+                    <a href="javascript:void()" class="text-teal">Semak</a>
                 </ng-template>
-            </ngx-datatable-column>
+              </ngx-datatable-column>
               
             </ngx-datatable>
           </div>

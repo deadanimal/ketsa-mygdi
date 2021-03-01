@@ -22,77 +22,78 @@ export class DatatableComponent implements OnInit {
   rows: any = [
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Dataset",
+      status: "61",
+      tindakan: "Semak"
+    },
+    {
+      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      kategori: "Dataset",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Dataset",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Imagery",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Imagery",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Imagery",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Gridded",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Gridded",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Gridded",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Gridded",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Gridded",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Gridded",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Gridded",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Gridded",
       status: "61"
     },
     {
       metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
-      status: "61"
-    },
-    {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      kategori: "Gridded",
       status: "61"
     },
   ];

@@ -16,13 +16,11 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { RouterModule } from '@angular/router';
 import { GlobalRoutes } from './global.routing';
 import { NotificationsComponent } from './notifications/notifications.component';
-import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
     NotificationsComponent,
-    ProfileComponent,
     SettingsComponent
   ],
   imports: [

@@ -33,13 +33,16 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup
   registerFormMessages = {
     'name': [
-      { type: 'required', message: 'Name is required' }
+      { type: 'required', message: 'Sila masukkan Nama' }
     ],
     'nric': [
-      { type: 'required', message: 'NRIC is required' }
+      { type: 'required', message: 'Sila masukkan No Kad Pengenalan' }
+    ],
+    'section': [
+      { type: 'required', message: 'Sila masukkan Bahagian' }
     ],
     'email': [
-      { type: 'required', message: 'Email is required' },
+      { type: 'required', message: 'Sila masukkan Emel' },
       { type: 'email', message: 'A valid email is required' }
     ],
     'password1': [
@@ -101,6 +104,9 @@ export class LoginComponent implements OnInit {
       nric: new FormControl('', Validators.compose([
         Validators.required
       ])),
+      section: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
       password1: new FormControl('', Validators.compose([
         Validators.required
       ])),
@@ -129,7 +135,7 @@ export class LoginComponent implements OnInit {
     }
     else if (this.loginForm.value.username == 'user2') {
       this.authService.userRole = 3
-      this.navigatePage('dashboard-user')
+      this.navigatePage('dashboard-user2')
     }
   }
 
@@ -144,10 +150,13 @@ export class LoginComponent implements OnInit {
       return this.router.navigate(['/auth/register'])
     }
     else if (path == 'dashboard-user') {
-      return this.router.navigate(['/user/dashboard'])
+      return this.router.navigate(['/admin/dashboard'])
+    }
+    else if (path == 'dashboard-user2') {
+      return this.router.navigate(['/user/profile'])
     }
     else if (path == 'dashboard-admin') {
-      return this.router.navigate(['/global/profile'])
+      return this.router.navigate(['/user/profile'])
     }
   }
 

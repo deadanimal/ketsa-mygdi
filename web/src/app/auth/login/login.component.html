@@ -109,8 +109,8 @@
                 </div>
             </div> 
           </div>
-          <div class="col-lg-5"></div>
-          <div class="col-lg-2">
+          <div class="col-lg-6"></div>
+          <div class="col-lg-1">
             <div class="form-group mt-7">
               <div class="card bcard square rounded-circle mr-4 mt-4 float-right">
                 <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
@@ -204,7 +204,7 @@
                 </div>
                 <div class="col-8">
                   <select class=" form-control form-control-sm ml-3" id="input-agensi">
-                    <option selected disabled>---- Pilih Agensi/Organisasi ----</option>
+                    <option selected disabled hidden> Pilih Agensi/Organisasi </option>
                     <option value="penerbit">Kementerian Tenaga dan Sumber Asli</option>
                     <option value="pengesah">Pengesah Metadata</option>
                     <option value="vw"></option>
@@ -222,8 +222,12 @@
                     id="input-bahagian" 
                     placeholder="Masukkan Bahagian"
                     type="text" 
-                    value=""
-                    formControlName="bahagian"/>
+                    formControlName="section"/>
+                    <ng-container *ngFor="let message of registerFormMessages.section">
+                        <div *ngIf="registerForm.get('section').hasError(message.type) && (registerForm.get('section').dirty || registerForm.get('section').touched)">
+                            <p class="error-message"><span>{{ message.message }}</span></p>
+                        </div>
+                    </ng-container>
                 </div>   
             </div>
             <div class="row mb-2">
@@ -234,7 +238,7 @@
                 </div>
                 <div class="col-8">
                   <select class=" form-control form-control-sm ml-3" id="category">
-                    <option selected disabled>---- Pilih Sektor ----</option>
+                    <option selected disabled hidden> Pilih Sektor </option>
                     <option value="penerbit">Kerajaan</option>
                     <option value="pengesah">Swasta</option>
                 </select>
@@ -295,7 +299,7 @@
                 </div>
                 <div class="col-6">
                   <select class=" form-control form-control-sm ml-3" id="input-peranan">
-                    <option selected disabled>---- Pilih Peranan ----</option>
+                    <option selected disabled hidden> Pilih Peranan </option>
                     <option value="penerbit">Penerbit Metadata</option>
                     <option value="pengesah">Pengesah Metadata</option>
                     <option value="vw">Pengguna Biasa</option>

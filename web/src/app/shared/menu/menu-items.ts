@@ -5,6 +5,7 @@ export interface RouteInfo {
     icontype: string;
     collapse?: string;
     isCollapsed?: boolean;
+    isCollapsed1?: boolean;
     isCollapsing?: any;
     children?: ChildrenItems[];
 }
@@ -24,7 +25,7 @@ export interface ChildrenItems2 {
 }
 
 // Menu Items
-export const ROUTES: RouteInfo[] = [
+export const ROUTESUSER: RouteInfo[] = [
   {
     path: '/portal/',
     title: 'Utama',
@@ -32,7 +33,7 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fas fa-home text-teal'
   },
   {
-    path: '/global/profile',
+    path: '/user/profile',
     title: 'Profil',
     type: 'link',
     icontype: 'fas fa-user text-blue'
@@ -98,13 +99,13 @@ export const ROUTESPENGESAH: RouteInfo[] = [
     icontype: 'fas fa-home text-teal'
   },
   {
-    path: '/global/profile',
+    path: '/user/profile',
     title: 'Profil',
     type: 'link',
     icontype: 'fas fa-user text-blue'
   },
   {
-    path: '/user/dashboard',
+    path: '/admin/dashboard',
     title: 'Dashboard',
     type: 'link',
     icontype: 'fas fa-desktop text-warning'
@@ -141,8 +142,8 @@ export const ROUTESPENGESAH: RouteInfo[] = [
     icontype: 'fas fa-braille text-indigo'
   }*/
   {
-    path: '/user/metadata',
-    title: 'Pengesahanan',
+    path: '/user/semakan',
+    title: 'Semakan Metadata',
     type: 'link',
     icontype: 'fas fa-edit text-pink'
   },
@@ -162,7 +163,19 @@ export const ROUTESPENGESAH: RouteInfo[] = [
   
 ];
 
-export const ROUTESUSER: RouteInfo[] = [
+export const ROUTESADMIN: RouteInfo[] = [
+  {
+    path: '/portal/',
+    title: 'Utama',
+    type: 'link',
+    icontype: 'fas fa-home text-teal'
+  },
+  {
+    path: '/user/profile',
+    title: 'Profil',
+    type: 'link',
+    icontype: 'fas fa-user text-blue'
+  },
   {
     path: '/dashboard',
     title: 'Dashboard',
@@ -170,41 +183,56 @@ export const ROUTESUSER: RouteInfo[] = [
     icontype: 'fas fa-desktop text-warning'
   },
   {
-    path: '/applications',
-    title: 'Applications',
+    path: '/admin/management/user',
+    title: 'Pengurusan Pengguna',
     type: 'link',
-    icontype: 'fas fa-file-invoice text-pink'
+    icontype: 'fas fa-user-cog text-purple',
   },
   {
-    path: '/houses',
-    title: 'Houses',
-    type: 'link',
-    icontype: 'fas fa-home text-purple'
+    path: '/admin/management/',
+    title: 'Pengurusan Metadata',
+    type: 'sub',
+    icontype: 'fas fa-braille text-indigo',
+    collapse: 'management',
+    isCollapsed: true,
+    children: [
+      { path: 'audit-trails', title: 'Senarai Metadata', type: 'link' },
+      { path: 'user', title: 'Kemaskini Elemen Metadata', type: 'link' }
+    ]
   },
   {
     path: '/management',
-    title: 'Management',
+    title: 'Pengurusan Data Asas',
     type: 'link',
     icontype: 'fas fa-tasks text-red'
   },
   {
-    path: '/report',
-    title: 'Report',
+    path: '/management',
+    title: 'Maklum Balas',
     type: 'link',
-    icontype: 'fas fa-chart-bar text-green'
+    icontype: 'fas fa-comments text-primary'
   },
   {
-    path: '/helpdesk',
-    title: 'Helpdesk',
-    type: 'link',
-    icontype: 'fas fa-life-ring text-blue'
+    path: '/admin/management/',
+    title: 'Pengurusan Portal',
+    type: 'sub',
+    icontype: 'fas fa-glasses text-green',
+    collapse: 'management',
+    isCollapsed: true,
+    children: [
+      { path: 'faq', title: 'Soalan Lazim', type: 'link' },
+      { path: 'annoucement', title: 'Pengumuman', type: 'link' },
+      { path: 'userguide', title: 'Panduan Pengguna', type: 'link' },
+      { path: 'disclaimer', title: 'Penafian', type: 'link' }
+    ]
   },
   {
-    path: '/audit',
-    title: 'Audit Trail',
+    path: '/auth/login', /*add destroy token*/
+    title: 'Log Keluar',
     type: 'link',
-    icontype: 'fas fa-braille text-indigo'
-  }/*,
+    icontype: 'fas fa-door-open text-black'
+  },
+  /*,
   {
     path: '/maintenance',
     title: 'Maintenance',
