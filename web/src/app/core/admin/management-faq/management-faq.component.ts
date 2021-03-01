@@ -36,28 +36,46 @@ export class ManagementFaqComponent implements OnInit {
     ]
   }
 
-  entries: number = 5;
+  entries: number = -1;
   selected: any[] = [];
   temp = [];
   activeRow: any;
   rows: any = [
     {
-      soalan: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      soalan: "Apa itu MyGeo Explorer? ",
     },
     {
-      soalan: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      soalan: "Apa itu MyGeo Explorer? ",
     },
     {
-      soalan: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      soalan: "Apa itu MyGeo Explorer? ",
     },
     {
-      soalan: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      soalan: "Apa itu MyGeo Explorer? ",
     },
     {
-      soalan: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      soalan: "Apa itu MyGeo Explorer? ",
     },
     {
-      soalan: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      soalan: "Apa itu MyGeo Explorer? ",
+    },
+    {
+      soalan: "Apa itu MyGeo Explorer? ",
+    },
+    {
+      soalan: "Apa itu MyGeo Explorer? ",
+    },
+    {
+      soalan: "Apa itu MyGeo Explorer? ",
+    },
+    {
+      soalan: "Apa itu MyGeo Explorer? ",
+    },
+    {
+      soalan: "Apa itu MyGeo Explorer? ",
+    },
+    {
+      soalan: "Apa itu MyGeo Explorer? ",
     },
   ];
   SelectionType = SelectionType;

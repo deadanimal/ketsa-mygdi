@@ -21,8 +21,15 @@
                         *ngIf="!editEnabled"
                         class="btn btn-default btn-sm text-white btn-icon btn-3" 
                         (click)="toggleEdit()"> 
-                        <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
-                        <span class="btn-inner--text">Tambah</span>
+                        <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                        <span class="btn-inner--text">Soalan</span>
+                    </a>
+                    <a 
+                        *ngIf="!editEnabled"
+                        class="btn btn-primary btn-sm text-white btn-icon btn-3" 
+                        (click)="toggleEdit()"> 
+                        <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                        <span class="btn-inner--text">Kategori</span>
                     </a>
                     <a
                         *ngIf="editEnabled"
@@ -49,10 +56,21 @@
         <div class="col-xl-7 order-xl-2">
         <div class="card">
             <div class="card-header bg-primary">
-                <h3 class="text-white mb-0">Perincian Soalan dan Jawapan</h3>
+                <h3 *ngIf="!editEnabled" class="text-white mb-0">Perincian Soalan dan Jawapan</h3>
+                <h3 *ngIf="editEnabled" class="text-white mb-0">Tambah Soalan dan Jawapan</h3>
             </div>
             <div class="card-body">
                 <form>
+                    <div *ngIf="editEnabled" class="form-group">
+                        <label class="form-control-label mr-4">Kategori</label>
+                        <select class="form-control custom-select py-0">
+                            <option hidden selected>Pilih Kategori</option>
+                            <option>Dataset</option>
+                            <option>Services</option>
+                            <option>Imagery</option>
+                            <option>Gridded</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Soalan</label>
                         <input 
@@ -80,10 +98,10 @@
                                 <label class="form-control-label mr-4">Kategori</label>
                                 <select class="form-control custom-select py-0">
                                     <option hidden selected>Pilih Kategori</option>
-                                    <option>Report 1</option>
-                                    <option>Report 2</option>
-                                    <option>Report 3</option>
-                                    <option>Report 4</option>
+                                    <option>Dataset</option>
+                                    <option>Services</option>
+                                    <option>Imagery</option>
+                                    <option>Gridded</option>
                                 </select>
                             </div>
                         </div>
@@ -117,7 +135,7 @@
                               {{rowIndex+1}}
                             </ng-template>
                           </ngx-datatable-column>
-                          <ngx-datatable-column name="Soalan" [width]="450"></ngx-datatable-column>
+                          <ngx-datatable-column name="Soalan" [width]="300"></ngx-datatable-column>
                           
                           
                         </ngx-datatable>

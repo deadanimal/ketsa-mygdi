@@ -29,7 +29,7 @@
 </div>
 
 <div class="container-fluid mt--6">
-    <div class="row">
+   <!--<div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header bg-secondary">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --> 
 
     <div class="row">
         <div class="col">
@@ -50,7 +50,7 @@
                 <div class="card-header bg-secondary">
                     <h3 class="m-0">User List</h3>
                 </div>
-                <div class="dataTables_wrapper py-4">
+                <div class="dataTables_wrapper p-4">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_length" id="datatable_length">
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <ngx-datatable 
                         class="bootstrap selection-cell"
                         [columnMode]="'force'"
@@ -125,11 +125,14 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column>
                             <ng-template ngx-datatable-header-template>
-                                <span>Status</span>
+                                <span>Tindakan</span>
                             </ng-template>
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <a *ngIf="row.is_active == 'Active'" class="badge badge-pill badge-success">Active</a>
-                                <a *ngIf="row.is_active == 'Inactive'" class="badge badge-pill badge-warning">Inactive</a>
+                                <!--<a *ngIf="row.is_active == 'Active'" class="badge badge-pill badge-success">Active</a>
+                                <a *ngIf="row.is_active == 'Inactive'" class="badge badge-pill badge-warning">Inactive</a> -->
+                                <a class="text-green" (click)="openModal(displayUser)"><i class="fas fa-eye mr-3"></i></a>
+                                <a href="javascript:void()"><i class="fas fa-edit mr-3"></i></a>
+                                <a class="text-warning" href="javascript:void()"><i class="fas fa-trash-alt"></i></a>
                             </ng-template>
                         </ngx-datatable-column>
                     </ngx-datatable>
@@ -159,7 +162,7 @@
     <div class="modal-body">
         <form [formGroup]="registerForm">
             <div class="form-group">
-                <label class="form-control-label">Nama</label>
+                <label class="form-control-label">Nama Penuh</label>
                 <input 
                   class="form-control"
                   placeholder="Enter name"
@@ -216,5 +219,166 @@
         >
             Tutup
         </button>
+    </div>
+</ng-template>
+
+<!--Display Maklumat Pengguna-->
+
+<ng-template #displayUser>
+    <div class="modal-header bg-default">
+        <h6 class="modal-title text-white my-auto" id="modal-title-default">
+            Maklumat Pengguna
+        </h6>
+
+        <button
+            aria-label="Close"
+            class="close"
+            data-dismiss="modal"
+            type="button"
+            (click)="closeModal()"
+        >
+            <span aria-hidden="true" class="text-white my-auto"> × </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="input-username">
+                    Nama Penuh  
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3"
+                    id="input-username" 
+                    placeholder="Name"
+                    type="text" 
+                    value="Tarmizi bin Ahmad"
+                    disabled/>
+                </div>   
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="input-username">
+                    No Kad Pengenalan  
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3"
+                    id="input-nric" 
+                    placeholder="Name"
+                    type="text" 
+                    value="890103085322"
+                    disabled/>
+                </div>   
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="input-username">
+                    Agensi/Organisasi
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3"
+                    id="input-username" 
+                    placeholder="Name"
+                    type="text" 
+                    value="Kementerian Tenaga dan Sumber Asli "
+                    disabled/>
+                </div>   
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="input-username">
+                    Bahagian  
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3"
+                    id="input-nric" 
+                    placeholder="Name"
+                    type="text" 
+                    value="Bahagian Pengurusan Maklumat"
+                    disabled/>
+                </div>   
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="input-username">
+                    Sektor  
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3"
+                    id="input-username" 
+                    placeholder="Name"
+                    type="text" 
+                    value="Kerajaan"
+                    disabled/>
+                </div>   
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="input-username">
+                    Emel  
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3"
+                    id="input-nric" 
+                    placeholder="Name"
+                    type="text" 
+                    value="tarmizi@ketsa.com.my"
+                    disabled/>
+                </div>   
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="input-username">
+                    Telefon Pejabat
+                    </label>
+                </div>
+                <div class="col-5">
+                    <input class="form-control form-control-sm ml-3"
+                    id="input-username" 
+                    placeholder="Name"
+                    type="text" 
+                    value="043456789"
+                    disabled/>
+                </div>
+            </div>
+            <div class="row mb-2">
+                   
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="input-username">
+                    Telefon Bimbit 
+                    </label>
+                </div>
+                <div class="col-5">
+                    <input class="form-control form-control-sm ml-3"
+                    id="input-username" 
+                    placeholder="Name"
+                    type="text" 
+                    value="0173456789"
+                    disabled/>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="input-username">
+                    Peranan  
+                    </label>
+                </div>
+                <div class="col-5">
+                    <input class="form-control form-control-sm ml-3"
+                    id="input-nric" 
+                    placeholder="Name"
+                    type="text" 
+                    value="Penerbit Metadata"
+                    disabled/>
+                </div>   
+            </div>
+        </form>
     </div>
 </ng-template>

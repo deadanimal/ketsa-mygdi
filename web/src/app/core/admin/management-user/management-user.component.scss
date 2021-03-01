@@ -6,3 +6,7 @@
     padding-bottom: 0;
     margin-bottom: 0;
 }
+::ng-deep .ngx-datatable .datatable-body {
+    max-height: 42vh !important;
+    overflow-y: scroll;
+}

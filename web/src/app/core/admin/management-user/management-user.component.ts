@@ -28,7 +28,7 @@ export enum SelectionType {
 export class ManagementUserComponent implements OnInit, OnDestroy {
 
   // Table
-  tableEntries: number = 5;
+  tableEntries: number = 10;
   selected: any[] = [];
   tableSelected: any[] = [];
   tableTemp = [];
@@ -55,7 +55,7 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
   modal: BsModalRef;
   modalConfig = {
     keyboard: true,
-    class: "modal-dialog-centered"
+    class: "modal-dialog-centered modal-lg"
   };
 
   // Form
