@@ -27,7 +27,7 @@
                     <a 
                         *ngIf="!editEnabled"
                         class="btn btn-primary btn-sm text-white btn-icon btn-3" 
-                        (click)="toggleEdit()"> 
+                        (click)="openModal(addCategory)"> 
                         <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                         <span class="btn-inner--text">Kategori</span>
                     </a>
@@ -145,3 +145,55 @@
         </div>
     </div>
 </div>
+
+<ng-template #addCategory>
+    <div class="modal-header bg-default">
+        <h6 class="modal-title text-white my-auto" id="modal-title-default">
+            Tambah Kategori
+        </h6>
+
+        <button
+            aria-label="Close"
+            class="close"
+            data-dismiss="modal"
+            type="button"
+            (click)="closeModal()"
+        >
+            <span aria-hidden="true" class="text-white my-auto"> × </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label class="form-control-label">Nama Kategori</label>
+                <input 
+                  class="form-control"
+                  placeholder="Masukkan Kategori"
+                  formControlName="category"
+                  type="text"
+                >
+            </div>
+        </form>
+        <form><quill-editor id="quill" data-toggle="quill"></quill-editor></form>
+    </div>
+
+    <div class="modal-footer">
+        <button 
+            class="btn btn-success"
+            type="button"
+            (click)="confirm()"
+        >
+            Tambah
+        </button>
+
+        <button
+            class="btn btn-outline-danger ml-auto"
+            data-dismiss="modal"
+            type="button"
+            (click)="closeModal()"
+        >
+            Tutup
+        </button>
+    </div>
+</ng-template>

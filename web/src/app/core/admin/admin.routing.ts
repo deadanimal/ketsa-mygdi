@@ -8,6 +8,7 @@ import { ReportComponent } from './report/report.component';
 import { ManagementFaqComponent } from './management-faq/management-faq.component';
 import { ManagementDisclaimerComponent } from './management-disclaimer/management-disclaimer.component';
 import { ManagementUserguideComponent } from './management-userguide/management-userguide.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 export const AdminRoutes: Routes = [
@@ -41,10 +42,16 @@ export const AdminRoutes: Routes = [
                         path: 'userguide',
                         component: ManagementUserguideComponent
                     },
+
+                    {
+                        path: 'tabledata',
+                        component: DatatableComponent
+                    },
                     {
                         path: 'disclaimer',
                         component: ManagementDisclaimerComponent
                     },
+
                 ]
             },
             {
@@ -52,8 +59,8 @@ export const AdminRoutes: Routes = [
                 component: ReportComponent
             },
             {
-                path: 'tabledata',
-                component: DatatableComponent
+                path: 'profile',
+                component: ProfileComponent
             },
         ]
     }

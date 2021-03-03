@@ -12,6 +12,10 @@
     margin-bottom: 0;
 }
 ::ng-deep .ngx-datatable .datatable-body {
-    max-height: 35vh !important;
+    max-height: 40vh !important;
     overflow-y: scroll;
+}
+
+.card {
+    min-height: 650px;
 }

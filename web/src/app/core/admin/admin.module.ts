@@ -8,6 +8,7 @@ import {
   TabsModule,
   TooltipModule
 } from 'ngx-bootstrap';
+import { QuillModule } from 'ngx-quill';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -24,6 +25,7 @@ import { ManagementFaqComponent } from './management-faq/management-faq.componen
 import { ManagementAnnoucementComponent } from './management-annoucement/management-annoucement.component';
 import { ManagementUserguideComponent } from './management-userguide/management-userguide.component';
 import { ManagementDisclaimerComponent } from './management-disclaimer/management-disclaimer.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { ManagementDisclaimerComponent } from './management-disclaimer/managemen
     ManagementFaqComponent,
     ManagementAnnoucementComponent,
     ManagementUserguideComponent,
-    ManagementDisclaimerComponent
+    ManagementDisclaimerComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +53,8 @@ import { ManagementDisclaimerComponent } from './management-disclaimer/managemen
     ReactiveFormsModule,
     LoadingBarModule,
     NgxDatatableModule,
-    RouterModule.forChild(AdminRoutes)
+    RouterModule.forChild(AdminRoutes),
+    QuillModule.forRoot()
   ]
 })
 export class AdminModule { }

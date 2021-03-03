@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import swal from 'sweetalert2';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import Quill from "quill";
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 
 export enum SelectionType {
@@ -35,6 +36,13 @@ export class ManagementFaqComponent implements OnInit {
       { type: 'email', message: 'A valid email is required' }
     ]
   }
+
+  // Modal
+  modal: BsModalRef;
+  modalConfig = {
+    keyboard: true,
+    class: "modal-dialog-centered modal-lg"
+  };
 
   entries: number = -1;
   selected: any[] = [];
@@ -81,7 +89,8 @@ export class ManagementFaqComponent implements OnInit {
   SelectionType = SelectionType;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalService: BsModalService,
   ) {
     
     this.temp = this.rows.map((prop, key) => {
@@ -217,5 +226,14 @@ export class ManagementFaqComponent implements OnInit {
       }
     })
   }
+
+  openModal(modalRef: TemplateRef<any>) {
+    this.modal = this.modalService.show(modalRef, this.modalConfig);
+  }
+
+  closeModal() {
+    this.modal.hide()
+  }
+
 
 }

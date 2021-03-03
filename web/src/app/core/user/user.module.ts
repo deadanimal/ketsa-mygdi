@@ -6,23 +6,25 @@ import {
   ModalModule,
   ProgressbarModule, 
   TabsModule,
-  TooltipModule
+  TooltipModule,
+  CollapseModule
 } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { RouterModule } from '@angular/router';
 import { UserRoutes } from './user.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MetadataComponent } from './metadata/metadata.component';
-import { ProfileComponent } from './profile/profile.component';
 import { SemakanComponent } from './semakan/semakan.component';
 
 @NgModule({
-  declarations: [DashboardComponent, MetadataComponent, ProfileComponent, SemakanComponent],
+  declarations: [
+    DashboardComponent, 
+    MetadataComponent, 
+    SemakanComponent],
   imports: [
     CommonModule,
     CollapseModule.forRoot(),
@@ -37,7 +39,7 @@ import { SemakanComponent } from './semakan/semakan.component';
     ReactiveFormsModule,
     LoadingBarModule,
     NgxDatatableModule,
-    RouterModule.forChild(UserRoutes)
+    RouterModule.forChild(UserRoutes),
   ]
 })
 export class UserModule { }

@@ -156,7 +156,7 @@ export class LoginComponent implements OnInit {
       return this.router.navigate(['/user/profile'])
     }
     else if (path == 'dashboard-admin') {
-      return this.router.navigate(['/user/profile'])
+      return this.router.navigate(['/admin/profile'])
     }
   }
 

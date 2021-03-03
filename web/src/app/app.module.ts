@@ -1,4 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -31,6 +33,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
+    CommonModule,
+    BrowserModule,
     FormsModule,
     AccordionModule.forRoot(),
     HttpClientModule,

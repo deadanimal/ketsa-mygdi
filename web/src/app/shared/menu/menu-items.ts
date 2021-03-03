@@ -76,7 +76,7 @@ export const ROUTESUSER: RouteInfo[] = [
     icontype: 'fas fa-edit text-pink'
   },
   {
-    path: '/admin/tabledata',
+    path: '/user/tabledata',
     title: 'Senarai Metadata',
     type: 'link',
     icontype: 'fas fa-list-ul text-indigo'
@@ -105,7 +105,7 @@ export const ROUTESPENGESAH: RouteInfo[] = [
     icontype: 'fas fa-user text-blue'
   },
   {
-    path: '/admin/dashboard',
+    path: '/user/dashboard',
     title: 'Dashboard',
     type: 'link',
     icontype: 'fas fa-desktop text-warning'
@@ -148,7 +148,7 @@ export const ROUTESPENGESAH: RouteInfo[] = [
     icontype: 'fas fa-edit text-pink'
   },
   {
-    path: '/admin/tabledata',
+    path: '/user/tabledata',
     title: 'Senarai Metadata',
     type: 'link',
     icontype: 'fas fa-list-ul text-indigo'
@@ -171,13 +171,13 @@ export const ROUTESADMIN: RouteInfo[] = [
     icontype: 'fas fa-home text-teal'
   },
   {
-    path: '/user/profile',
+    path: '/admin/profile',
     title: 'Profil',
     type: 'link',
     icontype: 'fas fa-user text-blue'
   },
   {
-    path: '/dashboard',
+    path: '/admin/dashboard',
     title: 'Dashboard',
     type: 'link',
     icontype: 'fas fa-desktop text-warning'
@@ -196,7 +196,7 @@ export const ROUTESADMIN: RouteInfo[] = [
     collapse: 'management',
     isCollapsed: true,
     children: [
-      { path: 'audit-trails', title: 'Senarai Metadata', type: 'link' },
+      { path: 'tabledata', title: 'Senarai Metadata', type: 'link' },
       { path: 'user', title: 'Kemaskini Elemen Metadata', type: 'link' }
     ]
   },
