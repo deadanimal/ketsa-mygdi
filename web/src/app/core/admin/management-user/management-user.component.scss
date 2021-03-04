@@ -1,3 +1,8 @@
+.btn-primary,
+.bg-primary {
+    background-color: #0A80B6 !important;
+    border-color: #0A80B6;
+}
 .error-message {
     color: #f5365c;
     text-align: right;
@@ -7,6 +12,10 @@
     margin-bottom: 0;
 }
 ::ng-deep .ngx-datatable .datatable-body {
-    max-height: 42vh !important;
+    max-height: 40vh !important;
     overflow-y: scroll;
+}
+
+.card {
+    min-height: 680px;
 }

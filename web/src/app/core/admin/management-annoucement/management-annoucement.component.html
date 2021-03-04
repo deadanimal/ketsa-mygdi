@@ -54,28 +54,36 @@
             </div>
             <div class="card-body">
                 <form>
-                    <div *ngIf="editEnabled" class="form-group">
-                        <label class="form-control-label mr-4">Kategori</label>
-                        <select class="form-control custom-select py-0">
-                            <option hidden selected>Pilih Kategori</option>
-                            <option>Dataset</option>
-                            <option>Services</option>
-                            <option>Imagery</option>
-                            <option>Gridded</option>
-                        </select>
-                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Tajuk</label>
                         <input 
                           class="form-control"
-                          placeholder=""
                           formControlName="name"
-                          type="text"
-                        >
+                          type="text">
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Kandungan</label>
-                        <form><div id="quill" data-toggle="quill"></div></form>
+                        <form><quill-editor></quill-editor></form>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-control-label">Tarikh Mula Paparan</label>
+                                <input 
+                                class="form-control"
+                                formControlName="startdate"
+                                type="date">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-control-label">Tarikh Tamat Paparan</label>
+                                <input 
+                                class="form-control"
+                                formControlName="enddate"
+                                type="date">
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -85,30 +93,12 @@
         <div class="col-xl-5 order-xl-1">
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col-8">
-                            <div class="form-inline">
-                                <label class="form-control-label mr-4">Kategori</label>
-                                <select class="form-control custom-select py-0">
-                                    <option hidden selected>Pilih Kategori</option>
-                                    <option>Dataset</option>
-                                    <option>Services</option>
-                                    <option>Imagery</option>
-                                    <option>Gridded</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-4 text-right">
-                            <!--<a  *ngIf="!editEnabled"  class="btn btn-sm btn-primary" href="javascript:void(0)">
-                                Settings
-                            </a>-->
-                        </div>
+                    <div class="text-center">
+                        <h3>Senarai Tajuk Pengumuman</h3>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <h3 class="text-center">Senarai Soalan</h3>
                     <div class="dataTables_wrapper py-4">
                         <ngx-datatable
                             class="bootstrap selection-cell"
@@ -128,7 +118,7 @@
                               {{rowIndex+1}}
                             </ng-template>
                           </ngx-datatable-column>
-                          <ngx-datatable-column name="Soalan" [width]="300"></ngx-datatable-column>
+                          <ngx-datatable-column name="Tajuk" [width]="300"></ngx-datatable-column>
                           
                           
                         </ngx-datatable>

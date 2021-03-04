@@ -50,16 +50,16 @@ export class ManagementAnnoucementComponent implements OnInit {
   activeRow: any;
   rows: any = [
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "Apa itu MyGeo Explorer? ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "Apa itu MyGeo Explorer? ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "Apa itu MyGeo Explorer? ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "Apa itu MyGeo Explorer? ",
     },
     
   ];
@@ -108,24 +108,6 @@ export class ManagementAnnoucementComponent implements OnInit {
         Validators.required,
         Validators.email
       ]))
-    })
-    var quill = new Quill("#quill", {
-      modules: {
-        toolbar: [
-          ["bold", "italic","underline"],
-          ["link"],
-          [
-            {
-              list: "ordered"
-            },
-            {
-              list: "bullet"
-            }
-          ]
-        ]
-      },
-      placeholder: "Quill WYSIWYG",
-      theme: "snow"
     });
   }
 

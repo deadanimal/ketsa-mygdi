@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
-// import { ROUTES } from "../../shared/menu/menu-items";
+//import { ROUTESADMIN, ROUTESPENGESAH, ROUTESUSER } from '../../shared/menu/menu-items';
 import {
   Router,
   Event,
@@ -16,6 +16,8 @@ import { NotifyService } from "src/app/shared/handler/notify/notify.service";
 import { UsersService } from "src/app/shared/services/users/users.service";
 import { User } from "src/app/shared/services/users/users.model";
 import { JwtService } from "src/app/shared/handler/jwt/jwt.service";
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import dxMenu from "devextreme/ui/menu";
 
 @Component({
   selector: "app-navbar",
@@ -26,6 +28,7 @@ export class NavbarComponent implements OnInit {
   focus;
   listTitles: any[];
   location: Location;
+  public auth;
 
   sidenavOpen: boolean = true;
 
@@ -37,6 +40,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     location: Location,
+    private authService: AuthService,
     private userService: UsersService,
     private jwtService: JwtService,
     private notifyService: NotifyService,
@@ -71,6 +75,16 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     console.log("as: ", this.user);
     // this.listTitles = ROUTES.filter(listTitle => listTitle);
+
+    if (this.authService.userRole == 1) {
+      this.auth = 1
+    }
+    else if (this.authService.userRole == 2) {
+      this.auth = 2
+    }
+    else if (this.authService.userRole == 3) {
+      this.auth = 3
+    }
   }
 
   getTitle() {

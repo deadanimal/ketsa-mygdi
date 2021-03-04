@@ -1,26 +1,15 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import Quill from "quill";
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-
-
-export enum SelectionType {
-  single = "single",
-  multi = "multi",
-  multiClick = "multiClick",
-  cell = "cell",
-  checkbox = "checkbox"
-}
 
 @Component({
-  selector: 'app-management-userguide',
-  templateUrl: './management-userguide.component.html',
-  styleUrls: ['./management-userguide.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class ManagementUserguideComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
-  
+
   // Toggle
   editEnabled: boolean = false
   formDataset: boolean = false
@@ -37,90 +26,9 @@ export class ManagementUserguideComponent implements OnInit {
     ]
   }
 
-  // Modal
-  modal: BsModalRef;
-  modalConfig = {
-    keyboard: true,
-    class: "modal-dialog-centered modal-lg"
-  };
-
-  entries: number = -1;
-  selected: any[] = [];
-  temp = [];
-  activeRow: any;
-  rows: any = [
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-    {
-      soalan: "Apa itu MyGeo Explorer? ",
-    },
-  ];
-  SelectionType = SelectionType;
-
   constructor(
-    private formBuilder: FormBuilder,
-    private modalService: BsModalService,
-  ) {
-    
-    this.temp = this.rows.map((prop, key) => {
-      return {
-        ...prop,
-        id: key
-      };
-    });
-  }
-  entriesChange($event) {
-    this.entries = $event.target.value;
-  }
-  filterTable($event) {
-    let val = $event.target.value;
-    this.temp = this.rows.filter(function(d) {
-      for (var key in d) {
-        if (d[key].toLowerCase().indexOf(val) !== -1) {
-          return true;
-        }
-      }
-      return false;
-    });
-  }
-  onSelect({ selected }) {
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
-  }
-  onActivate(event) {
-    this.activeRow = event.row;
-  }
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
@@ -131,9 +39,8 @@ export class ManagementUserguideComponent implements OnInit {
         Validators.required,
         Validators.email
       ]))
-    });
+    })
   }
-  
 
   toggleEdit() {
     this.editEnabled = !this.editEnabled
@@ -209,14 +116,5 @@ export class ManagementUserguideComponent implements OnInit {
       }
     })
   }
-
-  openModal(modalRef: TemplateRef<any>) {
-    this.modal = this.modalService.show(modalRef, this.modalConfig);
-  }
-
-  closeModal() {
-    this.modal.hide()
-  }
-
 
 }

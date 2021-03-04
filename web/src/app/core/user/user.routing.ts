@@ -1,8 +1,8 @@
-import { DatatableComponent } from '../admin/datatable/datatable.component';
+import { DatatableComponent } from './datatable/datatable.component';
 import { MetadataComponent } from './metadata/metadata.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProfileComponent } from '../admin/profile/profile.component';
+import { ProfileComponent } from './profile/profile.component';
 import { SemakanComponent } from './semakan/semakan.component';
 
 

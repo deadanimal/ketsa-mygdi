@@ -1,3 +1,5 @@
+import { DatatableComponent } from './datatable/datatable.component';
+import { ProfileComponent } from './profile/profile.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
@@ -24,7 +26,10 @@ import { SemakanComponent } from './semakan/semakan.component';
   declarations: [
     DashboardComponent, 
     MetadataComponent, 
-    SemakanComponent],
+    SemakanComponent,
+    ProfileComponent,
+    DatatableComponent,
+  ],
   imports: [
     CommonModule,
     CollapseModule.forRoot(),
