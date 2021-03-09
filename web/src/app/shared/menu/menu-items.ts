@@ -81,12 +81,7 @@ export const ROUTESUSER: RouteInfo[] = [
     type: 'link',
     icontype: 'fas fa-list-ul text-indigo'
   },
-  {
-    path: '/auth/login', /*add destroy token*/
-    title: 'Log Keluar',
-    type: 'link',
-    icontype: 'fas fa-door-open text-black'
-  },
+  
   
   
 ];
@@ -153,13 +148,6 @@ export const ROUTESPENGESAH: RouteInfo[] = [
     type: 'link',
     icontype: 'fas fa-list-ul text-indigo'
   },
-  {
-    path: '/auth/login', /*add destroy token*/
-    title: 'Log Keluar',
-    type: 'link',
-    icontype: 'fas fa-door-open text-black'
-  },
-  
   
 ];
 
@@ -197,17 +185,25 @@ export const ROUTESADMIN: RouteInfo[] = [
     isCollapsed: true,
     children: [
       { path: 'tabledata', title: 'Senarai Metadata', type: 'link' },
-      { path: 'user', title: 'Kemaskini Elemen Metadata', type: 'link' }
+      { path: 'update-element', title: 'Kemaskini Elemen Metadata', type: 'link' }
     ]
   },
   {
-    path: '/management',
+    path: '/admin/management',
     title: 'Pengurusan Data Asas',
-    type: 'link',
-    icontype: 'fas fa-tasks text-red'
+    type: 'sub',
+    icontype: 'fas fa-tasks text-red',
+    collapse: 'management',
+    isCollapsed: true,
+    children: [
+      { path: 'dataasas', title: 'Kemaskini Data', type: 'link' },
+      { path: 'newapplication', title: 'Permohonan Baru', type: 'link' },
+      { path: 'dataprocess', title: 'Proses Data', type: 'link' },
+      { path: 'applicationstatus', title: 'Status Permohonan', type: 'link' },
+    ]
   },
   {
-    path: '/management',
+    path: '/admin/feedback',
     title: 'Maklum Balas',
     type: 'link',
     icontype: 'fas fa-comments text-primary'
@@ -226,12 +222,7 @@ export const ROUTESADMIN: RouteInfo[] = [
       { path: 'disclaimer', title: 'Penafian', type: 'link' }
     ]
   },
-  {
-    path: '/auth/login', /*add destroy token*/
-    title: 'Log Keluar',
-    type: 'link',
-    icontype: 'fas fa-door-open text-black'
-  },
+  
   /*,
   {
     path: '/maintenance',

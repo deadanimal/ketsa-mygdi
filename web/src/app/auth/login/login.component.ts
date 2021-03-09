@@ -129,13 +129,25 @@ export class LoginComponent implements OnInit {
       this.authService.userRole = 1
       this.navigatePage('dashboard-admin')
     }
-    else if (this.loginForm.value.username == 'user') {
+    else if (this.loginForm.value.username == 'admin2') {
       this.authService.userRole = 2
+      this.navigatePage('dashboard-admin')
+    }
+    else if (this.loginForm.value.username == 'admin3') {
+      this.authService.userRole = 3
+      this.navigatePage('dashboard-admin')
+    }
+    else if (this.loginForm.value.username == 'user') {
+      this.authService.userRole = 4
       this.navigatePage('dashboard-user')
     }
     else if (this.loginForm.value.username == 'user2') {
-      this.authService.userRole = 3
-      this.navigatePage('dashboard-user2')
+      this.authService.userRole = 5
+      this.navigatePage('dashboard-user')
+    }
+    else if (this.loginForm.value.username == 'user3') {
+      this.authService.userRole = 6
+      this.navigatePage('dashboard-user')
     }
   }
 
@@ -150,9 +162,6 @@ export class LoginComponent implements OnInit {
       return this.router.navigate(['/auth/register'])
     }
     else if (path == 'dashboard-user') {
-      return this.router.navigate(['/admin/dashboard'])
-    }
-    else if (path == 'dashboard-user2') {
       return this.router.navigate(['/user/profile'])
     }
     else if (path == 'dashboard-admin') {

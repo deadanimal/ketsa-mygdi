@@ -85,6 +85,16 @@ export class NavbarComponent implements OnInit {
     else if (this.authService.userRole == 3) {
       this.auth = 3
     }
+    else if (this.authService.userRole == 4) {
+      this.auth = 4
+    }
+    else if (this.authService.userRole == 5) {
+      this.auth = 5
+    }
+    else if (this.authService.userRole == 6) {
+      this.auth = 6
+    }
+  
   }
 
   getTitle() {

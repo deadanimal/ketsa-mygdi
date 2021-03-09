@@ -27,6 +27,12 @@ import { ManagementUserguideComponent } from './management-userguide/management-
 import { ManagementDisclaimerComponent } from './management-disclaimer/management-disclaimer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { ManagementDataComponent } from './management-data/management-data.component';
+import { ManagementProcessdataComponent } from './management-processdata/management-processdata.component';
+import { ManagementAppstatusComponent } from './management-appstatus/management-appstatus.component';
+import { ManagementNewappComponent } from './management-newapp/management-newapp.component';
+import { ManagementElementmetadataComponent } from './management-elementmetadata/management-elementmetadata.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,13 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
     ManagementAnnoucementComponent,
     ManagementUserguideComponent,
     ManagementDisclaimerComponent,
-    ProfileComponent
+    ProfileComponent,
+    FeedbackComponent,
+    ManagementDataComponent,
+    ManagementProcessdataComponent,
+    ManagementAppstatusComponent,
+    ManagementNewappComponent,
+    ManagementElementmetadataComponent
   ],
   imports: [
     CommonModule,

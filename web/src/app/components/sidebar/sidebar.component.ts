@@ -38,10 +38,19 @@ export class SidebarComponent implements OnInit {
       this.menu = ROUTESADMIN
     }
     else if (this.authService.userRole == 2) {
-      this.menu = ROUTESUSER
+      this.menu = ROUTESADMIN
     }
     else if (this.authService.userRole == 3) {
+      this.menu = ROUTESADMIN
+    }
+    else if (this.authService.userRole == 4) {
+      this.menu = ROUTESUSER
+    }
+    else if (this.authService.userRole == 5) {
       this.menu = ROUTESPENGESAH
+    }
+    else if (this.authService.userRole == 6) {
+      this.menu = ROUTESUSER
     }
     this.menuItems = this.menu.filter(menuItem => menuItem);
     this.router.events.subscribe(event => {

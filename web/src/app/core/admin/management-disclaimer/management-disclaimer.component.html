@@ -45,8 +45,9 @@
 </div>
 
 <div class="container-fluid mt--6">
-    <div class="row">
-        <div class="col-xl-12 order-xl-2">
+
+    <div class="row order-xl-1">
+        <div class="col-xl-12">
         <div class="card">
             <div class="card-header bg-primary">
                 <h3 *ngIf="!editEnabled" class="text-white mb-0">Perincian Penafian</h3>
@@ -81,6 +82,44 @@
                 </form>
             </div>
         </div>
+        </div>
+    </div>
+    <div class="row order-xl-2">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="text-left">
+                        <h3>Senarai Kandungan Penafian</h3>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="dataTables_wrapper py-4">
+                        <ngx-datatable
+                            class="bootstrap selection-cell"
+                            [columnMode]="'force'"
+                            [headerHeight]="50"
+                            [footerHeight]="50"
+                            [rowHeight]="'auto'"
+                            [limit]="entries != -1 ? entries : undefined"
+                            [rows]="temp"
+                            [selected]="selected"
+                            [selectionType]="'single'"
+                            (activate)="onActivate($event)"
+                            
+                            >
+                          <ngx-datatable-column name="No" [width]="100">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                              {{rowIndex+1}}
+                            </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Penerangan" [width]="300"></ngx-datatable-column>
+                          
+                          
+                        </ngx-datatable>
+                      </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

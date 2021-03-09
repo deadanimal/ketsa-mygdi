@@ -1,3 +1,8 @@
+import { ManagementElementmetadataComponent } from './management-elementmetadata/management-elementmetadata.component';
+import { ManagementNewappComponent } from './management-newapp/management-newapp.component';
+import { ManagementAppstatusComponent } from './management-appstatus/management-appstatus.component';
+import { ManagementProcessdataComponent } from './management-processdata/management-processdata.component';
+import { ManagementDataComponent } from './management-data/management-data.component';
 import { ManagementAnnoucementComponent } from './management-annoucement/management-annoucement.component';
 import { DatatableComponent } from './datatable/datatable.component';
 import { Routes } from '@angular/router';
@@ -9,6 +14,7 @@ import { ManagementFaqComponent } from './management-faq/management-faq.componen
 import { ManagementDisclaimerComponent } from './management-disclaimer/management-disclaimer.component';
 import { ManagementUserguideComponent } from './management-userguide/management-userguide.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 export const AdminRoutes: Routes = [
@@ -42,7 +48,6 @@ export const AdminRoutes: Routes = [
                         path: 'userguide',
                         component: ManagementUserguideComponent
                     },
-
                     {
                         path: 'tabledata',
                         component: DatatableComponent
@@ -51,6 +56,26 @@ export const AdminRoutes: Routes = [
                         path: 'disclaimer',
                         component: ManagementDisclaimerComponent
                     },
+                    {
+                        path: 'dataasas',
+                        component: ManagementDataComponent
+                    },
+                    {
+                        path: 'dataprocess',
+                        component: ManagementProcessdataComponent
+                    },
+                    {
+                        path: 'applicationstatus',
+                        component: ManagementAppstatusComponent
+                    },
+                    {
+                        path: 'newapplication',
+                        component: ManagementNewappComponent
+                    },
+                    {
+                        path: 'update-element',
+                        component: ManagementElementmetadataComponent
+                    }
 
                 ]
             },
@@ -61,6 +86,10 @@ export const AdminRoutes: Routes = [
             {
                 path: 'profile',
                 component: ProfileComponent
+            },
+            {
+                path: 'feedback',
+                component: FeedbackComponent
             },
         ]
     }
