@@ -29,7 +29,6 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
 
   // Table
   tableEntries: number = 10;
-  selected: any[] = [];
   tableSelected: any[] = [];
   tableTemp = [];
   tableActiveRow: any;
@@ -105,9 +104,9 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
       return false;
     });
   }
-  onSelect({ selected }) {
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
+  onSelect({ tableSelected }) {
+    this.tableSelected.splice(0, this.tableSelected.length);
+    this.tableSelected.push(...tableSelected);
   }
   onActivate(event) {
     this.tableActiveRow = event.row;
@@ -305,6 +304,24 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
     }).then((result) => {
       if (result.value) {
         this.register()
+      }
+    })
+  }
+  
+  deleteUser() {
+    swal.fire({
+      title: "Pengesahan",
+      text: "Anda pasti untuk buang data pengguna ini?",
+      type: "warning",
+      buttonsStyling: false,
+      confirmButtonClass: "btn btn-info",
+      confirmButtonText: "Pasti",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-danger",
+      cancelButtonText: "Batal"
+    }).then((result) => {
+      if (result.value) {
+        this.modal.hide()
       }
     })
   }

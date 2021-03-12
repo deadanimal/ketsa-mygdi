@@ -11,7 +11,6 @@ import { ManagementAuditComponent } from './management-audit/management-audit.co
 import { ManagementUserComponent } from './management-user/management-user.component';
 import { ReportComponent } from './report/report.component';
 import { ManagementFaqComponent } from './management-faq/management-faq.component';
-import { ManagementDisclaimerComponent } from './management-disclaimer/management-disclaimer.component';
 import { ManagementUserguideComponent } from './management-userguide/management-userguide.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
@@ -51,10 +50,6 @@ export const AdminRoutes: Routes = [
                     {
                         path: 'tabledata',
                         component: DatatableComponent
-                    },
-                    {
-                        path: 'disclaimer',
-                        component: ManagementDisclaimerComponent
                     },
                     {
                         path: 'dataasas',

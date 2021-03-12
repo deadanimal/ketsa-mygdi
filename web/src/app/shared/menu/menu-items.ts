@@ -218,8 +218,7 @@ export const ROUTESADMIN: RouteInfo[] = [
     children: [
       { path: 'faq', title: 'Soalan Lazim', type: 'link' },
       { path: 'annoucement', title: 'Pengumuman', type: 'link' },
-      { path: 'userguide', title: 'Panduan Pengguna', type: 'link' },
-      { path: 'disclaimer', title: 'Penafian', type: 'link' }
+      { path: 'userguide', title: 'Panduan Pengguna', type: 'link' }
     ]
   },
   
