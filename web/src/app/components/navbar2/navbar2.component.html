@@ -1,208 +1,150 @@
-<nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark" style="background-color: #FFAD29;">
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/portal']">
-        <img src="assets/img/logo/mygdi-logo.png"/>
-        <span class="text-dark"> MyGeo Explorer</span>
-      </a>
-     
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbar-collapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-          <span class="navbar-toggler-icon fg-dark"></span>
-        </button>
-      <div
-        class="collapse navbar-collapse"
-        id="collapseBasic" [collapse]="isCollapsed">
-        <div class="navbar-collapse-header">
-          <div class="row">
-            <div class="col-6 collapse-brand">
-              <a [routerLink]="['/portal']">
-                <img src="assets/img/logo/mygdi-logo.png"/>
-                <span class="text-dark"> MyGeo Explorer</span>
-              </a>
-            </div>
-            <div class="col-6 collapse-close">
-              <button
-                type="button"
-                class="navbar-toggler"
-                data-toggle="collapse"
-                data-target="#navbar-collapse"
-                aria-controls="navbar-collapse"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                (click)="isCollapsed = !isCollapsed">
-                <span></span> <span></span>
-              </button>
-            </div>
+<nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark" style="background-color: #242881;">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/portal']">
+      <img src="assets/img/logo/mygeoexplorer-logo.png" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
+      aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+      <span class="navbar-toggler-icon fg-dark"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapseBasic" [collapse]="isCollapsed">
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a [routerLink]="['/portal']">
+              <img src="assets/img/logo/mygeoexplorer-logo.png" />
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse"
+              aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation"
+              (click)="isCollapsed = !isCollapsed">
+              <span></span> <span></span>
+            </button>
           </div>
         </div>
-            
-            <ul class="navbar-nav align-items-center ml-md-auto">
-                <li class="nav-item">
-                  <a
-                    class="nav-link nav-link-icon"
-                    routerLinkActive="active"
-                    [routerLink]="['/auth/login/']">
-                    <i class="fas fa-user-circle"></i>
-                    <span class="nav-link-inner--text text-bold">DAFTAR | LOG MASUK</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                    <a
-                      class="nav-link nav-link-icon"
-                      routerLinkActive="active"
-                      [routerLink]="['/faq']">
-                      <i class="fa fa-question-circle"></i>
-                      <span class="nav-link-inner--text text-bold">FAQ</span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown" dropdown>
-                  <a
-                    class="nav-link nav-link-icon"
-                    data-toggle="dropdown"
-                    href="javascript:;"
-                    dropdownToggle
-                    role="button"
-                  >
-                    <i class="fas fa-bars"> </i>
-                    <span class="nav-link-inner--text text-bold d-lg-none"> Lain-lain </span>
-                  </a>
-                  <div
-                    aria-labelledby="navbarDropdownMenuLink"
-                    class="dropdown-menu dropdown-menu-dark"
-                    *dropdownMenu
-                  >
-                    <a class="dropdown-item"  [routerLink]="['/examples/account-settings']">
-                      <i class="text-muted"> </i> MyGeo Explorer
-                    </a>
-                    <a class="dropdown-item" [routerLink]="['/userguide']">
-                      <i class="text-danger"> </i> Panduan Pengguna
-                    </a>
-                    <a class="dropdown-item" [routerLink]="['#']" (click)="openModal(feedBack)">
-                      <i class="text-pink"> </i> Maklum Balas
-                    </a>
-                    <a class="dropdown-item" [routerLink]="['/contactus']">
-                      <i class="text-info"> </i> Hubungi Kami
-                    </a>
-                  </div>
-                </li>
-                <li class="nav-item d-lg-none">
-					<!-- Sidenav toggler -->
-					<div 
-						class="sidenav-toggler sidenav-toggler-dark"
-						data-action="sidenav-pin"
-						data-target="#mySidenav" 
-						(click)="openSidebar()"
-					>
-						<div class="sidenav-toggler-inner">
-							<i class="sidenav-toggler-line"></i>
-							<i class="sidenav-toggler-line"></i>
-							<i class="sidenav-toggler-line"></i>
-						</div>
-					</div>
-				</li>
-            </ul>
       </div>
-    </div>
-  </nav>
-  <ng-template #feedBack>
-    <div class="modal-header bg-primary">
-        <h5 class="modal-title text-white my-auto" id="modal-title-default">
-            Anda perlukan sebarang bantuan atau pertanyaan?
-        </h5>
 
-        <button
-            aria-label="Close"
-            class="close"
-            data-dismiss="modal"
-            type="button"
-            (click)="closeModal()"
-        >
-            <span aria-hidden="true" class="text-white my-auto"> × </span>
-        </button>
-    </div>
+      <ul class="navbar-nav align-items-center ml-md-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/auth/login/']">
+            <span class="nav-link-inner--text text-bold">DAFTAR | LOG MASUK</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/faq']">
+            <img height="25" src="assets/img/icons/common/faq-gold.png" />
+            <span class="nav-link-inner--text text-bold d-lg-none"> Soalan Lazim </span>
+          </a>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a class="nav-link nav-link-icon" data-toggle="dropdown" href="javascript:;" dropdownToggle role="button">
 
-    <div class="modal-body">
-      
-        <form [formGroup]="feedbackForm">
-          <h6 class="heading-small text-muted mb-4">Maklum Balas</h6>
-          <div class="pl-lg-4">
-            <div class="row mb-3">
-                <div class="col-2">
-                    <label class="form-control-label mr-4" for="input-agensi">
-                    Kategori
-                    </label>
-                </div>
-                <div class="col-9">
-                  <select class=" form-control form-control-sm ml-3" id="input-agensi">
-                    <option selected disabled hidden> Pilih Kategori </option>
-                    <option value="penerbit">Metadata</option>
-                    <option value="pengesah">Permohonan Data-data Asas</option>
-                    <option value="vw">Lain-lain</option>
-                </select>
-                </div>   
+            <img height="21" src="assets/img/icons/common/menuoption.png" />
+            <span class="nav-link-inner--text text-bold d-lg-none"> Lain-lain </span>
+          </a>
+          <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-dark" *dropdownMenu>
+            <a class="dropdown-item" [routerLink]="['/examples/account-settings']">
+              <i class="text-muted"> </i> MyGeo Explorer
+            </a>
+            <a class="dropdown-item" [routerLink]="['/userguide']">
+              <i class="text-danger"> </i> Panduan Pengguna
+            </a>
+            <a class="dropdown-item" [routerLink]="['#']" (click)="openModal(feedBack)">
+              <i class="text-pink"> </i> Maklum Balas
+            </a>
+            <a class="dropdown-item" [routerLink]="['/contactus']">
+              <i class="text-info"> </i> Hubungi Kami
+            </a>
+          </div>
+        </li>
+        <li class="nav-item d-lg-none">
+          <!-- Sidenav toggler -->
+          <div class="sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#mySidenav"
+            (click)="openSidebar()">
+            <div class="sidenav-toggler-inner">
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
             </div>
-            <div class="row mb-3">
-                <div class="col-2">
-                    <label class="form-control-label mr-4" for="input-feedback">
-                    Pertanyaan  
-                    </label>
-                </div>
-                <div class="col-9">
-                    <textarea class="form-control form-control-sm ml-3"
-                    id="input-feedback" 
-                    placeholder="Nyatakan maklum balas anda"
-                    type="text"
-                    rows="5"
-                    formControlName="feedback"></textarea>
-                </div>   
-            </div>
-            <div class="row mb-3">
-                <div class="col-2">
-                    <label class="form-control-label mr-4" for="input-emel">
-                    Emel Personal
-                    </label>
-                </div>
-                <div class="col-7">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-emel" 
-                    placeholder="Masukan E-mel anda"
-                    type="text"
-                    formControlName="email"/>
-                    <ng-container *ngFor="let message of feedbackFormMessages.email">
-                      <div *ngIf="feedbackForm.get('email').hasError(message.type) && (feedbackForm.get('email').dirty || feedbackForm.get('email').touched)">
-                          <p class="error-message"><span>{{ message.message }}</span></p>
-                      </div>
-                  </ng-container>
-                </div>   
-            </div>
-          </div> 
-        </form>
+          </div>
+        </li>
+      </ul>
     </div>
+  </div>
+</nav>
+<ng-template #feedBack>
+  <div class="modal-header bg-primary">
+    <h5 class="modal-title text-white my-auto" id="modal-title-default">
+      Anda perlukan sebarang bantuan atau pertanyaan?
+    </h5>
 
-    <div class="modal-footer">
-        <button 
-            class="btn btn-success"
-            type="button"
-            (click)="confirm()"
-            [disabled]="feedbackForm.valid"
-        >
-            Hantar
-        </button>
+    <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
 
-        <button
-            class="btn btn-outline-danger ml-auto"
-            data-dismiss="modal"
-            type="button"
-            (click)="closeModal()"
-        >
-            Batal
-        </button>
-    </div>
+  <div class="modal-body">
+
+    <form [formGroup]="feedbackForm">
+      <h6 class="heading-small text-muted mb-4">Maklum Balas</h6>
+      <div class="pl-lg-4">
+        <div class="row mb-3">
+          <div class="col-2">
+            <label class="form-control-label mr-4" for="input-agensi">
+              Kategori
+            </label>
+          </div>
+          <div class="col-9">
+            <select class=" form-control form-control-sm ml-3" id="input-agensi">
+              <option selected disabled hidden> Pilih Kategori </option>
+              <option value="penerbit">Metadata</option>
+              <option value="pengesah">Permohonan Data-data Asas</option>
+              <option value="vw">Lain-lain</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-2">
+            <label class="form-control-label mr-4" for="input-feedback">
+              Pertanyaan
+            </label>
+          </div>
+          <div class="col-9">
+            <textarea class="form-control form-control-sm ml-3" id="input-feedback"
+              placeholder="Nyatakan maklum balas anda" type="text" rows="5" formControlName="feedback"></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-2">
+            <label class="form-control-label mr-4" for="input-emel">
+              Emel Personal
+            </label>
+          </div>
+          <div class="col-7">
+            <input class="form-control form-control-sm ml-3" id="input-emel" placeholder="Masukan E-mel anda"
+              type="text" formControlName="email" />
+            <ng-container *ngFor="let message of feedbackFormMessages.email">
+              <div
+                *ngIf="feedbackForm.get('email').hasError(message.type) && (feedbackForm.get('email').dirty || feedbackForm.get('email').touched)">
+                <p class="error-message"><span>{{ message.message }}</span></p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-success" type="button" (click)="confirm()" [disabled]="feedbackForm.valid">
+      Hantar
+    </button>
+
+    <button class="btn btn-outline-danger ml-auto" data-dismiss="modal" type="button" (click)="closeModal()">
+      Batal
+    </button>
+  </div>
 </ng-template>

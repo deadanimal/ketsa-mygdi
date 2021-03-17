@@ -23,9 +23,21 @@ import { PortalComponent } from './portal/portal.component';
 import { UserguideComponent } from './userguide/userguide.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { FaqComponent } from './faq/faq.component';
+import { DataAsasComponent } from './data-asas/data-asas.component';
+import { MetadataComponent } from './metadata/metadata.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 @NgModule({
-  declarations: [HomeComponent,PortalComponent, UserguideComponent, ContactusComponent, FaqComponent,],
+  declarations: [
+    HomeComponent,
+    PortalComponent, 
+    UserguideComponent, 
+    ContactusComponent, 
+    FaqComponent, 
+    DataAsasComponent, 
+    MetadataComponent, 
+    TutorialComponent,
+  ],
   imports: [
     CommonModule,
     ComponentsModule,

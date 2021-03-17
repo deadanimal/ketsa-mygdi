@@ -18,7 +18,13 @@ import { User } from 'src/assets/mock/admin-user/users.model'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  
+
+  myCheck = null;
+  myCheck2 = null;
+  myCheck3 = null;
+  myCheck4 = null;
+
+
   // Image
   imgLogo = 'assets/img/logo/prototype-logo.png'
 
@@ -63,7 +69,7 @@ export class LoginComponent implements OnInit {
   loginFormMessages = {
     'username': [
       { type: 'required', message: 'Masukkan ID pengguna' },
-      { type: 'email', message: 'Masukkan emel yang sah'}
+      { type: 'email', message: 'Masukkan emel yang sah' }
     ],
     'password': [
       { type: 'required', message: 'Password is required' },
@@ -71,9 +77,9 @@ export class LoginComponent implements OnInit {
     ]
   }
 
-  
+
   constructor(
-    
+
     private authService: AuthService,
     private notifyService: NotifyService,
     private formBuilder: FormBuilder,
@@ -83,7 +89,7 @@ export class LoginComponent implements OnInit {
     private modalService: BsModalService,
     private zone: NgZone
   ) { }
-  
+
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -155,10 +161,10 @@ export class LoginComponent implements OnInit {
     if (path == 'login') {
       return this.router.navigate(['/auth/login'])
     }
-    else  if (path == 'forgot') {
+    else if (path == 'forgot') {
       return this.router.navigate(['/auth/forgot'])
     }
-    else  if (path == 'register') {
+    else if (path == 'register') {
       return this.router.navigate(['/auth/register'])
     }
     else if (path == 'dashboard-user') {
@@ -177,6 +183,11 @@ export class LoginComponent implements OnInit {
 
   openModal(modalRef: TemplateRef<any>) {
     this.modal = this.modalService.show(modalRef, this.modalConfig);
+  }
+
+  openModal2(modalRef: TemplateRef<any>) {
+    this.modal = this.modalService.show(modalRef, this.modalConfig);
+    this.resetCheck()
   }
 
   closeModal() {
@@ -218,4 +229,19 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  resetCheck() {
+    this.myCheck = null
+    this.myCheck2 = null
+    this.myCheck3 = null;
+    this.myCheck4 = null;
+  }
+
+  resetCheck2() {
+    this.myCheck3 = null;
+    this.myCheck4 = null;
+  }
+
+  resetCheck4() {
+    this.myCheck4 = null;
+  }
 }

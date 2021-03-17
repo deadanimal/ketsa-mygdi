@@ -114,7 +114,9 @@ export class NavbarComponent implements OnInit {
   navigatePage(path: String) {
     if (path == "notifications") {
       return this.router.navigate(["/global/notifications"]);
-    } else if (path == "profile") {
+    } else if (path == "profile" && (this.auth == 1 || this.auth == 2 || this.auth == 3 )) {
+      return this.router.navigate(["/admin/profile"]);
+    } else if (path == "profile" && (this.auth == 4 || this.auth == 5 || this.auth == 6 )) {
       return this.router.navigate(["/user/profile"]);
     } else if (path == "settings") {
       return this.router.navigate(["/global/settings"]);

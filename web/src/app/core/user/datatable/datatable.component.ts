@@ -201,19 +201,36 @@ export class DatatableComponent implements OnInit {
       cancelButtonText: "Cancel"
     }).then((result) => {
       if (result.value) {
-        this.register()
+        this.success()
+      }
+    })
+  }
+  deleteData() {
+    swal.fire({
+      title: "Pengesahan",
+      text: "Anda pasti untuk buang metadata ini?",
+      type: "warning",
+      buttonsStyling: false,
+      confirmButtonClass: "btn btn-info",
+      confirmButtonText: "Pasti",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-danger",
+      cancelButtonText: "Batal"
+    }).then((result) => {
+      if (result.value) {
+        this.success()
       }
     })
   }
 
-  register() {
+  success() {
     swal.fire({
-      title: "Success",
-      text: "A new user has been created!",
+      title: "Berjaya",
+      text: "Metadata telah berjaya dibuang!",
       type: "success",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-success",
-      confirmButtonText: "Close"
+      confirmButtonText: "Tutup"
     }).then((result) => {
       if (result.value) {
         this.modal.hide()

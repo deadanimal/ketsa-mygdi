@@ -33,28 +33,6 @@ a:not([href]):not([tabindex]):focus
 }
 
 
-.navbar-dark .navbar-nav .nav-link
-{
-    color: rgba(0, 0, 0, 0.95);
-}
-.navbar-dark .navbar-nav .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link:focus
-{
-    color: rgba(65, 65, 65, 0.65);
-}
-.navbar-dark .navbar-nav .nav-link.disabled
-{
-    color: rgba(255, 255, 255, .25);
-}
-
-.navbar-dark .navbar-nav .show > .nav-link,
-.navbar-dark .navbar-nav .active > .nav-link,
-.navbar-dark .navbar-nav .nav-link.show,
-.navbar-dark .navbar-nav .nav-link.active
-{
-    color: rgba(34, 34, 34, 0.65);
-}
-
 .navbar
 {
     position: relative;
@@ -202,7 +180,7 @@ a:not([href]):not([tabindex]):focus
 }
 
 .bgg {
-    background-image: url('src/assets/img/theme/global.png');
+    background-image: url('src/assets/img/theme/mygeo-background.jpg');
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -222,3 +200,4 @@ a:not([href]):not([tabindex]):focus
     padding-bottom: 0;
     margin-bottom: 0;
 }
+

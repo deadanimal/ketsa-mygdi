@@ -2,425 +2,479 @@
 <div class="content-wrapper bgg" style="min-height: 670px;">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark"></h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark"></h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-  
+
     <!-- Main content -->
-    <div class="content p-2">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- /.col-md-6 -->
-          <div class="col-lg-5">
-            <div class="card mt-7 ml-6" style="background-color: rgba(255, 255, 255, 0.2);">
-                
-                <div class="card-body px-lg-5 py-lg-5">
-                    <!--<div class="logo-box">
+    <div class="content p-4">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- /.col-md-6 -->
+                <div class="col-lg-5">
+                    <div class="card mt-7 ml-6" style="background-color: rgba(255, 255, 255, 0.2);">
+
+                        <div class="card-body px-lg-5 py-lg-5">
+                            <!--<div class="logo-box">
                         <img class="logo" [src]="">
                     </div>-->
-                    <div class="text-white" style="font-size: 17px;">
-                        <span>Maklumat geospatial kini dihujung jari anda.</span><br>
-                        <span>Log Masuk.</span>
-                    <br><br>
-                    </div>
-                    <div class="mb-4">
-                        <a class="text-yellow" (click)="openModal(createUser)">
-                            Pengguna Baru? Daftar sekarang.
-                        </a>
-                        
-                    </div>
-                    <form [formGroup]="loginForm">
-                        <div class="form-group mb-3" [ngClass]="{ focused: focusUsername === true }">
-                            <div class="input-group input-group-alternative">
-                                <input 
-                                    class="form-control" 
-                                    placeholder="ID Pengguna" 
-                                    type="email"
-                                    formControlName="username"
-                                    (focus)="focusUsername = true" 
-                                    (blur)="focusUsername = false"
-                                />
-                                <div class="input-group-append">
-                                  <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                  </div>
-                                </div>
+                            <div class="text-white" style="font-size: 17px;">
+                                <span>Maklumat geospatial kini dihujung jari anda.</span><br>
+                                <span>Log Masuk.</span>
+                                <br><br>
                             </div>
-                            <ng-container *ngFor="let message of loginFormMessages.username">
-                                <div *ngIf="loginForm.get('username').hasError(message.type) && (loginForm.get('username').dirty || loginForm.get('username').touched)">
-                                    <p class="error-message text-orange"><span>{{ message.message }}</span></p>
-                                </div>
-                            </ng-container>
-                        </div>
-            
-                        <div class="form-group" [ngClass]="{ focused: focusPassword === true }">
-                            <div class="input-group input-group-alternative">
-                                <input 
-                                    class="form-control"
-                                    placeholder="Kata Laluan"
-                                    type="password"
-                                    formControlName="password"
-                                    (focus)="focusPassword = true" 
-                                    (blur)="focusPassword = false"
-                                />
-                                <div class="input-group-append">
-                                  <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                  </div>
-                                </div>
+                            <div class="mb-4">
+                                <a class="text-yellow" (click)="openModal2(addUser)">
+                                    Pengguna Baru? Daftar sekarang.
+                                </a>
+
                             </div>
-                            <div class="validation-errors">
-                                <ng-container *ngFor="let message of loginFormMessages.password">
-                                    <div *ngIf="loginForm.get('password').hasError(message.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
-                                        <p class="error-message text-orange"><span>{{ message.message }}</span></p>
+                            <form [formGroup]="loginForm">
+                                <div class="form-group mb-3" [ngClass]="{ focused: focusUsername === true }">
+                                    <div class="input-group input-group-alternative">
+                                        <input class="form-control" placeholder="ID Pengguna" type="email"
+                                            formControlName="username" (focus)="focusUsername = true"
+                                            (blur)="focusUsername = false" />
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-envelope"></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </ng-container>
-                            </div>
-                        </div>
-            
-                    </form>
-            
-                    <div class="row align-items-center">
-                        <div class="col-6 order-2">
-                           <!-- <div class="custom-control custom-control-alternative custom-checkbox">
+                                    <ng-container *ngFor="let message of loginFormMessages.username">
+                                        <div
+                                            *ngIf="loginForm.get('username').hasError(message.type) && (loginForm.get('username').dirty || loginForm.get('username').touched)">
+                                            <p class="error-message text-orange"><span>{{ message.message }}</span></p>
+                                        </div>
+                                    </ng-container>
+                                </div>
+
+                                <div class="form-group" [ngClass]="{ focused: focusPassword === true }">
+                                    <div class="input-group input-group-alternative">
+                                        <input class="form-control" placeholder="Kata Laluan" type="password"
+                                            formControlName="password" (focus)="focusPassword = true"
+                                            (blur)="focusPassword = false" />
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-lock"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="validation-errors">
+                                        <ng-container *ngFor="let message of loginFormMessages.password">
+                                            <div
+                                                *ngIf="loginForm.get('password').hasError(message.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                                                <p class="error-message text-orange"><span>{{ message.message }}</span>
+                                                </p>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <div class="row align-items-center">
+                                <div class="col-6 order-2">
+                                    <!-- <div class="custom-control custom-control-alternative custom-checkbox">
                                 <input class="custom-control-input" id="customCheckLogin" type="checkbox" />
                                 <label class="custom-control-label" for="customCheckLogin">
                                     <span>Remember me?</span>
                                 </label>
                             </div>-->
-                            <div class="text-center">
-                                <button type="button" class="btn btn-primary float-right" (click)="login()">
-                                    Log Masuk
-                                </button>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-primary float-right" (click)="login()">
+                                            Log Masuk
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-6 order-1">
+                                    <label class="forget-label" (click)="navigatePage('forgot')">
+                                        <a class="pointer text-white">Lupa kata laluan?</a>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6 order-1">
-                            <label class="forget-label" (click)="navigatePage('forgot')">
-                                <a class="pointer text-white">Lupa kata laluan?</a>
-                            </label>
                         </div>
                     </div>
                 </div>
-            </div> 
-          </div>
-          <div class="col-lg-6"></div>
-          <div class="col-lg-1">
-            <div class="form-group mt-7">
-              <div class="card bcard square rounded-circle mr-4 mt-4 float-right">
-                <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
-                  <img height="50" src="assets/img/icons/common/metadata.png"/>
-                </div>
-                <h4 class="text-yellow text-center mt-2">Metadata</h4>
-              </div>
-              <div class="card gcard square rounded-circle mr-4 mt-4 float-right">
-                <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
-                  <img height="50" src="assets/img/icons/common/dataapp.png"/>
-                </div>
-                <h4 class="text-yellow text-center mt-2">Data Asas</h4>
-              </div>
-              <div class="card rcard square rounded-circle mr-4 mt-4 float-right">
-                <div class="card-body pointer" [routerLink]="['/dashboards/dashboard']">
-                  <img height="50" src="assets/img/icons/common/tutorial.png"/>
-                </div>
-                <h4 class="text-yellow text-center mt-2">Tutorial</h4>
-              </div>
-          </div>
-          </div>
+                <div class="col-lg-6"></div>
+                <div class="col-lg-1">
+                    <div class="form-group mt-7">
+                      <div class="card fancy_card square rounded-circle mt-4 float-right">
+                        <div class="card-body pointer" [routerLink]="['/metadata']">
+                          <img height="50" src="assets/img/icons/common/metadata.png" />
+                        </div>
+                        <span class="text-center mt-2">Metadata</span>
+                      </div>
+                      <div class="card fancy_card square rounded-circle mt-4 float-right">
+                        <div class="card-body pointer" [routerLink]="['/data-asas']">
+                          <img height="50" src="assets/img/icons/common/dataapp.png" />
+                        </div>
+                        <span class="text-center mt-2">Data Asas</span>
+                      </div>
+                      <div class="card fancy_card square rounded-circle mt-4 float-right">
+                        <div class="card-body pointer" [routerLink]="['/tutorial']">
+                          <img height="50" src="assets/img/icons/common/tutorial.png" />
+                        </div>
+                        <span class="text-center mt-2">Tutorial</span>
+                      </div>
+                    </div>
+                  </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <ng-template #createUser>
+</div>
+<ng-template #createUser>
     <div class="modal-header bg-primary">
-        <h6 class="modal-title text-white my-auto" id="modal-title-default">
-            Pendaftaran
-        </h6>
+        <h6 *ngIf="myCheck == 1" class="modal-title text-white my-auto" id="modal-title-default">
+            Penerbit Metadata</h6>
+        <h6 *ngIf="myCheck == 2" class="modal-title text-white my-auto" id="modal-title-default">
+            Pengesah Metadata</h6>
+        <h6 *ngIf="myCheck == 3 && myCheck2 == 2" class="modal-title text-white my-auto" id="modal-title-default">
+            Pendaftaran Pemohon Data - G2G</h6>
+        <h6 *ngIf="myCheck == 3 && myCheck2 == 3" class="modal-title text-white my-auto" id="modal-title-default">
+            Pendaftaran Pemohon Data - G2E</h6>
 
-        <button
-            aria-label="Close"
-            class="close"
-            data-dismiss="modal"
-            type="button"
-            (click)="closeModal()"
-        >
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
             <span aria-hidden="true" class="text-white my-auto"> × </span>
         </button>
     </div>
 
     <div class="modal-body">
-      
         <form [formGroup]="registerForm">
-          <h6 class="heading-small text-muted mb-4">Maklumat Pengguna</h6>
-          <div class="pl-lg-4">
-            <div class="row mb-2">
-                <div class="col-3">
-                    <label class="form-control-label mr-4" for="input-username">
-                    Nama Penuh  
-                    </label>
-                </div>
-                <div class="col-8">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-username" 
-                    placeholder="Nama Penuh seperti dalam Kad Pengenalan"
-                    type="text"
-                    formControlName="name"/>
-                    <ng-container *ngFor="let message of registerFormMessages.name">
-                      <div *ngIf="registerForm.get('name').hasError(message.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
-                          <p class="error-message"><span>{{ message.message }}</span></p>
-                      </div>
-                    </ng-container>
-                </div>   
-            </div>
-            <div class="row mb-2">
-                <div class="col-3">
-                    <label class="form-control-label mr-4" for="input-nric">
-                    No NRIC  
-                    </label>
-                </div>
-                <div class="col-8">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-nric" 
-                    placeholder="No Kad Pengenalan"
-                    type="text"
-                    formControlName="nric"/>
-                    <ng-container *ngFor="let message of registerFormMessages.nric">
-                      <div *ngIf="registerForm.get('nric').hasError(message.type) && (registerForm.get('nric').dirty || registerForm.get('nric').touched)">
-                          <p class="error-message"><span>{{ message.message }}</span></p>
-                      </div>
-                    </ng-container>
-                </div>   
-            </div>
-            <div class="row mb-2">
-                <div class="col-3">
-                    <label class="form-control-label mr-4" for="input-agensi">
-                    Agensi/Organisasi
-                    </label>
-                </div>
-                <div class="col-8">
-                  <select class=" form-control form-control-sm ml-3" id="input-agensi">
-                    <option selected disabled hidden> Pilih Agensi/Organisasi </option>
-                    <option value="penerbit">Kementerian Tenaga dan Sumber Asli</option>
-                    <option value="pengesah">Pengesah Metadata</option>
-                    <option value="vw"></option>
-                </select>
-                </div>   
-            </div>
-            <div class="row mb-2">
-                <div class="col-3">
-                    <label class="form-control-label mr-4" for="input-bahagian">
-                    Bahagian  
-                    </label>
-                </div>
-                <div class="col-8">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-bahagian" 
-                    placeholder="Masukkan Bahagian"
-                    type="text" 
-                    formControlName="section"/>
-                    <ng-container *ngFor="let message of registerFormMessages.section">
-                        <div *ngIf="registerForm.get('section').hasError(message.type) && (registerForm.get('section').dirty || registerForm.get('section').touched)">
-                            <p class="error-message"><span>{{ message.message }}</span></p>
-                        </div>
-                    </ng-container>
-                </div>   
-            </div>
-            <div class="row mb-2">
-                <div class="col-3">
-                    <label class="form-control-label mr-4" for="input-sektor">
-                    Sektor  
-                    </label>
-                </div>
-                <div class="col-8">
-                  <select class=" form-control form-control-sm ml-3" id="category">
-                    <option selected disabled hidden> Pilih Sektor </option>
-                    <option value="penerbit">Kerajaan</option>
-                    <option value="pengesah">Swasta</option>
-                </select>
-                </div>   
-            </div>
-            <div class="row mb-2">
-                <div class="col-3">
-                    <label class="form-control-label mr-4" for="input-emel">
-                    Emel  
-                    </label>
-                </div>
-                <div class="col-6">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-emel" 
-                    placeholder="Masukan E-mel anda"
-                    type="text"
-                    formControlName="email"/>
-                    <ng-container *ngFor="let message of registerFormMessages.email">
-                      <div *ngIf="registerForm.get('email').hasError(message.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">
-                          <p class="error-message"><span>{{ message.message }}</span></p>
-                      </div>
-                  </ng-container>
-                </div>   
-            </div>
-            <div class="row mb-2">
-                <div class="col-3">
-                    <label class="form-control-label mr-4" for="input-tpejabat">
-                    Telefon Pejabat
-                    </label>
-                </div>
-                <div class="col-6">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-tpejabat" 
-                    placeholder="Nombor Telefon Pejabat"
-                    type="text"
-                    formControlName="officephone"/>
-                </div>   
-            </div>
-            <div class="row mb-2">
-              <div class="col-3">
-                  <label class="form-control-label mr-4" for="input-tbimbit">
-                  Telefon Bimbit
-                  </label>
-              </div>
-              <div class="col-6">
-                  <input class="form-control form-control-sm ml-3"
-                  id="input-tbimbit" 
-                  placeholder="Nombor Telefon Pejabat"
-                  type="text"
-                  formControlName="mobilephone"/>
-              </div>   
-          </div>
-            <div class="row mb-2">
-                <div class="col-3">
-                    <label class="form-control-label mr-4" for="input-peranan">
-                    Peranan  
-                    </label>
-                </div>
-                <div class="col-6">
-                  <select class=" form-control form-control-sm ml-3" id="input-peranan">
-                    <option selected disabled hidden> Pilih Peranan </option>
-                    <option value="penerbit">Penerbit Metadata</option>
-                    <option value="pengesah">Pengesah Metadata</option>
-                    <option value="vw">Pengguna Biasa</option>
-                </select>
-                </div>   
-            </div>
-            <div class="row mb-2">
-              <div class="col-3">
-                  <label class="form-control-label mr-4" for="input-supportdoc">
-                  Surat Sokongan  
-                  </label>
-              </div>
-              <div class="col-6">
-                <div class="custom-file form-control-sm ml-3">
-                  <input
-                    class=" custom-file-input"
-                    id="projectCoverUploads"
-                    type="file"
-                  />
-
-                  <label class=" custom-file-label text-muted" for="projectCoverUploads">
-                    Choose file
-                  </label>
-                </div>
-            </div>   
-          </div>
-        </div>
-        <hr class="my-4" />
-
-              <h6 class="heading-small text-muted mb-4"> Kata Laluan</h6>
-                  
-              <div class="pl-lg-4">
-                  <div class="row mb-2">
-                      <div class="col-4">
-                          <label class="form-control-label mr-4" for="input-password">
-                          Kata Laluan  
-                          </label>
-                      </div>
-                      <div class="col-6">
-                          <input class="form-control form-control-sm ml-3"
-                          id="input-password" 
-                          placeholder="Masukkan Kata Laluan Anda"
-                          type="password"
-                          formControlName="password1"/>
-                          <ng-container *ngFor="let message of registerFormMessages.password1">
-                            <div *ngIf="registerForm.get('password1').hasError(message.type) && (registerForm.get('password1').dirty || registerForm.get('password1').touched)">
+            <h6 class="heading-small text-muted mb-4">Maklumat Pengguna</h6>
+            <div class="pl-lg-4">
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-username">
+                            Nama Penuh
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm ml-3" id="input-username"
+                            placeholder="Nama Penuh seperti dalam Kad Pengenalan" type="text" formControlName="name" />
+                        <ng-container *ngFor="let message of registerFormMessages.name">
+                            <div
+                                *ngIf="registerForm.get('name').hasError(message.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
                                 <p class="error-message"><span>{{ message.message }}</span></p>
                             </div>
-                          </ng-container>
-                      </div>   
-                  </div>
-                  <div class="row mb-2">
-                      <div class="col-4">
-                          <label class="form-control-label mr-4" for="input-password">
-                          Sahkan Kata Laluan
-                          </label>
-                      </div>
-                      <div class="col-6">
-                          <input class="form-control form-control-sm ml-3"
-                          id="input-password" 
-                          placeholder="Masukkan Semula Kata Laluan"
-                          type="password"
-                          formControlName="password2"/>
-                          <ng-container *ngFor="let message of registerFormMessages.password2">
-                            <div *ngIf="registerForm.get('password2').hasError(message.type) && (registerForm.get('password2').dirty || registerForm.get('password2').touched)">
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-nric">
+                            No NRIC
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm ml-3" id="input-nric" placeholder="No Kad Pengenalan"
+                            type="text" formControlName="nric" />
+                        <ng-container *ngFor="let message of registerFormMessages.nric">
+                            <div
+                                *ngIf="registerForm.get('nric').hasError(message.type) && (registerForm.get('nric').dirty || registerForm.get('nric').touched)">
                                 <p class="error-message"><span>{{ message.message }}</span></p>
                             </div>
-                          </ng-container>
-                      </div>   
-                  </div>
-              </div>
-           <!-- <div class="form-group">
-                <label class="form-control-label">Name</label>
-                <input 
-                  class="form-control"
-                  placeholder="Enter name"
-                  formControlName="name"
-                  type="text"
-                >
-                <ng-container *ngFor="let message of registerFormMessages.name">
-                    <div *ngIf="registerForm.get('name').hasError(message.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
-                        <p class="error-message"><span>{{ message.message }}</span></p>
+                        </ng-container>
                     </div>
-                </ng-container>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-agensi">
+                            Agensi/Organisasi
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm ml-3" id="input-agensi"
+                            placeholder="Nama Agensi/Organisasi" type="text" formControlName="agensi" />
+                        <ng-container *ngFor="let message of registerFormMessages.name">
+                            <div
+                                *ngIf="registerForm.get('name').hasError(message.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
+                                <p class="error-message"><span>{{ message.message }}</span></p>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-address">
+                            Alamat
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <textarea class="form-control form-control-sm ml-3" id="input-address" row="4"
+                            placeholder="Alamat Agensi/Organisasi" type="text" formControlName="address"></textarea>
+                        <ng-container *ngFor="let message of registerFormMessages.address">
+                            <div
+                                *ngIf="registerForm.get('address').hasError(message.type) && (registerForm.get('address').dirty || registerForm.get('address').touched)">
+                                <p class="error-message"><span>{{ message.message }}</span></p>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-sektor">
+                            Sektor
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <select class=" form-control form-control-sm ml-3" id="category">
+                            <option selected disabled hidden> Pilih Sektor </option>
+                            <option value="penerbit">Kerajaan</option>
+                            <option value="pengesah">Swasta</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-emel">
+                            Emel
+                        </label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control form-control-sm ml-3" id="input-emel"
+                            placeholder="Masukan E-mel anda" type="text" formControlName="email" />
+                        <ng-container *ngFor="let message of registerFormMessages.email">
+                            <div
+                                *ngIf="registerForm.get('email').hasError(message.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+                                <p class="error-message"><span>{{ message.message }}</span></p>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-tpejabat">
+                            Telefon Pejabat
+                        </label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control form-control-sm ml-3" id="input-tpejabat"
+                            placeholder="Nombor Telefon Pejabat" type="text" formControlName="officephone" />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-tbimbit">
+                            Telefon Bimbit
+                        </label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control form-control-sm ml-3" id="input-tbimbit"
+                            placeholder="Nombor Telefon Pejabat" type="text" formControlName="mobilephone" />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-peranan">
+                            Peranan
+                        </label>
+                    </div>
+                    <div class="col-6">
+                        <select class=" form-control form-control-sm ml-3" id="input-peranan">
+                            <option selected disabled hidden> Pilih Peranan </option>
+                            <option value="penerbit">Penerbit Metadata</option>
+                            <option value="pengesah">Pengesah Metadata</option>
+                            <option value="vw">Pengguna Biasa</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="form-control-label">Email</label>
-                <input 
-                  class="form-control"
-                  placeholder="Enter email"
-                  formControlName="email"
-                  type="text"
-                >
-                <ng-container *ngFor="let message of registerFormMessages.email">
-                    <div *ngIf="registerForm.get('email').hasError(message.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">
-                        <p class="error-message"><span>{{ message.message }}</span></p>
+            <hr class="my-4" />
+
+            <h6 class="heading-small text-muted mb-4"> Kata Laluan</h6>
+
+            <div class="pl-lg-4">
+                <div class="row mb-2">
+                    <div class="col-4">
+                        <label class="form-control-label mr-4" for="input-password">
+                            Kata Laluan
+                        </label>
                     </div>
-                </ng-container>
-            </div> -->
+                    <div class="col-6">
+                        <input class="form-control form-control-sm ml-3" id="input-password"
+                            placeholder="Masukkan Kata Laluan Anda" type="password" formControlName="password1" />
+                        <ng-container *ngFor="let message of registerFormMessages.password1">
+                            <div
+                                *ngIf="registerForm.get('password1').hasError(message.type) && (registerForm.get('password1').dirty || registerForm.get('password1').touched)">
+                                <p class="error-message"><span>{{ message.message }}</span></p>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4">
+                        <label class="form-control-label mr-4" for="input-password">
+                            Sahkan Kata Laluan
+                        </label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control form-control-sm ml-3" id="input-password"
+                            placeholder="Masukkan Semula Kata Laluan" type="password" formControlName="password2" />
+                        <ng-container *ngFor="let message of registerFormMessages.password2">
+                            <div
+                                *ngIf="registerForm.get('password2').hasError(message.type) && (registerForm.get('password2').dirty || registerForm.get('password2').touched)">
+                                <p class="error-message"><span>{{ message.message }}</span></p>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 
     <div class="modal-footer">
-        <button 
-            class="btn btn-success"
-            type="button"
-            (click)="confirm()"
-            [disabled]="registerForm.valid"
-        >
+        <button class="btn btn-success" type="button" (click)="confirm()" [disabled]="registerForm.valid">
             Daftar
         </button>
 
-        <button
-            class="btn btn-outline-danger ml-auto"
-            data-dismiss="modal"
-            type="button"
-            (click)="closeModal()"
-        >
+        <button class="btn btn-outline-danger ml-auto" data-dismiss="modal" type="button" (click)="closeModal()">
             Tutup
         </button>
     </div>
-  </ng-template>
+</ng-template>
 
+<ng-template #addUser>
+    <div class="modal-header bg-default">
+        <h6 class="modal-title text-white my-auto" id="modal-title-default">
+            Daftar Sebagai :
+        </h6>
 
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
+            <span aria-hidden="true" class="text-white my-auto"> × </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form class="p-lg-5" id="myForm">
+            <div class=" custom-control custom-radio mb-3">
+                <input [(ngModel)]="myCheck" class=" custom-control-input" id="customRadio1" name="custom-radio-1"
+                    type="radio" value="1" (click)="resetCheck4()"/>
+                <label class=" custom-control-label" for="customRadio1">
+                    Penerbit Metadata
+                </label>
+            </div>
+            <div class=" custom-control custom-radio mb-3">
+                <input [(ngModel)]="myCheck" class=" custom-control-input" id="customRadio2" name="custom-radio-1"
+                    type="radio" value="2" (click)="resetCheck4()"/>
+                <label class=" custom-control-label" for="customRadio2">
+                    Pengesah Metadata
+                </label>
+            </div>
+            <div class=" custom-control custom-radio mb-3">
+                <input [(ngModel)]="myCheck" class=" custom-control-input" id="customRadio3" name="custom-radio-1"
+                    type="radio" value="3" />
+                <label class=" custom-control-label" for="customRadio3">
+                    Pemohon Data
+                </label>
+
+                <div class="ml-3 mt-2" *ngIf="myCheck == 3">
+                    <div class=" custom-control custom-radio mb-3">
+                        <input [(ngModel)]="myCheck2" class=" custom-control-input" id="customRadio4"
+                            name="custom-radio-2" type="radio" value="1" (click)="resetCheck2()">
+                        <label class=" custom-control-label" for="customRadio4">
+                            G2C
+                        </label>
+                        <span class="ml-3" tooltip="Awam" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                            tooltipPlacement="right">
+                            <i class="far fa-question-circle"></i>
+                        </span>
+                    </div>
+                    <div class=" custom-control custom-radio mb-3">
+                        <input [(ngModel)]="myCheck2" class=" custom-control-input" id="customRadio5"
+                            name="custom-radio-2" type="radio" value="2" (click)="resetCheck2()"/>
+                        <label class=" custom-control-label" for="customRadio5">
+                            G2G
+                        </label>
+                        <span class="ml-3" tooltip="Agensi, Badan Berkanun, GLC" [tooltipDisabled]="false"
+                            [tooltipAnimation]="true" tooltipPlacement="right">
+                            <i class="far fa-question-circle"></i>
+                        </span>
+                        <div class="ml-3 mt-2" *ngIf="myCheck2 == 2">
+                            <div class=" custom-control custom-radio mb-3">
+                                <input [(ngModel)]="myCheck3" class=" custom-control-input" id="customRad1" name="custom-radio-3"
+                                    type="radio" value="1"/>
+                                <label class=" custom-control-label" for="customRad1">
+                                    Agensi Persekutuan/Agensi Negeri
+                                </label>
+                            </div>
+                            <div class=" custom-control custom-radio mb-3">
+                                <input [(ngModel)]="myCheck3" class=" custom-control-input" id="customRad2" name="custom-radio-3"
+                                    type="radio" value="2"/>
+                                <label class=" custom-control-label" for="customRad2">
+                                    Badan Berkanun
+                                </label>
+                            </div>
+                            <div class=" custom-control custom-radio mb-3">
+                                <input [(ngModel)]="myCheck3" class=" custom-control-input" id="customRad3" name="custom-radio-3"
+                                    type="radio" value="3"/>
+                                <label class=" custom-control-label" for="customRad3">
+                                    GLC
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" custom-control custom-radio mb-3">
+                        <input [(ngModel)]="myCheck2" class=" custom-control-input" id="customRadio6"
+                            name="custom-radio-2" type="radio" value="3" (click)="resetCheck2()"/>
+                        <label class=" custom-control-label" for="customRadio6">
+                            G2E
+                        </label>
+                        <span class="ml-3" tooltip="IPTA/IPTS" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                            tooltipPlacement="right">
+                            <i class="far fa-question-circle"></i>
+                        </span>
+                        <div class="ml-3 mt-2" *ngIf="myCheck2 == 3">
+                            <div class=" custom-control custom-radio mb-3">
+                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi1" name="custom-radio-4"
+                                    type="radio" value="1"/>
+                                <label class=" custom-control-label" for="customRadi1">
+                                    IPTA - Pensyarah/Penyelidik
+                                </label>
+                            </div>
+                            <div class=" custom-control custom-radio mb-3">
+                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi2" name="custom-radio-4"
+                                    type="radio" value="2"/>
+                                <label class=" custom-control-label" for="customRadi2">
+                                    IPTA - Pelajar
+                                </label>
+                            </div>
+                            <div class=" custom-control custom-radio mb-3">
+                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi3" name="custom-radio-4"
+                                    type="radio" value="3"/>
+                                <label class=" custom-control-label" for="customRadi3">
+                                    IPTS - Pensyarah/Penyelidik
+                                </label>
+                            </div>
+                            <div class=" custom-control custom-radio mb-3">
+                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi4" name="custom-radio-4"
+                                    type="radio" value="4"/>
+                                <label class=" custom-control-label" for="customRadi4">
+                                    IPTS - Pelajar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <button 
+                *ngIf=" myCheck == 1 || 
+                        myCheck == 2 || 
+                        myCheck == 3 && myCheck2 == 2 && (myCheck3 == 1 || myCheck3 == 2 || myCheck3 == 3) || 
+                        myCheck == 3 && myCheck2 == 3 && (myCheck4 == 1 || myCheck4 == 2 || myCheck4 == 3 || myCheck4 == 4)"
+                class="btn btn-primary mx-auto" type="button" (click)="closeModal()" (click)="openModal(createUser)"
+                [disabled]="registerForm.valid">
+                Isi Borang
+            </button>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,14 @@
+.badge-custom
+{
+    color:#303030;
+    background-image: linear-gradient(to right, #ebba16, #ed8a19);
+    font-size: 130%;
+}
+.badge-custom[href]:hover,
+.badge-custom[href]:focus
+{
+    text-decoration: none;
+
+    color: #fff;
+    background-color: #fa3a0e;
+}

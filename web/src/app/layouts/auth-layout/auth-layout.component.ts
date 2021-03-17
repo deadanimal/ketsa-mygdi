@@ -16,7 +16,7 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
     var html = document.getElementsByTagName("html")[0];
     // html.classList.add("auth-layout");
     var body = document.getElementsByTagName("body")[0];
-    body.classList.add("");
+    //body.classList.add("");
     // var navbar = document.getElementsByClassName("navbar-horizontal")[0];
     // navbar.classList.add("navbar-light");
     // navbar.classList.add("navbar-transparent");
