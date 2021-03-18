@@ -87,27 +87,27 @@ export class DatatableComponent implements OnInit {
       status: "61"
     },
     {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      metadata: "Peta Pemetaan Utiliti Shah Alam AU1302521 ",
       kategori: "Gridded",
       status: "61"
     },
     {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      metadata: "Peta Pemetaan Utiliti Shah Alam AU1302521 ",
       kategori: "Gridded",
       status: "61"
     },
     {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      metadata: "Peta Pemetaan Utiliti Shah Alam AU1302521 ",
       kategori: "Gridded",
       status: "61"
     },
     {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      metadata: "Peta Pemetaan Utiliti Cyberjaya AU1302521 ",
       kategori: "Gridded",
       status: "61"
     },
     {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
+      metadata: "Peta Pemetaan Utiliti Cyberjaya AU1302521 ",
       kategori: "Gridded",
       status: "61"
     },

@@ -1,5 +1,5 @@
 <ngx-loading-bar></ngx-loading-bar>
-<div class="content-wrapper bgg" style="min-height: 670px;">
+<div class="content-wrapper bgg" style="min-height: 750px;">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -13,7 +13,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content p-4">
+    <div class="content p-5">
         <div class="container-fluid">
             <div class="row">
                 <!-- /.col-md-6 -->
@@ -105,26 +105,26 @@
                 <div class="col-lg-6"></div>
                 <div class="col-lg-1">
                     <div class="form-group mt-7">
-                      <div class="card fancy_card square rounded-circle mt-4 float-right">
-                        <div class="card-body pointer" [routerLink]="['/metadata']">
-                          <img height="50" src="assets/img/icons/common/metadata.png" />
+                        <div class="card fancy_card square rounded-circle mt-4 float-right">
+                            <div class="card-body pointer" [routerLink]="['/metadata']">
+                                <img height="50" src="assets/img/icons/common/metadata.png" />
+                            </div>
+                            <span class="text-center mt-2">Metadata</span>
                         </div>
-                        <span class="text-center mt-2">Metadata</span>
-                      </div>
-                      <div class="card fancy_card square rounded-circle mt-4 float-right">
-                        <div class="card-body pointer" [routerLink]="['/data-asas']">
-                          <img height="50" src="assets/img/icons/common/dataapp.png" />
+                        <div class="card fancy_card square rounded-circle mt-4 float-right">
+                            <div class="card-body pointer" [routerLink]="['/data-asas']">
+                                <img height="50" src="assets/img/icons/common/dataapp.png" />
+                            </div>
+                            <span class="text-center mt-2">Data Asas</span>
                         </div>
-                        <span class="text-center mt-2">Data Asas</span>
-                      </div>
-                      <div class="card fancy_card square rounded-circle mt-4 float-right">
-                        <div class="card-body pointer" [routerLink]="['/tutorial']">
-                          <img height="50" src="assets/img/icons/common/tutorial.png" />
+                        <div class="card fancy_card square rounded-circle mt-4 float-right">
+                            <div class="card-body pointer" [routerLink]="['/tutorial']">
+                                <img height="50" src="assets/img/icons/common/tutorial.png" />
+                            </div>
+                            <span class="text-center mt-2">Tutorial</span>
                         </div>
-                        <span class="text-center mt-2">Tutorial</span>
-                      </div>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -185,9 +185,10 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-3">
-                        <label class="form-control-label mr-4" for="input-agensi">
-                            Agensi/Organisasi
-                        </label>
+                        <label *ngIf="myCheck == 1 || myCheck == 2 || myCheck == 3 && myCheck2 == 2"
+                            class="form-control-label mr-4" for="input-agensi">Agensi/Organisasi</label>
+                        <label *ngIf="myCheck == 3 && myCheck2 == 3" class="form-control-label mr-4"
+                            for="input-agensi">Institusi</label>
                     </div>
                     <div class="col-8">
                         <input class="form-control form-control-sm ml-3" id="input-agensi"
@@ -217,7 +218,7 @@
                         </ng-container>
                     </div>
                 </div>
-                <div class="row mb-2">
+                <div *ngIf="myCheck == 1 || myCheck == 2" class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="input-sektor">
                             Sektor
@@ -233,9 +234,10 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-3">
-                        <label class="form-control-label mr-4" for="input-emel">
-                            Emel
-                        </label>
+                        <label *ngIf="myCheck == 1 || myCheck == 2 || myCheck == 3 && myCheck2 == 3"
+                            class="form-control-label mr-4" for="input-emel">Emel</label>
+                        <label *ngIf="myCheck == 3 && myCheck2 == 2" class="form-control-label mr-4"
+                            for="input-emel">Emel Rasmi</label>
                     </div>
                     <div class="col-6">
                         <input class="form-control form-control-sm ml-3" id="input-emel"
@@ -277,12 +279,35 @@
                         </label>
                     </div>
                     <div class="col-6">
-                        <select class=" form-control form-control-sm ml-3" id="input-peranan">
-                            <option selected disabled hidden> Pilih Peranan </option>
-                            <option value="penerbit">Penerbit Metadata</option>
-                            <option value="pengesah">Pengesah Metadata</option>
-                            <option value="vw">Pengguna Biasa</option>
-                        </select>
+                        <input *ngIf="myCheck == 1" class=" form-control form-control-sm ml-3" id="input-peranan"
+                            type="text" value="Penerbit Metadata" disabled />
+                        <input *ngIf="myCheck == 2" class=" form-control form-control-sm ml-3" id="input-peranan"
+                            type="text" value="Pengesah Metadata" disabled />
+                        <input *ngIf="myCheck == 3" class=" form-control form-control-sm ml-3" id="input-peranan"
+                            type="text" value="Pemohon Data" disabled />
+                    </div>
+                </div>
+                <div *ngIf="myCheck == 3" class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-kategori">
+                            Kategori
+                        </label>
+                    </div>
+                    <div class="col-6">
+                        <input *ngIf="myCheck3 == 1" class=" form-control form-control-sm ml-3" id="input-kategori"
+                            type="text" value="Agensi Persekutuan/Agensi Negeri" disabled />
+                        <input *ngIf="myCheck3 == 2" class=" form-control form-control-sm ml-3" id="input-kategori"
+                            type="text" value="Badan Berkanun" disabled />
+                        <input *ngIf="myCheck3 == 3" class=" form-control form-control-sm ml-3" id="input-kategori"
+                            type="text" value="GLC" disabled />
+                        <input *ngIf="myCheck4 == 1" class=" form-control form-control-sm ml-3" id="input-kategori"
+                            type="text" value="IPTA - Pensyarah/Penyelidik" disabled />
+                        <input *ngIf="myCheck4 == 2" class=" form-control form-control-sm ml-3" id="input-kategori"
+                            type="text" value="IPTA - Pelajar" disabled />
+                        <input *ngIf="myCheck4 == 3" class=" form-control form-control-sm ml-3" id="input-kategori"
+                            type="text" value="IPTS - Pensyarah/Penyelidik" disabled />
+                        <input *ngIf="myCheck4 == 4" class=" form-control form-control-sm ml-3" id="input-kategori"
+                            type="text" value="IPTS - Pelajar" disabled />
                     </div>
                 </div>
             </div>
@@ -355,14 +380,14 @@
         <form class="p-lg-5" id="myForm">
             <div class=" custom-control custom-radio mb-3">
                 <input [(ngModel)]="myCheck" class=" custom-control-input" id="customRadio1" name="custom-radio-1"
-                    type="radio" value="1" (click)="resetCheck4()"/>
+                    type="radio" value="1" (click)="resetCheck4()" />
                 <label class=" custom-control-label" for="customRadio1">
                     Penerbit Metadata
                 </label>
             </div>
             <div class=" custom-control custom-radio mb-3">
                 <input [(ngModel)]="myCheck" class=" custom-control-input" id="customRadio2" name="custom-radio-1"
-                    type="radio" value="2" (click)="resetCheck4()"/>
+                    type="radio" value="2" (click)="resetCheck4()" />
                 <label class=" custom-control-label" for="customRadio2">
                     Pengesah Metadata
                 </label>
@@ -388,7 +413,7 @@
                     </div>
                     <div class=" custom-control custom-radio mb-3">
                         <input [(ngModel)]="myCheck2" class=" custom-control-input" id="customRadio5"
-                            name="custom-radio-2" type="radio" value="2" (click)="resetCheck2()"/>
+                            name="custom-radio-2" type="radio" value="2" (click)="resetCheck2()" />
                         <label class=" custom-control-label" for="customRadio5">
                             G2G
                         </label>
@@ -398,22 +423,22 @@
                         </span>
                         <div class="ml-3 mt-2" *ngIf="myCheck2 == 2">
                             <div class=" custom-control custom-radio mb-3">
-                                <input [(ngModel)]="myCheck3" class=" custom-control-input" id="customRad1" name="custom-radio-3"
-                                    type="radio" value="1"/>
+                                <input [(ngModel)]="myCheck3" class=" custom-control-input" id="customRad1"
+                                    name="custom-radio-3" type="radio" value="1" />
                                 <label class=" custom-control-label" for="customRad1">
                                     Agensi Persekutuan/Agensi Negeri
                                 </label>
                             </div>
                             <div class=" custom-control custom-radio mb-3">
-                                <input [(ngModel)]="myCheck3" class=" custom-control-input" id="customRad2" name="custom-radio-3"
-                                    type="radio" value="2"/>
+                                <input [(ngModel)]="myCheck3" class=" custom-control-input" id="customRad2"
+                                    name="custom-radio-3" type="radio" value="2" />
                                 <label class=" custom-control-label" for="customRad2">
                                     Badan Berkanun
                                 </label>
                             </div>
                             <div class=" custom-control custom-radio mb-3">
-                                <input [(ngModel)]="myCheck3" class=" custom-control-input" id="customRad3" name="custom-radio-3"
-                                    type="radio" value="3"/>
+                                <input [(ngModel)]="myCheck3" class=" custom-control-input" id="customRad3"
+                                    name="custom-radio-3" type="radio" value="3" />
                                 <label class=" custom-control-label" for="customRad3">
                                     GLC
                                 </label>
@@ -423,7 +448,7 @@
 
                     <div class=" custom-control custom-radio mb-3">
                         <input [(ngModel)]="myCheck2" class=" custom-control-input" id="customRadio6"
-                            name="custom-radio-2" type="radio" value="3" (click)="resetCheck2()"/>
+                            name="custom-radio-2" type="radio" value="3" (click)="resetCheck2()" />
                         <label class=" custom-control-label" for="customRadio6">
                             G2E
                         </label>
@@ -433,29 +458,29 @@
                         </span>
                         <div class="ml-3 mt-2" *ngIf="myCheck2 == 3">
                             <div class=" custom-control custom-radio mb-3">
-                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi1" name="custom-radio-4"
-                                    type="radio" value="1"/>
+                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi1"
+                                    name="custom-radio-4" type="radio" value="1" />
                                 <label class=" custom-control-label" for="customRadi1">
                                     IPTA - Pensyarah/Penyelidik
                                 </label>
                             </div>
                             <div class=" custom-control custom-radio mb-3">
-                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi2" name="custom-radio-4"
-                                    type="radio" value="2"/>
+                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi2"
+                                    name="custom-radio-4" type="radio" value="2" />
                                 <label class=" custom-control-label" for="customRadi2">
                                     IPTA - Pelajar
                                 </label>
                             </div>
                             <div class=" custom-control custom-radio mb-3">
-                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi3" name="custom-radio-4"
-                                    type="radio" value="3"/>
+                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi3"
+                                    name="custom-radio-4" type="radio" value="3" />
                                 <label class=" custom-control-label" for="customRadi3">
                                     IPTS - Pensyarah/Penyelidik
                                 </label>
                             </div>
                             <div class=" custom-control custom-radio mb-3">
-                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi4" name="custom-radio-4"
-                                    type="radio" value="4"/>
+                                <input [(ngModel)]="myCheck4" class=" custom-control-input" id="customRadi4"
+                                    name="custom-radio-4" type="radio" value="4" />
                                 <label class=" custom-control-label" for="customRadi4">
                                     IPTS - Pelajar
                                 </label>
@@ -466,7 +491,7 @@
             </div>
         </form>
         <div class="row">
-            <button 
+            <button
                 *ngIf=" myCheck == 1 || 
                         myCheck == 2 || 
                         myCheck == 3 && myCheck2 == 2 && (myCheck3 == 1 || myCheck3 == 2 || myCheck3 == 3) || 

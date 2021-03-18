@@ -1,0 +1,31 @@
+.bgg {
+    background-image: url('src/assets/img/theme/mygeo-background.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btn-primary,
+.bg-primary {
+    background-color: #0A80B6 !important;
+    border-color: #0A80B6;
+}
+
+.card {
+    border-radius: 25px;
+}
+
+.scroll {
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scroll {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}

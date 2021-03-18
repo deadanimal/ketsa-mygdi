@@ -1,98 +1,84 @@
 <app-navbar2></app-navbar2>
 <div class="content-wrapper bgg" style="min-height: 670px;">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark"></h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-  
-    <!-- Main content -->
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <!-- /.col-md-6 -->
-          <div class="col-md-12">
-            <div class="card mt-4 p-3">
-                <div class="card-header">
-                    <h1 class="card-title m-0">Soalan Lazim (FAQ)</h1>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="accordion" id="accordionExample">
-                                <div class="acard">
-                                    <div class="acard-header" id="headingOne">
-                                        <h5 class="mb-0">
-                                            <button 
-                                                aria-controls="collapseOne"
-                                                class="btn btn-link w-100 text-ssm text-left"
-                                                [attr.aria-expanded]="!isCollapsed1" 
-                                                (click)="isCollapsed1 = !isCollapsed1"
-                                                id="collapseOne"
-                                                type="button">
-                                                1.<span class="tab"></span>METADATA
-                                                <i class=" float-right pt-1"> </i>
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div 
-                                        aria-labelledby="headingOne"
-                                        class="show"
-                                        data-parent="#accordionExample"
-                                        [isAnimated]="true"
-                                        [collapse]="isCollapsed1"
-                                        id="collapseOne">
-                                        <div class="acard-body opacity-8">
-                                            <p align="justify" style="text-align:justify">
-                                            XCESS Portal is an SSM Product Portal that provides online services to supply company and business information registered with SSM.</p>
-                                        </div>
-                                    </div>
-                                </div>
-    
-                                <div class="acard">
-                                    <div class="acard-header" id="headingTwo">
-                                        <h5 class="mb-0">
-                                            <button
-                                                aria-controls="collapseTwo"
-                                                class="btn btn-link w-100 text-ssm text-left collapsed"
-                                                [attr.aria-expanded]="!isCollapsed2"
-                                                (click)="isCollapsed2 = !isCollapsed2"
-                                                id="collapseTwo"
-                                                type="button">
-                                                2.<span class="tab"></span>DATA-DATA ASAS
-                                                <i class=" float-right pt-1"> </i>
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div 
-                                        aria-labelledby="headingTwo"
-                                        data-parent="#accordionExample"
-                                        [isAnimated]="true"
-                                        [collapse]="isCollapsed2"
-                                        id="collapseTwo">
-                                        <div class="acard-body opacity-8">                                        
-                                                <p align="justify" style="text-align:justify">
-                                                    The XCESS portal can be used on 1 January 2021.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark"></h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <!-- /.col-md-6 -->
+        <div class="col-md-12">
+          <div class="card mt-4 p-3">
+            <div class="card-header">
+              <h1 class="card-title m-0">Soalan Lazim (FAQ)</h1>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="accordion" id="accordionExample">
+                    <div class="acard">
+                      <div class="acard-header" id="headingOne">
+                        <h5 class="mb-0">
+                          <button aria-controls="collapseOne" class="btn btn-link w-100 text-ssm text-left"
+                            [attr.aria-expanded]="!isCollapsed1" (click)="isCollapsed1 = !isCollapsed1" id="collapseOne"
+                            type="button">
+                            1.<span class="tab"></span>METADATA
+                            <i class=" float-right pt-1"> </i>
+                          </button>
+                        </h5>
+                      </div>
+                      <div aria-labelledby="headingOne" class="show" data-parent="#accordionExample" [isAnimated]="true"
+                        [collapse]="isCollapsed1" id="collapseOne">
+                        <div class="acard-body opacity-8">
+                          <p class="text-bold" align="justify" style="text-align:justify">
+                            Adakah Aplikasi UPI memaparkan carian nombor lot dan maklumat lain berkenaan lot tanah?</p>
+                          <br>
+                          <p>Tidak. Aplikasi UPI hanya memaparkan struktur kod dan nama sempadan pentadbiran tanah
+                            seperti Negeri,
+                            Daerah,Mukim/Bandar/Pekan dan Seksyen. Maklumat berkenaan lokasi nombor lot tidak dipaparkan
+                            di dalam aplikasi ini.</p>
                         </div>
+                      </div>
+                    </div>
+
+                    <div class="acard">
+                      <div class="acard-header" id="headingTwo">
+                        <h5 class="mb-0">
+                          <button aria-controls="collapseTwo" class="btn btn-link w-100 text-ssm text-left collapsed"
+                            [attr.aria-expanded]="!isCollapsed2" (click)="isCollapsed2 = !isCollapsed2" id="collapseTwo"
+                            type="button">
+                            2.<span class="tab"></span>DATA-DATA ASAS
+                            <i class=" float-right pt-1"> </i>
+                          </button>
+                        </h5>
+                      </div>
+                      <div aria-labelledby="headingTwo" data-parent="#accordionExample" [isAnimated]="true"
+                        [collapse]="isCollapsed2" id="collapseTwo">
+                        <div class="acard-body opacity-8">
+                          <p class="text-bold" align="justify" style="text-align:justify">
+                            Adakah pengguna perlu mendaftar untuk melayari aplikasi UPI?</p><br>
+                          <p>Tidak. Aplikasi UPI terbuka untuk paparan umum.</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
 <app-footer2></app-footer2>
-
-
-    

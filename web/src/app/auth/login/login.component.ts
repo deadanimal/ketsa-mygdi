@@ -215,9 +215,9 @@ export class LoginComponent implements OnInit {
 
   register() {
     swal.fire({
-      title: "Dalam proses",
+      title: "Pendaftaran Berjaya",
       text: "Pendaftaran pengguna baru dalam proses.",
-      type: "info",
+      type: "success",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-success",
       confirmButtonText: "Tutup"

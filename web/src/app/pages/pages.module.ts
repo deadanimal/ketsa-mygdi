@@ -26,6 +26,11 @@ import { FaqComponent } from './faq/faq.component';
 import { DataAsasComponent } from './data-asas/data-asas.component';
 import { MetadataComponent } from './metadata/metadata.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
+import { DisclaimerComponent } from './disclaimer/disclaimer.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { MygeointroComponent } from './mygeointro/mygeointro.component';
+import { AnnoucementComponent } from './annoucement/annoucement.component';
+import { SubAnnoucementComponent } from './sub-annoucement/sub-annoucement.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,7 @@ import { TutorialComponent } from './tutorial/tutorial.component';
     FaqComponent, 
     DataAsasComponent, 
     MetadataComponent, 
-    TutorialComponent,
+    TutorialComponent, DisclaimerComponent, PrivacyComponent, MygeointroComponent, AnnoucementComponent, SubAnnoucementComponent,
   ],
   imports: [
     CommonModule,

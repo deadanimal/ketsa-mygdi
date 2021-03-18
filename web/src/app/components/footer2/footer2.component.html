@@ -1,21 +1,22 @@
-<footer class="footer p-2" style="background: #242881">
+<footer class="footer" style="background: #242881">
     <div class="container-fluid">
         <div class="row align-items-center justify-content-xl-between ">
             <div class="col-xl-4">
-                <div class="copyright text-xl-left text-white ">
-                    PENAFIAN | PENYATAAN PRIVASI <br>
+                <div class="copyright text-xl-left text-light">
+                    <a class = "text-light" [routerLink]="['/disclaimer']">PENAFIAN</a><span class="mr-2 ml-2">|</span>
+                    <a class = "text-light"[routerLink]="['/privacy']">PENYATAAN PRIVASI</a><br><br><br>
                     Hakcipta Terpelihara
                     &copy; {{ test2 | date: "yyyy" }}. Pusat Geospatial Malaysia.<br>
                 </div>
             </div>
             <div class="col-xl-4">
-                <div class=" copyright text-center text-white">
+                <div class=" copyright text-center text-light mt-2">
                     Jumlah Pelawat:<br>
                     <span class="badge badge-custom badge-pill mt-1">1,098,034</span>
                 </div>
             </div>
             <div class="col-xl-4">
-                <div class="copyright text-xl-right text-white">
+                <div class="copyright text-xl-right text-light">
                     Sebarang pertanyaan, boleh menghubungi:<br>
                     <br>
                     <i class="fas fa-envelope"></i>

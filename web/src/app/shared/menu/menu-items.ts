@@ -221,18 +221,78 @@ export const ROUTESADMIN: RouteInfo[] = [
       { path: 'userguide', title: 'Panduan Pengguna', type: 'link' }
     ]
   },
-  
-  /*,
+];
+
+export const ROUTESADMIN2: RouteInfo[] = [
   {
-    path: '/maintenance',
-    title: 'Maintenance',
+    path: '/portal/',
+    title: 'Utama',
     type: 'link',
-    icontype: 'fas fa-cogs text-orange'
-  }*/
-  /*{
-    path: '/settings',
-    title: 'Settings',
+    icontype: 'fas fa-home text-teal'
+  },
+  {
+    path: '/admin/profile',
+    title: 'Profil',
     type: 'link',
-    icontype: 'fas fa-sliders-h text-blue'
-  }*/
+    icontype: 'fas fa-user text-blue'
+  },
+  {
+    path: '/admin/dashboard',
+    title: 'Dashboard',
+    type: 'link',
+    icontype: 'fas fa-desktop text-warning'
+  },
+  {
+    path: '/admin/management/',
+    title: 'Pengurusan Metadata',
+    type: 'sub',
+    icontype: 'fas fa-braille text-indigo',
+    collapse: 'management',
+    isCollapsed: true,
+    children: [
+      { path: 'tabledata', title: 'Senarai Metadata', type: 'link' },
+      { path: 'update-element', title: 'Kemaskini Elemen Metadata', type: 'link' }
+    ]
+  },
+];
+
+export const ROUTESADMIN3: RouteInfo[] = [
+  {
+    path: '/portal/',
+    title: 'Utama',
+    type: 'link',
+    icontype: 'fas fa-home text-teal'
+  },
+  {
+    path: '/admin/profile',
+    title: 'Profil',
+    type: 'link',
+    icontype: 'fas fa-user text-blue'
+  },
+  {
+    path: '/admin/dashboard',
+    title: 'Dashboard',
+    type: 'link',
+    icontype: 'fas fa-desktop text-warning'
+  },
+  {
+    path: '/admin/management',
+    title: 'Pengurusan Data Asas',
+    type: 'sub',
+    icontype: 'fas fa-tasks text-red',
+    collapse: 'management',
+    isCollapsed: true,
+    children: [
+      { path: 'dataasas', title: 'Kemaskini Data', type: 'link' },
+      { path: 'newapplication', title: 'Permohonan Baru', type: 'link' },
+      { path: 'dataprocess', title: 'Proses Data', type: 'link' },
+      { path: 'applicationstatus', title: 'Status Permohonan', type: 'link' },
+    ]
+  },
+  {
+    path: '/admin/feedback',
+    title: 'Maklum Balas',
+    type: 'link',
+    icontype: 'fas fa-comments text-primary'
+  },
 ];

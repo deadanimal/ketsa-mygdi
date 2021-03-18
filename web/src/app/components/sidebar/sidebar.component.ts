@@ -6,7 +6,7 @@ import {
   NavigationEnd,
   NavigationError,
 } from "@angular/router";
-import { ROUTESADMIN, ROUTESPENGESAH, ROUTESUSER } from '../../shared/menu/menu-items';
+import { ROUTESADMIN, ROUTESADMIN2, ROUTESADMIN3, ROUTESUSER, ROUTESUSER2, ROUTESUSER3 } from '../../shared/menu/menu-items';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { JwtService } from "src/app/shared/handler/jwt/jwt.service";
 
@@ -38,19 +38,19 @@ export class SidebarComponent implements OnInit {
       this.menu = ROUTESADMIN
     }
     else if (this.authService.userRole == 2) {
-      this.menu = ROUTESADMIN
+      this.menu = ROUTESADMIN2
     }
     else if (this.authService.userRole == 3) {
-      this.menu = ROUTESADMIN
+      this.menu = ROUTESADMIN3
     }
     else if (this.authService.userRole == 4) {
       this.menu = ROUTESUSER
     }
     else if (this.authService.userRole == 5) {
-      this.menu = ROUTESPENGESAH
+      this.menu = ROUTESUSER2
     }
     else if (this.authService.userRole == 6) {
-      this.menu = ROUTESUSER
+      this.menu = ROUTESUSER3
     }
     this.menuItems = this.menu.filter(menuItem => menuItem);
     this.router.events.subscribe(event => {

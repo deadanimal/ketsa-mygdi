@@ -46,7 +46,7 @@
             <span class="nav-link-inner--text text-bold d-lg-none"> Lain-lain </span>
           </a>
           <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-dark" *dropdownMenu>
-            <a class="dropdown-item" [routerLink]="['/examples/account-settings']">
+            <a class="dropdown-item" [routerLink]="['/mygeoexplorer']">
               <i class="text-muted"> </i> MyGeo Explorer
             </a>
             <a class="dropdown-item" [routerLink]="['/userguide']">
@@ -139,7 +139,7 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-success" type="button" (click)="confirm()" [disabled]="feedbackForm.valid">
+    <button class="btn btn-success" type="button" (click)="confirm()" [disabled]="!feedbackForm.valid">
       Hantar
     </button>
 
