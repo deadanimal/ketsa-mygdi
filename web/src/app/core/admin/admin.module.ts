@@ -24,7 +24,7 @@ import { DatatableComponent } from './datatable/datatable.component';
 import { ManagementFaqComponent } from './management-faq/management-faq.component';
 import { ManagementAnnoucementComponent } from './management-annoucement/management-annoucement.component';
 import { ManagementUserguideComponent } from './management-userguide/management-userguide.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from '../admin/profile/profile.component';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ManagementDataComponent } from './management-data/management-data.component';

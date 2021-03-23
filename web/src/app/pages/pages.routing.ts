@@ -1,5 +1,4 @@
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
-import { DataAsasComponent } from './data-asas/data-asas.component';
 import { FaqComponent } from './faq/faq.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { PortalComponent } from './portal/portal.component';
@@ -10,8 +9,10 @@ import { MetadataComponent } from './metadata/metadata.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { MygeointroComponent } from './mygeointro/mygeointro.component';
-import { AnnoucementComponent } from './annoucement/annoucement.component';
-import { SubAnnoucementComponent } from './sub-annoucement/sub-annoucement.component';
+import { AnnoucementComponent } from './annouce/annoucement/annoucement.component';
+import { SubAnnoucementComponent } from './annouce/sub-annoucement/sub-annoucement.component';
+import { DataChoiceComponent } from './dataasas/data-choice/data-choice.component';
+import { DataListComponent } from './dataasas/data-list/data-list.component';
 
 export const PagesRoutes: Routes = [
     {
@@ -39,7 +40,7 @@ export const PagesRoutes: Routes = [
             },
             {
                 path: 'data-asas',
-                component: DataAsasComponent
+                component: DataChoiceComponent
             },
             {
                 path: 'metadata',
@@ -68,6 +69,10 @@ export const PagesRoutes: Routes = [
             {
                 path: 'sub-annoucement',
                 component: SubAnnoucementComponent
+            },
+            {
+                path: 'datalist',
+                component: DataListComponent
             },
         ]
     }

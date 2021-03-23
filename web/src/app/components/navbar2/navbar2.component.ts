@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, NgZone, TemplateRef } from '@angular/core';
 import swal from 'sweetalert2';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MocksService } from 'src/app/shared/services/mocks/mocks.service';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Router } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -10,7 +10,9 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 @Component({
   selector: 'app-navbar2',
   templateUrl: './navbar2.component.html',
-  styleUrls: ['./navbar2.component.scss']
+  styleUrls: ['./navbar2.component.scss'],
+  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
+  
 })
 export class Navbar2Component implements OnInit {
 

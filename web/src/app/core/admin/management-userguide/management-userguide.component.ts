@@ -50,40 +50,40 @@ export class ManagementUserguideComponent implements OnInit {
   activeRow: any;
   rows: any = [
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
     {
-      soalan: "Apa itu MyGeo Explorer? ",
+      tajuk: "MyGeo Explorer ",
     },
   ];
   SelectionType = SelectionType;
@@ -143,7 +143,7 @@ export class ManagementUserguideComponent implements OnInit {
   confirm() {
     swal.fire({
       title: "Pengesahan",
-      text: "Adakah anda pasti untuk menukar gambar profil ini?",
+      text: "Adakah anda pasti untuk menukar gambar profil ini",
       type: "info",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-info",
@@ -161,7 +161,7 @@ export class ManagementUserguideComponent implements OnInit {
   confirmSave() {
     swal.fire({
       title: "Pengesahan",
-      text: "Adakah anda pasti untuk menyimpan maklumat yang disunting ini?",
+      text: "Adakah anda pasti untuk menyimpan maklumat yang disunting ini",
       type: "info",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-info",
@@ -180,7 +180,7 @@ export class ManagementUserguideComponent implements OnInit {
   confirmPassword() {
     swal.fire({
       title: "Pengesahan",
-      text: "Adakah anda pasti untuk tukar laluan?",
+      text: "Adakah anda pasti untuk tukar laluan",
       type: "info",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-info",

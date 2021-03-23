@@ -128,7 +128,7 @@ export class FeedbackComponent implements OnInit {
   confirm() {
     swal.fire({
       title: "Pengesahan",
-      text: "Adakah anda pasti untuk menukar gambar profil ini?",
+      text: "Adakah anda pasti untuk menghantar maklum balas ini?",
       type: "info",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-info",
@@ -183,7 +183,7 @@ export class FeedbackComponent implements OnInit {
   edit() {
     swal.fire({
       title: "Berjaya",
-      text: "Kemaskini telah berjaya disimpan",
+      text: "Maklum balas telah berjaya dihantar",
       type: "success",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-success",

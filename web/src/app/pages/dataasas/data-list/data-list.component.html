@@ -1,0 +1,61 @@
+<app-navbar2></app-navbar2>
+<div class="bgg" style="min-height: 670px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="card" style="background-color: rgba(255, 255, 255, 0.9);">
+            <div class="card-header">
+                <h1 class="card-title m-0">Senarai Data-data Asas</h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        <div><span>slectvalue:</span>{{this.selectData}}</div>
+                        <h2>Kategori:</h2>
+                        <div class="list-group" id="cat1">
+                            <h3 [(ngModel)]="selectData" id="target1" ngDefaultControl name="select-1" (click)="reset()" (click)="activate(1)">1)&nbsp; Aeronautical</h3>
+                            <h3 [(ngModel)]="selectData" id="target2" ngDefaultControl name="select-1" (click)="reset()" (click)="activate(2)">2)&nbsp; Built Environment</h3>
+                            <h3 [(ngModel)]="selectData" id="target3" ngDefaultControl name="select-1" (click)="reset()" (click)="activate(3)">3)&nbsp; Demarcation</h3>
+                            <h3 [(ngModel)]="selectData" id="target1" ngDefaultControl name="select-1" (click)="reset()" (click)="activate(4)">4)&nbsp; Geology</h3>
+                            <h3 [(ngModel)]="selectData" ngDefaultControl  name="select-1" (click)="selectData=5">5)&nbsp; Hydrography</h3>
+                            <h3 [(ngModel)]="selectData" ngDefaultControl  name="select-1" (click)="selectData=6">6)&nbsp; Hypsography</h3>
+                            <h3 [(ngModel)]="selectData" ngDefaultControl  name="select-1" (click)="selectData=7">7)&nbsp; Soil</h3>
+                            <h3 [(ngModel)]="selectData" ngDefaultControl  name="select-1" (click)="selectData=8">8)&nbsp; Transportation</h3>
+                            <h3 [(ngModel)]="selectData" ngDefaultControl  name="select-1" (click)="selectData=9">9)&nbsp; Utility</h3>
+                            <h3 [(ngModel)]="selectData" ngDefaultControl  name="select-1" (click)="selectData=10">10)&nbsp; Vegetation</h3>
+                            <h3 [(ngModel)]="selectData" ngDefaultControl  name="select-1" (click)="selectData=11">11)&nbsp; Special Use</h3>
+                            <h3 [(ngModel)]="selectData" ngDefaultControl  name="select-1" (click)="selectData=12">12)&nbsp; General</h3>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div *ngIf="selectData == 1" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1) Ruang Udara (Air Space - AA)</h3>
+                            <h3>2) Lapangan Terbang (Aerodrome - AB)</h3>
+                            <h3>3) Kediaman (Residential - BA)</h3>
+                        </div>
+                        <div *ngIf="selectData == 2" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1)&nbsp; Aeronautical</h3>
+                            <h3>2)&nbsp; Built Environment</h3>
+                            <h3>3)&nbsp; Demarcatio</h3>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer2></app-footer2>

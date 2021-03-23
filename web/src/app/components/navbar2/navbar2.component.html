@@ -1,5 +1,5 @@
 <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark" style="background-color: #242881;">
-  <div class="container">
+  <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="['/portal']">
       <img src="assets/img/logo/mygeoexplorer-logo.png" />
     </a>
@@ -7,14 +7,14 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
       aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-      <span class="navbar-toggler-icon fg-dark"></span>
+      <span><img height="21" src="assets/img/icons/common/menuoption.png" /></span>
     </button>
     <div class="collapse navbar-collapse" id="collapseBasic" [collapse]="isCollapsed">
       <div class="navbar-collapse-header">
         <div class="row">
           <div class="col-6 collapse-brand">
             <a [routerLink]="['/portal']">
-              <img src="assets/img/logo/mygeoexplorer-logo.png" />
+              <img src="assets/img/logo/mygeoexplorer-logo2.png" />
             </a>
           </div>
           <div class="col-6 collapse-close">
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <ul class="navbar-nav align-items-center ml-md-auto">
+      <ul class="navbar-nav align-items-center ml-md-auto" id="button-animated">
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/auth/login/']">
             <span class="nav-link-inner--text text-bold">DAFTAR | LOG MASUK</span>
@@ -39,20 +39,20 @@
             <span class="nav-link-inner--text text-bold d-lg-none"> Soalan Lazim </span>
           </a>
         </li>
-        <li class="nav-item dropdown" dropdown>
-          <a class="nav-link nav-link-icon" data-toggle="dropdown" href="javascript:;" dropdownToggle role="button">
+        <li class="nav-item dropdown" dropdown placement="bottom-right">
+          <a class="nav-link nav-link-icon" data-toggle="dropdown" dropdownToggle role="button">
 
             <img height="21" src="assets/img/icons/common/menuoption.png" />
             <span class="nav-link-inner--text text-bold d-lg-none"> Lain-lain </span>
           </a>
-          <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-dark" *dropdownMenu>
+          <div aria-labelledby="button-animated" class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
             <a class="dropdown-item" [routerLink]="['/mygeoexplorer']">
               <i class="text-muted"> </i> MyGeo Explorer
             </a>
             <a class="dropdown-item" [routerLink]="['/userguide']">
               <i class="text-danger"> </i> Panduan Pengguna
             </a>
-            <a class="dropdown-item" [routerLink]="['#']" (click)="openModal(feedBack)">
+            <a class="dropdown-item" [routerLink]="['javascript:void(0)']" (click)="openModal(feedBack)">
               <i class="text-pink"> </i> Maklum Balas
             </a>
             <a class="dropdown-item" [routerLink]="['/contactus']">

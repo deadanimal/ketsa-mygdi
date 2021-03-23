@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataAsasComponent } from './data-asas.component';
+import { DataListComponent } from './data-list.component';
 
-describe('DataAsasComponent', () => {
-  let component: DataAsasComponent;
-  let fixture: ComponentFixture<DataAsasComponent>;
+describe('DataListComponent', () => {
+  let component: DataListComponent;
+  let fixture: ComponentFixture<DataListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataAsasComponent ]
+      declarations: [ DataListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataAsasComponent);
+    fixture = TestBed.createComponent(DataListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

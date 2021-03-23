@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +10,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class ProfileComponent implements OnInit {
 
+  public auth;
 
   // Toggle
   editEnabled: boolean = false
@@ -27,7 +29,8 @@ export class ProfileComponent implements OnInit {
   }
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -40,6 +43,25 @@ export class ProfileComponent implements OnInit {
         Validators.email
       ]))
     })
+
+    if (this.authService.userRole == 1) {
+      this.auth = 1
+    }
+    else if (this.authService.userRole == 2) {
+      this.auth = 2
+    }
+    else if (this.authService.userRole == 3) {
+      this.auth = 3
+    }
+    else if (this.authService.userRole == 4) {
+      this.auth = 4
+    }
+    else if (this.authService.userRole == 5) {
+      this.auth = 5
+    }
+    else if (this.authService.userRole == 6) {
+      this.auth = 6
+    }
   }
 
   toggleEdit() {

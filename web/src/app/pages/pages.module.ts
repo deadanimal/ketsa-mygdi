@@ -1,3 +1,4 @@
+import { DataListComponent } from './dataasas/data-list/data-list.component';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,14 +24,14 @@ import { PortalComponent } from './portal/portal.component';
 import { UserguideComponent } from './userguide/userguide.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { FaqComponent } from './faq/faq.component';
-import { DataAsasComponent } from './data-asas/data-asas.component';
 import { MetadataComponent } from './metadata/metadata.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { MygeointroComponent } from './mygeointro/mygeointro.component';
-import { AnnoucementComponent } from './annoucement/annoucement.component';
-import { SubAnnoucementComponent } from './sub-annoucement/sub-annoucement.component';
+import { AnnoucementComponent } from './annouce/annoucement/annoucement.component';
+import { SubAnnoucementComponent } from './annouce/sub-annoucement/sub-annoucement.component';
+import { DataChoiceComponent } from './dataasas/data-choice/data-choice.component';
 
 @NgModule({
   declarations: [
@@ -39,9 +40,15 @@ import { SubAnnoucementComponent } from './sub-annoucement/sub-annoucement.compo
     UserguideComponent, 
     ContactusComponent, 
     FaqComponent, 
-    DataAsasComponent, 
     MetadataComponent, 
-    TutorialComponent, DisclaimerComponent, PrivacyComponent, MygeointroComponent, AnnoucementComponent, SubAnnoucementComponent,
+    TutorialComponent, 
+    DisclaimerComponent, 
+    PrivacyComponent, 
+    MygeointroComponent, 
+    AnnoucementComponent, 
+    SubAnnoucementComponent,
+    DataChoiceComponent,
+    DataListComponent
   ],
   imports: [
     CommonModule,

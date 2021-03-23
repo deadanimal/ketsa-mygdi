@@ -1,5 +1,5 @@
 <ngx-loading-bar></ngx-loading-bar>
-<div class="content-wrapper bgg" style="min-height: 750px;">
+<div class=" bgg" style="min-height: 750px;">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -17,8 +17,8 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- /.col-md-6 -->
-                <div class="col-lg-5">
-                    <div class="card mt-7 ml-6" style="background-color: rgba(255, 255, 255, 0.2);">
+                <div class="col-lg-5 p-4 mt-7">
+                    <div class="card" style="background-color: rgba(255, 255, 255, 0.2);">
 
                         <div class="card-body px-lg-5 py-lg-5">
                             <!--<div class="logo-box">
@@ -88,7 +88,7 @@
                                 </label>
                             </div>-->
                                     <div class="text-center">
-                                        <button type="button" class="btn btn-primary float-right" (click)="login()">
+                                        <button type="button" class="btn btn-warning float-right" (click)="login()">
                                             Log Masuk
                                         </button>
                                     </div>
@@ -105,13 +105,13 @@
                 <div class="col-lg-6"></div>
                 <div class="col-lg-1">
                     <div class="form-group mt-7">
-                        <div class="card fancy_card square rounded-circle mt-4 float-right">
+                        <div class="card fancy_card square rounded-circle mt-4 ml-4 float-right">
                             <div class="card-body pointer" [routerLink]="['/metadata']">
                                 <img height="50" src="assets/img/icons/common/metadata.png" />
                             </div>
                             <span class="text-center mt-2">Metadata</span>
                         </div>
-                        <div class="card fancy_card square rounded-circle mt-4 float-right">
+                        <div class="card fancy_card square rounded-circle mt-4 ml-4 float-right">
                             <div class="card-body pointer" [routerLink]="['/data-asas']">
                                 <img height="50" src="assets/img/icons/common/dataapp.png" />
                             </div>
@@ -132,9 +132,9 @@
 <ng-template #createUser>
     <div class="modal-header bg-primary">
         <h6 *ngIf="myCheck == 1" class="modal-title text-white my-auto" id="modal-title-default">
-            Penerbit Metadata</h6>
+            Pendaftaran Penerbit Metadata</h6>
         <h6 *ngIf="myCheck == 2" class="modal-title text-white my-auto" id="modal-title-default">
-            Pengesah Metadata</h6>
+            Pendaftaran Pengesah Metadata</h6>
         <h6 *ngIf="myCheck == 3 && myCheck2 == 2" class="modal-title text-white my-auto" id="modal-title-default">
             Pendaftaran Pemohon Data - G2G</h6>
         <h6 *ngIf="myCheck == 3 && myCheck2 == 3" class="modal-title text-white my-auto" id="modal-title-default">
@@ -190,9 +190,16 @@
                         <label *ngIf="myCheck == 3 && myCheck2 == 3" class="form-control-label mr-4"
                             for="input-agensi">Institusi</label>
                     </div>
-                    <div class="col-8">
+                    <div *ngIf="myCheck == 1 || myCheck == 2 || myCheck == 3 && myCheck2 == 2" class="col-8">
+                        <select class=" form-control form-control-sm ml-3" id="input-agensi">
+                            <option selected disabled hidden> Nama Agensi/Organisasi </option>
+                            <option value="penerbit">Kerajaan</option>
+                            <option value="pengesah">Swasta</option>
+                        </select>
+                    </div>
+                    <div *ngIf="myCheck == 3 && myCheck2 == 3"  class="col-8">
                         <input class="form-control form-control-sm ml-3" id="input-agensi"
-                            placeholder="Nama Agensi/Organisasi" type="text" formControlName="agensi" />
+                            placeholder="Nama Institusi" type="text" formControlName="agensi" />
                         <ng-container *ngFor="let message of registerFormMessages.name">
                             <div
                                 *ngIf="registerForm.get('name').hasError(message.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
@@ -201,7 +208,21 @@
                         </ng-container>
                     </div>
                 </div>
-                <div class="row mb-2">
+                <div *ngIf="myCheck == 1 || myCheck == 2" class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-sektor">
+                            Bahagian
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <select class=" form-control form-control-sm ml-3" id="input-bahagian">
+                            <option selected disabled hidden> Nama bahagian dalam organisasi </option>
+                            <option value="penerbit">Kerajaan</option>
+                            <option value="pengesah">Swasta</option>
+                        </select>
+                    </div>
+                </div>
+                <div *ngIf ="myCheck == 3" class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="input-address">
                             Alamat
@@ -220,7 +241,7 @@
                 </div>
                 <div *ngIf="myCheck == 1 || myCheck == 2" class="row mb-2">
                     <div class="col-3">
-                        <label class="form-control-label mr-4" for="input-sektor">
+                        <label class="form-control-label mr-4" for="input-bahagian">
                             Sektor
                         </label>
                     </div>
@@ -261,7 +282,7 @@
                             placeholder="Nombor Telefon Pejabat" type="text" formControlName="officephone" />
                     </div>
                 </div>
-                <div class="row mb-2">
+                <div *ngIf="myCheck == 3"  class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="input-tbimbit">
                             Telefon Bimbit
@@ -285,6 +306,23 @@
                             type="text" value="Pengesah Metadata" disabled />
                         <input *ngIf="myCheck == 3" class=" form-control form-control-sm ml-3" id="input-peranan"
                             type="text" value="Pemohon Data" disabled />
+                    </div>
+                </div>
+                <div *ngIf ="myCheck == 1 || myCheck == 2" class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="input-address">
+                            Alamat
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <textarea class="form-control form-control-sm ml-3" id="input-address" row="4"
+                            placeholder="Alamat Agensi/Organisasi" type="text" formControlName="address"></textarea>
+                        <ng-container *ngFor="let message of registerFormMessages.address">
+                            <div
+                                *ngIf="registerForm.get('address').hasError(message.type) && (registerForm.get('address').dirty || registerForm.get('address').touched)">
+                                <p class="error-message"><span>{{ message.message }}</span></p>
+                            </div>
+                        </ng-container>
                     </div>
                 </div>
                 <div *ngIf="myCheck == 3" class="row mb-2">

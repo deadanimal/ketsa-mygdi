@@ -38,37 +38,6 @@ export const ROUTESUSER: RouteInfo[] = [
     type: 'link',
     icontype: 'fas fa-user text-blue'
   },
-  /*{
-    path: '/admin/management',
-    title: 'Management',
-    type: 'sub',
-    icontype: 'fas fa-file-invoice text-purple',
-    collapse: 'management',
-    isCollapsed: true,
-    children: [
-      { path: 'audit-trails', title: 'Audit Trails', type: 'link' },
-      { path: 'user', title: 'User', type: 'link' }
-    ]
-  },
-  /*{
-    path: '/admin/report',
-    title: 'Reporting',
-    type: 'link',
-    icontype: 'fas fa-chart-bar text-red'
-  },
-  
-  {
-    path: '/helpdesk',
-    title: 'Helpdesk',
-    type: 'link',
-    icontype: 'fas fa-life-ring text-blue'
-  },
-  {
-    path: '/audit',
-    title: 'Audit Trail',
-    type: 'link',
-    icontype: 'fas fa-braille text-indigo'
-  }*/
   {
     path: '/user/metadata',
     title: 'Pengisian Metadata',
@@ -86,7 +55,7 @@ export const ROUTESUSER: RouteInfo[] = [
   
 ];
 
-export const ROUTESPENGESAH: RouteInfo[] = [
+export const ROUTESUSER2: RouteInfo[] = [
   {
     path: '/portal/',
     title: 'Utama',
@@ -105,37 +74,6 @@ export const ROUTESPENGESAH: RouteInfo[] = [
     type: 'link',
     icontype: 'fas fa-desktop text-warning'
   },
-  /*{
-    path: '/admin/management',
-    title: 'Management',
-    type: 'sub',
-    icontype: 'fas fa-file-invoice text-purple',
-    collapse: 'management',
-    isCollapsed: true,
-    children: [
-      { path: 'audit-trails', title: 'Audit Trails', type: 'link' },
-      { path: 'user', title: 'User', type: 'link' }
-    ]
-  },
-  /*{
-    path: '/admin/report',
-    title: 'Reporting',
-    type: 'link',
-    icontype: 'fas fa-chart-bar text-red'
-  },
-  
-  {
-    path: '/helpdesk',
-    title: 'Helpdesk',
-    type: 'link',
-    icontype: 'fas fa-life-ring text-blue'
-  },
-  {
-    path: '/audit',
-    title: 'Audit Trail',
-    type: 'link',
-    icontype: 'fas fa-braille text-indigo'
-  }*/
   {
     path: '/user/semakan',
     title: 'Semakan Metadata',
@@ -147,6 +85,40 @@ export const ROUTESPENGESAH: RouteInfo[] = [
     title: 'Senarai Metadata',
     type: 'link',
     icontype: 'fas fa-list-ul text-indigo'
+  },
+  
+];
+
+export const ROUTESUSER3: RouteInfo[] = [
+  {
+    path: '/portal/',
+    title: 'Utama',
+    type: 'link',
+    icontype: 'fas fa-home text-teal'
+  },
+  {
+    path: '/user/profile',
+    title: 'Profil',
+    type: 'link',
+    icontype: 'fas fa-user text-blue'
+  },
+  {
+    path: '/user/dashboard',
+    title: 'Dashboard',
+    type: 'link',
+    icontype: 'fas fa-desktop text-warning'
+  },
+  {
+    path: '/user/tabledata',
+    title: 'Senarai Metadata',
+    type: 'link',
+    icontype: 'fas fa-list-ul text-indigo'
+  },
+  {
+    path: '/user/semakan',
+    title: 'Status Permohonan',
+    type: 'link',
+    icontype: 'fas fa-edit text-pink'
   },
   
 ];

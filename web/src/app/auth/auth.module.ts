@@ -1,10 +1,9 @@
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { ComponentsModule } from '../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { 
-  BsDropdownModule, 
+import {
+  BsDropdownModule,
   ProgressbarModule,
   TooltipModule,
   ModalModule

@@ -1,0 +1,48 @@
+<app-navbar2></app-navbar2>
+<div class=" bgg" style="min-height: 670px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark"></h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+  
+    <!-- Main content -->
+    <div class="content">
+      <div class="card2 mt-7 p-6" style="background-color: rgba(255, 255, 255, 0.9);" >
+          <div class="card-body">
+            <div class="form-inline justify-content-center">
+                <div class="card fancy_card square rounded-circle">
+                    <div class="card-body pointer" [routerLink]="['/datalist']">
+                        <img height="80" src="assets/img/icons/common/metadata.png" />
+                    </div>
+                    <span class="text-center mt-2">Senarai</span>
+                    <span class="text-center">Data-data Asas</span>
+
+                </div>
+                <div class="card fancy_card square rounded-circle mr-9 ml-9">
+                    <div class="card-body pointer" [routerLink]="['/data-asas']">
+                        <img height="80" src="assets/img/icons/common/dataapp.png" />
+                    </div>
+                    <span class="text-center mt-2">Tatacara Permohonan</span>
+                </div>
+                <div class="card fancy_card square rounded-circle">
+                    <div class="card-body pointer" [routerLink]="['/tutorial']">
+                        <img height="80" src="assets/img/icons/common/tutorial.png" />
+                    </div>
+                    <span class="text-center mt-2">Dokumen Berkaitan</span>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
+<app-footer2></app-footer2>
+
+
+    

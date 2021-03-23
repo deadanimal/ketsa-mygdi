@@ -1,5 +1,5 @@
 import { DatatableComponent } from './datatable/datatable.component';
-import { ProfileComponent } from '../admin/profile/profile.component';
+import { ProfileComponent } from '../user/profile/profile.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 

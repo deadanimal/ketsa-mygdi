@@ -1,0 +1,81 @@
+.square {
+    width: 130px;
+    height: 130px;
+}
+
+.auto          { cursor: auto; }
+.default       { cursor: default; }
+.none          { cursor: none; }
+.context-menu  { cursor: context-menu; }
+.help          { cursor: help; }
+.pointer       { cursor: pointer; }
+.progress      { cursor: progress; }
+.wait          { cursor: wait; }
+.cell          { cursor: cell; }
+.crosshair     { cursor: crosshair; }
+.text          { cursor: text; }
+.vertical-text { cursor: vertical-text; }
+.alias         { cursor: alias; }
+.copy          { cursor: copy; }
+.move          { cursor: move; }
+.no-drop       { cursor: no-drop; }
+.not-allowed   { cursor: not-allowed; }
+.all-scroll    { cursor: all-scroll; }
+.col-resize    { cursor: col-resize; }
+.row-resize    { cursor: row-resize; }
+.n-resize      { cursor: n-resize; }
+.e-resize      { cursor: e-resize; }
+.s-resize      { cursor: s-resize; }
+.w-resize      { cursor: w-resize; }
+.ns-resize     { cursor: ns-resize; }
+.ew-resize     { cursor: ew-resize; }
+.ne-resize     { cursor: ne-resize; }
+.nw-resize     { cursor: nw-resize; }
+.se-resize     { cursor: se-resize; }
+.sw-resize     { cursor: sw-resize; }
+.nesw-resize   { cursor: nesw-resize; }
+.nwse-resize   { cursor: nwse-resize; }
+
+.bgg {
+    background-image: url('src/assets/img/theme/mygeo-background.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.fancy_card {
+    box-shadow: 8px 14px 38px rgba(39, 44, 49, .06), 1px 3px 8px rgba(39, 44, 49, .03);
+    transition: all .3s ease;
+    /* back to normal */
+    //color: transparent;
+    text-transform: uppercase;
+    //background-image: linear-gradient(to right, #ebba16, #ed8a19);
+    background-color:#0A80B6;
+    font-weight: 500;
+}
+
+.fancy_card:hover {
+    box-shadow: 8px 28px 50px rgba(39, 44, 49, .07), 1px 6px 12px rgba(39, 44, 49, .04);
+    transition: all .4s ease;
+    /* zoom in */
+    transform: translate3D(0, -1px, 0) scale(1.2);
+    color: #272727;
+    font-size: 100%;
+    background-color: #0094d8;
+    //background-image: linear-gradient(to right, #ebc64c, #e4a053);
+}
+
+.btn-primary,
+.bg-primary {
+    background-color: #0A80B6 !important;
+    border-color: #0A80B6;
+}
+
+.card2 {
+    border-radius: 0;
+    top: 250px;
+    left: 0;
+    right: 0;
+}
+
