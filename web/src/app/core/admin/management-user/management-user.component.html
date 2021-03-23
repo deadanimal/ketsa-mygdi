@@ -18,18 +18,21 @@
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
-					<a class="btn btn-sm btn-default text-white" (click)="openModal(createUser)">
-						<i class="fas fa-plus"> </i> 
+                    <a class="btn btn-sm btn-default text-white" (click)="openModal(createUser)">
+                        Pemindahan Akaun
+                    </a>
+                    <a class="btn btn-sm btn-default text-white" (click)="openModal(createUser)">
+                        <i class="fas fa-plus"></i>
                         Pengguna Baru
-					</a>
-				</div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container-fluid mt--6">
-   <!--<div class="row">
+    <!--<div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header bg-secondary">
@@ -42,13 +45,14 @@
                 </div>
             </div>
         </div>
-    </div> --> 
+    </div> -->
 
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header bg-secondary">
                     <h3 class="m-0">Senarai Pengguna</h3>
+                    <h3 class="m-0">Pemindahan Akaun</h3>
                 </div>
                 <div class="dataTables_wrapper p-4">
                     <div class="row">
@@ -56,12 +60,8 @@
                             <div class="dataTables_length" id="datatable_length">
                                 <label>
                                     Papar
-                                    <select 
-                                        name="datatable_length"
-                                        aria-controls="datatable"
-                                        class="form-control form-control-sm"
-                                        (change)="entriesChange($event)"
-                                    >
+                                    <select name="datatable_length" aria-controls="datatable"
+                                        class="form-control form-control-sm" (change)="entriesChange($event)">
                                         <option value="5" [selected]="tableEntries==5">5</option>
                                         <option value="10" [selected]="tableEntries==10">10</option>
                                         <option value="15" [selected]="tableEntries==15">15</option>
@@ -74,28 +74,17 @@
                         <div class="col-sm-12 col-md-6">
                             <div id="datatable_filter" class="dataTables_filter">
                                 <label>
-                                    <input 
-                                        type="search"
-                                        class="form-control form-control-sm"
-                                        placeholder="Search records"
-                                        aria-controls="datatable"
-                                        (keyup)="filterTable($event)" 
-                                    />
+                                    <input type="search" class="form-control form-control-sm"
+                                        placeholder="Search records" aria-controls="datatable"
+                                        (keyup)="filterTable($event)" />
                                 </label>
                             </div>
                         </div>
                     </div>
-                    
-                    <ngx-datatable 
-                        class="bootstrap selection-cell"
-                        [columnMode]="'force'"
-                        [headerHeight]="50"
-                        [footerHeight]="50" 
-                        [rowHeight]="'auto'"
-                        [limit]="tableEntries != -1 ? tableEntries:undefined"
-                        [rows]="tableTemp" 
-                        (activate)="onActivate($event)"
-                    >
+
+                    <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="tableEntries != -1 ? tableEntries:undefined"
+                        [rows]="tableTemp" (activate)="onActivate($event)">
 
                         <ngx-datatable-column>
                             <ng-template ngx-datatable-header-template>
@@ -130,12 +119,31 @@
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 <!--<a *ngIf="row.is_active == 'Active'" class="badge badge-pill badge-success">Active</a>
                                 <a *ngIf="row.is_active == 'Inactive'" class="badge badge-pill badge-warning">Inactive</a> -->
-                                <a class="text-green" (click)="openModal(displayUser)"><i class="fas fa-eye mr-3"></i></a>
+                                <a class="text-green" (click)="openModal(displayUser)"><i
+                                        class="fas fa-eye mr-3"></i></a>
                                 <a href="javascript:void()"><i class="fas fa-edit mr-3"></i></a>
                                 <a class="text-warning" (click)="deleteUser()"><i class="fas fa-trash-alt"></i></a>
                             </ng-template>
                         </ngx-datatable-column>
                     </ngx-datatable>
+                </div>
+                <div class="card-body px-lg-5">
+                    <div class="form-group">
+                        <div class="row mb-2">
+                            <div class="col-3">
+                                <label class="form-control-label mr-4" for="input-sektor">
+                                    Pilih Agensi
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <select class="form-control form-control-sm ml-3" id="input-bahagian">
+                                    <option selected disabled hidden> Nama Agensi/Organisasi </option>
+                                    <option value="penerbit">Kerajaan</option>
+                                    <option value="pengesah">Swasta</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -148,13 +156,7 @@
             Tambah Pengguna Baru
         </h6>
 
-        <button
-            aria-label="Close"
-            class="close"
-            data-dismiss="modal"
-            type="button"
-            (click)="closeModal()"
-        >
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
             <span aria-hidden="true" class="text-white my-auto"> × </span>
         </button>
     </div>
@@ -163,14 +165,10 @@
         <form [formGroup]="registerForm">
             <div class="form-group">
                 <label class="form-control-label">Nama Penuh</label>
-                <input 
-                  class="form-control"
-                  placeholder="Enter name"
-                  formControlName="name"
-                  type="text"
-                >
+                <input class="form-control" placeholder="Enter name" formControlName="name" type="text">
                 <ng-container *ngFor="let message of registerFormMessages.name">
-                    <div *ngIf="registerForm.get('name').hasError(message.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
+                    <div
+                        *ngIf="registerForm.get('name').hasError(message.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
                         <p class="error-message"><span>{{ message.message }}</span></p>
                     </div>
                 </ng-container>
@@ -186,14 +184,10 @@
             </div>
             <div class="form-group">
                 <label class="form-control-label">Emel</label>
-                <input 
-                  class="form-control"
-                  placeholder="Enter email"
-                  formControlName="email"
-                  type="text"
-                >
+                <input class="form-control" placeholder="Enter email" formControlName="email" type="text">
                 <ng-container *ngFor="let message of registerFormMessages.email">
-                    <div *ngIf="registerForm.get('email').hasError(message.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+                    <div
+                        *ngIf="registerForm.get('email').hasError(message.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">
                         <p class="error-message"><span>{{ message.message }}</span></p>
                     </div>
                 </ng-container>
@@ -202,21 +196,11 @@
     </div>
 
     <div class="modal-footer">
-        <button 
-            class="btn btn-success"
-            type="button"
-            (click)="confirm()"
-            [disabled]="!registerForm.valid"
-        >
+        <button class="btn btn-success" type="button" (click)="confirm()" [disabled]="!registerForm.valid">
             Tambah
         </button>
 
-        <button
-            class="btn btn-outline-danger ml-auto"
-            data-dismiss="modal"
-            type="button"
-            (click)="closeModal()"
-        >
+        <button class="btn btn-outline-danger ml-auto" data-dismiss="modal" type="button" (click)="closeModal()">
             Tutup
         </button>
     </div>
@@ -230,13 +214,7 @@
             Maklumat Pengguna
         </h6>
 
-        <button
-            aria-label="Close"
-            class="close"
-            data-dismiss="modal"
-            type="button"
-            (click)="closeModal()"
-        >
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
             <span aria-hidden="true" class="text-white my-auto"> × </span>
         </button>
     </div>
@@ -246,149 +224,108 @@
             <div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="input-username">
-                    Nama Penuh  
+                        Nama Penuh
                     </label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-username" 
-                    placeholder="Name"
-                    type="text" 
-                    value="Tarmizi bin Ahmad"
-                    disabled/>
-                </div>   
+                    <input class="form-control form-control-sm ml-3" id="input-username" placeholder="Name" type="text"
+                        value="Tarmizi bin Ahmad" disabled />
+                </div>
             </div>
             <div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="input-username">
-                    No Kad Pengenalan  
+                        No Kad Pengenalan
                     </label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-nric" 
-                    placeholder="Name"
-                    type="text" 
-                    value="890103085322"
-                    disabled/>
-                </div>   
+                    <input class="form-control form-control-sm ml-3" id="input-nric" placeholder="Name" type="text"
+                        value="890103085322" disabled />
+                </div>
             </div>
             <div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="input-username">
-                    Agensi/Organisasi
+                        Agensi/Organisasi
                     </label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-username" 
-                    placeholder="Name"
-                    type="text" 
-                    value="Kementerian Tenaga dan Sumber Asli "
-                    disabled/>
-                </div>   
+                    <input class="form-control form-control-sm ml-3" id="input-username" placeholder="Name" type="text"
+                        value="Kementerian Tenaga dan Sumber Asli " disabled />
+                </div>
             </div>
             <div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="input-username">
-                    Bahagian  
+                        Bahagian
                     </label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-nric" 
-                    placeholder="Name"
-                    type="text" 
-                    value="Bahagian Pengurusan Maklumat"
-                    disabled/>
-                </div>   
+                    <input class="form-control form-control-sm ml-3" id="input-nric" placeholder="Name" type="text"
+                        value="Bahagian Pengurusan Maklumat" disabled />
+                </div>
             </div>
             <div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="input-username">
-                    Sektor  
+                        Sektor
                     </label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-username" 
-                    placeholder="Name"
-                    type="text" 
-                    value="Kerajaan"
-                    disabled/>
-                </div>   
+                    <input class="form-control form-control-sm ml-3" id="input-username" placeholder="Name" type="text"
+                        value="Kerajaan" disabled />
+                </div>
             </div>
             <div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="input-username">
-                    Emel  
+                        Emel
                     </label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-nric" 
-                    placeholder="Name"
-                    type="text" 
-                    value="tarmizi@ketsa.com.my"
-                    disabled/>
-                </div>   
+                    <input class="form-control form-control-sm ml-3" id="input-nric" placeholder="Name" type="text"
+                        value="tarmizi@ketsa.com.my" disabled />
+                </div>
             </div>
             <div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="input-username">
-                    Telefon Pejabat
+                        Telefon Pejabat
                     </label>
                 </div>
                 <div class="col-5">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-username" 
-                    placeholder="Name"
-                    type="text" 
-                    value="043456789"
-                    disabled/>
+                    <input class="form-control form-control-sm ml-3" id="input-username" placeholder="Name" type="text"
+                        value="043456789" disabled />
                 </div>
             </div>
             <div class="row mb-2">
-                   
+
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="input-username">
-                    Telefon Bimbit 
+                        Telefon Bimbit
                     </label>
                 </div>
                 <div class="col-5">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-username" 
-                    placeholder="Name"
-                    type="text" 
-                    value="0173456789"
-                    disabled/>
+                    <input class="form-control form-control-sm ml-3" id="input-username" placeholder="Name" type="text"
+                        value="0173456789" disabled />
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="input-username">
-                    Peranan  
+                        Peranan
                     </label>
                 </div>
                 <div class="col-5">
-                    <input class="form-control form-control-sm ml-3"
-                    id="input-nric" 
-                    placeholder="Name"
-                    type="text" 
-                    value="Penerbit Metadata"
-                    disabled/>
-                </div>   
+                    <input class="form-control form-control-sm ml-3" id="input-nric" placeholder="Name" type="text"
+                        value="Penerbit Metadata" disabled />
+                </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
 
-        <button
-            class="btn btn-outline-danger mx-auto"
-            data-dismiss="modal"
-            type="button"
-            (click)="closeModal()"
-        >
+        <button class="btn btn-outline-danger mx-auto" data-dismiss="modal" type="button" (click)="closeModal()">
             Close
         </button>
     </div>

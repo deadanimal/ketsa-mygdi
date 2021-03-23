@@ -23,11 +23,10 @@ export class DataListComponent implements OnInit {
   }
 
   activate(num: number) {
-    
     let cid = "target" + num
     this.selectData = num;
     this.prevnum = num;
-    document.getElementById(cid).style.color = "red"
+    document.getElementById(cid).style.color = "#11cdef"
   }
 
   reset(){
