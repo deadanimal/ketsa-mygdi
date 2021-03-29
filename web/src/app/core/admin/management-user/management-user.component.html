@@ -18,10 +18,13 @@
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
-                    <a class="btn btn-sm btn-default text-white" (click)="openModal(createUser)">
+                    <a *ngIf="!transEnabled" class="btn btn-sm btn-default text-white" (click)="toggleChange()">
                         Pemindahan Akaun
                     </a>
-                    <a class="btn btn-sm btn-default text-white" (click)="openModal(createUser)">
+                    <a *ngIf="transEnabled" class="btn btn-sm btn-danger text-white" (click)="toggleChange()">
+                        Back
+                    </a>
+                    <a class="btn btn-sm btn-success text-white" (click)="openModal(createUser)">
                         <i class="fas fa-plus"></i>
                         Pengguna Baru
                     </a>
@@ -51,10 +54,10 @@
         <div class="col">
             <div class="card">
                 <div class="card-header bg-secondary">
-                    <h3 class="m-0">Senarai Pengguna</h3>
-                    <h3 class="m-0">Pemindahan Akaun</h3>
+                    <h3 *ngIf="!transEnabled" class="m-0">Senarai Pengguna</h3>
+                    <h3 *ngIf="transEnabled" class="m-0">Pemindahan Akaun</h3>
                 </div>
-                <div class="dataTables_wrapper p-4">
+                <div *ngIf="!transEnabled" class="dataTables_wrapper p-4">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_length" id="datatable_length">
@@ -127,15 +130,15 @@
                         </ngx-datatable-column>
                     </ngx-datatable>
                 </div>
-                <div class="card-body px-lg-5">
+                <div *ngIf="transEnabled" class="card-body px-lg-4">
                     <div class="form-group">
                         <div class="row mb-2">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <label class="form-control-label mr-4" for="input-sektor">
                                     Pilih Agensi
                                 </label>
                             </div>
-                            <div class="col-6">
+                            <div class="col-5">
                                 <select class="form-control form-control-sm ml-3" id="input-bahagian">
                                     <option selected disabled hidden> Nama Agensi/Organisasi </option>
                                     <option value="penerbit">Kerajaan</option>
@@ -143,6 +146,52 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label class="form-control-label mr-4" for="input-sektor">
+                                    Pilih Penguna
+                                </label>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-control form-control-sm ml-3" id="input-bahagian">
+                                    <option selected disabled hidden> Pilih Pengguna </option>
+                                    <option value="penerbit">Kerajaan</option>
+                                    <option value="pengesah">Swasta</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label class="form-control-label mr-4" for="input-sektor">
+                                    Penguna Baru
+                                </label>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-control form-control-sm ml-3" id="input-bahagian">
+                                    <option selected disabled hidden> Pilih Jenis Akaun Pengguna </option>
+                                    <option value="penerbit">Kerajaan</option>
+                                    <option value="pengesah">Swasta</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-title">
+                        <h3 class="upcase mt-4">Senarai Metadata Dibawah Pengguna</h3>
+                    </div>
+                    <div class="dataTables_wrapper py-4">
+                        <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
+                            [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined"
+                            [rows]="temp" (activate)="onActivate($event)">
+
+                            <ngx-datatable-column name="Bil" [width]="80">
+                                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                                    {{rowIndex+1}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Nama Metadata" [width]="300"></ngx-datatable-column>
+                            <ngx-datatable-column name="Kategori" [width]="100"></ngx-datatable-column>
+                            <ngx-datatable-column name="Status" [width]="100"></ngx-datatable-column>
+                        </ngx-datatable>
                     </div>
                 </div>
             </div>
@@ -165,7 +214,7 @@
         <form [formGroup]="registerForm">
             <div class="form-group">
                 <label class="form-control-label">Nama Penuh</label>
-                <input class="form-control" placeholder="Enter name" formControlName="name" type="text">
+                <input class="form-control" placeholder="Masukkan Nama" formControlName="name" type="text">
                 <ng-container *ngFor="let message of registerFormMessages.name">
                     <div
                         *ngIf="registerForm.get('name').hasError(message.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
@@ -184,7 +233,7 @@
             </div>
             <div class="form-group">
                 <label class="form-control-label">Emel</label>
-                <input class="form-control" placeholder="Enter email" formControlName="email" type="text">
+                <input class="form-control" placeholder="Masukkan Emel" formControlName="email" type="text">
                 <ng-container *ngFor="let message of registerFormMessages.email">
                     <div
                         *ngIf="registerForm.get('email').hasError(message.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">

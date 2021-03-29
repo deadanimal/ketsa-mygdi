@@ -27,6 +27,9 @@ export enum SelectionType {
 })
 export class ManagementUserComponent implements OnInit, OnDestroy {
 
+  // Toggle
+  transEnabled: boolean = false
+
   // Table
   tableEntries: number = 10;
   tableSelected: any[] = [];
@@ -222,6 +225,10 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
     columnTemplate.strokeOpacity = 1;
 
     this.chart = chart
+  }
+
+  toggleChange() {
+    this.transEnabled = !this.transEnabled
   }
 
   calculateCharts() {
