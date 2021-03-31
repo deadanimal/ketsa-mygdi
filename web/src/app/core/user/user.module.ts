@@ -21,6 +21,7 @@ import { UserRoutes } from './user.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MetadataComponent } from './metadata/metadata.component';
 import { SemakanComponent } from './semakan/semakan.component';
+import { CheckMetadataComponent } from './check-metadata/check-metadata.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SemakanComponent } from './semakan/semakan.component';
     SemakanComponent,
     ProfileComponent,
     DatatableComponent,
+    CheckMetadataComponent,
   ],
   imports: [
     CommonModule,

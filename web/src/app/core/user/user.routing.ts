@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from '../user/profile/profile.component';
 import { SemakanComponent } from './semakan/semakan.component';
+import { CheckMetadataComponent } from './check-metadata/check-metadata.component';
 
 
 export const UserRoutes: Routes = [
@@ -17,6 +18,10 @@ export const UserRoutes: Routes = [
             {
                 path: 'metadata',
                 component: MetadataComponent
+            },
+            {
+                path: 'check-metadata',
+                component: CheckMetadataComponent
             },
             {
                 path: 'profile',

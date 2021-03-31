@@ -17,7 +17,7 @@ export class MetadataComponent implements OnInit {
     { name: "Imagery"},
     { name: "Gridded"},
   ];
-  selectedCat = "null";
+  selectedCat = "Select Category";
 
   // Accordian
   isCollapsed1 = true;
@@ -127,4 +127,22 @@ edit() {
   })
 }
 
+resetAccordion(){
+// set default Accordian
+this.isCollapsed1 = true;
+this.isCollapsed2 = true;
+this.isCollapsed3 = true;
+this.isCollapsed4 = true;
+this.isCollapsed5 = true;
+this.isCollapsed6 = true;
+this.isCollapsed7 = true;
+this.isCollapsed8 = true;
+this.isCollapsed9 = true;
+this.isCollapsed10 = true;
+this.isCollapsed11 = true;
+this.isCollapsed12 = true;
+this.isCollapsed13 = true;
+this.isCollapsed14 = true;
+this.isCollapsed15 = true;
+}
 }

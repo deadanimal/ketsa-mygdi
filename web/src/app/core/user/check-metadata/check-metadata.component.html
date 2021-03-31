@@ -3,7 +3,7 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-dark d-inline-block mb-0">Pengisian Metadata</h6>
+                    <h6 class="h2 text-dark d-inline-block mb-0">Pengesahan Metadata</h6>
 
                     <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
@@ -17,9 +17,12 @@
                     </nav>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
-                    <a *ngIf="!editEnabled" class="btn btn-sm btn-default ml-4" href="javascript:void(0)">
-                        Muat Naik XML
-                    </a>
+                    <a *ngIf="!editEnabled" class="btn btn-sm btn-default" [routerLink]="['/user/semakan']">
+                        Kembali
+                    </a> 
+                    <a *ngIf="!editEnabled" class="btn btn-sm btn-warning" [routerLink]="['/user/semakan']">
+                        Kemaskini
+                    </a> 
                 </div>
             </div>
         </div>
@@ -101,15 +104,18 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-xl-8">
+                            <h3>APLIKASI GEOSPATIAL ONLINE SERVICES (MyGOS) </h3>
                             <div class=" form-inline">
-                                <label for="category" class="mb-0 mr-2 " style="font-weight: bold;">Category :</label>
+                                <h3 for="category" class="mb-0 mr-2">KATEGORI :</h3>
                                 <select class=" form-control form-control-sm" id="category" [(ngModel)]="selectedCat" (change)="resetAccordion()">
                                     <option *ngFor=" let c of categoryList">{{c.name}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xl-4 text-right">
-
+                            <a *ngIf="!editEnabled" class="btn btn-sm btn-outline-success" [routerLink]="['javascript:void(0)']">
+                                Lulus Pukal
+                            </a> 
                         </div>
                     </div>
                 </div>
@@ -1590,14 +1596,10 @@
 
                         <hr class="my-4" />
 
-                        <div class="text-right">
-                            <a class="btn btn-default text-white btn-icon btn-3" (click)="confirm()">
-                                <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
-                                <span class="btn-inner--text">Simpan</span>
-                            </a>
-                            <a class="btn btn-danger text-white btn-icon btn-3" (click)="toggleEdit()">
+                        <div class="text-right"> 
+                             <a class="btn btn-danger text-white btn-icon btn-3" (click)="toggleEdit()">
                                 <span class="btn-inner--icon"><i class="fa fa-paper-plane"></i></span>
-                                <span class="btn-inner--text">Hantar</span>
+                                <span class="btn-inner--text">Terbit</span>
                             </a>
                         </div>
 
@@ -3133,14 +3135,10 @@
 
                         <hr class="my-4" />
 
-                        <div class="text-right">
-                            <a class="btn btn-default text-white btn-icon btn-3" (click)="confirm()">
-                                <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
-                                <span class="btn-inner--text">Simpan</span>
-                            </a>
-                            <a class="btn btn-danger text-white btn-icon btn-3" (click)="toggleEdit()">
+                        <div class="text-right"> 
+                             <a class="btn btn-danger text-white btn-icon btn-3" (click)="toggleEdit()">
                                 <span class="btn-inner--icon"><i class="fa fa-paper-plane"></i></span>
-                                <span class="btn-inner--text">Hantar</span>
+                                <span class="btn-inner--text">Terbit</span>
                             </a>
                         </div>
 
@@ -5092,14 +5090,10 @@
 
                         <hr class="my-4" />
 
-                        <div class="text-right">
-                            <a class="btn btn-default text-white btn-icon btn-3" (click)="confirm()">
-                                <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
-                                <span class="btn-inner--text">Simpan</span>
-                            </a>
-                            <a class="btn btn-danger text-white btn-icon btn-3" (click)="toggleEdit()">
+                        <div class="text-right"> 
+                             <a class="btn btn-danger text-white btn-icon btn-3" (click)="toggleEdit()">
                                 <span class="btn-inner--icon"><i class="fa fa-paper-plane"></i></span>
-                                <span class="btn-inner--text">Hantar</span>
+                                <span class="btn-inner--text">Terbit</span>
                             </a>
                         </div>
 
@@ -6991,14 +6985,10 @@
 
                         <hr class="my-4" />
 
-                        <div class="text-right">
-                            <a class="btn btn-default text-white btn-icon btn-3" (click)="confirm()">
-                                <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
-                                <span class="btn-inner--text">Simpan</span>
-                            </a>
-                            <a class="btn btn-danger text-white btn-icon btn-3" (click)="toggleEdit()">
+                        <div class="text-right"> 
+                             <a class="btn btn-danger text-white btn-icon btn-3" (click)="toggleEdit()">
                                 <span class="btn-inner--icon"><i class="fa fa-paper-plane"></i></span>
-                                <span class="btn-inner--text">Hantar</span>
+                                <span class="btn-inner--text">Terbit</span>
                             </a>
                         </div>
 

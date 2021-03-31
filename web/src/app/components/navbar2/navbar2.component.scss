@@ -278,12 +278,6 @@ a:not([href]):not([tabindex]):focus {
     background-size: cover;
 }
 
-.btn-primary,
-.bg-primary {
-    background-color: #0A80B6 !important;
-    border-color: #0A80B6;
-}
-
 .error-message {
     color: #f5365c;
     text-align: right;
@@ -318,7 +312,9 @@ a:not([href]):not([tabindex]):focus {
 }
 
 @media (max-width: 991.98px) {
-.navbar-expand-lg > .container, .navbar-expand-lg > .container-fluid {
-    padding: .55rem .5rem;
-}
+
+    .navbar-expand-lg>.container,
+    .navbar-expand-lg>.container-fluid {
+        padding: .55rem .5rem;
+    }
 }
