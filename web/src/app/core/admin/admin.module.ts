@@ -32,6 +32,7 @@ import { ManagementProcessdataComponent } from './management-processdata/managem
 import { ManagementAppstatusComponent } from './management-appstatus/management-appstatus.component';
 import { ManagementNewappComponent } from './management-newapp/management-newapp.component';
 import { ManagementElementmetadataComponent } from './management-elementmetadata/management-elementmetadata.component';
+import { ValuationComponent } from './valuation/valuation.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ManagementElementmetadataComponent } from './management-elementmetadata
     ManagementProcessdataComponent,
     ManagementAppstatusComponent,
     ManagementNewappComponent,
-    ManagementElementmetadataComponent
+    ManagementElementmetadataComponent,
+    ValuationComponent
   ],
   imports: [
     CommonModule,

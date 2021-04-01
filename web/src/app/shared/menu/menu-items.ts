@@ -1,27 +1,27 @@
 export interface RouteInfo {
-    path: string;
-    title: string;
-    type: string;
-    icontype: string;
-    collapse?: string;
-    isCollapsed?: boolean;
-    isCollapsed1?: boolean;
-    isCollapsing?: any;
-    children?: ChildrenItems[];
+  path: string;
+  title: string;
+  type: string;
+  icontype: string;
+  collapse?: string;
+  isCollapsed?: boolean;
+  isCollapsed1?: boolean;
+  isCollapsing?: any;
+  children?: ChildrenItems[];
 }
 
 export interface ChildrenItems {
-    path: string;
-    title: string;
-    type?: string;
-    collapse?: string;
-    children?: ChildrenItems2[];
-    isCollapsed?: boolean;
+  path: string;
+  title: string;
+  type?: string;
+  collapse?: string;
+  children?: ChildrenItems2[];
+  isCollapsed?: boolean;
 }
 export interface ChildrenItems2 {
-    path?: string;
-    title?: string;
-    type?: string;
+  path?: string;
+  title?: string;
+  type?: string;
 }
 
 // Menu Items
@@ -50,9 +50,9 @@ export const ROUTESUSER: RouteInfo[] = [
     type: 'link',
     icontype: 'fas fa-list-ul text-indigo'
   },
-  
-  
-  
+
+
+
 ];
 
 export const ROUTESUSER2: RouteInfo[] = [
@@ -86,7 +86,7 @@ export const ROUTESUSER2: RouteInfo[] = [
     type: 'link',
     icontype: 'fas fa-list-ul text-indigo'
   },
-  
+
 ];
 
 export const ROUTESUSER3: RouteInfo[] = [
@@ -120,7 +120,7 @@ export const ROUTESUSER3: RouteInfo[] = [
     type: 'link',
     icontype: 'fas fa-edit text-pink'
   },
-  
+
 ];
 
 export const ROUTESADMIN: RouteInfo[] = [
@@ -170,8 +170,9 @@ export const ROUTESADMIN: RouteInfo[] = [
     children: [
       { path: 'dataasas', title: 'Kemaskini Data', type: 'link' },
       { path: 'newapplication', title: 'Permohonan Baru', type: 'link' },
-      { path: 'dataprocess', title: 'Proses Data', type: 'link' },
       { path: 'applicationstatus', title: 'Status Permohonan', type: 'link' },
+      { path: 'dataprocess', title: 'Proses Data', type: 'link' },
+      { path: 'valuation', title: 'Penilaian', type: 'link' },
     ]
   },
   {
@@ -215,16 +216,16 @@ export const ROUTESADMIN2: RouteInfo[] = [
     icontype: 'fas fa-desktop text-warning'
   },
   {
-    path: '/admin/management/',
-    title: 'Pengurusan Metadata',
-    type: 'sub',
-    icontype: 'fas fa-braille text-indigo',
-    collapse: 'management',
-    isCollapsed: true,
-    children: [
-      { path: 'tabledata', title: 'Senarai Metadata', type: 'link' },
-      { path: 'update-element', title: 'Kemaskini Elemen Metadata', type: 'link' }
-    ]
+    path: '/admin/management/tabledata',
+    title: 'Senarai Metadata',
+    type: 'link',
+    icontype: 'fa fa-tasks text-indigo'
+  },
+  {
+    path: '/admin/management/update-element',
+    title: 'Kemaskini Elemen Metadata',
+    type: 'link',
+    icontype: 'fas fa-cubes text-green'
   },
 ];
 
@@ -248,23 +249,33 @@ export const ROUTESADMIN3: RouteInfo[] = [
     icontype: 'fas fa-desktop text-warning'
   },
   {
-    path: '/admin/management',
-    title: 'Pengurusan Data Asas',
-    type: 'sub',
-    icontype: 'fas fa-tasks text-red',
-    collapse: 'management',
-    isCollapsed: true,
-    children: [
-      { path: 'dataasas', title: 'Kemaskini Data', type: 'link' },
-      { path: 'newapplication', title: 'Permohonan Baru', type: 'link' },
-      { path: 'dataprocess', title: 'Proses Data', type: 'link' },
-      { path: 'applicationstatus', title: 'Status Permohonan', type: 'link' },
-    ]
+    path: '/admin/management/dataasas',
+    title: 'Kemaskini Data',
+    type: 'link',
+    icontype: 'fas fa-desktop text-warning'
   },
   {
-    path: '/admin/feedback',
-    title: 'Maklum Balas',
+    path: '/admin/management/newapplication',
+    title: 'Permohonan Baru',
     type: 'link',
-    icontype: 'fas fa-comments text-primary'
+    icontype: 'fas fa-desktop text-warning'
+  },
+  {
+    path: '/admin/management/applicationstatus',
+    title: 'Status Permohonan',
+    type: 'link',
+    icontype: 'fas fa-desktop text-warning'
+  },
+  {
+    path: '/admin/management/dataprocess',
+    title: 'Proses Data',
+    type: 'link',
+    icontype: 'fas fa-desktop text-warning'
+  },
+  {
+    path: '/admin/management/valuation',
+    title: 'Penilaian',
+    type: 'link',
+    icontype: 'fas fa-desktop text-warning'
   },
 ];

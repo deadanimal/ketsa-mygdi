@@ -14,6 +14,7 @@ import { ManagementFaqComponent } from './management-faq/management-faq.componen
 import { ManagementUserguideComponent } from './management-userguide/management-userguide.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { ValuationComponent } from './valuation/valuation.component';
 
 
 export const AdminRoutes: Routes = [
@@ -70,6 +71,10 @@ export const AdminRoutes: Routes = [
                     {
                         path: 'update-element',
                         component: ManagementElementmetadataComponent
+                    },
+                    {
+                        path: 'valuation',
+                        component: ValuationComponent
                     }
 
                 ]

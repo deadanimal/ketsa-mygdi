@@ -34,7 +34,7 @@ export const UserRoutes: Routes = [
             {
                 path: 'tabledata',
                 component: DatatableComponent
-            }
+            },
         ]
     }
 ]
