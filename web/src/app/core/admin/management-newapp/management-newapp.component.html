@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-lg-6 col-5 text-right">
-          <a *ngIf="!checkEnabled" class="btn btn-default btn-sm text-white btn-icon btn-3" (click)="displayCheck()">
+          <a *ngIf="checkEnabled" class="btn btn-default btn-sm text-white btn-icon btn-3" (click)="displayCheck()">
             <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
             <span class="btn-inner--text">Balik</span>
           </a>
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<div *ngIf="this.checkEnabled" class=" container-fluid mt--6">
+<div *ngIf="!this.checkEnabled" class=" container-fluid mt--6">
   <div class=" row">
     <div class=" col">
       <div class=" card">
@@ -65,21 +65,29 @@
           </div>
 
         </div>
-        <div class="dataTables_wrapper p-4">
+        <div class="dataTables_wrapper py-4">
           <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
             [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined" [rows]="temp"
             (activate)="onActivate($event)">
 
-            <ngx-datatable-column name="Bil" [width]="100">
+            <ngx-datatable-column name="Bil">
               <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
                 {{rowIndex+1}}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Nama Permohonan" [width]="400"></ngx-datatable-column>
-            <ngx-datatable-column name="Nama Pemohon" [width]="200"></ngx-datatable-column>
-            <ngx-datatable-column name="Kategori" [width]="200"></ngx-datatable-column>
-            <ngx-datatable-column name="Tarikh" [width]="200"></ngx-datatable-column>
-            <ngx-datatable-column name="Tindakan" [width]="200">
+            <ngx-datatable-column name="Nama Permohonan">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.namapermohonan}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Nama Pemohon">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.namapemohon}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Kategori"></ngx-datatable-column>
+            <ngx-datatable-column name="Tarikh"></ngx-datatable-column>
+            <ngx-datatable-column name="Tindakan">
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <a (click)="displayCheck()" class="text-teal">Semak</a>
               </ng-template>
@@ -92,7 +100,7 @@
   </div>
 </div>
 
-<div *ngIf="!this.checkEnabled" class=" container-fluid mt--6">
+<div *ngIf="this.checkEnabled" class=" container-fluid mt--6">
   <div class=" row">
     <div class=" col">
       <div class=" card">
@@ -238,7 +246,7 @@
           <hr class="my-4" />
 
           <h6 class="heading text-dark">Senarai Data dan Kawasan Data</h6>
-          <div class="dataTables_wrapper p-4">
+          <div class="dataTables_wrapper py-4">
             <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
               [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined" [rows]="temp"
               (activate)="onActivate($event)">
@@ -258,7 +266,7 @@
           <hr class="my-4" />
 
           <h6 class="heading text-dark">Dokumen Berkaitan</h6>
-          <div class="dataTables_wrapper p-4">
+          <div class="dataTables_wrapper py-4">
             <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
               [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined" [rows]="temp"
               (activate)="onActivate($event)">

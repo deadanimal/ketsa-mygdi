@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef,BsModalService } from 'ngx-bootstrap';
 
 export enum SelectionType {
   single = "single",
@@ -15,51 +16,52 @@ export enum SelectionType {
 })
 export class ManagementProcessdataComponent implements OnInit {
 
+  // Modal
+  modal: BsModalRef;
+  modalConfig = {
+    keyboard: true,
+    class: "modal-dialog-centered modal-xl"
+  };
+
   entries: number = 5;
+  entries2: number = -1;
   selected: any[] = [];
   temp = [];
   activeRow: any;
   rows: any = [
     {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      namapermohonan: "Permohonan Data Sungai Selangor ",
+      namapemohon: "Muhammad Rahman bin Talib",
+      kategori: "G2E-Pelajar",
+      subkategori:"",
       tarikh: "25/02/2021",
-      
     },
     {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      namapermohonan: "Permohonan Data Sungai Selangor ",
+      namapemohon: "Muhammad Rahman bin Talib",
+      kategori: "G2E-Pelajar",
+      subkategori:"",
       tarikh: "25/02/2021",
-      
     },
     {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      namapermohonan: "Permohonan Data Sungai Selangor ",
+      namapemohon: "Muhammad Rahman bin Talib",
+      kategori: "G2E-Pelajar",
+      subkategori:"",
       tarikh: "25/02/2021",
-      
     },
     {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
+      namapermohonan: "Permohonan Data Sungai Selangor ",
+      namapemohon: "Muhammad Rahman bin Talib",
+      kategori: "G2E-Pelajar",
+      subkategori:"",
       tarikh: "25/02/2021",
-      
-    },
-    {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
-      tarikh: "25/02/2021",
-      
-    },
-    {
-      metadata: "Peta Pemetaan Utiliti Putrajaya AU1302521 ",
-      kategori: "Edinburgh",
-      tarikh: "25/02/2021",
-      
     },
   ];
   SelectionType = SelectionType;
 
-  constructor() {
+  constructor(
+    private modalService: BsModalService,) {
     this.temp = this.rows.map((prop, key) => {
       return {
         ...prop,
@@ -90,4 +92,12 @@ export class ManagementProcessdataComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  openModal(modalRef: TemplateRef<any>) {
+    this.modal = this.modalService.show(modalRef, this.modalConfig);
+  }
+
+  closeModal() {
+    this.modal.hide()
+  }
 }

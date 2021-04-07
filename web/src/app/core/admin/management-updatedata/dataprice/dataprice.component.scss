@@ -12,18 +12,14 @@
     margin-bottom: 0;
 }
 // ::ng-deep .ngx-datatable .datatable-body {
-//     max-height: 40vh !important;
-//     overflow-y: auto;
+//     max-height: 50vh !important;
+//     overflow-y: scroll;
 // }
 
 .card {
     min-height: 680px;
 }
 
-.bg-custom {
-    background-color: #FFAD29 !important;
-}
-
-::ng-deep .ql-editor {
-    height: 200px;
+.upcase {
+    text-transform: uppercase;
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagementDataComponent } from './management-data.component';
+import { ClassSharecategoryComponent } from './class-sharecategory.component';
 
-describe('ManagementDataComponent', () => {
-  let component: ManagementDataComponent;
-  let fixture: ComponentFixture<ManagementDataComponent>;
+describe('ClassSharecategoryComponent', () => {
+  let component: ClassSharecategoryComponent;
+  let fixture: ComponentFixture<ClassSharecategoryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManagementDataComponent ]
+      declarations: [ ClassSharecategoryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManagementDataComponent);
+    fixture = TestBed.createComponent(ClassSharecategoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

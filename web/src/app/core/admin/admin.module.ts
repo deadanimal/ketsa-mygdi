@@ -1,3 +1,7 @@
+import { ClassSharecategoryComponent } from './management-updatedata/class-sharecategory/class-sharecategory.component';
+import { ClassCategoryComponent } from './management-updatedata/class-category/class-category.component';
+import { DatalistComponent } from './management-updatedata/datalist/datalist.component';
+import { DatapriceComponent } from './management-updatedata/dataprice/dataprice.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
@@ -27,7 +31,6 @@ import { ManagementUserguideComponent } from './management-userguide/management-
 import { ProfileComponent } from '../admin/profile/profile.component';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { FeedbackComponent } from './feedback/feedback.component';
-import { ManagementDataComponent } from './management-data/management-data.component';
 import { ManagementProcessdataComponent } from './management-processdata/management-processdata.component';
 import { ManagementAppstatusComponent } from './management-appstatus/management-appstatus.component';
 import { ManagementNewappComponent } from './management-newapp/management-newapp.component';
@@ -46,12 +49,15 @@ import { ValuationComponent } from './valuation/valuation.component';
     ManagementUserguideComponent,
     ProfileComponent,
     FeedbackComponent,
-    ManagementDataComponent,
     ManagementProcessdataComponent,
     ManagementAppstatusComponent,
     ManagementNewappComponent,
     ManagementElementmetadataComponent,
-    ValuationComponent
+    ValuationComponent,
+    DatapriceComponent,
+    DatalistComponent,
+    ClassCategoryComponent,
+    ClassSharecategoryComponent
   ],
   imports: [
     CommonModule,

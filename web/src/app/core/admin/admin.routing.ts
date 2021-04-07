@@ -1,8 +1,10 @@
+import { ClassSharecategoryComponent } from './management-updatedata/class-sharecategory/class-sharecategory.component';
+import { ClassCategoryComponent } from './management-updatedata/class-category/class-category.component';
+import { DatalistComponent } from './management-updatedata/datalist/datalist.component';
 import { ManagementElementmetadataComponent } from './management-elementmetadata/management-elementmetadata.component';
 import { ManagementNewappComponent } from './management-newapp/management-newapp.component';
 import { ManagementAppstatusComponent } from './management-appstatus/management-appstatus.component';
 import { ManagementProcessdataComponent } from './management-processdata/management-processdata.component';
-import { ManagementDataComponent } from './management-data/management-data.component';
 import { ManagementAnnoucementComponent } from './management-annoucement/management-annoucement.component';
 import { DatatableComponent } from './datatable/datatable.component';
 import { Routes } from '@angular/router';
@@ -15,6 +17,7 @@ import { ManagementUserguideComponent } from './management-userguide/management-
 import { ProfileComponent } from './profile/profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ValuationComponent } from './valuation/valuation.component';
+import { DatapriceComponent } from './management-updatedata/dataprice/dataprice.component';
 
 
 export const AdminRoutes: Routes = [
@@ -53,10 +56,6 @@ export const AdminRoutes: Routes = [
                         component: DatatableComponent
                     },
                     {
-                        path: 'dataasas',
-                        component: ManagementDataComponent
-                    },
-                    {
                         path: 'dataprocess',
                         component: ManagementProcessdataComponent
                     },
@@ -75,6 +74,26 @@ export const AdminRoutes: Routes = [
                     {
                         path: 'valuation',
                         component: ValuationComponent
+                    }, {
+                        path: 'dataasas',
+                        children: [
+                            {
+                                path: 'datalist',
+                                component: DatalistComponent
+                            },
+                            {
+                                path: 'class-category',
+                                component: ClassCategoryComponent
+                            },
+                            {
+                                path: 'class-sharecategory',
+                                component: ClassSharecategoryComponent
+                            },
+                            {
+                                path: 'dataprice',
+                                component: DatapriceComponent
+                            }
+                        ]
                     }
 
                 ]

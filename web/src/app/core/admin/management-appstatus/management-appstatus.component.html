@@ -1,1 +1,194 @@
-<p>management-appstatus works!</p>
+<div class=" header pb-6">
+    <div class=" container-fluid">
+        <div class=" header-body">
+            <div class=" row align-items-center py-4">
+                <div class=" col-lg-6 col-7">
+                    <h6 class=" h2 d-inline-block mb-0">Status Permohonan</h6>
+
+                    <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+
+                        <ol class=" breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class=" breadcrumb-item">
+                                <a href="javascript:void(0)"> <i class=" fas fa-home text-dark"> </i> </a>
+                            </li>
+
+                            <li aria-current="page" class="breadcrumb-item active">
+                                Data Asas
+                            </li>
+
+                        </ol>
+                    </nav>
+                </div>
+
+                <div class=" col-lg-6 col-5 text-right">
+                    <!--
+                <a class=" btn btn-sm btn-neutral" href="javascript:void(0)"> New </a>
+               -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class=" container-fluid mt--6">
+    <div class=" row">
+        <div class=" col">
+            <div class=" card">
+                <div class=" card-header">
+                    <div class="row mb-0">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="datatable_length">
+                                <label>
+                                    Papar
+                                    <select name="datatable_length" aria-controls="datatable"
+                                        class="form-control form-control-sm" (change)="entriesChange($event)">
+
+                                        <option value="5" [selected]="entries == 5">5</option>
+                                        <option value="10" [selected]="entries == 10">10</option>
+                                        <option value="25" [selected]="entries == 25">25</option>
+                                        <option value="50" [selected]="entries == 50">50</option>
+                                        <option value="-1" [selected]="entries == -1">All</option>
+                                    </select>
+                                    rekod
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <!-- <div id="datatable_filter" class="dataTables_filter">
+                  <label>
+                    <input type="search" class="form-control form-control-sm" placeholder="Carian Metadata"
+                      aria-controls="datatable" (keyup)="filterTable($event)" />
+                  </label>
+                </div> -->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="dataTables_wrapper py-4">
+                    <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined"
+                        [rows]="temp" (activate)="onActivate($event)" [scrollbarH]="true">
+
+                        <ngx-datatable-column name="Bil" [width]="100">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                                {{rowIndex+1}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column>
+                            <ng-template ngx-datatable-header-template>
+                                <span>Nama Permohonan</span>
+                            </ng-template>
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.namapermohonan}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column>
+                            <ng-template ngx-datatable-header-template>
+                                <span>Nama Pemohon</span>
+                            </ng-template>
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.namapemohon}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Kategori"></ngx-datatable-column>
+                        <ngx-datatable-column name="Status">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <a *ngIf="row.status == 'Baru'" class="badge badge-pill badge-success">Baru</a>
+                                <a *ngIf="row.status == 'Ditolak'" class="badge badge-pill badge-danger">Ditolak</a>
+                                <a *ngIf="row.status == 'Dalam Proses'" class="badge badge-pill badge-primary">Dalam Proses</a>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Muat Turun">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <a *ngIf="row.download_st == 'Selesai'" class="badge badge-pill badge-success">Selesai</a>
+                                <a *ngIf="row.download_st == 'Tidak'" class="badge badge-pill badge-danger">Tidak</a>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Penilaian">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <a *ngIf="row.valuation_st == 'Selesai'" class="badge badge-pill badge-success">Selesai</a>
+                                <a *ngIf="row.valuation_st == 'Tidak'" class="badge badge-pill badge-danger">Tidak</a>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #startTask>
+    <div class="modal-header bg-default">
+        <h6 class="modal-title text-white my-auto" id="modal-title-default">
+            Proses Data
+        </h6>
+
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
+            <span aria-hidden="true" class="text-white my-auto"> × </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
+            <div class="dataTables_wrapper py-4">
+                <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries2 != -1 ? entries2 : undefined"
+                    [rows]="temp" (activate)="onActivate($event)">
+
+                    <ngx-datatable-column name="Bil">
+                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                            {{rowIndex+1}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Lapisan Data"></ngx-datatable-column>
+                    <ngx-datatable-column name="Sub-Kategori"></ngx-datatable-column>
+                    <ngx-datatable-column name="Kategori"></ngx-datatable-column>
+                    <ngx-datatable-column name="Kawasan Data"></ngx-datatable-column>
+                    <ngx-datatable-column name="Saiz × Harga">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="form-inline">
+                                <input class="form-control form-control-sm" placeholder="Saiz" style="width: 90px;"
+                                    type="text">
+                                <label class="ml-2">× RM40</label>
+                            </div>
+
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="form-inline float-right">
+                        <label class="form-control-label mr-2">Jumlah Harga</label>
+                        <input class="form-control form-control-sm" placeholder="RM0.00" style="width: 90px;"
+                            type="text" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label class="form-control-label mr-2">Pautan Data </label>
+                        <input class="form-control form-control-sm mb-2" placeholder="" type="text">
+
+                        <label class="form-control-label mr-2">Tempoh Muat Turun </label>
+                        <input class="form-control form-control-sm" placeholder="" type="text">
+                    </div>
+                    <div class="form-inline">
+                        <label class="form-control-label mr-2">Surat Balasan Permohonan </label>
+                        <button class="btn btn-sm btn-danger mb-2" type="button" (click)="confirm()">
+                            Kemaskini
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xl-6 pt-9 text-right">
+                    <button class="btn btn-success ml-auto" type="button" (click)="confirm()">
+                        Hantar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

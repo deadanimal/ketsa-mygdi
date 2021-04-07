@@ -37,34 +37,31 @@
                         <h3>Senarai Maklum Balas</h3>
                     </div>
                 </div>
-
-                <div class="card-body">
-                    <div class="dataTables_wrapper py-4">
-                        <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
-                            [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined"
-                            [rows]="temp" [selected]="selected" [selectionType]="'single'"
-                            (activate)="onActivate($event)">
-                            <ngx-datatable-column name="No" [width]="20">
-                                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
-                                    {{rowIndex+1}}
-                                </ng-template>
-                            </ngx-datatable-column>
-                            <ngx-datatable-column name="Tajuk" [width]="100"></ngx-datatable-column>
-                            <ngx-datatable-column name="Kategori" [width]="100"></ngx-datatable-column>
-                            <ngx-datatable-column name="Emel" [width]="100"></ngx-datatable-column>
-                            <ngx-datatable-column name="Tindakan" [width]="100">
-                                <ng-template let-row="row" ngx-datatable-cell-template>
-                                    <a class="text-green" (click)="openModal(replyFeedback)"><i
-                                            class="fas fa-reply mr-2"></i><span>Balas</span></a>
-                                </ng-template>
-                            </ngx-datatable-column>
-                        </ngx-datatable>
-                    </div>
+                <div class="dataTables_wrapper py-4">
+                    <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined"
+                        [rows]="temp" [selected]="selected" [selectionType]="'single'" (activate)="onActivate($event)">
+                        <ngx-datatable-column name="No" [width]="20">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                                {{rowIndex+1}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Tajuk"></ngx-datatable-column>
+                        <ngx-datatable-column name="Kategori"></ngx-datatable-column>
+                        <ngx-datatable-column name="Emel"></ngx-datatable-column>
+                        <ngx-datatable-column name="Tindakan">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <a class="text-green" (click)="openModal(replyFeedback)"><i
+                                        class="fas fa-reply mr-2"></i><span>Balas</span></a>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <ng-template #replyFeedback>
     <div class="modal-header bg-default">

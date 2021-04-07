@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 export enum SelectionType {
   single = "single",
@@ -9,14 +10,21 @@ export enum SelectionType {
 }
 
 @Component({
-  selector: 'app-management-newapp',
-  templateUrl: './management-newapp.component.html',
-  styleUrls: ['./management-newapp.component.scss']
+  selector: 'app-datalist',
+  templateUrl: './datalist.component.html',
+  styleUrls: ['./datalist.component.scss']
 })
-export class ManagementNewappComponent implements OnInit {
+export class DatalistComponent implements OnInit {
 
   // Toggle
   checkEnabled: boolean = false
+
+   // Modal
+   modal: BsModalRef;
+   modalConfig = {
+     keyboard: true,
+     class: "modal-dialog-centered modal-lg"
+   };
 
   entries: number = 5;
   selected: any[] = [];
@@ -24,37 +32,27 @@ export class ManagementNewappComponent implements OnInit {
   activeRow: any;
   rows: any = [
     {
-      namapermohonan: "Permohonan Data Sungai Selangor ",
-      namapemohon: "Muhammad Rahman bin Talib",
-      kategori: "G2E-Pelajar",
-      subkategori:"",
-      tarikh: "25/02/2021",
+      category: "Aeronautical",
+      subcategory:"Lapangan Terbang (Aerodrome-AB)",
+      datalayer: "Transitional Surface",
     },
     {
-      namapermohonan: "Permohonan Data Sungai Selangor ",
-      namapemohon: "Muhammad Rahman bin Talib",
-      kategori: "G2E-Pelajar",
-      subkategori:"",
-      tarikh: "25/02/2021",
+      category: "Aeronautical",
+      subcategory:"Lapangan Terbang (Aerodrome-AB)",
+      datalayer: "Transitional Surface",
     },
     {
-      namapermohonan: "Permohonan Data Sungai Selangor ",
-      namapemohon: "Muhammad Rahman bin Talib",
-      kategori: "G2E-Pelajar",
-      subkategori:"",
-      tarikh: "25/02/2021",
+      category: "Aeronautical",
+      subcategory:"Lapangan Terbang (Aerodrome-AB)",
+      datalayer: "Transitional Surface",
     },
-    {
-      namapermohonan: "Permohonan Data Sungai Selangor ",
-      namapemohon: "Muhammad Rahman bin Talib",
-      kategori: "G2E-Pelajar",
-      subkategori:"",
-      tarikh: "25/02/2021",
-    },
+    
   ];
   SelectionType = SelectionType;
 
-  constructor() {
+  constructor(
+    private modalService: BsModalService,
+  ) {
     this.temp = this.rows.map((prop, key) => {
       return {
         ...prop,
@@ -86,6 +84,15 @@ export class ManagementNewappComponent implements OnInit {
 
 displayCheck(){
   this.checkEnabled = !this.checkEnabled;
+}
+
+openModal(modalRef: TemplateRef<any>) {
+  this.modal = this.modalService.show(modalRef, this.modalConfig);
+}
+
+closeModal() {
+  this.modal.hide()
+  //this.registerForm.reset()
 }
 
   ngOnInit() {}
