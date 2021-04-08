@@ -1,105 +1,360 @@
 <div class=" header pb-6">
-    <div class=" container-fluid">
-      <div class=" header-body">
-        <div class=" row align-items-center py-4">
-          <div class=" col-lg-6 col-7">
-            <h6 class=" h2 d-inline-block mb-0">Penilaian</h6>
-  
-            <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
-  
-              <ol class=" breadcrumb breadcrumb-links breadcrumb-dark">
-                <li class=" breadcrumb-item">
-                  <a href="javascript:void(0)"> <i class=" fas fa-home text-dark"> </i> </a>
-                </li>
-  
-                <li aria-current="page" class="breadcrumb-item active">
-                  Data Asas
-                </li>
-  
-              </ol>
-            </nav>
-          </div>
-  
-          <div class=" col-lg-6 col-5 text-right">
-            <!--
-                <a class=" btn btn-sm btn-neutral" href="javascript:void(0)"> New </a>
-               -->
-          </div>
+  <div class=" container-fluid">
+    <div class=" header-body">
+      <div class=" row align-items-center py-4">
+        <div class=" col-lg-6 col-7">
+          <h6 class=" h2 d-inline-block mb-0">Penilaian</h6>
+
+          <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+
+            <ol class=" breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class=" breadcrumb-item">
+                <a href="javascript:void(0)"> <i class=" fas fa-home text-dark"> </i> </a>
+              </li>
+
+              <li aria-current="page" class="breadcrumb-item active">
+                Data Asas
+              </li>
+
+            </ol>
+          </nav>
+        </div>
+
+        <div class=" col-lg-6 col-5 text-right">
+          <a *ngIf="editEnabled" class="btn btn-danger btn-sm text-white btn-icon btn-3" (click)="toggleForm()">
+            <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
+            <span class="btn-inner--text">Balik</span>
+          </a>
         </div>
       </div>
     </div>
   </div>
-  
-  <div class=" container-fluid mt--6">
-    <div class=" row">
-      <div class=" col">
-        <div class=" card">
-          <div class=" card-header">
-            <div class="row mb-0">
-              <div class="col-sm-12 col-md-6">
-                <div class="dataTables_length" id="datatable_length">
-                  <label>
-                    Papar
-                    <select name="datatable_length" aria-controls="datatable" class="form-control form-control-sm"
-                      (change)="entriesChange($event)">
-  
-                      <option value="5" [selected]="entries == 5">5</option>
-                      <option value="10" [selected]="entries == 10">10</option>
-                      <option value="25" [selected]="entries == 25">25</option>
-                      <option value="50" [selected]="entries == 50">50</option>
-                      <option value="-1" [selected]="entries == -1">All</option>
-                    </select>
-                    rekod
-                  </label>
-                </div>
+</div>
+
+<div class=" container-fluid mt--6">
+  <div class=" row">
+    <div class=" col">
+      <div class=" card">
+        <div *ngIf="!editEnabled" class=" card-header">
+          <div class="row mb-0">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_length" id="datatable_length">
+                <label>
+                  Papar
+                  <select name="datatable_length" aria-controls="datatable" class="form-control form-control-sm"
+                    (change)="entriesChange($event)">
+
+                    <option value="5" [selected]="entries == 5">5</option>
+                    <option value="10" [selected]="entries == 10">10</option>
+                    <option value="25" [selected]="entries == 25">25</option>
+                    <option value="50" [selected]="entries == 50">50</option>
+                    <option value="-1" [selected]="entries == -1">All</option>
+                  </select>
+                  rekod
+                </label>
               </div>
-              <div class="col-sm-12 col-md-6">
-                <!-- <div id="datatable_filter" class="dataTables_filter">
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <!-- <div id="datatable_filter" class="dataTables_filter">
                   <label>
                     <input type="search" class="form-control form-control-sm" placeholder="Carian Metadata"
                       aria-controls="datatable" (keyup)="filterTable($event)" />
                   </label>
                 </div> -->
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!editEnabled" class="dataTables_wrapper py-4">
+          <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+            [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined" [rows]="temp"
+            (activate)="onActivate($event)">
+
+            <ngx-datatable-column name="Bil" [width]="100">
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                {{rowIndex+1}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Nama Permohonan</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.namapermohonan}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Nama Pemohon</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.namapemohon}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Kategori"></ngx-datatable-column>
+            <ngx-datatable-column name="Tindakan">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a class="btn btn-sm btn-warning text-white" (click)="toggleForm()"><i
+                    class="fas fa-file-export"></i><span>Lihat Penilaian</span></a>
+              </ng-template>
+            </ngx-datatable-column>
+
+          </ngx-datatable>
+        </div>
+
+        <div *ngIf="editEnabled" class="card-header bg-default">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="text-white mb-0">Borang Penilaian Data</h3>
+            </div>
+
+            <div class="col-4 text-right">
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="editEnabled" class="card-body py-4 px-">
+          <div class="row">
+            <div class="col-xl-12 text-right">
+              <h6 class="heading text-muted">Lampiran 3</h6>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-xl-12">
+              <h3 class="text-dark">BORANG PENILAIAN PERKONGSIAN DATA GEOSPATIAL<br>PUSAT GEOSPATIAL NEGARA
+                (PGN)</h3>
+            </div>
+          </div>
+          <hr class="my-2 bg-dark">
+          <ul align="justify">
+            <li>Borang penilaian ini dibentuk untuk mendapatkan maklumbalas tentang kualiti perkongsian data melalui
+              MyGDI yang disediakan oleh Pusat Geospatial Negara (PGN).</li>
+            <li>Kami mengalu-alukan kerjasama dari pihak YBhg. Dato'/ Datin/Prof./Dr./Tuan/Puan untuk mengisi borang
+              soal selidik ini dan diharapkan dapat membantu memperbaiki dan menambahbaik kualiti perkongsian data yang
+              diberikan.</li>
+          </ul>
+          <div class="py-2 mt-2 bg-light">
+            <h3 class="text-dark mb-0 text-center">BAHAGIAN A: MAKLUMAT PEMOHON/PENGGUNA</h3>
+          </div>
+          <div class="px-2">
+            <div class="py-4" style="font-weight: bold;">Sila tandakan [&#10003;] pada ruangan yang berkenaan.</div>
+            <div class="mb-3">1.&nbsp; Kategori Pengguna</div>
+            <div class="row pl-lg-5 mb-4">
+              <div class="col-xl-12">
+                <div class=" custom-control custom-radio mb-2">
+                  <input class=" custom-control-input" id="radioCheck1" name="custom-radio-3" type="radio" />
+                  <label class=" custom-control-label" for="radioCheck1">
+                    Agensi Persekutuan
+                  </label>
+                </div>
+                <div class=" custom-control custom-radio mb-2">
+                  <input class=" custom-control-input" id="radioCheck2" name="custom-radio-3" type="radio" />
+                  <label class=" custom-control-label" for="radioCheck2">
+                    Agensi Negeri
+                  </label>
+                </div>
+                <div class=" custom-control custom-radio mb-2">
+                  <input class="custom-control-input" id="radioCheck3" name="custom-radio-3" type="radio" />
+                  <label class="custom-control-label" for="radioCheck3">
+                    Pelajar/Penyelidik
+                  </label>
+                </div>
               </div>
             </div>
-  
+            <div class="my-4">2.&nbsp; Sumber maklumat tentang kesediaan data yang dipohon</div>
+            <div class="row pl-lg-2 mb-4">
+              <div class="col-xl-4">
+                <div class=" custom-control custom-radio mb-2">
+                  <input [(ngModel)]="checkOther" class=" custom-control-input" id="radioCheck21" name="custom-radio-2"
+                    type="radio" value="1" />
+                  <label class=" custom-control-label" for="radioCheck21">
+                    Internet (MyGeo Explorer)
+                  </label>
+                </div>
+                <div class=" custom-control custom-radio mb-2">
+                  <input [(ngModel)]="checkOther" class=" custom-control-input" id="radioCheck22" name="custom-radio-2"
+                    type="radio" value="2" />
+                  <label class=" custom-control-label" for="radioCheck22">
+                    Simposium/Pameran/Brochure
+                  </label>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class=" custom-control custom-radio mb-2">
+                  <input [(ngModel)]="checkOther" class=" custom-control-input" id="radioCheck23" name="custom-radio-2"
+                    type="radio" value="3" />
+                  <label class=" custom-control-label" for="radioCheck23">
+                    Agensi Kerajaan Lain
+                  </label>
+                </div>
+                <div class=" custom-control custom-radio mb-2">
+                  <input [(ngModel)]="checkOther" class=" custom-control-input" id="radioCheck24" name="custom-radio-2"
+                    type="radio" value="4" />
+                  <label class=" custom-control-label" for="radioCheck24">
+                    Lain-Lain
+                  </label>
+                </div>
+                <div *ngIf="checkOther == 4" class=" custom-control custom-radio mb-2">
+                  <input class="form-control form-control-sm" id="others" type="text" placeholder="Sila Nyatakan ..." />
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="dataTables_wrapper py-4">
-            <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
-              [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined" [rows]="temp"
-              (activate)="onActivate($event)">
-  
-              <ngx-datatable-column name="Bil" [width]="100">
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
-                  {{rowIndex+1}}
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column>
-                <ng-template ngx-datatable-header-template>
-                  <span>Nama Permohonan</span>
-                </ng-template>
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                  {{row.namapermohonan}}
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column>
-                <ng-template ngx-datatable-header-template>
-                  <span>Nama Pemohon</span>
-                </ng-template>
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                  {{row.namapemohon}}
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column name="Kategori"></ngx-datatable-column>
-              <ngx-datatable-column name="Tindakan">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                  <a class="btn btn-sm btn-warning text-white" (click)="openModal(openValuationForm)"><i class="fas fa-file-export"></i><span>Lihat Penilaian</span></a>
-                </ng-template>
-              </ngx-datatable-column>
-  
-            </ngx-datatable>
+
+          <div class="py-2 mt-2 bg-light">
+            <h4 class="heading text-dark mb-0 text-center">BAHAGIAN B: PENILAIAN PENGURUSAN PERKONGSIAN DATA GEOSPATIAL
+            </h4>
+          </div>
+          <div class="px-2">
+            <div class="py-4" style="font-weight: bold;">Sila tandakan [&#10003;] pada ruangan yang berkenaan mengikut
+              sekala penilaian yang diberikan.</div>
+            <div class="form-inline pl-5">
+              <label class="mr-4"><b class="bg-light mr-2">&nbsp;1&nbsp;</b> Tidak Memuaskan</label>
+              <label class="mr-4"><b class="bg-light mr-2">&nbsp;2&nbsp;</b> Kurang Memuaskan</label>
+              <label class="mr-4"><b class="bg-light mr-2">&nbsp;3&nbsp;</b> Memuaskan</label>
+              <label class="mr-4"><b class="bg-light mr-2">&nbsp;4&nbsp;</b> Baik</label>
+              <label class="mr-4"><b class="bg-light mr-2">&nbsp;5&nbsp;</b> Cemerlang</label>
+            </div>
+            <div class="row py-4">
+              <div class="col-xl-12 px-5">
+                <table>
+                  <tr class="bg-light">
+                    <th class="text-center" colspan="2" rowspan="2">Pengurusan Perkongsian Data Geospatial</th>
+                    <th class="text-center" colspan="5">Skala Penilaian</th>
+                  </tr>
+                  <tr class="bg-light">
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                  </tr>
+                  <tr>
+                    <td>a.</td>
+                    <td>Proses kelulusan permohonan data adalah cepat dan efektif</td>
+                    <td><input type="radio" name="row1"></td>
+                    <td><input type="radio" name="row1"></td>
+                    <td><input type="radio" name="row1"></td>
+                    <td><input type="radio" name="row1"></td>
+                    <td><input type="radio" name="row1"></td>
+                  </tr>
+                  <tr>
+                    <td>b.</td>
+                    <td>Data yang diberikan menepati keperluan pengguna</td>
+                    <td><input type="radio" name="row2"></td>
+                    <td><input type="radio" name="row2"></td>
+                    <td><input type="radio" name="row2"></td>
+                    <td><input type="radio" name="row2"></td>
+                    <td><input type="radio" name="row2"></td>
+                  </tr>
+                  <tr>
+                    <td>c.</td>
+                    <td>Kaedah perkongsian data yang diamalkan adalah selamat </td>
+                    <td><input type="radio" name="row3"></td>
+                    <td><input type="radio" name="row3"></td>
+                    <td><input type="radio" name="row3"></td>
+                    <td><input type="radio" name="row3"></td>
+                    <td><input type="radio" name="row3"></td>
+                  </tr>
+                  <tr>
+                    <td>d.</td>
+                    <td>Data yang diterima adalah selamat untuk digunakan (no viruses, not corrupted)</td>
+                    <td><input type="radio" name="row4"></td>
+                    <td><input type="radio" name="row4"></td>
+                    <td><input type="radio" name="row4"></td>
+                    <td><input type="radio" name="row4"></td>
+                    <td><input type="radio" name="row4"></td>
+                  </tr>
+                  <tr>
+                    <td>e.</td>
+                    <td>Adakah serahan data ini selamat dan terjamin </td>
+                    <td><input type="radio" name="row5"></td>
+                    <td><input type="radio" name="row5"></td>
+                    <td><input type="radio" name="row5"></td>
+                    <td><input type="radio" name="row5"></td>
+                    <td><input type="radio" name="row5"></td>
+                  </tr>
+                  <tr>
+                    <td>f.</td>
+                    <td>Kawalan keselamatan terhadap proses serahan data yang dipraktikkan adalah memadai (encryption
+                      data, password)</td>
+                    <td><input type="radio" name="row6"></td>
+                    <td><input type="radio" name="row6"></td>
+                    <td><input type="radio" name="row6"></td>
+                    <td><input type="radio" name="row6"></td>
+                    <td><input type="radio" name="row6"></td>
+                  </tr>
+                  <tr>
+                    <td>g.</td>
+                    <td>Pemohon mendapat kerjasama yang baik daripada pegawai yang menguruskan permohonan data.</td>
+                    <td><input type="radio" name="row7"></td>
+                    <td><input type="radio" name="row7"></td>
+                    <td><input type="radio" name="row7"></td>
+                    <td><input type="radio" name="row7"></td>
+                    <td><input type="radio" name="row7"></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-2 my-4 bg-light">
+            <h4 class="heading text-dark mb-0 text-center">BAHAGIAN C: PENGUNAAN DATA</h4>
+          </div>
+          <div class="px-2">
+            <div class="row mb-4">
+              <div class="col-xl-10">
+                <div class="my-2">1.&nbsp;&nbsp; Kegunaan utama data yang dipohon. (Sila nyatakan)</div>
+                <input class="form-control form-control-sm ml-4" type="text">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-8">
+                <div class="mb-2">2.&nbsp;&nbsp; Data yang diterima telah ditambahnilai <i>(value added)</i></div>
+                <div class="row pl-lg-4 mb-4">
+                  <div class="col-xl-3">
+                    <div class="custom-control custom-radio mb-2">
+                      <input class=" custom-control-input" type="radio" id="choice1" name="yes2"><label
+                        class="custom-control-label" for="choice1">
+                        Ya
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-xl-4">
+                    <div class="custom-control custom-radio">
+                      <input class=" custom-control-input" type="radio" id="choice2" name="yes2"><label
+                        class="custom-control-label" for="choice2">
+                        Tidak
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-2">3.&nbsp;&nbsp; Data yang diterima telah dimanfaatkan sepenuhnya</div>
+                <div class="row pl-lg-4 mb-4">
+                  <div class="col-xl-3">
+                    <div class="custom-control custom-radio mb-2">
+                      <input class=" custom-control-input" type="radio" id="choice1" name="yes2"><label
+                        class="custom-control-label" for="choice1">
+                        Ya
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-xl-4">
+                    <div class="custom-control custom-radio">
+                      <input class=" custom-control-input" type="radio" id="choice2" name="yes2"><label
+                        class="custom-control-label" for="choice2">
+                        Tidak
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-2">4.&nbsp;&nbsp; Berikut merupakan screenshot kajian/analisis/laporan yang sedang/telah
+              dilaksanakan menggunakan data yang dikongsi melalui MyGDI.</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

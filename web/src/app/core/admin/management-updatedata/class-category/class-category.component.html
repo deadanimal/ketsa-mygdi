@@ -23,21 +23,7 @@
                 </div>
 
                 <div class=" col-lg-6 col-5 text-right">
-                    <div class="btn-group" dropdown>
-                        <button id="button-basic" dropdownToggle type="button"
-                            class="btn btn-primary btn-sm dropdown-toggle" aria-controls="dropdown-basic">
-                            Tambah <span class="caret"></span>
-                        </button>
-                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
-                            aria-labelledby="button-basic">
-                            <li role="menuitem"><a class="dropdown-item" (click)="openModal(addCategory)">Kategori +</a>
-                            </li>
-                            <li role="menuitem"><a class="dropdown-item"
-                                    (click)="openModal(addSubCategory)">Sub-Kategori +</a></li>
-                            <li role="menuitem"><a class="dropdown-item" (click)="openModal(addLayer)">Lapisan +</a>
-                            </li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -110,7 +96,8 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Tindakan">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <a class="text-success" (click)="openModal(editData)"><i class="fas fa-edit mr-3"></i></a>
+                                <a class="text-success" (click)="openModal(editData)"><i
+                                        class="fas fa-edit mr-3"></i></a>
                                 <a class="text-warning" (click)="deleteData()"><i class="fas fa-trash-alt"></i></a>
                             </ng-template>
                         </ngx-datatable-column>
@@ -274,4 +261,3 @@
         </button>
     </div>
 </ng-template>
-

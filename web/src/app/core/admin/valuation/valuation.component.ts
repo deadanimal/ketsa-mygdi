@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { BsModalRef,BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 export enum SelectionType {
   single = "single",
@@ -15,6 +15,11 @@ export enum SelectionType {
   styleUrls: ['./valuation.component.scss']
 })
 export class ValuationComponent implements OnInit {
+
+  checkOther = "null"
+
+  // Toggle
+  editEnabled: boolean = true
 
   // Modal
   modal: BsModalRef;
@@ -33,28 +38,28 @@ export class ValuationComponent implements OnInit {
       namapermohonan: "Permohonan Data Sungai Selangor ",
       namapemohon: "Muhammad Rahman bin Talib",
       kategori: "G2E-Pelajar",
-      subkategori:"",
+      subkategori: "",
       tarikh: "25/02/2021",
     },
     {
       namapermohonan: "Permohonan Data Sungai Selangor ",
       namapemohon: "Muhammad Rahman bin Talib",
       kategori: "G2E-Pelajar",
-      subkategori:"",
+      subkategori: "",
       tarikh: "25/02/2021",
     },
     {
       namapermohonan: "Permohonan Data Sungai Selangor ",
       namapemohon: "Muhammad Rahman bin Talib",
       kategori: "G2E-Pelajar",
-      subkategori:"",
+      subkategori: "",
       tarikh: "25/02/2021",
     },
     {
       namapermohonan: "Permohonan Data Sungai Selangor ",
       namapemohon: "Muhammad Rahman bin Talib",
       kategori: "G2E-Pelajar",
-      subkategori:"",
+      subkategori: "",
       tarikh: "25/02/2021",
     },
   ];
@@ -74,7 +79,7 @@ export class ValuationComponent implements OnInit {
   }
   filterTable($event) {
     let val = $event.target.value;
-    this.temp = this.rows.filter(function(d) {
+    this.temp = this.rows.filter(function (d) {
       for (var key in d) {
         if (d[key].toLowerCase().indexOf(val) !== -1) {
           return true;
@@ -91,7 +96,7 @@ export class ValuationComponent implements OnInit {
     this.activeRow = event.row;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   openModal(modalRef: TemplateRef<any>) {
     this.modal = this.modalService.show(modalRef, this.modalConfig);
@@ -99,5 +104,9 @@ export class ValuationComponent implements OnInit {
 
   closeModal() {
     this.modal.hide()
+  }
+
+  toggleForm() {
+    this.editEnabled = !this.editEnabled;
   }
 }

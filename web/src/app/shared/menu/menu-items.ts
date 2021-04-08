@@ -261,7 +261,7 @@ export const ROUTESADMIN3: RouteInfo[] = [
     title: 'Kemas Kini Data',
     type: 'sub',
     collapse: 'update-data',
-    icontype: 'fas fa-mouse text-green',
+    icontype: 'fas fa-magic text-red',
     isCollapsed: true,
     children: [
       { path: 'datalist', title: 'Senarai Data', type: 'link' },
