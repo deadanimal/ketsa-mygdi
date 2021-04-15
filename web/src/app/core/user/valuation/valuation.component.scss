@@ -1,0 +1,32 @@
+::ng-deep {
+    .ngx-datatable {
+        width: auto;
+    }
+}
+
+.card {
+    min-height: 680px;
+}
+
+.scroll {
+    overflow: auto;
+}
+
+.custom-control-label {
+    font-size: medium !important;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+th,
+td {
+    padding: 15px;
+}
+
+table{
+    max-width: 900px;
+}

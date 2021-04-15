@@ -22,6 +22,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MetadataComponent } from './metadata/metadata.component';
 import { SemakanComponent } from './semakan/semakan.component';
 import { CheckMetadataComponent } from './check-metadata/check-metadata.component';
+import { DataAppComponent } from './data-app/data-app.component';
+import { CheckstatusComponent } from './checkstatus/checkstatus.component';
+import { DownloadComponent } from './download/download.component';
+import { ValuationComponent } from './valuation/valuation.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { CheckMetadataComponent } from './check-metadata/check-metadata.componen
     ProfileComponent,
     DatatableComponent,
     CheckMetadataComponent,
+    DataAppComponent,
+    CheckstatusComponent,
+    DownloadComponent,
+    ValuationComponent,
   ],
   imports: [
     CommonModule,

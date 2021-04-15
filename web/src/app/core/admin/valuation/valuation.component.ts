@@ -1,5 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import Dropzone from "dropzone";
+Dropzone.autoDiscover = false;
+import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 export enum SelectionType {
   single = "single",
@@ -7,6 +11,7 @@ export enum SelectionType {
   multiClick = "multiClick",
   cell = "cell",
   checkbox = "checkbox"
+  
 }
 
 @Component({
@@ -16,7 +21,12 @@ export enum SelectionType {
 })
 export class ValuationComponent implements OnInit {
 
-  checkOther = "null"
+  checkOther = "null";
+  imageSrc: string;
+   myForm = new FormGroup({
+    file: new FormControl('', [Validators.required]),
+    fileSource: new FormControl('', [Validators.required])
+  });
 
   // Toggle
   editEnabled: boolean = true
@@ -96,8 +106,6 @@ export class ValuationComponent implements OnInit {
     this.activeRow = event.row;
   }
 
-  ngOnInit() { }
-
   openModal(modalRef: TemplateRef<any>) {
     this.modal = this.modalService.show(modalRef, this.modalConfig);
   }
@@ -108,5 +116,31 @@ export class ValuationComponent implements OnInit {
 
   toggleForm() {
     this.editEnabled = !this.editEnabled;
+  }
+
+  ngOnInit() {}
+
+  get f(){
+    return this.myForm.controls;
+  }
+
+  onFileChange(event) {
+    const reader = new FileReader();
+    
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+    
+      reader.onload = () => {
+   
+        this.imageSrc = reader.result as string;
+        //alert(this.imageSrc)
+        this.myForm.patchValue({
+          fileSource: reader.result
+        });
+   
+      };
+   
+    }
   }
 }

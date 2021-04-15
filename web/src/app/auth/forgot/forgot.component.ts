@@ -13,7 +13,7 @@ import { NotifyService } from 'src/app/shared/handler/notify/notify.service';
 export class ForgotComponent implements OnInit {
 
   // Image
-  imgLogo = 'assets/img/logo/prototype-logo.png'
+  imgLogo = 'assets/img/logo/jata-negara.png'
 
   // Form
   focusEmail
@@ -55,8 +55,8 @@ export class ForgotComponent implements OnInit {
   }
 
   successMessage() {
-    let title = 'Success'
-    let message = 'A reset link has been sent to your email'
+    let title = 'Pautan set semula kata laluan telah dihantar ke emel anda!'
+    let message = 'Berjaya'
     this.notifyService.openToastr(title, message)
   }
 

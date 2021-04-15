@@ -103,22 +103,28 @@ export const ROUTESUSER3: RouteInfo[] = [
     icontype: 'fas fa-user text-blue'
   },
   {
-    path: '/user/dashboard',
-    title: 'Dashboard',
+    path: '/user/data-app',
+    title: 'Mohon Data',
     type: 'link',
-    icontype: 'fas fa-desktop text-warning'
+    icontype: 'fas fa-pen-alt text-warning'
   },
   {
-    path: '/user/tabledata',
-    title: 'Senarai Metadata',
+    path: '/user/checkstatus',
+    title: 'Semakan Status',
     type: 'link',
-    icontype: 'fas fa-list-ul text-indigo'
+    icontype: 'fas fa-search text-danger'
   },
   {
-    path: '/user/semakan',
-    title: 'Status Permohonan',
+    path: '/user/download',
+    title: 'Muat Turun Data',
     type: 'link',
-    icontype: 'fas fa-edit text-pink'
+    icontype: 'fas fa-cloud-download-alt text-purple'
+  },
+  {
+    path: '/user/valuation',
+    title: 'Penilaian',
+    type: 'link',
+    icontype: 'fas fa-edit text-green'
   },
 
 ];

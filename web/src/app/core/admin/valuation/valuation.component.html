@@ -351,7 +351,47 @@
               </div>
             </div>
             <div class="mb-2">4.&nbsp;&nbsp; Berikut merupakan screenshot kajian/analisis/laporan yang sedang/telah
-              dilaksanakan menggunakan data yang dikongsi melalui MyGDI.</div>
+              dilaksanakan menggunakan data yang dikongsi melalui MyGeo Explorer. 
+            </div>
+            <div [formGroup]="myForm">
+              <div class="container p-0" style="border: 1px solid lightgray; border-radius: .25rem; min-height: 200px;">
+                <input formControlName="file" id="file" type="file" class="form-control" accept="image/*"
+                  (change)="onFileChange($event)" sytle="border: none;">
+                <img [src]="imageSrc" *ngIf="imageSrc" style="max-height: 500px; max-width: 900px" class="p-2"
+                  alt="...">
+              </div>
+            </div>
+            <div class="small py-4">Pihak kami mengalu-alukan sekiranya terdapat komen atau cadangan bagi meningkatkan
+              pengurusan perkongsian data melalui MyGeo Explorer.  Terima Kasih.
+            </div>
+            <h4 style="font-weight: bold;">Komen / Cadangan</h4>
+            <textarea class="form-control form-control-sm mb-4" rows="3" type="text"
+              placeholder="Masukkan Komen / Cadangan anda disini ...">
+            </textarea>
+            <hr class="my-2 bg-dark">
+            <div class="container p-3">
+              <div class="row mb-2">
+                <div class="col-6">
+                  <label class="form-control-label">Nama</label>
+                  <input class="form-control form-control-sm" type="text">
+                </div>
+                <div class="col-6">
+                  <label class="form-control-label">Emel</label>
+                  <input class="form-control form-control-sm" type="text">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="form-control-label">No Telefon</label>
+                  <input class="form-control form-control-sm" type="text">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-0 mt-5">
+            <div class="col-xl-12">
+              <h6 class="heading text-muted">PGN-ISMS-P3-019-002-260</h6>
+            </div>
           </div>
         </div>
       </div>
