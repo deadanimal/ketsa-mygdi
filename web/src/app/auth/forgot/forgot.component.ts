@@ -13,15 +13,14 @@ import { NotifyService } from 'src/app/shared/handler/notify/notify.service';
 export class ForgotComponent implements OnInit {
 
   // Image
-  imgLogo = 'assets/img/logo/jata-negara.png'
+  imgLogo = 'assets/img/logo/mygeo-logo.png'
 
   // Form
   focusEmail
   resetForm: FormGroup
   resetFormMessages = {
     'email': [
-      { type: 'required', message: 'Email is required' },
-      { type: 'email', message: 'Please enter a valid email'}
+      { type: 'email', message: 'Sila masukkan emel yang sah'}
     ]
   }
 
@@ -46,6 +45,7 @@ export class ForgotComponent implements OnInit {
     this.loadingBar.start()
     this.loadingBar.complete()
     this.successMessage()
+    this.resetForm.reset()
   }
 
   navigatePage(path: String) {

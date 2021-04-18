@@ -236,6 +236,12 @@ export class LoginComponent implements OnInit {
     this.myCheck4 = null;
   }
 
+  resetCheck3() {
+    this.myCheck2 = null;
+    this.myCheck3 = null;
+    this.myCheck4 = null;
+  }
+
   resetCheck2() {
     this.myCheck3 = null;
     this.myCheck4 = null;
