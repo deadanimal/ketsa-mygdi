@@ -31,7 +31,7 @@ export class DataListComponent implements OnInit {
 
   reset(){
     let previd = "target" + this.prevnum
-    document.getElementById(previd).style.color = "black"
+    document.getElementById(previd).style.color = ""
   }
 
 
