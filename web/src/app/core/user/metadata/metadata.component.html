@@ -103,7 +103,8 @@
                         <div class="col-xl-8">
                             <div class=" form-inline">
                                 <label for="category" class="mb-0 mr-2 " style="font-weight: bold;">Category :</label>
-                                <select class=" form-control form-control-sm" id="category" [(ngModel)]="selectedCat" (change)="resetAccordion()">
+                                <select class=" form-control form-control-sm" id="category" [(ngModel)]="selectedCat"
+                                    (change)="resetAccordion()">
                                     <option *ngFor=" let c of categoryList">{{c.name}}</option>
                                 </select>
                             </div>
@@ -229,7 +230,8 @@
                                                             <div class="col-xl-3">
                                                                 <label class="form-control-label"
                                                                     for="input-metadata-name">
-                                                                    Metadata Name<span class="text-warning">*</span> </label>
+                                                                    Metadata Name<span class="text-warning">*</span>
+                                                                </label>
                                                             </div>
                                                             <div class="col-xl-8">
                                                                 <input class="form-control form-control-sm "
@@ -640,8 +642,69 @@
                                             <div aria-labelledby="headingFour" data-parent="#accordionExample"
                                                 [isAnimated]="true" [collapse]="isCollapsed4" id="collapseFour">
                                                 <div class="acard-body opacity-8">
-                                                    <div class="container m-3">
-
+                                                    <div class="pl-lg-5">
+                                                        <div class="row mb-2">
+                                                            <div class="col-xl-3">
+                                                                <div class="form-group mb-0">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="input-west-bl">
+                                                                        West Bound Longitude<span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input class="form-control form-control-sm"
+                                                                        id="input-west-bl" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3">
+                                                                <div class="form-group mb-0">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="input-south-bl">
+                                                                        South Bound Longitude<span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input class="form-control form-control-sm"
+                                                                        id="input-south-bl" type="text">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-xl-3">
+                                                                <div class="form-group mb-0">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="input-west-bl">
+                                                                        East Bound Longitude<span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input class="form-control form-control-sm"
+                                                                        id="input-west-bl" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3">
+                                                                <div class="form-group mb-0">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="input-south-bl">
+                                                                        North Bound Longitude<span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input class="form-control form-control-sm"
+                                                                        id="input-south-bl" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-1"></div>
+                                                            <div class="col-xl-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="input-south-bl">
+                                                                        Search Location</label>
+                                                                    <div class=" input-group input-group-merge">
+                                                                        <input class=" form-control form-control-sm"
+                                                                            placeholder="Search" type="text">
+                                                                        <div class=" input-group-append">
+                                                                            <span class=" input-group-text">
+                                                                                <i class=" fas fa-binoculars"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="mapbox" class="map-container"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1716,7 +1779,8 @@
                                                             <div class="col-xl-3">
                                                                 <label class="form-control-label"
                                                                     for="input-metadata-name">
-                                                                    Metadata Name<span class="text-warning">*</span> </label>
+                                                                    Metadata Name<span class="text-warning">*</span>
+                                                                </label>
                                                             </div>
                                                             <div class="col-xl-8">
                                                                 <input class="form-control form-control-sm "
@@ -3259,7 +3323,8 @@
                                                             <div class="col-xl-3">
                                                                 <label class="form-control-label"
                                                                     for="input-metadata-name">
-                                                                    Metadata Name<span class="text-warning">*</span> </label>
+                                                                    Metadata Name<span class="text-warning">*</span>
+                                                                </label>
                                                             </div>
                                                             <div class="col-xl-8">
                                                                 <input class="form-control form-control-sm "
@@ -3674,7 +3739,8 @@
                                                         <div class="col-xl-6">
                                                             <div class="form-inline ml-3">
                                                                 <div class="form-control-label mr-3">
-                                                                    Scanning Resolution<span class="text-warning">*</span> :
+                                                                    Scanning Resolution<span
+                                                                        class="text-warning">*</span> :
                                                                 </div>
                                                                 <input class="form-control form-control-sm" type="text"
                                                                     style="width :100px" placeholder="0.0">
@@ -3773,7 +3839,8 @@
                                                         <div class="col-xl-5">
                                                             <div class="form-inline">
                                                                 <div class="form-control-label mr-3">
-                                                                    Collection Identification<span class="text-warning">*</span>
+                                                                    Collection Identification<span
+                                                                        class="text-warning">*</span>
                                                                 </div>
                                                                 <input class="form-control form-control-sm" type="text"
                                                                     style="width :150px" placeholder="Identification">
@@ -3947,7 +4014,8 @@
                                                                 <div class="row mb-2">
                                                                     <div class="col-xl-5">
                                                                         <div class="form-control-label">
-                                                                            Identifier<span class="text-warning">*</span>
+                                                                            Identifier<span
+                                                                                class="text-warning">*</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-xl-7">
@@ -4041,7 +4109,8 @@
                                                                 <div class="row mb-2">
                                                                     <div class="col-xl-5">
                                                                         <div class="form-control-label">
-                                                                            Identifier<span class="text-warning">*</span>
+                                                                            Identifier<span
+                                                                                class="text-warning">*</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-xl-7">
@@ -5218,7 +5287,8 @@
                                                             <div class="col-xl-3">
                                                                 <label class="form-control-label"
                                                                     for="input-metadata-name">
-                                                                    Metadata Name<span class="text-warning">*</span> </label>
+                                                                    Metadata Name<span class="text-warning">*</span>
+                                                                </label>
                                                             </div>
                                                             <div class="col-xl-8">
                                                                 <input class="form-control form-control-sm "
@@ -5633,7 +5703,8 @@
                                                         <div class="col-xl-6">
                                                             <div class="form-inline ml-3">
                                                                 <div class="form-control-label mr-3">
-                                                                    Scanning Resolution<span class="text-warning">*</span> :
+                                                                    Scanning Resolution<span
+                                                                        class="text-warning">*</span> :
                                                                 </div>
                                                                 <input class="form-control form-control-sm" type="text"
                                                                     style="width :100px" placeholder="0.0">
@@ -5732,7 +5803,8 @@
                                                         <div class="col-xl-5">
                                                             <div class="form-inline">
                                                                 <div class="form-control-label mr-3">
-                                                                    Collection Identification<span class="text-warning">*</span>
+                                                                    Collection Identification<span
+                                                                        class="text-warning">*</span>
                                                                 </div>
                                                                 <input class="form-control form-control-sm" type="text"
                                                                     style="width :150px" placeholder="Identification">
@@ -5906,7 +5978,8 @@
                                                                 <div class="row mb-2">
                                                                     <div class="col-xl-5">
                                                                         <div class="form-control-label">
-                                                                            Identifier<span class="text-warning">*</span>
+                                                                            Identifier<span
+                                                                                class="text-warning">*</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-xl-7">
@@ -6000,7 +6073,8 @@
                                                                 <div class="row mb-2">
                                                                     <div class="col-xl-5">
                                                                         <div class="form-control-label">
-                                                                            Identifier<span class="text-warning">*</span>
+                                                                            Identifier<span
+                                                                                class="text-warning">*</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-xl-7">

@@ -1,1 +1,314 @@
-<p>management-elementmetadata works!</p>
+<div class=" header pb-6">
+    <div class=" container-fluid">
+        <div class=" header-body">
+            <div class=" row align-items-center py-4">
+                <div class=" col-lg-8 col-7">
+                    <h6 class=" h2 d-inline-block mb-0">Kemas Kini Metadata</h6>
+
+                    <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+
+                        <ol class=" breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class=" breadcrumb-item">
+                                <a href="javascript:void(0)"> <i class=" fas fa-home text-dark"> </i> </a>
+                            </li>
+                            <li aria-current="page" class="breadcrumb-item active">
+                                Pengurusan Metadata
+                            </li>
+                            <li aria-current="page" class="breadcrumb-item active">
+                                Kemas Kini Metadata
+                            </li>
+
+                        </ol>
+                    </nav>
+                </div>
+
+                <div class=" col-lg-4 col-5 text-right">
+                    <div class="btn-group" dropdown>
+                        <button id="button-basic" dropdownToggle type="button"
+                            class="btn btn-primary btn-sm dropdown-toggle" aria-controls="dropdown-basic">
+                            Tambah <span class="caret"></span>
+                        </button>
+                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                            aria-labelledby="button-basic">
+                            <li role="menuitem"><a class="dropdown-item" (click)="openModal(addCategory)">Kategori +</a>
+                            </li>
+                            <li role="menuitem"><a class="dropdown-item" (click)="openModal(addSubTitle)">
+                                Tajuk +</a></li>
+                            <li role="menuitem"><a class="dropdown-item" (click)="openModal(addSubTitle)">
+                                Sub-Tajuk +</a></li>
+                            <li role="menuitem"><a class="dropdown-item" (click)="openModal(addElement)">Elemen +</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class=" container-fluid mt--6">
+    <div class=" row">
+        <div class=" col">
+            <div class=" card">
+                <div class=" card-header">
+                    <div class="row mb-0">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="datatable_length">
+                                <label>
+                                    Show
+                                    <select name="datatable_length" aria-controls="datatable"
+                                        class="form-control form-control-sm" (change)="entriesChange($event)">
+
+                                        <option value="5" [selected]="entries == 5">5</option>
+                                        <option value="10" [selected]="entries == 10">10</option>
+                                        <option value="25" [selected]="entries == 25">25</option>
+                                        <option value="50" [selected]="entries == 50">50</option>
+                                        <option value="-1" [selected]="entries == -1">All</option>
+                                    </select>
+                                    entries
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div id="datatable_filter" class="dataTables_filter">
+                                <label>
+                                    <input type="search" class="form-control form-control-sm" placeholder="Carian.."
+                                        aria-controls="datatable" (keyup)="filterTable($event)" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="dataTables_wrapper py-4">
+                    <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined"
+                        [rows]="temp" (activate)="onActivate($event)">
+
+                        <ngx-datatable-column name="Bil" [width]="80">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                                {{rowIndex+1}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Label" [width]="100"></ngx-datatable-column>
+                        <ngx-datatable-column name="Tajuk" [width]="200"></ngx-datatable-column>
+                        <ngx-datatable-column name="Sub-Tajuk" [width]="100">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.subtajuk}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Elemen" [width]="100"></ngx-datatable-column>
+                        <ngx-datatable-column name="Kategori" [width]="100"></ngx-datatable-column>
+                        <ngx-datatable-column name="Tindakan" [width]="100">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <a href="javascript:void(0)"><i class="fas fa-edit mr-3"></i></a>
+                                <a class="text-warning" (click)="deleteData()"><i class="fas fa-trash-alt"></i></a>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+
+
+<ng-template #addCategory>
+    <div class="modal-header bg-default">
+        <h6 class="modal-title text-white my-auto" id="modal-title-default">
+            Tambah Kategori
+        </h6>
+
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
+            <span aria-hidden="true" class="text-white my-auto"> × </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label class="form-control-label">Nama Kategori</label>
+                <input class="form-control" placeholder="Masukkan Kategori" formControlName="category" type="text">
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success ml-auto" type="button" (click)="confirm()">
+            Simpan
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #addTitle>
+    <div class="modal-header bg-default">
+        <h6 class="modal-title text-white my-auto" id="modal-title-default">
+            Tambah Tajuk
+        </h6>
+
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
+            <span aria-hidden="true" class="text-white my-auto"> × </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label class="form-control-label">Nama Kategori</label>
+                <select class="form-control py-0">
+                    <option selected disabled hidden>Pilih Kategori
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Label</label>
+                <input class="form-control" placeholder="Masukkan Label" formControlName="label"
+                    type="text">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Nama Tajuk</label>
+                <input class="form-control" placeholder="Masukkan Tajuk" formControlName="title"
+                    type="text">
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success ml-auto" type="button" (click)="confirm()">
+            Simpan
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #addSubTitle>
+    <div class="modal-header bg-default">
+        <h6 class="modal-title text-white my-auto" id="modal-title-default">
+            Tambah Sub-Tajuk
+        </h6>
+
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
+            <span aria-hidden="true" class="text-white my-auto"> × </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label class="form-control-label">Nama Kategori</label>
+                <select class="form-control py-0">
+                    <option selected disabled hidden>Pilih Kategori
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Label</label>
+                <select class="form-control py-0">
+                    <option selected disabled hidden>Pilih Label
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Nama Tajuk</label>
+                <select class="form-control py-0">
+                    <option selected disabled hidden>Pilih Tajuk
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Nama Sub-Tajuk</label>
+                <input class="form-control" placeholder="Masukkan Sub-Tajuk" formControlName="subtitle"
+                    type="text">
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success ml-auto" type="button" (click)="confirm()">
+            Simpan
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #addElement>
+    <div class="modal-header bg-default">
+        <h6 class="modal-title text-white my-auto" id="modal-title-default">
+            Tambah Elemen
+        </h6>
+
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
+            <span aria-hidden="true" class="text-white my-auto"> × </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label class="form-control-label">Nama Kategori</label>
+                <select class="form-control py-0">
+                    <option selected disabled hidden>Pilih Kategori
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Label</label>
+                <select class="form-control py-0">
+                    <option selected disabled hidden>Pilih Label
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Nama Tajuk</label>
+                <select class="form-control py-0">
+                    <option selected disabled hidden>Pilih Tajuk
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Nama Sub-Tajuk</label>
+                <select class="form-control py-0">
+                    <option selected disabled hidden>Pilih Sub-Tajuk
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Nama Elemen</label>
+                <input class="form-control" placeholder="Masukkan Elemen" formControlName="elemen"
+                    type="text">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Data Type</label>
+                <select class="form-control py-0" style="width: 50%;">
+                    <option selected disabled hidden>Pilih Data Type
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success ml-auto" type="button" (click)="confirm()">
+            Simpan
+        </button>
+    </div>
+</ng-template>

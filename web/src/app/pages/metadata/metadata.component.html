@@ -1,3 +1,101 @@
 <app-navbar2></app-navbar2>
-<p>metadata works!</p>
+<div class=" bgg" style="min-height: 800px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark"></h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container">
+            <div class="card p-3" style="background-color: rgba(255, 255, 255, 0.9);">
+            <div class="card-body text-center">
+                <h1>Carian Metadata</h1>
+                <hr class="mb-3">
+                <form *ngIf="!searchAdvanced"
+                    class="navbar-search navbar-search-light form-inline my-4 justify-content-center"
+                    id="navbar-search-main">
+                    <div class="form-inline mb-0" [ngClass]="{ focused: focus === true }">
+                        <div class="input-group input-group-alternative input-group-merge" style="background-image: linear-gradient(to right, #ebba16, #ed8a19);">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input class="form-control" placeholder="Carian..." type="text" (focus)="focus = true"
+                                (blur)="focus = false" />
+                        </div>
+                    </div>
+                    <button type="button" class="close" (click)="closeSearch()" data-action="search-close"
+                        data-target="#navbar-search-main" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </form>
+
+                <a *ngIf="!searchAdvanced" (click)="searchMessage()" class="btn btn-sm btn-success text-white text-center"><span><i
+                            class="mr-2 fas fa-search"></i></span>Cari</a>
+                <a *ngIf="!searchAdvanced" (click)="openModal(advancedSearch)"
+                    class="btn btn-sm btn-primary text-white text-center">Carian Tambahan >></a>
+
+            </div>
+        </div>
+        </div>
+        
+    </div>
+</div>
 <app-footer2></app-footer2>
+
+<ng-template #advancedSearch>
+    <div class="modal-header bg-primary">
+        <h6 class="modal-title text-white my-auto" id="modal-title-default">
+            Carian Tambahan
+        </h6>
+
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
+            <span aria-hidden="true" class="text-white my-auto"> × </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="form-control-label">Jenis Maklumat Kandungan (Content Type)</label>
+            <select class="form-control py-0 mb-3">
+                <option hidden selected>Pilih Maklumat Kandungan</option>
+                <option>Alam Sekitar dan Pemuliharaan</option>
+                <option>Batasan Pentadbiran dan Politik</option>
+                <option>Biologi dan Ekologi</option>
+                <option>Budaya, Masyarakat dan Demografi</option>
+                <option value="">Geologi dan Geofizik</option>
+                <option value="">Imejan dan Peta Pangkalan</option>
+            </select>
+
+            <label class="form-control-label">Kategori Data (Topic Category)</label>
+            <select size="4" class="form-control mb-3">
+                <option hidden selected>Pilih Kategori Data</option>
+                <option>Alam Sekitar dan Pemuliharaan</option>
+                <option>Batasan Pentadbiran dan Politik</option>
+                <option>Biologi dan Ekologi</option>
+                <option>Budaya, Masyarakat dan Demografi</option>
+                <option value="">Geologi dan Geofizik</option>
+                <option value="">Imejan dan Peta Pangkalan</option>
+            </select>
+
+            <label class="form-control-label">Tarikh Mula</label>
+            <input class="form-control mb-3" type="date">
+
+            <label class="form-control-label">Tarikh Tamat</label>
+            <input class="form-control mb-2" type="date">
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success ml-auto " type="button" (click)="searchMessage()">
+            Selesai
+        </button>
+    </div>
+</ng-template>

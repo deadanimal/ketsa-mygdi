@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   baseUrl: 'https://www.api.prototype.com.my/',
-  mapbox: {
-    accessToken: 'pk.eyJ1IjoiYWZlZXpheml6IiwiYSI6ImNqNjJ6anlhYzA0bTczM3FvYnppbDh4eTEifQ.AdDRr42bNfNJvQENLrE6eg' // Your access token goes here
+  mapboxKey: {
+    accessToken: 'pk.eyJ1IjoiZG5pZWFmZWVxIiwiYSI6ImNrbm55YmNscDEydnIyeW94MW5nMW92OTYifQ.SeLAsWQstUdr4vkzPk3GmA' // Your access token goes here
   }
 };
 

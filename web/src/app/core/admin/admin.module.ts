@@ -75,7 +75,7 @@ import { ValuationComponent } from './valuation/valuation.component';
     RouterModule.forChild(AdminRoutes),
     QuillModule.forRoot({
       modules: {
-        syntax: true,
+        syntax: false,
         toolbar: [
           ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
           ['blockquote', 'code-block'],

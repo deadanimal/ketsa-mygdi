@@ -20,6 +20,10 @@ export class NotifyService {
     this.toastr.warning(title, message)
   }
 
+  openToastrInfo(title: any, message: string) {
+    this.toastr.info(title, message)
+  }
+
   openToastr(title: any, message: string) {
     this.toastr.success(title, message)
   }

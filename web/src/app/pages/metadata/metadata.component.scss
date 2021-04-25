@@ -1,0 +1,28 @@
+.bgg {
+    background-image: url('src/assets/img/theme/mygeo-background.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card {
+    border-radius: 1.25rem;
+    top: 200px
+}
+
+.badge-custom {
+    color: #303030;
+    background-image: linear-gradient(to right, #ebba16, #ed8a19);
+    font-size: 60%;
+    padding: .75rem 1.05rem;
+}
+
+.badge-custom:hover,
+.badge-custom:focus {
+    text-decoration: none;
+
+    color: #fff;
+    background-color: #fa3a0e;
+}
+

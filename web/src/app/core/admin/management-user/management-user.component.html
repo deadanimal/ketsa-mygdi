@@ -89,27 +89,27 @@
                         [footerHeight]="50" [rowHeight]="'auto'" [limit]="tableEntries != -1 ? tableEntries:undefined"
                         [rows]="tableTemp" (activate)="onActivate($event)">
 
-                        <ngx-datatable-column>
-                            <ng-template ngx-datatable-header-template>
-                                <span>User ID</span>
-                            </ng-template>
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.user_id}}
+                        <ngx-datatable-column name="Bil" [width]="80">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                                {{rowIndex+1}}
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Name"></ngx-datatable-column>
-                        <ngx-datatable-column name="Email"></ngx-datatable-column>
-                        <ngx-datatable-column>
-                            <ng-template ngx-datatable-header-template>
-                                <span>Joined At</span>
-                            </ng-template>
+                        <ngx-datatable-column name="Nama Pengguna">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.joined_at}}
+                                {{row.name}}
                             </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column>
                             <ng-template ngx-datatable-header-template>
-                                <span>User Type</span>
+                                <span>Nama Agensi</span>
+                            </ng-template>
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.agency_name}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column>
+                            <ng-template ngx-datatable-header-template>
+                                <span>Peranan</span>
                             </ng-template>
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 {{row.user_type}}

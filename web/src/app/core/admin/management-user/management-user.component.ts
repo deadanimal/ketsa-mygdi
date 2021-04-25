@@ -246,7 +246,7 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
     this.chartDec = 0
     this.tableRows.forEach(
       ((row) => {
-        let checkerDate = moment(row.joined_at)
+        let checkerDate = moment(row.agency_name)
         let checkerDateMonth = checkerDate.month()
         if (checkerDateMonth == 0) {
           this.chartJan += 1
@@ -299,15 +299,15 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
 
   confirm() {
     swal.fire({
-      title: "Confirmation",
-      text: "Are you sure to create this new user?",
+      title: "Pengesahan",
+      text: "Anda pasti untuk cipta pengguna baru ini?",
       type: "info",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-info",
-      confirmButtonText: "Confirm",
+      confirmButtonText: "Pasti",
       showCancelButton: true,
       cancelButtonClass: "btn btn-danger",
-      cancelButtonText: "Cancel"
+      cancelButtonText: "Batal"
     }).then((result) => {
       if (result.value) {
         this.register()
@@ -335,12 +335,12 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
 
   register() {
     swal.fire({
-      title: "Success",
-      text: "A new user has been created!",
+      title: "Berjaya",
+      text: "Akaun pengguna baru telah dicipta!",
       type: "success",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-success",
-      confirmButtonText: "Close"
+      confirmButtonText: "Tutup"
     }).then((result) => {
       if (result.value) {
         this.modal.hide()
