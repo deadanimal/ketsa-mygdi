@@ -1,5 +1,5 @@
 <app-navbar2></app-navbar2>
-<div class="bgg" style="min-height: 500px;">
+<div class="bgg">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -19,8 +19,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-3">
-                        <div><span>selectvalue:</span>{{this.selectData}}</div>
+                    <div class="col-2">
                         <h2>Kategori:</h2>
                         <div class="list-group" id="cat1">
                             <h3 [(ngModel)]="selectData" id="target1" ngDefaultControl  (click)="reset()" (click)="activate(1)">1)&nbsp; Aeronautical</h3>
@@ -37,7 +36,7 @@
                             <h3 [(ngModel)]="selectData" id="target12" ngDefaultControl (click)="reset()" (click)="activate(12)">12)&nbsp; General</h3>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-5">
                         <div *ngIf="selectData == 1" class="list-group">
                             <h2>Sub-Kategori:</h2>
                             <h3>1) Ruang Udara (Air Space - AA)</h3>
@@ -48,12 +47,11 @@
                             <h3>1)&nbsp; Kediaman (Residential - BA)</h3>
                             <h3>2)&nbsp; Komersial (Commercial - BB)</h3>
                             <h3>3)&nbsp; Industri (Industrial - BC)</h3>
-                            <h3>4)&nbsp; ###### (##### - BC)</h3>
-                            <h3>5)&nbsp; Pendidikan (Educational - BE)</h3>
-                            <h3>6)&nbsp; Keagamaan (Religious - BF)</h3>
-                            <h3>7)&nbsp; Kemudahan Rekreasi (Recreational - BG)</h3>
-                            <h3>8)&nbsp; Perkuburan (Cemetery - BH)</h3>
-                            <h3>9)&nbsp; Struktur Kekal (Built-Up - BJ)</h3>
+                            <h3>4)&nbsp; Pendidikan (Educational - BE)</h3>
+                            <h3>5)&nbsp; Keagamaan (Religious - BF)</h3>
+                            <h3>6)&nbsp; Kemudahan Rekreasi (Recreational - BG)</h3>
+                            <h3>7)&nbsp; Perkuburan (Cemetery - BH)</h3>
+                            <h3>8)&nbsp; Struktur Kekal (Built-Up - BJ)</h3>
                         </div>
                         <div *ngIf="selectData == 3" class="list-group">
                             <h2>Sub-Kategori:</h2>
@@ -67,8 +65,54 @@
                             <h3>1)&nbsp; Jenis Batuan (Geolithology -  GA)</h3>
                             <h3>2)&nbsp; Mineral (Minerals - GB) </h3>
                             <h3>3)&nbsp; Penjelajahan (Exploration - GE)</h3>
-                            <h3>3)&nbsp; Fitur Geologi (Geological Features - GF)</h3>
-                            <h3>3)&nbsp; Geosains (Geoscience - GG)</h3>
+                            <h3>4)&nbsp; Fitur Geologi (Geological Features - GF)</h3>
+                            <h3>5)&nbsp; Geosains (Geoscience - GG)</h3>
+                        </div>
+                        <div *ngIf="selectData == 5" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1)&nbsp; Hidrografi Pinggir Laut (Coastal Hydrography – HA)</h3>
+                            <h3>2)&nbsp; Struktur Garis Pesisir Pelabuhan (Shoreline Structure - HB) </h3>
+                            <h3>3)&nbsp; Pelabuhan (Ports and Harbours - HD)</h3>
+                            <h3>4)&nbsp; Bantuan Navigasi (Navigation Aids - HE)</h3>
+                            <h3>5)&nbsp; Makumat Kedalaman (Depth Information - HG)</h3>
+                            <h3>6)&nbsp; Air Daratan (Inland Water - HH)</h3>
+                            <h3>7)&nbsp; Pulau (Island - HL)</h3>
+                        </div>
+                        <div *ngIf="selectData == 6" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1)&nbsp; Gambaran Relief (Relief Portrayal - RA)</h3>
+                        </div>
+                        <div *ngIf="selectData == 7" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1)&nbsp; (Soil Classification)</h3>
+                        </div>
+                        <div *ngIf="selectData == 8" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1)&nbsp; (Land Transportation - TA</h3>
+                        </div>
+                        <div *ngIf="selectData == 9" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1)&nbsp; Elektrik (Electricity - UA)</h3>
+                            <h3>2)&nbsp; Bekalan Air (Water Supply - UC) </h3>
+                            <h3>3)&nbsp; Pembetungan (Sewerage - UF)</h3>
+                            <h3>4)&nbsp; Pengurusan Sisa Pepejal (Waste Management – UG)</h3>
+                        </div>
+                        <div *ngIf="selectData == 10" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1)&nbsp; Pertanian (Agriculture - VA)</h3>
+                            <h3>2)&nbsp; Perhutanan (Forest - VB) </h3>
+                            <h3>3)&nbsp; Pelbagai (Miscellaneous - VC)</h3>
+                        </div>
+                        <div *ngIf="selectData == 11" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1)&nbsp; Analisis Muka Bumi (Terrain Analysis Dataset - XA)</h3>
+                            <h3>2)&nbsp; Meteorologi (Meteorological Dataset - XB) </h3>
+                            <h3>3)&nbsp; Data Bergrid dan Imej (Imagery & Gridded Dataset – XC)</h3>
+                        </div>
+                        <div *ngIf="selectData == 12" class="list-group">
+                            <h2>Sub-Kategori:</h2>
+                            <h3>1)&nbsp; Titik Kawal (Control Point - ZA)</h3>
+                            <h3>2)&nbsp; Label Nama Geografi (Label of Geography Name - ZB) </h3>
                         </div>
                     </div>
                     <div class="col-3">

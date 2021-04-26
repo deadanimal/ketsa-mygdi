@@ -8,6 +8,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { MapService } from "src/app/shared/services/map/map.service";
+import { Metadata } from 'src/app/shared/services/data/metadata';
 
 
 @Component({
@@ -16,8 +17,10 @@ import { MapService } from "src/app/shared/services/map/map.service";
   styleUrls: ["./metadata.component.scss"],
 })
 export class MetadataComponent implements OnChanges,OnInit,AfterViewInit  {
-  //Select Category
 
+  metadata = new Metadata();
+
+  //Select Category
   categoryList = [
     { name: "Dataset" },
     { name: "Services" },
@@ -74,6 +77,10 @@ export class MetadataComponent implements OnChanges,OnInit,AfterViewInit  {
     this.map.buildMap()
   }
 
+  insertData(){
+    console.log(this.metadata)
+  }
+
   toggleEdit() {
     this.editEnabled = !this.editEnabled;
   }
@@ -95,6 +102,7 @@ export class MetadataComponent implements OnChanges,OnInit,AfterViewInit  {
         if (result.value) {
           this.edit();
           this.toggleEdit();
+          this.insertData();
         }
       });
   }
