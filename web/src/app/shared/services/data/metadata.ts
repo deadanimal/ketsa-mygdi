@@ -53,8 +53,11 @@ export class Metadata {
   scope: any;
   compliance_lvl: any;
   datecompleteness: any;
-  result:any;
-  conformance_result:any;
-  
-  
+  result: any;
+  conformance_result: any;
+
+  services_type:any;
+  operation:any;
+  service_URL:any;
+  coupledataset_type:any;
 }

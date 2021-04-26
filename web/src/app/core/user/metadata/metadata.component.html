@@ -244,13 +244,13 @@
                                                                 <div class="col-xl-8">
                                                                     <input class="form-control form-control-sm mb-2"
                                                                         id="address1" placeholder="Line 1 Address"
-                                                                        type="text">
+                                                                        type="text" [(ngModel)]="metadata.address1">
                                                                     <input class="form-control form-control-sm mb-2"
                                                                         id="address2" placeholder="Line 2 Address"
-                                                                        type="text">
+                                                                        type="text" [(ngModel)]="metadata.address2">
                                                                     <input class="form-control form-control-sm mb-2"
                                                                         name="address3" placeholder="Line 3 Address"
-                                                                        type="text">
+                                                                        type="text" [(ngModel)]="metadata.address3">
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
@@ -262,9 +262,9 @@
                                                                                 [(ngModel)]="metadata.postcode">
                                                                                 <option selected disabled hidden> Select
                                                                                     Postcode</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-xl-2">
@@ -276,16 +276,16 @@
                                                                                 name="city" [(ngModel)]="metadata.city">
                                                                                 <option selected disabled hidden> Select
                                                                                     City</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="state"> State</label>
+                                                                                for="state">State</label>
                                                                         </div>
                                                                         <div class="col-xl-4">
                                                                             <select class="form-control form-control-sm"
@@ -293,9 +293,9 @@
                                                                                 [(ngModel)]="metadata.state">
                                                                                 <option selected disabled hidden> Select
                                                                                     State</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-xl-2">
@@ -308,9 +308,9 @@
                                                                                 [(ngModel)]="metadata.country">
                                                                                 <option selected disabled hidden> Select
                                                                                     Country</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1238,13 +1238,13 @@
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result" [(ngModel)]="metadata.result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                ="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -1284,7 +1284,8 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="scope">
+                                                                                name="scope"
+                                                                                [(ngModel)]="metadata.scope">
                                                                                 <option selected disabled hidden> Select
                                                                                     Scope
                                                                                 </option>
@@ -1294,13 +1295,14 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="complev">
+                                                                                for="compliance_lvl">
                                                                                 Compliance Level
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="complev" type="text"
+                                                                                name="compliance_lvl" type="text"
+                                                                                [(ngModel)]="metadata.compliance_lvl"
                                                                                 placeholder="Compliance Level">
                                                                         </div>
                                                                         <div class="col-xl-1">
@@ -1311,20 +1313,20 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="datecompleteness" type="date"
-                                                                                placeholder="Select Date">
+                                                                                name="datecompleteness" type="date"
+                                                                                [(ngModel)]="metadata.datecompleteness">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -1340,8 +1342,9 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="conforesult" type="text"
-                                                                                placeholder="Conformance Result">
+                                                                                name="conformance_result" type="text"
+                                                                                placeholder="Conformance Result"
+                                                                                [(ngModel)]="metadata.conformance_result">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1363,7 +1366,8 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="scope">
+                                                                                name="scope"
+                                                                                [(ngModel)]="metadata.scope">
                                                                                 <option selected disabled hidden> Select
                                                                                     Scope
                                                                                 </option>
@@ -1373,13 +1377,14 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="complev">
+                                                                                for="compliance_lvl">
                                                                                 Compliance Level
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="complev" type="text"
+                                                                                name="compliance_lvl" type="text"
+                                                                                [(ngModel)]="metadata.compliance_lvl"
                                                                                 placeholder="Compliance Level">
                                                                         </div>
                                                                         <div class="col-xl-1">
@@ -1390,20 +1395,20 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="datecompleteness" type="date"
-                                                                                placeholder="Select Date">
+                                                                                name="datecompleteness" type="date"
+                                                                                [(ngModel)]="metadata.datecompleteness">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -1419,8 +1424,9 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="conforesult" type="text"
-                                                                                placeholder="Conformance Result">
+                                                                                name="conformance_result" type="text"
+                                                                                placeholder="Conformance Result"
+                                                                                [(ngModel)]="metadata.conformance_result">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1442,7 +1448,8 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="scope">
+                                                                                name="scope"
+                                                                                [(ngModel)]="metadata.scope">
                                                                                 <option selected disabled hidden> Select
                                                                                     Scope
                                                                                 </option>
@@ -1452,13 +1459,14 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="complev">
+                                                                                for="compliance_lvl">
                                                                                 Compliance Level
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="complev" type="text"
+                                                                                name="compliance_lvl" type="text"
+                                                                                [(ngModel)]="metadata.compliance_lvl"
                                                                                 placeholder="Compliance Level">
                                                                         </div>
                                                                         <div class="col-xl-1">
@@ -1469,20 +1477,20 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="datecompleteness" type="date"
-                                                                                placeholder="Select Date">
+                                                                                name="datecompleteness" type="date"
+                                                                                [(ngModel)]="metadata.datecompleteness">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -1498,8 +1506,9 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="conforesult" type="text"
-                                                                                placeholder="Conformance Result">
+                                                                                name="conformance_result" type="text"
+                                                                                placeholder="Conformance Result"
+                                                                                [(ngModel)]="metadata.conformance_result">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1524,7 +1533,8 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="scope">
+                                                                                name="scope"
+                                                                                [(ngModel)]="metadata.scope">
                                                                                 <option selected disabled hidden> Select
                                                                                     Scope
                                                                                 </option>
@@ -1534,13 +1544,14 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="complev">
+                                                                                for="compliance_lvl">
                                                                                 Compliance Level
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="complev" type="text"
+                                                                                name="compliance_lvl" type="text"
+                                                                                [(ngModel)]="metadata.compliance_lvl"
                                                                                 placeholder="Compliance Level">
                                                                         </div>
                                                                         <div class="col-xl-1">
@@ -1551,20 +1562,20 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="datecompleteness" type="date"
-                                                                                placeholder="Select Date">
+                                                                                name="datecompleteness" type="date"
+                                                                                [(ngModel)]="metadata.datecompleteness">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -1580,8 +1591,9 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="conforesult" type="text"
-                                                                                placeholder="Conformance Result">
+                                                                                name="conformance_result" type="text"
+                                                                                placeholder="Conformance Result"
+                                                                                [(ngModel)]="metadata.conformance_result">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1726,8 +1738,9 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-xl-8">
-                                                                <input class="form-control form-control-sm "
-                                                                    id="metadata-name" placeholder="Name" type="text">
+                                                                <input class="form-control form-control-sm"
+                                                                    name="metadata_name" placeholder="Name" type="text"
+                                                                    [(ngModel)]="metadata.metadata_name">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-2">
@@ -1738,7 +1751,8 @@
                                                             </div>
                                                             <div class="col-xl-6">
                                                                 <select class="form-control form-control-sm"
-                                                                    id="typeproduct">
+                                                                    name="product_type"
+                                                                    [(ngModel)]="metadata.product_type">
                                                                     <option selected disabled hidden> Select Product
                                                                         Type
                                                                     </option>
@@ -1754,7 +1768,7 @@
                                                             </div>
                                                             <div class="col-xl-8">
                                                                 <textarea class="form-control form-control-sm "
-                                                                    id="abstract" type="text"
+                                                                    id="abstract" type="text" [(ngModel)]="metadata.abstract"
                                                                     rows="6"><Nama Aplikasi> <Tujuan> <Tahun Pembangunan> <Kemaskini> <Data Terlibat> <Sasaran Pengguna> <Versi> <Perisian Yang Digunakan dalam Pembangunan> <Versi Perisian></textarea>
                                                             </div>
                                                         </div>
@@ -1766,7 +1780,7 @@
                                                             </div>
                                                             <div class="col-xl-3">
                                                                 <select class="form-control form-control-sm"
-                                                                    id="servicestype">
+                                                                    name="services_type" [(ngModel)]="metadata.services_type">
                                                                     <option selected disabled hidden> Select Services
                                                                         Type
                                                                     </option>
@@ -1781,30 +1795,30 @@
                                                             </div>
                                                             <div class="col-xl-4">
                                                                 <input class="form-control form-control-sm "
-                                                                    id="operation" placeholder="Insert Ops Name"
-                                                                    type="text">
+                                                                    name="operation" placeholder="Insert Ops Name"
+                                                                    type="text" [(ngModel)]="metadata.operation">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-xl-3">
-                                                                <label class="form-control-label" for="servURL">
+                                                                <label class="form-control-label" for="service_URL">
                                                                     Service URL<span class="text-warning">*</span>
                                                                 </label>
                                                             </div>
                                                             <div class="col-xl-4">
                                                                 <input class="form-control form-control-sm "
-                                                                    id="servURL" placeholder="Insert Service URL"
-                                                                    type="text">
+                                                                    name="service_URL" placeholder="Insert Service URL"
+                                                                    type="text" [(ngModel)]="metadata.service_URL">
                                                             </div>
                                                             <div class="col-xl-3">
                                                                 <label class="form-control-label"
-                                                                    for="coupledataset-type">
+                                                                    for="coupledataset_type">
                                                                     Type of Coupling with Dataset
                                                                 </label>
                                                             </div>
                                                             <div class="col-xl-2">
                                                                 <select class="form-control form-control-sm"
-                                                                    id="coupledataset-type">
+                                                                    name="coupledataset_type" [(ngModel)]="metadata.coupledataset_type">
                                                                     <option selected disabled hidden> Select Type
                                                                         Dataset Coupling
                                                                     </option>
@@ -1825,7 +1839,8 @@
                                                             </div>
                                                             <div class="col-xl-6">
                                                                 <select class="form-control form-control-sm"
-                                                                    id="contactperson">
+                                                                    name="contact_person"
+                                                                    [(ngModel)]="metadata.contact_person">
                                                                     <option selected disabled hidden> Contact Person's
                                                                         Name
                                                                     </option>
@@ -1853,14 +1868,14 @@
                                                                 </div>
                                                                 <div class="col-xl-8">
                                                                     <input class="form-control form-control-sm mb-2"
-                                                                        id="address1" placeholder="Line 1 Address"
-                                                                        type="text">
-                                                                    <input class="form-control form-control-sm mb-2"
-                                                                        id="address2" placeholder="Line 2 Address"
-                                                                        type="text">
-                                                                    <input class="form-control form-control-sm mb-2"
-                                                                        id="address3" placeholder="Line 3 Address"
-                                                                        type="text">
+                                                                    id="address1" placeholder="Line 1 Address"
+                                                                    type="text" [(ngModel)]="metadata.address1">
+                                                                <input class="form-control form-control-sm mb-2"
+                                                                    id="address2" placeholder="Line 2 Address"
+                                                                    type="text" [(ngModel)]="metadata.address2">
+                                                                <input class="form-control form-control-sm mb-2"
+                                                                    name="address3" placeholder="Line 3 Address"
+                                                                    type="text" [(ngModel)]="metadata.address3">
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
@@ -1871,9 +1886,9 @@
                                                                                 id="postcode">
                                                                                 <option selected disabled hidden> Select
                                                                                     Postcode</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-xl-2">
@@ -1885,9 +1900,9 @@
                                                                                 id="city">
                                                                                 <option selected disabled hidden> Select
                                                                                     City</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1901,9 +1916,9 @@
                                                                                 id="state">
                                                                                 <option selected disabled hidden> Select
                                                                                     State</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-xl-2">
@@ -1915,9 +1930,9 @@
                                                                                 id="country">
                                                                                 <option selected disabled hidden> Select
                                                                                     Country</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1938,8 +1953,9 @@
                                                                 <label class="form-control-label" for="fax">Fax</label>
                                                             </div>
                                                             <div class="col-xl-3">
-                                                                <input class="form-control form-control-sm" id="fax"
-                                                                    placeholder="No Fax" type="text">
+                                                                <input class="form-control form-control-sm" name="fax"
+                                                                    placeholder="No Fax" type="text"
+                                                                    [(ngModel)]="metadata.fax">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-2">
@@ -1969,7 +1985,8 @@
                                                             </div>
                                                             <div class="col-xl-8">
                                                                 <input class="form-control form-control-sm "
-                                                                    id="website" placeholder="Name" type="text">
+                                                                    name="website" placeholder="Name" type="text"
+                                                                    [(ngModel)]="metadata.website">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2183,8 +2200,73 @@
                                             <div aria-labelledby="headingFour" data-parent="#accordionExample"
                                                 [isAnimated]="true" [collapse]="isCollapsed4" id="collapseFour">
                                                 <div class="acard-body opacity-8">
-                                                    <div class="container m-3">
-
+                                                    <div class="pl-lg-5">
+                                                        <div class="row mb-2">
+                                                            <div class="col-xl-3">
+                                                                <div class="form-group mb-0">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="west_bl">
+                                                                        West Bound Longitude<span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input class="form-control form-control-sm"
+                                                                        name="west_bl" type="text"
+                                                                        [(ngModel)]="metadata.west_bl">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3">
+                                                                <div class="form-group mb-0">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="south_bl">
+                                                                        South Bound Longitude<span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input class="form-control form-control-sm"
+                                                                        name="south_bl" type="text"
+                                                                        [(ngModel)]="metadata.south_bl">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-xl-3">
+                                                                <div class="form-group mb-0">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="east_bl">
+                                                                        East Bound Longitude<span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input class="form-control form-control-sm"
+                                                                        name="east_bl" type="text"
+                                                                        [(ngModel)]="metadata.east_bl">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3">
+                                                                <div class="form-group mb-0">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="south_bl">
+                                                                        North Bound Longitude<span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input class="form-control form-control-sm"
+                                                                        name="south_bl" type="text"
+                                                                        [(ngModel)]="metadata.south_bl">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-1"></div>
+                                                            <div class="col-xl-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-control-label mr-2"
+                                                                        for="south_bl">
+                                                                        Search Location</label>
+                                                                    <div class=" input-group input-group-merge">
+                                                                        <input class=" form-control form-control-sm"
+                                                                            placeholder="Search" type="text">
+                                                                        <div class=" input-group-append">
+                                                                            <span class=" input-group-text">
+                                                                                <i class=" fas fa-binoculars"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="mapbox" class="map-container"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2215,17 +2297,19 @@
                                                             </div>
                                                             <div class="col-xl-6">
                                                                 <input class="form-control form-control-sm "
-                                                                    id="filename" placeholder="" type="text">
+                                                                    name="filename" placeholder="" type="text"
+                                                                    [(ngModel)]="metadata.filename">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-2">
                                                             <div class="col-xl-3">
-                                                                <label class="form-control-label" for="filename">
+                                                                <label class="form-control-label" for="filetype">
                                                                     File Type </label>
                                                             </div>
                                                             <div class="col-xl-6">
-                                                                <input type="file" id="filetype"
-                                                                    class="form-control form-control-sm p-0">
+                                                                <input type="file" name="filetype"
+                                                                    class="form-control form-control-sm p-0"
+                                                                    [(ngModel)]="metadata.filetype">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-2">
@@ -2234,8 +2318,9 @@
                                                                     URL </label>
                                                             </div>
                                                             <div class="col-xl-6">
-                                                                <input class="form-control form-control-sm " id="url"
-                                                                    placeholder="" type="text">
+                                                                <input class="form-control form-control-sm" name="url"
+                                                                    placeholder="" type="text"
+                                                                    [(ngModel)]="metadata.url">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2247,8 +2332,9 @@
                                                                     Keyword<span class="text-warning">*</span> </label>
                                                             </div>
                                                             <div class="col-xl-5">
-                                                                <input class="form-control form-control-sm "
-                                                                    id="keyword" placeholder="" type="text">
+                                                                <input class="form-control form-control-sm"
+                                                                    name="keyword" placeholder="" type="text"
+                                                                    [(ngModel)]="metadata.keyword">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-2">
@@ -2258,7 +2344,8 @@
                                                             </div>
                                                             <div class="col-xl-5">
                                                                 <input class="form-control form-control-sm "
-                                                                    id="adkeyword1" placeholder="" type="text">
+                                                                    id="adkeyword1" placeholder="" type="text"
+                                                                    [(ngModel)]="metadata.adkeyword1">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-2">
@@ -2268,7 +2355,8 @@
                                                             </div>
                                                             <div class="col-xl-5">
                                                                 <input class="form-control form-control-sm "
-                                                                    id="adkeyword2" placeholder="" type="text">
+                                                                    id="adkeyword2" placeholder="" type="text"
+                                                                    [(ngModel)]="metadata.adkeyword2">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2298,23 +2386,25 @@
                                                         </div>
                                                         <div class="col-xl-3">
                                                             <input class="form-control form-control-sm "
-                                                                id="distribution-format" placeholder="Format Name"
-                                                                type="text">
+                                                                name="distribution_format" placeholder="Format Name"
+                                                                type="text" [(ngModel)]="metadata.distribution_format">
                                                         </div>
                                                         <div class="col-xl-1">
                                                             <label class="form-control-label" for="version">
                                                                 Version </label>
                                                         </div>
                                                         <div class="col-xl-2">
-                                                            <input class="form-control form-control-sm " id="version"
-                                                                placeholder="Format Version" type="text">
+                                                            <input class="form-control form-control-sm " name="version"
+                                                                placeholder="Format Version" type="text"
+                                                                [(ngModel)]="metadata.version">
                                                         </div>
                                                         <div class="col-xl-1">
                                                             <label class="form-control-label" for="medium">
                                                                 Medium </label>
                                                         </div>
                                                         <div class="col-xl-3">
-                                                            <select class="form-control form-control-sm" id="medium">
+                                                            <select class="form-control form-control-sm" name="medium"
+                                                                [(ngModel)]="metadata.medium">
                                                                 <option selected disabled hidden> Select Medium Name
                                                                 </option>
                                                                 <option value="1">Option 1</option>
@@ -2329,8 +2419,8 @@
                                                         </div>
                                                         <div class="col-xl-6">
                                                             <input class="form-control form-control-sm "
-                                                                id="distributor" placeholder="Organization Name"
-                                                                type="text">
+                                                                name="distributor" placeholder="" type="text"
+                                                                [(ngModel)]="metadata.distributor">
                                                         </div>
                                                     </div>
                                                     <h6 class="heading-small text-muted mt-4">Distribution Order Process
@@ -2344,44 +2434,48 @@
                                                             </div>
                                                             <div class="col-xl-3">
                                                                 <input class="form-control form-control-sm "
-                                                                    id="unit-distribution" placeholder="Units"
-                                                                    type="text">
+                                                                    name="unit_distribution" placeholder="Units"
+                                                                    type="text"
+                                                                    [(ngModel)]="metadata.unit_distribution">
                                                             </div>
                                                             <div class="col-xl-2">
                                                                 <label class="form-control-label" for="sizemb">
                                                                     Size (Megabytes) </label>
                                                             </div>
                                                             <div class="col-xl-2">
-                                                                <input class="form-control form-control-sm " id="sizemb"
-                                                                    placeholder="Size" type="text">
+                                                                <input class="form-control form-control-sm "
+                                                                    name="sizemb" placeholder="Size" type="text"
+                                                                    [(ngModel)]="metadata.sizemb">
                                                             </div>
                                                             <div class="col-xl-1">
                                                                 <label class="form-control-label" for="fees">
                                                                     Fees </label>
                                                             </div>
                                                             <div class="col-xl-2">
-                                                                <input class="form-control form-control-sm " id="fees"
-                                                                    placeholder="RM0.00" type="text">
+                                                                <input class="form-control form-control-sm " name="fees"
+                                                                    placeholder="RM0.00" type="text"
+                                                                    [(ngModel)]="metadata.fees">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-2">
                                                             <div class="col-xl-1">
-                                                                <label class="form-control-label" for="distributor">
+                                                                <label class="form-control-label" for="weblink">
                                                                     Link </label>
                                                             </div>
                                                             <div class="col-xl-4">
                                                                 <input class="form-control form-control-sm "
-                                                                    id="distributor" placeholder="Ordering Website Link"
-                                                                    type="text">
+                                                                    name="weblink" placeholder="Ordering Website Link"
+                                                                    type="text" [(ngModel)]="metadata.weblink">
                                                             </div>
                                                             <div class="col-xl-2">
                                                                 <label class="form-control-label"
-                                                                    for="instructionorder">
+                                                                    for="instruction_order">
                                                                     Ordering Instruction </label>
                                                             </div>
                                                             <div class="col-xl-5">
                                                                 <input class="form-control form-control-sm p-0"
-                                                                    id="instructionorder" type="file">
+                                                                    name="instruction_order" type="file"
+                                                                    [(ngModel)]="metadata.instruction_order">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2406,13 +2500,13 @@
                                                 <div class="acard-body opacity-8">
                                                     <div class="row mb-2">
                                                         <div class="col-xl-2">
-                                                            <label class="form-control-label" for="dataset-type">
+                                                            <label class="form-control-label" for="dataset_type">
                                                                 Data Set Type<span class="text-warning">*</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-xl-3">
                                                             <select class="form-control form-control-sm"
-                                                                id="dataset-type">
+                                                                name="dataset_type" [(ngModel)]="metadata.dataset_type">
                                                                 <option selected disabled hidden> Select Type
                                                                 </option>
                                                                 <option value="1">Option 1</option>
@@ -2429,7 +2523,8 @@
                                                         </div>
                                                         <div class="col-xl-2">
                                                             <input class="form-control form-control-sm "
-                                                                id="hardsoftcopy" placeholder="10:50000" type="text">
+                                                                name="hardsoftcopy" placeholder="10:50000" type="text"
+                                                                [(ngModel)]="metadata.hardsoftcopy">
                                                         </div>
                                                         <div class="col-xl-2">
                                                             <label class="form-control-label" for="imggsd">
@@ -2437,7 +2532,8 @@
                                                         </div>
                                                         <div class="col-md-2">
                                                             <div class="group">
-                                                                <input type="text" class="form-control form-control-sm">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    name="imggsd" [(ngModel)]="metadata.imggsd">
                                                                 <div class="group-append">
                                                                     <span class="group-text input-group-sm">meter</span>
                                                                 </div>
@@ -2449,7 +2545,8 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-xl-2">
-                                                            <select class="form-control form-control-sm" id="language">
+                                                            <select class="form-control form-control-sm" name="language"
+                                                                [(ngModel)]="metadata.language">
                                                                 <option selected disabled hidden> Language
                                                                 </option>
                                                                 <option value="penerbit">English</option>
@@ -2478,13 +2575,14 @@
                                                 <div class="acard-body opacity-8">
                                                     <div class="row mb-2">
                                                         <div class="col-xl-3">
-                                                            <label class="form-control-label" for="system-identifier">
+                                                            <label class="form-control-label" for="system_identifier">
                                                                 Reference System Identifier
                                                             </label>
                                                         </div>
                                                         <div class="col-xl-3">
                                                             <select class="form-control form-control-sm"
-                                                                id="system-identifier">
+                                                                name="system_identifier"
+                                                                [(ngModel)]="metadata.system_identifier">
                                                                 <option selected disabled hidden> Select System
                                                                     Identifier
                                                                 </option>
@@ -2581,7 +2679,8 @@
                                                                     </div>
                                                                     <div class="col-xl-7">
                                                                         <select class="form-control form-control-sm"
-                                                                            id="access-cons">
+                                                                            name="access_cons"
+                                                                            [(ngModel)]="metadata.access_cons">
                                                                             <option selected disabled hidden> Select
                                                                                 Access Constraints
                                                                             </option>
@@ -2593,13 +2692,14 @@
                                                                 <div class="row mb-2">
                                                                     <div class="col-xl-5">
                                                                         <label class="form-control-label"
-                                                                            for="use-cons">
+                                                                            for="use_cons">
                                                                             Use Constraints
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-xl-7">
                                                                         <select class="form-control form-control-sm"
-                                                                            id="use-cons">
+                                                                            name="use_cons"
+                                                                            [(ngModel)]="metadata.use_cons">
                                                                             <option selected disabled hidden> Select
                                                                                 Use Constraints
                                                                             </option>
@@ -2617,13 +2717,13 @@
                                                                 <div class="row mb-2">
                                                                     <div class="col-xl-5">
                                                                         <label class="form-control-label"
-                                                                            for="access-cons">
+                                                                            for="classification_system">
                                                                             Classification System
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-xl-7">
                                                                         <select class="form-control form-control-sm"
-                                                                            id="access-cons">
+                                                                            name="classification_system">
                                                                             <option selected disabled hidden> Select
                                                                                 Classification System
                                                                             </option>
@@ -2677,7 +2777,7 @@
                                                             </div>
                                                             <div class="col-xl-3">
                                                                 <select class="form-control form-control-sm"
-                                                                    id="DQscope">
+                                                                    name="DQscope" [(ngModel)]="metadata.DQscope">
                                                                     <option selected disabled hidden>
                                                                         DQ Scope
                                                                     </option>
@@ -2692,7 +2792,8 @@
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <input class="form-control form-control-sm" type="text"
-                                                                    id="datahistory" placeholder="None">
+                                                                    name="datahistory" placeholder="None"
+                                                                    [(ngModel)]="metadata.datahistory">
                                                             </div>
                                                             <div class="col-xl-1">
                                                                 <label class="form-control-label  float-right"
@@ -2702,7 +2803,7 @@
                                                             </div>
                                                             <div class="col-xl-2">
                                                                 <input class="form-control form-control-sm" type="date"
-                                                                    id="date" placeholder="">
+                                                                    name="DQdate" [(ngModel)]="metadata.DQdate">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2723,7 +2824,8 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="scope">
+                                                                                name="scope"
+                                                                                [(ngModel)]="metadata.scope">
                                                                                 <option selected disabled hidden> Select
                                                                                     Scope
                                                                                 </option>
@@ -2733,13 +2835,14 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="complev">
+                                                                                for="compliance_lvl">
                                                                                 Compliance Level
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="complev" type="text"
+                                                                                name="compliance_lvl" type="text"
+                                                                                [(ngModel)]="metadata.compliance_lvl"
                                                                                 placeholder="Compliance Level">
                                                                         </div>
                                                                         <div class="col-xl-1">
@@ -2750,20 +2853,20 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="datecompleteness" type="date"
-                                                                                placeholder="Select Date">
+                                                                                name="datecompleteness" type="date"
+                                                                                [(ngModel)]="metadata.datecompleteness">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -2779,8 +2882,9 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="conforesult" type="text"
-                                                                                placeholder="Conformance Result">
+                                                                                name="conformance_result" type="text"
+                                                                                placeholder="Conformance Result"
+                                                                                [(ngModel)]="metadata.conformance_result">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2802,7 +2906,8 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="scope">
+                                                                                name="scope"
+                                                                                [(ngModel)]="metadata.scope">
                                                                                 <option selected disabled hidden> Select
                                                                                     Scope
                                                                                 </option>
@@ -2812,13 +2917,14 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="complev">
+                                                                                for="compliance_lvl">
                                                                                 Compliance Level
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="complev" type="text"
+                                                                                name="compliance_lvl" type="text"
+                                                                                [(ngModel)]="metadata.compliance_lvl"
                                                                                 placeholder="Compliance Level">
                                                                         </div>
                                                                         <div class="col-xl-1">
@@ -2829,20 +2935,20 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="datecompleteness" type="date"
-                                                                                placeholder="Select Date">
+                                                                                name="datecompleteness" type="date"
+                                                                                [(ngModel)]="metadata.datecompleteness">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -2858,8 +2964,9 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="conforesult" type="text"
-                                                                                placeholder="Conformance Result">
+                                                                                name="conformance_result" type="text"
+                                                                                placeholder="Conformance Result"
+                                                                                [(ngModel)]="metadata.conformance_result">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2881,7 +2988,8 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="scope">
+                                                                                name="scope"
+                                                                                [(ngModel)]="metadata.scope">
                                                                                 <option selected disabled hidden> Select
                                                                                     Scope
                                                                                 </option>
@@ -2891,13 +2999,14 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="complev">
+                                                                                for="compliance_lvl">
                                                                                 Compliance Level
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="complev" type="text"
+                                                                                name="compliance_lvl" type="text"
+                                                                                [(ngModel)]="metadata.compliance_lvl"
                                                                                 placeholder="Compliance Level">
                                                                         </div>
                                                                         <div class="col-xl-1">
@@ -2908,20 +3017,20 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="datecompleteness" type="date"
-                                                                                placeholder="Select Date">
+                                                                                name="datecompleteness" type="date"
+                                                                                [(ngModel)]="metadata.datecompleteness">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -2937,8 +3046,9 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="conforesult" type="text"
-                                                                                placeholder="Conformance Result">
+                                                                                name="conformance_result" type="text"
+                                                                                placeholder="Conformance Result"
+                                                                                [(ngModel)]="metadata.conformance_result">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2960,7 +3070,8 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="scope">
+                                                                                name="scope"
+                                                                                [(ngModel)]="metadata.scope">
                                                                                 <option selected disabled hidden> Select
                                                                                     Scope
                                                                                 </option>
@@ -2970,13 +3081,14 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="complev">
+                                                                                for="compliance_lvl">
                                                                                 Compliance Level
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="complev" type="text"
+                                                                                name="compliance_lvl" type="text"
+                                                                                [(ngModel)]="metadata.compliance_lvl"
                                                                                 placeholder="Compliance Level">
                                                                         </div>
                                                                         <div class="col-xl-1">
@@ -2987,20 +3099,20 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="datecompleteness" type="date"
-                                                                                placeholder="Select Date">
+                                                                                name="datecompleteness" type="date"
+                                                                                [(ngModel)]="metadata.datecompleteness">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -3016,8 +3128,9 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="conforesult" type="text"
-                                                                                placeholder="Conformance Result">
+                                                                                name="conformance_result" type="text"
+                                                                                placeholder="Conformance Result"
+                                                                                [(ngModel)]="metadata.conformance_result">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3042,7 +3155,8 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="scope">
+                                                                                name="scope"
+                                                                                [(ngModel)]="metadata.scope">
                                                                                 <option selected disabled hidden> Select
                                                                                     Scope
                                                                                 </option>
@@ -3052,13 +3166,14 @@
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <label class="form-control-label"
-                                                                                for="complev">
+                                                                                for="compliance_lvl">
                                                                                 Compliance Level
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="complev" type="text"
+                                                                                name="compliance_lvl" type="text"
+                                                                                [(ngModel)]="metadata.compliance_lvl"
                                                                                 placeholder="Compliance Level">
                                                                         </div>
                                                                         <div class="col-xl-1">
@@ -3069,20 +3184,20 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="datecompleteness" type="date"
-                                                                                placeholder="Select Date">
+                                                                                name="datecompleteness" type="date"
+                                                                                [(ngModel)]="metadata.datecompleteness">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-2">
                                                                         <div class="col-xl-1">
                                                                             <label class="form-control-label"
-                                                                                for="result">
+                                                                                for="result" >
                                                                                 Result
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xl-2">
                                                                             <select class="form-control form-control-sm"
-                                                                                id="result">
+                                                                                name="result" [(ngModel)]="metadata.result">
                                                                                 <option selected disabled hidden> Select
                                                                                     Result
                                                                                 </option>
@@ -3098,8 +3213,9 @@
                                                                         </div>
                                                                         <div class="col-xl-3">
                                                                             <input class="form-control form-control-sm"
-                                                                                id="conforesult" type="text"
-                                                                                placeholder="Conformance Result">
+                                                                                name="conformance_result" type="text"
+                                                                                placeholder="Conformance Result"
+                                                                                [(ngModel)]="metadata.conformance_result">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3334,9 +3450,9 @@
                                                                                 id="postcode">
                                                                                 <option selected disabled hidden> Select
                                                                                     Postcode</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-xl-2">
@@ -3348,9 +3464,9 @@
                                                                                 id="cityy">
                                                                                 <option selected disabled hidden> Select
                                                                                     City</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -3364,9 +3480,9 @@
                                                                                 id="state">
                                                                                 <option selected disabled hidden> Select
                                                                                     State</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-xl-2">
@@ -3378,9 +3494,9 @@
                                                                                 id="country">
                                                                                 <option selected disabled hidden> Select
                                                                                     Country</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -5272,9 +5388,9 @@
                                                                                 id="postcode">
                                                                                 <option selected disabled hidden> Select
                                                                                     Postcode</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-xl-2">
@@ -5286,9 +5402,9 @@
                                                                                 id="cityy">
                                                                                 <option selected disabled hidden> Select
                                                                                     City</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -5302,9 +5418,9 @@
                                                                                 id="state">
                                                                                 <option selected disabled hidden> Select
                                                                                     State</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-xl-2">
@@ -5316,9 +5432,9 @@
                                                                                 id="country">
                                                                                 <option selected disabled hidden> Select
                                                                                     Country</option>
-                                                                                <option value="penerbit">Kerajaan
+                                                                                <option value="1">Option 1
                                                                                 </option>
-                                                                                <option value="pengesah">Swasta</option>
+                                                                                <option value="2">Option 2</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
