@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import * as $ from 'jquery';
 
 
 

@@ -1,5 +1,10 @@
-
-import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from "@angular/core";
 import swal from "sweetalert2";
 import {
   FormGroup,
@@ -8,24 +13,23 @@ import {
   Validators,
 } from "@angular/forms";
 import { MapService } from "src/app/shared/services/map/map.service";
-import { Metadata } from 'src/app/shared/services/data/metadata';
-
+import { Metadata } from "src/app/shared/services/data/metadata";
+import * as $ from 'jquery'
 
 @Component({
   selector: "app-metadata",
   templateUrl: "./metadata.component.html",
   styleUrls: ["./metadata.component.scss"],
 })
-export class MetadataComponent implements OnChanges,OnInit,AfterViewInit  {
-
+export class MetadataComponent implements OnChanges, OnInit, AfterViewInit {
   metadata = new Metadata();
 
   //Select Category
   categoryList = [
-    { name: "Dataset" },
-    { name: "Services" },
-    { name: "Imagery" },
-    { name: "Gridded" },
+    { name: "Dataset", value: "1" },
+    { name: "Services", value: "2" },
+    { name: "Imagery", value: "3" },
+    { name: "Gridded", value: "4" },
   ];
   selectedCat = "Select Category";
 
@@ -49,8 +53,6 @@ export class MetadataComponent implements OnChanges,OnInit,AfterViewInit  {
   // Toggle
   editEnabled: boolean = false;
 
-  
-
   // Form
   editForm: FormGroup;
   editFormMessages = {
@@ -61,9 +63,7 @@ export class MetadataComponent implements OnChanges,OnInit,AfterViewInit  {
     ],
   };
 
-  constructor(
-    private formBuilder: FormBuilder,
-              private map: MapService) {}        
+  constructor(private formBuilder: FormBuilder, private map: MapService) {}
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
@@ -74,11 +74,11 @@ export class MetadataComponent implements OnChanges,OnInit,AfterViewInit  {
       ),
     });
 
-    this.map.buildMap()
+    this.map.buildMap();
   }
 
-  insertData(){
-    console.log(this.metadata)
+  insertData() {
+    console.log(this.metadata);
   }
 
   toggleEdit() {
@@ -163,24 +163,19 @@ export class MetadataComponent implements OnChanges,OnInit,AfterViewInit  {
     this.isCollapsed15 = true;
   }
 
-  loadMap(){
-    this.map.buildMap()
+  loadMap() {
+    this.map.buildMap();
   }
-  
-  ngOnChanges(changes:SimpleChanges){
 
-    if(!changes.searchResults){
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.searchResults) {
       console.log("Inside if");
-      console.log(changes.searchResults)
-      this.ngAfterViewInit()
+      console.log(changes.searchResults);
+      this.ngAfterViewInit();
     }
-    
   }
 
   ngAfterViewInit() {
     this.map.buildMap();
   }
-
-
 }
-

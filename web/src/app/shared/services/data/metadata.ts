@@ -4,9 +4,9 @@ export class Metadata {
   abstract: any;
 
   contact_person: any;
-  addressline1: any;
-  addressline2: any;
-  addressline3: any;
+  address1: any;
+  address2: any;
+  address3: any;
   postcode: any;
   city: any;
   state: any;
@@ -43,12 +43,13 @@ export class Metadata {
   language: any;
 
   system_identifier: any;
+  datahistory:any;
 
   access_cons: any;
   use_cons: any;
   classification_system: any;
   DQscope: any;
-  date: any;
+  DQdate: any;
 
   scope: any;
   compliance_lvl: any;
