@@ -149,10 +149,16 @@ export const ROUTESADMIN: RouteInfo[] = [
     icontype: 'fas fa-desktop text-warning'
   },
   {
-    path: '/admin/management/user',
+    path: '/admin/management/',
     title: 'Pengurusan Pengguna',
-    type: 'link',
+    type: 'sub',
     icontype: 'fas fa-user-cog text-purple',
+    collapse: 'management',
+    isCollapsed: true,
+    children: [
+      { path: 'accept-user', title: 'Pengesahan Pengguna', type: 'link' },
+      { path: 'user', title: 'Senarai Pengguna Berdaftar', type: 'link' }
+    ]
   },
   {
     path: '/admin/management/',

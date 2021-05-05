@@ -32,31 +32,31 @@ export class DownloadComponent implements OnInit {
   activeRow: any;
   rows: any = [
     {
-      namapermohonan: "Permohonan Data Sungai Selangor ",
+      namapermohonan: "Permohonan Data Sungai Besi ",
       namapemohon: "Muhammad Rahman bin Talib",
       kategori: "G2E-Pelajar",
-      subkategori: "",
+      status: "Data Tersedia",
       tarikh: "25/02/2021",
     },
     {
       namapermohonan: "Permohonan Data Sungai Selangor ",
       namapemohon: "Muhammad Rahman bin Talib",
       kategori: "G2E-Pelajar",
-      subkategori: "",
+      status: "Dalam Proses",
       tarikh: "25/02/2021",
     },
     {
-      namapermohonan: "Permohonan Data Sungai Selangor ",
+      namapermohonan: "Permohonan Data Sungai Kedah ",
       namapemohon: "Muhammad Rahman bin Talib",
       kategori: "G2E-Pelajar",
-      subkategori: "",
+      status: "Dalam Proses",
       tarikh: "25/02/2021",
     },
     {
-      namapermohonan: "Permohonan Data Sungai Selangor ",
+      namapermohonan: "Permohonan Data Tanjung Tokong ",
       namapemohon: "Muhammad Rahman bin Talib",
       kategori: "G2E-Pelajar",
-      subkategori: "",
+      status: "Data Tersedia",
       tarikh: "25/02/2021",
     },
   ];
@@ -148,6 +148,7 @@ export class DownloadComponent implements OnInit {
       input: "checkbox",
       inputPlaceholder: "Sila klik kotak 'checkbox' untuk mengesah akuan penerimaan data",
       buttonsStyling: false,
+      allowOutsideClick: false,
       confirmButtonClass: "btn btn-warning",
       confirmButtonText: 'Seterusnya&nbsp;<i class="fa fa-arrow-right"></i>',
       footer: '<a href>Baca Akuan Penerimaan Data</a>',

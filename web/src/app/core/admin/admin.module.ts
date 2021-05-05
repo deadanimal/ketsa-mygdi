@@ -21,7 +21,6 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { RouterModule } from '@angular/router';
 import { AdminRoutes } from './admin.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ManagementAuditComponent } from './management-audit/management-audit.component';
 import { ManagementUserComponent } from './management-user/management-user.component';
 import { ReportComponent } from './report/report.component';
 import { DatatableComponent } from './datatable/datatable.component';
@@ -36,11 +35,11 @@ import { ManagementAppstatusComponent } from './management-appstatus/management-
 import { ManagementNewappComponent } from './management-newapp/management-newapp.component';
 import { ManagementElementmetadataComponent } from './management-elementmetadata/management-elementmetadata.component';
 import { ValuationComponent } from './valuation/valuation.component';
+import { ManagementAcceptuserComponent } from './management-acceptuser/management-acceptuser.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    ManagementAuditComponent,
     ManagementUserComponent,
     ReportComponent,
     DatatableComponent,
@@ -57,7 +56,8 @@ import { ValuationComponent } from './valuation/valuation.component';
     DatapriceComponent,
     DatalistComponent,
     ClassCategoryComponent,
-    ClassSharecategoryComponent
+    ClassSharecategoryComponent,
+    ManagementAcceptuserComponent
   ],
   imports: [
     CommonModule,

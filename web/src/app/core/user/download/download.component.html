@@ -83,16 +83,24 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Nama Permohonan">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.permohonan}}
+                                {{row.namapermohonan}}
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Status"></ngx-datatable-column>
+                        <ngx-datatable-column name="Status">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <a *ngIf="row.status == 'Dalam Proses'" class="badge badge-pill badge-danger">Dalam
+                                    Proses</a>
+                                <a *ngIf="row.status == 'Data Tersedia'" class="badge badge-pill badge-success">Data
+                                    Tersedia</a>
+                            </ng-template>
+                        </ngx-datatable-column>
                         <ngx-datatable-column name="Tarikh"></ngx-datatable-column>
                         <ngx-datatable-column name="Tindakan">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-
-                                <a (click)="confirm()" class="text-green"><span
-                                        class="fas fa-download mr-2"></span>Muat Turun</a>
+                                <a *ngIf="row.status == 'Data Tersedia'" (click)="confirm()" class="text-green"><span class="fas fa-download mr-2"></span>Muat
+                                    Turun</a>
+                                <a *ngIf="row.status == 'Dalam Proses'" class="text-muted" disabled><span class="fas fa-download mr-2"></span>Muat
+                                    Turun</a>
                             </ng-template>
                         </ngx-datatable-column>
 
@@ -102,52 +110,3 @@
         </div>
     </div>
 </div>
-
-<!--Modal-->
-
-<ng-template #chooseUpload>
-    <div class="modal-header bg-default">
-        <h6 class="modal-title text-white my-auto" id="modal-title-default">
-            Muat Naik
-        </h6>
-
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
-            <span aria-hidden="true" class="text-white my-auto"> × </span>
-        </button>
-    </div>
-
-    <div class="modal-body">
-        <div class="row align-items-center">
-            <div class="col-6 text-center">
-                <a (click)="closeModal()" (click)="test()">
-                    <i class="fas fa-id-card fa-7x" aria-hidden="true"></i><br>
-                    <label class="heading mt-3">Muat Naik Gambar</label>
-                </a>
-            </div>
-            <div class="col-6 text-center">
-                <a href="javascript:void(0)">
-                    <i class="fas fa-file-alt fa-7x" aria-hidden="true"></i><br>
-                    <label class="heading mt-3">Muat Naik Dokumen</label>
-                </a>
-            </div>
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #chooseUploads>
-    <div class="modal-header bg-default">
-        <h6 class="modal-title text-white my-auto" id="modal-title-default">
-            Muat Naikkkk
-        </h6>
-
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="closeModal()">
-            <span aria-hidden="true" class="text-white my-auto"> × </span>
-        </button>
-    </div>
-
-    <div class="modal-body">
-        <form>
-
-        </form>
-    </div>
-</ng-template>

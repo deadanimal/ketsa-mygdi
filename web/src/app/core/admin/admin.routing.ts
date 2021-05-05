@@ -9,7 +9,6 @@ import { ManagementAnnoucementComponent } from './management-annoucement/managem
 import { DatatableComponent } from './datatable/datatable.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ManagementAuditComponent } from './management-audit/management-audit.component';
 import { ManagementUserComponent } from './management-user/management-user.component';
 import { ReportComponent } from './report/report.component';
 import { ManagementFaqComponent } from './management-faq/management-faq.component';
@@ -18,6 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ValuationComponent } from './valuation/valuation.component';
 import { DatapriceComponent } from './management-updatedata/dataprice/dataprice.component';
+import { ManagementAcceptuserComponent } from './management-acceptuser/management-acceptuser.component';
 
 
 export const AdminRoutes: Routes = [
@@ -32,12 +32,12 @@ export const AdminRoutes: Routes = [
                 path: 'management',
                 children: [
                     {
-                        path: 'audit-trails',
-                        component: ManagementAuditComponent
-                    },
-                    {
                         path: 'user',
                         component: ManagementUserComponent
+                    },
+                    {
+                        path: 'accept-user',
+                        component: ManagementAcceptuserComponent
                     },
                     {
                         path: 'faq',
