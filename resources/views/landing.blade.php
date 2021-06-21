@@ -32,7 +32,7 @@
 <div class="col-lg-4">
     <div _ngcontent-ula-c486="" class="card umum_card" style="background-color: rgba(255, 255, 255, 0.527);">
         <div class="card-header text-center umum_header">
-            <h1 class="card-title m-0" style="color: #161616;"><i class="ni ni-notification-70 fa-spin mr-2"></i>PENGUMUMAN ftest</h1>
+            <h1 class="card-title m-0" style="color: #161616;"><i class="ni ni-notification-70 fa-spin mr-2"></i>PENGUMUMAN</h1>
         </div>
         <div class="card-body">
             <div class="card mb-0 umum_body" style="background-color: rgba(255, 255, 255, 0.808);">
