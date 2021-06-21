@@ -1,0 +1,199 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Carbon\Carbon;
+use App\User;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // Super Admin =========================================================
+        $user = User::create([
+            'name' => "Super Admin",
+            'email' => "superadmin@pipeline.com",
+            'password' => Hash::make('superadmin@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Pipeline',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 1,
+            'alamat' => '24 Jalan Melur Taman Bunga 45502 Gopeng Perak',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Super Admin');
+        
+        // Pentadbir Aplikasi ==================================================
+        $user = User::create([
+            'name' => "Pentadbir Aplikasi",
+            'email' => "pentadbiraplikasi@pipeline.com",
+            'password' => Hash::make('pentadbiraplikasi@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 1,
+            'alamat' => '25 Jalan Melur Taman Bunga 45502 Jitra Kedah',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Pentadbir Aplikasi');
+
+        // Pengesah Metadata ===================================================
+        $user = User::create([
+            'name' => "Pengesah Metadata 1",
+            'email' => "pengesahmetadata1@pipeline.com",
+            'password' => Hash::make('pengesahmetadata1@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 1,
+            'alamat' => '26 Jalan Melur Taman Bunga 45502 Bangsar Kuala Lumpur',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Pengesah Metadata');
+        
+        $user = User::create([
+            'name' => "Pengesah Metadata 2",
+            'email' => "pengesahmetadata2@pipeline.com",
+            'password' => Hash::make('pengesahmetadata2@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Bahagian Pengairan dan Saliran Pertanian (BPSP)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 1,
+            'alamat' => '27 Jalan Melur Taman Bunga 45502 Serendah Selangor',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Pengesah Metadata');
+        
+        $user = User::create([
+            'name' => "Pengesah Metadata 3",
+            'email' => "pengesahmetadata3@pipeline.com",
+            'password' => Hash::make('pengesahmetadata3@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Jabatan Penerbangan Awam Malaysia (DCA)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 1,
+            'alamat' => '28 Jalan Melur Taman Bunga 45502 Nilai Negeri Sembilan',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Pengesah Metadata');
+
+        // Penerbit Metadata ===================================================
+        $user = User::create([
+            'name' => "Penerbit Metadata 1",
+            'email' => "penerbitmetadata1@pipeline.com",
+            'password' => Hash::make('penerbitmetadata1@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 0,
+            'alamat' => '29 Jalan Melur Taman Bunga 45502 Jasin Melaka',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Penerbit Metadata');
+        
+        $user = User::create([
+            'name' => "Penerbit Metadata 2",
+            'email' => "penerbitmetadata2@pipeline.com",
+            'password' => Hash::make('penerbitmetadata2@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Bahagian Pengairan dan Saliran Pertanian (BPSP)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 0,
+            'alamat' => '30 Jalan Melur Taman Bunga 45502 Muar Johor',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Penerbit Metadata');
+        
+        $user = User::create([
+            'name' => "Penerbit Metadata 3",
+            'email' => "penerbitmetadata3@pipeline.com",
+            'password' => Hash::make('penerbitmetadata3@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Jabatan Penerbangan Awam Malaysia (DCA)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 0,
+            'alamat' => '31 Jalan Melur Taman Bunga 45502 Jengka Pahang',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Penerbit Metadata');
+
+        // Pentadbir Metadata ==================================================
+        $user = User::create([
+            'name' => "Pentadbir Metadata 1",
+            'email' => "pentadbirmetadata1@pipeline.com",
+            'password' => Hash::make('pentadbirmetadata1@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 0,
+            'alamat' => '32 Jalan Melur Taman Bunga 45502 Chukai Terengganu',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Pentadbir Metadata');
+        
+        $user = User::create([
+            'name' => "Pentadbir Metadata 2",
+            'email' => "pentadbirmetadata2@pipeline.com",
+            'password' => Hash::make('pentadbirmetadata2@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Bahagian Pengairan dan Saliran Pertanian (BPSP)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 0,
+            'alamat' => '33 Jalan Melur Taman Bunga 45502 Ketereh Kelantan',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Pentadbir Metadata');
+        
+        $user = User::create([
+            'name' => "Pentadbir Metadata 3",
+            'email' => "pentadbirmetadata3@pipeline.com",
+            'password' => Hash::make('pentadbirmetadata3@pipeline.com'),
+            'nric' => '888888-88-8888',
+            'agensi_organisasi' => 'Jabatan Penerbangan Awam Malaysia (DCA)',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 0,
+            'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
+            'gambar_profil' => 'mrt.jpg',
+        ]);
+        $user->assignRole('Pentadbir Metadata');
+
+        // \DB::statement('alter sequence users_id_seq restart with '.(intval($userId))); 
+    }
+}

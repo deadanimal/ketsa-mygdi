@@ -1,0 +1,159 @@
+/*!
+/  ConnectManage 2020 (cm2020)
+/  Author:     Nicholas A S
+/  Updated:    17 Nov 2020
+/  Copyright (c) 2020 CMG Holdings. All rights reserved.
+/  ========================================================================
+*/
+/*!
+/   Ticket details layout
+*/
+.upper {
+    margin-top: 40px;
+}
+div.scrollable-content {
+    height: 500px;
+    overflow: auto;
+}
+
+.display-sidebar {
+    background:#aacccc;
+}
+.display-sidebar-title {
+    font-size: 1.5rem;
+}
+.display-sidebar .sidebar-content1 {
+    font-size: 1rem;
+}
+.display-sidebar .sidebar-content2 {
+    font-size: 0.7rem;
+    font-style: italic;
+}
+.ticket_filter_row1 {    
+    vertical-align: bottom;
+}
+.ticket_filter_row2 {
+    background-color: #B6B2AA;
+}
+.ticket_filter_row1 .form-control, .ticket_filter_row2 .form-control{
+    font-size: 0.7rem;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    
+}
+.content4 .btn-sm-nopadding{
+    padding: .125rem .3rem !important;
+    font-size: .75rem;
+    line-height: 1.5;
+    border-radius: .15rem
+}
+
+.nav-treeview li{
+    margin-left: 7px;
+}
+.content4 .mbr-text-right {
+    text-align: right;
+}
+.content4 .display-2 {
+    font-family: 'Jost';
+    font-size: 3rem;
+    line-height: 1.1;
+}
+.content4 .mbr-text-bold {
+    font-weight: bold;
+}
+.content4 .mbr-section-title {
+    font-size: 2.2rem;
+}
+.content4 .mbr-section-subtitle {
+    font-size: 1.2rem;
+}
+.ticket-row .table-cell-project-id {    
+    font-weight: bold;
+}
+.ticket-row .table-cell-log-id {    
+    font-weight: bold;
+}
+/*!
+/   Ticket listing layout
+*/
+.ticket_table{
+    width:100%;
+}
+.ticket_table th,.ticket_table tr{
+    /* font-family: "Source Sans Pro"; */
+    font-family: "Arial";
+    font-size: .5rem;
+    line-height: 96%;
+}
+
+.ticket-row .table-cell-title{
+    font-size: 25px;
+    font-weight: lighter;
+    line-height: 1;
+}
+.ticket-row .table-cell{
+	vertical-align: top;
+    font-size: .9rem;
+    line-height: 1;	
+	padding: 8px 8px;
+}
+.ticket-table-fixed {
+    /* margin: 0 auto;
+    width: 100%;
+    clear: both;
+    border-collapse: collapse; */
+    table-layout: fixed;  
+    word-wrap: break-word;
+}
+.ticket-row .table-cell-assignee{
+    max-width: 100px;
+}
+.ticket-row td{	
+	vertical-align: top;
+    padding: 8px 8px;   
+}
+@media (max-width: 40em){
+    .ticket-table-fixed {        
+        table-layout: auto;  
+        word-wrap: break-word;
+    }
+}
+
+/* Dashboard views
+*/
+.dashboardview .card-title {
+    align-self: center;
+    font-size: .8rem;
+}
+.dashboardview .card-body {
+    align-content: center;
+    text-align: center;
+    font-size: .9rem;
+    background:rgb(243, 243, 243);
+    color: green;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.dashboardview .card-body .bottom{
+    text-align: center;
+    font-size: .6rem;
+    font-weight: bold;
+    color: black;
+}
+.dashboardview .indicator1 .row2 {    
+    color: red;
+}
+.dashboardview .indicator2 .row2 {    
+    color: red;
+}
+.dashboardview .indicator3 .row2 {    
+    color: red;
+}
+.dashboardview .indicator4 .row2 {    
+    color: red;
+}
+.dashboardview .information-sm {
+    font-size: .4rem;
+}
