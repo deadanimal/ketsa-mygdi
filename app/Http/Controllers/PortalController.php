@@ -45,6 +45,37 @@ class PortalController extends Controller
         $pengumuman = Pengumuman::get();
         return view('portal_settings',compact('hubungi_kami','panduan_pengguna','penafian','penyataan_privasi','faq','pengumuman'));
     }
+    public function edit_faq() {
+        $faq = Faq::get()->first();
+        return view('mygeo.faq',compact('faq'));
+    }
+    public function update_faq(Request $request){
+        DB::transaction(function() use ($request) {
+            Faq::where(["id"=>$request->id_faq])->update([
+                'title'=>$request->title_faq,
+                "content"=>$request->content_faq
+            ]);
+        });
+
+        return redirect('/faq_edit')->with('success', 'FAQ Disimpan');
+    }
+    public function edit_maklum_balas() {
+        $hubungi_kami = HubungiKami::get()->first();
+        $panduan_pengguna = PanduanPengguna::get()->first();
+        $penafian = Penafian::get()->first();
+        $penyataan_privasi = PenyataanPrivasi::get()->first();
+        $faq = Faq::get()->first();
+        $pengumuman = Pengumuman::get();
+        return view('mygeo.maklum_balas',compact('hubungi_kami','panduan_pengguna','penafian','penyataan_privasi','faq','pengumuman'));
+    }
+    public function edit_panduan_pengguna() {
+        $panduan_pengguna = PanduanPengguna::get()->first();
+        return view('mygeo.panduan_pengguna',compact('panduan_pengguna'));
+    }
+    public function edit_pengumuman2() {
+        $pengumuman = Pengumuman::get();
+        return view('mygeo.pengumuman',compact('pengumuman'));
+    }
 
     public function store_portal_settings(Request $request){
         DB::transaction(function() use ($request) {
@@ -80,7 +111,19 @@ class PortalController extends Controller
             ]);
         });
 
-        return redirect('portal_settings')->with('success', 'Maklum Balas Disimpan');
+        return redirect('/landing_mygeo')->with('success', 'Maklum Balas Disimpan');
+    }
+
+    public function store_panduan_pengguna(Request $request){
+        DB::transaction(function() use ($request) {
+            //save panduan pengguna
+            PanduanPengguna::where(["id"=>$request->id_panduan_pengguna])->update([
+                'title'=>$request->title_panduan_pengguna,
+                "content"=>$request->content_panduan_pengguna
+            ]);
+        });
+
+        return redirect('/panduan_pengguna_edit')->with('success', 'Panduan Pengguna Disimpan');
     }
 
 
@@ -155,7 +198,7 @@ class PortalController extends Controller
 
     public function edit_pengumuman(Request $request) {
         $pengumuman = Pengumuman::where(["id"=>$request->umum_id])->get()->first();
-        return view('pengumuman_edit',compact('pengumuman'));
+        return view('mygeo.pengumuman_edit',compact('pengumuman'));
     }
 
     public function update_pengumuman(Request $request) {
@@ -164,11 +207,11 @@ class PortalController extends Controller
         $pengumuman->date = $request->date_pengumuman;
         $pengumuman->content = $request->content_pengumuman;
         $pengumuman->save();
-        return redirect('portal_settings')->with('success', 'Pengumuman Dikemaskini');
+        return redirect('pengumuman_edit')->with('success', 'Pengumuman Dikemaskini');
     }
 
     public function delete_pengumuman(Request $request) {
         Pengumuman::where(["id"=>$request->umum_id])->delete();
-        return redirect('portal_settings')->with('success', 'Pengumuman Dibuang');
+        return redirect('pengumuman_edit')->with('success', 'Pengumuman Dibuang');
     }
 }

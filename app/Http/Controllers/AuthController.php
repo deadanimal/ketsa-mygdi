@@ -52,7 +52,7 @@ class AuthController extends Controller {
             dd('hashing of password is not working correctly - this is the problem');          
         }
 
-        if(!(Auth::attempt(array('email' => 'joe@gmail.com', 'password' => '123456')))){
+        if(!(Auth::attempt(array('email' => 'pentadbiraplikasi@pipeline.com', 'password' => Hash::make('pentadbiraplikasi@pipeline.com'))))){
             dd('storage of user password is not working correctly - this is the problem');          
         }else{
          dd('everything is working when the correct data is supplied - so the problem is related to your forms and the data being passed to the function');

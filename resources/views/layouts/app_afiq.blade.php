@@ -132,7 +132,7 @@
                                         <img height="21" src="{{ url('afiqlogin_files/menuoption.png') }}">
                                   </a>
                                   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                    @if(Auth::check() && auth::user()->hasRole(['Pengesah Metadata','Penerbit Metadata','Pentadbir Aplikasi','Pentadbir Metadata','Pentadbir Data','Super Admin']))
+                                    @if(Auth::check() && auth::user()->hasRole(['Pengesah Metadata','Penerbit Metadata','Pentadbir Aplikasi','Pentadbir Metadata','Pentadbir Data','Super Admin','Pemohon Data']))
                                         <a href="{{ url('/landing_mygeo') }}" class="dropdown-item">
                                             Dashboard
                                         </a>

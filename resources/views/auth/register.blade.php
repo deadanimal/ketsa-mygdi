@@ -53,10 +53,10 @@
                             <label for="exampleInputEmail1">Telefon (Pej)</label>
                             <input type="text" class="form-control" id="phone_pejabat" name="phone_pejabat" placeholder="Enter email">
                           </div>
-                          <div class="form-group">
+<!--                          <div class="form-group">
                             <label for="exampleInputEmail1">Telefon Bimbit</label>
                             <input type="text" class="form-control" id="phone_bimbit" name="phone_bimbit" placeholder="Enter email">
-                          </div>
+                          </div>-->
                           <div class="form-group">
                             <label for="exampleInputEmail1">Peranan</label>
                             <select class="form-control" id="peranan" name="peranan">

@@ -94,7 +94,7 @@
                                             </a>
                                         </li>
                                         @endif
-                                        @if(auth::user()->hasRole(['Pengesah Metadata','Pentadbir Aplikasi','Pentadbir Metadata','Pentadbir Data','Super Admin']))
+                                        @if(auth::user()->hasRole(['Pengesah Metadata','Pentadbir Aplikasi','Pentadbir Metadata','Pentadbir Data','Super Admin','Pemohon Data']))
                                         <li class="nav-item ng-star-inserted">
                                             <a class="nav-link ng-star-inserted" href="#">
                                                 <i class="fa-desktop fas ni text-warning"></i>
@@ -155,22 +155,22 @@
                                                 </a>
                                                 <ul class="nav nav-treeview">
                                                   <li class="nav-item">
-                                                    <a href="#" class="nav-link active">
+                                                    <a href="{{url('senarai_data')}}" class="nav-link active">
                                                       <span class="nav-link-text">Senarai Data</span>
                                                     </a>
                                                   </li>
                                                   <li class="nav-item">
-                                                    <a href="#" class="nav-link active">
+                                                    <a href="{{url('kategori_kelas_data')}}" class="nav-link active">
                                                       <span class="nav-link-text">Kategori Pengkelasan Data</span>
                                                     </a>
                                                   </li>
                                                   <li class="nav-item">
-                                                    <a href="#" class="nav-link active">
+                                                    <a href="{{url('kategori_kelas_kongsi_data')}}" class="nav-link active">
                                                       <span class="nav-link-text">Kategori Pengkelasan Perkongsian Data</span>
                                                     </a>
                                                   </li>
                                                   <li class="nav-item">
-                                                    <a href="#" class="nav-link active">
+                                                    <a href="{{url('harga_data')}}" class="nav-link active">
                                                       <span class="nav-link-text">Harga Data</span>
                                                     </a>
                                                   </li>
@@ -178,28 +178,28 @@
                                               </li>
                                               @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
                                               <li class="nav-item">
-                                                <a href="#" class="nav-link">
+                                                <a href="{{url('permohonan_baru')}}" class="nav-link">
                                                   <span class="nav-link-text">Permohonan Baru</span>
                                                 </a>
                                               </li>
                                               @endif
                                               @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
                                               <li class="nav-item">
-                                                <a href="#" class="nav-link">
+                                                <a href="{{url('status_permohonan')}}" class="nav-link">
                                                   <span class="nav-link-text">Status Permohonan</span>
                                                 </a>
                                               </li>
                                               @endif
                                               @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
                                               <li class="nav-item">
-                                                <a href="#" class="nav-link">
+                                                <a href="{{url('proses_data')}}" class="nav-link">
                                                   <span class="nav-link-text">Proses Data</span>
                                                 </a>
                                               </li>
                                               @endif
                                               @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
                                               <li class="nav-item">
-                                                <a href="#" class="nav-link">
+                                                <a href="{{url('penilaian')}}" class="nav-link">
                                                   <span class="nav-link-text">Penilaian</span>
                                                 </a>
                                               </li>
@@ -214,22 +214,22 @@
                                             </a>
                                             <ul class="nav nav-treeview">
                                               <li class="nav-item">
-                                                <a href="#" class="nav-link active">
+                                                <a href="{{url('senarai_data')}}" class="nav-link active">
                                                   <span class="nav-link-text">Senarai Data</span>
                                                 </a>
                                               </li>
                                               <li class="nav-item">
-                                                <a href="#" class="nav-link active">
+                                                <a href="{{url('kategori_kelas_data')}}" class="nav-link active">
                                                   <span class="nav-link-text">Kategori Pengkelasan Data</span>
                                                 </a>
                                               </li>
                                               <li class="nav-item">
-                                                <a href="#" class="nav-link active">
+                                                <a href="{{url('kategori_kelas_kongsi_data')}}" class="nav-link active">
                                                   <span class="nav-link-text">Kategori Pengkelasan Perkongsian Data</span>
                                                 </a>
                                               </li>
                                               <li class="nav-item">
-                                                <a href="#" class="nav-link active">
+                                                <a href="{{url('harga_data')}}" class="nav-link active">
                                                   <span class="nav-link-text">Harga Data</span>
                                                 </a>
                                               </li>
@@ -239,13 +239,15 @@
                                         @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
                                         <li class="nav-item">
                                             <a href="#" class="nav-link active">
+                                                <i class="fa-home fas ni text-teal"></i>
                                               <span class="nav-link-text">Maklum Balas</span>
                                             </a>
                                         </li>
                                         @endif
                                         @if(auth::user()->hasRole(['Pentadbir Data']))
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link active">
+                                            <a href="{{url('proses_data')}}" class="nav-link active">
+                                                <i class="fa-home fas ni text-teal"></i>
                                               <span class="nav-link-text">Proses Data</span>
                                             </a>
                                         </li>
@@ -260,7 +262,8 @@
                                         @endif
                                         @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link active">
+                                            <a href="{{ url('mohon_data') }}" class="nav-link active">
+                                                <i class="fa-home fas ni text-teal"></i>
                                               <span class="nav-link-text">Mohon Data</span>
                                             </a>
                                         </li>
@@ -268,13 +271,15 @@
                                         @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
                                         <li class="nav-item">
                                             <a href="#" class="nav-link active">
+                                                <i class="fa-home fas ni text-teal"></i>
                                               <span class="nav-link-text">Muat Turun Data</span>
                                             </a>
                                         </li>
                                         @endif
                                         @if(auth::user()->hasRole(['Pemohon Data']))
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link active">
+                                            <a href="{{url('penilaian')}}" class="nav-link active">
+                                                <i class="fa-home fas ni text-teal"></i>
                                               <span class="nav-link-text">Penilaian</span>
                                             </a>
                                         </li>
@@ -282,6 +287,7 @@
                                         @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
                                         <li class="nav-item">
                                             <a href="#" class="nav-link active">
+                                                <i class="fa-home fas ni text-teal"></i>
                                               <span class="nav-link-text">Semakan Status</span>
                                             </a>
                                         </li>

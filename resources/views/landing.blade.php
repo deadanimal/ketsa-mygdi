@@ -68,7 +68,7 @@
             </div>
             <span _ngcontent-lqr-c499="" class="text-center mt-2">Metadata</span>
         </div>
-        <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 ml-4 float-right">
+        <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 ml-4 float-right linkDataAsas">
             <div _ngcontent-lqr-c499="" class="card-body pointer" tabindex="0" ng-reflect-router-link="/data-asas">
                 <img _ngcontent-lqr-c499="" height="50" src="./afiqlogin_files/dataapp.png">
             </div>
@@ -88,6 +88,10 @@
     $(document).on("click",".aUmum",function(){
        var umumid = $(this).data("umumid");
        $("#form_umum_"+umumid).submit();
+    });
+    
+    $(document).on("click",".linkDataAsas",function(){
+        window.location.href = "{{url('data_asas_landing')}}";
     });
   });
 </script>

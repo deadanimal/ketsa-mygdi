@@ -44,7 +44,7 @@ class UserController extends Controller {
             exit();
         }
         
-        $users_all = User::where(['disahkan' => 1])->get();
+        $users_all = User::where(['disahkan' => 1])->orderBy('name', 'asc')->get();
         $users = [];
         foreach($users_all as $user){
             if($user->hasRole('Penerbit Metadata') || $user->hasRole('Pengesah Metadata')){
@@ -186,5 +186,12 @@ class UserController extends Controller {
         $user->password = Hash::make($request->password_new);
         $user->save();
         return view('mygeo.profil', compact('user'));
+    }
+    
+    public function change_user_status(Request $request){
+        $user = User::where(["id"=>$request->user_id])->get()->first();
+        $user->status = $request->status_id;
+        $user->save();
+        exit();
     }
 }

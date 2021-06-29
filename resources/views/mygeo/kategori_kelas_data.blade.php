@@ -1,0 +1,116 @@
+@extends('layouts.app_mygeo_afiq')
+
+@section('content')
+
+<style>
+    .ftest{
+        display:inline;
+        width:auto;
+    }
+</style>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1></h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        @csrf  
+                        <div class="card-header">
+                            <h3 class="card-title" style="font-size: 2rem;">Kategori Pengkelasan Data</h3>
+<!--                            <a href="{{url('mohon_data_asas_baru')}}">
+                                <button type="button" class="btn btn-default float-right">Tambah</button>
+                            </a>-->
+                        </div>
+                        <div class="card-body">
+                            <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>BIL</th>
+                                        <th>KATEGORI</th>
+                                        <th>SUB_KATEGORI</th>
+                                        <th>LAPISAN DATA</th>
+                                        <th>KELAS</th>
+                                        <th>TINDAKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Aeronautical</td>
+                                        <td>Lapangan Terbang (Aerodrome-AB)</td>
+                                        <td>Transitional Surface</td>
+                                        <td></td>
+                                        <td>
+                                            <button type="button" class="form-control">Lihat</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Aeronautical</td>
+                                        <td>Lapangan Terbang (Aerodrome-AB)</td>
+                                        <td>Transitional Surface</td>
+                                        <td></td>
+                                        <td>
+                                            <button type="button" class="form-control">Lihat</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Aeronautical</td>
+                                        <td>Lapangan Terbang (Aerodrome-AB)</td>
+                                        <td>Transitional Surface</td>
+                                        <td></td>
+                                        <td>
+                                            <button type="button" class="form-control">Lihat</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#table_metadatas").DataTable({
+            "ordering": false,
+            "responsive": true,
+            "autoWidth": false,
+            "oLanguage": {
+                "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                "sEmptyTable": "Tiada rekod ditemui",
+                "sZeroRecords": "Tiada rekod ditemui",
+                "sLengthMenu": "Papar _MENU_ rekod",
+                "sLoadingRecords": "Sila tunggu...",
+                "sSearch": "Carian:",
+                "oPaginate": {
+                    "sFirst": "Pertama",
+                    "sLast": "Terakhir",
+                    "sNext": ">",
+                    "sPrevious": "<",
+                }
+            }
+        });
+    });
+</script>
+@stop

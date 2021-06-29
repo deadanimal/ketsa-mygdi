@@ -64,7 +64,7 @@
             </div>
             <span _ngcontent-lqr-c499="" class="text-center mt-2">Metadata</span>
         </div>
-        <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 ml-4 float-right">
+        <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 ml-4 float-right linkDataAsas">
             <div _ngcontent-lqr-c499="" class="card-body pointer" tabindex="0" ng-reflect-router-link="/data-asas">
                 <img _ngcontent-lqr-c499="" height="50" src="./afiqlogin_files/dataapp.png">
             </div>
@@ -372,7 +372,7 @@
                                             <input class="form-control form-control-sm ml-3" id="input-tpejabat" placeholder="Nombor Telefon Pejabat" type="text" name="phone_pejabat" />
                                         </div>
                                     </div>
-                                    <div class="row mb-2 divPhoneBimbit">
+<!--                                    <div class="row mb-2 divPhoneBimbit">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="input-tbimbit">
                                                 Telefon Bimbit
@@ -381,7 +381,7 @@
                                         <div class="col-6">
                                             <input class="form-control form-control-sm ml-3" id="input-tbimbit" placeholder="Nombor Telefon Bimbit" type="text" name="phone_bimbit" />
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="row mb-2 divPeranan">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="input-peranan">
@@ -512,7 +512,7 @@
             $(".divInstitusi").hide();
             $(".txt_agensi_organisasi1").prop('disabled',false);
             $(".txt_agensi_organisasi2").prop('disabled',true);
-            $(".divPhoneBimbit").hide();
+//            $(".divPhoneBimbit").hide();
             $(".divKategori").hide();
             $('.divPemohonDataG2s').hide();
             $('#btn_isi_borang').show();
@@ -540,7 +540,7 @@
             $(".input_email_rasmi").prop("disabled",false);
             $(".input_email").prop("disabled",true);
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
+//            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $(".divAgensiOrganisasiAlamat").hide();
@@ -560,7 +560,7 @@
             $(".input_email_rasmi").prop("disabled",false);
             $(".input_email").prop("disabled",true);
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
+//            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $(".divInstitusi").hide();
@@ -579,7 +579,7 @@
             $(".input_email_rasmi").prop("disabled",false);
             $(".input_email").prop("disabled",true);
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
+//            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $(".divInstitusi").hide();
@@ -601,7 +601,7 @@
             $(".input_email_rasmi").prop("disabled",true);
             $(".input_email").prop("disabled",false);
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
+//            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $('#btn_isi_borang').show();
@@ -620,7 +620,7 @@
             $(".input_email_rasmi").prop("disabled",true);
             $(".input_email").prop("disabled",false);
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
+//            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $('#btn_isi_borang').show();
@@ -639,7 +639,7 @@
             $(".input_email_rasmi").prop("disabled",true);
             $(".input_email").prop("disabled",false);
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
+//            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $('#btn_isi_borang').show();
@@ -658,7 +658,7 @@
             $(".input_email_rasmi").prop("disabled",true);
             $(".input_email").prop("disabled",false);
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
+//            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $('#btn_isi_borang').show();
@@ -682,6 +682,10 @@
     });
     
     $(document).ready(function () {
+        $(document).on("click",".linkDataAsas",function(){
+            window.location.href = "{{url('data_asas_landing')}}";
+        });
+        
         //ajax get roles
         $.ajax({
             method: "POST",
