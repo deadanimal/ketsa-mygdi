@@ -1,42 +1,47 @@
 @extends('layouts.app_afiq')
 
 @section('content')
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-          <div class="container">
-            <div class="row mb-2">
-              <div class="col-sm-6">
+<style>
+    .card {
+        border-radius: 0;
+        top: 250px;
+        left: 0;
+        right: 0;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
                 <h1 class="m-0 text-dark"></h1>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-          </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
 
-        <!-- Main content -->
-        <div class="content">
-          <div class="container">
+<!-- Main content -->
+<div class="content">
+    <div class="card mt-7 p-4" style="background-color: rgba(255, 255, 255, 0.9);">
+        <div class="card-body">
             <div class="row">
-              <!-- /.col-md-6 -->
-              <div class="col-lg-12 ">
-                <div class="card">
-                  <div class="card-header">
-                    <h5 class="card-title m-0">{!! (!is_null($hubungi_kami) ? $hubungi_kami->title:"") !!}</h5>
-                  </div>
-                  <div class="card-body">
-                    {!! (!is_null($hubungi_kami) ? $hubungi_kami->content:"") !!}
-                  </div>
+                <div class="col-4">
+                    <h1 class="text-center">Hubungi Kami</h1>
                 </div>
-              </div>
-              <!-- /.col-md-6 -->
+                <div class="col">
+
+                    Pusat Geospatial Negara (PGN) <br>
+                    Kementerian Tenaga dan Sumber Asli (KeTSA) <br>
+                    Aras 7 & 8, Wisma Sumber Asli <br>
+                    No 25, Persiaran Perdana, Presint 4 <br>
+                    62574, Putrajaya, Malaysia <br><br>
+                    Tel:+603 8886 1156 | Faks: +603 8889 4851<br>
+                    <i class="fas fa-envelope"></i> adminexplorer@ketsa.gov.my <br>
+                </div>
             </div>
-            <!-- /.row -->
-          </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content -->
-      </div>
-      <!-- /.content-wrapper -->
+    </div>
+</div>
 
 @stop

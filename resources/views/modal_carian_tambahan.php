@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal-carian-tabahan">
+<div class="modal fade" id="modal-carian-tambahan">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Carian Tambahan</h4>
+            <div class="modal-header bg-primary mb-0">
+                <h4 class="text-white">Carian Tambahan</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

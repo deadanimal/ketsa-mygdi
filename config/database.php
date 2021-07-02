@@ -62,7 +62,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-        
+
         'mysql2' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
@@ -82,8 +82,8 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-        
-        
+
+
 
 
         'pgsql' => [
@@ -92,15 +92,15 @@ return [
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'ketsa_mygdi'),
-            'username' => env('DB_USERNAME', 'ketsa_admin'),
-            'password' => env('DB_PASSWORD', 'ketsa_admin'),
+            'username' => env('DB_USERNAME', 'postgres'),
+            'password' => env('DB_PASSWORD', 'admin'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
-        
+
         'pgsql2' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL_2'),

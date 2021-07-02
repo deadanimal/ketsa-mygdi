@@ -16,8 +16,8 @@
 }
 </style>
 
-<div class="col-lg-9 divCenter">
-    <div class="card mt-4 ml-4 p-3 umum_senarai_card">
+<div class="col-lg-9 pt-4 divCenter">
+    <div class="card mt-4 p-3 umum_senarai_card">
        <div class="card-header umum_senarai_header">
           <h1 class="card-title m-0">{!! (!is_null($pengumuman) ? $pengumuman->title:"") !!}</h1>
        </div>

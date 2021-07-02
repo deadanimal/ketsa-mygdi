@@ -29,7 +29,7 @@ div.scrollable-content {
     font-size: 0.7rem;
     font-style: italic;
 }
-.ticket_filter_row1 {    
+.ticket_filter_row1 {
     vertical-align: bottom;
 }
 .ticket_filter_row2 {
@@ -39,7 +39,7 @@ div.scrollable-content {
     font-size: 0.7rem;
     margin-top: 3px;
     margin-bottom: 3px;
-    
+
 }
 .content4 .btn-sm-nopadding{
     padding: .125rem .3rem !important;
@@ -68,10 +68,10 @@ div.scrollable-content {
 .content4 .mbr-section-subtitle {
     font-size: 1.2rem;
 }
-.ticket-row .table-cell-project-id {    
+.ticket-row .table-cell-project-id {
     font-weight: bold;
 }
-.ticket-row .table-cell-log-id {    
+.ticket-row .table-cell-log-id {
     font-weight: bold;
 }
 /*!
@@ -81,7 +81,7 @@ div.scrollable-content {
     width:100%;
 }
 .ticket_table th,.ticket_table tr{
-    /* font-family: "Source Sans Pro"; */
+    /* font-family: "Open Sans"; */
     font-family: "Arial";
     font-size: .5rem;
     line-height: 96%;
@@ -95,7 +95,7 @@ div.scrollable-content {
 .ticket-row .table-cell{
 	vertical-align: top;
     font-size: .9rem;
-    line-height: 1;	
+    line-height: 1;
 	padding: 8px 8px;
 }
 .ticket-table-fixed {
@@ -103,19 +103,19 @@ div.scrollable-content {
     width: 100%;
     clear: both;
     border-collapse: collapse; */
-    table-layout: fixed;  
+    table-layout: fixed;
     word-wrap: break-word;
 }
 .ticket-row .table-cell-assignee{
     max-width: 100px;
 }
-.ticket-row td{	
+.ticket-row td{
 	vertical-align: top;
-    padding: 8px 8px;   
+    padding: 8px 8px;
 }
 @media (max-width: 40em){
-    .ticket-table-fixed {        
-        table-layout: auto;  
+    .ticket-table-fixed {
+        table-layout: auto;
         word-wrap: break-word;
     }
 }
@@ -142,16 +142,16 @@ div.scrollable-content {
     font-weight: bold;
     color: black;
 }
-.dashboardview .indicator1 .row2 {    
+.dashboardview .indicator1 .row2 {
     color: red;
 }
-.dashboardview .indicator2 .row2 {    
+.dashboardview .indicator2 .row2 {
     color: red;
 }
-.dashboardview .indicator3 .row2 {    
+.dashboardview .indicator3 .row2 {
     color: red;
 }
-.dashboardview .indicator4 .row2 {    
+.dashboardview .indicator4 .row2 {
     color: red;
 }
 .dashboardview .information-sm {

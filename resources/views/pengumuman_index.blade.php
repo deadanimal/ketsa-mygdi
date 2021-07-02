@@ -26,14 +26,14 @@ thead {
     margin-left: auto;
 }
 .td_umum:hover{
-    background: yellow;
-    cursor: -webkit-grab; 
+    background:rgba(93, 118, 255, 0.849);
+    cursor: -webkit-grab;
     cursor: grab;
 }
 </style>
 
-<div class="col-lg-9 divCenter">
-    <div class="card mt-4 ml-4 p-3 umum_senarai_card">
+<div class="col-lg-10 s pt-4 pb-6 divCenter">
+    <div class="card mt-4 mx-auto p-3 umum_senarai_card">
        <div class="card-header umum_senarai_header">
           <h1 class="card-title m-0"><i class="fa fa-bullhorn mr-3"></i>Senarai Pengumuman</h1>
        </div>
@@ -51,7 +51,7 @@ thead {
                 <tr>
                     <td class="td_umum" data-umumid="{{ $umum->id }}">
                         <form id="form_umum_{{ $umum->id }}" method="post" action="{{ url('/tunjuk_pengumuman') }}">
-                            @csrf 
+                            @csrf
                             <input type="hidden" name="umum_id" value="{{ $umum->id }}">
                             <h2><?php echo date('j M Y',strtotime($umum->created_at)); ?></h2>
                             <?php echo $umum->kategori; ?>:<br>
@@ -62,13 +62,13 @@ thead {
                 <?php
               }
               ?>
-                
+
               <?php
               /*
                 foreach($pengumuman as $umum){
                     ?>
                     <form id="form_umum_{{ $umum->id }}" method="post" action="{{ url('/tunjuk_pengumuman') }}">
-                        @csrf 
+                        @csrf
                         <input type="hidden" name="umum_id" value="{{ $umum->id }}">
                         <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
                             <span style="color: #252525;"><?php echo date('j M Y',strtotime($umum->created_at)); ?></span>
@@ -77,7 +77,7 @@ thead {
                     </form>
                     <?php
                 }
-               * 
+               *
                */
                 ?>
             </tbody>
@@ -107,7 +107,7 @@ thead {
          }
       }
     });
-    
+
     $(document).on("click",".td_umum",function(){
        var umumid = $(this).data("umumid");
        $("#form_umum_"+umumid).submit();

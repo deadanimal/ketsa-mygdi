@@ -1,105 +1,64 @@
 @extends('layouts.app_afiq')
 
 @section('content')
+<style>
+    .card {
+        background-color: white;
+    }
+</style>
 <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-          <div class="container">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0 text-dark"></h1>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-          </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
 
-        <!-- Main content -->
-        <div class="content">
-          <div class="container">
-            <div class="row">
-              <!-- /.col-md-6 -->
-              <div class="col-lg-12">
+<div class="content p-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
-                  <div class="card-header">
-                            <h5 class="card-title m-0">Anda perlukan sebarang bantuan atau pertanyaan?</h5>
-                        </div>
-                        <div class="card-body">
-                            <form method="post" class="form-horizontal" action="{{url('simpan_maklum_balas')}}" id="form_maklum_balas">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>Kategori</label>
-                                            <select class="custom-select" name="kategori">
-                                                <option value="metadata">Metadata</option>
-                                                <option value="permohonan data asas">Permohonan Data-data Asas</option>
-                                                <option value="lain-lain">Lain-lain</option>
-                                            </select>
-                                        </div>
+                    <div class="card-header">
+                        <h2 class="card-title m-0">Anda perlukan sebarang bantuan atau pertanyaan?</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" class="form-horizontal" action="{{url('simpan_maklum_balas')}}" id="form_maklum_balas">
+                            <h6 class="heading-small text-muted mb-4">Maklum Balas</h6>
+                            <div class="pl-lg-4">
+                                <div class="row mb-3">
+                                    <div class="col-2"><label for="input-agensi" class="form-control-label mr-4"> Kategori </label></div>
+                                    <div class="col-9"><select id="input-agensi" class="form-control form-control-sm ml-3">
+                                            <option selected disabled hidden=""> Pilih Kategori </option>
+                                            <option value="metadata">Metadata</option>
+                                            <option value="permohonan data asas">Permohonan Data-data Asas</option>
+                                            <option value="lain-lain">Lain-lain</option>
+                                        </select></div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-2"><label for="input-feedback" class="form-control-label mr-4"> Pertanyaan </label></div>
+                                    <div class="col-9"><textarea name="pertanyaan" placeholder="Nyatakan maklum balas anda" type="text" rows="5" class="form-control form-control-sm ml-3"></textarea></div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-2"><label for="input-emel" class="form-control-label mr-4"> Emel Personal </label></div>
+                                    <div class="col-7"><input placeholder="Masukan E-mel anda" type="text" name="email" class="form-control form-control-sm ml-3">
+
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>Pertanyaan</label>
-                                            <textarea class="form-control" rows="3" name="pertanyaan" placeholder="Masukkan pertanyaan..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Emel Personal</label>
-                                            <input type="text" class="form-control" name="email" placeholder="Masukkan emel...">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary" id="btnHantar">Hantar</button>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary float-right" id="btnHantar">Hantar</button>
+                    </div>
                 </div>
-              </div>
-              <!-- /.col-md-6 -->
             </div>
-            <!-- /.row -->
-          </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content -->
-      </div>
-      <!-- /.content-wrapper -->
+    </div>
+</div>
+<!-- /.content -->
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
 
     });
 
-    $(document).on('click', '#btnHantar', function () {
+    $(document).on('click', '#btnHantar', function() {
         alert("Maklum balas berjaya dihantar.");
     });
 </script>
 @stop
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

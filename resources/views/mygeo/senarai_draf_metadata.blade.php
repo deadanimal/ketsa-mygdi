@@ -29,7 +29,7 @@
               <form method="post" class="form-horizontal" action="{{url('carian_metadata')}}" id="form_carian">
                 @csrf
                 <!--===== MODALS START =====-->
-                <div class="modal fade" id="modal-carian-tabahan">
+                <div class="modal fade" id="modal-carian-tambahan">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -106,7 +106,7 @@
                     <input type="text" name="carian" id="carian" class="form-control">
                   </div>
                   <p>
-                    <!--<a href="#" id="carian_tambahan" data-toggle="modal" data-target="#modal-carian-tabahan">Carian Tambahan >></a>-->
+                    <!--<a href="#" id="carian_tambahan" data-toggle="modal" data-target="#modal-carian-tambahan">Carian Tambahan >></a>-->
                   </p>
                 </div>
                 <button type="submit" class="form-control">Cari Metadata</button>
@@ -179,7 +179,7 @@
     </section>
   </div>
 
-<script>  
+<script>
   $(document).ready(function(){
     $("#table_metadatas").DataTable({
       "responsive": true,
