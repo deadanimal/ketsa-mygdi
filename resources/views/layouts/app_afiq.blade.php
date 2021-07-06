@@ -84,10 +84,9 @@
 
 <body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0">
     <app-root _nghost-lqr-c446="" ng-version="9.0.2">
-        <router-outlet _ngcontent-lqr-c446=""></router-outlet>
         <app-auth-layout _nghost-lqr-c448="">
             <app-navbar2 _nghost-lqr-c453="">
-                <nav _ngcontent-lqr-c453="" class="navbar navbar-horizontal navbar-expand-lg navbar-dark" style="background-color: #242881;">
+                <nav _ngcontent-lqr-c453="" class="navbar navbar-horizontal navbar-expand-lg navbar-dark" style="background-color: #0563bb;">
                     <div _ngcontent-lqr-c453="" class="container-fluid">
                         <a _ngcontent-lqr-c453="" class="navbar-brand" ng-reflect-router-link="/portal" href="{{ url('/') }}">
                             <img _ngcontent-lqr-c453="" src="{{ url('afiqlogin_files/mygeoexplorer-logo.png') }}">
@@ -186,7 +185,7 @@
 "ng-reflect-ng-if": null
 }-->
                 </ngx-loading-bar>
-                <div _ngcontent-lqr-c499="" class="bgg" style="min-height: 800px;">
+                <div _ngcontent-lqr-c499="" class="" style="min-height: 800px;">
                     <div _ngcontent-lqr-c499="" class="content-header">
                         <div _ngcontent-lqr-c499="" class="container-fluid">
                             <div _ngcontent-lqr-c499="" class="row">
@@ -205,7 +204,7 @@
             </app-login>
             <!--container-->
             <app-footer2>
-                <footer class="footer" style="background: #242881;">
+                <footer class="footer" style="background: #034f96;">
                     <div class="container-fluid">
                         <div class="row align-items-center justify-content-xl-between">
                             <div class="col-xl-4">
