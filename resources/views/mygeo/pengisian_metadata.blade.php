@@ -28,16 +28,32 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <section class="content-header">
+    <section class="header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1></h1>
-                </div>
-                <div class="col-sm-6">
+            <div class="header-body">
+                <div class="row align-items-center p-3 py-4">
+                    <div class="col-lg-6 col-7">
+                        <h6 class="h2 text-dark d-inline-block mb-0">Pengisian Metadata</h6>
+
+                        <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class=" breadcrumb-item">
+                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Pengisian Metadata
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+                        <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
+                            <?php echo __('lang.btn_upload_xml'); ?>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!--===== MODALS =====-->
@@ -82,12 +98,6 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="card-body">
-                    <h1 class="float-left">Pengisian Metadata</h1>
-                    <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
-                        <?php echo __('lang.btn_upload_xml'); ?>
-                    </button>
-                </div>
                 <div class="col-12">
                     <div class="card">
                         <form method="post" class="form-horizontal" action="{{url('store_metadata')}}" enctype="multipart/form-data">
@@ -150,7 +160,7 @@
                                                 </div>
 
                                                 <h2 class="heading-small text-muted">Metadata Publisher</h2>
-                                                <div class="">
+                                                <div class="my-1">
                                                     <div class="row my-0 py-0">
                                                         <div class="col-3 pl-5">
                                                             <label class="form-control-label mr-4" for="uname">
@@ -380,7 +390,7 @@
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="collapse3" class="panel-collapse collapse in show" data-parent="#div_c3">
+                                        <div id="collapse3" class="panel-collapse collapse in " data-parent="#div_c3">
                                             <div class="card-body">
                                                 <div class="row pl-lg-4 mt-4">
                                                     <div class="form-group col-4">
@@ -518,7 +528,7 @@
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="collapse5" class="panel-collapse collapse in show" data-parent="#div_c5">
+                                        <div id="collapse5" class="panel-collapse collapse in " data-parent="#div_c5">
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-xl-6">
@@ -588,7 +598,7 @@
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="collapse7" class="panel-collapse collapse in show" data-parent="#div_c7">
+                                        <div id="collapse7" class="panel-collapse collapse in " data-parent="#div_c7">
                                             <div class="card-body">
                                                 <div class="acard-body opacity-8">
                                                     <h6 class="heading-small text-muted mb-2">Wavelength Band
@@ -977,7 +987,7 @@
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="collapse11" class="panel-collapse collapse in show" data-parent="#div_c11">
+                                        <div id="collapse11" class="panel-collapse collapse in" data-parent="#div_c11">
                                             <div class="card-body">
                                                 <div class="row mb-2">
                                                     <div class="col-xl-2">
@@ -1086,7 +1096,6 @@
                                         </div>
                                         <div id="collapse12" class="panel-collapse collapse in show" data-parent="#div_c12">
                                             <div class="card-body">
-
                                                 <div class="acard-body opacity-8">
                                                     <div class="row mb-4">
                                                         <div class="col-xl-2">
@@ -1156,7 +1165,7 @@
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="collapse13" class="panel-collapse collapse in show" data-parent="#div_c13">
+                                        <div id="collapse13" class="panel-collapse collapse in" data-parent="#div_c13">
                                             <div class="card-body">
                                                 <div class="row mb-2">
                                                     <div class="col-xl-3">
@@ -1220,91 +1229,90 @@
                                         </div>
                                         <div id="collapse14" class="panel-collapse collapse in show" data-parent="#div_c14">
                                             <div class="card-body">
-                                                <div class="acard-body opacity-8">
-                                                    <div class="row">
-                                                        <div class="col-xl-6">
-                                                            <h6 class="heading-small text muted">Legal Constraints</h6>
-                                                            <div class="pl-lg-3">
-                                                                <div class="row mb-2">
-                                                                    <div class="col-xl-5">
-                                                                        <label class="form-control-label" for="input-access-cons">
-                                                                            Access Constraints
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="col-xl-7">
-                                                                        <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm">
-                                                                            <option value="copyright">Copyright</option>
-                                                                            <option value="intelect_prop_right">Intellectual Property Rights</option>
-                                                                            <option value="license">License</option>
-                                                                            <option value="license_end_user">License End User</option>
-                                                                            <option value="license_unrestricted">License Unrestricted</option>
-                                                                            <option value="other_restrictions">Other Restrictions</option>
-                                                                            <option value="patient">Patient</option>
-                                                                            <option value="patient_pending">Patient Pending</option>
-                                                                            <option value="restricted">Restricted</option>
-                                                                            <option value="trademark">Trademark</option>
-                                                                            <option value="unrestricted">Unrestricted</option>
-                                                                        </select>
-                                                                    </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <h6 class="heading-small text muted">Legal Constraints</h6>
+                                                        <div class="pl-lg-3">
+                                                            <div class="row mb-2">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="input-access-cons">
+                                                                        Access Constraints
+                                                                    </label>
                                                                 </div>
-                                                                <div class="row mb-2">
-                                                                    <div class="col-xl-5">
-                                                                        <label class="form-control-label" for="input-use-cons">
-                                                                            Use Constraints
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="col-xl-7">
-                                                                        <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm">
-                                                                            <option value="copyright">Copyright</option>
-                                                                            <option value="intelect_prop_right">Intellectual Property Rights</option>
-                                                                            <option value="license">License</option>
-                                                                            <option value="license_end_user">License End User</option>
-                                                                            <option value="license_unrestricted">License Unrestricted</option>
-                                                                            <option value="other_restrictions">Other Restrictions</option>
-                                                                            <option value="patient">Patient</option>
-                                                                            <option value="patient_pending">Patient Pending</option>
-                                                                            <option value="restricted">Restricted</option>
-                                                                            <option value="trademark">Trademark</option>
-                                                                            <option value="unrestricted">Unrestricted</option>
-                                                                        </select>
-                                                                    </div>
+                                                                <div class="col-xl-7">
+                                                                    <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm">
+                                                                        <option value="copyright">Copyright</option>
+                                                                        <option value="intelect_prop_right">Intellectual Property Rights</option>
+                                                                        <option value="license">License</option>
+                                                                        <option value="license_end_user">License End User</option>
+                                                                        <option value="license_unrestricted">License Unrestricted</option>
+                                                                        <option value="other_restrictions">Other Restrictions</option>
+                                                                        <option value="patient">Patient</option>
+                                                                        <option value="patient_pending">Patient Pending</option>
+                                                                        <option value="restricted">Restricted</option>
+                                                                        <option value="trademark">Trademark</option>
+                                                                        <option value="unrestricted">Unrestricted</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="input-use-cons">
+                                                                        Use Constraints
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-xl-7">
+                                                                    <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm">
+                                                                        <option value="copyright">Copyright</option>
+                                                                        <option value="intelect_prop_right">Intellectual Property Rights</option>
+                                                                        <option value="license">License</option>
+                                                                        <option value="license_end_user">License End User</option>
+                                                                        <option value="license_unrestricted">License Unrestricted</option>
+                                                                        <option value="other_restrictions">Other Restrictions</option>
+                                                                        <option value="patient">Patient</option>
+                                                                        <option value="patient_pending">Patient Pending</option>
+                                                                        <option value="restricted">Restricted</option>
+                                                                        <option value="trademark">Trademark</option>
+                                                                        <option value="unrestricted">Unrestricted</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-xl-6">
-                                                            <h6 class="heading-small text muted">Security Constraints
-                                                            </h6>
-                                                            <div class="pl-lg-3">
-                                                                <div class="row mb-2">
-                                                                    <div class="col-xl-5">
-                                                                        <label class="form-control-label" for="input-access-cons">
-                                                                            Classification System
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="col-xl-7">
-                                                                        <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
-                                                                            <option value="limited">Limited</option>
-                                                                            <option value="open">Open</option>
-                                                                            <option value="secret">Secret</option>
-                                                                            <option value="top_secret">Top Secret</option>
-                                                                            <option value="others">Others</option>
-                                                                        </select>
-                                                                    </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <h6 class="heading-small text muted">Security Constraints
+                                                        </h6>
+                                                        <div class="pl-lg-3">
+                                                            <div class="row mb-2">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="input-access-cons">
+                                                                        Classification System
+                                                                    </label>
                                                                 </div>
-                                                                <div class="row mb-2">
-                                                                    <div class="col-xl-5">
-                                                                        <label class="form-control-label" for="input-reference">
-                                                                            Reference
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="col-xl-7">
-                                                                        <input class="form-control form-control-sm" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal">
-                                                                    </div>
+                                                                <div class="col-xl-7">
+                                                                    <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
+                                                                        <option value="limited">Limited</option>
+                                                                        <option value="open">Open</option>
+                                                                        <option value="secret">Secret</option>
+                                                                        <option value="top_secret">Top Secret</option>
+                                                                        <option value="others">Others</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="input-reference">
+                                                                        Reference
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-xl-7">
+                                                                    <input class="form-control form-control-sm" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -1318,7 +1326,7 @@
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="collapse15" class="panel-collapse collapse in show" data-parent="#div_c15">
+                                        <div id="collapse15" class="panel-collapse collapse in " data-parent="#div_c15">
                                             <div class="card-body">
                                                 <div class="form-group row col-xl-6">
                                                     <b>Data Quality Information</b>

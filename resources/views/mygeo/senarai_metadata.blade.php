@@ -8,16 +8,30 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <section class="content-header">
+<section class="header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1></h1>
-                </div>
-                <div class="col-sm-6">
+            <div class="header-body">
+                <div class="row align-items-center p-3 py-4">
+                    <div class="col-lg-6 col-7">
+                        <h6 class="h2 text-dark d-inline-block mb-0">Senarai Metadata</h6>
+
+                        <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class=" breadcrumb-item">
+                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Senarai Metadata
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+
+                    </div>
                 </div>
             </div>
-        </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
@@ -104,14 +118,14 @@
                             <div class="card-body">
                                 <div class="form-group row ">
                                     <div class="col-12">
-                                    <h3 class="mb-3">Carian Metadata:</h3>
-                                    <div class="input-group mb-2">
-                                        <input type="text" name="carian" id="carian" class="form-control">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-success float-right">
-                                                <i class="fas fa-search mr-2"></i>Cari</button>
+                                        <h3 class="mb-3">Carian Metadata:</h3>
+                                        <div class="input-group mb-2">
+                                            <input type="text" name="carian" id="carian" class="form-control">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-success float-right">
+                                                    <i class="fas fa-search mr-2"></i>Cari</button>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                                 <p>
@@ -176,88 +190,90 @@
                                                             }
                                                             ?>
                                                 </td>
-                                                <td>
+                                                <td style="width: fit-content;">
                                                     <?php
                                                             if ($val[2] == 'draft') {
                                                                 ?>Draf<?php
-                                                } else {
-                                                    if ($val[1]->disahkan == 'yes') {
-                                                        ?>Diterbitkan<?php
-                                                                } elseif ($val[1]->disahkan == 'no') {
-                                                                    ?>Perlu Pembetulan<?php
-                                                                    } elseif ($val[1]->disahkan == '0' || $val[1]->disahkan == '') {
-                                                                        ?>Perlu Pengesahan<?php
-                                                                    }
-                                                                }
-                                                                ?>
+                                                                                } else {
+                                                                                    if ($val[1]->disahkan == 'yes') {
+                                                                                        ?>Diterbitkan<?php
+                                                                                                                    } elseif ($val[1]->disahkan == 'no') {
+                                                                                                                        ?>Perlu Pembetulan<?php
+                                                                                                                        } elseif ($val[1]->disahkan == '0' || $val[1]->disahkan == '') {
+                                                                                                                            ?>Perlu Pengesahan<?php
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                    ?>
                                                 </td>
                                                 <td>
-                                                    <?php /*
+                                                    <div class="form-inline">
+                                                        <?php /*
                                 <a href="javascript:void(0)" class="text-green">
                                     <i class="fas fa-eye mr-3"></i>
                                 </a>
                                 */ ?>
-                                                    <?php
-                                                            //lihat(view only)================================
-                                                            if ($val[2] == 'draft') {
-                                                                ?>
-                                                        <form method="post" action="{{ url('/lihat_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_type" value="draf">
-                                                            <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                                            <a type="submit" class="text-primary" style="margin-bottom:3px;"><i class="fas fa-eye"></i>Lihat</a>
-                                                        </form>
-                                                    <?php
-                                                            } else {
-                                                                ?>
-                                                        <form method="post" action="{{ url('/lihat_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_type" value="not_draf">
-                                                            <input type="hidden" name="metadata_id" value="{{ $key }}">
-                                                            <a type="submit" class="text-primary" style="margin-bottom:3px;"><i class="fas fa-eye"></i>Lihat</a>
-                                                        </form>
-                                                    <?php
-                                                            }
-                                                            //kemaskini=======================================
-                                                            if ($val[2] == 'draft') {
-                                                                ?>
-                                                        <form method="post" action="{{ url('/kemaskini_draf_metadata') }}">
-                                                            @csrf
+                                                        <?php
+                                                                //lihat(view only)================================
+                                                                if ($val[2] == 'draft') {
+                                                                    ?>
+                                                            <form method="post" action="{{ url('/lihat_metadata') }}">
+                                                                @csrf
+                                                                <input type="hidden" name="metadata_type" value="draf">
+                                                                <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                                                <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                                            </form>
+                                                        <?php
+                                                                } else {
+                                                                    ?>
+                                                            <form method="post" action="{{ url('/lihat_metadata') }}">
+                                                                @csrf
+                                                                <input type="hidden" name="metadata_type" value="not_draf">
+                                                                <input type="hidden" name="metadata_id" value="{{ $key }}">
+                                                                <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                                            </form>
+                                                        <?php
+                                                                }
+                                                                //kemaskini=======================================
+                                                                if ($val[2] == 'draft') {
+                                                                    ?>
+                                                            <form method="post" action="{{ url('/kemaskini_draf_metadata') }}">
+                                                                @csrf
 
-                                                            <input type="hidden" name="metadata_type" value="draf">
-                                                            <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                                            <a type="submit" class="text-success" style="margin-bottom:3px;"><i class="fas fa-edit"></i>Edit</a>
-                                                        </form>
-                                                    <?php
-                                                            } else {
+                                                                <input type="hidden" name="metadata_type" value="draf">
+                                                                <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                                                <button type="submit" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                                            </form>
+                                                        <?php
+                                                                } else {
+                                                                    ?>
+                                                            <form method="post" action="{{ url('/kemaskini_metadata') }}">
+                                                                @csrf
+                                                                <input type="hidden" name="metadata_type" value="not_draf">
+                                                                <input type="hidden" name="metadata_id" value="{{ $key }}">
+                                                                <button type="submit" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                                            </form>
+                                                        <?php
+                                                                }
+                                                                //delete==========================================
+                                                                if ($val[2] == 'draft') {
+                                                                    ?>
+                                                            <form method="post" action="{{ url('/delete_draf_metadata') }}">
+                                                                @csrf
+                                                                <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                                                <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                                            </form>
+                                                        <?php
+                                                                } else {
+                                                                    ?>
+                                                            <form method="post" action="{{ url('/delete_metadata') }}">
+                                                                @csrf
+                                                                <input type="hidden" name="metadata_id" value="{{ $key }}">
+                                                                <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                                            </form>
+                                                        <?php
+                                                                }
                                                                 ?>
-                                                        <form method="post" action="{{ url('/kemaskini_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_type" value="not_draf">
-                                                            <input type="hidden" name="metadata_id" value="{{ $key }}">
-                                                            <a type="submit" class="text-success" style="margin-bottom:3px;"><i class="fas fa-edit"></i>Edit</a>
-                                                        </form>
-                                                    <?php
-                                                            }
-                                                            //delete==========================================
-                                                            if ($val[2] == 'draft') {
-                                                                ?>
-                                                        <form method="post" action="{{ url('/delete_draf_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                                            <a type="button" class="text-danger btnDelete" style="margin-bottom:3px;"><i class="fas fa-trash"></i>Delete</a>
-                                                        </form>
-                                                    <?php
-                                                            } else {
-                                                                ?>
-                                                        <form method="post" action="{{ url('/delete_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id" value="{{ $key }}">
-                                                            <a type="button" class="text-danger btnDelete" style="margin-bottom:3px;"><i class="fas fa-trash"></i>Delete</a>
-                                                        </form>
-                                                    <?php
-                                                            }
-                                                            ?>
+                                                    </div>
                                                 </td>
                                             </tr>
                                     <?php

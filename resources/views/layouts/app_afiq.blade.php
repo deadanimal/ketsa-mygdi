@@ -33,6 +33,19 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
+    <link href="assetsweb/img/favicon.png" rel="icon">
+    <link href="assetsweb/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Vendor CSS Files -->
+    <link href="assetsweb/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="assetsweb/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assetsweb/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="assetsweb/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="assetsweb/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assetsweb/css/style.css" rel="stylesheet">
+
 
     <style>
         #map {
@@ -80,6 +93,15 @@
             font-size: 110%;
         }
     </style>
+    <style>
+        .bgland {
+            width: 100%;
+            height: 100vh;
+            background: url("../assetsweb/img/landscapemy.jpeg") top right no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0">
@@ -115,24 +137,32 @@
                             <ul _ngcontent-lqr-c453="" id="button-animated" class="navbar-nav align-items-center ml-md-auto">
                                 <li class="nav-item dropdown">
                                     @auth
-                                    <a class="nav-link finline" href="{{ url('/logout')}}">
+                                    <a class="nav-link nav-link-icon" href="{{ url('/logout')}}">
                                         LOG KELUAR
                                     </a>
                                     @endauth
                                     @guest
-                                    <a class="nav-link finline" href="{{ url('/login')}}">
+                                    <a class="nav-link nav-link-icon" href="{{ url('/login')}}">
                                         DAFTAR | LOG MASUK
                                     </a>
                                     @endguest
                                 </li>
                                 <li _ngcontent-lqr-c453="" class="nav-item">
                                     <a class="nav-link nav-link-icon" href="{{ url('/soalan_lazim') }}">
-                                        <img height="25" src="{{ url('afiqlogin_files/faq-gold.png') }}">
-                                        <span class="nav-link-inner--text text-bold d-lg-none"> Soalan Lazim </span>
+                                        <!-- <img height="25" src="{{ url('afiqlogin_files/faq-gold.png') }}"> -->
+                                        <span class="nav-link-inner--text text-bold"> FAQ </span>
                                     </a>
                                 </li>
+                                @auth
+                                <li _ngcontent-lqr-c453="" class="nav-item">
+                                    <a class="nav-link nav-link-icon" href="{{ url('/landing_mygeo') }}">
+                                        <!-- <img height="25" src="{{ url('afiqlogin_files/faq-gold.png') }}"> -->
+                                        <span class="nav-link-inner--text text-bold"> DASHBOARD </span>
+                                    </a>
+                                </li>
+                                @endauth
                                 <!-- Notifications Dropdown Menu -->
-                                <li class="nav-item dropdown">
+                                <!-- <li class="nav-item dropdown">
                                     <a class="nav-link" data-toggle="dropdown" href="#">
                                         <img height="21" src="{{ url('afiqlogin_files/menuoption.png') }}">
                                     </a>
@@ -161,7 +191,7 @@
                                     <a href="{{ url('/portal_settings') }}">Portal Settings</a> <br>
                                     <?php */ ?>
 
-                                </li>
+                                </li> -->
                                 <!--container-->
                                 <li _ngcontent-lqr-c453="" class="nav-item d-lg-none">
                                     <div _ngcontent-lqr-c453="" data-action="sidenav-pin" data-target="#mySidenav" class="sidenav-toggler sidenav-toggler-dark">
@@ -261,6 +291,20 @@
             bsCustomFileInput.init();
         });
     </script>
+
+    <!-- Vendor JS Files -->
+    <script src="assetsweb/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="assetsweb/vendor/php-email-form/validate.js"></script>
+    <script src="assetsweb/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="assetsweb/vendor/counterup/counterup.min.js"></script>
+    <script src="assetsweb/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assetsweb/vendor/venobox/venobox.min.js"></script>
+    <script src="assetsweb/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="assetsweb/vendor/typed.js/typed.min.js"></script>
+    <script src="assetsweb/vendor/aos/aos.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assetsweb/js/main.js"></script>
     <script>
         // Restricts input for the set of matched elements to the given inputFilter function.
         (function($) {

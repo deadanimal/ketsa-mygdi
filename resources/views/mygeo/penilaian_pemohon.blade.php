@@ -45,63 +45,7 @@
             <div class=" row">
                 <div class=" col">
                     <div class="card">
-                        @csrf
-                        <div class="card-header">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <h3 class="mb-0">Senarai Penilaian</h3>
-                                </div>
-
-                                <div class="col-4 text-right">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
-                                <thead>
-                                    <tr>
-                                        <th>BIL</th>
-                                        <th>NAMA PERMOHONAN</th>
-                                        <th>NAMA PEMOHON</th>
-                                        <th>KATEGORI</th>
-                                        <th>TINDAKAN</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Permohonan Data Sungai Selangor</td>
-                                        <td>Muhammad Rahman bin Talib</td>
-                                        <td>G2E-Pelajar</td>
-                                        <td>
-                                            <a class="btn btn-sm btn-warning text-white"><i class=" fas fa-file-export"></i><span>Lihat Penilaian</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Permohonan Data Sungai Selangor</td>
-                                        <td>Muhammad Rahman bin Talib</td>
-                                        <td>G2E-Pelajar</td>
-                                        <td>
-                                            <a class="btn btn-sm btn-warning text-white"><i class=" fas fa-file-export"></i><span>Lihat Penilaian</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Permohonan Data Sungai Selangor</td>
-                                        <td>Muhammad Rahman bin Talib</td>
-                                        <td>G2E-Pelajar</td>
-                                        <td>
-                                            <a class="btn btn-sm btn-warning text-white"><i class=" fas fa-file-export"></i><span>Lihat Penilaian</span></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div *ngIf="editEnabled" class="card-header bg-default">
+                        <div  class="card-header bg-default">
                             <div class="row align-items-center">
                                 <div class="col-8">
                                     <h3 class="text-white mb-0">Borang Penilaian Data</h3>
@@ -111,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="editEnabled" class="card-body py-4 px-">
+                        <div  class="card-body py-4 px-">
                             <div class="row">
                                 <div class="col-xl-12 text-right">
                                     <h6 class="heading text-muted">Lampiran 3</h6>

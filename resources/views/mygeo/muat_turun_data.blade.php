@@ -3,22 +3,19 @@
 @section('content')
 
 <link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
+
 <style>
-    .ftest{
-        display:inline;
-        width:auto;
-    }
 </style>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="header">
-        <div class=" container-fluid">
+        <div class="container-fluid">
             <div class="header-body">
                 <div class="row align-items-center p-3 py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-dark d-inline-block mb-0">Senarai Data</h6>
+                        <h6 class="h2 text-dark d-inline-block mb-0">Muat Turun Data</h6>
 
                         <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
@@ -26,10 +23,7 @@
                                     <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
                                 </li>
                                 <li aria-current="page" class="breadcrumb-item active">
-                                    Kemas Kini Data
-                                </li>
-                                <li aria-current="page" class="breadcrumb-item active">
-                                    Senarai Data
+                                    Muat Turun Data
                                 </li>
                             </ol>
                         </nav>
@@ -39,7 +33,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
@@ -52,14 +46,11 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Senarai Data</h3>
+                                    <h3 class="mb-0">Senarai Muat Turun Data</h3>
                                 </div>
 
                                 <div class="col-4 text-right">
-                                    <a href="{{ url('mohon_data_asas_baru') }}" class="btn btn-primary btn-sm text-white btn-icon btn-3">
-                                        <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                        <span class="btn-inner--text">Tambah</span>
-                                    </a>
+
                                 </div>
                             </div>
                         </div>
@@ -68,38 +59,44 @@
                                 <thead>
                                     <tr>
                                         <th>BIL</th>
-                                        <th>KATEGORI</th>
-                                        <th>SUB_KATEGORI</th>
-                                        <th>LAPISAN DATA</th>
+                                        <th>NAMA PERMOHONAN</th>
+                                        <th>STATUS</th>
+                                        <th>TARIKH</th>
                                         <th>TINDAKAN</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Aeronautical</td>
-                                        <td>Lapangan Terbang (Aerodrome-AB)</td>
-                                        <td>Transitional Surface</td>
+                                        <td>Permohonan Data Selangor</td>
+                                        <td><a class="badge badge-pill badge-danger">Dalam
+                                                Proses</a></td>
+                                        <td>8 September 2021</td>
                                         <td>
-                                            <button type="button" class="form-control">Lihat</button>
+                                            <a class="text-muted" disabled><span class="fas fa-download mr-2"></span>
+                                                Muat Turun</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Aeronautical</td>
-                                        <td>Lapangan Terbang (Aerodrome-AB)</td>
-                                        <td>Transitional Surface</td>
+                                        <td>Permohonan Data Putrajaya</td>
+                                        <td><a class="badge badge-pill badge-success">Data
+                                                Tersedia</a></td>
+                                        <td>23 Januari 2021</td>
                                         <td>
-                                            <button type="button" class="form-control">Lihat</button>
+                                            <a class="text-green" disabled><span class="fas fa-download mr-2"></span>
+                                                Muat Turun</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Aeronautical</td>
-                                        <td>Lapangan Terbang (Aerodrome-AB)</td>
-                                        <td>Transitional Surface</td>
+                                        <td>Permohonan Data Asas Kawasan Perindustrian Penang</td>
+                                        <td><a class="badge badge-pill badge-success">Data
+                                                Tersedia</a></td>
+                                        <td>17 Mei 2021</td>
                                         <td>
-                                            <button type="button" class="form-control">Lihat</button>
+                                            <a class="text-green"><span class="fas fa-download mr-2"></span>Muat
+                                                Turun</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -112,27 +109,4 @@
     </section>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $("#table_metadatas").DataTable({
-            "ordering": false,
-            "responsive": true,
-            "autoWidth": false,
-            "oLanguage": {
-                "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                "sEmptyTable": "Tiada rekod ditemui",
-                "sZeroRecords": "Tiada rekod ditemui",
-                "sLengthMenu": "Papar _MENU_ rekod",
-                "sLoadingRecords": "Sila tunggu...",
-                "sSearch": "Carian:",
-                "oPaginate": {
-                    "sFirst": "Pertama",
-                    "sLast": "Terakhir",
-                    "sNext": ">",
-                    "sPrevious": "<",
-                }
-            }
-        });
-    });
-</script>
 @stop

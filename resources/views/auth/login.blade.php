@@ -1,89 +1,88 @@
 @extends('layouts.app_afiq')
 
 @section('content')
+<style>
+    .bgland {
+        width: 100%;
+        height: 100vh;
+        background: url("../assetsweb/img/landscapemy.jpeg") top right no-repeat;
+        background-size: cover;
+        position: relative;
+    }
 
-<div _ngcontent-lqr-c499="" class="content p-5">
-    <div _ngcontent-lqr-c499="" class="container-fluid">
+    .bgland:before {
+        content: "";
+        background: rgba(255, 255, 255, 0.4);
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+</style>
+
+<div _ngcontent-lqr-c499="" class="content bgland p-5">
+    <div _ngcontent-lqr-c499="" class="container-fluid" data-aos="fade-up">
         <div _ngcontent-lqr-c499="" class="row">
 
-            <div _ngcontent-lqr-c499="" class="col-lg-5 p-4 mt-7">
-                <div _ngcontent-lqr-c499="" class="card" style="background-color: rgba(255, 255, 255, 0.2);">
-                    <div _ngcontent-lqr-c499="" class="card-body px-lg-5 py-lg-5">
-                        <div _ngcontent-lqr-c499="" class="text-white" style="font-size: 17px;">
-                            <span _ngcontent-lqr-c499="">Maklumat geospatial kini dihujung jari anda.</span>
-                            <br _ngcontent-lqr-c499="">
-                            <span _ngcontent-lqr-c499="">Log Masuk.</span>
-                            <br _ngcontent-lqr-c499="">
-                            <br _ngcontent-lqr-c499="">
-                        </div>
-                        <div _ngcontent-lqr-c499="" class="mb-4">
-                            <a class="text-yellow" href="#" id="hrefDaftar" data-toggle="modal" data-target="#modal-daftar-jenis-pengguna">Pengguna baru? Daftar sekarang.</a>
-                        </div>
-                        <form method="POST" action="{{ url('loginf') }}">
-                            @csrf
-                            <div _ngcontent-lqr-c499="" class="form-group mb-3" ng-reflect-ng-class="[object Object]">
-                                <div _ngcontent-lqr-c499="" class="input-group input-group-alternative mb-3">
-                                    <input id="id_pengguna" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="ID Pengguna">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-envelope"></i>
-                                        </div>
-                                    </div>
-                                </div>
+            <div class="col-lg-3"></div>
+            <div _ngcontent-lqr-c499="" class="col-lg-6 p-4 px-5">
+                <div class="row img-center">
+                    <img src="{{ url('assetsangular/img/logo/mygeo-logo.png') }}" alt="MyGeo Explorer" class="img-center" style="width: 80%; height: auto;">
+                </div>
+                <div class="row justify-content-center">
+                    <div _ngcontent-lqr-c499="" class="card" style="background-color: rgba(255, 255, 255, 0.7);">
+                        <div _ngcontent-lqr-c499="" class="card-body px-lg-5 py-lg-5">
+                            <div _ngcontent-lqr-c499="" class="text-muted" style="font-size: 17px;">
+                                <h2 class="mb-0 pb-0 text-muted">Maklumat geospatial kini dihujung jari anda.</h2>
+                                <h2 class="mb-0 pb-0 text-muted">Log Masuk.</h2>
+                                <br _ngcontent-lqr-c499="">
                             </div>
-                            <div _ngcontent-lqr-c499="" class="form-group" ng-reflect-ng-class="[object Object]">
-                                <div _ngcontent-lqr-c499="" class="input-group input-group-alternative">
-                                    <div class="input-group">
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Kata Laluan">
+                            <div _ngcontent-lqr-c499="" class="mb-4">
+                                <a class="text-primary" href="#" id="hrefDaftar" data-toggle="modal" data-target="#modal-daftar-jenis-pengguna">Pengguna baru? Daftar sekarang.</a>
+                            </div>
+                            <form method="POST" action="{{ url('loginf') }}">
+                                @csrf
+                                <div _ngcontent-lqr-c499="" class="form-group mb-3" ng-reflect-ng-class="[object Object]">
+                                    <div _ngcontent-lqr-c499="" class="input-group input-group-alternative mb-3">
+                                        <input id="id_pengguna" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="ID Pengguna">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
-                                                <i class="fas fa-eye" onclick="myFunction3()"></i>
+                                                <i class="fas fa-envelope"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div _ngcontent-lqr-c499="" class="validation-errors">
-                                </div>
-                            </div>
-                            <div _ngcontent-lqr-c499="" class="row align-items-center">
-                                <div _ngcontent-lqr-c499="" class="col-6 order-2">
-                                    <div _ngcontent-lqr-c499="" class="text-center">
-                                        <button type="submit" class="btn btn-warning float-right">Log Masuk</button>
+                                <div _ngcontent-lqr-c499="" class="form-group" ng-reflect-ng-class="[object Object]">
+                                    <div _ngcontent-lqr-c499="" class="input-group input-group-alternative">
+                                        <div class="input-group">
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Kata Laluan">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <i class="fas fa-eye" onclick="myFunction3()"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div _ngcontent-lqr-c499="" class="validation-errors">
                                     </div>
                                 </div>
-                                <div _ngcontent-lqr-c499="" class="col-6 order-1">
-                                    <label _ngcontent-lqr-c499="" class="forget-label">
-                                        <a class="pointer text-white" href="{{ route('password.request') }}">Lupa kata laluan?</a>
-                                    </label>
+                                <div _ngcontent-lqr-c499="" class="row align-items-center">
+                                    <div _ngcontent-lqr-c499="" class="col-6 order-2">
+                                        <div _ngcontent-lqr-c499="" class="text-center">
+                                            <button type="submit" class="btn btn-warning float-right">Log Masuk</button>
+                                        </div>
+                                    </div>
+                                    <div _ngcontent-lqr-c499="" class="col-6 order-1">
+                                        <a class="text-danger" href="{{ route('password.request') }}">Lupa kata laluan?</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div _ngcontent-lqr-c499="" class="col-lg-6"></div>
-            <div _ngcontent-lqr-c499="" class="col-lg-1">
-                <div _ngcontent-lqr-c499="" class="form-group mt-7">
-                    <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 ml-4 float-right">
-                        <div _ngcontent-lqr-c499="" class="card-body pointer" tabindex="0" ng-reflect-router-link="/metadata">
-                            <a href="{{ url('senarai_metadata_nologin') }}"><img _ngcontent-lqr-c499="" height="50" src="./afiqlogin_files/metadata.png"></a>
-                        </div>
-                        <span _ngcontent-lqr-c499="" class="text-center mt-2">Metadata</span>
-                    </div>
-                    <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 ml-4 float-right">
-                        <div _ngcontent-lqr-c499="" class="card-body pointer" tabindex="0" ng-reflect-router-link="/data-asas">
-                            <img _ngcontent-lqr-c499="" height="50" src="./afiqlogin_files/dataapp.png">
-                        </div>
-                        <span _ngcontent-lqr-c499="" class="text-center mt-2">Data Asas</span>
-                    </div>
-                    <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 float-right">
-                        <div _ngcontent-lqr-c499="" class="card-body pointer" tabindex="0" ng-reflect-router-link="/tutorial">
-                            <img _ngcontent-lqr-c499="" height="50" src="./afiqlogin_files/tutorial.png">
-                        </div>
-                        <span _ngcontent-lqr-c499="" class="text-center mt-2">Tutorial</span>
-                    </div>
-                </div>
-            </div>
+            <div class="col-lg-3"></div>
 
             <!--===== MODALS =====-->
             <div class="modal fade" id="modal-daftar-jenis-pengguna">

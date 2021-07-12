@@ -2,23 +2,41 @@
 
 @section('content')
 
+<link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
 <style>
-    .ftest{
-        display:inline;
-        width:auto;
+    .ftest {
+        display: inline;
+        width: auto;
     }
 </style>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1></h1>
-                </div>
-                <div class="col-sm-6">
+            <div class="header-body">
+                <div class="row align-items-center p-3 py-4">
+                    <div class="col-lg-6 col-7">
+                        <h6 class="h2 text-dark d-inline-block mb-0">Mohon Data</h6>
+
+                        <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class=" breadcrumb-item">
+                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"></i></a>
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Mohon Data
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Permohonan Baru
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+
+                    </div>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -30,71 +48,86 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @csrf  
+                        @csrf
                         <div class="card-header">
-                            <h3 class="card-title" style="font-size: 2rem;">Permohonan Baru</h3>
-                            <a href="javascript:history.back()">
-                                <button type="button" class="btn btn-default float-right">Kembali</button>
-                            </a>
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Permohonan Baru</h3>
+                                </div>
+
+                                <div class="col-4 text-right">
+                                    <a href="javascript:history.back()">
+                                        <button type="button" class="btn btn-sm btn-default float-right">Kembali</button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <h4>Maklumat Pemohon</h4>
-                            <div class="form-group row">
-                                <label for="nama_penuh" class="col-sm-2">Nama Penuh</label>
-                                <input type="text" class="form-control" name="nama_penuh" value="" disabled>
+                            <h4 class="heading text-muted">Maklumat Pemohon</h4>
+                            <div class="row">
+                                <div class="col-10 pl-lg-5">
+                                    <div class="form-group">
+                                        <label for="nama_penuh" class="form-control-label">Nama Penuh</label>
+                                        <input type="text" class="form-control form-control-sm" name="nama_penuh" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nric" class="form-control-label">No Kad Pengenalan</label>
+                                        <input type="text" class="form-control form-control-sm" name="nric" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="institusi" class="form-control-label">Institusi</label>
+                                        <input type="text" class="form-control form-control-sm" name="institusi" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="alamat" class="form-control-label">Alamat</label>
+                                        <input type="text" class="form-control form-control-sm" name="alamat" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="form-control-label">Emel</label>
+                                        <input type="text" class="form-control form-control-sm" name="email" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tel_pej" class="form-control-label">Telefon Pejabat</label>
+                                        <input type="text" class="form-control form-control-sm" name="tel_pej" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nric" class="form-control-label">No Kad Pengenalan</label>
+                                        <input type="text" class="form-control form-control-sm" name="nric" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="peranan" class="form-control-label">Peranan</label>
+                                        <input type="text" class="form-control form-control-sm" name="peranan" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="kategori" class="form-control-label">Kategori</label>
+                                        <input type="text" class="form-control form-control-sm" name="kategori" value="" disabled>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="nric" class="col-lg-2">No Kad Pengenalan</label>
-                                <input type="text" class="form-control" name="nric" value="" disabled>
+
+                            <hr class="my-4">
+
+                            <h4 class="heading text-muted">Maklumat Permohonan</h4>
+                            <div class="row">
+                                <div class="col-10 pl-lg-5">
+                                    <div class="form-group">
+                                        <label for="nama_permohonan" class="form-control-label">Nama Permohonan</label>
+                                        <input type="text" class="form-control form-control-sm" name="nama_permohonan" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date_permohonan" class="form-control-label">Tarikh Permohonan</label>
+                                        <input type="date" class="form-control form-control-sm" name="date_permohonan" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tujuan_permohonan" class="form-control-label">Tujuan Permohonan</label>
+                                        <input type="text" class="form-control form-control-sm" name="tujuan_permohonan" value="" disabled>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="institusi" class="col-lg-2">Institusi</label>
-                                <input type="text" class="form-control" name="institusi" value="" disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label for="alamat" class="col-lg-2">Alamat</label>
-                                <input type="text" class="form-control" name="alamat" value="" disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label for="email" class="col-lg-2">Emel</label>
-                                <input type="text" class="form-control" name="email" value="" disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label for="tel_pej" class="col-lg-2">Telefon Pejabat</label>
-                                <input type="text" class="form-control" name="tel_pej" value="" disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label for="nric" class="col-lg-2">No Kad Pengenalan</label>
-                                <input type="text" class="form-control" name="nric" value="" disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label for="peranan" class="col-lg-2">Peranan</label>
-                                <input type="text" class="form-control" name="peranan" value="" disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label for="kategori" class="col-lg-2">Kategori</label>
-                                <input type="text" class="form-control" name="kategori" value="" disabled>
-                            </div>
-                            
-                            <br><hr><br>
-                            
-                            <h4>Maklumat Permohonan</h4>
-                            <div class="form-group row">
-                                <label for="nama_permohonan" class="col-lg-2">Nama Permohonan</label>
-                                <input type="text" class="form-control" name="nama_permohonan" value="" disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label for="date_permohonan" class="col-lg-2">Tarikh Permohonan</label>
-                                <input type="text" class="form-control" name="date_permohonan" value="" disabled>
-                            </div>
-                            <div class="form-group row">
-                                <label for="tujuan_permohonan" class="col-lg-2">Tujuan Permohonan</label>
-                                <input type="text" class="form-control" name="tujuan_permohonan" value="" disabled>
-                            </div>
-                            
-                            <br><hr></br>
-                            
-                            <h4>Senarai Data dan Kawasan Data</h4>
+
+                            <hr class="my-4">
+
+                            <h4 class="heading text-muted">Senarai Data dan Kawasan Data</h4>
                             <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
@@ -139,10 +172,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            
-                            <br><hr></br>
-                            
-                            <h4>Dokumen Berkaitan</h4>
+
+                            <hr class="my-4">
+
+                            <h4 class="heading text-muted">Dokumen Berkaitan</h4>
                             <table id="table_metadatas2" class="table table-bordered table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
@@ -179,9 +212,9 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            
-                            <div class="form-group row">
-                                <button type="button" class="form-control">Hantar</button>
+
+                            <div class="form-group text-right">
+                                <button type="button" class="btn btn-success">Hantar</button>
                             </div>
                         </div>
                     </div>
@@ -192,7 +225,7 @@
 </div>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#table_metadatas").DataTable({
             "ordering": false,
             "responsive": true,

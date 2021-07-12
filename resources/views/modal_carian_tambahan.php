@@ -52,21 +52,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tarikh Mula</label>
-                                <div class="input-group date" id="tarikh_mula_div" data-target-input="nearest">
-                                    <input type="text" name="tarikh_mula" id="tarikh_mula" class="form-control datetimepicker-input" data-target="#tarikh_mula_div">
-                                    <div class="input-group-append" data-target="#tarikh_mula_div" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
+                                <input type="date" name="tarikh_mula" id="tarikh_mula" class="form-control datetimepicker-input" data-target="#tarikh_mula_div">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tarikh Tamat</label>
-                                <div class="input-group date" id="tarikh_tamat_div" data-target-input="nearest">
-                                    <input type="text" name="tarikh_tamat" id="tarikh_tamat" class="form-control datetimepicker-input" data-target="#tarikh_tamat_div">
-                                    <div class="input-group-append" data-target="#tarikh_tamat_div" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
+                                <input type="date" name="tarikh_tamat" id="tarikh_tamat" class="form-control datetimepicker-input" data-target="#tarikh_tamat_div">
                             </div>
                         </div>
                     </div>

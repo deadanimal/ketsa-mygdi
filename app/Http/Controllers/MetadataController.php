@@ -39,10 +39,10 @@ class MetadataController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response 
+     * @return \Illuminate\Http\Response
      */
     function __construct(){
-       
+
     }
 
     public function index() {
@@ -58,7 +58,7 @@ class MetadataController extends Controller
             $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id]=[$xml2,$met,'not_draft'];
         }
-        
+
          $draftsdb = DrafMetadata::where('created_by',auth::user()->id)->get()->all();
          $drafts = [];
          foreach($draftsdb as $met){
@@ -92,7 +92,7 @@ class MetadataController extends Controller
 
         return view('mygeo.senarai_draf_metadata',compact('drafts'));
     }
-    
+
     public function index_nologin() {
         $metadatas = [];
         /*
@@ -138,7 +138,7 @@ class MetadataController extends Controller
 
         return view('mygeo.senarai_pengesahan_metadata',compact('metadatas'));
     }
-    
+
     public function search(Request $request) {
         $metadatasdb = MetadataGeo::on('pgsql2')->where('data','ilike','%'.$request->carian.'%')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
@@ -153,7 +153,7 @@ class MetadataController extends Controller
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
             $metadatas[$met->id]=[$xml2,$met,'not_draft'];
         }
-        
+
         $draftsdb = DrafMetadata::where('created_by',auth::user()->id)->get()->all();
          $drafts = [];
          foreach($draftsdb as $met){
@@ -166,10 +166,10 @@ class MetadataController extends Controller
              $xml2 = simplexml_load_string($ftestxml2);
              $metadatas[]=[$xml2,$met,'draft'];
          }
-        
+
         return view('mygeo.senarai_metadata',compact('metadatas'));
     }
-    
+
     public function search_nologin(Request $request) {
         $metadatasdb = MetadataGeo::on('pgsql2')->where('data','ilike','%'.$request->carian.'%')->where('disahkan','yes')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
@@ -196,23 +196,23 @@ class MetadataController extends Controller
         }elseif(isset($_GET['bhs']) && $_GET['bhs'] == 'en'){
             App::setLocale('en');
         }
-        
+
         $categories = MCategory::all();
         $pengesahs = User::whereHas("roles", function($q){ $q->where("name", "Pengesah Metadata"); })->where('agensi_organisasi',auth::user()->agensi_organisasi)->where('bahagian',auth::user()->bahagian)->get()->first();
         $states = States::where(['country'=>1])->get()->all();
         $countries = Countries::where(['id'=>1])->get()->all();
         $refSysIds = ReferenceSystemIdentifier::all();
-        
+
         return view('mygeo.pengisian_metadata', compact('categories','states','countries','refSysIds','pengesahs'));
     }
-    
+
     public function show(Request $request){
         if($request->metadata_type == "not_draf"){
-            $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$request->metadata_id)->get()->first();        
+            $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$request->metadata_id)->get()->first();
         }elseif($request->metadata_type == "draf"){
             $metadataSearched = DrafMetadata::find($request->metadata_id);
         }
-        
+
         $ftestxml2 = <<<XML
                 $metadataSearched->data
                 XML;
@@ -221,7 +221,7 @@ class MetadataController extends Controller
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
         $metadata = simplexml_load_string($ftestxml2);
         $metadata_id = $metadataSearched->id;
-        
+
         $metadata = $metadata;
         $metadata_id = $metadata_id;
         $categories = MCategory::all();
@@ -230,7 +230,7 @@ class MetadataController extends Controller
         $countries = Countries::where(['id'=>1])->get()->all();
         $refSysIds = ReferenceSystemIdentifier::all();
 //        dd($metadata_id);
-        
+
         return view('mygeo.lihat_metadata', compact('categories','contacts','countries','states','refSysIds','metadata','metadata_id','metadataSearched'));
     }
 
@@ -245,20 +245,20 @@ class MetadataController extends Controller
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
         $metadata = simplexml_load_string($ftestxml2);
         $metadata_id = $metadataSearched->id;
-        
+
         $metadata = $metadata;
         $categories = MCategory::all();
         $contacts = User::all();
         $states = States::where(['country'=>1])->get()->all();
         $countries = Countries::where(['id'=>1])->get()->all();
         $refSysIds = ReferenceSystemIdentifier::all();
-        
+
         return view('mygeo.lihat_draf_metadata', compact('categories','contacts','countries','states','refSysIds','metadata','metadata_id'));
     }
-    
+
     public function edit(Request $request){
         if($request->metadata_type == "not_draf"){
-            $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$request->metadata_id)->get()->first();        
+            $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$request->metadata_id)->get()->first();
         }elseif($request->metadata_type == "draf"){
             $metadataSearched = DrafMetadata::find($request->metadata_id);
         }
@@ -270,7 +270,7 @@ class MetadataController extends Controller
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
         $metadata = simplexml_load_string($ftestxml2);
         $metadata_id = $metadataSearched->id;
-        
+
         $metadata_type = $request->metadata_type;
         $metadata = $metadata;
         $metadata_id = $metadata_id;
@@ -280,14 +280,14 @@ class MetadataController extends Controller
         $states = States::where(['country'=>1])->get()->all();
         $countries = Countries::where(['id'=>1])->get()->all();
         $refSysIds = ReferenceSystemIdentifier::all();
-        
+
         if($request->metadata_type == "not_draf"){
             return view('mygeo.kemaskini_metadata', compact('categories','contacts','countries','states','refSysIds','metadata','metadata_id','metadataSearched','metadata_type','pengesahs'));
         }elseif($request->metadata_type == "draf"){
             return view('mygeo.kemaskini_draf_metadata', compact('categories','contacts','countries','states','refSysIds','metadata','metadata_id','metadataSearched','metadata_type','pengesahs'));
         }
     }
-    
+
     public function show_nologin(Request $request){
 //        $vars = [];
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$request->metadata_id)->get()->first();
@@ -300,7 +300,7 @@ class MetadataController extends Controller
         $metadata = simplexml_load_string($ftestxml2);
         $metadata_id = $metadataSearched->id;
 //        dd($metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString.' ');
-        
+
         $metadata = $metadata;
         $metadata_id = $metadata_id;
         $categories = MCategory::all();
@@ -308,16 +308,16 @@ class MetadataController extends Controller
         $states = States::where(['country'=>1])->get()->all();
         $countries = Countries::where(['id'=>1])->get()->all();
         $refSysIds = ReferenceSystemIdentifier::all();
-        
+
         return view('lihat_metadata_nologin', compact('categories','contacts','countries','states','refSysIds','metadata','metadata_id'));
     }
-    
+
     public function show_xml_nologin(Request $request){
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$request->metadata_id)->get()->first();
         $ftestxml2 = <<<XML
                 $metadataSearched->data
                 XML;
-        
+
         return response($ftestxml2)->withHeaders([
             'Content-Type' => 'text/xml'
         ]);
@@ -1012,7 +1012,7 @@ class MetadataController extends Controller
 
             if(isset($request->btn_save)){
                 $maxid = MetadataGeo::on('pgsql2')->max('id');
-                
+
                 // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
                 $data = $data ?? random_bytes(16);
                 assert(strlen($data) == 16);
@@ -1024,7 +1024,7 @@ class MetadataController extends Controller
 
                 // Output the 36 character UUID.
                 $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
-                
+
                 $mg = new MetadataGeo;
                 $mg->timestamps = false;
                 $mg->id = $maxid+1;
@@ -1044,14 +1044,14 @@ class MetadataController extends Controller
             }elseif(isset($request->btn_draf)){
                 $draf = new DrafMetadata();
                 $draf->data = $xml;
-                $draf->created_by = auth::user()->id; 
+                $draf->created_by = auth::user()->id;
                 $draf->save();
             }
         });
-        
+
         return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
     }
-    
+
     public function store_xml(Request $request){
 //        dd($request,$_FILES['file_xml']);
         if(file_exists($_FILES['file_xml']['tmp_name'])){
@@ -1064,8 +1064,8 @@ class MetadataController extends Controller
             $uploaded_xml = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $uploaded_xml);
             $xmlObject = simplexml_load_string($uploaded_xml);
             $json = json_encode($xmlObject);
-            $xml_array = json_decode($json, true); 
-            
+            $xml_array = json_decode($json, true);
+
             //save in geonetwork
             DB::connection('pgsql2')->transaction(function() use ($request,$uploaded_xml) {
                 $maxid = MetadataGeo::on('pgsql2')->max('id');
@@ -1099,11 +1099,11 @@ class MetadataController extends Controller
                 $mg->disahkan = "0";
                 $mg->save();
             });
-            
+
             //delete uploaded xml
             Storage::disk('public')->delete($fileName);
         }
-        
+
         return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
     }
 
@@ -1785,9 +1785,9 @@ class MetadataController extends Controller
     </gmd:MD_Metadata>
                         ';
 
-            
+
                 $maxid = MetadataGeo::on('pgsql2')->max('id');
-                
+
                 // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
                 $data = $data ?? random_bytes(16);
                 assert(strlen($data) == 16);
@@ -1799,7 +1799,7 @@ class MetadataController extends Controller
 
                 // Output the 36 character UUID.
                 $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
-                
+
                 $mg = new MetadataGeo;
                 $mg->timestamps = false;
                 $mg->id = $maxid+1;
@@ -1818,10 +1818,10 @@ class MetadataController extends Controller
                 $mg->save();
             });
         }
-        
+
         return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
     }
-   
+
     public function update(Request $request){
         DB::connection('pgsql2')->transaction(function() use ($request) {
             $xml = '
@@ -2518,7 +2518,7 @@ class MetadataController extends Controller
             $mg->catatan15 = $request->catatan15;
             $mg->update();
         });
-        
+
         return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
     }
 
@@ -3198,10 +3198,10 @@ class MetadataController extends Controller
   </gmd:dataQualityInfo>
 </gmd:MD_Metadata>
                     ';
-            
+
             if(isset($request->btn_save)){
                 $maxid = MetadataGeo::on('pgsql2')->max('id');
-                
+
                 // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
                 $data = $data ?? random_bytes(16);
                 assert(strlen($data) == 16);
@@ -3213,7 +3213,7 @@ class MetadataController extends Controller
 
                 // Output the 36 character UUID.
                 $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
-                
+
                 $mg = new MetadataGeo;
                 $mg->timestamps = false;
                 $mg->id = $maxid+1;
@@ -3239,10 +3239,10 @@ class MetadataController extends Controller
                 $dm->update();
             }
         });
-        
+
         return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
     }
-    
+
     public function metadata_sahkan(){
         if(!auth::user()->hasRole(['Pengesah Metadata','Super Admin'])){
             exit();
@@ -3261,10 +3261,10 @@ class MetadataController extends Controller
             $metadata->disahkan = 'yes';
             $metadata->update();
         }
-        
+
 
         //send mail
-        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample()); 
+        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample());
         exit();
     }
 
@@ -3272,7 +3272,7 @@ class MetadataController extends Controller
         if(!auth::user()->hasRole(['Pengesah Metadata','Super Admin'])){
             exit();
         }
-        
+
         $metadata_id = $_POST['metadata_id'];
         $metadata = MetadataGeo::on('pgsql2')->find($metadata_id);
         $metadata->timestamps = false;
@@ -3280,18 +3280,18 @@ class MetadataController extends Controller
         $metadata->update();
 
         //send mail
-        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample()); 
+        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample());
         exit();
     }
-    
+
     public function delete_draf(Request $request){
         DrafMetadata::find($request->metadata_id)->delete();
         return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Deleted');
     }
-    
+
     public function delete(Request $request){
         MetadataGeo::on('pgsql2')->find($request->metadata_id)->delete();
-//        $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$request->metadata_id)->get()->first();        
+//        $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$request->metadata_id)->get()->first();
 //        $metadataSearched->disahkan = "no";
 //        $metadataSearched->save();
         return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Deleted');

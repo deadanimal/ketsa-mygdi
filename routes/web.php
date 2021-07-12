@@ -24,7 +24,7 @@ Route::post('/loginf','AuthController@authenticate');
 //Route::post('/registerf','RegisterController@create');
 
 Route::get('/soalan_lazim','PortalController@index_faq');
-Route::get('/mengenai_mygeo_explorer', function () { 
+Route::get('/mengenai_mygeo_explorer', function () {
     return view('mengenai_mygeo_explorer');
 });
 
@@ -111,26 +111,27 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/carian_metadata','MetadataController@search');
 
     Route::get('/mygeo_senarai_draf_metadata','MetadataController@index_draf');
-    
+
     Route::get('/mygeo_pengesahan_metadata','MetadataController@senarai_pengesahan_metadata');
-    
+
     Route::post('/lihat_metadata','MetadataController@show');
     Route::post('/simpan_kemaskini_metadata','MetadataController@update');
-        
+
     Route::post('/kemaskini_draf_metadata','MetadataController@edit');
     Route::post('/kemaskini_metadata','MetadataController@edit');
 
     Route::post('/lihat_draf_metadata','MetadataController@show_draf');
     Route::post('/simpan_kemaskini_draf_metadata','MetadataController@update_draf');
-    
+
     Route::post('/delete_draf_metadata','MetadataController@delete_draf');
     Route::post('/delete_metadata','MetadataController@delete');
 
     Route::get('/landing_mygeo','UserController@show');
     Route::get('/mygeo_profil','UserController@show');
-    
+
     Route::get('/mohon_data','DataAsasController@mohon_data');
     Route::get('/mohon_data_asas_baru','DataAsasController@mohon_data_asas_baru');
+    Route::get('/muat_turun_data','DataAsasController@muat_turun_data');
     Route::get('/senarai_data','DataAsasController@senarai_data');
     Route::get('/kategori_kelas_data','DataAsasController@kategori_kelas_data');
     Route::get('/kategori_kelas_kongsi_data','DataAsasController@kategori_kelas_kongsi_data');
@@ -139,8 +140,9 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/status_permohonan','DataAsasController@status_permohonan');
     Route::get('/proses_data','DataAsasController@proses_data');
     Route::get('/penilaian','DataAsasController@penilaian');
+    Route::get('/penilaian_pemohon','DataAsasController@penilaian_pemohon');
 
-    Route::get('/kemaskini_profil','UserController@edit'); 
+    Route::get('/kemaskini_profil','UserController@edit');
     Route::post('/simpan_kemaskini_profil','UserController@update_profile');
     Route::post('/simpan_kemaskini_password','UserController@update_password');
 
@@ -148,7 +150,7 @@ Route::group(['middleware'=>['auth']], function(){
 });
 
 Route::get('/send-mail', function () {
-    Mail::to('farhan.rimfiel@pipeline-network.com')->send(new MailtrapExample()); 
+    Mail::to('farhan.rimfiel@pipeline-network.com')->send(new MailtrapExample());
     return 'A message has been sent to Ftest!';
 });
 
