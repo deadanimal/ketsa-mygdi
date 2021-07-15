@@ -7,24 +7,24 @@
         background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
         background-image: linear-gradient(to right, #ebba16, #ed8a19);
         cursor: pointer;
+        border-radius: 10px;
     }
 
-    .card {
+    .card, .card-header:first-child {
         background-color: white;
+        border-radius: 12px;
     }
 </style>
 
 <!-- Content Wrapper. Contains page content -->
-<section class="content p-5">
+<section class="content bgland p-5">
     <div class="container-fluid">
+    <div class="section-title">
+            <h2>Soalan Lazim (FAQ)</h2>
+        </div>
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h1 class="card-title m-0">Soalan Lazim (FAQ)</h1>
-                    </div>
-                    <div class="card-body">
-                        <div id="accordion">
+            <div id="accordion">
                             <?php //=== collapse1 =============================================================?>
                             <div class="card card-primary div_c1" id="div_c1">
                                 <div class="card-header accordionHeader" data-toggle="collapse" href="#collapse1">
@@ -49,7 +49,7 @@
                             <?php //=== collapse2 =============================================================?>
                             <div class="card card-primary div_c2" id="div_c2">
                                 <div class="card-header accordionHeader" data-toggle="collapse" href="#collapse2">
-                                    <span>DATA_DATA ASAS</span>
+                                    <span>DATA-DATA ASAS</span>
                                 </div>
                                 <div id="collapse2" class="panel-collapse collapse in" data-parent="#div_c2">
                                     <div class="card-body">
@@ -68,8 +68,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

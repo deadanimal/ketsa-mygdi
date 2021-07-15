@@ -10,15 +10,19 @@
     }
 
     .navbar-search .form-control {
-        width: 400px;
+        width: 500px;
     }
 
     .navbar-search .form-control:focus {
-        width: 470px;
+        width: 550px;
     }
 
     .card {
         background-color: white;
+    }
+
+    .cardw {
+        height: 200px;
     }
 </style>
 
@@ -26,7 +30,7 @@
     <div class="container-fluid" data-aos="fade-up">
 
         <div class="section-title">
-            <h2>Carian Metadata</h2>
+            <h2 class="text-light">Carian Metadata</h2>
         </div>
 
         <div class="row">
@@ -94,8 +98,8 @@
                             </div>
                         </div>
                         <div class="text-center mt-5">
-                        <button type="button" class="btn btn-primary">Selesai</button>
-                    </div>
+                            <button type="button" class="btn btn-primary">Selesai</button>
+                        </div>
                     </div>
 
                 </div>
@@ -127,14 +131,14 @@
                     </div>
                 </div>
 
-                <div class="row divSenaraiMetadata" style="display:none; ">
+                <div class="row divSenaraiMetadata" style="display:none;">
                     <div class="col-12 pr-5">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="heading text-muted text-center mb-0">Senarai Metadata</h3>
                                 <!-- <button type="button" class="btn btn-default float-right">Kemas Kini</button> -->
                             </div>
-                            <div class="card-body">
+                            <!-- <div class="card-body">
                                 <?php ?>
                                 <table id="table_metadatas" class="table table-bordered table-striped">
                                     <thead>
@@ -194,6 +198,68 @@
                                         </div>
                                     </tbody>
                                 </table>
+                            </div> -->
+
+                            <div class="card-body">
+                                <div id="accordion">
+                                    <?php
+                                    $numCol = 3;
+                                    $rowCount = 0;
+                                    $rows = 5;
+                                    $bil = 1;
+                                    if (count($metadatas) > 0) {
+                                        foreach ($metadatas as $key => $val) {
+                                            if ($rowCount % $numCol == 0) { ?>
+                                                <div class="row">
+                                                <?php }
+                                                        $rowCount++ ?>
+
+                                                <?php //=== collapse1 =============================================================
+                                                        ?>
+                                                <div class="col-4">
+                                                    <div class="card card-primary" id="divParentCollapse{{ $bil }}">
+                                                        <div class="card-header cardw">
+                                                            <a data-toggle="collapse" href="#divCollapse{{ $bil }}">
+                                                                <?php
+                                                                        if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
+                                                                            echo strtoupper($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
+                                                                        } else {
+                                                                            ?>--no title set--<?php
+                                                                                                        }
+                                                                                                        ?>
+                                                            </a>
+                                                        </div>
+                                                        <div id="divCollapse{{ $bil }}" class="panel-collapse collapse in" data-parent="#divParentCollapse{{ $bil }}">
+                                                            <div class="card-body">
+                                                                <?php
+                                                                        $abstract = (isset($val->identificationInfo->MD_DataIdentification->abstract->CharacterString) ? $val->identificationInfo->MD_DataIdentification->abstract->CharacterString : "");
+                                                                        ?>
+                                                                <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
+                                                                <form method="post" action="{{ url('/lihat_metadata_nologin') }}" id="formViewMetadata{{ $key }}">
+                                                                    @csrf
+                                                                    <input type="hidden" name="metadata_id" value="{{ $key }}">
+                                                                </form>
+                                                                <form method="post" action="{{ url('/lihat_xml_nologin') }}" id="formViewXml{{ $key }}">
+                                                                    @csrf
+                                                                    <input type="hidden" name="metadata_id" value="{{ $key }}">
+                                                                </form>
+                                                                <a href="#" class="metadataActionLinks aViewMetadata" onClick="return false;" data-metid="{{$key}}">Metadata Details</a>
+                                                                <a href="#" class="metadataActionLinks aViewXml" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><?php /* SAMBUNG SINI - continue doing fn to show xml in new tab */ ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <?php if ($rowCount % $numCol == 0) { ?>
+                                                </div>
+                                            <?php } ?>
+
+                                    <?php
+                                            $bil++;
+                                        }
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -138,6 +138,18 @@
         width: 0;
         height: 0;
     }
+
+    .text-bl {
+        color: #0563bb;
+    }
+
+    .text-caps {
+        text-transform: uppercase;
+    }
+
+    .text-bold {
+        font-weight: 500;
+    }
 </style>
 <!-- ======= Header ======= -->
 <header id="header" class="d-flex flex-column justify-content-center">
@@ -159,44 +171,75 @@
     <div class="container-fluid pr-lg-5" data-aos="fade-up">
         <div class="row mt-0 pt-0 mb-5">
             <div class="col-12">
-                <p>Selamat Datang ke</p>
+                <p class="text-bl">Selamat Datang ke</p>
                 <h1><span class="typed" data-typed-items="MyGeo Explorer"></span></h1>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <div id="demo" class="carousel slide" data-ride="carousel">
+                <div id="demo" class="carousel slide mb-2" data-ride="carousel">
+                    <?php
+                    $bil = 0;
+                    $bil2 = 0;
+                    if (count($pengumuman) > 0) { ?>
+                        <ul class="carousel-indicators">
+                            <?php foreach ($pengumuman as $umum) { ?>
+                                <li data-target="#demo" data-slide-to="{{ $bil }}"></li>
+                            <?php $bil++;
+                                } ?>
+                        </ul>
 
-                    <!-- Indicators -->
-                    <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
+                        <div class="carousel-inner">
+                            <?php foreach ($pengumuman as $umum) { ?>
+                                <div class="carousel-item <?php if ($bil2 == 0) {
+                                                                        echo 'active';
+                                                                    } ?>">
+                                    <form id="form_umum_{{ $umum->id }}" method="post" action="{{ url('/tunjuk_pengumuman') }}">
+                                        @csrf
+                                        <input type="hidden" name="umum_id" value="{{ $umum->id }}">
+                                        <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
+                                            <?php if ($bil2 % 2 == 1 ) { ?> <img src="{{ url('assetsweb/img/gallery.jpeg') }}" alt="{{ $bil2 }}"> <?php } ?>
+                                            <?php if ($bil2 % 2 == 0) { ?> <img src="{{ url('assetsweb/img/bg1.png') }}" alt="{{ $bil2 }}"> <?php } ?>
+                                            <div class="carousel-caption">
+                                                <h2 class="text-caps text-white">
+                                                    <?php echo date('j M Y', strtotime($umum->created_at)); ?>
+                                                </h2>
+                                                <p class="text-white text-bold">
+                                                    <?php echo $umum->kategori; ?>: <br>
+                                                    <?php echo $umum->title; ?>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </form>
+                                </div>
+                            <?php $bil2++;
+                                } ?>
+                        </div>
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
 
-                    <!-- The slideshow -->
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ url('assetsweb/img/gallery.jpeg') }}" alt="">
-                            <div class="carousel-caption">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url('assetsweb/img/pgnketsa.png') }}" alt="">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url('assetsweb/img/gallery.jpeg') }}" alt="">
-                        </div>
-                    </div>
-
-                    <!-- Left and right controls -->
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
+                        <!-- <form id="form_umum_{{ $umum->id }}" method="post" action="{{ url('/tunjuk_pengumuman') }}">
+                            @csrf
+                            <input type="hidden" name="umum_id" value="{{ $umum->id }}">
+                            <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
+                                <span style="color: #252525;">
+                                    <?php echo date('j M Y', strtotime($umum->created_at)); ?>
+                                </span>
+                                <p class="text-black">
+                                    <?php echo $umum->kategori; ?>: <br>
+                                    <?php echo $umum->title; ?>
+                                </p>
+                            </a>
+                        </form> -->
+                    <?php
+                    }
+                    ?>
                 </div>
+                <a class="text-yellow float-right mr-2" href="{{ url('/senarai_pengumuman') }}">PAPAR SEMUA >&gt;</a>
             </div>
         </div>
     </div>
@@ -303,7 +346,7 @@
                         <a href="{{ url('senarai_metadata_nologin') }}">
                             <div class="card fancy_card">
                                 <div class="card-body pointer form-inline" tabindex="0" ng-reflect-router-link="/metadata">
-                                    <img height="90" src="./afiqlogin_files/metadata.png">
+                                    <img height="90" src="./afiqlogin_files/meta.png">
                                     <h2 class="mx-auto mb-0">Metadata</h2>
                                 </div>
                             </div>
@@ -313,7 +356,7 @@
                         <a href="{{ url('data_asas_landing') }}">
                             <div class="card fancy_card">
                                 <div class="card-body pointer form-inline" tabindex="0" ng-reflect-router-link="/data-asas">
-                                    <img height="90" src="./afiqlogin_files/dataapp.png">
+                                    <img height="90" src="./afiqlogin_files/data.png">
                                     <h2 class="mx-auto mb-0">Data Asas</h2>
                                 </div>
                             </div>

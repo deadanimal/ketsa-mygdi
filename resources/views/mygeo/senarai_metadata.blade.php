@@ -18,7 +18,7 @@
                         <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class=" breadcrumb-item">
-                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"></i> </a>
                                 </li>
                                 <li aria-current="page" class="breadcrumb-item active">
                                     Senarai Metadata
@@ -158,12 +158,7 @@
                         </div>
                         <div class="card-body">
                             <table id="table_metadatas" class="table table-bordered table-striped">
-                                <colgroup>
-                                    <col span="1" style="width: 10%;">
-                                    <col span="1" style="width: 45%;">
-                                    <col span="1" style="width: 25%;">
-                                    <col span="1" style="width: 20%;">
-                                </colgroup>
+
                                 <thead>
                                     <tr>
                                         <th>Bil</th>

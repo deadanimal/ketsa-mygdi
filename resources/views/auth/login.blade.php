@@ -1,25 +1,6 @@
 @extends('layouts.app_afiq')
 
 @section('content')
-<style>
-    .bgland {
-        width: 100%;
-        height: 100vh;
-        background: url("../assetsweb/img/landscapemy.jpeg") top right no-repeat;
-        background-size: cover;
-        position: relative;
-    }
-
-    .bgland:before {
-        content: "";
-        background: rgba(255, 255, 255, 0.4);
-        position: absolute;
-        bottom: 0;
-        top: 0;
-        left: 0;
-        right: 0;
-    }
-</style>
 
 <div _ngcontent-lqr-c499="" class="content bgland p-5">
     <div _ngcontent-lqr-c499="" class="container-fluid" data-aos="fade-up">

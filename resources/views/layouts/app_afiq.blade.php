@@ -33,7 +33,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
-    <link href="assetsweb/img/favicon.png" rel="icon">
     <link href="assetsweb/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Vendor CSS Files -->
@@ -96,10 +95,20 @@
     <style>
         .bgland {
             width: 100%;
-            height: 100vh;
-            background: url("../assetsweb/img/landscapemy.jpeg") top right no-repeat;
+            min-height: 100vh;
+            background: url("../assetsweb/img/bg4.png") top right no-repeat;
             background-size: cover;
             position: relative;
+        }
+
+        .bgland:before {
+            content: "";
+            background: rgba(126, 126, 126, 0.4);
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
         }
     </style>
 </head>

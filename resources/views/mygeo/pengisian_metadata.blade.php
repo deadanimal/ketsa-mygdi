@@ -21,8 +21,9 @@
         padding-bottom: 3px;
     }
 
-    .acard {
-        border-radius: 25px;
+    .card, .card-header:first-child {
+        background-color: white;
+        border-radius: 12px;
     }
 </style>
 

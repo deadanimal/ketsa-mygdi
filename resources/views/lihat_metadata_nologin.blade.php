@@ -38,11 +38,16 @@
         text-align: justify;
         height: fit-content;
     }
+
+    .card, .card-header:first-child {
+        background-color: white;
+        border-radius: 12px;
+    }
 </style>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="width:100%;">
-    <section class="content-header">
+    <!-- <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -52,13 +57,13 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content py-3 bgland">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 mx-2">
                     <?php
                     $metadata_name = (isset($metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString : "");
                     ?>
@@ -66,7 +71,7 @@
                     <div class="card">
                         <input type="hidden" name="metadata_id" value="{{ $metadata_id }}">
                         <div class="card-body">
-                            <div class="form-group row">
+                            <div class="form-group row col-8">
                                 <p>Category : &nbsp;&nbsp;&nbsp;</p>
                                 <?php
                                 if (count($categories) > 0) {
@@ -91,7 +96,7 @@
                             <div id="accordion">
                                 <?php //=== collapse1 =============================================================
                                 ?>
-                                <div class="card card-primary div_c1" id="div_c1">
+                                <div class="card card-primary mb-3 div_c1" id="div_c1">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse1">
@@ -179,7 +184,7 @@
                                 </div>
                                 <?php //=== collapse2 =============================================================
                                 ?>
-                                <div class="card card-primary div_c2" id="div_c2">
+                                <div class="card card-primary mb-3 div_c2" id="div_c2">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse2">
@@ -390,7 +395,7 @@
                                 </div>
                                 <?php //=== collapse3 =============================================================
                                 ?>
-                                <div class="card card-primary div_c3" id="div_c3">
+                                <div class="card card-primary mb-3 div_c3" id="div_c3">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse3">
@@ -422,7 +427,7 @@
                                 </div>
                                 <?php //=== collapse4 =============================================================
                                 ?>
-                                <div class="card card-primary div_c4" id="div_c4">
+                                <div class="card card-primary mb-3 div_c4" id="div_c4">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse4" class="fixMap">
@@ -445,7 +450,7 @@
                                 </div>
                                 <?php //=== collapse5 =============================================================
                                 ?>
-                                <div class="card card-primary div_c5" id="div_c5">
+                                <div class="card card-primary mb-3 div_c5" id="div_c5">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse5" class="fixMap">
@@ -468,7 +473,7 @@
                                 </div>
                                 <?php //=== collapse6 =============================================================
                                 ?>
-                                <div class="card card-primary div_c6" id="div_c6">
+                                <div class="card card-primary mb-3 div_c6" id="div_c6">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse6" class="fixMap">
@@ -491,7 +496,7 @@
                                 </div>
                                 <?php //=== collapse7 =============================================================
                                 ?>
-                                <div class="card card-primary div_c7" id="div_c7">
+                                <div class="card card-primary mb-3 div_c7" id="div_c7">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse7" class="fixMap">
@@ -514,7 +519,7 @@
                                 </div>
                                 <?php //=== collapse8 =============================================================
                                 ?>
-                                <div class="card card-primary div_c8" id="div_c8">
+                                <div class="card card-primary mb-3 div_c8" id="div_c8">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse8" class="fixMap">
@@ -537,7 +542,7 @@
                                 </div>
                                 <?php //=== collapse9 =============================================================
                                 ?>
-                                <div class="card card-primary div_c9" id="div_c9">
+                                <div class="card card-primary mb-3 div_c9" id="div_c9">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse9" class="fixMap">
@@ -573,7 +578,7 @@
                                 </div>
                                 <?php //=== collapse10 =============================================================
                                 ?>
-                                <div class="card card-primary div_c10" id="div_c10">
+                                <div class="card card-primary mb-3 div_c10" id="div_c10">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse10">
@@ -654,7 +659,7 @@
                                 </div>
                                 <?php //=== collapse11 =============================================================
                                 ?>
-                                <div class="card card-primary div_c11" id="div_c11">
+                                <div class="card card-primary mb-3 div_c11" id="div_c11">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse11">
@@ -761,7 +766,7 @@
                                 </div>
                                 <?php //=== collapse12 =============================================================
                                 ?>
-                                <div class="card card-primary div_c12" id="div_c12">
+                                <div class="card card-primary mb-3 div_c12" id="div_c12">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse12">
@@ -831,7 +836,7 @@
                                 </div>
                                 <?php //=== collapse13 =============================================================
                                 ?>
-                                <div class="card card-primary div_c13" id="div_c13">
+                                <div class="card card-primary mb-3 div_c13" id="div_c13">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse13">
@@ -893,7 +898,7 @@
                                 </div>
                                 <?php //=== collapse14 =============================================================
                                 ?>
-                                <div class="card card-primary div_c14" id="div_c14">
+                                <div class="card card-primary mb-3 div_c14" id="div_c14">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse14">
@@ -991,7 +996,7 @@
                                 </div>
                                 <?php //=== collapse15 ============================================================
                                 ?>
-                                <div class="card card-primary div_c15" id="div_c15">
+                                <div class="card card-primary mb-3 div_c15" id="div_c15">
                                     <div class="card-header ftest">
                                         <h4 class="card-title">
                                             <a data-toggle="collapse" href="#collapse15">
@@ -1047,7 +1052,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <div class="card card-primary card-outline card-outline-tabs">
+                                                <div class="card card-primary mb-3 card-outline card-outline-tabs">
                                                     <div class="card-header p-0 border-bottom-0">
                                                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                                                             <li class="nav-item">

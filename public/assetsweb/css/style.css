@@ -61,6 +61,10 @@ h6 {
     transition: background 0.2s ease-in-out;
 }
 
+.text-bl {
+    color: #0563bb;
+}
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -269,7 +273,7 @@ h6 {
 #home {
     width: 100%;
     height: 100vh;
-    background: url("../img/landscapemy.jpeg") top right no-repeat;
+    background: url("../img/bg4.png") top right no-repeat;
     background-size: cover;
     position: relative;
 }
@@ -282,7 +286,7 @@ h6 {
 
 #home:before {
     content: "";
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(126, 126, 126, 0.4);
     position: absolute;
     bottom: 0;
     top: 0;
@@ -295,11 +299,11 @@ h6 {
     font-size: 64px;
     font-weight: 700;
     line-height: 56px;
-    color: #45505b;
+    color: #ffca1d;
 }
 
 #home p {
-    color: #45505b;
+    color: #ffffff;
     margin: 15px 0 0 0;
     font-size: 26px;
     font-family: "Poppins", sans-serif;
