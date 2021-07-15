@@ -39,7 +39,8 @@
         height: fit-content;
     }
 
-    .card, .card-header:first-child {
+    .card,
+    .card-header:first-child {
         background-color: white;
         border-radius: 12px;
     }
@@ -60,14 +61,14 @@
     </section> -->
 
     <!-- Main content -->
-    <section class="content py-3 bgland">
+    <section class="content py-3">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 mx-2">
                     <?php
                     $metadata_name = (isset($metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString : "");
                     ?>
-                    <h1 style="color:white;">{{ $metadata_name }}</h1>
+                    <h1 class="">{{ $metadata_name }}</h1>
                     <div class="card">
                         <input type="hidden" name="metadata_id" value="{{ $metadata_id }}">
                         <div class="card-body">
@@ -108,9 +109,7 @@
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <p class="pl-lg-3 form-control-label">Content Information<span class="mx-3">:</span></p>
-                                                <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;" disabled>
-                                                    <option selected>Application</option>
-                                                </select>
+                                                <label>Application</label>
                                             </div>
                                             <h2 class="heading-small text-muted">Metadata Publisher</h2>
                                             <div class="">
@@ -205,7 +204,7 @@
                                                         <?php
                                                         $metadata_name = (isset($metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString : "");
                                                         ?>
-                                                        <input class="form-control form-control-sm ml-3" type="text" name="c2_metadataName" id="c2_metadataName" value="{{ $metadata_name }}" disabled />
+                                                        <label class="ml-3">{{ $metadata_name }}</label>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
@@ -215,17 +214,7 @@
                                                         </label><label class="float-right">:</label>
                                                     </div>
                                                     <div class="col-3">
-                                                        <select name="c2_product_type" class="form-control form-control-sm ml-3" disabled>
-                                                            <option selected hidden>Application</option>
-                                                            <!-- <option value="application">Application</option>
-                                                                <option value="document">Document</option>
-                                                                <option value="gisActivityProject">GIS Activity/Project</option>
-                                                                <option value="theMap">Map</option>
-                                                                <option value="rasterData">Raster Data</option>
-                                                                <option value="services">Services</option>
-                                                                <option value="software">Software</option>
-                                                                <option value="vectorData">Vector Data</option> -->
-                                                        </select>
+                                                        <label class="ml-3">Application</label>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
@@ -238,7 +227,7 @@
                                                         <?php
                                                         $abstract = (isset($metadata->identificationInfo->MD_DataIdentification->abstract->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->abstract->CharacterString : "");
                                                         ?>
-                                                        <textarea name="c2_abstract" id="c2_abstract" rows="10" class="form-control form-control-sm ml-3" disabled>{{ $abstract }}</textarea>
+                                                        <label align="justify" class="ml-3">{{ $abstract }}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -254,7 +243,7 @@
                                                         <?php
                                                         $cp = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString : "");
                                                         ?>
-                                                        <input type="text" class="form-control form-control-sm ml-3" name="c2_contact_name" id="c2_contact_name" value="{{ $cp }}" readonly>
+                                                        <label class="ml-3">{{ $cp }}</label>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
@@ -267,7 +256,7 @@
                                                         <?php
                                                         $org = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString : "");
                                                         ?>
-                                                        <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3" value="{{ $org }}" readonly>
+                                                        <label class="ml-3">{{ $org }}</label>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-4">
@@ -280,22 +269,22 @@
                                                         <?php
                                                         $add1 = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString : "");
                                                         ?>
-                                                        <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2" value="{{ $add1 }}" readonly>
+                                                        <label class="ml-3">{{ $add1 }}</label><br>
                                                         <?php
                                                         $city = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString : "");
                                                         ?>
-                                                        <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2" value="{{ $city }}" readonly>
+                                                        <label class="ml-3">{{ $city }}</label><br>
                                                         <?php
                                                         $postal = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString : "");
                                                         ?>
-                                                        <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2" value="{{ $postal }}" readonly>
+                                                        <label class="ml-3">{{ $postal }}</label><br>
                                                         <?php
                                                         $admin_area = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString : "");
                                                         ?>
-                                                        <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="{{ $admin_area }}" readonly>
+                                                        <label class="ml-3">{{ $admin_area }}</label>
                                                         <div class="form-inline row ml-3">
                                                             <label class="form-control-label mr-4" for="c2_contact_state">State :</label>
-                                                            <select name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm col-2" readonly disabled>
+                                                            <label class="col-2">
                                                                 <?php
                                                                 if (count($states) > 0) {
                                                                     $admin_area = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString : "");
@@ -314,9 +303,9 @@
                                                                                 }
                                                                             }
                                                                             ?>
-                                                            </select>
+                                                            </label>
                                                             <label class="form-control-label mr-4 ml-4" for="c2_contact_country">Country :</label>
-                                                            <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm ml-4 col-2" readonly disabled>
+                                                            <label class="ml-4 col-2">
                                                                 <?php
                                                                 $country2 = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString : "");
                                                                 if (count($countries) > 0) {
@@ -332,7 +321,7 @@
                                                                                                                                                                                             }
                                                                                                                                                                                         }
                                                                                                                                                                                         ?>
-                                                            </select>
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -346,8 +335,7 @@
                                                         <?php
                                                         $contact_email = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString : "");
                                                         ?>
-                                                        <input type="email" name="c2_contact_email" id="c2_contact_email" class="form-control form-control-sm ml-3" value="
-                                                        {{ $contact_email }}" readonly>
+                                                        <label class="ml-3">{{ $contact_email }}</label>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
@@ -360,7 +348,7 @@
                                                         <?php
                                                         $fax = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString : "");
                                                         ?>
-                                                        <input type="text" name="c2_contact_fax" id="c2_contact_fax" class="form-control form-control-sm ml-3" value="{{ $fax }}" disabled>
+                                                        <label class="ml-3">{{ $fax }}</label>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
@@ -373,7 +361,7 @@
                                                         <?php
                                                         $phone_office = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString : "");
                                                         ?>
-                                                        <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office" class="form-control form-control-sm ml-3" value="{{ $phone_office }}" readonly>
+                                                        <label class="ml-3">{{ $phone_office }}</label>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-4">
@@ -386,7 +374,7 @@
                                                         <?php
                                                         $url = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL : "");
                                                         ?>
-                                                        <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3" value="{{ $url }}" readonly>
+                                                        <label class="ml-3">{{ $url }}</label>
                                                     </div>
                                                 </div>
                                             </div>
