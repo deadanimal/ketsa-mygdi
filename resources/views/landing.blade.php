@@ -198,7 +198,7 @@
                                         @csrf
                                         <input type="hidden" name="umum_id" value="{{ $umum->id }}">
                                         <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
-                                            <?php if ($bil2 % 2 == 1 ) { ?> <img src="{{ url('assetsweb/img/gallery.jpeg') }}" alt="{{ $bil2 }}"> <?php } ?>
+                                            <?php if ($bil2 % 2 == 1) { ?> <img src="{{ url('assetsweb/img/gallery.jpeg') }}" alt="{{ $bil2 }}"> <?php } ?>
                                             <?php if ($bil2 % 2 == 0) { ?> <img src="{{ url('assetsweb/img/bg1.png') }}" alt="{{ $bil2 }}"> <?php } ?>
                                             <div class="carousel-caption">
                                                 <h2 class="text-caps text-white">
@@ -239,7 +239,7 @@
                     }
                     ?>
                 </div>
-                <a class="text-yellow float-right mr-2" href="{{ url('/senarai_pengumuman') }}">PAPAR SEMUA >&gt;</a>
+                <a class="text-yellow float-right mr-2" style="font-weight: 600;" href="{{ url('/senarai_pengumuman') }}">PAPAR SEMUA >&gt;</a>
             </div>
         </div>
     </div>
@@ -253,69 +253,7 @@
             <h2>Carian Metadata</h2>
         </div>
         <div class="row pl-lg-7">
-            <div class="col-lg-4">
-                <div _ngcontent-ula-c486="" class="card umum_card" style="background-color: rgba(255, 255, 255, 0.527);">
-                    <div class="card-header text-center umum_header">
-                        <h1 class="card-title m-0" style="color: #161616;"><i class="fas fa-bullhorn fa-spin mr-2"></i>PENGUMUMAN</h1>
-                    </div>
-                    <div class="card-body">
-                        <div class="card mb-0 umum_body" style="background-color: rgba(255, 255, 255, 0.808);">
-                            <div class="card-body scrollf">
-                                <?php
-                                foreach ($pengumuman as $umum) {
-                                    ?>
-                                    <form id="form_umum_{{ $umum->id }}" method="post" action="{{ url('/tunjuk_pengumuman') }}">
-                                        @csrf
-                                        <input type="hidden" name="umum_id" value="{{ $umum->id }}">
-                                        <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
-                                            <span style="color: #252525;">
-                                                <?php echo date('j M Y', strtotime($umum->created_at)); ?>
-                                            </span>
-                                            <p class="text-black">
-                                                <?php echo $umum->kategori; ?>: <br>
-                                                <?php echo $umum->title; ?>
-                                            </p>
-                                        </a>
-                                    </form>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center umum_footer">
-                        <a class="badge badge-custom btnPaparSemuaPengumuman" href="{{ url('/senarai_pengumuman') }}">PAPAR SEMUA &gt;</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <!-- <div class="text-center">
-                    <form method="post" class="navbar-search navbar-search-light form-inline my-4 justify-content-center" action="{{url('carian_metadata_nologin')}}" id="form_carian">
-                        @csrf
-                        @include('modal_carian_tambahan')
-                        <div class="form-inline mb-0">
-                            <div class="input-group input-group-alternative input-group-merge" style="background-image: linear-gradient(to right, #ebba16, #ed8a19);">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fas fa-search"></i>
-                                    </span>
-                                </div>
-                                <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off">
-                            </div>
-                        </div>
-                        <button type="button" data-action="search-close" data-target="#navbar-search-main" aria-label="Close" class="close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </form>
-                    <a class="btn btn-sm btn-success text-white text-center btn_cari_submit" style="cursor:pointer;">
-                        <span><i class="mr-2 fas fa-search"></i></span>
-                        Cari
-                    </a>
-                    <a class="btn btn-sm btn-primary text-white text-center" data-toggle="modal" data-target="#modal-carian-tambahan" style="cursor:pointer;">
-                        Carian Tambahan &gt;&gt;
-                    </a>
-                </div> -->
-
+            <div class="col-lg-12">
                 <div class="row mt-0 pt-0">
                     <div class="col-12 form-inline justify-content-center">
                         <form method="post" class="navbar-search navbar-search-light form-inline my-4 justify-content-center" action="{{url('carian_metadata_nologin')}}" id="form_carian">
@@ -364,33 +302,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div _ngcontent-lqr-c499="" class="col-lg-1">
-                <div _ngcontent-lqr-c499="" class="form-group mt-7">
-                    <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 ml-4 float-right">
-                        <div _ngcontent-lqr-c499="" class="card-body pointer" tabindex="0"
-                            ng-reflect-router-link="/metadata">
-                            <a href="{{ url('senarai_metadata_nologin') }}"><img _ngcontent-lqr-c499="" height="50"
-                                    src="./afiqlogin_files/metadata.png"></a>
-                        </div>
-                        <span _ngcontent-lqr-c499="" class="text-center mt-2">Metadata</span>
-                    </div>
-                    <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 ml-4 float-right">
-                        <div _ngcontent-lqr-c499="" class="card-body pointer" tabindex="0"
-                            ng-reflect-router-link="/data-asas">
-                            <img _ngcontent-lqr-c499="" height="50" src="./afiqlogin_files/dataapp.png">
-                        </div>
-                        <span _ngcontent-lqr-c499="" class="text-center mt-2">Data Asas</span>
-                    </div>
-                    <div _ngcontent-lqr-c499="" class="card fancy_card square rounded-circle mt-4 float-right">
-                        <div _ngcontent-lqr-c499="" class="card-body pointer" tabindex="0"
-                            ng-reflect-router-link="/tutorial">
-                            <img _ngcontent-lqr-c499="" height="50" src="./afiqlogin_files/tutorial.png">
-                        </div>
-                        <span _ngcontent-lqr-c499="" class="text-center mt-2">Tutorial</span>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 </section>

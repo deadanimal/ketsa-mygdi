@@ -26,13 +26,33 @@
     }
 </style>
 
-<section class="content bgland pb-4">
+<section class="content pb-4">
     <div class="container-fluid" data-aos="fade-up">
-
-        <div class="section-title">
-            <h2 class="text-light">Carian Metadata</h2>
+        <div class="section-title pt-0">
+            <h2 class="">Carian Metadata</h2>
         </div>
-
+        <div class="col-12 form-inline my-4 justify-content-center">
+            <form method="post" class="navbar-search navbar-search-light" action="{{url('carian_metadata_nologin')}}" id="form_carian">
+                @csrf
+                <div class="form-inline mb-0">
+                    <div class="input-group input-group-alternative input-group-merge" style="background-image: linear-gradient(to right, #ebba16, #ed8a19);">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                        <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off">
+                    </div>
+                </div>
+                <button type="button" data-action="search-close" data-target="#navbar-search-main" aria-label="Close" class="close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </form>
+            <a class="btn btn-primary text-white text-center btn_cari_submit ml-3" style="cursor:pointer;">
+                <span><i class="mr-2 fas fa-search"></i></span>
+                Cari
+            </a>
+        </div>
         <div class="row">
             <div class="col-4 pl-lg-5">
                 <div class="card">
@@ -106,31 +126,6 @@
             </div>
 
             <div class="col-8">
-                <div class="row mb-4">
-                    <div class="col-12 form-inline my-4 justify-content-center">
-                        <form method="post" class="navbar-search navbar-search-light" action="{{url('carian_metadata_nologin')}}" id="form_carian">
-                            @csrf
-                            <div class="form-inline mb-0">
-                                <div class="input-group input-group-alternative input-group-merge" style="background-image: linear-gradient(to right, #ebba16, #ed8a19);">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-search"></i>
-                                        </span>
-                                    </div>
-                                    <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off">
-                                </div>
-                            </div>
-                            <button type="button" data-action="search-close" data-target="#navbar-search-main" aria-label="Close" class="close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </form>
-                        <a class="btn btn-success text-white text-center btn_cari_submit ml-3" style="cursor:pointer;">
-                            <span><i class="mr-2 fas fa-search"></i></span>
-                            Cari
-                        </a>
-                    </div>
-                </div>
-
                 <div class="row divSenaraiMetadata" style="display:none;">
                     <div class="col-12 pr-5">
                         <div class="card">
