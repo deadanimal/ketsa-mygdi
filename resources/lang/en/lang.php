@@ -18,7 +18,6 @@
     'accord_12'=> 'DATA SET IDENTIFICATION',
     'accord_13'=> 'REFERENCE SYSTEM INFORMATION',
     'accord_14'=> 'CONSTRAINTS',
-    'accord_15'=> 'DATA QUALITY',
-    
+    'accord_15'=> 'DATA QUALITY',   
 ]
 ?>

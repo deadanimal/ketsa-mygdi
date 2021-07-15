@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReferenceSystemIdentifierSeeder::class);
         $this->call(PortalSettingsSeeder::class);
         $this->call(KategoriSeeder::class);
+        $this->call(AgensiOrganisasiSeeder::class);
     }
 }

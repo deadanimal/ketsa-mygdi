@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>Measurement widget | Sample | ArcGIS API for JavaScript 4.20</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #toolbarDiv {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: default;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+      }
+
+      #infoDiv {
+        position: absolute;
+        top: 15px;
+        left: 60px;
+      }
+      #infoDiv input {
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
+      }
+
+      .esri-legend__message {
+
+        color:white;
+      }
+
+      .esri-widget--button.active,
+      .esri-widget--button.active:hover,
+      .esri-widget--button.active:focus {
+        cursor: default;
+        background-color: #999696;
+      }
+      .esri-widget--button.active path,
+      .esri-widget--button.active:hover path,
+      .esri-widget--button.active:focus path {
+        fill: #E4E4E4;
+      }
+
+      /* The Modal (background) */
+.errMessage {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.errMessage-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+      
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.20/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.20/"></script>
+
+    <script src="js/map-service.js"></script>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/views/SceneView",
+        "esri/layers/TileLayer",
+        "esri/layers/FeatureLayer",
+        "esri/widgets/Measurement",
+        "esri/widgets/Legend",
+        "esri/request"
+      ], function (
+        Map,
+        MapView,
+        SceneView,
+        TileLayer,
+        FeatureLayer,
+        Measurement,
+        Legend,
+        esriRequest
+      ) {
+        // World Ocean Base Basemap
+        // const tileLayer = new TileLayer({
+        //   url:
+        //     "https://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Base/MapServer"
+        // });
+
+        // Get the modal
+        var modal = document.getElementById("modalErrMessage");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];  
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+
+
+        // Checking map service availability  
+        var options = {query: {f: "json"},responseType: "json"};
+        var url = mapServiceUrl;
+        esriRequest(url, options).then(function (response) { 
+            
+          console.log("response", response) 
+          // var responseJSON = JSON.stringify(response, null, 2);  
+          // console.log(responseJSON);
+        }).catch((err) => {
+       
+          // Error name = request:server
+
+          if (err.name === 'request:server' && mapServiceUrl != "") {
+            console.log('Request aborted');
+            // var errorMessage = true;
+            // alert(errorMessage); // output = true
+            console.log(err.name);
+            document.getElementById("errMessage-detail").innerHTML = "Map service could not be access. Please contact metadata publisher.";
+            modal.style.display = "block";
+            // Set Error Message
+
+          } else if (err.name === 'request:server' && mapServiceUrl == "") {
+
+            document.getElementById("errMessage-detail").innerHTML = "Map service not available";
+            modal.style.display = "block";
+
+          } else {
+            console.error('Error encountered', err);
+
+            document.getElementById("errMessage-detail").innerHTML = err;
+            modal.style.display = "block";
+
+          }
+
+        });  
+
+        
+        // if (mapServiceUrl == "" ) {
+        //   document.getElementById("errMessage-detail").innerHTML = "Map service not available";
+        //   modal.style.display = "block";
+        // }
+                
+
+       // Assign feature layer based on url in query string parameter
+        const featureLayer = new FeatureLayer({
+          url: mapServiceUrl
+        });
+
+
+
+        // Create new Map with TileLayer and FeatureLayer
+        const map = new Map({
+          layers: [featureLayer],
+          basemap: "topo-vector"
+        });
+
+        // Create MapView with defined zoom and center
+        const mapView = new MapView({
+          zoom: 6.52,
+          center: [107.3854408,5.3105],
+          map: map
+        });
+
+        // Create SceneView with similar extent to MapView
+        const sceneView = new SceneView({
+          scale: 123456789,
+          center: [5.3105,107.3854408],
+          map: map
+        });
+
+        // Set the activeView to the 2D MapView
+        let activeView = mapView;
+
+        // Create new instance of the Measurement widget
+        const measurement = new Measurement();
+
+
+
+        // Create new instance of the Legend widget
+
+      //   if (errorMessage == false) {
+      //     alert(errorMessage); 
+      //     errMsg = errMessage1;         
+
+      //   } else if (errorMessage == true) {
+      //     alert(errorMessage); 
+      //     errMsg = errMessage2;
+         
+      // }
+
+      // const legend = new Legend({
+      //     container: errMsg,
+      //   });
+
+
+        // Set-up event handlers for buttons and click events
+        const switchButton = document.getElementById("switch-btn");
+        const distanceButton = document.getElementById("distance");
+        const areaButton = document.getElementById("area");
+        const clearButton = document.getElementById("clear");
+
+        switchButton.addEventListener("click", function () {
+          switchView();
+        });
+        distanceButton.addEventListener("click", function () {
+          distanceMeasurement();
+        });
+        areaButton.addEventListener("click", function () {
+          areaMeasurement();
+        });
+        clearButton.addEventListener("click", function () {
+          clearMeasurements();
+        });
+
+        // if (showMessage == true) {  
+        //     // Add the legend to the bottom left
+        //   activeView.ui.add(legend, "bottom-left");
+        //   legend.view = activeView;  
+        //   legend.style = {
+        //   layout: "auto"};
+
+        //   }
+
+        // Call the loadView() function for the initial view
+        loadView();
+
+        // The loadView() function to define the view for the widgets and div
+        function loadView() {
+          activeView.set({
+            container: "viewDiv"
+          });
+          // Add the appropriate measurement UI to the bottom-right when activated
+          activeView.ui.add(measurement, "bottom-right");
+
+          // Set the views for the widgets
+          measurement.view = activeView;
+          
+          // legend.view = activeView;
+        }
+
+        // When the 2D or 3D button is activated, the switchView() function is called
+        function switchView() {
+          // Clone the viewpoint for the MapView or SceneView
+          const viewpoint = activeView.viewpoint.clone();
+          // Get the view type, either 2d or 3d
+          const type = activeView.type;
+
+          // Clear any measurements that had been drawn
+          clearMeasurements();
+
+          // Reset the measurement tools in the div
+          activeView.container = null;
+          activeView = null;
+          // Set the view based on whether it switched to 2D MapView or 3D SceneView
+          activeView = type.toUpperCase() === "2D" ? sceneView : mapView;
+          activeView.set({
+            container: "viewDiv",
+            viewpoint: viewpoint
+          });
+          // Add the appropriate measurement UI to the bottom-right when activated
+          activeView.ui.add(measurement, "bottom-right");
+         
+
+          // if (showMessage == true) {  
+          //  // Add the legend to the bottom left
+          // activeView.ui.add(legend, "bottom-left");
+          // legend.view = activeView;
+          
+          // }
+
+          // Set the views for the widgets
+          measurement.view = activeView;
+          // legend.view = activeView;
+          // Reset the value of the 2D or 3D switching button
+          switchButton.value = type.toUpperCase();
+        }
+
+        // Call the appropriate DistanceMeasurement2D or DirectLineMeasurement3D
+        function distanceMeasurement() {
+          const type = activeView.type;
+          measurement.activeTool =
+            type.toUpperCase() === "2D" ? "distance" : "direct-line";
+          distanceButton.classList.add("active");
+          areaButton.classList.remove("active");
+        }
+
+        // Call the appropriate AreaMeasurement2D or AreaMeasurement3D
+        function areaMeasurement() {
+          measurement.activeTool = "area";
+          distanceButton.classList.remove("active");
+          areaButton.classList.add("active");
+        }
+
+        // Clears all measurements
+        function clearMeasurements() {
+          distanceButton.classList.remove("active");
+          areaButton.classList.remove("active");
+          measurement.clear();
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+    <div id="infoDiv">
+      <input
+        class="esri-component esri-widget--button esri-widget esri-interactive"
+        type="button"
+        id="switch-btn"
+        value="3D"
+      />
+    </div>
+    <div id="toolbarDiv" class="esri-component esri-widget">
+      <button
+        id="distance"
+        class="esri-widget--button esri-interactive esri-icon-measure-line"
+        title="Distance Measurement Tool"
+      ></button>
+      <button
+        id="area"
+        class="esri-widget--button esri-interactive esri-icon-measure-area"
+        title="Area Measurement Tool"
+      ></button>
+      <button
+        id="clear"
+        class="esri-widget--button esri-interactive esri-icon-trash"
+        title="Clear Measurements"
+      ></button>
+    </div>
+
+    <!-- <div id="errMessage1"><br><br><h3 style="text-align: center;">Map Service Not Available</h3></div> -->
+
+    <!-- <div id="errMessage2"><br><br><h3 id="errMessage2Name" style="text-align: center;">Map service could not be access.Please contact the publisher</h3></div> -->
+    <!-- The Modal -->
+<div id="modalErrMessage" class="errMessage">
+  <!-- Modal content -->
+  <div class="errMessage-content">
+    <span class="close">&times;</span>
+    <p id="errMessage-detail"></p>
+  </div>
+</div>
+
+
+  </body>
+</html>

@@ -29,7 +29,7 @@ class PortalController extends Controller
      * @return \Illuminate\Http\Response
      */
     function __construct(){
-
+       
     }
 
 
@@ -142,7 +142,7 @@ class PortalController extends Controller
             $maklum_balas->status = 0;
             $maklum_balas->save();
         });
-
+        
         return redirect('maklum_balas')->with('success', 'Maklum Balas Disimpan');
     }
 
@@ -161,7 +161,6 @@ class PortalController extends Controller
         $panduan_pengguna = PanduanPengguna::get()->first();
         return view('panduan_pengguna',compact('panduan_pengguna'));
     }
-
 
 
 

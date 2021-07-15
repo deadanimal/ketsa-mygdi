@@ -77,18 +77,21 @@
                         <div class="card-body">
                           <div class="form-group row">
                             <p>Content Information : &nbsp;&nbsp;&nbsp;</p>
-                            <select name="c1_content_info" class="form-control" style="width:175px;">
-                              <option selected disabled>Select Content</option>
-                              <option value="application">Application</option>
-                              <option value="clearHouse">Clearing House</option>
-                              <option value="downloadableData">Downloadable Data</option>
-                              <option value="geoActivities">Geographic Activities</option>
-                              <option value="geoServices">Geographic Services</option>
-                              <option value="mapFiles">Map File</option>
-                              <option value="offlineData">Offline Data</option>
-                              <option value="staticMapImg">Static Map Images</option>
-                              <option value="otherDocs">Other Documents</option>
-                            </select>
+                            <?php 
+                            $ci = trim((isset($metadata->contact->CI_ResponsibleParty) && $metadata->contact->CI_ResponsibleParty != "" ? $metadata->contact->CI_ResponsibleParty:""));
+                            ?>
+                          <select name="c1_content_info" class="form-control" style="width:175px;">
+                            <option>Select Content</option>
+                            <option value="application" {{($ci == 'application' ? 'selected':'')}}>Application</option>
+                            <option value="clearHouse" {{($ci == 'clearHouse' ? 'selected':'')}}>Clearing House</option>
+                            <option value="downloadableData"{{($ci == 'downloadableData' ? 'selected':'')}}>Downloadable Data</option>
+                            <option value="geoActivities" {{($ci == 'geoActivities' ? 'selected':'')}}>Geographic Activities</option>
+                            <option value="geoServices" {{($ci == 'geoServices' ? 'selected':'')}}>Geographic Services</option>
+                            <option value="mapFiles" {{($ci == 'mapFiles' ? 'selected':'')}}>Map File</option>
+                            <option value="offlineData" {{($ci == 'offlineData' ? 'selected':'')}}>Offline Data</option>
+                            <option value="staticMapImg" {{($ci == 'staticMapImg' ? 'selected':'')}}>Static Map Images</option>
+                            <option value="otherDocs" {{($ci == 'otherDocs' ? 'selected':'')}}>Other Documents</option>
+                          </select>
                           </div>
 
                           <p><b>Metadata Publisher</b></p>

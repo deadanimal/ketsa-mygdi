@@ -92,7 +92,7 @@ class RegisterController extends Controller
             'sektor' => $data['sektor'],
             'email' => $data['email'],
             'phone_pejabat' => $data['phone_pejabat'],
-            'phone_bimbit' => $data['phone_bimbit'],
+//            'phone_bimbit' => $data['phone_bimbit'],
             'password' => Hash::make($data['password']),
             'alamat' => $data['alamat'],
             'kategori' => $data['kategori'],

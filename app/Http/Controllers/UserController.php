@@ -12,6 +12,9 @@ use Hash;
 use App\Mail\MailtrapExample;
 use Illuminate\Support\Facades\Mail;
 use Storage;
+use App\AgensiOrganisasi;
+use App\MetadataGeo;
+use DB;
  
 class UserController extends Controller {
 
@@ -36,7 +39,7 @@ class UserController extends Controller {
                 $users[]= $user;
             }
         }
-        return view('mygeo.pengesahan', compact('users'));
+        return view('mygeo.user.pengesahan', compact('users'));
     }
 
     public function index_berdaftar() {
@@ -51,7 +54,7 @@ class UserController extends Controller {
                 $users[]= $user;
             }
         }
-        return view('mygeo.senarai_pengguna_berdaftar', compact('users'));
+        return view('mygeo.user.senarai_pengguna_berdaftar', compact('users'));
     }
     
     public function get_user_details(){
@@ -61,50 +64,44 @@ class UserController extends Controller {
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2">Nama Penuh</label>
                 <div class="col-sm-10">
-                    : <label>'.$user_details->name.'</label>
+                    :'.$user_details->name.'
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2">Agensi</label>
                 <div class="col-sm-10">
-                    : <label>'.$user_details->agensi_organisasi.'</label>
+                    :'.$user_details->agensi_organisasi.'
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2">Bahagian</label>
                 <div class="col-sm-10">
-                    : <label>'.$user_details->bahagian.'</label>
+                    :'.$user_details->bahagian.'
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2">Telefon Pejabat</label>
                 <div class="col-sm-10">
-                    : <label>'.$user_details->phone_pejabat.'</label>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Telefon Bimbit</label>
-                <div class="col-sm-10">
-                    : <label>'.$user_details->phone_bimbit.'</label>
+                    :'.$user_details->phone_pejabat.'
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2">Emel</label>
                 <div class="col-sm-10">
-                    : <label>'.$user_details->email.'</label>
+                    :'.$user_details->email.'
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2">Peranan</label>
                 <div class="col-sm-10">
-                    : <label>
+                    :
         ';
         if(count($user_details->getRoleNames()) > 0){
             foreach($user_details->getRoleNames() as $role){
                 $html_details .= $role.'<br>';
             }
         }
-        $html_details .= '</label>
+        $html_details .= '
                 </div>
             </div>
         ';
@@ -138,24 +135,26 @@ class UserController extends Controller {
 
     public function show(){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
-        return view('mygeo.profil', compact('user'));
+        return view('mygeo.profile.profil', compact('user'));
     }
 
     public function edit(){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $roles = Role::get();
-        return view('mygeo.profil_edit', compact('user','roles'));
+        return view('mygeo.profile.profil_edit', compact('user','roles'));
     }
 
     public function update_profile(Request $request){
+        $this->validate($request,['gambar_profil' => 'required|image|mimes:jpeg,png,jpg']);
+        
         //save gambar profil.
         if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
             $exists = Storage::exists($request->gambar_profil->getClientOriginalName());
             $time = date('Y-m-d'.'_'.'H_i_s');
             $fileName = $time.'_'.$request->gambar_profil->getClientOriginalName();
-            $ftest = Storage::putFileAs('public/gambar_profil', $request->file('gambar_profil'), $fileName);
-            //dd($fileName,$ftest,pathinfo($fileName,PATHINFO_FILENAME));
+            $imageUrl = Storage::putFileAs('/public/', $request->file('gambar_profil'), $fileName);
         }
+
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
@@ -164,15 +163,14 @@ class UserController extends Controller {
         $user->bahagian = $request->bahagian;
         $user->sektor = $request->sektor;
         $user->phone_pejabat = $request->phone_pejabat;
-        $user->phone_bimbit = $request->phone_bimbit;
-        if(isset($fileName)){
-            $user->gambar_profil = $fileName;        
+        if(isset($imageUrl)){
+            $user->gambar_profil = $fileName;
         }
         $user->save();
 
         //save user's role
-        ModelHasRoles::where(["model_id"=>$user->id,"model_type"=>"App\User"])->delete();
         if(!is_null($request->peranan)){
+            ModelHasRoles::where(["model_id"=>$user->id,"model_type"=>"App\User"])->delete();
             foreach($request->peranan as $role){
                 $user->assignRole($role);
             }
@@ -185,13 +183,98 @@ class UserController extends Controller {
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->password = Hash::make($request->password_new);
         $user->save();
-        return view('mygeo.profil', compact('user'));
+        return view('mygeo.profile.profil', compact('user'));
     }
     
     public function change_user_status(Request $request){
         $user = User::where(["id"=>$request->user_id])->get()->first();
         $user->status = $request->status_id;
         $user->save();
+        exit();
+    }
+    
+    public function pemindahan_akaun(){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+            exit();
+        }
+        $agensi = AgensiOrganisasi::get()->all();
+        return view('mygeo.user.pemindahan_akaun', compact('agensi'));
+    }
+    
+    public function getUsersByAgensi(Request $request){
+        $usersByAgensi = User::where('agensi_organisasi',$request->agensi)->get();
+        $usersByPenerbit = '<option selected disabled>Pilih</option>';
+        foreach($usersByAgensi as $uba){
+            if($uba->hasRole('Penerbit Metadata')){
+                $usersByPenerbit .= '<option value="'.$uba->id.'">'.$uba->name.'</option>';
+            }
+        }
+        echo $usersByPenerbit;
+        exit();
+    }
+    
+    public function getMetadataByUser(Request $request){
+        $metadatasdb = MetadataGeo::on('pgsql2')->where('portal_user_id','=',$request->user_id)->orderBy('id', 'DESC')->get()->all();
+        $metadatas = [];
+        $metadataRows = '';
+        $bil = 1;
+        foreach ($metadatasdb as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            $xml2 = simplexml_load_string($ftestxml2);
+            $metadatas[$met->id] = [$xml2, $met];
+            
+            //category
+            $cat = "";
+            if(isset($xml2->categoryTitle) && $xml2->categoryTitle != ""){
+                $cat = trim($xml2->categoryTitle);
+            }
+            //metadata name
+            $name = "";
+            if(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $name = trim($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString);
+            }
+            //status
+            $status = "";
+            if($met->disahkan == '0'){
+                $status = "Perlu Pengesahan";
+            }elseif($met->disahkan == 'yes'){
+                $status = "Diterbitkan";
+            }elseif($met->disahkan == 'no'){
+                $status = "Perlu Pembetulan";
+            }elseif($met->disahkan == 'delete'){
+                $status = "Dipadam";
+            }
+            
+            $metadataRows .= '
+                <tr>
+                    <td>'.$bil.'</td>
+                    <td>'.$name.'</td>
+                    <td>'.$cat.'</td>
+                    <td>'.$status.'</td>
+                </tr>
+            ';
+            $bil++;
+        }
+        echo $metadataRows;
+        exit();
+    }
+    
+    public function simpan_pemindahan_akaun(Request $request){
+        DB::connection('pgsql2')->transaction(function () use ($request) {
+            $pengguna_lama = $request->pengguna_lama;
+            $pengguna_baru = $request->pengguna_baru;
+            
+            MetadataGeo::where(['portal_user_id'=>$pengguna_lama])->update([
+                'portal_user_id' => $pengguna_baru,
+                'changedate' => date("Y-m-d H:i:s"),
+            ]);
+        });
         exit();
     }
 }
