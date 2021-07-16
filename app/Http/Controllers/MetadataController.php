@@ -159,10 +159,10 @@ class MetadataController extends Controller {
             }
         }
         if(isset($request->tarikh_mula)){
-            $query = $query->where('date_created', '>=', '%' . date('Y-m-d',strtotime($request->tarikh_mula)) . '%');
+            $query = $query->where('createdate', '>=', date('Y-m-d',strtotime($request->tarikh_mula)));
         }
         if(isset($request->tarikh_tamat)){
-            $query = $query->where('date_created', '<=', '%' . date('Y-m-d',strtotime($request->tarikh_tamat)) . '%');
+            $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
         }
         $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
         

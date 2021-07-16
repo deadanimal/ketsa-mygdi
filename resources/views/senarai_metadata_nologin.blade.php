@@ -72,15 +72,16 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Jenis Maklumat Kandungan (Content Type)</label>
                                             <select name="content_type" id="content_type" class="form-control form-control-sm" autofocus>
-                                                <option selected disabled>Pilih</option>
+                                                <option selected disabled>Select Content</option>
                                                 <option value="Application">Application</option>
-                                                <option value="Document">Document</option>
-                                                <option value="GIS Activity/Project">GIS Activity/Project</option>
-                                                <option value="Map">Map</option>
-                                                <option value="Raster Data">Raster Data</option>
-                                                <option value="Services">Services</option>
-                                                <option value="Software">Software</option>
-                                                <option value="Vector Data">Vector Data</option>
+                                                <option value="Clearing House">Clearing House</option>
+                                                <option value="Downloadable Data">Downloadable Data</option>
+                                                <option value="Geographic Activities">Geographic Activities</option>
+                                                <option value="Geographic Services">Geographic Services</option>
+                                                <option value="Map File">Map File</option>
+                                                <option value="Offline Data">Offline Data</option>
+                                                <option value="Static Map Images">Static Map Images</option>
+                                                <option value="Other Documents">Other Documents</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

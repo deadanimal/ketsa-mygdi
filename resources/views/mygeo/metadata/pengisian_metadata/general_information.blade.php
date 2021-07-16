@@ -12,15 +12,15 @@
                 <p class="pl-lg-3 form-control-label">Content Information<span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                 <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;">
                     <option selected disabled>Select Content</option>
-                    <option value="application">Application</option>
-                    <option value="clearHouse">Clearing House</option>
-                    <option value="downloadableData">Downloadable Data</option>
-                    <option value="geoActivities">Geographic Activities</option>
-                    <option value="geoServices">Geographic Services</option>
-                    <option value="mapFiles">Map File</option>
-                    <option value="offlineData">Offline Data</option>
-                    <option value="staticMapImg">Static Map Images</option>
-                    <option value="otherDocs">Other Documents</option>
+                    <option value="Application">Application</option>
+                    <option value="Clearing House">Clearing House</option>
+                    <option value="Downloadable Data">Downloadable Data</option>
+                    <option value="Geographic Activities">Geographic Activities</option>
+                    <option value="Geographic Services">Geographic Services</option>
+                    <option value="Map File">Map File</option>
+                    <option value="Offline Data">Offline Data</option>
+                    <option value="Static Map Images">Static Map Images</option>
+                    <option value="Other Documents">Other Documents</option>
                 </select>
 
                 @error('c1_content_info')
