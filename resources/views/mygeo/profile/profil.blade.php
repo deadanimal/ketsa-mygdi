@@ -2,162 +2,226 @@
 
 @section('content')
 
-  <style>
-    /*.card{
-      opacity:0.3;
-      background-color:orange;
-      background-color: rgba(255, 236, 179, 0.2);
-    }
+<link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
 
-    .card p{
-      opacity:none;
-    }
+<style>
+</style>
 
-    .card a{
-      opacity:none;
-      color:#FFE802;
-    }*/
-
-    .ftest{
-      display:inline;
-      width:auto;
-    }
-  </style>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1></h1>
-          </div>
-          <div class="col-sm-6">
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+    <section class="header">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center p-3 py-4">
+                    <div class="col-lg-6 col-7">
+                        <h6 class="h2 text-dark d-inline-block mb-0">Profil</h6>
+
+                        <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class=" breadcrumb-item">
+                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Profil
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title" style="font-size: 2rem;">Profil Pengguna</h3>
-                <a href="{{ url('kemaskini_profil') }}"><button type="button" class="btn btn-default float-right">Kemas Kini</button></a>
-              </div>
-              <div class="card-body">
-                <form class="form-horizontal">
-                  <div class="card-body">
-                    <div class="form-group row">
-                      <label for="inputEmail3" class="col-sm-2">Nama Penuh</label>
-                      <div class="col-sm-10">
-                        : <label>{{ $user->name }}</label>
-                      </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Profil Pengguna</h3>
+                                </div>
+
+                                <div class="col-4 text-right">
+                                    <a href="{{ url('kemaskini_profil') }}" class="btn btn-primary btn-sm text-white btn-icon btn-3">
+                                        <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                                        <span class="btn-inner--text">Kemaskini Profil</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="heading-small text-muted mt-0 mb-4">Maklumat Pengguna</h6>
+                            <div class="pl-lg-4 pb-lg-4">
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label class="form-control-label mr-4" for="uname">
+                                            Nama Penuh
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control form-control-sm ml-3" id="uname" type="text" value="{{ $user->name }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label class="form-control-label mr-4" for="nric">
+                                            No Kad Pengenalan
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control form-control-sm ml-3" id="input-nric" type="text" value="{{ $user->nric }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label class="form-control-label mr-4" for="agensi_organisasi">
+                                            Agensi / Organisasi
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ $user->agensi_organisasi }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label class="form-control-label mr-4" for="bahagian">
+                                            Bahagian
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control form-control-sm ml-3" id="bahagian" type="text" value="{{ $user->bahagian }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label class="form-control-label mr-4" for="sektor">
+                                            Sektor
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control form-control-sm ml-3" id="sektor" type="text" value="{{ ($user->sektor == '1' ? "Kerajaan":"Swasta") }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label class="form-control-label mr-4" for="email">
+                                            Emel
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control form-control-sm ml-3" id="email" type="text" value="{{ $user->email }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label class="form-control-label mr-4" for="phone_pejabat">
+                                            Telefon Pejabat
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-control form-control-sm ml-3" id="phone_pejabat" type="text" value="{{ $user->phone_pejabat }}" disabled />
+                                    </div>
+                                    <div class="col-2">
+                                        <label class="form-control-label mr-4" for="phone_bimbit">
+                                            Telefon Bimbit
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-control form-control-sm ml-3" id="phone_bimbit" type="text" value="{{ $user->phone_bimbit }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label class="form-control-label mr-4" for="peranan">
+                                            Peranan
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <?php
+                                        if (!empty($user->getRoleNames())) {
+                                            $count = 1;
+                                            foreach ($user->getRoleNames() as $role) {
+                                                ?><input class="form-control form-control-sm ml-3" id="peranan" type="text" value="<?php echo $role; ?> " disabled /><?php
+                                                                                                                                                                                if ($count != count($user->getRoleNames())) {
+                                                                                                                                                                                    ?>,<?php
+                                                                                                                                                                                                }
+                                                                                                                                                                                                $count++;
+                                                                                                                                                                                            }
+                                                                                                                                                                                        }
+                                                                                                                                                                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group row">
-                      <label for="inputEmail3" class="col-sm-2">Kad Pengenalan</label>
-                      <div class="col-sm-10">
-                        : <label>{{ $user->nric }}</label>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputEmail3" class="col-sm-2">Agensi / Organisasi</label>
-                      <div class="col-sm-10">
-                        : <label>{{ $user->agensi_organisasi }}</label>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputEmail3" class="col-sm-2">Bahagian</label>
-                      <div class="col-sm-10">
-                        : <label>{{ $user->bahagian }}</label>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputEmail3" class="col-sm-2">Sektor</label>
-                      <div class="col-sm-10">
-                        : <label>{{ ($user->sektor == '1' ? "Kerajaan":"Swasta")  }}</label>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputEmail3" class="col-sm-2">Emel</label>
-                      <div class="col-sm-10">
-                        : <label>{{ $user->email }}</label>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputEmail3" class="col-sm-2">Telefon Pejabat</label>
-                      <div class="col-sm-10">
-                        : <label>{{ $user->phone_pejabat }}</label>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputEmail3" class="col-sm-2">Peranan</label>
-                      <div class="col-sm-10">
-                        : 
-                        <?php
-                        if(!empty($user->getRoleNames())){
-                          $count = 1;
-                          foreach($user->getRoleNames() as $role){
-                            ?><label><?php echo $role; ?></label><?php
-                            if($count != count($user->getRoleNames())){
-                                ?>,<?php
-                            }
-                            $count++;
-                          }
-                        }
-                        ?>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_password')}}" id="form_change_password">
-                @csrf
-                <div class="card-header">
-                  <h3 class="card-title" style="font-size: 2rem;">Tukar Kata Laluan</h3>
-                  <button type="submit" class="btn btn-default float-right">Tukar</button>
                 </div>
-                <div class="card-body">
-                  <form class="form-horizontal">
-                    <div class="card-body">
-                      <input type="hidden" value="{{ $user->password }}">
-                      <div class="form-group row">
-                        <label for="password_old" class="col-sm-2">Kata Laluan Lama</label>
-                        <div class="col-sm-10">
-                          : &nbsp; <input type="password" class="form-control ftest" id="password_old" name="password_old">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="password_new" class="col-sm-2">Kata Laluan Baru</label>
-                        <div class="col-sm-10">
-                          : &nbsp; <input type="password" class="form-control ftest" id="password_new" name="password_new">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="password_new_confirm" class="col-sm-2">Sah Kata Laluan Baru</label>
-                        <div class="col-sm-10">
-                          : &nbsp; <input type="password" class="form-control ftest" id="password_new_confirm" name="password_new_confirm">
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </form>
             </div>
-          </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_password')}}" id="form_change_password">
+                            @csrf
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">Tukar Kata Laluan</h3>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                    <button type="submit" class="btn btn-warning btn-sm text-white btn-icon btn-3">
+                                            <span class="btn-inner--icon"><i class="fas fa-wrench"></i></span>
+                                            <span class="btn-inner--text">Tukar</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="pl-lg-4 pb-lg-4">
+                                    <input type="hidden" value="{{ $user->password }}">
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="input-username">
+                                                Kata Laluan Lama
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <input class="form-control form-control-sm ml-3" placeholder="Masukkan Kata Laluan Lama" type="password" id="password_old" name="password_old" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="input-username">
+                                                Kata Laluan Baru
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <input class="form-control form-control-sm ml-3" placeholder="Masukkan Kata Laluan Baru" type="password" id="password_new" name="password_new" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="input-username">
+                                                Sahkan Kata Laluan Baru
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <input class="form-control form-control-sm ml-3" placeholder="Sahkan Kata Laluan Baru" type="password" id="password_new_confirm" name="password_new_confirm" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
-  </div>
+</div>
 
 @stop
