@@ -20,7 +20,7 @@
                                 <br _ngcontent-lqr-c499="">
                             </div>
                             <div _ngcontent-lqr-c499="" class="mb-4">
-                                <a class="text-primary" href="#" id="hrefDaftar" data-toggle="modal" data-target="#modal-daftar-jenis-pengguna">Pengguna baru? Daftar sekarang.</a>
+                                <a class="text-primary" href="#" id="hrefDaftar" data-backdrop="false" data-toggle="modal" data-target="#modal-daftar-jenis-pengguna">Pengguna baru? Daftar sekarang.</a>
                             </div>
                             <form method="POST" action="{{ url('loginf') }}">
                                 @csrf
@@ -653,7 +653,11 @@
         $(this).hide();
     });
 
-    $(document).ready(function() {
+    $(document).ready(function() {      
+        $("#input-nric").inputFilter(function(value) {
+            return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 999999999999);
+        });
+  
         //ajax get roles
         $.ajax({
             method: "POST",
@@ -683,13 +687,9 @@
         <?php
         if (null !== Session::get('msg') && !is_null(Session::get('msg')) && 'NULL' != Session::get('msg')) {
             ?>alert("<?php echo Session::get('msg'); ?>");
-    <?php
-    }
-    ?>
-
-    $("#input-nric,#input-tpejabat").inputFilter(function(value) {
-        return /^\d*$/.test(value);
-    });
+        <?php
+        }
+        ?>
 
     });
 
@@ -719,6 +719,23 @@
             x.type = "password";
         }
     }
+    
+    (function($) {
+  $.fn.inputFilter = function(inputFilter) {
+    return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+      if (inputFilter(this.value)) {
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        this.value = "";
+      }
+    });
+  };
+}(jQuery));
 </script>
 
 @stop
