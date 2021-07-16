@@ -79,10 +79,10 @@
                                                 <td>{{ $bil }}</td>
                                                 <td>
                                                     <?php
-                                                            if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
-                                                                echo $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                            }
-                                                            ?>
+                                                        if(isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                                                           echo $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                                                       }
+                                                       ?>
                                                 </td>
                                                 <td>
                                                     <form method="post" action="{{ url('/kemaskini_metadata') }}">
