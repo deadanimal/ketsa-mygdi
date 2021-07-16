@@ -14,7 +14,7 @@
                                                             <div class="form-control-label mr-3">
                                                                 Scanning Resolution<span class="text-warning">*</span> :
                                                             </div>
-                                                            <input class="form-control form-control-sm" type="text" style="width :100px" placeholder="0.0" name="c4_scan_res" id="c4_scan_res" value="{{old('c4_scan_res')}}">
+                                                            <input class="form-control form-control-sm" type="number" style="width :100px" placeholder="0.0" name="c4_scan_res" id="c4_scan_res" value="{{old('c4_scan_res')}}">
                                                             <div class="form-control-label ml-2">
                                                                 meter
                                                             </div>
@@ -28,7 +28,7 @@
                                                             <div class="form-control-label mr-3">
                                                                 Ground Scanning<span class="text-warning">*</span> :
                                                             </div>
-                                                            <input class="form-control form-control-sm" type="text" style="width :100px" placeholder="0.0" name="c4_ground_scan" id="c4_ground_scan" value="{{old('c4_ground_scan')}}">
+                                                            <input class="form-control form-control-sm" type="number" style="width :100px" placeholder="0.0" name="c4_ground_scan" id="c4_ground_scan" value="{{old('c4_ground_scan')}}">
                                                             <div class="form-control-label ml-2">
                                                                 meter
                                                             </div>

@@ -94,9 +94,9 @@
                                 <button type="reset" onclick="cleaLayer()" class="btn btn-outline-secondary">
                                     <i class="fas fa-retweet"></i> Set Semula
                                 </button>
-                                <button type="button" onclick="saveData()" class="btn btn-primary">
+<!--                                <button type="button" onclick="saveData()" class="btn btn-primary">
                                     <i class="fas fa-save"></i> Simpan
-                                </button>
+                                </button>-->
                             </div>
                         </div> 
                     </form>

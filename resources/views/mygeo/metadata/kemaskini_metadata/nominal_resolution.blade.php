@@ -21,7 +21,7 @@
                     $scanRes = $metadataxml->identificationInfo->SV_ServiceIdentification->scanningResolution->CharacterString;
                 }
                 ?>
-                <input type="text" name="c4_scan_res" id="c4_scan_res" class="form-control col-lg-4" value="{{ $scanRes }}"> 
+                <input type="number" name="c4_scan_res" id="c4_scan_res" class="form-control col-lg-4" value="{{ $scanRes }}"> 
                 &nbsp;&nbsp;&nbsp;
                 Ground Scanning<span class="required">*</span>:
                 <?php
@@ -30,7 +30,7 @@
                     $groundScan = $metadataxml->identificationInfo->SV_ServiceIdentification->groundScanning->Decimal;;
                 }
                 ?>
-                <input type="text" name="c4_ground_scan" id="c4_ground_scan" class="form-control col-lg-4" value="{{ $groundScan }}"> meter
+                <input type="number" name="c4_ground_scan" id="c4_ground_scan" class="form-control col-lg-4" value="{{ $groundScan }}"> meter
                 @error('c4_scan_res')
                     <div style="color:red;">{{ $message }}</div>
                 @enderror

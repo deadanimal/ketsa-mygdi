@@ -90,9 +90,11 @@
                     </div>
                 @endif
                 <h1 class="float-left">Kemaskini Metadata</h1>
-                <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
-                     <?php echo __('lang.btn_upload_xml'); ?>
-                </button>
+                @if(auth::user()->hasRole(['Penerbit Metadata','Super Admin']))
+                    <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
+                         <?php echo __('lang.btn_upload_xml'); ?>
+                    </button>
+                @endif
             </div>
           <div class="col-12">
             <div class="card">
