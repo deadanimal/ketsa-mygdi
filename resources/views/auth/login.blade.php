@@ -26,7 +26,7 @@
                                 @csrf
                                 <div _ngcontent-lqr-c499="" class="form-group mb-3" ng-reflect-ng-class="[object Object]">
                                     <div _ngcontent-lqr-c499="" class="input-group input-group-alternative mb-3">
-                                        <input id="id_pengguna" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="ID Pengguna">
+                                        <input id="id_pengguna" type="text" class="form-control @error('emailf') is-invalid @enderror" name="emailf" value="{{ old('emailf') }}" required autocomplete="emailf" autofocus placeholder="ID Pengguna">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <i class="fas fa-envelope"></i>
@@ -218,7 +218,7 @@
                                                     <label class="form-control-label mr-4" for="input-agensi">Institusi</label>
                                                 </div>
                                                 <div class="col-8">
-                                                    <input class="form-control form-control-sm ml-3" placeholder="Nama Institusi" type="text" name="agensi_organisasi" />
+                                                    <input class="form-control form-control-sm ml-3" placeholder="Nama Institusi" type="text" name="institusi" />
                                                 </div>
                                             </div>
                                             <div class="row mb-2 divBahagian">
@@ -257,7 +257,7 @@
                                                     <label class="form-control-label mr-4" for="input-emel">Emel Rasmi</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input class="form-control form-control-sm ml-3" placeholder="Masukan E-mel anda" type="text" name="email" />
+                                                    <input class="form-control form-control-sm ml-3" placeholder="Masukan E-mel anda" type="text" name="email2" />
                                                     <p class="error-message"><span></span></p>
                                                 </div>
                                             </div>
@@ -269,16 +269,6 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <input class="form-control form-control-sm ml-3" id="input-tpejabat" placeholder="Nombor Telefon Pejabat" type="text" name="phone_pejabat" />
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2 divPhoneBimbit">
-                                                <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="input-tbimbit">
-                                                        Telefon Bimbit
-                                                    </label>
-                                                </div>
-                                                <div class="col-6">
-                                                    <input class="form-control form-control-sm ml-3" id="input-tbimbit" placeholder="Nombor Telefon Bimbit" type="text" name="phone_bimbit" />
                                                 </div>
                                             </div>
                                             <div class="row mb-2 divPeranan">
@@ -416,7 +406,6 @@
             $(".divPeranan").show();
             $(".divAgensiOrganisasiAlamat").show();
             $(".divInstitusi").hide();
-            $(".divPhoneBimbit").hide();
             $(".divKategori").hide();
             $('.btn_isi_borang').show();
             $(".divsecond").hide();
@@ -444,7 +433,6 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").hide();
-            $(".divPhoneBimbit").hide();
             $(".divPeranan").hide();
             $(".divKategori").hide();
             $(".divdaftar").show();
@@ -473,7 +461,6 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").hide();
-            $(".divPhoneBimbit").hide();
             $(".divPeranan").hide();
             $(".divKategori").hide();
             $(".btn_isi_borang").show();
@@ -489,7 +476,6 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").show();
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $(".divAgensiOrganisasiAlamat").hide();
@@ -505,7 +491,6 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").show();
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $(".divInstitusi").hide();
@@ -520,7 +505,6 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").show();
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
             $(".divInstitusi").hide();
@@ -536,7 +520,6 @@
             $(".divEmel").show();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
         } else if (per == "2_g2e_iptaPelajar") {
@@ -550,7 +533,6 @@
             $(".divEmel").show();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
         } else if (per == "2_g2e_iptsSyarahSelidik") {
@@ -564,7 +546,6 @@
             $(".divEmel").show();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
         } else if (per == "2_g2e_iptsPelajar") {
@@ -578,7 +559,6 @@
             $(".divEmel").show();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").show();
-            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
         } else if (per == "2_g2g") {
@@ -602,7 +582,6 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").hide();
-            $(".divPhoneBimbit").hide();
             $(".divPeranan").hide();
             $(".divKategori").hide();
             $(".divdaftar").show();
@@ -629,7 +608,6 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").hide();
-            $(".divPhoneBimbit").hide();
             $(".divPeranan").hide();
             $(".divKategori").hide();
             $(".divdaftar").show();

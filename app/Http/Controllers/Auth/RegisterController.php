@@ -92,7 +92,6 @@ class RegisterController extends Controller
             'sektor' => $data['sektor'],
             'email' => $data['email'],
             'phone_pejabat' => $data['phone_pejabat'],
-//            'phone_bimbit' => $data['phone_bimbit'],
             'password' => Hash::make($data['password']),
             'alamat' => $data['alamat'],
             'kategori' => $data['kategori'],
@@ -105,6 +104,7 @@ class RegisterController extends Controller
     
     public function register(Request $request)
     {
+//        dd($request);
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
         // $this->guard()->login($user);
