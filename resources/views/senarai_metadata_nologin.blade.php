@@ -182,8 +182,12 @@
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
                                                                 </form>
-                                                                <a href="#" class="metadataActionLinks aViewMetadata" onClick="return false;" data-metid="{{$key}}">Metadata Details</a>
-                                                                <a href="#" class="metadataActionLinks aViewXml" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><?php /* SAMBUNG SINI - continue doing fn to show xml in new tab */ ?>
+                                                                <a href="#" class="metadataActionLinks aViewMetadata" onClick="return false;" data-metid="{{$key}}">Metadata Details</a><br>
+                                                                <a href="#" class="metadataActionLinks aViewXml" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><br>
+                                                                <?php
+                                                                $url = (isset($val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) ? $val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString : "");
+                                                                ?>
+                                                                <a href="#" class="metadataActionLinks aViewMap" onClick="return false;" data-metid="{{$key}}" data-toggle="modal" data-target="#modal-showmap" data-mapurl="{{ $url }}" data-backdrop="false">Show map</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -206,6 +210,35 @@
             </div>
         </div>
     </div>
+    
+    <!--===== MODALS show map =====-->
+    <div class="modal fade" id="modal-showmap">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <?php
+
+                                ?>
+                                <iframe id="mapiframe" src="" height="425px" width="100%" title="ArcGIS REST Services">
+    </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between1">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>  
     @include('modal_carian_tambahan')
     <div id="preloader"></div>
 </section>
@@ -255,6 +288,11 @@
     $(document).on("click", ".aViewXml", function() {
         var metid = $(this).data('metid');
         $("#formViewXml" + metid).submit();
+    });
+    $(document).on("click", ".aViewMap", function () {
+        var mapurl = $(this).data('mapurl');
+        $('#mapiframe').attr('src', 'http://localhost:8888/ketsa-mygdi/public/intecxmap/search/view-map-service.html?url='+mapurl);
+        $('#modal-showmap').modal('show');
     });
 
     $(document).on("click", ".btn_cari_submit", function() {
