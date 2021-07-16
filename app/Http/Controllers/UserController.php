@@ -145,10 +145,9 @@ class UserController extends Controller {
     }
 
     public function update_profile(Request $request){
-        $this->validate($request,['gambar_profil' => 'required|image|mimes:jpeg,png,jpg']);
-        
         //save gambar profil.
         if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
+            $this->validate($request,['gambar_profil' => 'required|image|mimes:jpeg,png,jpg']);
             $exists = Storage::exists($request->gambar_profil->getClientOriginalName());
             $time = date('Y-m-d'.'_'.'H_i_s');
             $fileName = $time.'_'.$request->gambar_profil->getClientOriginalName();
