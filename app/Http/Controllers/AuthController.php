@@ -29,8 +29,7 @@ class AuthController extends Controller {
         // var_dump(Hash::make($request->password));
         // echo "</pre>";
         // exit();
-        // $this->testLogin();
-        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'disahkan'=>'1'])) {
+        if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password,'disahkan'=>'1'])) {
             // Authentication passed...
             return redirect()->intended('/landing_mygeo');
         }else{
@@ -44,18 +43,18 @@ class AuthController extends Controller {
         $user->email = 'joe@gmail.com';
         $user->password = Hash::make('123456');
 
-        if(!($user->save())){
-            dd('user is not being saved to database properly - this is the problem');          
-        }
+//        if(!($user->save())){
+//            dd('user is not being saved to database properly - this is the problem');          
+//        }
 
         if(!(Hash::check('123456', Hash::make('123456')))){
             dd('hashing of password is not working correctly - this is the problem');          
         }
 
-        if(!(Auth::attempt(array('email' => 'pentadbiraplikasi@pipeline.com', 'password' => Hash::make('pentadbiraplikasi@pipeline.com'))))){
+        if(!(Auth::attempt(['email' => 'pentadbiraplikasi@pipeline.com', 'password' => 'pentadbiraplikasi@pipeline.com']))){
             dd('storage of user password is not working correctly - this is the problem');          
         }else{
-         dd('everything is working when the correct data is supplied - so the problem is related to your forms and the data being passed to the function');
+            dd('everything is working when the correct data is supplied - so the problem is related to your forms and the data being passed to the function');
         }
     }
 }
