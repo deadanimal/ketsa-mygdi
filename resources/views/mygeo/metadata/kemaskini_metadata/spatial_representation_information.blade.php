@@ -6,10 +6,9 @@
             </h4>
         </a>
         @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")
-        <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal6">Catatan</button>
+            <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal6">Catatan</button>
         @elseif(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
-        <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal6">Catatan</button>
-        @endif type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal6">Catatan</button>
+            <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal6">Catatan</button>
         @endif
     </div>
     <div id="collapse6" class="panel-collapse collapse in show" data-parent="#div_c6">

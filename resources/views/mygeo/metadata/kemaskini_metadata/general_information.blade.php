@@ -35,7 +35,7 @@
                 </select>
                 @error('c1_content_info')
                 <div class="text-error">{{ $message }}</div>
-                @enderror value="otherDocs">Other Documents</option>
+                @enderror
                 </select>
             </div>
 
@@ -100,7 +100,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        ?php
+                        <?php
                         $pub_phone = "";
                         if(isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != ""){
                         $pub_phone = $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;

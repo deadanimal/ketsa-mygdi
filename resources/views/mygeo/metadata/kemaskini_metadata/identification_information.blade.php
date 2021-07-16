@@ -142,6 +142,12 @@
                             <select name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm">
                                 <option disabled>Select State</option>
                                 <?php
+                                    $respState = "";
+                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != ""){
+                                        $respState = strtolower(trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
+                                    }
+                                    ?>
+                                <?php
                                 if (count($states) > 0) {
                                     foreach ($states as $st) {
                                         if (strtolower($st->name) == $respState) {
