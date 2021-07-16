@@ -1,60 +1,81 @@
 <div class="card card-primary div_c14" id="div_c14">
-    <div class="card-header ftest">
+    <div class="card-header">
         <a data-toggle="collapse" href="#collapse14">
             <h4 class="card-title">
                 <?php echo __('lang.accord_14'); ?>
             </h4>
         </a>
     </div>
-    <div id="collapse14" class="panel-collapse collapse" data-parent="#div_c14">
+    <div id="collapse14" class="panel-collapse collapse in show" data-parent="#div_c14">
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table-borderless" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th style="width: 50%">Legal Constraints</th>
-                            <th style="width: 50%">Security Constraints</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                Access Constraints:
+            <div class="row">
+                <div class="col-xl-6">
+                    <h6 class="heading-small text-muted">Legal Constraints</h6>
+                    <div class="pl-lg-3">
+                        <div class="row mb-2">
+                            <div class="col-xl-5">
+                                <label class="form-control-label" for="input-access-cons">
+                                    Access Constraints
+                                </label>
+                            </div>
+                            <div class="col-xl-7">
                                 <?php
-                                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints != ""){
-                                    echo "&nbsp;&nbsp;<p>".$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints."</p>";
+                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints != "") {
+                                    echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints . "</p>";
                                 }
                                 ?>
-                            </td>
-                            <td>
-                                Classification System:
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-xl-5">
+                                <label class="form-control-label" for="input-use-cons">
+                                    Use Constraints
+                                </label>
+                            </div>
+                            <div class="col-xl-7">
                                 <?php
-                                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification != ""){
-                                    echo "&nbsp;&nbsp;<p>".$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification."</p>";
+                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints != "") {
+                                    echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints . "</p>";
                                 }
                                 ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Use Constraints:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <h6 class="heading-small text-muted">Security Constraints
+                    </h6>
+                    <div class="pl-lg-3">
+                        <div class="row mb-2">
+                            <div class="col-xl-5">
+                                <label class="form-control-label" for="input-access-cons">
+                                    Classification System
+                                </label>
+                            </div>
+                            <div class="col-xl-7">
                                 <?php
-                                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints != ""){
-                                    echo "&nbsp;&nbsp;<p>".$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints."</p>";
+                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification != "") {
+                                    echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification . "</p>";
                                 }
                                 ?>
-                            </td>
-                            <td>
-                                Reference:
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-xl-5">
+                                <label class="form-control-label" for="input-reference">
+                                    Reference
+                                </label>
+                            </div>
+                            <div class="col-xl-7">
                                 <?php
-                                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != ""){
-                                    echo "&nbsp;&nbsp;<p>".$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference."</p>";
+                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
+                                    echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference . "</p>";
                                 }
                                 ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

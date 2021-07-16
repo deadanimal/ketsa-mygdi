@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('intecxmap/css/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css') }}">
 
 <div class="card card-primary div_c9" id="div_c9">
-    <div class="card-header ftest">
+    <div class="card-header">
         <a data-toggle="collapse" href="#collapse9" class="fixMap">
             <h4 class="card-title">
                 <?php echo __('lang.accord_9'); ?>
@@ -42,12 +42,12 @@
                                     ?>
                                     <div class="input-group-text" id="btnGroupAddon">N<span class="required">*</span></div>
                                     <input type="number" id="nblt" onchange="updateLayer()" step="any" class="form-control" placeholder="North Bound Latitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="top" title="North Bound Latitude" value="{{ $north }}" name="c9_north_bound_latitude">
-                                </div>            
+                                </div>
                             </div>
                         </div>
                         <div class="row"><p></p></div>
                         <div class="row">
-                            <div class="col col-lg-10"> 
+                            <div class="col col-lg-10">
                                 <div class="input-group">
                                     <?php
                                     $west = "";
@@ -62,7 +62,7 @@
                         </div>
                         <div class="row"><p></p></div>
                         <div class="row">
-                            <div class="col col-lg-10"> 
+                            <div class="col col-lg-10">
                                 <div class="input-group">
                                     <?php
                                     $south = "";
@@ -72,12 +72,12 @@
                                     ?>
                                     <div class="input-group-text" id="btnGroupAddon">S<span class="required">*</span></div>
                                     <input type="number" id="sblt" onchange="updateLayer()" step="any" class="form-control" placeholder="South Bound Latitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="South Bound Latitude" value="{{ $south }}" name="c9_south_bound_latitude">
-                                </div>            
+                                </div>
                             </div>
                         </div>
                         <div class="row"><p></p></div>
                         <div class="row">
-                            <div class="col col-lg-10"> 
+                            <div class="col col-lg-10">
                                 <div class="input-group">
                                     <?php
                                     $east = "";
@@ -87,11 +87,11 @@
                                     ?>
                                     <div class="input-group-text" id="btnGroupAddon">E<span class="required">*</span></div>
                                     <input type="number" id="eblg" onchange="updateLayer()"  step="any" class="form-control" placeholder="East Bound Longitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="East Bound Longitude" value="{{ $east }}" name="c9_east_bound_longitude">
-                                </div>            
+                                </div>
                             </div>
                         </div>
                         <div class="row"><p></p></div>
-                        <div class="row"></div> 
+                        <div class="row"></div>
                     </form>
                 </div>
             </div>

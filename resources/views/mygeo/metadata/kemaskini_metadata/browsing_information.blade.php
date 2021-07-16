@@ -1,98 +1,113 @@
-<div class="card card-primary div_c10" id="div_c10">
-    <div class="card-header ftest">
+<div class="card card-primary mb-4 div_c10" id="div_c10">
+    <div class="card-header">
         <a data-toggle="collapse" href="#collapse10">
             <h4 class="card-title">
                 <?php echo __('lang.accord_10'); ?>
             </h4>
         </a>
         @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")
-            <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal10">Catatan</button>
+        <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal10">Catatan</button>
         @elseif(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
-            <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal10">Catatan</button>
+        <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal10">Catatan</button>
         @endif
     </div>
     <div id="collapse10" class="panel-collapse collapse in show" data-parent="#div_c10">
         <div class="card-body">
-            <div class="form-group row">
-                <b>Browsing Graphic</b>
-                <table style="width:100%;">
-                    <tr>
-                        <td>File Name:</td>
-                        <td>
-                            <?php
-                            $fileName = "";
-                            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString != ""){
-                                $fileName = $metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString;
-                            }
-                            ?>
-                            <input type="text" name="c10_file_name" id="c10_file_name" class="form-control col-lg-4" value="{{ $fileName }}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>File Type:</td>
-                        <td>
-                            <?php
-                            $fileType = "";
-                            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString != ""){
-                                $fileType = $metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString;
-                            }
-                            ?>
-                            <input type="text" name="c10_file_type" id="c10_file_type" class="form-control col-lg-4" value="{{ $fileType }}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>URL:</td>
-                        <td>
-                            <?php
-                            $url = "";
-                            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString != ""){
-                                $url = $metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString;
-                            }
-                            ?>
-                            <input type="text" name="c10_file_url" id="c10_file_url" class="form-control col-lg-4" value="{{ $url }}">
-                        </td>
-                    </tr>
-                </table>
+            <h2 class="heading-small text-muted">Browsing Graphic</h2>
+            <div class="my-2">
+                <div class="row mb-2">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c10_file_name">
+                            File Name
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        $fileName = "";
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString != "") {
+                            $fileName = $metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString;
+                        }
+                        ?>
+                        <input type="text" name="c10_file_name" id="c10_file_name" class="form-control from-control-sm ml-3" value="{{ $fileName }}">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c10_file_type">
+                            File Type
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        $fileType = "";
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString != "") {
+                            $fileType = $metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString;
+                        }
+                        ?>
+                        <input type="text" name="c10_file_type" id="c10_file_type" class="form-control form-control-sm ml-3" value="{{ $fileType }}">
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c10_file_url">
+                            URL
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        $url = "";
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString != "") {
+                            $url = $metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString;
+                        }
+                        ?>
+                        <input type="text" name="c10_file_url" id="c10_file_url" class="form-control form-control-sm ml-3" value="{{ $url }}">
+                    </div>
+                </div>
             </div>
-            <div class="form-group row">
-                <b>Keyword</b>
-                <table style="width:100%;">
-                    <tr>
-                        <td>Keyword<span class="required">*</span>:</td>
-                        <td>
-                            <?php
-                            $keyword = "";
-                            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString != ""){
-                                $keyword = $metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString;
-                            }
+            <h2 class="heading-small text-muted">Keyword</h2>
+            <div class="my-2">
+                <div class="row mb-2">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c10_file_name">
+                            Keyword<span class="text-warning">*</span>
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-6">
+                        <?php
+                        $keyword = "";
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString != "") {
+                            $keyword = $metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString;
+                        }
+                        ?>
+                        <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ $keyword }}">
+                        @error('c10_keyword')
+                        <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <?php
+                $addKeyword = "";
+                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString != "") {
+                    $addKeyword = $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString;
+                    $addKeyword = explode(',', $addKeyword);
+                    if (count($addKeyword) > 0) {
+                        foreach ($addKeyword as $ak) {
                             ?>
-                            <input type="text" name="c10_keyword" id="c10_keyword" class="form-control col-lg-4" value="{{ $keyword }}">
-                            @error('c10_keyword')
-                                <div style="color:red;">{{ $message }}</div>
-                            @enderror
-                        </td>
-                    </tr>
-                    
-                    <?php
-                    $addKeyword = "";
-                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString != ""){
-                        $addKeyword = $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString;
-                        $addKeyword = explode(',',$addKeyword);
-                        if(count($addKeyword) > 0){
-                            foreach($addKeyword as $ak){
-                                ?>
-                                <tr>
-                                    <td>Additional Keyword:</td>
-                                    <td>
-                                        <input type="text" name="c10_additional_keyword[]" class="form-control col-lg-4" value="{{ $ak }}">
-                                    </td>
-                                </tr>
-                                <?php
-                            }
+                            <div class="row mb-2">
+                                <div class="col-3 pl-5">
+                                    <label class="form-control-label mr-4" for="c10_file_type">
+                                        Additional Keyword
+                                    </label><label class="float-right">:</label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ $ak }}">
+                                </div>
+                            </div>
+                <?php
                         }
                     }
-                    ?>
-                </table>
+                }
+                ?>
             </div>
         </div>
     </div>

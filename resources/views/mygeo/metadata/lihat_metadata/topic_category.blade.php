@@ -1,5 +1,5 @@
 <div class="card card-primary div_c3" id="div_c3">
-    <div class="card-header ftest">
+    <div class="card-header">
         <a data-toggle="collapse" href="#collapse3">
             <h4 class="card-title">
                 <?php echo __('lang.accord_3'); ?>
