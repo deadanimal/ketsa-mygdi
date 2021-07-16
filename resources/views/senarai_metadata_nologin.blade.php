@@ -72,15 +72,16 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Jenis Maklumat Kandungan (Content Type)</label>
                                             <select name="content_type" id="content_type" class="form-control form-control-sm" autofocus>
-                                                <option selected disabled>Pilih</option>
+                                                <option selected disabled>Select Content</option>
                                                 <option value="Application">Application</option>
-                                                <option value="Document">Document</option>
-                                                <option value="GIS Activity/Project">GIS Activity/Project</option>
-                                                <option value="Map">Map</option>
-                                                <option value="Raster Data">Raster Data</option>
-                                                <option value="Services">Services</option>
-                                                <option value="Software">Software</option>
-                                                <option value="Vector Data">Vector Data</option>
+                                                <option value="Clearing House">Clearing House</option>
+                                                <option value="Downloadable Data">Downloadable Data</option>
+                                                <option value="Geographic Activities">Geographic Activities</option>
+                                                <option value="Geographic Services">Geographic Services</option>
+                                                <option value="Map File">Map File</option>
+                                                <option value="Offline Data">Offline Data</option>
+                                                <option value="Static Map Images">Static Map Images</option>
+                                                <option value="Other Documents">Other Documents</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -136,68 +137,6 @@
                                 <h3 class="heading text-muted text-center mb-0">Senarai Metadata</h3>
                                 <!-- <button type="button" class="btn btn-default float-right">Kemas Kini</button> -->
                             </div>
-                            <!-- <div class="card-body">
-                                <?php ?>
-                                <table id="table_metadatas" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama Metadata</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <div id="accordion">
-                                            <?php
-                                            $bil = 1;
-                                            if (count($metadatas) > 0) {
-                                                foreach ($metadatas as $key => $val) {
-                                                    ?>
-                                                    <tr>
-                                                        <td style="padding: unset;">
-                                                            <?php //=== collapse1 =============================================================
-                                                                    ?>
-                                                            <div class="card0 card-primary0" id="divParentCollapse{{ $bil }}">
-                                                                <div class="card-header0 ftest0">
-                                                                    <a data-toggle="collapse" href="#divCollapse{{ $bil }}">
-                                                                        <?php
-                                                                                if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
-                                                                                    echo strtoupper($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
-                                                                                } else {
-                                                                                    ?>--no title set--<?php
-                                                                                                                }
-                                                                                                                ?>
-                                                                    </a>
-                                                                </div>
-                                                                <div id="divCollapse{{ $bil }}" class="panel-collapse collapse in" data-parent="#divParentCollapse{{ $bil }}">
-                                                                    <div class="card-body">
-                                                                        <?php
-                                                                                $abstract = (isset($val->identificationInfo->MD_DataIdentification->abstract->CharacterString) ? $val->identificationInfo->MD_DataIdentification->abstract->CharacterString : "");
-                                                                                ?>
-                                                                        <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
-                                                                        <form method="post" action="{{ url('/lihat_metadata_nologin') }}" id="formViewMetadata{{ $key }}">
-                                                                            @csrf
-                                                                            <input type="hidden" name="metadata_id" value="{{ $key }}">
-                                                                        </form>
-                                                                        <form method="post" action="{{ url('/lihat_xml_nologin') }}" id="formViewXml{{ $key }}">
-                                                                            @csrf
-                                                                            <input type="hidden" name="metadata_id" value="{{ $key }}">
-                                                                        </form>
-                                                                        <a href="#" class="metadataActionLinks aViewMetadata" onClick="return false;" data-metid="{{$key}}">Metadata Details</a>
-                                                                        <a href="#" class="metadataActionLinks aViewXml" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><?php /* SAMBUNG SINI - continue doing fn to show xml in new tab */ ?>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                            <?php
-                                                    $bil++;
-                                                }
-                                            }
-                                            ?>
-                                        </div>
-                                    </tbody>
-                                </table>
-                            </div> -->
-
                             <div class="card-body">
                                 <div id="accordion">
                                     <?php
@@ -218,20 +157,23 @@
                                                     <div class="card card-primary" id="divParentCollapse{{ $bil }}">
                                                         <div class="card-header cardw">
                                                             <a data-toggle="collapse" href="#divCollapse{{ $bil }}">
-                                                                <?php
-                                                                        if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
-                                                                            echo strtoupper($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
-                                                                        } else {
-                                                                            ?>--no title set--<?php
-                                                                                                        }
-                                                                                                        ?>
+                                                                <?php 
+                                                                if(isset($val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                                                                  echo $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                                                                }else{
+                                                                    ?>--no title set--<?php
+                                                                }
+                                                                ?>
                                                             </a>
                                                         </div>
                                                         <div id="divCollapse{{ $bil }}" class="panel-collapse collapse in" data-parent="#divParentCollapse{{ $bil }}">
                                                             <div class="card-body">
                                                                 <?php
-                                                                        $abstract = (isset($val->identificationInfo->MD_DataIdentification->abstract->CharacterString) ? $val->identificationInfo->MD_DataIdentification->abstract->CharacterString : "");
-                                                                        ?>
+                                                                $abstract = "";
+                                                                if(isset($val->identificationInfo->SV_ServiceIdentification->abstract) && $val->identificationInfo->SV_ServiceIdentification->abstract != ""){
+                                                                    $abstract = trim($val->identificationInfo->SV_ServiceIdentification->abstract);
+                                                                }
+                                                                ?>
                                                                 <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
                                                                 <form method="post" action="{{ url('/lihat_metadata_nologin') }}" id="formViewMetadata{{ $key }}">
                                                                     @csrf
@@ -241,8 +183,12 @@
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
                                                                 </form>
-                                                                <a href="#" class="metadataActionLinks aViewMetadata" onClick="return false;" data-metid="{{$key}}">Metadata Details</a>
-                                                                <a href="#" class="metadataActionLinks aViewXml" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><?php /* SAMBUNG SINI - continue doing fn to show xml in new tab */ ?>
+                                                                <a href="#" class="metadataActionLinks aViewMetadata" onClick="return false;" data-metid="{{$key}}">Metadata Details</a><br>
+                                                                <a href="#" class="metadataActionLinks aViewXml" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><br>
+                                                                <?php
+                                                                $url = (isset($val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) ? $val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString : "");
+                                                                ?>
+                                                                <a href="#" class="metadataActionLinks aViewMap" onClick="return false;" data-metid="{{$key}}" data-toggle="modal" data-target="#modal-showmap" data-mapurl="{{ $url }}" data-backdrop="false">Show map</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -265,6 +211,35 @@
             </div>
         </div>
     </div>
+    
+    <!--===== MODALS show map =====-->
+    <div class="modal fade" id="modal-showmap">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <?php
+
+                                ?>
+                                <iframe id="mapiframe" src="" height="425px" width="100%" title="ArcGIS REST Services">
+    </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between1">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>  
     @include('modal_carian_tambahan')
     <div id="preloader"></div>
 </section>
@@ -314,6 +289,11 @@
     $(document).on("click", ".aViewXml", function() {
         var metid = $(this).data('metid');
         $("#formViewXml" + metid).submit();
+    });
+    $(document).on("click", ".aViewMap", function () {
+        var mapurl = $(this).data('mapurl');
+        $('#mapiframe').attr('src', 'http://localhost:8888/ketsa-mygdi/public/intecxmap/search/view-map-service.html?url='+mapurl);
+        $('#modal-showmap').modal('show');
     });
 
     $(document).on("click", ".btn_cari_submit", function() {

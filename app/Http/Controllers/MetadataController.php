@@ -59,7 +59,7 @@ class MetadataController extends Controller {
         }elseif(auth::user()->hasRole(['Pengesah Metadata'])){
             //see all metadatas with same agensi_organisasi and bahagian
             $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . auth::user()->agensi_organisasi . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%')->orderBy('id', 'DESC')->get()->all();
-        }elseif(auth::user()->hasRole(['Pentadbir Metadata','Super Admin'])){
+        }elseif(auth::user()->hasRole(['Pentadbir Aplikasi','Pentadbir Metadata','Super Admin'])){
             //see all metadatas regardless
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
         }
@@ -159,10 +159,10 @@ class MetadataController extends Controller {
             }
         }
         if(isset($request->tarikh_mula)){
-            $query = $query->where('date_created', '>=', '%' . date('Y-m-d',strtotime($request->tarikh_mula)) . '%');
+            $query = $query->where('createdate', '>=', date('Y-m-d',strtotime($request->tarikh_mula)));
         }
         if(isset($request->tarikh_tamat)){
-            $query = $query->where('date_created', '<=', '%' . date('Y-m-d',strtotime($request->tarikh_tamat)) . '%');
+            $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
         }
         $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
         
@@ -290,27 +290,38 @@ class MetadataController extends Controller {
     }
 
     public function show_nologin(Request $request) {
-//        $vars = [];
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $request->metadata_id)->get()->first();
+
         $ftestxml2 = <<<XML
                 $metadataSearched->data
                 XML;
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+        $ftestxml2 = str_replace("srv:", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-        $metadata = simplexml_load_string($ftestxml2);
-        $metadata_id = $metadataSearched->id;
-//        dd($metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString.' ');
-
-        $metadata = $metadata;
-        $metadata_id = $metadata_id;
+        $metadataxml = simplexml_load_string($ftestxml2);
+        
         $categories = MCategory::all();
         $contacts = User::all();
         $states = States::where(['country' => 1])->get()->all();
-        $countries = Countries::where(['id' => 1])->get()->all();
-        $refSysIds = ReferenceSystemIdentifier::all();
+        $countryId = "";
+        if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString != ""){
+            $countryId = trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString);
+        }
+        if($countryId != ""){
+            $countries = Countries::where(['id' => $countryId])->get()->first();
+        }else{
+            $countries = Countries::where(['id' => 1])->get()->first();
+        }
+        
+        if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace != ""){
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace;
+            $refSys = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+        }else{
+            $refSys = [];
+        }
 
-        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSysIds', 'metadata', 'metadata_id'));
+        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'));
     }
 
     public function show_xml_nologin(Request $request) {
