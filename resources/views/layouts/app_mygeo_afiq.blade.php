@@ -457,7 +457,19 @@
                                                             ?>
                                                         </span>
                                                     </div>
-                                                    <span _ngcontent-oai-c451="" class="avatar avatar-md rounded-circle ml-3"><img _ngcontent-oai-c451="" alt="Image placeholder" src="./afiqadminmygeo_files/avatar.png"></span>
+                                                    <span _ngcontent-oai-c451="" class="avatar avatar-md rounded-circle ml-3">
+                                                        <?php
+                                                        if(auth::user()->gambar_profil != ""){
+                                                            ?>
+                                                            <img alt="Image placeholder" src="{{ asset('storage/'.auth::user()->gambar_profil) }}">    
+                                                            <?php
+                                                        }else{
+                                                            ?>
+                                                            <img alt="Image placeholder" src="./afiqadminmygeo_files/avatar.png">    
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </span>
                                                 </div>
                                             </a>
                                             <!--container-->
