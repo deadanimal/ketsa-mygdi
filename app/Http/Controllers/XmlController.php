@@ -82,8 +82,8 @@ class XmlController extends Controller {
                         <gmd:MD_ReferenceSystem>
                             <gmd:referenceSystemIdentifier>
                                 <gmd:RS_Identifier>
-                                    <gmd:codeSpace>$request->c13_ref_sys_identify
-                                        <gco:CharacterString></gco:CharacterString>
+                                    <gmd:codeSpace>
+                                        <gco:CharacterString>$request->c13_ref_sys_identify</gco:CharacterString>
                                     </gmd:codeSpace>
                                 </gmd:RS_Identifier>
                             </gmd:referenceSystemIdentifier>

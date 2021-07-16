@@ -253,69 +253,70 @@
             <div class="div_subkategori">
                 <h2 class="subKategoriTitle" style="display:none;">Sub-Kategori:</h2>
                 <div class="div_sub Aeronautical" style="display:none;">
-                    <p>1) Ruang Udara (Air Space - AA)</p>
-                    <p>2) Lapangan Terbang (Aerodrome - AB)</p>
+                    <p class="subkategori" data-id="General">1) Ruang Udara (Air Space - AA)</p>
+                    <p class="subkategori">2) Lapangan Terbang (Aerodrome - AB)</p>
+                    <p class="subkategori">3) Kediaman (Residential - BA)</p>
                 </div>
                 <div class="div_sub Built_Environment" style="display:none;">
-                    <p>1)  Kediaman (Residential - BA)</p>
-                    <p>2)  Komersial (Commercial - BB)</p>
-                    <p>3)  Industri (Industrial - BC)</p>
-                    <p>4)  Pendidikan (Educational - BE)</p>
-                    <p>5)  Keagamaan (Religious - BF)</p>
-                    <p>6)  Kemudahan Rekreasi (Recreational - BG)</p>
-                    <p>7)  Perkuburan (Cemetery - BH)</p>
-                    <p>8)  Struktur Kekal (Built-Up - BJ)</p>
+                    <p class="subkategori">1)  Kediaman (Residential - BA)</p>
+                    <p class="subkategori">2)  Komersial (Commercial - BB)</p>
+                    <p class="subkategori">3)  Industri (Industrial - BC)</p>
+                    <p class="subkategori">4)  Pendidikan (Educational - BE)</p>
+                    <p class="subkategori">5)  Keagamaan (Religious - BF)</p>
+                    <p class="subkategori">6)  Kemudahan Rekreasi (Recreational - BG)</p>
+                    <p class="subkategori">7)  Perkuburan (Cemetery - BH)</p>
+                    <p class="subkategori">8)  Struktur Kekal (Built-Up - BJ)</p>
                 </div>
                 <div class="div_sub Demarcation" style="display:none;">
-                    <p>1)  (Topographic - [Boundaries/Limites/Zones] - DA)</p>
-                    <p>2)  Maritim (Maritime - DB)</p>
-                    <p>3)  Kadaster (Cadastral - DC)</p>
-                    <p>4)  Guna Tanah Perancangan (Planning Land Use - DD)</p>
+                    <p class="subkategori">1)  (Topographic - [Boundaries/Limites/Zones] - DA)</p>
+                    <p class="subkategori">2)  Maritim (Maritime - DB)</p>
+                    <p class="subkategori">3)  Kadaster (Cadastral - DC)</p>
+                    <p class="subkategori">4)  Guna Tanah Perancangan (Planning Land Use - DD)</p>
                 </div>
                 <div class="div_sub Geology" style="display:none;">
-                    <p>1)  Jenis Batuan (Geolithology - GA)</p>
-                    <p>2)  Mineral (Minerals - GB)</p>
-                    <p>3)  Penjelajahan (Exploration - GE)</p>
-                    <p>4)  Fitur Geologi (Geological Features - GF)</p>
-                    <p>5)  Geosains (Geoscience - GG)</p>
+                    <p class="subkategori">1)  Jenis Batuan (Geolithology - GA)</p>
+                    <p class="subkategori">2)  Mineral (Minerals - GB)</p>
+                    <p class="subkategori">3)  Penjelajahan (Exploration - GE)</p>
+                    <p class="subkategori">4)  Fitur Geologi (Geological Features - GF)</p>
+                    <p class="subkategori">5)  Geosains (Geoscience - GG)</p>
                 </div>
                 <div class="div_sub Hydrography" style="display:none;">
-                    <p>1)  Hidrografi Pinggir Laut (Coastal Hydrography – HA)</p>
-                    <p>2)  Struktur Garis Pesisir Pelabuhan (Shoreline Structure - HB)</p>
-                    <p>3)  Pelabuhan (Ports and Harbours - HD)</p>
-                    <p>4)  Bantuan Navigasi (Navigation Aids - HE)</p>
-                    <p>5)  Makumat Kedalaman (Depth Information - HG)</p>
-                    <p>6)  Air Daratan (Inland Water - HH)</p>
-                    <p>7)  Pulau (Island - HL)</p>
+                    <p class="subkategori">1)  Hidrografi Pinggir Laut (Coastal Hydrography – HA)</p>
+                    <p class="subkategori">2)  Struktur Garis Pesisir Pelabuhan (Shoreline Structure - HB)</p>
+                    <p class="subkategori">3)  Pelabuhan (Ports and Harbours - HD)</p>
+                    <p class="subkategori">4)  Bantuan Navigasi (Navigation Aids - HE)</p>
+                    <p class="subkategori">5)  Makumat Kedalaman (Depth Information - HG)</p>
+                    <p class="subkategori">6)  Air Daratan (Inland Water - HH)</p>
+                    <p class="subkategori">7)  Pulau (Island - HL)</p>
                 </div>
                 <div class="div_sub Hypsography" style="display:none;">
-                    <p>1)  Gambaran Relief (Relief Portrayal - RA)</p>
+                    <p class="subkategori">1)  Gambaran Relief (Relief Portrayal - RA)</p>
                 </div>
                 <div class="div_sub Soil" style="display:none;">
-                    <p>1)  (Soil Classification)</p>
+                    <p class="subkategori">1)  (Soil Classification)</p>
                 </div>
                 <div class="div_sub Transportation" style="display:none;">
-                    <p>1)  (Land Transportation - TA</p>
+                    <p class="subkategori">1)  (Land Transportation - TA</p>
                 </div>
                 <div class="div_sub Utility" style="display:none;">
-                    <p>1)  Elektrik (Electricity - UA)</p>
-                    <p>2)  Bekalan Air (Water Supply - UC)</p>
-                    <p>3)  Pembetungan (Sewerage - UF)</p>
-                    <p>4)  Pengurusan Sisa Pepejal (Waste Management – UG)</p>
+                    <p class="subkategori">1)  Elektrik (Electricity - UA)</p>
+                    <p class="subkategori">2)  Bekalan Air (Water Supply - UC)</p>
+                    <p class="subkategori">3)  Pembetungan (Sewerage - UF)</p>
+                    <p class="subkategori">4)  Pengurusan Sisa Pepejal (Waste Management – UG)</p>
                 </div>
                 <div class="div_sub Vegetation" style="display:none;">
-                    <p>1)  Pertanian (Agriculture - VA)</p>
-                    <p>2)  Perhutanan (Forest - VB)</p>
-                    <p>3)  Pelbagai (Miscellaneous - VC)</p>
+                    <p class="subkategori">1)  Pertanian (Agriculture - VA)</p>
+                    <p class="subkategori">2)  Perhutanan (Forest - VB)</p>
+                    <p class="subkategori">3)  Pelbagai (Miscellaneous - VC)</p>
                 </div>
                 <div class="div_sub Special_Use" style="display:none;">
-                    <p>1)  Analisis Muka Bumi (Terrain Analysis Dataset - XA)</p>
-                    <p>2)  Meteorologi (Meteorological Dataset - XB)</p>
-                    <p>3)  Data Bergrid dan Imej (Imagery & Gridded Dataset – XC)</p>
+                    <p class="subkategori">1)  Analisis Muka Bumi (Terrain Analysis Dataset - XA)</p>
+                    <p class="subkategori">2)  Meteorologi (Meteorological Dataset - XB)</p>
+                    <p class="subkategori">3)  Data Bergrid dan Imej (Imagery & Gridded Dataset – XC)</p>
                 </div>
                 <div class="div_sub General" style="display:none;">
-                    <p>1)  Titik Kawal (Control Point - ZA)</p>
-                    <p>2)  Label Nama Geografi (Label of Geography Name - ZB)</p>
+                    <p class="subkategori">1)  Titik Kawal (Control Point - ZA)</p>
+                    <p class="subkategori">2)  Label Nama Geografi (Label of Geography Name - ZB)</p>
                 </div>
             </div>
         </div>
@@ -333,6 +334,13 @@
             $(".div_sub").hide();
             $("." + divname).show();
             $(".subKategoriTitle").show();
+        });
+        
+        $(document).on("click", ".subkategori, function () {
+//            var divname = $(this).data('id');
+//            $(".div_sub").hide();
+//            $("." + divname).show();
+//            $(".subKategoriTitle").show();
         });
     });
 </script>

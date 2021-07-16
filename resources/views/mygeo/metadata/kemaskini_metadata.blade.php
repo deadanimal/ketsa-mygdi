@@ -123,9 +123,12 @@
                     <div class="card">
                         <form method="post" class="form-horizontal" id="form_metadata" action="{{url('simpan_kemaskini_metadata')}}" enctype="multipart/form-data">
                             @csrf
+                            @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")
+                                <input type="hidden" name="newStatus" value="0"> 
+                            @endif
                             <input type="hidden" name="metadata_id" value="{{ $metadataSearched->id }}">
                             @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata','Super Admin']))
-                            @include('mygeo.metadata.modal_metadata.modal_catatan')
+                                @include('mygeo.metadata.modal_metadata.modal_catatan')
                             @endif
                             <div class="card-body">
                                 <!-- <div class="form-group row"> -->

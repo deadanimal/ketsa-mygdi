@@ -5,7 +5,9 @@
                 IDENTIFICATION INFORMATION
             </a>
         </h4>
-        @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
+        @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")
+        <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal2">Catatan</button>
+        @elseif(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
         <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal2">Catatan</button>
         @endif
     </div>

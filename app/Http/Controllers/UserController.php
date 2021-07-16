@@ -277,4 +277,9 @@ class UserController extends Controller {
         });
         exit();
     }
+    
+    public function get_agensiOrganisasi(){
+        echo json_encode(AgensiOrganisasi::get()); 
+        exit;
+    }
 }

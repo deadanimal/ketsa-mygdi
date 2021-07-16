@@ -229,9 +229,9 @@ class MetadataController extends Controller {
         }else{
             $countries = Countries::where(['id' => 1])->get()->first();
         }
-        
-        if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace != ""){
-            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace;
+
+        if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != ""){
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
             $refSys = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
         }else{
             $refSys = [];
@@ -653,6 +653,10 @@ class MetadataController extends Controller {
                 $mg->catatan13 = $request->catatan13;
                 $mg->catatan14 = $request->catatan14;
                 $mg->catatan15 = $request->catatan15;
+            }
+            
+            if(isset($request->newStatus)){
+                $mg->disahkan = $request->newStatus;
             }
             
             if(isset($request->btn_save)){

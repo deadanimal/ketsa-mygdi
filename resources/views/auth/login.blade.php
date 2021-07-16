@@ -75,7 +75,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id='formRegisterUser'>
                             @csrf
                             <div class="modal-body">
                                 <div class="container-fluid">
@@ -209,7 +209,8 @@
                                                     <label class="form-control-label mr-4" for="input-agensi">Agensi/Organisasi/Institusi</label>
                                                 </div>
                                                 <div class="col-8">
-                                                    <input class="form-control form-control-sm ml-3" placeholder="Nama Institusi" type="text" name="agensi_organisasi" />
+                                                    <select name="agensi_organisasi" id="agensi_organisasi" class="form-control form-control-sm ml-3"></select>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="row mb-2 divInstitusi">
@@ -370,7 +371,7 @@
                             <div class="modal-footer justify-content-between1">
                                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>-->
                                 <button type="button" class="btn btn-dark btn_isi_borang" id="btn_isi_borang">Isi Borang</button>
-                                <button type="submit" class="btn btn-default" id="btn_daftar">Daftar</button>
+                                <button type="button" class="btn btn-default" id="btn_daftar">Daftar</button>
                             </div>
                         </form>
                     </div>
@@ -652,6 +653,15 @@
         $('#btn_daftar').show();
         $(this).hide();
     });
+    
+    $(document).on("click","#btn_daftar",function(){
+        var nric = $("#input-nric").val();
+        if(nric.length < 12){
+            alert("NRIC number incomplete");
+        }else{
+            $("#formRegisterUser").submit();
+        }
+    });
 
     $(document).ready(function() {      
         $("#input-nric").inputFilter(function(value) {
@@ -669,6 +679,20 @@
         }).done(function(data) {
             data.forEach(function(the_var) {
                 $("#peranan").append("<option value='" + the_var.id + "'>" + the_var.name + "</option>");
+            });
+        });
+        
+        //ajax get agensi/organisasi
+        $.ajax({
+            method: "POST",
+            url: "get_agensiOrganisasi",
+            data: {
+                "_token": "{{ csrf_token() }}"
+            },
+            dataType: "json",
+        }).done(function(data) {
+            data.forEach(function(the_var) {
+                $("#agensi_organisasi").append("<option value='" + the_var.name + "'>" + the_var.name + "</option>");
             });
         });
 

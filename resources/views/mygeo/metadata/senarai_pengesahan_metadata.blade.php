@@ -85,14 +85,12 @@
                                                        ?>
                                                 </td>
                                                 <td>
-                                                    <form method="post" action="{{ url('/kemaskini_metadata') }}">
-                                                        @csrf
-                                                        <input type="hidden" name="metadata_type" value="not_draf">
-                                                        <input type="hidden" name="metadata_id" value="{{ $key }}">
-                                                        <button type="submit" class="btn btn-primary float-left" style="margin-right:4px;">Semak</button>
-                                                    </form>
-                                                    <button type="button" class="btn btn-danger btn_tolak float-left" data-metadataid="{{ $key }}">Tolak</button>
-                                                    <button type="button" class="btn btn-success btn_sahkan float-left" data-metadataid="{{ $key }}">Sahkan</button>
+                                                    <?php //sahkan(kemaskini)======================================= ?>
+                                                    <a href="{{ url('/kemaskini_metadata/'.$key) }}">
+                                                        <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:3px;">Semak</button>
+                                                    </a>
+                                                    <button type="button" class="btn btn-danger btn_tolak btn-sm" data-metadataid="{{ $key }}">Tolak</button>
+                                                    <button type="button" class="btn btn-success btn_sahkan btn-sm" data-metadataid="{{ $key }}">Sahkan</button>
                                                 </td>
                                             </tr>
                                     <?php

@@ -159,6 +159,7 @@ Route::get('/send-mail', function () {
 });
 
 Route::post('get_roles','RoleController@get_roles');
+Route::post('get_agensiOrganisasi','UserController@get_agensiOrganisasi');
 Route::post('get_user_details','UserController@get_user_details');
 Route::post('user_sahkan','UserController@user_sahkan');
 Route::post('user_pengesahan_ditolak','UserController@user_pengesahan_ditolak');
