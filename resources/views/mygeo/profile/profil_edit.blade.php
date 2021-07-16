@@ -43,7 +43,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+<<<<<<< HEAD
                         <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil">
+=======
+                        <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil" enctype="multipart/form-data">
+>>>>>>> 4e6bda17b20ac0c1101a8728e1bd36c8fa1aae55
                             @csrf
                             <div class="card-header">
                                 <div class="row align-items-center">
@@ -205,5 +209,4 @@
         </div>
     </section>
 </div>
-
 @stop

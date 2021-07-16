@@ -146,7 +146,27 @@ class MetadataController extends Controller {
     }
 
     public function search_nologin(Request $request) {
-        $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . $request->carian . '%')->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
+        $query = MetadataGeo::on('pgsql2');
+        if(isset($request->carian)){
+            $query = $query->where('data', 'ilike', '%' . $request->carian . '%');
+        }
+        if(isset($request->content_type)){
+            $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
+        }
+        if(isset($request->topic_category)){
+            foreach($request->topic_category as $tc){                
+                $query = $query->where('data', 'ilike', '%' . $tc . '%');
+            }
+        }
+        if(isset($request->tarikh_mula)){
+            $query = $query->where('date_created', '>=', '%' . date('Y-m-d',strtotime($request->tarikh_mula)) . '%');
+        }
+        if(isset($request->tarikh_tamat)){
+            $query = $query->where('date_created', '<=', '%' . date('Y-m-d',strtotime($request->tarikh_tamat)) . '%');
+        }
+        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
+        
+        
         $metadatas = [];
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML

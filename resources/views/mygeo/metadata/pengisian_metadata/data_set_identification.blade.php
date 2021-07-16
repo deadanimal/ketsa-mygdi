@@ -57,8 +57,8 @@
                     <div class="col-xl-2">
                         <select class="form-control form-control-sm" name="c12_language" id="c12_language">
                             <option selected disabled hidden> Language </option>
-                            <option value="English" {{(old('c12_language') == 'english' ? "selected":"")}}>English</option>
-                            <option value="Bahasa Malaysia" {{(old('c12_language') == 'bahasa_malaysia' ? "selected":"")}}>Bahasa Malaysia</option>
+                            <option value="English" {{(old('c12_language') == 'English' ? "selected":"")}}>English</option>
+                            <option value="Bahasa Malaysia" {{(old('c12_language') == 'Bahasa Malaysia' ? "selected":"")}}>Bahasa Malaysia</option>
                         </select>
                     </div>
                 </div>

@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Celcius" name="c8_file_name" id="c8_avg_air_temp" value="{{old('c8_avg_air_temp')}}">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Celcius" name="c8_avg_air_temp" id="c8_avg_air_temp" value="{{old('c8_avg_air_temp')}}">
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Humidity" name="c8_file_name" id="c8_relative_humid" value="{{old('c8_relative_humid')}}">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Humidity" name="c8_relative_humid" id="c8_relative_humid" value="{{old('c8_relative_humid')}}">
                                 </div>
                             </div>
                             <div class="row mb">
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_file_name" id="c8_identifier" value="{{old('c8_identifier')}}">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_identifier" id="c8_identifier" value="{{old('c8_identifier')}}">
                                     @error('c8_identifier')
                                     <div class="text-error">{{ $message }}</div>
                                     @enderror

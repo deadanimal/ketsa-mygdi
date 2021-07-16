@@ -11,45 +11,45 @@
             <div class="row pl-lg-4 mt-4">
                 <div class="form-group col-4">
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Biota" {{ (null !== old('topic_category') && in_array('boundaries',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Biota" {{ (null !== old('topic_category') && in_array('Biota',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_1">Biota</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_2" name="topic_category[]" value="Boundaries" {{ (null !== old('topic_category') && in_array('boundaries',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_2" name="topic_category[]" value="Boundaries" {{ (null !== old('topic_category') && in_array('Boundaries',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_2">Boundaries</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_3" name="topic_category[]" value="Climatology Meteorology Atmosphere" {{ (null !== old('topic_category') && in_array('climatology meteorology atmosphere',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_3" name="topic_category[]" value="Climatology Meteorology Atmosphere" {{ (null !== old('topic_category') && in_array('Climatology Meteorology Atmosphere',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_3">Climatology Meteorology Atmosphere</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_4" name="topic_category[]" value="Disaster" {{ (null !== old('topic_category') && in_array('disaster',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_4" name="topic_category[]" value="Disaster" {{ (null !== old('topic_category') && in_array('Disaster',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_4">Disaster</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_5" name="topic_category[]" value="Economy" {{ (null !== old('topic_category') && in_array('economy',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_5" name="topic_category[]" value="Economy" {{ (null !== old('topic_category') && in_array('Economy',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_5">Economy</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_6" name="topic_category[]" value="Elevation" {{ (null !== old('topic_category') && in_array('elevation',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_6" name="topic_category[]" value="Elevation" {{ (null !== old('topic_category') && in_array('Elevation',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_6">Elevation</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_7" name="topic_category[]" value="Environment" {{ (null !== old('topic_category') && in_array('environment',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_7" name="topic_category[]" value="Environment" {{ (null !== old('topic_category') && in_array('Environment',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_7">Environment</label>
                     </div>
                 </div>
                 <div class="form-group col-4">
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_8" name="topic_category[]" value="Farming" {{ (null !== old('topic_category') && in_array('farming',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_8" name="topic_category[]" value="Farming" {{ (null !== old('topic_category') && in_array('Farming',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_8">Farming</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_9" name="topic_category[]" value="Geoscientific Information" {{ (null !== old('topic_category') && in_array('geoscientific information',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_9" name="topic_category[]" value="Geoscientific Information" {{ (null !== old('topic_category') && in_array('Geoscientific Information',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_9">Geoscientific Information</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_10" name="topic_category[]" value="Health" {{ (null !== old('topic_category') && in_array('health',old('topic_category')) ? "checked":"") }}>
+                        <input type="checkbox" class="form-check-input" id="c3_10" name="topic_category[]" value="Health" {{ (null !== old('topic_category') && in_array('Health',old('topic_category')) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_10">Health</label>
                     </div>
                     <div class="form-check mb-2">

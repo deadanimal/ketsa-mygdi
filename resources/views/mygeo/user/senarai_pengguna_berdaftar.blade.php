@@ -32,9 +32,11 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title" style="font-size: 2rem;">Senarai pengguna berdaftar</h3>
-                <a href="{{ url('pemindahan_akaun') }}">
-                    <button type="button" class="btn btn-default float-right">Pemindahan Akaun</button>
-                </a>
+                @if(auth::user()->hasRole(['Pentadbir Aplikasi']))
+                    <a href="{{ url('pemindahan_akaun') }}">
+                        <button type="button" class="btn btn-default float-right">Pemindahan Akaun</button>
+                    </a>
+                @endif
               </div>
               <div class="card-body">
                 <table id="table_newUsers" class="table table-bordered table-striped">

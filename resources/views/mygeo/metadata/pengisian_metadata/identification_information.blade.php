@@ -110,18 +110,18 @@
                         <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
                         <div class="form-inline row ml-3">
                             <label class="form-control-label mr-4" for="c2_contact_state">State :</label>
-                            <select name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm" readonly>
+                            <select name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm">
                                 <option selected disabled>Select State</option>
                                 <?php
                                 if (count($states) > 0) {
                                     foreach ($states as $st) {
                                         ?><option value="<?php echo $st->id; ?>"><?php echo $st->name; ?></option><?php
-                                                                                                                                                            }
-                                                                                                                                                        }
+                                    }
+                                }
                                                                                                                                                         ?>
                             </select>
                             <label class="form-control-label mx-3" for="c2_contact_country">Country :</label>
-                            <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm ml-4" readonly>
+                            <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm ml-4">
                                 <option selected disabled>Select Country</option>
                                 <?php
                                 if (count($countries) > 0) {
