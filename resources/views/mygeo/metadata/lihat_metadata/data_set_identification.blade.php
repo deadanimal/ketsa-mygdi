@@ -12,7 +12,7 @@
                 <div class="row mb-4">
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-dataset-type">
-                            Data Set Type<span class="text-warning">*</span>
+                            Data Set Type
                         </label>
                     </div>
                     <div class="col-xl-3">

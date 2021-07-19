@@ -16,7 +16,7 @@
                         </label>
                     </div>
                     <div class="col-xl-3">
-                        <select class="form-control form-control-sm" id="c12_dataset_type">
+                        <select class="form-control form-control-sm" id="c12_dataset_type" name="c12_dataset_type">
                             <option selected disabled hidden> Select Type </option>
                             <option value="Grid" {{(old('c12_dataset_type') == 'grid' ? "selected":"")}}>Grid</option>
                             <option value="Stereo Model" {{(old('c12_dataset_type') == 'stereo_model' ? "selected":"")}}>Stereo Model</option>

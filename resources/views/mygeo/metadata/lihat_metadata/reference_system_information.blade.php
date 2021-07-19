@@ -27,24 +27,24 @@
                     <table>
                         <tr>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_1"><b>Projection:</b>{{$refSys->projection}}</label>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_1"><b>Projection:</b>{{(isset($refSys->projection) ? $refSys->projection:"")}}</label>
                             </td>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_2"><b>Semi Major Axis:</b>{{$refSys->semi_major_axis}}</label>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_2"><b>Semi Major Axis:</b>{{(isset($refSys->semi_major_axis) ? $refSys->semi_major_axis:"")}}</label>
                             </td>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_3"><b>Ellipsoid:</b>{{$refSys->ellipsoid}}</label>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_3"><b>Ellipsoid:</b>{{(isset($refSys->ellipsoid) ? $refSys->ellipsoid:"")}}</label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_4"><b>Axis Units:</b>{{$refSys->axis_units}}</label>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_4"><b>Axis Units:</b>{{(isset($refSys->axis_units) ? $refSys->axis_units:"")}}</label>
                             </td>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_5"><b>Datum:</b>{{$refSys->datum}}</label>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_5"><b>Datum:</b>{{(isset($refSys->datum) ? $refSys->datum:"")}}</label>
                             </td>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_6"><b>Denominator of Flattening Ratio:</b>{{$refSys->denominator_flattening_ratio}}</label>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_6"><b>Denominator of Flattening Ratio:</b>{{(isset($refSys->denominator_flattening_ratio) ? $refSys->denominator_flattening_ratio:"")}}</label>
                             </td>
                         </tr>
                     </table>

@@ -27,12 +27,11 @@
                             foreach ($refSys as $ids) {
                                 if ($ids->id == $refSysSelected->id) {
                                     ?><option value="<?php echo $ids->id; ?>" selected><?php echo $ids->name; ?></option><?php
-                                                                                                                                                                        } else {
-                                                                                                                                                                            ?><option value="<?php echo $ids->id; ?>"><?php echo $ids->name; ?></option><?php
-                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                        ?>
+                                } else {
+                                    ?><option value="<?php echo $ids->id; ?>"><?php echo $ids->name; ?></option><?php
+                                }
+                            }
+                        }                                                                                                                                   ?>
                     </select>
                 </div>
             </div>
