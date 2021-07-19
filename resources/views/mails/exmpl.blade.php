@@ -1,11 +1,2 @@
-@component('mail::message')
-Hello **{{$name}}**,  {{-- use double space for line break --}}
-Thank you for choosing Ftest!  Ftest_Ftest_Ftest
-
-Click below to start working right now
-@component('mail::button', ['url' => $link])
-Go to your inbox
-@endcomponent
-Sincerely,  
-Ftest team.
-@endcomponent
+Hello <strong>{{ $name }}</strong>,
+<p>{{$body}}</p>

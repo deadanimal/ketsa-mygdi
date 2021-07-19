@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
 
 class RegisterController extends Controller
 {
@@ -81,7 +83,6 @@ class RegisterController extends Controller
             // $fileUpload->metadata_id = $metadata->id;
             // $fileUpload->save();
         }
-//        dd($data);exit();
         
         $user = User::create([
             'name' => $data['name'],
@@ -98,6 +99,24 @@ class RegisterController extends Controller
         ]);
         
         $userRole = $user->assignRole($data['peranan']);
+        
+        //send email to person who registered
+        $to_name = $data['name'];
+        $to_email = $data['email'];
+        $data = array('name'=>'Pendaftaran pengguna baru di mygeo-explorer.gov.my', 'body' => 'Pendaftaran berjaya.');
+        Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Pendaftaran berjaya');
+            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
+        });
+        
+        //send email to person who will be approving the newly registered account
+        $to_name = 'Mr Pentadbir Aplikasi';
+        $to_email = 'farhan15959@gmail.com';
+        $data = array('name'=>'Pendaftaran pengguna baru di mygeo-explorer.gov.my', 'body' => 'Pendaftaran baru dikesan.');
+        Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Pendaftaran baru dikesan');
+            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
+        });
 
         return $user;
     }
