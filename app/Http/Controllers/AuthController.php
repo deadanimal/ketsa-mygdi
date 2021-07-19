@@ -23,7 +23,7 @@ class AuthController extends Controller {
 
     public function authenticate(Request $request)
     {
-        // echo "<pre>";
+        // echo "<pre>"; 
         // var_dump($request->email);
         // var_dump($request->password);  $2y$10$ds5kaqrIwRymOP.Fo0s5Feocrp6LE6GSoz91KlPVCjDAVkHdireqm
         // var_dump(Hash::make($request->password));
