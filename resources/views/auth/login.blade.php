@@ -16,7 +16,7 @@
                         <div _ngcontent-lqr-c499="" class="card-body px-lg-5 py-lg-5">
                             <div _ngcontent-lqr-c499="" class="text-muted" style="font-size: 17px;">
                                 <h2 class="mb-0 pb-0 text-muted">Maklumat geospatial kini dihujung jari anda.</h2>
-                                <h2 class="mb-0 pb-0 text-muted">Log Masuk.fartfart</h2>
+                                <h2 class="mb-0 pb-0 text-muted">Log Masuk.</h2>
                                 <br _ngcontent-lqr-c499="">
                             </div>
                             <div _ngcontent-lqr-c499="" class="mb-4">
