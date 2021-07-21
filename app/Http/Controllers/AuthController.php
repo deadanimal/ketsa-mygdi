@@ -33,7 +33,7 @@ class AuthController extends Controller {
             // Authentication passed...
             return redirect()->intended('/landing_mygeo');
         }else{
-            return redirect('/login')->with( ['msg' => 'Akaun anda belum disahkan.'] );
+            return redirect('/login')->with( ['msg' => 'Akaun anda tidak dijumpai atau belum disahkan.'] );
         } 
     } 
 
