@@ -33,7 +33,7 @@ class UserController extends Controller {
             exit();
         }
         
-        $users_all = User::where(['disahkan' => 0])->get();
+        $users_all = User::where(['disahkan' => 0,'deleted'=>'no'])->get();
         $users = [];
         foreach($users_all as $user){
             if($user->hasRole('Penerbit Metadata') || $user->hasRole('Pengesah Metadata')){
@@ -48,7 +48,7 @@ class UserController extends Controller {
             exit();
         }
         
-        $users_all = User::where(['disahkan' => 1])->orderBy('name', 'asc')->get();
+        $users_all = User::where(['disahkan' => 1,'deleted'=>'no'])->orderBy('name', 'asc')->get();
         $users = [];
         foreach($users_all as $user){
             if($user->hasRole('Penerbit Metadata') || $user->hasRole('Pengesah Metadata')){
@@ -214,6 +214,13 @@ class UserController extends Controller {
         exit();
     }
     
+    public function delete_user(Request $request){
+        $user = User::where(["id"=>$request->user_id])->get()->first();
+        $user->deleted = "yes";
+        $user->update();
+        exit();
+    }
+    
     public function pemindahan_akaun(){
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
             exit();
@@ -223,7 +230,7 @@ class UserController extends Controller {
     }
     
     public function getUsersByAgensi(Request $request){
-        $usersByAgensi = User::where('agensi_organisasi',$request->agensi)->get();
+        $usersByAgensi = User::where(['agensi_organisasi'=>$request->agensi,'deleted'=>'no'])->get();
         $usersByPenerbit = '<option selected disabled>Pilih</option>';
         foreach($usersByAgensi as $uba){
             if($uba->hasRole('Penerbit Metadata')){

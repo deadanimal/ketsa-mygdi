@@ -94,6 +94,25 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalChangeStatus">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <button class="btnStatusInactive btnChangeStatusAjax form-control" value="0" data-userid="">Aktif</button>
+                            <button class="btnStatusActive btnChangeStatusAjax form-control" value="1" data-userid="">Tidak Aktif</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main content -->
     <section class="content">
@@ -142,11 +161,13 @@
                                                 }
                                                 ?>
                                             </td>
-                                            <td>{{ ($user->status == "0" ? "Disabled":"Active") }}</td>
+                                            <td>{{ ($user->status == "0" ? "Tidak Aktif":"Aktif") }}</td>
                                             <td>
-                                                <button type="button" data-toggle="modal" data-target="#modal-butiran" class="butiran form-control" data-userid="{{ $user->id }}">Butiran</button>
-                                                <button type="button" class="btnStatus form-control" data-userid="{{ $user->id }}" data-statusid="1">Activate</button>
-                                                <button type="button" class="btnStatus form-control" data-userid="{{ $user->id }}" data-statusid="0">Disable</button>
+                                                <button type="button" data-toggle="modal" data-target="#modal-butiran" data-userid="{{ $user->id }}" class="butiran btn btn-sm btn-primary mr-2"><i class="fas fa-edit"></i></button>
+                                                <br><br>
+                                                <button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-primary mr-2"><i class="fas fa-pencil-alt"></i></button>
+                                                <br><br>
+                                                <button type="button" data-userid="{{ $user->id }}" class="btnDelete btn btn-sm btn-primary mr-2"><i class="fas fa-times"></i></button>
                                             </td>
                                         </tr>
                                         <?php
@@ -210,28 +231,58 @@
 
         $(document).on("click", ".butiran", function () {
             // ajax get user details
-            $user_id = $(this).data('userid');
+            var user_id = $(this).data('userid');
             $.ajax({
                 method: "POST",
                 url: "get_user_details",
-                data: {"_token": "{{ csrf_token() }}", "user_id": $user_id},
-            })
-                    .done(function (response) {
-                        $('.modal_user_detail').html(response);
-                    });
+                data: {"_token": "{{ csrf_token() }}", "user_id": user_id},
+            }).done(function (response) {
+                $('.modal_user_detail').html(response);
+            });
         });
-
-        $(document).on("click", ".btnStatus", function () {
-            $user_id = $(this).data('userid');
-            $status_id = $(this).data('statusid');
+        
+        $(document).on("click", ".btnChangeStatus", function () {
+            var userid = $(this).data('userid');
+            var statusid = $(this).data('statusid');
+            
+            if(statusid == "0"){
+                $('.btnStatusActive').data('userid',userid);
+                $('.btnStatusActive').show();
+                $('.btnStatusInactive').hide();
+            }else if(statusid == "1"){
+                $('.btnStatusInactive').data('userid',userid);
+                $('.btnStatusInactive').show();
+                $('.btnStatusActive').hide();
+            }
+        });
+        
+        $(document).on("click", ".btnChangeStatusAjax", function () {
+            var userid = $(this).data('userid');
+            var statusid = $(this).val();
+            
             $.ajax({
                 method: "POST",
                 url: "change_user_status",
-                data: {"_token": "{{ csrf_token() }}", "user_id": $user_id, "status_id": $status_id},
-            })
-                    .done(function (response) {
-                        location.reload();
-                    });
+                data: {"_token": "{{ csrf_token() }}", "user_id": userid, "status_id": statusid},
+            }).done(function (response) {
+                alert("Status pengguna berjaya diubah.");
+                window.location.reload();
+            });            
+        });
+        
+        $(document).on("click", ".btnDelete", function () {
+            var user_id = $(this).data('userid');
+            var r = confirm("Adakah anda pasti untuk padam pengguna ini?");
+            if (r == true) {
+                $.ajax({
+                    method: "POST",
+                    url: "delete_user",
+                    data: {"_token": "{{ csrf_token() }}", "user_id": user_id},
+                }).done(function (response) {
+                    alert("Pengguna berjaya dipadam.");
+                    location.reload();
+                });
+            }
         });
         
         <?php 

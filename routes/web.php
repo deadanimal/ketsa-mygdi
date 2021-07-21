@@ -72,6 +72,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/mygeo_pengesahan', 'UserController@index');
     Route::get('/mygeo_senarai_pengguna_berdaftar', 'UserController@index_berdaftar');
     Route::post('/change_user_status', 'UserController@change_user_status');
+    Route::post('/delete_user', 'UserController@delete_user');
 
     Route::get('/portal_settings','PortalController@index_portal_settings');
     Route::post('/simpan_portal_settings','PortalController@store_portal_settings');
