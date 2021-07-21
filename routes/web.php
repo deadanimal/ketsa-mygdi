@@ -146,6 +146,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/kemaskini_profil','UserController@edit'); 
     Route::post('/simpan_kemaskini_profil','UserController@update_profile');
     Route::post('/simpan_kemaskini_password','UserController@update_password');
+    Route::post('/tambahPenggunaBaru','UserController@tambahPenggunaBaru'); 
 
     Route::get('/pemindahan_akaun','UserController@pemindahan_akaun');
     

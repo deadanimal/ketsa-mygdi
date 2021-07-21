@@ -55,7 +55,8 @@ class UserController extends Controller {
                 $users[]= $user;
             }
         }
-        return view('mygeo.user.senarai_pengguna_berdaftar', compact('users'));
+        $peranans = Role::get();
+        return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans'));
     }
     
     public function get_user_details(){
@@ -301,5 +302,58 @@ class UserController extends Controller {
     public function get_agensiOrganisasi(){
         echo json_encode(AgensiOrganisasi::get()); 
         exit;
+    }
+    
+    public function tambahPenggunaBaru(Request $request){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+            exit();
+        }
+        $fields = [
+            "namaPenuh" => 'required',
+            "email" => 'required|unique:App\User,email',
+            "peranan" => 'required',
+        ];
+        $customMsg = [
+            "namaPenuh.required" => 'Nama Penuh diperlukan',
+            "email.required" => 'Email diperlukan',
+            "peranan.required" => 'Peranan diperlukan',
+        ];
+        $this->validate($request, $fields, $customMsg);
+        
+        try{
+            $nu = new User;
+            $nu->name = $request->namaPenuh;
+            $nu->email = $request->email;
+            $password = $this->generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',20);
+            $nu->password = Hash::make($password);
+            $nu->save();
+
+            $nu->assignRole($request->peranan);
+        }catch (Illuminate\Database\QueryException $e){
+            dd($e);
+        }
+        
+        //send email to the person created
+        $to_name = $request->namaPenuh;
+        $to_email = $request->email;
+        $data = array('name'=>'Pendaftaran pengguna baru di mygeo-explorer.gov.my', 'body' => 'Pendaftaran berjaya.');
+        Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Pendaftaran berjaya');
+            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
+        });
+        
+        return redirect('mygeo_senarai_pengguna_berdaftar')->with('success','User Saved');
+    }
+    
+ 
+    public function generate_string($input, $strength = 16) {
+        $input_length = strlen($input);
+        $random_string = '';
+        for($i = 0; $i < $strength; $i++) {
+            $random_character = $input[mt_rand(0, $input_length - 1)];
+            $random_string .= $random_character;
+        }
+
+        return $random_string;
     }
 }
