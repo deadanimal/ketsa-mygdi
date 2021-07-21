@@ -46,8 +46,8 @@
                                         </tr>
                                         <tr>
                                             @error('namaPenuh')
-                                            <div class="text-warning">{{ $message }}</div>
-                                            @enderror
+                                        <div class="text-warning">{{ $message }}</div>
+                                        @enderror
                                         </tr>
                                         <tr>
                                             <td>
@@ -58,8 +58,8 @@
                                                 <select name="peranan">
                                                     <option value="" selected disabled>Pilih</option>
                                                     <?php
-                                                    if(!empty($peranans)){
-                                                        foreach($peranans as $p){
+                                                    if (!empty($peranans)) {
+                                                        foreach ($peranans as $p) {
                                                             ?><option value="{{ $p->name }}">{{ $p->name }}</option><?php
                                                         }
                                                     }
@@ -69,8 +69,8 @@
                                         </tr>
                                         <tr>
                                             @error('peranan')
-                                            <div class="text-warning">{{ $message }}</div>
-                                            @enderror
+                                        <div class="text-warning">{{ $message }}</div>
+                                        @enderror
                                         </tr>
                                         <tr>
                                             <td>Email<span class="text-warning">*</span></td>
@@ -78,8 +78,8 @@
                                         </tr>
                                         <tr>
                                             @error('email')
-                                            <div class="text-warning">{{ $message }}</div>
-                                            @enderror
+                                        <div class="text-warning">{{ $message }}</div>
+                                        @enderror
                                         </tr>
                                     </table>
                                 </div>
@@ -132,50 +132,52 @@
                             @endif
                         </div>
                         <div class="card-body">
-                            <table id="table_newUsers" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Bil</th>
-                                        <th>Nama</th>
-                                        <th>Agensi</th>
-                                        <th>Peranan</th>
-                                        <th>Status</th>
-                                        <th>Butiran</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $bil = 1;
-                                    foreach ($users as $user) {
-                                        ?>
+                            <div style="overflow-x:auto;">
+                                <table id="table_newUsers" class="table table-bordered table-striped" style="overflow: auto;">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $bil }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->agensi_organisasi }}</td>
-                                            <td>
-                                                <?php
-                                                if (count($user->getRoleNames()) > 0) {
-                                                    foreach ($user->getRoleNames() as $role) {
-                                                        echo $role . "<br>";
-                                                    }
-                                                }
-                                                ?>
-                                            </td>
-                                            <td>{{ ($user->status == "0" ? "Tidak Aktif":"Aktif") }}</td>
-                                            <td>
-                                                <button type="button" data-toggle="modal" data-target="#modal-butiran" data-userid="{{ $user->id }}" class="butiran btn btn-sm btn-primary mr-2"><i class="fas fa-edit"></i></button>
-                                                <br><br>
-                                                <button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-primary mr-2"><i class="fas fa-pencil-alt"></i></button>
-                                                <br><br>
-                                                <button type="button" data-userid="{{ $user->id }}" class="btnDelete btn btn-sm btn-primary mr-2"><i class="fas fa-times"></i></button>
-                                            </td>
+                                            <th>Bil</th>
+                                            <th>Nama</th>
+                                            <th>Agensi</th>
+                                            <th>Peranan</th>
+                                            <th>Status</th>
+                                            <th>Butiran</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
                                         <?php
-                                        $bil++;
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                        $bil = 1;
+                                        foreach ($users as $user) {
+                                            ?>
+                                            <tr>
+                                                <td>{{ $bil }}</td>
+                                                <td>{{ $user->name }}asdlkad sa dasd sad klsa d</td>
+                                                <td>{{ $user->agensi_organisasi }}</td>
+                                                <td>
+                                                    <?php
+                                                    if (count($user->getRoleNames()) > 0) {
+                                                        foreach ($user->getRoleNames() as $role) {
+                                                            echo $role . "<br>";
+                                                        }
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td>{{ ($user->status == "0" ? "Tidak Aktif":"Aktif") }}</td>
+                                                <td>
+                                                    <button type="button" data-toggle="modal" data-target="#modal-butiran" data-userid="{{ $user->id }}" class="butiran btn btn-sm btn-primary mr-2"><i class="fas fa-edit"></i></button>
+                                                    <br><br>
+                                                    <button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-primary mr-2"><i class="fas fa-pencil-alt"></i></button>
+                                                    <br><br>
+                                                    <button type="button" data-userid="{{ $user->id }}" class="btnDelete btn btn-sm btn-primary mr-2"><i class="fas fa-times"></i></button>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            $bil++;
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -211,8 +213,8 @@
     $(function () {
         $("#table_newUsers").DataTable({
             "ordering": false,
-            "responsive": true,
-            "autoWidth": false,
+            "responsive": false,
+            "autoWidth": true,
             "oLanguage": {
                 "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
                 "sEmptyTable": "Tiada rekod ditemui",
@@ -240,26 +242,26 @@
                 $('.modal_user_detail').html(response);
             });
         });
-        
+
         $(document).on("click", ".btnChangeStatus", function () {
             var userid = $(this).data('userid');
             var statusid = $(this).data('statusid');
-            
-            if(statusid == "0"){
-                $('.btnStatusActive').data('userid',userid);
+
+            if (statusid == "0") {
+                $('.btnStatusActive').data('userid', userid);
                 $('.btnStatusActive').show();
                 $('.btnStatusInactive').hide();
-            }else if(statusid == "1"){
-                $('.btnStatusInactive').data('userid',userid);
+            } else if (statusid == "1") {
+                $('.btnStatusInactive').data('userid', userid);
                 $('.btnStatusInactive').show();
                 $('.btnStatusActive').hide();
             }
         });
-        
+
         $(document).on("click", ".btnChangeStatusAjax", function () {
             var userid = $(this).data('userid');
             var statusid = $(this).val();
-            
+
             $.ajax({
                 method: "POST",
                 url: "change_user_status",
@@ -267,9 +269,9 @@
             }).done(function (response) {
                 alert("Status pengguna berjaya diubah.");
                 window.location.reload();
-            });            
+            });
         });
-        
+
         $(document).on("click", ".btnDelete", function () {
             var user_id = $(this).data('userid');
             var r = confirm("Adakah anda pasti untuk padam pengguna ini?");
@@ -284,10 +286,10 @@
                 });
             }
         });
-        
-        <?php 
-        if($errors->any()){
-          ?>$('#modalPenggunaBaru').modal('show');<?php  
+
+        <?php
+        if ($errors->any()) {
+            ?>$('#modalPenggunaBaru').modal('show');<?php
         }
         ?>
     });
