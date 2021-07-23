@@ -29,11 +29,27 @@ class AuthController extends Controller {
         // var_dump(Hash::make($request->password));
         // echo "</pre>";
         // exit();
-        if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password,'disahkan'=>'1'])) {
+        
+        if(!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == ""){
+            return redirect('/login')->with( ['msg' => 'Sila lengkapkan reCaptcha'] );
+        }
+        
+        $user = User::where(['email'=>$request->emailf])->get()->first();
+        if($user->deleted == 'yes'){
+            return redirect('/login')->with( ['msg' => 'Akaun anda telah dipadam.'] );
+        }
+        if($user->status == '0'){
+            return redirect('/login')->with( ['msg' => 'Akaun anda tidak diaktifkan.'] );
+        }
+        if($user->disahkan == '0'){
+            return redirect('/login')->with( ['msg' => 'Akaun anda belum disahkan.'] );
+        }
+        
+        if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password,'disahkan'=>'1','status'=>'1','deleted'=>'no'])) {
             // Authentication passed...
             return redirect()->intended('/landing_mygeo');
         }else{
-            return redirect('/login')->with( ['msg' => 'Akaun anda tidak dijumpai atau belum disahkan.'] );
+            return redirect('/login')->with( ['msg' => 'Akaun anda tidak dijumpai.'] );
         } 
     } 
 

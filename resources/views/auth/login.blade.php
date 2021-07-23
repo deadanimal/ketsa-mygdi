@@ -22,7 +22,7 @@
                             <div _ngcontent-lqr-c499="" class="mb-4">
                                 <a class="text-primary" href="#" id="hrefDaftar" data-backdrop="false" data-toggle="modal" data-target="#modal-daftar-jenis-pengguna">Pengguna baru? Daftar sekarang.</a>
                             </div>
-                            <form method="POST" action="{{ url('loginf') }}">
+                            <form method="POST" action="{{ url('loginf') }}" id="formLogin">
                                 @csrf
                                 <div _ngcontent-lqr-c499="" class="form-group mb-3" ng-reflect-ng-class="[object Object]">
                                     <div _ngcontent-lqr-c499="" class="input-group input-group-alternative mb-3">
@@ -48,10 +48,19 @@
                                     <div _ngcontent-lqr-c499="" class="validation-errors">
                                     </div>
                                 </div>
+                                <div _ngcontent-lqr-c499="" class="form-group" ng-reflect-ng-class="[object Object]">
+                                    <div _ngcontent-lqr-c499="" class="input-group input-group-alternative">
+                                        <div class="input-group">
+                                            <div class="g-recaptcha" data-sitekey="6LdvEbUbAAAAAEeHGogajujfQIS-Rp98PxrU5Frz"></div>
+                                        </div>
+                                    </div>
+                                    <div _ngcontent-lqr-c499="" class="validation-errors">
+                                    </div>
+                                </div>
                                 <div _ngcontent-lqr-c499="" class="row align-items-center">
                                     <div _ngcontent-lqr-c499="" class="col-6 order-2">
                                         <div _ngcontent-lqr-c499="" class="text-center">
-                                            <button type="submit" class="btn btn-warning float-right">Log Masuk</button>
+                                            <button type="button" class="btn btn-warning float-right btn_login">Log Masuk</button>
                                         </div>
                                     </div>
                                     <div _ngcontent-lqr-c499="" class="col-6 order-1">
@@ -355,7 +364,6 @@
                                         </div>
                                         <?php //=================
                                         ?>
-                                        <div class="g-recaptcha" data-sitekey="6LdvEbUbAAAAAEeHGogajujfQIS-Rp98PxrU5Frz"></div>
                                     </div>
                                 </div>
                             </div>
@@ -375,6 +383,15 @@
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
+    $(document).on("click", ".btn_login", function() {
+        var captcha = $('#g-recaptcha-response').val();
+        if(captcha == ""){
+            alert("Sila lengkapkan captcha");
+        }else{
+            $("#formLogin").submit();
+        }
+    });
+    
     $(document).on("click", "#btn_hantar2", function() {
         $('#modal-daftar-jenis-pengguna').modal('hide');
         $('#modal-daftar-pengguna').modal('hide');
@@ -631,17 +648,13 @@
         $('#div_pilihan_peranan').hide();
         $('#form_registration').show();
         $('#btn_daftar').show();
-        $('.g-recaptcha').show();
         $(this).hide();
     });
     
     $(document).on("click","#btn_daftar",function(){
         var nric = $("#input-nric").val();
-        var captcha = $('#g-recaptcha-response').val();
         if(nric.length < 12){
             alert("Nombor NRIC tidak lengkap");
-        }else if(captcha == ""){
-            alert("Sila lengkapkan captcha");
         }else{
             $("#formRegisterUser").submit();
         }
@@ -686,7 +699,6 @@
         $("#divsecond").hide();
         $("#divthird").hide();
         $(".2_g2e").hide();
-        $('.g-recaptcha').hide();
 
 
         $(document).on("click", "#btn_backdoor", function() {

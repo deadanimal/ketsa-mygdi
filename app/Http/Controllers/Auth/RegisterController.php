@@ -97,6 +97,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'alamat' => $data['alamat'],
             'kategori' => $data['kategori'],
+            'status' => "1",
+            'deleted' => "no",
         ]);
         
         $userRole = $user->assignRole($data['peranan']);
