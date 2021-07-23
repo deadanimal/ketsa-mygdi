@@ -2,30 +2,29 @@
 
 @section('content')
 
-<div _ngcontent-lqr-c499="" class="content bgland p-5">
-    <div _ngcontent-lqr-c499="" class="container-fluid" data-aos="fade-up">
-        <div _ngcontent-lqr-c499="" class="row">
-
+<div class="content bgland p-5">
+    <div class="container-fluid" data-aos="fade-up">
+        <div class="row">
             <div class="col-lg-3"></div>
-            <div _ngcontent-lqr-c499="" class="col-lg-6 p-4 px-5">
+            <div class="col-lg-6 p-4 px-5">
                 <div class="row img-center">
                     <img src="{{ url('assetsangular/img/logo/mygeo-logo.png') }}" alt="MyGeo Explorer" class="img-center" style="width: 80%; height: auto;">
                 </div>
                 <div class="row justify-content-center">
-                    <div _ngcontent-lqr-c499="" class="card" style="background-color: rgba(255, 255, 255, 0.7);">
-                        <div _ngcontent-lqr-c499="" class="card-body px-lg-5 py-lg-5">
-                            <div _ngcontent-lqr-c499="" class="text-muted" style="font-size: 17px;">
+                    <div class="card" style="background-color: rgba(255, 255, 255, 0.7);">
+                        <div class="card-body px-lg-5 py-lg-5">
+                            <div class="text-muted" style="font-size: 17px;">
                                 <h2 class="mb-0 pb-0 text-muted">Maklumat geospatial kini dihujung jari anda.</h2>
                                 <h2 class="mb-0 pb-0 text-muted">Log Masuk.</h2>
-                                <br _ngcontent-lqr-c499="">
+                                <br>
                             </div>
-                            <div _ngcontent-lqr-c499="" class="mb-4">
+                            <div class="mb-4">
                                 <a class="text-primary" href="#" id="hrefDaftar" data-backdrop="false" data-toggle="modal" data-target="#modal-daftar-jenis-pengguna">Pengguna baru? Daftar sekarang.</a>
                             </div>
                             <form method="POST" action="{{ url('loginf') }}" id="formLogin">
                                 @csrf
-                                <div _ngcontent-lqr-c499="" class="form-group mb-3" ng-reflect-ng-class="[object Object]">
-                                    <div _ngcontent-lqr-c499="" class="input-group input-group-alternative mb-3">
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-alternative mb-3">
                                         <input id="id_pengguna" type="text" class="form-control @error('emailf') is-invalid @enderror" name="emailf" value="{{ old('emailf') }}" required autocomplete="emailf" autofocus placeholder="ID Pengguna">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
@@ -34,8 +33,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div _ngcontent-lqr-c499="" class="form-group" ng-reflect-ng-class="[object Object]">
-                                    <div _ngcontent-lqr-c499="" class="input-group input-group-alternative">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
                                         <div class="input-group">
                                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Kata Laluan">
                                             <div class="input-group-append">
@@ -45,25 +44,25 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div _ngcontent-lqr-c499="" class="validation-errors">
+                                    <div class="validation-errors">
                                     </div>
                                 </div>
-                                <div _ngcontent-lqr-c499="" class="form-group" ng-reflect-ng-class="[object Object]">
-                                    <div _ngcontent-lqr-c499="" class="input-group input-group-alternative">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
                                         <div class="input-group">
-                                            <div class="g-recaptcha" data-sitekey="6LdvEbUbAAAAAEeHGogajujfQIS-Rp98PxrU5Frz"></div>
+                                            <div class="g-recaptcha" style="width:100%;" data-sitekey="6LdvEbUbAAAAAEeHGogajujfQIS-Rp98PxrU5Frz"></div>
                                         </div>
                                     </div>
-                                    <div _ngcontent-lqr-c499="" class="validation-errors">
+                                    <div class="validation-errors">
                                     </div>
                                 </div>
-                                <div _ngcontent-lqr-c499="" class="row align-items-center">
-                                    <div _ngcontent-lqr-c499="" class="col-6 order-2">
-                                        <div _ngcontent-lqr-c499="" class="text-center">
+                                <div class="row align-items-center">
+                                    <div class="col-6 order-2">
+                                        <div class="text-center">
                                             <button type="button" class="btn btn-warning float-right btn_login">Log Masuk</button>
                                         </div>
                                     </div>
-                                    <div _ngcontent-lqr-c499="" class="col-6 order-1">
+                                    <div class="col-6 order-1">
                                         <a class="text-danger" href="{{ route('password.request') }}">Lupa kata laluan?</a>
                                     </div>
                                 </div>
