@@ -392,6 +392,8 @@
     $('input:radio[name="perananSelect"]').change(function() {
         var per = $(this).val();
 
+        $('.g-recaptcha').show();
+        
         //form elements to hide or show
         if (per == "3" || per == "4") {
             $(".2_g2c").hide();
@@ -636,14 +638,17 @@
     
     $(document).on("click","#btn_daftar",function(){
         var nric = $("#input-nric").val();
+        var captcha = $('#g-recaptcha-response').val();
         if(nric.length < 12){
-            alert("NRIC number incomplete");
+            alert("Nombor NRIC tidak lengkap");
+        else if(captcha == ""){
+            alert("Sila lengkapkan captcha");
         }else{
             $("#formRegisterUser").submit();
         }
     });
 
-    $(document).ready(function() {      
+    $(document).ready(function() {
         $("#input-nric").inputFilter(function(value) {
             return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 999999999999);
         });
@@ -682,6 +687,7 @@
         $("#divsecond").hide();
         $("#divthird").hide();
         $(".2_g2e").hide();
+        $('.g-recaptcha').hide();
 
 
         $(document).on("click", "#btn_backdoor", function() {
