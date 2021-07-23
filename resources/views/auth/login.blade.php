@@ -641,7 +641,7 @@
         var captcha = $('#g-recaptcha-response').val();
         if(nric.length < 12){
             alert("Nombor NRIC tidak lengkap");
-        else if(captcha == ""){
+        }else if(captcha == ""){
             alert("Sila lengkapkan captcha");
         }else{
             $("#formRegisterUser").submit();
