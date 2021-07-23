@@ -1,6 +1,11 @@
 @extends('layouts.app_afiq')
 
 @section('content')
+<style>
+    .g-recaptcha,.g-recaptcha+div,.g-recaptcha iframe{
+        width:100%;
+    }
+</style>
 
 <div class="content bgland p-5">
     <div class="container-fluid" data-aos="fade-up">
