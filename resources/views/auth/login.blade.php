@@ -355,6 +355,7 @@
                                         </div>
                                         <?php //=================
                                         ?>
+                                        <button class="g-recaptcha" data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'>Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -372,7 +373,11 @@
     </div>
 </div>
 
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
+    function onSubmit(token) {
+        document.getElementById("demo-form").submit();
+    }
     $(document).on("click", "#btn_hantar2", function() {
         $('#modal-daftar-jenis-pengguna').modal('hide');
         $('#modal-daftar-pengguna').modal('hide');
