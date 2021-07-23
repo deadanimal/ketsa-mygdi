@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'g-recaptcha-response' => ['required', 'string', 'min:8'],
+            'g-recaptcha-response' => ['required', 'string'],
         ]);
         
         return $valid;
@@ -84,8 +84,7 @@ class RegisterController extends Controller
             // $fileUpload->metadata_id = $metadata->id;
             // $fileUpload->save();
         }
-//        dd($data);exit();
-        return false;
+        
         $user = User::create([
             'name' => $data['name'],
             'nric' => $data['nric'],
