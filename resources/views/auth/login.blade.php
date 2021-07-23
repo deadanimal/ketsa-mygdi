@@ -355,14 +355,13 @@
                                         </div>
                                         <?php //=================
                                         ?>
-                                        <button class="g-recaptcha" data-sitekey="6LcqgrQbAAAAADahSfymDn1kN-TGroFHsNaGU0_5" data-callback='onSubmit' data-action='submit'>Submit</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between1">
                                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>-->
                                 <button type="button" class="btn btn-dark btn_isi_borang" id="btn_isi_borang">Isi Borang</button>
-                                <button type="button" class="btn btn-default" id="btn_daftar">Daftar</button>
+                                <button type="button" class="btn btn-default g-recaptcha" id="btn_daftar" data-sitekey="6LcqgrQbAAAAADahSfymDn1kN-TGroFHsNaGU0_5" data-callback='onSubmit' data-action='submit'>Daftar</button>
                             </div>
                         </form>
                     </div>
