@@ -83,7 +83,8 @@ class RegisterController extends Controller
             // $fileUpload->metadata_id = $metadata->id;
             // $fileUpload->save();
         }
-        dd($data);exit();
+//        dd($data);exit();
+        return "";
         $user = User::create([
             'name' => $data['name'],
             'nric' => $data['nric'],
