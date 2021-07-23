@@ -391,8 +391,6 @@
 
     $('input:radio[name="perananSelect"]').change(function() {
         var per = $(this).val();
-
-        $('.g-recaptcha').show();
         
         //form elements to hide or show
         if (per == "3" || per == "4") {
@@ -633,6 +631,7 @@
         $('#div_pilihan_peranan').hide();
         $('#form_registration').show();
         $('#btn_daftar').show();
+        $('.g-recaptcha').show();
         $(this).hide();
     });
     
