@@ -438,6 +438,11 @@
 
 <script>
     $(document).ready(function() {
+        <?php
+        if(Session::has('message')){
+            ?>alert("{{ Session::get('message') }}");<?php
+        }
+        ?>
         $(document).on("click", ".aUmum", function() {
             var umumid = $(this).data("umumid");
             $("#form_umum_" + umumid).submit();

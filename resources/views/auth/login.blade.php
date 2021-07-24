@@ -671,6 +671,11 @@
     });
 
     $(document).ready(function() {
+        <?php
+        if(Session::has('message')){
+            ?>alert("{{ Session::get('message') }}");<?php
+        }
+        ?>
         $("#input-nric").inputFilter(function(value) {
             return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 999999999999);
         });

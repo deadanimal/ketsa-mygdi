@@ -53,12 +53,20 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $valid = Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'g-recaptcha-response' => ['required', 'string'],
-        ]);
+        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
+            $valid = Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+        }else{
+            $valid = Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'g-recaptcha-response' => ['required', 'string'],
+            ]);    
+        }
         
         return $valid;
     }
@@ -71,20 +79,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //save attachment. currently unused. to be used as reference.
-        if(isset($_FILES['surat_sokongan']) && (file_exists($_FILES['surat_sokongan']['tmp_name']))){ die('ftester');
-            // $exists = Storage::exists($request->c6_order_instructions->getClientOriginalName());
-            // $time = date('Y-m-d'.'_'.'H_i_s');
-            // $fileName = $time.'_'.$request->c6_order_instructions->getClientOriginalName();
-            // Storage::putFileAs('public', $request->file('c6_order_instructions'), $fileName);
-
-            // $fileUpload = new MFileUpload();
-            // $fileUpload->file_name = pathinfo($fileName,PATHINFO_FILENAME);
-            // $fileUpload->extension_format = $request->c6_order_instructions->getClientOriginalExtension();
-            // $fileUpload->metadata_id = $metadata->id;
-            // $fileUpload->save();
-        }
-        
         $user = User::create([
             'name' => $data['name'],
             'nric' => $data['nric'],
@@ -99,25 +93,16 @@ class RegisterController extends Controller
             'kategori' => $data['kategori'],
             'status' => "0",
         ]);
-        
+
         $userRole = $user->assignRole($data['peranan']);
-        
-        //send email to person who registered
+    
+        //send email to the person created
         $to_name = $data['name'];
         $to_email = $data['email'];
-        $data = array('name'=>'Pendaftaran pengguna baru di mygeo-explorer.gov.my', 'body' => 'Pendaftaran berjaya.');
-        Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Pendaftaran berjaya');
-            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
-        });
-        
-        //send email to person who will be approving the newly registered account
-        $to_name = 'Mr Pentadbir Aplikasi';
-        $to_email = 'farhan15959@gmail.com';
-        $data = array('name'=>'Pendaftaran pengguna baru di mygeo-explorer.gov.my', 'body' => 'Pendaftaran baru dikesan.');
-        Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Pendaftaran baru dikesan');
-            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
+        $data = array('name'=>$data['name']);
+        Mail::send('mails.exmpl2', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('Pengesahan Pendaftaran Penerbit/Pengesah Metadata MyGeo Explorer');
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
 
         return $user;
@@ -125,10 +110,9 @@ class RegisterController extends Controller
     
     public function register(Request $request)
     {
-//        dd($request);
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
         // $this->guard()->login($user);
-        return $this->registered($request, $user)?: redirect($this->redirectPath());
+        return $this->registered($request, $user)?: redirect($this->redirectPath())->with('message','Pendaftaran anda dalam proses pengesahan. Anda akan menerima e-mel daripada pentadbir sekiranya pendaftaran berjaya');
      }
 }
