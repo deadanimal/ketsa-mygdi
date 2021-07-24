@@ -384,11 +384,21 @@
 <script>
     $(document).on("click", ".btn_login", function() {
         var captcha = $('#g-recaptcha-response').val();
-        if(captcha == ""){
-            alert("Sila lengkapkan captcha");
-        }else{
+        <?php
+        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
+            ?>
             $("#formLogin").submit();
+            <?php
+        }else{
+            ?>
+            if(captcha == ""){
+                alert("Sila lengkapkan captcha");
+            }else{
+                $("#formLogin").submit();
+            }   
+            <?php
         }
+        ?>
     });
     
     $(document).on("click", "#btn_hantar2", function() {

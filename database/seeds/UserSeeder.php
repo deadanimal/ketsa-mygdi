@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
         $user = User::create([
             'name' => "Pentadbir Aplikasi",
             'email' => "pentadbiraplikasi@gmail.com",
-            'password' => Hash::make('Pentadbir123!'),
+            'password' => Hash::make('pentadbiraplikasi@gmail.com'),
             'nric' => '888888-88-8888',
             'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
             'bahagian' => 'IT',
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
         $user = User::create([
             'name' => "Pengesah Metadata 1",
             'email' => "pengesahmetadata1@gmail.com",
-            'password' => Hash::make('Pengesah123!'),
+            'password' => Hash::make('pengesahmetadata1@gmail.com'),
             'nric' => '888888-88-8888',
             'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
             'bahagian' => 'IT',
@@ -105,7 +105,7 @@ class UserSeeder extends Seeder
         $user = User::create([
             'name' => "Penerbit Metadata 1",
             'email' => "penerbitmetadata1@gmail.com",
-            'password' => Hash::make('Penerbit123!'),
+            'password' => Hash::make('penerbitmetadata1@gmail.com'),
             'nric' => '888888-88-8888',
             'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
             'bahagian' => 'IT',

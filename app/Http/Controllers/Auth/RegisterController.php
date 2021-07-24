@@ -98,7 +98,6 @@ class RegisterController extends Controller
             'alamat' => $data['alamat'],
             'kategori' => $data['kategori'],
             'status' => "1",
-            'deleted' => "no",
         ]);
         
         $userRole = $user->assignRole($data['peranan']);

@@ -30,14 +30,13 @@ class AuthController extends Controller {
         // echo "</pre>";
         // exit();
         
-        if(!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == ""){
-            return redirect('/login')->with( ['msg' => 'Sila lengkapkan reCaptcha'] );
+        if($_SERVER['HTTP_HOST'] != "localhost:8888"){
+            if(!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == ""){
+                return redirect('/login')->with( ['msg' => 'Sila lengkapkan reCaptcha'] );
+            }
         }
         
         $user = User::where(['email'=>$request->emailf])->get()->first();
-        if($user->deleted == 'yes'){
-            return redirect('/login')->with( ['msg' => 'Akaun anda telah dipadam.'] );
-        }
         if($user->status == '0'){
             return redirect('/login')->with( ['msg' => 'Akaun anda tidak diaktifkan.'] );
         }
@@ -45,11 +44,11 @@ class AuthController extends Controller {
             return redirect('/login')->with( ['msg' => 'Akaun anda belum disahkan.'] );
         }
         
-        if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password,'disahkan'=>'1','status'=>'1','deleted'=>'no'])) {
+        if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password,'disahkan'=>'1','status'=>'1'])) {
             // Authentication passed...
             return redirect()->intended('/landing_mygeo');
         }else{
-            return redirect('/login')->with( ['msg' => 'Akaun anda tidak dijumpai.'] );
+            return redirect('/login')->with( ['msg' => 'Nama atau Kata Laluan tidak sah.'] );
         } 
     } 
 
