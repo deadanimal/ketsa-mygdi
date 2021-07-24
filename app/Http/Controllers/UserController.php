@@ -360,7 +360,7 @@ class UserController extends Controller {
             $message->from('pentadbiraplikasi@gmail.com','mail@mygeo-explorer.gov.my');
         });
         
-        return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna baru berjaya disimpan');
+        return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan');
     }
     
  

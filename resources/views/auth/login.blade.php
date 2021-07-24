@@ -326,6 +326,7 @@
                                             <hr class="my-4" />
 
                                             <h6 class="heading-small text-muted mb-4"> Kata Laluan</h6>
+                                            <p style="color:red;font-size:11px;">* Kata laluan mestilah mempunyai sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil, nombor dan simbol.</p>
                                             <div class="pl-lg-4">
                                                 <div class="row mb-2">
                                                     <div class="col-4">

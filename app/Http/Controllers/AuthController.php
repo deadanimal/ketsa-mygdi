@@ -41,14 +41,14 @@ class AuthController extends Controller {
             return redirect('/login')->with( ['msg' => 'Akaun anda tidak diaktifkan.'] );
         }
         if($user->disahkan == '0'){
-            return redirect('/login')->with( ['msg' => 'Akaun anda belum disahkan.'] );
+            return redirect('/login')->with( ['msg' => 'Akaun anda belum disahkan. Sila tunggu notifikasi e-mel pengesahan pendaftaran daripada Pentadbir Aplikasi untuk log masuk.'] );
         }
         
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password,'disahkan'=>'1','status'=>'1'])) {
             // Authentication passed...
             return redirect()->intended('/landing_mygeo');
         }else{
-            return redirect('/login')->with( ['msg' => 'Nama atau Kata Laluan tidak sah.'] );
+            return redirect('/login')->with( ['msg' => 'ID pengguna atau kata laluan tidak sah.'] );
         } 
     } 
 
