@@ -685,7 +685,7 @@
     
     function checkPassword(str){
         // at least one number, one lowercase and one uppercase letter, at least 12 characters
-        var regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}/; 
+        var regex = /^(?=^.{12,40}$)(?=.*\d)(?=.*[\W_])(?=.*[a-z])(?=.*[A-Z])(?!^.*\n).*$/;
         return regex.test(str);
     }
     
