@@ -128,9 +128,9 @@ class UserController extends Controller {
         $user->update();
         
         //send email to the person who was approved
-        $to_name = $request->namaPenuh;
-        $to_email = $request->email;
-        $data = array('name'=>$request->namaPenuh);
+        $to_name = $user->name;
+        $to_email = $user->email;
+        $data = array('name'=>$user->name);
         Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Diluluskan');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
@@ -150,9 +150,9 @@ class UserController extends Controller {
         $user->update();
         
         //send email to the person who was disapproved
-        $to_name = $request->namaPenuh;
-        $to_email = $request->email;
-        $data = array('name'=>$request->namaPenuh);
+        $to_name = $user->namaPenuh;
+        $to_email = $user->email;
+        $data = array('name'=>$user->name);
         Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Tidak Diluluskan');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
