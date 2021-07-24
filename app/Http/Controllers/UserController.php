@@ -331,6 +331,8 @@ class UserController extends Controller {
             $nu->email = $request->email;
             $password = $this->generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',20);
             $nu->password = Hash::make($password);
+            $nu->status = '1';
+            $nu->disahkan = '1';
             $nu->save();
 
             $nu->assignRole($request->peranan);
