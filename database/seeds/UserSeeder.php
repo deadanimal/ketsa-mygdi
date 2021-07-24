@@ -34,8 +34,8 @@ class UserSeeder extends Seeder
         // Pentadbir Aplikasi ==================================================
         $user = User::create([
             'name' => "Pentadbir Aplikasi",
-            'email' => "pentadbiraplikasi@pipeline.com",
-            'password' => Hash::make('pentadbiraplikasi@pipeline.com'),
+            'email' => "pentadbiraplikasi@gmail.com",
+            'password' => Hash::make('Pentadbir123!'),
             'nric' => '888888-88-8888',
             'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
             'bahagian' => 'IT',
@@ -52,8 +52,8 @@ class UserSeeder extends Seeder
         // Pengesah Metadata ===================================================
         $user = User::create([
             'name' => "Pengesah Metadata 1",
-            'email' => "pengesahmetadata1@pipeline.com",
-            'password' => Hash::make('pengesahmetadata1@pipeline.com'),
+            'email' => "pengesahmetadata1@gmail.com",
+            'password' => Hash::make('Pengesah123!'),
             'nric' => '888888-88-8888',
             'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
             'bahagian' => 'IT',
@@ -104,8 +104,8 @@ class UserSeeder extends Seeder
         // Penerbit Metadata ===================================================
         $user = User::create([
             'name' => "Penerbit Metadata 1",
-            'email' => "penerbitmetadata1@pipeline.com",
-            'password' => Hash::make('penerbitmetadata1@pipeline.com'),
+            'email' => "penerbitmetadata1@gmail.com",
+            'password' => Hash::make('Penerbit123!'),
             'nric' => '888888-88-8888',
             'agensi_organisasi' => 'Agensi Angkasa Negara (ANGKASA)',
             'bahagian' => 'IT',
