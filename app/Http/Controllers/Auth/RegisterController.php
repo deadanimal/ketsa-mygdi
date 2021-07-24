@@ -94,10 +94,10 @@ class RegisterController extends Controller
         ]);
 
         $userRole = $user->assignRole($data['peranan']);
-    
-        //send email to the person created
-        $to_name = $data['name'];
-        $to_email = $data['email'];
+        
+        //send email to the pentadbiraplikasi
+        $to_name = 'pentadbiraplikasi@gmail.com';
+        $to_email = 'pentadbiraplikasi@gmail.com';
         $data = array('name'=>$data['name']);
         Mail::send('mails.exmpl2', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)->subject('Pengesahan Pendaftaran Penerbit/Pengesah Metadata MyGeo Explorer');
