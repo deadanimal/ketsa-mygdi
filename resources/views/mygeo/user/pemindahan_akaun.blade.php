@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+<link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
 <style>
     .ftest{
         display:inline;
@@ -12,13 +14,30 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1></h1>
-                </div>
-                <div class="col-sm-6">
+            <div class="header-body">
+                <div class="row align-items-center p-3 py-4">
+                    <div class="col-lg-8 col-6">
+                        <h6 class="h2 text-dark d-inline-block mb-0">Pengurusan Pengguna</h6>
+
+                        <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class=" breadcrumb-item">
+                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Pengurusan Pengguna
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Pemindahan Akaun
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-4 col-2 text-right">
+
+                    </div>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -30,8 +49,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" style="font-size: 2rem;">Pemindahan Akaun</h3>
+                    <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-5">
+                                    <h3 class="mb-0">Pemindahan Akaun</h3>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -58,7 +81,7 @@
                                                             if(isset($agensi) && count($agensi) > 0){
                                                                 foreach($agensi as $a){
                                                                     ?>
-                                                                    <option value="{{ $a->name }}">{{ $a->name }}</option>    
+                                                                    <option value="{{ $a->name }}">{{ $a->name }}</option>
                                                                     <?php
                                                                 }
                                                             }
@@ -104,7 +127,7 @@
                             </div>
 
                             <br><br>
-                            
+
                             <h5>SENARAI METADATA DI BAWAH PENGGUNA</h5>
                             <table id="table_metadata" class="table table-bordered table-striped">
                                 <thead>
@@ -181,17 +204,17 @@
                 $('#pengguna_lama').empty().append(response);
                 $('#pengguna_baru').empty().append(response);
             });
-            
+
             validateForm();
         });
-        
+
         $(document).on("change", "#pengguna_lama", function () {
             var penggunaLama = $(this).val();
             $("#pengguna_baru option").prop("disabled",false);
             $("#pengguna_baru option[value="+penggunaLama+"]").prop("disabled",true);
             $("#pengguna_baru").val($("#pengguna_baru option:first").val());
             $("#pengguna_baru option:first").prop('disabled',true);
-            
+
             // ajax get metadatas owned by selected user
             $.ajax({
                 method: "POST",
@@ -201,30 +224,30 @@
             .done(function (response) {
                 $('#table_metadata tbody').empty().append(response);
             });
-            
+
             validateForm();
         });
-        
+
         $(document).on("change", "#pengguna_baru", function () {
             validateForm();
         });
-        
+
         function validateForm(){
             var agensi = $('#pilih_agensi').val();
             var pengguna_lama = $('#pengguna_lama').val();
             var pengguna_baru = $('#pengguna_baru').val();
-            
+
             if(agensi === "" || !agensi || pengguna_lama === "" || !pengguna_lama || pengguna_lama === "Pilih" || pengguna_baru === "" || !pengguna_baru || pengguna_baru === "Pilih"){
                 $(".btnPindahAkaun").prop('disabled',true);
             }else{
                 $(".btnPindahAkaun").prop('disabled',false);
             }
         }
-        
+
         $(document).on("click", ".btnPindahAkaun", function () {
             var pengguna_lama = $('#pengguna_lama').val();
             var pengguna_baru = $('#pengguna_baru').val();
-            
+
             // ajax submit form
             $.ajax({
                 method: "POST",
@@ -235,7 +258,7 @@
                 alert("Metadata ownership transferred to new user.");
                 window.location.reload();
             });
-            
+
             validateForm();
         });
     });

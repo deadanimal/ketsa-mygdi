@@ -9,7 +9,7 @@ use App\ModelHasRoles;
 use Illuminate\Support\Facades\Log;
 use Auth;
 use Hash;
- 
+
 class AuthController extends Controller {
 
     /**
@@ -23,19 +23,19 @@ class AuthController extends Controller {
 
     public function authenticate(Request $request)
     {
-        // echo "<pre>"; 
+        // echo "<pre>";
         // var_dump($request->email);
         // var_dump($request->password);  $2y$10$ds5kaqrIwRymOP.Fo0s5Feocrp6LE6GSoz91KlPVCjDAVkHdireqm
         // var_dump(Hash::make($request->password));
         // echo "</pre>";
         // exit();
-        
-        if($_SERVER['HTTP_HOST'] != "localhost:8888"){
+
+        if($_SERVER['HTTP_HOST'] != "127.0.0.1:8003"){
             if(!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == ""){
                 return redirect('/login')->with( ['msg' => 'Sila lengkapkan reCaptcha'] );
             }
         }
-        
+
         $user = User::where(['email'=>$request->emailf])->get()->first();
         if($user->status == '0'){
             return redirect('/login')->with( ['msg' => 'Akaun anda tidak diaktifkan.'] );
@@ -43,14 +43,14 @@ class AuthController extends Controller {
         if($user->disahkan == '0'){
             return redirect('/login')->with( ['msg' => 'Akaun anda belum disahkan. Sila tunggu notifikasi e-mel pengesahan pendaftaran daripada Pentadbir Aplikasi untuk log masuk.'] );
         }
-        
+
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password,'disahkan'=>'1','status'=>'1'])) {
             // Authentication passed...
             return redirect()->intended('/landing_mygeo');
         }else{
             return redirect('/login')->with( ['msg' => 'ID pengguna atau kata laluan tidak sah.'] );
-        } 
-    } 
+        }
+    }
 
     public function testLogin(){
         $user = new User;
@@ -59,15 +59,15 @@ class AuthController extends Controller {
         $user->password = Hash::make('123456');
 
 //        if(!($user->save())){
-//            dd('user is not being saved to database properly - this is the problem');          
+//            dd('user is not being saved to database properly - this is the problem');
 //        }
 
         if(!(Hash::check('123456', Hash::make('123456')))){
-            dd('hashing of password is not working correctly - this is the problem');          
+            dd('hashing of password is not working correctly - this is the problem');
         }
 
         if(!(Auth::attempt(['email' => 'pentadbiraplikasi@pipeline.com', 'password' => 'pentadbiraplikasi@pipeline.com']))){
-            dd('storage of user password is not working correctly - this is the problem');          
+            dd('storage of user password is not working correctly - this is the problem');
         }else{
             dd('everything is working when the correct data is supplied - so the problem is related to your forms and the data being passed to the function');
         }
