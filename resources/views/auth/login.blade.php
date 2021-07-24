@@ -256,7 +256,7 @@
                                                     <label class="form-control-label mr-4" for="input-emel">Emel</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input class="form-control form-control-sm ml-3" placeholder="Masukan E-mel anda" type="text" name="email" />
+                                                    <input id="email_daftar" class="form-control form-control-sm ml-3" placeholder="Masukan E-mel anda" type="email" name="email" />
                                                     <p class="error-message"><span></span></p>
                                                 </div>
                                             </div>
@@ -665,12 +665,16 @@
         var nric = $("#input-nric").val();
         var tpejabat = $("#input-tpejabat").val();
         var password_daftar = $("#password_daftar").val();
+        var email_daftar = $("#email_daftar").val();
         var msg = "";
         if(nric.length < 12){
             msg = msg + "Nombor NRIC tidak lengkap\r\n";
         }
         if(!checkPassword(password_daftar)){
             msg = msg + "Kata laluan mesti mempunyai sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil, nombor dan simbol.\r\n";
+        }
+        if(!isEmail(email_daftar)){
+            msg = msg + "Emel tidak sah\r\n";
         }
         if(msg.length > 0){
             alert(msg);
@@ -681,8 +685,13 @@
     
     function checkPassword(str){
         // at least one number, one lowercase and one uppercase letter, at least 12 characters
-        var re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}/;
-        return re.test(str);
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
+        return regex.test(str);
+    }
+    
+    function isEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
     }
 
     $(document).ready(function() {
