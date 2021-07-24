@@ -60,7 +60,7 @@ class UserController extends Controller {
         $peranans = $peranans->sortBy(function($model) use ($ids) {
             return array_search($model->getKey(), $ids);
         });
-        dd($peranans);
+//        dd($peranans);
         return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans'));
     }
     
