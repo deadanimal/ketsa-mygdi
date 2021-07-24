@@ -401,9 +401,9 @@
                                         </li>
                                         @endif
                                     </ul>
-                                    <hr _ngcontent-oai-c452="" class="my-3">
-                                    <ul _ngcontent-oai-c452="" class="navbar-nav">
-                                        <li _ngcontent-oai-c452="" class="nav-item pointer">
+                                    <hr class="my-3">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item pointer">
                                             <a class="nav-link active" href="{{ url('/logout') }}">
                                                 <i class="fas fa-door-open text-black"></i>
                                                 <span class="nav-link-text">Log keluar</span>

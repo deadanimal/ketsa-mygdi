@@ -33,7 +33,7 @@ class UserController extends Controller {
             exit();
         }
         
-        $users_all = User::where(['disahkan' => 0])->get();
+        $users_all = User::where(['disahkan'=>0])->get();
         $users = [];
         foreach($users_all as $user){
             if($user->hasRole('Penerbit Metadata') || $user->hasRole('Pengesah Metadata')){
@@ -56,6 +56,11 @@ class UserController extends Controller {
             }
         }
         $peranans = Role::get();
+        $ids = [ 5, 6, 3, 4, 2];
+        $peranans = $peranans->sortBy(function($model) use ($ids) {
+            return array_search($model->getKey(), $ids);
+        });
+        dd($peranans);
         return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans'));
     }
     

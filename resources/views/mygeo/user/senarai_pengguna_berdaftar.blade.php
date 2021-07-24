@@ -60,7 +60,13 @@
                                                     <?php
                                                     if (!empty($peranans)) {
                                                         foreach ($peranans as $p) {
-                                                            ?><option value="{{ $p->name }}">{{ $p->name }}</option><?php
+                                                            if(strtolower($p->name) != 'pentadbir aplikasi' && strtolower($p->name) != 'super admin'){
+                                                                ?>
+                                                                <option value="{{ $p->name }}">
+                                                                    {{ $p->name }}
+                                                                </option>
+                                                                <?php
+                                                            }
                                                         }
                                                     }
                                                     ?>
