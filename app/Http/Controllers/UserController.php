@@ -48,7 +48,7 @@ class UserController extends Controller {
             exit();
         }
         
-        $users_all = User::where(['disahkan' => 1])->orderBy('name', 'asc')->get();
+        $users_all = User::where(['disahkan' => 1])->orderBy('updated_at', 'desc')->get();
         $users = [];
         foreach($users_all as $user){
             if($user->hasRole('Penerbit Metadata') || $user->hasRole('Pengesah Metadata')){
@@ -346,10 +346,10 @@ class UserController extends Controller {
         $data = array('name'=>'Pendaftaran pengguna baru di mygeo-explorer.gov.my', 'body' => 'Pendaftaran berjaya.');
         Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)->subject('Mygeo Explorer - Pendaftaran berjaya');
-            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
+            $message->from('pentadbiraplikasi@gmail.com','mail@mygeo-explorer.gov.my');
         });
         
-        return redirect('mygeo_senarai_pengguna_berdaftar')->with('success','User Saved');
+        return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna baru berjaya disimpan');
     }
     
  

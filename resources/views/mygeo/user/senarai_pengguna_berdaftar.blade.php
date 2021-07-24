@@ -230,6 +230,12 @@
                 }
             }
         });
+        
+        <?php
+        if(Session::has('message')){
+            ?>alert("{{ Session::get('message') }}");<?php
+        }
+        ?>
 
         $(document).on("click", ".butiran", function () {
             // ajax get user details
