@@ -127,14 +127,15 @@ class UserController extends Controller {
         $user->disahkan = 1;
         $user->update();
         
-        //send mail
-        $to_name = $user->name;
-        $to_email = $user->email;
-        $data = array('name'=>'Akaun disahkan di mygeo-explorer.gov.my', 'body' => 'Akaun disahkan.');
+        //send email to the person who was approved
+        $to_name = $request->namaPenuh;
+        $to_email = $request->email;
+        $data = array('name'=>$request->namaPenuh);
         Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Akaun disahkan');
-            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
+            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Diluluskan');
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
+        
         exit();
     }
 
@@ -148,14 +149,15 @@ class UserController extends Controller {
         $user->disahkan = 2;
         $user->update();
         
-        //send mail
-        $to_name = $user->name;
-        $to_email = $user->email;
-        $data = array('name'=>'Akaun ditolak di mygeo-explorer.gov.my', 'body' => 'Akaun ditolak.');
+        //send email to the person who was disapproved
+        $to_name = $request->namaPenuh;
+        $to_email = $request->email;
+        $data = array('name'=>$request->namaPenuh);
         Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Akaun ditolak');
-            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
+            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Tidak Diluluskan');
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
+        
         exit();
     }
 
