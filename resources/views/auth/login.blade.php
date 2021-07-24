@@ -663,12 +663,30 @@
     
     $(document).on("click","#btn_daftar",function(){
         var nric = $("#input-nric").val();
+        var tpejabat = $("#input-tpejabat").val();
+        var password_daftar = $("#password_daftar").val();
+        var msg = "";
         if(nric.length < 12){
-            alert("Nombor NRIC tidak lengkap");
+            msg = msg + "Nombor NRIC tidak lengkap\r\n";
+        }
+        if(tpejabat.length < 12){
+            msg = msg + "Telefon Pejabat tidak lengkap\r\n";
+        }
+        if(!checkPassword(password_daftar)){
+            msg = msg + "Kata laluan mesti mempunyai sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil, nombor dan simbol.\r\n";
+        }
+        if(msg.length > 0){
+            alert(msg);
         }else{
             $("#formRegisterUser").submit();
         }
     });
+    
+    function checkPassword(str){
+        // at least one number, one lowercase and one uppercase letter, at least 12 characters
+        var re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}/;
+        return re.test(str);
+    }
 
     $(document).ready(function() {
         <?php
@@ -676,7 +694,7 @@
             ?>alert("{{ Session::get('message') }}");<?php
         }
         ?>
-        $("#input-nric").inputFilter(function(value) {
+        $("#input-nric,#input-tpejabat").inputFilter(function(value) {
             return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 999999999999);
         });
   

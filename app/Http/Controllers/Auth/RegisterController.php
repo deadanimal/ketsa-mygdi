@@ -55,7 +55,7 @@ class RegisterController extends Controller
     {
         if($_SERVER['HTTP_HOST'] == "localhost:8888"){
             $valid = Validator::make($data, [
-                'name' => ['required', 'string', 'max:255'],
+                'name' => ['required', 'string'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
