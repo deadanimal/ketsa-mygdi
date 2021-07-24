@@ -149,13 +149,10 @@
                                             $count = 1;
                                             foreach ($user->getRoleNames() as $role) {
                                                 ?><input class="form-control form-control-sm ml-3" id="peranan" type="text" value="<?php echo $role; ?> " disabled /><?php
-                                                                                                                                                                                if ($count != count($user->getRoleNames())) {
-                                                                                                                                                                                    ?>,<?php
-                                                                                                                                                                                                }
-                                                                                                                                                                                                $count++;
-                                                                                                                                                                                            }
-                                                                                                                                                                                        }
-                                                                                                                                                                                        ?>
+                                                if ($count != count($user->getRoleNames())) {                                                                    ?>,<?php                                                                                                   }
+                                                $count++;
+                                            }                                                                                                         }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +171,7 @@
                                         <h3 class="mb-0">Tukar Kata Laluan</h3>
                                     </div>
                                     <div class="col-4 text-right">
-                                    <button type="submit" class="btn btn-warning btn-sm text-white btn-icon btn-3">
+                                    <button type="button" class="btn btn-warning btn-sm text-white btn-icon btn-3 btnTukar">
                                             <span class="btn-inner--icon"><i class="fas fa-wrench"></i></span>
                                             <span class="btn-inner--text">Tukar</span>
                                         </button>
@@ -223,5 +220,31 @@
         </div>
     </section>
 </div>
+
+<script>
+$(document).ready(function(){
+    <?php
+    if(Session::has('message')){
+        ?>alert("{{ Session::get('message') }}");<?php
+    }
+    ?>
+            
+    $(document).on('click','.btnTukar',function(){
+        var passold = $('#password_old').val();
+        var passnew = $('#password_new').val();
+        var passnewconfirm = $('#password_new_confirm').val();
+        
+        if(passold == "" || passnew == "" || passnewconfirm == ""){
+            alert('Sila pastikan maklumat kata laluan lama dan baru lengkap');
+        }else{
+            if(passnew == passnewconfirm){
+                $('#form_change_password').submit();
+            }else{
+                alert('Sila pastikan input kata laluan baru dan sahkan kata laluan baru sama dan lengkap');
+            }
+        }
+    });
+});
+</script>
 
 @stop

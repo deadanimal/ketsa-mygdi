@@ -202,9 +202,13 @@ class UserController extends Controller {
 
     public function update_password(Request $request){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
-        $user->password = Hash::make($request->password_new);
-        $user->save();
-        return view('mygeo.profile.profil', compact('user'));
+        
+        if (Hash::check($request->password_old, $user->password)) { 
+            $user->fill(['password' => Hash::make($request->password_new)])->save();
+            return redirect('mygeo_profil')->with('message','Kata laluan berjaya ditukar');
+        } else {
+            return redirect('mygeo_profil')->with('message','Kata laluan lama tidak betul');
+        }
     }
     
     public function change_user_status(Request $request){
@@ -325,12 +329,15 @@ class UserController extends Controller {
         ];
         $this->validate($request, $fields, $customMsg);
         
+        $password = "";
+        
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;
             $nu->email = $request->email;
-            $password = $this->generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',20);
-            $nu->password = Hash::make($password);
+            $pass = $this->generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',20);
+            $password = $pass;
+            $nu->password = Hash::make($pass);
             $nu->status = '1';
             $nu->disahkan = '1';
             $nu->save();
@@ -343,7 +350,11 @@ class UserController extends Controller {
         //send email to the person created
         $to_name = $request->namaPenuh;
         $to_email = $request->email;
-        $data = array('name'=>'Pendaftaran pengguna baru di mygeo-explorer.gov.my', 'body' => 'Pendaftaran berjaya.');
+        $data = array(
+            'name'=>$request->namaPenuh,
+            'body'=>'Pendaftaran berjaya.',
+            'password'=>$password
+        );
         Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)->subject('Mygeo Explorer - Pendaftaran berjaya');
             $message->from('pentadbiraplikasi@gmail.com','mail@mygeo-explorer.gov.my');

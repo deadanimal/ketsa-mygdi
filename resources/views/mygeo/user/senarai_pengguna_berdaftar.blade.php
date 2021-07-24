@@ -151,7 +151,7 @@
                                             ?>
                                             <tr>
                                                 <td>{{ $bil }}</td>
-                                                <td>{{ $user->name }}asdlkad sa dasd sad klsa d</td>
+                                                <td>{{ $user->name }}</td>
                                                 <td>{{ $user->agensi_organisasi }}</td>
                                                 <td>
                                                     <?php
