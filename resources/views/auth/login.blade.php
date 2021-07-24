@@ -669,9 +669,6 @@
         if(nric.length < 12){
             msg = msg + "Nombor NRIC tidak lengkap\r\n";
         }
-        if(tpejabat.length < 12){
-            msg = msg + "Telefon Pejabat tidak lengkap\r\n";
-        }
         if(!checkPassword(password_daftar)){
             msg = msg + "Kata laluan mesti mempunyai sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil, nombor dan simbol.\r\n";
         }
