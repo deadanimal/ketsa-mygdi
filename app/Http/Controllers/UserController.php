@@ -51,7 +51,9 @@ class UserController extends Controller {
         $users_all = User::where(['disahkan' => 1])->orderBy('updated_at', 'desc')->get();
         $users = [];
         foreach($users_all as $user){
-            if($user->hasRole('Penerbit Metadata') || $user->hasRole('Pengesah Metadata')){
+            if($user->hasRole('Super Admin')){
+
+            }else{
                 $users[]= $user;
             }
         }
@@ -125,6 +127,7 @@ class UserController extends Controller {
         $user_id = $_POST['user_id'];
         $user = User::where(['id'=>$user_id])->get()->first();
         $user->disahkan = 1;
+        $user->status = 1;
         $user->update();
         
         //send email to the person who was approved
