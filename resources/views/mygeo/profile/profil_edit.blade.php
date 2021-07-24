@@ -43,30 +43,26 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-<<<<<<< HEAD
-                        <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil">
-=======
-                        <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil" enctype="multipart/form-data">
->>>>>>> 4e6bda17b20ac0c1101a8728e1bd36c8fa1aae55
-                            @csrf
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h3 class="mb-0">Kemaskini Profil Pengguna</h3>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <a href="{{ url('mygeo_profil') }}" class="btn btn-danger btn-sm text-white btn-icon btn-3">
-                                            <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
-                                            <span class="btn-inner--text">Balik</span>
-                                        </a>
-                                        <button type="submit" class="btn btn-success btn-sm text-white btn-icon btn-3">
-                                            <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
-                                            <span class="btn-inner--text">Simpan</span>
-                                        </button>
-                                    </div>
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Kemaskini Profil Pengguna</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a href="{{ url('mygeo_profil') }}" class="btn btn-danger btn-sm text-white btn-icon btn-3">
+                                        <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
+                                        <span class="btn-inner--text">Balik</span>
+                                    </a>
+                                    <button type="submit" class="btn btn-success btn-sm text-white btn-icon btn-3">
+                                        <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
+                                        <span class="btn-inner--text">Simpan</span>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="card-body">
+                        </div>
+                        <div class="card-body">
+                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil" enctype="multipart/form-data">
+                                @csrf
                                 <h6 class="heading-small text-muted mt-0 mb-4">Maklumat Pengguna</h6>
                                 <div class="pl-lg-4 pb-lg-4">
                                     <div class="row mb-2">
@@ -168,41 +164,50 @@
                                                                     $assigned = $assigned * 0;
                                                                 }
                                                             }
-
                                                             if ($assigned == 0) {
-                                                                ?><option value="{{ $role->name }}" selected>{{ $role->name }} 1</option><?php
-                                                                                                                                                        } else {
-                                                                                                                                                            ?><option value="{{ $role->name }}">{{ $role->name }} 1</option><?php
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    } else {
-                                                                                                                                                                                                                                        ?><option value="{{ $role->name }}">{{ $role->name }} 1</option><?php
-                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                        ?>
+                                                                ?><option value="{{ $role->name }}" selected>{{ $role->name }} 1</option><?php } else {
+                                                                ?><option value="{{ $role->name }}">{{ $role->name }} 1</option><?php
+                                                            }
+                                                        } else {
+                                                            ?><option value="{{ $role->name }}">{{ $role->name }} 1</option><?php }
+                                        }
+                                    } ?>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+                            </form>
 
-                                <hr class="my-4">
-                                <h6 class="heading-small text-muted mt-0 mb-4">Gambar Profil</h6>
+                            <hr class="my-4">
+                            <h6 class="heading-small text-muted mt-0 mb-4">Gambar Profil</h6>
+                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_gambarprofil')}}" id="form_kemaskini_gambarprofil" enctype="multipart/form-data">
+                                @csrf
                                 <div class="pl-lg-4">
                                     <div class="row mb-2">
                                         <div class="col-3">
-                                            <image id="profileImage" src="http://lorempixel.com/200/250" style="border-radius: .95rem"/>
+                                            <?php
+                                            if(auth::user()->gambar_profil != ""){
+                                                ?>
+                                                <image id="profileImage" alt="Image placeholder" src="{{ asset('storage/'.auth::user()->gambar_profil) }}" style="border-radius: .95rem;max-width:250px;">
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <image id="profileImage" alt="Image placeholder" src="./afiqadminmygeo_files/avatar.png" style="border-radius: .95rem;max-width:250px;">
+                                                <?php
+                                            }
+                                            ?>
                                         </div>
                                         <div class="col-6 ml-4 ">
                                             <label class="form-control-label">Pilih Gambar</label>
                                             <div class="form-inline">
-                                                <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" class="form-control form-control-sm p-0">
-                                            <button class="btn btn-sm btn-warning ml-3">Simpan</button>
+                                                <input id="imageUpload" type="file" name="gambar_profil" placeholder="Photo" class="form-control form-control-sm p-0">
+                                                <button class="btn btn-sm btn-warning ml-3">Simpan</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>                        
                     </div>
                 </div>
             </div>

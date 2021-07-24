@@ -166,16 +166,6 @@ class UserController extends Controller {
     }
 
     public function update_profile(Request $request){
-        
-        //save gambar profil.ftest
-        if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
-            $this->validate($request,['gambar_profil' => 'required|image|mimes:jpeg,png,jpg']);
-            $exists = Storage::exists($request->gambar_profil->getClientOriginalName());
-            $time = date('Y-m-d'.'_'.'H_i_s');
-            $fileName = $time.'_'.$request->gambar_profil->getClientOriginalName();
-            $imageUrl = Storage::putFileAs('/public/', $request->file('gambar_profil'), $fileName);
-        }
-
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
@@ -184,9 +174,6 @@ class UserController extends Controller {
         $user->bahagian = $request->bahagian;
         $user->sektor = $request->sektor;
         $user->phone_pejabat = $request->phone_pejabat;
-        if(isset($imageUrl)){
-            $user->gambar_profil = $fileName;
-        }
         $user->save();
 
         //save user's role
@@ -197,7 +184,26 @@ class UserController extends Controller {
             }
         }
 
-        return redirect()->action([UserController::class,'show']);
+        return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
+    }
+    
+    public function update_gambarprofile(Request $request){
+        //save gambar profil
+        if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
+            $this->validate($request,['gambar_profil' => 'required|image|mimes:jpeg,png,jpg']);
+            $exists = Storage::exists($request->gambar_profil->getClientOriginalName());
+            $time = date('Y-m-d'.'_'.'H_i_s');
+            $fileName = $time.'_'.$request->gambar_profil->getClientOriginalName();
+            $imageUrl = Storage::putFileAs('/public/', $request->file('gambar_profil'), $fileName);
+        }
+
+        $user = User::where(["id"=>Auth::user()->id])->get()->first();
+        if(isset($imageUrl)){
+            $user->gambar_profil = $fileName;
+        }
+        $user->save();
+
+        return redirect('mygeo_profil')->with('message','Gambar profil berjaya dikemas kini.');
     }
 
     public function update_password(Request $request){
@@ -352,12 +358,12 @@ class UserController extends Controller {
         $to_email = $request->email;
         $data = array(
             'name'=>$request->namaPenuh,
-            'body'=>'Pendaftaran berjaya.',
-            'password'=>$password
+            'email'=>$request->email,
+            'password'=>$password,
         );
         Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Pendaftaran berjaya');
-            $message->from('pentadbiraplikasi@gmail.com','mail@mygeo-explorer.gov.my');
+            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Akaun');
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
         
         return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan');
