@@ -239,8 +239,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p id="modal_title" style="white-space: normal;width:100%;margin-top:20px;">{{ $abstract }}</p>
-                                <p id="modal_abstract" style="white-space: normal;width:100%;margin-top:20px;">{{ $abstract }}</p>
+                                <p id="modal_title" style="white-space: normal;width:100%;margin-top:20px;"></p>
+                                <p id="modal_abstract" style="white-space: normal;width:100%;margin-top:20px;"></p>
                             </div>
                         </div>
                         <div class="row">
