@@ -673,16 +673,16 @@
         var email_daftar = $("#email_daftar").val();
         var msg = "";
         if(nric.length < 12){
-            msg = msg + "Nombor NRIC tidak lengkap\r\n";
+            msg = msg + "Nombor NRIC tidak lengkap\r\n\r\n";
         }
         if(!checkPassword(password_daftar)){
-            msg = msg + "Kata laluan mesti mempunyai sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil, nombor dan simbol.\r\n";
+            msg = msg + "Kata laluan mesti mempunyai sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil, nombor dan simbol.\r\n\r\n";
         }
         if(!isEmail(email_daftar)){
-            msg = msg + "Emel tidak sah\r\n";
+            msg = msg + "Emel tidak sah\r\n\r\n";
         }
         if(password_daftar != password_confirm){
-            msg = msg + "Kata laluan yang dimasukkan berbeza dengan kata laluan yang disahkan\r\n";
+            msg = msg + "Kata laluan yang dimasukkan berbeza dengan kata laluan yang disahkan\r\n\r\n";
         }
         if(msg.length > 0){
             alert(msg);
