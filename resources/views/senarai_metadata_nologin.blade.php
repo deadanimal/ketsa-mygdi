@@ -156,7 +156,7 @@
                                                 <div class="col-4">
                                                     <div class="card card-primary" id="divParentCollapse{{ $bil }}">
                                                         <div class="card-header cardw">
-                                                            <a data-toggle="collapse" href="#divCollapse{{ $bil }}">
+                                                            <a class="a_title" data-toggle="collapse" href="#divCollapse{{ $bil }}">
                                                                 <?php 
                                                                 if(isset($val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                                                                   echo $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
@@ -175,7 +175,8 @@
                                                                 }
                                                                 ?>
                                                                 <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
-                                                                <form method="post" action="{{ url('/lihat_metadata_nologin') }}" id="formViewMetadata{{ $key }}">
+                                                                <input class="p_abstract" type="hidden" value="{{ $abstract }}">
+                                                                <form method="post" action="{{ url('/lihat_metadata_nologin') }}" id="formViewMetadata{{ $key }}" target="_blank">
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
                                                                 </form>
@@ -187,8 +188,12 @@
                                                                 <a href="#" class="metadataActionLinks aViewXml" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><br>
                                                                 <?php
                                                                 $url = (isset($val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) ? $val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString : "");
+                                                                if(trim($url) != ""){
+                                                                    ?>
+                                                                    <a href="#" class="metadataActionLinks aViewMap" onClick="return false;" data-metid="{{$key}}" data-toggle="modal" data-target="#modal-showmap" data-mapurl="{{ $url }}" data-backdrop="false">Show map</a>
+                                                                    <?php
+                                                                }
                                                                 ?>
-                                                                <a href="#" class="metadataActionLinks aViewMap" onClick="return false;" data-metid="{{$key}}" data-toggle="modal" data-target="#modal-showmap" data-mapurl="{{ $url }}" data-backdrop="false">Show map</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -230,6 +235,18 @@
                                 ?>
                                 <iframe id="mapiframe" src="" height="425px" width="100%" title="ArcGIS REST Services">
     </iframe>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p id="modal_title" style="white-space: normal;width:100%;margin-top:20px;">{{ $abstract }}</p>
+                                <p id="modal_abstract" style="white-space: normal;width:100%;margin-top:20px;">{{ $abstract }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="#" class="metadataActionLinks a_metadata_details" onClick="return false;" data-metid="">Metadata Details</a><br>
+                                <a href="#" class="metadataActionLinks a_metadata_xml" onClick="return false;" data-metid="">Metadata (XML)</a>
                             </div>
                         </div>
                     </div>
@@ -281,17 +298,24 @@
         // format: 'L'
     });
 
-    $(document).on("click", ".aViewMetadata", function() {
+    $(document).on("click", ".aViewMetadata, .a_metadata_details", function() {
         var metid = $(this).data('metid');
         $("#formViewMetadata" + metid).submit();
     });
-    $(document).on("click", ".aViewXml", function() {
+    $(document).on("click", ".aViewXml, .a_metadata_xml", function() {
         var metid = $(this).data('metid');
         $("#formViewXml" + metid).submit();
     });
     $(document).on("click", ".aViewMap", function () {
         var mapurl = $(this).data('mapurl');
+        var abstract = $(this).parent().find('.p_abstract').val();
+        var title = $(this).parent().parent().parent().find('.a_title').html();
+        
         $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
+        $('#modal_abstract').html(abstract);
+        $('#modal_title').html(title);
+        $('.a_metadata_details').data('metid',$(this).data('metid'));
+        $('.a_metadata_xml').data('metid',$(this).data('metid'));
         $('#modal-showmap').modal('show');
     });
 
