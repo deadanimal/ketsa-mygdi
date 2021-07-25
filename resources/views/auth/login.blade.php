@@ -669,6 +669,7 @@
         var nric = $("#input-nric").val();
         var tpejabat = $("#input-tpejabat").val();
         var password_daftar = $("#password_daftar").val();
+        var password_confirm = $("#password-confirm").val();
         var email_daftar = $("#email_daftar").val();
         var msg = "";
         if(nric.length < 12){
@@ -679,6 +680,9 @@
         }
         if(!isEmail(email_daftar)){
             msg = msg + "Emel tidak sah\r\n";
+        }
+        if(password_daftar != password_confirm){
+            msg = msg + "Kata laluan yang dimasukkan berbeza dengan kata laluan yang disahkan\r\n";
         }
         if(msg.length > 0){
             alert(msg);
