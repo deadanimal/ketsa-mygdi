@@ -338,7 +338,9 @@
                                                         <div class="input-group">
                                                             <input id="password_daftar" type="password" class="form-control" name="password" required autocomplete="new-password" placeholder="Password">
                                                             <span class="input-group-append">
-                                                                <button type="button" class="btn btn-link btn-flat" onclick="myFunction()">Show Password</button>
+                                                                <div class="input-group-text">
+                                                                    <i class="fas fa-eye" onclick="myFunction()"></i>
+                                                                </div>
                                                             </span>
                                                         </div>
                                                         <p class="error-message"><span></span></p>
@@ -354,7 +356,9 @@
                                                         <div class="input-group">
                                                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Password">
                                                             <span class="input-group-append">
-                                                                <button type="button" class="btn btn-link btn-flat" onclick="myFunction2()">Show Password</button>
+                                                                <div class="input-group-text">
+                                                                    <i class="fas fa-eye" onclick="myFunction2()"></i>
+                                                                </div>
                                                             </span>
                                                         </div>
                                                         <p class="error-message"><span></span></p>

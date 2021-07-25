@@ -1,7 +1,7 @@
 <?php
-
 namespace App;
 
+use App\Notifications\ResetPasswordNotification; // At the top under your namespace
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,5 +43,9 @@ class User extends Authenticatable
 
     public function user_roles(){
         // return $this->belongsTo(Role::class, 'peranan', 'id');
+    }
+    
+    public function sendPasswordResetNotification($token){
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

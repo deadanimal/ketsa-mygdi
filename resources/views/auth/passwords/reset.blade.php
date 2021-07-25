@@ -31,8 +31,16 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group">
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-eye" onclick="myFunction3()"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -45,7 +53,16 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group">
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-eye" onclick="myFunction4()"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -63,3 +80,26 @@
     </div>
 </div>
 @endsection
+
+<script>
+    function myFunction3() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    
+    function myFunction4() {
+        var x = document.getElementById("password-confirm");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    
+    $(document).ready(function(){
+    });
+</script>
