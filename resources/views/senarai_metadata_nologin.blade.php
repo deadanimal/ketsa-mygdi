@@ -194,6 +194,14 @@
                                                                     <?php
                                                                 }
                                                                 ?>
+                                                                <?php
+                                                                $website = (isset($val->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL) ? $val->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL : "");
+                                                                if(trim($website) != ""){
+                                                                    ?>
+                                                                    <a href="{{ $website }}" class="metadataActionLinks">Website</a>
+                                                                    <?php
+                                                                }
+                                                                ?>
                                                             </div>
                                                         </div>
                                                     </div>
