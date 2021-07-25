@@ -690,7 +690,7 @@ class MetadataController extends Controller {
         }
 
         //send mail
-        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample());
+//        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample());
         exit();
     }
 
@@ -706,7 +706,7 @@ class MetadataController extends Controller {
         $metadata->update();
 
         //send mail
-        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample());
+//        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample());
         exit();
     }
 
