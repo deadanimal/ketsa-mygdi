@@ -244,7 +244,6 @@
     <div id="preloader"></div>
 </section>
 
-
 <script>
     $(document).ready(function() {
         <?php
@@ -292,7 +291,7 @@
     });
     $(document).on("click", ".aViewMap", function () {
         var mapurl = $(this).data('mapurl');
-        $('#mapiframe').attr('src', 'http://localhost:8888/ketsa-mygdi/public/intecxmap/search/view-map-service.html?url='+mapurl);
+        $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
         $('#modal-showmap').modal('show');
     });
 
