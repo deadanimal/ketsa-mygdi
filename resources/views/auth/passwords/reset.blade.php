@@ -1,4 +1,4 @@
-@extends('layouts.app_afiq)'
+@extends('layouts.app_afiq')
 
 @section('content')
 <div class="container">

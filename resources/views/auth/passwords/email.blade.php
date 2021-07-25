@@ -17,16 +17,16 @@
     }
 </style>
 
-<div _ngcontent-lqr-c499="" class="content bgland p-5">
+<div class="content bgland p-5">
     <div class="container-fluid" data-aos="fade-up">
-        <div _ngcontent-lqr-c499="" class="row">
+        <div class="row">
             <div class="col-lg-3"></div>
-            <div _ngcontent-lqr-c499="" class="col-lg-6 p-4 px-5">
+            <div class="col-lg-6 p-4 px-5">
                 <div class="row img-center">
                     <img src="{{ url('assetsangular/img/logo/mygeo-logo.png') }}" alt="MyGeo Explorer" class="img-center" style="width: 80%; height: auto;">
                 </div>
                 <div class="row justify-content-center">
-                    <div _ngcontent-lqr-c499="" class="card" style="background-color: rgba(255, 255, 255, 0.7);">
+                    <div class="card" style="background-color: rgba(255, 255, 255, 0.7);">
                         <div class="card-body px-lg-5 py-lg-5">
                             @if (session('status'))
                             <div class="alert alert-success" role="alert">
