@@ -15,7 +15,7 @@ return [
 
     'reset' => 'Kata laluan berjaya dikemaskini',
     'sent' => 'We have emailed your password reset link!',
-    'sent' => 'Sila periksa emel anda untuk melihat pautan pengemaskinian kata laluan',
+    'sent' => 'Sila semak e-mel anda untuk membuat pengemaskinian kata laluan',
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
     'user' => "Email pengguna tidak dijumpai",
