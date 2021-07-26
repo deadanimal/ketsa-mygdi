@@ -77,41 +77,60 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    { 
         $user = User::create([
             'name' => $data['name'],
             'nric' => $data['nric'],
             'email' => $data['email'],
             'agensi_organisasi' => $data['agensi_organisasi'],
+            'institusi' => $data['institusi'],
             'bahagian' => $data['bahagian'],
             'sektor' => $data['sektor'],
             'email' => $data['email'],
             'phone_pejabat' => $data['phone_pejabat'],
+            'phone_bimbit' => $data['phone_bimbit'],
             'password' => Hash::make($data['password']),
             'alamat' => $data['alamat'],
             'kategori' => $data['kategori'],
-            'status' => "0",
+            'status' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
+            'disahkan' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
         ]);
 
         $userRole = $user->assignRole($data['peranan']);
         
-        //send email to the pentadbiraplikasi
-        $to_name = 'pentadbiraplikasi@gmail.com';
-        $to_email = 'pentadbiraplikasi@gmail.com';
-        $data = array('name'=>$data['name']);
-        Mail::send('mails.exmpl2', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Pengesahan Pendaftaran Penerbit/Pengesah Metadata MyGeo Explorer');
-            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-        });
-
+        if($data['peranan'] == "Pemohon Data"){
+            //send email to the pemohon data
+            $to_name = $data['name'];
+            $to_email = $data['email'];
+            $data = array('name'=>$data['name']);
+            Mail::send('mails.exmpl7', $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Berjaya');
+                $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+            });
+        }else{
+            //send email to the pentadbiraplikasi
+            $to_name = 'pentadbiraplikasi@gmail.com';
+            $to_email = 'pentadbiraplikasi@gmail.com';
+            $data = array('name'=>$data['name']);
+            Mail::send('mails.exmpl2', $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject('Pengesahan Pendaftaran Penerbit/Pengesah Metadata MyGeo Explorer');
+                $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+            });
+        }
+        
         return $user;
     }
     
     public function register(Request $request)
-    {
+    { 
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
         // $this->guard()->login($user);
-        return $this->registered($request, $user)?: redirect($this->redirectPath())->with('message','Pendaftaran anda dalam proses pengesahan. Anda akan menerima e-mel daripada pentadbir sekiranya pendaftaran berjaya');
+        if($request['peranan'] == "Pemohon Data"){
+            $msg = 'Akaun anda telah berjaya didaftarkan. Sila log masuk menggunakan e-mel sebagai ID pengguna dan kata laluan yang telah ditetapkan semasa mengisi borang pendaftaran.';
+        }else{
+            $msg = 'Pendaftaran anda dalam proses pengesahan. Anda akan menerima e-mel daripada pentadbir sekiranya pendaftaran berjaya';
+        }
+        return $this->registered($request, $user)?: redirect($this->redirectPath())->with('message',$msg);
      }
 }

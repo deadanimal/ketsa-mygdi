@@ -188,7 +188,14 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <input class="form-control form-control-sm ml-3" placeholder="Masukkan Kata Laluan Lama" type="password" id="password_old" name="password_old" />
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="Masukkan Kata Laluan Lama" type="password" id="password_old" name="password_old" />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-eye" onclick="myFunction1()"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -198,7 +205,14 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <input class="form-control form-control-sm ml-3" placeholder="Masukkan Kata Laluan Baru" type="password" id="password_new" name="password_new" />
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="Masukkan Kata Laluan Baru" type="password" id="password_new" name="password_new" />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-eye" onclick="myFunction2()"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -208,7 +222,14 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <input class="form-control form-control-sm ml-3" placeholder="Sahkan Kata Laluan Baru" type="password" id="password_new_confirm" name="password_new_confirm" />
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="Sahkan Kata Laluan Baru" type="password" id="password_new_confirm" name="password_new_confirm" />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-eye" onclick="myFunction3()"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -222,29 +243,56 @@
 </div>
 
 <script>
-$(document).ready(function(){
-    <?php
-    if(Session::has('message')){
-        ?>alert("{{ Session::get('message') }}");<?php
-    }
-    ?>
-            
-    $(document).on('click','.btnTukar',function(){
-        var passold = $('#password_old').val();
-        var passnew = $('#password_new').val();
-        var passnewconfirm = $('#password_new_confirm').val();
-        
-        if(passold == "" || passnew == "" || passnewconfirm == ""){
-            alert('Sila pastikan maklumat kata laluan lama dan baru lengkap');
-        }else{
-            if(passnew == passnewconfirm){
-                $('#form_change_password').submit();
-            }else{
-                alert('Sila pastikan input kata laluan baru dan sahkan kata laluan baru sama dan lengkap');
-            }
+    $(document).ready(function(){
+        <?php
+        if(Session::has('message')){
+            ?>alert("{{ Session::get('message') }}");<?php
         }
+        ?>
+
+        $(document).on('click','.btnTukar',function(){
+            var passold = $('#password_old').val();
+            var passnew = $('#password_new').val();
+            var passnewconfirm = $('#password_new_confirm').val();
+
+            if(passold == "" || passnew == "" || passnewconfirm == ""){
+                alert('Sila pastikan maklumat kata laluan lama dan baru lengkap');
+            }else{
+                if(passnew == passnewconfirm){
+                    $('#form_change_password').submit();
+                }else{
+                    alert('Sila pastikan input kata laluan baru dan sahkan kata laluan baru sama dan lengkap');
+                }
+            }
+        });
+
     });
-});
+    function myFunction1() {
+        var x = document.getElementById("password_old");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction2() {
+        var x = document.getElementById("password_new");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction3() {
+        var x = document.getElementById("password_new_confirm");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 </script>
 
 @stop

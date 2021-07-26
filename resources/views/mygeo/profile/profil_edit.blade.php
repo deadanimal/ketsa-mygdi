@@ -53,7 +53,7 @@
                                         <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
                                         <span class="btn-inner--text">Balik</span>
                                     </a>
-                                    <button type="submit" class="btn btn-success btn-sm text-white btn-icon btn-3">
+                                    <button type="button" class="btn btn-success btn-sm text-white btn-icon btn-3 btn_simpan">
                                         <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
                                         <span class="btn-inner--text">Simpan</span>
                                     </button>
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil" enctype="multipart/form-data">
+                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil">
                                 @csrf
                                 <h6 class="heading-small text-muted mt-0 mb-4">Maklumat Pengguna</h6>
                                 <div class="pl-lg-4 pb-lg-4">
@@ -72,7 +72,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="uname" type="text" value="{{ $user->name }}" />
+                                            <p>{{ $user->name }}</p>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -82,7 +82,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="nric" type="text" value="{{ $user->nric }}" />
+                                            <p>{{ $user->nric }}</p>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -92,7 +92,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="agensi_organisasi" type="text" value="{{ $user->agensi_organisasi }}" />
+                                            <p>{{ $user->agensi_organisasi }}</p>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -153,26 +153,14 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <select class="form-control form-control-sm ml-3" id="peranan" name="peranan[]">
-                                                <?php
-                                                if (!empty($roles)) {
-                                                    foreach ($roles as $role) {
-                                                        $assigned = 1; //0=assigned,1=unassigned
-                                                        if (!empty($user->getRoleNames())) {
-                                                            foreach ($user->getRoleNames() as $roleUser) {
-                                                                if ($role->name == $roleUser) {
-                                                                    $assigned = $assigned * 0;
-                                                                }
-                                                            }
-                                                            if ($assigned == 0) {
-                                                                ?><option value="{{ $role->name }}" selected>{{ $role->name }} 1</option><?php } else {
-                                                                ?><option value="{{ $role->name }}">{{ $role->name }} 1</option><?php
-                                                            }
-                                                        } else {
-                                                            ?><option value="{{ $role->name }}">{{ $role->name }} 1</option><?php }
-                                        }
-                                    } ?>
-                                            </select>
+                                            <?php
+                                            $roles = Auth::user()->getRoleNames();
+                                            if(!empty($roles) && count($roles) > 0){
+                                                foreach($roles as $r){
+                                                    ?><p>{{ $r }}</p><?php
+                                                }
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -214,4 +202,13 @@
         </div>
     </section>
 </div>
+
+<script>
+$(document).ready(function(){
+    $(document).on('click','.btn_simpan',function(){
+        $('#form_kemaskini_profil').submit();
+    });
+});
+</script>
+
 @stop

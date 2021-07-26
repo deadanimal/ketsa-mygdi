@@ -110,7 +110,7 @@
 
                                                     <div id="divsecond" class="divsecond">
                                                         <div class="custom-control custom-radio mb-3 2_g2c">
-                                                            <input class="custom-control-input" id="2_g2c" name="perananSelect" type="radio" value="2_g2c">
+                                                            <input class="custom-control-input" id="2_g2c" name="perananSelect" type="radio" value="2_g2c" disabled>
                                                             <label class="custom-control-label" for="2_g2c">
                                                                 G2C
                                                             </label>
@@ -214,7 +214,7 @@
                                             </div>
                                             <div class="row mb-2 divAgensiOrganisasi">
                                                 <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="input-agensi">Agensi/Organisasi/Institusi</label>
+                                                    <label class="form-control-label mr-4" for="input-agensi">Agensi/Organisasi</label>
                                                 </div>
                                                 <div class="col-8">
                                                     <select name="agensi_organisasi" id="agensi_organisasi" class="form-control form-control-sm ml-3"></select>
@@ -244,28 +244,20 @@
                                                 </div>
                                                 <div class="col-8">
                                                     <select class=" form-control form-control-sm ml-3" id="sektor" name="sektor">
-                                                        <option selected disabled>Pilih</option>
-                                                        <option value="1">Kerajaan</option>
+                                                        <!--<option selected disabled>Pilih</option>-->
+                                                        <option value="1" selected>Kerajaan</option>
                                                         <option value="2">Swasta</option>
                                                     </select>
                                                     <p class="error-message"><span></span></p>
                                                 </div>
                                             </div>
-                                            <div class="row mb-2 divEmel">
+                                            <div class="row mb-2">
                                                 <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="input-emel">Emel</label>
+                                                    <label class="form-control-label mr-4 divEmel" for="input-emel">Emel</label>
+                                                    <label class="form-control-label mr-4 divEmelRasmi" for="input-emel">Emel Rasmi</label>
                                                 </div>
                                                 <div class="col-6">
                                                     <input id="email_daftar" class="form-control form-control-sm ml-3" placeholder="Masukan E-mel anda" type="email" name="email" />
-                                                    <p class="error-message"><span></span></p>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2 divEmelRasmi">
-                                                <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="input-emel">Emel Rasmi</label>
-                                                </div>
-                                                <div class="col-6">
-                                                    <input class="form-control form-control-sm ml-3" placeholder="Masukan E-mel anda" type="text" name="email2" />
                                                     <p class="error-message"><span></span></p>
                                                 </div>
                                             </div>
@@ -277,6 +269,16 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <input class="form-control form-control-sm ml-3" id="input-tpejabat" placeholder="Nombor Telefon Pejabat" type="text" name="phone_pejabat" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 divPhoneBimbit">
+                                                <div class="col-3">
+                                                    <label class="form-control-label mr-4" for="input-tbimbit">
+                                                        Telefon Bimbit
+                                                    </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input class="form-control form-control-sm ml-3" id="input-tbimbit" placeholder="Nombor Telefon Bimbit" type="text" name="phone_bimbit" />
                                                 </div>
                                             </div>
                                             <div class="row mb-2 divPeranan">
@@ -436,6 +438,7 @@
             $(".divEmel").show();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").show();
+            $(".divPhoneBimbit").hide();
             $(".divPeranan").show();
             $(".divAgensiOrganisasiAlamat").show();
             $(".divInstitusi").hide();
@@ -466,11 +469,13 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").hide();
+            $(".divPhoneBimbit").hide();
             $(".divPeranan").hide();
             $(".divKategori").hide();
             $(".divdaftar").show();
             $(".divsecond").show();
             $(".divthird").show();
+            $('.btn_isi_borang').hide();
         } else if (per == "2_g2c") {
             $(".2_g2c").show();
             $(".2_g2g").show();
@@ -494,29 +499,16 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").hide();
+            $(".divPhoneBimbit").show();
             $(".divPeranan").hide();
             $(".divKategori").hide();
             $(".btn_isi_borang").show();
             $(".divsecond").show();
             $(".divthird").show();
-        } else if (per == "2_g2g_agensiPersNeg") {
-            $(".2_g2c").hide();
+        } else if (per == "2_g2g_agensiPersNeg" || per == "2_g2g_badanBerkanun" || per == "2_glc") {
             $(".divNama").show();
             $(".divNric").show();
-            $(".divAgensiOrganisasi").show();
-            $(".divBahagian").hide();
-            $(".divSektor").hide();
-            $(".divEmel").hide();
-            $(".divEmelRasmi").show();
-            $(".divPhonePejabat").show();
-            $(".divPeranan").show();
-            $(".divKategori").show();
-            $(".divAgensiOrganisasiAlamat").hide();
             $(".divInstitusi").hide();
-        } else if (per == "2_g2g_badanBerkanun") {
-            $(".2_g2c").hide();
-            $(".divNama").show();
-            $(".divNric").show();
             $(".divAgensiOrganisasi").show();
             $(".divAgensiOrganisasiAlamat").show();
             $(".divBahagian").hide();
@@ -524,25 +516,14 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").show();
             $(".divPhonePejabat").show();
+            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
-            $(".divInstitusi").hide();
-        } else if (per == "2_glc") {
-            $(".2_g2c").hide();
-            $(".divNama").show();
-            $(".divNric").show();
-            $(".divAgensiOrganisasi").show();
-            $(".divAgensiOrganisasiAlamat").show();
-            $(".divBahagian").hide();
-            $(".divSektor").hide();
-            $(".divEmel").hide();
-            $(".divEmelRasmi").show();
-            $(".divPhonePejabat").show();
-            $(".divPeranan").show();
-            $(".divKategori").show();
-            $(".divInstitusi").hide();
-        } else if (per == "2_g2e_iptaSyarahSelidik") {
-            $(".2_g2c").hide();
+            $(".divdaftar").show();
+            $(".divsecond").show();
+            $(".divthird").show();
+            $('.btn_isi_borang').show();
+        } else if (per == "2_g2e_iptaSyarahSelidik" || per == "2_g2e_iptaPelajar" || per == "2_g2e_iptsSyarahSelidik" || per == "2_g2e_iptsPelajar") {
             $(".divNama").show();
             $(".divNric").show();
             $(".divInstitusi").show();
@@ -553,47 +534,10 @@
             $(".divEmel").show();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").show();
+            $(".divPhoneBimbit").show();
             $(".divPeranan").show();
             $(".divKategori").show();
-        } else if (per == "2_g2e_iptaPelajar") {
-            $(".divNama").show();
-            $(".divNric").show();
-            $(".divInstitusi").show();
-            $(".divAgensiOrganisasi").hide();
-            $(".divAgensiOrganisasiAlamat").show();
-            $(".divBahagian").hide();
-            $(".divSektor").hide();
-            $(".divEmel").show();
-            $(".divEmelRasmi").hide();
-            $(".divPhonePejabat").show();
-            $(".divPeranan").show();
-            $(".divKategori").show();
-        } else if (per == "2_g2e_iptsSyarahSelidik") {
-            $(".divNama").show();
-            $(".divNric").show();
-            $(".divInstitusi").show();
-            $(".divAgensiOrganisasi").hide();
-            $(".divAgensiOrganisasiAlamat").show();
-            $(".divBahagian").hide();
-            $(".divSektor").hide();
-            $(".divEmel").show();
-            $(".divEmelRasmi").hide();
-            $(".divPhonePejabat").show();
-            $(".divPeranan").show();
-            $(".divKategori").show();
-        } else if (per == "2_g2e_iptsPelajar") {
-            $(".divNama").show();
-            $(".divNric").show();
-            $(".divInstitusi").show();
-            $(".divAgensiOrganisasi").hide();
-            $(".divAgensiOrganisasiAlamat").show();
-            $(".divBahagian").hide();
-            $(".divSektor").hide();
-            $(".divEmel").show();
-            $(".divEmelRasmi").hide();
-            $(".divPhonePejabat").show();
-            $(".divPeranan").show();
-            $(".divKategori").show();
+            $('.btn_isi_borang').show();
         } else if (per == "2_g2g") {
             $(".2_g2c").show();
             $(".2_g2g_agensiPersNeg").show();
@@ -615,11 +559,13 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").hide();
+            $(".divPhoneBimbit").show();
             $(".divPeranan").hide();
             $(".divKategori").hide();
             $(".divdaftar").show();
             // $(".divsecond").hide();
             // $(".divthird").hide();
+            $('.btn_isi_borang').hide();
         } else if (per == "2_g2e") {
             $(".2_g2c").show();
             $(".2_g2g_agensiPersNeg").hide();
@@ -641,11 +587,13 @@
             $(".divEmel").hide();
             $(".divEmelRasmi").hide();
             $(".divPhonePejabat").hide();
+            $(".divPhoneBimbit").show();
             $(".divPeranan").hide();
             $(".divKategori").hide();
             $(".divdaftar").show();
             // $(".divsecond").hide();
             // $(".divthird").hide();
+            $('.btn_isi_borang').hide();
         }
 
         //pre-set form values based on role selected
@@ -703,28 +651,37 @@
     }
 
     $(document).ready(function() {
+        var msg = "";
+        <?php
+        if($errors->any()){
+            foreach($errors->all() as $error){
+                ?>msg = msg+"{{ $error }}\n\n";<?php
+            }
+            ?>alert(msg);<?php
+        } 
+        ?>
         <?php
         if(Session::has('message')){
             ?>alert("{{ Session::get('message') }}");<?php
         }
         ?>
-        $("#input-nric,#input-tpejabat").inputFilter(function(value) {
+        $("#input-nric,#input-tpejabat,#input-tbimbit").inputFilter(function(value) {
             return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 999999999999);
         });
   
         //ajax get roles
-        $.ajax({
-            method: "POST",
-            url: "get_roles",
-            data: {
-                "_token": "{{ csrf_token() }}"
-            },
-            dataType: "json",
-        }).done(function(data) {
-            data.forEach(function(the_var) {
-                $("#peranan").append("<option value='" + the_var.id + "'>" + the_var.name + "</option>");
-            });
-        });
+//        $.ajax({
+//            method: "POST",
+//            url: "get_roles",
+//            data: {
+//                "_token": "{{ csrf_token() }}"
+//            },
+//            dataType: "json",
+//        }).done(function(data) {
+//            data.forEach(function(the_var) {
+//                $("#peranan").append("<option value='" + the_var.id + "'>" + the_var.name + "</option>");
+//            });
+//        });
         
         //ajax get agensi/organisasi
         $.ajax({

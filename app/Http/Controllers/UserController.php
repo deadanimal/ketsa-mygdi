@@ -48,7 +48,7 @@ class UserController extends Controller {
             exit();
         }
         
-        $users_all = User::where(['disahkan' => 1])->orderBy('updated_at', 'desc')->get();
+        $users_all = User::where(['disahkan' => 1])->orderBy('name')->get();
         $users = [];
         foreach($users_all as $user){
             if($user->hasRole('Super Admin')){
@@ -177,22 +177,23 @@ class UserController extends Controller {
 
     public function update_profile(Request $request){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
-        $user->name = $request->uname;
-        $user->nric = $request->nric;
-        $user->email = $request->email;
-        $user->agensi_organisasi = $request->agensi_organisasi;
+//        $user->name = $request->uname;
+//        $user->nric = $request->nric;
+//        $user->email = $request->email;
+//        $user->agensi_organisasi = $request->agensi_organisasi;
         $user->bahagian = $request->bahagian;
         $user->sektor = $request->sektor;
         $user->phone_pejabat = $request->phone_pejabat;
+        $user->phone_bimbit = $request->phone_bimbit;
         $user->save();
 
         //save user's role
-        if(!is_null($request->peranan)){
-            ModelHasRoles::where(["model_id"=>$user->id,"model_type"=>"App\User"])->delete();
-            foreach($request->peranan as $role){
-                $user->assignRole($role);
-            }
-        }
+//        if(!is_null($request->peranan)){
+//            ModelHasRoles::where(["model_id"=>$user->id,"model_type"=>"App\User"])->delete();
+//            foreach($request->peranan as $role){
+//                $user->assignRole($role);
+//            }
+//        }
 
         return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
     }
