@@ -17,6 +17,7 @@
     <link href="{{ asset('afiqadminmygeo_files/mapbox-gl.css')}}" rel="stylesheet">
     <link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
 
+
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -66,6 +67,8 @@
 
         }
     </style>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0" style="padding-right: 0px;">
@@ -461,11 +464,11 @@
                                                         <?php
                                                         if(auth::user()->gambar_profil != ""){
                                                             ?>
-                                                            <img alt="Image placeholder" src="{{ asset('storage/'.auth::user()->gambar_profil) }}">    
+                                                            <img alt="Image placeholder" src="{{ asset('storage/'.auth::user()->gambar_profil) }}">
                                                             <?php
                                                         }else{
                                                             ?>
-                                                            <img alt="Image placeholder" src="./afiqadminmygeo_files/avatar.png">    
+                                                            <img alt="Image placeholder" src="./afiqadminmygeo_files/avatar.png">
                                                             <?php
                                                         }
                                                         ?>
@@ -482,6 +485,7 @@
                         <div _ngcontent-oai-c451="" class="backdrop d-xl-none ng-star-inserted"></div>
                     </app-navbar>
 
+                    <link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
                     @yield('content')
 
                     <!--container-->

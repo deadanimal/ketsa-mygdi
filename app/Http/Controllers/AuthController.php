@@ -9,6 +9,7 @@ use App\ModelHasRoles;
 use Illuminate\Support\Facades\Log;
 use Auth;
 use Hash;
+use UxWeb\SweetAlert\SweetAlert;
 
 class AuthController extends Controller {
 
@@ -46,9 +47,11 @@ class AuthController extends Controller {
 
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password,'disahkan'=>'1','status'=>'1'])) {
             // Authentication passed...
+            alert()->success('Log masuk berjaya.', 'Berjaya');
             return redirect()->intended('/landing_mygeo');
         }else{
-            return redirect('/login')->with( ['msg' => 'ID pengguna atau kata laluan tidak sah.'] );
+            alert()->warning('ID pengguna atau kata laluan tidak sah.', 'Tidak Berjaya');
+            return redirect('/login');
         }
     }
 

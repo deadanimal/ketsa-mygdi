@@ -157,24 +157,24 @@
                                                     <div class="card card-primary" id="divParentCollapse{{ $bil }}">
                                                         <div class="card-header cardw">
                                                             <a data-toggle="collapse" href="#divCollapse{{ $bil }}">
-                                                                <?php 
+                                                                <?php
                                                                 if(isset($val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                                                                   echo $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                                                                 }else{
                                                                     ?>--no title set--<?php
                                                                 }
                                                                 ?>
-                                                            </a>
-                                                        </div>
-                                                        <div id="divCollapse{{ $bil }}" class="panel-collapse collapse in" data-parent="#divParentCollapse{{ $bil }}">
-                                                            <div class="card-body">
                                                                 <?php
                                                                 $abstract = "";
                                                                 if(isset($val->identificationInfo->SV_ServiceIdentification->abstract) && $val->identificationInfo->SV_ServiceIdentification->abstract != ""){
                                                                     $abstract = trim($val->identificationInfo->SV_ServiceIdentification->abstract);
                                                                 }
                                                                 ?>
-                                                                <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
+                                                                <p class="mt-3" style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
+                                                            </a>
+                                                        </div>
+                                                        <div id="divCollapse{{ $bil }}" class="panel-collapse collapse in" data-parent="#divParentCollapse{{ $bil }}">
+                                                            <div class="card-body">
                                                                 <form method="post" action="{{ url('/lihat_metadata_nologin') }}" id="formViewMetadata{{ $key }}">
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
@@ -183,12 +183,12 @@
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
                                                                 </form>
-                                                                <a href="#" class="metadataActionLinks aViewMetadata" onClick="return false;" data-metid="{{$key}}">Metadata Details</a><br>
-                                                                <a href="#" class="metadataActionLinks aViewXml" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><br>
+                                                                <a class="btn btn-sm btn-primary metadataActionLinks aViewMetadata col-12 mb-2" onClick="return false;" data-metid="{{$key}}"><span class="text-white"><i class="far fa-newspaper mr-2"></i>Metadata Details</span></a><br>
+                                                                <a class="btn btn-sm btn-warning metadataActionLinks aViewXml col-12 mb-2" onClick="return false;" data-metid="{{$key}}"><span class="text-white"><i class="fas fa-map mr-2"></i>Metadata (XML)</span></a><br>
                                                                 <?php
                                                                 $url = (isset($val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) ? $val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString : "");
                                                                 ?>
-                                                                <a href="#" class="metadataActionLinks aViewMap" onClick="return false;" data-metid="{{$key}}" data-toggle="modal" data-target="#modal-showmap" data-mapurl="{{ $url }}" data-backdrop="false">Show map</a>
+                                                                <a class="btn btn-sm btn-success metadataActionLinks aViewMap col-12 mb-2" onClick="return false;" data-metid="{{$key}}" data-toggle="modal" data-target="#modal-showmap" data-mapurl="{{ $url }}" data-backdrop="false"><span class="text-white"><i class="fas fa-map-marker-alt mr-2"></i>Show Map</span></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -211,7 +211,7 @@
             </div>
         </div>
     </div>
-    
+
     <!--===== MODALS show map =====-->
     <div class="modal fade" id="modal-showmap">
         <div class="modal-dialog modal-xl">
@@ -235,11 +235,11 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between1">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
     @include('modal_carian_tambahan')
     <div id="preloader"></div>
 </section>

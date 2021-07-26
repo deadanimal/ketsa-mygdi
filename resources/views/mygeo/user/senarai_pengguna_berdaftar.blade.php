@@ -143,7 +143,7 @@
                                         <button type="button" class="btn btn-sm btn-default mr-2">Pemindahan Akaun</button>
                                     </a>
                                     <a href="#" onclick="return false;">
-                                        <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modalPenggunaBaru"><span><i class="fas fa-plus mr-2"></i></i></span>Pengguna Baru</button>
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalPenggunaBaru"><span><i class="fas fa-plus mr-2"></i></i></span>Pengguna Baru</button>
                                     </a>
                                     @endif
                                 </div>
@@ -159,7 +159,7 @@
                                             <th>Agensi</th>
                                             <th>Peranan</th>
                                             <th>Status</th>
-                                            <th>Butiran</th>
+                                            <th>Tindakan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -186,7 +186,6 @@
                                                         <button type="button" data-toggle="modal" data-target="#modal-butiran" data-userid="{{ $user->id }}" class="butiran btn btn-sm btn-info mr-2"><i class="fas fa-eye"></i></button>
                                                         <button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>
                                                         <button type="button" data-userid="{{ $user->id }}" class="btnDelete btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
-
                                                     </div>
                                                 </td>
                                             </tr>
@@ -247,7 +246,7 @@
                     "sNext": ">",
                     "sPrevious": "<",
                 }
-            }
+            },
         });
 
         <?php

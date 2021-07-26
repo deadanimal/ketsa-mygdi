@@ -8,6 +8,7 @@
 </style>
 
 <div class="content bgland p-5">
+@include('sweet::alert')
     <div class="container-fluid" data-aos="fade-up">
         <div class="row">
             <div class="col-lg-3"></div>

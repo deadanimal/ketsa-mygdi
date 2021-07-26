@@ -111,9 +111,11 @@
             right: 0;
         }
     </style>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0">
+    @include('sweet::alert')
     <app-root _nghost-lqr-c446="" ng-version="9.0.2">
         <app-auth-layout _nghost-lqr-c448="">
             <app-navbar2 _nghost-lqr-c453="">

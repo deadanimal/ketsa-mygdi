@@ -32,7 +32,7 @@
                       <th>Metadata</th>
                       <th>Kategori</th>
                       <th>Status</th>
-                      <th></th>
+                      <th>Tindakan</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -76,7 +76,7 @@
                                 }
                                 ?>
                           </td>
-                          <td>
+                          <td class="pr-1">
                             <div class="form-inline">
                                 <?php //lihat(view only)================================ ?>
                                 <form method="post" action="{{ url('/lihat_metadata') }}">
@@ -112,7 +112,7 @@
     </section>
   </div>
 
-<script>  
+<script>
   $(document).ready(function(){
     $("#table_metadatas").DataTable({
       "responsive": true,
@@ -132,10 +132,11 @@
         }
       },
       "columns": [
-        { "width": "3%" },
-        { "width": "49%" },
-        { "width": "8%" },
-        { "width": "40%" },
+        { "width": "5%" },
+        { "width": "50%" },
+        { "width": "15%" },
+        { "width": "10%" },
+        { "width": "15%" },
       ]
     });
 
@@ -143,7 +144,7 @@
       format:'DD-MM-YYYY H:mm:ss',
       // format: 'L'
     });
-    
+
     $(document).on('click','.btnDelete',function(){
         var conf = confirm('Adakah anda pasti untuk buang metadata ini?');
         if (conf) {
