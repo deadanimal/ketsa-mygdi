@@ -35,7 +35,8 @@
                 <button type="button" class="btn btn-default float-right">Kemas Kini</button>
               </div>
               <div class="card-body">
-                <table id="table_newUsers" class="table table-bordered table-striped">
+                  <div style="overflow-x:auto;">
+                <table id="table_newUsers" class="table table-bordered table-striped" style="overflow: auto;">
                   <thead>
                     <tr>
                       <th>Bil</th>
@@ -90,6 +91,7 @@
                     </tr>
                   </tfoot> -->
                 </table>
+              </div>
               </div>
             </div>
           </div>
