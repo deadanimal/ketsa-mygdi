@@ -314,7 +314,8 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <select name="kategori" class="form-control form-control-sm ml-3 peranan">
+                                                    <input type="text" name="kategori" class="form-control-sm ml-3" id="kategoriPemohonData" readonly disabled>
+                                                    <select name="kategori" id="skategoriNonPemohonData" class="form-control form-control-sm ml-3 peranan">
                                                         <option value="1">Agensi Persekutuan/Agensi Negeri</option>
                                                         <option value="2">Badan Berkanun</option>
                                                         <option value="3">GLC</option>
@@ -374,7 +375,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between1">
-                                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>-->
+                                <button type="button" class="btn btn-default" id='btn_batal'>Kembali</button>
                                 <button type="button" class="btn btn-dark btn_isi_borang" id="btn_isi_borang">Isi Borang</button>
                                 <button type="button" class="btn btn-default" id="btn_daftar">Daftar</button>
                             </div>
@@ -420,6 +421,7 @@
         $('#form_registration').hide();
         $('#btn_isi_borang').hide();
         $('#btn_daftar').hide();
+        $('#btn_batal').hide();
     });
 
     $('input:radio[name="perananSelect"]').change(function() {
@@ -446,6 +448,8 @@
             $('.btn_isi_borang').show();
             $(".divsecond").hide();
             $(".divthird").hide();
+            $("#kategoriPemohonData").prop('disabled',true).hide();
+            $("#kategoriNonPemohonData").prop('disabled',false).show();
         } else if (per == "2") {
             $(".2_g2c").show();
             $(".2_g2g").show();
@@ -523,6 +527,8 @@
             $(".divsecond").show();
             $(".divthird").show();
             $('.btn_isi_borang').show();
+            $("#kategoriPemohonData").prop('disabled',false).show();
+            $("#kategoriNonPemohonData").prop('disabled','disabled').hide();
         } else if (per == "2_g2e_iptaSyarahSelidik" || per == "2_g2e_iptaPelajar" || per == "2_g2e_iptsSyarahSelidik" || per == "2_g2e_iptsPelajar") {
             $(".divNama").show();
             $(".divNric").show();
@@ -538,6 +544,8 @@
             $(".divPeranan").show();
             $(".divKategori").show();
             $('.btn_isi_borang').show();
+            $("#kategoriPemohonData").prop('disabled',false).show();
+            $("#kategoriNonPemohonData").prop('disabled','disabled').hide();
         } else if (per == "2_g2g") {
             $(".2_g2c").show();
             $(".2_g2g_agensiPersNeg").show();
@@ -610,7 +618,16 @@
         $('#div_pilihan_peranan').hide();
         $('#form_registration').show();
         $('#btn_daftar').show();
+        $('#btn_batal').show();
         $(this).hide();
+    });
+    $(document).on("click", "#btn_batal", function() {
+        $('#div_pilihan_peranan').show();
+        $('#form_registration').hide();
+        $('#btn_daftar').hide();
+        $('#btn_batal').hide();
+        $(this).hide();
+        $('input[name="perananSelect"]').prop('checked', false);
     });
     
     $(document).on("click","#btn_daftar",function(){
@@ -700,6 +717,7 @@
         $('#form_registration').hide();
         $('#btn_isi_borang').hide();
         $('#btn_daftar').hide();
+        $('#btn_batal').hide();
         $("#divsecond").hide();
         $("#divthird").hide();
         $(".2_g2e").hide();

@@ -137,14 +137,20 @@
                                         <div class="col-3">
                                             <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="text" value="{{ $user->phone_pejabat }}" />
                                         </div>
-                                        <div class="col-2">
-                                            <label class="form-control-label mr-4" for="phone_bimbit">
-                                                Telefon Bimbit
-                                            </label><label class="float-right">:</label>
-                                        </div>
-                                        <div class="col-3">
-                                            <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="text" value="{{ $user->phone_bimbit }}" />
-                                        </div>
+                                        <?php
+                                        if(Auth::user()->hasRole('Pemohon Data')){
+                                            ?>
+                                            <div class="col-2">
+                                                <label class="form-control-label mr-4" for="phone_bimbit">
+                                                    Telefon Bimbit
+                                                </label><label class="float-right">:</label>
+                                            </div>
+                                            <div class="col-3">
+                                                <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="text" value="{{ $user->phone_bimbit }}" />
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-3">

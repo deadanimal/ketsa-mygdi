@@ -160,78 +160,6 @@
                                             </ul>
                                         </li>
                                         @endif
-                                        @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
-                                        <li class="nav-item has-treeview">
-                                            <a class="nav-link ng-star-inserted" href="#">
-                                                <i class="fa-tasks fas text-red"></i>
-                                                <span class="nav-link-text">Pengurusan Data Asas</span>
-                                                <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
-                                            </a>
-                                            <ul class="nav nav-sm nav-treeview">
-                                                <li class="nav-item has-treeview">
-                                                    <a class="nav-link ng-star-inserted" href="#">
-                                                        <i class="fas fa-magic text-red"></i>
-                                                        <span class="nav-link-text">Kemas Kini Data</span>
-                                                        <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
-                                                    </a>
-                                                    <ul class="nav nav-sm nav-treeview">
-                                                        <li class="nav-item">
-                                                            <a href="{{ url('senarai_data') }}" class="nav-link active">
-                                                                <span class="nav-link-text">Senarai Data</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a href="{{ url('kategori_kelas_kongsi_data') }}" class="nav-link active">
-                                                                <span class="nav-link-text">Kategori Pengkelasan Data</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a href="{{ url('kategori_kelas_data') }}" class="nav-link active">
-                                                                <span class="nav-link-text">Kategori Pengkelasan Perkongsian Data</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a href="{{ url('harga_data') }}" class="nav-link active">
-                                                                <span class="nav-link-text">Harga Data</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
-                                                <li class="nav-item">
-                                                    <a href="{{ url('permohonan_baru') }}" class="nav-link">
-                                                        <i class="far fa-id-card text-green"></i>
-                                                        <span class="nav-link-text">Permohonan Baru</span>
-                                                    </a>
-                                                </li>
-                                                @endif
-                                                @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
-                                                <li class="nav-item">
-                                                    <a href="{{ url('status_permohonan') }}" class="nav-link">
-                                                        <i class="fas fa-book text-purple"></i>
-                                                        <span class="nav-link-text">Status Permohonan</span>
-                                                    </a>
-                                                </li>
-                                                @endif
-                                                @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
-                                                <li class="nav-item">
-                                                    <a href="{{ url('proses_data') }}" class="nav-link">
-                                                        <i class="fas fa-sync-alt text-cyan"></i>
-                                                        <span class="nav-link-text">Proses Data</span>
-                                                    </a>
-                                                </li>
-                                                @endif
-                                                @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
-                                                <li class="nav-item">
-                                                    <a href="{{ url('penilaian') }}" class="nav-link">
-                                                        <i class="fas fa-file-signature text-primary"></i>
-                                                        <span class="nav-link-text">Penilaian</span>
-                                                    </a>
-                                                </li>
-                                                @endif
-                                            </ul>
-                                        </li>
-                                        @endif
                                         @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
                                         <li class="nav-item has-treeview">
                                             <a class="nav-link ng-star-inserted" href="#">
@@ -321,6 +249,14 @@
                                         @endif
                                         @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
                                         <li class="nav-item">
+                                            <a href="#" class="nav-link active">
+                                                <i class="fas fa-search text-danger"></i>
+                                                <span class="nav-link-text">Semakan Status</span>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
+                                        <li class="nav-item">
                                             <a href="{{ url('muat_turun_data') }}" class="nav-link active">
                                                 <i class="fas fa-cloud-download-alt text-purple"></i>
                                                 <span class="nav-link-text">Muat Turun Data</span>
@@ -332,14 +268,6 @@
                                             <a href="{{ url('penilaian_pemohon') }}" class="nav-link active">
                                                 <i class="fas fa-edit text-green"></i>
                                                 <span class="nav-link-text">Penilaian</span>
-                                            </a>
-                                        </li>
-                                        @endif
-                                        @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link active">
-                                                <i class="fas fa-search text-danger"></i>
-                                                <span class="nav-link-text">Semakan Status</span>
                                             </a>
                                         </li>
                                         @endif
