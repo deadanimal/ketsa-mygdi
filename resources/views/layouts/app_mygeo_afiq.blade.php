@@ -72,6 +72,7 @@
 </head>
 
 <body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0" style="padding-right: 0px;">
+@include('sweet::alert')
     <app-root _nghost-oai-c446="" ng-version="9.0.2">
         <router-outlet _ngcontent-oai-c446=""></router-outlet>
         <app-admin-layout _nghost-oai-c447="" class="ng-star-inserted">
