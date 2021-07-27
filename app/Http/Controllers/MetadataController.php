@@ -32,8 +32,9 @@ use App\MetadataGeo;
 use App\Mail\MailtrapExample;
 use App;
 use App\Http\Controllers\XmlController;
-//use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
 
 class MetadataController extends Controller {
 
@@ -689,8 +690,14 @@ class MetadataController extends Controller {
             $metadata->update();
         }
 
-        //send mail
-//        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample());
+        //send email to whom?
+//        $to_name = 'pentadbiraplikasi@gmail.com';
+//        $to_email = 'pentadbiraplikasi@gmail.com';
+//        $data = array('name'=>$data['name']);
+//        Mail::send('mails.exmpl2', $data, function($message) use ($to_name, $to_email) {
+//            $message->to($to_email, $to_name)->subject('Pengesahan Pendaftaran Penerbit/Pengesah Metadata MyGeo Explorer');
+//            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+//        });
         exit();
     }
 
