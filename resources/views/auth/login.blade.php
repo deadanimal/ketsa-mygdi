@@ -319,15 +319,14 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input type="text" name="kategori" class="form-control-sm ml-3" id="kategoriPemohonData" readonly disabled>
-                                                    <select name="kategori" id="skategoriNonPemohonData" class="form-control form-control-sm ml-3 peranan">
-                                                        <option value="1">Agensi Persekutuan/Agensi Negeri</option>
-                                                        <option value="2">Badan Berkanun</option>
-                                                        <option value="3">GLC</option>
-                                                        <option value="4">IPTA - Pensyarah/Penyelidik</option>
-                                                        <option value="5">IPTA - Pelajar</option>
-                                                        <option value="6">IPTS - Pensyarah/Penyelidik</option>
-                                                        <option value="7">IPTS - Pelajar</option>
+                                                    <select name="kategori" id="kategoriPemohonData" class="form-control form-control-sm ml-3 peranan">
+                                                        <option value="G2G - Agensi Persekutuan/Agensi Negeri">G2G - Agensi Persekutuan/Agensi Negeri</option>
+                                                        <option value="G2G - Badan Berkanun">G2G - Badan Berkanun</option>
+                                                        <option value="G2G - GLC">G2G - GLC</option>
+                                                        <option value="G2E - IPTA - Pensyarah/Penyelidik">G2E - IPTA - Pensyarah/Penyelidik</option>
+                                                        <option value="G2E - Pelajar">G2E - Pelajar</option>
+                                                        <option value="G2E - Pensyarah/Penyelidik">G2E - Pensyarah/Penyelidik</option>
+                                                        <option value="G2E - Pelajar">G2E - Pelajar</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -453,8 +452,7 @@
             $('.btn_isi_borang').show();
             $(".divsecond").hide();
             $(".divthird").hide();
-            $("#kategoriPemohonData").prop('disabled',true).hide();
-            $("#kategoriNonPemohonData").prop('disabled',false).show();
+            $("#kategoriPemohonData").hide();
         } else if (per == "2") {
             $(".2_g2c").show();
             $(".2_g2g").show();
@@ -532,8 +530,7 @@
             $(".divsecond").show();
             $(".divthird").show();
             $('.btn_isi_borang').show();
-            $("#kategoriPemohonData").prop('disabled',false).show();
-            $("#kategoriNonPemohonData").prop('disabled','disabled').hide();
+            $("#kategoriPemohonData").show();
         } else if (per == "2_g2e_iptaSyarahSelidik" || per == "2_g2e_iptaPelajar" || per == "2_g2e_iptsSyarahSelidik" || per == "2_g2e_iptsPelajar") {
             $(".divNama").show();
             $(".divNric").show();
@@ -549,8 +546,7 @@
             $(".divPeranan").show();
             $(".divKategori").show();
             $('.btn_isi_borang').show();
-            $("#kategoriPemohonData").prop('disabled',false).show();
-            $("#kategoriNonPemohonData").prop('disabled','disabled').hide();
+            $("#kategoriPemohonData").show();
         } else if (per == "2_g2g") {
             $(".2_g2c").show();
             $(".2_g2g_agensiPersNeg").show();
@@ -574,7 +570,6 @@
             $(".divPhonePejabat").hide();
             $(".divPhoneBimbit").show();
             $(".divPeranan").hide();
-            $(".divKategori").hide();
             $(".divdaftar").show();
             // $(".divsecond").hide();
             // $(".divthird").hide();
@@ -602,7 +597,6 @@
             $(".divPhonePejabat").hide();
             $(".divPhoneBimbit").show();
             $(".divPeranan").hide();
-            $(".divKategori").hide();
             $(".divdaftar").show();
             // $(".divsecond").hide();
             // $(".divthird").hide();
