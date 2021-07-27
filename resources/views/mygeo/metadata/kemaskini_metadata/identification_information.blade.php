@@ -2,7 +2,7 @@
     <div class="card-header">
         <h4 class="card-title">
             <a data-toggle="collapse" href="#collapse2">
-                IDENTIFICATION INFORMATION
+                <?php echo __('lang.accord_2'); ?>
             </a>
         </h4>
         @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")
@@ -250,7 +250,7 @@
                         <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3" value="{{ $respWebsite }}">
                     </div>
                 </div>
-            </div>\
+            </div>
         </div>
     </div>
 </div>

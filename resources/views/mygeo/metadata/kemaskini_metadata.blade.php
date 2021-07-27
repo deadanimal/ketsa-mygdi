@@ -114,7 +114,6 @@
                         </ul>
                     </div>
                     @endif
-                    <h1 class="float-left">Kemaskini Metadata</h1>
                     <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
                         <?php echo __('lang.btn_upload_xml'); ?>
                     </button>

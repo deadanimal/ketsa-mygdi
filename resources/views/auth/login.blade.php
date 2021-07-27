@@ -319,14 +319,15 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <select name="kategori" id="kategoriPemohonData" class="form-control form-control-sm ml-3 peranan">
-                                                        <option value="G2G - Agensi Persekutuan/Agensi Negeri">G2G - Agensi Persekutuan/Agensi Negeri</option>
-                                                        <option value="G2G - Badan Berkanun">G2G - Badan Berkanun</option>
-                                                        <option value="G2G - GLC">G2G - GLC</option>
-                                                        <option value="G2E - IPTA - Pensyarah/Penyelidik">G2E - IPTA - Pensyarah/Penyelidik</option>
-                                                        <option value="G2E - Pelajar">G2E - Pelajar</option>
-                                                        <option value="G2E - Pensyarah/Penyelidik">G2E - Pensyarah/Penyelidik</option>
-                                                        <option value="G2E - Pelajar">G2E - Pelajar</option>
+                                                    <input type="hidden" name="kategori" id="hiddenKategori">
+                                                    <select name="kategoriPemohonData" id="kategoriPemohonData" class="form-control form-control-sm ml-3 peranan">
+                                                        <option value="2_g2g_agensiPersNeg">G2G - Agensi Persekutuan/Agensi Negeri</option>
+                                                        <option value="2_g2g_badanBerkanun">G2G - Badan Berkanun</option>
+                                                        <option value="2_glc">G2G - GLC</option>
+                                                        <option value="2_g2e_iptaSyarahSelidik">G2E - IPTA - Pensyarah/Penyelidik</option>
+                                                        <option value="2_g2e_iptaPelajar">G2E - Pelajar</option>
+                                                        <option value="2_g2e_iptsSyarahSelidik">G2E - Pensyarah/Penyelidik</option>
+                                                        <option value="2_g2e_iptsPelajar">G2E - Pelajar</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -530,7 +531,8 @@
             $(".divsecond").show();
             $(".divthird").show();
             $('.btn_isi_borang').show();
-            $("#kategoriPemohonData").show();
+            $("#hiddenKategori").val(per);
+            $("#kategoriPemohonData").val(per).change().prop('disabled','disabled');
         } else if (per == "2_g2e_iptaSyarahSelidik" || per == "2_g2e_iptaPelajar" || per == "2_g2e_iptsSyarahSelidik" || per == "2_g2e_iptsPelajar") {
             $(".divNama").show();
             $(".divNric").show();
@@ -546,7 +548,8 @@
             $(".divPeranan").show();
             $(".divKategori").show();
             $('.btn_isi_borang').show();
-            $("#kategoriPemohonData").show();
+            $("#hiddenKategori").val(per);
+            $("#kategoriPemohonData").val(per).change().prop('disabled','disabled');
         } else if (per == "2_g2g") {
             $(".2_g2c").show();
             $(".2_g2g_agensiPersNeg").show();
