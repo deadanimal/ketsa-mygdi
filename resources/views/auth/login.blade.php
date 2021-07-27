@@ -1,6 +1,11 @@
 @extends('layouts.app_afiq')
 
 @section('content')
+<style>
+    .card {
+        border-radius: 2rem;
+    }
+</style>
 
 <div class="content bgland p-5">
     <div class="container-fluid" data-aos="fade-up">
@@ -50,7 +55,7 @@
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group">
-                                            <div class="g-recaptcha" data-sitekey="6LdvEbUbAAAAAEeHGogajujfQIS-Rp98PxrU5Frz"></div>
+                                            <div class="g-recaptcha" data-sitekey="6LdvEbUbAAAAAEeHGogajujfQIS-Rp98PxrU5Frz" width="100%"></div>
                                         </div>
                                     </div>
                                     <div class="validation-errors">

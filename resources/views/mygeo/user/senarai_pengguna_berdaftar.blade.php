@@ -2,23 +2,41 @@
 
 @section('content')
 
+<link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
 <style>
-    .ftest{
-        display:inline;
-        width:auto;
+    .ftest {
+        display: inline;
+        width: auto;
     }
 </style>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1></h1>
-                </div>
-                <div class="col-sm-6">
+            <div class="header-body">
+                <div class="row align-items-center p-3 py-4">
+                    <div class="col-lg-8 col-6">
+                        <h6 class="h2 text-dark d-inline-block mb-0">Pengurusan Pengguna</h6>
+
+                        <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class=" breadcrumb-item">
+                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Pengurusan Pengguna
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Senarai Pengguna Berdaftar
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-4 col-2 text-right">
+
+                    </div>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -39,26 +57,23 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table>
-                                        <tr>
-                                            <td>Nama Penuh<span class="text-warning">*</span></td>
-                                            <td>: <input type="text" name="namaPenuh"></td>
-                                        </tr>
-                                        <tr>
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <label class="form-control-label">Nama Penuh</label><span class="text-warning">*</span>
+                                            <input class="form-control form-control-sm" type="text" name="namaPenuh">
                                             @error('namaPenuh')
-                                        <div class="text-warning">{{ $message }}</div>
-                                        @enderror
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Peranan<span class="text-warning">*</span>
-                                            </td>
-                                            <td>
-                                                : 
-                                                <select name="peranan">
-                                                    <option value="" selected disabled>Pilih</option>
-                                                    <?php
-                                                    if (!empty($peranans)) {
+                                            <div class="text-warning">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <label class="form-control-label">Peranan</label><span class="text-warning">*</span>
+                                            <select name="peranan" class="form-control form-control-sm">
+                                                <option value="" selected disabled>Pilih</option>
+                                                <?php
+                                                if (!empty($peranans)) {
+                                                    foreach ($peranans as $p) {
                                                         foreach ($peranans as $p) {
                                                             if(strtolower($p->name) != 'pentadbir aplikasi' && strtolower($p->name) != 'super admin'){
                                                                 ?>
@@ -68,26 +83,24 @@
                                                                 <?php
                                                             }
                                                         }
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
+							}
+}
+                                                                                                                ?>
+                                            </select>
                                             @error('peranan')
-                                        <div class="text-warning">{{ $message }}</div>
-                                        @enderror
-                                        </tr>
-                                        <tr>
-                                            <td>Email<span class="text-warning">*</span></td>
-                                            <td>: <input type="email" name="email"></td>
-                                        </tr>
-                                        <tr>
+                                            <div class="text-warning">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <label class="form-control-label">Emel</label><span class="text-warning">*</span>
+                                            <input class="form-control form-control-sm" type="email" name="email">
                                             @error('email')
-                                        <div class="text-warning">{{ $message }}</div>
-                                        @enderror
-                                        </tr>
-                                    </table>
+                                            <div class="text-warning">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -127,15 +140,22 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="font-size: 2rem;">Senarai pengguna berdaftar</h3>
-                            @if(auth::user()->hasRole(['Pentadbir Aplikasi']))
-                            <a href="{{ url('pemindahan_akaun') }}">
-                                <button type="button" class="btn btn-default float-right">Pemindahan Akaun</button>
-                            </a>
-                            <a href="#" onclick="return false;">
-                                <button type="button" class="btn btn-default float-right" data-toggle="modal" data-target="#modalPenggunaBaru">Pengguna Baru</button>
-                            </a>
-                            @endif
+                            <div class="row align-items-center">
+                                <div class="col-5">
+                                    <h3 class="mb-0">Senarai Pengguna Berdaftar</h3>
+                                </div>
+
+                                <div class="col-7 text-right">
+                                    @if(auth::user()->hasRole(['Pentadbir Aplikasi']))
+                                    <a href="{{ url('pemindahan_akaun') }}">
+                                        <button type="button" class="btn btn-sm btn-default mr-2">Pemindahan Akaun</button>
+                                    </a>
+                                    <a href="#" onclick="return false;">
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalPenggunaBaru"><span><i class="fas fa-plus mr-2"></i></i></span>Pengguna Baru</button>
+                                    </a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div style="overflow-x:auto;">
@@ -147,7 +167,7 @@
                                             <th>Agensi</th>
                                             <th>Peranan</th>
                                             <th>Status</th>
-                                            <th>Butiran</th>
+                                            <th>Tindakan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -161,23 +181,23 @@
                                                 <td>{{ $user->agensi_organisasi }}</td>
                                                 <td>
                                                     <?php
-                                                    if (count($user->getRoleNames()) > 0) {
-                                                        foreach ($user->getRoleNames() as $role) {
-                                                            echo $role . "<br>";
+                                                        if (count($user->getRoleNames()) > 0) {
+                                                            foreach ($user->getRoleNames() as $role) {
+                                                                echo $role . "<br>";
+                                                            }
                                                         }
-                                                    }
-                                                    ?>
+                                                        ?>
                                                 </td>
                                                 <td>{{ ($user->status == "0" ? "Tidak Aktif":"Aktif") }}</td>
-                                                <td>
-                                                    <button type="button" data-toggle="modal" data-target="#modal-butiran" data-userid="{{ $user->id }}" class="butiran btn btn-sm btn-primary mr-2"><i class="fas fa-edit"></i></button>
-                                                    <br><br>
-                                                    <button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-primary mr-2"><i class="fas fa-pencil-alt"></i></button>
-                                                    <br><br>
-                                                    <button type="button" data-userid="{{ $user->id }}" class="btnDelete btn btn-sm btn-primary mr-2"><i class="fas fa-times"></i></button>
+                                                <td class="pr-0">
+                                                    <div class="form-inline">
+                                                        <button type="button" data-toggle="modal" data-target="#modal-butiran" data-userid="{{ $user->id }}" class="butiran btn btn-sm btn-info mr-2"><i class="fas fa-eye"></i></button>
+                                                        <button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>
+                                                        <button type="button" data-userid="{{ $user->id }}" class="btnDelete btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                            <?php
+                                        <?php
                                             $bil++;
                                         }
                                         ?>
