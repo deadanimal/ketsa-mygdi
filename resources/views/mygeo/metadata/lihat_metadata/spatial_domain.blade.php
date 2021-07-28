@@ -35,13 +35,13 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <?php
-                                    $north = "";
-                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal != ""){
-                                        $north = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal;
+                                    $west = "";
+                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal != ""){
+                                        $west = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal;
                                     }
                                     ?>
-                                    <div class="input-group-text" id="btnGroupAddon">N<span class="required">*</span></div>
-                                    <input type="number" id="nblt" onchange="updateLayer()" step="any" class="form-control" placeholder="North Bound Latitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="top" title="North Bound Latitude" value="{{ $north }}" name="c9_north_bound_latitude">
+                                    <div class="input-group-text" id="btnGroupAddon">W<span class="required">*</span></div>
+                                    <input type="number" step="any" id="wblg" onchange="updateLayer()" class="form-control" placeholder="West Bound Longitude"  aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="West Bound Longitude" value="{{ $west }}" name="c9_west_bound_longitude">
                                 </div>
                             </div>
                         </div>
@@ -50,13 +50,13 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <?php
-                                    $west = "";
-                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal != ""){
-                                        $west = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal;
+                                    $east = "";
+                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal != ""){
+                                        $east = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal;
                                     }
                                     ?>
-                                    <div class="input-group-text" id="btnGroupAddon">W<span class="required">*</span></div>
-                                    <input type="number" step="any" id="wblg" onchange="updateLayer()" class="form-control" placeholder="West Bound Longitude"  aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="West Bound Longitude" value="{{ $west }}" name="c9_west_bound_longitude">
+                                    <div class="input-group-text" id="btnGroupAddon">E<span class="required">*</span></div>
+                                    <input type="number" id="eblg" onchange="updateLayer()"  step="any" class="form-control" placeholder="East Bound Longitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="East Bound Longitude" value="{{ $east }}" name="c9_east_bound_longitude">
                                 </div>
                             </div>
                         </div>
@@ -80,13 +80,13 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <?php
-                                    $east = "";
-                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal != ""){
-                                        $east = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal;
+                                    $north = "";
+                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal != ""){
+                                        $north = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal;
                                     }
                                     ?>
-                                    <div class="input-group-text" id="btnGroupAddon">E<span class="required">*</span></div>
-                                    <input type="number" id="eblg" onchange="updateLayer()"  step="any" class="form-control" placeholder="East Bound Longitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="East Bound Longitude" value="{{ $east }}" name="c9_east_bound_longitude">
+                                    <div class="input-group-text" id="btnGroupAddon">N<span class="required">*</span></div>
+                                    <input type="number" id="nblt" onchange="updateLayer()" step="any" class="form-control" placeholder="North Bound Latitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="top" title="North Bound Latitude" value="{{ $north }}" name="c9_north_bound_latitude">
                                 </div>
                             </div>
                         </div>

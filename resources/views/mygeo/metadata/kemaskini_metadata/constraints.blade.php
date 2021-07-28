@@ -37,8 +37,8 @@
                                     <option value="License End User" {{($accessConst == 'License End User' ? "selected":"")}}>License End User</option>
                                     <option value="License Unrestricted" {{($accessConst == 'License Unrestricted' ? "selected":"")}}>License Unrestricted</option>
                                     <option value="Other Restrictions" {{($accessConst == 'Other Restrictions' ? "selected":"")}}>Other Restrictions</option>
-                                    <option value="Patient" {{($accessConst == 'Patient' ? "selected":"")}}>Patient</option>
-                                    <option value="Patient Pending" {{($accessConst == 'Patient Pending' ? "selected":"")}}>Patient Pending</option>
+                                    <option value="Patent" {{($accessConst == 'Patent' ? "selected":"")}}>Patent</option>
+                                    <option value="Patent Pending" {{($accessConst == 'Patent Pending' ? "selected":"")}}>Patent Pending</option>
                                     <option value="Restricted" {{($accessConst == 'Restricted' ? "selected":"")}}>Restricted</option>
                                     <option value="Trademark" {{($accessConst == 'Trademark' ? "selected":"")}}>Trademark</option>
                                     <option value="Unrestricted" {{($accessConst == 'Unrestricted' ? "selected":"")}}>Unrestricted</option>
@@ -65,8 +65,8 @@
                                     <option value="License End User" {{($useConst == 'License End User' ? "selected":"")}}>License End User</option>
                                     <option value="License Unrestricted" {{($useConst == 'License Unrestricted' ? "selected":"")}}>License Unrestricted</option>
                                     <option value="Other Restrictions" {{($useConst == 'Other Restrictions' ? "selected":"")}}>Other Restrictions</option>
-                                    <option value="Patient" {{($useConst == 'Patient' ? "selected":"")}}>Patient</option>
-                                    <option value="Patient Pending" {{($useConst == 'Patient Pending' ? "selected":"")}}>Patient Pending</option>
+                                    <option value="Patent" {{($useConst == 'Patent' ? "selected":"")}}>Patient</option>
+                                    <option value="Patent Pending" {{($useConst == 'Patent Pending' ? "selected":"")}}>Patent Pending</option>
                                     <option value="Restricted" {{($useConst == 'Restricted' ? "selected":"")}}>Restricted</option>
                                     <option value="Trademark" {{($useConst == 'Trademark' ? "selected":"")}}>Trademark</option>
                                     <option value="Unrestricted" {{($useConst == 'Unrestricted' ? "selected":"")}}>Unrestricted</option>
@@ -82,7 +82,7 @@
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">
-                                    Classification System
+                                    Classification
                                 </label>
                             </div>
                             <div class="col-xl-7">

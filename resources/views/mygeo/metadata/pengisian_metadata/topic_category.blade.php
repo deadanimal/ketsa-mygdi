@@ -1,9 +1,7 @@
 <div class="card card-primary mb-4 div_c3" id="div_c3">
     <div class="card-header">
         <h4 class="card-title">
-            <a data-toggle="collapse" href="#collapse3">
-                <?php echo __('lang.accord_3'); ?>
-            </a>
+            <a data-toggle="collapse" href="#collapse3" class="aTopicCategory"></a>
         </h4>
     </div>
     <div id="collapse3" class="panel-collapse collapse in show" data-parent="#div_c3">

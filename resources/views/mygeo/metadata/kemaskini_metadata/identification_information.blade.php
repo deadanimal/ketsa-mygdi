@@ -17,7 +17,16 @@
                 <div class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataName">
-                            Metadata Name<span class="text-warning">*</span>
+                            <?php
+                            if(isset($metadataxml->categoryTitle) && $metadataxml->categoryTitle != ""){
+                                if(strtolower($metadataxml->categoryTitle) == "dataset"){
+                                    echo "Title";
+                                }else{
+                                    echo "Metadata Name";
+                                }
+                            }
+                            ?>
+                            <span class="text-warning">*</span>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
@@ -237,7 +246,7 @@
                 <div class="row mb-4">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName">
-                            Website
+                            Contact Website
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">

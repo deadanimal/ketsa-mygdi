@@ -26,8 +26,8 @@
                                                                         <option value="License End User" {{(old('c14_access_constraint') == 'License End User' ? "selected":"")}}>License End User</option>
                                                                         <option value="License Unrestricted" {{(old('c14_access_constraint') == 'License Unrestricted' ? "selected":"")}}>License Unrestricted</option>
                                                                         <option value="Other Restrictions" {{(old('c14_access_constraint') == 'Other Restrictions' ? "selected":"")}}>Other Restrictions</option>
-                                                                        <option value="Patient" {{(old('c14_access_constraint') == 'Patient' ? "selected":"")}}>Patient</option>
-                                                                        <option value="Patient Pending" {{(old('c14_access_constraint') == 'Patient Pending' ? "selected":"")}}>Patient Pending</option>
+                                                                        <option value="Patent" {{(old('c14_access_constraint') == 'Patent' ? "selected":"")}}>Patent</option>
+                                                                        <option value="Patent Pending" {{(old('c14_access_constraint') == 'Patent Pending' ? "selected":"")}}>Patent Pending</option>
                                                                         <option value="Restricted" {{(old('c14_access_constraint') == 'Restricted' ? "selected":"")}}>Restricted</option>
                                                                         <option value="Trademark" {{(old('c14_access_constraint') == 'Trademark' ? "selected":"")}}>Trademark</option>
                                                                         <option value="Unrestricted" {{(old('c14_access_constraint') == 'Unrestricted' ? "selected":"")}}>Unrestricted</option>
@@ -48,8 +48,8 @@
                                                                         <option value="License End User" {{(old('c14_use_constraint') == 'License End User' ? "selected":"")}}>License End User</option>
                                                                         <option value="License Unrestricted" {{(old('c14_use_constraint') == 'License Unrestricted' ? "selected":"")}}>License Unrestricted</option>
                                                                         <option value="Other Restrictions" {{(old('c14_use_constraint') == 'Other Restrictions' ? "selected":"")}}>Other Restrictions</option>
-                                                                        <option value="Patient" {{(old('c14_use_constraint') == 'Patient' ? "selected":"")}}>Patient</option>
-                                                                        <option value="Patient Pending" {{(old('c14_use_constraint') == 'Patient Pending' ? "selected":"")}}>Patient Pending</option>
+                                                                        <option value="Patent" {{(old('c14_use_constraint') == 'Patent' ? "selected":"")}}>Patent</option>
+                                                                        <option value="Patent Pending" {{(old('c14_use_constraint') == 'Patent Pending' ? "selected":"")}}>Patent Pending</option>
                                                                         <option value="Restricted" {{(old('c14_use_constraint') == 'Restricted' ? "selected":"")}}>Restricted</option>
                                                                         <option value="Trademark" {{(old('c14_use_constraint') == 'Trademark' ? "selected":"")}}>Trademark</option>
                                                                         <option value="Unrestricted" {{(old('c14_use_constraint') == 'Unrestricted' ? "selected":"")}}>Unrestricted</option>
@@ -65,7 +65,7 @@
                                                             <div class="row mb-2">
                                                                 <div class="col-xl-5">
                                                                     <label class="form-control-label" for="input-access-cons">
-                                                                        Classification System
+                                                                        Classification
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">

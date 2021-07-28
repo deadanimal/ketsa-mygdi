@@ -11,8 +11,7 @@
             <div class="my-2">
                 <div class="row mb-2">
                     <div class="col-3">
-                        <label class="form-control-label mr-4" for="c2_metadataName">
-                            Metadata Name<span class="text-warning">*</span>
+                        <label class="form-control-label mr-4 lblMetadataName" for="c2_metadataName">
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
@@ -176,7 +175,7 @@
                 <div class="row mb-4">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName">
-                            Website
+                            Contact Website
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">

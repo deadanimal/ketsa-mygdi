@@ -281,6 +281,13 @@
 
         $(document).on('change', '#kategori', function() {
             var kategori = $(this).val();
+            if (kategori.toLowerCase() == "dataset") {
+                $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
+                $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?><span class="text-warning">*</span>');
+            }else{
+                $('.lblMetadataName').html('Metadata Name<span class="text-warning">*</span>');
+                $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?>');
+            }
             if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
                 $('#accordion').show();

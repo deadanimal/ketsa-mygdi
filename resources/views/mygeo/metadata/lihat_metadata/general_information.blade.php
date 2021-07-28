@@ -75,6 +75,31 @@
                         ?>
                     </div>
                 </div>
+                <div class="row my-0 py-0">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="metadata_standard_name">
+                            Metadata Standard Name
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-8">
+                        MyGDI Metadata Standard
+                        <?php
+                        if(isset($metadataxml->categoryTitle) && $metadataxml->categoryTitle != ""){
+                            echo '('.$metadataxml->categoryTitle.')';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="row my-0 py-0">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="metadata_standard_version">
+                            Metadata Standard Version
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-8">
+                        Version 1.0
+                    </div>
+                </div>
             </div>
         </div>
     </div>

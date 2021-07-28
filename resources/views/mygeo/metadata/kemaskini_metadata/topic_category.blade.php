@@ -3,6 +3,14 @@
         <a data-toggle="collapse" href="#collapse3">
             <h4 class="card-title">
                 <?php echo __('lang.accord_3'); ?>
+                <?php
+                if(isset($metadataxml->categoryTitle) && $metadataxml->categoryTitle != ""){
+                    if(strtolower($metadataxml->categoryTitle) == "dataset"){
+                        ?><span class="text-warning">*</span><?php
+                    }
+                }
+                ?>
+                <span class="text-warning">*</span>
             </h4>
         </a>
         @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")

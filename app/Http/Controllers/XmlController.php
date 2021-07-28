@@ -10,6 +10,8 @@ class XmlController extends Controller {
     function __construct() {}
 
     public function createXml($request) {
+        $c2_metadataName = strtoupper($request->c2_metadataName);
+        
         $xml = <<<XML
                 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                     <gmd:fileIdentifier>
@@ -130,7 +132,7 @@ class XmlController extends Controller {
                             <gmd:citation>
                                 <gmd:CI_Citation>
                                     <gmd:title>
-                                        <gco:CharacterString>$request->c2_metadataName</gco:CharacterString>
+                                        <gco:CharacterString>$c2_metadataName</gco:CharacterString>
                                     </gmd:title>
                                     <gmd:date>
                                         <gmd:CI_Date>

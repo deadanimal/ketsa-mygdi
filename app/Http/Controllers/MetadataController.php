@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Auth;
-use Mail;
+//use Mail;
 use DateTime;
 use Redirect;
 use DB;
@@ -361,6 +361,9 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
         ];
+        if(strtolower($request->kategori) == 'dataset'){
+            $fields["topic_category"]= 'required';
+        }
         if(strtolower($request->kategori) == 'imagery' || strtolower($request->kategori) == 'gridded'){
             $fields["c4_scan_res"]= 'required';
             $fields["c4_ground_scan"]= 'required';
@@ -395,6 +398,7 @@ class MetadataController extends Controller {
             "c9_south_bound_latitude.required" => 'South Bound Latitude required',
             "c9_north_bound_latitude.required" => 'North Bound Latitude required',
             "c10_keyword.required" => 'Browsing Information Keyword required',
+            "topic_category.required" => 'Topic Category required',
         ];
         $this->validate($request, $fields, $customMsg);
         
@@ -576,6 +580,9 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
         ];
+        if(strtolower($request->kategori) == 'dataset'){
+            $fields["topic_category"]= 'required';
+        }
         if(strtolower($request->kategori) == 'imagery' || strtolower($request->kategori) == 'gridded'){
             $fields["c4_scan_res"]= 'required';
             $fields["c4_ground_scan"]= 'required';
@@ -610,6 +617,7 @@ class MetadataController extends Controller {
             "c9_south_bound_latitude.required" => 'South Bound Latitude required',
             "c9_north_bound_latitude.required" => 'North Bound Latitude required',
             "c10_keyword.required" => 'Browsing Information Keyword required',
+            "topic_category.required" => 'Topic Category required',
         ];
         $this->validate($request, $fields, $customMsg);
         

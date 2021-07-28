@@ -28,10 +28,26 @@
                         Medium </label>
                 </div>
                 <div class="col-xl-3">
-                    <?php
-                    $medium = (isset($metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name) ? $metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name : "");
-                    ?>
-                    <input type="text" name="c11_medium" id="c11_medium" class="form-control form-control-sm" value="{{old('c11_medium')}}">
+                    <select name="c11_medium" id="c11_medium" class="form-control form-control-sm">
+                        <option value="cdROM (001)" {{ (old('c11_medium')=='cdROM (001)' ? 'selected':'') }}>cdROM (001)</option>
+                        <option value="dvd (002)" {{ (old('c11_medium')=='dvd (002)' ? 'selected':'') }}>dvd (002)</option>
+                        <option value="dvdRom (003)" {{ (old('c11_medium')=='dvdRom (003)' ? 'selected':'') }}>dvdRom (003)</option>
+                        <option value="3halfInchFloppy (004)" {{ (old('c11_medium')=='3halfInchFloppy (004)' ? 'selected':'') }}>3halfInchFloppy (004)</option>
+                        <option value="5quarterInchFloppy (005)" {{ (old('c11_medium')=='5quarterInchFloppy (005)' ? 'selected':'') }}>5quarterInchFloppy (005)</option>
+                        <option value="7trackTape (006)" {{ (old('c11_medium')=='7trackTape (006)' ? 'selected':'') }}>7trackTape (006)</option>
+                        <option value="9trackTape (007)" {{ (old('c11_medium')=='9trackTape (007)' ? 'selected':'') }}>9trackTape (007)</option>
+                        <option value="3480Cartridge (008)" {{ (old('c11_medium')=='3480Cartridge (008)' ? 'selected':'') }}>3480Cartridge (008)</option>
+                        <option value="3490Cartridge (009)" {{ (old('c11_medium')=='3490Cartridge (009)' ? 'selected':'') }}>3490Cartridge (009)</option>
+                        <option value="3580Cartridge (010)" {{ (old('c11_medium')=='3580Cartridge (010)' ? 'selected':'') }}>3580Cartridge (010)</option>
+                        <option value="4mmCartridgeTape (011)" {{ (old('c11_medium')=='4mmCartridgeTape (011)' ? 'selected':'') }}>4mmCartridgeTape (011)</option>
+                        <option value="8mmCartridgeTape (012)" {{ (old('c11_medium')=='8mmCartridgeTape (012)' ? 'selected':'') }}>8mmCartridgeTape (012)</option>
+                        <option value="1quaterInchCartridgeTape (013)" {{ (old('c11_medium')=='1quaterInchCartridgeTape (013)' ? 'selected':'') }}>1quaterInchCartridgeTape (013)</option>
+                        <option value="digitalLinearTape (014)" {{ (old('c11_medium')=='digitalLinearTape (014)' ? 'selected':'') }}>digitalLinearTape (014)</option>
+                        <option value="onLine (015)" {{ (old('c11_medium')=='onLine (015)' ? 'selected':'') }}>onLine (015)</option>
+                        <option value="satellite (016)" {{ (old('c11_medium')=='satellite (016)' ? 'selected':'') }}>satellite (016)</option>
+                        <option value="telephoneLink (017)" {{ (old('c11_medium')=='telephoneLink (017)' ? 'selected':'') }}>telephoneLink (017)</option>
+                        <option value="hardcopy (018)" {{ (old('c11_medium')=='hardcopy (018)' ? 'selected':'') }}>hardcopy (018)</option>
+                    </select>
                 </div>
             </div>
             <div class="row mb-2">
