@@ -20,10 +20,11 @@
                     </div>
                     <div class="col-xl-3">
                         <select name="c15_data_quality_info" id="c15_data_quality_info" class="form-control form-control-sm">
-                            option value="Attribute" {{(old('c15_data_quality_info') == 'Attribute' ? "selected":"")}}>Attribute</option>
+                            <option value="Attribute" {{(old('c15_data_quality_info') == 'Attribute' ? "selected":"")}}>Attribute</option>
                             <option value="Attribute Type" {{(old('c15_data_quality_info') == 'Attribute Type' ? "selected":"")}}>Attribute Type</option>
                             <option value="Collection Session" {{(old('c15_data_quality_info') == 'Collection Session' ? "selected":"")}}>Collection Session</option>
                             <option value="Dataset" {{(old('c15_data_quality_info') == 'Dataset' ? "selected":"")}}>Dataset</option>
+                            <option value="Series" {{(old('c15_data_quality_info') == 'Series' ? "selected":"")}}>Series</option>
                             <option value="Feature" {{(old('c15_data_quality_info') == 'Feature' ? "selected":"")}}>Feature</option>
                             <option value="Dimension Group" {{(old('c15_data_quality_info') == 'Dimension Group' ? "selected":"")}}>Dimension Group</option>
                             <option value="Feature Type" {{(old('c15_data_quality_info') == 'Feature Type' ? "selected":"")}}>Feature Type</option>

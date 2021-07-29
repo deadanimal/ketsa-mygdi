@@ -93,11 +93,15 @@
                                 }
                                 ?>
                                 <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
-                                    <option value="Limited" {{($classSys == 'Limited' ? "selected":"")}}>Limited</option>
-                                    <option value="Open" {{($classSys == 'Open' ? "selected":"")}}>Open</option>
+                                    <option value="unclassified" {{($classSys == 'unclassified' ? "selected":"")}}>unclassified</option>
+                                    <option value="restricted" {{($classSys == 'restricted' ? "selected":"")}}>restricted</option>
+                                    <option value="confidential" {{($classSys == 'confidential' ? "selected":"")}}>confidential</option>
                                     <option value="Secret" {{($classSys == 'Secret' ? "selected":"")}}>Secret</option>
                                     <option value="Top Secret" {{($classSys == 'Top Secret' ? "selected":"")}}>Top Secret</option>
-                                    <option value="Others" {{($classSys == 'Others' ? "selected":"")}}>Others</option>
+                                    <option value="sensitiveButUnclassified" {{($classSys == 'sensitiveButUnclassified' ? "selected":"")}}>sensitiveButUnclassified</option>
+                                    <option value="forOfficialUseOnly Others" {{($classSys == 'forOfficialUseOnly Others' ? "selected":"")}}>forOfficialUseOnly Others</option>
+                                    <option value="protected" {{($classSys == 'protected' ? "selected":"")}}>protected</option>
+                                    <option value="limitedDistribution" {{($classSys == 'limitedDistribution' ? "selected":"")}}>limitedDistribution</option>
                                 </select>
                             </div>
                         </div>

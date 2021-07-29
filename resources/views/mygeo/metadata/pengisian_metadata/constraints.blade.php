@@ -70,11 +70,15 @@
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
-                                                                        <option value="Limited" {{(old('c14_classification_sys') == 'Limited' ? "selected":"")}}>Limited</option>
-                                                                        <option value="Open" {{(old('c14_classification_sys') == 'Open' ? "selected":"")}}>Open</option>
+                                                                        <option value="unclassified" {{(old('c14_classification_sys') == 'unclassified' ? "selected":"")}}>unclassified</option>
+                                                                        <option value="restricted" {{(old('c14_classification_sys') == 'restricted' ? "selected":"")}}>restricted</option>
+                                                                        <option value="confidential" {{(old('c14_classification_sys') == 'confidential' ? "selected":"")}}>confidential</option>
                                                                         <option value="Secret" {{(old('c14_classification_sys') == 'Secret' ? "selected":"")}}>Secret</option>
                                                                         <option value="Top Secret" {{(old('c14_classification_sys') == 'Top Secret' ? "selected":"")}}>Top Secret</option>
-                                                                        <option value="Others" {{(old('c14_classification_sys') == 'Others' ? "selected":"")}}>Others</option>
+                                                                        <option value="sensitiveButUnclassified" {{(old('c14_classification_sys') == 'sensitiveButUnclassified' ? "selected":"")}}>sensitiveButUnclassified</option>
+                                                                        <option value="forOfficialUseOnly Others" {{(old('c14_classification_sys') == 'forOfficialUseOnly Others' ? "selected":"")}}>forOfficialUseOnly Others</option>
+                                                                        <option value="protected" {{(old('c14_classification_sys') == 'protected' ? "selected":"")}}>protected</option>
+                                                                        <option value="limitedDistribution" {{(old('c14_classification_sys') == 'limitedDistribution' ? "selected":"")}}>limitedDistribution</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

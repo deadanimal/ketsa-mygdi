@@ -35,6 +35,7 @@
                             <option value="Attribute Type" {{($dqScope == 'Attribute Type' ? "selected":"")}}>Attribute Type</option>
                             <option value="Collection Session" {{($dqScope == 'Collection Session' ? "selected":"")}}>Collection Session</option>
                             <option value="Dataset" {{($dqScope == 'Dataset' ? "selected":"")}}>Dataset</option>
+                            <option value="Series" {{($dqScope == 'Series' ? "selected":"")}}>Series</option>
                             <option value="Feature" {{($dqScope == 'Feature' ? "selected":"")}}>Feature</option>
                             <option value="Dimension Group" {{($dqScope == 'Dimension Group' ? "selected":"")}}>Dimension Group</option>
                             <option value="Feature Type" {{($dqScope == 'Feature Type' ? "selected":"")}}>Feature Type</option>

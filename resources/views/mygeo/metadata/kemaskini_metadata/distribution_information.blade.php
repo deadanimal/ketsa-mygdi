@@ -54,24 +54,24 @@
                     ?>
                     <input type="text" name="c11_medium" id="c11_medium" class="form-control form-control-sm" value="{{ $medium }}">
                     <select name="c11_medium" id="c11_medium" class="form-control form-control-sm">
-                        <option value="cdROM (001)" {{ ($medium=='cdROM (001)' ? 'selected':'') }}>cdROM (001)</option>
-                        <option value="dvd (002)" {{ ($medium=='dvd (002)' ? 'selected':'') }}>dvd (002)</option>
-                        <option value="dvdRom (003)" {{ ($medium=='dvdRom (003)' ? 'selected':'') }}>dvdRom (003)</option>
-                        <option value="3halfInchFloppy (004)" {{ ($medium=='3halfInchFloppy (004)' ? 'selected':'') }}>3halfInchFloppy (004)</option>
-                        <option value="5quarterInchFloppy (005)" {{ ($medium=='5quarterInchFloppy (005)' ? 'selected':'') }}>5quarterInchFloppy (005)</option>
-                        <option value="7trackTape (006)" {{ ($medium=='7trackTape (006)' ? 'selected':'') }}>7trackTape (006)</option>
-                        <option value="9trackTape (007)" {{ ($medium=='9trackTape (007)' ? 'selected':'') }}>9trackTape (007)</option>
-                        <option value="3480Cartridge (008)" {{ ($medium=='3480Cartridge (008)' ? 'selected':'') }}>3480Cartridge (008)</option>
-                        <option value="3490Cartridge (009)" {{ ($medium=='3490Cartridge (009)' ? 'selected':'') }}>3490Cartridge (009)</option>
-                        <option value="3580Cartridge (010)" {{ ($medium=='3580Cartridge (010)' ? 'selected':'') }}>3580Cartridge (010)</option>
-                        <option value="4mmCartridgeTape (011)" {{ ($medium=='4mmCartridgeTape (011)' ? 'selected':'') }}>4mmCartridgeTape (011)</option>
-                        <option value="8mmCartridgeTape (012)" {{ ($medium=='8mmCartridgeTape (012)' ? 'selected':'') }}>8mmCartridgeTape (012)</option>
-                        <option value="1quaterInchCartridgeTape (013)" {{ ($medium=='1quaterInchCartridgeTape (013)' ? 'selected':'') }}>1quaterInchCartridgeTape (013)</option>
-                        <option value="digitalLinearTape (014)" {{ ($medium=='digitalLinearTape (014)' ? 'selected':'') }}>digitalLinearTape (014)</option>
-                        <option value="onLine (015)" {{ ($medium=='onLine (015)' ? 'selected':'') }}>onLine (015)</option>
-                        <option value="satellite (016)" {{ ($medium=='satellite (016)' ? 'selected':'') }}>satellite (016)</option>
-                        <option value="telephoneLink (017)" {{ ($medium=='telephoneLink (017)' ? 'selected':'') }}>telephoneLink (017)</option>
-                        <option value="hardcopy (018)" {{ ($medium=='hardcopy (018)' ? 'selected':'') }}>hardcopy (018)</option>
+                        <option value="cdROM" {{ ($medium=='cdROM' ? 'selected':'') }}>cdROM</option>
+                        <option value="dvd" {{ ($medium=='dvd' ? 'selected':'') }}>dvd</option>
+                        <option value="dvdRom" {{ ($medium=='dvdRom' ? 'selected':'') }}>dvdRom</option>
+                        <option value="3halfInchFloppy" {{ ($medium=='3halfInchFloppy' ? 'selected':'') }}>3halfInchFloppy</option>
+                        <option value="5quarterInchFloppy" {{ ($medium=='5quarterInchFloppy' ? 'selected':'') }}>5quarterInchFloppy</option>
+                        <option value="7trackTape" {{ ($medium=='7trackTape' ? 'selected':'') }}>7trackTape</option>
+                        <option value="9trackTape" {{ ($medium=='9trackTape' ? 'selected':'') }}>9trackTape</option>
+                        <option value="3480Cartridge" {{ ($medium=='3480Cartridge' ? 'selected':'') }}>3480Cartridge</option>
+                        <option value="3490Cartridge" {{ ($medium=='3490Cartridge' ? 'selected':'') }}>3490Cartridge</option>
+                        <option value="3580Cartridge" {{ ($medium=='3580Cartridge' ? 'selected':'') }}>3580Cartridge</option>
+                        <option value="4mmCartridgeTape" {{ ($medium=='4mmCartridgeTape' ? 'selected':'') }}>4mmCartridgeTape</option>
+                        <option value="8mmCartridgeTape" {{ ($medium=='8mmCartridgeTape' ? 'selected':'') }}>8mmCartridgeTape</option>
+                        <option value="1quaterInchCartridgeTape" {{ ($medium=='1quaterInchCartridgeTape' ? 'selected':'') }}>1quaterInchCartridgeTape</option>
+                        <option value="digitalLinearTape" {{ ($medium=='digitalLinearTape' ? 'selected':'') }}>digitalLinearTape</option>
+                        <option value="onLine" {{ ($medium=='onLine' ? 'selected':'') }}>onLine</option>
+                        <option value="satellite" {{ ($medium=='satellite' ? 'selected':'') }}>satellite</option>
+                        <option value="telephoneLink" {{ ($medium=='telephoneLink' ? 'selected':'') }}>telephoneLink</option>
+                        <option value="hardcopy" {{ ($medium=='hardcopy' ? 'selected':'') }}>hardcopy</option>
                     </select>
                 </div>
             </div>
