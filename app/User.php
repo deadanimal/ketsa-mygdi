@@ -12,6 +12,7 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
+
     protected $table = 'users';
 
     /**
@@ -43,5 +44,18 @@ class User extends Authenticatable
 
     public function user_roles(){
         // return $this->belongsTo(Role::class, 'peranan', 'id');
+    }
+
+    public function users(){
+        return $this->hasMany(MohonData::class,'user_id','id');
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($user) { // before delete() method call this
+             $user->users()->delete();
+             // do the rest of the cleanup...
+        });
     }
 }

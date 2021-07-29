@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DokumenBerkaitan;
+use App\SenaraiKawasanData;
+use App\MohonData;
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
 
 class DataAsasController extends Controller
 {
@@ -11,8 +16,29 @@ class DataAsasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    { }
+    public function index($id)
+    {
+        return $id;
+        $user = User::where(["id" => Auth::user()->id])->get()->first();
+        $skdatas = SenaraiKawasanData::all();
+
+        $pemohon = MohonData::all();
+
+        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'pemohon'));
+    }
+
+    public function tambah($id)
+    {
+        #return $id;
+        $user = User::where(["id" => Auth::user()->id])->get()->first();
+        $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
+
+        $pemohon = MohonData::where('id', $id)->first();
+        $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->get();
+        //  return $dokumens;
+
+        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'pemohon', 'dokumens'));
+    }
 
     public function data_asas_landing()
     {
@@ -51,7 +77,14 @@ class DataAsasController extends Controller
 
     public function mohon_data()
     {
-        return view('mygeo.mohon_data');
+
+        $user = User::where(["id" => Auth::user()->id])->get()->first();
+        if ($user->id == 1) {
+            $pemohons = MohonData::all();
+        } else {
+            $pemohons = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->get();
+        }
+        return view('mygeo.mohon_data', compact('pemohons', 'user'));
     }
 
     public function mohon_data_asas()
@@ -94,10 +127,6 @@ class DataAsasController extends Controller
         return view('mygeo.permohonan_baru');
     }
 
-    public function mohon_data_asas_baru()
-    {
-        return view('mygeo.mohon_data_asas_baru');
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -120,16 +149,79 @@ class DataAsasController extends Controller
         //
     }
 
+    public function store_senarai_kawasan(Request $request)
+    {
+
+        // return $request;
+        $skdata = new SenaraiKawasanData();
+
+        $skdata->lapisan_data = $request->lapisan_data;
+        $skdata->kategori = $request->kategori;
+        $skdata->subkategori = $request->subkategori;
+        $skdata->kawasan_data = $request->kawasan_data;
+
+        $skdata->permohonan_id = $request->permohonan_id;
+
+        $skdata->save();
+
+        //$skdata;
+        $id = $request->permohonan_id;
+
+        // return redirect('mohon_data');
+        return redirect()->action('DataAsasController@tambah', ['id' => $id]);
+    }
+
+    public function store_permohonan_baru(Request $request)
+    {
+        //return $request;
+
+        $mdata = new MohonData();
+
+        $mdata->nama_permohonan = $request->nama_permohonan;
+        $mdata->date_permohonan = $request->date_permohonan;
+        $mdata->tujuan_permohonan = $request->tujuan_permohonan;
+
+        $mdata->user_id = $request->user_id;
+
+        $mdata->save();
+
+        $id = $request->permohonan_id;
+
+        // return redirect()->action('DataAsasController@tambah', ['id' => $id]);
+        return redirect('mohon_data')->with('success', 'Permohonan ditambah. Sila klik pautan berkenaan');
+    }
+
+    public function store_dokumen_berkaitan(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'
+        ]);
+
+        $failModel = new DokumenBerkaitan();
+
+        if ($request->file()) {
+            $failNama = time() . '_' . $request->file->getClientOriginalName();
+            $failPath = $request->file('file')->storeAs('uploads', $failNama, 'public');
+            $failModel->tajuk_dokumen = $request->tajuk_dokumen;
+            $failModel->nama_fail = time() . '_' . $request->file->getClientOriginalName();
+            $failModel->file_path = '/storage/' . $failPath;
+            $failModel->permohonan_id = $request->permohonan_id;
+            $failModel->save();
+
+            return back()
+                ->with('success', 'Dokumen telah berjaya dimuat naik.')
+                ->with('file', $failNama);
+        }
+    }
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    public function show()
+    { }
 
     /**
      * Show the form for editing the specified resource.
@@ -163,5 +255,14 @@ class DataAsasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete_permohonan(Request $request)
+    {
+        MohonData::where(["id" => $request->user_id])->delete();
+        SenaraiKawasanData::where(["id" => $request->permohonan_id])->delete();
+        DokumenBerkaitan::where(["id" => $request->permohonan_id])->delete();
+
+        return redirect('mohon_data')->with('success', 'Permohonan Data dibuang!');
     }
 }
