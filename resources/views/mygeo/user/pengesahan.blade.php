@@ -55,7 +55,7 @@
                                 <thead>
                                     <tr>
                                         <th>Bil</th>
-                                        <th>Nama Metadata</th>
+                                        <th>Nama</th>
                                         <th>Agensi</th>
                                         <th>Peranan</th>
 					<th>Butiran</th>

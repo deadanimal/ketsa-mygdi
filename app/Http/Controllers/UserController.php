@@ -149,8 +149,6 @@ class UserController extends Controller {
         
         $user_id = $_POST['user_id'];
         $user = User::where(['id'=>$user_id])->get()->first();
-        $user->disahkan = 2;
-        $user->update();
         
         //send email to the person who was disapproved
         $to_name = $user->namaPenuh;
@@ -160,6 +158,8 @@ class UserController extends Controller {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Tidak Diluluskan');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
+        
+        User::where(['id'=>$user_id])->delete();
         
         exit();
     }

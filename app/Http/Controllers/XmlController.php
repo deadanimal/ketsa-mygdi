@@ -27,9 +27,9 @@ class XmlController extends Controller {
                         <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset"></gmd:MD_ScopeCode>
                     </gmd:hierarchyLevel>
 
-                    <gmd:categoryTitle>$request->kategori
+                    <gmd:categoryTitle>
                         <gmd:categoryItem>
-                            <gco:CharacterString></gco:CharacterString>
+                            <gco:CharacterString>$request->kategori</gco:CharacterString>
                         </gmd:categoryItem>
                     </gmd:categoryTitle>
 

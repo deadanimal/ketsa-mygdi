@@ -138,8 +138,8 @@
                                         <?php
                                         if (count($categories) > 0) {
                                             $catSelected = "";
-                                            if (isset($metadataxml->categoryTitle) && $metadataxml->categoryTitle != "") {
-                                                $catSelected = strtolower(trim($metadataxml->categoryTitle));
+                                            if (isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != "") {
+                                                $catSelected = strtolower(trim($metadataxml->categoryTitle->categoryItem->CharacterString));
                                             }
                                             foreach ($categories as $cat) {
                                                 if (strtolower(trim($cat->name)) == $catSelected) {
