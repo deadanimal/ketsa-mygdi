@@ -20,6 +20,7 @@
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm">
+                                                                        <option value="">Pilih</option>
                                                                         <option value="Copyright" {{(old('c14_access_constraint') == 'Copyright' ? "selected":"")}}>Copyright</option>
                                                                         <option value="Intellectual Property Rights" {{(old('c14_access_constraint') == 'Intellectual Property Rights' ? "selected":"")}}>Intellectual Property Rights</option>
                                                                         <option value="License" {{(old('c14_access_constraint') == 'License' ? "selected":"")}}>License</option>
@@ -42,6 +43,7 @@
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm">
+                                                                        <option value="">Pilih</option>
                                                                         <option value="Copyright" {{(old('c14_use_constraint') == 'Copyright' ? "selected":"")}}>Copyright</option>
                                                                         <option value="Intellectual Property Rights" {{(old('c14_use_constraint') == 'Intellectual Property Rights' ? "selected":"")}}>Intellectual Property Rights</option>
                                                                         <option value="License" {{(old('c14_use_constraint') == 'License' ? "selected":"")}}>License</option>
@@ -70,6 +72,7 @@
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
+                                                                        <option value="">Pilih</option>
                                                                         <option value="Confidential" {{(old('c14_classification_sys') == 'Confidential' ? "selected":"")}}>Confidential</option>
                                                                         <option value="For Official Use Only" {{(old('c14_classification_sys') == 'For Official Use Only' ? "selected":"")}}>For Official Use Only</option>
                                                                         <option value="Limited Distribution" {{(old('c14_classification_sys') == 'Limited Distribution' ? "selected":"")}}>Limited Distribution</option>
