@@ -227,6 +227,9 @@ class XmlController extends Controller {
                                                     <gmd:electronicMailAddress>
                                                         <gco:CharacterString>$request->c2_contact_email</gco:CharacterString>
                                                     </gmd:electronicMailAddress>
+                                                    <gmd:role>
+                                                        <gco:CharacterString>$request->c2_contact_role</gco:CharacterString>
+                                                    </gmd:role>
                                                 </gmd:CI_Address>
                                             </gmd:address>
                                             <gmd:onlineResource>

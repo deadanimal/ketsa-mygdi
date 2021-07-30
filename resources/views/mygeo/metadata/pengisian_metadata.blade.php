@@ -289,6 +289,7 @@
                 $('.divMetadataDateType').show();
                 $('.divMetadataStatus').show();
                 $('.divCity').show();
+                $('.divResponsiblePartyRole').show();
             }else{
                 $('.lblMetadataName').html('Metadata Name<span class="text-warning">*</span>');
                 $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?>');
@@ -297,6 +298,7 @@
                 $('.divMetadataDateType').hide();
                 $('.divMetadataStatus').hide();
                 $('.divCity').hide();
+                $('.divResponsiblePartyRole').hide();
             }
             if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();

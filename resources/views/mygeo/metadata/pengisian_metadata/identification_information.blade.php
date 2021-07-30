@@ -15,10 +15,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
-                        <?php
-                        $metadata_name = (isset($metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString : "");
-                        ?>
-                        <input class="form-control form-control-sm ml-3" type="text" name="c2_metadataName" id="c2_metadataName" value="{{ $metadata_name }}" />
+                        <input class="form-control form-control-sm ml-3" type="text" name="c2_metadataName" id="c2_metadataName" value="{{ old('c2_metadataName') }}" />
                         @error('c2_metadataName')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -62,7 +59,7 @@
                 </div>
                 <div class="row mb-2 divMetadataDate">
                     <div class="col-3">
-                        <label class="form-control-label mr-4" for="c2_date">
+                        <label class="form-control-label mr-4" for="c2_metadataDate">
                             Date
                         </label><label class="float-right">:</label>
                     </div>
@@ -75,12 +72,29 @@
                 </div>
                 <div class="row mb-2 divMetadataDateType">
                     <div class="col-3">
-                        <label class="form-control-label mr-4" for="c2_date">
+                        <label class="form-control-label mr-4" for="c2_metadataDateType">
                             Date Type
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
-                        <input class="form-control form-control-sm" type="date" name="c2_metadataDateType" id="c2_metadataDateType" value="{{old('c2_metadataDate')}}">
+                        <select name="c2_metadataDateType" id="c2_metadataDateType" class="form-control form-control-sm">
+                            <option value="Adopted">Adopted</option>
+                            <option value="Creation">Creation</option>
+                            <option value="Deprecated">Deprecated</option>
+                            <option value="Distribution">Distribution</option>
+                            <option value="Expiry">Expiry</option>
+                            <option value="In Force">In Force</option>
+                            <option value="Last Revison">Last Revison</option>
+                            <option value="Last Update">Last Update</option>
+                            <option value="Next Update">Next Update</option>
+                            <option value="Publication">Publication</option>
+                            <option value="Released">Released</option>
+                            <option value="Revision">Revision</option>
+                            <option value="Superseded">Superseded</option>
+                            <option value="Validity Begins">Validity Begins</option>
+                            <option value="Validy Expires">Validy Expires</option>
+                            <option value="Unavailable">Unavailable</option>
+                        </select>
                         @error('c2_metadataDateType')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -88,12 +102,31 @@
                 </div>
                 <div class="row mb-2 divMetadataStatus">
                     <div class="col-3">
-                        <label class="form-control-label mr-4" for="c2_date">
+                        <label class="form-control-label mr-4" for="c2_metadataStatus">
                             Status
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
-                        <input class="form-control form-control-sm" type="text" name="c2_metadataStatus" id="c2_metadataStatus" value="{{old('c2_metadataStatus')}}">
+                        <select class="form-control form-control-sm" name="c2_metadataStatus" id="c2_metadataStatus">
+                            <option value="Accepted" {{ (old('c2_metadataStatus') == "Accepted" ? "selected":"") }}>Accepted</option>
+                            <option value="Completed" {{ (old('c2_metadataStatus') == "Completed" ? "selected":"") }}>Completed</option>
+                            <option value="Deprecated" {{ (old('c2_metadataStatus') == "Deprecated" ? "selected":"") }}>Deprecated</option>
+                            <option value="Final" {{ (old('c2_metadataStatus') == "Final" ? "selected":"") }}>Final</option>
+                            <option value="Historical Archive" {{ (old('c2_metadataStatus') == "Historical Archive" ? "selected":"") }}>Historical Archive</option>
+                            <option value="Not Accepted" {{ (old('c2_metadataStatus') == "Not Accepted" ? "selected":"") }}>Not Accepted</option>
+                            <option value="Obsolete" {{ (old('c2_metadataStatus') == "Obsolete" ? "selected":"") }}>Obsolete</option>
+                            <option value="On Going" {{ (old('c2_metadataStatus') == "On Going" ? "selected":"") }}>On Going</option>
+                            <option value="Pending" {{ (old('c2_metadataStatus') == "Pending" ? "selected":"") }}>Pending</option>
+                            <option value="Planned" {{ (old('c2_metadataStatus') == "Planned" ? "selected":"") }}>Planned</option>
+                            <option value="Proposed" {{ (old('c2_metadataStatus') == "Proposed" ? "selected":"") }}>Proposed</option>
+                            <option value="Required" {{ (old('c2_metadataStatus') == "Required" ? "selected":"") }}>Required</option>
+                            <option value="Retired" {{ (old('c2_metadataStatus') == "Retired" ? "selected":"") }}>Retired</option>
+                            <option value="Superseded" {{ (old('c2_metadataStatus') == "Superseded" ? "selected":"") }}>Superseded</option>
+                            <option value="Tentative" {{ (old('c2_metadataStatus') == "Tentative" ? "selected":"") }}>Tentative</option>
+                            <option value="Withrawn" {{ (old('c2_metadataStatus') == "Withrawn" ? "selected":"") }}>Withrawn</option>
+                            <option value="Under Development" {{ (old('c2_metadataStatus') == "Under Development" ? "selected":"") }}>Under Development</option>
+                            <option value="Valid" {{ (old('c2_metadataStatus') == "Valid" ? "selected":"") }}>Valid</option>
+                        </select>
                         @error('c2_metadataStatus')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -217,6 +250,37 @@
                     </div>
                     <div class="col-6">
                         <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3">
+                    </div>
+                </div>
+                <div class="row mb-4 divResponsiblePartyRole">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c2_contact_role">
+                            Role
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-6">
+                        <select name="c2_contact_role" id="c2_contact_role" class="form-control form-control-sm ml-3">
+                            <option value="Author" {{ (old('c2_contact_role') == "Author" ? "selected":"") }}>Author</option>
+                            <option value="Co Author" {{ (old('c2_contact_role') == "Co Author" ? "selected":"") }}>Co Author</option>
+                            <option value="Collaborator" {{ (old('c2_contact_role') == "Collaborator" ? "selected":"") }}>Collaborator</option>
+                            <option value="Contributor" {{ (old('c2_contact_role') == "Contributor" ? "selected":"") }}>Contributor</option>
+                            <option value="Custodian" {{ (old('c2_contact_role') == "Custodian" ? "selected":"") }}>Custodian</option>
+                            <option value="Distributor" {{ (old('c2_contact_role') == "Distributor" ? "selected":"") }}>Distributor</option>
+                            <option value="Editor" {{ (old('c2_contact_role') == "Editor" ? "selected":"") }}>Editor</option>
+                            <option value="Funder" {{ (old('c2_contact_role') == "Funder" ? "selected":"") }}>Funder</option>
+                            <option value="Mediator" {{ (old('c2_contact_role') == "Mediator" ? "selected":"") }}>Mediator</option>
+                            <option value="Originator" {{ (old('c2_contact_role') == "Originator" ? "selected":"") }}>Originator</option>
+                            <option value="Point Of Contact" {{ (old('c2_contact_role') == "Point Of Contact" ? "selected":"") }}>Point Of Contact</option>
+                            <option value="Principal Investigator" {{ (old('c2_contact_role') == "Principal Investigator" ? "selected":"") }}>Principal Investigator</option>
+                            <option value="Processor" {{ (old('c2_contact_role') == "Processor" ? "selected":"") }}>Processor</option>
+                            <option value="Publisher" {{ (old('c2_contact_role') == "Publisher" ? "selected":"") }}>Publisher</option>
+                            <option value="Resource Provider " {{ (old('c2_contact_role') == "Resource Provider" ? "selected":"") }}>Resource Provider</option>
+                            <option value="Rights Holder" {{ (old('c2_contact_role') == "Rights Holder" ? "selected":"") }}>Rights Holder</option>
+                            <option value="Sponsor" {{ (old('c2_contact_role') == "Sponsor" ? "selected":"") }}>Sponsor</option>
+                            <option value="Stakeholder" {{ (old('c2_contact_role') == "Stakeholder" ? "selected":"") }}>Stakeholder</option>
+                            <option value="Owner" {{ (old('c2_contact_role') == "Owner" ? "selected":"") }}>Owner</option>
+                            <option value="User" {{ (old('c2_contact_role') == "User" ? "selected":"") }}>User</option>
+                        </select>
                     </div>
                 </div>
             </div>
