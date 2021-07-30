@@ -133,6 +133,7 @@
         $('.divMetadataDateType').show();
         $('.divMetadataStatus').show();
         $('.divCity').show();
+        $('.divPostalCode').show();
     }else{
         $('.divPublisherRole').hide();
         $('.divMetadataLanguage').hide();
@@ -140,6 +141,7 @@
         $('.divMetadataDateType').hide();
         $('.divMetadataStatus').hide();
         $('.divCity').hide();
+        $('.divPostalCode').hide();
     }
     if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {
         $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();

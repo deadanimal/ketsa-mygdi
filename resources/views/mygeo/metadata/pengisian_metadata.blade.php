@@ -289,6 +289,7 @@
                 $('.divMetadataDateType').show();
                 $('.divMetadataStatus').show();
                 $('.divCity').show();
+                $('.divPostalCode').show();
                 $('.divResponsiblePartyRole').show();
             }else{
                 $('.lblMetadataName').html('Metadata Name<span class="text-warning">*</span>');
@@ -298,6 +299,7 @@
                 $('.divMetadataDateType').hide();
                 $('.divMetadataStatus').hide();
                 $('.divCity').hide();
+                $('.divPostalCode').hide();
                 $('.divResponsiblePartyRole').hide();
             }
             if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {

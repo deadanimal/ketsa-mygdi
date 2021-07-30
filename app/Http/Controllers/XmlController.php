@@ -219,7 +219,7 @@ class XmlController extends Controller {
                                                         <gco:CharacterString>$request->c2_contact_state</gco:CharacterString>
                                                     </gmd:administrativeArea>
                                                     <gmd:postalCode>
-                                                        <gco:CharacterString></gco:CharacterString>
+                                                        <gco:CharacterString>$request->c2_postal_code</gco:CharacterString>
                                                     </gmd:postalCode>
                                                     <gmd:country>
                                                         <gco:CharacterString>$request->c2_contact_country</gco:CharacterString>

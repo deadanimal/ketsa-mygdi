@@ -156,6 +156,14 @@
                         }
                         ?>
                         <div class="form-group row">
+                            <div class="divPostalCode">
+                                Postal Code:
+                                <?php
+                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
+                                        echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString;
+                                    }
+                                ?>
+                            </div>
                             <div class="divCity">
                                 City:
                                 <?php

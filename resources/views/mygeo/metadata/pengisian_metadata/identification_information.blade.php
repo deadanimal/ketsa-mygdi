@@ -144,12 +144,12 @@
                     <div class="col-7">
                         <div class="ml-3">
                             <?php
-                            if (isset($pengesahs->agensi_organisasi)) {
-                                echo $pengesahs->agensi_organisasi;
+                            if (isset($pengesahs->name)) {
+                                echo $pengesahs->name;
                             }
                             ?>
                         </div>
-                        <input type="hidden" name="c2_contact_name" id="c2_contact_name" value="{{ (isset($pengesahs->agensi_organisasi) ? $pengesahs->agensi_organisasi:"") }}">
+                        <input type="hidden" name="c2_contact_name" id="c2_contact_name" value="{{ (isset($pengesahs->name) ? $pengesahs->name:"") }}">
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -172,14 +172,16 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2" value="{{ (isset($pengesahs->alamat) ? $pengesahs->alamat:"") }}" readonly>
-                        <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
-                        <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
-                        <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
+                        <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2" value="{{ (isset($pengesahs->alamat) ? $pengesahs->alamat:"") }}">
+                        <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2" value="">
+                        <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2" value="">
+                        <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="">
                         <div class="form-inline row ml-3">
+                            <label class="form-control-label mr-4 divPostalCode" for="c2_contact_city">Postal Code :</label>
+                            <input type="text" name="c2_postal_code" id="c2_postal_code" class="form-control form-control-sm ml-3 mb-2 divPostalCode" value="{{ old('c2_postal_code') }}">
                             <label class="form-control-label mr-4 divCity" for="c2_contact_city">City :</label>
                             <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm ml-3 mb-2 divCity" value="{{ old('c2_contact_city') }}">
-                            <label class="form-control-label mr-4" for="c2_contact_state">State :</label>
+                            <label class="form-control-label mr-4" for="c2_contact_state">State<span class="text-warning">*</span> :</label>
                             <select name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm">
                                 <option selected disabled>Select State</option>
                                 <?php

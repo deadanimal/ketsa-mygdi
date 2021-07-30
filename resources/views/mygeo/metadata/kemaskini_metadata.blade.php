@@ -268,6 +268,8 @@ if (empty($pengesahs)) {
                 $('.divMetadataDateType').show();
                 $('.divMetadataStatus').show();
                 $('.divCity').show();
+                $('.divPostalCode').show();
+                $('.divResponsiblePartyRole').show();
             }else{
                 $('.lblMetadataName').html('Metadata Name<span class="text-warning">*</span>');
                 $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?>');
@@ -276,6 +278,8 @@ if (empty($pengesahs)) {
                 $('.divMetadataDateType').hide();
                 $('.divMetadataStatus').hide();
                 $('.divCity').hide();
+                $('.divPostalCode').hide();
+                $('.divResponsiblePartyRole').hide();
             }        
         }
         

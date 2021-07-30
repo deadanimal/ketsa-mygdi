@@ -242,6 +242,14 @@
                         <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
                         <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
                         <div class="form-inline row ml-3">
+                            <label class="form-control-label mr-4 divPostalCode" for="c2_contact_city">Postal Code :</label>
+                            <?php
+                                $postalCode = "";
+                                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
+                                    $postalCode = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString;
+                                }
+                            ?>
+                            <input type="text" name="c2_postal_code" id="c2_postal_code" class="form-control form-control-sm ml-3 mb-2 divPostalCode" value="{{ $postalCode }}">
                             <label class="form-control-label mr-4 divCity" for="c2_contact_city">City :</label>
                             <?php
                                 $city = "";
@@ -250,7 +258,7 @@
                                 }
                             ?>
                             <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm ml-3 mb-2 divCity" value="{{ $city }}">
-                            <label class="form-control-label mr-4" for="c2_contact_state">State :</label>
+                            <label class="form-control-label mr-4" for="c2_contact_state">State<span class="text-warning">*</span> :</label>
                             <select name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm">
                                 <option disabled>Select State</option>
                                 <?php
