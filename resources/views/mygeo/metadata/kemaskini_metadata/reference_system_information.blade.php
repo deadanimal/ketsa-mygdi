@@ -25,7 +25,7 @@
                         <?php
                         if (count($refSys) > 0) {
                             foreach ($refSys as $ids) {
-                                if ($ids->id == $refSysSelected->id) {
+                                if (isset($refSysSelected->id) && $ids->id == $refSysSelected->id) {
                                     ?><option value="<?php echo $ids->id; ?>" selected><?php echo $ids->name; ?></option><?php
                                 } else {
                                     ?><option value="<?php echo $ids->id; ?>"><?php echo $ids->name; ?></option><?php
@@ -103,6 +103,12 @@
             });
         });
 
-        $("#c13_ref_sys_identify").val("{{ $refSysSelected->id }}").trigger('change');
+        <?php
+        if(isset($refSysSelected->id)){
+            ?>
+            $("#c13_ref_sys_identify").val("{{ $refSysSelected->id }}").trigger('change');
+            <?php
+        }
+        ?>
     });
 </script>
