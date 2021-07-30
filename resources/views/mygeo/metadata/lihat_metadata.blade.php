@@ -56,8 +56,10 @@
                     <p>
                         Category:
                         <?php
+                        $category = "";
                         if(isset($metadataxml->categoryTitle) && $metadataxml->categoryTitle != ""){
                             echo $metadataxml->categoryTitle;
+                            $category = $metadataxml->categoryTitle;
                         }
                         ?>
                     </p>
@@ -123,6 +125,31 @@
       }
     }
     ?>
+            
+    if ("<?php echo $category; ?>" == "dataset") {
+        $('.divPublisherRole').show();
+        $('.divMetadataLanguage').show();
+        $('.divMetadataDate').show();
+        $('.divMetadataDateType').show();
+        $('.divMetadataStatus').show();
+        $('.divCity').show();
+    }else{
+        $('.divPublisherRole').hide();
+        $('.divMetadataLanguage').hide();
+        $('.divMetadataDate').hide();
+        $('.divMetadataDateType').hide();
+        $('.divMetadataStatus').hide();
+        $('.divCity').hide();
+    }
+    if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {
+        $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
+        $('#accordion').show();
+        $('#div_action_buttons').show();
+    } else if (kategori.toLowerCase() == "imagery" || kategori.toLowerCase() == "gridded") {
+        $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
+        $('#accordion').show();
+        $('#div_action_buttons').show();
+    }
   });
 </script>
 

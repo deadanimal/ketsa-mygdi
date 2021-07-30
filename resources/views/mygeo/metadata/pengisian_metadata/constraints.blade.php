@@ -70,22 +70,22 @@
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
-                                                                        <option value="unclassified" {{(old('c14_classification_sys') == 'unclassified' ? "selected":"")}}>unclassified</option>
-                                                                        <option value="restricted" {{(old('c14_classification_sys') == 'restricted' ? "selected":"")}}>restricted</option>
-                                                                        <option value="confidential" {{(old('c14_classification_sys') == 'confidential' ? "selected":"")}}>confidential</option>
+                                                                        <option value="Confidential" {{(old('c14_classification_sys') == 'Confidential' ? "selected":"")}}>Confidential</option>
+                                                                        <option value="For Official Use Only" {{(old('c14_classification_sys') == 'For Official Use Only' ? "selected":"")}}>For Official Use Only</option>
+                                                                        <option value="Limited Distribution" {{(old('c14_classification_sys') == 'Limited Distribution' ? "selected":"")}}>Limited Distribution</option>
+                                                                        <option value="Protected" {{(old('c14_classification_sys') == 'Protected' ? "selected":"")}}>Protected</option>
+                                                                        <option value="Restricted" {{(old('c14_classification_sys') == 'Restricted' ? "selected":"")}}>Restricted</option>
                                                                         <option value="Secret" {{(old('c14_classification_sys') == 'Secret' ? "selected":"")}}>Secret</option>
+                                                                        <option value="Sensitive But Unclassified" {{(old('c14_classification_sys') == 'Sensitive But Unclassified' ? "selected":"")}}>Sensitive But Unclassified</option>
                                                                         <option value="Top Secret" {{(old('c14_classification_sys') == 'Top Secret' ? "selected":"")}}>Top Secret</option>
-                                                                        <option value="sensitiveButUnclassified" {{(old('c14_classification_sys') == 'sensitiveButUnclassified' ? "selected":"")}}>sensitiveButUnclassified</option>
-                                                                        <option value="forOfficialUseOnly Others" {{(old('c14_classification_sys') == 'forOfficialUseOnly Others' ? "selected":"")}}>forOfficialUseOnly Others</option>
-                                                                        <option value="protected" {{(old('c14_classification_sys') == 'protected' ? "selected":"")}}>protected</option>
-                                                                        <option value="limitedDistribution" {{(old('c14_classification_sys') == 'limitedDistribution' ? "selected":"")}}>limitedDistribution</option>
+                                                                        <option value="Unclassified" {{(old('c14_classification_sys') == 'Unclassified' ? "selected":"")}}>Unclassified</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-2">
                                                                 <div class="col-xl-5">
                                                                     <label class="form-control-label" for="input-reference">
-                                                                        Reference
+                                                                        Classification System
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">

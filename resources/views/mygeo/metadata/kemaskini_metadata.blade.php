@@ -258,6 +258,27 @@ if (empty($pengesahs)) {
             }
         });
 
+        var kategori = "<?php echo strtolower($catSelected); ?>";
+
+        if (kategori == "dataset") {
+                $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
+                $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?><span class="text-warning">*</span>');
+                $('.divPublisherRole').show();
+                $('.divMetadataDate').show();
+                $('.divMetadataDateType').show();
+                $('.divMetadataStatus').show();
+                $('.divCity').show();
+            }else{
+                $('.lblMetadataName').html('Metadata Name<span class="text-warning">*</span>');
+                $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?>');
+                $('.divPublisherRole').hide();
+                $('.divMetadataDate').hide();
+                $('.divMetadataDateType').hide();
+                $('.divMetadataStatus').hide();
+                $('.divCity').hide();
+            }        
+        }
+        
 <?php
 if ($catSelected == "dataset" || $catSelected == "services") {
     ?>
@@ -278,6 +299,27 @@ if ($catSelected == "dataset" || $catSelected == "services") {
             } else if (kategori.toLowerCase() == "imagery" || kategori.toLowerCase() == "gridded") {
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
                 $('#accordion').show();
+            }
+        });
+        
+        $(document).on('change', '#c2_product_type', function() {
+            var type = $(this).val();
+            if (type == "Application") {
+                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
+            }else if (type == "Document") {
+                $('#c2_abstract').attr('placeholder','Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
+            }else if (type == "GIS Activity/Project") {
+                $('#c2_abstract').attr('placeholder','Nama Aktiviti –Tujuan – Lokasi – Tahun');
+            }else if (type == "Map") {
+                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit ');
+            }else if (type == "Raster Data") {
+                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
+            }else if (type == "Services") {
+                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
+            }else if (type == "Software") {
+                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
+            }else if (type == "Vector Data") {
+                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
             }
         });
 
@@ -433,7 +475,7 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
 
         console.log("zoomToRectangle values:");
         console.log(zoomToRectangle);
-        map.setView(zoomToRectangle, 6);
+        map.setView(zoomToRectangle, 6); //SMBG SINI - zoom 2nd param
 
         // var map = L.map('map').setView([5.3105,107.3854408], 5);
 

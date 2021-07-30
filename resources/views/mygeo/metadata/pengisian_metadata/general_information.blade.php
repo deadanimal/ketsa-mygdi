@@ -74,6 +74,28 @@
                         <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
                     </div>
                 </div>
+                <div class="row my-0 py-0 divPublisherRole">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="publisher_role">
+                            Role
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-8">
+                        <select name='publisher_role' class='form-control form-control-sm ml-3'>
+                            <option value="Author">Author</option>
+                            <option value="Custodian">Custodian</option>
+                            <option value="Distributor">Distributor</option>
+                            <option value="Originator">Originator</option>
+                            <option value="Owner">Owner</option>
+                            <option value="Point of Contact">Point of Contact</option>
+                            <option value="Principal Investigator">Principal Investigator</option>
+                            <option value="Processor">Processor</option>
+                            <option value="Publisher" selected>Publisher</option>
+                            <option value="Resource Provider">Resource Provider</option>
+                            <option value="User">User</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

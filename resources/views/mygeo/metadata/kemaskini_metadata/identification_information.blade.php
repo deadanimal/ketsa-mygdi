@@ -73,7 +73,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-3">
-                        <label class="form-control-label mr-4" for="c2_metadataName">
+                        <label class="form-control-label mr-4" for="c2_abstract">
                             Abstract<span class="text-warning">*</span>
                         </label><label class="float-right">:</label>
                     </div>
@@ -86,6 +86,63 @@
                         ?>
                         <textarea name="c2_abstract" id="c2_abstract" class="form-control form-control-sm ml-3">{{ $abstract }}</textarea>
                         @error('c2_abstract')
+                        <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-2 divMetadataDate">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_date">
+                            Date
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        $metDate = "";
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->metadataDate->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDate->CharacterString != "") {
+                            $metDate = $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDate->CharacterString;
+                        }
+                        ?>
+                        <input class="form-control form-control-sm" type="date" name="c2_metadataDate" id="c2_metadataDate" value="{{ $metDate }}">
+                        @error('c2_metadataDate')
+                        <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-2 divMetadataDateType">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_date">
+                            Date Type
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        $metDateType = "";
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->metadataDateType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDateType->CharacterString != "") {
+                            $metDateType = $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDateType->CharacterString;
+                        }
+                        ?>
+                        <input class="form-control form-control-sm" type="date" name="c2_metadataDateType" id="c2_metadataDateType" value="{{ $metDateType }}">
+                        @error('c2_metadataDateType')
+                        <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-2 divMetadataStatus">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_date">
+                            Status
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        $metStatus = "";
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->metadataStatus->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->metadataStatus->CharacterString != "") {
+                            $metStatus = $metadataxml->identificationInfo->SV_ServiceIdentification->metadataStatus->CharacterString;
+                        }
+                        ?>
+                        <input class="form-control form-control-sm" type="date" name="c2_metadataStatus" id="c2_metadataStatus" value="{{ $metStatus }}">
+                        @error('c2_metadataStatus')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
                     </div>
@@ -149,6 +206,14 @@
                         <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
                         <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
                         <div class="form-inline row ml-3">
+                            <label class="form-control-label mr-4 divCity" for="c2_contact_city">City :</label>
+                            <?php
+                                $city = "";
+                                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
+                                    $city = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString;
+                                }
+                            ?>
+                            <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm ml-3 mb-2 divCity" value="{{ $city }}">
                             <label class="form-control-label mr-4" for="c2_contact_state">State :</label>
                             <select name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm">
                                 <option disabled>Select State</option>
@@ -157,7 +222,7 @@
                                     if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != ""){
                                         $respState = strtolower(trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
                                     }
-                                    ?>
+                                ?>
                                 <?php
                                 if (count($states) > 0) {
                                     foreach ($states as $st) {

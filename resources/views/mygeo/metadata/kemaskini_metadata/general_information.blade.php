@@ -110,6 +110,34 @@
                         <input type="hidden" name="publisher_phone" value="{{ $pub_phone }}">
                     </div>
                 </div>
+                <div class="row my-0 py-0 divPublisherRole">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="publisher_role">
+                            Role
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-8">
+                        <?php
+                        $pub_role = "";
+                        if(isset($metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString != ""){
+                            $pub_role = $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString;
+                        }
+                        ?>
+                        <select name='publisher_role' class='form-control form-control-sm ml-3'>
+                            <option value="Author" {{ ($pub_role == "Author" ? "selected":"") }}>Author</option>
+                            <option value="Custodian" {{ ($pub_role == "Custodian" ? "selected":"") }}>Custodian</option>
+                            <option value="Distributor" {{ ($pub_role == "Distributor" ? "selected":"") }}>Distributor</option>
+                            <option value="Originator" {{ ($pub_role == "Originator" ? "selected":"") }}>Originator</option>
+                            <option value="Owner" {{ ($pub_role == "Owner" ? "selected":"") }}>Owner</option>
+                            <option value="Point of Contact" {{ ($pub_role == "Point of Contact" ? "selected":"") }}>Point of Contact</option>
+                            <option value="Principal Investigator" {{ ($pub_role == "Principal Investigator" ? "selected":"") }}>Principal Investigator</option>
+                            <option value="Processor" {{ ($pub_role == "Processor" ? "selected":"") }}>Processor</option>
+                            <option value="Publisher" {{ ($pub_role == "Publisher" ? "selected":"") }}>Publisher</option>
+                            <option value="Resource Provider" {{ ($pub_role == "Resource Provider" ? "selected":"") }}>Resource Provider</option>
+                            <option value="User" {{ ($pub_role == "User" ? "selected":"") }}>User</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

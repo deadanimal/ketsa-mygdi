@@ -18,7 +18,7 @@ class XmlController extends Controller {
                         <gco:CharacterString>{82EB5705-61EA-41A7-BAF5-183B3B3EA010}</gco:CharacterString>
                     </gmd:fileIdentifier>
                     <gmd:language>
-                        <gco:CharacterString></gco:CharacterString>
+                        <gco:CharacterString>$request->flanguage</gco:CharacterString>
                     </gmd:language>
                     <gmd:characterSet>
                         <gmd:MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part3"></gmd:MD_CharacterSetCode>
@@ -62,6 +62,9 @@ class XmlController extends Controller {
                                     </gmd:address>
                                 </gmd:CI_Contact>
                             </gmd:contactInfo>
+                            <gmd:publisherRole>
+                                <gco:CharacterString>$request->publisher_role</gco:CharacterString>
+                            </gmd:publisherRole>
                         </gmd:CI_ResponsibleParty>
                     </gmd:contact>
                     <gmd:dateStamp>
@@ -172,6 +175,15 @@ class XmlController extends Controller {
                             <gmd:status>
                                 <gmd:MD_ProgressCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode" codeListValue="completed"></gmd:MD_ProgressCode>
                             </gmd:status>
+                            <gmd:metadataDate>
+                                <gco:CharacterString>$request->c2_metadataDate</gco:CharacterString>
+                            </gmd:metadataDate>
+                            <gmd:metadataDateType>
+                                <gco:CharacterString>$request->c2_metadataDateType</gco:CharacterString>
+                            </gmd:metadataDateType>
+                            <gmd:metadataStatus>
+                                <gco:CharacterString>$request->c2_metadataStatus</gco:CharacterString>
+                            </gmd:metadataStatus>
                             <gmd:pointOfContact>
                                 <gmd:CI_ResponsibleParty>
                                     <gmd:organisationName>
@@ -201,7 +213,7 @@ class XmlController extends Controller {
                                                         <gco:CharacterString>$request->c2_contact_address1</gco:CharacterString>
                                                     </gmd:deliveryPoint>
                                                     <gmd:city>
-                                                        <gco:CharacterString></gco:CharacterString>
+                                                        <gco:CharacterString>$request->c2_contact_city</gco:CharacterString>
                                                     </gmd:city>
                                                     <gmd:administrativeArea>
                                                         <gco:CharacterString>$request->c2_contact_state</gco:CharacterString>

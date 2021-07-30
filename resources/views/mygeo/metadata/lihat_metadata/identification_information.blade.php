@@ -21,7 +21,7 @@
                                 }
                             }
                             ?>
-                            <span class="text-warning">*</span>
+                            
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
@@ -35,7 +35,7 @@
                 <div class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataName">
-                            Type of Product<span class="text-warning">*</span>
+                            Type of Product
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-3">
@@ -48,8 +48,50 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_abstract">
+                            Abstract
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract != "") {
+                            echo $metadataxml->identificationInfo->SV_ServiceIdentification->abstract;
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataName">
-                            Abstract<span class="text-warning">*</span>
+                            Date
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract != "") {
+                            echo $metadataxml->identificationInfo->SV_ServiceIdentification->abstract;
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_metadataName">
+                            Date Type
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract != "") {
+                            echo $metadataxml->identificationInfo->SV_ServiceIdentification->abstract;
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_metadataName">
+                            Status
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
@@ -66,7 +108,7 @@
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName">
-                            Name<span class="text-warning">*</span>
+                            Name
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
@@ -75,6 +117,16 @@
                             echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName;
                         }
                         ?>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c2_metadataName">
+                            Position Name
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        Metadata Approver
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -103,8 +155,16 @@
                             echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString;
                         }
                         ?>
-
                         <div class="form-group row">
+                            <div class="divCity">
+                                City:
+                                <?php
+                                    $city = "";
+                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
+                                        echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString;
+                                    }
+                                ?>
+                            </div>
                             State:
                             <?php
                             if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != "") {
