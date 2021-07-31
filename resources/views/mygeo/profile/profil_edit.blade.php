@@ -82,7 +82,13 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <p>{{ $user->nric }}</p>
+                                            <?php
+                                            if(trim($user->nric) == ""){
+                                                ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"><?php
+                                            }else{
+                                                ?><p>{{ $user->nric }}</p><?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -92,7 +98,17 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <p>{{ $user->agensi_organisasi }}</p>
+                                            <?php
+                                            if(trim($user->agensi_organisasi) == ""){
+                                                ?>
+                                                <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                                                    <option value="">Pilih...</option>
+                                                </select>    
+                                                <?php
+                                            }else{
+                                                ?><p>{{ $user->agensi_organisasi }}</p><?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -102,7 +118,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="bahagian" type="text" value="{{ $user->bahagian }}" />
+                                            <input class="form-control form-control-sm ml-3" name="bahagian" id="bahagian" type="text" value="{{ $user->bahagian }}" />
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -212,7 +228,37 @@
 <script>
 $(document).ready(function(){
     $(document).on('click','.btn_simpan',function(){
-        $('#form_kemaskini_profil').submit();
+        var nric = $("#nric").val();
+        var agensi_organisasi = $("#agensi_organisasi").val();
+        var bahagian = $("#bahagian").val();
+        var msg = "";
+        if(nric.length < 12){
+            msg = msg + "Nombor NRIC tidak lengkap\r\n\r\n";
+        }
+        if(agensi_organisasi == ""){
+            msg = msg + "Sila pilih agensi / organisasi\r\n\r\n";
+        }
+        if(bahagian == ""){
+            msg = msg + "Sila pilih bahagian\r\n\r\n";
+        }
+        if(msg.length > 0){
+            alert(msg);
+        }else{
+            $("#form_kemaskini_profil").submit();
+        }
+    });
+    
+    $.ajax({
+        method: "POST",
+        url: "get_agensiOrganisasi",
+        data: {
+            "_token": "{{ csrf_token() }}"
+        },
+        dataType: "json",
+    }).done(function(data) {
+        data.forEach(function(the_var) {
+            $("#agensi_organisasi").append("<option value='" + the_var.name + "'>" + the_var.name + "</option>");
+        });
     });
 });
 </script>

@@ -351,31 +351,31 @@
                     </div>
                 </nav>
 
-                <div _ngcontent-oai-c447="" class="main-content">
-                    <app-navbar _ngcontent-oai-c447="" _nghost-oai-c451="">
-                        <nav _ngcontent-oai-c451="" id="navbar-main" class="navbar navbar-top navbar-expand navbar-light bg-custom border-bottom">
-                            <div _ngcontent-oai-c451="" class="container-fluid">
-                                <div _ngcontent-oai-c451="" id="navbarSupportedContent" class="collapse navbar-collapse">
-                                    <div _ngcontent-oai-c451="" class="media align-items-center"><span _ngcontent-oai-c451="" class="ml-1"><img _ngcontent-oai-c451="" alt="Image placeholder" src="{{ url('afiqadminmygeo_files/mygeoexplorer-logo2.png') }}" width="50%"></span></div>
-                                    <ul _ngcontent-oai-c451="" class="navbar-nav align-items-center ml-md-auto">
-                                        <li _ngcontent-oai-c451="" class="nav-item d-xl-none">
-                                            <div _ngcontent-oai-c451="" data-action="sidenav-pin" data-target="#sidenav-main" class="pr-3 sidenav-toggler sidenav-toggler-dark">
-                                                <div _ngcontent-oai-c451="" class="sidenav-toggler-inner"><i _ngcontent-oai-c451="" class="sidenav-toggler-line"></i><i _ngcontent-oai-c451="" class="sidenav-toggler-line"></i><i _ngcontent-oai-c451="" class="sidenav-toggler-line"></i></div>
+                <div class="main-content">
+                    <app-navbar>
+                        <nav id="navbar-main" class="navbar navbar-top navbar-expand navbar-light bg-custom border-bottom">
+                            <div class="container-fluid">
+                                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                                    <div class="media align-items-center"><span class="ml-1"><img alt="Image placeholder" src="{{ url('afiqadminmygeo_files/mygeoexplorer-logo2.png') }}" width="50%"></span></div>
+                                    <ul class="navbar-nav align-items-center ml-md-auto">
+                                        <li class="nav-item d-xl-none">
+                                            <div data-action="sidenav-pin" data-target="#sidenav-main" class="pr-3 sidenav-toggler sidenav-toggler-dark">
+                                                <div class="sidenav-toggler-inner"><i class="sidenav-toggler-line"></i><i class="sidenav-toggler-line"></i><i class="sidenav-toggler-line"></i></div>
                                             </div>
                                         </li>
-                                        <li _ngcontent-oai-c451="" class="nav-item d-sm-none"><a _ngcontent-oai-c451="" class="nav-link"><i _ngcontent-oai-c451="" class="ni ni-zoom-split-in"></i></a></li>
-                                        <li _ngcontent-oai-c451="" dropdown="" placement="bottom-right" class="nav-item dropdown" ng-reflect-placement="bottom-right">
-                                            <a _ngcontent-oai-c451="" role="button" disabled="" class="nav-link dropdown-toggle"></a>
+                                        <li class="nav-item d-sm-none"><a class="nav-link"><i class="ni ni-zoom-split-in"></i></a></li>
+                                        <li dropdown="" placement="bottom-right" class="nav-item dropdown" >
+                                            <a role="button" disabled="" class="nav-link dropdown-toggle"></a>
                                             <!--container-->
                                         </li>
                                         <!--container-->
                                     </ul>
-                                    <ul _ngcontent-oai-c451="" class="navbar-nav align-items-center ml-auto ml-md-0">
-                                        <li _ngcontent-oai-c451="" dropdown="" placement="bottom-right" class="nav-item dropdown" ng-reflect-placement="bottom-right">
-                                            <a _ngcontent-oai-c451="" role="button" dropdowntoggle="" class="nav-link pr-0 dropdown-toggle" aria-haspopup="true">
-                                                <div _ngcontent-oai-c451="" class="media align-items-center pointer">
-                                                    <div _ngcontent-oai-c451="" class="media-body ml-2 d-none d-lg-block"><span _ngcontent-oai-c451="" class="mb-0 text-sm font-weight-bold ng-star-inserted">{{ strtoupper(auth::user()->name) }} </span><br _ngcontent-oai-c451="">
-                                                        <span _ngcontent-oai-c451="" class="float-right text-sm font-weight-light ng-star-inserted">
+                                    <ul class="navbar-nav align-items-center ml-auto ml-md-0">
+                                        <li placement="bottom-right" class="nav-item dropdown">
+                                            <a role="button" dropdowntoggle="" class="nav-link pr-0 dropdown-toggle" aria-haspopup="true">
+                                                <div class="media align-items-center pointer">
+                                                    <div class="media-body ml-2 d-none d-lg-block"><span class="mb-0 text-sm font-weight-bold ng-star-inserted">{{ strtoupper(auth::user()->name) }} </span><br>
+                                                        <span class="float-right text-sm font-weight-light ng-star-inserted">
                                                             <?php
                                                             $roles = "";
                                                             if (!empty(auth::user()->getRoleNames())) {
@@ -387,7 +387,7 @@
                                                             ?>
                                                         </span>
                                                     </div>
-                                                    <span _ngcontent-oai-c451="" class="avatar avatar-md rounded-circle ml-3">
+                                                    <span class="avatar avatar-md rounded-circle ml-3">
                                                         <?php
                                                         if(auth::user()->gambar_profil != ""){
                                                             ?>
@@ -409,21 +409,21 @@
                                 </div>
                             </div>
                         </nav>
-                        <div _ngcontent-oai-c451="" class="backdrop d-xl-none ng-star-inserted"></div>
+                        <div class="backdrop d-xl-none ng-star-inserted"></div>
                     </app-navbar>
 
                     @yield('content')
 
                     <!--container-->
-                    <app-footer _ngcontent-oai-c447="" _nghost-oai-c445="">
-                        <div _ngcontent-oai-c445="">
-                            <footer _ngcontent-oai-c445="" class="footer" style="background: #40b3e9;">
-                                <div _ngcontent-oai-c445="" class="container-fluid">
-                                    <div _ngcontent-oai-c445="" class="row align-items-center justify-content-xl-between">
-                                        <div _ngcontent-oai-c445="" class="col-xl-6">
-                                            <div _ngcontent-oai-c445="" class="copyright text-xl-left text-white"> Hakcipta Terpelihara © 2021. Pusat Geospatial Malaysia. </div>
+                    <app-footer>
+                        <div>
+                            <footer class="footer" style="background: #40b3e9;">
+                                <div class="container-fluid">
+                                    <div class="row align-items-center justify-content-xl-between">
+                                        <div class="col-xl-6">
+                                            <div class="copyright text-xl-left text-white"> Hakcipta Terpelihara © 2021. Pusat Geospatial Malaysia. </div>
                                         </div>
-                                        <div _ngcontent-oai-c445="" class="col-xl-6"></div>
+                                        <div class="col-xl-6"></div>
                                     </div>
                                 </div>
                             </footer>

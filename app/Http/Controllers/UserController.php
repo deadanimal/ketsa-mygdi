@@ -186,9 +186,9 @@ class UserController extends Controller {
     public function update_profile(Request $request){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
 //        $user->name = $request->uname;
-//        $user->nric = $request->nric;
+        $user->nric = $request->nric;
         $user->email = $request->email;
-//        $user->agensi_organisasi = $request->agensi_organisasi;
+        $user->agensi_organisasi = $request->agensi_organisasi;
         $user->bahagian = $request->bahagian;
         $user->sektor = $request->sektor;
         $user->phone_pejabat = $request->phone_pejabat;
