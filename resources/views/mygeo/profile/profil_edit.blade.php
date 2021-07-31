@@ -72,7 +72,13 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <p>{{ $user->name }}</p>
+                                            <?php
+                                            if($user->editable == "1"){
+                                                ?><input type="text" name="uname" id="uname" class="form-control form-control-sm ml-3" value="{{ $user->name }}"><?php
+                                            }else{
+                                                ?><p>{{ $user->name }}</p><?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -83,8 +89,8 @@
                                         </div>
                                         <div class="col-8">
                                             <?php
-                                            if(trim($user->nric) == ""){
-                                                ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"><?php
+                                            if($user->editable == "1"){
+                                                ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ $user->nric }}"><?php
                                             }else{
                                                 ?><p>{{ $user->nric }}</p><?php
                                             }
@@ -98,17 +104,9 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <?php
-                                            if(trim($user->agensi_organisasi) == ""){
-                                                ?>
-                                                <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
-                                                    <option value="">Pilih...</option>
-                                                </select>    
-                                                <?php
-                                            }else{
-                                                ?><p>{{ $user->agensi_organisasi }}</p><?php
-                                            }
-                                            ?>
+                                            <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                                                <option value="">Pilih...</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -257,7 +255,11 @@ $(document).ready(function(){
         dataType: "json",
     }).done(function(data) {
         data.forEach(function(the_var) {
-            $("#agensi_organisasi").append("<option value='" + the_var.name + "'>" + the_var.name + "</option>");
+            var selected = "<?php echo $user->agensi_organisasi; ?>";
+            if(selected != "" && selected == the_var.name){
+                selected = "selected";
+            }
+            $("#agensi_organisasi").append("<option value='" + the_var.name + "' " + selected + ">" + the_var.name + "</option>");
         });
     });
 });
