@@ -377,11 +377,13 @@
                                                     <div _ngcontent-oai-c451="" class="media-body ml-2 d-none d-lg-block"><span _ngcontent-oai-c451="" class="mb-0 text-sm font-weight-bold ng-star-inserted">{{ strtoupper(auth::user()->name) }} </span><br _ngcontent-oai-c451="">
                                                         <span _ngcontent-oai-c451="" class="float-right text-sm font-weight-light ng-star-inserted">
                                                             <?php
+                                                            $roles = "";
                                                             if (!empty(auth::user()->getRoleNames())) {
                                                                 foreach (auth::user()->getRoleNames() as $role) {
-                                                                    echo $role;
+                                                                    $roles .=  $role.", ";
                                                                 }
                                                             }
+                                                            echo rtrim($roles,', ');
                                                             ?>
                                                         </span>
                                                     </div>

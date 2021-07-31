@@ -165,6 +165,14 @@ class UserController extends Controller {
     }
 
     public function show(){
+//        dd(Auth::user());
+//        Auth::user()->assignRole('Pemohon Data');
+//        if (!empty(Auth::user()->getRoleNames())) {
+//            foreach (Auth::user()->getRoleNames() as $role) {
+//                echo "<br>".$role;
+//            }
+//        }
+//        exit();
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         return view('mygeo.profile.profil', compact('user'));
     }
