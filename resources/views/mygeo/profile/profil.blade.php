@@ -260,21 +260,26 @@
 
         $(document).on('click','.btnTukar',function(){
             var passold = $('#password_old').val();
-            var passnew = $('#password_new').val();
-            var passnewconfirm = $('#password_new_confirm').val();
-
-            if(passold == "" || passnew == "" || passnewconfirm == ""){
-                alert('Sila pastikan maklumat kata laluan lama dan baru lengkap');
+            var password_daftar = $("#password_new").val();
+            var password_confirm = $("#password_new_confirm").val();
+            var msg = "";
+            if(passold == ""){
+                msg = msg + "Sila isi kata laluan kini\r\n\r\n"
+            }
+            if(!checkPassword(password_daftar)){
+                msg = msg + "Kata laluan mesti mempunyai sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil, nombor dan simbol.\r\n\r\n";
+            }
+            if(password_daftar != password_confirm){
+                msg = msg + "Kata laluan yang dimasukkan berbeza dengan kata laluan yang disahkan\r\n\r\n";
+            }
+            if(msg.length > 0){
+                alert(msg);
             }else{
-                if(passnew == passnewconfirm){
-                    $('#form_change_password').submit();
-                }else{
-                    alert('Sila pastikan input kata laluan baru dan sahkan kata laluan baru sama dan lengkap');
-                }
+                $('#form_change_password').submit();
             }
         });
-
     });
+    
     function myFunction1() {
         var x = document.getElementById("password_old");
         if (x.type === "password") {
@@ -300,6 +305,12 @@
         } else {
             x.type = "password";
         }
+    }
+    
+    function checkPassword(str){
+        // at least one number, one lowercase and one uppercase letter, at least 12 characters
+        var regex = /^(?=^.{12,40}$)(?=.*\d)(?=.*[\W_])(?=.*[a-z])(?=.*[A-Z])(?!^.*\n).*$/;
+        return regex.test(str);
     }
 </script>
 
