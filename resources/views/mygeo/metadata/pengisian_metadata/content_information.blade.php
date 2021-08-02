@@ -19,6 +19,7 @@
                                     Band Boundry
                                 </div>
                                 <input type="text" name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm" style="width:150px;" value="{{old('c7_band_boundary')}}">
+                                <!--<select name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm">-->
                             </div>
                         </div>
                     </div>

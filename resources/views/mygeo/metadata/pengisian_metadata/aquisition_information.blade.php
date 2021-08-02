@@ -80,7 +80,12 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_trigger" id="c8_trigger" value="{{old('c8_trigger')}}">
+                                    <select class="form-control form-control-sm" name="c8_trigger" id="c8_trigger">
+                                        <option value="">Pilih...</option>
+                                        <option value="Automatic" {{ (old('c8_trigger') == 'Automatic' ? "selected":"") }}>Automatic</option>
+                                        <option value="Manual" {{ (old('c8_trigger') == 'Manual' ? "selected":"") }}>Manual</option>
+                                        <option value="Pre Programmed" {{ (old('c8_trigger') == 'Pre Programmed' ? "selected":"") }}>Pre Programmed</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -90,7 +95,12 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_context" id="c8_context" value="{{old('c8_context')}}">
+                                    <select class="form-control form-control-sm" name="c8_context" id="c8_context">
+                                        <option value="">Pilih...</option>
+                                        <option value="Acquisition" {{ (old('c8_trigger') == 'Acquisition' ? "selected":"") }}>Acquisition</option>
+                                        <option value="Pass" {{ (old('c8_trigger') == 'Pass' ? "selected":"") }}>Pass</option>
+                                        <option value="Way Point" {{ (old('c8_trigger') == 'Way Point' ? "selected":"") }}>Way Point</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -100,7 +110,12 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_sequence" id="c8_sequence" value="{{old('c8_sequence')}}">
+                                    <select class="form-control form-control-sm" name="c8_sequence" id="c8_sequence">
+                                        <option value="">Pilih...</option>
+                                        <option value="Start" {{ (old('c8_trigger') == 'Start' ? "selected":"") }}>Start</option>
+                                        <option value="End" {{ (old('c8_trigger') == 'End' ? "selected":"") }}>End</option>
+                                        <option value="Instantaneous" {{ (old('c8_trigger') == 'Instantaneous' ? "selected":"") }}>Instantaneous</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">

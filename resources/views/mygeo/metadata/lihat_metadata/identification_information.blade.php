@@ -13,8 +13,8 @@
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataName">
                             <?php
-                            if(isset($metadataxml->categoryTitle) && $metadataxml->categoryTitle != ""){
-                                if(strtolower($metadataxml->categoryTitle) == "dataset"){
+                            if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
+                                if(strtolower($metadataxml->categoryTitle->categoryItem->CharacterString) == "dataset"){
                                     echo "Title";
                                 }else{
                                     echo "Metadata Name";

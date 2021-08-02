@@ -118,8 +118,8 @@
                     <div class="col-8">
                         MyGDI Metadata Standard
                         <?php
-                        if(isset($metadataxml->categoryTitle) && $metadataxml->categoryTitle != ""){
-                            echo '('.$metadataxml->categoryTitle.')';
+                        if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
+                            echo '('.$metadataxml->categoryTitle->categoryItem->CharacterString.')';
                         }
                         ?>
                     </div>

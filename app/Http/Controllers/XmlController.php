@@ -79,7 +79,8 @@ class XmlController extends Controller {
                     <gmd:metadataMaintenance>
                         <gmd:MD_MaintenanceInformation>
                             <gmd:maintenanceAndUpdateFrequency>
-                                <gmd:MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="" />
+                                <gmd:MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="">$request->c12_maintenanceUpdate
+                                </gmd:MD_MaintenanceFrequencyCode
                             </gmd:maintenanceAndUpdateFrequency>
                         </gmd:MD_MaintenanceInformation>
                     </gmd:metadataMaintenance>
@@ -184,13 +185,22 @@ class XmlController extends Controller {
                             <gmd:metadataStatus>
                                 <gco:CharacterString>$request->c2_metadataStatus</gco:CharacterString>
                             </gmd:metadataStatus>
+                            <gmd:typeOfServices>
+                                <gco:CharacterString>$request->c2_typeOfServices</gco:CharacterString>
+                            </gmd:typeOfServices>
+                            <gmd:operationName>
+                                <gco:CharacterString></gco:CharacterString>
+                            </gmd:operationName>
+                            <gmd:serviceUrl>
+                                <gco:CharacterString>$request->c2_serviceUrl</gco:CharacterString>
+                            </gmd:serviceUrl>
                             <gmd:pointOfContact>
                                 <gmd:CI_ResponsibleParty>
                                     <gmd:organisationName>
                                         <gco:CharacterString>$request->c2_contact_agensiorganisasi</gco:CharacterString>
                                     </gmd:organisationName>
-                                    <gmd:individualName>$request->c2_contact_name
-                                        <gco:CharacterString></gco:CharacterString>
+                                    <gmd:individualName>
+                                        <gco:CharacterString>$request->c2_contact_name</gco:CharacterString>
                                     </gmd:individualName>
                                     <gmd:positionName>
                                         <gco:CharacterString></gco:CharacterString>
@@ -402,12 +412,12 @@ class XmlController extends Controller {
                             </gmd:searchAddtionalKeyword>
                             <srv:couplingType>
                                 <!-- Mandated by ISO 19119-->
-                                <srv:SV_CouplingType codeList="#SV_CouplingType" codeListValue="" />
+                                <srv:SV_CouplingType codeList="#SV_CouplingType" codeListValue="">$request->c2_typeOfCouplingDataset</srv:SV_CouplingType>
                             </srv:couplingType>
                             <srv:containsOperations>
                                 <srv:SV_OperationMetadata>
                                     <srv:operationName>
-                                        <gco:CharacterString></gco:CharacterString>
+                                        <gco:CharacterString>$request->c2_operationName</gco:CharacterString>
                                     </srv:operationName>
                                     <srv:DCP>
                                         <srv:DCPList codeList="#DCPList" codeListValue="WebServices"></srv:DCPList>
@@ -427,7 +437,7 @@ class XmlController extends Controller {
                                         <gco:CharacterString />
                                     </gmd:specificUsage>
                                     <gmd:userDeterminedLimitations>
-                                        <gco:CharacterString />
+                                        <gco:CharacterString>$request->c14_useLimitation</gco:CharacterString>
                                     </gmd:userDeterminedLimitations>
                                 </gmd:MD_Usage>
                             </gmd:resourceSpecificUsage>

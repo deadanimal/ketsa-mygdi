@@ -17,6 +17,22 @@
                 <div class="col-xl-6">
                     <h6 class="heading-small text muted">Legal Constraints</h6>
                     <div class="pl-lg-3">
+                        <div class="row mb-2 divUseLimitation">
+                            <div class="col-xl-5">
+                                <label class="form-control-label" for="input-access-cons">
+                                    Use Limitation
+                                </label>
+                            </div>
+                            <div class="col-xl-7">
+                                <?php
+                                $useLimitation = "";
+                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+                                    $useLimitation = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString);
+                                }
+                                ?>
+                                <input type="text" name="c14_useLimitation" id="c14_useLimitation" class="form-control form-control-sm" value="{{ $useLimitation }}">
+                            </div>
+                        </div>
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">

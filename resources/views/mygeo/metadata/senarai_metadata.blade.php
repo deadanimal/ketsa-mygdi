@@ -54,8 +54,8 @@
                           </td>
                           <td>
                              <?php
-                                if(isset($val[0]->categoryTitle) && $val[0]->categoryTitle != ""){
-                                   echo $val[0]->categoryTitle;
+                                if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
+                                   echo $val[0]->categoryTitle->categoryItem->CharacterString;
                                }
                                ?>
                           </td>

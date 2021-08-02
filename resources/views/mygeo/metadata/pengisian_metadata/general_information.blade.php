@@ -12,15 +12,21 @@
                 <p class="pl-lg-3 form-control-label">Content Information<span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                 <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;">
                     <option selected disabled>Select Content</option>
-                    <option value="Application">Application</option>
-                    <option value="Clearing House">Clearing House</option>
-                    <option value="Downloadable Data">Downloadable Data</option>
-                    <option value="Geographic Activities">Geographic Activities</option>
-                    <option value="Geographic Services">Geographic Services</option>
-                    <option value="Map File">Map File</option>
-                    <option value="Offline Data">Offline Data</option>
-                    <option value="Static Map Images">Static Map Images</option>
-                    <option value="Other Documents">Other Documents</option>
+                    <option value="Application" class='optContentInfo_dataset'>Application</option>
+                    <option value="Clearing House" class='optContentInfo_dataset'>Clearing House</option>
+                    <option value="Downloadable Data" class='optContentInfo_dataset'>Downloadable Data</option>
+                    <option value="Geographic Activities" class='optContentInfo_dataset'>Geographic Activities</option>
+                    <option value="Geographic Services" class='optContentInfo_dataset'>Geographic Services</option>
+                    <option value="Map File" class='optContentInfo_dataset'>Map File</option>
+                    <option value="Offline Data" class='optContentInfo_dataset'>Offline Data</option>
+                    <option value="Static Map Images" class='optContentInfo_dataset'>Static Map Images</option>
+                    <option value="Other Documents" class='optContentInfo_dataset'>Other Documents</option>
+                    
+                    <option value="Live Data and Maps" class='optContentInfo_services'>Live Data and Maps</option>
+                    
+                    <option value="Gridded" class='optContentInfo_gridded'>Gridded</option>
+                    
+                    <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                 </select>
 
                 @error('c1_content_info')
@@ -66,7 +72,7 @@
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_phone">
-                            Telephone
+                            Telephone (Office)
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">

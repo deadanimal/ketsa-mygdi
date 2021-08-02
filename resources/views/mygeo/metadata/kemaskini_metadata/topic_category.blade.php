@@ -4,8 +4,8 @@
             <h4 class="card-title">
                 <?php echo __('lang.accord_3'); ?>
                 <?php
-                if(isset($metadataxml->categoryTitle) && $metadataxml->categoryTitle != ""){
-                    if(strtolower($metadataxml->categoryTitle) == "dataset"){
+                if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
+                    if(strtolower($metadataxml->categoryTitle->categoryItem->CharacterString) == "dataset"){
                         ?><span class="text-warning">*</span><?php
                     }
                 }
@@ -31,88 +31,76 @@
                 ?>
                 <div class="form-group col-4">
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Biota" {{ (!empty($tc) && in_array('Biota',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_1">Biota</label>
+                        <input type="checkbox" class="form-check-input" id="c3_2" name="topic_category[]" value="Administrative and Political Boundaries" {{ (!empty($tc) && in_array('Administrative and Political Boundaries',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_2">Administrative and Political Boundaries</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_2" name="topic_category[]" value="Boundaries" {{ (!empty($tc) && in_array('Boundaries',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_2">Boundaries</label>
+                        <input type="checkbox" class="form-check-input" id="c3_8" name="topic_category[]" value="Agriculture and Farming" {{ (!empty($tc) && in_array('Agriculture and Farming',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_8">Agriculture and Farming</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_3" name="topic_category[]" value="Climatology Meteorology Atmosphere" {{ (!empty($tc) && in_array('Climatology Meteorology Atmosphere',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_3">Climatology Meteorology Atmosphere</label>
+                        <input type="checkbox" class="form-check-input" id="c3_3" name="topic_category[]" value="Atmosphere and Climatic" {{ (!empty($tc) && in_array('Atmosphere and Climatic',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_3">Atmosphere and Climatic</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_4" name="topic_category[]" value="Disaster" {{ (!empty($tc) && in_array('Disaster',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_4">Disaster</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Cadastral" {{ (!empty($tc) && in_array('Cadastral',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Cadastral</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_5" name="topic_category[]" value="Economy" {{ (!empty($tc) && in_array('Economy',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_5">Economy</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Cultural, Society and Demography" {{ (!empty($tc) && in_array('Cultural, Society and Demography',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Cultural, Society and Demography</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_6" name="topic_category[]" value="Elevation" {{ (!empty($tc) && in_array('Elevation',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_6">Elevation</label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_7" name="topic_category[]" value="Environment" {{ (!empty($tc) && in_array('Environment',$tc) ? "checked":"") }}>`
-                        <label class="form-check-label" for="c3_7">Environment</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Elevation and Derived Products" {{ (!empty($tc) && in_array('Elevation and Derived Products',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Elevation and Derived Products</label>
                     </div>
                 </div>
                 <div class="form-group col-4">
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_8" name="topic_category[]" value="Farming" {{ (!empty($tc) && in_array('Farming',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_8">Farming</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Environment and Conservation" {{ (!empty($tc) && in_array('Environment and Conservation',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Environment and Conservation</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_9" name="topic_category[]" value="Geoscientific Information" {{ (!empty($tc) && in_array('Geoscientific Information',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_9">Geoscientific Information</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Facilities and Structures" {{ (!empty($tc) && in_array('Facilities and Structures',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Facilities and Structures</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_10" name="topic_category[]" value="Health" {{ (!empty($tc) && in_array('Health',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_10">Health</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Geological and Geophysical" {{ (!empty($tc) && in_array('Geological and Geophysical',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Geological and Geophysical</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_11" name="topic_category[]" value="Imagery Base Maps-Earth Cover" {{ (!empty($tc) && in_array('Imagery Base Maps-Earth Cover',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_11">Imagery Base Maps-Earth Cover</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Human Health and Disease" {{ (!empty($tc) && in_array('Human Health and Disease',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Human Health and Disease</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_12" name="topic_category[]" value="Intelligence Military" {{ (!empty($tc) && in_array('Intelligence Military',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_12">Intelligence Military</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Imagery and Base Maps" {{ (!empty($tc) && in_array('Imagery and Base Maps',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Imagery and Base Maps</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_13" name="topic_category[]" value="Inland Waters" {{ (!empty($tc) && in_array('Inland Waters',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_13">Inland Waters</label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_14" name="topic_category[]" value="Location" {{ (!empty($tc) && in_array('Location',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_14">Location</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Inland Water Resources" {{ (!empty($tc) && in_array('Inland Water Resources',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Inland Water Resources</label>
                     </div>
                 </div>
                 <div class="form-group col-4">
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_15" name="topic_category[]" alue="Oceans" {{ (!empty($tc) && in_array('Oceans',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_15">Oceans</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Locations and Geodetic Networks" {{ (!empty($tc) && in_array('Locations and Geodetic Networks',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Locations and Geodetic Networks</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_16" name="topic_category[]" value="Planning Cadastre" {{ (!empty($tc) && in_array('Planning Cadastre',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_16">Planning Cadastre</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Military" {{ (!empty($tc) && in_array('Military',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Military</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_17" name="topic_category[]" value="Society" {{ (!empty($tc) && in_array('Society',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_17">Society</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Oceans and Estuaries" {{ (!empty($tc) && in_array('Oceans and Estuaries',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Oceans and Estuaries</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_18" name="topic_category[]" value="Structure" {{ (!empty($tc) && in_array('Structure',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_18">Structure</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Transportation Networks" {{ (!empty($tc) && in_array('Transportation Networks',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Transportation Networks</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_19" name="topic_category[]" value="Transportation" {{ (!empty($tc) && in_array('Transportation',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_19">Transportation</label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="c3_20" name="topic_category[]" value="Utilities and Communication" {{ (!empty($tc) && in_array('Utilities and Communication',$tc) ? "checked":"") }}>
-                        <label class="form-check-label" for="c3_20">Utilities and Communication</label>
+                        <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Utilities and Communication" {{ (!empty($tc) && in_array('Utilities and Communication',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_1">Utilities and Communication</label>
                     </div>
                 </div>
             </div>

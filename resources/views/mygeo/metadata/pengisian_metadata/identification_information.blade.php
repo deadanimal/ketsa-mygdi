@@ -12,6 +12,7 @@
                 <div class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4 lblMetadataName" for="c2_metadataName">
+                            Metadata Name
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
@@ -29,7 +30,7 @@
                     </div>
                     <div class="col-7">
                         <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3">
-                            <option selected disabled>Type of Product</option>
+                            <option value="" selected>Pilih...</option>
                             <option value="Application">Application</option>
                             <option value="Document">Document</option>
                             <option value="GIS Activity/Project">GIS Activity/Project</option>
@@ -78,6 +79,7 @@
                     </div>
                     <div class="col-7">
                         <select name="c2_metadataDateType" id="c2_metadataDateType" class="form-control form-control-sm">
+                            <option value="" selected>Pilih...</option>
                             <option value="Adopted">Adopted</option>
                             <option value="Creation">Creation</option>
                             <option value="Deprecated">Deprecated</option>
@@ -108,26 +110,111 @@
                     </div>
                     <div class="col-7">
                         <select class="form-control form-control-sm" name="c2_metadataStatus" id="c2_metadataStatus">
-                            <option value="Accepted" {{ (old('c2_metadataStatus') == "Accepted" ? "selected":"") }}>Accepted</option>
-                            <option value="Completed" {{ (old('c2_metadataStatus') == "Completed" ? "selected":"") }}>Completed</option>
-                            <option value="Deprecated" {{ (old('c2_metadataStatus') == "Deprecated" ? "selected":"") }}>Deprecated</option>
-                            <option value="Final" {{ (old('c2_metadataStatus') == "Final" ? "selected":"") }}>Final</option>
-                            <option value="Historical Archive" {{ (old('c2_metadataStatus') == "Historical Archive" ? "selected":"") }}>Historical Archive</option>
-                            <option value="Not Accepted" {{ (old('c2_metadataStatus') == "Not Accepted" ? "selected":"") }}>Not Accepted</option>
-                            <option value="Obsolete" {{ (old('c2_metadataStatus') == "Obsolete" ? "selected":"") }}>Obsolete</option>
-                            <option value="On Going" {{ (old('c2_metadataStatus') == "On Going" ? "selected":"") }}>On Going</option>
-                            <option value="Pending" {{ (old('c2_metadataStatus') == "Pending" ? "selected":"") }}>Pending</option>
-                            <option value="Planned" {{ (old('c2_metadataStatus') == "Planned" ? "selected":"") }}>Planned</option>
-                            <option value="Proposed" {{ (old('c2_metadataStatus') == "Proposed" ? "selected":"") }}>Proposed</option>
-                            <option value="Required" {{ (old('c2_metadataStatus') == "Required" ? "selected":"") }}>Required</option>
-                            <option value="Retired" {{ (old('c2_metadataStatus') == "Retired" ? "selected":"") }}>Retired</option>
-                            <option value="Superseded" {{ (old('c2_metadataStatus') == "Superseded" ? "selected":"") }}>Superseded</option>
-                            <option value="Tentative" {{ (old('c2_metadataStatus') == "Tentative" ? "selected":"") }}>Tentative</option>
-                            <option value="Withrawn" {{ (old('c2_metadataStatus') == "Withrawn" ? "selected":"") }}>Withrawn</option>
-                            <option value="Under Development" {{ (old('c2_metadataStatus') == "Under Development" ? "selected":"") }}>Under Development</option>
-                            <option value="Valid" {{ (old('c2_metadataStatus') == "Valid" ? "selected":"") }}>Valid</option>
+                            <option value="" selected>Pilih...</option>
+                            <option value="Accepted" {{ (old('c2_metadataStatus') == "Accepted" ? "selected":"") }} class="optStatus_dataset">Accepted</option>
+                            <option value="Completed" {{ (old('c2_metadataStatus') == "Completed" ? "selected":"") }} class="optStatus_dataset">Completed</option>
+                            <option value="Deprecated" {{ (old('c2_metadataStatus') == "Deprecated" ? "selected":"") }} class="optStatus_dataset">Deprecated</option>
+                            <option value="Final" {{ (old('c2_metadataStatus') == "Final" ? "selected":"") }} class="optStatus_dataset">Final</option>
+                            <option value="Historical Archive" {{ (old('c2_metadataStatus') == "Historical Archive" ? "selected":"") }} class="optStatus_dataset">Historical Archive</option>
+                            <option value="Not Accepted" {{ (old('c2_metadataStatus') == "Not Accepted" ? "selected":"") }} class="optStatus_dataset">Not Accepted</option>
+                            <option value="Obsolete" {{ (old('c2_metadataStatus') == "Obsolete" ? "selected":"") }} class="optStatus_dataset">Obsolete</option>
+                            <option value="On Going" {{ (old('c2_metadataStatus') == "On Going" ? "selected":"") }} class="optStatus_dataset">On Going</option>
+                            <option value="Pending" {{ (old('c2_metadataStatus') == "Pending" ? "selected":"") }} class="optStatus_dataset">Pending</option>
+                            <option value="Planned" {{ (old('c2_metadataStatus') == "Planned" ? "selected":"") }} class="optStatus_dataset">Planned</option>
+                            <option value="Proposed" {{ (old('c2_metadataStatus') == "Proposed" ? "selected":"") }} class="optStatus_dataset">Proposed</option>
+                            <option value="Required" {{ (old('c2_metadataStatus') == "Required" ? "selected":"") }} class="optStatus_dataset">Required</option>
+                            <option value="Retired" {{ (old('c2_metadataStatus') == "Retired" ? "selected":"") }} class="optStatus_dataset">Retired</option>
+                            <option value="Superseded" {{ (old('c2_metadataStatus') == "Superseded" ? "selected":"") }} class="optStatus_dataset">Superseded</option>
+                            <option value="Tentative" {{ (old('c2_metadataStatus') == "Tentative" ? "selected":"") }} class="optStatus_dataset">Tentative</option>
+                            <option value="Withrawn" {{ (old('c2_metadataStatus') == "Withrawn" ? "selected":"") }} class="optStatus_dataset">Withrawn</option>
+                            <option value="Under Development" {{ (old('c2_metadataStatus') == "Under Development" ? "selected":"") }} class="optStatus_dataset">Under Development</option>
+                            <option value="Valid" {{ (old('c2_metadataStatus') == "Valid" ? "selected":"") }} class="optStatus_dataset">Valid</option>
+                 
+                            <option value="Completed" {{ (old('c2_metadataStatus') == "Completed" ? "selected":"") }} class="optStatus_services">Completed</option>
+                            <option value="Historical Archive" {{ (old('c2_metadataStatus') == "Historical Archive" ? "selected":"") }} class="optStatus_services">Historical Archive</option>
+                            <option value="Obsolete" {{ (old('c2_metadataStatus') == "Obsolete" ? "selected":"") }} class="optStatus_services">Obsolete</option>
+                            <option value="On Going" {{ (old('c2_metadataStatus') == "On Going" ? "selected":"") }} class="optStatus_services">On Going</option>
+                            <option value="Planned" {{ (old('c2_metadataStatus') == "Planned" ? "selected":"") }} class="optStatus_services">Planned</option>
+                            <option value="Required" {{ (old('c2_metadataStatus') == "Required" ? "selected":"") }} class="optStatus_services">Required</option>
+                            <option value="Withdrawn" {{ (old('c2_metadataStatus') == "Withdrawn" ? "selected":"") }} class="optStatus_services">Withdrawn</option>
+                            <option value="Under Development" {{ (old('c2_metadataStatus') == "Under Development" ? "selected":"") }} class="optStatus_services">Under Development</option>
                         </select>
                         @error('c2_metadataStatus')
+                        <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-2 divTypeOfServices">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_typeOfServices">
+                            Type of Services
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <select class="form-control form-control-sm" name="c2_typeOfServices" id="c2_typeOfServices">
+                            <option value="" selected>Pilih...</option>
+                            <option value="ArcIMS Service" {{ (old('c2_typeOfServices') == "ArcIMS Service" ? "selected":"") }}>ArcIMS Service</option>
+                            <option value="ArcGIS Services" {{ (old('c2_typeOfServices') == "ArcGIS Services" ? "selected":"") }}>ArcGIS Services</option>
+                            <option value="OGC Geography Markup Language" {{ (old('c2_typeOfServices') == "OGC Geography Markup Language" ? "selected":"") }}>OGC Geography Markup Language</option>
+                            <option value="OGC Catalouge Service" {{ (old('c2_typeOfServices') == "OGC Catalouge Service" ? "selected":"") }}>OGC Catalouge Service</option>
+                            <option value="OGC Coordinate Transformation Service Archive" {{ (old('c2_typeOfServices') == "OGC Coordinate Transformation Service" ? "selected":"") }}>OGC Coordinate Transformation Service</option>
+                            <option value="OGC Grid Coverage Service" {{ (old('c2_typeOfServices') == "OGC Grid Coverage Service" ? "selected":"") }}>OGC Grid Coverage Service</option>
+                            <option value="OGC Location Service" {{ (old('c2_typeOfServices') == "OGC Location Service" ? "selected":"") }}>OGC Location Service</option>
+                            <option value="OGC KML 2.2" {{ (old('c2_typeOfServices') == "OGC KML 2.2" ? "selected":"") }}>OGC KML 2.2</option>
+                            <option value="OGC Simple Feature Access" {{ (old('c2_typeOfServices') == "OGC Simple Feature Access" ? "selected":"") }}>OGC Simple Feature Access</option>
+                            <option value="OGC Sensor Observation Service" {{ (old('c2_typeOfServices') == "OGC Sensor Observation Service" ? "selected":"") }}>OGC Sensor Observation Service</option>
+                            <option value="OGC Web Coverage Service" {{ (old('c2_typeOfServices') == "OGC Web Coverage Service" ? "selected":"") }}>OGC Web Coverage Service</option>
+                            <option value="OGC Web Feature Service" {{ (old('c2_typeOfServices') == "OGC Web Feature Service" ? "selected":"") }}>OGC Web Feature Service</option>
+                            <option value="OGC Web Map Service" {{ (old('c2_typeOfServices') == "OGC Web Map Service" ? "selected":"") }}>OGC Web Map Service</option>
+                            <option value="OGC Web Processing Service" {{ (old('c2_typeOfServices') == "OGC Web Processing Service" ? "selected":"") }}>OGC Web Processing Service</option>
+                            <option value="Generic Service" {{ (old('c2_typeOfServices') == "Generic Service" ? "selected":"") }}>Generic Service</option>
+                        </select>
+                        @error('c2_typeOfServices')
+                        <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-2 divOperationName">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_operationName">
+                            Operation Name
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <input type="text" class="form-control form-control-sm" name="c2_operationName" id="c2_operationName">
+                        @error('c2_operationName')
+                        <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-2 divServiceUrl">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_serviceUrl">
+                            Service URL
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <input type="text" class="form-control form-control-sm" name="c2_serviceUrl" id="c2_serviceUrl">
+                        <button id="btnTestServiceUrl" type="button">Test</button>
+                        @error('c2_serviceUrl')
+                        <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-2 divTypeOfCouplingDataset">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c2_typeOfCouplingDataset">
+                            Type of Coupling with Dataset
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <select class="form-control form-control-sm" name="c2_typeOfCouplingDataset" id="c2_typeOfCouplingDataset">
+                            <option value="">Pilih...</option>
+                            <option value="Loose" {{ (old('c2_typeOfCouplingDataset') == "Loose" ? "selected":"") }}>Loose</option>
+                            <option value="Mixed" {{ (old('c2_typeOfCouplingDataset') == "Mixed" ? "selected":"") }}>Mixed</option>
+                            <option value="Tight" {{ (old('c2_typeOfCouplingDataset') == "Tight" ? "selected":"") }}>Tight</option>
+                        </select>
+                        @error('c2_typeOfCouplingDataset')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
                     </div>
@@ -163,6 +250,16 @@
                         @error('c2_contact_agensiorganisasi')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c2_metadataName">
+                            Position Name
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        Metadata Approver
                     </div>
                 </div>
                 <div class="row mb-4">

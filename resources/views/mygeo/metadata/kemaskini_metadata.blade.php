@@ -259,29 +259,70 @@ if (empty($pengesahs)) {
         });
 
         var kategori = "<?php echo strtolower($catSelected); ?>";
-
-        if (kategori == "dataset") {
+        if (kategori.toLowerCase() == "dataset") {
                 $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
                 $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?><span class="text-warning">*</span>');
                 $('.divPublisherRole').show();
                 $('.divMetadataDate').show();
                 $('.divMetadataDateType').show();
                 $('.divMetadataStatus').show();
-                $('.divCity').show();
-                $('.divPostalCode').show();
                 $('.divResponsiblePartyRole').show();
-            }else{
-                $('.lblMetadataName').html('Metadata Name<span class="text-warning">*</span>');
-                $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?>');
-                $('.divPublisherRole').hide();
-                $('.divMetadataDate').hide();
-                $('.divMetadataDateType').hide();
-                $('.divMetadataStatus').hide();
-                $('.divCity').hide();
-                $('.divPostalCode').hide();
-                $('.divResponsiblePartyRole').hide();
-            }        
-        }
+                $('.optContentInfo_dataset').show();
+                $('.optContentInfo_services').hide();
+                $('.optContentInfo_gridded').hide();
+                $('.optContentInfo_imagery').hide();
+                $('.optStatus_dataset').show();
+                $('.optStatus_services').hide();
+                $('.divTypeOfServices').hide();
+                $('.divOperationName').hide();
+                $('.divServiceUrl').hide();
+                $('.divTypeOfCouplingDataset').hide();
+                $('.refSys_Services').hide();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').show();
+            }else if (kategori.toLowerCase() == "services") {
+                $('.optContentInfo_dataset').hide();
+                $('.optContentInfo_services').show();
+                $('.optContentInfo_gridded').hide();
+                $('.optContentInfo_imagery').hide();
+                $('.optStatus_dataset').hide();
+                $('.optStatus_services').show();
+                $('.divTypeOfServices').show();
+                $('.divOperationName').show();
+                $('.divServiceUrl').show();
+                $('.divTypeOfCouplingDataset').show();
+                $('.refSys_Services').show();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',false);
+                $('.divDataQualityTabs').hide();
+            }else if (kategori.toLowerCase() == "gridded") {
+                $('.optContentInfo_dataset').hide();
+                $('.optContentInfo_services').hide();
+                $('.optContentInfo_gridded').show();
+                $('.optContentInfo_imagery').hide();
+                $('.optStatus_dataset').hide();
+                $('.optStatus_services').show()
+                $('.divTypeOfServices').hide();
+                $('.divOperationName').hide();
+                $('.divServiceUrl').hide();
+                $('.divTypeOfCouplingDataset').hide();
+                $('.refSys_Services').hide();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').show();
+            }else if (kategori.toLowerCase() == "imagery") {
+                $('.optContentInfo_dataset').hide();
+                $('.optContentInfo_services').hide();
+                $('.optContentInfo_gridded').hide();
+                $('.optContentInfo_imagery').show();
+                $('.optStatus_dataset').hide();
+                $('.optStatus_services').show();
+                $('.divTypeOfServices').hide();
+                $('.divOperationName').hide();
+                $('.divServiceUrl').hide();
+                $('.divTypeOfCouplingDataset').hide();
+                $('.refSys_Services').hide();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').show();
+            }
         
 <?php
 if ($catSelected == "dataset" || $catSelected == "services") {

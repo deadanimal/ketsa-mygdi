@@ -79,7 +79,7 @@
             </div>
 
             &nbsp;&nbsp;&nbsp;
-            <div class="form-group row col-xl-12">
+            <div class="form-group row col-xl-12 divDataQualityTabs">
                 <div class="card card-primary card-outline card-outline-tabs">
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">

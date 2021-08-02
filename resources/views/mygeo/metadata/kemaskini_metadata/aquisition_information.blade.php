@@ -121,7 +121,12 @@
                                         $trigger = $metadataxml->identificationInfo->SV_ServiceIdentification->trigger->CharacterString;
                                     }
                                     ?>
-                                    <input class="form-control form-control-sm" type="text" style="width :120px" name="c8_trigger" id="c8_trigger" value="{{ $trigger }}">
+                                    <select class="form-control form-control-sm" name="c8_trigger" id="c8_trigger">
+                                        <option value="">Pilih...</option>
+                                        <option value="Automatic" {{ ($trigger == 'Automatic' ? "selected":"") }}>Automatic</option>
+                                        <option value="Manual" {{ ($trigger == 'Manual' ? "selected":"") }}>Manual</option>
+                                        <option value="Pre Programmed" {{ ($trigger == 'Pre Programmed' ? "selected":"") }}>Pre Programmed</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -137,7 +142,12 @@
                                         $context = $metadataxml->identificationInfo->SV_ServiceIdentification->context->CharacterString;
                                     }
                                     ?>
-                                    <input class="form-control form-control-sm" type="text" style="width :120px" name="c8_context" id="c8_context" value="{{ $context }}">
+                                    <select class="form-control form-control-sm" name="c8_context" id="c8_context">
+                                        <option value="">Pilih...</option>
+                                        <option value="Acquisition" {{ ($context == 'Acquisition' ? "selected":"") }}>Acquisition</option>
+                                        <option value="Pass" {{ ($context == 'Pass' ? "selected":"") }}>Pass</option>
+                                        <option value="Way Point" {{ ($context == 'Way Point' ? "selected":"") }}>Way Point</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -153,7 +163,12 @@
                                         $sequence = $metadataxml->identificationInfo->SV_ServiceIdentification->sequence->CharacterString;
                                     }
                                     ?>
-                                    <input class="form-control form-control-sm" type="text" style="width :120px" name="c8_sequence" id="c8_sequence" value="{{ $sequence }}">
+                                    <select class="form-control form-control-sm" name="c8_sequence" id="c8_sequence">
+                                        <option value="">Pilih...</option>
+                                        <option value="Start" {{ ($sequence == 'Start' ? "selected":"") }}>Start</option>
+                                        <option value="End" {{ ($sequence == 'End' ? "selected":"") }}>End</option>
+                                        <option value="Instantaneous" {{ ($sequence == 'Instantaneous' ? "selected":"") }}>Instantaneous</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">

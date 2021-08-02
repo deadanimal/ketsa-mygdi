@@ -89,6 +89,37 @@
                         </select>
                     </div>
                 </div>
+                <div class="row mb-2 divMaintenanceInfo">
+                    <div class="col-xl-3">
+                        <label class="form-control-label" for="input-hardsoftcopy">
+                            Maintenance and Update
+                        </label>
+                    </div>
+                    <div class="col-xl-2">
+                        <?php
+                        $maintenanceUpdate = "";
+                        if (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && $metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode != "") {
+                            $maintenanceUpdate = $metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode;
+                        }
+                        ?>
+                        <select class="form-control form-control-sm" name="c12_maintenanceUpdate" id="c12_maintenanceUpdate">
+                            <option value="">Pilih...</option>
+                            <option value="Continual" {{ ($maintenanceUpdate == "Continual" ? "selected":"") }}>Continual</option>
+                            <option value="Daily" {{ ($maintenanceUpdate == "Daily" ? "selected":"") }}>Daily</option>
+                            <option value="Weekly" {{ ($maintenanceUpdate == "Weekly" ? "selected":"") }}>Weekly</option>
+                            <option value="Fortnightly" {{ ($maintenanceUpdate == "Fortnightly" ? "selected":"") }}>Fortnightly</option>
+                            <option value="Monthly" {{ ($maintenanceUpdate == "Monthly" ? "selected":"") }}>Monthly</option>
+                            <option value="Quarterly" {{ ($maintenanceUpdate == "Quarterly" ? "selected":"") }}>Quarterly</option>
+                            <option value="Biannually" {{ ($maintenanceUpdate == "Biannually" ? "selected":"") }}>Biannually</option>
+                            <option value="Annually" {{ ($maintenanceUpdate == "Annually" ? "selected":"") }}>Annually</option>
+                            <option value="As needed" {{ ($maintenanceUpdate == "As needed" ? "selected":"") }}>As needed</option>
+                            <option value="Irregular" {{ ($maintenanceUpdate == "Irregular" ? "selected":"") }}>Irregular</option>
+                            <option value="Not planned" {{ ($maintenanceUpdate == "Not planned" ? "selected":"") }}>Not planned</option>
+                            <option value="Unknown" {{ ($maintenanceUpdate == "Unknown" ? "selected":"") }}>Unknown</option>
+                            <option value="None" {{ ($maintenanceUpdate == "None" ? "selected":"") }}>None</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

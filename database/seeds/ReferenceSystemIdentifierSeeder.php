@@ -228,7 +228,6 @@ class ReferenceSystemIdentifierSeeder extends Seeder
             'axis_units' => "Meter",
             'denominator_flattening_ratio' => "300.801699999999000",
         ]);
-        /*
         ReferenceSystemIdentifier::create([
             'name' => "UTM ZON 47",
             'projection' => "Tranverse-Mercator",
@@ -265,6 +264,17 @@ class ReferenceSystemIdentifierSeeder extends Seeder
             'axis_units' => "Meter",
             'denominator_flattening_ratio' => "298.257223563000000",
         ]);
-        */
+        ReferenceSystemIdentifier::create([
+            'name' => "ESPG",
+        ]);
+        ReferenceSystemIdentifier::create([
+            'name' => "SR-ORG",
+        ]);
+        ReferenceSystemIdentifier::create([
+            'name' => "ESRI",
+        ]);
+        ReferenceSystemIdentifier::create([
+            'name' => "Unknown / Not Geo Reference",
+        ]);
     }
 }
