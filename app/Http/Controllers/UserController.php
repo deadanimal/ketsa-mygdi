@@ -62,7 +62,6 @@ class UserController extends Controller {
         $peranans = $peranans->sortBy(function($model) use ($ids) {
             return array_search($model->getKey(), $ids);
         });
-//        dd($peranans);
         return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans'));
     }
     
@@ -239,10 +238,10 @@ class UserController extends Controller {
         }
     }
     
-    public function change_user_status(Request $request){
+    public function change_user_status(Request $request){ 
         $user = User::where(["id"=>$request->user_id])->get()->first();
         $user->status = $request->status_id;
-        $user->save();
+        $user->update();
         exit();
     }
     

@@ -3,6 +3,8 @@
 @section('content')
 
 <link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <style>
     .ftest {
         display: inline;
@@ -186,12 +188,13 @@
                                                         }
                                                         ?>
                                                 </td>
-                                                <td>{{ ($user->status == "0" ? "Tidak Aktif":"Aktif") }}</td>
+                                                <td id='tdUserStatus{{ $user->id }}'>{{ ($user->status == "0" ? "Tidak Aktif":"Aktif") }}</td>
                                                 <td class="pr-0">
                                                     <div class="form-inline">
                                                         <button type="button" data-toggle="modal" data-target="#modal-butiran" data-userid="{{ $user->id }}" class="butiran btn btn-sm btn-info mr-2"><i class="fas fa-eye"></i></button>
-                                                        <button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>
+                                                        <!--<button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>-->
                                                         <button type="button" data-userid="{{ $user->id }}" class="btnDelete btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
+                                                        <input type="checkbox" data-toggle="toggle" data-on="Aktif" data-off="Tidak Aktif" data-onstyle="success" data-offstyle="danger" data-width="175" data-height="34" class='btnStatusUser' data-userid="{{ $user->id }}">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -234,6 +237,28 @@
 </div>
 
 <script>
+    $('.btnStatusUser').change(function() {
+        var userid = $(this).data('userid');
+        var newStatus = '';
+        var newStatusText = '';
+        if($(this).prop('checked')){
+            newStatus = '1';
+            newStatusText = 'Aktif';
+        }else{
+            newStatus = '0';
+            newStatusText = 'Tidak Aktif';
+        }
+        
+        $.ajax({
+            method: "POST",
+            url: "change_user_status",
+            data: {"_token": "{{ csrf_token() }}", "user_id": userid, "status_id": newStatus},
+        }).done(function (response) {
+            alert("Status pengguna berjaya diubah.");
+            $('#tdUserStatus'+userid).html(newStatusText);
+        });
+    });
+     
     $(function () {
         $("#table_newUsers").DataTable({
             "ordering": false,
