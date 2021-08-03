@@ -2,114 +2,136 @@
 
 @section('content')
 <style>
-  #form-container {
-  width: 500px;
-}
+    #form-container {
+        width: 500px;
+    }
 
-.row {
-  margin-top: 15px;
-}
-.row.form-group {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.btn {
-  margin-left: 15px;
-}
+    .row.form-group {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
-.change-link {
-  background-color: #000;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  bottom: 0;
-  color: #fff;
-  opacity: 0.8;
-  padding: 4px;
-  position: absolute;
-  text-align: center;
-  width: 150px;
-}
-.change-link:hover {
-  color: #fff;
-  text-decoration: none;
-}
+    .btn {
+        margin-left: 15px;
+    }
 
-img {
-  width: 150px;
-}
+    .change-link {
+        background-color: #000;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        bottom: 0;
+        color: #fff;
+        opacity: 0.8;
+        padding: 4px;
+        position: absolute;
+        text-align: center;
+        width: 150px;
+    }
 
-#editor-container {
-  height: 130px;
-}
+    .change-link:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    #editor-container {
+        height: 130px;
+    }
 </style>
-      
-  <div class="content-wrapper">
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark"></h1>
-          </div>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="header">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center p-3 py-4">
+                    <div class="col-lg-6 col-7">
+                        <h6 class="h2 text-dark d-inline-block mb-0">Panduan Pengguna</h6>
+
+                        <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class=" breadcrumb-item">
+                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Pengurusan Portal
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">
+                                    Panduan Pengguna
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Konfigurasi Panduan Pengguna</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" class="form-horizontal" action="{{url('simpan_panduan_pengguna')}}" id="form_portal_settings">
+                                @csrf
+                                <input type="hidden" name="id_panduan_pengguna" value="{{ (!is_null($panduan_pengguna) ? $panduan_pengguna->id:'')}}">
+                                <input type="hidden" name="content_panduan_pengguna" id="content_panduan_pengguna">
+                                <label class="form-control-label">Tajuk</label>
+
+                                <input type="text" name="title_panduan_pengguna" id="title_panduan_pengguna" class="form-control" value="{{ (!is_null($panduan_pengguna) ? $panduan_pengguna->title:'') }}">
+
+                                <label class="form-control-label mt-4">Kandungan</label>
+                                <div id="content_panduan_pengguna_input"></div>
+
+                                <button id="btn_submit" type="button" class="btn btn-success mt-4 float-right">Simpan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="content">
-      <div class="container">
-        <form method="post" class="form-horizontal" action="{{url('simpan_panduan_pengguna')}}" id="form_portal_settings">
-          @csrf  
-          <input type="hidden" name="content_panduan_pengguna" id="content_panduan_pengguna">
-          <input type="hidden" name="content_hubungi_kami" id="content_hubungi_kami">
-          <input type="hidden" name="content_penafian" id="content_penafian">
-          <input type="hidden" name="content_penyataan_privasi" id="content_penyataan_privasi">
-          <input type="hidden" name="id_panduan_pengguna" id="content_faq" value="{{ (isset($panduan_pengguna->id) ? $panduan_pengguna->id:"") }}">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="card-title m-0 col-lg-12">
-                    <input type="text" name="title_panduan_pengguna" id="title_panduan_pengguna" class="form-control" value="{{ (!is_null($panduan_pengguna) ? $panduan_pengguna->title:'') }}">
-                  </h5>
-                </div>
-                <div class="card-body">
-                  <div id="content_panduan_pengguna_input"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card">
-                <div class="card-body">
-                  <button type="button" id="btn_submit" class="form-control">Submit</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+    </section>
+</div>
 
 <script>
-  $(document).ready(function(){
-    $(document).on("click","#btn_submit",function(){
-        $('#content_panduan_pengguna').val($(".ql-editor").html());
-        $("#form_portal_settings").submit();
+    $(document).ready(function() {
+        $(document).on("click", "#btn_submit", function() {
+            $("#content_panduan_pengguna").val($("#content_panduan_pengguna_input > .ql-editor").html());
+            $("#form_portal_settings").submit();
+        });
+
+        var quill_panduan_pengguna = new Quill('#content_panduan_pengguna_input', {
+            modules: {
+                toolbar: [
+                    ['bold', 'italic'],
+                    ['link', 'blockquote', 'code-block', 'image'],
+                    [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
+                    [{
+                        list: 'ordered'
+                    }, {
+                        list: 'bullet'
+                    }]
+                ],
+            },
+            placeholder: 'Compose an epic...',
+            theme: 'snow',
+        });
+        quill_panduan_pengguna.root.innerHTML = '{!! (!is_null($panduan_pengguna) ? $panduan_pengguna->content:"") !!}';
+
     });
-    var quill_panduan_pengguna = new Quill('#content_panduan_pengguna_input',{
-      modules: {
-        toolbar: [
-          ['bold', 'italic'],
-          ['link', 'blockquote', 'code-block', 'image'],
-          [{ list: 'ordered' }, { list: 'bullet' }]
-        ],
-      },
-      placeholder: 'Compose an epic...',
-      theme: 'snow',
-    });
-    quill_panduan_pengguna.root.innerHTML='{!! (!is_null($panduan_pengguna) ? $panduan_pengguna->content:"") !!}';
-  });
 </script>
 
 @stop

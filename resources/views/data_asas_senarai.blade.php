@@ -335,7 +335,7 @@
             $("." + divname).show();
             $(".subKategoriTitle").show();
         });
-        
+
         $(document).on("click", ".subkategori, function () {
 //            var divname = $(this).data('id');
 //            $(".div_sub").hide();

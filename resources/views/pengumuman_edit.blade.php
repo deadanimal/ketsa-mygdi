@@ -5,10 +5,6 @@
   #form-container {
   width: 500px;
 }
-
-.row {
-  margin-top: 15px;
-}
 .row.form-group {
   padding-left: 15px;
   padding-right: 15px;
@@ -42,7 +38,7 @@ img {
   height: 130px;
 }
 </style>
-      
+
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container">

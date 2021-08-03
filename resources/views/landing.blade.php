@@ -161,7 +161,7 @@
             <li><a href="#about"><i class="bx bx-food-menu"></i> <span>MyGeo Explorer</span></a></li>
             <li><a href="#userguide"><i class="bx bx-mouse"></i> <span>Panduan Pengguna</span></a></li>
             <li><a href="#feedback"><i class="bx bx-support"></i> <span>Maklum Balas</span></a></li>
-            <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+            <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Hubungi Kami</span></a></li>
         </ul>
     </nav><!-- .nav-menu -->
 
@@ -341,9 +341,7 @@
         <div class="row pb-7">
             <div class="col-12">
                 <p align="center">
-                    MyGeo Explorer sesuai dilayari oleh semua perisian pelayar (Desktop & Versi Mobile) atau mana-mana perisian pelayan web yang setara dengannya. Jika anda menggunakan pelayar versi terdahulu atau selainnya, segelintir paparan tidak dapat dilakukan dengan sempurna.<br>
-                    Pelayar web mestilah menyokong penggunaan JavaScript, Cascading Style Sheet, warna, format teks dan fungsi-fungsi asas yang lain.Resolusi minima yang bersesuaian untuk memaparkan laman web ini ialah 1024 x 768 piksel.<br>
-                    Muat Turun PDF Panduan Pengguna:
+                    <?php echo $panduan_pengguna->content; ?>
                 </p>
             </div>
         </div>

@@ -72,12 +72,12 @@
 
                                     @foreach($pemohons as $pemohon)
                                     <tr>
-                                        <td>{{$loop -> iteration}}</td>
-                                        <td>{{$pemohon ->nama_permohonan}}</td>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$pemohon->nama_permohonan}}</td>
                                         <td><span class="badge badge-pill badge-info">Draf Baru</span></td>
-                                        <td>{{$pemohon ->date_permohonan}}</td>
+                                        <td>{{ Carbon\Carbon::parse($pemohon->date_permohonan)->format('d M Y') }}</td>
                                         <td>
-                                            <a href="/tambah_permohonan/{{$pemohon->id}}" class="btn btn-sm btn-info text-center"><i class="fas fa-eye mr-2"></i> Lihat</a>
+                                            <a href="/tambah_permohonan/{{$pemohon->id}}" class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i></a>
                                             <button type="button" data-permohonanid="{{ $pemohon->id }}" class="btnDelete btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -118,7 +118,6 @@
                             </div>
                             <input type="hidden" name="id" value="{{$user -> id}}">
                             <input type="hidden" name="user_id" value="{{$user -> id}}">
-
 
                             <button class="btn btn-primary" type="submit">
                                 <span class="text-white">Tambah</span>

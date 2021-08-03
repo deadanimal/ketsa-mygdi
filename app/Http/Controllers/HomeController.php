@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PanduanPengguna;
 use Illuminate\Http\Request;
 use App\Pengumuman;
 
@@ -25,6 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $pengumuman = Pengumuman::orderBy('created_at', 'DESC')->limit(5)->get();
-        return view('landing',compact('pengumuman'));
+        $panduan_pengguna = PanduanPengguna::get()->first();
+        return view('landing',compact('pengumuman','panduan_pengguna'));
     }
 }

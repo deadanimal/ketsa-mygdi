@@ -17,7 +17,7 @@ class CreateMohonDataTable extends Migration
             $table->id();
 
             $table->string('nama_permohonan', 100);
-            $table->string('date_permohonan');
+            $table->timestamp('date_permohonan');
             $table->string('tujuan_permohonan', 100);
 
             $table->foreignId('user_id');

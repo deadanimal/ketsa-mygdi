@@ -45,12 +45,13 @@ Route::group(['middleware'=>['auth']], function(){
 
     Route::get('/senarai_pengumuman','PortalController@index_pengumuman');
     Route::post('/tunjuk_pengumuman','PortalController@show_pengumuman');
-    Route::post('/kemaskini_pengumuman','PortalController@edit_pengumuman');
+    Route::get('/kemaskini_pengumuman','PortalController@edit_pengumuman');
     Route::post('/simpan_pengumuman','PortalController@update_pengumuman');
+    Route::post('/tambah_pengumuman','PortalController@store_pengumuman');
     Route::post('/buang_pengumuman','PortalController@delete_pengumuman');
 
     Route::get('/mygeo_senarai_pengumuman','PortalController@index_pengumuman');
-    Route::post('/mygeo_tunjuk_pengumuman','PortalController@show_pengumuman');
+    Route::post('/mygeo_tunjuk_pengumuman','PortalController@show_pengumuman2');
     Route::post('/mygeo_kemaskini_pengumuman','PortalController@edit_pengumuman');
     Route::post('/mygeo_simpan_pengumuman','PortalController@update_pengumuman');
     Route::post('/mygeo_buang_pengumuman','PortalController@delete_pengumuman');
@@ -78,7 +79,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/simpan_portal_settings','PortalController@store_portal_settings');
 
     Route::get('/faq','PortalController@index_faq');
-    Route::get('/faq_edit','PortalController@edit_faq');
+    Route::get('/kemaskini_faq','PortalController@edit_faq');
     Route::post('/simpan_maklum_balas','PortalController@store_maklum_balas');
 
     // Route::get('/maklum_balas','PortalController@index_maklum_balas');

@@ -167,15 +167,15 @@
                                 <div class="col-10 pl-lg-5">
                                     <div class="form-group">
                                         <label for="nama_permohonan" class="form-control-label">Nama Permohonan</label>
-                                        <input type="text" class="form-control form-control-sm" name="nama_permohonan" value="{{ $pemohon->nama_permohonan }}">
+                                        <input type="text" class="form-control" name="nama_permohonan" value="{{ $pemohon->nama_permohonan }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="date_permohonan" class="form-control-label">Tarikh Permohonan</label>
-                                        <input type="date" class="form-control form-control-sm" name="date_permohonan" value="{{ $pemohon->date_permohonan }}">
+                                        <input type="text" class="form-control" name="date_permohonan" value="{{ Carbon\Carbon::parse($pemohon->date_permohonan)->format('d M Y') }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="tujuan_permohonan" class="form-control-label">Tujuan Permohonan</label>
-                                        <input type="text" class="form-control form-control-sm" name="tujuan_permohonan" value="{{ $pemohon->tujuan_permohonan }}">
+                                        <input type="text" class="form-control" name="tujuan_permohonan" value="{{ $pemohon->tujuan_permohonan }}">
                                     </div>
                                     <!-- <input type="hidden" name="user_id" value={{ $user->id }}> -->
 
@@ -295,10 +295,34 @@
                                         <label for="kategori">Kategori</label>
                                         <select name="kategori" class="form-control" autofocus>
                                             <option selected disabled>Pilih</option>
-                                            <option value="application">Application</option>
-                                            <option value="document">Document</option>
-                                            <option value="gisActivityProject">GIS Activity/Project</option>
-                                            <option value="theMap">Map</option>
+                                            <option class="kategori" value="Aeronautical" data-id="Aeronautical">Aeronautical</option>
+                                            <option value="Built Environment">Built Environment</option>
+                                            <option value="Demarcation">Demarcation</option>
+                                            <option value="Geology">Geology</option>
+                                            <option value="Hydrography">Hydrography</option>
+                                            <option value="Hypsography">Hypsography</option>
+                                            <option value="Soil">Soil</option>
+                                            <option value="Transportation">Transportation</option>
+                                            <option value="Utility">Utility</option>
+                                            <option value="Vegetation">Vegetation</option>
+                                            <option value="Special Use">Special Use</option>
+                                            <option value="General">General</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
+                                        <select name="subkategori" class="form-control" autofocus>
+                                            <option selected disabled>Pilih</option>
+                                            <div class="div_sub Aeronautical" style="display:none;">
+                                                <option value="Air Space - AA">Air Space - AA</option>
+                                                <option value="Aerodrome - AB">Aerodrome - AB</option>
+                                            </div>
+                                            <div>
+                                                <option value="Residential - BA">Residential - BA</option>
+                                                <option value="Commercial - BB">Commercial - BB</option>
+                                                <option value="Industrial - BC">Industrial - BC</option>
+                                                <option value="- BD">- BD</option>
+                                            </div>
                                             <option value="rasterData">Raster Data</option>
                                             <option value="services">Services</option>
                                             <option value="software">Software</option>
@@ -306,9 +330,9 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="subkategori">Sub-Kategori</label>
-                                        <select name="subkategori" class="form-control" autofocus>
-                                            <option selected disabled>Pilih</option>
+                                        <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
+                                        <select name="lapisan_data" class="form-control" autofocus>
+                                            <option selected disabled hidden>Pilih</option>
                                             <option value="application">Application</option>
                                             <option value="document">Document</option>
                                             <option value="gisActivityProject">GIS Activity/Project</option>
@@ -321,31 +345,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
-                                        <select name="kawasan_data" class="form-control" autofocus>
-                                            <option selected disabled>Pilih</option>
-                                            <option value="application">Application</option>
-                                            <option value="document">Document</option>
-                                            <option value="gisActivityProject">GIS Activity/Project</option>
-                                            <option value="theMap">Map</option>
-                                            <option value="rasterData">Raster Data</option>
-                                            <option value="services">Services</option>
-                                            <option value="software">Software</option>
-                                            <option value="vectorData">Vector Data</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
-                                        <select name="lapisan_data" class="form-control" autofocus>
-                                            <option selected disabled>Pilih</option>
-                                            <option value="application">Application</option>
-                                            <option value="document">Document</option>
-                                            <option value="gisActivityProject">GIS Activity/Project</option>
-                                            <option value="theMap">Map</option>
-                                            <option value="rasterData">Raster Data</option>
-                                            <option value="services">Services</option>
-                                            <option value="software">Software</option>
-                                            <option value="vectorData">Vector Data</option>
-                                        </select>
+                                        <input name="kawasan_data" class="form-control" placeholder="Masukkan Kawasan Data"/>
                                     </div>
                                     <input type="hidden" name="permohonan_id" value="{{$pemohon -> id}}">
                                     <input type="hidden" name="id" value="{{$pemohon -> id}}">
@@ -438,6 +438,26 @@
                     "sPrevious": "<",
                 }
             }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $(".div_sub").hide();
+        $(".subKategoriTitle").hide();
+
+        $(document).on("click", ".kategori", function() {
+            var divname = $(this).data('id');
+            $(".div_sub").hide();
+            $("." + divname).show();
+            $(".subKategoriTitle").show();
+        });
+
+        $(document).on("click", ".subkategori, function () {
+            //            var divname = $(this).data('id');
+            //            $(".div_sub").hide();
+            //            $("." + divname).show();
+            //            $(".subKategoriTitle").show();
         });
     });
 </script>
