@@ -29,7 +29,14 @@
                                     $bandBound = $metadataxml->identificationInfo->SV_ServiceIdentification->bandBoundry->CharacterString;
                                 }
                                 ?>
-                                <input type="text" name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm" style="width:150px;" value="{{ $bandBound }}">
+                                <select name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm">
+                                    <option value="">Pilih...</option>
+                                    <option value="Equivalent Width" {{ ($bandBound == "Equivalent Width") }}>Equivalent Width</option>
+                                    <option value="Fifty Percent" {{ ($bandBound == "Fifty Percent") }}>Fifty Percent</option>
+                                    <option value="One Over E" {{ ($bandBound == "One Over E") }}>One Over E</option>
+                                    <option value="3d B" {{ ($bandBound == "3d B<") }}>3d B</option>
+                                    <option value="Half Mazimum" {{ ($bandBound == "Half Mazimum") }}>Half Mazimum</option>
+                                </select>
                             </div>
                         </div>
                     </div>

@@ -74,6 +74,7 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+//            dd($ftestxml2);
             $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = [$xml2, $met];
         }
@@ -416,9 +417,16 @@ class MetadataController extends Controller {
             }
             $request->topic_category = substr($string, 0, -1);
         }
+        if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
+            $this->validate($request,['c11_order_instructions' => 'required|mimes:pdf,doc,docx,xls,xlsx']);
+            $exists = Storage::exists($request->c11_order_instructions->getClientOriginalName());
+            $time = date('Y-m-d'.'_'.'H_i_s');
+            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
+            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
+        }
 
         $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request);
+        $xml = $xmlcon->createXml($request,$fileUrl);
         
         DB::connection('pgsql2')->transaction(function () use ($request,$xml) {
             $maxid = MetadataGeo::on('pgsql2')->max('id');

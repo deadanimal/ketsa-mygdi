@@ -80,8 +80,8 @@
                     <div class="col-7">
                         <?php
                         $abstract = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract != "") {
-                            $abstract = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract;
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != "") {
+                            $abstract = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
                         }
                         ?>
                         <textarea name="c2_abstract" id="c2_abstract" class="form-control form-control-sm ml-3">{{ $abstract }}</textarea>

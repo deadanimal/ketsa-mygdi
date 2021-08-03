@@ -9,7 +9,7 @@ class XmlController extends Controller {
 
     function __construct() {}
 
-    public function createXml($request) {
+    public function createXml($request,$fileUrl) {
         $c2_metadataName = strtoupper($request->c2_metadataName);
         
         $xml = <<<XML
@@ -80,7 +80,7 @@ class XmlController extends Controller {
                         <gmd:MD_MaintenanceInformation>
                             <gmd:maintenanceAndUpdateFrequency>
                                 <gmd:MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="">$request->c12_maintenanceUpdate
-                                </gmd:MD_MaintenanceFrequencyCode
+                                </gmd:MD_MaintenanceFrequencyCode>
                             </gmd:maintenanceAndUpdateFrequency>
                         </gmd:MD_MaintenanceInformation>
                     </gmd:metadataMaintenance>
@@ -164,8 +164,8 @@ class XmlController extends Controller {
                                     <gco:CharacterString></gco:CharacterString>
                                 </gmd:productTypeItem>
                             </gmd:productType>
-                            <gmd:abstract>$request->c2_abstract
-                                <gco:CharacterString></gco:CharacterString>
+                            <gmd:abstract>
+                                <gco:CharacterString>$request->c2_abstract</gco:CharacterString>
                             </gmd:abstract>
                             <gmd:purpose>
                                 <gco:CharacterString />
@@ -494,8 +494,8 @@ class XmlController extends Controller {
                                             <gmd:plannedAvailableDateTime>
                                                 <gco:DateTime></gco:DateTime>
                                             </gmd:plannedAvailableDateTime>
-                                            <gmd:orderingInstructions>$request->c11_order_instructions
-                                                <gco:CharacterString />
+                                            <gmd:orderingInstructions>
+                                                <gco:CharacterString>$fileUrl</gco:CharacterString>
                                             </gmd:orderingInstructions>
                                         </gmd:MD_StandardOrderProcess>
                                     </gmd:distributionOrderProcess>
@@ -592,26 +592,26 @@ class XmlController extends Controller {
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
-                                    <gmd:compOmissScope>$request->c15_t1_scope
+                                    <gmd:compOmissScope>$request->c15_t1_scope_2
                                         <gmd:compOmissScopeItem>
                                             <gco:CharacterString></gco:CharacterString>
                                         </gmd:compOmissScopeItem>
                                     </gmd:compOmissScope>
-                                    <gmd:compOmissLevel>$request->c15_t1_comply_level
-                                        <gco:CharacterString></gco:CharacterString >
-                                    </gmd:compOmissLevel>
+                                    <gmd:compOmissComplLevel>$request->c15_t1_comply_level_2
+                                        <gco:CharacterString></gco:CharacterString>
+                                    </gmd:compOmissComplLevel>
                                     <gmd:dateTime>
-                                        <gco:Date>$request->c15_t1_date</gco:Date>
+                                        <gco:Date>$request->c15_t1_date_2</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
                                         <gco:CharacterString />
                                     </gmd:measureDescription>
                                     <gmd:result>
                                         <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t1_result
+                                            <gmd:pass>$request->c15_t1_result_2
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t1_conform_result
+                                            <gmd:explanation>$request->c15_t1_conform_result_2
                                                 <gco:CharacterString />
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>
@@ -646,88 +646,88 @@ class XmlController extends Controller {
                                         </gmd:DQ_ConformanceResult>
                                     </gmd:result>
                                 </gmd:DQ_ConceptualConsistency>
-                                <gmd:DQ_DomainConsistency>$request->c15_t2_type
+                                <gmd:DQ_DomainConsistency>$request->c15_t2_type_2
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
-                                    <gmd:consistDomainScope>$request->c15_t2_scope
+                                    <gmd:consistDomainScope>$request->c15_t2_scope_2
                                         <gmd:consistConceptScopeItem>
                                             <gco:CharacterString></gco:CharacterString>
                                         </gmd:consistConceptScopeItem>
                                     </gmd:consistDomainScope>
-                                    <gmd:compDomainLevel>$request->c15_t2_comply_level
+                                    <gmd:compDomainLevel>$request->c15_t2_comply_level_2
                                         <gco:CharacterString></gco:CharacterString >
                                     </gmd:compDomainLevel>
                                     <gmd:dateTime>
-                                        <gco:Date>$request->c15_t2_date</gco:Date>
+                                        <gco:Date>$request->c15_t2_date_2</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
                                         <gco:CharacterString />
                                     </gmd:measureDescription>
                                     <gmd:result>
                                         <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t2_result
+                                            <gmd:pass>$request->c15_t2_result_2
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t2_conform_result
+                                            <gmd:explanation>$request->c15_t2_conform_result_2
                                                 <gco:CharacterString />
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>
                                     </gmd:result>
                                 </gmd:DQ_DomainConsistency>
-                                <gmd:DQ_FormatConsistency> $request->c15_t2_type
+                                <gmd:DQ_FormatConsistency> $request->c15_t2_type_3
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
                                     <gmd:dateTime>
-                                        <gmd:consistFormatScope>$request->c15_t2_scope
+                                        <gmd:consistFormatScope>$request->c15_t2_scope_3
                                             <gmd:consistFormatScopeItem>
                                                 <gco:CharacterString></gco:CharacterString>
                                             </gmd:consistFormatScopeItem>
                                         </gmd:consistFormatScope>
-                                        <gmd:compFormatLevel>$request->c15_t2_comply_level
+                                        <gmd:compFormatLevel>$request->c15_t2_comply_level_3
                                             <gco:CharacterString></gco:CharacterString >
                                         </gmd:compFormatLevel>
-                                        <gco:Date>$request->c15_t2_date</gco:Date>
+                                        <gco:Date>$request->c15_t2_date_3</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
                                         <gco:CharacterString />
                                     </gmd:measureDescription>
                                     <gmd:result>
                                         <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t2_result
+                                            <gmd:pass>$request->c15_t2_result_3
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t2_conform_result
+                                            <gmd:explanation>$request->c15_t2_conform_result_3
                                                 <gco:CharacterString />
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>
                                     </gmd:result>
                                 </gmd:DQ_FormatConsistency>
-                                <gmd:DQ_TopologicalConsistency>$request->c15_t2_type
+                                <gmd:DQ_TopologicalConsistency>$request->c15_t2_type_4
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
                                     <gmd:dateTime>
-                                        <gmd:consistTopoScope>$request->c15_t2_scope
+                                        <gmd:consistTopoScope>$request->c15_t2_scope_4
                                             <gmd:consistTopoScopeItem>
                                                 <gco:CharacterString></gco:CharacterString>
                                             </gmd:consistTopoScopeItem>
                                         </gmd:consistTopoScope>
-                                        <gmd:compTopoLevel>$request->c15_t2_comply_level
+                                        <gmd:compTopoLevel>$request->c15_t2_comply_level_4
                                             <gco:CharacterString></gco:CharacterString >
                                         </gmd:compTopoLevel>
-                                        <gco:Date>$request->c15_t2_date</gco:Date>
+                                        <gco:Date>$request->c15_t2_date_4</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
                                         <gco:CharacterString />
                                     </gmd:measureDescription>
                                     <gmd:result>
                                         <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t2_result
+                                            <gmd:pass>$request->c15_t2_result_4
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t2_conform_result
+                                            <gmd:explanation>$request->c15_t2_conform_result_4
                                                 <gco:CharacterString />
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>
@@ -762,59 +762,59 @@ class XmlController extends Controller {
                                         </gmd:DQ_ConformanceResult>
                                     </gmd:result>
                                 </gmd:DQ_AbsoluteExternalPositionalAccuracy>
-                                <gmd:DQ_RelativeInternalPositionalAccuracy>$request->c15_t3_type
+                                <gmd:DQ_RelativeInternalPositionalAccuracy>$request->c15_t3_type_2
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
-                                    <gmd:posAccRelativeScope>$request->c15_t3_scope
+                                    <gmd:posAccRelativeScope>$request->c15_t3_scope_2
                                         <gmd:posAccRelativeScopeItem>
                                             <gco:CharacterString></gco:CharacterString>
                                         </gmd:posAccRelativeScopeItem>
                                     </gmd:posAccRelativeScope>
-                                    <gmd:posAccRelativeLevel>$request->c15_t3_comply_level
+                                    <gmd:posAccRelativeLevel>$request->c15_t3_comply_level_2
                                         <gco:CharacterString></gco:CharacterString>
                                     </gmd:posAccRelativeLevel>
                                     <gmd:dateTime>
-                                        <gco:Date>$request->c15_t3_date</gco:Date>
+                                        <gco:Date>$request->c15_t3_date_2</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
                                         <gco:CharacterString />
                                     </gmd:measureDescription>
                                     <gmd:result>
                                         <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t3_result
+                                            <gmd:pass>$request->c15_t3_result_2
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t3_conform_result
+                                            <gmd:explanation>$request->c15_t3_conform_result_2
                                                 <gco:CharacterString />
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>
                                     </gmd:result>
                                 </gmd:DQ_RelativeInternalPositionalAccuracy>
-                                <gmd:DQ_GriddedDataPositionalAccuracy>$request->c15_t3_type
+                                <gmd:DQ_GriddedDataPositionalAccuracy>$request->c15_t3_type_3
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
-                                    <gmd:posAccGridScope>$request->c15_t3_scope
+                                    <gmd:posAccGridScope>$request->c15_t3_scope_3
                                         <gmd:posAccGridScopeItem>
                                             <gco:CharacterString></gco:CharacterString>
                                         </gmd:posAccGridScopeItem>
                                     </gmd:posAccGridScope>
-                                    <gmd:posAccGridLevel>$request->c15_t3_comply_level
+                                    <gmd:posAccGridLevel>$request->c15_t3_comply_level_3
                                         <gco:CharacterString></gco:CharacterString >
                                     </gmd:posAccGridLevel>
                                     <gmd:dateTime>
-                                        <gco:Date>$request->c15_t3_date</gco:Date>
+                                        <gco:Date>$request->c15_t3_date_3</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
                                         <gco:CharacterString />
                                     </gmd:measureDescription>
                                     <gmd:result>
                                         <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t3_result
+                                            <gmd:pass>$request->c15_t3_result_3
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t3_conform_result
+                                            <gmd:explanation>$request->c15_t3_conform_result_3
                                                 <gco:CharacterString />
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>
@@ -849,59 +849,59 @@ class XmlController extends Controller {
                                         </gmd:DQ_ConformanceResult>
                                     </gmd:result>
                                 </gmd:DQ_AccuracyOfATimeMeasurement>
-                                <gmd:DQ_TemporalConsistency>$request->c15_t4_type
+                                <gmd:DQ_TemporalConsistency>$request->c15_t4_type_2
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
-                                    <gmd:TemporalConsistencyScope>$request->c15_t4_scope
+                                    <gmd:TemporalConsistencyScope>$request->c15_t4_scope_2
                                         <gmd:TemporalConsistencyItem>
                                             <gco:CharacterString></gco:CharacterString>
                                         </gmd:TemporalConsistencyItem>
                                     </gmd:TemporalConsistencyScope>
-                                    <gmd:TemporalConsistencyLevel>$request->c15_t4_comply_level
+                                    <gmd:TemporalConsistencyLevel>$request->c15_t4_comply_level_2
                                         <gco:CharacterString></gco:CharacterString >
                                     </gmd:TemporalConsistencyLevel>
                                     <gmd:dateTime>
-                                        <gco:Date>$request->c15_t4_date</gco:Date>
+                                        <gco:Date>$request->c15_t4_date_2</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
                                         <gco:CharacterString />
                                     </gmd:measureDescription>
                                     <gmd:result>
                                         <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t4_result
+                                            <gmd:pass>$request->c15_t4_result_2
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t4_conform_result
+                                            <gmd:explanation>$request->c15_t4_conform_result_2
                                                 <gco:CharacterString />
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>
                                     </gmd:result>
                                 </gmd:DQ_TemporalConsistency>
-                                <gmd:DQ_TemporalValidity> $request->c15_t4_type
+                                <gmd:DQ_TemporalValidity> $request->c15_t4_type_3
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
-                                    <gmd:TemporalValidityScope>$request->c15_t4_scope
+                                    <gmd:TemporalValidityScope>$request->c15_t4_scope_3
                                         <gmd:TemporalValidityItem>
                                             <gco:CharacterString></gco:CharacterString>
                                         </gmd:TemporalValidityItem>
                                     </gmd:TemporalValidityScope>
-                                    <gmd:TemporalValidityLevel>$request->c15_t4_comply_level
+                                    <gmd:TemporalValidityLevel>$request->c15_t4_comply_level_3
                                         <gco:CharacterString></gco:CharacterString >
                                     </gmd:TemporalValidityLevel>
                                     <gmd:dateTime>
-                                        <gco:Date>$request->c15_t4_date</gco:Date>
+                                        <gco:Date>$request->c15_t4_date_3</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
                                         <gco:CharacterString />
                                     </gmd:measureDescription>
                                     <gmd:result>
                                         <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t4_result
+                                            <gmd:pass>$request->c15_t4_result_3
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t4_conform_result
+                                            <gmd:explanation>$request->c15_t4_conform_result_3
                                                 <gco:CharacterString />
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>

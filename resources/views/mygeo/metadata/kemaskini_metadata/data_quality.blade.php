@@ -117,7 +117,7 @@
                                                         ?>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t1_complete_comm_or_omit">
-                                                                <input type="radio" name="c15_t1_complete_comm_or_omit" value='Completeness Commission' {{($radio1 == 'Completeness Commission' ? 'checked="checked"':'')}}>&nbsp;Completeness Commission
+                                                                <input type="radio" name="c15_t1_complete_comm_or_omit" id='completeness_comission' value='Completeness Commission' {{($radio1 == 'Completeness Commission' ? 'checked="checked"':'')}}>&nbsp;Completeness Commission
                                                             </label>
                                                         </td>
                                                         <td>
@@ -126,17 +126,18 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <?php //================= ?>
+                                                    <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
-                                                                <b>Scope:</b>
                                                                 <?php
                                                                 $t1Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope != "") {
-                                                                    $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope);
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compComissScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compComissScope != "") {
+                                                                    $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compComissScope);
                                                                 }
                                                                 ?>
-                                                                <select name="c15_t1_scope" id="c15_t1_scope" class="form-control">
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t1_scope" id="c15_t1_scope" class="form-control form-control-sm">
                                                                     <option value="Aeronautical" {{($t1Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t1Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t1Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -153,45 +154,51 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
-                                                                <b>Compliance Level:</b>
                                                                 <?php
                                                                 $compLvl = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel != "") {
                                                                     $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel;
                                                                 }
                                                                 ?>
-                                                                <input type="text" name="c15_t1_comply_level" id="c15_t1_comply_level" class="form-control" value="{{ $compLvl }}">
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t1_comply_level" id="c15_t1_comply_level" class="form-control form-control-sm" value="{{$compLvl}}">
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c15_t1_commission_date">
-                                                                <b>Date:</b>
                                                                 <?php
                                                                 $t1Date = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date != "") {
                                                                     $t1Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date;
                                                                 }
                                                                 ?>
-                                                                <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control" value="{{ $t1Date }}">
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
+                                                                    <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control form-control-sm" value="{{$t1Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
-                                                                <b>Result:</b>
                                                                 <?php
                                                                 $t1Res = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass != "") {
                                                                     $t1Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass);
                                                                 }
                                                                 ?>
-                                                                <select name="c15_t1_result" id="c15_t1_result" class="form-control">
+                                                                <b>Result:</b>
+                                                                <select name="c15_t1_result" id="c15_t1_result" class="form-control form-control-sm">
                                                                     <option value="Pass" {{($t1Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t1Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t1Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -199,17 +206,111 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="Completeness_Commission">
                                                         <td>
-                                                            <label class="form-check-label" for="c3_4">
-                                                                <b>Conformance Result:</b>
+                                                            <label class="form-check-label" for="c15_t1_conform_result">
                                                                 <?php
                                                                 $conformRes = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation != "") {
                                                                     $conformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation;
                                                                 }
                                                                 ?>
-                                                                <input type="text" name="c15_t1_conform_result" id="c15_t1_conform_result" class="form-control" value="{{ $conformRes }}">
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t1_conform_result" id="c15_t1_conform_result" class="form-control form-control-sm" value="{{$conformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class="Completeness_Omission">
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_1">
+                                                                <?php
+                                                                $t1Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope != "") {
+                                                                    $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope);
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t1_scope_2" id="c15_t1_scope_2" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t1Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t1Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t1Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t1Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t1Scope == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t1Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t1Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t1Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t1Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t1Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t1Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t1Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Completeness_Omission">
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_3">
+                                                                <?php
+                                                                $compLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel != "") {
+                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t1_comply_level_2" id="c15_t1_comply_level_2" class="form-control form-control-sm" value="{{$compLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Completeness_Omission">
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t1_commission_date">
+                                                                <?php
+                                                                $t1Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date != "") {
+                                                                    $t1Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
+                                                                    <input type="date" name="c15_t1_date_2" id="c15_t1_date_2" class="form-control form-control-sm" value="{{$t1Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Completeness_Omission">
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_2">
+                                                                <?php
+                                                                $t1Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t1Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t1_result_2" id="c15_t1_result_2" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t1Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t1Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t1Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Completeness_Omission">
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_4">
+                                                                <?php
+                                                                $conformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $conformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t1_conform_result_2" id="c15_t1_conform_result_2" class="form-control form-control-sm" value="{{$conformRes}}">
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -218,7 +319,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>    
                             <div class="tab-pane fade" id="consistency" role="tabpanel" aria-labelledby="tab_consistency">
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
@@ -234,7 +335,7 @@
                                                         ?>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_type">
-                                                                <input type="radio" name="c15_t2_type" value="Conceptual" {{($radio2 == 'Conceptual' ? 'checked="checked"':'')}}>&nbsp;Conceptual
+                                                                <input type="radio" name="c15_t2_type" id='conceptual' value="Conceptual" {{($radio2 == 'Conceptual' ? 'checked="checked"':'')}}>&nbsp;Conceptual
                                                             </label>
                                                         </td>
                                                         <td>
@@ -253,17 +354,18 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <?php //================= ?>
+                                                    <tr class='Conceptual'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_1">
-                                                                <b>Scope:</b>
+                                                            <label class="form-check-label" for="c15_t2_scope">
                                                                 <?php
                                                                 $t2Scope = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope != "") {
                                                                     $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope);
                                                                 }
                                                                 ?>
-                                                                <select name="c15_t2_scope" id="c15_t2_scope" class="form-control">
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t2_scope" id="c15_t2_scope" class="form-control form-control-sm">
                                                                     <option value="Aeronautical" {{($t2Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t2Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t2Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -280,45 +382,51 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='Conceptual'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_3">
-                                                                <b>Compliance Level:</b>
+                                                            <label class="form-check-label" for="c15_t2_comply_level">
                                                                 <?php
                                                                 $compLvl = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel != "") {
                                                                     $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel;
                                                                 }
                                                                 ?>
-                                                                <input type="text" name="c15_t2_comply_level" id="c15_t2_comply_level" class="form-control" value="{{ $compLvl }}">
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t2_comply_level" id="c15_t2_comply_level" class="form-control form-control-sm" value="{{$compLvl}}">
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='Conceptual'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
-                                                                <b>Date:</b>
+                                                            <label class="form-check-label" for="c15_t2_date">
                                                                 <?php
                                                                 $t2Date = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date != "") {
                                                                     $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date;
                                                                 }
                                                                 ?>
-                                                                <input type="date" name="c15_t2_date" id="c15_t2_date" class="form-control" value="{{ $t2Date }}">
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
+                                                                    <input type="date" name="c15_t2_date" id="c15_t2_date" class="form-control form-control-sm" value="{{$t2Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='Conceptual'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_2">
-                                                                <b>Result:</b>
+                                                            <label class="form-check-label" for="c15_t2_result">
                                                                 <?php
                                                                 $t2Res = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass != "") {
                                                                     $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass);
                                                                 }
                                                                 ?>
-                                                                <select name="c15_t2_result" id="c15_t2_result" class="form-control">
+                                                                <b>Result:</b>
+                                                                <select name="c15_t2_result" id="c15_t2_result" class="form-control form-control-sm">
                                                                     <option value="Pass" {{($t2Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t2Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t2Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -326,17 +434,299 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='Conceptual'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_4">
-                                                                <b>Conformance Result:</b>
+                                                            <label class="form-check-label" for="c15_t2_conform_result">
                                                                 <?php
                                                                 $t2ConformRes = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation != "") {
                                                                     $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation;
                                                                 }
                                                                 ?>
-                                                                <input type="text" name="c15_t2_conform_result" id="c15_t2_conform_result" class="form-control" value="{{ $t2ConformRes }}">
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t2_conform_result" id="c15_t2_conform_result" class="form-control form-control-sm" value="{{$t2ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='Domain'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_1">
+                                                                <?php
+                                                                $t2Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope != "") {
+                                                                    $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope);
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t2_scope_2" id="c15_t2_scope_2" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t2Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t2Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t2Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t2Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t2Scope == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t2Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t2Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t2Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t2Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t2Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t2Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t2Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Domain'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_3">
+                                                                <?php
+                                                                $compLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel != "") {
+                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t2_comply_level_2" id="c15_t2_comply_level_2" class="form-control form-control-sm" value="{{$compLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Domain'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                                <?php
+                                                                $t2Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date != "") {
+                                                                    $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
+                                                                    <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm" value="{{$t2Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Domain'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_2">
+                                                                <?php
+                                                                $t2Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t2_result_2" id="c15_t2_result_2" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t2Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t2Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t2Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Domain'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_4">
+                                                                <?php
+                                                                $t2ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t2_conform_result_2" id="c15_t2_conform_result_2" class="form-control form-control-sm" value="{{$t2ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='Format'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_1">
+                                                                <?php
+                                                                $t2Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope != "") {
+                                                                    $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope);
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t2_scope_3" id="c15_t2_scope_3" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t2Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t2Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t2Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t2Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t2Scope == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t2Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t2Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t2Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t2Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t2Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t2Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t2Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Format'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_3">
+                                                                <?php
+                                                                $compLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel != "") {
+                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t2_comply_level_3" id="c15_t2_comply_level_3" class="form-control form-control-sm" value="{{$compLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Format'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                                <?php
+                                                                $t2Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date != "") {
+                                                                    $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
+                                                                    <input type="date" name="c15_t2_date_3" id="c15_t2_date_3" class="form-control form-control-sm" value="{{$t2Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Format'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_2">
+                                                                <?php
+                                                                $t2Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t2_result_3" id="c15_t2_result_3" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t2Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t2Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t2Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Format'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_4">
+                                                                <?php
+                                                                $t2ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t2_conform_result_3" id="c15_t2_conform_result_3" class="form-control form-control-sm" value="{{$t2ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='Topological'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_1">
+                                                                <?php
+                                                                $t2Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope != "") {
+                                                                    $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope);
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t2_scope_4" id="c15_t2_scope_4" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t2Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t2Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t2Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t2Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t2Scope == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t2Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t2Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t2Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t2Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t2Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t2Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t2Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Topological'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_3">
+                                                                <?php
+                                                                $compLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel != "") {
+                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t2_comply_level_4" id="c15_t2_comply_level_4" class="form-control form-control-sm" value="{{$compLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Topological'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                                <?php
+                                                                $t2Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date != "") {
+                                                                    $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
+                                                                    <input type="date" name="c15_t2_date_4" id="c15_t2_date_4" class="form-control form-control-sm" value="{{$t2Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Topological'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_2">
+                                                                <?php
+                                                                $t2Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t2_result_4" id="c15_t2_result_4" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t2Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t2Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t2Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='Topological'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_4">
+                                                                <?php
+                                                                $t2ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t2_conform_result_4" id="c15_t2_conform_result_4" class="form-control form-control-sm" value="{{$t2ConformRes}}">
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -361,7 +751,7 @@
                                                         ?>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_type">
-                                                                <input type="radio" name="c15_t3_type" value="Absolute or External" {{($radio3 == 'Absolute or External' ? 'checked="checked"':'')}}>&nbsp;Absolute or External
+                                                                <input type="radio" name="c15_t3_type" id='AbsoluteOrExternal' value="Absolute or External" {{($radio3 == 'Absolute or External' ? 'checked="checked"':'')}}>&nbsp;Absolute or External
                                                             </label>
                                                         </td>
                                                         <td>
@@ -375,17 +765,18 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <?php //================= ?>
+                                                    <tr class='AbsoluteorExternal'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_1">
-                                                                <b>Scope:</b>
+                                                            <label class="form-check-label" for="c15_t3_scope">
                                                                 <?php
                                                                 $t3Scope = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope != "") {
                                                                     $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope);
                                                                 }
                                                                 ?>
-                                                                <select name="c15_t3_scope" id="c15_t3_scope" class="form-control">
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t3_scope" id="c15_t3_scope" class="form-control form-control-sm">
                                                                     <option value="Aeronautical" {{($t3Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t3Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t3Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -402,308 +793,702 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='AbsoluteorExternal'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_3">
-                                                                <b>Compliance Level:</b>
+                                                            <label class="form-check-label" for="c15_t3_comply_level">
                                                                 <?php
                                                                 $t3CompLvl = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel != "") {
                                                                     $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel;
                                                                 }
                                                                 ?>
-                                                                <input type="text" name="c15_t3_comply_level" id="c15_t3_comply_level" class="form-control" value="{{ $t3CompLvl }}">
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t3_comply_level" id="c15_t3_comply_level" class="form-control form-control-sm" value="{{$t3CompLvl}}">
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='AbsoluteorExternal'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t3_absExt_date">
-                                                                <b>Date:</b>
+                                                            <label class="form-check-label" for="c15_t3_date">
                                                                 <?php
                                                                 $t3Date = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date != "") {
                                                                     $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date;
                                                                 }
                                                                 ?>
-                                                                <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control" value="{{ $t3Date }}">
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
+                                                                    <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control form-control-sm" value="{{$t3Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='AbsoluteorExternal'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_result">
+                                                                <?php
+                                                                $t3Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t3_result" id="c15_t3_result" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t3Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t3Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t3Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='AbsoluteorExternal'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_conform_result">
+                                                                <?php
+                                                                $t3ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>  
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t3_conform_result" id="c15_t3_conform_result" class="form-control form-control-sm" value="{{$t3ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='RelativeorInternal'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_scope_2">
+                                                                <?php
+                                                                $t3Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope != "") {
+                                                                    $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope);
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t3_scope_2" id="c15_t3_scope_2" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t3Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t3Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t3Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t3Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t3Scope == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t3Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t3Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t3Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t3Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t3Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t3Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t3Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='RelativeorInternal'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_comply_level_2">
+                                                                <?php
+                                                                $t3CompLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel != "") {
+                                                                    $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t3_comply_level_2" id="c15_t3_comply_level_2" class="form-control form-control-sm" value="{{$t3CompLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='RelativeorInternal'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_date_2">
+                                                                <?php
+                                                                $t3Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date != "") {
+                                                                    $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
+                                                                    <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm" value="{{$t3Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='RelativeorInternal'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_result_2">
+                                                                <?php
+                                                                $t3Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t3_result_2" id="c15_t3_result_2" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{(old('c15_t3_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{(old('c15_t3_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{(old('c15_t3_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='RelativeorInternal'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_conform_result_2">
+                                                                <?php
+                                                                $t3ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?> 
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t3_conform_result_2" id="c15_t3_conform_result_2" class="form-control form-control-sm" value="{{$t3ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='GriddedData'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_scope_3">
+                                                                <?php
+                                                                $t3Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope != "") {
+                                                                    $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope);
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t3_scope_3" id="c15_t3_scope_3" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t3Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t3Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t3Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t3Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t3Scope == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t3Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t3Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t3Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t3Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t3Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t3Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t3Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='GriddedData'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_comply_level_3">
+                                                                <?php
+                                                                $t3CompLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel != "") {
+                                                                    $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t3_comply_level_3" id="c15_t3_comply_level_3" class="form-control form-control-sm" value="{{$t3CompLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='GriddedData'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_date_3">
+                                                                <?php
+                                                                $t3Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date != "") {
+                                                                    $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
+                                                                    <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm" value="{{$t3Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='GriddedData'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_result_3">
+                                                                <?php
+                                                                $t3Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t3_result_3" id="c15_t3_result_3" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t3Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t3Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t3Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='GriddedData'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t3_conform_result_3">
+                                                                <?php
+                                                                $t3ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?> 
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t3_conform_result_3" id="c15_t3_conform_result_3" class="form-control form-control-sm" value="{{$t3ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        </label>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="form-check-label" for="c3_2">
-                                                    <b>Result:</b>
-                                                    <?php
-                                                    $t3Res = "";
-                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
-                                                        $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass);
-                                                    }
-                                                    ?>
-                                                    <select name="c15_t3_result" id="c15_t3_result" class="form-control">
-                                                        <option value="Pass" {{($t3Res == 'Pass' ? "selected":"")}}>Pass</option>
-                                                        <option value="Fail" {{($t3Res == 'Fail' ? "selected":"")}}>Fail</option>
-                                                        <option value="Not Relevant" {{($t3Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
-                                                    </select>
-                                                </label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="form-check-label" for="c3_4">
-                                                    <b>Conformance Result:</b>
-                                                    <?php
-                                                    $t3ConformRes = "";
-                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation != "") {
-                                                        $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation;
-                                                    }
-                                                    ?>
-                                                    <input type="text" name="c15_t3_conform_result" id="c15_t3_conform_result" class="form-control" value="{{ $t3ConformRes }}">
-                                                </label>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                        </table>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="temp_accuracy" role="tabpanel" aria-labelledby="tab_temp_accuracy">
-                            <div class="form-group row">
-                                <div class="bd-highlight">
-                                    <div class="table-responsive">
-                                        <table class="table-borderless">
-                                            <tbody>
-                                                <tr>
-                                                    <?php
-                                                    $radio4 = "";
-                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement != "") {
-                                                        $radio4 = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement);
-                                                    }
-                                                    ?>
-                                                    <td>
-                                                        <label class="form-check-label" for="c15_t4_type">
-                                                            <input type="radio" name="c15_t4_type" value="Accuracy or Time Measurement" {{($radio4 == 'Accuracy or Time Measurement' ? 'checked="checked"':'')}}>&nbsp;Accuracy or Time Measurement
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <label class="form-check-label" for="c15_t4_type">
-                                                            <input type="radio" name="c15_t4_type" value="Temporal Consistency" {{($radio4 == 'Temporal Consistency' ? 'checked="checked"':'')}}>&nbsp;Temporal Consistency
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <label class="form-check-label" for="c15_t4_type">
-                                                            <input type="radio" name="c15_t4_type" value="Temporal Validity" {{($radio4 == 'Temporal Validity' ? 'checked="checked"':'')}}>&nbsp;Temporal Validity
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
-                                                            <b>Scope:</b>
-                                                            <?php
-                                                            $t4Scope = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope != "") {
-                                                                $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope);
-                                                            }
-                                                            ?>
-                                                            <select name="c15_t4_scope" id="c15_t4_scope" class="form-control">
-                                                                <option value="Aeronautical" {{($t4Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
-                                                                <option value="Built Environment" {{($t4Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
-                                                                <option value="Demarcation" {{($t4Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
-                                                                <option value="General" {{($t4Scope == 'General' ? "selected":"")}}>General</option>
-                                                                <option value="Geology" {{($t4Scope == 'Geology' ? "selected":"")}}>Geology</option>
-                                                                <option value="Hydrography" {{($t4Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
-                                                                <option value="Hypsography" {{($t4Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
-                                                                <option value="Soil" {{($t4Scope == 'Soil' ? "selected":"")}}>Soil</option>
-                                                                <option value="Special Use" {{($t4Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
-                                                                <option value="Transportation" {{($t4Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
-                                                                <option value="Utility" {{($t4Scope == 'Utility' ? "selected":"")}}>Utility</option>
-                                                                <option value="Vegetation" {{($t4Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
-                                                            </select>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c3_3">
-                                                            <b>Compliance Level:</b>
-                                                            <?php
-                                                            $t4CompLvl = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel != "") {
-                                                                $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel;
-                                                            }
-                                                            ?>
-                                                            <input type="text" name="c15_t4_comply_level" id="c15_t4_comply_level" class="form-control" value="{{ $t4CompLvl }}">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c15_t4_accuTimeMeasure_date">
-                                                            <b>Date:</b>
-                                                            <?php
-                                                            $t4Date = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date != "") {
-                                                                $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date;
-                                                            }
-                                                            ?>
-                                                            <input type="date" name="c15_t4_date" id="c15_t4_date" class="form-control" value="{{ $t4Date }}">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c3_2">
-                                                            <b>Result:</b>
-                                                            <?php
-                                                            $t4Res = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass != "") {
-                                                                $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass);
-                                                            }
-                                                            ?>
-                                                            <select name="c15_t4_result" id="c15_t4_result" class="form-control">
-                                                                <option value="Pass" {{($t4Res == 'Pass' ? "selected":"")}}>Pass</option>
-                                                                <option value="Fail" {{($t4Res == 'Fail' ? "selected":"")}}>Fail</option>
-                                                                <option value="Not Relevant" {{($t4Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
-                                                            </select>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c3_4">
-                                                            <b>Conformance Result:</b>
-                                                            <?php
-                                                            $t4ConformRes = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation != "") {
-                                                                $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation;
-                                                            }
-                                                            ?>
-                                                            <input type="text" name="c15_t4_conform_result" id="c15_t4_conform_result" class="form-control" value="{{ $t4ConformRes }}">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="tab-pane fade" id="temp_accuracy" role="tabpanel" aria-labelledby="tab_temp_accuracy">
+                                <div class="form-group row">
+                                    <div class="bd-highlight">
+                                        <div class="table-responsive">
+                                            <table class="table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <?php
+                                                        $radio4 = "";
+                                                        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement != "") {
+                                                            $radio4 = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement);
+                                                        }
+                                                        ?>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_type">
+                                                                <input type="radio" name="c15_t4_type" id='AccuracyorTimeMeasurement' value="Accuracy or Time Measurement" {{($radio4 == 'Accuracy or Time Measurement' ? 'checked="checked"':'')}}>&nbsp;Accuracy or Time Measurement
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_type">
+                                                                <input type="radio" name="c15_t4_type" value="Temporal Consistency" {{($radio4 == 'Temporal Consistency' ? 'checked="checked"':'')}}>&nbsp;Temporal Consistency
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_type">
+                                                                <input type="radio" name="c15_t4_type" value="Temporal Validity" {{($radio4 == 'Temporal Validity' ? 'checked="checked"':'')}}>&nbsp;Temporal Validity
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='AccuracyorTimeMeasurement'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
+                                                                <?php
+                                                                $t4Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope != "") {
+                                                                    $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope);
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t4_scope" id="c15_t4_scope" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t4Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t4Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t4Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t4Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t4Scope == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t4Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t4Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t4Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t4Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t4Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t4Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t4Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='AccuracyorTimeMeasurement'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_3">
+                                                                <?php
+                                                                $t4CompLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel != "") {
+                                                                    $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t4_comply_level" id="c15_t4_comply_level" class="form-control form-control-sm" value="{{$t4CompLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='AccuracyorTimeMeasurement'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_date">
+                                                                <?php
+                                                                $t4Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date != "") {
+                                                                    $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
+                                                                    <input type="date" name="c15_t4_date" id="c15_t4_date" class="form-control form-control-sm" value="{{$t4Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='AccuracyorTimeMeasurement'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_2">
+                                                                <?php
+                                                                $t4Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t4_result" id="c15_t4_result" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t4Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t4Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t4Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='AccuracyorTimeMeasurement'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_4">
+                                                                <?php
+                                                                $t4ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t4_conform_result" id="c15_t4_conform_result" class="form-control form-control-sm" value="{{$t4ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='TemporalConsistency'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_scope_2">
+                                                                <?php
+                                                                $t4Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope != "") {
+                                                                    $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope);
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t4_scope_2" id="c15_t4_scope_2" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t4Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t4Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t4Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t4Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t4Scope == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t4Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t4Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t4Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t4Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t4Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t4Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t4Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='TemporalConsistency'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_comply_level_2">
+                                                                <?php
+                                                                $t4CompLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel != "") {
+                                                                    $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t4_comply_level_2" id="c15_t4_comply_level_2" class="form-control form-control-sm" value="{{$t4CompLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='TemporalConsistency'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_date_2">
+                                                                <?php
+                                                                $t4Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date != "") {
+                                                                    $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
+                                                                    <input type="date" name="c15_t4_date_2" id="c15_t4_date_2" class="form-control form-control-sm" value="{{$t4Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='TemporalConsistency'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
+                                                                <?php
+                                                                $t4Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t4_conform_result_2" id="c15_t4_conform_result_2" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t4Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t4Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t4Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='TemporalConsistency'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
+                                                                <?php
+                                                                $t4ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t4_conform_result_2" id="c15_t4_conform_result_2" class="form-control form-control-sm" value="{{$t4ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='TemporalValidity'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
+                                                                <?php
+                                                                $t4Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope != "") {
+                                                                    $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope);
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t4_scope_3" id="c15_t4_scope_3" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t4Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t4Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t4Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t4Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t4Scope == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t4Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t4Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t4Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t4Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t4Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t4Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t4Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='TemporalValidity'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_comply_level_3">
+                                                                <?php
+                                                                $t4CompLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel != "") {
+                                                                    $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t4_comply_level_3" id="c15_t4_comply_level_3" class="form-control form-control-sm" value="{{$t4CompLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='TemporalValidity'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_date_3">
+                                                                <?php
+                                                                $t4Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date != "") {
+                                                                    $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
+                                                                    <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{$t4Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='TemporalValidity'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_result_3">
+                                                                <?php
+                                                                $t4Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t4_result_3" id="c15_t4_result_3" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t4Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t4Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t4Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='TemporalValidity'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t4_conform_result_3">
+                                                                <?php
+                                                                $t4ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t4_conform_result_3" id="c15_t4_conform_result_3" class="form-control form-control-sm" value="{{$t4ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="thematic_accuracy" role="tabpanel" aria-labelledby="tab_thematic_accuracy">
-                            <div class="form-group row">
-                                <div class="d-flex flex-wrap bd-highlight">
-                                    <div class="table-responsive">
-                                        <table class="table-borderless">
-                                            <tbody>
-                                                <tr>
-                                                    <?php
-                                                    $radio5 = "";
-                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness != "") {
-                                                        $radio5 = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness);
-                                                    }
-                                                    ?>
-                                                    <td>
-                                                        <label class="form-check-label" for="c15_t5_type">
-                                                            <input type="radio" name="c15_t5_type" value="Classification Correctness" {{($radio5 == 'Classification Correctness' ? 'checked="checked"':'')}}>&nbsp;Classification Correctness
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c15_t5_classCorrect_scope">
-                                                            <b>Scope:</b>
-                                                            <?php
-                                                            $t5Scope = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope != "") {
-                                                                $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope);
-                                                                echo $t5Scope;
-                                                            }
-                                                            ?>
-                                                            <select name="c15_t5_scope" id="c15_t5_scope" class="form-control">
-                                                                <option value="Aeronautical" {{($t5Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
-                                                                <option value="Built Environment" {{($t5Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
-                                                                <option value="Demarcation" {{($t5Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
-                                                                <option value="General" {{($t5Scope == 'General' ? "selected":"")}}>General</option>
-                                                                <option value="Geology" {{($t5Scope == 'Geology' ? "selected":"")}}>Geology</option>
-                                                                <option value="Hydrography" {{($t5Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
-                                                                <option value="Hypsography" {{($t5Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
-                                                                <option value="Soil" {{($t5Scope == 'Soil' ? "selected":"")}}>Soil</option>
-                                                                <option value="Special Use" {{($t5Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
-                                                                <option value="Transportation" {{($t5Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
-                                                                <option value="Utility" {{($t5Scope == 'Utility' ? "selected":"")}}>Utility</option>
-                                                                <option value="Vegetation" {{($t5Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
-                                                            </select>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c3_3">
-                                                            <b>Compliance Level:</b>
-                                                            <?php
-                                                            $t5CompLvl = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel != "") {
-                                                                $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel;
-                                                            }
-                                                            ?>
-                                                            <input type="text" name="c15_t5_comply_level" id="c15_t5_comply_level" class="form-control" value="{{ $t5CompLvl }}">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c15_t5_classCorrect_date">
-                                                            <b>Date:</b>
-                                                            <?php
-                                                            $t5Date = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date != "") {
-                                                                $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date;
-                                                            }
-                                                            ?>
-                                                            <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control" value="{{ $t5Date }}">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c3_2">
-                                                            <b>Result:</b>
-                                                            <?php
-                                                            $t5Res = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass != "") {
-                                                                $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass);
-                                                            }
-                                                            ?>
-                                                            <select name="c15_t5_result" id="c15_t5_result" class="form-control">
-                                                                <option value="Pass" {{($t5Res == 'Pass' ? "selected":"")}}>Pass</option>
-                                                                <option value="Fail" {{($t5Res == 'Fail' ? "selected":"")}}>Fail</option>
-                                                                <option value="Not Relevant" {{($t5Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
-                                                            </select>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="form-check-label" for="c3_4">
-                                                            <b>Conformance Result:</b>
-                                                            <?php
-                                                            $t5ConformRes = "";
-                                                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation != "") {
-                                                                $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation;
-                                                            }
-                                                            ?>
-                                                            <input type="text" name="c15_t5_conform_result" id="c15_t5_conform_result" class="form-control" value="{{ $t5ConformRes }}">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="tab-pane fade" id="thematic_accuracy" role="tabpanel" aria-labelledby="tab_thematic_accuracy">
+                                <div class="form-group row">
+                                    <div class="d-flex flex-wrap bd-highlight">
+                                        <div class="table-responsive">
+                                            <table class="table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <?php
+                                                        $radio5 = "";
+                                                        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness != "") {
+                                                            $radio5 = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness);
+                                                        }
+                                                        ?>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_type">
+                                                                <input type="radio" name="c15_t5_type" value="Classification Correctness" checked>&nbsp;Classification Correctness
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_classCorrect_scope">
+                                                                <?php
+                                                                $t5Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope != "") {
+                                                                    $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope);
+                                                                    echo $t5Scope;
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t5_scope" id="c15_t5_scope" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t5Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t5Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t5Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t5Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t5Scope == 'feature' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t5Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t5Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t5Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t5Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t5Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t5Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t5Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_3">
+                                                                <?php
+                                                                $t5CompLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel != "") {
+                                                                    $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t5_comply_level" id="c15_t5_comply_level" class="form-control form-control-sm" value="{{$t5CompLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_classCorrect_date">
+                                                                <?php
+                                                                $t5Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date != "") {
+                                                                    $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <div class="input-group date" id="c15_t5_classCorrect_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
+                                                                    <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control form-control-sm" value="{{$t5Date}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_2">
+                                                                <?php
+                                                                $t5Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t5_result" id="c15_t5_result" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t5Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t5Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t5Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_4">
+                                                                <?php
+                                                                $t5ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t5_conform_result" id="c15_t5_conform_result" class="form-control form-control-sm" value="{{$t5ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -27,6 +27,7 @@
                         </select>
                     </div>
                 </div>
+                <h6 class="heading-small text-muted mb-2">DATA SET RESOLUTION</h6>
                 <div class="row mb-2">
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy">
@@ -62,6 +63,7 @@
                         </select>
                     </div>
                 </div>
+                <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
                 <div class="row mb-2 divMaintenanceInfo">
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy">
