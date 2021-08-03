@@ -35,7 +35,7 @@
                                 <div class="form-control-label mr-4">
                                     Transfer Function Type
                                 </div>
-                                <input class="form-control form-control-sm" type="text" style="width :200px" placeholder="Transfer Type" nname="c7_trans_fn_type" id="c7_trans_fn_type" value="{{old('c7_trans_fn_type')}}">
+                                <input class="form-control form-control-sm" type="text" style="width :200px" placeholder="Transfer Type" name="c7_trans_fn_type" id="c7_trans_fn_type" value="{{old('c7_trans_fn_type')}}">
                             </div>
                         </div>
                         <div class="col-xl-6">

@@ -203,7 +203,7 @@ class XmlController extends Controller {
                                         <gco:CharacterString>$request->c2_contact_name</gco:CharacterString>
                                     </gmd:individualName>
                                     <gmd:positionName>
-                                        <gco:CharacterString></gco:CharacterString>
+                                        <gco:CharacterString>$request->c2_position_name</gco:CharacterString>
                                     </gmd:positionName>
                                     <gmd:contactInfo>
                                         <gmd:CI_Contact>
@@ -523,8 +523,8 @@ class XmlController extends Controller {
                                         </gmd:CI_OnlineResource>
                                     </gmd:onLine>
                                     <gmd:offLine>
-                                        <gmd:MD_Medium>$request->c11_medium
-                                            <gmd:name />
+                                        <gmd:MD_Medium>
+                                            <gmd:name>$request->c11_medium</gmd:name>
                                         </gmd:MD_Medium>
                                     </gmd:offLine>
                                 </gmd:MD_DigitalTransferOptions>
@@ -685,8 +685,8 @@ class XmlController extends Controller {
                                                 <gco:CharacterString></gco:CharacterString>
                                             </gmd:consistFormatScopeItem>
                                         </gmd:consistFormatScope>
-                                        <gmd:compFormatLevel>$request->c15_t2_comply_level_3
-                                            <gco:CharacterString></gco:CharacterString >
+                                        <gmd:compFormatLevel>
+                                            <gco:CharacterString>$request->c15_t2_comply_level_3</gco:CharacterString>
                                         </gmd:compFormatLevel>
                                         <gco:Date>$request->c15_t2_date_3</gco:Date>
                                     </gmd:dateTime>
@@ -714,8 +714,8 @@ class XmlController extends Controller {
                                                 <gco:CharacterString></gco:CharacterString>
                                             </gmd:consistTopoScopeItem>
                                         </gmd:consistTopoScope>
-                                        <gmd:compTopoLevel>$request->c15_t2_comply_level_4
-                                            <gco:CharacterString></gco:CharacterString >
+                                        <gmd:compTopoLevel>
+                                            <gco:CharacterString>$request->c15_t2_comply_level_4</gco:CharacterString>
                                         </gmd:compTopoLevel>
                                         <gco:Date>$request->c15_t2_date_4</gco:Date>
                                     </gmd:dateTime>
@@ -800,8 +800,8 @@ class XmlController extends Controller {
                                             <gco:CharacterString></gco:CharacterString>
                                         </gmd:posAccGridScopeItem>
                                     </gmd:posAccGridScope>
-                                    <gmd:posAccGridLevel>$request->c15_t3_comply_level_3
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:posAccGridLevel>
+                                        <gco:CharacterString>$request->c15_t3_comply_level_3</gco:CharacterString >
                                     </gmd:posAccGridLevel>
                                     <gmd:dateTime>
                                         <gco:Date>$request->c15_t3_date_3</gco:Date>
@@ -814,8 +814,8 @@ class XmlController extends Controller {
                                             <gmd:pass>$request->c15_t3_result_3
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t3_conform_result_3
-                                                <gco:CharacterString />
+                                            <gmd:explanation>
+                                                <gco:CharacterString>$request->c15_t3_conform_result_3</gco:CharacterString>
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>
                                     </gmd:result>
@@ -858,8 +858,8 @@ class XmlController extends Controller {
                                             <gco:CharacterString></gco:CharacterString>
                                         </gmd:TemporalConsistencyItem>
                                     </gmd:TemporalConsistencyScope>
-                                    <gmd:TemporalConsistencyLevel>$request->c15_t4_comply_level_2
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:TemporalConsistencyLevel>
+                                        <gco:CharacterString>$request->c15_t4_comply_level_2</gco:CharacterString >
                                     </gmd:TemporalConsistencyLevel>
                                     <gmd:dateTime>
                                         <gco:Date>$request->c15_t4_date_2</gco:Date>
@@ -872,8 +872,8 @@ class XmlController extends Controller {
                                             <gmd:pass>$request->c15_t4_result_2
                                                 <gco:Boolean />
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t4_conform_result_2
-                                                <gco:CharacterString />
+                                            <gmd:explanation>
+                                                <gco:CharacterString>$request->c15_t4_conform_result_2</gco:CharacterString>
                                             </gmd:explanation>
                                         </gmd:DQ_ConformanceResult>
                                     </gmd:result>
@@ -887,8 +887,8 @@ class XmlController extends Controller {
                                             <gco:CharacterString></gco:CharacterString>
                                         </gmd:TemporalValidityItem>
                                     </gmd:TemporalValidityScope>
-                                    <gmd:TemporalValidityLevel>$request->c15_t4_comply_level_3
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:TemporalValidityLevel>
+                                        <gco:CharacterString>$request->c15_t4_comply_level_3</gco:CharacterString>
                                     </gmd:TemporalValidityLevel>
                                     <gmd:dateTime>
                                         <gco:Date>$request->c15_t4_date_3</gco:Date>

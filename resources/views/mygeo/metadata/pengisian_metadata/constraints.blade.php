@@ -102,7 +102,7 @@
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">
-                                                                    <input class="form-control form-control-sm" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal" value="{{old('c14_reference')}}">
+                                                                    <input class="form-control form-control-sm" name="c14_reference" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal" value="{{old('c14_reference')}}">
                                                                 </div>
                                                             </div>
                                                         </div>

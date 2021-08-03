@@ -213,9 +213,11 @@
                                 </div>
                                 <div id="div_action_buttons">
                                     @if(auth::user()->hasRole(['Penerbit Metadata','Super Admin']))
-                                    <input type="submit" name="btn_draf" value="Simpan" class="btn btn-primary">
+                                    <input type="button" data-name="draf" value="Simpan" class="btn btn-primary btnSubmit">
                                     @endif
-                                    <input type="submit" name="btn_save" value="Hantar" class="btn btn-success">
+                                    <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSubmit">
+                                    
+                                    <input type="hidden" name="submitAction" id="submitAction" value="save">
                                 </div>
                             </div>
                         </form>
@@ -230,16 +232,41 @@
     var pengesahs = [];
 
     $(document).ready(function () {
-<?php
-if (empty($pengesahs)) {
-    ?>
+        var oriMetadataName = $('#c2_metadataName').val();
+        
+        $(document).on('click','.btnSubmit',function(){
+            $('#submitAction').val($(this).data('name'));
+            var currentName = $('#c2_metadataName').val();
+            
+            if(oriMetadataName.toLowerCase() != currentName.toLowerCase()){
+                if(confirm('Anda membuat perubahan pada tajuk metadata. Simpan metadata sebagai metadata baharu?')){
+                    $('#c2_saveAsNew').val('yes');
+                }else{
+                    $('#c2_saveAsNew').val('no');
+                }
+            }
+            
+            if($(this).data('name') == 'save'){
+                if(confirm('Anda pasti untuk menghantar metadata?')){
+                    $('#form_metadata').submit();
+                }
+            }else if($(this).data('name') == 'draf'){
+                if(confirm('Anda pasti untuk menyimpan metadata?')){
+                    $('#form_metadata').submit();
+                }
+            }
+        });
+        
+        <?php
+        if (empty($pengesahs)) {
+            ?>
             alert('Tiada pengesah dari bahagian sama dijumpai');
             $('#kategori').hide();
             $('#lbl_kategori').hide();
             $("#accordion").hide();
-    <?php
-}
-?>
+            <?php
+        }
+        ?>
 
         $('#c15_date_div,#c15_t1_commission_date_div,#c15_t2_conceptual_date_div,#c15_t3_absExt_date_div,#c15_t4_accuTimeMeasure_date_div,c15_t5_classCorrect_date_div').datetimepicker({
             format: 'DD/MM/YYYY',
@@ -280,6 +307,7 @@ if (empty($pengesahs)) {
                 $('.refSys_Services').hide();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').show();
+                $('.divUseLimitation').hide();
             }else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').show();
@@ -294,6 +322,7 @@ if (empty($pengesahs)) {
                 $('.refSys_Services').show();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',false);
                 $('.divDataQualityTabs').hide();
+                $('.divUseLimitation').show();
             }else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -308,6 +337,7 @@ if (empty($pengesahs)) {
                 $('.refSys_Services').hide();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').show();
+                $('.divUseLimitation').hide();
             }else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -322,6 +352,7 @@ if (empty($pengesahs)) {
                 $('.refSys_Services').hide();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').show();
+                $('.divUseLimitation').hide();
             }
         
 <?php

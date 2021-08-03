@@ -205,8 +205,10 @@
                                     @include('mygeo.metadata.pengisian_metadata.data_quality')
                                 </div>
                                 <div id="div_action_buttons">
-                                    <input type="submit" name="btn_draf" value="Simpan" class="btn btn-primary btnDraf">
-                                    <input type="submit" name="btn_save" value="Hantar" class="btn btn-success btnSave">
+                                    <input type="button" data-name="draf" value="Simpan" class="btn btn-primary btnDraf btnSubmit">
+                                    <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSave btnSubmit">
+                                    
+                                    <input type="hidden" name="submitAction" id="submitAction" value="save">
                                 </div>
                             </div>
                         </form>
@@ -239,6 +241,24 @@
     var pengesahs = [];
 
     $(document).ready(function() {
+        $(document).on('click','.btnSubmit',function(){
+            $('#submitAction').val($(this).data('name'));
+            
+            if($(this).data('name') == 'save'){
+                if(confirm('Anda pasti untuk menghantar metadata?')){
+                    $('#form_metadata').submit();
+                }
+            }else if($(this).data('name') == 'draf'){
+                if($('#c2_metadataName').val() == ""){
+                    alert('Sila isi nama metadata');
+                }else{
+                    if(confirm('Anda pasti untuk menyimpan metadata?')){
+                        $('#form_metadata').submit();
+                    }
+                }
+            }
+        });
+        
         $('#accordion').hide();
         <?php
         if (isset($_GET['bhs']) && $_GET['bhs'] != "") {

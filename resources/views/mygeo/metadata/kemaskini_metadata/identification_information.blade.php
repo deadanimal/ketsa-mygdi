@@ -37,6 +37,7 @@
                         }
                         ?>
                         <input type="text" name="c2_metadataName" id="c2_metadataName" class="form-control form-control-sm ml-3" value="{{ $met_name }}">
+                        <input type="hidden" name="c2_saveAsNew" id="c2_saveAsNew" value="no">
                         @error('c2_metadataName')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -329,6 +330,25 @@
                         ?>
                         <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm" value="{{ $respAgencyOrg }}" readonly>
                         @error('c2_contact_agensiorganisasi')
+                        <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c2_contact_agensiorganisasi">
+                            Position Name
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <?php
+                        $positionName = "";
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString != "") {
+                            $positionName = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString;
+                        }
+                        ?>
+                        <input type="text" name="c2_position_name" id="c2_position_name" class="form-control form-control-sm ml-3 mb-2" value="{{ $positionName }}">
+                        @error('c2_position_name')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
                     </div>

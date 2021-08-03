@@ -441,9 +441,11 @@ class MetadataController extends Controller {
         }
 
         $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request,$fileUrl);
+        $xml = $xmlcon->createXml($request,$fileUrl="");
         
-        DB::connection('pgsql2')->transaction(function () use ($request,$xml) {
+        $msg = "";
+        
+        DB::connection('pgsql2')->transaction(function () use ($request,$xml,&$msg) {
             $maxid = MetadataGeo::on('pgsql2')->max('id');
 
             // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
@@ -475,15 +477,31 @@ class MetadataController extends Controller {
             $mg->disahkan = "0";
             $mg->portal_user_id = auth::user()->id;
             
-            if(isset($request->btn_save)){
+            $msg = "";
+            if(isset($request->btn_save) || (isset($request->submitAction) && $request->submitAction == "save")){
                 $mg->is_draf = "no";
-            }elseif (isset($request->btn_draf)){
+                
+                if($request->c2_contact_email != ""){
+                    //send email to pengesah metadata
+                    $user = User::where('email',$request->c2_contact_email)->get()->first();
+                    $to_name = $user->name;
+                    $to_email = $user->email;
+                    $data = array('title'=>$request->c2_metadataName);
+                    Mail::send('mails.exmpl10', $data, function($message) use ($to_name, $to_email, $request) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                    });
+                }
+                
+                $msg = "Metadata berjaya disimpan.";
+            }elseif (isset($request->btn_draf) || (isset($request->submitAction) && $request->submitAction == "draf")){
                 $mg->is_draf = "yes";
+                $msg = "Metadata disimpan sebagai draf.";
             }
             $mg->save();
         });
 
-        return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
+        return redirect('mygeo_senarai_metadata')->with('message',$msg);
     }
 
     public function store_xml(Request $request) {
@@ -584,6 +602,10 @@ class MetadataController extends Controller {
     }
 
     public function update(Request $request) {
+        if($request->c2_saveAsNew == 'yes'){
+            $this->store($request);
+            return redirect('mygeo_senarai_metadata')->with('success', 'ftest');
+        }
         $fields = [
             "c1_content_info" => 'required',
             "publisher_name" => 'required',
@@ -691,15 +713,18 @@ class MetadataController extends Controller {
                 $mg->disahkan = $request->newStatus;
             }
             
-            if(isset($request->btn_save)){
+            $msg = "";
+            if($request->saveAction == "save"){
                 $mg->is_draf = "no";
-            }elseif (isset($request->btn_draf)){
+                $msg = "Metadata berjaya disimpan.";
+            }elseif ($request->saveAction == "draf"){
                 $mg->is_draf = "yes";
+                $msg = "Metadata disimpan sebagai draf.";
             }
             $mg->update();
         });
 
-        return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
+        return redirect('mygeo_senarai_metadata')->with('success', $msg);
     }
 
     public function metadata_sahkan() {
@@ -713,22 +738,66 @@ class MetadataController extends Controller {
                 $metadata->timestamps = false;
                 $metadata->disahkan = 'yes';
                 $metadata->update();
+                
+                $ftestxml2 = <<<XML
+                $metadata->data
+                XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+                $metadataxml = simplexml_load_string($ftestxml2);
+                
+                $metadataName = "";
+                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                   $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                }
+                
+                $user = User::where("id",$metadata->portal_user_id)->get()->first();
+                if(!empty($user)){
+                    //send email to penerbit
+                    $to_name = $user->name;
+                    $to_email = $user->email;
+                    $data = array('title'=>$metadataName);
+                    Mail::send('mails.exmpl8', $data, function($message) use ($to_name, $to_email, $metadataName) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : '.$metadataName);
+                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                    });
+                }
             }
         } else {
             $metadata = MetadataGeo::on('pgsql2')->find($_POST['metadata_id']);
             $metadata->timestamps = false;
             $metadata->disahkan = 'yes';
             $metadata->update();
+            
+            $ftestxml2 = <<<XML
+            $metadata->data
+            XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            $metadataxml = simplexml_load_string($ftestxml2);
+
+            $metadataName = "";
+            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+               $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+            }
+
+            $user = User::where("id",$metadata->portal_user_id)->get()->first();
+            if(!empty($user)){
+                //send email to penerbit
+                $to_name = $user->name;
+                $to_email = $user->email;
+                $data = array('title'=>$metadataName);
+                Mail::send('mails.exmpl8', $data, function($message) use ($to_name, $to_email, $metadataName) {
+                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : '.$metadataName);
+                    $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                });
+            }
         }
 
-        //send email to whom?
-//        $to_name = 'pentadbiraplikasi@gmail.com';
-//        $to_email = 'pentadbiraplikasi@gmail.com';
-//        $data = array('name'=>$data['name']);
-//        Mail::send('mails.exmpl2', $data, function($message) use ($to_name, $to_email) {
-//            $message->to($to_email, $to_name)->subject('Pengesahan Pendaftaran Penerbit/Pengesah Metadata MyGeo Explorer');
-//            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-//        });
         exit();
     }
 
@@ -737,19 +806,77 @@ class MetadataController extends Controller {
             exit();
         }
 
-        $metadata_id = $_POST['metadata_id'];
-        $metadata = MetadataGeo::on('pgsql2')->find($metadata_id);
-        $metadata->timestamps = false;
-        $metadata->disahkan = 'no';
-        $metadata->update();
+        if (is_array($_POST['metadata_id'])) {
+            foreach ($_POST['metadata_id'] as $mid) {
+                $metadata = MetadataGeo::on('pgsql2')->find($mid);
+                $metadata->timestamps = false;
+                $metadata->disahkan = 'no';
+                $metadata->update();
+                
+                $ftestxml2 = <<<XML
+                $metadata->data
+                XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+                $metadataxml = simplexml_load_string($ftestxml2);
+                
+                $metadataName = "";
+                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                   $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                }
+                
+                $user = User::where("id",$metadata->portal_user_id)->get()->first();
+                if(!empty($user)){
+                    //send email to penerbit
+                    $to_name = $user->name;
+                    $to_email = $user->email;
+                    $data = array('title'=>$metadataName);
+                    Mail::send('mails.exmpl8', $data, function($message) use ($to_name, $to_email, $metadataName) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : '.$metadataName);
+                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                    });
+                }
+            }
+        } else {
+            $metadata = MetadataGeo::on('pgsql2')->find($_POST['metadata_id']);
+            $metadata->timestamps = false;
+            $metadata->disahkan = 'yes';
+            $metadata->update();
+            
+            $ftestxml2 = <<<XML
+            $metadata->data
+            XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            $metadataxml = simplexml_load_string($ftestxml2);
 
-        //send mail
-//        Mail::to('farhan15959_test@gmail.com')->send(new MailtrapExample());
+            $metadataName = "";
+            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+               $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+            }
+
+            $user = User::where("id",$metadata->portal_user_id)->get()->first();
+            if(!empty($user)){
+                //send email to penerbit
+                $to_name = $user->name;
+                $to_email = $user->email;
+                $data = array('title'=>$metadataName);
+                Mail::send('mails.exmpl9', $data, function($message) use ($to_name, $to_email, $metadataName) {
+                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : '.$metadataName);
+                    $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                });
+            }
+        }
+        
         exit();
     }
 
     public function delete(Request $request) {
         MetadataGeo::on('pgsql2')->find($request->metadata_id)->delete();
-        return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Deleted');
+        return redirect('mygeo_senarai_metadata')->with('message', 'Metadata berjaya dihapus.');
     }
 }

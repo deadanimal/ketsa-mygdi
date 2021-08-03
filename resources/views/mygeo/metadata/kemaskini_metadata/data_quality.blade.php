@@ -174,17 +174,15 @@
                                                                 <?php
                                                                 $t1Date = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date != "") {
-                                                                    $t1Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date;
+                                                                    $t1Date = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date);
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
-                                                                    <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control form-control-sm" value="{{$t1Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
-                                                                </div>
+                                                                <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
+                                                                <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control form-control-sm" value="{{ $t1Date }}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -272,13 +270,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
-                                                                    <input type="date" name="c15_t1_date_2" id="c15_t1_date_2" class="form-control form-control-sm" value="{{$t1Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
-                                                                </div>
+                                                                <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
+                                                                <input type="date" name="c15_t1_date_2" id="c15_t1_date_2" class="form-control form-control-sm" value="{{$t1Date}}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -406,13 +402,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date" id="c15_t2_date" class="form-control form-control-sm" value="{{$t2Date}}">
                                                                     <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>-->
-                                                                </div>
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -500,13 +494,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm" value="{{$t2Date}}">
                                                                     <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>-->
-                                                                </div>
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -575,8 +567,8 @@
                                                             <label class="form-check-label" for="c3_3">
                                                                 <?php
                                                                 $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel;
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->compFormatLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->compFormatLevel->CharacterString != "") {
+                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->compFormatLevel->CharacterString;
                                                                 }
                                                                 ?>
                                                                 <b>Compliance Level:</b>
@@ -594,13 +586,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_3" id="c15_t2_date_3" class="form-control form-control-sm" value="{{$t2Date}}">
                                                                     <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>-->
-                                                                </div>
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -669,8 +659,8 @@
                                                             <label class="form-check-label" for="c3_3">
                                                                 <?php
                                                                 $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel;
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->compTopoLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->compTopoLevel->CharacterString != "") {
+                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->compTopoLevel->CharacterString;
                                                                 }
                                                                 ?>
                                                                 <b>Compliance Level:</b>
@@ -688,13 +678,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_4" id="c15_t2_date_4" class="form-control form-control-sm" value="{{$t2Date}}">
                                                                     <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>-->
-                                                                </div>
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -817,13 +805,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
-                                                                    <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control form-control-sm" value="{{$t3Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
-                                                                </div>
+                                                                <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
+                                                                <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control form-control-sm" value="{{$t3Date}}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -911,13 +897,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
-                                                                    <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm" value="{{$t3Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
-                                                                </div>
+                                                                <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
+                                                                <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm" value="{{$t3Date}}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -986,8 +970,8 @@
                                                             <label class="form-check-label" for="c15_t3_comply_level_3">
                                                                 <?php
                                                                 $t3CompLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel != "") {
-                                                                    $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel;
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString != "") {
+                                                                    $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString;
                                                                 }
                                                                 ?>
                                                                 <b>Compliance Level:</b>
@@ -1005,13 +989,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
-                                                                    <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm" value="{{$t3Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
-                                                                </div>
+                                                                <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
+                                                                <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm" value="{{$t3Date}}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1036,10 +1018,10 @@
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result_3">
-                                                                <?php
+                                                                <?php   
                                                                 $t3ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation;
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                    $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
                                                                 }
                                                                 ?> 
                                                                 <b>Conformance Result:</b>
@@ -1134,13 +1116,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
                                                                     <input type="date" name="c15_t4_date" id="c15_t4_date" class="form-control form-control-sm" value="{{$t4Date}}">
                                                                     <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>-->
-                                                                </div>
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1228,13 +1208,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
-                                                                    <input type="date" name="c15_t4_date_2" id="c15_t4_date_2" class="form-control form-control-sm" value="{{$t4Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
-                                                                </div>
+                                                                <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
+                                                                <input type="date" name="c15_t4_date_2" id="c15_t4_date_2" class="form-control form-control-sm" value="{{$t4Date}}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1303,8 +1281,8 @@
                                                             <label class="form-check-label" for="c15_t4_comply_level_3">
                                                                 <?php
                                                                 $t4CompLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel != "") {
-                                                                    $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel;
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString != "") {
+                                                                    $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString;
                                                                 }
                                                                 ?>
                                                                 <b>Compliance Level:</b>
@@ -1322,13 +1300,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
-                                                                    <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{$t4Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
-                                                                </div>
+                                                                <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
+                                                                <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{$t4Date}}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1441,13 +1417,11 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <div class="input-group date" id="c15_t5_classCorrect_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
-                                                                    <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control form-control-sm" value="{{$t5Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
-                                                                </div>
+                                                                <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
+                                                                <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control form-control-sm" value="{{$t5Date}}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1495,3 +1469,91 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        //t1
+        $('.Completeness_Commission').show();
+        $('.Completeness_Omission').hide();
+        $("#completeness_comission").prop("checked", true);
+        //t2
+        $('.Conceptual').show();
+        $('.Domain').hide();
+        $('.Format').hide();
+        $('.Topological').hide();
+        $("#conceptual").prop("checked", true);
+        //t3
+        $('.AbsoluteorExternal').show();
+        $('.RelativeorInternal').hide();
+        $('.GriddedData').hide();
+        $("#AbsoluteOrExternal").prop("checked", true);
+        //t4
+        $('.AccuracyorTimeMeasurement').show();
+        $('.TemporalConsistency').hide();
+        $('.TemporalValidity').hide();
+        $("#AccuracyorTimeMeasurement").prop("checked", true);
+    });
+    
+    $('input:radio[name="c15_t1_complete_comm_or_omit"]').change(function() {
+        if ($(this).val() == 'Completeness Commission') {
+            $('.Completeness_Commission').show();
+            $('.Completeness_Omission').hide();
+        } else if ($(this).val() == 'Completeness Omission') {
+            $('.Completeness_Commission').hide();
+            $('.Completeness_Omission').show();
+        }
+    });
+    $('input:radio[name="c15_t2_type"]').change(function() {
+        if ($(this).val() == 'Conceptual') {
+            $('.Conceptual').show();
+            $('.Domain').hide();
+            $('.Format').hide();
+            $('.Topological').hide();
+        } else if ($(this).val() == 'Domain') {
+            $('.Conceptual').hide();
+            $('.Domain').show();
+            $('.Format').hide();
+            $('.Topological').hide();
+        } else if ($(this).val() == 'Format') {
+            $('.Conceptual').hide();
+            $('.Domain').hide();
+            $('.Format').show();
+            $('.Topological').hide();
+        } else if ($(this).val() == 'Topological') {
+            $('.Conceptual').hide();
+            $('.Domain').hide();
+            $('.Format').hide();
+            $('.Topological').show();
+        }
+    });
+    $('input:radio[name="c15_t3_type"]').change(function() {
+        if ($(this).val() == 'Absolute or External') {
+            $('.AbsoluteorExternal').show();
+            $('.RelativeorInternal').hide();
+            $('.GriddedData').hide();
+        } else if ($(this).val() == 'Relative or Internal') {
+            $('.AbsoluteorExternal').hide();
+            $('.RelativeorInternal').show();
+            $('.GriddedData').hide();
+        } else if ($(this).val() == 'Gridded Data') {
+            $('.AbsoluteorExternal').hide();
+            $('.RelativeorInternal').hide();
+            $('.GriddedData').show();
+        }
+    });
+    $('input:radio[name="c15_t4_type"]').change(function() {
+        if ($(this).val() == 'Accuracy or Time Measurement') {
+            $('.AccuracyorTimeMeasurement').show();
+            $('.TemporalConsistency').hide();
+            $('.TemporalValidity').hide();
+        } else if ($(this).val() == 'Temporal Consistency') {
+            $('.AccuracyorTimeMeasurement').hide();
+            $('.TemporalConsistency').show();
+            $('.TemporalValidity').hide();
+        } else if ($(this).val() == 'Temporal Validity') {
+            $('.AccuracyorTimeMeasurement').hide();
+            $('.TemporalConsistency').hide();
+            $('.TemporalValidity').show();
+        }
+    });
+</script>

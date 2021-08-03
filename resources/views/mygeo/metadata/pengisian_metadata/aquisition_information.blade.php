@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Feet" name="c8_url" id="c8_altitude" value="{{old('c8_altitude')}}">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Feet" name="c8_altitude" id="c8_altitude" value="{{old('c8_altitude')}}">
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Condition" name="c8_url" id="c8_meteor_cond" value="{{old('c8_meteor_cond')}}">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Condition" name="c8_meteor_cond" id="c8_meteor_cond" value="{{old('c8_meteor_cond')}}">
                                 </div>
                             </div>
                         </div>
