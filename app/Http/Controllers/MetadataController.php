@@ -199,7 +199,10 @@ class MetadataController extends Controller {
         $categories = MCategory::all();
         $pengesahs = User::whereHas("roles", function ($q) {
                     $q->where("name", "Pengesah Metadata");
-                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+                })->where('agensi_organisasi', auth::user()->agensi_organisasi.'asd')->where('bahagian', auth::user()->bahagian.'asd')->get()->first();
+        if(empty($pengesahs)){
+            $pengesahs = User::where(['id'=>'2'])->get()->first(); //make Pentadbir Aplikasi the pengesah if no pengesahs with same agency or organisation is found
+        }
         $states = States::where(['country' => 1])->get()->all();
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
@@ -340,6 +343,18 @@ class MetadataController extends Controller {
             'c2_metadataName.required' => 'ftest1test1',
             'c2_metadataName.required' => 'ftest2test2',
         ];
+    }
+    
+    public function validateMetadataName(Request $request){
+        $lowered = strtolower($request->metadataName);
+        $lowered = $request->metadataName;
+        $metadatas = MetadataGeo::on('pgsql2')->where('data','LIKE','%>'.$lowered.'<%')->get()->first();
+        if(empty($metadatas)){
+            return "not found";
+        }else{
+            return "found";
+        }
+        exit();
     }
 
     public function store(Request $request) {

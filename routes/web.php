@@ -171,6 +171,7 @@ Route::post('metadata_tidak_disahkan','MetadataController@metadata_tidak_disahka
 Route::post('getUsersByAgensi','UserController@getUsersByAgensi');
 Route::post('getMetadataByUser','UserController@getMetadataByUser');
 Route::post('simpan_pemindahan_akaun','UserController@simpan_pemindahan_akaun');
+Route::post('validateMetadataName','MetadataController@validateMetadataName');
 
 Auth::routes();
 

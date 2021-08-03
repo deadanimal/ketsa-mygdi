@@ -205,8 +205,8 @@
                                     @include('mygeo.metadata.pengisian_metadata.data_quality')
                                 </div>
                                 <div id="div_action_buttons">
-                                    <input type="submit" name="btn_draf" value="Simpan" class="btn btn-primary">
-                                    <input type="submit" name="btn_save" value="Hantar" class="btn btn-success">
+                                    <input type="submit" name="btn_draf" value="Simpan" class="btn btn-primary btnDraf">
+                                    <input type="submit" name="btn_save" value="Hantar" class="btn btn-success btnSave">
                                 </div>
                             </div>
                         </form>
@@ -218,6 +218,24 @@
 </div>
 
 <script>
+    $("#c2_metadataName").focusout(function(){
+        var metadataName = $(this).val();
+        var thisVal = $(this);
+        $.ajax({
+            method: "POST",
+            url: "validateMetadataName",
+            data: {"_token": "{{ csrf_token() }}", "metadataName": metadataName},
+        }).done(function (response) {
+            if(response == "found"){
+                alert('Nama metadata sudah wujud');
+                $('.btnDraf').prop('disabled',true);
+                $('.btnSave').prop('disabled',true);
+            }else{
+                $('.btnDraf').prop('disabled',false);
+                $('.btnSave').prop('disabled',false);
+            }
+        });
+    });
     var pengesahs = [];
 
     $(document).ready(function() {
