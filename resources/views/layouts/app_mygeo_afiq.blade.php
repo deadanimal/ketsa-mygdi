@@ -304,7 +304,7 @@
                                         @endif
                                         @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link active">
+                                            <a href="{{ url('maklum_balas') }}" class="nav-link active">
                                                 <i class="fa-comments fas text-green"></i>
                                                 <span class="nav-link-text">Maklum Balas</span>
                                             </a>
@@ -402,6 +402,16 @@
                                                 <li class="nav-item">
                                                     <a href="{{ url('panduan_pengguna_edit') }}" class="nav-link">
                                                         <span class="nav-link-text">Panduan Pengguna</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{{ url('mygeo_penafian') }}" class="nav-link">
+                                                        <span class="nav-link-text">Penafian</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{{ url('mygeo_penyataan_privasi') }}" class="nav-link">
+                                                        <span class="nav-link-text">Penyataan Privasi</span>
                                                     </a>
                                                 </li>
                                             </ul>

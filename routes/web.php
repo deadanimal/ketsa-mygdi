@@ -15,46 +15,49 @@ use Illuminate\Support\Facades\Mail;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/senarai_metadata_nologin','MetadataController@index_nologin');
-Route::post('/carian_metadata_nologin','MetadataController@search_nologin');
-Route::post('/lihat_metadata_nologin','MetadataController@show_nologin');
-Route::post('/lihat_xml_nologin','MetadataController@show_xml_nologin');
 
-Route::post('/loginf','AuthController@authenticate');
+Route::get('/senarai_metadata_nologin', 'MetadataController@index_nologin');
+Route::post('/carian_metadata_nologin', 'MetadataController@search_nologin');
+Route::post('/lihat_metadata_nologin', 'MetadataController@show_nologin');
+Route::post('/lihat_xml_nologin', 'MetadataController@show_xml_nologin');
+
+Route::post('/loginf', 'AuthController@authenticate');
 //Route::post('/registerf','RegisterController@create');
 
-Route::get('/soalan_lazim','PortalController@index_faq');
+Route::get('/soalan_lazim', 'PortalController@index_faq');
 Route::get('/mengenai_mygeo_explorer', function () {
     return view('mengenai_mygeo_explorer');
 });
 
-Route::get('/','HomeController@index');
+Route::get('/', 'HomeController@index');
 //Route::get('/', function () {
 //    return view('mygeo.profil');
 //});
-Route::get('/panduan_pengguna','PortalController@index_panduan_pengguna');
-Route::get('/maklum_balas','PortalController@index_maklum_balas');
-Route::get('/hubungi_kami','PortalController@index_hubungi_kami');
+Route::get('/panduan_pengguna', 'PortalController@index_panduan_pengguna');
+Route::get('/hubungi_kami', 'PortalController@index_hubungi_kami');
+Route::get('/penafian', 'PortalController@index_penafian');
+Route::get('/penyataan_privasi', 'PortalController@index_penyataan_privasi');
 
-Route::get('/data_asas_landing','DataAsasController@data_asas_landing');
-Route::get('/data_asas_senarai','DataAsasController@data_asas_senarai');
-Route::get('/data_asas_tatacara_mohon','DataAsasController@data_asas_tatacara_mohon');
-Route::get('/data_asas_dokumen_berkaitan','DataAsasController@data_asas_dokumen_berkaitan');
+Route::get('/data_asas_landing', 'DataAsasController@data_asas_landing');
+Route::get('/data_asas_senarai', 'DataAsasController@data_asas_senarai');
+Route::get('/data_asas_tatacara_mohon', 'DataAsasController@data_asas_tatacara_mohon');
+Route::get('/data_asas_dokumen_berkaitan', 'DataAsasController@data_asas_dokumen_berkaitan');
 
-Route::group(['middleware'=>['auth']], function(){
+Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/senarai_pengumuman','PortalController@index_pengumuman');
-    Route::post('/tunjuk_pengumuman','PortalController@show_pengumuman');
-    Route::get('/kemaskini_pengumuman','PortalController@edit_pengumuman');
-    Route::post('/simpan_pengumuman','PortalController@update_pengumuman');
-    Route::post('/tambah_pengumuman','PortalController@store_pengumuman');
-    Route::post('/buang_pengumuman','PortalController@delete_pengumuman');
 
-    Route::get('/mygeo_senarai_pengumuman','PortalController@index_pengumuman');
-    Route::post('/mygeo_tunjuk_pengumuman','PortalController@show_pengumuman2');
-    Route::post('/mygeo_kemaskini_pengumuman','PortalController@edit_pengumuman');
-    Route::post('/mygeo_simpan_pengumuman','PortalController@update_pengumuman');
-    Route::post('/mygeo_buang_pengumuman','PortalController@delete_pengumuman');
+    Route::get('/senarai_pengumuman', 'PortalController@index_pengumuman');
+    Route::post('/tunjuk_pengumuman', 'PortalController@show_pengumuman');
+    Route::get('/kemaskini_pengumuman', 'PortalController@edit_pengumuman');
+    Route::post('/simpan_pengumuman', 'PortalController@update_pengumuman');
+    Route::post('/tambah_pengumuman', 'PortalController@store_pengumuman');
+    Route::post('/buang_pengumuman', 'PortalController@delete_pengumuman');
+
+    Route::get('/mygeo_senarai_pengumuman', 'PortalController@index_pengumuman');
+    Route::post('/mygeo_tunjuk_pengumuman', 'PortalController@show_pengumuman2');
+    Route::post('/mygeo_kemaskini_pengumuman', 'PortalController@edit_pengumuman');
+    Route::post('/mygeo_simpan_pengumuman', 'PortalController@update_pengumuman');
+    Route::post('/mygeo_buang_pengumuman', 'PortalController@delete_pengumuman');
 
     Route::get('/landing', function () {
         return view('landing');
@@ -75,89 +78,90 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/change_user_status', 'UserController@change_user_status');
     Route::post('/delete_user', 'UserController@delete_user');
 
-    Route::get('/portal_settings','PortalController@index_portal_settings');
-    Route::post('/simpan_portal_settings','PortalController@store_portal_settings');
+    Route::get('/portal_settings', 'PortalController@index_portal_settings');
+    Route::post('/simpan_portal_settings', 'PortalController@store_portal_settings');
 
-    Route::get('/faq','PortalController@index_faq');
-    Route::get('/kemaskini_faq','PortalController@edit_faq');
-    Route::post('/simpan_maklum_balas','PortalController@store_maklum_balas');
+    Route::get('/faq', 'PortalController@index_faq');
+    Route::get('/kemaskini_faq', 'PortalController@edit_faq');
+    Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
 
-    // Route::get('/maklum_balas','PortalController@index_maklum_balas');
-    Route::get('/maklum_balas_edit','PortalController@edit_maklum_balas');
-    Route::post('/simpan_maklum_balas','PortalController@store_maklum_balas');
+    Route::get('/maklum_balas','PortalController@index_maklum_balas');
+    Route::get('/maklum_balas_edit', 'PortalController@edit_maklum_balas');
+    Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
+    Route::post('/delete_maklum_balas', 'PortalController@delete_maklum_balas');
 
     // Route::get('/panduan_pengguna','PortalController@index_panduan_pengguna');
-    Route::get('/panduan_pengguna_edit','PortalController@edit_panduan_pengguna');
-    Route::post('/simpan_panduan_pengguna','PortalController@store_panduan_pengguna');
+    Route::get('/panduan_pengguna_edit', 'PortalController@edit_panduan_pengguna');
+    Route::post('/simpan_panduan_pengguna', 'PortalController@store_panduan_pengguna');
 
-    Route::get('/pengumuman_edit','PortalController@edit_pengumuman2');
+    Route::get('/pengumuman_edit', 'PortalController@edit_pengumuman2');
     // Route::post('/simpan_pengumuman','PortalController@store_panduan_pengguna');
 
     // Route::get('/hubungi_kami','PortalController@index_hubungi_kami');
-    Route::post('/simpan_hubungi_kami','PortalController@store_hubungi_kami');
+    Route::post('/simpan_hubungi_kami', 'PortalController@store_hubungi_kami');
 
-    Route::get('/penafian','PortalController@index_penafian');
-    Route::post('/simpan_penafian','PortalController@store_penafian');
+    Route::get('/mygeo_penafian', 'PortalController@index_penafian_mygeo');
+    Route::post('/simpan_penafian', 'PortalController@store_penafian');
 
-    Route::get('/penyataan_privasi','PortalController@index_penyataan_privasi');
-    Route::post('/simpan_penyataan_privasi','PortalController@store_penyataan_privasi');
+    Route::get('/mygeo_penyataan_privasi', 'PortalController@index_penyataan_privasi_mygeo');
+    Route::post('/simpan_penyataan_privasi', 'PortalController@store_penyataan_privasi');
 
-    Route::post('/simpan_soalan_lazim','PortalController@store_faq');
-    Route::post('/update_faq','PortalController@update_faq');
+    Route::post('/simpan_soalan_lazim', 'PortalController@store_faq');
+    Route::post('/update_faq', 'PortalController@update_faq');
 
-    Route::get('/mygeo_pengisian_metadata','MetadataController@create');
-    Route::post('/store_metadata','MetadataController@store');
-    Route::post('/muat_naik_xml','MetadataController@store_xml');
+    Route::get('/mygeo_pengisian_metadata', 'MetadataController@create');
+    Route::post('/store_metadata', 'MetadataController@store');
+    Route::post('/muat_naik_xml', 'MetadataController@store_xml');
 
-    Route::get('/mygeo_senarai_metadata','MetadataController@index');
-    Route::post('/carian_metadata','MetadataController@search');
+    Route::get('/mygeo_senarai_metadata', 'MetadataController@index');
+    Route::post('/carian_metadata', 'MetadataController@search');
 
-    Route::get('/mygeo_senarai_draf_metadata','MetadataController@index_draf');
+    Route::get('/mygeo_senarai_draf_metadata', 'MetadataController@index_draf');
 
-    Route::get('/mygeo_pengesahan_metadata','MetadataController@senarai_pengesahan_metadata');
+    Route::get('/mygeo_pengesahan_metadata', 'MetadataController@senarai_pengesahan_metadata');
 
-    Route::post('/lihat_metadata','MetadataController@show');
-    Route::post('/simpan_kemaskini_metadata','MetadataController@update');
+    Route::post('/lihat_metadata', 'MetadataController@show');
+    Route::post('/simpan_kemaskini_metadata', 'MetadataController@update');
 
-    Route::post('/kemaskini_draf_metadata','MetadataController@edit');
-    Route::get('/kemaskini_metadata/{id}','MetadataController@edit');
+    Route::post('/kemaskini_draf_metadata', 'MetadataController@edit');
+    Route::get('/kemaskini_metadata/{id}', 'MetadataController@edit');
 
 
-    Route::post('/lihat_draf_metadata','MetadataController@show_draf');
-    Route::post('/simpan_kemaskini_draf_metadata','MetadataController@update_draf');
+    Route::post('/lihat_draf_metadata', 'MetadataController@show_draf');
+    Route::post('/simpan_kemaskini_draf_metadata', 'MetadataController@update_draf');
 
-    Route::post('/delete_draf_metadata','MetadataController@delete_draf');
-    Route::post('/delete_metadata','MetadataController@delete');
+    Route::post('/delete_draf_metadata', 'MetadataController@delete_draf');
+    Route::post('/delete_metadata', 'MetadataController@delete');
 
-    Route::get('/landing_mygeo','UserController@show');
-    Route::get('/mygeo_profil','UserController@show');
+    Route::get('/landing_mygeo', 'UserController@show');
+    Route::get('/mygeo_profil', 'UserController@show');
 
-    Route::get('/tambah_permohonan/{id}','DataAsasController@tambah')->name('tambah.permohonan');
-    Route::get('/mohon_data','DataAsasController@mohon_data');
-    Route::post('/simpan_permohonan_baru','DataAsasController@store_permohonan_baru');
-    Route::post('/simpan_senarai_kawasan','DataAsasController@store_senarai_kawasan');
+    Route::get('/tambah_permohonan/{id}', 'DataAsasController@tambah')->name('tambah.permohonan');
+    Route::get('/mohon_data', 'DataAsasController@mohon_data');
+    Route::post('/simpan_permohonan_baru', 'DataAsasController@store_permohonan_baru');
+    Route::post('/simpan_senarai_kawasan', 'DataAsasController@store_senarai_kawasan');
 
     Route::post('/muatnaik_dokumen', 'DataAsasController@store_dokumen_berkaitan')->name('muatnaikFail');
 
     #Route::get('/mohon_data_asas_baru','DataAsasController@index');
-    Route::post('/delete_permohonan','DataAsasController@delete_permohonan');
-    Route::get('/muat_turun_data','DataAsasController@muat_turun_data');
-    Route::get('/senarai_data','DataAsasController@senarai_data');
-    Route::get('/kategori_kelas_data','DataAsasController@kategori_kelas_data');
-    Route::get('/kategori_kelas_kongsi_data','DataAsasController@kategori_kelas_kongsi_data');
-    Route::get('/harga_data','DataAsasController@harga_data');
-    Route::get('/permohonan_baru','DataAsasController@permohonan_baru');
-    Route::get('/status_permohonan','DataAsasController@status_permohonan');
-    Route::get('/proses_data','DataAsasController@proses_data');
-    Route::get('/penilaian','DataAsasController@penilaian');
-    Route::get('/penilaian_pemohon','DataAsasController@penilaian_pemohon');
+    Route::post('/delete_permohonan', 'DataAsasController@delete_permohonan');
+    Route::get('/muat_turun_data', 'DataAsasController@muat_turun_data');
+    Route::get('/senarai_data', 'DataAsasController@senarai_data');
+    Route::get('/kategori_kelas_data', 'DataAsasController@kategori_kelas_data');
+    Route::get('/kategori_kelas_kongsi_data', 'DataAsasController@kategori_kelas_kongsi_data');
+    Route::get('/harga_data', 'DataAsasController@harga_data');
+    Route::get('/permohonan_baru', 'DataAsasController@permohonan_baru');
+    Route::get('/status_permohonan', 'DataAsasController@status_permohonan');
+    Route::get('/proses_data', 'DataAsasController@proses_data');
+    Route::get('/penilaian', 'DataAsasController@penilaian');
+    Route::get('/penilaian_pemohon', 'DataAsasController@penilaian_pemohon');
 
-    Route::get('/kemaskini_profil','UserController@edit');
-    Route::post('/simpan_kemaskini_profil','UserController@update_profile');
-    Route::post('/simpan_kemaskini_password','UserController@update_password');
-    Route::post('/tambahPenggunaBaru','UserController@tambahPenggunaBaru');
+    Route::get('/kemaskini_profil', 'UserController@edit');
+    Route::post('/simpan_kemaskini_profil', 'UserController@update_profile');
+    Route::post('/simpan_kemaskini_password', 'UserController@update_password');
+    Route::post('/tambahPenggunaBaru', 'UserController@tambahPenggunaBaru');
 
-    Route::get('/pemindahan_akaun','UserController@pemindahan_akaun');
+    Route::get('/pemindahan_akaun', 'UserController@pemindahan_akaun');
 
 
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -168,16 +172,16 @@ Route::get('/send-mail', function () {
     return 'A message has been sent to Ftest!';
 });
 
-Route::post('get_roles','RoleController@get_roles');
-Route::post('get_agensiOrganisasi','UserController@get_agensiOrganisasi');
-Route::post('get_user_details','UserController@get_user_details');
-Route::post('user_sahkan','UserController@user_sahkan');
-Route::post('user_pengesahan_ditolak','UserController@user_pengesahan_ditolak');
-Route::post('metadata_sahkan','MetadataController@metadata_sahkan');
-Route::post('metadata_tidak_disahkan','MetadataController@metadata_tidak_disahkan');
-Route::post('getUsersByAgensi','UserController@getUsersByAgensi');
-Route::post('getMetadataByUser','UserController@getMetadataByUser');
-Route::post('simpan_pemindahan_akaun','UserController@simpan_pemindahan_akaun');
+Route::post('get_roles', 'RoleController@get_roles');
+Route::post('get_agensiOrganisasi', 'UserController@get_agensiOrganisasi');
+Route::post('get_user_details', 'UserController@get_user_details');
+Route::post('user_sahkan', 'UserController@user_sahkan');
+Route::post('user_pengesahan_ditolak', 'UserController@user_pengesahan_ditolak');
+Route::post('metadata_sahkan', 'MetadataController@metadata_sahkan');
+Route::post('metadata_tidak_disahkan', 'MetadataController@metadata_tidak_disahkan');
+Route::post('getUsersByAgensi', 'UserController@getUsersByAgensi');
+Route::post('getMetadataByUser', 'UserController@getMetadataByUser');
+Route::post('simpan_pemindahan_akaun', 'UserController@simpan_pemindahan_akaun');
 
 Auth::routes();
 

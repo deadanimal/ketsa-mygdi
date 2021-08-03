@@ -47,9 +47,10 @@ class PortalController extends Controller
     }
     public function edit_faq()
     {
-        $faq = Faq::get()->first();
+        $faq = Faq::get();
         return view('mygeo.faq', compact('faq'));
     }
+
     public function update_faq(Request $request)
     {
         DB::transaction(function () use ($request) {
@@ -62,6 +63,7 @@ class PortalController extends Controller
 
         return redirect('/kemaskini_faq')->with('success', 'FAQ Disimpan');
     }
+
     public function edit_maklum_balas()
     {
         $hubungi_kami = HubungiKami::get()->first();
@@ -102,25 +104,12 @@ class PortalController extends Controller
         return redirect('/landing_mygeo')->with('success', 'Maklum Balas Disimpan');
     }
 
-    public function store_panduan_pengguna(Request $request)
-    {
-        DB::transaction(function () use ($request) {
-            //save panduan pengguna
-            PanduanPengguna::where(["id" => $request->id_panduan_pengguna])->update([
-                'title' => $request->title_panduan_pengguna,
-                "content" => $request->content_panduan_pengguna
-            ]);
-        });
-
-        return redirect('/panduan_pengguna_edit')->with('success', 'Panduan Pengguna Disimpan');
-    }
-
-
 
     //=== Maklum Balas Functions ==============================================================
     public function index_maklum_balas()
     {
-        return view('maklum_balas');
+        $maklum_balas = MaklumBalas::get();
+        return view('mygeo.maklumbalas', compact('maklum_balas'));
     }
 
     public function store_maklum_balas(Request $request)
@@ -134,10 +123,14 @@ class PortalController extends Controller
             $maklum_balas->save();
         });
 
-        return redirect('maklum_balas')->with('success', 'Maklum Balas Disimpan');
+        return redirect('')->with('success', 'Maklum Balas Dihantar');
     }
 
-
+    public function delete_maklum_balas(Request $request)
+    {
+        MaklumBalas::where(["id" => $request->id])->delete();
+        return redirect('maklum_balas')->with('success', 'Maklum Balas Dibuang');
+    }
 
     //=== Hubungi Kami Functions ==============================================================
     public function index_hubungi_kami()
@@ -155,6 +148,18 @@ class PortalController extends Controller
         return view('panduan_pengguna', compact('panduan_pengguna'));
     }
 
+    public function store_panduan_pengguna(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            //save panduan pengguna
+            PanduanPengguna::where(["id" => $request->id_panduan_pengguna])->update([
+                "title" => $request->title_panduan_pengguna,
+                "content" => $request->content_panduan_pengguna
+            ]);
+        });
+
+        return redirect('/panduan_pengguna_edit')->with('success', 'Panduan Pengguna Disimpan');
+    }
 
 
     //=== Penafian Functions ===========================================================
@@ -164,12 +169,50 @@ class PortalController extends Controller
         return view('penafian', compact('penafian'));
     }
 
+    public function index_penafian_mygeo()
+    {
+        $penafian = Penafian::get()->first();
+        return view('mygeo.penafian', compact('penafian'));
+    }
+
+    public function store_penafian(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            //save penafian
+            Penafian::where(["id" => $request->id_penafian])->update([
+                "title" => $request->title_penafian,
+                "content" => $request->content_penafian
+            ]);
+        });
+
+        return redirect('mygeo_penafian')->with('success', 'Tetapan Penafian Disimpan');
+    }
+
 
     //=== Penyataan Privasi Functions ===========================================================
     public function index_penyataan_privasi()
     {
         $penyataan_privasi = PenyataanPrivasi::get()->first();
         return view('penyataan_privasi', compact('penyataan_privasi'));
+    }
+
+    public function index_penyataan_privasi_mygeo()
+    {
+        $penyataan_privasi = PenyataanPrivasi::get()->first();
+        return view('mygeo.penyataan_privasi', compact('penyataan_privasi'));
+    }
+
+    public function store_penyataan_privasi(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            //save penafian
+            PenyataanPrivasi::where(["id" => $request->id_penyataan_privasi])->update([
+                "title" => $request->title_penyataan_privasi,
+                "content" => $request->content_penyataan_privasi
+            ]);
+        });
+
+        return redirect('mygeo_penyataan_privasi')->with('success', 'Tetapan Penytaan Privasi Disimpan');
     }
 
 
