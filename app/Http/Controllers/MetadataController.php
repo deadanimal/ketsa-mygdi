@@ -432,6 +432,7 @@ class MetadataController extends Controller {
             }
             $request->topic_category = substr($string, 0, -1);
         }
+        $fileUrl = "";
         if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
             $this->validate($request,['c11_order_instructions' => 'required|mimes:pdf,doc,docx,xls,xlsx']);
             $exists = Storage::exists($request->c11_order_instructions->getClientOriginalName());
@@ -441,7 +442,7 @@ class MetadataController extends Controller {
         }
 
         $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request,$fileUrl="");
+        $xml = $xmlcon->createXml($request,$fileUrl);
         
         $msg = "";
         
@@ -680,11 +681,21 @@ class MetadataController extends Controller {
             }
             $request->topic_category = substr($string, 0, -1);
         }
+        $fileUrl = "";
+        if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
+            $this->validate($request,['c11_order_instructions' => 'required|mimes:pdf,doc,docx,xls,xlsx']);
+            $exists = Storage::exists($request->c11_order_instructions->getClientOriginalName());
+            $time = date('Y-m-d'.'_'.'H_i_s');
+            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
+            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
+        }
 
         $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request);
+        $xml = $xmlcon->createXml($request,$fileUrl);
         
-        DB::connection('pgsql2')->transaction(function () use ($request, $xml) {
+        $msg = "";
+        
+        DB::connection('pgsql2')->transaction(function () use ($request, $xml, &$msg) {
             $mg = MetadataGeo::on('pgsql2')->where('id', $request->metadata_id)->get()->first();
             $mg->timestamps = false;
             $mg->data = $xml;

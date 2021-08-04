@@ -9,7 +9,7 @@ class XmlController extends Controller {
 
     function __construct() {}
 
-    public function createXml($request,$fileUrl) {
+    public function createXml($request,$fileUrl="") {
         $c2_metadataName = strtoupper($request->c2_metadataName);
         
         $xml = <<<XML
