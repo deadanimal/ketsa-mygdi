@@ -352,7 +352,8 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
 
         console.log("zoomToRectangle values:");
         console.log(zoomToRectangle);
-        map.setView(zoomToRectangle, 6);
+        
+        map.fitBounds(bounds);
 
         // var map = L.map('map').setView([5.3105,107.3854408], 5);
 

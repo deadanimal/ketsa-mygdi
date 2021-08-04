@@ -60,6 +60,21 @@
                         }
                         ?>
                     </div>
+                    <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
+                    <div class="col-xl-1">
+                        <label class="form-control-label" for="input-language">
+                            MAINTENANCE INFORMATION
+                        </label>
+                    </div>
+                    <div class="col-xl-2">
+                        <?php
+                        $maintenanceUpdate = "";
+                        if (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && $metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode != "") {
+                            $maintenanceUpdate = trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode);
+                        }
+                        echo $maintenanceUpdate;
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>

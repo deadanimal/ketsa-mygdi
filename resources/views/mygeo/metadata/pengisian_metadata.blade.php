@@ -569,6 +569,7 @@
             [sblt, eblg]
         ];
         rectangle = L.rectangle(bounds).addTo(map);
+        map.fitBounds(bounds);
     }
 
     function cleaLayer() {

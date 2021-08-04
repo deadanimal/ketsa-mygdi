@@ -291,7 +291,7 @@
                                                     </tr>
                                                     <tr class='Conceptual'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                            <label class="form-check-label" for="c15_t2_date">
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
@@ -349,13 +349,13 @@
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
                                                                 <b>Compliance Level:</b>
-                                                                <input type="text" name="c15_t2_comply_level_2" id="c15_t2_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t2_comply_level')}}">
+                                                                <input type="text" name="c15_t2_comply_level_2" id="c15_t2_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t2_comply_level_2')}}">
                                                             </label>
                                                         </td>
                                                     </tr>
                                                     <tr class='Domain'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                            <label class="form-check-label" for="c15_t2_date_2">
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
@@ -381,7 +381,7 @@
                                                     </tr>
                                                     <tr class='Domain'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_4">
+                                                            <label class="form-check-label" for="c15_t2_conform_result_2">
                                                                 <b>Conformance Result:</b>
                                                                 <input type="text" name="c15_t2_conform_result_2" id="c15_t2_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t2_conform_result_2')}}">
                                                             </label>
@@ -411,7 +411,7 @@
                                                     </tr>
                                                     <tr class='Format'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_3">
+                                                            <label class="form-check-label" for="c15_t2_comply_level_3">
                                                                 <b>Compliance Level:</b>
                                                                 <input type="text" name="c15_t2_comply_level_3" id="c15_t2_comply_level_3" class="form-control form-control-sm" value="{{old('c15_t2_comply_level_3')}}">
                                                             </label>
@@ -419,7 +419,7 @@
                                                     </tr>
                                                     <tr class='Format'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                            <label class="form-check-label" for="c15_t2_date_3">
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
@@ -454,7 +454,7 @@
                                                     <?php //================= ?>
                                                     <tr class='Topological'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_1">
+                                                            <label class="form-check-label" for="c15_t2_scope_4">
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t2_scope_4" id="c15_t2_scope_4" class="form-control form-control-sm">
                                                                     <option value="Aeronautical" {{(old('c15_t2_scope_4') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
@@ -475,7 +475,7 @@
                                                     </tr>
                                                     <tr class='Topological'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_3">
+                                                            <label class="form-check-label" for="c15_t2_comply_level_4">
                                                                 <b>Compliance Level:</b>
                                                                 <input type="text" name="c15_t2_comply_level_4" id="c15_t2_comply_level_4" class="form-control form-control-sm" value="{{old('c15_t2_comply_level_4')}}">
                                                             </label>
@@ -483,7 +483,7 @@
                                                     </tr>
                                                     <tr class='Topological'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                            <label class="form-check-label" for="c15_t2_date_4">
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
@@ -497,7 +497,7 @@
                                                     </tr>
                                                     <tr class='Topological'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_2">
+                                                            <label class="form-check-label" for="c15_t2_result_4">
                                                                 <b>Result:</b>
                                                                 <select name="c15_t2_result_4" id="c15_t2_result_4" class="form-control form-control-sm">
                                                                     <option value="Pass" {{(old('c15_t2_result_4') == 'Pass' ? "selected":"")}}>Pass</option>
@@ -509,7 +509,7 @@
                                                     </tr>
                                                     <tr class='Topological'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_4">
+                                                            <label class="form-check-label" for="c15_t2_conform_result_4">
                                                                 <b>Conformance Result:</b>
                                                                 <input type="text" name="c15_t2_conform_result_4" id="c15_t2_conform_result_4" class="form-control form-control-sm" value="{{old('c15_t2_conform_result_4')}}">
                                                             </label>
@@ -547,7 +547,7 @@
                                                     <?php //================= ?>
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_1">
+                                                            <label class="form-check-label" for="c15_t3_scope">
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t3_scope" id="c15_t3_scope" class="form-control form-control-sm">
                                                                     <option value="Aeronautical" {{(old('c15_t3_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
@@ -568,7 +568,7 @@
                                                     </tr>
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_3">
+                                                            <label class="form-check-label" for="c15_t3_comply_level">
                                                                 <b>Compliance Level:</b>
                                                                 <input type="text" name="c15_t3_comply_level" id="c15_t3_comply_level" class="form-control form-control-sm" value="{{old('c15_t3_comply_level')}}">
                                                             </label>
@@ -576,7 +576,7 @@
                                                     </tr>
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t3_absExt_date">
+                                                            <label class="form-check-label" for="c15_t3_date">
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
@@ -590,7 +590,7 @@
                                                     </tr>
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_2">
+                                                            <label class="form-check-label" for="c15_t3_result">
                                                                 <b>Result:</b>
                                                                 <select name="c15_t3_result" id="c15_t3_result" class="form-control form-control-sm">
                                                                     <option value="Pass" {{(old('c15_t3_result') == 'Pass' ? "selected":"")}}>Pass</option>
@@ -602,7 +602,7 @@
                                                     </tr>
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_4">
+                                                            <label class="form-check-label" for="c15_t3_conform_result">
                                                                 <b>Conformance Result:</b>
                                                                 <input type="text" name="c15_t3_conform_result" id="c15_t3_conform_result" class="form-control form-control-sm" value="{{old('c15_t3_conform_result')}}">
                                                             </label>
@@ -634,7 +634,7 @@
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_comply_level_2">
                                                                 <b>Compliance Level:</b>
-                                                                <input type="text" name="c15_t3_comply_level_2" id="c15_t3_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t3_comply_level')}}">
+                                                                <input type="text" name="c15_t3_comply_level_2" id="c15_t3_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t3_comply_level_2')}}">
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -668,7 +668,7 @@
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result_2">
                                                                 <b>Conformance Result:</b>
-                                                                <input type="text" name="c15_t3_conform_result_2" id="c15_t3_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t3_conform_result')}}">
+                                                                <input type="text" name="c15_t3_conform_result_2" id="c15_t3_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t3_conform_result_2')}}">
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -678,18 +678,18 @@
                                                             <label class="form-check-label" for="c15_t3_scope_3">
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t3_scope_3" id="c15_t3_scope_3" class="form-control form-control-sm">
-                                                                    <option value="Aeronautical" {{(old('c15_t3_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
-                                                                    <option value="Built Environment" {{(old('c15_t3_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
-                                                                    <option value="Demarcation" {{(old('c15_t3_scope') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
-                                                                    <option value="General" {{(old('c15_t3_scope') == 'General' ? "selected":"")}}>General</option>
-                                                                    <option value="Geology" {{(old('c15_t3_scope') == 'Geology' ? "selected":"")}}>Geology</option>
-                                                                    <option value="Hydrography" {{(old('c15_t3_scope') == 'Hydrography' ? "selected":"")}}>Hydrography</option>
-                                                                    <option value="Hypsography" {{(old('c15_t3_scope') == 'Hypsography' ? "selected":"")}}>Hypsography</option>
-                                                                    <option value="Soil" {{(old('c15_t3_scope') == 'Soil' ? "selected":"")}}>Soil</option>
-                                                                    <option value="Special Use" {{(old('c15_t3_scope') == 'Special Use' ? "selected":"")}}>Special Use</option>
-                                                                    <option value="Transportation" {{(old('c15_t3_scope') == 'Transportation' ? "selected":"")}}>Transportation</option>
-                                                                    <option value="Utility" {{(old('c15_t3_scope') == 'Utility' ? "selected":"")}}>Utility</option>
-                                                                    <option value="Vegetation" {{(old('c15_t3_scope') == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                    <option value="Aeronautical" {{(old('c15_t3_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{(old('c15_t3_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{(old('c15_t3_scope_3') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{(old('c15_t3_scope_3') == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{(old('c15_t3_scope_3') == 'Geology' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{(old('c15_t3_scope_3') == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{(old('c15_t3_scope_3') == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{(old('c15_t3_scope_3') == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{(old('c15_t3_scope_3') == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{(old('c15_t3_scope_3') == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{(old('c15_t3_scope_3') == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{(old('c15_t3_scope_3') == 'Vegetation' ? "selected":"")}}>Vegetation</option>
                                                                 </select>
                                                             </label>
                                                         </td>
@@ -698,7 +698,7 @@
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_comply_level_3">
                                                                 <b>Compliance Level:</b>
-                                                                <input type="text" name="c15_t3_comply_level_3" id="c15_t3_comply_level_3" class="form-control form-control-sm" value="{{old('c15_t3_comply_level')}}">
+                                                                <input type="text" name="c15_t3_comply_level_3" id="c15_t3_comply_level_3" class="form-control form-control-sm" value="{{old('c15_t3_comply_level_3')}}">
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -732,7 +732,7 @@
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result_3">
                                                                 <b>Conformance Result:</b>
-                                                                <input type="text" name="c15_t3_conform_result_3" id="c15_t3_conform_result_3" class="form-control form-control-sm" value="{{old('c15_t3_conform_result')}}">
+                                                                <input type="text" name="c15_t3_conform_result_3" id="c15_t3_conform_result_3" class="form-control form-control-sm" value="{{old('c15_t3_conform_result_3')}}">
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -768,7 +768,7 @@
                                                     <?php //================= ?>
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
+                                                            <label class="form-check-label" for="c15_t4_scope">
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t4_scope" id="c15_t4_scope" class="form-control form-control-sm">
                                                                     <option value="Aeronautical" {{(old('c15_t4_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
@@ -789,7 +789,7 @@
                                                     </tr>
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_3">
+                                                            <label class="form-check-label" for="c15_t4_comply_level">
                                                                 <b>Compliance Level:</b>
                                                                 <input type="text" name="c15_t4_comply_level" id="c15_t4_comply_level" class="form-control form-control-sm" value="{{old('c15_t4_comply_level')}}">
                                                             </label>
@@ -797,7 +797,7 @@
                                                     </tr>
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_date">
+                                                            <label class="form-check-label" for="c15_t4_date">
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
@@ -811,7 +811,7 @@
                                                     </tr>
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_2">
+                                                            <label class="form-check-label" for="c15_t4_result">
                                                                 <b>Result:</b>
                                                                 <select name="c15_t4_result" id="c15_t4_result" class="form-control form-control-sm">
                                                                     <option value="Pass" {{(old('c15_t4_result') == 'Pass' ? "selected":"")}}>Pass</option>
@@ -823,7 +823,7 @@
                                                     </tr>
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_4">
+                                                            <label class="form-check-label" for="c15_t4_conform_result">
                                                                 <b>Conformance Result:</b>
                                                                 <input type="text" name="c15_t4_conform_result" id="c15_t4_conform_result" class="form-control form-control-sm" value="{{old('c15_t4_conform_result')}}">
                                                             </label>
@@ -875,12 +875,12 @@
                                                     </tr>
                                                     <tr class='TemporalConsistency'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
+                                                            <label class="form-check-label" for="c15_t4_result_2">
                                                                 <b>Result:</b>
-                                                                <select name="c15_t4_conform_result_2" id="c15_t4_conform_result_2" class="form-control form-control-sm">
-                                                                    <option value="Pass" {{(old('c15_t4_conform_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
-                                                                    <option value="Fail" {{(old('c15_t4_conform_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
-                                                                    <option value="Not Relevant" {{(old('c15_t4_conform_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                <select name="c15_t4_result_2" id="c15_t4_result_2" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{(old('c15_t4_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{(old('c15_t4_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{(old('c15_t4_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
                                                                 </select>
                                                             </label>
                                                         </td>
@@ -896,7 +896,7 @@
                                                     <?php //================= ?>
                                                     <tr class='TemporalValidity'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
+                                                            <label class="form-check-label" for="c15_t4_scope_3">
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t4_scope_3" id="c15_t4_scope_3" class="form-control form-control-sm">
                                                                     <option value="Aeronautical" {{(old('c15_t4_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>

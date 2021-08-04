@@ -106,7 +106,13 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        Role here
+                        <?php
+                        $pub_role = "";
+                        if(isset($metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString != ""){
+                            $pub_role = $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString;
+                        }
+                        echo $pub_role;
+                        ?>
                     </div>
                 </div>
                 <div class="row my-0 py-0">

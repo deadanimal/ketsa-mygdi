@@ -132,8 +132,8 @@
                                                             <label class="form-check-label" for="c3_1">
                                                                 <?php
                                                                 $t1Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compComissScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compComissScope != "") {
-                                                                    $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compComissScope);
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope != "") {
+                                                                    $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope);
                                                                 }
                                                                 ?>
                                                                 <b>Scope:</b>
@@ -537,7 +537,7 @@
                                                     <?php //================= ?>
                                                     <tr class='Format'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_1">
+                                                            <label class="form-check-label" for="c15_t2_scope_3">
                                                                 <?php
                                                                 $t2Scope = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope != "") {
@@ -567,8 +567,8 @@
                                                             <label class="form-check-label" for="c3_3">
                                                                 <?php
                                                                 $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->compFormatLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->compFormatLevel->CharacterString != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->compFormatLevel->CharacterString;
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString != "") {
+                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString;
                                                                 }
                                                                 ?>
                                                                 <b>Compliance Level:</b>
@@ -629,7 +629,7 @@
                                                     <?php //================= ?>
                                                     <tr class='Topological'>
                                                         <td>
-                                                            <label class="form-check-label" for="c3_1">
+                                                            <label class="form-check-label" for="c15_t2_scope_4">
                                                                 <?php
                                                                 $t2Scope = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope != "") {
@@ -659,8 +659,8 @@
                                                             <label class="form-check-label" for="c3_3">
                                                                 <?php
                                                                 $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->compTopoLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->compTopoLevel->CharacterString != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->compTopoLevel->CharacterString;
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString != "") {
+                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString;
                                                                 }
                                                                 ?>
                                                                 <b>Compliance Level:</b>
@@ -709,8 +709,8 @@
                                                             <label class="form-check-label" for="c3_4">
                                                                 <?php
                                                                 $t2ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation;
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                    $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
                                                                 }
                                                                 ?>
                                                                 <b>Conformance Result:</b>
@@ -1189,8 +1189,8 @@
                                                             <label class="form-check-label" for="c15_t4_comply_level_2">
                                                                 <?php
                                                                 $t4CompLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel != "") {
-                                                                    $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel;
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString != "") {
+                                                                    $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString;
                                                                 }
                                                                 ?>
                                                                 <b>Compliance Level:</b>
@@ -1218,7 +1218,7 @@
                                                     </tr>
                                                     <tr class='TemporalConsistency'>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
+                                                            <label class="form-check-label" for="c15_t4_result_2">
                                                                 <?php
                                                                 $t4Res = "";
                                                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass != "") {
@@ -1226,7 +1226,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Result:</b>
-                                                                <select name="c15_t4_conform_result_2" id="c15_t4_conform_result_2" class="form-control form-control-sm">
+                                                                <select name="c15_t4_result_2" id="c15_t4_result_2" class="form-control form-control-sm">
                                                                     <option value="Pass" {{($t4Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t4Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t4Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>

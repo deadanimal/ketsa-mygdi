@@ -11,7 +11,6 @@ class XmlController extends Controller {
 
     public function createXml($request,$fileUrl="") {
         $c2_metadataName = strtoupper($request->c2_metadataName);
-        
         $xml = <<<XML
                 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                     <gmd:fileIdentifier>
@@ -679,15 +678,15 @@ class XmlController extends Controller {
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
+                                    <gmd:consistFormatScope>$request->c15_t2_scope_3
+                                        <gmd:consistFormatScopeItem>
+                                            <gco:CharacterString></gco:CharacterString>
+                                        </gmd:consistFormatScopeItem>
+                                    </gmd:consistFormatScope>
+                                    <gmd:compFormatLevel>
+                                        <gco:CharacterString>$request->c15_t2_comply_level_3</gco:CharacterString>
+                                    </gmd:compFormatLevel>
                                     <gmd:dateTime>
-                                        <gmd:consistFormatScope>$request->c15_t2_scope_3
-                                            <gmd:consistFormatScopeItem>
-                                                <gco:CharacterString></gco:CharacterString>
-                                            </gmd:consistFormatScopeItem>
-                                        </gmd:consistFormatScope>
-                                        <gmd:compFormatLevel>
-                                            <gco:CharacterString>$request->c15_t2_comply_level_3</gco:CharacterString>
-                                        </gmd:compFormatLevel>
                                         <gco:Date>$request->c15_t2_date_3</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
@@ -708,15 +707,15 @@ class XmlController extends Controller {
                                     <gmd:statement>
                                         <gco:CharacterString />
                                     </gmd:statement>
+                                    <gmd:consistTopoScope>$request->c15_t2_scope_4
+                                        <gmd:consistTopoScopeItem>
+                                            <gco:CharacterString></gco:CharacterString>
+                                        </gmd:consistTopoScopeItem>
+                                    </gmd:consistTopoScope>
+                                    <gmd:compTopoLevel>
+                                        <gco:CharacterString>$request->c15_t2_comply_level_4</gco:CharacterString>
+                                    </gmd:compTopoLevel>
                                     <gmd:dateTime>
-                                        <gmd:consistTopoScope>$request->c15_t2_scope_4
-                                            <gmd:consistTopoScopeItem>
-                                                <gco:CharacterString></gco:CharacterString>
-                                            </gmd:consistTopoScopeItem>
-                                        </gmd:consistTopoScope>
-                                        <gmd:compTopoLevel>
-                                            <gco:CharacterString>$request->c15_t2_comply_level_4</gco:CharacterString>
-                                        </gmd:compTopoLevel>
                                         <gco:Date>$request->c15_t2_date_4</gco:Date>
                                     </gmd:dateTime>
                                     <gmd:measureDescription>
