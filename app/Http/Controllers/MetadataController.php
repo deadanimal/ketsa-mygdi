@@ -199,7 +199,7 @@ class MetadataController extends Controller {
         $categories = MCategory::all();
         $pengesahs = User::whereHas("roles", function ($q) {
                     $q->where("name", "Pengesah Metadata");
-                })->where('agensi_organisasi', auth::user()->agensi_organisasi.'asd')->where('bahagian', auth::user()->bahagian.'asd')->get()->first();
+                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
         if(empty($pengesahs)){
             $pengesahs = User::where(['id'=>'2'])->get()->first(); //make Pentadbir Aplikasi the pengesah if no pengesahs with same agency or organisation is found
         }
