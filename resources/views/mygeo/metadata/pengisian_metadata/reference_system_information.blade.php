@@ -111,5 +111,13 @@
                 }
             });
         });
+        
+        <?php
+        if(null !== old('c13_ref_sys_identify')){
+            ?>
+            $("#c13_ref_sys_identify").val("<?php echo old('c13_ref_sys_identify'); ?>").change();    
+            <?php
+        }
+        ?>
     });
 </script>

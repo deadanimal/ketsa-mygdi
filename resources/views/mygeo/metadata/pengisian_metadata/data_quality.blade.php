@@ -359,7 +359,7 @@
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
-                                                                    <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm" value="{{old('c15_t2_date')}}">
+                                                                    <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm" value="{{old('c15_t2_date_2')}}">
                                                                     <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>-->
@@ -644,7 +644,7 @@
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
-                                                                    <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm" value="{{old('c15_t3_date')}}">
+                                                                    <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm" value="{{old('c15_t3_date_2')}}">
                                                                     <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>-->
@@ -708,7 +708,7 @@
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
-                                                                    <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm" value="{{old('c15_t3_date')}}">
+                                                                    <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm" value="{{old('c15_t3_date_3')}}">
                                                                     <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>-->
@@ -929,7 +929,7 @@
                                                                 <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
                                                                     <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
-                                                                    <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{old('c15_t4_date')}}">
+                                                                    <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{old('c15_t4_date_3')}}">
                                                                     <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>-->

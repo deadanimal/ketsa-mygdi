@@ -97,9 +97,9 @@
                                 <div class="col-xl-7">
                                     <select class="form-control form-control-sm" name="c8_context" id="c8_context">
                                         <option value="">Pilih...</option>
-                                        <option value="Acquisition" {{ (old('c8_trigger') == 'Acquisition' ? "selected":"") }}>Acquisition</option>
-                                        <option value="Pass" {{ (old('c8_trigger') == 'Pass' ? "selected":"") }}>Pass</option>
-                                        <option value="Way Point" {{ (old('c8_trigger') == 'Way Point' ? "selected":"") }}>Way Point</option>
+                                        <option value="Acquisition" {{ (old('c8_context') == 'Acquisition' ? "selected":"") }}>Acquisition</option>
+                                        <option value="Pass" {{ (old('c8_context') == 'Pass' ? "selected":"") }}>Pass</option>
+                                        <option value="Way Point" {{ (old('c8_context') == 'Way Point' ? "selected":"") }}>Way Point</option>
                                     </select>
                                 </div>
                             </div>
@@ -112,9 +112,9 @@
                                 <div class="col-xl-7">
                                     <select class="form-control form-control-sm" name="c8_sequence" id="c8_sequence">
                                         <option value="">Pilih...</option>
-                                        <option value="Start" {{ (old('c8_trigger') == 'Start' ? "selected":"") }}>Start</option>
-                                        <option value="End" {{ (old('c8_trigger') == 'End' ? "selected":"") }}>End</option>
-                                        <option value="Instantaneous" {{ (old('c8_trigger') == 'Instantaneous' ? "selected":"") }}>Instantaneous</option>
+                                        <option value="Start" {{ (old('c8_sequence') == 'Start' ? "selected":"") }}>Start</option>
+                                        <option value="End" {{ (old('c8_sequence') == 'End' ? "selected":"") }}>End</option>
+                                        <option value="Instantaneous" {{ (old('c8_sequence') == 'Instantaneous' ? "selected":"") }}>Instantaneous</option>
                                     </select>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_op_identifier" id="c8_op_identifier">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_op_identifier" id="c8_op_identifier" value="{{ old('c8_op_identifier') }}">
                                     @error('c8_op_identifier')
                                     <div class="text-error">{{ $message }}</div>
                                     @enderror

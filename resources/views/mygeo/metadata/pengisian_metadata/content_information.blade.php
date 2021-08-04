@@ -20,11 +20,11 @@
                                 </div>
                                 <select name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm">
                                     <option value="">Pilih...</option>
-                                    <option value="Equivalent Width" {{ (old('c7_band_boundary') == "Equivalent Width") }}>Equivalent Width</option>
-                                    <option value="Fifty Percent" {{ (old('c7_band_boundary') == "Fifty Percent") }}>Fifty Percent</option>
-                                    <option value="One Over E" {{ (old('c7_band_boundary') == "One Over E") }}>One Over E</option>
-                                    <option value="3d B" {{ (old('c7_band_boundary') == "3d B<") }}>3d B</option>
-                                    <option value="Half Mazimum" {{ (old('c7_band_boundary') == "Half Mazimum") }}>Half Mazimum</option>
+                                    <option value="Equivalent Width" {{ (old('c7_band_boundary') == "Equivalent Width" ? "selected":"") }}>Equivalent Width</option>
+                                    <option value="Fifty Percent" {{ (old('c7_band_boundary') == "Fifty Percent" ? "selected":"") }}>Fifty Percent</option>
+                                    <option value="One Over E" {{ (old('c7_band_boundary') == "One Over E" ? "selected":"") }}>One Over E</option>
+                                    <option value="3d B" {{ (old('c7_band_boundary') == "3d B<" ? "selected":"") }}>3d B</option>
+                                    <option value="Half Mazimum" {{ (old('c7_band_boundary') == "Half Mazimum" ? "selected":"") }}>Half Mazimum</option>
                                 </select>
                             </div>
                         </div>

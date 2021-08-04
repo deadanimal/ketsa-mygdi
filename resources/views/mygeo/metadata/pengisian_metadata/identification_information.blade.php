@@ -31,14 +31,14 @@
                     <div class="col-7">
                         <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3">
                             <option value="" selected>Pilih...</option>
-                            <option value="Application">Application</option>
-                            <option value="Document">Document</option>
-                            <option value="GIS Activity/Project">GIS Activity/Project</option>
-                            <option value="Map">Map</option>
-                            <option value="Raster Data">Raster Data</option>
-                            <option value="Services">Services</option>
-                            <option value="Software">Software</option>
-                            <option value="Vector Data">Vector Data</option>
+                            <option value="Application" {{ (old('c2_product_type') == "Application" ? "selected":"") }}>Application</option>
+                            <option value="Document" {{ (old('c2_product_type') == "Document" ? "selected":"") }}>Document</option>
+                            <option value="GIS Activity/Project" {{ (old('c2_product_type') == "GIS Activity/Project" ? "selected":"") }}>GIS Activity/Project</option>
+                            <option value="Map" {{ (old('c2_product_type') == "Map" ? "selected":"") }}>Map</option>
+                            <option value="Raster Data" {{ (old('c2_product_type') == "Raster Data" ? "selected":"") }}>Raster Data</option>
+                            <option value="Services" {{ (old('c2_product_type') == "Services" ? "selected":"") }}>Services</option>
+                            <option value="Software" {{ (old('c2_product_type') == "Software" ? "selected":"") }}>Software</option>
+                            <option value="Vector Data" {{ (old('c2_product_type') == "Vector Data" ? "selected":"") }}>Vector Data</option>
                         </select>
                         @error('c2_product_type')
                         <div class="text-error">{{ $message }}</div>
@@ -284,7 +284,7 @@
                                 <?php
                                 if (count($states) > 0) {
                                     foreach ($states as $st) {
-                                        ?><option value="<?php echo $st->id; ?>"><?php echo $st->name; ?></option><?php
+                                        ?><option value="<?php echo $st->id; ?>" {{ ($st->id == old('c2_contact_state') ? "selected":"") }}><?php echo $st->name; ?></option><?php
                                     }
                                 }
                                                                                                                                                         ?>
@@ -295,7 +295,7 @@
                                 <?php
                                 if (count($countries) > 0) {
                                     foreach ($countries as $country) {
-                                        ?><option value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option><?php
+                                        ?><option value="<?php echo $country->id; ?>" {{ ($country->id == old('c2_contact_country') ? "selected":"") }}><?php echo $country->name; ?></option><?php
                                     }
                                 }                                                                                                                ?>
                             </select>
@@ -325,7 +325,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" name="c2_contact_fax" id="c2_contact_fax" class="form-control form-control-sm ml-3">
+                        <input type="text" name="c2_contact_fax" id="c2_contact_fax" class="form-control form-control-sm ml-3" value="{{ old('c2_contact_fax') }}">
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -348,7 +348,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3">
+                        <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3" value="{{ old('c2_contact_website') }}">
                     </div>
                 </div>
                 <div class="row mb-4 divResponsiblePartyRole">
