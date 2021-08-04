@@ -108,7 +108,7 @@ class MetadataController extends Controller {
             exit();
         }
         // auth::user()->agensi_organisasi, auth::user()->agensi_organisasi
-        $metadatasdb = MetadataGeo::on('pgsql2')->where('disahkan', '0')->orderBy('id', 'DESC')->get()->all();
+        $metadatasdb = MetadataGeo::on('pgsql2')->where('disahkan', '0')->where('is_draf','no')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
@@ -725,10 +725,10 @@ class MetadataController extends Controller {
             }
             
             $msg = "";
-            if($request->saveAction == "save"){
+            if($request->submitAction == "save"){
                 $mg->is_draf = "no";
                 $msg = "Metadata berjaya disimpan.";
-            }elseif ($request->saveAction == "draf"){
+            }elseif ($request->submitAction == "draf"){
                 $mg->is_draf = "yes";
                 $msg = "Metadata disimpan sebagai draf.";
             }
