@@ -63,6 +63,7 @@
                                         <th>EMEL</th>
                                         <th>KATEGORI</th>
                                         <th>STATUS</th>
+                                        <th>TARIKH</th>
                                         <th>TINDAKAN</th>
                                     </tr>
                                 </thead>
@@ -72,7 +73,8 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$mb->email}}</td>
                                         <td>{{$mb->category}}</td>
-                                        <td><span class="badge badge-pill badge-info">Baru Diterima</span></td>
+                                        <td><span class="badge badge-pill badge-info">{{($mb->status == '0' ? 'Baru':'')}}</span></td>
+                                        <td>{{ $mb->created_at }}</td>
                                         <td>
                                             <a data-toggle="modal" data-target="#modal-balas-mb-{{$mb->id}}">
                                                 <button type="button" class="btn btn-sm btn-success"><i class="fas fa-reply mr-2"></i>Balas</button>
