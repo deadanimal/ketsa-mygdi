@@ -20,6 +20,8 @@ use App\PenyataanPrivasi;
 use App\Faq;
 use App\Pengumuman;
 use Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
 
 class PortalController extends Controller
 {
@@ -141,6 +143,19 @@ class PortalController extends Controller
                 "email" => $request->email,
                 "status" => $request->status
             ]);
+        });
+        
+        //send email to the person created
+        $to_name = $request->namaPenuh;
+        $to_email = $request->email;
+        $data = array(
+            'name'=>$request->namaPenuh,
+            'email'=>$request->email,
+            'password'=>$password,
+        );
+        Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Akaun');
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
 
         return redirect('maklum_balas')->with('success', 'Maklum balas telah dihantar');

@@ -49,7 +49,13 @@
                             <th>Kategori</th>
                             <th>Status</th>
                             <th>Tindakan</th>
-                        @endif
+                        @else
+                            <th>Bil</th>
+                            <th>Metadata</th>
+                            <th>Kategori</th>
+                            <th>Status</th>
+                            <th>Tindakan</th>
+                        @end
                     </tr>
                   </thead>
                   <tbody>
@@ -124,8 +130,7 @@
                                 </form>
                               </div>
                           </td>
-                         @endif
-                         @if(auth::user()->hasRole(['Pentadbir Metadata']))<?php //################################## ?>                          
+                         @elseif(auth::user()->hasRole(['Pentadbir Metadata']))<?php //################################## ?>                          
                          <td>
                               {{ (isset($val[2]->name) ? $val[2]->name:"") }}
                           </td>
@@ -176,8 +181,52 @@
                                 </form>
                               </div>
                           </td>
-                         @endif
-                         @if(auth::user()->hasRole(['Penerbit Metadata']))<?php //################################## ?>                          
+                         @elseif(auth::user()->hasRole(['Penerbit Metadata']))<?php //################################## ?>                          
+                            <td>
+                                <?php
+                                   if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
+                                      echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                  }
+                                  ?>
+                             </td>
+                             <td>
+                                <?php
+                                if($val[1]->is_draf == 'yes'){
+                                  ?>Draf<?php
+                                }else{
+                                    if($val[1]->disahkan == '0'){
+                                        ?>Perlu Pengesahan<?php
+                                    }elseif($val[1]->disahkan == 'yes'){
+                                        ?>Diterbitkan<?php
+                                    }elseif($val[1]->disahkan == 'no'){
+                                        ?>Perlu Pembetulan<?php
+                                    }elseif($val[1]->disahkan == 'delete'){
+                                        ?>Dipadam<?php
+                                    }
+                                }
+                                ?>
+                          </td>
+                          <td class="pr-1">
+                            <div class="form-inline">
+                                <?php //lihat(view only)================================ ?>
+                                <form method="post" action="{{ url('/lihat_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                </form>
+                                <?php //kemaskini======================================= ?>
+                                <a href="{{ url('/kemaskini_metadata/'.$val[1]->id) }}">
+                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                </a>
+                                <?php //delete========================================== ?>
+                                <form method="post" action="{{ url('/delete_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                </form>
+                              </div>
+                          </td>
+                         @else <?php //################################## ?>                          
                             <td>
                                 <?php
                                    if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
