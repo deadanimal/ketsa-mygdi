@@ -53,7 +53,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
+        if($_SERVER['HTTP_HOST'] == "127.0.0.1:8003"){
             $valid = Validator::make($data, [
                 'name' => ['required', 'string'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -64,9 +64,9 @@ class RegisterController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);    
+            ]);
         }
-        
+
         return $valid;
     }
 
@@ -77,7 +77,7 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    { 
+    {
         $user = User::create([
             'name' => $data['name'],
             'nric' => $data['nric'],
@@ -97,7 +97,7 @@ class RegisterController extends Controller
         ]);
 
         $userRole = $user->assignRole($data['peranan']);
-        
+
         if($data['peranan'] == "Pemohon Data"){
             //send email to the pemohon data
             $to_name = $data['name'];
@@ -117,12 +117,12 @@ class RegisterController extends Controller
                 $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
             });
         }
-        
+
         return $user;
     }
-    
+
     public function register(Request $request)
-    { 
+    {
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
         // $this->guard()->login($user);
