@@ -225,36 +225,71 @@
                             echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString;
                         }
                         ?>
-                        <div class="form-group row">
-                            <div class="divPostalCode">
+                    </div>
+                    <div class="row mb-4 divPostalCode">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c2_metadataName">
                                 Postal Code:
-                                <?php
-                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
-                                        echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString;
-                                    }
-                                ?>
-                            </div>
-                            <div class="divCity">
-                                City:
-                                <?php
-                                    $city = "";
-                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
-                                        echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString;
-                                    }
-                                ?>
-                            </div>
-                            State:
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-6">
+                            <?php
+                            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
+                                echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString;
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row mb-4 divCity">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c2_metadataName">
+                                City
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-6">
+                            <?php
+                            $city = "";
+                            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
+                                echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString;
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row mb-4 divCity">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c2_metadataName">
+                                State
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-6">
                             <?php
                             if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != "") {
                                 echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString;
                             }
                             ?>
-
-                            &nbsp;&nbsp;&nbsp;
-                            Country:
+                        </div>
+                    </div>
+                    <div class="row mb-4 divCity">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c2_metadataName">
+                                Country
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-6">
                             <?php echo $countries->name; ?>
                         </div>
                     </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="c2_metadataName">

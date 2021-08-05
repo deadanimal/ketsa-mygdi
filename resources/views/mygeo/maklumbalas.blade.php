@@ -102,8 +102,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="/reply_maklum_balas">
+                <form method="POST" action="{{ url('/reply_maklum_balas') }}">
                     @csrf
+                    <input type='hidden' name='mbid' value='{{ $mb->id }}'>
                     <div class="modal-body row">
                         <div class="col-12">
                             <div class="form-group">
@@ -112,11 +113,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Emel</label>
-                                <input placeholder="Masukan E-mel anda" type="email" name="email" class="form-control form-control-sm" value="{{ $mb->email }}" disabled>
+                                <input placeholder="Masukan E-mel anda" type="email" name="email" class="form-control form-control-sm" value="{{ $mb->email }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label"> Pertanyaan </label>
-                                <textarea name="pertanyaan" placeholder="Nyatakan maklum balas anda" type="text" rows="5" class="form-control form-control-sm" disabled>{{ $mb->pertanyaan }}</textarea>
+                                <textarea name="pertanyaan" placeholder="Nyatakan maklum balas anda" type="text" rows="5" class="form-control form-control-sm" readonly>{{ $mb->pertanyaan }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label"> Balas </label>

@@ -33,7 +33,7 @@ class AuthController extends Controller
         // echo "</pre>";
         // exit();
 
-        if ($_SERVER['HTTP_HOST'] != "127.0.0.1:8003") {
+        if ($_SERVER['HTTP_HOST'] != "localhost:8888") {
             if (!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == "") {
                 return redirect('/login')->with(['msg' => 'Sila lengkapkan reCaptcha']);
             }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Auth;
-use Mail;
+//use Mail;
 use DateTime;
 use Redirect;
 use DB;
@@ -135,24 +135,14 @@ class PortalController extends Controller
 
     public function reply_maklum_balas(Request $request)
     {
-        DB::transaction(function () use ($request) {
-            //reply maklum_balas
-            PanduanPengguna::where(["id" => $request->id_maklum_balas])->update([
-                "category" => $request->category,
-                "pertanyaan" => $request->pertanyaan,
-                "email" => $request->email,
-                "status" => $request->status
-            ]);
-        });
+        $maklum_balas = MaklumBalas::where('id',$request->mbid)->get()->first();
+        $maklum_balas->status = 1;
+        $maklum_balas->save();
         
         //send email to the person created
-        $to_name = $request->namaPenuh;
+        $to_name = $request->email;
         $to_email = $request->email;
-        $data = array(
-            'name'=>$request->namaPenuh,
-            'email'=>$request->email,
-            'password'=>$password,
-        );
+        $data = array('email'=>$request->email);
         Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Akaun');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
