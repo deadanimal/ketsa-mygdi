@@ -74,7 +74,7 @@
                                         <td>{{$mb->email}}</td>
                                         <td>{{$mb->category}}</td>
                                         <td><span class="badge badge-pill badge-info">{{($mb->status == '0' ? 'Baru':'')}}</span></td>
-                                        <td>{{ date('dd/m/Y',strtotime($mb->created_at)) }}</td>
+                                        <td>{{ date('d/m/Y',strtotime($mb->created_at)) }}</td>
                                         <td>
                                             <a data-toggle="modal" data-target="#modal-balas-mb-{{$mb->id}}">
                                                 <button type="button" class="btn btn-sm btn-success"><i class="fas fa-reply mr-2"></i>Balas</button>
