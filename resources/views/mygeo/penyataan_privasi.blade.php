@@ -41,7 +41,7 @@
             <div class="header-body">
                 <div class="row align-items-center p-3 py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-dark d-inline-block mb-0">Panduan Pengguna</h6>
+                        <h6 class="h2 text-dark d-inline-block mb-0">Penytaan Privasi</h6>
 
                         <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
@@ -52,7 +52,7 @@
                                     Pengurusan Portal
                                 </li>
                                 <li aria-current="page" class="breadcrumb-item active">
-                                    Panduan Pengguna
+                                    Penyataan Privasi
                                 </li>
                             </ol>
                         </nav>
@@ -74,23 +74,23 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Konfigurasi Panduan Pengguna</h3>
+                                    <h3 class="mb-0">Konfigurasi Penyataan Privasi</h3>
                                 </div>
                                 <div class="col-4 text-right">
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="post" class="form-horizontal" action="{{url('simpan_panduan_pengguna')}}" id="form_portal_settings">
+                            <form method="post" class="form-horizontal" action="{{url('simpan_penyataan_privasi')}}" id="form_portal_settings">
                                 @csrf
-                                <input type="hidden" name="id_panduan_pengguna" value="{{ (!is_null($panduan_pengguna) ? $panduan_pengguna->id:'')}}">
-                                <input type="hidden" name="content_panduan_pengguna" id="content_panduan_pengguna">
+                                <input type="hidden" name="id_penyataan_privasi" value="{{ (!is_null($penyataan_privasi) ? $penyataan_privasi->id:'')}}">
+                                <input type="hidden" name="content_penyataan_privasi" id="content_penyataan_privasi">
                                 <label class="form-control-label">Tajuk</label>
 
-                                <input type="text" name="title_panduan_pengguna" id="title_panduan_pengguna" class="form-control" value="{{ (!is_null($panduan_pengguna) ? $panduan_pengguna->title:'') }}">
+                                <input type="text" name="title_penyataan_privasi" id="title_penyataan_privasi" class="form-control" value="{{ (!is_null($penyataan_privasi) ? $penyataan_privasi->title:'') }}">
 
                                 <label class="form-control-label mt-4">Kandungan</label>
-                                <div id="content_panduan_pengguna_input"></div>
+                                <div id="content_penyataan_privasi_input"></div>
 
                                 <button id="btn_submit" type="button" class="btn btn-success mt-4 float-right">Simpan</button>
                             </form>
@@ -105,11 +105,11 @@
 <script>
     $(document).ready(function() {
         $(document).on("click", "#btn_submit", function() {
-            $("#content_panduan_pengguna").val($("#content_panduan_pengguna_input > .ql-editor").html());
+            $("#content_penyataan_privasi").val($("#content_penyataan_privasi_input > .ql-editor").html());
             $("#form_portal_settings").submit();
         });
 
-        var quill_panduan_pengguna = new Quill('#content_panduan_pengguna_input', {
+        var quill_penyataan_privasi = new Quill('#content_penyataan_privasi_input', {
             modules: {
                 toolbar: [
                     ['bold', 'italic'],
@@ -125,7 +125,7 @@
             placeholder: 'Compose an epic...',
             theme: 'snow',
         });
-        quill_panduan_pengguna.root.innerHTML = '{!! (!is_null($panduan_pengguna) ? $panduan_pengguna->content:"") !!}';
+        quill_penyataan_privasi.root.innerHTML = '{!! (!is_null($penyataan_privasi) ? $penyataan_privasi->content:"") !!}';
 
     });
 </script>

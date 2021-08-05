@@ -13,7 +13,7 @@ class CreateDokumenBerkaitansTable extends Migration
      */
     public function up()
     {
-        Schema::create('dokumen_berkaitan', function (Blueprint $table) {
+        Schema::create('dokumen_berkaitans', function (Blueprint $table) {
             $table->id();
 
             $table->string('tajuk_dokumen')->nullable();

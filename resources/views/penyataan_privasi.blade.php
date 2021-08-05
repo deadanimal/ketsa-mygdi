@@ -1,32 +1,33 @@
-@extends('layouts.app')
+@extends('layouts.app_afiq')
 
 @section('content')
-  <div class="content-wrapper">
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark"></h1>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 ">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title m-0">{!! (!is_null($penyataan_privasi) ? $penyataan_privasi->title:"") !!}</h5>
-              </div>
-              <div class="card-body">
-                {!! (!is_null($penyataan_privasi) ? $penyataan_privasi->content:"") !!}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<style>
+    .umum_senarai_card {
+        border-radius: 25px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 0;
+        background-color: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .divCenter {
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style>
+<section class="bgland">
+    <div class="section-title">
+        <h2 class="text-white">{!! (!is_null($penyataan_privasi) ? $penyataan_privasi->title:"") !!}</h2>
     </div>
-  </div>
+    <div class="col-lg-9 pt-4 divCenter">
+        <div class="card mt-2 umum_senarai_card">
+            <div class="card-body scroll mt-2">
+                <h3 align="justify">
+                    {!! (!is_null($penyataan_privasi) ? $penyataan_privasi->content:"") !!}
+                </h3>
+            </div>
+        </div>
+    </div>
+</section>
 @stop

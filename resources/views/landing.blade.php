@@ -158,10 +158,10 @@
         <ul>
             <li class="active"><a href="#home"><i class="bx bx-home"></i> <span>Laman Utama</span></a></li>
             <li><a href="#home2"><i class="bx bx-map-alt"></i> <span>Carian Metadata</span></a></li>
-            <li><a href="#about"><i class="bx bx-food-menu"></i> <span>MyGeo Explorer</span></a></li>
+            <li><a href="#about"><i class="bx bx-food-menu"></i> <span>Mengenai MyGeo Explorer</span></a></li>
             <li><a href="#userguide"><i class="bx bx-mouse"></i> <span>Panduan Pengguna</span></a></li>
             <li><a href="#feedback"><i class="bx bx-support"></i> <span>Maklum Balas</span></a></li>
-            <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+            <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Hubungi Kami</span></a></li>
         </ul>
     </nav><!-- .nav-menu -->
 
@@ -340,11 +340,7 @@
         </div>
         <div class="row pb-7">
             <div class="col-12">
-                <p align="center">
-                    MyGeo Explorer sesuai dilayari oleh semua perisian pelayar (Desktop & Versi Mobile) atau mana-mana perisian pelayan web yang setara dengannya. Jika anda menggunakan pelayar versi terdahulu atau selainnya, segelintir paparan tidak dapat dilakukan dengan sempurna.<br>
-                    Pelayar web mestilah menyokong penggunaan JavaScript, Cascading Style Sheet, warna, format teks dan fungsi-fungsi asas yang lain.Resolusi minima yang bersesuaian untuk memaparkan laman web ini ialah 1024 x 768 piksel.<br>
-                    Muat Turun PDF Panduan Pengguna:
-                </p>
+                <?php echo $panduan_pengguna->content; ?>
             </div>
         </div>
 
@@ -358,16 +354,17 @@
         </div>
         <h2 class="text-center text-muted my-4">Anda perlukan sebarang bantuan atau pertanyaan?</h2>
 
-        <form method="post" class="form-horizontal" action="{{url('simpan_maklum_balas')}}" id="form_maklum_balas" style="min-height: 300px;">
+        <form method="POST" class="form-horizontal" action="{{url('simpan_maklum_balas')}}" id="form_maklum_balas" style="min-height: 300px;">
+            @csrf
             <div class="pl-lg-6">
                 <div class="row mb-3">
-                    <div class="col-2"><label for="input-agensi" class="form-control-label ml-4"> Kategori </label>
+                    <div class="col-2"><label class="form-control-label ml-4"> Kategori </label>
                     </div>
-                    <div class="col-9"><select id="input-agensi" class="form-control form-control-sm ml-3">
-                            <option selected disabled hidden=""> Pilih Kategori </option>
-                            <option value="metadata">Metadata</option>
-                            <option value="permohonan data asas">Permohonan Data-data Asas</option>
-                            <option value="lain-lain">Lain-lain</option>
+                    <div class="col-9"><select name="kategori" class="form-control form-control-sm ml-3">
+                            <option selected disabled> Pilih Kategori </option>
+                            <option value="Metadata">Metadata</option>
+                            <option value="Data-data Asas">Permohonan Data-data Asas</option>
+                            <option value="Lain-lain">Lain-lain</option>
                         </select></div>
                 </div>
                 <div class="row mb-3">
@@ -378,7 +375,9 @@
                 <div class="row mb-3">
                     <div class="col-2"><label for="input-emel" class="form-control-label ml-4"> Emel Personal </label>
                     </div>
-                    <div class="col-7"><input placeholder="Masukan E-mel anda" type="text" name="email" class="form-control form-control-sm ml-3"></div>
+                    <div class="col-7">
+                        <input placeholder="Masukan E-mel anda" type="text" name="email" class="form-control form-control-sm ml-3">
+                    </div>
                     <div class="col-2">
                         <button type="submit" class="btn btn-primary float-right" id="btnHantar"><i class="fas fa-paper-plane mr-2"></i>Hantar</button>
                     </div>

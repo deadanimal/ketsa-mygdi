@@ -42,6 +42,9 @@
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css" />
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
+    <!-- Main Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <style>
         #map {
@@ -68,11 +71,11 @@
         }
     </style>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0" style="padding-right: 0px;">
-@include('sweet::alert')
+    @include('sweet::alert')
     <app-root _nghost-oai-c446="" ng-version="9.0.2">
         <router-outlet _ngcontent-oai-c446=""></router-outlet>
         <app-admin-layout _nghost-oai-c447="" class="ng-star-inserted">
@@ -301,7 +304,7 @@
                                         @endif
                                         @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link active">
+                                            <a href="{{ url('maklum_balas') }}" class="nav-link active">
                                                 <i class="fa-comments fas text-green"></i>
                                                 <span class="nav-link-text">Maklum Balas</span>
                                             </a>
@@ -387,18 +390,28 @@
                                             </a>
                                             <ul class="nav nav-sm nav-treeview">
                                                 <li class="nav-item">
-                                                    <a href="#" class="nav-link active">
+                                                    <a href="{{ url('kemaskini_faq') }}" class="nav-link active">
                                                         <span class="nav-link-text">Soalan Lazim</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="#" class="nav-link">
+                                                    <a href="{{ url('pengumuman_edit') }}" class="nav-link">
                                                         <span class="nav-link-text">Pengumuman</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="#" class="nav-link">
+                                                    <a href="{{ url('panduan_pengguna_edit') }}" class="nav-link">
                                                         <span class="nav-link-text">Panduan Pengguna</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{{ url('mygeo_penafian') }}" class="nav-link">
+                                                        <span class="nav-link-text">Penafian</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{{ url('mygeo_penyataan_privasi') }}" class="nav-link">
+                                                        <span class="nav-link-text">Penyataan Privasi</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -463,14 +476,14 @@
                                                     </div>
                                                     <span _ngcontent-oai-c451="" class="avatar avatar-md rounded-circle ml-3">
                                                         <?php
-                                                        if(auth::user()->gambar_profil != ""){
+                                                        if (auth::user()->gambar_profil != "") {
                                                             ?>
-                                                            <img alt="Image placeholder" src="{{ asset('storage/'.auth::user()->gambar_profil) }}">
-                                                            <?php
-                                                        }else{
+                                                            <img alt="Image" src="{{ asset('storage/'.auth::user()->gambar_profil) }}">
+                                                        <?php
+                                                        } else {
                                                             ?>
-                                                            <img alt="Image placeholder" src="./afiqadminmygeo_files/avatar.png">
-                                                            <?php
+                                                            <img alt="Image" src="./afiqadminmygeo_files/avatar.png">
+                                                        <?php
                                                         }
                                                         ?>
                                                     </span>

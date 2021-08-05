@@ -168,7 +168,14 @@ class DataAsasController extends Controller
         $id = $request->permohonan_id;
 
         // return redirect('mohon_data');
-        return redirect()->action('DataAsasController@tambah', ['id' => $id]);
+        return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan ditambah!');
+    }
+
+    public function delete_senarai_kawasan(Request $request)
+    {
+        SenaraiKawasanData::where(["id" => $request->permohonan_id])->delete();
+
+        return redirect('mohon_data')->with('success', 'Data Senarai dan Kawasan dibuang!');
     }
 
     public function store_permohonan_baru(Request $request)
@@ -190,6 +197,8 @@ class DataAsasController extends Controller
         // return redirect()->action('DataAsasController@tambah', ['id' => $id]);
         return redirect('mohon_data')->with('success', 'Permohonan ditambah. Sila klik pautan berkenaan');
     }
+
+
 
     public function store_dokumen_berkaitan(Request $request)
     {
