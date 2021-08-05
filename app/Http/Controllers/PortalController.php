@@ -114,8 +114,7 @@ class PortalController extends Controller
 
     public function store_maklum_balas(Request $request)
     {
-        DB::transaction(function () use ($request) {
-            dd($request);
+        DB::transaction(function () use ($request) {    
             $maklum_balas = new MaklumBalas();
             $maklum_balas->category = $request->kategori;
             $maklum_balas->pertanyaan = $request->pertanyaan;
