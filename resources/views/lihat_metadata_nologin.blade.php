@@ -138,7 +138,8 @@
           'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       id: 'mapbox/streets-v11',
       tileSize: 512,
-      zoomOffset: -1
+      zoomOffset: -1,
+      interactive: false
   }).addTo(map);
 
   drawRectangleEditor();
@@ -256,6 +257,7 @@
 
     var bounds = [[nblt, wblg], [sblt, eblg]];
     rectangle = L.rectangle(bounds).addTo(map);
+    map.fitBounds(bounds);
   }
 
   function cleaLayer() {
