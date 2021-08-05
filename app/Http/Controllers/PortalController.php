@@ -142,9 +142,9 @@ class PortalController extends Controller
         //send email to the person created
         $to_name = $request->email;
         $to_email = $request->email;
-        $data = array('email'=>$request->email);
-        Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Akaun');
+        $data = array('email'=>$request->email,'pertanyaan'=>$request->pertanyaan,'balas'=>$request->balas);
+        Mail::send('mails.exmpl11', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('MyGeo Explorer : Jawapan Maklum Balas MyGeo Explorer');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
 
