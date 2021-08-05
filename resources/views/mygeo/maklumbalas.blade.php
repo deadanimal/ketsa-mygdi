@@ -60,9 +60,8 @@
                                 <thead>
                                     <tr>
                                         <th>BIL</th>
-                                        <th>PERTANYAAN</th>
-                                        <th>KATEGORI</th>
                                         <th>EMEL</th>
+                                        <th>KATEGORI</th>
                                         <th>STATUS</th>
                                         <th>TINDAKAN</th>
                                     </tr>
@@ -71,9 +70,8 @@
                                     @foreach($maklum_balas as $mb)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$mb->pertanyaan}}</td>
-                                        <td>{{$mb->category}}</td>
                                         <td>{{$mb->email}}</td>
+                                        <td>{{$mb->category}}</td>
                                         <td><span class="badge badge-pill badge-info">Baru Diterima</span></td>
                                         <td>
                                             <a data-toggle="modal" data-target="#modal-balas-mb-{{$mb->id}}">
