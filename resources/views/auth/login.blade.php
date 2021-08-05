@@ -396,7 +396,7 @@
     $(document).on("click", ".btn_login", function() {
         var captcha = $('#g-recaptcha-response').val();
         <?php
-        if($_SERVER['HTTP_HOST'] == "127.0.0.1:8003"){
+        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
             ?>
             $("#formLogin").submit();
             <?php

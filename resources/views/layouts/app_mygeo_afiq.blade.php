@@ -147,7 +147,7 @@
                                                 <span class="nav-link-text">Pengurusan Metadata</span>
                                                 <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
                                             </a>
-                                            <ul class="nav nav-sm nav-treeview">
+                                            <ul class="nav nav-sm nav-treeview"> 
                                                 <li class="nav-item">
                                                     <a href="{{ url('mygeo_senarai_metadata') }}" class="nav-link active">
                                                         <span class="nav-link-text">Senarai Metadata</span>
