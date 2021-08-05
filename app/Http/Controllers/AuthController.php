@@ -33,12 +33,12 @@ class AuthController extends Controller
         // echo "</pre>";
         // exit();
 
-        if ($_SERVER['HTTP_HOST'] != "localhost:8888") {
+        if ($_SERVER['HTTP_HOST'] != "127.0.0.1:8003") {
             if (!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == "") {
                 return redirect('/login')->with(['msg' => 'Sila lengkapkan reCaptcha']);
             }
         }
-        
+
         $user = User::where(['email'=>$request->emailf])->get()->first();
         if(is_null($user)){
             return redirect('/login')->with( ['msg' => 'ID pengguna atau kata laluan tidak sah.'] );
@@ -49,12 +49,12 @@ class AuthController extends Controller
         if($user->disahkan == '0'){
             return redirect('/login')->with( ['msg' => 'Akaun anda belum disahkan. Sila tunggu notifikasi e-mel pengesahan pendaftaran daripada Pentadbir Aplikasi untuk log masuk.'] );
         }
-        
+
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password])) {
             return redirect()->intended('/landing_mygeo');
         }else{
             return redirect('/login')->with(['msg'=>'ID pengguna atau kata laluan tidak sah.']);
-        } 
+        }
     }
 
     public function testLogin()

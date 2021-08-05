@@ -224,7 +224,7 @@
                                                 </div>
                                                 <div class="col-8">
                                                     <select name="agensi_organisasi" id="agensi_organisasi" class="form-control form-control-sm ml-3"></select>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="row mb-2 divInstitusi">
@@ -396,7 +396,7 @@
     $(document).on("click", ".btn_login", function() {
         var captcha = $('#g-recaptcha-response').val();
         <?php
-        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
+        if($_SERVER['HTTP_HOST'] == "127.0.0.1:8003"){
             ?>
             $("#formLogin").submit();
             <?php
@@ -406,12 +406,12 @@
                 alert("Sila lengkapkan captcha");
             }else{
                 $("#formLogin").submit();
-            }   
+            }
             <?php
         }
         ?>
     });
-    
+
     $(document).on("click", "#btn_hantar2", function() {
         $('#modal-daftar-jenis-pengguna').modal('hide');
         $('#modal-daftar-pengguna').modal('hide');
@@ -429,7 +429,7 @@
 
     $('input:radio[name="perananSelect"]').change(function() {
         var per = $(this).val();
-        
+
         //form elements to hide or show
         if (per == "3" || per == "4") {
             $(".2_g2c").hide();
@@ -629,7 +629,7 @@
         $(this).hide();
         $('input[name="perananSelect"]').prop('checked', false);
     });
-    
+
     $(document).on("click","#btn_daftar",function(){
         var nric = $("#input-nric").val();
         var tpejabat = $("#input-tpejabat").val();
@@ -655,13 +655,13 @@
             $("#formRegisterUser").submit();
         }
     });
-    
+
     function checkPassword(str){
         // at least one number, one lowercase and one uppercase letter, at least 12 characters
         var regex = /^(?=^.{12,40}$)(?=.*\d)(?=.*[\W_])(?=.*[a-z])(?=.*[A-Z])(?!^.*\n).*$/;
         return regex.test(str);
     }
-    
+
     function isEmail(email) {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email);
@@ -675,7 +675,7 @@
                 ?>msg = msg+"{{ $error }}\n\n";<?php
             }
             ?>alert(msg);<?php
-        } 
+        }
         ?>
         <?php
         if(Session::has('message')){
@@ -685,7 +685,7 @@
         $("#input-nric,#input-tpejabat,#input-tbimbit").inputFilter(function(value) {
             return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 999999999999);
         });
-  
+
         //ajax get roles
 //        $.ajax({
 //            method: "POST",
@@ -699,7 +699,7 @@
 //                $("#peranan").append("<option value='" + the_var.id + "'>" + the_var.name + "</option>");
 //            });
 //        });
-        
+
         //ajax get agensi/organisasi
         $.ajax({
             method: "POST",
@@ -762,7 +762,7 @@
             x.type = "password";
         }
     }
-    
+
     (function($) {
   $.fn.inputFilter = function(inputFilter) {
     return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {

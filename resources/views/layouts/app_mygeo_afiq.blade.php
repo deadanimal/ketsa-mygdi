@@ -65,7 +65,7 @@
             text-align: center;
         }
 
-        .nav-item>.nav-link-text {
+        .nav-item>.nav-link-text {s
             font-size: 12px;
 
         }
@@ -92,7 +92,6 @@
                                 </div>
                             </div>
 
-
                             <div class="navbar-inner">
                                 <div id="sidenav-collapse-main" class="collapse navbar-collapse">
                                     <ul class="navbar-nav nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -114,7 +113,7 @@
                                         @endif
                                         @if(auth::user()->hasRole(['Pengesah Metadata','Pentadbir Aplikasi','Pentadbir Metadata','Pentadbir Data','Super Admin']))
                                         <li class="nav-item ng-star-inserted">
-                                            <a class="nav-link active" href="#">
+                                            <a class="nav-link active" href="{{ url('mygeo_dashboard') }}">
                                                 <i class="fa-desktop fas text-orange"></i>
                                                 <span class="nav-link-text">Dashboard</span>
                                             </a>
