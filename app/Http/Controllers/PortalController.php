@@ -47,8 +47,8 @@ class PortalController extends Controller
     }
     public function edit_faq()
     {
-        $faq = Faq::get();
-        return view('mygeo.faq', compact('faq'));
+        $faqs = Faq::get();
+        return view('mygeo.faq', compact('faqs'));
     }
 
     public function update_faq(Request $request)

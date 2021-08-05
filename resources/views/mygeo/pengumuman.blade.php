@@ -114,6 +114,7 @@
                                             <td>{{ Carbon\Carbon::parse($umum->date)->format('d M Y') }}</td>
                                             <td>
                                                 <div class="form-inline">
+                                                    <form></form>
                                                     <form id="form_umum_show_{{ $umum->id }}" method="POST" action="{{ url('/mygeo_tunjuk_pengumuman') }}">
                                                         @csrf
                                                         <input type="hidden" name="umum_id" value="{{ $umum->id }}">

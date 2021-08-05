@@ -84,7 +84,7 @@
                             </div>
                             <div class="card-body">
                                 <select class="form-control" style="overflow: hidden;" size="10">
-                                    @foreach ($faq as $faq)
+                                    @foreach ($faqs as $faq)
                                         <option value="{{ $faq->id }}" data-show=".display-faq">{{ $faq->category }}
                                         </option>
                                     @endforeach
@@ -103,17 +103,18 @@
                                     </div>
                                 </div>
                             </div>
-                            @foreach ($faq as $fq)
+                            @foreach ($faqs as $faq)
+                                
                                 <div class="card-body">
                                     <form method="POST" class="form-horizontal" action="{{ url('update_faq') }}"
                                         id="form_faq">
                                         @csrf
-                                        <input type="hidden" name="id_faq" value="{{ $fq->id}}">
+                                        <input type="hidden" name="id_faq" value="{{ $faq->id}}">
                                         <input type="hidden" name="content_faq" id="content_faq">
                                         <input type="hidden" name="title_faq" id="title_faq" value="Soalan Lazim (FAQ)">
                                         <label class="form-control-label">Kategori</label>
                                         <input type="text" name="category_faq" id="category_faq" class="form-control"
-                                            value="{{ $fq->category }}">
+                                            value="{{ $faq->category }}">
 
                                         <label class="form-control-label mt-4">Kandungan</label>
                                         <div id="content_faq_input"></div>
