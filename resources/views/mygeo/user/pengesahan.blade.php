@@ -116,83 +116,109 @@
               <div class="col-md-12">
                 <div class="card-body modal_user_detail">
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-        <div class="modal-footer justify-content-between1">
-          <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+    </section>
+</div>
+
+<div class="modal fade" id="modal-butiran">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Maklumat Pengguna</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-body modal_user_detail">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between1">
+                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <script>
-    $(function () {
-      $("#table_newUsers").DataTable({
-        "responsive": true,
-        "autoWidth": false,
-        "oLanguage": {
-          "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-          "sEmptyTable": "Tiada rekod ditemui",
-           "sZeroRecords": "Tiada rekod ditemui",
-          "sLengthMenu": "Papar _MENU_ rekod",
-          "sLoadingRecords": "Sila tunggu...",
-          "sSearch": "Carian:",
-          "oPaginate": {
-             "sFirst": "Pertama",
-             "sLast": "Terakhir",
-             "sNext": ">",
-             "sPrevious": "<",
-           }
-        }
-      });
-
-      $(document).on("click",".butiran",function(){
-        // ajax get user details
-        $user_id = $(this).data('userid');
-        $.ajax({
-            method: "POST",
-            url: "get_user_details",
-            data: { "_token": "{{ csrf_token() }}", "user_id": $user_id },
-        })
-        .done(function(response) {
-            $('.modal_user_detail').html(response);
+<script>
+    $(function() {
+        $("#table_newUsers").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            "oLanguage": {
+                "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                "sEmptyTable": "Tiada rekod ditemui",
+                "sZeroRecords": "Tiada rekod ditemui",
+                "sLengthMenu": "Papar _MENU_ rekod",
+                "sLoadingRecords": "Sila tunggu...",
+                "sSearch": "Carian:",
+                "oPaginate": {
+                    "sFirst": "Pertama",
+                    "sLast": "Terakhir",
+                    "sNext": ">",
+                    "sPrevious": "<",
+                }
+            }
         });
-      });
 
-      $(document).on("click",".btn_lulus",function(){
-        if(confirm("Adakah anda pasti untuk meluluskan pendaftaran?")){
-          // ajax sahkan user
-          $user_id = $(this).data('userid');
-          $.ajax({
-              method: "POST",
-              url: "user_sahkan",
-              data: { "_token": "{{ csrf_token() }}", "user_id": $user_id },
-          })
-          .done(function(response) {
-            alert("Pengguna berjaya didaftarkan.");
-            location.reload();
-          });
-        }
-      });
+        $(document).on("click", ".butiran", function() {
+            // ajax get user details
+            $user_id = $(this).data('userid');
+            $.ajax({
+                    method: "POST",
+                    url: "get_user_details",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "user_id": $user_id
+                    },
+                })
+                .done(function(response) {
+                    $('.modal_user_detail').html(response);
+                });
+        });
 
-      $(document).on("click",".btn_tolak",function(){
-        if(confirm("Adakah anda pasti untuk menolak pendaftaran?")){
-          // ajax sahkan user
-          $user_id = $(this).data('userid');
-          $.ajax({
-              method: "POST",
-              url: "user_pengesahan_ditolak",
-              data: { "_token": "{{ csrf_token() }}", "user_id": $user_id },
-          })
-          .done(function(response) {
-            alert("Pendaftaran ditolak.");
-            location.reload();
-          });
-        }
-      });
+        $(document).on("click", ".btn_lulus", function() {
+            if (confirm("Adakah anda pasti untuk meluluskan pendaftaran?")) {
+                // ajax sahkan user
+                $user_id = $(this).data('userid');
+                $.ajax({
+                        method: "POST",
+                        url: "user_sahkan",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "user_id": $user_id
+                        },
+                    })
+                    .done(function(response) {
+                        alert("Pengguna berjaya didaftarkan.");
+                        location.reload();
+                    });
+            }
+        });
+
+        $(document).on("click", ".btn_tolak", function() {
+            if (confirm("Adakah anda pasti untuk menolak pendaftaran?")) {
+                // ajax sahkan user
+                $user_id = $(this).data('userid');
+                $.ajax({
+                        method: "POST",
+                        url: "user_pengesahan_ditolak",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "user_id": $user_id
+                        },
+                    })
+                    .done(function(response) {
+                        alert("Pendaftaran ditolak.");
+                        location.reload();
+                    });
+            }
+        });
     });
-  </script>
+</script>
 
 @stop

@@ -111,9 +111,11 @@
             right: 0;
         }
     </style>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0">
+    @include('sweet::alert')
     <app-root _nghost-lqr-c446="" ng-version="9.0.2">
         <app-auth-layout _nghost-lqr-c448="">
             <app-navbar2 _nghost-lqr-c453="">
@@ -248,9 +250,9 @@
                         <div class="row align-items-center justify-content-xl-between">
                             <div class="col-xl-4">
                                 <div class="copyright text-xl-left text-light">
-                                    <a class="text-light" ng-reflect-router-link="/disclaimer" href="{{ url('/penafian') }}">PENAFIAN</a>
+                                    <a class="text-light" href="{{ url('/penafian') }}">PENAFIAN</a>
                                     <span class="mr-2 ml-2">|</span>
-                                    <a class="text-light" ng-reflect-router-link="/privacy" href="{{ url('/penyataan_privasi') }}">PENYATAAN PRIVASI</a>
+                                    <a class="text-light" href="{{ url('/penyataan_privasi') }}">PENYATAAN PRIVASI</a>
                                     <br>
                                     <br>
                                     <br> Hakcipta Terpelihara © 2021. Pusat Geospatial Malaysia.

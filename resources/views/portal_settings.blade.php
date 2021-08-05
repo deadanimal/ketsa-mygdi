@@ -42,7 +42,7 @@ img {
   height: 130px;
 }
 </style>
-      
+
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container">
@@ -56,9 +56,9 @@ img {
     <div class="content">
       <div class="container">
         <form method="post" class="form-horizontal" action="{{url('simpan_portal_settings')}}" id="form_portal_settings">
-          @csrf  
-          <input type="hidden" name="id_hubungi_kami" value="{{ (!is_null($panduan_pengguna) ? $panduan_pengguna->id:'') }}">
-          <input type="hidden" name="id_panduan_pengguna" value="{{ (!is_null($hubungi_kami) ? $hubungi_kami->id:'') }}">
+          @csrf
+          <input type="hidden" name="id_hubungi_kami" value="{{ (!is_null($hubungi_kami) ? $hubungi_kami->id:'') }}">
+          <input type="hidden" name="id_panduan_pengguna" value="{{ (!is_null($panduan_pengguna) ? $panduan_pengguna->id:'')}}">
           <input type="hidden" name="id_penafian" value="{{ (!is_null($penafian) ? $penafian->id:'') }}">
           <input type="hidden" name="id_penyataan_privasi" value="{{ (!is_null($penyataan_privasi) ? $penyataan_privasi->id:'') }}">
           <input type="hidden" name="id_faq" value="{{ (!is_null($faq) ? $faq->id:'') }}">

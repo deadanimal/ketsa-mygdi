@@ -76,7 +76,7 @@
                                 }
                                 ?>
                           </td>
-                          <td>
+                          <td class="pr-1">
                             <div class="form-inline">
                                 <?php //lihat(view only)================================ ?>
                                 <form method="post" action="{{ url('/lihat_metadata') }}">
@@ -112,7 +112,7 @@
     </section>
   </div>
 
-<script>  
+<script>
   $(document).ready(function(){
     $("#table_metadatas").DataTable({
       "responsive": true,
@@ -137,7 +137,7 @@
       format:'DD-MM-YYYY H:mm:ss',
       // format: 'L'
     });
-    
+
     $(document).on('click','.btnDelete',function(){
         var conf = confirm('Anda pasti untuk menghapus metadata?');
         if (conf) {

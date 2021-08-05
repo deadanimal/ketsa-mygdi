@@ -17,7 +17,7 @@
             <div class="header-body">
                 <div class="row align-items-center p-3 py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-dark d-inline-block mb-0">Permohonan Baru</h6>
+                        <h6 class="h2 text-dark d-inline-block mb-0">Maklum Balas</h6>
 
                         <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
@@ -25,7 +25,7 @@
                                     <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
                                 </li>
                                 <li aria-current="page" class="breadcrumb-item active">
-                                    Permohonan Baru
+                                    Maklum Balas Pelanggan
                                 </li>
                             </ol>
                         </nav>
@@ -48,12 +48,10 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Permohonan Baru</h3>
+                                    <h3 class="mb-0">Senarai Maklum Balas Pelanggan</h3>
                                 </div>
                                 <div class="col-4 text-right">
-                                    <a href="{{url('mohon_data_asas_baru')}}" data-toggle="modal" data-target="#modal-senarai-kawasan-data">
-                                        <button type="button" class="btn btn-sm btn-default float-right"><i class="fas fa-plus mr-2"></i>Permohonan Baru</button>
-                                    </a>
+
                                 </div>
                             </div>
                         </div>
@@ -62,23 +60,26 @@
                                 <thead>
                                     <tr>
                                         <th>BIL</th>
-                                        <th>NAMA PERMOHONAN</th>
+                                        <th>PERTANYAAN</th>
+                                        <th>KATEGORI</th>
+                                        <th>EMEL</th>
                                         <th>STATUS</th>
-                                        <th>TARIKH</th>
                                         <th>TINDAKAN</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    @foreach($pemohons as $pemohon)
+                                    @foreach($maklum_balas as $mb)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$pemohon->nama_permohonan}}</td>
-                                        <td><span class="badge badge-pill badge-info">Draf Baru</span></td>
-                                        <td>{{ Carbon\Carbon::parse($pemohon->date_permohonan)->format('d M Y') }}</td>
+                                        <td>{{$mb->pertanyaan}}</td>
+                                        <td>{{$mb->category}}</td>
+                                        <td>{{$mb->email}}</td>
+                                        <td><span class="badge badge-pill badge-info">Baru Diterima</span></td>
                                         <td>
-                                            <a href="/tambah_permohonan/{{$pemohon->id}}" class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i></a>
-                                            <button type="button" data-permohonanid="{{ $pemohon->id }}" class="btnDelete btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
+                                            <a data-toggle="modal" data-target="#modal-balas-mb-{{$mb->id}}">
+                                                <button type="button" class="btn btn-sm btn-success"><i class="fas fa-reply mr-2"></i>Balas</button>
+                                            </a>
+                                            <button type="button" data-maklumbalasid="{{ $mb->id }}" class="btnDelete btn btn-sm btn-danger mx-2"><i class="fas fa-trash mr-2"></i>Padam</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -90,12 +91,13 @@
             </div>
         </div>
     </section>
-    <!-- Modal Tambah Permohonan -->
-    <div class="modal fade" id="modal-senarai-kawasan-data">
-        <div class="modal-dialog">
+    <!-- Modal Maklumbalas-->
+    @foreach ($maklum_balas as $mb)
+    <div class="modal fade" id="modal-balas-mb-{{$mb->id}}">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary mb-0">
-                    <h4 class="text-white">Tambah Permohonan Baru</h4>
+                    <h4 class="text-white">Maklum Balas kepada Pelanggan ID#{{$loop->iteration}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -105,22 +107,24 @@
                     <div class="modal-body row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="nama_permohonan" class="form-control-label">Nama Permohonan</label>
-                                <input type="text" class="form-control form-control-sm" name="nama_permohonan" value="">
+                                <label class="form-control-label">Kategori</label>
+                                <input type="text" class="form-control form-control-sm" name="category" value="{{ $mb->category }}" disabled>
                             </div>
                             <div class="form-group">
-                                <label for="date_permohonan" class="form-control-label">Tarikh Permohonan</label>
-                                <input type="date" class="form-control form-control-sm" name="date_permohonan" value="<?php echo date('Y-m-d'); ?>">
+                                <label class="form-control-label">Emel</label>
+                                <input placeholder="Masukan E-mel anda" type="email" name="email" class="form-control form-control-sm" value="{{ $mb->email }}" disabled>
                             </div>
                             <div class="form-group">
-                                <label for="tujuan_permohonan" class="form-control-label">Tujuan Permohonan</label>
-                                <input type="text" class="form-control form-control-sm" name="tujuan_permohonan" value="">
+                                <label class="form-control-label"> Pertanyaan </label>
+                                <textarea name="pertanyaan" placeholder="Nyatakan maklum balas anda" type="text" rows="5" class="form-control form-control-sm" disabled>{{ $mb->pertanyaan }}</textarea>
                             </div>
-                            <input type="hidden" name="id" value="{{$user -> id}}">
-                            <input type="hidden" name="user_id" value="{{$user -> id}}">
+                            <div class="form-group">
+                                <label class="form-control-label"> Balas </label>
+                                <textarea name="balas" placeholder="Masukkan respon..." type="text" rows="5" class="form-control form-control-sm"></textarea>
+                            </div>
 
-                            <button class="btn btn-primary" type="submit">
-                                <span class="text-white">Tambah</span>
+                            <button class="btn btn-success float-right" type="submit">
+                                <span class="text-white">Balas</span>
                             </button>
 
                         </div>
@@ -129,6 +133,7 @@
             </div>
         </div>
     </div>
+    @endforeach
 </div>
 
 <script>
@@ -155,20 +160,18 @@
     });
 
     $(document).on("click", ".btnDelete", function() {
-        var user_id = $(this).data('permohonanid');
-        var permohonan_id = $(this).data('permohonanid');
-        var r = confirm("Adakah anda pasti untuk padam permohonan ini?");
+        var mb_id = $(this).data('maklumbalasid');
+        var r = confirm("Adakah anda pasti untuk padam maklum balas ini?");
         if (r == true) {
             $.ajax({
                 method: "POST",
-                url: "delete_permohonan",
+                url: "delete_maklum_balas",
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    "user_id": user_id,
-                    "permohonan_id": permohonan_id
+                    "id": mb_id
                 },
             }).done(function(response) {
-                alert("Permohonan berjaya dipadam.");
+                alert("Maklum balas telah dibuang.");
                 location.reload();
             });
         }

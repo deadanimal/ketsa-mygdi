@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFaqTable extends Migration
+class CreateSenaraiKawasanDataTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,16 @@ class CreateFaqTable extends Migration
      */
     public function up()
     {
-        Schema::create('faq', function (Blueprint $table) {
+        Schema::create('senarai_kawasan_data', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('category')->nullable();
-            $table->text('content');
+
+            $table->string('lapisan_data', 50);
+            $table->string('kategori',50);
+            $table->string('subkategori', 50);
+            $table->string('kawasan_data', 50);
+
+            $table->foreignId('permohonan_id');
+
             $table->timestamps();
         });
     }
@@ -29,6 +34,6 @@ class CreateFaqTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faq');
+        Schema::dropIfExists('senarai_kawasan_data');
     }
 }
