@@ -27,6 +27,8 @@ use App\Countries;
 use App\States;
 use App\ReferenceSystemIdentifier;
 use App\MFileUpload;
+use App\ElemenMetadata;
+use App\Tajuk;
 use Session;
 use App\MetadataGeo;
 use App\Mail\MailtrapExample;
@@ -889,5 +891,47 @@ class MetadataController extends Controller {
     public function delete(Request $request) {
         MetadataGeo::on('pgsql2')->find($request->metadata_id)->delete();
         return redirect('mygeo_senarai_metadata')->with('message', 'Metadata berjaya dihapus.');
+    }
+    
+    public function kemaskini_elemen_metadata() {
+        if(!auth::user()->hasRole(['Pentadbir Metadata'])){
+            abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
+        }   
+        $elemens = ElemenMetadata::get();
+
+        return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('elemens'));
+    }
+    
+    public function simpan_kategori(Request $request) {
+        if(!auth::user()->hasRole(['Pentadbir Metadata'])){
+            abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
+        }   
+        var_dump($request);
+        
+        exit();
+    }
+    
+    public function simpan_tajuk(Request $request) {
+        if(!auth::user()->hasRole(['Pentadbir Metadata'])){
+            abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
+        }   
+        $elemens = ElemenMetadata::get();
+    }
+    
+    public function simpan_sub_tajuk(Request $request) {
+        if(!auth::user()->hasRole(['Pentadbir Metadata'])){
+            abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
+        }   
+        $elemens = ElemenMetadata::get();
+
+    }
+    
+    public function simpan_elemen(Request $request) {
+        if(!auth::user()->hasRole(['Pentadbir Metadata'])){
+            abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
+        }   
+        $elemens = ElemenMetadata::get();
+
+
     }
 }

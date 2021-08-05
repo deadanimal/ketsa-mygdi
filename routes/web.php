@@ -111,7 +111,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/mygeo_senarai_metadata','MetadataController@index');
     Route::post('/carian_metadata','MetadataController@search');
 
-    Route::get('/mygeo_senarai_draf_metadata','MetadataController@index_draf');
+    Route::get('/mygeo_kemaskini_elemen_metadata','MetadataController@kemaskini_elemen_metadata');
     
     Route::get('/mygeo_pengesahan_metadata','MetadataController@senarai_pengesahan_metadata');
     
@@ -172,6 +172,10 @@ Route::post('getUsersByAgensi','UserController@getUsersByAgensi');
 Route::post('getMetadataByUser','UserController@getMetadataByUser');
 Route::post('simpan_pemindahan_akaun','UserController@simpan_pemindahan_akaun');
 Route::post('validateMetadataName','MetadataController@validateMetadataName');
+Route::post('simpan_kategori','MetadataController@simpan_kategori');
+Route::post('impan_tajuk','MetadataController@simpan_tajuk');
+Route::post('simpan_sub_tajuk','MetadataController@simpan_sub_tajuk');
+Route::post('simpan_elemen','MetadataController@simpan_elemen');
 
 Auth::routes();
 

@@ -147,13 +147,8 @@
                                                         <span class="nav-link-text">Senarai Metadata</span>
                                                     </a>
                                                 </li>
-                                                <!-- <li class="nav-item ng-star-inserted">
-                                                    <a class="nav-link ng-star-inserted" href="{{ url('mygeo_senarai_draf_metadata') }}">
-                                                        <span class="nav-link-text">Senarai Draf Metadata</span>
-                                                    </a>
-                                                </li> -->
                                                 <li class="nav-item">
-                                                    <a href="#" class="nav-link">
+                                                    <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}" class="nav-link">
                                                         <span class="nav-link-text">Kemas Kini Elemen Metadata</span>
                                                     </a>
                                                 </li>
@@ -189,6 +184,14 @@
                                                     </a>
                                                 </li>
                                             </ul>
+                                        </li>
+                                        @endif
+                                        @if(auth::user()->hasRole(['Pentadbir Metadata']))
+                                        <li class="nav-item">
+                                            <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}" class="nav-link">
+                                                <i class="far fa-id-card text-green"></i>
+                                                <span class="nav-link-text">Kemas Kini Elemen</span>
+                                            </a>
                                         </li>
                                         @endif
                                         @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
@@ -279,25 +282,11 @@
                                             </a>
                                         </li>
                                         @endif
-                                        @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata','Pentadbir Metadata','Super Admin']))
+                                        @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata','Pentadbir Metadata']))
                                         <li class="nav-item">
                                             <a href="{{ url('mygeo_senarai_metadata') }}" class="nav-link active">
                                                 <i class="fas fa-list-ul text-indigo"></i>
                                                 <span class="nav-link-text">Senarai Metadata</span>
-                                            </a>
-                                        </li>
-                                        <!-- <li class="nav-item ng-star-inserted">
-                                            <a class="nav-link ng-star-inserted" href="{{ url('mygeo_senarai_draf_metadata') }}">
-                                                <i class="fa-edit fas text-green"></i>
-                                                <span class="nav-link-text">Senarai Draf Metadata</span>
-                                            </a>
-                                        </li> -->
-                                        @endif
-                                        @if(auth::user()->hasRole(['Pentadbir Metadata','Super Admin']))
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link active">
-                                                <i class="fa-tasks fas text-primary"></i>
-                                                <span class="nav-link-text">Kemas Kini Elemen Metadata</span>
                                             </a>
                                         </li>
                                         @endif
