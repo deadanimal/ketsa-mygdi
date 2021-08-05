@@ -21,7 +21,7 @@
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
-                                    Band Boundry {{ $metadataxml->identificationInfo->SV_ServiceIdentification->bandBoundry->CharacterString }}
+                                    Band Boundry
                                 </div>
                                 <?php
                                 $bandBound = "";
