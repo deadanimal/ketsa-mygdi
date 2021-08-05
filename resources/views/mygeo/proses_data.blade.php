@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @csrf  
+                        @csrf
                         <div class="card-header">
                             <h3 class="card-title" style="font-size: 2rem;">Proses Data</h3>
 <!--                            <a href="{{url('mohon_data_asas_baru')}}">
@@ -49,33 +49,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($pemohons as $pemohon)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Permohonan Data Sungai Selangor</td>
-                                        <td>Muhammad Rahman bin Talib</td>
-                                        <td>G2E-Pelajar</td>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$pemohon->nama_permohonan}}</td>
+                                        <td>{{$pemohon->users->name}}</td>
+                                        <td><span class="badge badge-pill badge-info">Draf Baru</span></td>
                                         <td>
-                                            <button type="button" class="form-control">Lihat</button>
+                                            <a href="/tambah_permohonan/{{$pemohon->id}}" class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i></a>
+                                            <button type="button" data-permohonanid="{{ $pemohon->id }}" class="btnDelete btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Permohonan Data Sungai Selangor</td>
-                                        <td>Muhammad Rahman bin Talib</td>
-                                        <td>G2E-Pelajar</td>
-                                        <td>
-                                            <button type="button" class="form-control">Lihat</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Permohonan Data Sungai Selangor</td>
-                                        <td>Muhammad Rahman bin Talib</td>
-                                        <td>G2E-Pelajar</td>
-                                        <td>
-                                            <button type="button" class="form-control">Lihat</button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

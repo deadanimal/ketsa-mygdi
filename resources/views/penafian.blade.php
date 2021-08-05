@@ -15,6 +15,10 @@
         margin-right: auto;
         margin-left: auto;
     }
+
+    .ql-align-center {
+            text-align: center;
+        }
 </style>
 <section class="bgland">
     <div class="section-title">
@@ -23,9 +27,9 @@
     <div class="col-lg-9 pt-4 divCenter">
         <div class="card mt-2 umum_senarai_card">
             <div class="card-body scroll mt-2">
-                <h3 align="justify">
+                <span align="justify">
                     {!! (!is_null($penafian) ? $penafian->content:"") !!}
-                </h3>
+                </span>
             </div>
         </div>
     </div>

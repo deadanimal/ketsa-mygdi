@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale())}}" class="perfect-scrollbar-off">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="perfect-scrollbar-off">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,20 +15,23 @@
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-    <link rel="icon" href="{{ asset('assetsangular/img/logo/jata-negara.png/')}}" type="image/png">
-    <link rel="stylesheet" href="{{ asset('afiqlogin_files/css')}}">
+    <link rel="icon" href="{{ asset('assetsangular/img/logo/jata-negara.png/') }}" type="image/png">
+    <link rel="stylesheet" href="{{ asset('afiqlogin_files/css') }}">
     <!--<link href="./afiqlogin_files/bootstrap.min.css" rel="stylesheet">-->
-    <!--        <link href="{{ asset('afiqlogin_files/mapbox-gl.css')}}" rel="stylesheet">-->
+    <!--        <link href="{{ asset('afiqlogin_files/mapbox-gl.css') }}" rel="stylesheet">-->
 
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.0/mapbox-gl-draw.css" type="text/css" />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.0/mapbox-gl-draw.css"
+        type="text/css" />
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css" />
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+        type="text/css" />
 
-    <link href="{{ asset('css/afiq.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/afiq.css') }}" rel="stylesheet">
     <!--<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <!-- daterange picker -->
@@ -91,6 +94,7 @@
             background-image: linear-gradient(to right, #ebba16, #ed8a19);
             font-size: 110%;
         }
+
     </style>
     <style>
         .bgland {
@@ -110,6 +114,7 @@
             left: 0;
             right: 0;
         }
+
     </style>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
@@ -119,43 +124,54 @@
     <app-root _nghost-lqr-c446="" ng-version="9.0.2">
         <app-auth-layout _nghost-lqr-c448="">
             <app-navbar2 _nghost-lqr-c453="">
-                <nav _ngcontent-lqr-c453="" class="navbar navbar-horizontal navbar-expand-lg navbar-dark" style="background-color: #0563bb;">
+                <nav _ngcontent-lqr-c453="" class="navbar navbar-horizontal navbar-expand-lg navbar-dark"
+                    style="background-color: #0563bb;">
                     <div _ngcontent-lqr-c453="" class="container-fluid">
-                        <a _ngcontent-lqr-c453="" class="navbar-brand" ng-reflect-router-link="/portal" href="{{ url('/') }}">
+                        <a _ngcontent-lqr-c453="" class="navbar-brand" ng-reflect-router-link="/portal"
+                            href="{{ url('/') }}">
                             <img _ngcontent-lqr-c453="" src="{{ url('afiqlogin_files/mygeoexplorer-logo.png') }}">
                         </a>
-                        <button _ngcontent-lqr-c453="" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-label="Toggle navigation" aria-controls="collapseBasic" class="navbar-toggler">
+                        <button _ngcontent-lqr-c453="" type="button" data-toggle="collapse"
+                            data-target="#navbar-collapse" aria-expanded="false" aria-label="Toggle navigation"
+                            aria-controls="collapseBasic" class="navbar-toggler">
                             <span _ngcontent-lqr-c453="">
-                                <img _ngcontent-lqr-c453="" height="21" src="{{ url('afiqlogin_files/menuoption.png') }}">
+                                <img _ngcontent-lqr-c453="" height="21"
+                                    src="{{ url('afiqlogin_files/menuoption.png') }}">
                             </span>
                         </button>
-                        <div _ngcontent-lqr-c453="" id="collapseBasic" class="collapse navbar-collapse" ng-reflect-collapse="true" aria-expanded="false" aria-hidden="true" style="display: none;">
+                        <div _ngcontent-lqr-c453="" id="collapseBasic" class="collapse navbar-collapse"
+                            ng-reflect-collapse="true" aria-expanded="false" aria-hidden="true" style="display: none;">
                             <div _ngcontent-lqr-c453="" class="navbar-collapse-header">
                                 <div _ngcontent-lqr-c453="" class="row">
                                     <div _ngcontent-lqr-c453="" class="col-6 collapse-brand">
-                                        <a _ngcontent-lqr-c453="" ng-reflect-router-link="/portal" href="{{ url('/') }}">
-                                            <img _ngcontent-lqr-c453="" src="{{ url('afiqlogin_files/mygeoexplorer-logo2.png') }}">
+                                        <a _ngcontent-lqr-c453="" ng-reflect-router-link="/portal"
+                                            href="{{ url('/') }}">
+                                            <img _ngcontent-lqr-c453=""
+                                                src="{{ url('afiqlogin_files/mygeoexplorer-logo2.png') }}">
                                         </a>
                                     </div>
                                     <div _ngcontent-lqr-c453="" class="col-6 collapse-close">
-                                        <button _ngcontent-lqr-c453="" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
+                                        <button _ngcontent-lqr-c453="" type="button" data-toggle="collapse"
+                                            data-target="#navbar-collapse" aria-controls="navbar-collapse"
+                                            aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
                                             <span _ngcontent-lqr-c453=""></span>
                                             <span _ngcontent-lqr-c453=""></span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <ul _ngcontent-lqr-c453="" id="button-animated" class="navbar-nav align-items-center ml-md-auto">
+                            <ul _ngcontent-lqr-c453="" id="button-animated"
+                                class="navbar-nav align-items-center ml-md-auto">
                                 <li class="nav-item dropdown">
                                     @auth
-                                    <a class="nav-link nav-link-icon" href="{{ url('/logout')}}">
-                                        LOG KELUAR
-                                    </a>
+                                        <a class="nav-link nav-link-icon" href="{{ url('/logout') }}">
+                                            LOG KELUAR
+                                        </a>
                                     @endauth
                                     @guest
-                                    <a class="nav-link nav-link-icon" href="{{ url('/login')}}">
-                                        DAFTAR | LOG MASUK
-                                    </a>
+                                        <a class="nav-link nav-link-icon" href="{{ url('/login') }}">
+                                            DAFTAR | LOG MASUK
+                                        </a>
                                     @endguest
                                 </li>
                                 <li _ngcontent-lqr-c453="" class="nav-item">
@@ -165,12 +181,12 @@
                                     </a>
                                 </li>
                                 @auth
-                                <li _ngcontent-lqr-c453="" class="nav-item">
-                                    <a class="nav-link nav-link-icon" href="{{ url('/landing_mygeo') }}">
-                                        <!-- <img height="25" src="{{ url('afiqlogin_files/faq-gold.png') }}"> -->
-                                        <span class="nav-link-inner--text text-bold"> DASHBOARD </span>
-                                    </a>
-                                </li>
+                                    <li _ngcontent-lqr-c453="" class="nav-item">
+                                        <a class="nav-link nav-link-icon" href="{{ url('/landing_mygeo') }}">
+                                            <!-- <img height="25" src="{{ url('afiqlogin_files/faq-gold.png') }}"> -->
+                                            <span class="nav-link-inner--text text-bold"> DASHBOARD </span>
+                                        </a>
+                                    </li>
                                 @endauth
                                 <!-- Notifications Dropdown Menu -->
                                 <!-- <li class="nav-item dropdown">
@@ -179,9 +195,9 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                         @auth
-                                        <a href="{{ url('/landing_mygeo') }}" class="dropdown-item">
-                                            Dashboard
-                                        </a>
+                                                <a href="{{ url('/landing_mygeo') }}" class="dropdown-item">
+                                                    Dashboard
+                                                </a>
                                         @endauth
                                         <a href="{{ url('/mengenai_mygeo_explorer') }}" class="dropdown-item">
                                             MyGeo Explorer
@@ -197,7 +213,7 @@
                                         </a>
                                     </div>
 
-                                    <?php /* ?>
+                                    <?php /* ?> ?> ?>
                                     <a href="{{ url('/soalan_lazim') }}">Soalan Lazim (FAQ)</a> <br>
                                     <a href="{{ url('/portal_settings') }}">Portal Settings</a> <br>
                                     <?php */ ?>
@@ -205,7 +221,8 @@
                                 </li> -->
                                 <!--container-->
                                 <li _ngcontent-lqr-c453="" class="nav-item d-lg-none">
-                                    <div _ngcontent-lqr-c453="" data-action="sidenav-pin" data-target="#mySidenav" class="sidenav-toggler sidenav-toggler-dark">
+                                    <div _ngcontent-lqr-c453="" data-action="sidenav-pin" data-target="#mySidenav"
+                                        class="sidenav-toggler sidenav-toggler-dark">
                                         <div _ngcontent-lqr-c453="" class="sidenav-toggler-inner">
                                             <i _ngcontent-lqr-c453="" class="sidenav-toggler-line"></i>
                                             <i _ngcontent-lqr-c453="" class="sidenav-toggler-line"></i>
@@ -280,16 +297,16 @@
         </app-auth-layout>
         <!--container-->
     </app-root>
-    <script src="{{ asset('dist/js/adminlte.min.js')}}"></script>
-    <script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- Datatables -->
-    <script src="{{ asset('/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{ asset('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{ asset('/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{ asset('/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-    <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+    <script src="{{ asset('/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('/dist/js/demo.js') }}"></script>
     <!-- daterangepicker -->

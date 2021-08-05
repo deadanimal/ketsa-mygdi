@@ -31,9 +31,6 @@ class PortalController extends Controller
     function __construct()
     { }
 
-
-
-
     //=== Portal Settings Functions ==========================================================
     public function index_portal_settings()
     {
@@ -47,7 +44,7 @@ class PortalController extends Controller
     }
     public function edit_faq()
     {
-        $faqs = Faq::get();
+        $faqs = Faq::orderBy('id', 'ASC')->get();
         return view('mygeo.faq', compact('faqs'));
     }
 
@@ -74,11 +71,13 @@ class PortalController extends Controller
         $pengumuman = Pengumuman::get();
         return view('mygeo.maklum_balas', compact('hubungi_kami', 'panduan_pengguna', 'penafian', 'penyataan_privasi', 'faq', 'pengumuman'));
     }
+
     public function edit_panduan_pengguna()
     {
         $panduan_pengguna = PanduanPengguna::get()->first();
         return view('mygeo.panduan_pengguna', compact('panduan_pengguna'));
     }
+
     public function edit_pengumuman2()
     {
         $pengumuman = Pengumuman::get();
@@ -132,13 +131,27 @@ class PortalController extends Controller
         return redirect('maklum_balas')->with('success', 'Maklum Balas Dibuang');
     }
 
+    public function reply_maklum_balas(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            //reply maklum_balas
+            PanduanPengguna::where(["id" => $request->id_maklum_balas])->update([
+                "category" => $request->category,
+                "pertanyaan" => $request->pertanyaan,
+                "email" => $request->email,
+                "status" => $request->status
+            ]);
+        });
+
+        return redirect('maklum_balas')->with('success', 'Maklum balas telah dihantar');
+    }
+
     //=== Hubungi Kami Functions ==============================================================
     public function index_hubungi_kami()
     {
         $hubungi_kami = HubungiKami::get()->first();
         return view('hubungi_kami', compact('hubungi_kami'));
     }
-
 
 
     //=== Panduan Penggun Functions ===========================================================
@@ -212,15 +225,15 @@ class PortalController extends Controller
             ]);
         });
 
-        return redirect('mygeo_penyataan_privasi')->with('success', 'Tetapan Penytaan Privasi Disimpan');
+        return redirect('mygeo_penyataan_privasi')->with('success', 'Tetapan Penyataan Privasi Berjaya Disimpan');
     }
 
 
     //=== Soalan Lazim Functions ===========================================================
     public function index_faq()
     {
-        $faq = Faq::get()->first();
-        return view('faq', compact('faq'));
+        $faqs = Faq::orderBy('id', 'ASC')->get();
+        return view('faq', compact('faqs'));
     }
 
 
