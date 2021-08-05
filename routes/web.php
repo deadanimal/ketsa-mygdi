@@ -20,6 +20,7 @@ Route::get('/senarai_metadata_nologin', 'MetadataController@index_nologin');
 Route::post('/carian_metadata_nologin', 'MetadataController@search_nologin');
 Route::post('/lihat_metadata_nologin', 'MetadataController@show_nologin');
 Route::post('/lihat_xml_nologin', 'MetadataController@show_xml_nologin');
+Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
 
 Route::post('/loginf', 'AuthController@authenticate');
 //Route::post('/registerf','RegisterController@create');
@@ -83,11 +84,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/faq', 'PortalController@index_faq');
     Route::get('/kemaskini_faq', 'PortalController@edit_faq');
-    Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
 
     Route::get('/maklum_balas','PortalController@index_maklum_balas');
     Route::get('/maklum_balas_edit', 'PortalController@edit_maklum_balas');
-    Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
+    
     Route::post('/delete_maklum_balas', 'PortalController@delete_maklum_balas');
 
     // Route::get('/panduan_pengguna','PortalController@index_panduan_pengguna');

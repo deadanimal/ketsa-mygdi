@@ -252,7 +252,7 @@
                                 <div class="copyright text-xl-left text-light">
                                     <a class="text-light" href="{{ url('/penyataan_privasi') }}">PENYATAAN PRIVASI</a>
                                     <span class="mr-2 ml-2">|</span>
-                                    <a class="text-light" href="{{ url('/penafian') }}">PENAFIAN</a>s
+                                    <a class="text-light" href="{{ url('/penafian') }}">PENAFIAN</a>
                                     <br>
                                     <br>
                                     <br> Hakcipta Terpelihara © 2021. Pusat Geospatial Malaysia.
