@@ -76,12 +76,18 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-//            dd($ftestxml2);
+            
+            $penerbit = $this->getUser($met->portal_user_id);
+            
             $xml2 = simplexml_load_string($ftestxml2);
-            $metadatas[$met->id] = [$xml2, $met];
+            $metadatas[$met->id] = [$xml2, $met, $penerbit];
         }
 
         return view('mygeo.metadata.senarai_metadata', compact('metadatas'));
+    }
+    
+    function getUser($user_id){
+        return User::where('id',$user_id)->get()->first();
     }
 
     public function index_nologin() {
