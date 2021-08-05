@@ -108,11 +108,6 @@
                                     </div>
                                 </div>
                             </div>
-<<<<<<< HEAD
-                            @foreach ($faqs as $faq)
-                                
-                                <div class="card-body">
-=======
                             <div class="card-body info-faq">
                                 <form method="POST" class="form-horizontal" action="{{ url('update_faq') }}"></form>
                                 @csrf
@@ -129,25 +124,15 @@
                             </div>
                             @foreach ($faqs as $faq)
                                 <div class="card-body hide info-faq-{{ $faq->id }}">
->>>>>>> webpadu
                                     <form method="POST" class="form-horizontal" action="{{ url('update_faq') }}"
                                         id="form_faq_{{ $faq->id }}">
                                         @csrf
-<<<<<<< HEAD
-                                        <input type="hidden" name="id_faq" value="{{ $faq->id}}">
-                                        <input type="hidden" name="content_faq" id="content_faq">
-                                        <input type="hidden" name="title_faq" id="title_faq" value="Soalan Lazim (FAQ)">
-                                        <label class="form-control-label">Kategori</label>
-                                        <input type="text" name="category_faq" id="category_faq" class="form-control"
-                                            value="{{ $faq->category }}">
-=======
                                         <input type="hidden" name="id_faq" value="{{ !is_null($faq) ? $faq->id : '' }}">
                                         <input type="hidden" name="content_faq" id="content_faq_{{ $faq->id }}">
                                         <input type="hidden" name="title_faq" id="title_faq" value="Soalan Lazim (FAQ)">
                                         <label class="form-control-label">Kategori</label>
                                         <input type="text" name="category_faq" id="category_faq" class="form-control"
                                             value="{{ !is_null($faq) ? $faq->category : '' }}">
->>>>>>> webpadu
 
                                         <label class="form-control-label mt-4">Kandungan</label>
                                         <div id="content_faq_input_{{ $faq->id }}"></div>
