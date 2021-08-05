@@ -194,7 +194,7 @@
                                                         <button type="button" data-toggle="modal" data-target="#modal-butiran" data-userid="{{ $user->id }}" class="butiran btn btn-sm btn-info mr-2"><i class="fas fa-eye"></i></button>
                                                         <!--<button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>-->
                                                         <button type="button" data-userid="{{ $user->id }}" class="btnDelete btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
-                                                        <input type="checkbox" data-toggle="toggle" data-on="Aktif" data-off="Tidak Aktif" data-onstyle="success" data-offstyle="danger" data-width="175" data-height="34" class='btnStatusUser' data-userid="{{ $user->id }}">
+                                                        <input type="checkbox" data-toggle="toggle" data-on="Aktif" data-off="Tidak Aktif" data-onstyle="success" data-offstyle="danger" data-width="175" data-height="34" class='btnStatusUser' data-userid="{{ $user->id }}" {{ ($user->status == "1" ? "checked":"") }}>
                                                     </div>
                                                 </td>
                                             </tr>
