@@ -242,6 +242,7 @@
 
     $(document).ready(function() {
         $(document).on('click','.btnSubmit',function(){
+            window.onbeforeunload = null;
             $('#submitAction').val($(this).data('name'));
             
             if($(this).data('name') == 'save'){

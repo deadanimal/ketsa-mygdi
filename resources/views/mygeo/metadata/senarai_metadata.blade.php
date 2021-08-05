@@ -55,7 +55,7 @@
                             <th>Kategori</th>
                             <th>Status</th>
                             <th>Tindakan</th>
-                        @end
+                        @endif
                     </tr>
                   </thead>
                   <tbody>
@@ -75,7 +75,8 @@
                                }
                                ?>
                           </td>
-                          @if(Auth::user()->hasRole(['Pengesah Metadata'])) <?php //################################## ?>                          
+                          @if(Auth::user()->hasRole(['Pengesah Metadata'])) 
+                              <?php //################################## ?>                          
                           <td>
                             {{ (isset($val[2]->name) ? $val[2]->name:"") }}
                           </td>
@@ -130,7 +131,8 @@
                                 </form>
                               </div>
                           </td>
-                         @elseif(auth::user()->hasRole(['Pentadbir Metadata']))<?php //################################## ?>                          
+                         @elseif(auth::user()->hasRole(['Pentadbir Metadata']))
+                             <?php //################################## ?>                          
                          <td>
                               {{ (isset($val[2]->name) ? $val[2]->name:"") }}
                           </td>
@@ -181,7 +183,8 @@
                                 </form>
                               </div>
                           </td>
-                         @elseif(auth::user()->hasRole(['Penerbit Metadata']))<?php //################################## ?>                          
+                         @elseif(auth::user()->hasRole(['Penerbit Metadata']))
+                             <?php //################################## ?>                          
                             <td>
                                 <?php
                                    if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
@@ -226,7 +229,8 @@
                                 </form>
                               </div>
                           </td>
-                         @else <?php //################################## ?>                          
+                         @else 
+                             <?php //################################## ?>                          
                             <td>
                                 <?php
                                    if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
