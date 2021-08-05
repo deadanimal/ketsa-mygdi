@@ -139,9 +139,9 @@
                                         if (count($categories) > 0) {
                                             foreach ($categories as $cat) {
                                                 ?><option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?></option><?php
-                                                                                                                }
-                                                                                                            }
-                                                                                                            ?>
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                     &nbsp;&nbsp;&nbsp;
                                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -205,8 +205,10 @@
                                     @include('mygeo.metadata.pengisian_metadata.data_quality')
                                 </div>
                                 <div id="div_action_buttons">
-                                    <input type="submit" name="btn_draf" value="Simpan" class="btn btn-primary">
-                                    <input type="submit" name="btn_save" value="Hantar" class="btn btn-success">
+                                    <input type="button" data-name="draf" value="Simpan" class="btn btn-primary btnDraf btnSubmit">
+                                    <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSave btnSubmit">
+                                    
+                                    <input type="hidden" name="submitAction" id="submitAction" value="save">
                                 </div>
                             </div>
                         </form>
@@ -218,9 +220,45 @@
 </div>
 
 <script>
+    $("#c2_metadataName").focusout(function(){
+        var metadataName = $(this).val();
+        var thisVal = $(this);
+        $.ajax({
+            method: "POST",
+            url: "validateMetadataName",
+            data: {"_token": "{{ csrf_token() }}", "metadataName": metadataName},
+        }).done(function (response) {
+            if(response == "found"){
+                alert('Nama metadata sudah wujud');
+                $('.btnDraf').prop('disabled',true);
+                $('.btnSave').prop('disabled',true);
+            }else{
+                $('.btnDraf').prop('disabled',false);
+                $('.btnSave').prop('disabled',false);
+            }
+        });
+    });
     var pengesahs = [];
 
     $(document).ready(function() {
+        $(document).on('click','.btnSubmit',function(){
+            $('#submitAction').val($(this).data('name'));
+            
+            if($(this).data('name') == 'save'){
+                if(confirm('Anda pasti untuk menghantar metadata?')){
+                    $('#form_metadata').submit();
+                }
+            }else if($(this).data('name') == 'draf'){
+                if($('#c2_metadataName').val() == ""){
+                    alert('Sila isi nama metadata');
+                }else{
+                    if(confirm('Anda pasti untuk menyimpan metadata?')){
+                        $('#form_metadata').submit();
+                    }
+                }
+            }
+        });
+        
         $('#accordion').hide();
         <?php
         if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
@@ -281,6 +319,79 @@
 
         $(document).on('change', '#kategori', function() {
             var kategori = $(this).val();
+            if (kategori.toLowerCase() == "dataset") {
+                $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
+                $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?><span class="text-warning">*</span>');
+                $('.divPublisherRole').show();
+                $('.divMetadataDate').show();
+                $('.divMetadataDateType').show();
+                $('.divMetadataStatus').show();
+                $('.divResponsiblePartyRole').show();
+                $('.optContentInfo_dataset').show();
+                $('.optContentInfo_services').hide();
+                $('.optContentInfo_gridded').hide();
+                $('.optContentInfo_imagery').hide();
+                $('.optStatus_dataset').show();
+                $('.optStatus_services').hide();
+                $('.divTypeOfServices').hide();
+                $('.divOperationName').hide();
+                $('.divServiceUrl').hide();
+                $('.divTypeOfCouplingDataset').hide();
+                $('.refSys_Services').hide();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').show();
+                $('.divUseLimitation').hide();
+                $('.divMaintenanceInfo').hide();
+            }else if (kategori.toLowerCase() == "services") {
+                $('.optContentInfo_dataset').hide();
+                $('.optContentInfo_services').show();
+                $('.optContentInfo_gridded').hide();
+                $('.optContentInfo_imagery').hide();
+                $('.optStatus_dataset').hide();
+                $('.optStatus_services').show();
+                $('.divTypeOfServices').show();
+                $('.divOperationName').show();
+                $('.divServiceUrl').show();
+                $('.divTypeOfCouplingDataset').show();
+                $('.refSys_Services').show();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',false);
+                $('.divDataQualityTabs').hide();
+                $('.divUseLimitation').show();
+                $('.divMaintenanceInfo').hide();
+            }else if (kategori.toLowerCase() == "gridded") {
+                $('.optContentInfo_dataset').hide();
+                $('.optContentInfo_services').hide();
+                $('.optContentInfo_gridded').show();
+                $('.optContentInfo_imagery').hide();
+                $('.optStatus_dataset').hide();
+                $('.optStatus_services').show()
+                $('.divTypeOfServices').hide();
+                $('.divOperationName').hide();
+                $('.divServiceUrl').hide();
+                $('.divTypeOfCouplingDataset').hide();
+                $('.refSys_Services').hide();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').show();
+                $('.divUseLimitation').hide();
+                $('.divMaintenanceInfo').show();
+            }else if (kategori.toLowerCase() == "imagery") {
+                $('.optContentInfo_dataset').hide();
+                $('.optContentInfo_services').hide();
+                $('.optContentInfo_gridded').hide();
+                $('.optContentInfo_imagery').show();
+                $('.optStatus_dataset').hide();
+                $('.optStatus_services').show();
+                $('.divTypeOfServices').hide();
+                $('.divOperationName').hide();
+                $('.divServiceUrl').hide();
+                $('.divTypeOfCouplingDataset').hide();
+                $('.refSys_Services').hide();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').show();
+                $('.divUseLimitation').hide();
+                $('.divMaintenanceInfo').show();
+            }
+            
             if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
                 $('#accordion').show();
@@ -289,6 +400,27 @@
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
                 $('#accordion').show();
                 $('#div_action_buttons').show();
+            }
+        });
+        
+        $(document).on('change', '#c2_product_type', function() {
+            var type = $(this).val();
+            if (type == "Application") {
+                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
+            }else if (type == "Document") {
+                $('#c2_abstract').attr('placeholder','Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
+            }else if (type == "GIS Activity/Project") {
+                $('#c2_abstract').attr('placeholder','Nama Aktiviti –Tujuan – Lokasi – Tahun');
+            }else if (type == "Map") {
+                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit ');
+            }else if (type == "Raster Data") {
+                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
+            }else if (type == "Services") {
+                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
+            }else if (type == "Software") {
+                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
+            }else if (type == "Vector Data") {
+                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
             }
         });
 
@@ -437,6 +569,7 @@
             [sblt, eblg]
         ];
         rectangle = L.rectangle(bounds).addTo(map);
+        map.fitBounds(bounds);
     }
 
     function cleaLayer() {

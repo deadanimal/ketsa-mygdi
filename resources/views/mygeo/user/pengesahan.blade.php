@@ -55,9 +55,10 @@
                                 <thead>
                                     <tr>
                                         <th>Bil</th>
-                                        <th>Nama Metadata</th>
+                                        <th>Nama</th>
                                         <th>Agensi</th>
                                         <th>Peranan</th>
+					<th>Butiran</th>
                                         <th>Tindakan</th>
                                     </tr>
                                 </thead>
@@ -94,19 +95,26 @@
                                     }
                                     ?>
                                 </tbody>
-                                <!-- <tfoot>
-                    <tr>
-                      <th>Bil</th>
-                      <th>Nama Metadata</th>
-                      <th>Agensi</th>
-                      <th>Peranan</th>
-                      <th>Butiran</th>
-                      <th>Tindakan</th>
-                    </tr>
-                  </tfoot> -->
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+  <div class="modal fade" id="modal-butiran">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Maklumat Pengguna</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card-body modal_user_detail">
                 </div>
             </div>
         </div>

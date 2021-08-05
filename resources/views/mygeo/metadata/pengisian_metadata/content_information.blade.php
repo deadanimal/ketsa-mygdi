@@ -18,7 +18,14 @@
                                 <div class="form-control-label mr-3">
                                     Band Boundry
                                 </div>
-                                <input type="text" name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm" style="width:150px;" value="{{old('c7_band_boundary')}}">
+                                <select name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm">
+                                    <option value="">Pilih...</option>
+                                    <option value="Equivalent Width" {{ (old('c7_band_boundary') == "Equivalent Width" ? "selected":"") }}>Equivalent Width</option>
+                                    <option value="Fifty Percent" {{ (old('c7_band_boundary') == "Fifty Percent" ? "selected":"") }}>Fifty Percent</option>
+                                    <option value="One Over E" {{ (old('c7_band_boundary') == "One Over E" ? "selected":"") }}>One Over E</option>
+                                    <option value="3d B" {{ (old('c7_band_boundary') == "3d B<" ? "selected":"") }}>3d B</option>
+                                    <option value="Half Mazimum" {{ (old('c7_band_boundary') == "Half Mazimum" ? "selected":"") }}>Half Mazimum</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -28,7 +35,7 @@
                                 <div class="form-control-label mr-4">
                                     Transfer Function Type
                                 </div>
-                                <input class="form-control form-control-sm" type="text" style="width :200px" placeholder="Transfer Type" nname="c7_trans_fn_type" id="c7_trans_fn_type" value="{{old('c7_trans_fn_type')}}">
+                                <input class="form-control form-control-sm" type="text" style="width :200px" placeholder="Transfer Type" name="c7_trans_fn_type" id="c7_trans_fn_type" value="{{old('c7_trans_fn_type')}}">
                             </div>
                         </div>
                         <div class="col-xl-6">

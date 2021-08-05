@@ -12,6 +12,16 @@
                                                     <div class="col-xl-6">
                                                         <h6 class="heading-small text muted">Legal Constraints</h6>
                                                         <div class="pl-lg-3">
+                                                            <div class="row mb-2 divUseLimitation">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="c14_useLimitation">
+                                                                        Use Limitation
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-xl-7">
+                                                                    <input type="text" name="c14_useLimitation" id="c14_useLimitation" class="form-control form-control-sm" value="{{ old('c14_useLimitation') }}">
+                                                                </div>
+                                                            </div>
                                                             <div class="row mb-2">
                                                                 <div class="col-xl-5">
                                                                     <label class="form-control-label" for="input-access-cons">
@@ -20,14 +30,15 @@
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm">
+                                                                        <option value="">Pilih</option>
                                                                         <option value="Copyright" {{(old('c14_access_constraint') == 'Copyright' ? "selected":"")}}>Copyright</option>
                                                                         <option value="Intellectual Property Rights" {{(old('c14_access_constraint') == 'Intellectual Property Rights' ? "selected":"")}}>Intellectual Property Rights</option>
                                                                         <option value="License" {{(old('c14_access_constraint') == 'License' ? "selected":"")}}>License</option>
                                                                         <option value="License End User" {{(old('c14_access_constraint') == 'License End User' ? "selected":"")}}>License End User</option>
                                                                         <option value="License Unrestricted" {{(old('c14_access_constraint') == 'License Unrestricted' ? "selected":"")}}>License Unrestricted</option>
                                                                         <option value="Other Restrictions" {{(old('c14_access_constraint') == 'Other Restrictions' ? "selected":"")}}>Other Restrictions</option>
-                                                                        <option value="Patient" {{(old('c14_access_constraint') == 'Patient' ? "selected":"")}}>Patient</option>
-                                                                        <option value="Patient Pending" {{(old('c14_access_constraint') == 'Patient Pending' ? "selected":"")}}>Patient Pending</option>
+                                                                        <option value="Patent" {{(old('c14_access_constraint') == 'Patent' ? "selected":"")}}>Patent</option>
+                                                                        <option value="Patent Pending" {{(old('c14_access_constraint') == 'Patent Pending' ? "selected":"")}}>Patent Pending</option>
                                                                         <option value="Restricted" {{(old('c14_access_constraint') == 'Restricted' ? "selected":"")}}>Restricted</option>
                                                                         <option value="Trademark" {{(old('c14_access_constraint') == 'Trademark' ? "selected":"")}}>Trademark</option>
                                                                         <option value="Unrestricted" {{(old('c14_access_constraint') == 'Unrestricted' ? "selected":"")}}>Unrestricted</option>
@@ -42,14 +53,15 @@
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm">
+                                                                        <option value="">Pilih</option>
                                                                         <option value="Copyright" {{(old('c14_use_constraint') == 'Copyright' ? "selected":"")}}>Copyright</option>
                                                                         <option value="Intellectual Property Rights" {{(old('c14_use_constraint') == 'Intellectual Property Rights' ? "selected":"")}}>Intellectual Property Rights</option>
                                                                         <option value="License" {{(old('c14_use_constraint') == 'License' ? "selected":"")}}>License</option>
                                                                         <option value="License End User" {{(old('c14_use_constraint') == 'License End User' ? "selected":"")}}>License End User</option>
                                                                         <option value="License Unrestricted" {{(old('c14_use_constraint') == 'License Unrestricted' ? "selected":"")}}>License Unrestricted</option>
                                                                         <option value="Other Restrictions" {{(old('c14_use_constraint') == 'Other Restrictions' ? "selected":"")}}>Other Restrictions</option>
-                                                                        <option value="Patient" {{(old('c14_use_constraint') == 'Patient' ? "selected":"")}}>Patient</option>
-                                                                        <option value="Patient Pending" {{(old('c14_use_constraint') == 'Patient Pending' ? "selected":"")}}>Patient Pending</option>
+                                                                        <option value="Patent" {{(old('c14_use_constraint') == 'Patent' ? "selected":"")}}>Patent</option>
+                                                                        <option value="Patent Pending" {{(old('c14_use_constraint') == 'Patent Pending' ? "selected":"")}}>Patent Pending</option>
                                                                         <option value="Restricted" {{(old('c14_use_constraint') == 'Restricted' ? "selected":"")}}>Restricted</option>
                                                                         <option value="Trademark" {{(old('c14_use_constraint') == 'Trademark' ? "selected":"")}}>Trademark</option>
                                                                         <option value="Unrestricted" {{(old('c14_use_constraint') == 'Unrestricted' ? "selected":"")}}>Unrestricted</option>
@@ -65,27 +77,32 @@
                                                             <div class="row mb-2">
                                                                 <div class="col-xl-5">
                                                                     <label class="form-control-label" for="input-access-cons">
-                                                                        Classification System
+                                                                        Classification
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
-                                                                        <option value="Limited" {{(old('c14_classification_sys') == 'Limited' ? "selected":"")}}>Limited</option>
-                                                                        <option value="Open" {{(old('c14_classification_sys') == 'Open' ? "selected":"")}}>Open</option>
+                                                                        <option value="">Pilih</option>
+                                                                        <option value="Confidential" {{(old('c14_classification_sys') == 'Confidential' ? "selected":"")}}>Confidential</option>
+                                                                        <option value="For Official Use Only" {{(old('c14_classification_sys') == 'For Official Use Only' ? "selected":"")}}>For Official Use Only</option>
+                                                                        <option value="Limited Distribution" {{(old('c14_classification_sys') == 'Limited Distribution' ? "selected":"")}}>Limited Distribution</option>
+                                                                        <option value="Protected" {{(old('c14_classification_sys') == 'Protected' ? "selected":"")}}>Protected</option>
+                                                                        <option value="Restricted" {{(old('c14_classification_sys') == 'Restricted' ? "selected":"")}}>Restricted</option>
                                                                         <option value="Secret" {{(old('c14_classification_sys') == 'Secret' ? "selected":"")}}>Secret</option>
+                                                                        <option value="Sensitive But Unclassified" {{(old('c14_classification_sys') == 'Sensitive But Unclassified' ? "selected":"")}}>Sensitive But Unclassified</option>
                                                                         <option value="Top Secret" {{(old('c14_classification_sys') == 'Top Secret' ? "selected":"")}}>Top Secret</option>
-                                                                        <option value="Others" {{(old('c14_classification_sys') == 'Others' ? "selected":"")}}>Others</option>
+                                                                        <option value="Unclassified" {{(old('c14_classification_sys') == 'Unclassified' ? "selected":"")}}>Unclassified</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-2">
                                                                 <div class="col-xl-5">
                                                                     <label class="form-control-label" for="input-reference">
-                                                                        Reference
+                                                                        Classification System
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">
-                                                                    <input class="form-control form-control-sm" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal" value="{{old('c14_reference')}}">
+                                                                    <input class="form-control form-control-sm" name="c14_reference" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal" value="{{old('c14_reference')}}">
                                                                 </div>
                                                             </div>
                                                         </div>

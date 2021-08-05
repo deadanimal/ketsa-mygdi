@@ -17,6 +17,30 @@
                 }
                 ?>
             </div>
+            <div class="form-group row divMetadataLanguage">
+                <p class="pl-lg-3 form-control-label">Language<span class="mx-3">:</span></p>
+                <?php
+                if (isset($metadataxml->language->CharacterString) && $metadataxml->language->CharacterString != "") {
+                    echo $metadataxml->language->CharacterString;
+                }
+                ?>
+            </div>
+            <div class="form-group row">
+                <p class="pl-lg-3 form-control-label">Metadata Language<span class="mx-3">:</span></p>
+                <?php
+                if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
+                    echo $metadataxml->contact->CI_ResponsibleParty;
+                }
+                ?>
+            </div>
+            <div class="form-group row">
+                <p class="pl-lg-3 form-control-label">Metadata Create Date<span class="mx-3">:</span></p>
+                <?php
+                if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
+                    echo $metadataxml->contact->CI_ResponsibleParty;
+                }
+                ?>
+            </div>
             <h2 class="heading-small text-muted">Metadata Publisher</h2>
             <div class="">
                 <div class="row my-0 py-0">
@@ -73,6 +97,47 @@
                             echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
                         }
                         ?>
+                    </div>
+                </div>
+                <div class="row my-0 py-0 divPublisherRole">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="publisher_role">
+                            Role
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-8">
+                        <?php
+                        $pub_role = "";
+                        if(isset($metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString != ""){
+                            $pub_role = $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString;
+                        }
+                        echo $pub_role;
+                        ?>
+                    </div>
+                </div>
+                <div class="row my-0 py-0">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="metadata_standard_name">
+                            Metadata Standard Name
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-8">
+                        MyGDI Metadata Standard
+                        <?php
+                        if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
+                            echo '('.$metadataxml->categoryTitle->categoryItem->CharacterString.')';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="row my-0 py-0">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="metadata_standard_version">
+                            Metadata Standard Version
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-8">
+                        Version 1.0
                     </div>
                 </div>
             </div>

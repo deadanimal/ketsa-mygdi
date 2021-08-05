@@ -17,6 +17,22 @@
                 <div class="col-xl-6">
                     <h6 class="heading-small text muted">Legal Constraints</h6>
                     <div class="pl-lg-3">
+                        <div class="row mb-2 divUseLimitation">
+                            <div class="col-xl-5">
+                                <label class="form-control-label" for="input-access-cons">
+                                    Use Limitation
+                                </label>
+                            </div>
+                            <div class="col-xl-7">
+                                <?php
+                                $useLimitation = "";
+                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+                                    $useLimitation = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString);
+                                }
+                                ?>
+                                <input type="text" name="c14_useLimitation" id="c14_useLimitation" class="form-control form-control-sm" value="{{ $useLimitation }}">
+                            </div>
+                        </div>
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">
@@ -37,8 +53,8 @@
                                     <option value="License End User" {{($accessConst == 'License End User' ? "selected":"")}}>License End User</option>
                                     <option value="License Unrestricted" {{($accessConst == 'License Unrestricted' ? "selected":"")}}>License Unrestricted</option>
                                     <option value="Other Restrictions" {{($accessConst == 'Other Restrictions' ? "selected":"")}}>Other Restrictions</option>
-                                    <option value="Patient" {{($accessConst == 'Patient' ? "selected":"")}}>Patient</option>
-                                    <option value="Patient Pending" {{($accessConst == 'Patient Pending' ? "selected":"")}}>Patient Pending</option>
+                                    <option value="Patent" {{($accessConst == 'Patent' ? "selected":"")}}>Patent</option>
+                                    <option value="Patent Pending" {{($accessConst == 'Patent Pending' ? "selected":"")}}>Patent Pending</option>
                                     <option value="Restricted" {{($accessConst == 'Restricted' ? "selected":"")}}>Restricted</option>
                                     <option value="Trademark" {{($accessConst == 'Trademark' ? "selected":"")}}>Trademark</option>
                                     <option value="Unrestricted" {{($accessConst == 'Unrestricted' ? "selected":"")}}>Unrestricted</option>
@@ -65,8 +81,8 @@
                                     <option value="License End User" {{($useConst == 'License End User' ? "selected":"")}}>License End User</option>
                                     <option value="License Unrestricted" {{($useConst == 'License Unrestricted' ? "selected":"")}}>License Unrestricted</option>
                                     <option value="Other Restrictions" {{($useConst == 'Other Restrictions' ? "selected":"")}}>Other Restrictions</option>
-                                    <option value="Patient" {{($useConst == 'Patient' ? "selected":"")}}>Patient</option>
-                                    <option value="Patient Pending" {{($useConst == 'Patient Pending' ? "selected":"")}}>Patient Pending</option>
+                                    <option value="Patent" {{($useConst == 'Patent' ? "selected":"")}}>Patient</option>
+                                    <option value="Patent Pending" {{($useConst == 'Patent Pending' ? "selected":"")}}>Patent Pending</option>
                                     <option value="Restricted" {{($useConst == 'Restricted' ? "selected":"")}}>Restricted</option>
                                     <option value="Trademark" {{($useConst == 'Trademark' ? "selected":"")}}>Trademark</option>
                                     <option value="Unrestricted" {{($useConst == 'Unrestricted' ? "selected":"")}}>Unrestricted</option>
@@ -82,7 +98,7 @@
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">
-                                    Classification System
+                                    Classification
                                 </label>
                             </div>
                             <div class="col-xl-7">
@@ -93,11 +109,15 @@
                                 }
                                 ?>
                                 <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
-                                    <option value="Limited" {{($classSys == 'Limited' ? "selected":"")}}>Limited</option>
-                                    <option value="Open" {{($classSys == 'Open' ? "selected":"")}}>Open</option>
+                                    <option value="Confidential" {{($classSys == 'Confidential' ? "selected":"")}}>Confidential</option>
+                                    <option value="For Official Use Only" {{($classSys == 'For Official Use Only' ? "selected":"")}}>For Official Use Only</option>
+                                    <option value="Limited Distribution" {{($classSys == 'Limited Distribution' ? "selected":"")}}>Limited Distribution</option>
+                                    <option value="Protected" {{($classSys == 'Protected' ? "selected":"")}}>Protected</option>
+                                    <option value="Restricted" {{($classSys == 'Restricted' ? "selected":"")}}>Restricted</option>
                                     <option value="Secret" {{($classSys == 'Secret' ? "selected":"")}}>Secret</option>
+                                    <option value="Sensitive But Unclassified" {{($classSys == 'Sensitive But Unclassified' ? "selected":"")}}>Sensitive But Unclassified</option>
                                     <option value="Top Secret" {{($classSys == 'Top Secret' ? "selected":"")}}>Top Secret</option>
-                                    <option value="Others" {{($classSys == 'Others' ? "selected":"")}}>Others</option>
+                                    <option value="Unclassified" {{($classSys == 'Unclassified' ? "selected":"")}}>Unclassified</option>
                                 </select>
                             </div>
                         </div>

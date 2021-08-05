@@ -128,14 +128,20 @@
                                     <div class="col-3">
                                         <input class="form-control form-control-sm ml-3" id="phone_pejabat" type="text" value="{{ $user->phone_pejabat }}" disabled />
                                     </div>
-                                    <div class="col-2">
-                                        <label class="form-control-label mr-4" for="phone_bimbit">
-                                            Telefon Bimbit
-                                        </label><label class="float-right">:</label>
-                                    </div>
-                                    <div class="col-3">
-                                        <input class="form-control form-control-sm ml-3" id="phone_bimbit" type="text" value="{{ $user->phone_bimbit }}" disabled />
-                                    </div>
+                                    <?php
+                                    if(Auth::user()->hasRole('Pemohon Data')){
+                                        ?>
+                                        <div class="col-2">
+                                            <label class="form-control-label mr-4" for="phone_bimbit">
+                                                Telefon Bimbit
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-3">
+                                            <input class="form-control form-control-sm ml-3" id="phone_bimbit" type="text" value="{{ $user->phone_bimbit }}" disabled />
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col-3">
@@ -149,9 +155,11 @@
                                             $count = 1;
                                             foreach ($user->getRoleNames() as $role) {
                                                 ?><input class="form-control form-control-sm ml-3" id="peranan" type="text" value="<?php echo $role; ?> " disabled /><?php
-                                                if ($count != count($user->getRoleNames())) {                                                                    ?>,<?php                                                                                                   }
+                                                if ($count != count($user->getRoleNames())) {                                                                                           ?>,<?php
+                                                }
                                                 $count++;
-                                            }                                                                                                         }
+                                            }
+                                        }
                                         ?>
                                     </div>
                                 </div>
@@ -188,7 +196,14 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <input class="form-control form-control-sm ml-3" placeholder="Masukkan Kata Laluan Lama" type="password" id="password_old" name="password_old" />
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="Masukkan Kata Laluan Lama" type="password" id="password_old" name="password_old" />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-eye" onclick="myFunction1()"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -198,7 +213,14 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <input class="form-control form-control-sm ml-3" placeholder="Masukkan Kata Laluan Baru" type="password" id="password_new" name="password_new" />
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="Masukkan Kata Laluan Baru" type="password" id="password_new" name="password_new" />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-eye" onclick="myFunction2()"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -208,7 +230,14 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <input class="form-control form-control-sm ml-3" placeholder="Sahkan Kata Laluan Baru" type="password" id="password_new_confirm" name="password_new_confirm" />
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="Sahkan Kata Laluan Baru" type="password" id="password_new_confirm" name="password_new_confirm" />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-eye" onclick="myFunction3()"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -222,29 +251,67 @@
 </div>
 
 <script>
-$(document).ready(function(){
-    <?php
-    if(Session::has('message')){
-        ?>alert("{{ Session::get('message') }}");<?php
-    }
-    ?>
-            
-    $(document).on('click','.btnTukar',function(){
-        var passold = $('#password_old').val();
-        var passnew = $('#password_new').val();
-        var passnewconfirm = $('#password_new_confirm').val();
-        
-        if(passold == "" || passnew == "" || passnewconfirm == ""){
-            alert('Sila pastikan maklumat kata laluan lama dan baru lengkap');
-        }else{
-            if(passnew == passnewconfirm){
-                $('#form_change_password').submit();
-            }else{
-                alert('Sila pastikan input kata laluan baru dan sahkan kata laluan baru sama dan lengkap');
-            }
+    $(document).ready(function(){
+        <?php
+        if(Session::has('message')){
+            ?>alert("{{ Session::get('message') }}");<?php
         }
+        ?>
+
+        $(document).on('click','.btnTukar',function(){
+            var passold = $('#password_old').val();
+            var password_daftar = $("#password_new").val();
+            var password_confirm = $("#password_new_confirm").val();
+            var msg = "";
+            if(passold == ""){
+                msg = msg + "Sila isi kata laluan kini\r\n\r\n"
+            }
+            if(!checkPassword(password_daftar)){
+                msg = msg + "Kata laluan mesti mempunyai sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil, nombor dan simbol.\r\n\r\n";
+            }
+            if(password_daftar != password_confirm){
+                msg = msg + "Kata laluan yang dimasukkan berbeza dengan kata laluan yang disahkan\r\n\r\n";
+            }
+            if(msg.length > 0){
+                alert(msg);
+            }else{
+                $('#form_change_password').submit();
+            }
+        });
     });
-});
+    
+    function myFunction1() {
+        var x = document.getElementById("password_old");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction2() {
+        var x = document.getElementById("password_new");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction3() {
+        var x = document.getElementById("password_new_confirm");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    
+    function checkPassword(str){
+        // at least one number, one lowercase and one uppercase letter, at least 12 characters
+        var regex = /^(?=^.{12,40}$)(?=.*\d)(?=.*[\W_])(?=.*[a-z])(?=.*[A-Z])(?!^.*\n).*$/;
+        return regex.test(str);
+    }
 </script>
 
 @stop

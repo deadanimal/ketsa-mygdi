@@ -14,7 +14,7 @@
                         <div class="form-control-label mr-3">
                             Process Level
                         </div>
-                        <input class="form-control form-control-sm" type="text" style="width :120pxpx" placeholder="Insert Process Level" name="c5_process_lvl" id="c5_process_lvl" value="{{old('c5_process_lvl')}}">
+                        <input class="form-control form-control-sm" type="text" style="width :120px" placeholder="Insert Process Level" name="c5_process_lvl" id="c5_process_lvl" value="{{old('c5_process_lvl')}}">
                     </div>
                 </div>
                 <div class="col-xl-6">

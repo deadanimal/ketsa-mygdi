@@ -20,14 +20,27 @@
                         <?php
                         if (count($refSys) > 0) {
                             foreach ($refSys as $ids) {
+                                $class = "";
+                                if($ids->name == "UTM ZON 47" ||
+                                        $ids->name == "UTM ZON 48" ||
+                                        $ids->name == "UTM ZON 49" ||
+                                        $ids->name == "UTM ZON 50" ||
+                                        $ids->name == "ESPG" ||
+                                        $ids->name == "SR-ORG" ||
+                                        $ids->name == "ESRI" ||
+                                        $ids->name == "Unknown / Not Geo Reference"
+                                ){
+                                    $class = "refSys_Services";
+                                }
+                                
                                 if ($ids->id == old('c13_ref_sys_identify')) {
-                                    ?><option value="<?php echo $ids->id; ?>" selected><?php echo $ids->name; ?></option><?php
-                                                                                                                                                                        } else {
-                                                                                                                                                                            ?><option value="<?php echo $ids->id; ?>"><?php echo $ids->name; ?></option><?php
-                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                        ?>
+                                    ?><option value="<?php echo $ids->id; ?>" selected class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
+                                } else {
+                                    ?><option value="<?php echo $ids->id; ?>" class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
+                                }
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
@@ -98,5 +111,13 @@
                 }
             });
         });
+        
+        <?php
+        if(null !== old('c13_ref_sys_identify')){
+            ?>
+            $("#c13_ref_sys_identify").val("<?php echo old('c13_ref_sys_identify'); ?>").change();    
+            <?php
+        }
+        ?>
     });
 </script>

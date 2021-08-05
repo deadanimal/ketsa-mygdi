@@ -12,11 +12,12 @@
         @endif
     </div>
     <div id="collapse11" class="panel-collapse collapse in show" data-parent="#div_c11">
-        <div class="card-body">
+        <div class="card-body">            
+            <h6 class="heading-small text-muted mt-4">Distribution Format</h6>
             <div class="row mb-2">
                 <div class="col-xl-2">
                     <label class="form-control-label" for="input-distribution-format">
-                        Distribution Format </label>
+                        Format Name</label>
                 </div>
                 <div class="col-xl-3">
                     <?php
@@ -29,10 +30,9 @@
                 </div>
                 <div class="col-xl-1">
                     <label class="form-control-label" for="input-version">
-                        Version </label>
+                        Format Version </label>
                 </div>
                 <div class="col-xl-2">
-
                     <?php
                     $version = "";
                     if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString != "") {
@@ -41,24 +41,12 @@
                     ?>
                     <input class="form-control form-control-sm" type="text" name="c11_version" id="c11_version" placeholder="Format Version" value="{{ $version }}">
                 </div>
-                <div class="col-xl-1">
-                    <label class="form-control-label" for="input-medium">
-                        Medium </label>
-                </div>
-                <div class="col-xl-3">
-                    <?php
-                    $medium = "";
-                    if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium != "") {
-                        $medium = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium;
-                    }
-                    ?>
-                    <input type="text" name="c11_medium" id="c11_medium" class="form-control form-control-sm" value="{{ $medium }}">
-                </div>
             </div>
+            <h6 class="heading-small text-muted mt-4">Distributor</h6>
             <div class="row mb-2">
                 <div class="col-xl-2">
                     <label class="form-control-label" for="input-distributor">
-                        Distributor </label>
+                        Organisation Name </label>
                 </div>
                 <div class="col-xl-6">
                     <?php
@@ -67,12 +55,10 @@
                         $dist = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName;
                     }
                     ?>
-                    <input type="text" name="c11_distributor" id="c11_distributor" class="form-control form-control-sm" value="{{ $dist }}" placeholder="Organization Name">
+                    <input type="text" name="c11_distributor" id="c11_distributor" class="form-control form-control-sm" placeholder="Organization Name" value="{{ $dist }}">
                 </div>
             </div>
-            <h6 class="heading-small text-muted mt-4">Distribution Order Process
-            </h6>
-            <div class="pl-lg-3">
+            <h6 class="heading-small text-muted mt-4">Ordering Transfer Options</h6>
                 <div class="row mb-2">
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-unit-distribution">
@@ -88,18 +74,68 @@
                         <input type="text" placeholder="Units" name="c11_units_of_dist" id="c11_units_of_dist" class="form-control form-control-sm" value="{{ $unitDist }}">
                     </div>
                     <div class="col-xl-2">
+                        <label class="form-control-label" for="input-sizemb">
+                            Size (Megabytes) </label>
+                    </div>
+                    <div class="col-xl-2">
                         <?php
                         $size = "";
                         if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize != "") {
                             $size = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize;
                         }
                         ?>
-                        <label class="form-control-label" for="input-sizemb">
-                            Size (Megabytes) </label>
+                        <input type="text" name="c11_size" id="c11_size" class="form-control form-control-sm" placehorder="Size" value="{{ $size }}">
                     </div>
-                    <div class="col-xl-2">
-                        <input type="text" name="c11_size" id="c11_size" class="form-control form-control-sm" value="{{ $size }}" placehorder="Size">
+                    <div class="col-xl-1">
+                        <label class="form-control-label" for="input-distributor">
+                            Link </label>
                     </div>
+                    <div class="col-xl-4">
+                        <?php
+                        $link = "";
+                        if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage != "") {
+                            $link = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage;
+                        }
+                        ?>
+                        <input class="form-control form-control-sm" name="c11_link" id="c11_link" placeholder="Ordering Website Link" type="text" value="{{ $link }}">
+                    </div>
+                </div>
+            <h6 class="heading-small text-muted mt-4">Medium Format</h6>
+            <div class="pl-lg-3">
+                <div class="col-xl-1">
+                    <label class="form-control-label" for="input-medium">
+                        Medium Name</label>
+                </div>
+                <div class="col-xl-3">
+                    <?php
+                    $medium = "";
+                    if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name != "") {
+                        $medium = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name;
+                    }
+                    ?>
+                    <select name="c11_medium" id="c11_medium" class="form-control form-control-sm">
+                        <option value="cdROM" {{ ($medium=='cdROM' ? 'selected':'') }}>cdROM</option>
+                        <option value="dvd" {{ ($medium=='dvd' ? 'selected':'') }}>dvd</option>
+                        <option value="dvdRom" {{ ($medium=='dvdRom' ? 'selected':'') }}>dvdRom</option>
+                        <option value="3halfInchFloppy" {{ ($medium=='3halfInchFloppy' ? 'selected':'') }}>3halfInchFloppy</option>
+                        <option value="5quarterInchFloppy" {{ ($medium=='5quarterInchFloppy' ? 'selected':'') }}>5quarterInchFloppy</option>
+                        <option value="7trackTape" {{ ($medium=='7trackTape' ? 'selected':'') }}>7trackTape</option>
+                        <option value="9trackTape" {{ ($medium=='9trackTape' ? 'selected':'') }}>9trackTape</option>
+                        <option value="3480Cartridge" {{ ($medium=='3480Cartridge' ? 'selected':'') }}>3480Cartridge</option>
+                        <option value="3490Cartridge" {{ ($medium=='3490Cartridge' ? 'selected':'') }}>3490Cartridge</option>
+                        <option value="3580Cartridge" {{ ($medium=='3580Cartridge' ? 'selected':'') }}>3580Cartridge</option>
+                        <option value="4mmCartridgeTape" {{ ($medium=='4mmCartridgeTape' ? 'selected':'') }}>4mmCartridgeTape</option>
+                        <option value="8mmCartridgeTape" {{ ($medium=='8mmCartridgeTape' ? 'selected':'') }}>8mmCartridgeTape</option>
+                        <option value="1quaterInchCartridgeTape" {{ ($medium=='1quaterInchCartridgeTape' ? 'selected':'') }}>1quaterInchCartridgeTape</option>
+                        <option value="digitalLinearTape" {{ ($medium=='digitalLinearTape' ? 'selected':'') }}>digitalLinearTape</option>
+                        <option value="onLine" {{ ($medium=='onLine' ? 'selected':'') }}>onLine</option>
+                        <option value="satellite" {{ ($medium=='satellite' ? 'selected':'') }}>satellite</option>
+                        <option value="telephoneLink" {{ ($medium=='telephoneLink' ? 'selected':'') }}>telephoneLink</option>
+                        <option value="hardcopy" {{ ($medium=='hardcopy' ? 'selected':'') }}>hardcopy</option>
+                    </select>
+                </div>
+                <h6 class="heading-small text-muted mt-4">Distribution Order Process</h6>
+                <div class="row mb-2">
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-fees">
                             Fees </label>
@@ -111,32 +147,11 @@
                             $fees = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees;
                         }
                         ?>
-                        <input type="text" name="c11_fees" id="c11_fees" placeholder="RM 0.00" value="{{ $fees }}" class="form-control form-control-sm" placeholder="RM 0.00">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-xl-1">
-                        <?php
-                        $link = (isset($metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL) ? $metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL : "");
-                        ?>
-                        <label class="form-control-label" for="input-distributor">
-                            Link </label>
-                    </div>
-                    <div class="col-xl-4">
-                        <?php
-                        $link = "";
-                        if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage != "") {
-                            $link = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage;
-                        }
-                        ?>
-                        <input type="text" name="c11_link" id="c11_link" class="form-control col-lg-3" value="{{ $link }}" placeholder="Ordering Website Link">
+                        <input type="text" name="c11_fees" id="c11_fees" class="form-control form-control-sm" placeholder="RM 0.00" value="{{ $fees }}">
                     </div>
                     <div class="col-xl-2">
-                        <?php
-                        $order_instruct = (isset($metadata->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) ? $metadata->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString : "");
-                        ?>
                         <label class="form-control-label" for="input-instructionorder">
-                            Ordering Instruction </label>
+                            Ordering Instructions </label>
                     </div>
                     <div class="col-xl-5">
                         <?php
@@ -145,7 +160,7 @@
                             $orderInstruct = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions;
                         }
                         ?>
-                        <input type="text" name="c11_order_instructions" id="c11_order_instructions" class="form-control form-control-sm" value="{{ $orderInstruct }}">
+                        <input type="file" name="c11_order_instructions" id="c11_order_instructions" class="form-control form-control-sm" value="{{ $orderInstruct }}">
                     </div>
                 </div>
             </div>

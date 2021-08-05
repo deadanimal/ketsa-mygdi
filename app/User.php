@@ -1,7 +1,7 @@
 <?php
-
 namespace App;
 
+use App\Notifications\ResetPasswordNotification; // At the top under your namespace
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','email','password','nric','agensi_organisasi','bahagian','sektor','phone_pejabat','surat_sokongan','alamat','status','disahkan','deleted'
+        'name','email','password','nric','agensi_organisasi','bahagian','sektor','phone_pejabat','surat_sokongan','alamat','status','disahkan','institusi','kategori'
     ];
 
     /**
@@ -57,5 +57,9 @@ class User extends Authenticatable
              $user->users()->delete();
              // do the rest of the cleanup...
         });
+    }
+    
+    public function sendPasswordResetNotification($token){
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

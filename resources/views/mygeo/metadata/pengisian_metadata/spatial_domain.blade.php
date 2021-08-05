@@ -29,13 +29,13 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">N<span class="text-red">*</span></div>
+                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">W<span class="text-red">*</span></div>
                                     </div>
-                                    <input type="number" id="nblt" onchange="updateLayer()" step="any" class="form-control" placeholder="North Bound Latitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="top" title="North Bound Latitude" value="{{ old('c9_north_bound_latitude') }}" name="c9_north_bound_latitude">
+                                    <input type="number" step="any" id="wblg" onchange="updateLayer()" class="form-control" placeholder="West Bound Longitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="West Bound Longitude" value="{{ old('c9_west_bound_longitude') }}" name="c9_west_bound_longitude">
                                     <br>
                                 </div>
 
-                                @error('c9_north_bound_latitude')
+                                @error('c9_west_bound_longitude')
                                 <div class="text-error">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -47,13 +47,13 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">W<span class="text-red">*</span></div>
+                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">E<span class="text-red">*</span></div>
                                     </div>
-                                    <input type="number" step="any" id="wblg" onchange="updateLayer()" class="form-control" placeholder="West Bound Longitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="West Bound Longitude" value="{{ old('c9_west_bound_longitude') }}" name="c9_west_bound_longitude">
+                                    <input type="number" id="eblg" onchange="updateLayer()" step="any" class="form-control" placeholder="East Bound Longitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="East Bound Longitude" value="{{ old('c9_east_bound_longitude') }}" name="c9_east_bound_longitude">
                                     <br>
                                 </div>
 
-                                @error('c9_west_bound_longitude')
+                                @error('c9_east_bound_longitude')
                                 <div class="text-error">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -83,13 +83,13 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">E<span class="text-red">*</span></div>
+                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">N<span class="text-red">*</span></div>
                                     </div>
-                                    <input type="number" id="eblg" onchange="updateLayer()" step="any" class="form-control" placeholder="East Bound Longitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="East Bound Longitude" value="{{ old('c9_east_bound_longitude') }}" name="c9_east_bound_longitude">
+                                    <input type="number" id="nblt" onchange="updateLayer()" step="any" class="form-control" placeholder="North Bound Latitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="top" title="North Bound Latitude" value="{{ old('c9_north_bound_latitude') }}" name="c9_north_bound_latitude">
                                     <br>
                                 </div>
 
-                                @error('c9_east_bound_longitude')
+                                @error('c9_north_bound_latitude')
                                 <div class="text-error">{{ $message }}</div>
                                 @enderror
                             </div>

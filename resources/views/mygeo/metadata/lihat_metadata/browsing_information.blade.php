@@ -53,12 +53,12 @@
                     </div>
                 </div>
             </div>
-            <h2 class="heading-small text-muted">Keyword</h2>
+            <h2 class="heading-small text-muted">Keywords</h2>
             <div class="my-2">
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_name">
-                            Keyword<span class="text-warning">*</span>
+                            Keywords<span class="text-warning">*</span>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
@@ -72,7 +72,7 @@
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_type">
-                            Additional Keyword
+                            Additional Keywords
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">

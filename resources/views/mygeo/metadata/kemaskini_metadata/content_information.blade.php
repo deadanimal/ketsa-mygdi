@@ -21,7 +21,7 @@
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
-                                    Band Boundry
+                                    Band Boundry {{ $metadataxml->identificationInfo->SV_ServiceIdentification->bandBoundry->CharacterString }}
                                 </div>
                                 <?php
                                 $bandBound = "";
@@ -29,7 +29,14 @@
                                     $bandBound = $metadataxml->identificationInfo->SV_ServiceIdentification->bandBoundry->CharacterString;
                                 }
                                 ?>
-                                <input type="text" name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm" style="width:150px;" value="{{ $bandBound }}">
+                                <select name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm">
+                                    <option value="">Pilih...</option>
+                                    <option value="Equivalent Width" {{ ($bandBound == "Equivalent Width" ? "selected":"") }}>Equivalent Width</option>
+                                    <option value="Fifty Percent" {{ ($bandBound == "Fifty Percent" ? "selected":"") }}>Fifty Percent</option>
+                                    <option value="One Over E" {{ ($bandBound == "One Over E" ? "selected":"") }}>One Over E</option>
+                                    <option value="3d B" {{ ($bandBound == "3d B" ? "selected":"") }}>3d B</option>
+                                    <option value="Half Mazimum" {{ ($bandBound == "Half Mazimum" ? "selected":"") }}>Half Mazimum</option>
+                                </select>
                             </div>
                         </div>
                     </div>

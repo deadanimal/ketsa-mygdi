@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Feet" name="c8_url" id="c8_altitude" value="{{old('c8_altitude')}}">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Feet" name="c8_altitude" id="c8_altitude" value="{{old('c8_altitude')}}">
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Condition" name="c8_url" id="c8_meteor_cond" value="{{old('c8_meteor_cond')}}">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Condition" name="c8_meteor_cond" id="c8_meteor_cond" value="{{old('c8_meteor_cond')}}">
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,12 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_trigger" id="c8_trigger" value="{{old('c8_trigger')}}">
+                                    <select class="form-control form-control-sm" name="c8_trigger" id="c8_trigger">
+                                        <option value="">Pilih...</option>
+                                        <option value="Automatic" {{ (old('c8_trigger') == 'Automatic' ? "selected":"") }}>Automatic</option>
+                                        <option value="Manual" {{ (old('c8_trigger') == 'Manual' ? "selected":"") }}>Manual</option>
+                                        <option value="Pre Programmed" {{ (old('c8_trigger') == 'Pre Programmed' ? "selected":"") }}>Pre Programmed</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -90,7 +95,12 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_context" id="c8_context" value="{{old('c8_context')}}">
+                                    <select class="form-control form-control-sm" name="c8_context" id="c8_context">
+                                        <option value="">Pilih...</option>
+                                        <option value="Acquisition" {{ (old('c8_context') == 'Acquisition' ? "selected":"") }}>Acquisition</option>
+                                        <option value="Pass" {{ (old('c8_context') == 'Pass' ? "selected":"") }}>Pass</option>
+                                        <option value="Way Point" {{ (old('c8_context') == 'Way Point' ? "selected":"") }}>Way Point</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -100,7 +110,12 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_sequence" id="c8_sequence" value="{{old('c8_sequence')}}">
+                                    <select class="form-control form-control-sm" name="c8_sequence" id="c8_sequence">
+                                        <option value="">Pilih...</option>
+                                        <option value="Start" {{ (old('c8_sequence') == 'Start' ? "selected":"") }}>Start</option>
+                                        <option value="End" {{ (old('c8_sequence') == 'End' ? "selected":"") }}>End</option>
+                                        <option value="Instantaneous" {{ (old('c8_sequence') == 'Instantaneous' ? "selected":"") }}>Instantaneous</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -139,7 +154,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_op_identifier" id="c8_op_identifier">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_op_identifier" id="c8_op_identifier" value="{{ old('c8_op_identifier') }}">
                                     @error('c8_op_identifier')
                                     <div class="text-error">{{ $message }}</div>
                                     @enderror

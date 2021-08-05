@@ -54,8 +54,8 @@
                           </td>
                           <td>
                              <?php
-                                if(isset($val[0]->categoryTitle) && $val[0]->categoryTitle != ""){
-                                   echo $val[0]->categoryTitle;
+                                if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
+                                   echo $val[0]->categoryTitle->categoryItem->CharacterString;
                                }
                                ?>
                           </td>
@@ -89,7 +89,7 @@
                                     <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
                                 </a>
                                 <?php //delete========================================== ?>
-                                <form method="post" action="{{ url('/delete_draf_metadata') }}">
+                                <form method="post" action="{{ url('/delete_metadata') }}">
                                     @csrf
                                     <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
                                     <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
@@ -131,13 +131,6 @@
            "sPrevious": "<",
         }
       },
-      "columns": [
-        { "width": "5%" },
-        { "width": "50%" },
-        { "width": "15%" },
-        { "width": "10%" },
-        { "width": "15%" },
-      ]
     });
 
     $('#tarikh_mula_div,#tarikh_tamat_div').datetimepicker({
@@ -146,11 +139,17 @@
     });
 
     $(document).on('click','.btnDelete',function(){
-        var conf = confirm('Adakah anda pasti untuk buang metadata ini?');
+        var conf = confirm('Anda pasti untuk menghapus metadata?');
         if (conf) {
           $(this).parent().submit();
         }
     });
+    
+    <?php
+    if(Session::has('message')){
+        ?>alert("{{ Session::get('message') }}");<?php
+    }
+    ?>
   });
 </script>
 @stop

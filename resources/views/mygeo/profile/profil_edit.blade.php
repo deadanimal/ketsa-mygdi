@@ -43,30 +43,26 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-<<<<<<< HEAD
-                        <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil">
-=======
-                        <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil" enctype="multipart/form-data">
->>>>>>> 4e6bda17b20ac0c1101a8728e1bd36c8fa1aae55
-                            @csrf
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h3 class="mb-0">Kemaskini Profil Pengguna</h3>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <a href="{{ url('mygeo_profil') }}" class="btn btn-danger btn-sm text-white btn-icon btn-3">
-                                            <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
-                                            <span class="btn-inner--text">Balik</span>
-                                        </a>
-                                        <button type="submit" class="btn btn-success btn-sm text-white btn-icon btn-3">
-                                            <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
-                                            <span class="btn-inner--text">Simpan</span>
-                                        </button>
-                                    </div>
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Kemaskini Profil Pengguna</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a href="{{ url('mygeo_profil') }}" class="btn btn-danger btn-sm text-white btn-icon btn-3">
+                                        <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
+                                        <span class="btn-inner--text">Balik</span>
+                                    </a>
+                                    <button type="button" class="btn btn-success btn-sm text-white btn-icon btn-3 btn_simpan">
+                                        <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
+                                        <span class="btn-inner--text">Simpan</span>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="card-body">
+                        </div>
+                        <div class="card-body">
+                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil">
+                                @csrf
                                 <h6 class="heading-small text-muted mt-0 mb-4">Maklumat Pengguna</h6>
                                 <div class="pl-lg-4 pb-lg-4">
                                     <div class="row mb-2">
@@ -76,7 +72,13 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="uname" type="text" value="{{ $user->name }}" />
+                                            <?php
+                                            if($user->editable == "1"){
+                                                ?><input type="text" name="uname" id="uname" class="form-control form-control-sm ml-3" value="{{ $user->name }}"><?php
+                                            }else{
+                                                ?><p>{{ $user->name }}</p><?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -86,7 +88,13 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="nric" type="text" value="{{ $user->nric }}" />
+                                            <?php
+                                            if($user->editable == "1"){
+                                                ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ $user->nric }}"><?php
+                                            }else{
+                                                ?><p>{{ $user->nric }}</p><?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -96,7 +104,9 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="agensi_organisasi" type="text" value="{{ $user->agensi_organisasi }}" />
+                                            <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                                                <option value="">Pilih...</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -106,7 +116,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="bahagian" type="text" value="{{ $user->bahagian }}" />
+                                            <input class="form-control form-control-sm ml-3" name="bahagian" id="bahagian" type="text" value="{{ $user->bahagian }}" />
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -141,14 +151,20 @@
                                         <div class="col-3">
                                             <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="text" value="{{ $user->phone_pejabat }}" />
                                         </div>
-                                        <div class="col-2">
-                                            <label class="form-control-label mr-4" for="phone_bimbit">
-                                                Telefon Bimbit
-                                            </label><label class="float-right">:</label>
-                                        </div>
-                                        <div class="col-3">
-                                            <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="text" value="{{ $user->phone_bimbit }}" />
-                                        </div>
+                                        <?php
+                                        if(Auth::user()->hasRole('Pemohon Data')){
+                                            ?>
+                                            <div class="col-2">
+                                                <label class="form-control-label mr-4" for="phone_bimbit">
+                                                    Telefon Bimbit
+                                                </label><label class="float-right">:</label>
+                                            </div>
+                                            <div class="col-3">
+                                                <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="text" value="{{ $user->phone_bimbit }}" />
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-3">
@@ -157,56 +173,96 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <select class="form-control form-control-sm ml-3" id="peranan" name="peranan[]">
-                                                <?php
-                                                if (!empty($roles)) {
-                                                    foreach ($roles as $role) {
-                                                        $assigned = 1; //0=assigned,1=unassigned
-                                                        if (!empty($user->getRoleNames())) {
-                                                            foreach ($user->getRoleNames() as $roleUser) {
-                                                                if ($role->name == $roleUser) {
-                                                                    $assigned = $assigned * 0;
-                                                                }
-                                                            }
-
-                                                            if ($assigned == 0) {
-                                                                ?><option value="{{ $role->name }}" selected>{{ $role->name }} 1</option><?php
-                                                                                                                                                        } else {
-                                                                                                                                                            ?><option value="{{ $role->name }}">{{ $role->name }} 1</option><?php
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    } else {
-                                                                                                                                                                                                                                        ?><option value="{{ $role->name }}">{{ $role->name }} 1</option><?php
-                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                        ?>
-                                            </select>
+                                            <?php
+                                            $roles = Auth::user()->getRoleNames();
+                                            if(!empty($roles) && count($roles) > 0){
+                                                foreach($roles as $r){
+                                                    ?><p>{{ $r }}</p><?php
+                                                }
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
+                            </form>
 
-                                <hr class="my-4">
-                                <h6 class="heading-small text-muted mt-0 mb-4">Gambar Profil</h6>
+                            <hr class="my-4">
+                            <h6 class="heading-small text-muted mt-0 mb-4">Gambar Profil</h6>
+                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_gambarprofil')}}" id="form_kemaskini_gambarprofil" enctype="multipart/form-data">
+                                @csrf
                                 <div class="pl-lg-4">
                                     <div class="row mb-2">
                                         <div class="col-3">
-                                            <image id="profileImage" src="http://lorempixel.com/200/250" style="border-radius: .95rem"/>
+                                            <?php
+                                            if(auth::user()->gambar_profil != ""){
+                                                ?>
+                                                <image id="profileImage" alt="Image placeholder" src="{{ asset('storage/'.auth::user()->gambar_profil) }}" style="border-radius: .95rem;max-width:250px;">
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <image id="profileImage" alt="Image placeholder" src="./afiqadminmygeo_files/avatar.png" style="border-radius: .95rem;max-width:250px;">
+                                                <?php
+                                            }
+                                            ?>
                                         </div>
                                         <div class="col-6 ml-4 ">
                                             <label class="form-control-label">Pilih Gambar</label>
                                             <div class="form-inline">
-                                                <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" class="form-control form-control-sm p-0">
-                                            <button class="btn btn-sm btn-warning ml-3">Simpan</button>
+                                                <input id="imageUpload" type="file" name="gambar_profil" placeholder="Photo" class="form-control form-control-sm p-0">
+                                                <button class="btn btn-sm btn-warning ml-3">Simpan</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>                        
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
+
+<script>
+$(document).ready(function(){
+    $(document).on('click','.btn_simpan',function(){
+        var nric = $("#nric").val();
+        var agensi_organisasi = $("#agensi_organisasi").val();
+        var bahagian = $("#bahagian").val();
+        var msg = "";
+        if(nric.length < 12){
+            msg = msg + "Nombor NRIC tidak lengkap\r\n\r\n";
+        }
+        if(agensi_organisasi == ""){
+            msg = msg + "Sila pilih agensi / organisasi\r\n\r\n";
+        }
+        if(bahagian == ""){
+            msg = msg + "Sila pilih bahagian\r\n\r\n";
+        }
+        if(msg.length > 0){
+            alert(msg);
+        }else{
+            $("#form_kemaskini_profil").submit();
+        }
+    });
+    
+    $.ajax({
+        method: "POST",
+        url: "get_agensiOrganisasi",
+        data: {
+            "_token": "{{ csrf_token() }}"
+        },
+        dataType: "json",
+    }).done(function(data) {
+        data.forEach(function(the_var) {
+            var selected = "<?php echo $user->agensi_organisasi; ?>";
+            if(selected != "" && selected == the_var.name){
+                selected = "selected";
+            }
+            $("#agensi_organisasi").append("<option value='" + the_var.name + "' " + selected + ">" + the_var.name + "</option>");
+        });
+    });
+});
+</script>
+
 @stop

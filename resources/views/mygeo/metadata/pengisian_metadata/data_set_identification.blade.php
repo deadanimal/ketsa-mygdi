@@ -12,7 +12,7 @@
                 <div class="row mb-4">
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-dataset-type">
-                            Data Set Type
+                            Spatial Data Set Type
                         </label>
                     </div>
                     <div class="col-xl-3">
@@ -27,6 +27,7 @@
                         </select>
                     </div>
                 </div>
+                <h6 class="heading-small text-muted mb-2">DATA SET RESOLUTION</h6>
                 <div class="row mb-2">
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy">
@@ -59,6 +60,32 @@
                             <option selected disabled hidden> Language </option>
                             <option value="English" {{(old('c12_language') == 'English' ? "selected":"")}}>English</option>
                             <option value="Bahasa Malaysia" {{(old('c12_language') == 'Bahasa Malaysia' ? "selected":"")}}>Bahasa Malaysia</option>
+                        </select>
+                    </div>
+                </div>
+                <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
+                <div class="row mb-2 divMaintenanceInfo">
+                    <div class="col-xl-3">
+                        <label class="form-control-label" for="input-hardsoftcopy">
+                            Maintenance and Update
+                        </label>
+                    </div>
+                    <div class="col-xl-2">
+                        <select class="form-control form-control-sm" name="c12_maintenanceUpdate" id="c12_maintenanceUpdate">
+                            <option value="">Pilih...</option>
+                            <option value="Continual" {{ (old('c12_maintenanceUpdate') == "Continual" ? "selected":"") }}>Continual</option>
+                            <option value="Daily" {{ (old('c12_maintenanceUpdate') == "Daily" ? "selected":"") }}>Daily</option>
+                            <option value="Weekly" {{ (old('c12_maintenanceUpdate') == "Weekly" ? "selected":"") }}>Weekly</option>
+                            <option value="Fortnightly" {{ (old('c12_maintenanceUpdate') == "Fortnightly" ? "selected":"") }}>Fortnightly</option>
+                            <option value="Monthly" {{ (old('c12_maintenanceUpdate') == "Monthly" ? "selected":"") }}>Monthly</option>
+                            <option value="Quarterly" {{ (old('c12_maintenanceUpdate') == "Quarterly" ? "selected":"") }}>Quarterly</option>
+                            <option value="Biannually" {{ (old('c12_maintenanceUpdate') == "Biannually" ? "selected":"") }}>Biannually</option>
+                            <option value="Annually" {{ (old('c12_maintenanceUpdate') == "Annually" ? "selected":"") }}>Annually</option>
+                            <option value="As needed" {{ (old('c12_maintenanceUpdate') == "As needed" ? "selected":"") }}>As needed</option>
+                            <option value="Irregular" {{ (old('c12_maintenanceUpdate') == "Irregular" ? "selected":"") }}>Irregular</option>
+                            <option value="Not planned" {{ (old('c12_maintenanceUpdate') == "Not planned" ? "selected":"") }}>Not planned</option>
+                            <option value="Unknown" {{ (old('c12_maintenanceUpdate') == "Unknown" ? "selected":"") }}>Unknown</option>
+                            <option value="None" {{ (old('c12_maintenanceUpdate') == "None" ? "selected":"") }}>None</option>
                         </select>
                     </div>
                 </div>

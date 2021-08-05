@@ -33,7 +33,7 @@ class UserController extends Controller {
             exit();
         }
         
-        $users_all = User::where(['disahkan' => 0])->get();
+        $users_all = User::where(['disahkan'=>0])->get();
         $users = [];
         foreach($users_all as $user){
             if($user->hasRole('Penerbit Metadata') || $user->hasRole('Pengesah Metadata')){
@@ -48,14 +48,20 @@ class UserController extends Controller {
             exit();
         }
         
-        $users_all = User::where(['disahkan' => 1])->orderBy('updated_at', 'desc')->get();
+        $users_all = User::where(['disahkan' => 1])->orderBy('name')->get();
         $users = [];
         foreach($users_all as $user){
-            if($user->hasRole('Penerbit Metadata') || $user->hasRole('Pengesah Metadata')){
+            if($user->hasRole('Super Admin')){
+
+            }else{
                 $users[]= $user;
             }
         }
         $peranans = Role::get();
+        $ids = [ 5, 6, 3, 4, 2];
+        $peranans = $peranans->sortBy(function($model) use ($ids) {
+            return array_search($model->getKey(), $ids);
+        });
         return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans'));
     }
     
@@ -120,16 +126,18 @@ class UserController extends Controller {
         $user_id = $_POST['user_id'];
         $user = User::where(['id'=>$user_id])->get()->first();
         $user->disahkan = 1;
+        $user->status = 1;
         $user->update();
         
-        //send mail
+        //send email to the person who was approved
         $to_name = $user->name;
         $to_email = $user->email;
-        $data = array('name'=>'Akaun disahkan di mygeo-explorer.gov.my', 'body' => 'Akaun disahkan.');
-        Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Akaun disahkan');
-            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
+        $data = array('name'=>$user->name);
+        Mail::send('mails.exmpl5', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Diluluskan');
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
+        
         exit();
     }
 
@@ -140,21 +148,30 @@ class UserController extends Controller {
         
         $user_id = $_POST['user_id'];
         $user = User::where(['id'=>$user_id])->get()->first();
-        $user->disahkan = 2;
-        $user->update();
         
-        //send mail
-        $to_name = $user->name;
+        //send email to the person who was disapproved
+        $to_name = $user->namaPenuh;
         $to_email = $user->email;
-        $data = array('name'=>'Akaun ditolak di mygeo-explorer.gov.my', 'body' => 'Akaun ditolak.');
-        Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Akaun ditolak');
-            $message->from('farhan.rimfiel@pipeline-network.com','mail@mygeo-explorer.gov.my');
+        $data = array('name'=>$user->name);
+        Mail::send('mails.exmpl6', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Tidak Diluluskan');
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
+        
+        User::where(['id'=>$user_id])->delete();
+        
         exit();
     }
 
     public function show(){
+//        dd(Auth::user());
+//        Auth::user()->assignRole('Pemohon Data');
+//        if (!empty(Auth::user()->getRoleNames())) {
+//            foreach (Auth::user()->getRoleNames() as $role) {
+//                echo "<br>".$role;
+//            }
+//        }
+//        exit();
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         return view('mygeo.profile.profil', compact('user'));
     }
@@ -166,8 +183,33 @@ class UserController extends Controller {
     }
 
     public function update_profile(Request $request){
-        
-        //save gambar profil.ftest
+        $user = User::where(["id"=>Auth::user()->id])->get()->first();
+        $user->name = $request->uname;
+        $user->nric = $request->nric;
+        $user->email = $request->email;
+        $user->agensi_organisasi = $request->agensi_organisasi;
+        $user->bahagian = $request->bahagian;
+        $user->sektor = $request->sektor;
+        $user->phone_pejabat = $request->phone_pejabat;
+        $user->phone_bimbit = $request->phone_bimbit;
+        if($user->editable == "1"){
+            $user->editable = "0";
+        }
+        $user->save();
+
+        //save user's role
+//        if(!is_null($request->peranan)){
+//            ModelHasRoles::where(["model_id"=>$user->id,"model_type"=>"App\User"])->delete();
+//            foreach($request->peranan as $role){
+//                $user->assignRole($role);
+//            }
+//        }
+
+        return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
+    }
+    
+    public function update_gambarprofile(Request $request){
+        //save gambar profil
         if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
             $this->validate($request,['gambar_profil' => 'required|image|mimes:jpeg,png,jpg']);
             $exists = Storage::exists($request->gambar_profil->getClientOriginalName());
@@ -177,27 +219,12 @@ class UserController extends Controller {
         }
 
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
-        $user->name = $request->uname;
-        $user->nric = $request->nric;
-        $user->email = $request->email;
-        $user->agensi_organisasi = $request->agensi_organisasi;
-        $user->bahagian = $request->bahagian;
-        $user->sektor = $request->sektor;
-        $user->phone_pejabat = $request->phone_pejabat;
         if(isset($imageUrl)){
             $user->gambar_profil = $fileName;
         }
         $user->save();
 
-        //save user's role
-        if(!is_null($request->peranan)){
-            ModelHasRoles::where(["model_id"=>$user->id,"model_type"=>"App\User"])->delete();
-            foreach($request->peranan as $role){
-                $user->assignRole($role);
-            }
-        }
-
-        return redirect()->action([UserController::class,'show']);
+        return redirect('mygeo_profil')->with('message','Gambar profil berjaya dikemas kini.');
     }
 
     public function update_password(Request $request){
@@ -211,10 +238,10 @@ class UserController extends Controller {
         }
     }
     
-    public function change_user_status(Request $request){
+    public function change_user_status(Request $request){ 
         $user = User::where(["id"=>$request->user_id])->get()->first();
         $user->status = $request->status_id;
-        $user->save();
+        $user->update();
         exit();
     }
     
@@ -352,12 +379,12 @@ class UserController extends Controller {
         $to_email = $request->email;
         $data = array(
             'name'=>$request->namaPenuh,
-            'body'=>'Pendaftaran berjaya.',
-            'password'=>$password
+            'email'=>$request->email,
+            'password'=>$password,
         );
         Mail::send('mails.exmpl', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Mygeo Explorer - Pendaftaran berjaya');
-            $message->from('pentadbiraplikasi@gmail.com','mail@mygeo-explorer.gov.my');
+            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Akaun');
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
         
         return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan');
