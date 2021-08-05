@@ -138,7 +138,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
     var S = "<?php echo $southBoundLatitude; ?>";
     var E = "<?php echo $eastBoundLongitude; ?>";
 
-
     var map = L.map('map').setView([5.3105, 107.3854408], 5);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -147,7 +146,7 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
                 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         id: 'mapbox/streets-v11',
         tileSize: 512,
-        zoomOffset: -1
+        zoomOffset: -1,
     }).addTo(map);
 
         var setNbltValue = document.getElementById("nblt").value = N;
@@ -158,7 +157,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
         // To trigger onchange function
         var el = document.getElementById('nblt');
         el.dispatchEvent(new Event('change'));
-
 
 // drawRectangleEditor()
 // var wblgValue = document.getElementById('wblg').value = '';
@@ -171,22 +169,15 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
         var sbltValue = document.getElementById("sblt").value;
         var eblgValue = document.getElementById("eblg").value;
 
-
         if (wblgValue != '' && eblgValue != '' && nbltValue != '' && sbltValue != '') {
-
             map.eachLayer((layer) => {
                 layer.remove();
             });
 
             console.log("all onchange: " + wblgValue + "," + eblgValue + "," + nbltValue + "," + sbltValue);
 
-
             showRectangle(nbltValue, wblgValue, sbltValue, eblgValue)
-
         }
-
-
-
     }
 
 
@@ -211,14 +202,10 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
             results.clearLayers();
             for (var i = data.results.length - 1; i >= 0; i--) {
 // results.addLayer(L.marker(data.results[i].latlng));
-
                 console.log(data.results[i].latlng.lat);
                 L.marker([data.results[i].latlng.lat, data.results[i].latlng.lng], {icon: markerIcon}).addTo(map);
             }
-
         });
-
-
     }
 
 
@@ -226,11 +213,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
         var rectangle;
         // var resetBound = [[0, 0],[0, 0]];
         // rectangle = L.rectangle(resetBound).addTo(map);
-
-
-
-
-
         // var map = L.map('map').setView([4.6161396,101.8562205], 6);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -239,9 +221,8 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
                     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             id: 'mapbox/streets-v11',
             tileSize: 512,
-            zoomOffset: -1
+            zoomOffset: -1,
         }).addTo(map);
-
 
         // nblt = parseFloat(nblt); 
         // wblg = parseFloat(wblg); 
@@ -273,16 +254,12 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
         // rectangle.remove();
 
         // rectangle = L.rectangle(bounds).addTo(map);
-
     }
 
     function cleaLayer() {
-
-
         map.eachLayer((layer) => {
             layer.remove();
         });
-
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 18,
@@ -292,10 +269,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);
-
-
-
-
     }
 
     function saveData() {

@@ -241,10 +241,6 @@
     var pengesahs = [];
 
     $(document).ready(function() {
-//        $(window).bind('beforeunload', function(){
-//            return 'Are you sure you want to leave?';
-//        });
-
         $(document).on('click','.btnSubmit',function(){
             $('#submitAction').val($(this).data('name'));
             
@@ -277,24 +273,20 @@
         <?php
         }
         ?>
-        <?php
-        if (empty($pengesahs)) {
-            ?>
-            alert('Tiada pengesah dari bahagian sama dijumpai');
-            $('#kategori').hide();
-            $('#lbl_kategori').hide();
-            $("#accordion").hide();
-        <?php
-        }
-        ?>
         $('#div_action_buttons').hide();
 
         $('#c15_date_div,#c15_t1_commission_date_div,#c15_t2_conceptual_date_div,#c15_t3_absExt_date_div,#c15_t4_accuTimeMeasure_date_div,c15_t5_classCorrect_date_div').datetimepicker({
             format: 'DD/MM/YYYY',
             format: 'L'
         });
+        
+        window.onbeforeunload = function() {
+            return 'Anda sedang meninggal. page ini. Sila simpan metadata terlebih dahulu.' ;
+        }
 
         $('input:radio[name="flanguage"]').change(function() {
+            window.onbeforeunload = null;
+            
             if ($(this).val() == 'bm') {
                 var url = '{{ url("/mygeo_pengisian_metadata") }}';
                 url += '?bhs=bm';
