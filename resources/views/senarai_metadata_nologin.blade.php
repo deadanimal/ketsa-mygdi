@@ -164,18 +164,19 @@
                                                                     ?>--no title set--<?php
                                                                 }
                                                                 ?>
+                                                            </a>
+                                                        </div>
+                                                        <div id="divCollapse{{ $bil }}" class="panel-collapse collapse in" data-parent="#divParentCollapse{{ $bil }}">
+                                                            <div class="card-body">
                                                                 <?php
                                                                 $abstract = "";
                                                                 if(isset($val->identificationInfo->SV_ServiceIdentification->abstract) && $val->identificationInfo->SV_ServiceIdentification->abstract != ""){
                                                                     $abstract = trim($val->identificationInfo->SV_ServiceIdentification->abstract);
                                                                 }
                                                                 ?>
-                                                                <p class="mt-3" style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
-                                                            </a>
-                                                        </div>
-                                                        <div id="divCollapse{{ $bil }}" class="panel-collapse collapse in" data-parent="#divParentCollapse{{ $bil }}">
-                                                            <div class="card-body">
-                                                                <form method="post" action="{{ url('/lihat_metadata_nologin') }}" id="formViewMetadata{{ $key }}">
+                                                                <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
+                                                                <input class="p_abstract" type="hidden" value="{{ $abstract }}">
+                                                                <form method="post" action="{{ url('/lihat_metadata_nologin') }}" id="formViewMetadata{{ $key }}" target="_blank">
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
                                                                 </form>
@@ -183,8 +184,8 @@
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
                                                                 </form>
-                                                                <a class="btn btn-sm btn-primary metadataActionLinks aViewMetadata col-12 mb-2" onClick="return false;" data-metid="{{$key}}"><span class="text-white"><i class="far fa-newspaper mr-2"></i>Metadata Details</span></a><br>
-                                                                <a class="btn btn-sm btn-warning metadataActionLinks aViewXml col-12 mb-2" onClick="return false;" data-metid="{{$key}}"><span class="text-white"><i class="fas fa-map mr-2"></i>Metadata (XML)</span></a><br>
+                                                                <a href="#" class="metadataActionLinks aViewMetadata" onClick="return false;" data-metid="{{$key}}">Metadata Details</a><br>
+                                                                <a href="#" class="metadataActionLinks aViewXml" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><br>
                                                                 <?php
                                                                 $url = (isset($val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) ? $val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString : "");
                                                                 if(trim($url) != ""){
@@ -223,7 +224,7 @@
             </div>
         </div>
     </div>
-
+    
     <!--===== MODALS show map =====-->
     <div class="modal fade" id="modal-showmap">
         <div class="modal-dialog modal-xl">
@@ -263,7 +264,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
     @include('modal_carian_tambahan')
     <div id="preloader"></div>
 </section>
