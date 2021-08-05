@@ -5,11 +5,6 @@
                 <?php echo __('lang.accord_15'); ?>
             </h4>
         </a>
-        @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")
-        <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal15">Catatan</button>
-        @elseif(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
-        <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal15">Catatan</button>
-        @endif
     </div>
     <div id="collapse15" class="panel-collapse collapse in show" data-parent="#div_c15">
         <div class="card-body">
