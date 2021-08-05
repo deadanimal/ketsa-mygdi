@@ -241,6 +241,10 @@
     var pengesahs = [];
 
     $(document).ready(function() {
+//        $(window).bind('beforeunload', function(){
+//            return 'Are you sure you want to leave?';
+//        });
+
         $(document).on('click','.btnSubmit',function(){
             $('#submitAction').val($(this).data('name'));
             
@@ -293,11 +297,11 @@
         $('input:radio[name="flanguage"]').change(function() {
             if ($(this).val() == 'bm') {
                 var url = '{{ url("/mygeo_pengisian_metadata") }}';
-                url += '?bhs=bm'
+                url += '?bhs=bm';
                 window.location.href = url;
             } else if ($(this).val() == 'en') {
                 var url = '{{ url("/mygeo_pengisian_metadata") }}';
-                url += '?bhs=en'
+                url += '?bhs=en';
                 window.location.href = url;
             }
         });

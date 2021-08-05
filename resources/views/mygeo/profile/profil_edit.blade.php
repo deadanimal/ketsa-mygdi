@@ -76,7 +76,10 @@
                                             if($user->editable == "1"){
                                                 ?><input type="text" name="uname" id="uname" class="form-control form-control-sm ml-3" value="{{ $user->name }}"><?php
                                             }else{
-                                                ?><p>{{ $user->name }}</p><?php
+                                                ?>
+                                                <p>{{ $user->name }}</p>
+                                                <input type="hidden" name="uname" id="uname" value="{{ $user->name }}">
+                                                <?php
                                             }
                                             ?>
                                         </div>
@@ -92,7 +95,10 @@
                                             if($user->editable == "1"){
                                                 ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ $user->nric }}"><?php
                                             }else{
-                                                ?><p>{{ $user->nric }}</p><?php
+                                                ?>
+                                                <p>{{ $user->nric }}</p>
+                                                <input type="hidden" name="nric" id="nric" value="{{ $user->nric }}">
+                                                <?php
                                             }
                                             ?>
                                         </div>
