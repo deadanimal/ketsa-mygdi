@@ -31,6 +31,10 @@
             text-decoration: none;
         }
 
+        .hide {
+            display: none;
+        }
+
         #editor-container {
             height: 130px;
         }
@@ -84,8 +88,9 @@
                             </div>
                             <div class="card-body">
                                 <select class="form-control" style="overflow: hidden;" size="10">
-                                    @foreach ($faq as $faq)
-                                        <option value="{{ $faq->id }}" data-show=".display-faq">{{ $faq->category }}
+                                    @foreach ($faqs as $faq)
+                                        <option class="choose-faqs-{{ $faq->id }}" value="{{ $faq->id }}"
+                                            data-show=".info-faq-{{ $faq->id }}">{{ $faq->category }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -103,68 +108,186 @@
                                     </div>
                                 </div>
                             </div>
-                            @foreach ($faq as $fq)
-                                <div class="card-body">
+                            <div class="card-body info-faq">
+                                <form method="POST" class="form-horizontal" action="{{ url('update_faq') }}"></form>
+                                @csrf
+                                <input type="hidden" name="id_faq" value="">
+                                <input type="hidden" name="content_faq" id="content_faq">
+                                <input type="hidden" name="title_faq" id="title_faq" value="Soalan Lazim (FAQ)">
+                                <label class="form-control-label">Kategori</label>
+                                <input type="text" name="category_faq" id="category_faq" class="form-control" value="">
+
+                                <label class="form-control-label mt-4">Kandungan</label>
+                                <div id="content_faq_input"></div>
+
+                                </form>
+                            </div>
+                            @foreach ($faqs as $faq)
+                                <div class="card-body hide info-faq-{{ $faq->id }}">
                                     <form method="POST" class="form-horizontal" action="{{ url('update_faq') }}"
-                                        id="form_faq">
+                                        id="form_faq_{{ $faq->id }}">
                                         @csrf
-                                        <input type="hidden" name="id_faq" value="{{ $fq->id}}">
-                                        <input type="hidden" name="content_faq" id="content_faq">
+                                        <input type="hidden" name="id_faq" value="{{ !is_null($faq) ? $faq->id : '' }}">
+                                        <input type="hidden" name="content_faq" id="content_faq_{{ $faq->id }}">
                                         <input type="hidden" name="title_faq" id="title_faq" value="Soalan Lazim (FAQ)">
                                         <label class="form-control-label">Kategori</label>
                                         <input type="text" name="category_faq" id="category_faq" class="form-control"
-                                            value="{{ $fq->category }}">
+                                            value="{{ !is_null($faq) ? $faq->category : '' }}">
 
                                         <label class="form-control-label mt-4">Kandungan</label>
-                                        <div id="content_faq_input"></div>
+                                        <div id="content_faq_input_{{ $faq->id }}"></div>
 
-                                        <button id="btn_submit" type="button"
+                                        <button id="btn_submit_{{ $faq->id }}" type="button"
                                             class="btn btn-success mt-4 float-right">Simpan</button>
                                     </form>
+                                </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
     </div>
-    </section>
-    </div>
+    @foreach ($faqs as $faq)
+        <script>
+            $(document).ready(function() {
+                var quill_faq_{{ $faq->id }} = new Quill('#content_faq_input_{{ $faq->id }}', {
+                    modules: {
+                        toolbar: [
+                            ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+                            ['blockquote', 'code-block'],
+
+                            [{
+                                'header': 1
+                            }, {
+                                'header': 2
+                            }], // custom button values
+                            [{
+                                'list': 'ordered'
+                            }, {
+                                'list': 'bullet'
+                            }],
+                            [{
+                                'script': 'sub'
+                            }, {
+                                'script': 'super'
+                            }], // superscript/subscript
+                            [{
+                                'indent': '-1'
+                            }, {
+                                'indent': '+1'
+                            }], // outdent/indent
+                            [{
+                                'direction': 'rtl'
+                            }], // text direction
+
+                            [{
+                                'size': ['small', false, 'large', 'huge']
+                            }], // custom dropdown
+                            [{
+                                'header': [1, 2, 3, 4, 5, 6, false]
+                            }],
+
+                            [{
+                                'color': []
+                            }, {
+                                'background': []
+                            }], // dropdown with defaults from theme
+                            [{
+                                'font': []
+                            }],
+                            [{
+                                'align': []
+                            }],
+
+                            ['clean'],
+                        ],
+                    },
+                    placeholder: 'Compose an epic...',
+                    theme: 'snow',
+                });
+                quill_faq_{{ $faq->id }}.root.innerHTML = '{!! !is_null($faq) ? $faq->content : '' !!}';
+
+                $(document).on("click", "#btn_submit_{{ $faq->id }}", function() {
+                    $("#content_faq_{{ $faq->id }}").val($(
+                        "#content_faq_input_{{ $faq->id }} > .ql-editor").html());
+                    $("#form_faq_{{ $faq->id }}").submit();
+                });
+            });
+        </script>
+    @endforeach
+    <script>
+        var quill_faq = new Quill('#content_faq_input', {
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+                    ['blockquote', 'code-block'],
+
+                    [{
+                        'header': 1
+                    }, {
+                        'header': 2
+                    }], // custom button values
+                    [{
+                        'list': 'ordered'
+                    }, {
+                        'list': 'bullet'
+                    }],
+                    [{
+                        'script': 'sub'
+                    }, {
+                        'script': 'super'
+                    }], // superscript/subscript
+                    [{
+                        'indent': '-1'
+                    }, {
+                        'indent': '+1'
+                    }], // outdent/indent
+                    [{
+                        'direction': 'rtl'
+                    }], // text direction
+
+                    [{
+                        'size': ['small', false, 'large', 'huge']
+                    }], // custom dropdown
+                    [{
+                        'header': [1, 2, 3, 4, 5, 6, false]
+                    }],
+
+                    [{
+                        'color': []
+                    }, {
+                        'background': []
+                    }], // dropdown with defaults from theme
+                    [{
+                        'font': []
+                    }],
+                    [{
+                        'align': []
+                    }],
+
+                    ['clean'],
+                ],
+            },
+            placeholder: 'Kandungan...',
+            theme: 'snow',
+        });
+        quill_faq.root.innerHTML = '';
+    </script>
 
     <script>
-        $(document).ready(function() {
-            var quill_faq = new Quill('#content_faq_input', {
-                modules: {
-                    toolbar: [
-                        ['bold', 'italic'],
-                        ['link', 'blockquote', 'code-block', 'image'],
-                        [{
-                            list: 'ordered'
-                        }, {
-                            list: 'bullet'
-                        }]
-                    ],
-                },
-                placeholder: 'Compose an epic...',
-                theme: 'snow',
-            });
-            quill_faq.root.innerHTML = '{!! !is_null($faq) ? $faq->content : '' !!}';
-
-            $(document).on("click", "#btn_submit", function() {
-                $("#content_faq").val($("#content_faq_input > .ql-editor").html());
-                $("#form_faq").submit();
-            });
-        });
-    </script>
-    <script>
-        $(document).on('change', '.address-detail', function() {
-            var target = $(this).data('target');
-            var show = $("option:selected", this).data('show');
-            $(target).children().addClass('hide');
-            $(show).removeClass('hide');
+        $(document).on("click", ".choose-faqs-1", function() {
+            $('.info-faq-1').show();
+            $('.info-faq-2').hide();
+            $('.info-faq').hide();
         });
 
-        $(document).ready(function() {
-            $('.address-detail').trigger('change');
+        $(document).on("click", ".choose-faqs-2", function() {
+            $('.info-faq-2').show();
+            $('.info-faq-1').hide();
+            $('.info-faq').hide();
         });
     </script>
+
+
 @stop

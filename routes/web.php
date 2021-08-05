@@ -42,9 +42,10 @@ Route::get('/data_asas_landing', 'DataAsasController@data_asas_landing');
 Route::get('/data_asas_senarai', 'DataAsasController@data_asas_senarai');
 Route::get('/data_asas_tatacara_mohon', 'DataAsasController@data_asas_tatacara_mohon');
 Route::get('/data_asas_dokumen_berkaitan', 'DataAsasController@data_asas_dokumen_berkaitan');
+Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
+Route::post('/reply_maklum_balas', 'PortalController@reply_maklum_balas');
 
 Route::group(['middleware' => ['auth']], function () {
-
 
     Route::get('/senarai_pengumuman', 'PortalController@index_pengumuman');
     Route::post('/tunjuk_pengumuman', 'PortalController@show_pengumuman');
@@ -83,11 +84,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/faq', 'PortalController@index_faq');
     Route::get('/kemaskini_faq', 'PortalController@edit_faq');
-    Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
 
     Route::get('/maklum_balas','PortalController@index_maklum_balas');
     Route::get('/maklum_balas_edit', 'PortalController@edit_maklum_balas');
-    Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
     Route::post('/delete_maklum_balas', 'PortalController@delete_maklum_balas');
 
     // Route::get('/panduan_pengguna','PortalController@index_panduan_pengguna');
@@ -147,6 +146,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/delete_permohonan', 'DataAsasController@delete_permohonan');
     Route::get('/muat_turun_data', 'DataAsasController@muat_turun_data');
     Route::get('/senarai_data', 'DataAsasController@senarai_data');
+    Route::post('/simpan_senarai_data', 'DataAsasController@store_senarai_data');
+    Route::post('/delete_senarai_data', 'DataAsasController@delete_senarai_data');
+    Route::post('/kemaskini_senarai_data', 'DataAsasController@update_senarai_data');
+
     Route::get('/kategori_kelas_data', 'DataAsasController@kategori_kelas_data');
     Route::get('/kategori_kelas_kongsi_data', 'DataAsasController@kategori_kelas_kongsi_data');
     Route::get('/harga_data', 'DataAsasController@harga_data');

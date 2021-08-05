@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @csrf  
+                        @csrf
                         <div class="card-header">
                             <h3 class="card-title" style="font-size: 2rem;">Harga Data</h3>
 <!--                            <a href="{{url('mohon_data_asas_baru')}}">
@@ -43,43 +43,34 @@
                                     <tr>
                                         <th>BIL</th>
                                         <th>KATEGORI</th>
-                                        <th>SUB_KATEGORI</th>
+                                        <th>SUB-KATEGORI</th>
                                         <th>LAPISAN DATA</th>
                                         <th>HARGA DATA (1MB)</th>
                                         <th>TINDAKAN</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Aeronautical</td>
-                                        <td>Lapangan Terbang (Aerodrome-AB)</td>
-                                        <td></td>
-                                        <td>RM44</td>
-                                        <td>
-                                            <button type="button" class="form-control">Lihat</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Aeronautical</td>
-                                        <td>Lapangan Terbang (Aerodrome-AB)</td>
-                                        <td></td>
-                                        <td>RM44</td>
-                                        <td>
-                                            <button type="button" class="form-control">Lihat</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Aeronautical</td>
-                                        <td>Lapangan Terbang (Aerodrome-AB)</td>
-                                        <td></td>
-                                        <td>RM44</td>
-                                        <td>
-                                            <button type="button" class="form-control">Lihat</button>
-                                        </td>
-                                    </tr>
+                                    @foreach ($senarai_data as $sdata)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $sdata->kategori }}</td>
+                                            <td>{{ $sdata->subkategori }}</td>
+                                            <td>{{ $sdata->lapisan_data }}</td>
+                                            <td>{{ $sdata->harga_data }}</td>
+                                            <td>
+                                                <a data-toggle="modal"
+                                                    data-target="#modal-kemaskinidata-{{ $sdata->id }}">
+                                                    <button type="button" class="btn btn-sm btn-success"><i
+                                                            class="fas fa-edit"></i>
+                                                    </button>
+                                                </a>
+                                                <button type="button" data-senaraidataid="{{ $sdata->id }}"
+                                                    class="btnDelete btn btn-sm btn-danger mx-2"><i
+                                                        class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -88,6 +79,72 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal Kemaskini Data-->
+    @foreach ($senarai_data as $sdata)
+        <div class="modal fade" id="modal-kemaskinidata-{{ $sdata->id }}">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary mb-0">
+                        <h4 class="text-white">Data ID#{{ $loop->iteration }}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="/kemaskini_senarai_data">
+                        @csrf
+                        <div class="modal-body row">
+                            <div class="col-12">
+                                <input type="hidden" name="id_senarai_data" value="{{ $sdata->id }}">
+                                <div class="form-group">
+                                    <label class="form-control-label">Kategori</label>
+                                    <input type="text" class="form-control form-control-sm" name="kategori"
+                                        value="{{ $sdata->kategori }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Sub-Kategori</label>
+                                    <input type="text" class="form-control form-control-sm" name="subkategori"
+                                        value="{{ $sdata->subkategori }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Lapisan Data</label>
+                                    <input type="text" class="form-control form-control-sm" name="lapisan_data"
+                                        value="{{ $sdata->lapisan_data }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Kategori Pemohon</label>
+                                    <input type="text" class="form-control form-control-sm" name="kategori_pemohon"
+                                        value="{{ $sdata->kategori_pemohon }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Kelas</label>
+                                    <input type="text" class="form-control form-control-sm" name="kelas"
+                                        value="{{ $sdata->kelas }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Status</label>
+                                    <select class="form-control form-control-sm" name="status">
+                                        <option value="Aktif">Aktif</option>
+                                        <option value="Tak Aktif">Tak Aktif</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Harga Data</label>
+                                    <input type="text" class="form-control form-control-sm" name="harga_data"
+                                        value="{{ $sdata->harga_data }}">
+                                </div>
+
+                                <button class="btn btn-success float-right" type="submit">
+                                    <span class="text-white">Simpan</span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 </div>
 
 <script>

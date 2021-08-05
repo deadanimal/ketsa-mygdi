@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\DokumenBerkaitan;
 use App\SenaraiKawasanData;
 use App\MohonData;
+use App\SenaraiData;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use DB;
 
 class DataAsasController extends Controller
 {
@@ -72,7 +74,8 @@ class DataAsasController extends Controller
 
     public function proses_data()
     {
-        return view('mygeo.proses_data');
+        $pemohons = MohonData::all();
+        return view('mygeo.proses_data', compact('pemohons'));
     }
 
     public function mohon_data()
@@ -99,32 +102,77 @@ class DataAsasController extends Controller
 
     public function status_permohonan()
     {
-        return view('mygeo.status_permohonan');
+        $pemohons = MohonData::all();
+        return view('mygeo.status_permohonan', compact('pemohons'));
     }
 
     public function senarai_data()
     {
-        return view('mygeo.senarai_data');
+        $senarai_data = SenaraiData::all();
+        return view('mygeo.senarai_data', compact('senarai_data'));
+    }
+
+    public function store_senarai_data(Request $request)
+    {
+        $senarai_data = new SenaraiData();
+
+        $senarai_data->kategori = $request->kategori;
+        $senarai_data->subkategori = $request->subkategori;
+        $senarai_data->lapisan_data = $request->lapisan_data;
+
+        $senarai_data->data_id = $request->data_id;
+
+        $senarai_data->save();
+
+        return redirect('senarai_data')->with('success', 'Permohonan ditambah. Sila klik pautan berkenaan');
+    }
+
+    public function update_senarai_data(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            //save senarai data
+            SenaraiData::where(["id" => $request->id_senarai_data])->update([
+                "kategori" => $request->kategori,
+                "subkategori" => $request->subkategori,
+                "lapisan_data" => $request->lapisan_data,
+                "kategori_pemohon" => $request->kategori_pemohon,
+                "kelas" => $request->kelas,
+                "status" => $request->status,
+                "harga_data" => $request->harga_data,
+            ]);
+        });
+
+        return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
+    }
+
+    public function delete_senarai_data(Request $request)
+    {
+        SenaraiData::where(["id" => $request->id])->delete();
+        return redirect('senarai_data')->with('success', 'Data tersebut telah dibuang');
     }
 
     public function kategori_kelas_data()
     {
-        return view('mygeo.kategori_kelas_data');
+        $senarai_data = SenaraiData::all();
+        return view('mygeo.kategori_kelas_data', compact('senarai_data'));
     }
 
     public function kategori_kelas_kongsi_data()
     {
-        return view('mygeo.kategori_kelas_kongsi_data');
+        $senarai_data = SenaraiData::all();
+        return view('mygeo.kategori_kelas_kongsi_data',compact('senarai_data'));
     }
 
     public function harga_data()
     {
-        return view('mygeo.harga_data');
+        $senarai_data = SenaraiData::all();
+        return view('mygeo.harga_data',compact('senarai_data'));
     }
 
     public function permohonan_baru()
     {
-        return view('mygeo.permohonan_baru');
+        $pemohons = MohonData::all();
+        return view('mygeo.permohonan_baru', compact('pemohons'));
     }
 
 

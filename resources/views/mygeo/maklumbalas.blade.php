@@ -60,9 +60,8 @@
                                 <thead>
                                     <tr>
                                         <th>BIL</th>
-                                        <th>PERTANYAAN</th>
-                                        <th>KATEGORI</th>
                                         <th>EMEL</th>
+                                        <th>KATEGORI</th>
                                         <th>STATUS</th>
                                         <th>TINDAKAN</th>
                                     </tr>
@@ -71,9 +70,8 @@
                                     @foreach($maklum_balas as $mb)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$mb->pertanyaan}}</td>
-                                        <td>{{$mb->category}}</td>
                                         <td>{{$mb->email}}</td>
+                                        <td>{{$mb->category}}</td>
                                         <td><span class="badge badge-pill badge-info">Baru Diterima</span></td>
                                         <td>
                                             <a data-toggle="modal" data-target="#modal-balas-mb-{{$mb->id}}">
@@ -102,7 +100,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="/simpan_permohonan_baru">
+                <form method="POST" action="/reply_maklum_balas">
                     @csrf
                     <div class="modal-body row">
                         <div class="col-12">
@@ -161,7 +159,7 @@
 
     $(document).on("click", ".btnDelete", function() {
         var mb_id = $(this).data('maklumbalasid');
-        var r = confirm("Adakah anda pasti untuk padam maklum balas ini?");
+        var r = confirm("Adakah anda pasti untuk buang maklum balas ini?");
         if (r == true) {
             $.ajax({
                 method: "POST",

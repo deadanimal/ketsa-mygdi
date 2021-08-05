@@ -302,7 +302,7 @@
                                             </a>
                                         </li>
                                         @endif
-                                        @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
+                                        @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Metadata','Pentadbir Data']))
                                         <li class="nav-item">
                                             <a href="{{ url('maklum_balas') }}" class="nav-link active">
                                                 <i class="fa-comments fas text-green"></i>

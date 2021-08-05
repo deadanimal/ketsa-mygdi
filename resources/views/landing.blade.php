@@ -11,6 +11,10 @@
         height: 430%;
         width: 100%;
     }
+
+    .ql-align-center{
+        text-align: center;
+    }
 </style>
 <style>
     .card-header {
