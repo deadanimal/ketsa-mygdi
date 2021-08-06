@@ -17,27 +17,23 @@
                 }
                 ?>
             </div>
-            <div class="form-group row divMetadataLanguage">
-                <p class="pl-lg-3 form-control-label">Language<span class="mx-3">:</span></p>
-                <?php
-                if (isset($metadataxml->language->CharacterString) && $metadataxml->language->CharacterString != "") {
-                    echo $metadataxml->language->CharacterString;
-                }
-                ?>
-            </div>
             <div class="form-group row">
                 <p class="pl-lg-3 form-control-label">Metadata Language<span class="mx-3">:</span></p>
                 <?php
-                if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
-                    echo $metadataxml->contact->CI_ResponsibleParty;
+                if (isset($metadataxml->language->CharacterString) && $metadataxml->language->CharacterString != "") {
+                    if($metadataxml->language->CharacterString == 'en'){
+                        echo "English";
+                    }elseif($metadataxml->language->CharacterString == 'bm'){
+                        echo "Bahasa Malaysia";
+                    }
                 }
                 ?>
             </div>
             <div class="form-group row">
                 <p class="pl-lg-3 form-control-label">Metadata Create Date<span class="mx-3">:</span></p>
                 <?php
-                if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
-                    echo $metadataxml->contact->CI_ResponsibleParty;
+                if($metadataSearched->createdate != ""){
+                    echo  date('d/m/Y',strtotime($metadataSearched->createdate));
                 }
                 ?>
             </div>

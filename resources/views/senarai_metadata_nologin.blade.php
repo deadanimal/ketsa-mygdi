@@ -187,7 +187,7 @@
                                                                 <a href="#" class="btn btn-sm btn-primary metadataActionLinks aViewMetadata col-12 mb-2" onClick="return false;" data-metid="{{$key}}">Metadata Details</a><br>
                                                                 <a href="#" class="btn btn-sm btn-warning metadataActionLinks aViewXml col-12 mb-2" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><br>
                                                                 <?php
-                                                                $url = (isset($val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString) ? $val->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString : "");
+                                                                $url = (isset($val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString) ? $val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString : "");
                                                                 if(trim($url) != ""){
                                                                     ?>
                                                                     <a href="#" class="btn btn-sm btn-success metadataActionLinks aViewMap col-12 mb-2" onClick="return false;" data-metid="{{$key}}" data-toggle="modal" data-target="#modal-showmap" data-mapurl="{{ $url }}" data-backdrop="false">Show map</a>

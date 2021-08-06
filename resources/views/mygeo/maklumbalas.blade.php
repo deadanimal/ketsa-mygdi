@@ -73,7 +73,19 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$mb->email}}</td>
                                         <td>{{$mb->category}}</td>
-                                        <td><span class="badge badge-pill badge-info">{{($mb->status == '0' ? 'Baru':'')}}</span></td>
+                                        <td>
+                                            <?php
+                                            if($mb->status == '0'){
+                                                ?>
+                                                <span class="badge badge-pill badge-danger">Baru</span>
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <span class="badge badge-pill badge-success">Dibalas</span>
+                                                <?php
+                                            }
+                                            ?>
+                                        </td>
                                         <td>{{ date('d/m/Y',strtotime($mb->created_at)) }}</td>
                                         <td>
                                             <a data-toggle="modal" data-target="#modal-balas-mb-{{$mb->id}}">
