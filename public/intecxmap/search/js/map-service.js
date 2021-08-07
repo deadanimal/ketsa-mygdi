@@ -20,6 +20,12 @@
     
       }
 
+     function openWebInNewTab(param) {
+
+      document.getElementById("viewWebsite").innerHTML = window.open(param);
+
+     } 
+
 
    
     
