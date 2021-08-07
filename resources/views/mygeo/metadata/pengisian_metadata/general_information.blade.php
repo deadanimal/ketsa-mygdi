@@ -54,8 +54,8 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        {{ (isset(auth::user()->agensi_organisasi) ?  auth::user()->agensi_organisasi: "") }}
-                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensi_organisasi) ?  auth::user()->agensi_organisasi: "") }}" />
+                        {{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}
+                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0">
