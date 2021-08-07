@@ -246,7 +246,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
-                        <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3" value="{{ (isset($pengesahs->agensi_organisasi) ? $pengesahs->agensi_organisasi:"") }}" readonly>
+                        <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3" value="{{ (isset($pengesahs->agensiOrganisasi->name) ? $pengesahs->agensiOrganisasi->name:"") }}" readonly>
                         @error('c2_contact_agensiorganisasi')
                         <div class="text-error">{{ $message }}</div>
                         @enderror

@@ -81,7 +81,7 @@ class UserController extends Controller {
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2">Agensi</label>
                 <div class="col-sm-10">
-                    :'.$user_details->agensi_organisasi.'
+                    :'.$user_details->agensiOrganisasi->name.'
                 </div>
             </div>
             <div class="form-group row">
