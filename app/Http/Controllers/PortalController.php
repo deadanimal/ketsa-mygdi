@@ -360,4 +360,19 @@ class PortalController extends Controller
         echo json_encode(["bhgns"=>$bhgns,"msg"=>$msg,"error"=>$error]);
         exit();
     }
+    
+    public function delete_agensi_organisasi(Request $request){
+        $type = ($request->type == "bahagian" ? "Bahagian":"Agensi/Organisasi");
+        $msg = "";
+        $deleted = AgensiOrganisasi::where('id',$request->id)->delete();
+        if($deleted){
+            $error = 0;
+            $msg = $type." berjaya dipadam.";
+        }else{
+            $error = 1;            
+            $msg = $type + " tidak berjaya dipadam.";
+        }
+        echo json_encode(["msg"=>$msg,"error"=>$error]);
+        exit();
+    }
 }

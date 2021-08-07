@@ -152,6 +152,19 @@
         // Checking map service availability  
         var options = {query: {f: "json"},responseType: "json"};
         var url = mapServiceUrl;
+
+        var url_check = url.lastIndexOf("arcgis/rest");
+        // url_check = -1 , Indicate the url is not an arcgis rest services
+
+        // if ( url_check > -1) {
+
+        //   alert("The url is an arcgis rest service");
+
+        // } else if(url_check == -1) {
+
+        //   alert("The url is NOT AN ARCGIS REST service");
+        // }
+
         esriRequest(url, options).then(function (response) { 
             
           console.log("response", response) 
@@ -161,7 +174,7 @@
        
           // Error name = request:server
 
-          if (err.name === 'request:server' && mapServiceUrl != "") {
+          if (err.name === 'request:server' && mapServiceUrl != "" && url_check > -1) {
             console.log('Request aborted');
             // var errorMessage = true;
             // alert(errorMessage); // output = true
@@ -174,6 +187,11 @@
 
             document.getElementById("errMessage-detail").innerHTML = "Map service not available";
             modal.style.display = "block";
+
+          // Display other services (non arcgis map services) eg: website   
+          } else if (url_check == -1 && mapServiceUrl != "") {
+
+            openWebInNewTab(url);
 
           } else {
             console.error('Error encountered', err);
@@ -379,6 +397,9 @@
         title="Clear Measurements"
       ></button>
     </div>
+
+    <div id="viewWebsite"></div>
+
 
     <!-- <div id="errMessage1"><br><br><h3 style="text-align: center;">Map Service Not Available</h3></div> -->
 

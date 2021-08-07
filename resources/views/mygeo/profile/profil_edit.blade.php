@@ -73,14 +73,16 @@
                                         </div>
                                         <div class="col-8">
                                             <?php
-                                            if($user->editable == "1"){
+//                                            if($user->editable == "1"){
                                                 ?><input type="text" name="uname" id="uname" class="form-control form-control-sm ml-3" value="{{ $user->name }}"><?php
+                                                /*
                                             }else{
                                                 ?>
                                                 <p>{{ $user->name }}</p>
                                                 <input type="hidden" name="uname" id="uname" value="{{ $user->name }}">
                                                 <?php
                                             }
+                                                 */
                                             ?>
                                         </div>
                                     </div>
@@ -92,14 +94,17 @@
                                         </div>
                                         <div class="col-8">
                                             <?php
-                                            if($user->editable == "1"){
+//                                            if($user->editable == "1"){
                                                 ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ $user->nric }}"><?php
-                                            }else{
+                                            
+                                                /*
+                                                }else{
                                                 ?>
                                                 <p>{{ $user->nric }}</p>
                                                 <input type="hidden" name="nric" id="nric" value="{{ $user->nric }}">
                                                 <?php
                                             }
+                                                 */
                                             ?>
                                         </div>
                                     </div>
@@ -110,9 +115,10 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <select class="form-control form-control-sm ml-3" name="sektor">
-                                                <option value="1" {{ ($user->sektor == '1' ? "selected":"") }}>Kerajaan</option>
-                                                <option value="2" {{ ($user->sektor == '2' ? "selected":"") }}>Swasta</option>
+                                            <select class="form-control form-control-sm ml-3" name="sektor" id="sektor">
+                                                <option value="">Pilih...</option>
+                                                <option value="1">Kerajaan</option>
+                                                <option value="2">Swasta</option>
                                             </select>
                                         </div>
                                     </div>
@@ -135,7 +141,9 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="bahagian" id="bahagian" type="text" value="{{ $user->bahagian }}" />
+                                            <select id="bahagian" name="bahagian" class="form-control form-control-sm ml-3">
+                                                <option value="">Pilih...</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -252,22 +260,57 @@ $(document).ready(function(){
         }
     });
     
-    $.ajax({
-        method: "POST",
-        url: "get_agensiOrganisasi",
-        data: {
-            "_token": "{{ csrf_token() }}"
-        },
-        dataType: "json",
-    }).done(function(data) {
-        data.forEach(function(the_var) {
-            var selected = "<?php echo $user->agensi_organisasi; ?>";
-            if(selected != "" && selected == the_var.name){
-                selected = "selected";
-            }
-            $("#agensi_organisasi").append("<option value='" + the_var.name + "' " + selected + ">" + the_var.name + "</option>");
+    $('#sektor').change(function() {
+        $.ajax({
+            method: "POST",
+            url: "{{ url('get_agensi_organisasi_by_sektor') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "sektor": $(this).val(),
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            $('#agensi_organisasi').html('');
+            $('#agensi_organisasi').append('<option value="">Pilih...</option>');
+            $.each(data.aos, function(index,value) {
+                $('#agensi_organisasi').append('<option value="'+value.id+'" data-name="'+value.name+'">'+value.name+'</option>');
+            });
+            
+            $('#bahagian').html('');
+            $('#bahagian').append('<option value="">Pilih...</option>');
         });
     });
+    $('#agensi_organisasi').change(function() {
+        var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
+        
+        $.ajax({
+            method: "POST",
+            url: "{{ url('get_bahagian') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "agensi_organisasi_name": agensi_organisasi_name,
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            if(data.error == '1'){
+                alert(data.msg);
+            }else{
+                $('#bahagian').html('');
+                $('#bahagian').append('<option value="">Pilih...</option>');
+                $.each(data.bhgns, function(index,value) {
+                    $('#bahagian').append('<option value="'+value.bahagian+'">'+value.bahagian+'</option>');
+                });
+            }
+        });
+    });
+    
+    $('#sektor').val('<?php echo $user->sektor; ?>').change();
+    setTimeout(function(){
+        $('#agensi_organisasi').val('<?php echo $user->agensi_organisasi; ?>').change();
+    }, 750);
+    setTimeout(function(){
+        $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
+    }, 1000);
 });
 </script>
 

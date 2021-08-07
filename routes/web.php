@@ -199,6 +199,7 @@ Route::post('get_agensi_organisasi_by_sektor','PortalController@get_agensi_organ
 Route::post('get_agensi_organisasi','PortalController@get_agensi_organisasi');
 Route::post('get_bahagian','PortalController@get_bahagian');
 Route::post('simpan_kemaskini_agensi_organisasi','PortalController@simpan_kemaskini_agensi_organisasi');
+Route::post('delete_agensi_organisasi','PortalController@delete_agensi_organisasi');
 
 Auth::routes();
 

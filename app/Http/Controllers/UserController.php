@@ -62,7 +62,10 @@ class UserController extends Controller {
         $peranans = $peranans->sortBy(function($model) use ($ids) {
             return array_search($model->getKey(), $ids);
         });
-        return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans'));
+        
+        $aos = AgensiOrganisasi::distinct('name')->get();
+        
+        return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans','aos'));
     }
     
     public function get_user_details(){
@@ -348,11 +351,13 @@ class UserController extends Controller {
             "namaPenuh" => 'required',
             "email" => 'required|unique:App\User,email',
             "peranan" => 'required',
+            "agensi_organisasi" => 'required',
         ];
         $customMsg = [
             "namaPenuh.required" => 'Nama Penuh diperlukan',
             "email.required" => 'Email diperlukan',
             "peranan.required" => 'Peranan diperlukan',
+            "agensi_organisasi.required" => 'Agensi/Organisasi diperlukan',
         ];
         $this->validate($request, $fields, $customMsg);
         

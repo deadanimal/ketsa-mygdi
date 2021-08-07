@@ -71,9 +71,15 @@
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                     @endif
-                                                    <button type="button" data-senaraidataid="{{ $ao->id }}" class="btnDelete btn btn-sm btn-danger mx-2">
+                                                    @if($ao->bahagian != "")
+                                                    <button type="button" data-rowid="{{ $ao->id }}" data-type="bahagian" class="btnDelete btn btn-sm btn-danger mx-2">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
+                                                    @else
+                                                    <button type="button" data-rowid="{{ $ao->id }}" data-type="agensi_organisasi" class="btnDelete btn btn-sm btn-danger mx-2">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <?php
@@ -403,18 +409,29 @@
         });
         
         $(document).on("click", ".btnDelete", function() {
-            var sdata_id = $(this).data('senaraidataid');
-            var r = confirm("Adakah anda pasti untuk buang data ini?");
+            var rowid = $(this).data('rowid');
+            var type = $(this).data('type');
+            var confirmMsg = "";
+            
+            if(type == 'bahagian'){
+                confirmMsg = "Adakah anda pasti untuk buang Bahagian ini?";
+            }else{
+                confirmMsg = "Adakah anda pasti untuk buang Agensi/Organisasi ini?";
+            }
+            
+        var r = confirm(confirmMsg);
             if (r == true) {
                 $.ajax({
                     method: "POST",
-                    url: "delete_senarai_data",
+                    url: "delete_agensi_organisasi",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "id": sdata_id
+                        "id": rowid,
+                        "type": type,
                     },
                 }).done(function(response) {
-                    alert("Data telah dibuang.");
+                    var data = jQuery.parseJSON(response);
+                    alert(data.msg);
                     location.reload();
                 });
             }

@@ -81,12 +81,22 @@
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col-3">
+                                        <label class="form-control-label mr-4" for="sektor">
+                                            Sektor
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control form-control-sm ml-3" id="sektor" type="text" value="{{ ($user->sektor == '1' ? "Kerajaan":"Swasta") }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
                                         <label class="form-control-label mr-4" for="agensi_organisasi">
                                             Agensi / Organisasi
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ $user->agensi_organisasi }}" disabled />
+                                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ $user->agensiOrganisasi->name }}" disabled />
                                     </div>
                                 </div>
                                 <div class="row mb-2">
@@ -97,16 +107,6 @@
                                     </div>
                                     <div class="col-8">
                                         <input class="form-control form-control-sm ml-3" id="bahagian" type="text" value="{{ $user->bahagian }}" disabled />
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-3">
-                                        <label class="form-control-label mr-4" for="sektor">
-                                            Sektor
-                                        </label><label class="float-right">:</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input class="form-control form-control-sm ml-3" id="sektor" type="text" value="{{ ($user->sektor == '1' ? "Kerajaan":"Swasta") }}" disabled />
                                     </div>
                                 </div>
                                 <div class="row mb-2">
@@ -252,11 +252,6 @@
 
 <script>
     $(document).ready(function(){
-        <?php
-        if(Session::has('message')){
-            ?>alert("{{ Session::get('message') }}");<?php
-        }
-        ?>
 
         $(document).on('click','.btnTukar',function(){
             var passold = $('#password_old').val();

@@ -49,6 +49,10 @@ class User extends Authenticatable
     public function users(){
         return $this->hasMany(MohonData::class,'user_id','id');
     }
+    
+    public function agensiOrganisasi(){
+        return $this->hasOne('App\AgensiOrganisasi', 'id', 'agensi_organisasi');
+    }
 
     public static function boot() {
         parent::boot();
