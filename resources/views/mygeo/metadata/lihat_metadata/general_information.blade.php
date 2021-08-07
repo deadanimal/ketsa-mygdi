@@ -133,7 +133,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        Version 1.0
+                        Version 1.02021
                     </div>
                 </div>
             </div>
