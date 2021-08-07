@@ -32,6 +32,7 @@
                             <th>Bil</th>
                             <th>Nama Metadata</th>
                             <th>Nama Penerbit</th>
+                            <th>Agensi/Organisasi</th>
                             <th>Kategori</th>
                             <th>Status</th>
                             <th>Tindakan</th>
