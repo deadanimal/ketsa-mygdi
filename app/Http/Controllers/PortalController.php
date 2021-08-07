@@ -348,4 +348,16 @@ class PortalController extends Controller
         echo json_encode(["ao"=>$ao,"aos"=>$aos]);
         exit();
     }
+    
+    public function get_bahagian(Request $request){
+        $bhgns = AgensiOrganisasi::where('name',$request->agensi_organisasi_name)->whereNotNull('bahagian')->get();
+        $error = '0';
+        $msg = "";
+        if(count($bhgns) == 0){
+            $error = '1';
+            $msg = "Tiada Bahagian dijumpai";
+        }
+        echo json_encode(["bhgns"=>$bhgns,"msg"=>$msg,"error"=>$error]);
+        exit();
+    }
 }

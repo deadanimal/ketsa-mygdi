@@ -94,6 +94,30 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-12">
+                                            <label class="form-control-label">Agensi / Organisasi</label><span class="text-warning">*</span>
+                                            <select name="peranan" class="form-control form-control-sm">
+                                                <option value="" selected disabled>Pilih</option>
+                                                <?php
+                                                if (!empty($peranans)) {
+                                                    foreach ($peranans as $p) {
+                                                        if(strtolower($p->name) != 'pentadbir aplikasi' && strtolower($p->name) != 'super admin'){
+                                                            ?>
+                                                            <option value="{{ $p->name }}">
+                                                                {{ $p->name }}
+                                                            </option>
+                                                            <?php
+                                                        }
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                            @error('peranan')
+                                            <div class="text-warning">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12">
                                             <label class="form-control-label">Emel</label><span class="text-warning">*</span>
                                             <input class="form-control form-control-sm" type="email" name="email">
                                             @error('email')

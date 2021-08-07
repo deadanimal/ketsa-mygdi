@@ -218,13 +218,27 @@
                                                     <p class="error-message"><span></span></p>
                                                 </div>
                                             </div>
+                                            <div class="row mb-2 divSektor">
+                                                <div class="col-3">
+                                                    <label class="form-control-label mr-4" for="input-agensi">Sektor</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <select class=" form-control form-control-sm ml-3" id="sektor" name="sektor">
+                                                        <option value="" selected>Pilih...</option>
+                                                        <option value="1">Kerajaan</option>
+                                                        <option value="2">Swasta</option>
+                                                    </select>
+                                                    <p class="error-message"><span></span></p>
+                                                </div>
+                                            </div>
                                             <div class="row mb-2 divAgensiOrganisasi">
                                                 <div class="col-3">
                                                     <label class="form-control-label mr-4" for="input-agensi">Agensi/Organisasi</label>
                                                 </div>
                                                 <div class="col-8">
-                                                    <select name="agensi_organisasi" id="agensi_organisasi" class="form-control form-control-sm ml-3"></select>
-
+                                                    <select name="agensi_organisasi" id="agensi_organisasi" class="form-control form-control-sm ml-3">
+                                                        <option value="" data-name="">Pilih...</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="row mb-2 divInstitusi">
@@ -240,19 +254,8 @@
                                                     <label class="form-control-label mr-4" for="bahagian">Bahagian</label>
                                                 </div>
                                                 <div class="col-8">
-                                                    <input class="form-control form-control-sm ml-3" id="bahagian" placeholder="Bahagian" type="text" name="bahagian" />
-                                                    <p class="error-message"><span></span></p>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2 divSektor">
-                                                <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="input-agensi">Sektor</label>
-                                                </div>
-                                                <div class="col-8">
-                                                    <select class=" form-control form-control-sm ml-3" id="sektor" name="sektor">
-                                                        <!--<option selected disabled>Pilih</option>-->
-                                                        <option value="1" selected>Kerajaan</option>
-                                                        <option value="2">Swasta</option>
+                                                    <select name="bahagian" id="bahagian" class="form-control form-control-sm ml-3">
+                                                        <option value="">Pilih...</option>
                                                     </select>
                                                     <p class="error-message"><span></span></p>
                                                 </div>
@@ -425,6 +428,50 @@
         $('#btn_isi_borang').hide();
         $('#btn_daftar').hide();
         $('#btn_batal').hide();
+    });
+    
+    $('#sektor').change(function() {
+        $.ajax({
+            method: "POST",
+            url: "{{ url('get_agensi_organisasi_by_sektor') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "sektor": $(this).val(),
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            $('#agensi_organisasi').html('');
+            $('#agensi_organisasi').append('<option value="">Pilih...</option>');
+            $.each(data.aos, function(index,value) {
+                $('#agensi_organisasi').append('<option value="'+value.id+'" data-name="'+value.name+'">'+value.name+'</option>');
+            });
+            
+            $('#bahagian').html('');
+            $('#bahagian').append('<option value="">Pilih...</option>');
+        });
+    });
+    $('#agensi_organisasi').change(function() {
+        var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
+        
+        $.ajax({
+            method: "POST",
+            url: "{{ url('get_bahagian') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "agensi_organisasi_name": agensi_organisasi_name,
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            if(data.error == '1'){
+                alert(data.msg);
+            }else{
+                $('#bahagian').html('');
+                $('#bahagian').append('<option value="">Pilih...</option>');
+                $.each(data.bhgns, function(index,value) {
+                    $('#bahagian').append('<option value="'+value.bahagian+'">'+value.bahagian+'</option>');
+                });
+            }
+        });
     });
 
     $('input:radio[name="perananSelect"]').change(function() {
@@ -678,9 +725,11 @@
         }
         ?>
         <?php
+        /*
         if(Session::has('message')){
             ?>alert("{{ Session::get('message') }}");<?php
         }
+         */
         ?>
         $("#input-nric,#input-tpejabat,#input-tbimbit").inputFilter(function(value) {
             return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 999999999999);
@@ -700,20 +749,6 @@
 //            });
 //        });
 
-        //ajax get agensi/organisasi
-        $.ajax({
-            method: "POST",
-            url: "get_agensiOrganisasi",
-            data: {
-                "_token": "{{ csrf_token() }}"
-            },
-            dataType: "json",
-        }).done(function(data) {
-            data.forEach(function(the_var) {
-                $("#agensi_organisasi").append("<option value='" + the_var.name + "'>" + the_var.name + "</option>");
-            });
-        });
-
         $('#form_registration').hide();
         $('#btn_isi_borang').hide();
         $('#btn_daftar').hide();
@@ -728,10 +763,13 @@
         });
 
         <?php
+        /*
         if (null !== Session::get('msg') && !is_null(Session::get('msg')) && 'NULL' != Session::get('msg')) {
             ?>alert("<?php echo Session::get('msg'); ?>");
         <?php
         }
+         * 
+         */
         ?>
 
     });

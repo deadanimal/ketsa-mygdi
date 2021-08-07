@@ -180,7 +180,6 @@ Route::get('/send-mail', function () {
 });
 
 Route::post('get_roles','RoleController@get_roles');
-Route::post('get_agensiOrganisasi','UserController@get_agensiOrganisasi');
 Route::post('get_user_details','UserController@get_user_details');
 Route::post('user_sahkan','UserController@user_sahkan');
 Route::post('user_pengesahan_ditolak','UserController@user_pengesahan_ditolak');
@@ -198,6 +197,7 @@ Route::post('simpan_agensi_organisasi','PortalController@simpan_agensi_organisas
 Route::post('simpan_bahagian','PortalController@simpan_bahagian');
 Route::post('get_agensi_organisasi_by_sektor','PortalController@get_agensi_organisasi_by_sektor');
 Route::post('get_agensi_organisasi','PortalController@get_agensi_organisasi');
+Route::post('get_bahagian','PortalController@get_bahagian');
 Route::post('simpan_kemaskini_agensi_organisasi','PortalController@simpan_kemaskini_agensi_organisasi');
 
 Auth::routes();

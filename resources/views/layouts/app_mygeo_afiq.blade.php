@@ -153,12 +153,14 @@
                                                         <span class="nav-link-text">Senarai Metadata</span>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item">
-                                                    <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}" class="nav-link">
-                                                        <span class="nav-link-text">Kemas Kini Elemen Metadata</span>
-                                                    </a>
-                                                </li>
                                             </ul>
+                                        </li>
+                                        @endif
+                                        @if(auth::user()->hasRole(['Pentadbir Metadata','Super Admin']))
+                                        <li class="nav-item">
+                                            <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}" class="nav-link">
+                                                <span class="nav-link-text">Kemas Kini Elemen Metadata</span>
+                                            </a>
                                         </li>
                                         @endif
                                         @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))

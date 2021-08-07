@@ -105,6 +105,19 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-3">
+                                            <label class="form-control-label mr-4" for="sektor">
+                                                Sektor
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <select class="form-control form-control-sm ml-3" name="sektor">
+                                                <option value="1" {{ ($user->sektor == '1' ? "selected":"") }}>Kerajaan</option>
+                                                <option value="2" {{ ($user->sektor == '2' ? "selected":"") }}>Swasta</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
                                             <label class="form-control-label mr-4" for="agensi_organisasi">
                                                 Agensi / Organisasi
                                             </label><label class="float-right">:</label>
@@ -123,19 +136,6 @@
                                         </div>
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" name="bahagian" id="bahagian" type="text" value="{{ $user->bahagian }}" />
-                                        </div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col-3">
-                                            <label class="form-control-label mr-4" for="sektor">
-                                                Sektor
-                                            </label><label class="float-right">:</label>
-                                        </div>
-                                        <div class="col-8">
-                                            <select class="form-control form-control-sm ml-3" name="sektor">
-                                                <option value="1" {{ ($user->sektor == '1' ? "selected":"") }}>Kerajaan</option>
-                                                <option value="2" {{ ($user->sektor == '2' ? "selected":"") }}>Swasta</option>
-                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
