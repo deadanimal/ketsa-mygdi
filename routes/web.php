@@ -165,6 +165,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_kemaskini_gambarprofil','UserController@update_gambarprofile');
     Route::post('/simpan_kemaskini_password','UserController@update_password');
     Route::post('/tambahPenggunaBaru','UserController@tambahPenggunaBaru');
+    
+    Route::get('/senarai_agensi_organisasi','PortalController@senarai_agensi_organisasi');
+    Route::get('/senarai_bahagian','PortalController@senarai_bahagian');
 
     Route::get('/pemindahan_akaun','UserController@pemindahan_akaun');
 
@@ -191,6 +194,11 @@ Route::post('simpan_kategori','MetadataController@simpan_kategori');
 Route::post('simpan_tajuk','MetadataController@simpan_tajuk');
 Route::post('simpan_sub_tajuk','MetadataController@simpan_sub_tajuk');
 Route::post('simpan_elemen','MetadataController@simpan_elemen');
+Route::post('simpan_agensi_organisasi','PortalController@simpan_agensi_organisasi');
+Route::post('simpan_bahagian','PortalController@simpan_bahagian');
+Route::post('get_agensi_organisasi_by_sektor','PortalController@get_agensi_organisasi_by_sektor');
+Route::post('get_agensi_organisasi','PortalController@get_agensi_organisasi');
+Route::post('simpan_kemaskini_agensi_organisasi','PortalController@simpan_kemaskini_agensi_organisasi');
 
 Auth::routes();
 

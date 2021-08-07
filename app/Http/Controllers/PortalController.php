@@ -22,6 +22,8 @@ use App\Pengumuman;
 use Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
+use App\AgensiOrganisasi;
+use App\Bahagian;
 
 class PortalController extends Controller
 {
@@ -294,5 +296,56 @@ class PortalController extends Controller
     {
         Pengumuman::where(["id" => $request->umum_id])->delete();
         return redirect('pengumuman_edit')->with('success', 'Pengumuman Dibuang');
+    }
+    
+    public function senarai_agensi_organisasi(){
+        $aos = AgensiOrganisasi::orderBy('created_at','desc')->get();
+        return view('mygeo.pengurusan_portal.senarai_agensi_organisasi', compact('aos'));
+    }
+    
+    public function simpan_agensi_organisasi(Request $request){
+        $msg = "Penambahan Agensi / Organisasi berjaya.";
+        $ao = new AgensiOrganisasi();
+        $ao->sektor = $request->sektor;
+        $ao->name = $request->namaAgensiOrganisasi;
+        if(isset($request->namaBahagian)){
+            $ao->bahagian = $request->namaBahagian;
+            $msg = "Penambahan Bahagian berjaya.";
+        }
+        $ao->save();
+        
+        echo json_encode(["msg"=>$msg]);
+        exit();
+    }
+    
+    public function simpan_kemaskini_agensi_organisasi(Request $request){
+        $msg = "Agensi / Organisasi berjaya dikemaskini.";
+        $ao = AgensiOrganisasi::where('id',$request->rowid)->get()->first();
+        $ao->sektor = $request->sektor;
+        $ao->name = $request->namaAgensiOrganisasi;
+        if(isset($request->bahagian)){
+            $ao->bahagian = $request->bahagian;
+            $msg = "Bahagian berjaya dikemaskini.";
+        }
+        $ao->save();
+        
+        echo json_encode(["msg"=>$msg]);
+        exit();
+    }
+    
+    public function get_agensi_organisasi_by_sektor(Request $request){
+        $aos = AgensiOrganisasi::where('sektor',$request->sektor)->distinct('name')->get();
+        echo json_encode(["aos"=>$aos]);
+        exit();
+    }
+    public function get_agensi_organisasi(Request $request){
+        $aos = "";
+        $ao = AgensiOrganisasi::where('id',$request->rowid)->get()->first();
+        if($ao->bahagian != ""){
+            //get all agensi_organisasi 
+            $aos = AgensiOrganisasi::where('sektor',$ao->sektor)->distinct('name')->get();
+        }
+        echo json_encode(["ao"=>$ao,"aos"=>$aos]);
+        exit();
     }
 }

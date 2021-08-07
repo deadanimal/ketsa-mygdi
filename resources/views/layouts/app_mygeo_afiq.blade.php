@@ -333,6 +333,14 @@
                                             </ul>
                                         </li>
                                         @endif
+                                        @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
+                                        <li class="nav-item">
+                                            <a href="{{ url('senarai_agensi_organisasi') }}" class="nav-link">
+                                                <i class="fas fa-list-ul text-indigo"></i>
+                                                <span class="nav-link-text">Kemaskini Agensi / Organisasi</span>
+                                            </a>
+                                        </li>
+                                        @endif
                                     </ul>
                                     <hr class="my-3">
                                     <ul class="navbar-nav">

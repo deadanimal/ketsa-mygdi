@@ -15,7 +15,7 @@
                 if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
                     echo $metadataxml->contact->CI_ResponsibleParty;
                 }
-                ?>
+                ?>s
             </div>
             <div class="form-group row">
                 <p class="pl-lg-3 form-control-label">Metadata Language<span class="mx-3">:</span></p>
