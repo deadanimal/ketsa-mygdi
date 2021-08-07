@@ -72,11 +72,11 @@
                                     @foreach($pemohons as $pemohon)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$pemohon->nama_permohonan}}</td>
+                                        <td>{{$pemohon->name}}</td>
                                         <td><span class="badge badge-pill badge-info">Draf Baru</span></td>
-                                        <td>{{ Carbon\Carbon::parse($pemohon->date_permohonan)->format('d M Y') }}</td>
+                                        <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d M Y') }}</td>
                                         <td>
-                                            <a href="/tambah_permohonan/{{$pemohon->id}}" class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i></a>
+                                            <a href="/lihat_permohonan/{{$pemohon->id}}" class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i></a>
                                             <button type="button" data-permohonanid="{{ $pemohon->id }}" class="btnDelete btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -104,16 +104,16 @@
                     <div class="modal-body row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="nama_permohonan" class="form-control-label">Nama Permohonan</label>
-                                <input type="text" class="form-control form-control-sm" name="nama_permohonan" value="">
+                                <label for="name" class="form-control-label">Nama Permohonan</label>
+                                <input type="text" class="form-control form-control-sm" name="name" value="">
                             </div>
                             <div class="form-group">
-                                <label for="date_permohonan" class="form-control-label">Tarikh Permohonan</label>
-                                <input type="date" class="form-control form-control-sm" name="date_permohonan" value="<?php echo date('Y-m-d'); ?>">
+                                <label for="date" class="form-control-label">Tarikh Permohonan</label>
+                                <input type="date" class="form-control form-control-sm" name="date" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                             <div class="form-group">
-                                <label for="tujuan_permohonan" class="form-control-label">Tujuan Permohonan</label>
-                                <input type="text" class="form-control form-control-sm" name="tujuan_permohonan" value="">
+                                <label for="tujuan" class="form-control-label">Tujuan Permohonan</label>
+                                <input type="text" class="form-control form-control-sm" name="tujuan" value="">
                             </div>
                             <input type="hidden" name="id" value="{{$user -> id}}">
                             <input type="hidden" name="user_id" value="{{$user -> id}}">

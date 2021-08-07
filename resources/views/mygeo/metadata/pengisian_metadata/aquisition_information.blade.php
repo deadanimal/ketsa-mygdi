@@ -11,13 +11,13 @@
             <div class="acard-body opacity-8">
                 <div class="row">
                     <div class="col-xl-4">
-                        <h6 class="heading-small text-muted mb-3">Enviroment Record
+                        <h6 class="heading-small text-muted mb-3"><?php echo __('lang.enviromentRecord'); ?>
                         </h6>
                         <div class="form-group">
                             <div class="row mb-2">
                                 <div class="col-xl-8">
-                                    <div class="form-control-label">
-                                        Average Air Temperature
+                                    <div class="form-control-label" data-toggle="tooltip" title="Purata suhu udara sepanjang penerbangan">
+                                        <?php echo __('lang.average_air_temperature'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
@@ -26,8 +26,8 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-xl-8">
-                                    <div class="form-control-label">
-                                        Altitude
+                                    <div class="form-control-label" data-toggle="tooltip" title="">
+                                        <?php echo __('lang.altitude'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
@@ -36,8 +36,8 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-xl-8">
-                                    <div class="form-control-label">
-                                        Relative Humidity
+                                    <div class="form-control-label" data-toggle="tooltip" title="Kelembapan relatif maksimum sepanjang penerbangan">
+                                        <?php echo __('lang.relative_humidity'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
@@ -46,8 +46,8 @@
                             </div>
                             <div class="row mb">
                                 <div class="col-xl-8">
-                                    <div class="form-control-label">
-                                        Meteorological Condition
+                                    <div class="form-control-label" data-toggle="tooltip" title="Keadaan meteorologi kawasan penerbangan seperti awan dan angin">
+                                        <?php echo __('lang.meteorological_conditions'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
@@ -57,13 +57,13 @@
                         </div>
                     </div>
                     <div class="col-xl-3">
-                        <h6 class="heading-small text-muted mb-3">Event Identifier
+                        <h6 class="heading-small text-muted mb-3"><?php echo __('lang.eventIdentification'); ?>
                         </h6>
                         <div class="form-group">
                             <div class="row mb-2">
                                 <div class="col-xl-5">
-                                    <div class="form-control-label">
-                                        Identifier<span class="text-warning">*</span>
+                                    <div class="form-control-label" data-toggle="tooltip" title="Nama cerapan atau nombor cerapan">
+                                        <?php echo __('lang.identifier'); ?><span class="text-warning">*</span>
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
@@ -75,8 +75,8 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
-                                    <div class="form-control-label">
-                                        Trigger
+                                    <div class="form-control-label" data-toggle="tooltip" title="Permulaan cerapan">
+                                        <?php echo __('lang.trigger'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
@@ -90,8 +90,8 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
-                                    <div class="form-control-label">
-                                        Context
+                                    <div class="form-control-label" data-toggle="tooltip" title="Tujuan cerapan">
+                                        <?php echo __('lang.context'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
@@ -105,8 +105,8 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
-                                    <div class="form-control-label">
-                                        Sequence
+                                    <div class="form-control-label" data-toggle="tooltip" title="Masa relative cerapan dijalankan">
+                                        <?php echo __('lang.sequence'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
@@ -120,8 +120,8 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
-                                    <div class="form-control-label">
-                                        Time
+                                    <div class="form-control-label" data-toggle="tooltip" title="Masa cerapan diambil">
+                                        <?php echo __('lang.time'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
@@ -131,12 +131,12 @@
                         </div>
                     </div>
                     <div class="col-xl-3">
-                        <h6 class="heading-small text-muted mb-3">Instrument Identification</h6>
+                        <h6 class="heading-small text-muted mb-3"><?php echo __('lang.instrumentIdentification'); ?></h6>
                         <div class="form-group">
                             <div class="row mb-2">
                                 <div class="col-xl-5">
-                                    <div class="form-control-label">
-                                        Type<span class="text-warning">*</span>
+                                    <div class="form-control-label" data-toggle="tooltip" title="Jenis alat yang digunakan">
+                                        <?php echo __('lang.type'); ?><span class="text-warning">*</span>
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
@@ -146,11 +146,11 @@
                                     @enderror
                                 </div>
                             </div>
-                            <h6 class="heading-small text-muted mt-2 mb-3">Operation</h6>
+                            <h6 class="heading-small text-muted mt-2 mb-3"><?php echo __('lang.operation'); ?></h6>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
-                                    <div class="form-control-label">
-                                        Identifier<span class="text-warning">*</span>
+                                    <div class="form-control-label" data-toggle="tooltip" title="Numbor Pengenalan cerapan/ kerja">
+                                        <?php echo __('lang.identifier'); ?><span class="text-warning">*</span>
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
@@ -162,8 +162,8 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
-                                    <div class="form-control-label">
-                                        Status
+                                    <div class="form-control-label" data-toggle="tooltip" title="Status data cerapan">
+                                        <?php echo __('lang.status'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
@@ -172,8 +172,8 @@
                             </div>
                             <div class="row mb">
                                 <div class="col-xl-5">
-                                    <div class="form-control-label">
-                                        Type
+                                    <div class="form-control-label" data-toggle="tooltip" title="Teknik cerapan diambil">
+                                        <?php echo __('lang.type'); ?>
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
@@ -183,15 +183,15 @@
                         </div>
                     </div>
                     <div class="col-lg-2 px-0">
-                        <h6 class="heading-small text-muted mb-3">Request Data Range
+                        <h6 class="heading-small text-muted mb-3"><?php echo __('lang.requestDataRange'); ?>
                         </h6>
                         <div class="form-group">
-                            <div class="form-control-label mr-3">
-                                Date
+                            <div class="form-control-label mr-3" data-toggle="tooltip" title="Tarikh mula cerapan dijalankan ">
+                                <?php echo __('lang.date'); ?>
                             </div>
                             <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_rdr_date" id="c8_rdr_date" value="{{old('c8_rdr_date')}}">
-                            <div class="form-control-label mt-3 mr-3">
-                                Last Acceptable Date
+                            <div class="form-control-label mt-3 mr-3" data-toggle="tooltip" title="Tarikh cerapan siap dijalankan">
+                                <?php echo __('lang.latest_acceptable_date'); ?>
                             </div>
                             <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" value="{{old('c8_last_accept_date')}}">
                         </div>

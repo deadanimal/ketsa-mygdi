@@ -51,7 +51,7 @@
                                 <div class="col-4 text-right">
                                     <a href="{{ url('mygeo_profil') }}" class="btn btn-danger btn-sm text-white btn-icon btn-3">
                                         <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
-                                        <span class="btn-inner--text">Balik</span>
+                                        <span class="btn-inner--text">Kembali</span>
                                     </a>
                                     <button type="button" class="btn btn-success btn-sm text-white btn-icon btn-3 btn_simpan">
                                         <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
@@ -77,7 +77,7 @@
                                                 ?><input type="text" name="uname" id="uname" class="form-control form-control-sm ml-3" value="{{ $user->name }}"><?php
                                             }else{
                                                 ?>
-                                                <p>{{ $user->name }}</p>
+                                                <p class="ml-3 mb-0">{{ $user->name }}</p>
                                                 <input type="hidden" name="uname" id="uname" value="{{ $user->name }}">
                                                 <?php
                                             }
@@ -96,7 +96,7 @@
                                                 ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ $user->nric }}"><?php
                                             }else{
                                                 ?>
-                                                <p>{{ $user->nric }}</p>
+                                                <p class="ml-3 mb-0">{{ $user->nric }}</p>
                                                 <input type="hidden" name="nric" id="nric" value="{{ $user->nric }}">
                                                 <?php
                                             }
@@ -183,7 +183,7 @@
                                             $roles = Auth::user()->getRoleNames();
                                             if(!empty($roles) && count($roles) > 0){
                                                 foreach($roles as $r){
-                                                    ?><p>{{ $r }}</p><?php
+                                                    ?><p class="ml-3 mb-0">{{ $r }}</p><?php
                                                 }
                                             }
                                             ?>
@@ -221,7 +221,7 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -251,7 +251,7 @@ $(document).ready(function(){
             $("#form_kemaskini_profil").submit();
         }
     });
-    
+
     $.ajax({
         method: "POST",
         url: "get_agensiOrganisasi",

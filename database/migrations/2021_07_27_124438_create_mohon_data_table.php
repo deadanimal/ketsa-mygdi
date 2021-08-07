@@ -16,9 +16,14 @@ class CreateMohonDataTable extends Migration
         Schema::create('mohon_data', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nama_permohonan', 100);
-            $table->timestamp('date_permohonan');
-            $table->string('tujuan_permohonan', 100);
+            $table->string('name');
+            $table->timestamp('date');
+            $table->string('tujuan');
+            $table->string('status')->nullable();
+            $table->string('download')->nullable();
+            $table->string('penilaian')->nullable();
+            $table->string('assign_admin')->nullable();
+            $table->string('catatan')->nullable();
 
             $table->foreignId('user_id');
 

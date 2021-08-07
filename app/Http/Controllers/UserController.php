@@ -16,7 +16,7 @@ use App\AgensiOrganisasi;
 use App\MetadataGeo;
 use DB;
 use App\Mail\MailNotify;
- 
+
 class UserController extends Controller {
 
     /**
@@ -32,7 +32,7 @@ class UserController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
             exit();
         }
-        
+
         $users_all = User::where(['disahkan'=>0])->get();
         $users = [];
         foreach($users_all as $user){
@@ -47,7 +47,7 @@ class UserController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
             exit();
         }
-        
+
         $users_all = User::where(['disahkan' => 1])->orderBy('name')->get();
         $users = [];
         foreach($users_all as $user){
@@ -64,7 +64,7 @@ class UserController extends Controller {
         });
         return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans'));
     }
-    
+
     public function get_user_details(){
         $user_id = $_POST['user_id'];
         $user_details = User::where(["id"=>$user_id])->get()->first();
@@ -114,7 +114,7 @@ class UserController extends Controller {
             </div>
         ';
 
-        echo $html_details; 
+        echo $html_details;
         exit;
     }
 
@@ -122,13 +122,13 @@ class UserController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
             exit();
         }
-        
+
         $user_id = $_POST['user_id'];
         $user = User::where(['id'=>$user_id])->get()->first();
         $user->disahkan = 1;
         $user->status = 1;
         $user->update();
-        
+
         //send email to the person who was approved
         $to_name = $user->name;
         $to_email = $user->email;
@@ -137,7 +137,7 @@ class UserController extends Controller {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Diluluskan');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
-        
+
         exit();
     }
 
@@ -145,10 +145,10 @@ class UserController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
             exit();
         }
-        
+
         $user_id = $_POST['user_id'];
         $user = User::where(['id'=>$user_id])->get()->first();
-        
+
         //send email to the person who was disapproved
         $to_name = $user->namaPenuh;
         $to_email = $user->email;
@@ -157,9 +157,9 @@ class UserController extends Controller {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Tidak Diluluskan');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
-        
+
         User::where(['id'=>$user_id])->delete();
-        
+
         exit();
     }
 
@@ -207,7 +207,7 @@ class UserController extends Controller {
 
         return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
     }
-    
+
     public function update_gambarprofile(Request $request){
         //save gambar profil
         if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
@@ -229,27 +229,27 @@ class UserController extends Controller {
 
     public function update_password(Request $request){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
-        
-        if (Hash::check($request->password_old, $user->password)) { 
+
+        if (Hash::check($request->password_old, $user->password)) {
             $user->fill(['password' => Hash::make($request->password_new)])->save();
             return redirect('mygeo_profil')->with('message','Kata laluan berjaya ditukar');
         } else {
             return redirect('mygeo_profil')->with('message','Kata laluan lama tidak betul');
         }
     }
-    
-    public function change_user_status(Request $request){ 
+
+    public function change_user_status(Request $request){
         $user = User::where(["id"=>$request->user_id])->get()->first();
         $user->status = $request->status_id;
         $user->update();
         exit();
     }
-    
+
     public function delete_user(Request $request){
         User::where(["id"=>$request->user_id])->delete();
         exit();
     }
-    
+
     public function pemindahan_akaun(){
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
             exit();
@@ -257,7 +257,7 @@ class UserController extends Controller {
         $agensi = AgensiOrganisasi::get()->all();
         return view('mygeo.user.pemindahan_akaun', compact('agensi'));
     }
-    
+
     public function getUsersByAgensi(Request $request){
         $usersByAgensi = User::where(['agensi_organisasi'=>$request->agensi])->get();
         $usersByPenerbit = '<option selected disabled>Pilih</option>';
@@ -269,7 +269,7 @@ class UserController extends Controller {
         echo $usersByPenerbit;
         exit();
     }
-    
+
     public function getMetadataByUser(Request $request){
         $metadatasdb = MetadataGeo::on('pgsql2')->where('portal_user_id','=',$request->user_id)->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
@@ -285,7 +285,7 @@ class UserController extends Controller {
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
             $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = [$xml2, $met];
-            
+
             //category
             $cat = "";
             if(isset($xml2->categoryTitle) && $xml2->categoryTitle != ""){
@@ -307,7 +307,7 @@ class UserController extends Controller {
             }elseif($met->disahkan == 'delete'){
                 $status = "Dipadam";
             }
-            
+
             $metadataRows .= '
                 <tr>
                     <td>'.$bil.'</td>
@@ -321,12 +321,12 @@ class UserController extends Controller {
         echo $metadataRows;
         exit();
     }
-    
+
     public function simpan_pemindahan_akaun(Request $request){
         DB::connection('pgsql2')->transaction(function () use ($request) {
             $pengguna_lama = $request->pengguna_lama;
             $pengguna_baru = $request->pengguna_baru;
-            
+
             MetadataGeo::where(['portal_user_id'=>$pengguna_lama])->update([
                 'portal_user_id' => $pengguna_baru,
                 'changedate' => date("Y-m-d H:i:s"),
@@ -334,12 +334,12 @@ class UserController extends Controller {
         });
         exit();
     }
-    
+
     public function get_agensiOrganisasi(){
-        echo json_encode(AgensiOrganisasi::get()); 
+        echo json_encode(AgensiOrganisasi::get());
         exit;
     }
-    
+
     public function tambahPenggunaBaru(Request $request){
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
             exit();
@@ -355,9 +355,9 @@ class UserController extends Controller {
             "peranan.required" => 'Peranan diperlukan',
         ];
         $this->validate($request, $fields, $customMsg);
-        
+
         $password = "";
-        
+
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;
@@ -373,7 +373,7 @@ class UserController extends Controller {
         }catch (Illuminate\Database\QueryException $e){
             dd($e);
         }
-        
+
         //send email to the person created
         $to_name = $request->namaPenuh;
         $to_email = $request->email;
@@ -386,11 +386,11 @@ class UserController extends Controller {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Akaun');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
-        
+
         return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan');
     }
-    
- 
+
+
     public function generate_string($input, $strength = 16) {
         $input_length = strlen($input);
         $random_string = '';

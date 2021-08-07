@@ -8,11 +8,12 @@
     </div>
     <div id="collapse13" class="panel-collapse collapse in" data-parent="#div_c13">
         <div class="card-body">
-            <div class="row mb-2">
+            <div class="row mb-5">
                 <div class="col-xl-3">
-                    <label class="form-control-label" for="input-system-identifier">
-                        Reference System Identifier
-                    </label>
+                    <b for="input-system-identifier" data-toggle="tooltip"
+                        title="Sistem rujukan bagi maklumat geospatial">
+                        <?php echo __('lang.reference_system_identifier'); ?>
+                    </b>
                 </div>
                 <div class="col-xl-3">
                     <select class="form-control form-control-sm" name="c13_ref_sys_identify" id="c13_ref_sys_identify">
@@ -24,19 +25,17 @@
                                 if($ids->name == "UTM ZON 47" ||
                                         $ids->name == "UTM ZON 48" ||
                                         $ids->name == "UTM ZON 49" ||
-                                        $ids->name == "UTM ZON 50" ||
-                                        $ids->name == "ESPG" ||
-                                        $ids->name == "SR-ORG" ||
-                                        $ids->name == "ESRI" ||
-                                        $ids->name == "Unknown / Not Geo Reference"
+                                        $ids->name == "UTM ZON 50"
                                 ){
                                     $class = "refSys_Services";
                                 }
-                                
+
                                 if ($ids->id == old('c13_ref_sys_identify')) {
-                                    ?><option value="<?php echo $ids->id; ?>" selected class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
+                                    ?><option value="<?php echo $ids->id; ?>" selected class="<?php echo $class; ?>">
+                            <?php echo $ids->name; ?></option><?php
                                 } else {
-                                    ?><option value="<?php echo $ids->id; ?>" class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
+                                    ?><option value="<?php echo $ids->id; ?>"
+                            class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
                                 }
                             }
                         }
@@ -44,50 +43,38 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-xl-12">
-                    <table>
-                        <tr>
-                            <td>
-                                <label class="form-check-label" style="margin-left:20px;">
-                                    <b>Projection:</b>&nbsp;&nbsp;&nbsp;
-                                    <input class="form-control form-control-sm" type="text" name="refsys_projection" id="refsys_projection" readonly value="{{old('refsys_projection')}}">
-                                </label>
-                            </td>
-                            <td>
-                                <label class="form-check-label" style="margin-left:20px;">
-                                    <b>Semi Major Axis:</b>&nbsp;&nbsp;&nbsp;
-                                    <input class="form-control form-control-sm" type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" readonly value="{{old('refsys_semiMajorAxis')}}">
-                                </label>
-                            </td>
-                            <td>
-                                <label class="form-check-label" style="margin-left:20px;">
-                                    <b>Ellipsoid:</b>&nbsp;&nbsp;&nbsp;
-                                    <input class="form-control form-control-sm" type="text" name="refsys_ellipsoid" id="refsys_ellipsoid" readonly value="{{old('refsys_ellipsoid')}}">
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="form-check-label" style="margin-left:20px;">
-                                    <b>Axis Units:</b>&nbsp;&nbsp;&nbsp;
-                                    <input class="form-control form-control-sm" type="text" name="refsys_axis_units" id="refsys_axis_units" readonly value="{{old('refsys_axis_units')}}">
-                                </label>
-                            </td>
-                            <td>
-                                <label class="form-check-label" style="margin-left:20px;">
-                                    <b>Datum:</b>&nbsp;&nbsp;&nbsp;
-                                    <input class="form-control form-control-sm" type="text" name="refsys_datum" id="refsys_datum" readonly value="{{old('refsys_datum')}}">
-                                </label>
-                            </td>
-                            <td>
-                                <label class="form-check-label" style="margin-left:20px;">
-                                    <b>Denominator of Flattening Ratio:</b>&nbsp;&nbsp;&nbsp;
-                                    <input class="form-control form-control-sm" type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" readonly value="{{old('refsys_denomFlatRatio')}}">
-                                </label>
-                            </td>
-                        </tr>
-                    </table>
+            <div class="row mb-2">
+                <div class="col-2"><b><?php echo __('lang.projection'); ?> :</b></div>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" name="refsys_projection"
+                        id="refsys_projection" readonly value="{{ old('refsys_projection') }}">
+                </div>
+                <div class="col-2"><b><?php echo __('lang.axis_units'); ?> :</b></div>
+                <div class="col-4"><input class="form-control form-control-sm" type="text" name="refsys_axis_units"
+                        id="refsys_axis_units" readonly value="{{ old('refsys_axis_units') }}"></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2"><b><?php echo __('lang.semi_major_axis'); ?> :</b></div>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" name="refsys_semiMajorAxis"
+                        id="refsys_semiMajorAxis" readonly value="{{ old('refsys_semiMajorAxis') }}">
+                </div>
+                <div class="col-2"><b><?php echo __('lang.datum'); ?> :</b></div>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" name="refsys_datum" id="refsys_datum"
+                        readonly value="{{ old('refsys_datum') }}">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2"><b><?php echo __('lang.ellipsoid'); ?> :</b></div>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" name="refsys_ellipsoid"
+                        id="refsys_ellipsoid" readonly value="{{ old('refsys_ellipsoid') }}">
+                </div>
+                <div class="col-2"><b><?php echo __('lang.denominator_of_flattening_ratio'); ?> :</b></div>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" name="refsys_denomFlatRatio"
+                        id="refsys_denomFlatRatio" readonly value="{{ old('refsys_denomFlatRatio') }}">
                 </div>
             </div>
         </div>
@@ -111,12 +98,12 @@
                 }
             });
         });
-        
+
         <?php
         if(null !== old('c13_ref_sys_identify')){
             ?>
-            $("#c13_ref_sys_identify").val("<?php echo old('c13_ref_sys_identify'); ?>").change();    
-            <?php
+        $("#c13_ref_sys_identify").val("<?php echo old('c13_ref_sys_identify'); ?>").change();
+        <?php
         }
         ?>
     });

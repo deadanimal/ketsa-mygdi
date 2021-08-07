@@ -11,8 +11,8 @@
             <div class="acard-body opacity-8">
                 <div class="row mb-4">
                     <div class="col-xl-2">
-                        <label class="form-control-label" for="input-dataset-type">
-                            Spatial Data Set Type
+                        <label class="form-control-label" for="input-dataset-type" data-toggle="tooltip" title="Jenis maklumat geospatial">
+                            <?php echo __('lang.spatial_data_set_type'); ?>
                         </label>
                     </div>
                     <div class="col-xl-3">
@@ -27,11 +27,11 @@
                         </select>
                     </div>
                 </div>
-                <h6 class="heading-small text-muted mb-2">DATA SET RESOLUTION</h6>
+                <h6 class="heading-small text-muted mb-2"><?php echo __('lang.dataSetResolution'); ?></h6>
                 <div class="row mb-2">
                     <div class="col-xl-3">
-                        <label class="form-control-label" for="input-hardsoftcopy">
-                            Scale in Hardcopy/Softcopy
+                        <label class="form-control-label" for="input-hardsoftcopy" data-toggle="tooltip" title="Pengisian butiran skala (sekiranya ada). Contoh skala 1:50,000">
+                            <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
                             <span style="font-size: smaller;">(feature scale)</span>
                         </label>
                     </div>
@@ -39,8 +39,8 @@
                         <input class="form-control form-control-sm" name="c12_feature_scale" id="c12_feature_scale" placeholder="10:50000" type="text" value="{{old('c12_feature_scale')}}">
                     </div>
                     <div class="col-xl-2">
-                        <label class="form-control-label" for="input-imggsd">
-                            Image Resolution (GSD)</label>
+                        <label class="form-control-label" for="input-imggsd" data-toggle="tooltip" title="Pengisian butiran resolusi (sekiranya ada). Contoh GSD (Ground Sample Distance) - Resolution = 0.5 meter">
+                            <?php echo __('lang.image_resolution'); ?></label>
                     </div>
                     <div class="col-md-2">
                         <div class="input-group">
@@ -51,8 +51,8 @@
                         </div>
                     </div>
                     <div class="col-xl-1">
-                        <label class="form-control-label" for="input-language">
-                            Language
+                        <label class="form-control-label" for="input-language" data-toggle="tooltip" title="Penggunaan bahasa bagi maklumat geospatial">
+                            <?php echo __('lang.data_set_language'); ?>
                         </label>
                     </div>
                     <div class="col-xl-2">
@@ -63,11 +63,11 @@
                         </select>
                     </div>
                 </div>
-                <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
+                <h6 class="heading-small text-muted mb-2 divMaintenanceInfo"><?php echo __('lang.maintenanceInfomation'); ?></h6>
                 <div class="row mb-2 divMaintenanceInfo">
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy">
-                            Maintenance and Update
+                            <?php echo __('lang.maintenance_and_update'); ?>
                         </label>
                     </div>
                     <div class="col-xl-2">

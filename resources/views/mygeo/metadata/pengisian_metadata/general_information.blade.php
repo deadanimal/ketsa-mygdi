@@ -9,7 +9,7 @@
     <div id="collapse1" class="panel-collapse collapse in show" data-parent="#div_c1">
         <div class="card-body">
             <div class="form-group row">
-                <p class="pl-lg-3 form-control-label">Content Information<span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
+                <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                 <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;">
                     <option selected disabled>Select Content</option>
                     <option value="Application" class='optContentInfo_dataset'>Application</option>
@@ -21,11 +21,11 @@
                     <option value="Offline Data" class='optContentInfo_dataset'>Offline Data</option>
                     <option value="Static Map Images" class='optContentInfo_dataset'>Static Map Images</option>
                     <option value="Other Documents" class='optContentInfo_dataset'>Other Documents</option>
-                    
+
                     <option value="Live Data and Maps" class='optContentInfo_services'>Live Data and Maps</option>
-                    
+
                     <option value="Gridded" class='optContentInfo_gridded'>Gridded</option>
-                    
+
                     <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                 </select>
 
@@ -34,59 +34,58 @@
                 @enderror
             </div>
 
-            <h2 class="heading-small text-muted">Metadata Publisher</h2>
+            <h2 class="heading-small text-muted"><?php echo __('lang.metadataPublisher'); ?></h2>
             <div class="my-1">
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="uname">
-                            Name
+                            <?php echo __('lang.name'); ?>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        {{ auth::user()->name }}
+                        <p class="ml-3 mb-0">{{ auth::user()->name }}</p>
                         <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_name" value="{{ auth::user()->name }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="publisher_agensi_organisasi">
-                            Agency/Organization
+                        <label class="form-control-label mr-4" for="publisher_agensi_organisasi"><?php echo __('lang.organisation_name'); ?>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        {{ (isset(auth::user()->agensi_organisasi) ?  auth::user()->agensi_organisasi: "") }}
+                        <p class="ml-3 mb-0">{{ (isset(auth::user()->agensi_organisasi) ?  auth::user()->agensi_organisasi: "") }}</p>
                         <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensi_organisasi) ?  auth::user()->agensi_organisasi: "") }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_email">
-                            Email
+                            <?php echo __('lang.email'); ?>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        {{ auth::user()->email }}
+                        <p class="mb-0 ml-3">{{ auth::user()->email }}</p>
                         <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_email" value="{{ auth::user()->email }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_phone">
-                            Telephone (Office)
+                            <?php echo __('lang.telephone_office'); ?>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        {{ auth::user()->phone_pejabat }}
+                        <p class="ml-3 mb-0">{{ auth::user()->phone_pejabat }}</p>
                         <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0 divPublisherRole">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_role">
-                            Role
+                            <?php echo __('lang.role'); ?>
                         </label><label class="float-right">:</label>
                     </div>
-                    <div class="col-8">
+                    <div class="col-7">
                         <select name='publisher_role' class='form-control form-control-sm ml-3'>
                             <option value="Author">Author</option>
                             <option value="Custodian">Custodian</option>

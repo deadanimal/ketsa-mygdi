@@ -80,7 +80,6 @@ class DataAsasController extends Controller
 
     public function mohon_data()
     {
-
         $user = User::where(["id" => Auth::user()->id])->get()->first();
         if ($user->id == 1) {
             $pemohons = MohonData::all();
@@ -176,6 +175,8 @@ class DataAsasController extends Controller
     }
 
 
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -226,15 +227,31 @@ class DataAsasController extends Controller
         return redirect('mohon_data')->with('success', 'Data Senarai dan Kawasan dibuang!');
     }
 
+    public function hantar_permohonan(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            //hantar permohonan to admin
+            MohonData::where(["id" => $request->permohonan_id])->update([
+                "status" => $request->kategori,
+                "assign_admin" => $request->subkategori,
+                "lapisan_data" => $request->lapisan_data,
+                "kategori_pemohon" => $request->kategori_pemohon,
+                "kelas" => $request->kelas,
+                "status" => $request->status,
+                "harga_data" => $request->harga_data,
+            ]);
+        });
+    }
+
     public function store_permohonan_baru(Request $request)
     {
         //return $request;
 
         $mdata = new MohonData();
 
-        $mdata->nama_permohonan = $request->nama_permohonan;
-        $mdata->date_permohonan = $request->date_permohonan;
-        $mdata->tujuan_permohonan = $request->tujuan_permohonan;
+        $mdata->name = $request->name;
+        $mdata->date = $request->date;
+        $mdata->tujuan = $request->tujuan;
 
         $mdata->user_id = $request->user_id;
 

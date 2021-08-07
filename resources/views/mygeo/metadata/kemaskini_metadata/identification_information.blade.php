@@ -180,7 +180,7 @@
                             <option value="Withrawn" {{ ($metStatus == "Withrawn" ? "selected":"") }} class="optStatus_dataset">Withrawn</option>
                             <option value="Under Development" {{ ($metStatus == "Under Development" ? "selected":"") }} class="optStatus_dataset">Under Development</option>
                             <option value="Valid" {{ ($metStatus == "Valid" ? "selected":"") }} class="optStatus_dataset">Valid</option>
-                            
+
                             <option value="Completed" {{ ($metStatus == "Completed" ? "selected":"") }} class="optStatus_services">Completed</option>
                             <option value="Historical Archive" {{ ($metStatus == "Historical Archive" ? "selected":"") }} class="optStatus_services">Historical Archive</option>
                             <option value="Obsolete" {{ ($metStatus == "Obsolete" ? "selected":"") }} class="optStatus_services">Obsolete</option>

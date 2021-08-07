@@ -6,6 +6,12 @@
         border-radius: 2rem;
     }
 </style>
+<style>
+    div.g-recaptcha {
+      margin: 0 auto;
+      width: 304px;
+    }
+</style>
 
 <div class="content bgland p-5">
     <div class="container-fluid" data-aos="fade-up">
@@ -52,7 +58,7 @@
                                     <div class="validation-errors">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group justify-item-center">
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group">
                                             <div class="g-recaptcha" data-sitekey="6LdvEbUbAAAAAEeHGogajujfQIS-Rp98PxrU5Frz" width="100%"></div>
@@ -396,7 +402,7 @@
     $(document).on("click", ".btn_login", function() {
         var captcha = $('#g-recaptcha-response').val();
         <?php
-        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
+        if($_SERVER['HTTP_HOST'] == "127.0.0.1:8003"){
             ?>
             $("#formLogin").submit();
             <?php
