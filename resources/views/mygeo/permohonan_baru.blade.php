@@ -73,12 +73,12 @@
                                     @foreach($pemohons as $pemohon)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$pemohon->nama_permohonan}}</td>
+                                        <td>{{$pemohon->name}}</td>
                                         <td>{{$pemohon->users->name}}</td>
-                                        <td><span class="badge badge-pill badge-info">Draf Baru</span></td>
-                                        <td>{{ Carbon\Carbon::parse($pemohon->date_permohonan)->format('d M Y') }}</td>
+                                        <td>{{$pemohon->users->kategori}}</td>
+                                        <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d M Y') }}</td>
                                         <td>
-                                            <a href="/tambah_permohonan/{{$pemohon->id}}" class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i></a>
+                                            <a href="/lihat_permohonan/{{$pemohon->id}}" class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i></a>
                                             <button type="button" data-permohonanid="{{ $pemohon->id }}" class="btnDelete btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>

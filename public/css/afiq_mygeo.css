@@ -11377,11 +11377,11 @@ a.close.disabled {
   border-left-color: #000;
 }
 .tooltip-inner {
-  max-width: 200px;
+  max-width: 800px;
   padding: 0.25rem 0.5rem;
-  color: #fff;
-  text-align: center;
-  background-color: #000;
+  color: rgb(133, 133, 133);
+  text-align: left;
+  background-color: #fff9b6;
   border-radius: 0.375rem;
 }
 .popover {
@@ -30240,9 +30240,9 @@ a[_ngcontent-oai-c448]:not([href]):not([tabindex]):focus {
 
 .scroll[_ngcontent-oai-c448] {
   -ms-overflow-style: none;
-  
+
   scrollbar-width: none;
-  
+
 }
 
 .card-header[_ngcontent-oai-c448] {
@@ -30509,9 +30509,9 @@ a[_ngcontent-oai-c453]:not([href]):not([tabindex]):focus {
 
 .scroll[_ngcontent-oai-c453] {
   -ms-overflow-style: none;
-  
+
   scrollbar-width: none;
-  
+
 }
 
 .card-header[_ngcontent-oai-c453] {
@@ -30625,7 +30625,7 @@ a[_ngcontent-oai-c453]:not([href]):not([tabindex]):focus {
   box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06), 1px 3px 8px rgba(39, 44, 49, 0.03);
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  
+
   color: transparent;
   text-transform: uppercase;
   background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
@@ -30636,7 +30636,7 @@ a[_ngcontent-oai-c453]:not([href]):not([tabindex]):focus {
   box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07), 1px 6px 12px rgba(39, 44, 49, 0.04);
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  
+
   -webkit-transform: translate3D(0, -1px, 0) scale(1.2);
           transform: translate3D(0, -1px, 0) scale(1.2);
   font-size: 110%;
@@ -30881,9 +30881,9 @@ a[_ngcontent-oai-c499]:not([href]):not([tabindex]):focus {
 
 .scroll[_ngcontent-oai-c499] {
   -ms-overflow-style: none;
-  
+
   scrollbar-width: none;
-  
+
 }
 
 .card-header[_ngcontent-oai-c499] {
@@ -30961,7 +30961,7 @@ a[_ngcontent-oai-c499]:not([href]):not([tabindex]):focus {
   box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06), 1px 3px 8px rgba(39, 44, 49, 0.03);
   -webkit-transition: all 0.7s ease;
   transition: all 0.7s ease;
-  
+
   color: transparent;
   text-transform: uppercase;
   background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
@@ -30972,7 +30972,7 @@ a[_ngcontent-oai-c499]:not([href]):not([tabindex]):focus {
   box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07), 1px 6px 12px rgba(39, 44, 49, 0.04);
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  
+
   -webkit-transform: translate3D(0, -1px, 0) scale(1.2);
           transform: translate3D(0, -1px, 0) scale(1.2);
   font-size: 110%;

@@ -55,9 +55,9 @@
                                         @foreach ($pemohons as $pemohon)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pemohon->nama_permohonan }}</td>
+                                                <td>{{ $pemohon->name }}</td>
                                                 <td>{{ $pemohon->users->name }}</td>
-                                                <td></td>
+                                                <td>{{ $pemohon->users->kategori }}</td>
                                                 <td><span class="badge badge-pill badge-info">Baru</span></td>
                                                 <td><span class="badge badge-pill badge-success">Selesai</span></td>
                                                 <td><span class="badge badge-pill badge-warning">Tidak</span></td>

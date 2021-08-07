@@ -10,12 +10,12 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-xl-6">
-                                                        <h6 class="heading-small text muted">Legal Constraints</h6>
+                                                        <h6 class="heading-small text muted"><?php echo __('lang.legalConstraints'); ?></h6>
                                                         <div class="pl-lg-3">
                                                             <div class="row mb-2 divUseLimitation">
                                                                 <div class="col-xl-5">
                                                                     <label class="form-control-label" for="c14_useLimitation">
-                                                                        Use Limitation
+                                                                        <?php echo __('lang.use_limitation'); ?>
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">
@@ -24,8 +24,8 @@
                                                             </div>
                                                             <div class="row mb-2">
                                                                 <div class="col-xl-5">
-                                                                    <label class="form-control-label" for="input-access-cons">
-                                                                        Access Constraints
+                                                                    <label class="form-control-label" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
+                                                                        <?php echo __('lang.access_constraints'); ?>
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">
@@ -47,8 +47,8 @@
                                                             </div>
                                                             <div class="row mb-2">
                                                                 <div class="col-xl-5">
-                                                                    <label class="form-control-label" for="input-use-cons">
-                                                                        Use Constraints
+                                                                    <label class="form-control-label" for="input-use-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
+                                                                        <?php echo __('lang.use_constraints'); ?>
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">
@@ -71,13 +71,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6">
-                                                        <h6 class="heading-small text muted">Security Constraints
+                                                        <h6 class="heading-small text muted"> <?php echo __('lang.securityConstraints'); ?>
                                                         </h6>
                                                         <div class="pl-lg-3">
                                                             <div class="row mb-2">
                                                                 <div class="col-xl-5">
-                                                                    <label class="form-control-label" for="input-access-cons">
-                                                                        Classification
+                                                                    <label class="form-control-label" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
+                                                                        <?php echo __('lang.classification'); ?>
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">
@@ -97,8 +97,9 @@
                                                             </div>
                                                             <div class="row mb-2">
                                                                 <div class="col-xl-5">
-                                                                    <label class="form-control-label" for="input-reference">
-                                                                        Classification System
+                                                                    <label class="form-control-label" for="input-reference" data-toggle="tooltip" title="Pengisian polisi/perundangan bagi maklumat geospatial.
+                                                                    Contoh: Pekeliling Arahan Keselamatan Dokumen Geospatial Terperingkat Terhadap">
+                                                                    <?php echo __('lang.classification_system'); ?>
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-xl-7">

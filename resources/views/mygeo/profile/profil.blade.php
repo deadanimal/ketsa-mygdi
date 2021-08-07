@@ -274,7 +274,7 @@
             }
         });
     });
-    
+
     function myFunction1() {
         var x = document.getElementById("password_old");
         if (x.type === "password") {
@@ -301,7 +301,7 @@
             x.type = "password";
         }
     }
-    
+
     function checkPassword(str){
         // at least one number, one lowercase and one uppercase letter, at least 12 characters
         var regex = /^(?=^.{12,40}$)(?=.*\d)(?=.*[\W_])(?=.*[a-z])(?=.*[A-Z])(?!^.*\n).*$/;

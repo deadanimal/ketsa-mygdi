@@ -139,7 +139,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/landing_mygeo','UserController@show');
     Route::get('/mygeo_profil','UserController@show');
 
-    Route::get('/tambah_permohonan/{id}', 'DataAsasController@tambah')->name('tambah.permohonan');
+    Route::get('/lihat_permohonan/{id}', 'DataAsasController@tambah')->name('tambah.permohonan');
     Route::get('/mohon_data', 'DataAsasController@mohon_data');
     Route::post('/simpan_permohonan_baru', 'DataAsasController@store_permohonan_baru');
     Route::post('/simpan_senarai_kawasan', 'DataAsasController@store_senarai_kawasan');

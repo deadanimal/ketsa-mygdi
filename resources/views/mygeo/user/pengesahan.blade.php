@@ -70,7 +70,7 @@
                                         <tr>
                                             <td>{{ $bil }}</td>
                                             <td>{{ $user->name }}</td>
-                                            <td>{{ $user->agensi_organisasi }}</td>
+                                            <td>{{ (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"") }}</td>
                                             <td>
                                                 <?php
                                                     if (count($user->getRoleNames()) > 0) {
