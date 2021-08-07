@@ -147,11 +147,10 @@
             modal.style.display = "none";
           }
         }
-        
-        var param1 = getParamValue('param1');
 
         // Checking map service availability  
         var options = {query: {f: "json"},responseType: "json"};
+        //var url = getParamValue('url');
         var url = getParamValue('url');
 
         var url_check = url.lastIndexOf("arcgis/rest");
