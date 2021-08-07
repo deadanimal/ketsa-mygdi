@@ -54,8 +54,9 @@
                     </div>
                     <div class="col-7">
                         <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract != "") {
-                            echo $metadataxml->identificationInfo->SV_ServiceIdentification->abstract;
+                        $abstract = "";
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != "") {
+                            $abstract = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
                         }
                         ?>
                     </div>
