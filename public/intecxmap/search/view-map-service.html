@@ -147,11 +147,12 @@
             modal.style.display = "none";
           }
         }
-
+        
+        var param1 = getParamValue('param1');
 
         // Checking map service availability  
         var options = {query: {f: "json"},responseType: "json"};
-        var url = mapServiceUrl;
+        var url = getParamValue('url');
 
         var url_check = url.lastIndexOf("arcgis/rest");
         // url_check = -1 , Indicate the url is not an arcgis rest services
@@ -365,6 +366,17 @@
           distanceButton.classList.remove("active");
           areaButton.classList.remove("active");
           measurement.clear();
+        }
+        
+        function getParamValue(paramName){
+            var url = window.location.search.substring(1); //get rid of "?" in querystring
+            var qArray = url.split('&'); //get key-value pairs
+            for (var i = 0; i < qArray.length; i++) 
+            {
+                var pArr = qArray[i].split('='); //split key and value
+                if (pArr[0] == paramName) 
+                    return pArr[1]; //return value
+            }
         }
       });
     </script>
