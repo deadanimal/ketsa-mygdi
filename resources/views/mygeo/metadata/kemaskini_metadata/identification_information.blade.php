@@ -263,7 +263,7 @@
                             $serviceUrl = $metadataxml->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString;
                         }
                         ?>
-                        <input type="text" class="form-control form-control-sm" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ $operationName }}">
+                        <input type="text" class="form-control form-control-sm" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ $serviceUrl }}">
                         @error('c2_serviceUrl')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
