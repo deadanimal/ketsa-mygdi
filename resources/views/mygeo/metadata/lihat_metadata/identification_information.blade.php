@@ -56,7 +56,7 @@
                         <?php
                         $abstract = "";
                         if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != "") {
-                            $abstract = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
+                            echo $abstract = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
                         }
                         ?>
                     </div>
