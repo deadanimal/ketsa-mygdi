@@ -769,13 +769,11 @@
         });
 
         <?php
-        /*
+        
         if (null !== Session::get('msg') && !is_null(Session::get('msg')) && 'NULL' != Session::get('msg')) {
             ?>alert("<?php echo Session::get('msg'); ?>");
         <?php
         }
-         * 
-         */
         ?>
 
     });
