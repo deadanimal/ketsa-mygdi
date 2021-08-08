@@ -399,8 +399,8 @@
                                     <?php
                                     if (count($states) > 0) {
                                         foreach ($states as $st) {
-                                            ?><option value="<?php echo $st->id; ?>"
-                                        {{ $st->id == old('c2_contact_state') ? 'selected' : '' }}>
+                                            ?><option value="<?php echo $st->name; ?>"
+                                        {{ $st->name == old('c2_contact_state') ? 'selected' : '' }}>
                                         <?php echo $st->name; ?>
                                     </option><?php
                                         }
