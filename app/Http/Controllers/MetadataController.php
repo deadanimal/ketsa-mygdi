@@ -61,7 +61,7 @@ class MetadataController extends Controller {
             $metadatasdb = MetadataGeo::on('pgsql2')->where('portal_user_id','=',auth::user()->id)->orderBy('id', 'DESC')->get()->all();
         }elseif(auth::user()->hasRole(['Pengesah Metadata'])){
             //see all metadatas with same agensi_organisasi and bahagian
-            $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . auth::user()->agensi_organisasi . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%')->orderBy('id', 'DESC')->get()->all();
+            $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . auth::user()->agensiOrganisasi->name . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%')->orderBy('id', 'DESC')->get()->all();
         }elseif(auth::user()->hasRole(['Pentadbir Aplikasi','Pentadbir Metadata','Super Admin'])){
             //see all metadatas regardless
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
@@ -129,7 +129,7 @@ class MetadataController extends Controller {
             $xml2 = simplexml_load_string($ftestxml2);
 
             $agensi = (isset($xml2->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString : "");
-            if (strtolower($agensi) == strtolower(auth::user()->agensi_organisasi)) {
+            if (strtolower($agensi) == strtolower(auth::user()->agensiOrganisasi->name)) {
                 $metadatas[$met->id] = [$xml2,$met];
             }
         }

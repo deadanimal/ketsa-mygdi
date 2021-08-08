@@ -138,7 +138,7 @@
                               {{ (isset($val[2]->name) ? $val[2]->name:"") }}
                           </td>
                          <td>
-                              {{ (isset($val[2]->agensi_organisasi) ? $val[2]->agensi_organisasi:"") }}
+                              {{ (isset($val[2]->agensiOrganisasi->name) ? $val[2]->agensiOrganisasi->name:"") }}
                           </td>
                             <td>
                                 <?php

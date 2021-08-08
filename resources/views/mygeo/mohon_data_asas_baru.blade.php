@@ -97,7 +97,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <input class="form-control form-control-sm ml-3" name="institusi"
-                                                    type="text" value="{{ $user->agensi_organisasi }}" disabled />
+                                                    type="text" value="{{ $user->agensiOrganisasi->name }}" disabled />
                                             </div>
                                         </div>
                                         <div class="row mb-2">
