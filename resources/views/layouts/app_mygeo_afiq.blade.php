@@ -242,7 +242,7 @@
                                             </a>
                                         </li>
                                         @endif
-                                        @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
+                                        @if(auth::user()->hasRole(['Pengesah Metadata','Pentadbir Aplikasi','Super Admin']))
                                         <li class="nav-item">
                                             <a href="{{ url('mygeo_pengesahan_metadata') }}" class="nav-link active">
                                                 <i class="fas fa-edit text-green"></i>
