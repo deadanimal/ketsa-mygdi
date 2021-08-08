@@ -81,7 +81,7 @@ class UserController extends Controller {
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2">Agensi</label>
                 <div class="col-sm-10">
-                    :'.$user_details->agensiOrganisasi->name.'
+                    :'.(isset($user_details->agensiOrganisasi->name) ? $user_details->agensiOrganisasi->name:"").'
                 </div>
             </div>
             <div class="form-group row">
@@ -367,6 +367,7 @@ class UserController extends Controller {
             $nu = new User;
             $nu->name = $request->namaPenuh;
             $nu->email = $request->email;
+            $nu->agensi_organisasi = $request->agensi_organisasi;
             $pass = $this->generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',20);
             $password = $pass;
             $nu->password = Hash::make($pass);
