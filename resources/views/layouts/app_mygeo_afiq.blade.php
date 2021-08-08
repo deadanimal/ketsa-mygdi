@@ -161,7 +161,6 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                            @endif
                                         </li>
                                         @endif
                                         @if(auth::user()->hasRole(['Pentadbir Metadata','Super Admin']))
