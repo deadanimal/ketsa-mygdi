@@ -112,7 +112,7 @@ class MetadataController extends Controller {
         if (isset($_GET['var']) && $_GET['var'] == 'add_dummy_metadata') {
             $this->store_todel();
         }
-        if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Pentadbir Metadata','Pengesah Metadata', 'Super Admin'])) {
             exit();
         }
         // auth::user()->agensi_organisasi, auth::user()->agensi_organisasi
