@@ -251,10 +251,11 @@
 
     <script>
         $(document).ready(function() {
-            $("#table_agensi_organisasi").DataTable({
+            var table = $("#table_agensi_organisasi").DataTable({
+                "orderCellsTop": true,
                 "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
+                "responsive": false,
+                "autoWidth": true,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
                     "sEmptyTable": "Tiada rekod ditemui",
@@ -270,7 +271,20 @@
                     }
                 }
             });
+            
+            // Setup - add a text input to each footer cell
+            $('#table_agensi_organisasi thead tr').clone(true).appendTo('#table_agensi_organisasi thead');
+            $('#table_agensi_organisasi thead tr:eq(1) th').each( function (i) {
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
+                $('input',this).on('keyup change', function(){
+                    if(table.column(i).search() !== this.value){
+                        table.column(i).search(this.value).draw();
+                    }
+                });
+            });
         });
+        
 
         $(document).on("click", ".btnSimpanAgensiOrganisasi", function() {
             var sektor = $('#formTambahAgensiOrganisasi .sektor').val().trim();

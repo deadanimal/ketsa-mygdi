@@ -127,10 +127,13 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
             $xml2 = simplexml_load_string($ftestxml2);
+            
+            $penerbit = $this->getUser($met->portal_user_id);
 
             $agensi = (isset($xml2->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString : "");
             if (strtolower($agensi) == strtolower(auth::user()->agensiOrganisasi->name)) {
                 $metadatas[$met->id] = [$xml2,$met];
+                $metadatas[$met->id] = [$xml2, $met, $penerbit];
             }
         }
 

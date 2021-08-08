@@ -583,7 +583,7 @@
             $(".divthird").show();
             $('.btn_isi_borang').show();
             $("#hiddenKategori").val(per);
-            $("#kategoriPemohonData").val(per).change().prop('disabled','disabled');
+            $("#kategoriPemohonData").val(per).change().prop('disabled','disabled').show();
         } else if (per == "2_g2e_iptaSyarahSelidik" || per == "2_g2e_iptaPelajar" || per == "2_g2e_iptsSyarahSelidik" || per == "2_g2e_iptsPelajar") {
             $(".divNama").show();
             $(".divNric").show();
@@ -600,7 +600,7 @@
             $(".divKategori").show();
             $('.btn_isi_borang').show();
             $("#hiddenKategori").val(per);
-            $("#kategoriPemohonData").val(per).change().prop('disabled','disabled');
+            $("#kategoriPemohonData").val(per).change().prop('disabled','disabled').show();
         } else if (per == "2_g2g") {
             $(".2_g2c").show();
             $(".2_g2g_agensiPersNeg").show();

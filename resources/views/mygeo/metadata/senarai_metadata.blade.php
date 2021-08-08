@@ -1,6 +1,11 @@
 @extends('layouts.app_mygeo_afiq')
 
 @section('content')
+<style>
+    thead input {
+        width: 100%;
+    }
+    </style>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <section class="content-header">
@@ -25,16 +30,17 @@
                 <h3 class="card-title" style="font-size: 2rem;">Senarai Metadata</h3>
               </div>
               <div class="card-body">
-                <table id="table_metadatas" class="table table-bordered table-striped">
+                  <div style="overflow-x:auto;">
+                <table id="table_metadatas" class="table table-bordered table-striped" style="overflow: auto;">
                   <thead>
                     <tr>
                         @if(auth::user()->hasRole(['Pengesah Metadata']))
                             <th>Bil</th>
                             <th>Nama Metadata</th>
                             <th>Nama Penerbit</th>
-                            <th>Agensi/Organisasi</th>
                             <th>Kategori</th>
                             <th>Status</th>
+                            <th>Tarikh</th>
                             <th>Tindakan</th>
                         @elseif(auth::user()->hasRole(['Pentadbir Metadata']))
                             <th>Bil</th>
@@ -43,12 +49,14 @@
                             <th>Nama Agensi</th>
                             <th>Kategori</th>
                             <th>Status</th>
+                            <th>Tarikh</th>
                             <th>Tindakan</th>
-                        @elseif(auth::user()->hasRole(['Penerbit Metadata']))
+                        @elseif(auth::user()->hasRole(['Penerbit Metadata','Pentadbir Aplikasi']))
                             <th>Bil</th>
                             <th>Metadata</th>
                             <th>Kategori</th>
                             <th>Status</th>
+                            <th>Tarikh</th>
                             <th>Tindakan</th>
                         @else
                             <th>Bil</th>
@@ -81,13 +89,6 @@
                           <td>
                             {{ (isset($val[2]->name) ? $val[2]->name:"") }}
                           </td>
-                          <td>
-                                <?php
-                                   if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString != ""){
-                                      echo $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
-                                  }
-                                  ?>
-                          </td>
                             <td>
                                 <?php
                                    if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
@@ -111,6 +112,9 @@
                                     }
                                 }
                                 ?>
+                          </td>
+                          <td>
+                              {{ date('d/m/Y',strtotime($val[1]->created_at)) }}
                           </td>
                           <td class="pr-1">
                             <div class="form-inline">
@@ -164,6 +168,9 @@
                                 }
                                 ?>
                           </td>
+                          <td>
+                              {{ date('d/m/Y',strtotime($val[1]->created_at)) }}
+                          </td>
                           <td class="pr-1">
                             <div class="form-inline">
                                 <?php //lihat(view only)================================ ?>
@@ -184,7 +191,7 @@
                                 </form>
                               </div>
                           </td>
-                         @elseif(auth::user()->hasRole(['Penerbit Metadata']))
+                         @elseif(auth::user()->hasRole(['Penerbit Metadata','Pentadbir Aplikasi']))
                              <?php //################################## ?>                          
                             <td>
                                 <?php
@@ -209,6 +216,9 @@
                                     }
                                 }
                                 ?>
+                          </td>
+                          <td>
+                              {{ date('d/m/Y',strtotime($val[1]->created_at)) }}
                           </td>
                           <td class="pr-1">
                             <div class="form-inline">
@@ -286,18 +296,21 @@
                   </tbody>
                 </table>
               </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
   </div>
-
+  
 <script>
   $(document).ready(function(){
-    $("#table_metadatas").DataTable({
-      "responsive": true,
-      "autoWidth": false,
+    var table = $("#table_metadatas").DataTable({
+        "orderCellsTop": true,
+      "ordering": false,
+      "responsive": false,
+      "autoWidth": true,
       "oLanguage": {
         "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
         "sEmptyTable": "Tiada rekod ditemui",
@@ -312,6 +325,18 @@
            "sPrevious": "<",
         }
       },
+    });
+    
+    // Setup - add a text input to each footer cell
+    $('#table_metadatas thead tr').clone(true).appendTo('#table_metadatas thead');
+    $('#table_metadatas thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
+        $('input',this).on('keyup change', function(){
+            if(table.column(i).search() !== this.value){
+                table.column(i).search(this.value).draw();
+            }
+        });
     });
 
     $('#tarikh_mula_div,#tarikh_tamat_div').datetimepicker({

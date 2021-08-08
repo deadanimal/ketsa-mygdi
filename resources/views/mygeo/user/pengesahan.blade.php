@@ -146,9 +146,11 @@
 
 <script>
     $(function() {
-        $("#table_newUsers").DataTable({
-            "responsive": true,
-            "autoWidth": false,
+        var table = $("#table_newUsers").DataTable({
+            "orderCellsTop": true,
+            "ordering": false,
+            "responsive": false,
+            "autoWidth": true,
             "oLanguage": {
                 "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
                 "sEmptyTable": "Tiada rekod ditemui",
@@ -163,6 +165,18 @@
                     "sPrevious": "<",
                 }
             }
+        });
+        
+        // Setup - add a text input to each footer cell
+        $('#table_newUsers thead tr').clone(true).appendTo('#table_newUsers thead');
+        $('#table_newUsers thead tr:eq(1) th').each( function (i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
+            $('input',this).on('keyup change', function(){
+                if(table.column(i).search() !== this.value){
+                    table.column(i).search(this.value).draw();
+                }
+            });
         });
 
         $(document).on("click", ".butiran", function() {

@@ -62,6 +62,9 @@
                                         <th></th>
                                         <th>Bil</th>
                                         <th>Nama Metadata</th>
+                                        <th>Penerbit</th>
+                                        <th>Kategori</th>
+                                        <th>Tarikh</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -83,6 +86,19 @@
                                                            echo $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                                                        }
                                                        ?>
+                                                </td>
+                                                <td>
+                                                    {{ (isset($val[2]->name) ? $val[2]->name:"") }}
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                       if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
+                                                          echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                                      }
+                                                      ?>
+                                                 </td>
+                                                 <td>
+                                                    {{ date('d/m/Y',strtotime($val[1]->created_at)) }}
                                                 </td>
                                                 <td>
                                                     <?php //sahkan(kemaskini)======================================= ?>
@@ -118,9 +134,11 @@
 <script>
     $(document).ready(function() {
         var checked_metadatas = [];
-        var table_metadatas = $("#table_metadatas").DataTable({
-            "responsive": true,
-            "autoWidth": false,
+        var table = $("#table_metadatas").DataTable({
+            "orderCellsTop": true,
+            "ordering": false,
+            "responsive": false,
+            "autoWidth": true,
             "drawCallback": function(settings) {
                 $(".checkbox_metadatas").on("click", function() {
                     if ($(this).is(":checked")) {
@@ -150,6 +168,18 @@
                 }
             }
         });
+        
+    // Setup - add a text input to each footer cell
+    $('#table_metadatas thead tr').clone(true).appendTo('#table_metadatas thead');
+    $('#table_metadatas thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
+        $('input',this).on('keyup change', function(){
+            if(table.column(i).search() !== this.value){
+                table.column(i).search(this.value).draw();
+            }
+        });
+    });
 
         $(document).on("click", ".btn_sahkan", function() {
             if (confirm("Adakah anda pasti untuk mengesahkan metadata ini?")) {
