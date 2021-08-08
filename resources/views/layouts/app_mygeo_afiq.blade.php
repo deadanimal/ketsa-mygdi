@@ -154,6 +154,15 @@
                                                     </a>
                                                 </li>
                                             </ul>
+                                        </li>
+                                        @endif
+                                        @if(auth::user()->hasRole(['Pentadbir Metadata','Super Admin']))
+                                        <li class="nav-item has-treeview">
+                                            <a class="nav-link ng-star-inserted" href="#">
+                                                <i class="fa-braille fas text-indigo"></i>
+                                                <span class="nav-link-text">Pengurusan Metadata</span>
+                                                <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
+                                            </a>
                                             <ul class="nav nav-sm nav-treeview"> 
                                                 <li class="nav-item">
                                                     <a href="{{ url('mygeo_pengesahan_metadata') }}" class="nav-link active">
