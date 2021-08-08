@@ -154,13 +154,13 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                            @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('mygeo_pengesahan_metadata') }}" class="nav-link active">
-                                                    <i class="fas fa-edit text-green"></i>
-                                                    <span class="nav-link-text">Semakan Metadata</span>
-                                                </a>
-                                            </li>
+                                            <ul class="nav nav-sm nav-treeview"> 
+                                                <li class="nav-item">
+                                                    <a href="{{ url('mygeo_pengesahan_metadata') }}" class="nav-link active">
+                                                        <span class="nav-link-text">Semakan Metadata</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                             @endif
                                         </li>
                                         @endif
