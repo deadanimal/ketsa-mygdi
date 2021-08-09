@@ -65,7 +65,7 @@
                                         <th>Penerbit</th>
                                         <th>Kategori</th>
                                         <th>Tarikh</th>
-                                        <th>Actions</th>
+                                        <th>Tindakan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
