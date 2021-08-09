@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/mygeo_pengesahan', 'UserController@index');
     Route::get('/mygeo_senarai_pengguna_berdaftar', 'UserController@index_berdaftar');
+    Route::get('/mygeo_senarai_penerbit_pengesah', 'UserController@index_penerbit_pengesah');
     Route::post('/change_user_status', 'UserController@change_user_status');
     Route::post('/delete_user', 'UserController@delete_user');
 

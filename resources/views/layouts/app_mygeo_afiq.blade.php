@@ -315,6 +315,14 @@
                                             </a>
                                         </li>
                                         @endif
+                                        @if(auth::user()->hasRole(['Pentadbir Metadata']))
+                                        <li class="nav-item">
+                                            <a href="{{ url('mygeo_senarai_penerbit_pengesah') }}" class="nav-link active">
+                                                <i class="fas fa-list-ul text-indigo"></i>
+                                                <span class="nav-link-text">Senarai Penerbit / Pengesah</span>
+                                            </a>
+                                        </li>
+                                        @endif
                                         @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
                                         <li class="nav-item has-treeview">
                                             <a class="nav-link ng-star-inserted" href="#">

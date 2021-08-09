@@ -67,6 +67,30 @@ class UserController extends Controller {
         
         return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans','aos'));
     }
+    
+    public function index_penerbit_pengesah() {
+        if(!auth::user()->hasRole(['Pentadbir Metadata','Super Admin'])){
+            exit();
+        }
+
+        $users_all = User::whereHas("roles", function ($q) {
+                    $q->where("name", "Pengesah Metadata")->orWhere("name", "Penerbit Metadata");
+                })->orderBy('name')->get();
+        $users = [];
+        foreach($users_all as $user){
+            $users[]= $user;
+        }
+
+        $peranans = Role::get();
+        $ids = [ 5, 6, 3, 4, 2];
+        $peranans = $peranans->sortBy(function($model) use ($ids) {
+            return array_search($model->getKey(), $ids);
+        });
+        
+        $aos = AgensiOrganisasi::distinct('name')->get();
+        
+        return view('mygeo.user.senarai_penerbit_pengesah', compact('users','peranans','aos'));
+    }
 
     public function get_user_details(){
         $user_id = $_POST['user_id'];
