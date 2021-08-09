@@ -170,14 +170,12 @@
                                                         <span class="nav-link-text">Semakan Metadata</span>
                                                     </a>
                                                 </li>
+                                                <li class="nav-item">
+                                                    <a href="{{ url('mygeo_senarai_metadata') }}" class="nav-link active">
+                                                        <span class="nav-link-text">Senarai Metadata</span>
+                                                    </a>
+                                                </li>
                                             </ul>
-                                        </li>
-                                        @endif
-                                        @if(auth::user()->hasRole(['Pentadbir Metadata','Super Admin']))
-                                        <li class="nav-item">
-                                            <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}" class="nav-link">
-                                                <span class="nav-link-text">Kemas Kini Elemen Metadata</span>
-                                            </a>
                                         </li>
                                         @endif
                                         @if(auth::user()->hasRole(['Pentadbir Data','Super Admin']))
@@ -307,7 +305,7 @@
                                             </a>
                                         </li>
                                         @endif
-                                        @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata','Pentadbir Metadata']))
+                                        @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
                                         <li class="nav-item">
                                             <a href="{{ url('mygeo_senarai_metadata') }}" class="nav-link active">
                                                 <i class="fas fa-list-ul text-indigo"></i>
