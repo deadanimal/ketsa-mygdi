@@ -114,7 +114,7 @@
                                 ?>
                           </td>
                           <td>
-                              {{ date('d/m/Y',strtotime($val[1]->created_at)) }}
+                              {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
                           </td>
                           <td class="pr-1">
                             <div class="form-inline">
@@ -169,7 +169,7 @@
                                 ?>
                           </td>
                           <td>
-                              {{ date('d/m/Y',strtotime($val[1]->created_at)) }}
+                              {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
                           </td>
                           <td class="pr-1">
                             <div class="form-inline">
@@ -218,7 +218,7 @@
                                 ?>
                           </td>
                           <td>
-                              {{ date('d/m/Y',strtotime($val[1]->created_at)) }}
+                              {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
                           </td>
                           <td class="pr-1">
                             <div class="form-inline">
