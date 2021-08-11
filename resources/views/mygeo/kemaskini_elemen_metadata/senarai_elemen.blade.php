@@ -68,13 +68,13 @@
                                             ?>
                                             <tr>
                                                 <td>{{ $bil }}</td>
-                                                <td>{{ $bil }}</td>
-                                                <td>{{ $bil }}</td>
-                                                <td>{{ $bil }}</td>
-                                                <td>{{ $bil }}</td>
+                                                <td>{{ $elemen->getTajuk->name }}</td>
+                                                <td>{{ $elemen->getSubTajuk->sub_tajuk }}</td>
+                                                <td>{{ $elemen->elemen }}</td>
+                                                <td>{{ $elemen->getKategori->name }}</td>
                                                 <td>
-                                                    <button type="button" class="btnEdit">Edit</button>
-                                                    <button type="button" class="btnDelete">Delete</button>
+                                                    <button type="button" class="form-control btnEdit">Edit</button>
+                                                    <button type="button" class="form-control btnDelete">Delete</button>
                                                 </td>
                                             </tr>
                                             <?php

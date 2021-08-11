@@ -906,7 +906,8 @@ class MetadataController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Metadata'])){
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
         }   
-        $elemens = ElemenMetadata::get();
+        
+        $elemens = ElemenMetadata::with('getKategori','getTajuk','getSubTajuk')->get();
         $categories = MCategory::get();
 
         return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('elemens','categories'));
