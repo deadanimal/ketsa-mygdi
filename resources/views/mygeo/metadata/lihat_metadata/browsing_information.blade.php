@@ -10,79 +10,89 @@
         <div class="card-body">
             <h2 class="heading-small text-muted">Browsing Graphic</h2>
             <div class="my-2">
-                <div class="row mb-2">
-                    <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c10_file_name">
-                            File Name
-                        </label><label class="float-right">:</label>
+                <?php
+                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString != "") {
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c10_file_name">
+                                File Name
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-7">
+                            <?php echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString; ?>
+                        </div>
                     </div>
-                    <div class="col-7">
-                        <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString != "") {
-                            echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString;
-                        }
-                        ?>
+                    <?php
+                }
+                ?>
+                <?php
+                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString != "") {
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c10_file_type">
+                                File Type
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-7">
+                            <?php echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString; ?>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c10_file_type">
-                            File Type
-                        </label><label class="float-right">:</label>
+                    <?php
+                }
+                ?>
+                <?php
+                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString != "") {
+                    ?>
+                    <div class="row mb-4">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c10_file_url">
+                                URL
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-7">
+                            <?php echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString; ?>
+                        </div>
                     </div>
-                    <div class="col-7">
-                        <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString != "") {
-                            echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString;
-                        }
-                        ?>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c10_file_url">
-                            URL
-                        </label><label class="float-right">:</label>
-                    </div>
-                    <div class="col-7">
-                        <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString != "") {
-                            echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString;
-                        }
-                        ?>
-                    </div>
-                </div>
+                    <?php
+                }
+                ?>
             </div>
             <h2 class="heading-small text-muted">Keywords</h2>
             <div class="my-2">
-                <div class="row mb-2">
-                    <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c10_file_name">
-                            Keywords<span class="text-warning">*</span>
-                        </label><label class="float-right">:</label>
+                <?php
+                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString != "") {
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c10_file_name">
+                                Keywords<span class="text-warning">*</span>
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-6">
+                            <?php echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString; ?>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString != "") {
-                            echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString;
-                        }
-                        ?>
+                    <?php
+                }
+                ?>
+                <?php
+                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString != "") {
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c10_file_type">
+                                Additional Keywords
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-6">
+                            <?php echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString; ?>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c10_file_type">
-                            Additional Keywords
-                        </label><label class="float-right">:</label>
-                    </div>
-                    <div class="col-6">
-                        <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString != "") {
-                            echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString;
-                        }
-                        ?>
-                    </div>
-                </div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </div>

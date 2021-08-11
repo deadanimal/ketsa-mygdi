@@ -12,84 +12,92 @@
                 <div class="col-xl-6">
                     <h6 class="heading-small text-muted">Legal Constraints</h6>
                     <div class="pl-lg-3">
-                        <div class="row mb-2 divUseLimitation">
-                            <div class="col-xl-5">
-                                <label class="form-control-label" for="input-access-cons">
-                                    Use Limitation
-                                </label>
+                        <?php
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+                            ?>
+                            <div class="row mb-2 divUseLimitation">
+                                <div class="col-xl-5">
+                                    <label class="form-control-label" for="input-access-cons">
+                                        Use Limitation
+                                    </label>
+                                </div>
+                                <div class="col-xl-7">
+                                    <?php trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString); ?>
+                                </div>
                             </div>
-                            <div class="col-xl-7">
-                                <?php
-                                $useLimitation = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
-                                    $useLimitation = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString);
-                                }
-                                echo $useLimitation;
-                                ?>
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints != "") {
+                            ?>
+                            <div class="row mb-2">
+                                <div class="col-xl-5">
+                                    <label class="form-control-label" for="input-access-cons">
+                                        Access Constraints
+                                    </label>
+                                </div>
+                                <div class="col-xl-7">
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints . "</p>"; ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-xl-5">
-                                <label class="form-control-label" for="input-access-cons">
-                                    Access Constraints
-                                </label>
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints != "") {
+                            ?>
+                            <div class="row mb-2">
+                                <div class="col-xl-5">
+                                    <label class="form-control-label" for="input-use-cons">
+                                        Use Constraints
+                                    </label>
+                                </div>
+                                <div class="col-xl-7">
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints . "</p>"; ?>
+                                </div>
                             </div>
-                            <div class="col-xl-7">
-                                <?php
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints != "") {
-                                    echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints . "</p>";
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-xl-5">
-                                <label class="form-control-label" for="input-use-cons">
-                                    Use Constraints
-                                </label>
-                            </div>
-                            <div class="col-xl-7">
-                                <?php
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints != "") {
-                                    echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints . "</p>";
-                                }
-                                ?>
-                            </div>
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <h6 class="heading-small text-muted">Security Constraints
                     </h6>
                     <div class="pl-lg-3">
-                        <div class="row mb-2">
-                            <div class="col-xl-5">
-                                <label class="form-control-label" for="input-access-cons">
-                                    Classification System
-                                </label>
+                        <?php
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification != "") {
+                            ?>
+                            <div class="row mb-2">
+                                <div class="col-xl-5">
+                                    <label class="form-control-label" for="input-access-cons">
+                                        Classification System
+                                    </label>
+                                </div>
+                                <div class="col-xl-7">
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification . "</p>"; ?>
+                                </div>
                             </div>
-                            <div class="col-xl-7">
-                                <?php
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification != "") {
-                                    echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification . "</p>";
-                                }
-                                ?>
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
+                            ?>
+                            <div class="row mb-2">
+                                <div class="col-xl-5">
+                                    <label class="form-control-label" for="input-reference">
+                                        Reference
+                                    </label>
+                                </div>
+                                <div class="col-xl-7">
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference . "</p>"; ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-xl-5">
-                                <label class="form-control-label" for="input-reference">
-                                    Reference
-                                </label>
-                            </div>
-                            <div class="col-xl-7">
-                                <?php
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
-                                    echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference . "</p>";
-                                }
-                                ?>
-                            </div>
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

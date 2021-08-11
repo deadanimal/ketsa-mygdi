@@ -13,47 +13,47 @@
             </div>
             <div class="pl-lg-2">
                 <div class="row mb-2">
-                    <div class="col-xl-1">
-                        <label class="form-control-label" for="input-DQscope">
-                            DQ Scope
-                        </label>
-                    </div>
-                    <div class="col-xl-3">
-                        <?php
-                        $dqScope = "";
-                        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level) && $metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level != "") {
-                            $dqScope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level);
-                        }
-                        echo $dqScope;
+                    <?php
+                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level) && $metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level != "") {
                         ?>
-                    </div>
-                    <div class="col-xl-2">
-                        <label class="form-control-label float-right" for="input-datahistory">
-                            Data History</label>
-                    </div>
-                    <div class="col-md-2">
-                        <?php
-                        $dataHist = "";
-                        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement) && $metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement != "") {
-                            $dataHist = $metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement;
-                        }
-                        echo $dataHist;
+                        <div class="col-xl-1">
+                            <label class="form-control-label" for="input-DQscope">
+                                DQ Scope
+                            </label>
+                        </div>
+                        <div class="col-xl-3">
+                            <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level); ?>
+                        </div>
+                        <?php 
+                    }
+                    ?>
+                    <?php
+                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement) && $metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement != "") {
                         ?>
-                    </div>
-                    <div class="col-xl-1">
-                        <label class="form-control-label  float-right" for="input-date">
-                            Date
-                        </label>
-                    </div>
-                    <div class="col-xl-3">
+                        <div class="col-xl-2">
+                            <label class="form-control-label float-right" for="input-datahistory">
+                                Data History</label>
+                        </div>
+                        <div class="col-md-2">
+                            <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement; ?>
+                        </div>      
                         <?php
-                        $dqDate = "";
-                        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date != "") {
-                            $dqDate = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date);
-                        }
-                        echo $dqDate;
+                    }
+                    ?>
+                    <?php
+                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date != "") {
                         ?>
-                    </div>
+                        <div class="col-xl-1">
+                            <label class="form-control-label  float-right" for="input-date">
+                                Date
+                            </label>
+                        </div>
+                        <div class="col-xl-3">
+                            <?php echo date('d/m/Y',strtotime(trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date))); ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -100,147 +100,148 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
-                                                    <tr class="Completeness_Commission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_1">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t1Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope != "") {
-                                                                    $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope);
-                                                                }
-                                                                echo $t1Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="Completeness_Commission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_3">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel;
-                                                                }
-                                                                echo $compLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="Completeness_Commission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t1_commission_date">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t1Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date != "") {
-                                                                    $t1Date = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date);
-                                                                }
-                                                                echo $t1Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="Completeness_Commission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_2">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t1Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t1Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t1Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="Completeness_Commission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t1_conform_result">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $conformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $conformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation;
-                                                                }
-                                                                echo $conformRes;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Commission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_1">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Commission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_3">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Commission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t1_commission_date">
+                                                                    <b>Date:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Commission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_2">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Commission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t1_conform_result">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                   
                                                     <?php //================= ?>
-                                                    <tr class="Completeness_Omission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_1">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t1Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope != "") {
-                                                                    $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope);
-                                                                }
-                                                                echo $t1Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="Completeness_Omission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_3">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel;
-                                                                }
-                                                                echo $compLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="Completeness_Omission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t1_commission_date">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t1Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date != "") {
-                                                                    $t1Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date;
-                                                                }
-                                                                echo $t1Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="Completeness_Omission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_2">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t1Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t1Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t1Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="Completeness_Omission">
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_4">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $conformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $conformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation;
-                                                                }
-                                                                echo $conformRes;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Omission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_1">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Omission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_3">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Omission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t1_commission_date">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Omission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_2">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation != "") {
+                                                        ?>
+                                                        <tr class="Completeness_Omission">
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_4">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -276,289 +277,289 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
-                                                    <tr class='Conceptual'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_scope">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t2Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope != "") {
-                                                                    $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope);
-                                                                }
-                                                                echo $t2Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Conceptual'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_comply_level">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel;
-                                                                }
-                                                                echo $compLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Conceptual'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_date">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t2Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date != "") {
-                                                                    $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date;
-                                                                }
-                                                                echo $t2Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Conceptual'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_result">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t2Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t2Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Conceptual'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_conform_result">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $t2ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation;
-                                                                }
-                                                                echo $t2ConformRes;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope != "") {
+                                                        ?>
+                                                        <tr class='Conceptual'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t2_scope">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel != "") {
+                                                        ?>
+                                                        <tr class='Conceptual'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t2_comply_level">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class='Conceptual'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t2_date">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class='Conceptual'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t2_result">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation != "") {
+                                                        ?>
+                                                        <tr class='Conceptual'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t2_conform_result">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     <?php //================= ?>
-                                                    <tr class='Domain'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_1">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t2Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope != "") {
-                                                                    $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope);
-                                                                }
-                                                                echo $t2Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Domain'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_3">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel;
-                                                                }
-                                                                echo $compLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Domain'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t2Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date != "") {
-                                                                    $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date;
-                                                                }
-                                                                echo $t2Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Domain'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_2">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t2Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t2Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Domain'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_4">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $t2ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation;
-                                                                }
-                                                                echo $t2ConformRes;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope != "") {
+                                                        ?>
+                                                        <tr class='Domain'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_1">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel != "") {
+                                                        ?>
+                                                        <tr class='Domain'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_3">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class='Domain'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class='Domain'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_2">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation != "") {
+                                                        ?>
+                                                        <tr class='Domain'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_4">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     <?php //================= ?>
-                                                    <tr class='Format'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_1">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t2Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope != "") {
-                                                                    $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope);
-                                                                }
-                                                                echo $t2Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Format'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_3">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString;
-                                                                }
-                                                                echo $compLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Format'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t2Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date != "") {
-                                                                    $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date;
-                                                                }
-                                                                echo $t2Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Format'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_2">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t2Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t2Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Format'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_4">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $t2ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation;
-                                                                }
-                                                                echo $t2ConformRes;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope != "") {
+                                                        ?>
+                                                        <tr class='Format'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_1">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString != "") {
+                                                        ?>
+                                                        <tr class='Format'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_3">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class='Format'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class='Format'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_2">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation != "") {
+                                                        ?>
+                                                        <tr class='Format'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_4">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     <?php //================= ?>
-                                                    <tr class='Topological'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_1">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t2Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope != "") {
-                                                                    $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope);
-                                                                }
-                                                                echo $t2Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Topological'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_3">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $compLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString != "") {
-                                                                    $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString;
-                                                                }
-                                                                echo $compLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Topological'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t2Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date != "") {
-                                                                    $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date;
-                                                                }
-                                                                echo $t2Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Topological'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_2">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t2Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t2Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='Topological'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_4">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $t2ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation;
-                                                                }
-                                                                echo $t2ConformRes;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope != "") {
+                                                        ?>
+                                                        <tr class='Topological'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_1">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString != "") {
+                                                        ?>
+                                                        <tr class='Topological'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_3">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class='Topological'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class='Topological'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_2">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation != "") {
+                                                        ?>
+                                                        <tr class='Topological'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_4">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation; ?>  
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -589,218 +590,218 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
-                                                    <tr class='AbsoluteorExternal'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_scope">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t3Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope != "") {
-                                                                    $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope);
-                                                                }
-                                                                echo $t3Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='AbsoluteorExternal'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_comply_level">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $t3CompLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel != "") {
-                                                                    $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel;
-                                                                }
-                                                                echo $t3CompLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='AbsoluteorExternal'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_date">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t3Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date != "") {
-                                                                    $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date;
-                                                                }
-                                                                echo $t3Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='AbsoluteorExternal'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_result">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t3Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t3Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='AbsoluteorExternal'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_conform_result">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $t3ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation;
-                                                                }
-                                                                echo $t3ConformRes;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope != "") {
+                                                        ?>
+                                                        <tr class='AbsoluteorExternal'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_scope">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel != "") {
+                                                        ?>
+                                                        <tr class='AbsoluteorExternal'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_comply_level">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class='AbsoluteorExternal'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_date">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class='AbsoluteorExternal'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_result">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation != "") {
+                                                        ?>
+                                                        <tr class='AbsoluteorExternal'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_conform_result">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     <?php //================= ?>
-                                                    <tr class='RelativeorInternal'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_scope_2">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t3Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope != "") {
-                                                                    $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope);
-                                                                }
-                                                                echo $t3Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='RelativeorInternal'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_comply_level_2">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $t3CompLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel != "") {
-                                                                    $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel;
-                                                                }
-                                                                echo $t3CompLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='RelativeorInternal'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_date_2">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t3Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date != "") {
-                                                                    $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date;
-                                                                }
-                                                                echo $t3Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='RelativeorInternal'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_result_2">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t3Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t3Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='RelativeorInternal'>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope != "") {
+                                                        ?>
+                                                        <tr class='RelativeorInternal'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_scope_2">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel != "") {
+                                                        ?>
+                                                        <tr class='RelativeorInternal'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_comply_level_2">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class='RelativeorInternal'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_date_2">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class='RelativeorInternal'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_result_2">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation != "") {
+                                                        ?>
+                                                        <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result_2">
                                                                 <b>Conformance Result:</b>
-                                                                <?php
-                                                                $t3ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation;
-                                                                }
-                                                                echo $t3Res;
-                                                                ?> 
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                                <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?> 
                                                     <?php //================= ?>
-                                                    <tr class='GriddedData'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_scope_3">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t3Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope != "") {
-                                                                    $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope);
-                                                                }
-                                                                echo $t3Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='GriddedData'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_comply_level_3">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $t3CompLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString != "") {
-                                                                    $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString;
-                                                                }
-                                                                echo $t3CompLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='GriddedData'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_date_3">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t3Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date != "") {
-                                                                    $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date;
-                                                                }
-                                                                echo $t3Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='GriddedData'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_result_3">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t3Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t3Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='GriddedData'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_conform_result_3">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $t3ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
-                                                                    $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
-                                                                }
-                                                                echo $t3ConformRes;
-                                                                ?> 
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope != "") {
+                                                        ?>
+                                                        <tr class='GriddedData'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_scope_3">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString != "") {
+                                                        ?>
+                                                        <tr class='GriddedData'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_comply_level_3">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class='GriddedData'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_date_3">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class='GriddedData'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_result_3">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                        ?>
+                                                        <tr class='GriddedData'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t3_conform_result_3">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -831,162 +832,168 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
-                                                    <tr class='AccuracyorTimeMeasurement'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t4Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope != "") {
-                                                                    $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope);
-                                                                }
-                                                                echo $t4Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='AccuracyorTimeMeasurement'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_3">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $t4CompLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel != "") {
-                                                                    $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel;
-                                                                }
-                                                                echo $t4CompLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='AccuracyorTimeMeasurement'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_date">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t4Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date != "") {
-                                                                    $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date;
-                                                                }
-                                                                echo $t4Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='AccuracyorTimeMeasurement'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_2">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t4Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t4Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='AccuracyorTimeMeasurement'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c3_4">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $t4ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation != "") {
-                                                                    $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation;
-                                                                }
-                                                                echo $t4ConformRes;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope != "") {
+                                                        ?>
+                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel != "") {
+                                                        ?>
+                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_3">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t4_accuTimeMeasure_date">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_2">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation != "") {
+                                                        ?>
+                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c3_4">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     <?php //================= ?>
-                                                    <tr class='TemporalConsistency'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t4_scope_2">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t4Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope != "") {
-                                                                    $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope);
-                                                                }
-                                                                echo $t4Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='TemporalConsistency'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t4_comply_level_2">
-                                                                <b>Compliance Level:</b>
-                                                                <?php
-                                                                $t4CompLvl = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString != "") {
-                                                                    $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString;
-                                                                }
-                                                                echo $t4CompLvl;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='TemporalConsistency'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t4_date_2">
-                                                                <b>Date:</b>
-                                                                <?php
-                                                                $t4Date = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date != "") {
-                                                                    $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date;
-                                                                }
-                                                                echo $t4Date;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='TemporalConsistency'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
-                                                                <b>Result:</b>
-                                                                <?php
-                                                                $t4Res = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass != "") {
-                                                                    $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass);
-                                                                }
-                                                                echo $t4Res;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class='TemporalConsistency'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
-                                                                <b>Conformance Result:</b>
-                                                                <?php
-                                                                $t4ConformRes = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
-                                                                    $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
-                                                                }
-                                                                echo $t4ConformRes;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope != "") {
+                                                        ?>
+                                                        <tr class='TemporalConsistency'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t4_scope_2">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString != "") {
+                                                        ?>
+                                                        <tr class='TemporalConsistency'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t4_comply_level_2">
+                                                                    <b>Compliance Level:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date != "") {
+                                                        ?>
+                                                        <tr class='TemporalConsistency'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t4_date_2">
+                                                                    <b>Date:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass != "") {
+                                                        ?>
+                                                        <tr class='TemporalConsistency'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t4_conform_result_2">
+                                                                    <b>Result:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                        ?>
+                                                        <tr class='TemporalConsistency'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t4_conform_result_2">
+                                                                    <b>Conformance Result:</b>
+                                                                    <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString; ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     <?php //================= ?>
-                                                    <tr class='TemporalValidity'>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
-                                                                <b>Scope:</b>
-                                                                <?php
-                                                                $t4Scope = "";
-                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope != "") {
-                                                                    $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope);
-                                                                }
-                                                                echo $t4Scope;
-                                                                ?>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                    <?php
+                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope != "") {
+                                                        ?>
+                                                        <tr class='TemporalValidity'>
+                                                            <td>
+                                                                <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
+                                                                    <b>Scope:</b>
+                                                                    <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope); ?>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_comply_level_3">

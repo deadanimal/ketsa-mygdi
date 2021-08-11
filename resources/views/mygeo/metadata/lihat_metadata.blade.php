@@ -90,7 +90,9 @@
                     <?php //=== collapse12 =============================================================?>
                     @include('mygeo.metadata.lihat_metadata.data_set_identification')
                     <?php //=== collapse13 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.reference_system_information')
+                    <?php if (!empty($refSys) > 0) { ?>
+                        @include('mygeo.metadata.lihat_metadata.reference_system_information')
+                    <?php } ?>
                     <?php //=== collapse14 =============================================================?>
                     @include('mygeo.metadata.lihat_metadata.constraints')
                     <?php //=== collapse15 =============================================================?>
