@@ -15,14 +15,14 @@ class CreateElemenMetadataTable extends Migration
     {
         Schema::create('elemen_metadata', function (Blueprint $table) {
             $table->id();
-            $table->string('elemen');
-            $table->string('kategori');
-            $table->string('label');
-            $table->string('tajuk');
-            $table->string('sub_tajuk');
-            $table->string('status');
-            $table->string('created_by');
-            $table->string('updated_by');
+            $table->string('elemen')->nullable();
+            $table->string('kategori')->nullable();
+            $table->string('label')->nullable();
+            $table->string('tajuk')->nullable();
+            $table->string('sub_tajuk')->nullable();
+            $table->string('status')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

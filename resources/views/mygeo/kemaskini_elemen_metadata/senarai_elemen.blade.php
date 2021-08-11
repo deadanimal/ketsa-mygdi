@@ -113,17 +113,63 @@
                 }
             }
         });
-        
-        $(document).on('click','.btnSimpan',function(){
-            var theForm = $(this).parent().parent();
-            var post_url = theForm.attr("action");
-            var request_method = theForm.attr("method");
-            var form_data = theForm.serialize();
-            
-            $.ajax({
-                url : post_url, method: request_method, data : form_data
-            }).done(function(response){
-                console.log(response);
+
+        $(document).on('click', '.btnSimpan', function () {
+            $(this).parent().parent().submit();;
+        });
+    });
+    
+    $('#formTambahSubTajuk .kategori').change(function() {
+        $.ajax({
+            method: "POST",
+            url: "{{ url('getTajukByCategory') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "kategori": $(this).val(),
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            $('#formTambahSubTajuk .tajuk').html('');
+            $('#formTambahSubTajuk .tajuk').append('<option value="">Pilih...</option>');
+            $.each(data, function(index,value) {
+                $('#formTambahSubTajuk .tajuk').append('<option value="'+value.name+'">'+value.name+'</option>');
+            });
+        });
+    });
+    
+    $('#formTambahElemen .kategori').change(function() {
+        $.ajax({
+            method: "POST",
+            url: "{{ url('getTajukByCategory') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "kategori": $(this).val(),
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            $('#formTambahElemen .tajuk').html('');
+            $('#formTambahElemen .tajuk').append('<option value="">Pilih...</option>');
+            $.each(data, function(index,value) {
+                $('#formTambahElemen .tajuk').append('<option value="'+value.id+'" data-rowid="'+value.name+'">'+value.name+'</option>');
+            });
+        });
+    });
+    
+    $('#formTambahElemen .tajuk').change(function() {
+        var selectedTajuk = $(this).find(':selected').data('rowid')
+        $.ajax({
+            method: "POST",
+            url: "{{ url('getSubTajuk') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "tajuk": selectedTajuk,
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            $('#formTambahElemen .sub_tajuk').html('');
+            $('#formTambahElemen .sub_tajuk').append('<option value="">Pilih...</option>');
+            $.each(data.sub_tajuks, function(index,value) {
+                $('#formTambahElemen .sub_tajuk').append('<option value="'+value.id+'">'+value.sub_tajuk+'</option>');
             });
         });
     });

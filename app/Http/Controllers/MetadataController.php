@@ -907,24 +907,53 @@ class MetadataController extends Controller {
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
         }   
         $elemens = ElemenMetadata::get();
+        $categories = MCategory::get();
 
-        return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('elemens'));
+        return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('elemens','categories'));
     }
     
     public function simpan_kategori(Request $request) {
         if(!auth::user()->hasRole(['Pentadbir Metadata'])){
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
         }   
-        var_dump($request);
         
-        exit();
+        $mcat = new MCategory();
+        $mcat->name = $request->kategori;
+        $query = $mcat->save();
+        
+        if($query){
+            $msg = "Kategori berjaya ditambah.";
+        }else{
+            $msg = "Kategori tidak berjaya ditambah.";
+        }
+        
+        return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
     }
     
     public function simpan_tajuk(Request $request) {
         if(!auth::user()->hasRole(['Pentadbir Metadata'])){
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
         }   
-        $elemens = ElemenMetadata::get();
+        
+        $word = "Tajuk";
+        
+        $tajuk = new Tajuk();
+        $tajuk->kategori = $request->kategori;
+        $tajuk->name = $request->tajuk;
+        if(isset($request->sub_tajuk)){
+            $tajuk->sub_tajuk = $request->sub_tajuk;
+            $word = "Sub-Tajuk";
+        }
+        $query = $tajuk->save();
+        
+        
+        if($query){
+            $msg = $word." berjaya ditambah.";
+        }else{
+            $msg = $word." tidak berjaya ditambah.";
+        }
+        
+        return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
     }
     
     public function simpan_sub_tajuk(Request $request) {
@@ -938,9 +967,35 @@ class MetadataController extends Controller {
     public function simpan_elemen(Request $request) {
         if(!auth::user()->hasRole(['Pentadbir Metadata'])){
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
-        }   
-        $elemens = ElemenMetadata::get();
-
-
+        }
+        
+        $em = new ElemenMetadata();
+        $em->elemen = $request->elemen;
+        $em->kategori = $request->kategori;
+        $em->tajuk = $request->tajuk;
+        $em->sub_tajuk = $request->sub_tajuk;
+        $em->jenis_input = $request->jenis_input;
+        $em->data_type = $request->data_type;
+        $query = $em->save();
+        
+        if($query){
+            $msg = "Elemen berjaya ditambah.";
+        }else{
+            $msg = "Elemen tidak berjaya ditambah.";
+        }
+        
+        return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
+    }
+    
+    public function getTajukByCategory(Request $request){
+        $tajuks = Tajuk::where('kategori',$request->kategori)->whereNull('sub_tajuk')->get();
+        echo json_encode($tajuks);
+        exit();
+    }
+    
+    public function getSubTajuk(Request $request){
+        $sub_tajuks = Tajuk::where('name',$request->tajuk)->whereNotNull('sub_tajuk')->get();
+        echo json_encode(['sub_tajuks'=>$sub_tajuks]);
+        exit();
     }
 }

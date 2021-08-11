@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCategoryToFaqTable extends Migration
+class AddJenisInputToElemenMetadataTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddCategoryToFaqTable extends Migration
      */
     public function up()
     {
-        Schema::table('faq', function (Blueprint $table) {
-            $table->string('category')->nullable();
+        Schema::table('elemen_metadata', function (Blueprint $table) {
+            $table->string('jenis_input')->after('elemen')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddCategoryToFaqTable extends Migration
      */
     public function down()
     {
-        Schema::table('faq', function (Blueprint $table) {
-            $table->dropColumn(['category']);
+        Schema::table('elemen_metadata', function (Blueprint $table) {
+            $table->dropColumn(['jenis_input']);
         });
     }
 }

@@ -51,11 +51,10 @@
                                     <label for="kategori">Kategori:</label>
                                     <select name="kategori" class="form-control kategori">
                                         <option value="">Pilih...</option>
+                                        @foreach($categories as $cat)
+                                            <option value="{{ $cat-> id }}">{{ $cat->name }}</option>
+                                        @endforeach
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="label">Label:</label>
-                                    <input type="text" name="label" class="form-control label">
                                 </div>
                                 <div class="form-group">
                                     <label for="tajuk">Tajuk:</label>
@@ -83,7 +82,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="formTambahSubTajuk" method="POST" action="{{ url('simpan_sub_tajuk') }}" class="theForm">
+            <form id="formTambahSubTajuk" method="POST" action="{{ url('simpan_tajuk') }}" class="theForm">
                 @csrf
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -94,12 +93,9 @@
                                     <label for="kategori">Kategori:</label>
                                     <select name="kategori" class="form-control kategori">
                                         <option value="">Pilih...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="label">Label:</label>
-                                    <select name="label" class="form-control label">
-                                        <option value="">Pilih...</option>
+                                        @foreach($categories as $cat)
+                                            <option value="{{ $cat-> id }}">{{ $cat->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -144,12 +140,9 @@
                                     <label for="kategori">Kategori:</label>
                                     <select name="kategori" class="form-control kategori">
                                         <option value="">Pilih...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="label">Label:</label>
-                                    <select name="label" class="form-control label">
-                                        <option value="">Pilih...</option>
+                                        @foreach($categories as $cat)
+                                            <option value="{{ $cat-> id }}">{{ $cat->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -169,14 +162,23 @@
                                     <input type="text" name="elemen" class="form-control elemen">
                                 </div>
                                 <div class="form-group">
+                                    <label for="elemen">Jenis Input:</label>
+                                    <select name="jenis_input" class="form-control jenis_input">
+                                        <option value="">Pilih...</option>
+                                        <option value="Text">Text</option>
+                                        <option value="Dropdown">Dropdown</option>
+                                        <option value="Checkbox">Checkbox</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="data_type">Data Type:</label>
                                     <select name="data_type" class="form-control data_type">
                                         <option value="">Pilih...</option>
-                                        <option value="">varchar</option>
-                                        <option value="">text</option>
-                                        <option value="">integer</option>
-                                        <option value="">date</option>
-                                        <option value="">timestamp</option>
+                                        <option value="Varchar">Varchar</option>
+                                        <option value="Rext">Rext</option>
+                                        <option value="Integer">Integer</option>
+                                        <option value="Date">Date</option>
+                                        <option value="Timestamp">Timestamp</option>
                                     </select>
                                 </div>
                             </div>
