@@ -7,7 +7,6 @@
 
 </style>
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <section class="header">
         <div class="container-fluid">
@@ -32,10 +31,9 @@
                     </div>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">

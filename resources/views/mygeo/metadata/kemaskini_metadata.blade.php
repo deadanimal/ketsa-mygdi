@@ -235,26 +235,41 @@
         var oriMetadataName = $('#c2_metadataName').val();
         
         $(document).on('click','.btnSubmit',function(){
+            var btnSubmit = $(this);
+            window.onbeforeunload = null; //remove double alert
             $('#submitAction').val($(this).data('name'));
             var currentName = $('#c2_metadataName').val();
             
-            if(oriMetadataName.toLowerCase() != currentName.toLowerCase()){
-                if(confirm('Anda membuat perubahan pada tajuk metadata. Simpan metadata sebagai metadata baharu?')){
-                    $('#c2_saveAsNew').val('yes');
-                }else{
-                    $('#c2_saveAsNew').val('no');
+            $.ajax({
+                method: "POST",
+                url: "validateMetadataName",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "metadataName": currentName
+                },
+            }).done(function(response) {
+                if (response == "found") {
+                    alert('Nama metadata sudah wujud');
+                } else {
+                    if(oriMetadataName.toLowerCase() != currentName.toLowerCase()){
+                        if(confirm('Anda membuat perubahan pada tajuk metadata. Simpan metadata sebagai metadata baharu?')){
+                            $('#c2_saveAsNew').val('yes');
+                        }else{
+                            $('#c2_saveAsNew').val('no');
+                        }
+                    }
+
+                    if($(this).data('name') == 'save'){
+                        if(confirm('Anda pasti untuk menghantar metadata?')){
+                            $('#form_metadata').submit();
+                        }
+                    }else if($(this).data('name') == 'draf'){
+                        if(confirm('Anda pasti untuk menyimpan metadata?')){
+                            $('#form_metadata').submit();
+                        }
+                    }
                 }
-            }
-            
-            if($(this).data('name') == 'save'){
-                if(confirm('Anda pasti untuk menghantar metadata?')){
-                    $('#form_metadata').submit();
-                }
-            }else if($(this).data('name') == 'draf'){
-                if(confirm('Anda pasti untuk menyimpan metadata?')){
-                    $('#form_metadata').submit();
-                }
-            }
+            });
         });
 
         $('#c15_date_div,#c15_t1_commission_date_div,#c15_t2_conceptual_date_div,#c15_t3_absExt_date_div,#c15_t4_accuTimeMeasure_date_div,c15_t5_classCorrect_date_div').datetimepicker({

@@ -237,47 +237,41 @@
         });
     </script>
     <script>
-        $("#c2_metadataName").focusout(function() {
-            var metadataName = $(this).val();
-            var thisVal = $(this);
-            $.ajax({
-                method: "POST",
-                url: "validateMetadataName",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "metadataName": metadataName
-                },
-            }).done(function(response) {
-                if (response == "found") {
-                    alert('Nama metadata sudah wujud');
-                    $('.btnDraf').prop('disabled', true);
-                    $('.btnSave').prop('disabled', true);
-                } else {
-                    $('.btnDraf').prop('disabled', false);
-                    $('.btnSave').prop('disabled', false);
-                }
-            });
-        });
         var pengesahs = [];
 
         $(document).ready(function() {
             $(document).on('click', '.btnSubmit', function() {
-                window.onbeforeunload = null;
+                var btnSubmit = $(this);
+                window.onbeforeunload = null; //remove double alert
                 $('#submitAction').val($(this).data('name'));
-
-                if ($(this).data('name') == 'save') {
-                    if (confirm('Anda pasti untuk menghantar metadata?')) {
-                        $('#form_metadata').submit();
-                    }
-                } else if ($(this).data('name') == 'draf') {
-                    if ($('#c2_metadataName').val() == "") {
-                        alert('Sila isi nama metadata');
+                
+                var metadataName = $("#c2_metadataName").val();
+                $.ajax({
+                    method: "POST",
+                    url: "validateMetadataName",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "metadataName": metadataName
+                    },
+                }).done(function(response) {
+                    if (response == "found") {
+                        alert('Nama metadata sudah wujud');
                     } else {
-                        if (confirm('Anda pasti untuk menyimpan metadata?')) {
-                            $('#form_metadata').submit();
+                        if (btnSubmit.data('name') == 'save') {
+                            if (confirm('Anda pasti untuk menghantar metadata?')) {
+                                $('#form_metadata').submit();
+                            }
+                        } else if (btnSubmit.data('name') == 'draf') {
+                            if ($('#c2_metadataName').val() == "") {
+                                alert('Sila isi nama metadata');
+                            } else {
+                                if (confirm('Anda pasti untuk menyimpan metadata?')) {
+                                    $('#form_metadata').submit();
+                                }
+                            }
                         }
                     }
-                }
+                });
             });
 
             $('#accordion').hide();
