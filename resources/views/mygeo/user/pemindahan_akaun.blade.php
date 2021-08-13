@@ -248,7 +248,7 @@
                     },
                 })
                 .done(function(response) {
-                    alert("Metadata berjaya dipindah milik.");
+                    alert("Metadata telah berpindah hak milik.");
                     window.location.reload();
                 });
 

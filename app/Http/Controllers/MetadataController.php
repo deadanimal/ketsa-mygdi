@@ -443,14 +443,15 @@ class MetadataController extends Controller {
             }
             $request->topic_category = substr($string, 0, -1);
         }
-        $fileUrl = "";
-        if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
-            $this->validate($request,['c11_order_instructions' => 'required|mimes:pdf,doc,docx,xls,xlsx']);
-            $exists = Storage::exists($request->c11_order_instructions->getClientOriginalName());
-            $time = date('Y-m-d'.'_'.'H_i_s');
-            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
-            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
-        }
+//        $fileUrl = "";
+        $fileUrl = $request->c11_order_instructions;
+//        if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
+//            $this->validate($request,['c11_order_instructions' => 'required|mimes:pdf,doc,docx,xls,xlsx']);
+//            $exists = Storage::exists($request->c11_order_instructions->getClientOriginalName());
+//            $time = date('Y-m-d'.'_'.'H_i_s');
+//            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
+//            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
+//        }
 
         $xmlcon = new XmlController;
         $xml = $xmlcon->createXml($request,$fileUrl);
@@ -693,13 +694,14 @@ class MetadataController extends Controller {
             $request->topic_category = substr($string, 0, -1);
         }
         $fileUrl = "";
-        if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
-            $this->validate($request,['c11_order_instructions' => 'required|mimes:pdf,doc,docx,xls,xlsx']);
-            $exists = Storage::exists($request->c11_order_instructions->getClientOriginalName());
-            $time = date('Y-m-d'.'_'.'H_i_s');
-            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
-            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
-        }
+        $fileUrl = $request->c11_order_instructions;
+//        if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
+//            $this->validate($request,['c11_order_instructions' => 'required|mimes:pdf,doc,docx,xls,xlsx']);
+//            $exists = Storage::exists($request->c11_order_instructions->getClientOriginalName());
+//            $time = date('Y-m-d'.'_'.'H_i_s');
+//            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
+//            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
+//        }
 
         $xmlcon = new XmlController;
         $xml = $xmlcon->createXml($request,$fileUrl);
