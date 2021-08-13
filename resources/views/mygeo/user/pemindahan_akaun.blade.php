@@ -70,7 +70,7 @@
                                                         if (isset($agensi) && count($agensi) > 0) {
                                                             foreach ($agensi as $a) {
                                                                 ?>
-                                                                <option value="{{ $a->name }}">{{ $a->name }}</option>
+                                                                <option value="{{ $a->id }}">{{ $a->name }}</option>
                                                         <?php
                                                             }
                                                         }
@@ -248,7 +248,7 @@
                     },
                 })
                 .done(function(response) {
-                    alert("Metadata ownership transferred to new user.");
+                    alert("Metadata berjaya dipindah milik.");
                     window.location.reload();
                 });
 
