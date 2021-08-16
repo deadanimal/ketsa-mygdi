@@ -218,9 +218,8 @@ class MetadataController extends Controller {
         $states = States::where(['country' => 1])->get()->all();
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
-        //$elemenMetadata = ElemenMetadata::get();
 
-        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','elemenMetadata'));
+        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs'));
     }
 
     public function show(Request $request) {
