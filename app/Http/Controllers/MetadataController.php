@@ -37,6 +37,7 @@ use App\Http\Controllers\XmlController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
+use App\AuditTrail;
 
 class MetadataController extends Controller {
 
@@ -212,13 +213,14 @@ class MetadataController extends Controller {
                     $q->where("name", "Pengesah Metadata");
                 })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
         if(empty($pengesahs)){
-            $pengesahs = User::where(['id'=>'2'])->get()->first(); //make Pentadbir Aplikasi the pengesah if no pengesahs with same agency or organisation is found
+            $pengesahs = User::where(['id'=>'9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
         }
         $states = States::where(['country' => 1])->get()->all();
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
+        //$elemenMetadata = ElemenMetadata::get();
 
-        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs'));
+        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','elemenMetadata'));
     }
 
     public function show(Request $request) {
@@ -513,6 +515,11 @@ class MetadataController extends Controller {
             }
             $mg->save();
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('mygeo_senarai_metadata')->with('message',$msg);
     }
@@ -566,6 +573,11 @@ class MetadataController extends Controller {
             //delete uploaded xml
             Storage::disk('public')->delete($fileName);
         }
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
     }
@@ -747,6 +759,11 @@ class MetadataController extends Controller {
             }
             $mg->update();
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('mygeo_senarai_metadata')->with('success', $msg);
     }
@@ -821,6 +838,11 @@ class MetadataController extends Controller {
                 });
             }
         }
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         exit();
     }
@@ -896,11 +918,22 @@ class MetadataController extends Controller {
             }
         }
         
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         exit();
     }
 
     public function delete(Request $request) {
         MetadataGeo::on('pgsql2')->find($request->metadata_id)->delete();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         return redirect('mygeo_senarai_metadata')->with('message', 'Metadata berjaya dihapus.');
     }
     
@@ -930,6 +963,11 @@ class MetadataController extends Controller {
             $msg = "Kategori tidak berjaya ditambah.";
         }
         
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
     }
     
@@ -955,6 +993,11 @@ class MetadataController extends Controller {
         }else{
             $msg = $word." tidak berjaya ditambah.";
         }
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
         
         return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
     }
@@ -983,6 +1026,11 @@ class MetadataController extends Controller {
         
         if($query){
             $msg = "Elemen berjaya ditambah.";
+            
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->save();
         }else{
             $msg = "Elemen tidak berjaya ditambah.";
         }
@@ -999,6 +1047,26 @@ class MetadataController extends Controller {
     public function getSubTajuk(Request $request){
         $sub_tajuks = Tajuk::where('name',$request->tajuk)->whereNotNull('sub_tajuk')->get();
         echo json_encode(['sub_tajuks'=>$sub_tajuks]);
+        exit();
+    }
+    
+    public function deleteElemenMetadata(Request $request){
+        $msg = "";
+        $error = 0;
+        $delete = ElemenMetadata::where('id',$request->rowid)->delete();
+        if($delete){
+            $error = 0; 
+            $msg = "Elemen Metadata telah dipadam";
+            
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->save();
+        }else{
+            $error = 1;
+            $msg = "Elemen Metadata tidak berjaya dipadam";
+        }
+        echo json_encode(['error'=>$error,'msg'=>$msg]);
         exit();
     }
 }

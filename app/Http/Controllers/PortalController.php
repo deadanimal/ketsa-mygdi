@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
 use App\AgensiOrganisasi;
 use App\Bahagian;
+use App\AuditTrail;
 
 class PortalController extends Controller
 {
@@ -61,6 +62,11 @@ class PortalController extends Controller
                 "category" => $request->category_faq
             ]);
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('/kemaskini_faq')->with('success', 'FAQ Disimpan');
     }
@@ -103,6 +109,11 @@ class PortalController extends Controller
                 "category" => $request->category_faq
             ]);
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('/landing_mygeo')->with('success', 'Maklum Balas Disimpan');
     }
@@ -125,6 +136,11 @@ class PortalController extends Controller
             $maklum_balas->status = 0;
             $maklum_balas->save();
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('')->with('success', 'Maklum Balas Dihantar');
     }
@@ -132,6 +148,12 @@ class PortalController extends Controller
     public function delete_maklum_balas(Request $request)
     {
         MaklumBalas::where(["id" => $request->id])->delete();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         return redirect('maklum_balas')->with('success', 'Maklum Balas Dibuang');
     }
 
@@ -149,6 +171,11 @@ class PortalController extends Controller
             $message->to($to_email, $to_name)->subject('MyGeo Explorer : Jawapan Maklum Balas MyGeo Explorer');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('maklum_balas')->with('success', 'Maklum balas telah dihantar');
     }
@@ -177,6 +204,11 @@ class PortalController extends Controller
                 "content" => $request->content_panduan_pengguna
             ]);
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('/panduan_pengguna_edit')->with('success', 'Panduan Pengguna Disimpan');
     }
@@ -204,6 +236,11 @@ class PortalController extends Controller
                 "content" => $request->content_penafian
             ]);
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('mygeo_penafian')->with('success', 'Tetapan Penafian Disimpan');
     }
@@ -231,6 +268,11 @@ class PortalController extends Controller
                 "content" => $request->content_penyataan_privasi
             ]);
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('mygeo_penyataan_privasi')->with('success', 'Tetapan Penyataan Privasi Berjaya Disimpan');
     }
@@ -278,6 +320,11 @@ class PortalController extends Controller
             $pengumuman->content = $request->content_pengumuman;
             $pengumuman->save();
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('pengumuman_edit')->with('success', 'Pengumuman Ditambah');
     }
@@ -289,12 +336,24 @@ class PortalController extends Controller
         $pengumuman->date = $request->date_pengumuman;
         $pengumuman->content = $request->content_pengumuman;
         $pengumuman->save();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         return redirect('pengumuman_edit')->with('success', 'Pengumuman Dikemaskini');
     }
 
     public function delete_pengumuman(Request $request)
     {
         Pengumuman::where(["id" => $request->umum_id])->delete();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         return redirect('pengumuman_edit')->with('success', 'Pengumuman Dibuang');
     }
     
@@ -314,6 +373,11 @@ class PortalController extends Controller
         }
         $ao->save();
         
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         echo json_encode(["msg"=>$msg]);
         exit();
     }
@@ -328,6 +392,11 @@ class PortalController extends Controller
             $msg = "Bahagian berjaya dikemaskini.";
         }
         $ao->save();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
         
         echo json_encode(["msg"=>$msg]);
         exit();
@@ -372,7 +441,18 @@ class PortalController extends Controller
             $error = 1;            
             $msg = $type + " tidak berjaya dipadam.";
         }
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         echo json_encode(["msg"=>$msg,"error"=>$error]);
         exit();
+    }
+    
+    public function audit_trail(){
+        $audit_trails = AuditTrail::get();
+        return view('mygeo.pengurusan_portal.audit_trail', compact('audit_trails'));
     }
 }

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
+use App\AuditTrail;
 
 class RegisterController extends Controller
 {
@@ -117,6 +118,11 @@ class RegisterController extends Controller
                 $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
             });
         }
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = $user->id;
+        $at->save();
 
         return $user;
     }

@@ -171,6 +171,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/senarai_bahagian','PortalController@senarai_bahagian');
 
     Route::get('/pemindahan_akaun','UserController@pemindahan_akaun');
+    
+    Route::get('/audit_trail','PortalController@audit_trail');
 
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 });
@@ -203,6 +205,7 @@ Route::post('simpan_kemaskini_agensi_organisasi','PortalController@simpan_kemask
 Route::post('delete_agensi_organisasi','PortalController@delete_agensi_organisasi');
 Route::post('getTajukByCategory','MetadataController@getTajukByCategory');
 Route::post('getSubTajuk','MetadataController@getSubTajuk');
+Route::post('deleteElemenMetadata','MetadataController@deleteElemenMetadata');
 
 Auth::routes();
 

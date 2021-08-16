@@ -257,6 +257,14 @@
                                             </a>
                                         </li>
                                         @endif
+                                        @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
+                                        <li class="nav-item">
+                                            <a href="{{ url('audit_trail') }}" class="nav-link active">
+                                                <i class="fa-comments fas text-green"></i>
+                                                <span class="nav-link-text">Audit Trail</span>
+                                            </a>
+                                        </li>
+                                        @endif
                                         @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
                                         <li class="nav-item">
                                             <a href="{{ url('mygeo_pengesahan_metadata') }}" class="nav-link active">

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Auth;
 use Hash;
 use UxWeb\SweetAlert\SweetAlert;
+use App\AuditTrail;
 
 class AuthController extends Controller
 {
@@ -51,6 +52,11 @@ class AuthController extends Controller
         }
 
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password])) {
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->save();
+        
             return redirect()->intended('/landing_mygeo');
         }else{
             return redirect('/login')->with(['msg'=>'ID pengguna atau kata laluan tidak sah.']);

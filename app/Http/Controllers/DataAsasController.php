@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use DB;
+use App\AuditTrail;
 
 class DataAsasController extends Controller
 {
@@ -122,6 +123,11 @@ class DataAsasController extends Controller
         $senarai_data->data_id = $request->data_id;
 
         $senarai_data->save();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('senarai_data')->with('success', 'Permohonan ditambah. Sila klik pautan berkenaan');
     }
@@ -140,6 +146,11 @@ class DataAsasController extends Controller
                 "harga_data" => $request->harga_data,
             ]);
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
     }
@@ -147,6 +158,12 @@ class DataAsasController extends Controller
     public function delete_senarai_data(Request $request)
     {
         SenaraiData::where(["id" => $request->id])->delete();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         return redirect('senarai_data')->with('success', 'Data tersebut telah dibuang');
     }
 
@@ -215,6 +232,11 @@ class DataAsasController extends Controller
 
         //$skdata;
         $id = $request->permohonan_id;
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         // return redirect('mohon_data');
         return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan ditambah!');
@@ -223,6 +245,11 @@ class DataAsasController extends Controller
     public function delete_senarai_kawasan(Request $request)
     {
         SenaraiKawasanData::where(["id" => $request->permohonan_id])->delete();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('mohon_data')->with('success', 'Data Senarai dan Kawasan dibuang!');
     }
@@ -258,6 +285,11 @@ class DataAsasController extends Controller
         $mdata->save();
 
         $id = $request->permohonan_id;
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         // return redirect()->action('DataAsasController@tambah', ['id' => $id]);
         return redirect('mohon_data')->with('success', 'Permohonan ditambah. Sila klik pautan berkenaan');
@@ -281,6 +313,11 @@ class DataAsasController extends Controller
             $failModel->file_path = '/storage/' . $failPath;
             $failModel->permohonan_id = $request->permohonan_id;
             $failModel->save();
+            
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->save();
 
             return back()
                 ->with('success', 'Dokumen telah berjaya dimuat naik.')
@@ -336,6 +373,11 @@ class DataAsasController extends Controller
         MohonData::where(["id" => $request->user_id])->delete();
         SenaraiKawasanData::where(["id" => $request->permohonan_id])->delete();
         DokumenBerkaitan::where(["id" => $request->permohonan_id])->delete();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('mohon_data')->with('success', 'Permohonan Data dibuang!');
     }

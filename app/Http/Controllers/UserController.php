@@ -16,6 +16,7 @@ use App\AgensiOrganisasi;
 use App\MetadataGeo;
 use DB;
 use App\Mail\MailNotify;
+use App\AuditTrail;
 
 class UserController extends Controller {
 
@@ -164,6 +165,11 @@ class UserController extends Controller {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Diluluskan');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         exit();
     }
@@ -186,6 +192,11 @@ class UserController extends Controller {
         });
 
         User::where(['id'=>$user_id])->delete();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         exit();
     }
@@ -232,6 +243,11 @@ class UserController extends Controller {
 //            }
 //        }
 
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+            
         return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
     }
 
@@ -250,6 +266,11 @@ class UserController extends Controller {
             $user->gambar_profil = $fileName;
         }
         $user->save();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('mygeo_profil')->with('message','Gambar profil berjaya dikemas kini.');
     }
@@ -259,6 +280,12 @@ class UserController extends Controller {
 
         if (Hash::check($request->password_old, $user->password)) {
             $user->fill(['password' => Hash::make($request->password_new)])->save();
+            
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->save();
+        
             return redirect('mygeo_profil')->with('message','Kata laluan berjaya ditukar');
         } else {
             return redirect('mygeo_profil')->with('message','Kata laluan lama tidak betul');
@@ -269,11 +296,23 @@ class UserController extends Controller {
         $user = User::where(["id"=>$request->user_id])->get()->first();
         $user->status = $request->status_id;
         $user->update();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         exit();
     }
 
     public function delete_user(Request $request){
         User::where(["id"=>$request->user_id])->delete();
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         exit();
     }
 
@@ -359,6 +398,12 @@ class UserController extends Controller {
                 'changedate' => date("Y-m-d H:i:s"),
             ]);
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
+        
         exit();
     }
 
@@ -416,6 +461,11 @@ class UserController extends Controller {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Akaun');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
+        
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->save();
 
         return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan');
     }

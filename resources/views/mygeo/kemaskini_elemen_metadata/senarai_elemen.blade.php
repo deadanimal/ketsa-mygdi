@@ -70,8 +70,8 @@
                                                 <td>{{ $elemen->elemen }}</td>
                                                 <td>{{ $elemen->getKategori->name }}</td>
                                                 <td>
-                                                    <button type="button" class="form-control btnEdit">Edit</button>
-                                                    <button type="button" class="form-control btnDelete">Delete</button>
+                                                    <!--<button type="button" class="form-control btnEdit">Edit</button>-->
+                                                    <button type="button" class="form-control btnDelete" data-rowid="{{ $elemen->id }}">Delete</button>
                                                 </td>
                                             </tr>
                                             <?php
@@ -112,7 +112,24 @@
         });
 
         $(document).on('click', '.btnSimpan', function () {
-            $(this).parent().parent().submit();;
+            $(this).parent().parent().submit();
+        });
+        
+        $(document).on('click', '.btnDelete', function () {
+            $.ajax({
+                method: "POST",
+                url: "{{ url('deleteElemenMetadata') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "rowid": $(this).data('rowid'),
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                alert(data.msg);
+                if(data.error == '0'){
+                    window.location.reload();
+                }
+            });
         });
     });
     
