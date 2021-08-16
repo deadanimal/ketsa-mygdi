@@ -16,7 +16,7 @@ class CreateAuditTrailTable extends Migration
         Schema::create('audit_trail', function (Blueprint $table) {
             $table->id();
             $table->string('action')->nullable();
-            $table->string('model')->nullable();
+            $table->string('path')->nullable();
             $table->string('data')->nullable();
             $table->string('user_id')->nullable();
             $table->timestamps();
