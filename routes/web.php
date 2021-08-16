@@ -144,11 +144,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_permohonan_baru', 'DataAsasController@store_permohonan_baru');
     Route::post('/simpan_senarai_kawasan', 'DataAsasController@store_senarai_kawasan');
 
+    Route::post('/simpan_penilaian', 'DataAsasController@store_penilaian');
+
     Route::post('/muatnaik_dokumen', 'DataAsasController@store_dokumen_berkaitan')->name('muatnaikFail');
 
     Route::get('/mohon_data','DataAsasController@mohon_data');
     Route::get('/mohon_data_asas_baru','DataAsasController@mohon_data_asas_baru');
     Route::post('/delete_permohonan', 'DataAsasController@delete_permohonan');
+    Route::post('/hantar_permohonan', 'DataAsasController@hantar_permohonan');
+    Route::post('/kemaskini_permohonan', 'DataAsasController@kemaskini_permohonan');
+
     Route::get('/muat_turun_data','DataAsasController@muat_turun_data');
     Route::get('/senarai_data','DataAsasController@senarai_data');
     Route::get('/kategori_kelas_data','DataAsasController@kategori_kelas_data');
@@ -158,7 +163,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/status_permohonan','DataAsasController@status_permohonan');
     Route::get('/proses_data','DataAsasController@proses_data');
     Route::get('/penilaian','DataAsasController@penilaian');
-    Route::get('/penilaian_pemohon','DataAsasController@penilaian_pemohon');
+    Route::get('/penilaian_pemohon/{id}','DataAsasController@penilaian_pemohon')->name('tambah.penilaian');
 
     Route::get('/kemaskini_profil','UserController@edit');
     Route::post('/simpan_kemaskini_profil','UserController@update_profile');

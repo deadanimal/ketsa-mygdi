@@ -147,7 +147,7 @@
                                                 <span class="nav-link-text">Pengurusan Metadata</span>
                                                 <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
                                             </a>
-                                            <ul class="nav nav-sm nav-treeview"> 
+                                            <ul class="nav nav-sm nav-treeview">
                                                 <li class="nav-item">
                                                     <a href="{{ url('mygeo_senarai_metadata') }}" class="nav-link active">
                                                         <span class="nav-link-text">Senarai Metadata</span>
@@ -274,7 +274,7 @@
                                         @endif
                                         @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
                                         <li class="nav-item">
-                                            <a href="{{ url('penilaian_pemohon') }}" class="nav-link active">
+                                            <a href="{{ url('penilaian') }}" class="nav-link active">
                                                 <i class="fas fa-edit text-green"></i>
                                                 <span class="nav-link-text">Penilaian</span>
                                             </a>

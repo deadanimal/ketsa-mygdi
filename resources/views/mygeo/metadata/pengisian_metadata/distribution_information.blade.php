@@ -31,7 +31,7 @@
             <div class="row mb-2">
                 <div class="col-xl-2">
                     <label class="form-control-label" for="input-distributor" data-toggle="tooltip" title="Organisasi yang bertanggungjawab dalam penyebaran maklumat geospatial tersebut">
-                        <?php echo __('lang.organisation'); ?></label>
+                        <?php echo __('lang.organisation_name'); ?></label>
                 </div>
                 <div class="col-xl-6">
                     <input type="text" name="c11_distributor" id="c11_distributor" class="form-control form-control-sm"

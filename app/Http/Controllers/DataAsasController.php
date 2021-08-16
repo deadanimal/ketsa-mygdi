@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DokumenBerkaitan;
 use App\SenaraiKawasanData;
 use App\MohonData;
+use App\Penilaian;
 use App\SenaraiData;
 use Illuminate\Http\Request;
 use App\User;
@@ -33,13 +34,22 @@ class DataAsasController extends Controller
     {
         #return $id;
         $user = User::where(["id" => Auth::user()->id])->get()->first();
+        $users_all = User::where(['disahkan' => 1])->orderBy('name')->get();
+        $pentadbirdata = [];
+        foreach($users_all as $user){
+            if($user->hasRole('Pentadbir Data')){
+                $pentadbirdata[]= $user;
+            }else{
+
+            }
+        }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
 
         $pemohon = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->get();
         //  return $dokumens;
 
-        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'pemohon', 'dokumens'));
+        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'pemohon', 'dokumens','pentadbirdata'));
     }
 
     public function data_asas_landing()
@@ -64,27 +74,36 @@ class DataAsasController extends Controller
 
     public function penilaian()
     {
-        return view('mygeo.penilaian');
+        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin'])) {
+            $pemohons = MohonData::where(['dihantar' => 1])->orderBy('created_at', 'DESC')->get();
+        } else {
+            $pemohons = MohonData::with('users')
+            ->where(['dihantar' => 1])
+            ->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
+        return view('mygeo.penilaian', compact('pemohons'));
     }
 
-    public function penilaian_pemohon()
+    public function penilaian_pemohon($id)
     {
-        return view('mygeo.penilaian_pemohon');
+        $penilaian = Penilaian::where('permohonan_id', $id)->first();
+        $pemohon = MohonData::where('id', $id)->first();
+        return view('mygeo.penilaian_pemohon',compact('pemohon','penilaian'));
     }
 
     public function proses_data()
     {
-        $pemohons = MohonData::all();
+        $pemohons = MohonData::where(['status' => 1,'dihantar' => 1])->get();
         return view('mygeo.proses_data', compact('pemohons'));
     }
 
     public function mohon_data()
     {
         $user = User::where(["id" => Auth::user()->id])->get()->first();
-        if ($user->id == 1) {
-            $pemohons = MohonData::all();
+        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin'])) {
+            $pemohons = MohonData::orderBy('created_at', 'DESC')->get();
         } else {
-            $pemohons = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->get();
+            $pemohons = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         }
         return view('mygeo.mohon_data', compact('pemohons', 'user'));
     }
@@ -96,12 +115,13 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        return view('mygeo.muat_turun_data');
+        $pemohons = MohonData::where(['status' => 1,'dihantar' => 1])->get();
+        return view('mygeo.muat_turun_data', compact('pemohons'));
     }
 
     public function status_permohonan()
     {
-        $pemohons = MohonData::all();
+        $pemohons = MohonData::where(['dihantar' => 1])->get();
         return view('mygeo.status_permohonan', compact('pemohons'));
     }
 
@@ -170,11 +190,9 @@ class DataAsasController extends Controller
 
     public function permohonan_baru()
     {
-        $pemohons = MohonData::all();
+        $pemohons = MohonData::where(['dihantar' => 1])->get();
         return view('mygeo.permohonan_baru', compact('pemohons'));
     }
-
-
 
 
     /**
@@ -227,43 +245,112 @@ class DataAsasController extends Controller
         return redirect('mohon_data')->with('success', 'Data Senarai dan Kawasan dibuang!');
     }
 
+    public function kemaskini_permohonan(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            //simpan status permohonan ini
+            MohonData::where(["id" => $request->permohonan_id])->update([
+                "status" => $request->status,
+                "catatan" => $request->catatan,
+                "assign_admin" => $request->assign_admin,
+            ]);
+        });
+        // return $request;
+        return back()->with('success', 'Permohonan berjaya disimpan');
+        // return redirect('mohon_data')->with('success', 'Permohonan anda berjaya dihantar');
+    }
+
     public function hantar_permohonan(Request $request)
     {
         DB::transaction(function () use ($request) {
             //hantar permohonan to admin
             MohonData::where(["id" => $request->permohonan_id])->update([
-                "status" => $request->kategori,
-                "assign_admin" => $request->subkategori,
-                "lapisan_data" => $request->lapisan_data,
-                "kategori_pemohon" => $request->kategori_pemohon,
-                "kelas" => $request->kelas,
-                "status" => $request->status,
-                "harga_data" => $request->harga_data,
+                "dihantar" => $request->dihantar = 1,
             ]);
         });
+
+        return redirect('mohon_data')->with('success', 'Permohonan anda berjaya dihantar');
     }
 
     public function store_permohonan_baru(Request $request)
     {
         //return $request;
+        $user = User::where(["id" => Auth::user()->id])->get()->first();
 
         $mdata = new MohonData();
-
         $mdata->name = $request->name;
         $mdata->date = $request->date;
         $mdata->tujuan = $request->tujuan;
-
-        $mdata->user_id = $request->user_id;
-
+        $mdata->status = $request->status = 0;
+        $mdata->user_id = $request->user_id = $user->id;
         $mdata->save();
+
+        $valuation = new Penilaian();
+        $valuation->permohonan_id = $request->permohonan_id = $mdata->id;
+        $valuation->save();
 
         $id = $request->permohonan_id;
 
-        // return redirect()->action('DataAsasController@tambah', ['id' => $id]);
-        return redirect('mohon_data')->with('success', 'Permohonan ditambah. Sila klik pautan berkenaan');
+        return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Permohonan baru telah ditambah. Sila lengkapkan maklumat permohonan.');
     }
 
+    public function store_penilaian(Request $request)
+    {
 
+        DB::transaction(function () use ($request) {
+
+            if ($request->file()) {
+                $fileName = time() . '_' . $request->file->getClientOriginalName();
+                $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+
+                //save senarai data
+                Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
+                    "kategori" => $request->kategori,
+                    "info_data" => $request->info_data,
+
+                    "bhg_b_a" => $request->bhg_b_a,
+                    "bhg_b_b" => $request->bhg_b_b,
+                    "bhg_b_c" => $request->bhg_b_c,
+                    "bhg_b_d" => $request->bhg_b_d,
+                    "bhg_b_e" => $request->bhg_b_e,
+                    "bhg_b_f" => $request->bhg_b_f,
+                    "bhg_b_g" => $request->bhg_b_g,
+
+                    "bhg_c_1" => $request->bhg_c_1,
+                    "bhg_c_2" => $request->bhg_c_2,
+                    "bhg_c_3" => $request->bhg_c_3,
+
+                    "bhg_c_4_file_path" => $request->bhg_c_4_file_path = '/storage/' . $filePath,
+                    "komen_cadangan" => $request->komen_cadangan,
+
+                ]);
+            } else {
+                //save senarai data
+                Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
+                    "kategori" => $request->kategori,
+                    "info_data" => $request->info_data,
+
+                    "bhg_b_a" => $request->bhg_b_a,
+                    "bhg_b_b" => $request->bhg_b_b,
+                    "bhg_b_c" => $request->bhg_b_c,
+                    "bhg_b_d" => $request->bhg_b_d,
+                    "bhg_b_e" => $request->bhg_b_e,
+                    "bhg_b_f" => $request->bhg_b_f,
+                    "bhg_b_g" => $request->bhg_b_g,
+
+                    "bhg_c_1" => $request->bhg_c_1,
+                    "bhg_c_2" => $request->bhg_c_2,
+                    "bhg_c_3" => $request->bhg_c_3,
+
+                    "komen_cadangan" => $request->komen_cadangan,
+
+                ]);
+            }
+
+        });
+
+        return redirect('penilaian')->with('success', 'Penilaian disimpan!');
+    }
 
     public function store_dokumen_berkaitan(Request $request)
     {
@@ -336,6 +423,7 @@ class DataAsasController extends Controller
         MohonData::where(["id" => $request->user_id])->delete();
         SenaraiKawasanData::where(["id" => $request->permohonan_id])->delete();
         DokumenBerkaitan::where(["id" => $request->permohonan_id])->delete();
+        Penilaian::where(["id" => $request->permohonan_id])->delete();
 
         return redirect('mohon_data')->with('success', 'Permohonan Data dibuang!');
     }

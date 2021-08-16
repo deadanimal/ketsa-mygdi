@@ -66,39 +66,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($pemohons as $pemohon)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Permohonan Data Selangor</td>
-                                        <td><a class="badge badge-pill badge-danger">Dalam
-                                                Proses</a></td>
-                                        <td>8 September 2021</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $pemohon->name }}</td>
+                                        <td>
+                                            @if ($pemohon->download == '1')
+                                                <span class="badge badge-pill badge-success">Data Tersedia</span>
+                                            @else
+                                                <span class="badge badge-pill badge-danger">Dalam Proses</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
                                         <td>
                                             <a class="text-muted" disabled><span class="fas fa-download mr-2"></span>
                                                 Muat Turun</a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Permohonan Data Putrajaya</td>
-                                        <td><a class="badge badge-pill badge-success">Data
-                                                Tersedia</a></td>
-                                        <td>23 Januari 2021</td>
-                                        <td>
-                                            <a class="text-green" disabled><span class="fas fa-download mr-2"></span>
-                                                Muat Turun</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Permohonan Data Asas Kawasan Perindustrian Penang</td>
-                                        <td><a class="badge badge-pill badge-success">Data
-                                                Tersedia</a></td>
-                                        <td>17 Mei 2021</td>
-                                        <td>
-                                            <a class="text-green"><span class="fas fa-download mr-2"></span>Muat
-                                                Turun</a>
-                                        </td>
-                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
