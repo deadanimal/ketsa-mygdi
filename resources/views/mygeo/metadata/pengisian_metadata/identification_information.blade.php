@@ -268,7 +268,7 @@
                 <div class="row mb-2 divServiceUrl">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_serviceUrl" data-toggle="tooltip" title="URL bagi service berkenaan. Klik ‘Test’ bagi percubaan URL berkenaan.">
-                            <?php echo __('lang.service_URL'); ?>
+                            <?php echo __('lang.service_URL'); ?><span class="text-warning">*</span>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
