@@ -368,7 +368,7 @@
                     $('.divTypeOfCouplingDataset').show();
                     $('.refSys_Services').show();
                     $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio')
-                        .prop('readonly', false);
+                        .prop('readonly', true);
                     $('.divDataQualityTabs').hide();
                     $('.divUseLimitation').show();
                     $('.divMaintenanceInfo').hide();
