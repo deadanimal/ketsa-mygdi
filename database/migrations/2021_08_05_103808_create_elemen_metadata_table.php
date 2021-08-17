@@ -22,6 +22,7 @@ class CreateElemenMetadataTable extends Migration
             $table->string('sub_tajuk')->nullable();
             $table->string('status')->nullable();
             $table->string('data_type')->nullable();
+            $table->string('jenis_input')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();
