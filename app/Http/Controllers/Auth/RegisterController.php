@@ -54,19 +54,21 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if($_SERVER['HTTP_HOST'] == "127.0.0.1:8003"){
-            $valid = Validator::make($data, [
+        $criterias = [
+            'name' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ];
+        
+        $user = User::where('email',$data['email'])->get()->first();
+        if($user){
+            $criterias = [
                 'name' => ['required', 'string'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
-        }else{
-            $valid = Validator::make($data, [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
+            ];
         }
+        
+        $valid = Validator::make($data,$criterias);
 
         return $valid;
     }
@@ -79,23 +81,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'nric' => $data['nric'],
-            'email' => $data['email'],
-            'agensi_organisasi' => $data['agensi_organisasi'],
-            'institusi' => $data['institusi'],
-            'bahagian' => $data['bahagian'],
-            'sektor' => $data['sektor'],
-            'email' => $data['email'],
-            'phone_pejabat' => $data['phone_pejabat'],
-            'phone_bimbit' => $data['phone_bimbit'],
-            'password' => Hash::make($data['password']),
-            'alamat' => $data['alamat'],
-            'kategori' => $data['kategori'],
-            'status' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
-            'disahkan' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
-        ]);
+        $user = User::where('email',$data['email'])->get()->first();
+        if(!$user){
+            $user = User::create([
+                'name' => $data['name'],
+                'nric' => $data['nric'],
+                'email' => $data['email'],
+                'agensi_organisasi' => $data['agensi_organisasi'],
+                'institusi' => $data['institusi'],
+                'bahagian' => $data['bahagian'],
+                'sektor' => $data['sektor'],
+                'email' => $data['email'],
+                'phone_pejabat' => $data['phone_pejabat'],
+                'phone_bimbit' => $data['phone_bimbit'],
+                'password' => Hash::make($data['password']),
+                'alamat' => $data['alamat'],
+                'kategori' => $data['kategori'],
+                'status' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
+                'disahkan' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
+            ]);
+        }
 
         $userRole = $user->assignRole($data['peranan']);
 
@@ -129,6 +134,21 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        $theUser = User::where('email',$request->email)->get()->first();
+        if($theUser){
+            if(count($theUser->getRoleNames()) == 2){
+                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda dah ade 2 role dah']);
+            }
+            $roles = $theUser->getRoleNames();
+            $r2 = [];
+            foreach($roles as $role){
+                $r2[] = $role;
+            }
+            if(in_array($request->peranan,$r2)){
+                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda telah didaftar dengan peranan dipilih.']);
+            }
+        }
+        
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
         // $this->guard()->login($user);
