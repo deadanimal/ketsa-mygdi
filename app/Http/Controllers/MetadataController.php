@@ -209,9 +209,10 @@ class MetadataController extends Controller {
         }
 
         $categories = MCategory::all();
-        $pengesahs = User::whereHas("roles", function ($q) {
-                    $q->where("name", "Pengesah Metadata");
-                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+//        $pengesahs = User::whereHas("roles", function ($q) {
+//                    $q->where("name", "Pengesah Metadata");
+//                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+        $pengesahs = User::where('assigned_roles','LIKE','%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
         if(empty($pengesahs)){
             $pengesahs = User::where(['id'=>'9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
         }
@@ -279,9 +280,10 @@ class MetadataController extends Controller {
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
         $metadataxml = simplexml_load_string($ftestxml2);
 
-        $pengesahs = User::whereHas("roles", function ($q) {
-                    $q->where("name", "Pengesah Metadata");
-                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+//        $pengesahs = User::whereHas("roles", function ($q) {
+//                    $q->where("name", "Pengesah Metadata");
+//                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+        $pengesahs = User::where('assigned_roles','LIKE','%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
         $categories = MCategory::all();
         $contacts = User::all();
         $states = States::where(['country' => 1])->get()->all();

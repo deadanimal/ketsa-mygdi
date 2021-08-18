@@ -331,7 +331,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
-                        <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3" value="{{ (isset($pengesahs->agensiOrganisasi->name) ? $pengesahs->agensiOrganisasi->name:"") }}" readonly>
+                        <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3" value="{{ (isset($pengesahs->agensiOrganisasi->name) ? $pengesahs->agensiOrganisasi->name:"") }}" >
                         @error('c2_contact_agensiorganisasi')
                             <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -441,7 +441,7 @@
                     <div class="col-6">
                         <input type="email" name="c2_contact_email" id="c2_contact_email"
                             class="form-control form-control-sm ml-3"
-                            value="{{ isset($pengesahs->email) ? $pengesahs->email : '' }}" readonly>
+                            value="{{ isset($pengesahs->email) ? $pengesahs->email : '' }}" >
                         @error('c2_contact_email')
                             <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -467,7 +467,7 @@
                     <div class="col-6">
                         <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office"
                             class="form-control form-control-sm ml-3"
-                            value="{{ isset($pengesahs->phone_pejabat) ? $pengesahs->phone_pejabat : '' }}" readonly>
+                            value="{{ isset($pengesahs->phone_pejabat) ? $pengesahs->phone_pejabat : '' }}" >
                         @error('c2_contact_phone_office')
                             <div class="text-error">{{ $message }}</div>
                         @enderror

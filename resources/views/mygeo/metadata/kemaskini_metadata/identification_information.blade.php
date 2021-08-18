@@ -309,7 +309,7 @@
                             $respName = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString;
                         }
                         ?>
-                        <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3" value="{{ $respName }}" readonly>
+                        <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3" value="{{ $respName }}" >
                         @error('c2_contact_name')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -328,7 +328,7 @@
                             $respAgencyOrg = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString;
                         }
                         ?>
-                        <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm" value="{{ $respAgencyOrg }}" readonly>
+                        <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm" value="{{ $respAgencyOrg }}" >
                         @error('c2_contact_agensiorganisasi')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -366,10 +366,10 @@
                             $respAddress = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString;
                         }
                         ?>
-                        <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2" value="{{ $respAddress }}" readonly>
-                        <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
-                        <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
-                        <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="" readonly>
+                        <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2" value="{{ $respAddress }}" >
+                        <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2" value="" >
+                        <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2" value="" >
+                        <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="" >
                         <div class="form-inline row ml-3">
                             <label class="form-control-label mr-4 divPostalCode" for="c2_contact_city">Postal Code :</label>
                             <?php
@@ -410,7 +410,7 @@
                             <div class="text-error">{{ $message }}</div>
                             @enderror
                             <label class="form-control-label mx-4" for="c2_contact_country">Country :</label>
-                            <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm ml-4" readonly>
+                            <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm ml-4" >
                                 <option selected disabled>Select Country</option>
                                 <?php
                                 foreach ($countries as $country) {
@@ -434,7 +434,7 @@
                             $respEmail = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString;
                         }
                         ?>
-                        <input type="email" name="c2_contact_email" id="c2_contact_email" class="form-control form-control-sm ml-3" value="{{ $respEmail }}" readonly>
+                        <input type="email" name="c2_contact_email" id="c2_contact_email" class="form-control form-control-sm ml-3" value="{{ $respEmail }}" >
                         @error('c2_contact_email')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -469,7 +469,7 @@
                             $respPhone = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
                         }
                         ?>
-                        <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office" class="form-control form-control-sm ml-3" value="{{ $respPhone }}" readonly>
+                        <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office" class="form-control form-control-sm ml-3" value="{{ $respPhone }}" >
                         @error('c2_contact_phone_office')
                         <div class="text-error">{{ $message }}</div>
                         @enderror

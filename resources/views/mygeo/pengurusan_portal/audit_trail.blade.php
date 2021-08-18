@@ -113,7 +113,11 @@
                 }
             });
             
-            $('#dateRange').daterangepicker();
+            $('#dateRange').daterangepicker({
+                locale: {
+                    format: 'DD/M/Y'
+                }
+            });
             $('#dateRange').on('apply.daterangepicker', function(ev, picker) {
                 $('#formFilter').submit();
             });
