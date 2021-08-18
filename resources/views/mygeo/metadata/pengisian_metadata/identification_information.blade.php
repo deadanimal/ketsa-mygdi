@@ -275,7 +275,7 @@
                         <input type="text" class="form-control form-control-sm ml-3" name="c2_serviceUrl" id="c2_serviceUrl">
                     </div>
                     <div class="col-1">
-                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button">Test</button>
+                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
                         @error('c2_serviceUrl')
                             <div class="text-error">{{ $message }}</div>
                         @enderror
