@@ -469,7 +469,7 @@ class PortalController extends Controller
         if(isset($request->dateRange)){
             $dateRange = explode(' - ',$request->dateRange);
             $dateStart = date('Y-m-d H:i:s',strtotime(str_replace('/', '-', $dateRange[0]." 00:00:00")));
-            $dateEnd = date('Y-m-d H:i:s',strtotime(str_replace('/', '-', $dateRange[1]." 11:59:59")));
+            $dateEnd = date('Y-m-d H:i:s',strtotime(str_replace('/', '-', $dateRange[1]." 23:59:59")));
             $audit_trails = AuditTrail::with('getUser')->whereBetween('created_at',[$dateStart,$dateEnd])->orderBy('created_at','DESC')->get();
         }else{
             $audit_trails = AuditTrail::with('getUser')->orderBy('created_at','DESC')->get();
