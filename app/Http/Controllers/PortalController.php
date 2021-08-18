@@ -466,7 +466,9 @@ class PortalController extends Controller
     }
     
     public function audit_trail(Request $request){
+        $var = "";
         if(isset($request->dateRange)){
+            $var = $request->dateRange;
             $dateRange = explode(' - ',$request->dateRange);
             $dateStart = date('Y-m-d H:i:s',strtotime(str_replace('/', '-', $dateRange[0]." 00:00:00")));
             $dateEnd = date('Y-m-d H:i:s',strtotime(str_replace('/', '-', $dateRange[1]." 23:59:59")));
@@ -474,6 +476,6 @@ class PortalController extends Controller
         }else{
             $audit_trails = AuditTrail::with('getUser')->orderBy('created_at','DESC')->get();
         }
-        return view('mygeo.pengurusan_portal.audit_trail', compact('audit_trails'));
+        return view('mygeo.pengurusan_portal.audit_trail', compact('audit_trails','var'));
     }
 }

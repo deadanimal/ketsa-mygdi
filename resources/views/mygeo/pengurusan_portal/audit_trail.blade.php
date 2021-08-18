@@ -45,7 +45,7 @@
                                                 <i class="far fa-calendar-alt"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control float-right" name="dateRange" id="dateRange">
+                                        <input type="text" class="form-control float-right" name="dateRange" id="dateRange" value="{{ $var }}">
                                     </div>  
                                 </form>
                                 <br><br>
