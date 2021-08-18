@@ -518,6 +518,7 @@ class MetadataController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('mygeo_senarai_metadata')->with('message',$msg);
@@ -576,6 +577,7 @@ class MetadataController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
@@ -762,6 +764,7 @@ class MetadataController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
 
         return redirect('mygeo_senarai_metadata')->with('success', $msg);
@@ -841,6 +844,7 @@ class MetadataController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
 
         exit();
@@ -920,6 +924,7 @@ class MetadataController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
         
         exit();
@@ -931,6 +936,7 @@ class MetadataController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
         $at->save();
         
         return redirect('mygeo_senarai_metadata')->with('message', 'Metadata berjaya dihapus.');
@@ -965,6 +971,7 @@ class MetadataController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
         
         return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
@@ -996,6 +1003,7 @@ class MetadataController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
         
         return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
@@ -1029,6 +1037,7 @@ class MetadataController extends Controller {
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
+            $at->data = 'Create';
             $at->save();
         }else{
             $msg = "Elemen tidak berjaya ditambah.";
@@ -1060,6 +1069,7 @@ class MetadataController extends Controller {
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
+            $at->data = 'Delete';
             $at->save();
         }else{
             $error = 1;

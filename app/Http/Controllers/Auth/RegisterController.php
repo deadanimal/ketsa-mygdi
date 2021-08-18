@@ -135,6 +135,7 @@ class RegisterController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = $user->id;
+        $at->data = 'Create';
         $at->save();
 
         return $user;

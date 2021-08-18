@@ -169,6 +169,7 @@ class UserController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
 
         exit();
@@ -196,6 +197,7 @@ class UserController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
 
         exit();
@@ -246,6 +248,7 @@ class UserController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
             
         return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
@@ -270,6 +273,7 @@ class UserController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
 
         return redirect('mygeo_profil')->with('message','Gambar profil berjaya dikemas kini.');
@@ -284,6 +288,7 @@ class UserController extends Controller {
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
+            $at->data = 'Update';
             $at->save();
         
             return redirect('mygeo_profil')->with('message','Kata laluan berjaya ditukar');
@@ -300,6 +305,7 @@ class UserController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
         
         exit();
@@ -311,6 +317,7 @@ class UserController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
         $at->save();
         
         exit();
@@ -402,6 +409,7 @@ class UserController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
         
         exit();
@@ -465,6 +473,7 @@ class UserController extends Controller {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan');

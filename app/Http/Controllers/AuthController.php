@@ -55,6 +55,7 @@ class AuthController extends Controller
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
+            $at->data = 'Login';
             $at->save();
         
             return redirect()->intended('/landing_mygeo');

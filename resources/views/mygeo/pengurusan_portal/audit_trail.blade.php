@@ -55,6 +55,7 @@
                                             <th>BIL</th>
                                             <th>PATH</th>
                                             <th>USER</th>
+                                            <th>ACTION</th>
                                             <th>DATE ACCESSED</th>
                                         </tr>
                                     </thead>
@@ -63,13 +64,16 @@
                                         $counter = 1;
                                         foreach ($audit_trails as $at){
                                             if(!isset($at->getUser->name)){
-                                                break;
+//                                                break;
                                             }
                                             ?>
                                             <tr>
                                                 <td>{{ $counter }}</td>
                                                 <td>{{ $at->path }}</td>
-                                                <td>{{ $at->getUser->name }}</td>
+                                                <td>{{ (isset($at->getUser->name) ? $at->getUser->name:"") }}</td>
+                                                <td>
+                                                    <small class="badge badge-success">{{ $at->data }}</small>
+                                                </td>
                                                 <td>{{ date('d/m/Y H:m:s',strtotime($at->created_at)) }}</td>
                                             </tr>
                                             <?php

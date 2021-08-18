@@ -66,6 +66,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
 
         return redirect('/kemaskini_faq')->with('success', 'FAQ Disimpan');
@@ -113,6 +114,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
 
         return redirect('/landing_mygeo')->with('success', 'Maklum Balas Disimpan');
@@ -140,6 +142,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('')->with('success', 'Maklum Balas Dihantar');
@@ -152,6 +155,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
         $at->save();
         
         return redirect('maklum_balas')->with('success', 'Maklum Balas Dibuang');
@@ -175,6 +179,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('maklum_balas')->with('success', 'Maklum balas telah dihantar');
@@ -208,6 +213,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('/panduan_pengguna_edit')->with('success', 'Panduan Pengguna Disimpan');
@@ -240,6 +246,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('mygeo_penafian')->with('success', 'Tetapan Penafian Disimpan');
@@ -272,6 +279,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('mygeo_penyataan_privasi')->with('success', 'Tetapan Penyataan Privasi Berjaya Disimpan');
@@ -324,6 +332,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('pengumuman_edit')->with('success', 'Pengumuman Ditambah');
@@ -340,6 +349,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
         
         return redirect('pengumuman_edit')->with('success', 'Pengumuman Dikemaskini');
@@ -352,6 +362,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
         $at->save();
         
         return redirect('pengumuman_edit')->with('success', 'Pengumuman Dibuang');
@@ -376,6 +387,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
         
         echo json_encode(["msg"=>$msg]);
@@ -396,6 +408,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
         
         echo json_encode(["msg"=>$msg]);
@@ -445,6 +458,7 @@ class PortalController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
         $at->save();
         
         echo json_encode(["msg"=>$msg,"error"=>$error]);

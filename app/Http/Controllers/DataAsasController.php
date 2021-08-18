@@ -127,6 +127,7 @@ class DataAsasController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         return redirect('senarai_data')->with('success', 'Permohonan ditambah. Sila klik pautan berkenaan');
@@ -150,6 +151,7 @@ class DataAsasController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
         $at->save();
 
         return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
@@ -162,6 +164,7 @@ class DataAsasController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
         $at->save();
         
         return redirect('senarai_data')->with('success', 'Data tersebut telah dibuang');
@@ -236,6 +239,7 @@ class DataAsasController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         // return redirect('mohon_data');
@@ -249,6 +253,7 @@ class DataAsasController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
         $at->save();
 
         return redirect('mohon_data')->with('success', 'Data Senarai dan Kawasan dibuang!');
@@ -289,6 +294,7 @@ class DataAsasController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
         $at->save();
 
         // return redirect()->action('DataAsasController@tambah', ['id' => $id]);
@@ -317,6 +323,7 @@ class DataAsasController extends Controller
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
+            $at->data = 'Create';
             $at->save();
 
             return back()
@@ -377,6 +384,7 @@ class DataAsasController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
         $at->save();
 
         return redirect('mohon_data')->with('success', 'Permohonan Data dibuang!');

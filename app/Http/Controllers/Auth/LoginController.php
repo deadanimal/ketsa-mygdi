@@ -44,6 +44,7 @@ class LoginController extends Controller
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
+        $at->data = 'Logout';
         $at->save();
         
         Auth::logout();
