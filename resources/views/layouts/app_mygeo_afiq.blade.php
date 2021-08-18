@@ -506,7 +506,7 @@
                                     <div id="div_pilihan_peranan">
                                         <?php
                                         $peranans = explode(',',Auth::user()->assigned_roles);
-                                        if(count($peranans) > 1){
+                                        if(count($peranans) > 0){
                                             $count = 1;
                                             foreach($peranans as $p){
                                                 $checked = "";

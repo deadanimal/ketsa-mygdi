@@ -249,10 +249,10 @@
                                             </div>
                                             <div class="row mb-2 divInstitusi">
                                                 <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="input-agensi">Institusi</label>
+                                                    <label class="form-control-label mr-4" for="input-agensi">Agensi/Organisasi/Institusi</label>
                                                 </div>
                                                 <div class="col-8">
-                                                    <input class="form-control form-control-sm ml-3" placeholder="Nama Institusi" type="text" name="institusi" />
+                                                    <input class="form-control form-control-sm ml-3" placeholder="Nama Institusi" type="text" name="agensi_organisasi" id="agensi_organisasi2"/>
                                                 </div>
                                             </div>
                                             <div class="row mb-2 divBahagian">
@@ -500,6 +500,8 @@
             $(".divPeranan").show();
             $(".divAgensiOrganisasiAlamat").show();
             $(".divInstitusi").hide();
+            $("#agensi_organisasi").prop('disabled',false);
+            $("#agensi_organisasi2").prop('disabled',true);
             $(".divKategori").hide();
             $('.btn_isi_borang').show();
             $(".divsecond").hide();
@@ -567,8 +569,10 @@
         } else if (per == "2_g2g_agensiPersNeg" || per == "2_g2g_badanBerkanun" || per == "2_glc") {
             $(".divNama").show();
             $(".divNric").show();
-            $(".divInstitusi").hide();
-            $(".divAgensiOrganisasi").show();
+            $(".divInstitusi").show();
+            $(".divAgensiOrganisasi").hide();
+            $("#agensi_organisasi").prop('disabled',true);
+            $("#agensi_organisasi2").prop('disabled',false);
             $(".divAgensiOrganisasiAlamat").show();
             $(".divBahagian").hide();
             $(".divSektor").hide();
@@ -589,6 +593,8 @@
             $(".divNric").show();
             $(".divInstitusi").show();
             $(".divAgensiOrganisasi").hide();
+            $("#agensi_organisasi").prop('disabled',true);
+            $("#agensi_organisasi2").prop('disabled',false);
             $(".divAgensiOrganisasiAlamat").show();
             $(".divBahagian").hide();
             $(".divSektor").hide();
@@ -614,7 +620,9 @@
             $(".2_g2e").show();
             $(".divNama").hide();
             $(".divNric").hide();
-            $(".divInstitusi").hide();
+            $(".divInstitusi").show();
+            $("#agensi_organisasi").prop('disabled',true);
+            $("#agensi_organisasi2").prop('disabled',false);
             $(".divAgensiOrganisasi").hide();
             $(".divAgensiOrganisasiAlamat").hide();
             $(".divBahagian").hide();
@@ -641,7 +649,9 @@
             $(".2_g2e").show();
             $(".divNama").hide();
             $(".divNric").hide();
-            $(".divInstitusi").hide();
+            $(".divInstitusi").show();
+            $("#agensi_organisasi").prop('disabled',true);
+            $("#agensi_organisasi2").prop('disabled',false);
             $(".divAgensiOrganisasi").hide();
             $(".divAgensiOrganisasiAlamat").hide();
             $(".divBahagian").hide();

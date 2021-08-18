@@ -99,7 +99,7 @@ class RegisterController extends Controller
                 'kategori' => $data['kategori'],
                 'status' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
                 'disahkan' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
-                'assinged_roles' => $data['peranan'],
+                'assigned_roles' => $data['peranan'],
             ]);
         }else{
             $var = $user->assigned_roles;
