@@ -472,7 +472,7 @@ class PortalController extends Controller
             $dateEnd = date('Y-m-d H:i:s',strtotime(str_replace('/', '-', $dateRange[1]." 11:59:59")));
             $audit_trails = AuditTrail::with('getUser')->whereBetween('created_at',[$dateStart,$dateEnd])->orderBy('created_at','DESC')->get();
         }else{
-            $audit_trails = AuditTrail::with('getUser')->order_by('created_at','DESC')->get();
+            $audit_trails = AuditTrail::with('getUser')->orderBy('created_at','DESC')->get();
         }
         return view('mygeo.pengurusan_portal.audit_trail', compact('audit_trails'));
     }
