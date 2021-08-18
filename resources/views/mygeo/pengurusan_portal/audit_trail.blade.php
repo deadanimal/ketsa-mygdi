@@ -38,7 +38,7 @@
                             <div class="card-body">
                                 <form action="{{ url('audit_trail') }}" method="POST" id="formFilter">
                                     @csrf
-                                    <label for="reservation">Data Range</label>
+                                    <label for="reservation">Sela Masa</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
