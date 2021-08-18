@@ -62,6 +62,9 @@
                                         <?php
                                         $counter = 1;
                                         foreach ($audit_trails as $at){
+                                            if(!isset($at->getUser->name)){
+                                                break;
+                                            }
                                             ?>
                                             <tr>
                                                 <td>{{ $counter }}</td>

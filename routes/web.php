@@ -173,7 +173,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pemindahan_akaun','UserController@pemindahan_akaun');
     
     Route::match(['get','post'],'/audit_trail','PortalController@audit_trail');
-    Route::post('/auditTrailFilter','PortalController@auditTrailFilter');
 
     Route::post('/tukar_peranan','UserController@tukar_peranan');
     

@@ -454,15 +454,10 @@ class PortalController extends Controller
     public function audit_trail(Request $request){
         if(isset($request->dateRange)){
             $dateRange = explode(' - ',$request->dateRange);
-            $audit_trails = AuditTrail::whereBetween('created_at',[$dateRange[0],$dateRange[1]])->get();
+            $audit_trails = AuditTrail::with('getUser')->whereBetween('created_at',[$dateRange[0],$dateRange[1]])->get();
         }else{
-            $audit_trails = AuditTrail::get();
+            $audit_trails = AuditTrail::with('getUser')->get();
         }
-        return view('mygeo.pengurusan_portal.audit_trail', compact('audit_trails'));
-    }
-    
-    public function auditTrailFilter(Request $request){
-        $audit_trails = AuditTrail::get();
         return view('mygeo.pengurusan_portal.audit_trail', compact('audit_trails'));
     }
 }
