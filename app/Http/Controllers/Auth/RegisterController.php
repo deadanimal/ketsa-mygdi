@@ -88,7 +88,7 @@ class RegisterController extends Controller
                 'nric' => $data['nric'],
                 'email' => $data['email'],
                 'agensi_organisasi' => $data['agensi_organisasi'],
-                'institusi' => $data['institusi'],
+//                'institusi' => $data['institusi'],
                 'bahagian' => $data['bahagian'],
                 'sektor' => $data['sektor'],
                 'email' => $data['email'],
