@@ -481,4 +481,10 @@ class UserController extends Controller {
 
         return $random_string;
     }
+    
+    public function tukar_peranan(Request $request) {
+        $user = User::where('id',Auth::user()->id)->get()->first();
+        $user->syncRoles([$request->perananSelect]);
+        return redirect()->back();
+    }
 }

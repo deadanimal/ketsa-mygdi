@@ -27,7 +27,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '24 Jalan Melur Taman Bunga 45502 Gopeng Perak',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Super Admin',
         ]);
         $user->assignRole('Super Admin');
         
@@ -45,7 +46,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '25 Jalan Melur Taman Bunga 45502 Jitra Kedah',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pentadbir Aplikasi,Penerbit Metadata',
         ]);
         $user->assignRole('Pentadbir Aplikasi');
 
@@ -63,7 +65,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '26 Jalan Melur Taman Bunga 45502 Bangsar Kuala Lumpur',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pengesah Metadata',
         ]);
         $user->assignRole('Pengesah Metadata');
         
@@ -80,7 +83,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '27 Jalan Melur Taman Bunga 45502 Serendah Selangor',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pengesah Metadata',
         ]);
         $user->assignRole('Pengesah Metadata');
         
@@ -97,7 +101,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '28 Jalan Melur Taman Bunga 45502 Nilai Negeri Sembilan',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pengesah Metadata',
         ]);
         $user->assignRole('Pengesah Metadata');
 
@@ -115,7 +120,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '29 Jalan Melur Taman Bunga 45502 Jasin Melaka',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Penerbit Metadata',
         ]);
         $user->assignRole('Penerbit Metadata');
         
@@ -132,7 +138,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '30 Jalan Melur Taman Bunga 45502 Muar Johor',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Penerbit Metadata',
         ]);
         $user->assignRole('Penerbit Metadata');
         
@@ -149,7 +156,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '31 Jalan Melur Taman Bunga 45502 Jengka Pahang',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Penerbit Metadata',
         ]);
         $user->assignRole('Penerbit Metadata');
 
@@ -167,7 +175,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '32 Jalan Melur Taman Bunga 45502 Chukai Terengganu',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pentadbir Metadata',
         ]);
         $user->assignRole('Pentadbir Metadata');
         
@@ -184,7 +193,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '33 Jalan Melur Taman Bunga 45502 Ketereh Kelantan',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pentadbir Metadata',
         ]);
         $user->assignRole('Pentadbir Metadata');
         
@@ -201,7 +211,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pentadbir Metadata',
         ]);
         $user->assignRole('Pentadbir Metadata');
 
@@ -220,7 +231,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pemohon Data',
         ]);
         $user->assignRole('Pemohon Data');
         
@@ -237,7 +249,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pemohon Data',
         ]);
         $user->assignRole('Pemohon Data');
         
@@ -254,7 +267,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pemohon Data',
         ]);
         $user->assignRole('Pemohon Data');
         
@@ -271,7 +285,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pentadbir Data',
         ]);
         $user->assignRole('Pentadbir Data');
         
@@ -288,7 +303,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pentadbir Data',
         ]);
         $user->assignRole('Pentadbir Data');
         
@@ -305,7 +321,8 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'assigned_roles' => 'Pentadbir Data',
         ]);
         $user->assignRole('Pentadbir Data');
     }

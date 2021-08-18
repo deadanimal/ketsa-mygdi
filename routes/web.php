@@ -174,6 +174,8 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/audit_trail','PortalController@audit_trail');
 
+    Route::post('/tukar_peranan','UserController@tukar_peranan');
+    
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 });
 

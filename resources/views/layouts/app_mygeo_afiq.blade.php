@@ -418,7 +418,8 @@
                                     </ul>
                                     <ul class="navbar-nav align-items-center ml-auto ml-md-0">
                                         <li placement="bottom-right" class="nav-item dropdown">
-                                            <a role="button" dropdowntoggle="" class="nav-link pr-0 dropdown-toggle" aria-haspopup="true">
+                                            <!--<a role="button" dropdowntoggle="" class="nav-link pr-0 dropdown-toggle" aria-haspopup="true">-->
+                                                <a class="nav-link pr-0 dropdown-toggle" data-toggle="dropdown" href="#">
                                                 <div class="media align-items-center pointer">
                                                     <div class="media-body ml-2 d-none d-lg-block"><span class="mb-0 text-sm font-weight-bold ng-star-inserted">{{ strtoupper(auth::user()->name) }} </span><br>
                                                         <span class="float-right text-sm font-weight-light ng-star-inserted">
@@ -448,6 +449,11 @@
                                                     </span>
                                                 </div>
                                             </a>
+                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal_tukar_peranan">
+                                                  <i class="fas fa-users mr-2 tukarPeranan"></i> Tukar Peranan
+                                                </a>
+                                            </div>
                                             <!--container-->
                                         </li>
                                         <!--container-->
@@ -481,6 +487,55 @@
         </app-admin-layout>
         <!--container-->
     </app-root>
+
+    <div class="modal fade" id="modal_tukar_peranan">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tukar Peranan:</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="{{ url('tukar_peranan') }}" id='formTukarPeranan'>
+                    @csrf
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="div_pilihan_peranan">
+                                        <?php
+                                        $peranans = explode(',',Auth::user()->assigned_roles);
+                                        if(count($peranans) > 1){
+                                            $count = 1;
+                                            foreach($peranans as $p){
+                                                $checked = "";
+                                                if(Auth::user()->hasRole($p)){
+                                                    $checked = "checked";
+                                                }
+                                                ?>
+                                                <div class=" custom-control custom-radio mb-3">
+                                                    <input class="custom-control-input" name="perananSelect" type="radio" value="{{ $p }}" {{ $checked }} id="peranan_{{ $count }}"/>
+                                                    <label class="custom-control-label" for="peranan_{{ $count }}">{{ $p }}</label>
+                                                </div>
+                                                <?php
+                                                $count++;
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between1">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-default">Tukar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
     <div class="overlay-container">

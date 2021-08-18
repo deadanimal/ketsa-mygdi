@@ -99,10 +99,18 @@ class RegisterController extends Controller
                 'kategori' => $data['kategori'],
                 'status' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
                 'disahkan' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
+                'assinged_roles' => $data['peranan'],
             ]);
+        }else{
+            $var = $user->assigned_roles;
+            $var = $var.",".$data['peranan'];
+            $user->assigned_roles = $var;
+            $user->save();
+            
+            $user->syncRoles([]);
         }
 
-        $userRole = $user->assignRole($data['peranan']);
+        $user->assignRole($data['peranan']);
 
         if($data['peranan'] == "Pemohon Data"){
             //send email to the pemohon data
