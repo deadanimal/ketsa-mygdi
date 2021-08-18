@@ -451,7 +451,17 @@ class PortalController extends Controller
         exit();
     }
     
-    public function audit_trail(){
+    public function audit_trail(Request $request){
+        if(isset($request->dateRange)){
+            $dateRange = explode(' - ',$request->dateRange);
+            $audit_trails = AuditTrail::whereBetween('created_at',[$dateRange[0],$dateRange[1]])->get();
+        }else{
+            $audit_trails = AuditTrail::get();
+        }
+        return view('mygeo.pengurusan_portal.audit_trail', compact('audit_trails'));
+    }
+    
+    public function auditTrailFilter(Request $request){
         $audit_trails = AuditTrail::get();
         return view('mygeo.pengurusan_portal.audit_trail', compact('audit_trails'));
     }

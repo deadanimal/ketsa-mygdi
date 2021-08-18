@@ -36,6 +36,19 @@
                                 <h3 class="card-title" style="font-size: 2rem;">Audit Trail</h3>
                             </div>
                             <div class="card-body">
+                                <form action="{{ url('audit_trail') }}" method="POST" id="formFilter">
+                                    @csrf
+                                    <label for="reservation">Data Range</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control float-right" name="dateRange" id="dateRange">
+                                    </div>  
+                                </form>
+                                <br><br>
                                 <table id="table_audit_trail" class="table table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
@@ -93,7 +106,11 @@
                 }
             });
             
-            // Setup - add a text input to each footer cell
+            $('#dateRange').daterangepicker();
+            $('#dateRange').on('apply.daterangepicker', function(ev, picker) {
+                $('#formFilter').submit();
+            });
+            
             $('#table_agensi_organisasi thead tr').clone(true).appendTo('#table_agensi_organisasi thead');
             $('#table_agensi_organisasi thead tr:eq(1) th').each( function (i) {
                 var title = $(this).text();
