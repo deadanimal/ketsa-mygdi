@@ -40,7 +40,8 @@
                     <option value="Imagery" class='optContentInfo_imagery' {{($var=="Imagery" ? "selected":"")}}>Imagery</option>
                 </select>
                 
-                <input type="text" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled value="{{ $var }}">
+                <p class="ml-3 mb-0 lblContentInfo">{{ $var }}</p>
+                <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled value="{{ $var }}">
                 
                 @error('c1_content_info')
                 <div class="text-error">{{ $message }}</div>
@@ -62,10 +63,10 @@
                         $pub_name = "";
                         if (isset($metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
                             $pub_name = $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString;
-                            echo $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString;
+//                            echo $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString;
                         }
                         ?>
-                        <input type="hidden" name="publisher_name" value="{{ $pub_name }}">
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_name" value="{{ $pub_name }}">
                     </div>
                 </div>
                 <div class="row my-0 py-0">
@@ -79,10 +80,10 @@
                         $pub_agencyOrg = "";
                         if (isset($metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
                             $pub_agencyOrg = $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString;
-                            echo $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString;
+//                            echo $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString;
                         }
                         ?>
-                        <input type="hidden" name="publisher_agensi_organisasi" value="{{ $pub_agencyOrg }}">
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_agensi_organisasi" value="{{ $pub_agencyOrg }}">
                     </div>
                 </div>
                 <div class="row my-0 py-0">
@@ -96,10 +97,10 @@
                         $pub_email = "";
                         if (isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
                             $pub_email = $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString;
-                            echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString;
+//                            echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString;
                         }
                         ?>
-                        <input type="hidden" name="publisher_email" value="{{ $pub_email }}">
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_email" value="{{ $pub_email }}">
                     </div>
                 </div>
                 <div class="row my-0 py-0">
@@ -113,10 +114,10 @@
                         $pub_phone = "";
                         if(isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != ""){
                         $pub_phone = $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
-                        echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
+//                        echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
                         }
                         ?>
-                        <input type="hidden" name="publisher_phone" value="{{ $pub_phone }}">
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_phone" value="{{ $pub_phone }}">
                     </div>
                 </div>
                 <div class="row my-0 py-0 divPublisherRole">

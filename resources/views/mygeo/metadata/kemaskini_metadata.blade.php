@@ -440,7 +440,7 @@
                 $('#c1_content_info').prop('disabled',false);
                 $('#content_info_text').prop('disabled',true);
                 $('#c1_content_info').show();
-                $('#content_info_text').hide();
+                $('.lblContentInfo').hide();
                 $('#divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
             }else if (kategori.toLowerCase() == "services") {
@@ -460,8 +460,10 @@
                 $('.divUseLimitation').show();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Live Data and Maps');
+                $('#content_info_text').val('Live Data and Maps');
+                $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-                $('#content_info_text').show();
                 $('#divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
             }else if (kategori.toLowerCase() == "gridded") {
@@ -481,8 +483,10 @@
                 $('.divUseLimitation').hide();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Gridded');
+                $('#content_info_text').val('Gridded');
+                $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-                $('#content_info_text').show();
                 $('#divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }else if (kategori.toLowerCase() == "imagery") {
@@ -502,8 +506,10 @@
                 $('.divUseLimitation').hide();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Imagery');
+                $('#content_info_text').val('Imagery');
+                $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-                $('#content_info_text').show();
                 $('#divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }
@@ -545,6 +551,28 @@ if ($catSelected == "dataset" || $catSelected == "services") {
                 $('.optContentInfo_gridded').hide();
                 $('.optContentInfo_imagery').hide();
                 $('#c1_content_info').val('').change();
+                $('.lblContentInfo').hide();
+            }else if (kategori.toLowerCase() == "services"){ 
+                $('#c1_content_info').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Services');
+                $('#content_info_text').val('Services');
+                $('.lblContentInfo').show();
+                $('#c1_content_info').hide();
+            }else if (kategori.toLowerCase() == "imagery"){ 
+                $('#c1_content_info').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Imagery');
+                $('#content_info_text').val('Imagery');
+                $('.lblContentInfo').show();
+                $('#c1_content_info').hide();
+            }else if (kategori.toLowerCase() == "gridded"){ 
+                $('#c1_content_info').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Gridded');
+                $('#content_info_text').val('Gridded');
+                $('.lblContentInfo').show();
+                $('#c1_content_info').hide();
             }else{
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);

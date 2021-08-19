@@ -409,6 +409,7 @@
                 $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Live Data and Maps');
+                $('#content_info_text').val('Live Data and Maps');
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
                 $('#divMaintenanceInfo').hide();
@@ -432,6 +433,7 @@
                 $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Gridded');
+                $('#content_info_text').val('Gridded');
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
                 $('#divMaintenanceInfo').show();
@@ -455,6 +457,7 @@
                 $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Imagery');
+                $('#content_info_text').val('Imagery');
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
                 $('#divMaintenanceInfo').show();
