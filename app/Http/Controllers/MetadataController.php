@@ -235,6 +235,10 @@ class MetadataController extends Controller {
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
         $metadataxml = simplexml_load_string($ftestxml2);
         
+        if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
+            App::setLocale(trim($metadataxml->language->CharacterString));
+        }
+        
         $categories = MCategory::all();
         $contacts = User::all();
         $states = States::where(['country' => 1])->get()->all();
@@ -262,12 +266,6 @@ class MetadataController extends Controller {
         if (!auth::user()->hasRole(['Pengesah Metadata','Penerbit Metadata', 'Super Admin'])) {
             exit();
         }
-
-        if (isset($_GET['bhs']) && $_GET['bhs'] == 'bm') {
-            App::setLocale('bm');
-        } elseif (isset($_GET['bhs']) && $_GET['bhs'] == 'en') {
-            App::setLocale('en');
-        }
         
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$id)->get()->first();
         
@@ -279,6 +277,16 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
         $metadataxml = simplexml_load_string($ftestxml2);
+        
+        if (isset($_GET['bhs']) && $_GET['bhs'] == 'bm'){
+            App::setLocale('bm');
+        }elseif(isset($_GET['bhs']) && $_GET['bhs'] == 'en'){
+            App::setLocale('en');
+        }else{
+            if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
+                App::setLocale(trim($metadataxml->language->CharacterString));
+            }
+        }
 
 //        $pengesahs = User::whereHas("roles", function ($q) {
 //                    $q->where("name", "Pengesah Metadata");
@@ -319,6 +327,10 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
         $metadataxml = simplexml_load_string($ftestxml2);
+        
+        if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
+            App::setLocale(trim($metadataxml->language->CharacterString));
+        }
         
         $categories = MCategory::all();
         $contacts = User::all();
@@ -753,6 +765,21 @@ class MetadataController extends Controller {
                 $mg->catatan14 = $request->catatan14;
                 $mg->catatan15 = $request->catatan15;
             }elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+                $mg->catatan1 = "";
+                $mg->catatan2 = "";
+                $mg->catatan3 = "";
+                $mg->catatan4 = "";
+                $mg->catatan5 = "";
+                $mg->catatan6 = "";
+                $mg->catatan7 = "";
+                $mg->catatan8 = "";
+                $mg->catatan9 = "";
+                $mg->catatan10 = "";
+                $mg->catatan11 = "";
+                $mg->catatan12 = "";
+                $mg->catatan13 = "";
+                $mg->catatan14 = "";
+                $mg->catatan15 = "";
                 $mg->disahkan = "0";
             }
             
@@ -784,7 +811,7 @@ class MetadataController extends Controller {
         if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
             exit();
         }
-
+        
         if (is_array($_POST['metadata_id'])) {
             foreach ($_POST['metadata_id'] as $mid) {
                 $metadata = MetadataGeo::on('pgsql2')->find($mid);

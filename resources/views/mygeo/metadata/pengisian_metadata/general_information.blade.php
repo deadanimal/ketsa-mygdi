@@ -28,8 +28,9 @@
 
                     <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                 </select>
-                
-                <input type="text" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled>
+
+                <p class="ml-3 mb-0 lblContentInfo">Live Data and Maps</p>
+                <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled>
 
                 @error('c1_content_info')
                 <div class="text-error ml-3">{{ $message }}</div>
@@ -45,8 +46,8 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        <p class="ml-3 mb-0">{{ auth::user()->name }}</p>
-                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_name" value="{{ auth::user()->name }}" />
+                        <!--<p class="ml-3 mb-0">{{ auth::user()->name }}</p>-->
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_name" value="{{ auth::user()->name }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0">
@@ -55,8 +56,8 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        <p class="ml-3 mb-0">{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}</p>
-                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}" />
+                        <!--<p class="ml-3 mb-0">{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}</p>-->
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0">
@@ -66,8 +67,8 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        <p class="mb-0 ml-3">{{ auth::user()->email }}</p>
-                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_email" value="{{ auth::user()->email }}" />
+                        <!--<p class="mb-0 ml-3">{{ auth::user()->email }}</p>-->
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_email" value="{{ auth::user()->email }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0">
@@ -77,8 +78,8 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        <p class="ml-3 mb-0">{{ auth::user()->phone_pejabat }}</p>
-                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
+                        <!--<p class="ml-3 mb-0">{{ auth::user()->phone_pejabat }}</p>-->
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0 divPublisherRole">

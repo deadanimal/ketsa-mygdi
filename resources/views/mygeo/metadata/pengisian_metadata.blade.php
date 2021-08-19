@@ -387,7 +387,7 @@
                 $('#content_info_dropdown').prop('disabled',false);
                 $('#content_info_text').prop('disabled',true);
                 $('#content_info_dropdown').show();
-                $('#content_info_text').hide();
+                $('.lblContentInfo').hide();
                 $('#divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
             } else if (kategori.toLowerCase() == "services") {
@@ -408,8 +408,9 @@
                 $('.divMaintenanceInfo').hide();
                 $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Live Data and Maps');
+                $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
-                $('#content_info_text').show();
                 $('#divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
             } else if (kategori.toLowerCase() == "gridded") {
@@ -430,8 +431,9 @@
                 $('.divMaintenanceInfo').show();
                 $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Gridded');
+                $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
-                $('#content_info_text').show();
                 $('#divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             } else if (kategori.toLowerCase() == "imagery") {
@@ -452,8 +454,9 @@
                 $('.divMaintenanceInfo').show();
                 $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Imagery');
+                $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
-                $('#content_info_text').show();
                 $('#divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }

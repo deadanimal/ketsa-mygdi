@@ -185,13 +185,19 @@
                                     </select>
                                     &nbsp;&nbsp;&nbsp;
                                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                                        <?php
+                                        $langSelected = "";
+                                        if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != "") {
+                                            $langSelected = strtolower(trim($metadataxml->language->CharacterString));
+                                        }
+                                        ?>
                                         <label class="btn btn-secondary active">
                                             <img src="{{ url('/img/flagMalaysia.jpeg') }}" alt="User Avatar">
-                                            <input type="radio" name="flanguage" value="bm" {{ (isset($_GET['bhs']) && $_GET['bhs'] == 'bm' ? 'checked':'') }} {{ (!isset($_GET['bhs']) ? 'checked':'') }}>BM
+                                            <input type="radio" name="flanguage" value="bm" {{ ((isset($_GET['bhs']) && $_GET['bhs'] == 'bm') || ($langSelected == 'bm') ? 'checked':'') }}>BM
                                         </label>
                                         <label class="btn btn-secondary">
                                             <img src="{{ url('/img/flagUnitedKingdom.jpeg') }}" alt="User Avatar">
-                                            <input type="radio" name="flanguage" value="en" {{ (isset($_GET['bhs']) && $_GET['bhs'] == 'en' ? 'checked':'') }}>ENG
+                                            <input type="radio" name="flanguage" value="en" {{ ((isset($_GET['bhs']) && $_GET['bhs'] == 'en') || ($langSelected == 'en') ? 'checked':'') }}>ENG
                                         </label>
                                     </div>
                                 </div>
@@ -250,7 +256,7 @@
                                     @endif
                                     @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
                                     <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
-                                    <button class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
+                                    <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
                                     @endif
                                     
                                     <input type="hidden" name="submitAction" id="submitAction" value="save">
@@ -584,7 +590,7 @@ if (!is_null(old('kategori'))) {
                 var metadata_id = $(this).data('metadataid');
                 $.ajax({
                     method: "POST",
-                    url: "metadata_sahkan",
+                    url: "{{ url('metadata_sahkan') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "metadata_id": metadata_id
@@ -592,7 +598,7 @@ if (!is_null(old('kategori'))) {
                 })
                 .done(function(response) {
                     alert("Metadata berjaya disahkan.");
-                    location.reload();
+                    window.location.replace('{{ url("mygeo_pengesahan_metadata") }}');
                 });
             }
         });
