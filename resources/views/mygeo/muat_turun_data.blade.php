@@ -4,6 +4,10 @@
 
     <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
 
+     <!-- SweetAlert2 -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+
     <style>
     </style>
 
@@ -72,7 +76,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $pemohon->name }}</td>
                                                 <td>
-                                                    @if ($pemohon->download == '1')
+                                                    @if (!empty($pemohon->proses_datas->pautan_data))
                                                         <span class="badge badge-pill badge-success">Data Tersedia</span>
                                                     @else
                                                         <span class="badge badge-pill badge-danger">Dalam Proses</span>
@@ -80,7 +84,7 @@
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a class="text-muted download" href="javascript:void(0)"><span
+                                                    <a @if(!empty($pemohon->proses_datas->pautan_data)) class="text-success download" disabled href="{{ $pemohon->proses_datas->pautan_data }}" @endif target="_blank"><span
                                                             class="fas fa-download mr-2"></span>
                                                         Muat Turun</a>
                                                 </td>
@@ -135,6 +139,7 @@
                     return !result && "Anda perlu sahkan akuan penerimaan data ini!";
                 },
             }).then(function(result) {
+                window.location.href = url;
                 swal({
                     title: "Akuan Penerimaan Data",
                     text: "Berjaya disahkan!",

@@ -72,17 +72,23 @@
                                                 <td>{{ $pemohon->name }}</td>
                                                 <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a href="/penilaian_pemohon/{{ $pemohon->id }}"
-                                                        class="btn btn-sm btn-info text-center">
-                                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+
+                                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                                        <a href="/penilaian_pemohon/{{ $pemohon->id }}"
+                                                            class="btn btn-sm btn-info text-center">
                                                             Lihat
                                                         @else
-                                                            Buat Penilaian
-                                                        @endif
+                                                            <a href="/penilaian_pemohon/{{ $pemohon->id }}" @if ($pemohon->penilaian == '1') hidden @endif
+                                                                class="btn btn-sm btn-info text-center">
+                                                                Buat Penilaian
+                                                    @endif
                                                     </a>
-                                                    <button type="button" data-permohonanid="{{ $pemohon->id }}"
-                                                        class="btnDelete btn btn-sm btn-danger mr-2"><i
-                                                            class="fas fa-trash"></i></button>
+                                                    @if (Auth::user()->hasRole(['Pemohon Data']))
+                                                        <button type="button" data-permohonanid="{{ $pemohon->id }}"
+                                                            class="btnDelete btn btn-sm btn-danger mr-2"><i
+                                                                class="fas fa-trash"></i>
+                                                        </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

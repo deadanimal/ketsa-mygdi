@@ -146,22 +146,23 @@ class DataAsasController extends Controller
     {
         $pemohons = MohonData::where(['status' => 1,'dihantar' => 1])->get();
         $skdatas = SenaraiKawasanData::get();
-        return view('mygeo.proses_data', compact('pemohons','skdatas'));
+        $proses = ProsesData::get();
+        return view('mygeo.proses_data', compact('pemohons','skdatas','proses'));
     }
 
     public function update_proses_data(Request $request)
     {
         DB::transaction(function () use ($request) {
             //save senarai data
-            Prosesdata::where(["permohonan_id" => $request->permohonan_id])->update([
+            ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
                 "pautan_data" => $request->pautan_data,
                 "tempoh" => $request->tempoh,
                 "total_harga" => $request->total_harga,
             ]);
 
-            // SenaraiKawasanData::where(["id" => $request->permohonan_id])->update([
-            //     "saiz_data" => $request->saiz_data,
-            // ]);
+            Mohondata::where(["id" => $request->permohonan_id])->update([
+                "status" => $request->status = 3,
+            ]);
 
         });
 
@@ -275,8 +276,7 @@ class DataAsasController extends Controller
             ]);
 
         });
-        $id = $request->permohonan_id;
-        return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Surat Balasan Dikemaskini');
+        return redirect('proses_data')->with('success', 'Surat Balasan Disimpan');
     }
 
     public function akuan_pelajar($id)
@@ -306,12 +306,12 @@ class DataAsasController extends Controller
 
         });
         $id = $request->permohonan_id;
-        return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Dihantar');
+        return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
     }
 
     public function permohonan_baru()
     {
-        $pemohons = MohonData::where(['dihantar' => 1])->get();
+        $pemohons = MohonData::where(['dihantar' => 1,'status' => 0])->get();
         return view('mygeo.permohonan_baru', compact('pemohons'));
     }
 
@@ -351,9 +351,9 @@ class DataAsasController extends Controller
         $valid = SenaraiData::where([
             ["kategori","=", $request->kategori],
             ["subkategori","=", $request->subkategori],
+            ["lapisan_data","=", $request->lapisan_data],
         ])->first();
         if(empty($valid)){
-            return redirect()->back()->with('warning', 'Sila pilih padanan lapisan data yang betul');
         } else{
             $skdata->harga_data = $valid->harga_data;
             $skdata->save();
@@ -362,9 +362,42 @@ class DataAsasController extends Controller
 
     }
 
+    public function update_senarai_kawasan(Request $request)
+    {
+        $valid = SenaraiData::where([
+            ["kategori","=", $request->kategori],
+            ["subkategori","=", $request->subkategori],
+            ["lapisan_data","=", $request->lapisan_data],
+        ])->first();
+
+
+        DB::transaction(function () use ($request, $valid) {
+            if(empty($valid)){
+
+                return redirect()->back()->with('warning', 'Sila pilih padanan lapisan data yang betul');
+            }
+            else {
+
+                //update senarai kawasan data
+                SenaraiKawasanData::where(["id" => $request->sk_id])->update([
+                    "kategori" => $request->kategori,
+                    "subkategori" => $request->subkategori,
+                    "lapisan_data" => $request->lapisan_data,
+                    "kawasan_data" => $request->kawasan_data,
+                    "harga_data" => $valid->harga_data,
+                ]);
+
+
+            $id = $request->permohonan_id;
+            // return $id;
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan Telah Dikemaskini!');
+            }
+        });
+    }
+
     public function delete_senarai_kawasan(Request $request)
     {
-        SenaraiKawasanData::where(["id" => $request->id])->delete();
+        SenaraiKawasanData::where(["id" => $request->sk_id])->delete();
         return redirect()->back()->with('success', 'Data Senarai dan Kawasan dibuang!');
     }
 
@@ -585,6 +618,7 @@ class DataAsasController extends Controller
         DokumenBerkaitan::where(["id" => $request->permohonan_id])->delete();
         Penilaian::where(["id" => $request->permohonan_id])->delete();
         SuratBalasan::where(["id" => $request->permohonan_id])->delete();
+        ProsesData::where(["id" => $request->permohonan_id])->delete();
 
         if($user->kategori == 'G2E - Pelajar'){
             AkuanPelajar::where(["id" => $request->permohonan_id])->delete();

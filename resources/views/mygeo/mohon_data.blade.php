@@ -52,8 +52,7 @@
                                         <h3 class="mb-0">Permohonan Baru</h3>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <a href="{{ url('mohon_data_asas_baru') }}" data-toggle="modal"
-                                            data-target="#modal-senarai-kawasan-data">
+                                        <a data-toggle="modal" data-target="#modal-permohonan-baru">
                                             <button type="button" class="btn btn-sm btn-default float-right"><i
                                                     class="fas fa-plus mr-2"></i>Permohonan Baru</button>
                                         </a>
@@ -104,7 +103,7 @@
             </div>
         </section>
         <!-- Modal Tambah Permohonan -->
-        <div class="modal fade" id="modal-senarai-kawasan-data">
+        <div class="modal fade" id="modal-permohonan-baru">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-primary mb-0">

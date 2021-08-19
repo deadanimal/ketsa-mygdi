@@ -207,8 +207,6 @@
                                                 <textarea name="tujuan" cols="30" class="form-control"
                                                     rows="10">{{ $pemohon->tujuan }}</textarea>
                                             </div>
-                                            <!-- <input type="hidden" name="user_id" value={{ $user->id }}> -->
-
                                         </div>
                                     </div>
 
@@ -241,17 +239,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($skdatas as $data)
+                                            @foreach ($skdatas as $sk)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $data->lapisan_data }}</td>
-                                                    <td>{{ $data->subkategori }}</td>
-                                                    <td>{{ $data->kategori }}</td>
-                                                    <td>{{ $data->kawasan_data }}</td>
+                                                    <td>{{ $sk->lapisan_data }}</td>
+                                                    <td>{{ $sk->subkategori }}</td>
+                                                    <td>{{ $sk->kategori }}</td>
+                                                    <td>{{ $sk->kawasan_data }}</td>
                                                     @if (Auth::user()->hasRole(['Pemohon Data']))
                                                         <td>
-                                                            <button type="button" data-skid="{{ $data->id }}"
-                                                                class="btnDeleteSK btn btn-sm btn-danger mr-2"><i
+                                                            <a data-toggle="modal" data-target="#modal-skd-{{$sk->id}}">
+                                                                <button type="button" class="btn btn-sm btn-success"><i
+                                                                        class="fas fa-edit"></i></button>
+                                                            </a>
+                                                            <button type="button" data-skid="{{ $sk->id }}"
+                                                                class="btnDeleteSK btn btn-sm btn-danger mx-2"><i
                                                                     class="fas fa-trash"></i>
                                                             </button>
                                                         </td>
@@ -419,15 +421,12 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
                                         <select name="lapisan_data" class="form-control" autofocus>
-                                            <option selected disabled hidden>Pilih</option>
-                                            <option value="Application">Application</option>
-                                            <option value="Document">Document</option>
-                                            <option value="GIS Activity/Project">GIS Activity/Project</option>
-                                            <option value="Map">Map</option>
-                                            <option value="Raster Data">Raster Data</option>
-                                            <option value="Services">Services</option>
-                                            <option value="Software">Software</option>
-                                            <option value="Vector Data">Vector Data</option>
+                                            <option selected disabled>Pilih</option>
+                                            @foreach ($senarai_data as $sdata)
+                                                <option value="{{ $sdata->lapisan_data }}">
+                                                    {{ $sdata->lapisan_data }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -514,6 +513,77 @@
         </div>
     </div>
 
+     <!-- Modal Kemaskini Senarai Kawasan Data -->
+     @foreach ($skdatas as $sk)
+          <div class="modal fade" id="modal-skd-{{$sk->id}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary mb-0">
+                    <h4 class="text-white">Kemaskini Senarai Data dan Kawasan Data</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/kemaskini_senarai_kawasan" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="kategori">Kategori</label>
+                                        <select class="form-control" name="kategori">
+                                            <option selected disabled>Pilih</option>
+                                            @foreach ($senarai_data as $sdata)
+                                                <option value="{{ $sdata->kategori }}" @if($sk->kategori == $sdata->kategori) selected @endif>
+                                                    {{ $sdata->kategori }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
+                                        <select name="subkategori" class="form-control" autofocus>
+                                            <option selected disabled>Pilih</option>
+                                            @foreach ($senarai_data as $sdata)
+                                                <option value="{{ $sdata->subkategori }}" @if($sk->subkategori == $sdata->subkategori) selected @endif>
+                                                    {{ $sdata->subkategori }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
+                                        <select name="lapisan_data" class="form-control" autofocus>
+                                            <option selected disabled>Pilih</option>
+                                            @foreach ($senarai_data as $sdata)
+                                                <option value="{{ $sdata->lapisan_data }}" @if($sk->lapisan_data == $sdata->lapisan_data) selected @endif>
+                                                    {{ $sdata->lapisan_data }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
+                                        <input name="kawasan_data" class="form-control"
+                                            value="{{$sk->kawasan_data}}" />
+                                    </div>
+                                    <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
+                                    <input type="hidden" name="sk_id" value="{{ $sk->id }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between1">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+     @endforeach
+
+
     </div>
 
     <script>
@@ -523,13 +593,13 @@
             if (r == true) {
                 $.ajax({
                     method: "POST",
-                    url: "delete_senarai_kawasan",
+                    url: "{{ url('delete_senarai_kawasan') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "id": sk_id
+                        "sk_id": sk_id
                     },
                 }).done(function(response) {
-                    alert("Data telah dibuang.");
+                    alert("Senarai Data tersebut telah dibuang.");
                     location.reload();
                 });
             }
