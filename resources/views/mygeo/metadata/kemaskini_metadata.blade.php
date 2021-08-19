@@ -246,8 +246,12 @@
                                 <div id="div_action_buttons">
                                     @if(auth::user()->hasRole(['Penerbit Metadata','Super Admin']))
                                     <input type="button" data-name="draf" value="Simpan" class="btn btn-primary btnSubmit">
-                                    @endif
                                     <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSubmit">
+                                    @endif
+                                    @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
+                                    <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
+                                    <button class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
+                                    @endif
                                     
                                     <input type="hidden" name="submitAction" id="submitAction" value="save">
                                 </div>
@@ -264,6 +268,50 @@
     var pengesahs = [];
 
     $(document).ready(function () {
+        <?php 
+        if(auth::user()->hasRole(['Pengesah Metadata','Super Admin'])){
+            ?>
+            $(document).on('focusout','.catatan',function(){
+                if($(this).val().trim() != ""){
+                    $('.btn_hantar').show();
+                    $('.btn_terbit').hide();
+                    var btn = $(this).data('parentmodal');
+                    $(document).find("[data-target='#"+btn+"'").removeClass('btn-secondary').addClass('btn-danger');
+                }else{
+                    var flag = 1;
+                    $('.catatan').each(function(i, obj) {
+                       if($(this).val().trim() != ""){
+                           flag = flag * 0;
+                       }
+                    });
+                    if(flag == 1){
+                        $('.btn_hantar').hide();
+                        $('.btn_terbit').show();
+                    }
+                    var btn = $(this).data('parentmodal');
+                    $(document).find("[data-target='#"+btn+"'").removeClass('btn-danger').addClass('btn-secondary');
+                }
+            });
+            $('.catatan').each(function(i, obj) {
+               if($(this).val().trim() != ""){
+                   var btn = $(this).data('parentmodal');
+                   $(document).find("[data-target='#"+btn+"'").removeClass('btn-secondary').addClass('btn-danger');
+               }
+            });
+            <?php
+        }
+        if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no"){
+            ?>
+            $('.catatan').each(function(i, obj) {
+               if($(this).text().trim() != "- Tiada Catatan -"){
+                   var btn = $(this).data('parentmodal');
+                   $(document).find("[data-target='#"+btn+"'").removeClass('btn-secondary').addClass('btn-danger');
+               }
+            });
+            <?php
+        }
+        ?>
+
         $(document).on("click", "#btnTestServiceUrl", function () {
             var mapurl = $('#c2_serviceUrl').val();
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
@@ -276,26 +324,44 @@
             var btnSubmit = $(this);
             window.onbeforeunload = null; //remove double alert
             $('#submitAction').val($(this).data('name'));
-            var currentName = $('#c2_metadataName').val();
+            var currentName = $('#c2_metadataName').val().trim();
             
-            $.ajax({
-                method: "POST",
-                url: "validateMetadataName",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "metadataName": currentName
-                },
-            }).done(function(response) {
-                if (response == "found") {
-                    alert('Nama metadata sudah wujud');
-                } else {
-                    if(oriMetadataName.toLowerCase() != currentName.toLowerCase()){
-                        if(confirm('Anda membuat perubahan pada tajuk metadata. Simpan metadata sebagai metadata baharu?')){
-                            $('#c2_saveAsNew').val('yes');
-                        }else{
-                            $('#c2_saveAsNew').val('no');
+            <?php
+            if(auth::user()->hasRole(['Penerbit Metadata'])){
+                ?>
+                if(oriMetadataName.trim().toLowerCase() != currentName.trim().toLowerCase()){
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ url('validateMetadataName') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "metadataName": currentName
+                        },
+                    }).done(function(response) {
+                        if (response == "found") {
+                            alert('Nama metadata sudah wujud');
+                        } else {
+                            if(oriMetadataName.trim().toLowerCase() != currentName.trim().toLowerCase()){
+                                if(confirm('Anda membuat perubahan pada tajuk metadata. Simpan metadata sebagai metadata baharu?')){
+                                    $('#c2_saveAsNew').val('yes');
+                                }else{
+                                    $('#c2_saveAsNew').val('no');
+                                }
+                            }
+
+                            if($(this).data('name') == 'save'){
+                                if(confirm('Anda pasti untuk menghantar metadata?')){
+                                    $('#form_metadata').submit();
+                                }
+                            }else if($(this).data('name') == 'draf'){
+                                if(confirm('Anda pasti untuk menyimpan metadata?')){
+                                    $('#form_metadata').submit();
+                                }
+                            }
                         }
-                    }
+                    });
+                }else{
+                    $('#c2_saveAsNew').val('no');
 
                     if($(this).data('name') == 'save'){
                         if(confirm('Anda pasti untuk menghantar metadata?')){
@@ -307,7 +373,16 @@
                         }
                     }
                 }
-            });
+                <?php
+            }else if(auth::user()->hasRole(['Pengesah Metadata'])){
+                ?>
+                $('#c2_saveAsNew').val('no');
+                if(confirm('Anda pasti untuk menghantar metadata?')){
+                    $('#form_metadata').submit();
+                }
+                <?php
+            }
+            ?>
         });
 
         $('#c15_date_div,#c15_t1_commission_date_div,#c15_t2_conceptual_date_div,#c15_t3_absExt_date_div,#c15_t4_accuTimeMeasure_date_div,c15_t5_classCorrect_date_div').datetimepicker({
@@ -502,6 +577,25 @@ if (!is_null(old('kategori'))) {
 ?>
 
         updateLayer();
+        
+        $(document).on("click", ".btn_terbit", function() {
+            if (confirm("Adakah anda pasti untuk mengesahkan metadata ini?")) {
+                // ajax sahkan metadata
+                var metadata_id = $(this).data('metadataid');
+                $.ajax({
+                    method: "POST",
+                    url: "metadata_sahkan",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "metadata_id": metadata_id
+                    },
+                })
+                .done(function(response) {
+                    alert("Metadata berjaya disahkan.");
+                    location.reload();
+                });
+            }
+        });
     });
 </script>
 

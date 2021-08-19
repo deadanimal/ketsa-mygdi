@@ -40,7 +40,7 @@
                     <option value="Imagery" class='optContentInfo_imagery' {{($var=="Imagery" ? "selected":"")}}>Imagery</option>
                 </select>
                 
-                <input type="text" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled>
+                <input type="text" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled value="{{ $var }}">
                 
                 @error('c1_content_info')
                 <div class="text-error">{{ $message }}</div>

@@ -96,7 +96,7 @@
                                                       ?>
                                                  </td>
                                                  <td>
-                                                    {{ date('d/m/Y',strtotime($val[1]->created_at)) }}
+                                                    {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
                                                 </td>
                                                 <td>
                                                     <?php //sahkan(kemaskini)======================================= ?>

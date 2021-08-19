@@ -700,7 +700,7 @@ class MetadataController extends Controller {
         ];
         $this->validate($request, $fields, $customMsg);
         
-        if(count($request->c10_additional_keyword) > 0){
+        if(isset($request->c10_additional_keyword) && count($request->c10_additional_keyword) > 0){
             $string = "";
             foreach($request->c10_additional_keyword as $var){
                 $string .= $var.",";
@@ -736,7 +736,7 @@ class MetadataController extends Controller {
             $mg->changedate = date("Y-m-d H:i:s");
             
             if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
-                $mg->disahkan = "no";
+//                $mg->disahkan = "no";
                 $mg->catatan1 = $request->catatan1;
                 $mg->catatan2 = $request->catatan2;
                 $mg->catatan3 = $request->catatan3;
@@ -752,6 +752,8 @@ class MetadataController extends Controller {
                 $mg->catatan13 = $request->catatan13;
                 $mg->catatan14 = $request->catatan14;
                 $mg->catatan15 = $request->catatan15;
+            }elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+                $mg->disahkan = "0";
             }
             
             if(isset($request->newStatus)){
@@ -899,7 +901,7 @@ class MetadataController extends Controller {
         } else {
             $metadata = MetadataGeo::on('pgsql2')->find($_POST['metadata_id']);
             $metadata->timestamps = false;
-            $metadata->disahkan = 'yes';
+            $metadata->disahkan = 'no';
             $metadata->update();
             
             $ftestxml2 = <<<XML
