@@ -383,7 +383,7 @@
             }else if(auth::user()->hasRole(['Pengesah Metadata'])){
                 ?>
                 $('#c2_saveAsNew').val('no');
-                if(confirm('Anda pasti untuk menghantar metadata?')){
+                if(confirm('Anda pasti untuk menyimpan catatan?')){
                     $('#form_metadata').submit();
                 }
                 <?php

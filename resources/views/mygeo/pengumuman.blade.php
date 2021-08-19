@@ -154,7 +154,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="/tambah_pengumuman">
+                <form method="POST" action="{{ url('tambah_pengumuman') }}">
                     @csrf
                     <div class="modal-body row">
                         <div class="col-12">

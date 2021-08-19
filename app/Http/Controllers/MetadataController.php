@@ -457,7 +457,7 @@ class MetadataController extends Controller {
         if(isset($request->topic_category) && count($request->topic_category) > 0){
             $string = "";
             foreach($request->topic_category as $var){
-                $string .= $var.",";
+                $string .= $var."|";
             }
             $request->topic_category = substr($string, 0, -1);
         }
@@ -722,7 +722,7 @@ class MetadataController extends Controller {
         if(isset($request->topic_category) && count($request->topic_category) > 0){
             $string = "";
             foreach($request->topic_category as $var){
-                $string .= $var.",";
+                $string .= $var."|";
             }
             $request->topic_category = substr($string, 0, -1);
         }
@@ -790,7 +790,11 @@ class MetadataController extends Controller {
             $msg = "";
             if($request->submitAction == "save"){
                 $mg->is_draf = "no";
-                $msg = "Metadata berjaya dihantar.";
+                if(auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+                    $msg = "Catatan berjaya disimpan.";
+                }elseif(auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+                    $msg = "Metadata berjaya dihantar.";
+                }
             }elseif ($request->submitAction == "draf"){
                 $mg->is_draf = "yes";
                 $msg = "Metadata disimpan sebagai draf.";
@@ -804,7 +808,7 @@ class MetadataController extends Controller {
         $at->data = 'Update';
         $at->save();
 
-        return redirect('mygeo_senarai_metadata')->with('success', $msg);
+        return redirect('mygeo_pengesahan_metadata')->with('success', $msg);
     }
 
     public function metadata_sahkan() {

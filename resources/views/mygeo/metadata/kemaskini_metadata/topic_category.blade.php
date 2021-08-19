@@ -26,7 +26,7 @@
                 $tc = [];
                 if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory) && $metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory != "") {
                     $topic_categories =  $metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory;
-                    $tc = array_map('trim', explode(',', $topic_categories));
+                    $tc = array_map('trim', explode('|', $topic_categories));
                 }
                 ?>
                 <div class="form-group col-4">

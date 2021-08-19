@@ -492,6 +492,7 @@
                     </div>
                     <div class="col-6">
                         <select name="c2_contact_role" id="c2_contact_role" class="form-control form-control-sm ml-3">
+                            <option value="">Pilih...
                             <option value="Author" {{ old('c2_contact_role') == 'Author' ? 'selected' : '' }}>Author
                             </option>
                             <option value="Co Author" {{ old('c2_contact_role') == 'Co Author' ? 'selected' : '' }}>

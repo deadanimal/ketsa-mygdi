@@ -91,7 +91,7 @@ class PortalController extends Controller
 
     public function edit_pengumuman2()
     {
-        $pengumuman = Pengumuman::get();
+        $pengumuman = Pengumuman::orderBy('created_at','DESC')->get();
         return view('mygeo.pengumuman', compact('pengumuman'));
     }
 

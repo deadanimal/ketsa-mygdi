@@ -511,6 +511,7 @@
                         }
                         ?>
                         <select name="c2_contact_role" id="c2_contact_role" class="form-control form-control-sm ml-3">
+                            <option value="">Pilih...</option>
                             <option value="Author" {{ ($role == "Author" ? "selected":"") }}>Author</option>
                             <option value="Co Author" {{ ($role == "Co Author" ? "selected":"") }}>Co Author</option>
                             <option value="Collaborator" {{ ($role == "Collaborator" ? "selected":"") }}>Collaborator</option>
