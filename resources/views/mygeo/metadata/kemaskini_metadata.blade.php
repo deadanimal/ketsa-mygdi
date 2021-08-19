@@ -255,7 +255,7 @@
                                     <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSubmit">
                                     @endif
                                     @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
-                                    <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
+                                    <input type="button" data-name="save" value="Simpan" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
                                     <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
                                     @endif
                                     
