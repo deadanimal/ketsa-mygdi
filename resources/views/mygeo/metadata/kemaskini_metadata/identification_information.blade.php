@@ -253,10 +253,10 @@
                 <div class="row mb-2 divServiceUrl">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_serviceUrl">
-                            Service URL
+                            Service URL<span class="text-warning">*</span>
                         </label><label class="float-right">:</label>
                     </div>
-                    <div class="col-7">
+                    <div class="col-6">
                         <?php
                         $serviceUrl = "";
                         if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString != "") {
@@ -266,6 +266,12 @@
                         <input type="text" class="form-control form-control-sm" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ $serviceUrl }}">
                         @error('c2_serviceUrl')
                         <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
+                        @error('c2_serviceUrl')
+                            <div class="text-error">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>

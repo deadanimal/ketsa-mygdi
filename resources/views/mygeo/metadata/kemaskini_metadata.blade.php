@@ -99,6 +99,38 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-showmap">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <?php
+                                ?>
+                                <iframe id="mapiframe" src="" height="425px" width="100%" title="ArcGIS REST Services">
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p id="modal_title" style="white-space: normal;width:100%;margin-top:20px;"></p>
+                                <p id="modal_abstract" style="white-space: normal;width:100%;margin-top:20px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between1">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>  
 
     <!-- Main content -->
     <section class="content">
@@ -232,6 +264,12 @@
     var pengesahs = [];
 
     $(document).ready(function () {
+        $(document).on("click", "#btnTestServiceUrl", function () {
+            var mapurl = $('#c2_serviceUrl').val();
+            $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
+//            $('#modal-showmap').modal('show');
+        });
+        
         var oriMetadataName = $('#c2_metadataName').val();
         
         $(document).on('click','.btnSubmit',function(){
@@ -318,6 +356,12 @@
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
+                $('#c1_content_info').prop('disabled',false);
+                $('#content_info_text').prop('disabled',true);
+                $('#c1_content_info').show();
+                $('#content_info_text').hide();
+                $('#divMaintenanceInfo').hide();
+                $('#c12_maintenanceUpdate').prop('disabled',true);
             }else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').show();
@@ -330,9 +374,15 @@
                 $('.divServiceUrl').show();
                 $('.divTypeOfCouplingDataset').show();
                 $('.refSys_Services').show();
-                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',false);
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').hide();
                 $('.divUseLimitation').show();
+                $('#c1_content_info').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('#c1_content_info').hide();
+                $('#content_info_text').show();
+                $('#divMaintenanceInfo').hide();
+                $('#c12_maintenanceUpdate').prop('disabled',true);
             }else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -348,6 +398,12 @@
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
+                $('#c1_content_info').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('#c1_content_info').hide();
+                $('#content_info_text').show();
+                $('#divMaintenanceInfo').show();
+                $('#c12_maintenanceUpdate').prop('disabled',false);
             }else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -363,6 +419,12 @@
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
+                $('#c1_content_info').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('#c1_content_info').hide();
+                $('#content_info_text').show();
+                $('#divMaintenanceInfo').show();
+                $('#c12_maintenanceUpdate').prop('disabled',false);
             }
         
 <?php
@@ -382,9 +444,31 @@ if ($catSelected == "dataset" || $catSelected == "services") {
             if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
                 $('#accordion').show();
+                $('#divMaintenanceInfo').hide();
+                $('#c12_maintenanceUpdate').prop('disabled',true);
             } else if (kategori.toLowerCase() == "imagery" || kategori.toLowerCase() == "gridded") {
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
                 $('#accordion').show();
+                $('#divMaintenanceInfo').show();
+                $('#c12_maintenanceUpdate').prop('disabled',false);
+            }
+            
+            //for content info
+            if (kategori.toLowerCase() == "dataset"){ 
+                $('#c1_content_info').prop('disabled',false);
+                $('#content_info_text').prop('disabled',true);
+                $('#c1_content_info').show();
+                $('#content_info_text').hide();
+                $('.optContentInfo_dataset').show();
+                $('.optContentInfo_services').hide();
+                $('.optContentInfo_gridded').hide();
+                $('.optContentInfo_imagery').hide();
+                $('#c1_content_info').val('').change();
+            }else{
+                $('#c1_content_info').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('#c1_content_info').hide();
+                $('#content_info_text').show();
             }
         });
         

@@ -391,6 +391,9 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
         ];
+        if(strtolower($request->kategori) == 'services'){
+            $fields["c2_serviceUrl"]= 'required';
+        }
         if(strtolower($request->kategori) == 'dataset'){
             $fields["topic_category"]= 'required';
         }
@@ -509,7 +512,7 @@ class MetadataController extends Controller {
                     });
                 }
                 
-                $msg = "Metadata berjaya disimpan.";
+                $msg = "Metadata berjaya dihantar.";
             }elseif (isset($request->btn_draf) || (isset($request->submitAction) && $request->submitAction == "draf")){
                 $mg->is_draf = "yes";
                 $msg = "Metadata disimpan sebagai draf.";
@@ -653,6 +656,9 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
         ];
+        if(strtolower($request->kategori) == 'services'){
+            $fields["c2_serviceUrl"]= 'required';
+        }
         if(strtolower($request->kategori) == 'dataset'){
             $fields["topic_category"]= 'required';
         }
@@ -755,7 +761,7 @@ class MetadataController extends Controller {
             $msg = "";
             if($request->submitAction == "save"){
                 $mg->is_draf = "no";
-                $msg = "Metadata berjaya disimpan.";
+                $msg = "Metadata berjaya dihantar.";
             }elseif ($request->submitAction == "draf"){
                 $mg->is_draf = "yes";
                 $msg = "Metadata disimpan sebagai draf.";

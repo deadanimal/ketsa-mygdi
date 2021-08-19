@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="form-group row">
                 <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
-                <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;">
+                <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;" id="content_info_dropdown">
                     <option selected disabled>Select Content</option>
                     <option value="Application" class='optContentInfo_dataset'>Application</option>
                     <option value="Clearing House" class='optContentInfo_dataset'>Clearing House</option>
@@ -28,6 +28,8 @@
 
                     <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                 </select>
+                
+                <input type="text" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled>
 
                 @error('c1_content_info')
                 <div class="text-error ml-3">{{ $message }}</div>

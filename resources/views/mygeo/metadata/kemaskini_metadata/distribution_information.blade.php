@@ -160,7 +160,8 @@
                             $orderInstruct = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions;
                         }
                         ?>
-                        <input type="file" name="c11_order_instructions" id="c11_order_instructions" class="form-control form-control-sm" value="{{ $orderInstruct }}">
+                        <input type="text" name="c11_order_instructions" id="c11_order_instructions"
+                        class="form-control form-control-sm" value="{{ $orderInstruct }}">
                     </div>
                 </div>
             </div>

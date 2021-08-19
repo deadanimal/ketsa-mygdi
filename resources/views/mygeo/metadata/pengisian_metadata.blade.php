@@ -384,6 +384,12 @@
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').hide();
+                $('#content_info_dropdown').prop('disabled',false);
+                $('#content_info_text').prop('disabled',true);
+                $('#content_info_dropdown').show();
+                $('#content_info_text').hide();
+                $('#divMaintenanceInfo').hide();
+                $('#c12_maintenanceUpdate').prop('disabled',true);
             } else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').show();
@@ -400,6 +406,12 @@
                 $('.divDataQualityTabs').hide();
                 $('.divUseLimitation').show();
                 $('.divMaintenanceInfo').hide();
+                $('#content_info_dropdown').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('#content_info_dropdown').hide();
+                $('#content_info_text').show();
+                $('#divMaintenanceInfo').hide();
+                $('#c12_maintenanceUpdate').prop('disabled',true);
             } else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -416,6 +428,12 @@
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').show();
+                $('#content_info_dropdown').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('#content_info_dropdown').hide();
+                $('#content_info_text').show();
+                $('#divMaintenanceInfo').show();
+                $('#c12_maintenanceUpdate').prop('disabled',false);
             } else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -432,6 +450,12 @@
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').show();
+                $('#content_info_dropdown').prop('disabled',true);
+                $('#content_info_text').prop('disabled',false);
+                $('#content_info_dropdown').hide();
+                $('#content_info_text').show();
+                $('#divMaintenanceInfo').show();
+                $('#c12_maintenanceUpdate').prop('disabled',false);
             }
 
             if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {

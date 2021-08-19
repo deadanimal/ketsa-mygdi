@@ -350,12 +350,6 @@
           $(this).parent().submit();
         }
     });
-    
-    <?php
-    if(Session::has('message')){
-        ?>alert("{{ Session::get('message') }}");<?php
-    }
-    ?>
   });
 </script>
 @stop
