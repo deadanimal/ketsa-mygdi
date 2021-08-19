@@ -321,11 +321,24 @@ class PortalController extends Controller
 
     public function store_pengumuman(Request $request)
     {
-        DB::transaction(function () use ($request) {
+        //save gambar profil
+        if(isset($_FILES['gambar']) && (file_exists($_FILES['gambar']['tmp_name']))){
+            $this->validate($request,['gambar' => 'required|image|mimes:jpeg,png,jpg']);
+            $exists = Storage::exists($request->gambar->getClientOriginalName());
+            $time = date('Y-m-d'.'_'.'H_i_s');
+            $fileName = $time.'_'.$request->gambar->getClientOriginalName();
+            $imageUrl = Storage::putFileAs('/public/', $request->file('gambar'), $fileName);
+        }else{
+            $fileName = "banner2.jpeg";
+        }
+
+        DB::transaction(function () use ($request,$fileName) {
             $pengumuman = new Pengumuman();
+            $pengumuman->kategori = $request->category_pengumuman;
             $pengumuman->title = $request->title_pengumuman;
             $pengumuman->date = $request->date_pengumuman;
             $pengumuman->content = $request->content_pengumuman;
+            $pengumuman->gambar = $fileName;
             $pengumuman->save();
         });
         

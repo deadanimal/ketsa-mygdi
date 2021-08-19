@@ -526,7 +526,6 @@
             map.eachLayer((layer) => {
                 layer.remove();
             });
-            console.log("all onchange: " + wblgValue + "," + eblgValue + "," + nbltValue + "," + sbltValue);
             showRectangle(nbltValue, wblgValue, sbltValue, eblgValue)
         }
     }
@@ -535,7 +534,6 @@
         var markerIcon = L.icon({
             iconUrl: "{{ asset('intecxmap/css/leaflet@1.7.1/images/marker-icon-2x.png') }}",
             iconSize: [30, 53], // size of the icon [width, height] in px
-            // shadowSize:   [50, 64], // size of the shadow
             iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
         });
         var searchControl = new L.esri.Controls.Geosearch().addTo(map);
@@ -543,7 +541,6 @@
         searchControl.on('results', function(data) {
             results.clearLayers();
             for (var i = data.results.length - 1; i >= 0; i--) {
-                console.log(data.results[i].latlng.lat);
                 L.marker([data.results[i].latlng.lat, data.results[i].latlng.lng], {
                     icon: markerIcon
                 }).addTo(map);

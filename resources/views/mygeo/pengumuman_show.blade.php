@@ -64,6 +64,17 @@
                         <div class="card-body">
                             <h4>{!! (!is_null($pengumuman) ? date("j M Y",strtotime($pengumuman->date)):"") !!}</h4>
                             <p>{!! (!is_null($pengumuman) ? $pengumuman->content:"") !!}</p>
+                            <?php
+                            if($pengumuman->gambar != ""){
+                                ?>
+                                <image id="profileImage" alt="Image placeholder" src="{{ asset('storage/'.$pengumuman->gambar) }}" style="border-radius: .95rem;max-width:250px;">
+                                <?php
+                            }else{
+                                ?>
+                                <image id="profileImage" alt="Image placeholder" src="./assetsweb/img/banner2.jpeg" style="border-radius: .95rem;max-width:250px;">
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

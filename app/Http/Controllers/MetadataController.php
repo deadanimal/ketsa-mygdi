@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
 use App\AuditTrail;
+use App\Pengumuman;
 
 class MetadataController extends Controller {
 
@@ -113,9 +114,11 @@ class MetadataController extends Controller {
         if (isset($_GET['var']) && $_GET['var'] == 'add_dummy_metadata') {
             $this->store_todel();
         }
+        
         if (!auth::user()->hasRole(['Pentadbir Metadata','Pengesah Metadata', 'Super Admin'])) {
             exit();
         }
+        
         // auth::user()->agensi_organisasi, auth::user()->agensi_organisasi
         $metadatasdb = MetadataGeo::on('pgsql2')->where('disahkan', '0')->where('is_draf','no')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
@@ -738,7 +741,7 @@ class MetadataController extends Controller {
         $xmlcon = new XmlController;
         $xml = $xmlcon->createXml($request,$fileUrl);
         
-        $msg = "";
+        $msg = $redirect = "";
         
         DB::connection('pgsql2')->transaction(function () use ($request, $xml, &$msg) {
             $mg = MetadataGeo::on('pgsql2')->where('id', $request->metadata_id)->get()->first();
@@ -800,8 +803,8 @@ class MetadataController extends Controller {
             }
             $mg->update();
             
-            //sahkan
             if ($request->submitAction == "terbit" && auth::user()->hasRole(['Pengesah Metadata'])){
+                //sahkan
                 $metadata = MetadataGeo::on('pgsql2')->find($mg->id);
                 $metadata->timestamps = false;
                 $metadata->disahkan = 'yes';
@@ -833,9 +836,23 @@ class MetadataController extends Controller {
                     });
                 }
                 
+                //create new pengumuman about the new metadata
+                $pengumuman = new Pengumuman();
+                $pengumuman->title = $request->title_pengumuman;
+                $pengumuman->date = $request->date_pengumuman;
+                $pengumuman->content = $request->content_pengumuman;
+                $pengumuman->gambar = "banner2.jpeg";
+                $pengumuman->save();
+                
                 $msg = "Metadata berjaya diterbitkan.";
             }
         });
+        
+        if(auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+            $redirect = "mygeo_pengesahan_metadata";
+        }elseif(auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+            $redirect = "mygeo_senarai_metadata";
+        }
         
         $at = new AuditTrail();
         $at->path = url()->full();
@@ -843,7 +860,7 @@ class MetadataController extends Controller {
         $at->data = 'Update';
         $at->save();
 
-        return redirect('mygeo_pengesahan_metadata')->with('success', $msg);
+        return redirect($redirect)->with('success', $msg);
     }
 
     public function metadata_sahkan() {

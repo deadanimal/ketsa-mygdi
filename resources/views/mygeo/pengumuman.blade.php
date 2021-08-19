@@ -154,14 +154,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ url('tambah_pengumuman') }}">
+                <form method="POST" action="{{ url('tambah_pengumuman') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body row">
                         <div class="col-12">
                             <div class="form-group">
                                 <label class="form-control-label">Tajuk</label>
                                 <select name="category_pengumuman" class="form-control form-control-sm">
-                                    <option selected hidden>Pilih kategori</option>
+                                    <option value="">Pilih kategori</option>
                                     <option value="Metadata Baharu">Metadata Baharu</option>
                                     <option value="Makluman">Makluman</option>
                                     <option value="Peringatan">Peringatan</option>
@@ -179,6 +179,11 @@
                             <div class="form-group">
                                 <label class="form-control-label">Kandungan</label>
                                 <input type="text" class="form-control form-control-sm" name="content_pengumuman" value="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Gambar</label>
+                                <input id="imageUpload" type="file" name="gambar" placeholder="Photo" class="form-control form-control-sm p-0">
+                                <image id="profileImage" alt="Image placeholder" src="./assetsweb/img/banner2.jpeg" style="border-radius: .95rem;width:100%;padding-top:10px;">
                             </div>
 
                             <button class="btn btn-primary" type="submit">

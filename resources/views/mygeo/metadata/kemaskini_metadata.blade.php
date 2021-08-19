@@ -649,101 +649,111 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
     var S = "<?php echo $southBoundLatitude; ?>";
     var E = "<?php echo $eastBoundLongitude; ?>";
 
+    var setNbltValue = document.getElementById("nblt").value = N;
+    var setWblgValue = document.getElementById("wblg").value = W;
+    var serSbltValue = document.getElementById("sblt").value = S;
+    var setEblgValue = document.getElementById("eblg").value = E;
 
     var map = L.map('map').setView([5.3105, 107.3854408], 5);
-
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: - 1
     }).addTo(map);
+    drawRectangleEditor();
+    searchLocation();
 
-        var setNbltValue = document.getElementById("nblt").value = N;
-        var setWblgValue = document.getElementById("wblg").value = W;
-        var serSbltValue = document.getElementById("sblt").value = S;
-        var setEblgValue = document.getElementById("eblg").value = E;
-
-        // To trigger onchange function
-        var el = document.getElementById('nblt');
-        el.dispatchEvent(new Event('change'));
-
-
-// drawRectangleEditor()
-// var wblgValue = document.getElementById('wblg').value = '';
-    searchLocation()
+    // To trigger onchange function
+//    var el = document.getElementById('nblt');
+//    el.dispatchEvent(new Event('change'));
 
     function updateLayer() {
-
         var nbltValue = document.getElementById("nblt").value;
         var wblgValue = document.getElementById("wblg").value;
         var sbltValue = document.getElementById("sblt").value;
         var eblgValue = document.getElementById("eblg").value;
-
-
         if (wblgValue != '' && eblgValue != '' && nbltValue != '' && sbltValue != '') {
-
             map.eachLayer((layer) => {
                 layer.remove();
             });
-
-            console.log("all onchange: " + wblgValue + "," + eblgValue + "," + nbltValue + "," + sbltValue);
-
-
             showRectangle(nbltValue, wblgValue, sbltValue, eblgValue)
-
         }
-
-
-
     }
 
-
     function searchLocation() {
-
         var markerIcon = L.icon({
             iconUrl: 'css/leaflet@1.7.1/images/marker-icon-2x.png',
-// shadowUrl: 'leaf-shadow.png',
-
             iconSize: [30, 53], // size of the icon [width, height] in px
-// shadowSize:   [50, 64], // size of the shadow
             iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-// shadowAnchor: [4, 62],  // the same for the shadow
-// popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
-
         var searchControl = new L.esri.Controls.Geosearch().addTo(map);
-
         var results = new L.LayerGroup().addTo(map);
-
         searchControl.on('results', function (data) {
             results.clearLayers();
             for (var i = data.results.length - 1; i >= 0; i--) {
-// results.addLayer(L.marker(data.results[i].latlng));
-
-                console.log(data.results[i].latlng.lat);
                 L.marker([data.results[i].latlng.lat, data.results[i].latlng.lng], {icon: markerIcon}).addTo(map);
             }
-
         });
-
-
     }
 
+    function drawRectangleEditor() {
+        // Initialise the FeatureGroup to store editable layers
+        var editableLayers = new L.FeatureGroup();
+        map.addLayer(editableLayers);
+        var drawPluginOptions = {
+            position: 'topright',
+            edit: {
+                edit: false,
+                featureGroup: editableLayers, //REQUIRED!!
+                remove: false
+            },
+            draw: {
+                rectangle: {
+                allowIntersection: false, // Restricts shapes to simple polygons
+                    drawError: {
+                        color: '#e1e100', // Color the shape will turn when intersects
+                        message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+                    },
+                    shapeOptions: {
+                        color: '#97009c'
+                    }
+                },
+                // disable toolbar item by setting it to false
+                polygon: false,
+                polyline: false,
+                circle: false, // Turns off this drawing tool
+                rectangle: true,
+                marker: false,
+            }
+        };
+    // Initialise the draw control and pass it the FeatureGroup of editable layers
+        var drawControl = new L.Control.Draw(drawPluginOptions);
+        map.addControl(drawControl);
+        var editableLayers = new L.FeatureGroup();
+        map.addLayer(editableLayers);
+        map.on('draw:created', function(e) {
+            var type = e.layerType,
+            layer = e.layer;
+            var coordinatesData = layer.getLatLngs();
+            var drawNblt = coordinatesData[0][1];
+            var drawWblg = coordinatesData[0][1];
+            var drawSblt = coordinatesData[0][3];
+            var drawEblg = coordinatesData[0][3];
+            var setNbltValue = document.getElementById("nblt").value = drawNblt.lat;
+            var setWblgValue = document.getElementById("wblg").value = drawWblg.lng;
+            var serSbltValue = document.getElementById("sblt").value = drawSblt.lat;
+            var setEblgValue = document.getElementById("eblg").value = drawEblg.lng;
+            var el = document.getElementById('nblt');
+            el.dispatchEvent(new Event('change'));
+            editableLayers.addLayer(layer);
+        });
+    }
 
     function showRectangle(nblt, wblg, sblt, eblg) {
         var rectangle;
-        // var resetBound = [[0, 0],[0, 0]];
-        // rectangle = L.rectangle(resetBound).addTo(map);
-
-
-
-
-
-        // var map = L.map('map').setView([4.6161396,101.8562205], 6);
-
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 18,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -752,49 +762,19 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);
-
-
-        // nblt = parseFloat(nblt); 
-        // wblg = parseFloat(wblg); 
-        // sblt = parseFloat(sblt); 
-        // eblg = parseFloat(eblg); 
-
-        console.log(nblt); // 6.3171
-        console.log(wblg); // 101.7046
-        console.log(sblt); // 2.7158
-        console.log(eblg); // 104.4547
-
-        // var bounds = [[6.3171, 101.7046], [2.7158, 104.4547]];
-
-        // var bounds = [[0+nblt, 0+wblg], [0+sblt, 0+eblg]];
-
-        var bounds = [[nblt, wblg], [sblt, eblg]];
-
+        var bounds = [
+            [nblt, wblg],
+            [sblt, eblg]
+        ];
         rectangle = L.rectangle(bounds).addTo(map);
-
         var zoomToRectangle = L.rectangle(bounds).addTo(map).getCenter();
-
-        console.log("zoomToRectangle values:");
-        console.log(zoomToRectangle);
-        
         map.fitBounds(bounds);
-
-        // var map = L.map('map').setView([5.3105,107.3854408], 5);
-
-        // rectangle.remove();
-
-        // rectangle = L.rectangle(bounds).addTo(map);
-
     }
 
     function cleaLayer() {
-
-
         map.eachLayer((layer) => {
             layer.remove();
         });
-
-
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 18,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -803,22 +783,13 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);
-
-
-
-
     }
 
     function saveData() {
-
         var nbltValue = document.getElementById("nblt").value;
         var wblgValue = document.getElementById("wblg").value;
         var sbltValue = document.getElementById("sblt").value;
         var eblgValue = document.getElementById("eblg").value;
-
-        // var data = "North Bound Latitude: "+nbltValue+"";
-        //     data += "West Bound Longitude: "+wblgValue+"";
-
         var data = ["North Bound Latitude: " + nbltValue, "West Bound Longitude: " + wblgValue, "South Bound Latitude: " + sbltValue, "East Bound Longitude: " + eblgValue];
 
         alert(data);

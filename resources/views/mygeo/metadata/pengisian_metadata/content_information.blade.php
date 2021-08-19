@@ -15,7 +15,7 @@
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="">
-                                    <?php echo __('lang.band_boundary'); ?>
+                                    <?php echo __('lang.band_boundry'); ?>
                                 </div>
                                 <select name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm">
                                     <option value="">Pilih...</option>
