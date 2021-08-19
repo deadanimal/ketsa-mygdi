@@ -87,26 +87,25 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Kategori Data (Topic Category)</label>
                                             <select name="topic_category[]" id="topic_category" class="form-control form-control-sm" multiple>
-                                                <option value="Biota">Biota</label>
-                                                <option value="Boundaries">Boundaries</label>
-                                                <option value="Climatology Meteorology Atmosphere">Climatology Meteorology Atmosphere</label>
-                                                <option value="Disaster">Disaster</label>
-                                                <option value="Economy">Economy</label>
-                                                <option value="Elevation">Elevation</label>
-                                                <option value="Environment">Environment</label>
-                                                <option value="Farming">Farming</label>
-                                                <option value="Geoscientific Information">Geoscientific Information</label>
-                                                <option value="Health">Health</label>
-                                                <option value="Imagery Base Maps-Earth Cover">Imagery Base Maps-Earth Cover</label>
-                                                <option value="Intelligence Military">Intelligence Military</label>
-                                                <option value="Inland Waters">Inland Waters</label>
-                                                <option value="Location">Location</label>
-                                                <option value="Oceans">Oceans</label>
-                                                <option value="Planning Cadastre">Planning Cadastre</label>
-                                                <option value="Society">Society</label>
-                                                <option value="Structure">Structure</label>
-                                                <option value="Transportation">Transportation</label>
-                                                <option value="Utilities and Communication">Utilities and Communication</label>
+                                                <option value="Administrative and Political Boundaries">Administrative and Political Boundaries</option>
+                                                <option value="Agriculture and Farming">Agriculture and Farming</option>
+                                                <option value="Atmosphere and Climatic">Atmosphere and Climatic</option>
+                                                <option value="Biology and Ecology">Biology and Ecology</option>
+                                                <option value="Business and Economic">Business and Economic</option>
+                                                <option value="Cadastral">Cadastral</option>
+                                                <option value="Cultural, Society and Demography">Cultural, Society and Demography</option>
+                                                <option value="Elevation and Derived Products">Elevation and Derived Products</option>
+                                                <option value="Environment and Conservation">Environment and Conservation</option>
+                                                <option value="Facilities and Structures">Facilities and Structures</option>
+                                                <option value="Geological and Geophysical">Geological and Geophysical</option>
+                                                <option value="Human Health and Disease">Human Health and Disease</option>
+                                                <option value="Imagery and Base Maps">Imagery and Base Maps</option>
+                                                <option value="Inland Water Resources">Inland Water Resources</option>
+                                                <option value="Locations and Geodetic Networks">Locations and Geodetic Networks</option>
+                                                <option value="Military">Military</option>
+                                                <option value="Oceans and Estuaries">Oceans and Estuaries</option>
+                                                <option value="Transportation Networks">Transportation Networks</option>
+                                                <option value="Utilities and Communication">Utilities and Communication</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
