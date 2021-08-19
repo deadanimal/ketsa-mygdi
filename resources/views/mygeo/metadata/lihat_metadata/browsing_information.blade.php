@@ -8,10 +8,12 @@
     </div>
     <div id="collapse10" class="panel-collapse collapse in show" data-parent="#div_c10">
         <div class="card-body">
-            <h2 class="heading-small text-muted">Browsing Graphic</h2>
+            <h2 class="heading-small text-muted browseInfoSubtajuk1">Browsing Graphic</h2>
             <div class="my-2">
                 <?php
+                $flag1 = 1;
                 if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileName->CharacterString != "") {
+                    $flag1 *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -28,6 +30,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileType->CharacterString != "") {
+                    $flag1 *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -44,6 +47,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->fileURL->CharacterString != "") {
+                    $flag1 *= 0;
                     ?>
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
@@ -59,10 +63,12 @@
                 }
                 ?>
             </div>
-            <h2 class="heading-small text-muted">Keywords</h2>
+            <h2 class="heading-small text-muted browseInfoSubtajuk2">Keywords</h2>
             <div class="my-2">
                 <?php
+                $flag2 = 1;
                 if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchKeyword->CharacterString != "") {
+                    $flag2 *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -78,7 +84,8 @@
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) != "" && trim($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) != ",") {
+                    $flag2 *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -97,3 +104,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        <?php
+        if($flag1 == 1){
+            ?>
+            $('.browseInfoSubtajuk1').hide();    
+            <?php
+        }else{
+            ?>
+            $('.browseInfoSubtajuk1').show();
+            <?php
+        }
+        
+        if($flag2 == 1){
+            ?>
+            $('.browseInfoSubtajuk2').hide();    
+            <?php
+        }else{
+            ?>
+            $('.browseInfoSubtajuk2').show();
+            <?php
+        }
+        ?>
+    });
+</script>

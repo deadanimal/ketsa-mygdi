@@ -10,10 +10,12 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-xl-6">
-                    <h6 class="heading-small text-muted">Legal Constraints</h6>
+                    <h6 class="heading-small text-muted constraintSubTajuk1">Legal Constraints</h6>
                     <div class="pl-lg-3">
                         <?php
+                        $flag1 = 1;
                         if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+                            $flag1 *= 0;
                             ?>
                             <div class="row mb-2 divUseLimitation">
                                 <div class="col-xl-5">
@@ -30,6 +32,7 @@
                         ?>
                         <?php
                         if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints != "") {
+                            $flag1 *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
@@ -46,6 +49,7 @@
                         ?>
                         <?php
                         if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints != "") {
+                            $flag1 *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
@@ -63,11 +67,13 @@
                     </div>
                 </div>
                 <div class="col-xl-6">
-                    <h6 class="heading-small text-muted">Security Constraints
+                    <h6 class="heading-small text-muted constraintSubTajuk2">Security Constraints
                     </h6>
                     <div class="pl-lg-3">
                         <?php
+                        $flag2 = 1;
                         if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification != "") {
+                            $flag2 *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
@@ -84,6 +90,7 @@
                         ?>
                         <?php
                         if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
+                            $flag2 *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
@@ -104,3 +111,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        <?php
+        if($flag1 == 1){
+            ?>
+            $('.constraintSubTajuk1').hide();    
+            <?php
+        }else{
+            ?>
+            $('.constraintSubTajuk1').show();
+            <?php
+        }
+        
+        if($flag2 == 1){
+            ?>
+            $('.constraintSubTajuk2').hide();    
+            <?php
+        }else{
+            ?>
+            $('.constraintSubTajuk2').show();
+            <?php
+        }
+        ?>
+    });
+</script>

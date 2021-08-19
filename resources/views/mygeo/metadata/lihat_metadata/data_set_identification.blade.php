@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="acard-body opacity-8">
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType != "") {
+                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType) != "") {
                     ?>
                     <div class="row mb-4">
                         <div class="col-xl-2">
@@ -28,7 +28,7 @@
                 
                 <div class="row mb-2">
                     <?php
-                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator != "") {
+                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator) != "") {
                         ?>
                         <div class="col-xl-3">
                             <label class="form-control-label" for="input-hardsoftcopy">
@@ -43,7 +43,7 @@
                     }
                     ?>
                     <?php
-                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance != "") {
+                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance) != "") {
                         ?>
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-imggsd">
@@ -56,7 +56,7 @@
                     }
                     ?>
                     <?php
-                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->language) && $metadataxml->identificationInfo->SV_ServiceIdentification->language != "") {
+                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->language) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->language) != "") {
                         ?>
                         <div class="col-xl-1">
                             <label class="form-control-label" for="input-language">
@@ -72,7 +72,7 @@
                     
                     <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6> 
                     <?php
-                    if (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && $metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode != "") {
+                    if (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) != "") {
                         ?>
                         <div class="col-xl-1">
                             <label class="form-control-label" for="input-language">

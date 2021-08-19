@@ -442,7 +442,7 @@ class MetadataController extends Controller {
             }
             $request->c10_additional_keyword = substr($string, 0, -1);
         }
-        if(count($request->topic_category) > 0){
+        if(isset($request->topic_category) && count($request->topic_category) > 0){
             $string = "";
             foreach($request->topic_category as $var){
                 $string .= $var.",";
@@ -707,7 +707,7 @@ class MetadataController extends Controller {
             }
             $request->c10_additional_keyword = substr($string, 0, -1);
         }
-        if(count($request->topic_category) > 0){
+        if(isset($request->topic_category) && count($request->topic_category) > 0){
             $string = "";
             foreach($request->topic_category as $var){
                 $string .= $var.",";

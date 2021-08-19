@@ -28,7 +28,7 @@
                     }
                     ?>
                     <?php
-                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement) && $metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement != "") {
+                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement) && trim($metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement) != "") {
                         ?>
                         <div class="col-xl-2">
                             <label class="form-control-label float-right" for="input-datahistory">

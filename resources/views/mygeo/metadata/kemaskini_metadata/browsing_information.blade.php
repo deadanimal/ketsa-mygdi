@@ -87,7 +87,7 @@
                 </div>
                 <?php
                 $addKeyword = "";
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) != "" && trim($metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString) != ",") {
                     $addKeyword = $metadataxml->identificationInfo->SV_ServiceIdentification->searchAddtionalKeyword->CharacterString;
                     $addKeyword = explode(',', $addKeyword);
                     if (count($addKeyword) > 0) {
