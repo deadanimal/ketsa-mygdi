@@ -129,9 +129,19 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
-                                                <option value="">Pilih...</option>
-                                            </select>
+                                            <?php
+                                            if (Auth::user()->hasRole(['Pemohon Data'])) {
+                                                ?>
+                                                <input type="text" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                                                    <option value="">Pilih...</option>
+                                                </select>
+                                                <?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
