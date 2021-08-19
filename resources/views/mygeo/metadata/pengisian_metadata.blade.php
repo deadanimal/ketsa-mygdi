@@ -388,7 +388,6 @@
                 $('#content_info_text').prop('disabled',true);
                 $('#content_info_dropdown').show();
                 $('.lblContentInfo').hide();
-                $('#divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
             } else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
@@ -412,7 +411,6 @@
                 $('#content_info_text').val('Live Data and Maps');
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
-                $('#divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
             } else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
@@ -436,7 +434,6 @@
                 $('#content_info_text').val('Gridded');
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
-                $('#divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             } else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
@@ -460,7 +457,6 @@
                 $('#content_info_text').val('Imagery');
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
-                $('#divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }
 

@@ -470,7 +470,6 @@ class MetadataController extends Controller {
 //            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
 //            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
 //        }
-
         $xmlcon = new XmlController;
         $xml = $xmlcon->createXml($request,$fileUrl);
         

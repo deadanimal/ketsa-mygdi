@@ -284,8 +284,8 @@
                     <div class="col-7">
                         <?php
                         $typeCouplingDataset = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->srv) && $metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->srv != "") {
-                            $typeCouplingDataset = $metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->srv;
+                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->SV_CouplingType) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->SV_CouplingType) != "") {
+                            $typeCouplingDataset = $metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->SV_CouplingType;
                         }
                         ?>
                         <select class="form-control form-control-sm" name="c2_typeOfCouplingDataset" id="c2_typeOfCouplingDataset">

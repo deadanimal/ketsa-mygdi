@@ -114,6 +114,7 @@
                     }
                     ?>
                     <select name="c11_medium" id="c11_medium" class="form-control form-control-sm">
+                        <option value="">Pilih...</option>
                         <option value="cdROM" {{ ($medium=='cdROM' ? 'selected':'') }}>cdROM</option>
                         <option value="dvd" {{ ($medium=='dvd' ? 'selected':'') }}>dvd</option>
                         <option value="dvdRom" {{ ($medium=='dvdRom' ? 'selected':'') }}>dvdRom</option>
@@ -156,8 +157,8 @@
                     <div class="col-xl-5">
                         <?php
                         $orderInstruct = "";
-                        if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions) && $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions != "") {
-                            $orderInstruct = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions;
+                        if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) != "") {
+                            $orderInstruct = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString;
                         }
                         ?>
                         <input type="text" name="c11_order_instructions" id="c11_order_instructions"

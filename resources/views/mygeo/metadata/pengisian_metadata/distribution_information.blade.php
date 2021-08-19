@@ -95,6 +95,7 @@
                 </div>
                 <div class="col-xl-3">
                     <select name="c11_medium" id="c11_medium" class="form-control form-control-sm">
+                        <option value="">Pilih...</option>
                         <option value="cdROM" {{ old('c11_medium') == 'cdROM' ? 'selected' : '' }}>cdROM</option>
                         <option value="dvd" {{ old('c11_medium') == 'dvd' ? 'selected' : '' }}>dvd</option>
                         <option value="dvdRom" {{ old('c11_medium') == 'dvdRom' ? 'selected' : '' }}>dvdRom</option>

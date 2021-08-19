@@ -441,7 +441,7 @@
                 $('#content_info_text').prop('disabled',true);
                 $('#c1_content_info').show();
                 $('.lblContentInfo').hide();
-                $('#divMaintenanceInfo').hide();
+                $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
             }else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
@@ -464,7 +464,7 @@
                 $('#content_info_text').val('Live Data and Maps');
                 $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-                $('#divMaintenanceInfo').hide();
+                $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
             }else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
@@ -487,7 +487,7 @@
                 $('#content_info_text').val('Gridded');
                 $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-                $('#divMaintenanceInfo').show();
+                $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
@@ -510,7 +510,7 @@
                 $('#content_info_text').val('Imagery');
                 $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-                $('#divMaintenanceInfo').show();
+                $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }
         
@@ -531,12 +531,12 @@ if ($catSelected == "dataset" || $catSelected == "services") {
             if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
                 $('#accordion').show();
-                $('#divMaintenanceInfo').hide();
+                $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
             } else if (kategori.toLowerCase() == "imagery" || kategori.toLowerCase() == "gridded") {
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
                 $('#accordion').show();
-                $('#divMaintenanceInfo').show();
+                $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }
             
