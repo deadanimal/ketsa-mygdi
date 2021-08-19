@@ -79,15 +79,24 @@
                                                 <td>{{ $pemohon->users->kategori }}</td>
                                                 <td>
                                                     @if ($pemohon->status == '1')
-                                                        <span class="badge badge-pill badge-success">Diterima</span>
+                                                        <span class="badge badge-pill badge-success">Dalam Proses</span>
                                                     @elseif($pemohon->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
                                                     @elseif($pemohon->status == '0')
-                                                        <span class="badge badge-pill badge-info">Dalam Proses</span>
+                                                        <span class="badge badge-pill badge-info">Baru</span>
                                                     @endif
                                                 </td>
-                                                <td><span class="badge badge-pill badge-success">Selesai</span></td>
-                                                <td><span class="badge badge-pill badge-warning">Tidak</span></td>
+                                                <td>
+                                                    @if ($pemohon->download == '1')
+                                                        <span class="badge badge-pill badge-success">Selesai</span>
+                                                    @endif
+                                                </td>
+                                                <td> @if($pemohon->penilaian == '1')
+                                                        <span class="badge badge-pill badge-success">Selesai</span>
+                                                    {{-- @elseif ($pemohon->download == '1' && $pemohon->)
+                                                        <span class="badge badge-pill badge-danger">Tidak</span> --}}
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Super Admin');
-        
+
         // Pentadbir Aplikasi ==================================================
         $user = User::create([
             'name' => "Pentadbir Aplikasi",
@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Pengesah Metadata');
-        
+
         $user = User::create([
             'name' => "Pengesah Metadata 2",
             'email' => "pengesahmetadata2@pipeline.com",
@@ -83,7 +83,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Pengesah Metadata');
-        
+
         $user = User::create([
             'name' => "Pengesah Metadata 3",
             'email' => "pengesahmetadata3@pipeline.com",
@@ -118,7 +118,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Penerbit Metadata');
-        
+
         $user = User::create([
             'name' => "Penerbit Metadata 2",
             'email' => "penerbitmetadata2@pipeline.com",
@@ -135,7 +135,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Penerbit Metadata');
-        
+
         $user = User::create([
             'name' => "Penerbit Metadata 3",
             'email' => "penerbitmetadata3@pipeline.com",
@@ -170,7 +170,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Pentadbir Metadata');
-        
+
         $user = User::create([
             'name' => "Pentadbir Metadata 2",
             'email' => "pentadbirmetadata2@pipeline.com",
@@ -187,7 +187,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Pentadbir Metadata');
-        
+
         $user = User::create([
             'name' => "Pentadbir Metadata 3",
             'email' => "pentadbirmetadata3@pipeline.com",
@@ -205,8 +205,8 @@ class UserSeeder extends Seeder
         ]);
         $user->assignRole('Pentadbir Metadata');
 
-        // \DB::statement('alter sequence users_id_seq restart with '.(intval($userId))); 
-        
+        // \DB::statement('alter sequence users_id_seq restart with '.(intval($userId)));
+
         $user = User::create([
             'name' => "Pemohon Data 1",
             'email' => "pemohondata1@pipeline.com",
@@ -220,10 +220,11 @@ class UserSeeder extends Seeder
             'disahkan' => 1,
             'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
             'gambar_profil' => 'mrt.jpg',
-            'status' => '1'
+            'status' => '1',
+            'kategori' => 'G2E - Pelajar'
         ]);
         $user->assignRole('Pemohon Data');
-        
+
         $user = User::create([
             'name' => "Pemohon Data 2",
             'email' => "pemohondata2@pipeline.com",
@@ -240,7 +241,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Pemohon Data');
-        
+
         $user = User::create([
             'name' => "Pemohon Data 3",
             'email' => "pemohondata3@pipeline.com",
@@ -257,7 +258,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Pemohon Data');
-        
+
         $user = User::create([
             'name' => "Pentadbir Data 1",
             'email' => "pentadbirdata1@pipeline.com",
@@ -274,7 +275,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Pentadbir Data');
-        
+
         $user = User::create([
             'name' => "Pentadbir Data 2",
             'email' => "pentadbirdata2@pipeline.com",
@@ -291,7 +292,7 @@ class UserSeeder extends Seeder
             'status' => '1'
         ]);
         $user->assignRole('Pentadbir Data');
-        
+
         $user = User::create([
             'name' => "Pentadbir Data 3",
             'email' => "pentadbirdata3@pipeline.com",

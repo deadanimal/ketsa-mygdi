@@ -77,11 +77,10 @@
                                                     <td>{{ $pemohon->name }}</td>
                                                     <td>{{ $pemohon->users->name }}</td>
                                                     <td>{{ $pemohon->users->kategori }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d M Y') }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
                                                     <td>
                                                         <a href="/lihat_permohonan/{{ $pemohon->id }}"
-                                                            class="btn btn-sm btn-info text-center"><i
-                                                                class="fas fa-eye"></i></a>
+                                                            class="btn btn-sm btn-success text-center">Semak</a>
                                                         <button type="button" data-permohonanid="{{ $pemohon->id }}"
                                                             class="btnDelete btn btn-sm btn-danger mr-2"><i
                                                                 class="fas fa-trash"></i></button>

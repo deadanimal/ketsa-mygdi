@@ -18,13 +18,14 @@ class CreateMohonDataTable extends Migration
 
             $table->string('name');
             $table->timestamp('date');
-            $table->string('tujuan');
+            $table->text('tujuan');
             $table->string('dihantar')->nullable();
             $table->string('status')->nullable();
             $table->string('download')->nullable();
             $table->string('penilaian')->nullable();
             $table->string('assign_admin')->nullable();
             $table->string('catatan')->nullable();
+            $table->string('acceptance')->nullable();
 
             $table->foreignId('user_id');
 

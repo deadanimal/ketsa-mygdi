@@ -2,96 +2,147 @@
 
 @section('content')
 
-<link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
 
-<style>
-</style>
+    <style>
+    </style>
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="header">
-        <div class="container-fluid">
-            <div class="header-body">
-                <div class="row align-items-center p-3 py-4">
-                    <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-dark d-inline-block mb-0">Muat Turun Data</h6>
 
-                        <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
-                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class=" breadcrumb-item">
-                                    <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
-                                </li>
-                                <li aria-current="page" class="breadcrumb-item active">
-                                    Muat Turun Data
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <div class="col-lg-6 col-5 text-right">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="header">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center p-3 py-4">
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-dark d-inline-block mb-0">Muat Turun Data</h6>
 
+                            <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class=" breadcrumb-item">
+                                        <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                    </li>
+                                    <li aria-current="page" class="breadcrumb-item active">
+                                        Muat Turun Data
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="col-lg-6 col-5 text-right">
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
+            </div><!-- /.container-fluid -->
+        </section>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        @csrf
-                        <div class="card-header">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <h3 class="mb-0">Senarai Muat Turun Data</h3>
-                                </div>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            @csrf
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">Senarai Muat Turun Data</h3>
+                                    </div>
 
-                                <div class="col-4 text-right">
+                                    <div class="col-4 text-right">
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
-                                <thead>
-                                    <tr>
-                                        <th>BIL</th>
-                                        <th>NAMA PERMOHONAN</th>
-                                        <th>STATUS</th>
-                                        <th>TARIKH</th>
-                                        <th>TINDAKAN</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($pemohons as $pemohon)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $pemohon->name }}</td>
-                                        <td>
-                                            @if ($pemohon->download == '1')
-                                                <span class="badge badge-pill badge-success">Data Tersedia</span>
-                                            @else
-                                                <span class="badge badge-pill badge-danger">Dalam Proses</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
-                                        <td>
-                                            <a class="text-muted" disabled><span class="fas fa-download mr-2"></span>
-                                                Muat Turun</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                            <div class="card-body">
+                                <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>BIL</th>
+                                            <th>NAMA PERMOHONAN</th>
+                                            <th>STATUS</th>
+                                            <th>TARIKH</th>
+                                            <th>TINDAKAN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($pemohons as $pemohon)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $pemohon->name }}</td>
+                                                <td>
+                                                    @if ($pemohon->download == '1')
+                                                        <span class="badge badge-pill badge-success">Data Tersedia</span>
+                                                    @else
+                                                        <span class="badge badge-pill badge-danger">Dalam Proses</span>
+                                                    @endif
+                                                </td>
+                                                <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
+                                                <td>
+                                                    <a class="text-muted download" href="javascript:void(0)"><span
+                                                            class="fas fa-download mr-2"></span>
+                                                        Muat Turun</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#table_metadatas").DataTable({
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": false,
+                "oLanguage": {
+                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sEmptyTable": "Tiada rekod ditemui",
+                    "sZeroRecords": "Tiada rekod ditemui",
+                    "sLengthMenu": "Papar _MENU_ rekod",
+                    "sLoadingRecords": "Sila tunggu...",
+                    "sSearch": "Carian:",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": ">",
+                        "sPrevious": "<",
+                    }
+                }
+            });
+        });
 
+        $('.download').on('click', function(event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            swal({
+                title: "Akuan Penerimaan Data",
+                type: "warning",
+                input: "checkbox",
+                inputPlaceholder: " Sila klik kotak 'checkbox' untuk mengesah akuan penerimaan data",
+                buttonsStyling: false,
+                allowOutsideClick: false,
+                confirmButtonClass: "btn btn-warning",
+                confirmButtonText: 'Seterusnya&nbsp;<i class="fa fa-arrow-right"></i>',
+                footer: '<a href>Baca Akuan Penerimaan Data</a>',
+                inputValidator: (result) => {
+                    return !result && "Anda perlu sahkan akuan penerimaan data ini!";
+                },
+            }).then(function(result) {
+                swal({
+                    title: "Akuan Penerimaan Data",
+                    text: "Berjaya disahkan!",
+                    type: "success",
+                    showConfirmButton: false,
+                    timer: 1700,
+                })
+            })
+        });
+    </script>
 @stop

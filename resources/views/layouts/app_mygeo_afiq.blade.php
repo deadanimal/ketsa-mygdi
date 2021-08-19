@@ -45,6 +45,9 @@
     <!-- Main Quill library -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+     <!-- SweetAlert2 -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
     <style>
         #map {
@@ -175,18 +178,8 @@
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="{{ url('kategori_kelas_data') }}" class="nav-link active">
-                                                        <span class="nav-link-text">Kategori Pengkelasan Data</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
                                                     <a href="{{ url('kategori_kelas_kongsi_data') }}" class="nav-link active">
                                                         <span class="nav-link-text">Kategori Pengkelasan Perkongsian Data</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="{{ url('harga_data') }}" class="nav-link active">
-                                                        <span class="nav-link-text">Harga Data</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -228,7 +221,7 @@
                                         <li class="nav-item">
                                             <a href="{{ url('penilaian') }}" class="nav-link">
                                                 <i class="fas fa-file-signature text-primary"></i>
-                                                <span class="nav-link-text">Penilaian</span>
+                                                <span class="nav-link-text">Penilaian Data</span>
                                             </a>
                                         </li>
                                         @endif
@@ -258,7 +251,7 @@
                                         @endif
                                         @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link active">
+                                            <a href="{{ url('semakan_status') }}" class="nav-link active">
                                                 <i class="fas fa-search text-danger"></i>
                                                 <span class="nav-link-text">Semakan Status</span>
                                             </a>
@@ -276,7 +269,7 @@
                                         <li class="nav-item">
                                             <a href="{{ url('penilaian') }}" class="nav-link active">
                                                 <i class="fas fa-edit text-green"></i>
-                                                <span class="nav-link-text">Penilaian</span>
+                                                <span class="nav-link-text">Penilaian Data</span>
                                             </a>
                                         </li>
                                         @endif

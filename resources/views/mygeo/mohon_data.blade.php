@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tujuan" class="form-control-label">Tujuan Permohonan</label>
-                                    <input type="text" class="form-control form-control-sm" name="tujuan" value="">
+                                    <textarea name="tujuan" class="form-control form-control-sm" cols="30" rows="10"></textarea>
                                 </div>
                                 <input type="hidden" name="id" value="{{ $user->id }}">
                                 <input type="hidden" name="user_id" value="{{ $user->id }}">

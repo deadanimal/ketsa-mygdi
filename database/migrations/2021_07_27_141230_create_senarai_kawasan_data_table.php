@@ -20,6 +20,8 @@ class CreateSenaraiKawasanDataTable extends Migration
             $table->string('kategori',50);
             $table->string('subkategori', 50);
             $table->string('kawasan_data', 50);
+            $table->string('harga_data', 50);
+            $table->string('saiz_data', 50)->nullable();
 
             $table->foreignId('permohonan_id');
 

@@ -33,20 +33,40 @@
                         <div class="card">
                             @csrf
                             <div class="card-header">
-                                <h3 class="card-title" style="font-size: 2rem;">Senarai Data</h3>
-                                <a data-toggle="modal" data-target="#modal-senarai-data">
-                                    <button type="button" class="btn btn-sm btn-default float-right"><i
-                                            class="fas fa-plus mr-2"></i>Tambah</button>
-                                </a>
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">Senarai Data</h3>
+                                    </div>
+
+                                    <div class="col-4 text-right">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button id="btnGroupDrop1" type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Tambah
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                                                <a class="dropdown-item" data-toggle="modal"
+                                                    data-target="#modal-kategori">Kategori</a>
+                                                <a class="dropdown-item" data-toggle="modal"
+                                                    data-target="#modal-subkategori">Sub-Kategori</a>
+                                                <a class="dropdown-item" data-toggle="modal"
+                                                    data-target="#modal-lapisan-data">Lapisan Data</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="table_metadatas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
                                             <th>KATEGORI</th>
                                             <th>SUB-KATEGORI</th>
                                             <th>LAPISAN DATA</th>
+                                            <th>KELAS</th>
+                                            <th>HARGA DATA</th>
+                                            <th>STATUS</th>
                                             <th>TINDAKAN</th>
                                         </tr>
                                     </thead>
@@ -57,6 +77,10 @@
                                                 <td>{{ $sdata->kategori }}</td>
                                                 <td>{{ $sdata->subkategori }}</td>
                                                 <td>{{ $sdata->lapisan_data }}</td>
+                                                <td>{{ $sdata->kelas }}</td>
+                                                <td>{{ $sdata->harga_data }}</td>
+                                                <td>{{ $sdata->status }}</td>
+
                                                 <td>
                                                     <a data-toggle="modal"
                                                         data-target="#modal-kemaskinidata-{{ $sdata->id }}">
@@ -86,7 +110,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header bg-primary mb-0">
-                            <h4 class="text-white">Data ID#{{ $loop->iteration }}</h4>
+                            <h4 class="text-white">Kemaskini SenaraiData ID#{{ $loop->iteration }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -112,26 +136,25 @@
                                             value="{{ $sdata->lapisan_data }}">
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-control-label">Kategori Pemohon</label>
-                                        <input type="text" class="form-control form-control-sm" name="kategori_pemohon"
-                                            value="{{ $sdata->kategori_pemohon }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Kelas</label>
-                                        <input type="text" class="form-control form-control-sm" name="kelas"
-                                            value="{{ $sdata->kelas }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Status</label>
-                                        <select class="form-control form-control-sm" name="status">
-                                            <option value="Aktif">Aktif</option>
-                                            <option value="Tak Aktif">Tak Aktif</option>
+                                        <label class="form-control-label">Pengkelasan Lapisan Data</label>
+                                        <select class="form-control form-control-sm" name="kelas">
+                                            <option selected disabled>Pilih</option>
+                                            <option value="Terhad" >Terhad</option>
+                                            <option value="Tidak Terhad">Tidak Terhad</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Harga Data</label>
                                         <input type="text" class="form-control form-control-sm" name="harga_data"
                                             value="{{ $sdata->harga_data }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Status Data</label>
+                                        <select class="form-control form-control-sm" name="status">
+                                            <option selected disabled>Pilih</option>
+                                            <option value="Tersedia">Tersedia</option>
+                                            <option value="Tiada">Tiada</option>
+                                        </select>
                                     </div>
 
                                     <button class="btn btn-success float-right" type="submit">
@@ -146,12 +169,12 @@
             </div>
         @endforeach
 
-        <!-- Modal Tambah Data Asas -->
-        <div class="modal fade" id="modal-senarai-data">
+        <!-- Modal Kategori -->
+        <div class="modal fade" id="modal-kategori">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-primary mb-0">
-                        <h4 class="text-white">Tambah Senarai Data</h4>
+                        <h4 class="text-white">Tambah Kategori</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -164,23 +187,107 @@
                                     <label class="form-control-label">Kategori</label>
                                     <input type="text" class="form-control form-control-sm" name="kategori" value="">
                                 </div>
+                                {{-- <input type="hidden" name="id" value="{{ $user->id }}">
+                                <input type="hidden" name="data_id" value="{{ $user->id }}"> --}}
+
+                                <button class="btn btn-success float-right mt-4" type="submit">
+                                    <span class="text-white">Tambah</span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Sub-Kategori -->
+        <div class="modal fade" id="modal-subkategori">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary mb-0">
+                        <h4 class="text-white">Tambah Sub-Kategori</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="/simpan_senarai_data">
+                        @csrf
+                        <div class="modal-body row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Kategori</label>
+                                    <select class="form-control form-control-sm" name="kategori">
+                                        <option selected disabled>Pilih</option>
+                                        @foreach ($senarai_data as $sdata)
+                                            <option value="{{ $sdata->kategori }}">{{ $sdata->kategori }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Sub-Kategori</label>
                                     <input type="text" class="form-control form-control-sm" name="subkategori" value="">
                                 </div>
+                                {{-- <input type="hidden" name="id" value="{{ $user->id }}">
+                                <input type="hidden" name="data_id" value="{{ $user->id }}"> --}}
+
+                                <button class="btn btn-success float-right mt-4" type="submit">
+                                    <span class="text-white">Tambah</span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Tambah Data Asas -->
+        <div class="modal fade" id="modal-lapisan-data">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary mb-0">
+                        <h4 class="text-white">Tambah Lapisan Data</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="/simpan_senarai_data">
+                        @csrf
+                        <div class="modal-body row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Kategori</label>
+                                    <select class="form-control form-control-sm" name="kategori">
+                                        <option selected disabled>Pilih</option>
+                                        @foreach ($senarai_data as $sdata)
+                                            <option value="{{ $sdata->kategori }}">{{ $sdata->kategori }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Sub-Kategori</label>
+                                    <select class="form-control form-control-sm" name="subkategori">
+                                        <option selected disabled>Pilih</option>
+                                        @foreach ($senarai_data as $sdata)
+                                            <option value="{{ $sdata->subkategori }}">{{ $sdata->subkategori }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Lapisan Data</label>
                                     <input type="text" class="form-control form-control-sm" name="lapisan_data" value="">
-                                    {{-- </div>
-                            <input type="hidden" name="id" value="{{$user -> id}}">
-                            <input type="hidden" name="data_id" value="{{$user -> id}}"> --}}
-
-                                    <button class="btn btn-success float-right mt-4" type="submit">
-                                        <span class="text-white">Tambah</span>
-                                    </button>
-
                                 </div>
+                                {{-- <input type="hidden" name="id" value="{{ $user->id }}">
+                                <input type="hidden" name="data_id" value="{{ $user->id }}"> --}}
+
+                                <button class="btn btn-success float-right mt-4" type="submit">
+                                    <span class="text-white">Tambah</span>
+                                </button>
+
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>
