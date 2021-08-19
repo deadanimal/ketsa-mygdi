@@ -96,7 +96,7 @@
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ (isset($user->agensiOrganisasi->name ? $user->agensiOrganisasi->name:$user->agensi_organisasi }}" disabled />
+                                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:$user->agensi_organisasi) }}" disabled />
                                     </div>
                                 </div>
                                 <div class="row mb-2">
