@@ -316,11 +316,11 @@
                         <div class="ml-3">
                             <?php
                             if (isset($pengesahs->name)) {
-                                echo $pengesahs->name;
+//                                echo $pengesahs->name;
                             }
                             ?>
                         </div>
-                        <input type="hidden" name="c2_contact_name" id="c2_contact_name"
+                        <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3" 
                             value="{{ isset($pengesahs->name) ? $pengesahs->name : '' }}">
                     </div>
                 </div>
@@ -346,7 +346,7 @@
                     <div class="col-7">
                         <input type="text" name="c2_position_name" id="c2_position_name"
                             class="form-control form-control-sm ml-3 mb-2"
-                            value="{{ null !== old('c2_position_name') ? old('c2_position_name') : 'Metadata Approver' }}">
+                            value="{{ null !== old('c2_position_name') ? old('c2_position_name') : '' }}">
                     </div>
                 </div>
                 <div class="row mb-4">

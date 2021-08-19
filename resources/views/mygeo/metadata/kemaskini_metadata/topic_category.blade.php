@@ -43,6 +43,14 @@
                         <label class="form-check-label" for="c3_3">Atmosphere and Climatic</label>
                     </div>
                     <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="c3_3" name="topic_category[]" value="Biology and Ecology" {{ (!empty($tc) && in_array('Biology and Ecology',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_3">Biology and Ecology</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="c3_3" name="topic_category[]" value="Business and Economic" {{ (!empty($tc) && in_array('Business and Economic',$tc) ? "checked":"") }}>
+                        <label class="form-check-label" for="c3_3">Business and Economic</label>
+                    </div>
+                    <div class="form-check mb-2">
                         <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]" value="Cadastral" {{ (!empty($tc) && in_array('Cadastral',$tc) ? "checked":"") }}>
                         <label class="form-check-label" for="c3_1">Cadastral</label>
                     </div>
