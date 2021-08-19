@@ -65,7 +65,7 @@
                             <h4>{!! (!is_null($pengumuman) ? date("j M Y",strtotime($pengumuman->date)):"") !!}</h4>
                             <p>{!! (!is_null($pengumuman) ? $pengumuman->content:"") !!}</p>
                             <?php
-                            if($pengumuman->gambar != ""){
+                            if(isset($pengumuman->gambar) && $pengumuman->gambar != ""){
                                 ?>
                                 <image id="profileImage" alt="Image placeholder" src="{{ asset('storage/'.$pengumuman->gambar) }}" style="border-radius: .95rem;max-width:250px;">
                                 <?php
