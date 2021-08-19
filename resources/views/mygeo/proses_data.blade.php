@@ -153,7 +153,7 @@
                                         <div class="form-inline float-right">
                                             <label class="form-control-label mr-2">Jumlah Harga (RM)</label>
                                             <input class="form-control form-control-sm" placeholder="RM0.00"
-                                                style="width: 90px;" type="text" name="total_harga" id="total_{{$pemohon->id}}">
+                                                style="width: 90px;" type="text" name="total_harga" id="total_{{$pemohon->id}}" value="{{$pemohon->proses_datas->total_harga}}">
                                         </div>
                                     </div>
                                 </div>
@@ -161,10 +161,10 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-control-label mr-2">Pautan Data </label>
-                                            <input class="form-control form-control-sm mb-2" name="pautan_data" placeholder="Masukkan Pautan Data" type="text">
+                                            <input class="form-control form-control-sm mb-2" name="pautan_data" placeholder="Masukkan Pautan Data" type="text" value="{{$pemohon->proses_datas->pautan_data}}">
 
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
-                                            <input class="form-control form-control-sm" name="tempoh" placeholder="" type="date">
+                                            <input class="form-control form-control-sm" name="tempoh" placeholder="" type="date" disabled>
                                         </div>
                                         <div class="form-inline">
                                             <label class="form-control-label mr-2">Surat Balasan Permohonan </label>

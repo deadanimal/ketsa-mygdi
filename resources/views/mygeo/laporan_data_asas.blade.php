@@ -69,9 +69,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($permohonans as $mohon)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $mohon->users->name }}</td>
+                                                <td>{{ $mohon->users->agensi_organisasi }}</td>
+                                                <td>{{ $mohon->users->kategori }}</td>
+                                                <td>
+                                                    @if ($mohon->status == '1')
+                                                        <span class="badge badge-pill badge-success">Dalam Proses</span>
+                                                    @elseif($mohon->status == '2')
+                                                        <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                    @elseif($mohon->status == '0')
+                                                        <span class="badge badge-pill badge-info">Baru</span>
+                                                    @endif
+                                                </td>
+                                                <td>{{ Carbon\Carbon::parse($mohon->date)->format('d/m/Y') }}</td>
+                                                <td>
+                                                    @if($mohon->acceptance == '1')
+                                                    {{ Carbon\Carbon::parse($mohon->updated_date)->format('d/m/Y') }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
-                                        <th>JUMLAH PERMOHONAN DATA</th>
+                                        <th colspan="7">JUMLAH PERMOHONAN DATA</th>
                                     </tfoot>
                                 </table>
                             </div>

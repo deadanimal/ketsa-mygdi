@@ -50,6 +50,8 @@ Route::post('/reply_maklum_balas', 'PortalController@reply_maklum_balas');
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/laporan_data_asas', 'LaporanDashboardController@index_laporan_data');
+
     Route::get('/senarai_pengumuman', 'PortalController@index_pengumuman');
     Route::post('/tunjuk_pengumuman', 'PortalController@show_pengumuman');
     Route::get('/kemaskini_pengumuman', 'PortalController@edit_pengumuman');
@@ -147,6 +149,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_permohonan_baru', 'DataAsasController@store_permohonan_baru');
     Route::post('/simpan_senarai_kawasan', 'DataAsasController@store_senarai_kawasan');
     Route::post('/delete_senarai_kawasan', 'DataAsasController@delete_senarai_kawasan');
+    Route::post('/kemaskini_senarai_kawasan', 'DataAsasController@update_senarai_kawasan');
 
     Route::post('/simpan_penilaian', 'DataAsasController@store_penilaian');
 

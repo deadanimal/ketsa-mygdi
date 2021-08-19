@@ -123,6 +123,25 @@
                                                 <span class="nav-link-text">Dashboard</span>
                                             </a>
                                         </li>
+                                        <li class="nav-item has-treeview">
+                                            <a class="nav-link active" href="#">
+                                                <i class="fa-chart-bar fas text-purple"></i>
+                                                <span class="nav-link-text">Laporan</span>
+                                                <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
+                                            </a>
+                                            <ul class="nav nav-sm nav-treeview">
+                                                <li class="nav-item">
+                                                    <a href="{{ url('laporan_metadata') }}" class="nav-link active">
+                                                        <span class="nav-link-text">Laporan Metadata</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{{ url('laporan_data_asas') }}" class="nav-link">
+                                                        <span class="nav-link-text">Laporan Data Asas</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                         @endif
                                         @if(auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin']))
                                         <li class="nav-item has-treeview">
