@@ -12,7 +12,7 @@
                 <?php
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory) != ""){
                     $topic_categories =  $metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory;
-                    $tc = explode(',',$topic_categories);
+                    $tc = explode('|',$topic_categories);
                     if(count($tc) > 0){
                         foreach($tc as $t){
                             ?>

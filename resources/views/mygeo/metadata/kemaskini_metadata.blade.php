@@ -614,20 +614,23 @@ if (!is_null(old('kategori'))) {
         
         $(document).on("click", ".btn_terbit", function() {
             if (confirm("Adakah anda pasti untuk mengesahkan metadata ini?")) {
+                $('#submitAction').val('terbit');
+                $('#form_metadata').submit();
                 // ajax sahkan metadata
-                var metadata_id = $(this).data('metadataid');
-                $.ajax({
-                    method: "POST",
-                    url: "{{ url('metadata_sahkan') }}",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "metadata_id": metadata_id
-                    },
-                })
-                .done(function(response) {
-                    alert("Metadata berjaya disahkan.");
-                    window.location.replace('{{ url("mygeo_pengesahan_metadata") }}');
-                });
+//                var metadata_id = $(this).data('metadataid');
+//                $.ajax({
+//                    method: "POST",
+//                    url: "{{ url('metadata_sahkan') }}",
+//                    data: {
+//                        "_token": "{{ csrf_token() }}",
+//                        "metadata_id": metadata_id,
+//                        "process": "terbit"
+//                    },
+//                })
+//                .done(function(response) {
+//                    alert("Metadata berjaya disahkan.");
+//                    window.location.replace('{{ url("mygeo_pengesahan_metadata") }}');
+//                });
             }
         });
     });

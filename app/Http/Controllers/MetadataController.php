@@ -800,6 +800,42 @@ class MetadataController extends Controller {
                 $msg = "Metadata disimpan sebagai draf.";
             }
             $mg->update();
+            
+            //sahkan
+            if ($request->submitAction == "terbit" && auth::user()->hasRole(['Pengesah Metadata'])){
+                $metadata = MetadataGeo::on('pgsql2')->find($mg->id);
+                $metadata->timestamps = false;
+                $metadata->disahkan = 'yes';
+                $metadata->update();
+
+                $ftestxml2 = <<<XML
+                $metadata->data
+                XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+                $metadataxml = simplexml_load_string($ftestxml2);
+
+                $metadataName = "";
+                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                   $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                }
+
+                $user = User::where("id",$metadata->portal_user_id)->get()->first();
+                if(!empty($user)){
+                    //send email to penerbit
+                    $to_name = $user->name;
+                    $to_email = $user->email;
+                    $data = array('title'=>$metadataName);
+                    Mail::send('mails.exmpl8', $data, function($message) use ($to_name, $to_email, $metadataName) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : '.$metadataName);
+                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                    });
+                }
+                
+                $msg = "Metadata berjaya diterbitkan.";
+            }
         });
         
         $at = new AuditTrail();
