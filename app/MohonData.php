@@ -21,4 +21,21 @@ class MohonData extends Model
         return $this->hasMany(MohonData::class,'permohonan_id','id');
     }
 
+    public function penilaians(){
+        return $this->hasOne(MohonData::class,'permohonan_id','id');
+    }
+
+    public function akuans(){
+        return $this->hasOne(MohonData::class,'permohonan_id','id');
+    }
+
+    public function proses_datas(){
+        return $this->hasOne(MohonData::class,'permohonan_id','id');
+    }
+
+    public function suratbalas()
+    {
+        return $this->hasOne(MohonData::class,'permohonan_id','id');
+    }
+
 }

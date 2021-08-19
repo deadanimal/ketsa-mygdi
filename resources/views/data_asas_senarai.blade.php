@@ -233,6 +233,44 @@
 <div _ngcontent-tvu-c497="" class="card22 mt-29 p-26" style="width:100%;background-color: rgba(255, 255, 255, 0.9);">
     <div class="card-body">
         <h1>Senarai Data-Data Asas</h1>
+
+        <div class="row">
+            <div class="col-3">
+                @foreach ($senarai_data as $data)
+                    @if (!empty($data->subkategori))
+                        <a href="/data_asas_senarai/{{$data->id}}">{{$data->kategori}}</a><br>
+                    @endif
+
+                @endforeach
+            </div>
+            <div class="col-3">
+                @forelse ($subs as $dataa)
+                <a href="/data_asas_senarai/{{$data->id}}/{{$dataa->id}}">{{$dataa->subkategori}}</a><br>
+                @empty
+                    -
+                @endforelse
+            </div>
+            <div class="col-3">
+                @forelse ($lapisan as $ldata)
+                {{-- {{$ldata}} --}}
+                <a>{{$ldata->lapisan_data}}</a><br>
+                @empty
+                    -
+                @endforelse
+            </div>
+            <div class="col-3">
+                @forelse ($lapisan as $ldata)
+                {{-- {{$ldata}} --}}
+                <a>{{$ldata->kelas}}</a><br>
+                @empty
+                    -
+                @endforelse
+            </div>
+        </div>
+
+
+
+
         <br>
         <div class="row">
             <div class="col-md-2 div_kategori">

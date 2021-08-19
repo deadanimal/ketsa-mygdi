@@ -166,6 +166,6 @@ class RegisterController extends Controller
         }else{
             $msg = 'Pendaftaran anda dalam proses pengesahan. Anda akan menerima e-mel daripada pentadbir sekiranya pendaftaran berjaya';
         }
-        return $this->registered($request, $user)?: redirect($this->redirectPath())->with('message',$msg);
+        return $this->registered($request, $user)?: redirect($this->redirectPath())->with('success',$msg);
      }
 }

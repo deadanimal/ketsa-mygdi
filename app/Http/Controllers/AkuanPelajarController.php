@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\SenaraiData;
+use App\AkuanPelajar;
 use Illuminate\Http\Request;
 
-class SenaraiDataController extends Controller
+class AkuanPelajarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SenaraiDataController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SenaraiData  $senaraiData
+     * @param  \App\AkuanPelajar  $akuanPelajar
      * @return \Illuminate\Http\Response
      */
-    public function show(SenaraiData $senaraiData)
+    public function show(AkuanPelajar $akuanPelajar)
     {
         //
     }
@@ -52,10 +52,10 @@ class SenaraiDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SenaraiData  $senaraiData
+     * @param  \App\AkuanPelajar  $akuanPelajar
      * @return \Illuminate\Http\Response
      */
-    public function edit(SenaraiData $senaraiData)
+    public function edit(AkuanPelajar $akuanPelajar)
     {
         //
     }
@@ -64,10 +64,10 @@ class SenaraiDataController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SenaraiData  $senaraiData
+     * @param  \App\AkuanPelajar  $akuanPelajar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SenaraiData $senaraiData)
+    public function update(Request $request, AkuanPelajar $akuanPelajar)
     {
         //
     }
@@ -75,10 +75,10 @@ class SenaraiDataController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SenaraiData  $senaraiData
+     * @param  \App\AkuanPelajar  $akuanPelajar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SenaraiData $senaraiData)
+    public function destroy(AkuanPelajar $akuanPelajar)
     {
         //
     }

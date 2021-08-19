@@ -3,10 +3,6 @@
 @section('content')
 
     <style>
-        .ftest {
-            display: inline;
-            width: auto;
-        }
 
     </style>
 
@@ -18,7 +14,7 @@
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
                         <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-dark d-inline-block mb-0">Penilaian</h6>
+                            <h6 class="h2 text-dark d-inline-block mb-0">Semakan Status</h6>
 
                             <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
@@ -26,7 +22,7 @@
                                         <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
                                     </li>
                                     <li aria-current="page" class="breadcrumb-item active">
-                                        Penilaian
+                                        Semakan Status
                                     </li>
                                 </ol>
                             </nav>
@@ -49,9 +45,11 @@
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h3 class="mb-0">Senarai Penilaian</h3>
+                                        <h3 class="mb-0">Senarai Semakan Status Permohonan</h3>
                                     </div>
+
                                     <div class="col-4 text-right">
+
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +59,7 @@
                                         <tr>
                                             <th>BIL</th>
                                             <th>NAMA PERMOHONAN</th>
-                                            <th>TARIKH</th>
+                                            <th>STATUS</th>
                                             <th>TINDAKAN</th>
                                         </tr>
                                     </thead>
@@ -70,19 +68,23 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $pemohon->name }}</td>
-                                                <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a href="/penilaian_pemohon/{{ $pemohon->id }}"
-                                                        class="btn btn-sm btn-info text-center">
-                                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
-                                                            Lihat
-                                                        @else
-                                                            Buat Penilaian
-                                                        @endif
+                                                    @if ($pemohon->status == '1')
+                                                        <span class="badge badge-pill badge-success">Dalam Proses</span>
+                                                    @elseif($pemohon->status == '2')
+                                                        <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                    @elseif($pemohon->status == '0')
+                                                        <span class="badge badge-pill badge-info">Baru</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="/lihat_permohonan/{{ $pemohon->id }}"
+                                                        class="btn btn-sm btn-success text-center"><i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $pemohon->id }}"
                                                         class="btnDelete btn btn-sm btn-danger mr-2"><i
-                                                            class="fas fa-trash"></i></button>
+                                                            class="fas fa-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         @endforeach

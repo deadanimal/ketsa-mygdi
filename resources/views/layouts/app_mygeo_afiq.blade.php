@@ -47,6 +47,10 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+     <!-- SweetAlert2 -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+
     <style>
         #map {
             position: absolute;
@@ -148,7 +152,7 @@
                                                 <span class="nav-link-text">Pengurusan Metadata</span>
                                                 <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
                                             </a>
-                                            <ul class="nav nav-sm nav-treeview"> 
+                                            <ul class="nav nav-sm nav-treeview">
                                                 <li class="nav-item">
                                                     <a href="{{ url('mygeo_senarai_metadata') }}" class="nav-link active">
                                                         <span class="nav-link-text">Senarai Metadata</span>
@@ -192,18 +196,8 @@
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="{{ url('kategori_kelas_data') }}" class="nav-link active">
-                                                        <span class="nav-link-text">Kategori Pengkelasan Data</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
                                                     <a href="{{ url('kategori_kelas_kongsi_data') }}" class="nav-link active">
                                                         <span class="nav-link-text">Kategori Pengkelasan Perkongsian Data</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="{{ url('harga_data') }}" class="nav-link active">
-                                                        <span class="nav-link-text">Harga Data</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -245,7 +239,7 @@
                                         <li class="nav-item">
                                             <a href="{{ url('penilaian') }}" class="nav-link">
                                                 <i class="fas fa-file-signature text-primary"></i>
-                                                <span class="nav-link-text">Penilaian</span>
+                                                <span class="nav-link-text">Penilaian Data</span>
                                             </a>
                                         </li>
                                         @endif
@@ -283,7 +277,7 @@
                                         @endif
                                         @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link active">
+                                            <a href="{{ url('semakan_status') }}" class="nav-link active">
                                                 <i class="fas fa-search text-danger"></i>
                                                 <span class="nav-link-text">Semakan Status</span>
                                             </a>
@@ -299,9 +293,9 @@
                                         @endif
                                         @if(auth::user()->hasRole(['Pemohon Data','Super Admin']))
                                         <li class="nav-item">
-                                            <a href="{{ url('penilaian_pemohon') }}" class="nav-link active">
+                                            <a href="{{ url('penilaian') }}" class="nav-link active">
                                                 <i class="fas fa-edit text-green"></i>
-                                                <span class="nav-link-text">Penilaian</span>
+                                                <span class="nav-link-text">Penilaian Data</span>
                                             </a>
                                         </li>
                                         @endif

@@ -41,6 +41,8 @@ Route::get('/penyataan_privasi', 'PortalController@index_penyataan_privasi');
 
 Route::get('/data_asas_landing', 'DataAsasController@data_asas_landing');
 Route::get('/data_asas_senarai', 'DataAsasController@data_asas_senarai');
+Route::get('/data_asas_senarai/{data1}', 'DataAsasController@data_asas_senarai_show');
+Route::get('/data_asas_senarai/{data1}/{data2}', 'DataAsasController@data_asas_senarai_show_show');
 Route::get('/data_asas_tatacara_mohon', 'DataAsasController@data_asas_tatacara_mohon');
 Route::get('/data_asas_dokumen_berkaitan', 'DataAsasController@data_asas_dokumen_berkaitan');
 Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
@@ -144,22 +146,39 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/mohon_data', 'DataAsasController@mohon_data');
     Route::post('/simpan_permohonan_baru', 'DataAsasController@store_permohonan_baru');
     Route::post('/simpan_senarai_kawasan', 'DataAsasController@store_senarai_kawasan');
+    Route::post('/delete_senarai_kawasan', 'DataAsasController@delete_senarai_kawasan');
+
+    Route::post('/simpan_penilaian', 'DataAsasController@store_penilaian');
 
     Route::post('/muatnaik_dokumen', 'DataAsasController@store_dokumen_berkaitan')->name('muatnaikFail');
 
     Route::get('/mohon_data','DataAsasController@mohon_data');
     Route::get('/mohon_data_asas_baru','DataAsasController@mohon_data_asas_baru');
     Route::post('/delete_permohonan', 'DataAsasController@delete_permohonan');
+    Route::post('/hantar_permohonan', 'DataAsasController@hantar_permohonan');
+    Route::post('/kemaskini_permohonan', 'DataAsasController@kemaskini_permohonan');
+    Route::get('/akuan_pelajar/{id}','DataAsasController@akuan_pelajar');
+    Route::post('/simpan_akuan_pelajar', 'DataAsasController@update_akuan_pelajar');
+
+    Route::get('/surat_balasan/{id}','DataAsasController@surat_balasan');
+    Route::post('/simpan_surat_balasan', 'DataAsasController@update_surat_balasan');
+
+    Route::get('/semakan_status','DataAsasController@semakan_status');
+
     Route::get('/muat_turun_data','DataAsasController@muat_turun_data');
     Route::get('/senarai_data','DataAsasController@senarai_data');
-    Route::get('/kategori_kelas_data','DataAsasController@kategori_kelas_data');
+    Route::post('/simpan_senarai_data', 'DataAsasController@store_senarai_data');
+    Route::post('/kemaskini_senarai_data', 'DataAsasController@update_senarai_data');
+    Route::post('/delete_senarai_data', 'DataAsasController@delete_senarai_data');
+
     Route::get('/kategori_kelas_kongsi_data','DataAsasController@kategori_kelas_kongsi_data');
-    Route::get('/harga_data','DataAsasController@harga_data');
     Route::get('/permohonan_baru','DataAsasController@permohonan_baru');
     Route::get('/status_permohonan','DataAsasController@status_permohonan');
-    Route::get('/proses_data','DataAsasController@proses_data');
     Route::get('/penilaian','DataAsasController@penilaian');
-    Route::get('/penilaian_pemohon','DataAsasController@penilaian_pemohon');
+    Route::get('/penilaian_pemohon/{id}','DataAsasController@penilaian_pemohon')->name('tambah.penilaian');
+
+    Route::get('/proses_data','DataAsasController@proses_data');
+    Route::post('/simpan_proses_data','DataAsasController@update_proses_data');
 
     Route::get('/kemaskini_profil','UserController@edit');
     Route::post('/simpan_kemaskini_profil','UserController@update_profile');
@@ -212,3 +231,4 @@ Route::post('deleteElemenMetadata','MetadataController@deleteElemenMetadata');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

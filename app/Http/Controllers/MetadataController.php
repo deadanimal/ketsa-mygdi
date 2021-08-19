@@ -45,10 +45,10 @@ class MetadataController extends Controller {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response 
+     * @return \Illuminate\Http\Response
      */
     function __construct() {
-        
+
     }
 
     public function index() {
@@ -68,7 +68,7 @@ class MetadataController extends Controller {
             //see all metadatas regardless
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
         }
-        
+
         $metadatas = [];
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
@@ -78,16 +78,16 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-            
+
             $penerbit = $this->getUser($met->portal_user_id);
-            
+
             $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = [$xml2, $met, $penerbit];
         }
 
         return view('mygeo.metadata.senarai_metadata', compact('metadatas'));
     }
-    
+
     function getUser($user_id){
         return User::where('id',$user_id)->get()->first();
     }
@@ -171,7 +171,7 @@ class MetadataController extends Controller {
             $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
         }
         if(isset($request->topic_category)){
-            foreach($request->topic_category as $tc){                
+            foreach($request->topic_category as $tc){
                 $query = $query->where('data', 'ilike', '%' . $tc . '%');
             }
         }
@@ -182,8 +182,8 @@ class MetadataController extends Controller {
             $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
         }
         $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
-        
-        
+
+
         $metadatas = [];
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
@@ -271,7 +271,7 @@ class MetadataController extends Controller {
         }
         
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$id)->get()->first();
-        
+
         $ftestxml2 = <<<XML
                 $metadataSearched->data
                 XML;
@@ -347,7 +347,7 @@ class MetadataController extends Controller {
         }else{
             $countries = Countries::where(['id' => 1])->get()->first();
         }
-        
+
         if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && trim($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) != ""){
             $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
             $refSys = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
@@ -373,7 +373,7 @@ class MetadataController extends Controller {
             'c2_metadataName.required' => 'ftest2test2',
         ];
     }
-    
+
     public function validateMetadataName(Request $request){
         $lowered = strtolower($request->metadataName);
         $lowered = $request->metadataName;
@@ -449,7 +449,7 @@ class MetadataController extends Controller {
             "topic_category.required" => 'Topic Category required',
         ];
         $this->validate($request, $fields, $customMsg);
-        
+
         if(count($request->c10_additional_keyword) > 0){
             $string = "";
             foreach($request->c10_additional_keyword as $var){
@@ -475,9 +475,9 @@ class MetadataController extends Controller {
 //        }
         $xmlcon = new XmlController;
         $xml = $xmlcon->createXml($request,$fileUrl);
-        
+
         $msg = "";
-        
+
         DB::connection('pgsql2')->transaction(function () use ($request,$xml,&$msg) {
             $maxid = MetadataGeo::on('pgsql2')->max('id');
 
@@ -509,11 +509,11 @@ class MetadataController extends Controller {
             $mg->uuid = $uuid;
             $mg->disahkan = "0";
             $mg->portal_user_id = auth::user()->id;
-            
+
             $msg = "";
             if(isset($request->btn_save) || (isset($request->submitAction) && $request->submitAction == "save")){
                 $mg->is_draf = "no";
-                
+
                 if($request->c2_contact_email != ""){
                     //send email to pengesah metadata
                     $user = User::where('email',$request->c2_contact_email)->get()->first();
@@ -748,7 +748,7 @@ class MetadataController extends Controller {
             $mg->timestamps = false;
             $mg->data = $xml;
             $mg->changedate = date("Y-m-d H:i:s");
-            
+
             if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
 //                $mg->disahkan = "no";
                 $mg->catatan1 = $request->catatan1;
@@ -784,11 +784,11 @@ class MetadataController extends Controller {
                 $mg->catatan15 = "";
                 $mg->disahkan = "0";
             }
-            
+
             if(isset($request->newStatus)){
                 $mg->disahkan = $request->newStatus;
             }
-            
+
             $msg = "";
             if($request->submitAction == "save"){
                 $mg->is_draf = "no";
@@ -874,7 +874,7 @@ class MetadataController extends Controller {
                 $metadata->timestamps = false;
                 $metadata->disahkan = 'yes';
                 $metadata->update();
-                
+
                 $ftestxml2 = <<<XML
                 $metadata->data
                 XML;
@@ -883,12 +883,12 @@ class MetadataController extends Controller {
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $metadataxml = simplexml_load_string($ftestxml2);
-                
+
                 $metadataName = "";
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                    $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                 }
-                
+
                 $user = User::where("id",$metadata->portal_user_id)->get()->first();
                 if(!empty($user)){
                     //send email to penerbit
@@ -906,7 +906,7 @@ class MetadataController extends Controller {
             $metadata->timestamps = false;
             $metadata->disahkan = 'yes';
             $metadata->update();
-            
+
             $ftestxml2 = <<<XML
             $metadata->data
             XML;
@@ -954,7 +954,7 @@ class MetadataController extends Controller {
                 $metadata->timestamps = false;
                 $metadata->disahkan = 'no';
                 $metadata->update();
-                
+
                 $ftestxml2 = <<<XML
                 $metadata->data
                 XML;
@@ -963,12 +963,12 @@ class MetadataController extends Controller {
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $metadataxml = simplexml_load_string($ftestxml2);
-                
+
                 $metadataName = "";
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                    $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                 }
-                
+
                 $user = User::where("id",$metadata->portal_user_id)->get()->first();
                 if(!empty($user)){
                     //send email to penerbit
@@ -986,7 +986,7 @@ class MetadataController extends Controller {
             $metadata->timestamps = false;
             $metadata->disahkan = 'no';
             $metadata->update();
-            
+
             $ftestxml2 = <<<XML
             $metadata->data
             XML;
@@ -1034,7 +1034,7 @@ class MetadataController extends Controller {
         
         return redirect('mygeo_senarai_metadata')->with('message', 'Metadata berjaya dihapus.');
     }
-    
+
     public function kemaskini_elemen_metadata() {
         if(!auth::user()->hasRole(['Pentadbir Metadata'])){
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
@@ -1045,7 +1045,7 @@ class MetadataController extends Controller {
 
         return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('elemens','categories'));
     }
-    
+
     public function simpan_kategori(Request $request) {
         if(!auth::user()->hasRole(['Pentadbir Metadata'])){
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
@@ -1069,7 +1069,7 @@ class MetadataController extends Controller {
         
         return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
     }
-    
+
     public function simpan_tajuk(Request $request) {
         if(!auth::user()->hasRole(['Pentadbir Metadata'])){
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
@@ -1101,15 +1101,15 @@ class MetadataController extends Controller {
         
         return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
     }
-    
+
     public function simpan_sub_tajuk(Request $request) {
         if(!auth::user()->hasRole(['Pentadbir Metadata'])){
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
-        }   
+        }
         $elemens = ElemenMetadata::get();
 
     }
-    
+
     public function simpan_elemen(Request $request) {
         if(!auth::user()->hasRole(['Pentadbir Metadata'])){
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
