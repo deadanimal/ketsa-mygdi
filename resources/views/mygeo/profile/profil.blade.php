@@ -79,7 +79,7 @@
                                         <input class="form-control form-control-sm ml-3" id="input-nric" type="text" value="{{ $user->nric }}" disabled />
                                     </div>
                                 </div>
-                                <div class="row mb-2">
+                                <div class="row mb-2 divSektor">
                                     <div class="col-3">
                                         <label class="form-control-label mr-4" for="sektor">
                                             Sektor
@@ -96,10 +96,20 @@
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:$user->agensi_organisasi) }}" disabled />
+                                        <?php
+                                        if(Auth::user()->hasRole('Pemohon Data')){
+                                            ?>
+                                            <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ $user->agensi_organisasi }}" disabled />
+                                            <?php
+                                        }else{
+                                            ?>
+                                            <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ (is_numeric($user->agensi_organisasi) ? $user->agensiOrganisasi->name:$user->agensi_organisasi) }}" disabled />
+                                            <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
-                                <div class="row mb-2">
+                                <div class="row mb-2 divBahagian">
                                     <div class="col-3">
                                         <label class="form-control-label mr-4" for="bahagian">
                                             Bahagian
@@ -252,6 +262,13 @@
 
 <script>
     $(document).ready(function(){
+        <?php
+        if(Auth::user()->hasRole('Pemohon Data')){
+            ?>
+            $('.divSektor,.divBahagian').hide();
+            <?php
+        }
+        ?>
 
         $(document).on('click','.btnTukar',function(){
             var passold = $('#password_old').val();

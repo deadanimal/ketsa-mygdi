@@ -108,7 +108,7 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-2 divSektor">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="sektor">
                                                 Sektor
@@ -132,7 +132,7 @@
                                             <?php
                                             if (Auth::user()->hasRole(['Pemohon Data'])) {
                                                 ?>
-                                                <input type="text" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                                                <input type="text" name="agensi_organisasi" class="form-control form-control-sm ml-3" value="{{ $user->agensi_organisasi }}">
                                                 <?php
                                             }else{
                                                 ?>
@@ -144,7 +144,7 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-2 divBahagian">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="bahagian">
                                                 Bahagian
@@ -249,6 +249,14 @@
 
 <script>
 $(document).ready(function(){
+    <?php
+    if(Auth::user()->hasRole('Pemohon Data')){
+        ?>
+        $('.divSektor,.divBahagian').hide();
+        <?php
+    }
+    ?>
+                
     $(document).on('click','.btn_simpan',function(){
         var nric = $("#nric").val();
         var agensi_organisasi = $("#agensi_organisasi").val();
