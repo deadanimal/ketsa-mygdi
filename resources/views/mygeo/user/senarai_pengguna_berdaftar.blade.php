@@ -202,7 +202,19 @@
                                             <tr>
                                                 <td>{{ $bil }}</td>
                                                 <td>{{ $user->name }}</td>
-                                                <td>{{ (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"") }}</td>
+                                                <td>
+                                                    <?php
+                                                    if (Auth::user()->hasRole(['Pemohon Data'])) {
+                                                        ?>
+                                                        {{ $user->agensi_organisasi }}
+                                                        <?php
+                                                    }else{
+                                                        ?>
+                                                        {{ (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"") }}
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </td>
                                                 <td>
                                                     <?php
                                                     if (count($user->getRoleNames()) > 0) {
