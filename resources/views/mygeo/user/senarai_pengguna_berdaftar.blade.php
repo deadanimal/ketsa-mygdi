@@ -204,7 +204,7 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>
                                                     <?php
-                                                    if (Auth::user()->hasRole(['Pemohon Data'])) {
+                                                    if($user->hasRole(['Pemohon Data'])) {
                                                         ?>
                                                         {{ $user->agensi_organisasi }}
                                                         <?php
