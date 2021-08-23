@@ -70,16 +70,19 @@
                                                 <td>{{ $pemohon->name }}</td>
                                                 <td>
                                                     @if ($pemohon->status == '1')
-                                                        <span class="badge badge-pill badge-success">Dalam Proses</span>
+                                                        <span class="badge badge-pill badge-warning">Dalam Proses</span>
                                                     @elseif($pemohon->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                    @elseif($pemohon->status == '3')
+                                                        <span class="badge badge-pill badge-success">Selesai</span>
                                                     @elseif($pemohon->status == '0')
                                                         <span class="badge badge-pill badge-info">Baru</span>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <a href="/lihat_permohonan/{{ $pemohon->id }}"
-                                                        class="btn btn-sm btn-success text-center"><i class="fas fa-edit"></i>
+                                                        class="btn btn-sm btn-success text-center"><i
+                                                            class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $pemohon->id }}"
                                                         class="btnDelete btn btn-sm btn-danger mr-2"><i

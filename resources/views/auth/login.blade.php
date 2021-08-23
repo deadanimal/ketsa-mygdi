@@ -405,7 +405,7 @@
     $(document).on("click", ".btn_login", function() {
         var captcha = $('#g-recaptcha-response').val();
         <?php
-        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
+        if($_SERVER['HTTP_HOST'] == "127.0.0.1:8003"){
             ?>
             $("#formLogin").submit();
             <?php
@@ -435,7 +435,7 @@
         $('#btn_daftar').hide();
         $('#btn_batal').hide();
     });
-    
+
     $('#sektor').change(function() {
         $.ajax({
             method: "POST",
@@ -451,14 +451,14 @@
             $.each(data.aos, function(index,value) {
                 $('#agensi_organisasi').append('<option value="'+value.id+'" data-name="'+value.name+'">'+value.name+'</option>');
             });
-            
+
             $('#bahagian').html('');
             $('#bahagian').append('<option value="">Pilih...</option>');
         });
     });
     $('#agensi_organisasi').change(function() {
         var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
-        
+
         $.ajax({
             method: "POST",
             url: "{{ url('get_bahagian') }}",
@@ -779,7 +779,7 @@
         });
 
         <?php
-        
+
         if (null !== Session::get('msg') && !is_null(Session::get('msg')) && 'NULL' != Session::get('msg')) {
             ?>alert("<?php echo Session::get('msg'); ?>");
         <?php
