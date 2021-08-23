@@ -932,6 +932,7 @@ class MetadataController extends Controller {
                     $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
                 });
             }
+            //smbg sini - add pengumuman when sahkan
         }
         
         $at = new AuditTrail();
