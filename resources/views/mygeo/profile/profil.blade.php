@@ -103,7 +103,7 @@
                                             <?php
                                         }else{
                                             ?>
-                                            <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ (is_numeric($user->agensi_organisasi) && isset($user->agensi_organisasi) ? $user->agensiOrganisasi->name:$user->agensi_organisasi) }}" disabled />
+                                            <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ (is_numeric($user->agensi_organisasi) && isset($user->agensiOrganisasi) ? $user->agensiOrganisasi->name:$user->agensi_organisasi) }}" disabled />
                                             <?php
                                         }
                                         ?>
