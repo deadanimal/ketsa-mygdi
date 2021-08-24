@@ -972,11 +972,22 @@
                                                     <tr>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_type">
-                                                                <input type="radio" name="c15_t5_type" value="Classification Correctness" checked>&nbsp;<?php echo __('lang.classificationCorrectness'); ?>
+                                                                <input type="radio" name="c15_t5_type" id="ClassificationCorrectness" value="Classification Correctness" checked>&nbsp;<?php echo __('lang.classificationCorrectness'); ?>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_type">
+                                                                <input type="radio" name="c15_t5_type" value="Non Quantitative Attribute Correctness">&nbsp;<?php echo __('lang.nonQuantitativeAttributeCorrectness'); ?>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_type">
+                                                                <input type="radio" name="c15_t5_type" value="Quantitative Attribute Accuracy">&nbsp;<?php echo __('lang.quantitativeAttributeCorrectness'); ?>
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <?php //================= ?>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_scope">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
@@ -997,7 +1008,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
                                                                 <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
@@ -1005,7 +1016,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
@@ -1019,7 +1030,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
@@ -1031,11 +1042,139 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
                                                                 <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
                                                                 <input type="text" name="c15_t5_conform_result" id="c15_t5_conform_result" class="form-control form-control-sm" value="{{old('c15_t5_conform_result')}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_scope_2">
+                                                                <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+                                                                <select name="c15_t5_scope_2" id="c15_t5_scope_2" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{(old('c15_t5_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{(old('c15_t5_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{(old('c15_t5_scope_2') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{(old('c15_t5_scope_2') == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{(old('c15_t5_scope_2') == 'feature' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{(old('c15_t5_scope_2') == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{(old('c15_t5_scope_2') == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{(old('c15_t5_scope_2') == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{(old('c15_t5_scope_2') == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{(old('c15_t5_scope_2') == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{(old('c15_t5_scope_2') == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{(old('c15_t5_scope_2') == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_comply_level_2">
+                                                                <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+                                                                <input type="text" name="c15_t5_comply_level_2" id="c15_t5_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t5_comply_level_2')}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_classCorrect_2_date">
+                                                                <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
+                                                                <div class="input-group date" id="c15_t5_classCorrect_2_date_div" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
+                                                                    <input type="date" name="c15_t5_date_2" id="c15_t5_date_2" class="form-control form-control-sm" value="{{old('c15_t5_date_2')}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_result_2">
+                                                                <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+                                                                <select name="c15_t5_result_2" id="c15_t5_result_2" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{(old('c15_t5_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{(old('c15_t5_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{(old('c15_t5_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_4">
+                                                                <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+                                                                <input type="text" name="c15_t5_conform_result_2" id="c15_t5_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t5_conform_result_2')}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_scope_3">
+                                                                <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+                                                                <select name="c15_t5_scope_3" id="c15_t5_scope_3" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{(old('c15_t5_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{(old('c15_t5_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{(old('c15_t5_scope_3') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{(old('c15_t5_scope_3') == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{(old('c15_t5_scope_3') == 'feature' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{(old('c15_t5_scope_3') == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{(old('c15_t5_scope_3') == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{(old('c15_t5_scope_3') == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{(old('c15_t5_scope_3') == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{(old('c15_t5_scope_3') == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{(old('c15_t5_scope_3') == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{(old('c15_t5_scope_3') == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_comply_level_3">
+                                                                <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+                                                                <input type="text" name="c15_t5_comply_level_3" id="c15_t5_comply_level_3" class="form-control form-control-sm" value="{{old('c15_t5_comply_level_3')}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_classCorrect_date_3">
+                                                                <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
+                                                                <div class="input-group date" id="c15_t5_classCorrect_date_div_3" data-target-input="nearest">
+                                                                    <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
+                                                                    <input type="date" name="c15_t5_date_3" id="c15_t5_date_3" class="form-control form-control-sm" value="{{old('c15_t5_date_3')}}">
+                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>-->
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_result_3">
+                                                                <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+                                                                <select name="c15_t5_result_3" id="c15_t5_result_3" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{(old('c15_t5_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{(old('c15_t5_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{(old('c15_t5_result_3') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_conform_result_3">
+                                                                <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+                                                                <input type="text" name="c15_t5_conform_result_3" id="c15_t5_conform_result_3" class="form-control form-control-sm" value="{{old('c15_t5_conform_result_3')}}">
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1075,6 +1214,11 @@
         $('.TemporalConsistency').hide();
         $('.TemporalValidity').hide();
         $("#AccuracyorTimeMeasurement").prop("checked", true);
+        //t5
+        $('.classificationCorrectness').show();
+        $('.nonQuantitativeAttributeCorrectness').hide();
+        $('.quantitativeAttributeCorrectness').hide();
+        $("#ClassificationCorrectness").prop("checked", true);
     });
 
     $('input:radio[name="c15_t1_complete_comm_or_omit"]').change(function() {
@@ -1137,6 +1281,21 @@
             $('.AccuracyorTimeMeasurement').hide();
             $('.TemporalConsistency').hide();
             $('.TemporalValidity').show();
+        }
+    });
+    $('input:radio[name="c15_t5_type"]').change(function() {
+        if ($(this).val() == 'Classification Correctness') {
+            $('.classificationCorrectness').show();
+            $('.nonQuantitativeAttributeCorrectness').hide();
+            $('.quantitativeAttributeCorrectness').hide();
+        } else if ($(this).val() == 'Non Quantitative Attribute Correctness') {
+            $('.classificationCorrectness').hide();
+            $('.nonQuantitativeAttributeCorrectness').show();
+            $('.quantitativeAttributeCorrectness').hide();
+        } else if ($(this).val() == 'Quantitative Attribute Accuracy') {
+            $('.classificationCorrectness').hide();
+            $('.nonQuantitativeAttributeCorrectness').hide();
+            $('.quantitativeAttributeCorrectness').show();
         }
     });
 </script>

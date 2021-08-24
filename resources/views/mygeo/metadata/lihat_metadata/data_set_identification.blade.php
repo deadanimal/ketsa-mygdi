@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="acard-body opacity-8">
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType) != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) && trim($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) != "") {
                     ?>
                     <div class="row mb-4">
                         <div class="col-xl-2">
@@ -19,7 +19,7 @@
                             </label>
                         </div>
                         <div class="col-xl-3">
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType . "</p>"; ?>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode . "</p>"; ?>
                         </div>
                     </div>
                     <?php
@@ -28,7 +28,7 @@
                 
                 <div class="row mb-2">
                     <?php
-                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator) != "") {
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) && trim($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) != "") {
                         ?>
                         <div class="col-xl-3">
                             <label class="form-control-label" for="input-hardsoftcopy">
@@ -37,26 +37,26 @@
                             </label>
                         </div>
                         <div class="col-xl-2">
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator . "</p>"; ?>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer . "</p>"; ?>
                         </div>
                         <?php
                     }
                     ?>
                     <?php
-                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance) != "") {
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance) && trim($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance) != "") {
                         ?>
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-imggsd">
                                 Image Resolution (GSD)</label>
                         </div>
                         <div class="col-md-2">
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance . " meter</p>"; ?>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance . " meter</p>"; ?>
                         </div>
                         <?php
                     }
                     ?>
                     <?php
-                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->language) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->language) != "") {
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) && trim($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) != "") {
                         ?>
                         <div class="col-xl-1">
                             <label class="form-control-label" for="input-language">
@@ -64,7 +64,7 @@
                             </label>
                         </div>
                         <div class="col-xl-2">
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->language . "</p>"; ?>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString . "</p>"; ?>
                         </div>
                         <?php 
                     }
@@ -76,7 +76,7 @@
                         ?>
                         <div class="col-xl-1">
                             <label class="form-control-label" for="input-language">
-                                MAINTENANCE INFORMATION
+                                Maintenance Information
                             </label>
                         </div>
                         <div class="col-xl-2">

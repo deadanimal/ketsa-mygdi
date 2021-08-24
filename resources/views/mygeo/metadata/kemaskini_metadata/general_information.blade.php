@@ -78,12 +78,19 @@
                     <div class="col-8">
                         <?php
                         $pub_agencyOrg = "";
-                        if (isset($metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
+                        if (isset($metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString != "") {
                             $pub_agencyOrg = $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString;
 //                            echo $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString;
                         }
                         ?>
                         <input class="form-control form-control-sm ml-3" type="text" name="publisher_agensi_organisasi" value="{{ $pub_agencyOrg }}">
+                        <?php
+                        $bahagian = "";
+                        if (isset($metadataxml->contact->CI_ResponsibleParty->departmentName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->departmentName->CharacterString != "") {
+                            $bahagian = $metadataxml->contact->CI_ResponsibleParty->departmentName->CharacterString;
+                        }
+                        ?>
+                        <input type="hidden" name="publisher_bahagian" value="{{ $bahagian }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0">

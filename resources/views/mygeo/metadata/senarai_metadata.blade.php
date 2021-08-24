@@ -79,8 +79,8 @@
                           <td>{{ $bil }}</td>
                           <td>
                               <?php
-                                if(isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                                   echo $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                                if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                                   echo $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                }
                                ?>
                           </td>
@@ -91,8 +91,8 @@
                           </td>
                             <td>
                                 <?php
-                                   if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
-                                      echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
                                   }
                                   ?>
                              </td>
@@ -146,8 +146,8 @@
                           </td>
                             <td>
                                 <?php
-                                   if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
-                                      echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
                                   }
                                   ?>
                              </td>
@@ -195,8 +195,8 @@
                              <?php //################################## ?>                          
                             <td>
                                 <?php
-                                   if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
-                                      echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
                                   }
                                   ?>
                              </td>
@@ -244,8 +244,8 @@
                              <?php //################################## ?>                          
                             <td>
                                 <?php
-                                   if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
-                                      echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
                                   }
                                   ?>
                              </td>

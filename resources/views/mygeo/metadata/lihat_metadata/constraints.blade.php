@@ -14,7 +14,7 @@
                     <div class="pl-lg-3">
                         <?php
                         $flag1 = 1;
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
                             $flag1 *= 0;
                             ?>
                             <div class="row mb-2 divUseLimitation">
@@ -24,14 +24,14 @@
                                     </label>
                                 </div>
                                 <div class="col-xl-7">
-                                    <?php trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString); ?>
+                                    <?php trim($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString); ?>
                                 </div>
                             </div>
                             <?php
                         }
                         ?>
                         <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints != "") {
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
                             $flag1 *= 0;
                             ?>
                             <div class="row mb-2">
@@ -41,14 +41,14 @@
                                     </label>
                                 </div>
                                 <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints . "</p>"; ?>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode . "</p>"; ?>
                                 </div>
                             </div>
                             <?php
                         }
                         ?>
                         <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints != "") {
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
                             $flag1 *= 0;
                             ?>
                             <div class="row mb-2">
@@ -58,7 +58,7 @@
                                     </label>
                                 </div>
                                 <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints . "</p>"; ?>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode . "</p>"; ?>
                                 </div>
                             </div>
                             <?php
@@ -72,34 +72,34 @@
                     <div class="pl-lg-3">
                         <?php
                         $flag2 = 1;
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification != "") {
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
                             $flag2 *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <label class="form-control-label" for="input-access-cons">
-                                        Classification System
+                                        Classification
                                     </label>
                                 </div>
                                 <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification . "</p>"; ?>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode . "</p>"; ?>
                                 </div>
                             </div>
                             <?php
                         }
                         ?>
                         <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
                             $flag2 *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <label class="form-control-label" for="input-reference">
-                                        Reference
+                                        Classification System
                                     </label>
                                 </div>
                                 <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference . "</p>"; ?>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference . "</p>"; ?>
                                 </div>
                             </div>
                             <?php
