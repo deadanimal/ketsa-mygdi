@@ -164,7 +164,7 @@ class DataAsasController extends Controller
             Mohondata::where(["id" => $request->permohonan_id])->update([
                 "status" => $request->status = 3,
             ]);
-            
+
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
@@ -197,7 +197,7 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        $pemohons = MohonData::where(['status' => 1,'dihantar' => 1])->get();
+        $pemohons = MohonData::where(['dihantar' => 1])->get();
         return view('mygeo.muat_turun_data', compact('pemohons'));
     }
 
@@ -224,7 +224,7 @@ class DataAsasController extends Controller
         $senarai_data->data_id = $request->data_id;
 
         $senarai_data->save();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -248,7 +248,7 @@ class DataAsasController extends Controller
                 "harga_data" => $request->harga_data,
             ]);
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -261,13 +261,13 @@ class DataAsasController extends Controller
     public function delete_senarai_data(Request $request)
     {
         SenaraiData::where(["id" => $request->id])->delete();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Delete';
         $at->save();
-        
+
         return redirect('senarai_data')->with('success', 'Data tersebut telah dibuang');
     }
 
@@ -336,13 +336,13 @@ class DataAsasController extends Controller
             ]);
 
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Update';
         $at->save();
-        
+
         $id = $request->permohonan_id;
         return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
     }
@@ -386,7 +386,7 @@ class DataAsasController extends Controller
         $skdata->kawasan_data = $request->kawasan_data;
         $skdata->permohonan_id = $request->permohonan_id;
         $id = $request->permohonan_id;
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -461,7 +461,7 @@ class DataAsasController extends Controller
                     "catatan" => $request->catatan,
                     "assign_admin" => $request->assign_admin,
                 ]);
-                
+
                 $at = new AuditTrail();
                 $at->path = url()->full();
                 $at->user_id = Auth::user()->id;
@@ -478,7 +478,7 @@ class DataAsasController extends Controller
                     "name" => $request->name,
                     "tujuan" => $request->tujuan,
                 ]);
-                
+
                 $at = new AuditTrail();
                 $at->path = url()->full();
                 $at->user_id = Auth::user()->id;
@@ -537,7 +537,7 @@ class DataAsasController extends Controller
         }
 
         $id = $request->permohonan_id;
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -602,7 +602,7 @@ class DataAsasController extends Controller
             MohonData::where(["id" => $request->permohonan_id])->update([
                 "penilaian" => $request->penilaian = 1,
             ]);
-            
+
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
@@ -631,7 +631,7 @@ class DataAsasController extends Controller
             $failModel->file_path = '/storage/' . $failPath;
             $failModel->permohonan_id = $request->permohonan_id;
             $failModel->save();
-            
+
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
@@ -702,7 +702,7 @@ class DataAsasController extends Controller
         if($user->kategori == 'G2E - Pelajar'){
             AkuanPelajar::where(["id" => $request->permohonan_id])->delete();
         }
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;

@@ -34,7 +34,7 @@ class AuthController extends Controller
         // echo "</pre>";
         // exit();
 
-        if ($_SERVER['HTTP_HOST'] != "localhost:8888") {
+        if ($_SERVER['HTTP_HOST'] != "127.0.0.1:8003") {
             if (!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == "") {
                 return redirect('/login')->with(['msg' => 'Sila lengkapkan reCaptcha']);
             }
@@ -57,7 +57,7 @@ class AuthController extends Controller
             $at->user_id = Auth::user()->id;
             $at->data = 'Login';
             $at->save();
-        
+
             return redirect()->intended('/landing_mygeo');
         }else{
             return redirect('/login')->with(['msg'=>'ID pengguna atau kata laluan tidak sah.']);
