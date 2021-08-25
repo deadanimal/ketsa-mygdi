@@ -73,25 +73,31 @@
                                         </div>
                                     </div>
                                     <p align="justify" class="mx-6">
-                                        <textarea class="form-control form-control-sm" cols="30"
+                                        <textarea class="form-control form-control-sm mt-3" cols="30"
                                             placeholder="Nama dan Alamat" rows="10"></textarea>
 
 
                                         Tuan/Puan,<br>
                                         <input type="text" class="form-control form-control-sm" name="tajuk_surat"
-                                        placeholder="Tajuk Surat Balasan Permohonan">
-                                        <input type="text" class="form-control form-control-sm my-4" name="no_rujukan"
+                                            placeholder="Tajuk Surat Balasan Permohonan">
+                                        <input type="hidden" class="form-control form-control-sm my-4" name="no_rujukan"
                                             placeholder="Tajuk" value="">
 
-                                        Dengan segala hormatnya merujuk kepada surat tuan/puan JPBD.Tr 1/1572/8(27)
-                                        bertarikh 5 Oktober 2020 mengenai perkara di atas.<br><br>
+                                        <span class="form-inline">Dengan segala hormatnya merujuk kepada surat tuan/puan
+                                            <input type="text" class="form-control form-control-sm col-1 mx-1"
+                                                name="no_rujukan_mohon" placeholder="JPBD.Tr 1/1572/8(27)">
+                                            bertarikh
+                                            <span>{{ Carbon\Carbon::parse($pemohon->date)->format('d M Y') }}</span>
+                                            mengenai perkara di atas.</span><br><br>
 
                                         2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan
                                         permohonan data geospatial terperingkat dan tiada halangan atas permohonan tersebut.
-                                        Senarai data yang dibekalkan adalah seperti Lamgiran 1. Walau bagaimanapun, untuk
+                                        Senarai data yang dibekalkan adalah seperti <span class="text-bold">Lampiran
+                                            1</span>. Walau bagaimanapun, untuk
                                         permohonan metadata pula, pihak tuan/puan boleh melayari aplikasi MyGDI Explorer
                                         untuk mendapatkan informasi yang lebih terperinci
-                                        https://www.mygeoportal.gov.my/node/173.<br><br>
+                                        <span class="text-bold">https://www.mygeoportal.gov.my/node/173.</span>
+                                        <br><br>
 
                                         3. Untuk makluman tuan/puan, penggunaan data ini adalah terikat dengan Pekeliling Am
                                         Bil 1/2007: Pekeliling Arahan Keselamatan Terhadap Dokumen Geospatial Terperingkat,
@@ -99,10 +105,11 @@
                                         Pemeliharaan Rekod-Rekod Kerajaan. <br><br>
 
                                         4. Pihak tuan/puan boleh melayari Aplikasi MyGDI Data Services di
-                                        https://mygos.mygeoportal.gov.my/myservices bagi mendapatkan paparan data asas GDC
+                                        <span class="text-bold">https://mygos.mygeoportal.gov.my/myservices</span> bagi
+                                        mendapatkan paparan data asas GDC
                                         yang boleh dikongsi antara agensi kerajaan melalui program MyGDl. Permohonan untuk
                                         mendapatkan capaian ke aplikasi ini boleh dihantar kepada pihak PGN melalui emel
-                                        pgn.ktotQketsa.gov.mv. <br><br>
+                                        <span class="text-bold">pgn.ktotQketsa.gov.mv.</span> <br><br>
 
                                         5. Sebarang pertanyaan mengenai kesahihan dan ketepatan data perlulah dirujuk kepada
                                         Agensi Pembekal Data (APD) yang berkenaan. Penggunaan data ini selain daripada
@@ -110,30 +117,27 @@
                                         <br><br>
 
                                         6. Mohon kerjasama pihak tuan/puan untuk melengkapkan Borang Pengesahan Penerimaan
-                                        Data Geospatial seperti di Lampiran 2 dan Borang Penilaian Perkongsian Data Melalui
-                                        MyGDI seperti di Lampiran 3 dan dikembalikan semula kepada pihak PGN dalam tempoh
+                                        Data Geospatial seperti di <span class="text-bold">Lampiran 2</span> dan Borang
+                                        Penilaian Perkongsian Data Melalui
+                                        MyGDI seperti di <span class="text-bold">Lampiran 3</span> dan dikembalikan semula
+                                        kepada pihak PGN dalam tempoh
                                         dua minggu dari tarikh surat ini. Sekiranya ada sebarang pertanyaan, sila hubungi
                                         Puan Normala Binti Mohamed Solehhin di talian 03-8886 1193 (normala@ketsa.gov.my).
                                         <br><br><br>
 
 
                                         Sekian terima kasih.
+                                        <br><br><br>
+                                        <i> **Ini adalah surat cetakan komputer, tidak perlu tandatangan**</i>
+
                                     </p>
                                     @csrf
-                                    <input type="date" class="form-control form-control-sm">
-
-                                    <input type="text" class="form-control form-control-sm" name="tajuk_surat"
-                                        placeholder="Tajuk Surat Balasan Permohonan">
-                                    <input type="text" class="form-control form-control-sm" name="no_rujukan_mohon"
-                                        placeholder="No rujukan Permohonan">
-                                    <input type="date" class="form-control form-control-sm" name="date_mohon"
-                                        placeholder="Tarikh Permohonan">
 
                                     <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
                                     <input type="hidden" name="id" value="{{ $pemohon->id }}">
 
                                     @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
-                                        <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                                        <button type="submit" class="btn btn-primary float-right">Simpan</button>
                                     @endif
                                 </form>
                             </div>
