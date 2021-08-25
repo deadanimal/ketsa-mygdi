@@ -236,14 +236,16 @@
 
         <div class="row">
             <div class="col-3">
+                <h2>Kategori :</h2>
                 @foreach ($senarai_data as $data)
                     @if (!empty($data->subkategori))
-                        <a href="/data_asas_senarai/{{$data->id}}">{{$data->kategori}}</a><br>
+                        <a href="/data_asas_senarai/{{$data->id}}">{{$loop->iteration}}.&nbsp; {{$data->kategori}}</a><br>
                     @endif
 
                 @endforeach
             </div>
             <div class="col-3">
+                <h2>Sub-Kategori :</h2>
                 @forelse ($subs as $dataa)
                 <a href="/data_asas_senarai/{{$data->id}}/{{$dataa->id}}">{{$dataa->subkategori}}</a><br>
                 @empty
@@ -251,6 +253,7 @@
                 @endforelse
             </div>
             <div class="col-3">
+                <h2>Lapisan Data :</h2>
                 @forelse ($lapisan as $ldata)
                 {{-- {{$ldata}} --}}
                 <a>{{$ldata->lapisan_data}}</a><br>
@@ -259,6 +262,7 @@
                 @endforelse
             </div>
             <div class="col-3">
+                <h2>Kelas :</h2>
                 @forelse ($lapisan as $ldata)
                 {{-- {{$ldata}} --}}
                 <a>{{$ldata->kelas}}</a><br>
@@ -272,9 +276,9 @@
 
 
         <br>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-2 div_kategori">
-                <h2>Kategori:</h2>
+
                 <p class="kategori" data-id="Aeronautical">1)  Aeronautical</p>
                 <p class="kategori" data-id="Built_Environment">2)  Built Environment</p>
                 <p class="kategori" data-id="Demarcation">3)  Demarcation</p>
@@ -357,7 +361,7 @@
                     <p class="subkategori">2)  Label Nama Geografi (Label of Geography Name - ZB)</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 

@@ -62,7 +62,8 @@
                                             <th>BIL</th>
                                             <th>NAMA PERMOHONAN</th>
                                             <th>TARIKH</th>
-                                            <th>TINDAKAN</th>
+                                            <th>AKUAN PENERIMAAN</th>
+                                            <th>PENILAIAN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,7 +73,18 @@
                                                 <td>{{ $pemohon->name }}</td>
                                                 <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
                                                 <td>
-
+                                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                                        <a href="/akuan_penerimaan/{{ $pemohon->id }}"
+                                                            class="btn btn-sm btn-primary text-center">
+                                                            Lihat
+                                                        @else
+                                                            <a href="/akuan_penerimaan/{{ $pemohon->id }}" @if ($pemohon->acceptance == '1') hidden @endif
+                                                                class="btn btn-sm btn-primary text-center">
+                                                                Buat Akuan Penerimaan
+                                                    @endif
+                                                    </a>
+                                                </td>
+                                                <td>
                                                     @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                                         <a href="/penilaian_pemohon/{{ $pemohon->id }}"
                                                             class="btn btn-sm btn-info text-center">

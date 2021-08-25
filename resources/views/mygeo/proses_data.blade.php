@@ -190,6 +190,25 @@
 
     </div>
 
+
+    <script>
+        @foreach ($pemohons as $pemohon)
+            $('.amount_{{$pemohon->id}}').change(function() {
+            var tot = 0;
+
+            $('.price_{{$pemohon->id}}').each(function() {
+            var mul = 0;
+            price = +$(this).val();
+            });
+            $('.amount_{{$pemohon->id}}').each(function() {
+            result = +$(this).val();
+            var mul = result * price;
+            tot += mul;
+            });
+            $('#total_{{$pemohon->id}}').val(tot);
+            });
+        @endforeach
+    </script>
     <script>
         $(document).ready(function() {
             $("#table_metadatas").DataTable({
@@ -212,23 +231,5 @@
                 }
             });
         });
-    </script>
-    <script>
-        @foreach ($pemohons as $pemohon)
-            $('.amount_{{$pemohon->id}}').change(function() {
-            var result = 0;
-            var mul = 0;
-
-            $('.price_{{$pemohon->id}}').each(function() {
-            price = +$(this).val();
-            });
-            $('.amount_{{$pemohon->id}}').each(function() {
-            result = +$(this).val();
-            mul += result * price;
-            });
-            $('#total_{{$pemohon->id}}').val(mul);
-            });
-
-        @endforeach
     </script>
 @stop
