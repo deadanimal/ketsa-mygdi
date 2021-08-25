@@ -17,8 +17,8 @@
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
-                        <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-dark d-inline-block mb-0">Penilaian</h6>
+                        <div class="col-lg-12 col-7">
+                            <h6 class="h2 text-dark d-inline-block mb-0">Akuan Penerimaan dan Penilaian Data</h6>
 
                             <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
@@ -26,14 +26,14 @@
                                         <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
                                     </li>
                                     <li aria-current="page" class="breadcrumb-item active">
-                                        Penilaian
+                                        Akuan Penerimaan dan Penilaian Data
                                     </li>
                                 </ol>
                             </nav>
                         </div>
-                        <div class="col-lg-6 col-5 text-right">
+                        {{-- <div class="col-lg-6 col-5 text-right">
 
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -49,7 +49,7 @@
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h3 class="mb-0">Senarai Penilaian</h3>
+                                        <h3 class="mb-0">Senarai Akuan Penerimaan dan Penilaian Data</h3>
                                     </div>
                                     <div class="col-4 text-right">
                                     </div>
@@ -62,7 +62,8 @@
                                             <th>BIL</th>
                                             <th>NAMA PERMOHONAN</th>
                                             <th>TARIKH</th>
-                                            <th>TINDAKAN</th>
+                                            <th>AKUAN PENERIMAAN DATA</th>
+                                            <th>PENILAIAN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,23 +73,35 @@
                                                 <td>{{ $pemohon->name }}</td>
                                                 <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
                                                 <td>
+                                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                                        <a href="/akuan_penerimaan/{{ $pemohon->id }}"
+                                                            class="btn btn-sm btn-primary text-center">
+                                                            Lihat
+                                                    @else
+                                                            @if($pemohon->acceptance == '1')
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                            @endif
+                                                            <a href="/akuan_penerimaan/{{ $pemohon->id }}" @if ($pemohon->acceptance == '1') hidden @endif
+                                                                class="btn btn-sm btn-primary text-center">
+                                                                Buat Akuan Penerimaan
+                                                    @endif
 
+                                                    </a>
+                                                </td>
+                                                <td>
                                                     @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                                         <a href="/penilaian_pemohon/{{ $pemohon->id }}"
                                                             class="btn btn-sm btn-info text-center">
                                                             Lihat
-                                                        @else
+                                                    @else
+                                                            @if($pemohon->penilaian == '1')
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                            @endif
                                                             <a href="/penilaian_pemohon/{{ $pemohon->id }}" @if ($pemohon->penilaian == '1') hidden @endif
                                                                 class="btn btn-sm btn-info text-center">
                                                                 Buat Penilaian
                                                     @endif
                                                     </a>
-                                                    @if (Auth::user()->hasRole(['Pemohon Data']))
-                                                        <button type="button" data-permohonanid="{{ $pemohon->id }}"
-                                                            class="btnDelete btn btn-sm btn-danger mr-2"><i
-                                                                class="fas fa-trash"></i>
-                                                        </button>
-                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\AkuanPelajar;
 use App\DokumenBerkaitan;
 use App\SenaraiKawasanData;
@@ -9,6 +10,7 @@ use App\MohonData;
 use App\ProsesData;
 use App\Penilaian;
 use App\SenaraiData;
+use App\KelasKongsi;
 use App\SuratBalasan;
 use Illuminate\Http\Request;
 use App\User;
@@ -130,7 +132,7 @@ class DataAsasController extends Controller
             $pemohons = MohonData::where(['dihantar' => 1])->orderBy('created_at', 'DESC')->get();
         } else {
             $pemohons = MohonData::with('users')
-            ->where(['dihantar' => 1])
+            ->where(['dihantar' => 1, 'status' => 3])
             ->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         }
         return view('mygeo.penilaian', compact('pemohons'));
@@ -141,6 +143,25 @@ class DataAsasController extends Controller
         $penilaian = Penilaian::where('permohonan_id', $id)->first();
         $pemohon = MohonData::where('id', $id)->first();
         return view('mygeo.penilaian_pemohon',compact('pemohon','penilaian'));
+    }
+
+    public function akuan_terima($id)
+    {
+        $pemohon = MohonData::where('id', $id)->first();
+        return view('mygeo.akuan_terima',compact('pemohon'));
+    }
+
+    public function change_akuan_terima(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            //save acceptance data
+            Mohondata::where(["id" => $request->permohonan_id])->update([
+                "acceptance" => $request->acceptance,
+            ]);
+
+        });
+
+        exit();
     }
 
     public function proses_data()
@@ -279,8 +300,22 @@ class DataAsasController extends Controller
 
     public function kategori_kelas_kongsi_data()
     {
-        $senarai_data = SenaraiData::all();
-        return view('mygeo.kategori_kelas_kongsi_data',compact('senarai_data'));
+        $kategori = KelasKongsi::orderby('subcategory')->get();
+        return view('mygeo.kategori_kelas_kongsi_data',compact('kategori'));
+    }
+
+    public function update_kelas_kongsi(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            //save senarai data
+            KelasKongsi::where(["id" => $request->id_kelas_kongsi])->update([
+                "category" => $request->kategori,
+                "subcategory" => $request->subkategori,
+                "status" => $request->status,
+            ]);
+        });
+
+        return redirect('/kategori_kelas_kongsi_data')->with('success', 'Data Berjaya Dikemaskini');
     }
 
     public function surat_balasan($id)
@@ -414,22 +449,23 @@ class DataAsasController extends Controller
             ["lapisan_data","=", $request->lapisan_data],
         ])->first();
 
-
-        DB::transaction(function () use ($request, $valid) {
-            if(empty($valid)){
-
+        if(empty($valid))
+            {
                 return redirect()->back()->with('warning', 'Sila pilih padanan lapisan data yang betul');
             }
-            else {
+            else
+            {
+                DB::transaction(function () use ($request, $valid) {
+                    //update senarai kawasan data
+                    SenaraiKawasanData::where(["id" => $request->sk_id])->update([
+                        "kategori" => $request->kategori,
+                        "subkategori" => $request->subkategori,
+                        "lapisan_data" => $request->lapisan_data,
+                        "kawasan_data" => $request->kawasan_data,
+                        "harga_data" => $valid->harga_data,
+                    ]);
 
-                //update senarai kawasan data
-                SenaraiKawasanData::where(["id" => $request->sk_id])->update([
-                    "kategori" => $request->kategori,
-                    "subkategori" => $request->subkategori,
-                    "lapisan_data" => $request->lapisan_data,
-                    "kawasan_data" => $request->kawasan_data,
-                    "harga_data" => $valid->harga_data,
-                ]);
+                });
 
                 $at = new AuditTrail();
                 $at->path = url()->full();
@@ -437,11 +473,12 @@ class DataAsasController extends Controller
                 $at->data = 'Update';
                 $at->save();
 
-            $id = $request->permohonan_id;
-            // return $id;
-            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan Telah Dikemaskini!');
+                $id = $request->permohonan_id;
+                return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan Telah Dikemaskini.');
+
             }
-        });
+
+
     }
 
     public function delete_senarai_kawasan(Request $request)
@@ -515,6 +552,7 @@ class DataAsasController extends Controller
         $mdata->tujuan = $request->tujuan;
         $mdata->dihantar = $request->dihantar = 0;
         $mdata->status = $request->status = 0;
+        $mdata->acceptance = $request->acceptance = 0;
         $mdata->user_id = $request->user_id = $user->id;
         $mdata->save();
 

@@ -61,58 +61,67 @@
                             </div>
                             <div class="card-body p-4">
                                 <form action="/simpan_surat_balasan" method="POST">
-            <pre>
-                Pengarah
-                Jabatan Perancangan Bandar dan Desa Negeri Terengganu Tingkat 3 dan 4, Wisma Negeri
-                20646 KUALA TERENGGANU
-                (u/p: Puan Asfazilah Binti Samad)
+                                    <div class="row">
+                                        <div class="col-8"></div>
+                                        <div class="col-4">
+                                            <div class="form-inline">
+                                                Rujukan : KeTSA 606-4/3/2 Jld.13 (1q)
+                                            </div>
+                                            <div class="form-inline">
+                                                Tarikh : {{ Carbon\Carbon::now()->format('d M Y') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p align="justify" class="mx-6">
+                                        <textarea class="form-control form-control-sm" cols="30"
+                                            placeholder="Nama dan Alamat" rows="10"></textarea>
 
 
-                Tuan/Puan,
+                                        Tuan/Puan,<br>
+                                        <input type="text" class="form-control form-control-sm" name="tajuk_surat"
+                                        placeholder="Tajuk Surat Balasan Permohonan">
+                                        <input type="text" class="form-control form-control-sm my-4" name="no_rujukan"
+                                            placeholder="Tajuk" value="">
 
-                PERMOHONAN DATA GUNA TANAH NEGERI TERENGGANU
+                                        Dengan segala hormatnya merujuk kepada surat tuan/puan JPBD.Tr 1/1572/8(27)
+                                        bertarikh 5 Oktober 2020 mengenai perkara di atas.<br><br>
 
-                Dengan segala hormatnya merujuk kepada surat tuan/puan JPBD.Tr 1/1572/8(27)
-                bertarikh 5 Oktober 2020 mengenai perkara di atas.
+                                        2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan
+                                        permohonan data geospatial terperingkat dan tiada halangan atas permohonan tersebut.
+                                        Senarai data yang dibekalkan adalah seperti Lamgiran 1. Walau bagaimanapun, untuk
+                                        permohonan metadata pula, pihak tuan/puan boleh melayari aplikasi MyGDI Explorer
+                                        untuk mendapatkan informasi yang lebih terperinci
+                                        https://www.mygeoportal.gov.my/node/173.<br><br>
 
-                2.Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan
-                permohonan data geospatial terperingkat dan tiada halangan atas permohonan tersebut.
-                Senarai data yang dibekalkan adalah seperti Lamgiran 1. Walau bagaimanapun, untuk
-                permohonan metadata pula, pihak tuan/puan boleh melayari aplikasi MyGDI Explorer
-                untuk mendapatkan informasi yang lebih terperinci
-                https://www.mygeoportal.gov.my/node/173.
+                                        3. Untuk makluman tuan/puan, penggunaan data ini adalah terikat dengan Pekeliling Am
+                                        Bil 1/2007: Pekeliling Arahan Keselamatan Terhadap Dokumen Geospatial Terperingkat,
+                                        Akta Rahsia Rasmi 1972 dan Surat Pekeliling Am Bil 1 Tahun 1997 : Peraturan
+                                        Pemeliharaan Rekod-Rekod Kerajaan. <br><br>
 
-                3.Untuk makluman tuan/puan, penggunaan data ini adalah terikat dengan Pekeliling Am
-                Bil 1/2007: Pekeliling Arahan Keselamatan Terhadap Dokumen Geospatial Terperingkat,
-                Akta Rahsia Rasmi 1972 dan Surat Pekeliling Am Bil 1 Tahun 1997 : Peraturan
-                Pemeliharaan Rekod-Rekod Kerajaan.
+                                        4. Pihak tuan/puan boleh melayari Aplikasi MyGDI Data Services di
+                                        https://mygos.mygeoportal.gov.my/myservices bagi mendapatkan paparan data asas GDC
+                                        yang boleh dikongsi antara agensi kerajaan melalui program MyGDl. Permohonan untuk
+                                        mendapatkan capaian ke aplikasi ini boleh dihantar kepada pihak PGN melalui emel
+                                        pgn.ktotQketsa.gov.mv. <br><br>
 
-                4.Pihak tuan/puan boleh melayari Aplikasi MyGDI Data Services di
-                https://mygos.mygeoportal.gov.my/myservices bagi mendapatkan paparan data asas GDC
-                yang boleh dikongsi antara agensi kerajaan melalui program MyGDl. Permohonan untuk
-                mendapatkan capaian ke aplikasi ini boleh dihantar kepada pihak PGN melalui emel
-                pgn.ktotQketsa.gov.mv.
+                                        5. Sebarang pertanyaan mengenai kesahihan dan ketepatan data perlulah dirujuk kepada
+                                        Agensi Pembekal Data (APD) yang berkenaan. Penggunaan data ini selain daripada
+                                        tujuan asal yang dimohon perlulah mendapat kebenaran daripada pihak APD dan PGN.
+                                        <br><br>
 
-                5.Sebarang pertanyaan mengenai kesahihan dan ketepatan data perlulah dirujuk kepada
-                Agensi Pembekal Data (APD) yang berkenaan. Penggunaan data ini selain daripada
-                tujuan asal yang dimohon perlulah mendapat kebenaran daripada pihak APD dan PGN.
-
-                6.Mohon kerjasama pihak tuan/puan untuk melengkapkan Borang Pengesahan Penerimaan
-                Data Geospatial seperti di Lampiran 2 dan Borang Penilaian Perkongsian Data Melalui
-                MyGDI seperti di Lampiran 3 dan dikembalikan semula kepada pihak PGN dalam tempoh
-                dua minggu dari tarikh surat ini. Sekiranya ada sebarang pertanyaan, sila hubungi
-                Puan Normala Binti Mohamed Solehhin di talian 03-8886 1193 (normala@ketsa.gov.my).
-
+                                        6. Mohon kerjasama pihak tuan/puan untuk melengkapkan Borang Pengesahan Penerimaan
+                                        Data Geospatial seperti di Lampiran 2 dan Borang Penilaian Perkongsian Data Melalui
+                                        MyGDI seperti di Lampiran 3 dan dikembalikan semula kepada pihak PGN dalam tempoh
+                                        dua minggu dari tarikh surat ini. Sekiranya ada sebarang pertanyaan, sila hubungi
+                                        Puan Normala Binti Mohamed Solehhin di talian 03-8886 1193 (normala@ketsa.gov.my).
+                                        <br><br><br>
 
 
-                Sekian terima kasih.
-            </pre>
+                                        Sekian terima kasih.
+                                    </p>
                                     @csrf
-                                    <input type="text" class="form-control form-control-sm" name="no_rujukan"
-                                        placeholder="Tajuk" value="">
                                     <input type="date" class="form-control form-control-sm">
-                                    <textarea class="form-control form-control-sm" cols="30" placeholder="Nama dan Alamat"
-                                        rows="10"></textarea>
+
                                     <input type="text" class="form-control form-control-sm" name="tajuk_surat"
                                         placeholder="Tajuk Surat Balasan Permohonan">
                                     <input type="text" class="form-control form-control-sm" name="no_rujukan_mohon"

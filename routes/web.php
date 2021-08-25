@@ -162,6 +162,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/kemaskini_permohonan', 'DataAsasController@kemaskini_permohonan');
     Route::get('/akuan_pelajar/{id}','DataAsasController@akuan_pelajar');
     Route::post('/simpan_akuan_pelajar', 'DataAsasController@update_akuan_pelajar');
+    Route::post('/change_akuan_terima', 'DataAsasController@change_akuan_terima');
 
     Route::get('/surat_balasan/{id}','DataAsasController@surat_balasan');
     Route::post('/simpan_surat_balasan', 'DataAsasController@update_surat_balasan');
@@ -175,10 +176,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/delete_senarai_data', 'DataAsasController@delete_senarai_data');
 
     Route::get('/kategori_kelas_kongsi_data','DataAsasController@kategori_kelas_kongsi_data');
+    Route::post('/kemaskini_kelas_kongsi', 'DataAsasController@update_kelas_kongsi');
+
     Route::get('/permohonan_baru','DataAsasController@permohonan_baru');
     Route::get('/status_permohonan','DataAsasController@status_permohonan');
     Route::get('/penilaian','DataAsasController@penilaian');
     Route::get('/penilaian_pemohon/{id}','DataAsasController@penilaian_pemohon')->name('tambah.penilaian');
+    Route::get('/akuan_penerimaan/{id}','DataAsasController@akuan_terima');
 
     Route::get('/proses_data','DataAsasController@proses_data');
     Route::post('/simpan_proses_data','DataAsasController@update_proses_data');
@@ -188,16 +192,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_kemaskini_gambarprofil','UserController@update_gambarprofile');
     Route::post('/simpan_kemaskini_password','UserController@update_password');
     Route::post('/tambahPenggunaBaru','UserController@tambahPenggunaBaru');
-    
+
     Route::get('/senarai_agensi_organisasi','PortalController@senarai_agensi_organisasi');
     Route::get('/senarai_bahagian','PortalController@senarai_bahagian');
 
     Route::get('/pemindahan_akaun','UserController@pemindahan_akaun');
-    
+
     Route::match(['get','post'],'/audit_trail','PortalController@audit_trail');
 
     Route::post('/tukar_peranan','UserController@tukar_peranan');
-    
+
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 });
 

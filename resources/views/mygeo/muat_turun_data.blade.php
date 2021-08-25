@@ -84,7 +84,7 @@
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a @if(!empty($pemohon->proses_datas->pautan_data)) class="text-success download" disabled href="{{ $pemohon->proses_datas->pautan_data }}" @endif target="_blank"><span
+                                                    <a @if(!empty($pemohon->proses_datas->pautan_data)) class="text-success download" disabled href="{{ $pemohon->proses_datas->pautan_data }}" target="_blank" @endif><span
                                                             class="fas fa-download mr-2"></span>
                                                         Muat Turun</a>
                                                 </td>
