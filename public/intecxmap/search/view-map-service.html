@@ -6,7 +6,7 @@
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
-    <title>Measurement widget | Sample | ArcGIS API for JavaScript 4.20</title>
+    <!-- <title>Measurement widget | Sample | ArcGIS API for JavaScript 4.20</title> -->
 
     <style>
       html,
@@ -107,22 +107,32 @@
     <script>
       require([
         "esri/Map",
+        "esri/views/View",
         "esri/views/MapView",
         "esri/views/SceneView",
         "esri/layers/TileLayer",
-        "esri/layers/FeatureLayer",
+        // "esri/layers/FeatureLayer",
+        "esri/layers/Layer",
+        "esri/layers/MapImageLayer",
         "esri/widgets/Measurement",
         "esri/widgets/Legend",
-        "esri/request"
+        "esri/request",
+        "esri/widgets/Legend",
+        "esri/WebMap"
       ], function (
         Map,
+        View,
         MapView,
         SceneView,
         TileLayer,
-        FeatureLayer,
+        // FeatureLayer,
+        Layer,
+        MapImageLayer,
         Measurement,
         Legend,
-        esriRequest
+        esriRequest,
+        Legend, 
+        WebMap
       ) {
         // World Ocean Base Basemap
         // const tileLayer = new TileLayer({
@@ -148,22 +158,13 @@
           }
         }
 
+
         // Checking map service availability  
         var options = {query: {f: "json"},responseType: "json"};
-        //var url = getParamValue('url');
-        var url = getParamValue('url');
+        var url = mapServiceUrl;
 
-        var url_check = url.lastIndexOf("arcgis/rest");
-        // url_check = -1 , Indicate the url is not an arcgis rest services
+        // var url_check = url.lastIndexOf("arcgis/");
 
-        // if ( url_check > -1) {
-
-        //   alert("The url is an arcgis rest service");
-
-        // } else if(url_check == -1) {
-
-        //   alert("The url is NOT AN ARCGIS REST service");
-        // }
 
         esriRequest(url, options).then(function (response) { 
             
@@ -174,7 +175,8 @@
        
           // Error name = request:server
 
-          if (err.name === 'request:server' && mapServiceUrl != "" && url_check > -1) {
+          // if (err.name === 'request:server' && mapServiceUrl != "" && url_check > -1) {  
+          if (err.name === 'request:server' && mapServiceUrl != "") {
             console.log('Request aborted');
             // var errorMessage = true;
             // alert(errorMessage); // output = true
@@ -189,11 +191,15 @@
             modal.style.display = "block";
 
           // Display other services (non arcgis map services) eg: website   
-          } else if (url_check == -1 && mapServiceUrl != "") {
+          } 
+          
+          // else if (url_check == -1 && mapServiceUrl != "") {
 
-            openWebInNewTab(url);
+          //   openWebInNewTab(url);
 
-          } else {
+          // } 
+          
+          else {
             console.error('Error encountered', err);
 
             document.getElementById("errMessage-detail").innerHTML = err;
@@ -211,29 +217,63 @@
                 
 
        // Assign feature layer based on url in query string parameter
-        const featureLayer = new FeatureLayer({
-          url: mapServiceUrl
+        // const featureLayer = new FeatureLayer({
+        //   url: mapServiceUrl
+        // });
+
+        const layer = new MapImageLayer({
+          url: mapServiceUrl,
         });
 
 
 
-        // Create new Map with TileLayer and FeatureLayer
+        // Create new Map with Map Image Layer
         const map = new Map({
-          layers: [featureLayer],
+          layers: [layer],
           basemap: "topo-vector"
         });
 
+
+        // layer.when(function(){
+        //   view.extent = layer.fullExtent;
+        // });
+
         // Create MapView with defined zoom and center
         const mapView = new MapView({
-          zoom: 6.52,
-          center: [107.3854408,5.3105],
+          zoom: 7,
+          // center: layer.fullExtent,
+          center: [107.5927215,3.9675402],
           map: map
+        });
+
+
+        mapView.when(function () {
+          // get the first layer in the collection of operational layers in the WebMap
+          // when the resources in the MapView have loaded.
+          // var metadataLayer = webmap.layer.getItemAt(0);
+
+          var legend = new Legend({
+            view: mapView,
+            layerInfos: [
+              {
+                layer: layer
+                // title: "Your Title"
+              }
+            ]
+          });
+
+       
+
+          // Add widget to the bottom right corner of the view
+          mapView.ui.add(legend, "bottom-right");
+
         });
 
         // Create SceneView with similar extent to MapView
         const sceneView = new SceneView({
           scale: 123456789,
-          center: [5.3105,107.3854408],
+          // center: layer.fullExtent,
+          center: [3.9675402,107.5927215],
           map: map
         });
 
@@ -299,7 +339,7 @@
             container: "viewDiv"
           });
           // Add the appropriate measurement UI to the bottom-right when activated
-          activeView.ui.add(measurement, "bottom-right");
+          activeView.ui.add(measurement, "bottom-left");
 
           // Set the views for the widgets
           measurement.view = activeView;
@@ -366,17 +406,6 @@
           areaButton.classList.remove("active");
           measurement.clear();
         }
-        
-        function getParamValue(paramName){
-            var url = window.location.search.substring(1); //get rid of "?" in querystring
-            var qArray = url.split('&'); //get key-value pairs
-            for (var i = 0; i < qArray.length; i++) 
-            {
-                var pArr = qArray[i].split('='); //split key and value
-                if (pArr[0] == paramName) 
-                    return pArr[1]; //return value
-            }
-        }
       });
     </script>
 
@@ -427,3 +456,6 @@
 
   </body>
 </html>
+
+
+‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍
