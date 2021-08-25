@@ -253,10 +253,14 @@ class MetadataController extends Controller {
         }else{
             $countries = Countries::where(['id' => 1])->get()->first();
         }
-
+        
         if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != ""){
-            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
-            $refSys = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+            $refSysId = trim($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString);
+            if(is_numeric($refSysId)){
+                $refSys = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+            }else{
+                $refSys = ReferenceSystemIdentifier::where('name',$refSysId)->get()->first();
+            }
         }else{
             $refSys = [];
         }
@@ -603,6 +607,7 @@ class MetadataController extends Controller {
                 $mg->source = "e1be8c47-7b4b-4fb9-862a-16a349e5f586";
                 $mg->uuid = $uuid;
                 $mg->disahkan = "0";
+                $mg->portal_user_id = Auth::user()->id;
                 $mg->save();
             });
 
