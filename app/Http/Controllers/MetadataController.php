@@ -134,13 +134,12 @@ class MetadataController extends Controller {
             
             $penerbit = $this->getUser($met->portal_user_id);
 
-            $agensi = (isset($xml2->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString : "");
+            $agensi = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
             if (strtolower($agensi) == strtolower(auth::user()->agensiOrganisasi->name)) {
                 $metadatas[$met->id] = [$xml2,$met];
                 $metadatas[$met->id] = [$xml2, $met, $penerbit];
             }
         }
-
         return view('mygeo.metadata.senarai_pengesahan_metadata', compact('metadatas'));
     }
 
@@ -246,18 +245,22 @@ class MetadataController extends Controller {
         $contacts = User::all();
         $states = States::where(['country' => 1])->get()->all();
         $countryId = "";
-        if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString != ""){
-            $countryId = trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString);
+        if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != ""){
+            $countryId = trim($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString);
         }
         if($countryId != ""){
-            $countries = Countries::where(['id' => $countryId])->get()->first();
+            $countries = Countries::where(['name' => $countryId])->get()->first();
         }else{
             $countries = Countries::where(['id' => 1])->get()->first();
         }
-
+        
         if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != ""){
-            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
-            $refSys = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+            $refSysId = trim($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString);
+            if(is_numeric($refSysId)){
+                $refSys = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+            }else{
+                $refSys = ReferenceSystemIdentifier::where('name',$refSysId)->get()->first();
+            }
         }else{
             $refSys = [];
         }
@@ -450,19 +453,37 @@ class MetadataController extends Controller {
         ];
         $this->validate($request, $fields, $customMsg);
 
+        $keywords = "";
         if(count($request->c10_additional_keyword) > 0){
-            $string = "";
             foreach($request->c10_additional_keyword as $var){
-                $string .= $var.",";
+                $keywords .= '
+                    <keyword>
+                        <gco:CharacterString>'.$var.'</gco:CharacterString>
+                    </keyword>
+                ';
             }
-            $request->c10_additional_keyword = substr($string, 0, -1);
+        }else{
+            $keywords .= '
+                <keyword>
+                    <gco:CharacterString></gco:CharacterString>
+                </keyword>
+            ';
         }
+        $topicCategories = "";
         if(isset($request->topic_category) && count($request->topic_category) > 0){
-            $string = "";
             foreach($request->topic_category as $var){
-                $string .= $var."|";
+                $topicCategories .= '
+                    <topicCategory>
+                        <MD_TopicCategoryCode>'.$var.'</MD_TopicCategoryCode>
+                    </topicCategory>
+                ';
             }
-            $request->topic_category = substr($string, 0, -1);
+        }else{
+            $topicCategories .= '
+                <topicCategory>
+                    <MD_TopicCategoryCode></MD_TopicCategoryCode>
+                </topicCategory>
+            ';
         }
 //        $fileUrl = "";
         $fileUrl = $request->c11_order_instructions;
@@ -474,7 +495,7 @@ class MetadataController extends Controller {
 //            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
 //        }
         $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request,$fileUrl);
+        $xml = $xmlcon->createXml($request,$fileUrl,$keywords,$topicCategories);
 
         $msg = "";
 
@@ -586,6 +607,7 @@ class MetadataController extends Controller {
                 $mg->source = "e1be8c47-7b4b-4fb9-862a-16a349e5f586";
                 $mg->uuid = $uuid;
                 $mg->disahkan = "0";
+                $mg->portal_user_id = Auth::user()->id;
                 $mg->save();
             });
 
@@ -714,20 +736,6 @@ class MetadataController extends Controller {
         ];
         $this->validate($request, $fields, $customMsg);
         
-        if(isset($request->c10_additional_keyword) && count($request->c10_additional_keyword) > 0){
-            $string = "";
-            foreach($request->c10_additional_keyword as $var){
-                $string .= $var.",";
-            }
-            $request->c10_additional_keyword = substr($string, 0, -1);
-        }
-        if(isset($request->topic_category) && count($request->topic_category) > 0){
-            $string = "";
-            foreach($request->topic_category as $var){
-                $string .= $var."|";
-            }
-            $request->topic_category = substr($string, 0, -1);
-        }
         $fileUrl = "";
         $fileUrl = $request->c11_order_instructions;
 //        if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
@@ -737,9 +745,41 @@ class MetadataController extends Controller {
 //            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
 //            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
 //        }
+        $keywords = "";
+        if(count($request->c10_additional_keyword) > 0){
+            foreach($request->c10_additional_keyword as $var){
+                $keywords .= '
+                    <keyword>
+                        <gco:CharacterString>'.$var.'</gco:CharacterString>
+                    </keyword>
+                ';
+            }
+        }else{
+            $keywords .= '
+                <keyword>
+                    <gco:CharacterString></gco:CharacterString>
+                </keyword>
+            ';
+        }
+        $topicCategories = "";
+        if(isset($request->topic_category) && count($request->topic_category) > 0){
+            foreach($request->topic_category as $var){
+                $topicCategories .= '
+                    <topicCategory>
+                        <MD_TopicCategoryCode>'.$var.'</MD_TopicCategoryCode>
+                    </topicCategory>
+                ';
+            }
+        }else{
+            $topicCategories .= '
+                <topicCategory>
+                    <MD_TopicCategoryCode></MD_TopicCategoryCode>
+                </topicCategory>
+            ';
+        }
 
         $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request,$fileUrl);
+        $xml = $xmlcon->createXml($request,$fileUrl,$keywords,$topicCategories);
         
         $msg = $redirect = "";
         
@@ -838,9 +878,10 @@ class MetadataController extends Controller {
                 
                 //create new pengumuman about the new metadata
                 $pengumuman = new Pengumuman();
-                $pengumuman->title = $request->title_pengumuman;
-                $pengumuman->date = $request->date_pengumuman;
-                $pengumuman->content = $request->content_pengumuman;
+                $pengumuman->title = 'Metadata Baharu: '.$metadataName;
+                $pengumuman->date = date('Y-m-d H:i:s',time());
+                $pengumuman->kategori = 'Metadata Baharu';
+                $pengumuman->content = 'Metadata Baharu telah diterbitkan bertajuk '.$metadataName;
                 $pengumuman->gambar = "banner2.jpeg";
                 $pengumuman->save();
                 
@@ -888,6 +929,15 @@ class MetadataController extends Controller {
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                    $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                 }
+                
+                //create new pengumuman about the new metadata
+                $pengumuman = new Pengumuman();
+                $pengumuman->title = 'Metadata Baharu: '.$metadataName;
+                $pengumuman->date = date('Y-m-d H:i:s',time());
+                $pengumuman->kategori = 'Metadata Baharu';
+                $pengumuman->content = 'Metadata Baharu telah diterbitkan bertajuk '.$metadataName;
+                $pengumuman->gambar = "banner2.jpeg";
+                $pengumuman->save();
 
                 $user = User::where("id",$metadata->portal_user_id)->get()->first();
                 if(!empty($user)){
@@ -932,6 +982,15 @@ class MetadataController extends Controller {
                     $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
                 });
             }
+            
+            //create new pengumuman about the new metadata
+            $pengumuman = new Pengumuman();
+            $pengumuman->title = 'Metadata Baharu: '.$metadataName;
+            $pengumuman->date = date('Y-m-d H:i:s',time());
+            $pengumuman->kategori = 'Metadata Baharu';
+            $pengumuman->content = 'Metadata Baharu telah diterbitkan bertajuk '.$metadataName;
+            $pengumuman->gambar = "banner2.jpeg";
+            $pengumuman->save();
         }
         
         $at = new AuditTrail();

@@ -10,14 +10,14 @@
         <div class="card-body">
             <div class="my-2">
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
                     ?>
                     <div class="row mb-2">
                         <div class="col-3">
                             <label class="form-control-label mr-4" for="c2_metadataName">
                                 <?php
-                                if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
-                                    if(strtolower($metadataxml->categoryTitle->categoryItem->CharacterString) == "dataset"){
+                                if(isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != ""){
+                                    if(strtolower($metadataxml->hierarchyLevel->MD_ScopeCode) == "dataset"){
                                         echo "Title";
                                     }else{
                                         echo "Metadata Name";
@@ -27,14 +27,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->productType) && $metadataxml->identificationInfo->SV_ServiceIdentification->productType != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString != "") {
                     ?>
                     <div class="row mb-2">
                         <div class="col-3">
@@ -43,7 +43,7 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-3">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->productType; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString; ?>
                         </div>
                     </div>
                     <?php
@@ -51,7 +51,7 @@
                 ?>
                 <?php
                 $abstract = "";
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != "") {
                     ?>
                     <div class="row mb-2">
                         <div class="col-3">
@@ -60,14 +60,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $abstract = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString; ?>
+                            <?php echo $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->metadataDate->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDate->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date != "") {
                     ?>
                     <div class="row mb-2 divMetadataDate">
                         <div class="col-3">
@@ -76,14 +76,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDate->CharacterString; ?>
+                            <?php echo date('d/m/Y',strtotime($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date)); ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->metadataDateType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDateType->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode != "") {
                     ?>
                     <div class="row mb-2 divMetadataDateType">
                         <div class="col-3">
@@ -92,14 +92,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDateType->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->metadataStatus->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->metadataStatus->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString != "") {
                     ?>
                     <div class="row mb-2 divMetadataStatus">
                         <div class="col-3">
@@ -108,14 +108,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->metadataStatus->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->typeOfServices->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->typeOfServices->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString != "") {
                     ?>
                     <div class="row mb-2 divTypeOfServices">
                         <div class="col-3">
@@ -124,14 +124,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->typeOfServices->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString != "") {
                     ?>
                     <div class="row mb-2 divOperationName">
                         <div class="col-3">
@@ -140,14 +140,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString != "") {
                     ?>
                     <div class="row mb-2 divServiceUrl">
                         <div class="col-3">
@@ -156,14 +156,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->srv) && $metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->srv != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType) && $metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType != "") {
                     ?>
                     <div class="row mb-2 divTypeOfCouplingDataset">
                         <div class="col-3">
@@ -172,7 +172,7 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->srv; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType; ?>
                         </div>
                     </div>
                     <?php
@@ -182,7 +182,7 @@
             <h2 class="heading-small text-muted">Responsible Party</h2>
             <div class="my-2">
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString != "") {
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -191,7 +191,7 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString; ?>
                         </div>
                     </div>
                     <?php
@@ -208,7 +208,7 @@
                     </div>
                 </div>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString != "") {
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -217,14 +217,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString != "") {
                     ?>
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
@@ -233,14 +233,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
                     ?>
                     <div class="row mb-4 divPostalCode">
                         <div class="col-3 pl-5">
@@ -249,14 +249,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
                     ?>
                     <div class="row mb-4 divCity">
                         <div class="col-3 pl-5">
@@ -265,14 +265,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != "") {
                     ?>
                     <div class="row mb-4 divCity">
                         <div class="col-3 pl-5">
@@ -281,7 +281,7 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString; ?>
                         </div>
                     </div>
                     <?php
@@ -304,7 +304,7 @@
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
                     ?>
                     <div class="row mb-2">
                             <div class="col-3 pl-5">
@@ -313,14 +313,14 @@
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-6">
-                                <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString; ?>
+                                <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString != "") {
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -329,14 +329,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != "") {
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -345,14 +345,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL != "") {
                     ?>
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
@@ -361,14 +361,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>  
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->role->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->role->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode != "") {
                     ?>
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
@@ -377,7 +377,7 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->role->CharacterString; ?>
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode; ?>
                         </div>
                     </div>
                     <?php

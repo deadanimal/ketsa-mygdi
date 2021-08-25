@@ -202,7 +202,19 @@
                                             <tr>
                                                 <td>{{ $bil }}</td>
                                                 <td>{{ $user->name }}</td>
-                                                <td>{{ (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"") }}</td>
+                                                <td>
+                                                    <?php
+                                                    if($user->hasRole(['Pemohon Data'])) {
+                                                        ?>
+                                                        {{ $user->agensi_organisasi }}
+                                                        <?php
+                                                    }else{
+                                                        ?>
+                                                        {{ (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"") }}
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </td>
                                                 <td>
                                                     <?php
                                                     if (count($user->getRoleNames()) > 0) {
@@ -345,32 +357,12 @@
         });
 
         $(function() {
-            $("#table_newUsers").DataTable({
-                "ordering": false,
-                "responsive": false,
-                "autoWidth": true,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
-                    }
-                },
-            });
-
             <?php
-        if (Session::has('message')) {
-            ?>alert("{{ Session::get('message') }}");
-            <?php
-    }
-    ?>
+            if (Session::has('message')) {
+                ?>alert("{{ Session::get('message') }}");
+                <?php
+            }
+            ?>
 
             $(document).on("click", ".butiran", function() {
                 // ajax get user details

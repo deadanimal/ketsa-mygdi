@@ -10,28 +10,28 @@
         <div class="card-body">
             <div class="row">
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->collectionName->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
                     ?>
                     <div class="col-xl-7">
                         <div class="form-inline ml-3">
                             <div class="form-control-label mr-3">
                                 Collection Name<span class="text-warning">*</span>
                             </div>
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->collectionName->CharacterString . "</p>"; ?>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString . "</p>"; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->collectionIdentification->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {
                     ?>
                     <div class="col-xl-5">
                         <div class="form-inline">
                             <div class="form-control-label mr-3">
                                 Collection Identification<span class="text-warning">*</span>
                             </div>
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->collectionIdentification->CharacterString . "</p>"; ?>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString . "</p>"; ?>
                         </div>
                     </div>
                     <?php

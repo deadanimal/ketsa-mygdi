@@ -112,7 +112,7 @@
                 }
                 ?>
                 <?php
-                if(isset($metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString != ""){
+                if(isset($metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode != ""){
                     ?>
                     <div class="row my-0 py-0 divPublisherRole">
                         <div class="col-3 pl-5">
@@ -121,14 +121,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">
-                            <?php echo $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString; ?>
+                            <?php echo $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
+                if(isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != ""){
                     ?>
                     <div class="row my-0 py-0">
                         <div class="col-3 pl-5">
@@ -138,7 +138,7 @@
                         </div>
                         <div class="col-8">
                             MyGDI Metadata Standard
-                            <?php echo '('.$metadataxml->categoryTitle->categoryItem->CharacterString.')'; ?>
+                            <?php echo '('.$metadataxml->hierarchyLevel->MD_ScopeCode.')'; ?>
                         </div>
                     </div>
                     <?php

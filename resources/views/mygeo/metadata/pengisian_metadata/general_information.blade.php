@@ -58,6 +58,7 @@
                     <div class="col-8">
                         <!--<p class="ml-3 mb-0">{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}</p>-->
                         <input class="form-control form-control-sm ml-3" type="text" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}" />
+                        <input type="hidden" name="publisher_bahagian" value="{{ auth::user()->bahagian }}" />
                     </div>
                 </div>
                 <div class="row my-0 py-0">

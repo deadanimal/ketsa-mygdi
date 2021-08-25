@@ -1364,8 +1364,19 @@
                                                                 <input type="radio" name="c15_t5_type" value="Classification Correctness" checked>&nbsp;Classification Correctness
                                                             </label>
                                                         </td>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_type">
+                                                                <input type="radio" name="c15_t5_type" value="Non Quantitative Attribute Correctness">&nbsp;<?php echo __('lang.nonQuantitativeAttributeCorrectness'); ?>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_type">
+                                                                <input type="radio" name="c15_t5_type" value="Quantitative Attribute Accuracy">&nbsp;<?php echo __('lang.quantitativeAttributeCorrectness'); ?>
+                                                            </label>
+                                                        </td>
                                                     </tr>
-                                                    <tr>
+                                                    <?php //================= ?>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_scope">
                                                                 <?php
@@ -1393,7 +1404,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
                                                                 <?php
@@ -1407,7 +1418,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_date">
                                                                 <?php
@@ -1425,7 +1436,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
                                                                 <?php
@@ -1443,7 +1454,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
                                                                 <?php
@@ -1454,6 +1465,192 @@
                                                                 ?>
                                                                 <b>Conformance Result:</b>
                                                                 <input type="text" name="c15_t5_conform_result" id="c15_t5_conform_result" class="form-control form-control-sm" value="{{$t5ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_scope_2">
+                                                                <?php
+                                                                $t5Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope != "") {
+                                                                    $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope);
+                                                                    echo $t5Scope;
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t5_scope_2" id="c15_t5_scope_2" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t5Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t5Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t5Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t5Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t5Scope == 'feature' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t5Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t5Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t5Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t5Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t5Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t5Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t5Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_comply_level_2">
+                                                                <?php
+                                                                $t5CompLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel != "") {
+                                                                    $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t5_comply_level_2" id="c15_t5_comply_level_2" class="form-control form-control-sm" value="{{$t5CompLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_date_2">
+                                                                <?php
+                                                                $t5Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date != "") {
+                                                                    $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
+                                                                <input type="date" name="c15_t5_date_2" id="c15_t5_date_2" class="form-control form-control-sm" value="{{$t5Date}}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_result_2">
+                                                                <?php
+                                                                $t5Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t5_result_2" id="c15_t5_result_2" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t5Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t5Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t5Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_conform_result_2">
+                                                                <?php
+                                                                $t5ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t5_conform_result_2" id="c15_t5_conform_result_2" class="form-control form-control-sm" value="{{$t5ConformRes}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php //================= ?>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_scope_3">
+                                                                <?php
+                                                                $t5Scope = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope != "") {
+                                                                    $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope);
+                                                                    echo $t5Scope;
+                                                                }
+                                                                ?>
+                                                                <b>Scope:</b>
+                                                                <select name="c15_t5_scope_3" id="c15_t5_scope_3" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{($t5Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{($t5Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{($t5Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{($t5Scope == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{($t5Scope == 'feature' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{($t5Scope == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{($t5Scope == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{($t5Scope == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{($t5Scope == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{($t5Scope == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{($t5Scope == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{($t5Scope == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_comply_level_3">
+                                                                <?php
+                                                                $t5CompLvl = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel != "") {
+                                                                    $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel;
+                                                                }
+                                                                ?>
+                                                                <b>Compliance Level:</b>
+                                                                <input type="text" name="c15_t5_comply_level_3" id="c15_t5_comply_level_3" class="form-control form-control-sm" value="{{$t5CompLvl}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_date_3">
+                                                                <?php
+                                                                $t5Date = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date != "") {
+                                                                    $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date;
+                                                                }
+                                                                ?>
+                                                                <b>Date:</b>
+                                                                <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
+                                                                <input type="date" name="c15_t5_date_3" id="c15_t5_date_3" class="form-control form-control-sm" value="{{$t5Date}}">
+                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                </div>-->
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_result_3">
+                                                                <?php
+                                                                $t5Res = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass != "") {
+                                                                    $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass);
+                                                                }
+                                                                ?>
+                                                                <b>Result:</b>
+                                                                <select name="c15_t5_result_3" id="c15_t5_result_3" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{($t5Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{($t5Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{($t5Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_conform_result_3">
+                                                                <?php
+                                                                $t5ConformRes = "";
+                                                                if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation != "") {
+                                                                    $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation;
+                                                                }
+                                                                ?>
+                                                                <b>Conformance Result:</b>
+                                                                <input type="text" name="c15_t5_conform_result_3" id="c15_t5_conform_result_3" class="form-control form-control-sm" value="{{$t5ConformRes}}">
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1492,6 +1689,11 @@
         $('.TemporalConsistency').hide();
         $('.TemporalValidity').hide();
         $("#AccuracyorTimeMeasurement").prop("checked", true);
+        //t5
+        $('.classificationCorrectness').show();
+        $('.nonQuantitativeAttributeCorrectness').hide();
+        $('.quantitativeAttributeCorrectness').hide();
+        $("#ClassificationCorrectness").prop("checked", true);
     });
     
     $('input:radio[name="c15_t1_complete_comm_or_omit"]').change(function() {
@@ -1554,6 +1756,21 @@
             $('.AccuracyorTimeMeasurement').hide();
             $('.TemporalConsistency').hide();
             $('.TemporalValidity').show();
+        }
+    });
+    $('input:radio[name="c15_t5_type"]').change(function() {
+        if ($(this).val() == 'Classification Correctness') {
+            $('.classificationCorrectness').show();
+            $('.nonQuantitativeAttributeCorrectness').hide();
+            $('.quantitativeAttributeCorrectness').hide();
+        } else if ($(this).val() == 'Non Quantitative Attribute Correctness') {
+            $('.classificationCorrectness').hide();
+            $('.nonQuantitativeAttributeCorrectness').show();
+            $('.quantitativeAttributeCorrectness').hide();
+        } else if ($(this).val() == 'Quantitative Attribute Accuracy') {
+            $('.classificationCorrectness').hide();
+            $('.nonQuantitativeAttributeCorrectness').hide();
+            $('.quantitativeAttributeCorrectness').show();
         }
     });
 </script>

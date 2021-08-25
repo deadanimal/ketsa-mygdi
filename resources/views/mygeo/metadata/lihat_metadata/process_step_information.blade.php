@@ -10,28 +10,28 @@
         <div class="card-body">
             <div class="row">
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->processLevel->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->processLevel->CharacterString != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString != "") {
                     ?>
                     <div class="col-xl-6">
                         <div class="form-inline ml-3">
                             <div class="form-control-label mr-3">
                                 Process Level
                             </div>
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->processLevel->CharacterString . "</p>"; ?>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString . "</p>"; ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->processResolution->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->processResolution->Decimal != "") {
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal != "") {
                     ?>
                     <div class="col-xl-6">
                         <div class="form-inline">
                             <div class="form-control-label mr-3">
                                 Resolution
                             </div>                
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->processResolution->Decimal . " meter</p>"; ?>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal . " meter</p>"; ?>
                         </div>
                     </div>
                     <?php
