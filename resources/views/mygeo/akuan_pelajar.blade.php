@@ -63,76 +63,117 @@
                                 <form action="/simpan_akuan_pelajar" method="POST">
                                     @csrf
 
-                                    <h4 class="heading text-center">Akuan Pelajar</h4>
-                            <p>
+                                    <h3 class="text-center">AKUAN PELAJAR</h3>
+                                    <p class="mx-6 pr-lg-4">
                                         (Sila nyatakan tajuk tesis/projek/kajian
                                         <input type="text" class="form-control form-control-sm" name="title"
-                                            placeholder="Tajuk" value="{{ $akuan->title }}">
-                                        1. Saya (nyatakan nama)<input type="text" class="form-control form-control-sm"
-                                            name="nama" disabled value="{{ $pemohon->users->name }}">
-                                        K.P. No <input type="text" class="form-control form-control-sm" name="nric" disabled
-                                            placeholder="No Kad Pengenalan" value="{{ $pemohon->users->nric }}"> yang
-                                        bertandatangan di bawah ini, sebagai
-                                        seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
-                                        <input type="text" class="form-control form-control-sm" name="agensi_organisasi"
-                                            disabled placeholder="Agensi/Organisasi"
-                                            value="{{ $pemohon->users->agensi_organisasi }}">
-                                        dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
-                                        sama ada peta topografi / foto udara dan sebagainya)
-                                        .......................................
-                                        ………………….....................................................................................................
-                                        seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
-                                        yang disebutkan di bawah.<br>
-                                        2. Senarai Dokumen Geospatial Terperingkat<br>
-                                        (i) Peta Topografi:
-                                        (a) <input type="text" class="form-control form-control-sm" name="peta_topo_a"
-                                            placeholder="Peta Topologi A" value="{{ $akuan->peta_topo_a }}">
-                                        (b) <input type="text" class="form-control form-control-sm" name="peta_topo_b"
-                                            placeholder="Peta Topologi B" value="{{ $akuan->peta_topo_b }}">
-                                        (c) <input type="text" class="form-control form-control-sm" name="peta_topo_c"
-                                            placeholder="Peta Topologi C" value="{{ $akuan->peta_topo_c }}"><br>
-                                        (ii) Foto Udara:
-                                        (a) <input type="text" class="form-control form-control-sm" name="foto_udara_a"
-                                            placeholder="Foto Udara A" value="{{ $akuan->foto_udara_a }}">
-                                        (b) <input type="text" class="form-control form-control-sm" name="foto_udara_b"
-                                            placeholder="Foto Udara B" value="{{ $akuan->foto_udara_b }}">
-                                        (c) <input type="text" class="form-control form-control-sm" name="foto_udara_c"
-                                            placeholder="Foto Udara C" value="{{ $akuan->foto_udara_c }}"><br>
+                                            placeholder="Tajuk" value="{{ $akuan->title }}"><br>
+                                    <ol align="justify" class="mx-5 pr-lg-4">
+                                        <li>Saya (nyatakan nama) <input type="text" class="form-control form-control-sm"
+                                                name="nama" disabled value="{{ $pemohon->users->name }}">
+                                            K.P. No <input type="text" class="form-control form-control-sm" name="nric"
+                                                disabled placeholder="No Kad Pengenalan"
+                                                value="{{ $pemohon->users->nric }}"> yang
+                                            bertandatangan di bawah ini, sebagai
+                                            seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
+                                            <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
+                                                name="agensi_organisasi" disabled>{{ $pemohon->users->agensiOrganisasi->name }}, {{ $pemohon->users->alamat }}
+                                                             </textarea>
+                                            dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
+                                            sama ada peta topografi / foto udara dan sebagainya)
+                                            seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
+                                            yang disebutkan di bawah.<br>
+                                        </li><br><br>
+                                        <li>Senarai Dokumen Geospatial Terperingkat<br></li>
+                                        <ol type="i">
+                                            <li>Peta Topografi :</li>
+                                            <ol type="a">
+                                                <li><span class="form-inline"><input type="text"
+                                                            class="form-control form-control-sm" name="peta_topo_a"
+                                                            placeholder="Peta Topologi A"
+                                                            value="{{ $akuan->peta_topo_a }}"></span></li>
+                                                <li><span class="form-inline"><input type="text"
+                                                            class="form-control form-control-sm" name="peta_topo_a"
+                                                            placeholder="Peta Topologi B"
+                                                            value="{{ $akuan->peta_topo_b }}"></span></li>
+                                                <li><span class="form-inline"><input type="text"
+                                                            class="form-control form-control-sm" name="peta_topo_a"
+                                                            placeholder="Peta Topologi C"
+                                                            value="{{ $akuan->peta_topo_c }}"></span></li>
+                                            </ol>
+                                            <br><br>
+                                            <li>Foto Udara :</li>
+                                            <ol type="a">
+                                                <li><span class="form-inline"><input type="text"
+                                                            class="form-control form-control-sm" name="foto_udara_a"
+                                                            placeholder="Foto Udara A"
+                                                            value="{{ $akuan->foto_udara_a }}"></span></li>
+                                                <li><span class="form-inline"><input type="text"
+                                                            class="form-control form-control-sm" name="foto_udara_b"
+                                                            placeholder="Foto Udara B"
+                                                            value="{{ $akuan->foto_udara_b }}"></span></li>
+                                                <li><span class="form-inline"><input type="text"
+                                                            class="form-control form-control-sm" name="foto_udara_c"
+                                                            placeholder="Foto Udara C"
+                                                            value="{{ $akuan->foto_udara_c }}"></span></li>
+                                            </ol>
+                                            <br><br>
+                                            <li>Lain-lain :</li>
+                                            <ol type="a">
+                                                <li><span class="form-inline"><input type="text"
+                                                            class="form-control form-control-sm" name="lain_a"
+                                                            placeholder="Lain-lain A"
+                                                            value="{{ $akuan->lain_a }}"></span></li>
+                                                <li><span class="form-inline"><input type="text"
+                                                            class="form-control form-control-sm" name="lain_b"
+                                                            placeholder="Lain-lain B"
+                                                            value="{{ $akuan->lain_b }}"></span></li>
+                                                <li><span class="form-inline"><input type="text"
+                                                            class="form-control form-control-sm" name="lain_c"
+                                                            placeholder="Lain-lain C"
+                                                            value="{{ $akuan->lain_c }}"></span></li>
+                                            </ol>
+                                        </ol>
+                                        <br><br>
+                                        <li>Syarat-syarat</li>
+                                        <br>
+                                        <ol type="i">
+                                            <li>Di samping syarat-syarat yang dinyatakan di dalam Borang
+                                                PPNM – 1 (Pind. 1/2008) PERMOHONAN MEMBELI DOKUMEN GEOSPATIAL
+                                                TERPERINGKAT, maklumat-maklumat berkenaan akan digunakan
+                                                mengikut prinsip PERLU MENGETAHUI.</li>
+                                            <li>Penggunaan bahan-bahan dengan Hak Cipta Kerajaan akan dibataskan
+                                                kepada keperluan sendiri sahaja. Penggunaan bahan-bahan berkenaan
+                                                untuk tujuan lain tidak dibenarkan.</li>
+                                            <li>Kandungan bahan-bahan ini tidak akan dihebahkan atau disampaikan
+                                                secara langsung atau tidak langsung kepada pihak akhbar atau orang lain
+                                                yang tidak diberi kuasa untuk menerimanya.</li>
+                                            <li>Bahan-bahan ini akan dibawa balik ke Malaysia dalam masa 6 bulan.
+                                                Pengarah Pemetaan Negara, Malaysia hendaklah diberitahu mengenai
+                                                tarikh bahan-bahan dibawa keluar dan dikembalikan ke Malaysia.<br><br>
+                                                Tandatangan</li>
+                                        </ol>
+                                    </ol>
 
-                                        (iii) Lain-lain:
-                                        (a) <input type="text" class="form-control form-control-sm" name="lain_a"
-                                            placeholder="Lain-lain A">
-                                        (b) <input type="text" class="form-control form-control-sm" name="lain_b"
-                                            placeholder="Lain-lain B">
-                                        (c) <input type="text" class="form-control form-control-sm" name="lain_c"
-                                            placeholder="Lain-lain C">
-                                        3. Syarat-syarat
-                                        (i) Di samping syarat-syarat yang dinyatakan di dalam Borang
-                                        PPNM – 1 (Pind. 1/2008) PERMOHONAN MEMBELI DOKUMEN GEOSPATIAL
-                                        TERPERINGKAT, maklumat-maklumat berkenaan akan digunakan
-                                        mengikut prinsip PERLU MENGETAHUI.
-                                        (ii) Penggunaan bahan-bahan dengan Hak Cipta Kerajaan akan dibataskan
-                                        kepada keperluan sendiri sahaja. Penggunaan bahan-bahan berkenaan
-                                        untuk tujuan lain tidak dibenarkan.
-                                        (iii) Kandungan bahan-bahan ini tidak akan dihebahkan atau disampaikan
-                                        secara langsung atau tidak langsung kepada pihak akhbar atau orang lain
-                                        yang tidak diberi kuasa untuk menerimanya.
-                                        (iv) Bahan-bahan ini akan dibawa balik ke Malaysia dalam masa 6 bulan.
-                                        Pengarah Pemetaan Negara, Malaysia hendaklah diberitahu mengenai
-                                        tarikh bahan-bahan dibawa keluar dan dikembalikan ke Malaysia.<br><br>
-                                        Tandatangan
-                                        Pelajar:<input type="text" class="form-control form-control-sm" name="digital_sign"
-                                            placeholder="Digital Sign">
+
+                                    <br><br>
+                                    <div class="mx-6 pl-lg-8">
+                                        Tandatangan Pelajar:<input type="file" class="form-control form-control-sm py-0"
+                                            name="digital_sign" placeholder="Digital Sign">
                                         Tarikh:<input type="date" class="form-control form-control-sm">
-                                        Nama:<input type="text" class="form-control form-control-sm" value="{{ $pemohon->users->name }}">
-                                        Alamat:<input type="text" class="form-control form-control-sm" value="{{ $pemohon->users->alamat }}">
-                                        <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
-                                        <input type="hidden" name="id" value="{{ $pemohon->id }}">
+                                        Nama:<input type="text" class="form-control form-control-sm"
+                                            value="{{ $pemohon->users->name }}">
+                                        Alamat:<textarea class="form-control form-control-sm" cols="30"
+                                            rows="6">{{ $pemohon->users->alamat }}</textarea>
+                                    </div>
 
-                                        @if (Auth::user()->hasRole(['Pemohon Data']))
-                                            <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-                                        @endif
-                            </p>
+                                    <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
+                                    <input type="hidden" name="id" value="{{ $pemohon->id }}">
+
+                                    @if (Auth::user()->hasRole(['Pemohon Data']))
+                                        <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                                    @endif
+                                    </p>
                                 </form>
                             </div>
                         </div>

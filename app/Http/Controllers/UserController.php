@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\ModelHasRoles;
+use App\MohonData;
 use Illuminate\Support\Facades\Log;
 use Auth;
 use Hash;
@@ -63,12 +64,12 @@ class UserController extends Controller {
         $peranans = $peranans->sortBy(function($model) use ($ids) {
             return array_search($model->getKey(), $ids);
         });
-        
+
         $aos = AgensiOrganisasi::distinct('name')->get();
-        
+
         return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans','aos'));
     }
-    
+
     public function index_penerbit_pengesah() {
         if(!auth::user()->hasRole(['Pentadbir Metadata','Super Admin'])){
             exit();
@@ -87,9 +88,9 @@ class UserController extends Controller {
         $peranans = $peranans->sortBy(function($model) use ($ids) {
             return array_search($model->getKey(), $ids);
         });
-        
+
         $aos = AgensiOrganisasi::distinct('name')->get();
-        
+
         return view('mygeo.user.senarai_penerbit_pengesah', compact('users','peranans','aos'));
     }
 
@@ -165,7 +166,7 @@ class UserController extends Controller {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Diluluskan');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -193,7 +194,7 @@ class UserController extends Controller {
         });
 
         User::where(['id'=>$user_id])->delete();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -213,7 +214,14 @@ class UserController extends Controller {
 //        }
 //        exit();
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
-        return view('mygeo.profile.profil', compact('user'));
+        $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
+
+        if($pemohonan_yang_tidak_dinilais) {
+            \Session::flash('warning','Anda perlu membuat penilaian kepada permohonan terbaru');
+            return view('mygeo.profile.profil', compact('user'));
+        } else {
+            return view('mygeo.profile.profil', compact('user'));
+        }
     }
 
     public function edit(){
@@ -250,7 +258,7 @@ class UserController extends Controller {
         $at->user_id = Auth::user()->id;
         $at->data = 'Update';
         $at->save();
-            
+
         return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
     }
 
@@ -269,7 +277,7 @@ class UserController extends Controller {
             $user->gambar_profil = $fileName;
         }
         $user->save();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -284,13 +292,13 @@ class UserController extends Controller {
 
         if (Hash::check($request->password_old, $user->password)) {
             $user->fill(['password' => Hash::make($request->password_new)])->save();
-            
+
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
             $at->data = 'Update';
             $at->save();
-        
+
             return redirect('mygeo_profil')->with('message','Kata laluan berjaya ditukar');
         } else {
             return redirect('mygeo_profil')->with('message','Kata laluan lama tidak betul');
@@ -301,25 +309,25 @@ class UserController extends Controller {
         $user = User::where(["id"=>$request->user_id])->get()->first();
         $user->status = $request->status_id;
         $user->update();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Update';
         $at->save();
-        
+
         exit();
     }
 
     public function delete_user(Request $request){
         User::where(["id"=>$request->user_id])->delete();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Delete';
         $at->save();
-        
+
         exit();
     }
 
@@ -405,13 +413,13 @@ class UserController extends Controller {
                 'changedate' => date("Y-m-d H:i:s"),
             ]);
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Update';
         $at->save();
-        
+
         exit();
     }
 
@@ -469,7 +477,7 @@ class UserController extends Controller {
             $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Akaun');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -490,7 +498,7 @@ class UserController extends Controller {
 
         return $random_string;
     }
-    
+
     public function tukar_peranan(Request $request) {
         $user = User::where('id',Auth::user()->id)->get()->first();
         $user->syncRoles([$request->perananSelect]);

@@ -339,7 +339,7 @@
                                                 <label class="custom-file-label" for="chooseFile">Pilih Fail</label>
                                             </div>
                                             <img style="max-height: 500px; max-width: 900px" class="p-2" alt="..."
-                                                src="{{ asset('<?php echo $penilaian->bhg_c_4_file_path; ?>') }}">
+                                                src="{{ $penilaian->bhg_c_4_file_path }}">
                                         </div>
                                         <div class="small py-4">Pihak kami mengalu-alukan sekiranya terdapat komen atau
                                             cadangan
