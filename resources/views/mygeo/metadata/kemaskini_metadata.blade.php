@@ -168,10 +168,10 @@
                                     <select name="kategori" id="kategori" class="form-control float-left" style="width:175px;">
                                         <option disabled><?php echo __('lang.dropdown_choose'); ?></option>
                                         <?php
+                                        $catSelected = "";
                                         if (count($categories) > 0) {
-                                            $catSelected = "";
-                                            if (isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != "") {
-                                                $catSelected = strtolower(trim($metadataxml->categoryTitle->categoryItem->CharacterString));
+                                            if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != "") {
+                                                $catSelected = strtolower(trim($metadataxml->hierarchyLevel->MD_ScopeCode));
                                             }
                                             foreach ($categories as $cat) {
                                                 if (strtolower(trim($cat->name)) == $catSelected) {
@@ -413,7 +413,7 @@
                 window.location.href = url;
             }
         });
-
+        
         var kategori = "<?php echo strtolower($catSelected); ?>";
         if (kategori.toLowerCase() == "dataset") {
                 $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
