@@ -101,7 +101,7 @@
                                             <div class="custom-control custom-checkbox m-5">
                                                 <input class="custom-control-input checkAkuanTerima" id="customCheck1"
                                                     type="checkbox" data-permohonanid="{{ $pemohon->id }}"
-                                                    {{ $pemohon->acceptance == '1' ? 'checked' : '' }}>
+                                                    {{ $pemohon->acceptance == '1' ? 'checked disabled' : '' }}>
                                                 <label class="custom-control-label" for="customCheck1">Saya terima terma dan
                                                     syarat diatas berikut</label>
                                             </div>
@@ -137,7 +137,7 @@
 
             $.ajax({
                 method: "POST",
-                url: "change_akuan_terima",
+                url: "{{ url('change_akuan_terima') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "permohonan_id": permohonan_id,

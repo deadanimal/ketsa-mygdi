@@ -74,7 +74,7 @@
                                                     @elseif($pemohon->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
                                                     @elseif($pemohon->status == '3')
-                                                        <span class="badge badge-pill badge-success">Selesai</span>
+                                                        <span class="badge badge-pill badge-success">Data Tersedia</span>
                                                     @elseif($pemohon->status == '0')
                                                         <span class="badge badge-pill badge-info">Baru</span>
                                                     @endif

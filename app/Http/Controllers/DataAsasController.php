@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\AkuanPelajar;
 use App\DokumenBerkaitan;
 use App\SenaraiKawasanData;
@@ -131,7 +132,7 @@ class DataAsasController extends Controller
             $pemohons = MohonData::where(['dihantar' => 1])->orderBy('created_at', 'DESC')->get();
         } else {
             $pemohons = MohonData::with('users')
-            ->where(['dihantar' => 1])
+            ->where(['dihantar' => 1, 'status' => 3])
             ->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         }
         return view('mygeo.penilaian', compact('pemohons'));
@@ -155,7 +156,7 @@ class DataAsasController extends Controller
         DB::transaction(function () use ($request) {
             //save acceptance data
             Mohondata::where(["id" => $request->permohonan_id])->update([
-                "acceptance" => $request->newStatus,
+                "acceptance" => $request->acceptance,
             ]);
 
         });
