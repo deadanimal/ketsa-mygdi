@@ -21,8 +21,8 @@
                         </div>
                         <?php
                         $colName = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->collectionName->CharacterString != "") {
-                            $colName = $metadataxml->identificationInfo->SV_ServiceIdentification->collectionName->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
+                            $colName = $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString;
                         }
                         ?>
                         <input type="text" name="c6_collection_name" id="c6_collection_name" class="form-control form-control-sm" value="{{ $colName }}" style="width :280px" placeholder="Insert Collection Name">
@@ -37,8 +37,8 @@
                             Collection Identification<span class="text-warning">*</span>
                             <?php
                             $collId = "";
-                            if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->collectionIdentification->CharacterString != "") {
-                                $collId = $metadataxml->identificationInfo->SV_ServiceIdentification->collectionIdentification->CharacterString;
+                            if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {
+                                $collId = $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString;
                             }
                             ?>
                             <input type="text" name="c6_collection_id" id="c6_collection_id" value="{{ $collId }}" class="form-control form-control-sm" style="width :150px" placeholder="Identification">

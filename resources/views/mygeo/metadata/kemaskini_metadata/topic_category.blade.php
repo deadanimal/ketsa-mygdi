@@ -21,12 +21,13 @@
     </div>
     <div id="collapse3" class="panel-collapse collapse in show" data-parent="#div_c3">
         <div class="card-body">
-            <div class="row pl-lg-4 mt-4">
+            <div class="row pl-lg-4 mt-4"> 
                 <?php
                 $tc = [];
-                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory) && $metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory != "") {
-                    $topic_categories =  $metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory;
-                    $tc = array_map('trim', explode('|', $topic_categories));
+                foreach($metadataxml->identificationInfo->MD_DataIdentification->topicCategory as $tcd){
+                    if(trim($tcd->MD_TopicCategoryCode) != ""){
+                        $tc[]= trim($tcd->MD_TopicCategoryCode);
+                    }
                 }
                 ?>
                 <div class="form-group col-4">

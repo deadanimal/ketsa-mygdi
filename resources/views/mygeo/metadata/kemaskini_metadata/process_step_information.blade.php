@@ -21,8 +21,8 @@
                         </div>
                         <?php
                         $processLevel = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->processLevel->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->processLevel->CharacterString != "") {
-                            $processLevel = $metadataxml->identificationInfo->SV_ServiceIdentification->processLevel->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString != "") {
+                            $processLevel = $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString;
                         }
                         ?>
                         <input type="text" name="c5_process_lvl" id="c5_process_lvl" class="form-control form-control-sm" value="{{ $processLevel }}" style="width :120pxpx" placeholder="Insert Process Level">
@@ -35,8 +35,8 @@
                         </div>
                         <?php
                         $res = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->processResolution->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->processResolution->Decimal != "") {
-                            $res = $metadataxml->identificationInfo->SV_ServiceIdentification->processResolution->Decimal;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal != "") {
+                            $res = $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal;
                         }
                         ?>
                         <input type="text" name="c5_resolution" id="c5_resolution" class="form-control form-control-sm" value="{{ $res }}" style="width :100px" placeholder="0.0">
