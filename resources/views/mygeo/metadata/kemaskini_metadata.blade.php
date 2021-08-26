@@ -274,7 +274,41 @@
     var pengesahs = [];
 
     $(document).ready(function () {
+        $(document).on('change','#c1_content_info',function(){
+            var cat = $('#kategori').val();
+            if(cat == "Dataset" && $(this).val() == "Application"){
+                $('.divIdentificationInformationUrl').show();
+                $('.inputIdentificationInformationUrl').prop('disabled',false);
+                $('.divBrowsingInformationUrl').hide();
+                $('.inputBrowsingInformationUrl').prop('disabled',true);
+            }else{
+                $('.divIdentificationInformationUrl').hide();
+                $('.inputIdentificationInformationUrl').prop('disabled',true);
+                $('.divBrowsingInformationUrl').show();
+                $('.inputBrowsingInformationUrl').prop('disabled',false);
+            }
+        });
         <?php
+        $var = "";
+        if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
+            $var = trim($metadataxml->contact->CI_ResponsibleParty);
+        }
+        if ($catSelected == "Dataset" && $var == "Application") {
+            ?>
+            $('.divIdentificationInformationUrl').show();
+            $('.inputIdentificationInformationUrl').prop('disabled',false);
+            $('.divBrowsingInformationUrl').show();
+            $('.inputBrowsingInformationUrl').prop('disabled',true);
+            <?php
+        }else{
+            ?>
+            $('.divIdentificationInformationUrl').hide();
+            $('.inputIdentificationInformationUrl').prop('disabled',true);
+            $('.divBrowsingInformationUrl').show();
+            $('.inputBrowsingInformationUrl').prop('disabled',false);
+            <?php
+        }
+        
         $typeofProd = "";
         if (isset($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString != "") {
             $typeofProd = trim($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString);

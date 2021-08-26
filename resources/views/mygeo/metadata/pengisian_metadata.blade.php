@@ -271,6 +271,22 @@
 <script>
     var pengesahs = [];
     $(document).ready(function() {
+        $(document).on('change','#content_info_dropdown',function(){
+            var cat = $('#kategori').val();
+            if(cat == "Dataset" && $(this).val() == "Application"){
+                $('.divIdentificationInformationUrl').show();
+                $('.inputIdentificationInformationUrl').prop('disabled',false);
+                $('.divBrowsingInformationUrl').hide();
+                $('.inputBrowsingInformationUrl').prop('disabled',true);
+            }else{
+                $('.divIdentificationInformationUrl').hide();
+                $('.inputIdentificationInformationUrl').prop('disabled',true);
+                $('.divBrowsingInformationUrl').show();
+                $('.inputBrowsingInformationUrl').prop('disabled',false);
+            }
+        });
+        $('.divIdentificationInformationUrl').hide();
+        $('.inputIdentificationInformationUrl').prop('disabled',true);
         $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
         $(document).on("click", "#btnTestServiceUrl", function () {
             var mapurl = $('#c2_serviceUrl').val();

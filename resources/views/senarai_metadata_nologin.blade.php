@@ -157,8 +157,8 @@
                                                         <div class="card-header cardw">
                                                             <a class="a_title" data-toggle="collapse" href="#divCollapse{{ $bil }}">
                                                                 <?php 
-                                                                if(isset($val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                                                                  echo $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                                                                if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
+                                                                  echo $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                                                 }else{
                                                                     ?>--no title set--<?php
                                                                 }
@@ -171,6 +171,7 @@
                                                                 ?>
                                                                 <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
                                                             </a>
+                                                            <?php /* @include('abstract') */ ?>
                                                         </div>
                                                         <div id="divCollapse{{ $bil }}" class="panel-collapse collapse in" data-parent="#divParentCollapse{{ $bil }}">
                                                             <div class="card-body">

@@ -47,7 +47,7 @@
                         <input type="text" name="c10_file_type" id="c10_file_type" class="form-control form-control-sm ml-3" value="{{ $fileType }}">
                     </div>
                 </div>
-                <div class="row mb-4">
+                <div class="row mb-4 divBrowsingInformationUrl">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_url">
                             URL
@@ -60,7 +60,7 @@
                             $url = $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString;
                         }
                         ?>
-                        <input type="text" name="c10_file_url" id="c10_file_url" class="form-control form-control-sm ml-3" value="{{ $url }}">
+                        <input type="text" name="c10_file_url" id="c10_file_url" class="form-control form-control-sm ml-3 inputBrowsingInformationUrl" value="{{ $url }}">
                     </div>
                 </div>
             </div>

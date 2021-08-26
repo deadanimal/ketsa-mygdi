@@ -49,7 +49,13 @@
                     <?php
                 }
                 ?>
+                <h2 class="heading-small text-muted"><?php echo __('lang.abstract'); ?></h2>
+                <?php //=== abstract==============================================================
+                ?>
+                @include('mygeo.metadata.lihat_metadata.abstract')
+                <br>
                 <?php
+                /*
                 $abstract = "";
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != "") {
                     ?>
@@ -65,6 +71,7 @@
                     </div>
                     <?php
                 }
+                */
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date != "") {
