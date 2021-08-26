@@ -59,16 +59,24 @@
                 ?>
                 @include('mygeo.metadata.pengisian_metadata.abstract')
                 <br>
-                <div class="row mb-4 divIdentificationInformationUrl">
-                    <div class="col-3 pl-5">
+                
+                <div class="row mb-2 divIdentificationInformationUrl">
+                    <div class="col-3">
                         <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
-                            <?php echo __('lang.URL'); ?>
+                            <?php echo __('lang.URL'); ?><span class="text-warning">*</span>
                         </label><label class="float-right">:</label>
                     </div>
-                    <div class="col-7">
-                        <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl" value="{{old('c10_file_url')}}">
+                    <div class="col-6">
+                        <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest" value="{{old('c10_file_url')}}">
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal" data-target="#modal-showweb" data-backdrop="false">Test</button>
+                        @error('c10_file_url')
+                            <div class="text-error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
+                
                 
                 <?php /* //ori unseparated abstract ?>
                 <div class="row mb-2">

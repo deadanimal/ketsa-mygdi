@@ -425,6 +425,14 @@ class MetadataController extends Controller {
             $fields["c10_file_name"]= 'required';
             $fields["c10_file_type"]= 'required';
         }
+        if(trim($request->c10_file_name) != ''){
+            $fields["c10_file_url"]= 'required';
+            $fields["c10_file_type"]= 'required';
+        }
+        if(trim($request->c10_file_type) != ''){
+            $fields["c10_file_url"]= 'required';
+            $fields["c10_file_name"]= 'required';
+        }
         if(strtolower($request->kategori) == 'services'){
             $fields["c2_serviceUrl"]= 'required';
         }
@@ -857,6 +865,14 @@ class MetadataController extends Controller {
         if(trim($request->c10_file_url) != ''){
             $fields["c10_file_name"]= 'required';
             $fields["c10_file_type"]= 'required';
+        }
+        if(trim($request->c10_file_name) != ''){
+            $fields["c10_file_url"]= 'required';
+            $fields["c10_file_type"]= 'required';
+        }
+        if(trim($request->c10_file_type) != ''){
+            $fields["c10_file_url"]= 'required';
+            $fields["c10_file_name"]= 'required';
         }
         if(strtolower($request->kategori) == 'services'){
             $fields["c2_serviceUrl"]= 'required';

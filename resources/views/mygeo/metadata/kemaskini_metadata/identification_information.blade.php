@@ -77,22 +77,30 @@
                 ?>
                 @include('mygeo.metadata.kemaskini_metadata.abstract')
                 <br>
+                
                 <div class="row mb-4 divIdentificationInformationUrl">
-                    <div class="col-3 pl-5">
+                    <div class="col-3">
                         <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
-                            <?php echo __('lang.URL'); ?>
+                            <?php echo __('lang.URL'); ?><span class="text-warning">*</span>
                         </label><label class="float-right">:</label>
                     </div>
-                    <div class="col-7">
+                    <div class="col-6">
                         <?php
                         $url = "";
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != "") {
                             $url = $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString;
                         }
                         ?>
-                        <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl" value="{{ $url }}">
+                        <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest" value="{{ $url }}">
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal" data-target="#modal-showweb" data-backdrop="false">Test</button>
+                        @error('c2_serviceUrl')
+                            <div class="text-error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
+                
                 <?php /* ?>
                 <div class="row mb-2">
                     <div class="col-3">
