@@ -1114,22 +1114,22 @@ class MetadataController extends Controller {
                 $mg->catatan14 = $request->catatan14;
                 $mg->catatan15 = $request->catatan15;
             }elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
-                $mg->catatan1 = "";
-                $mg->catatan2 = "";
-                $mg->catatan3 = "";
-                $mg->catatan4 = "";
-                $mg->catatan5 = "";
-                $mg->catatan6 = "";
-                $mg->catatan7 = "";
-                $mg->catatan8 = "";
-                $mg->catatan9 = "";
-                $mg->catatan10 = "";
-                $mg->catatan11 = "";
-                $mg->catatan12 = "";
-                $mg->catatan13 = "";
-                $mg->catatan14 = "";
-                $mg->catatan15 = "";
-                $mg->disahkan = "0";
+//                $mg->catatan1 = "";
+//                $mg->catatan2 = "";
+//                $mg->catatan3 = "";
+//                $mg->catatan4 = "";
+//                $mg->catatan5 = "";
+//                $mg->catatan6 = "";
+//                $mg->catatan7 = "";
+//                $mg->catatan8 = "";
+//                $mg->catatan9 = "";
+//                $mg->catatan10 = "";
+//                $mg->catatan11 = "";
+//                $mg->catatan12 = "";
+//                $mg->catatan13 = "";
+//                $mg->catatan14 = "";
+//                $mg->catatan15 = "";
+//                $mg->disahkan = "0";
             }
 
             if(isset($request->newStatus)){
