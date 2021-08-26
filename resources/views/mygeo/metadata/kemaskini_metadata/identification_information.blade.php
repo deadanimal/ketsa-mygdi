@@ -18,8 +18,8 @@
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataName">
                             <?php
-                            if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
-                                if(strtolower($metadataxml->categoryTitle->categoryItem->CharacterString) == "dataset"){
+                            if(isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != ""){
+                                if(strtolower($metadataxml->hierarchyLevel->MD_ScopeCode) == "dataset"){
                                     echo "Title";
                                 }else{
                                     echo "Metadata Name";
@@ -72,6 +72,12 @@
                         @enderror
                     </div>
                 </div>
+                <h2 class="heading-small text-muted"><?php echo __('lang.abstract'); ?></h2>
+                <?php //=== abstract==============================================================
+                ?>
+                @include('mygeo.metadata.kemaskini_metadata.abstract')
+                <br>
+                <?php /* ?>
                 <div class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_abstract">
@@ -91,6 +97,7 @@
                         @enderror
                     </div>
                 </div>
+                <?php */ ?>
                 <div class="row mb-2 divMetadataDate">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_date">
@@ -540,10 +547,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        //        $('#c2_product_type').val("{{old('c2_product_type')}}").trigger('change');
-        //        $('#c2_contact_state').val("{{old('c2_contact_state')}}").trigger('change');
-    });
-</script>

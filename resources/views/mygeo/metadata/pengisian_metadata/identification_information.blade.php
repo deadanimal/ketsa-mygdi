@@ -54,6 +54,13 @@
                         @enderror
                     </div>
                 </div>
+                <h2 class="heading-small text-muted"><?php echo __('lang.abstract'); ?></h2>
+                <?php //=== abstract= =============================================================
+                ?>
+                @include('mygeo.metadata.pengisian_metadata.abstract')
+                <br>
+                
+                <?php /* //ori unseparated abstract ?>
                 <div class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Penerangan ringkasan tentang maklumat geospatial berkenaan">
@@ -68,6 +75,8 @@
                         @enderror
                     </div>
                 </div>
+                <?php */ ?>
+                
                 <div class="row mb-2 divMetadataDate">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataDate" data-toggle="tooltip" title="Tarikh berkaitan  bagi maklumat geospatial.">

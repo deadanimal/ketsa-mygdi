@@ -10,16 +10,18 @@
         <div class="card-body">
             <div class="d-flex flex-wrap bd-highlight">
                 <?php
-                foreach($metadataxml->identificationInfo->MD_DataIdentification->topicCategory as $tc){
-                    if(trim($tc->MD_TopicCategoryCode) != ""){
-                        ?>
-                        <div class="p-2 bd-highlight">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" name="topic_category[]" checked=""checked" disabled>
-                                <label class="form-check-label" for="c3_1"><?php echo $tc->MD_TopicCategoryCode; ?></label>
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->topicCategory) && trim($metadataxml->identificationInfo->MD_DataIdentification->topicCategory) != ""){
+                    foreach($metadataxml->identificationInfo->MD_DataIdentification->topicCategory as $tc){
+                        if(trim($tc->MD_TopicCategoryCode) != ""){
+                            ?>
+                            <div class="p-2 bd-highlight">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="topic_category[]" checked=""checked" disabled>
+                                    <label class="form-check-label" for="c3_1"><?php echo $tc->MD_TopicCategoryCode; ?></label>
+                                </div>
                             </div>
-                        </div>
-                        <?php
+                            <?php
+                        }
                     }
                 }
                 ?>
