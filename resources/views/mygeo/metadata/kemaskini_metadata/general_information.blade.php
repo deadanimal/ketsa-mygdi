@@ -136,8 +136,8 @@
                     <div class="col-8">
                         <?php
                         $pub_role = "";
-                        if(isset($metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString != ""){
-                            $pub_role = $metadataxml->contact->CI_ResponsibleParty->publisherRole->CharacterString;
+                        if(isset($metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode != ""){
+                            $pub_role = $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode;
                         }
                         ?>
                         <select name='publisher_role' class='form-control form-control-sm ml-3'>

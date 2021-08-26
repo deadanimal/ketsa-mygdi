@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="card-body p-4">
-                                <form action="/simpan_akuan_pelajar" method="POST">
+                                <form action="/simpan_akuan_pelajar" method="POST" enctype="multipart/form-data">
                                     @csrf
 
                                     <h3 class="text-center">AKUAN PELAJAR</h3>
@@ -93,11 +93,11 @@
                                                             placeholder="Peta Topologi A"
                                                             value="{{ $akuan->peta_topo_a }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="peta_topo_a"
+                                                            class="form-control form-control-sm" name="peta_topo_b"
                                                             placeholder="Peta Topologi B"
                                                             value="{{ $akuan->peta_topo_b }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="peta_topo_a"
+                                                            class="form-control form-control-sm" name="peta_topo_c"
                                                             placeholder="Peta Topologi C"
                                                             value="{{ $akuan->peta_topo_c }}"></span></li>
                                             </ol>
@@ -158,9 +158,12 @@
 
                                     <br><br>
                                     <div class="mx-6 pl-lg-8">
-                                        Tandatangan Pelajar:<input type="file" class="form-control form-control-sm py-0"
-                                            name="digital_sign" placeholder="Digital Sign">
-                                        Tarikh:<input type="date" class="form-control form-control-sm">
+                                        Tandatangan Pelajar:
+                                        <img src="{{$akuan->digital_sign}}" alt="Gambar Tandatangan" height="120">
+                                        <input type="file" class="form-control form-control-sm py-0"
+                                            name="file" placeholder="Digital Sign">
+                                            <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
+                                        Tarikh:<input type="text" class="form-control form-control-sm" placeholder="Auto Pilih Tarikh Semasa" value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
                                         Nama:<input type="text" class="form-control form-control-sm"
                                             value="{{ $pemohon->users->name }}">
                                         Alamat:<textarea class="form-control form-control-sm" cols="30"

@@ -32,8 +32,8 @@
                     <div class="col-7">
                         <?php
                         $met_name = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != "") {
-                            $met_name = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
+                            $met_name = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                         }
                         ?>
                         <input type="text" name="c2_metadataName" id="c2_metadataName" class="form-control form-control-sm ml-3" value="{{ $met_name }}">
@@ -52,8 +52,8 @@
                     <div class="col-7">
                         <?php
                         $typeofProd = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->productType) && $metadataxml->identificationInfo->SV_ServiceIdentification->productType != "") {
-                            $typeofProd = trim($metadataxml->identificationInfo->SV_ServiceIdentification->productType);
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString != "") {
+                            $typeofProd = trim($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString);
                         }
                         ?>
                         <select name="c2_product_type" id="c2_product_type" class="form-control form-control ml-3">
@@ -81,8 +81,8 @@
                     <div class="col-7">
                         <?php
                         $abstract = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != "") {
-                            $abstract = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != "") {
+                            $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
                         }
                         ?>
                         <textarea name="c2_abstract" id="c2_abstract" class="form-control form-control-sm ml-3">{{ $abstract }}</textarea>
@@ -100,8 +100,8 @@
                     <div class="col-7">
                         <?php
                         $metDate = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->metadataDate->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDate->CharacterString != "") {
-                            $metDate = $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDate->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date != "") {
+                            $metDate = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date;
                         }
                         ?>
                         <input class="form-control form-control-sm" type="date" name="c2_metadataDate" id="c2_metadataDate" value="{{ $metDate }}">
@@ -119,8 +119,8 @@
                     <div class="col-7">
                         <?php
                         $metDateType = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->metadataDateType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDateType->CharacterString != "") {
-                            $metDateType = $metadataxml->identificationInfo->SV_ServiceIdentification->metadataDateType->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode != "") {
+                            $metDateType = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode;
                         }
                         ?>
                         <select name="c2_metadataDateType" id="c2_metadataDateType" class="form-control form-control-sm">
@@ -156,8 +156,8 @@
                     <div class="col-7">
                         <?php
                         $metStatus = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->metadataStatus->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->metadataStatus->CharacterString != "") {
-                            $metStatus = $metadataxml->identificationInfo->SV_ServiceIdentification->metadataStatus->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString != "") {
+                            $metStatus = $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString;
                         }
                         ?>
                         <select class="form-control form-control-sm" name="c2_metadataStatus" id="c2_metadataStatus">
@@ -204,8 +204,8 @@
                     <div class="col-7">
                         <?php
                         $typeOfServices = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->typeOfServices->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->typeOfServices->CharacterString != "") {
-                            $typeOfServices = $metadataxml->identificationInfo->SV_ServiceIdentification->typeOfServices->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString != "") {
+                            $typeOfServices = $metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString;
                         }
                         ?>
                         <select class="form-control form-control-sm" name="c2_typeOfServices" id="c2_typeOfServices">
@@ -240,8 +240,8 @@
                     <div class="col-7">
                         <?php
                         $operationName = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString != "") {
-                            $operationName = $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString != "") {
+                            $operationName = $metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString;
                         }
                         ?>
                         <input type="text" class="form-control form-control-sm" name="c2_operationName" id="c2_operationName" value="{{ $operationName }}">
@@ -259,8 +259,8 @@
                     <div class="col-6">
                         <?php
                         $serviceUrl = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString != "") {
-                            $serviceUrl = $metadataxml->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString != "") {
+                            $serviceUrl = $metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString;
                         }
                         ?>
                         <input type="text" class="form-control form-control-sm" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ $serviceUrl }}">
@@ -272,7 +272,7 @@
                         <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
                         @error('c2_serviceUrl')
                             <div class="text-error">{{ $message }}</div>
-                        @enderror
+                        @enderror <?php //ftestsmbgsini ?>
                     </div>
                 </div>
                 <div class="row mb-2 divTypeOfCouplingDataset">

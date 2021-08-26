@@ -44,8 +44,8 @@
           <div class="col-12">
               <h1>
                 <?php 
-                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                  echo $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                  echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                 }
                 ?>
               </h1>
@@ -56,8 +56,10 @@
                     <p>
                         Category:
                         <?php
-                        if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
-                            echo $metadataxml->categoryTitle->categoryItem->CharacterString;
+                        $category = "";
+                        if(isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != ""){
+                            echo $metadataxml->hierarchyLevel->MD_ScopeCode;
+                            $category = $metadataxml->hierarchyLevel->MD_ScopeCode;
                         }
                         ?>
                     </p>
@@ -123,13 +125,98 @@
       }
     }
     ?>
+            
+    var kategori = "<?php echo $category; ?>";
+    if (kategori.toLowerCase() == "dataset") {
+        $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
+        $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?><span class="text-warning">*</span>');
+        $('.divPublisherRole').show();
+        $('.divMetadataDate').show();
+        $('.divMetadataDateType').show();
+        $('.divMetadataStatus').show();
+        $('.divResponsiblePartyRole').show();
+        $('.optContentInfo_dataset').show();
+        $('.optContentInfo_services').hide();
+        $('.optContentInfo_gridded').hide();
+        $('.optContentInfo_imagery').hide();
+        $('.optStatus_dataset').show();
+        $('.optStatus_services').hide();
+        $('.divTypeOfServices').hide();
+        $('.divOperationName').hide();
+        $('.divServiceUrl').hide();
+        $('.divTypeOfCouplingDataset').hide();
+        $('.refSys_Services').hide();
+        $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+        $('.divDataQualityTabs').show();
+        $('.divUseLimitation').hide();
+        $('.divMaintenanceInfo').hide();
+    }else if (kategori.toLowerCase() == "services") {
+        $('.optContentInfo_dataset').hide();
+        $('.optContentInfo_services').show();
+        $('.optContentInfo_gridded').hide();
+        $('.optContentInfo_imagery').hide();
+        $('.optStatus_dataset').hide();
+        $('.optStatus_services').show();
+        $('.divTypeOfServices').show();
+        $('.divOperationName').show();
+        $('.divServiceUrl').show();
+        $('.divTypeOfCouplingDataset').show();
+        $('.refSys_Services').show();
+        $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',false);
+        $('.divDataQualityTabs').hide();
+        $('.divUseLimitation').show();
+        $('.divMaintenanceInfo').hide();
+    }else if (kategori.toLowerCase() == "gridded") {
+        $('.optContentInfo_dataset').hide();
+        $('.optContentInfo_services').hide();
+        $('.optContentInfo_gridded').show();
+        $('.optContentInfo_imagery').hide();
+        $('.optStatus_dataset').hide();
+        $('.optStatus_services').show()
+        $('.divTypeOfServices').hide();
+        $('.divOperationName').hide();
+        $('.divServiceUrl').hide();
+        $('.divTypeOfCouplingDataset').hide();
+        $('.refSys_Services').hide();
+        $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+        $('.divDataQualityTabs').show();
+        $('.divUseLimitation').hide();
+        $('.divMaintenanceInfo').show();
+    }else if (kategori.toLowerCase() == "imagery") {
+        $('.optContentInfo_dataset').hide();
+        $('.optContentInfo_services').hide();
+        $('.optContentInfo_gridded').hide();
+        $('.optContentInfo_imagery').show();
+        $('.optStatus_dataset').hide();
+        $('.optStatus_services').show();
+        $('.divTypeOfServices').hide();
+        $('.divOperationName').hide();
+        $('.divServiceUrl').hide();
+        $('.divTypeOfCouplingDataset').hide();
+        $('.refSys_Services').hide();
+        $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+        $('.divDataQualityTabs').show();
+        $('.divUseLimitation').hide();
+        $('.divMaintenanceInfo').show();
+    }
+
+    if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {
+        $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
+        $('#accordion').show();
+        $('#div_action_buttons').show();
+    } else if (kategori.toLowerCase() == "imagery" || kategori.toLowerCase() == "gridded") {
+        $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
+        $('#accordion').show();
+        $('#div_action_buttons').show();
+    }
   });
 </script>
+
 <?php
-$westBoundLongitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal : "");
-$eastBoundLongitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal : "");
-$southBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
-$northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
+$westBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal : "");
+$eastBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal : "");
+$southBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
+$northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
 ?>
 
 <script>
