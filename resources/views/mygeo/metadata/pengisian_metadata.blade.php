@@ -143,37 +143,7 @@
                 </div>
             </div>
         </div>
-    </div>  
-    <div class="modal fade" id="modal-showweb">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <?php
-                                ?>
-                                <iframe id="webiframe" src="" height="425px" width="100%" title="URL Test">
-                                </iframe>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between1">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>  
+    </div>
 
     <!-- Main content -->
     <section class="content">
@@ -325,7 +295,7 @@
         });
         $(document).on("click", ".btnTestUrl", function () {
             var weburl = $(this).parent().parent().find('.urlToTest').val();
-            $('#webiframe').attr('src', weburl);
+            window.open(weburl, '_blank');
         });
         
         $(document).on('click', '.btnSubmit', function() {
