@@ -216,11 +216,15 @@ class UserController extends Controller {
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
 
+        // dd($pemohonan_yang_tidak_dinilais);
         if($pemohonan_yang_tidak_dinilais) {
-            \Session::flash('warning','Anda perlu membuat penilaian kepada permohonan terbaru');
             return view('mygeo.profile.profil', compact('user'));
         } else {
+            if(Auth::user()->hasRole(['Pemohon Data'])){
+            \Session::flash('warning','Anda perlu membuat penilaian kepada permohonan terbaru');
             return view('mygeo.profile.profil', compact('user'));
+        }
+
         }
     }
 

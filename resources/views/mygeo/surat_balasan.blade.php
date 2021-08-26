@@ -66,6 +66,8 @@
                                         <div class="col-4">
                                             <div class="form-inline">
                                                 Rujukan : KeTSA 606-4/3/2 Jld.13 (1q)
+                                                <input type="hidden" name="no_rujukan" value="KeTSA 606-4/3/2 Jld.13 (1q)">
+                                                <input type="hidden" name="date_mohon" value="{{$pemohon->date}}">
                                             </div>
                                             <div class="form-inline">
                                                 Tarikh : {{ Carbon\Carbon::now()->format('d M Y') }}
@@ -74,20 +76,19 @@
                                     </div>
                                     <p align="justify" class="mx-6">
                                         <textarea class="form-control form-control-sm mt-3" cols="30"
-                                            placeholder="Nama dan Alamat" rows="10"></textarea>
+                                            placeholder="Nama dan Alamat" rows="10">{{$pemohon->users->name}},&#13;&#10;{{$pemohon->users->alamat}}
+                                        </textarea>
 
 
                                         Tuan/Puan,<br>
-                                        <input type="text" class="form-control form-control-sm" name="tajuk_surat"
-                                            placeholder="Tajuk Surat Balasan Permohonan">
-                                        <input type="hidden" class="form-control form-control-sm my-4" name="no_rujukan"
-                                            placeholder="Tajuk" value="">
+                                        <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
+                                            placeholder="Tajuk Surat Balasan Permohonan" value="{{$surat->tajuk_surat}}">
 
-                                        <span class="form-inline">Dengan segala hormatnya merujuk kepada surat tuan/puan
-                                            <input type="text" class="form-control form-control-sm col-1 mx-1"
-                                                name="no_rujukan_mohon" placeholder="JPBD.Tr 1/1572/8(27)">
+                                        <span class="form-inline">Dengan segala hormatnya merujuk kepada surat tuan/puan <i class="mx-2"> JPBD.Tr 1/1572/8(27) </i>
+                                            <input type="hidden" class="form-control form-control-sm col-3 mx-1"
+                                                name="no_rujukan_mohon" value="JPBD.Tr 1/1572/8(27)">
                                             bertarikh
-                                            <span>{{ Carbon\Carbon::parse($pemohon->date)->format('d M Y') }}</span>
+                                            <span class="mx-2">{{ Carbon\Carbon::parse($pemohon->date)->format('d M Y') }}</span>
                                             mengenai perkara di atas.</span><br><br>
 
                                         2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan

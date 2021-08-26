@@ -461,7 +461,12 @@
                         @csrf
                         <div class="form-group">
                             <label for="tajuk_dokumen" class="form-control-label">Tajuk Dokumen</label>
-                            <input type="text" class="form-control" name="tajuk_dokumen" value="">
+                            <select name="tajuk_dokumen" class="form-control">
+                                <option disabled>Pilih</option>
+                                <option value="Salinan Kad Pengenalan">Salinan Kad Pengenalan</option>
+                                <option value="Borang PPNM">Borang PPNM</option>
+                                <option value="Borang Undertaking">Borang Undertaking</option>
+                            </select>
                         </div>
                         <input type="file" name="file" class="form-control">
                         <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">

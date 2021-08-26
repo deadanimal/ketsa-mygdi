@@ -31,6 +31,7 @@ class CreateAkuanPelajarsTable extends Migration
             $table->string('lain_c')->nullable();
 
             $table->string('digital_sign')->nullable();
+            $table->timestamp('date_sign')->nullable();
 
             $table->foreignId('permohonan_id')->nullable();
 

@@ -2,248 +2,294 @@
 
 @section('content')
 
-<style>
-    .accordionHeader{
-        background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
-        background-image: linear-gradient(to right, #ebba16, #ed8a19);
-        cursor: pointer;
-    }
-</style>
-<style>
-    .fancy_card[_ngcontent-tvu-c486] {
-        box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06), 1px 3px 8px rgba(39, 44, 49, 0.03);
-        -webkit-transition: all 0.7s ease;
-        transition: all 0.7s ease;
+    <style>
+        .accordionHeader {
+            background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
+            background-image: linear-gradient(to right, #ebba16, #ed8a19);
+            cursor: pointer;
+        }
 
-        color: transparent;
-        text-transform: uppercase;
-        background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
-        background-image: linear-gradient(to right, #ebba16, #ed8a19);
-    }
+    </style>
+    <style>
+        .fancy_card[_ngcontent-tvu-c486] {
+            box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06), 1px 3px 8px rgba(39, 44, 49, 0.03);
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
 
-    .fancy_card[_ngcontent-tvu-c486]:hover {
-        box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07), 1px 6px 12px rgba(39, 44, 49, 0.04);
-        -webkit-transition: all 0.4s ease;
-        transition: all 0.4s ease;
+            color: transparent;
+            text-transform: uppercase;
+            background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
+            background-image: linear-gradient(to right, #ebba16, #ed8a19);
+        }
 
-        -webkit-transform: translate3D(0, -1px, 0) scale(1.2);
-        transform: translate3D(0, -1px, 0) scale(1.2);
-        font-size: 110%;
-        color: #ffffff;
-        background-image: -webkit-gradient(linear, left top, right top, from(#ebc64c), to(#e4a053));
-        background-image: linear-gradient(to right, #ebc64c, #e4a053);
-    }
+        .fancy_card[_ngcontent-tvu-c486]:hover {
+            box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07), 1px 6px 12px rgba(39, 44, 49, 0.04);
+            -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease;
 
-    .badge-custom[_ngcontent-tvu-c486] {
-        color: #303030;
-        background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
-        background-image: linear-gradient(to right, #ebba16, #ed8a19);
-        font-size: 80%;
-        padding: 0.75rem 1.05rem;
-    }
+            -webkit-transform: translate3D(0, -1px, 0) scale(1.2);
+            transform: translate3D(0, -1px, 0) scale(1.2);
+            font-size: 110%;
+            color: #ffffff;
+            background-image: -webkit-gradient(linear, left top, right top, from(#ebc64c), to(#e4a053));
+            background-image: linear-gradient(to right, #ebc64c, #e4a053);
+        }
 
-    .badge-custom[href][_ngcontent-tvu-c486]:hover, .badge-custom[href][_ngcontent-tvu-c486]:focus {
-        text-decoration: none;
-        color: #fff;
-        background-color: #fa3a0e;
-    }
+        .badge-custom[_ngcontent-tvu-c486] {
+            color: #303030;
+            background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
+            background-image: linear-gradient(to right, #ebba16, #ed8a19);
+            font-size: 80%;
+            padding: 0.75rem 1.05rem;
+        }
 
-    p[_ngcontent-tvu-c486]:hover {
-        background-color: #e4e6ff;
-    }</style><style>.square[_ngcontent-tvu-c497] {
-        width: 130px;
-        height: 130px;
-    }
+        .badge-custom[href][_ngcontent-tvu-c486]:hover,
+        .badge-custom[href][_ngcontent-tvu-c486]:focus {
+            text-decoration: none;
+            color: #fff;
+            background-color: #fa3a0e;
+        }
 
-    .auto[_ngcontent-tvu-c497] {
-        cursor: auto;
-    }
+        p[_ngcontent-tvu-c486]:hover {
+            background-color: #e4e6ff;
+        }
 
-    .default[_ngcontent-tvu-c497] {
-        cursor: default;
-    }
+    </style>
+    <style>
+        .square[_ngcontent-tvu-c497] {
+            width: 130px;
+            height: 130px;
+        }
 
-    .none[_ngcontent-tvu-c497] {
-        cursor: none;
-    }
+        .auto[_ngcontent-tvu-c497] {
+            cursor: auto;
+        }
 
-    .context-menu[_ngcontent-tvu-c497] {
-        cursor: context-menu;
-    }
+        .default[_ngcontent-tvu-c497] {
+            cursor: default;
+        }
 
-    .help[_ngcontent-tvu-c497] {
-        cursor: help;
-    }
+        .none[_ngcontent-tvu-c497] {
+            cursor: none;
+        }
 
-    .pointer[_ngcontent-tvu-c497] {
-        cursor: pointer;
-    }
+        .context-menu[_ngcontent-tvu-c497] {
+            cursor: context-menu;
+        }
 
-    .progress[_ngcontent-tvu-c497] {
-        cursor: progress;
-    }
+        .help[_ngcontent-tvu-c497] {
+            cursor: help;
+        }
 
-    .wait[_ngcontent-tvu-c497] {
-        cursor: wait;
-    }
+        .pointer[_ngcontent-tvu-c497] {
+            cursor: pointer;
+        }
 
-    .cell[_ngcontent-tvu-c497] {
-        cursor: cell;
-    }
+        .progress[_ngcontent-tvu-c497] {
+            cursor: progress;
+        }
 
-    .crosshair[_ngcontent-tvu-c497] {
-        cursor: crosshair;
-    }
+        .wait[_ngcontent-tvu-c497] {
+            cursor: wait;
+        }
 
-    .text[_ngcontent-tvu-c497] {
-        cursor: text;
-    }
+        .cell[_ngcontent-tvu-c497] {
+            cursor: cell;
+        }
 
-    .vertical-text[_ngcontent-tvu-c497] {
-        cursor: vertical-text;
-    }
+        .crosshair[_ngcontent-tvu-c497] {
+            cursor: crosshair;
+        }
 
-    .alias[_ngcontent-tvu-c497] {
-        cursor: alias;
-    }
+        .text[_ngcontent-tvu-c497] {
+            cursor: text;
+        }
 
-    .copy[_ngcontent-tvu-c497] {
-        cursor: copy;
-    }
+        .vertical-text[_ngcontent-tvu-c497] {
+            cursor: vertical-text;
+        }
 
-    .move[_ngcontent-tvu-c497] {
-        cursor: move;
-    }
+        .alias[_ngcontent-tvu-c497] {
+            cursor: alias;
+        }
 
-    .no-drop[_ngcontent-tvu-c497] {
-        cursor: no-drop;
-    }
+        .copy[_ngcontent-tvu-c497] {
+            cursor: copy;
+        }
 
-    .not-allowed[_ngcontent-tvu-c497] {
-        cursor: not-allowed;
-    }
+        .move[_ngcontent-tvu-c497] {
+            cursor: move;
+        }
 
-    .all-scroll[_ngcontent-tvu-c497] {
-        cursor: all-scroll;
-    }
+        .no-drop[_ngcontent-tvu-c497] {
+            cursor: no-drop;
+        }
 
-    .col-resize[_ngcontent-tvu-c497] {
-        cursor: col-resize;
-    }
+        .not-allowed[_ngcontent-tvu-c497] {
+            cursor: not-allowed;
+        }
 
-    .row-resize[_ngcontent-tvu-c497] {
-        cursor: row-resize;
-    }
+        .all-scroll[_ngcontent-tvu-c497] {
+            cursor: all-scroll;
+        }
 
-    .n-resize[_ngcontent-tvu-c497] {
-        cursor: n-resize;
-    }
+        .col-resize[_ngcontent-tvu-c497] {
+            cursor: col-resize;
+        }
 
-    .e-resize[_ngcontent-tvu-c497] {
-        cursor: e-resize;
-    }
+        .row-resize[_ngcontent-tvu-c497] {
+            cursor: row-resize;
+        }
 
-    .s-resize[_ngcontent-tvu-c497] {
-        cursor: s-resize;
-    }
+        .n-resize[_ngcontent-tvu-c497] {
+            cursor: n-resize;
+        }
 
-    .w-resize[_ngcontent-tvu-c497] {
-        cursor: w-resize;
-    }
+        .e-resize[_ngcontent-tvu-c497] {
+            cursor: e-resize;
+        }
 
-    .ns-resize[_ngcontent-tvu-c497] {
-        cursor: ns-resize;
-    }
+        .s-resize[_ngcontent-tvu-c497] {
+            cursor: s-resize;
+        }
 
-    .ew-resize[_ngcontent-tvu-c497] {
-        cursor: ew-resize;
-    }
+        .w-resize[_ngcontent-tvu-c497] {
+            cursor: w-resize;
+        }
 
-    .ne-resize[_ngcontent-tvu-c497] {
-        cursor: ne-resize;
-    }
+        .ns-resize[_ngcontent-tvu-c497] {
+            cursor: ns-resize;
+        }
 
-    .nw-resize[_ngcontent-tvu-c497] {
-        cursor: nw-resize;
-    }
+        .ew-resize[_ngcontent-tvu-c497] {
+            cursor: ew-resize;
+        }
 
-    .se-resize[_ngcontent-tvu-c497] {
-        cursor: se-resize;
-    }
+        .ne-resize[_ngcontent-tvu-c497] {
+            cursor: ne-resize;
+        }
 
-    .sw-resize[_ngcontent-tvu-c497] {
-        cursor: sw-resize;
-    }
+        .nw-resize[_ngcontent-tvu-c497] {
+            cursor: nw-resize;
+        }
 
-    .nesw-resize[_ngcontent-tvu-c497] {
-        cursor: nesw-resize;
-    }
+        .se-resize[_ngcontent-tvu-c497] {
+            cursor: se-resize;
+        }
 
-    .nwse-resize[_ngcontent-tvu-c497] {
-        cursor: nwse-resize;
-    }
+        .sw-resize[_ngcontent-tvu-c497] {
+            cursor: sw-resize;
+        }
 
-    .bgg[_ngcontent-tvu-c497] {
-        background-image: url('mygeo-background.jpg');
-        height: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+        .nesw-resize[_ngcontent-tvu-c497] {
+            cursor: nesw-resize;
+        }
 
-    .fancy_card[_ngcontent-tvu-c497] {
-        box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06), 1px 3px 8px rgba(39, 44, 49, 0.03);
-        -webkit-transition: all 0.3s ease;
-        transition: all 0.3s ease;
+        .nwse-resize[_ngcontent-tvu-c497] {
+            cursor: nwse-resize;
+        }
 
-        text-transform: uppercase;
-        background-color: #0A80B6;
-        font-weight: 500;
-    }
+        .bgg[_ngcontent-tvu-c497] {
+            background-image: url('mygeo-background.jpg');
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
 
-    .fancy_card[_ngcontent-tvu-c497]:hover {
-        box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07), 1px 6px 12px rgba(39, 44, 49, 0.04);
-        -webkit-transition: all 0.4s ease;
-        transition: all 0.4s ease;
+        .fancy_card[_ngcontent-tvu-c497] {
+            box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06), 1px 3px 8px rgba(39, 44, 49, 0.03);
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
 
-        -webkit-transform: translate3D(0, -1px, 0) scale(1.2);
-        transform: translate3D(0, -1px, 0) scale(1.2);
-        color: #272727;
-        font-size: 100%;
-        background-color: #0094d8;
-    }
+            text-transform: uppercase;
+            background-color: #0A80B6;
+            font-weight: 500;
+        }
 
-    .btn-primary[_ngcontent-tvu-c497], .bg-primary[_ngcontent-tvu-c497] {
-        background-color: #0A80B6 !important;
-        border-color: #0A80B6;
-    }
+        .fancy_card[_ngcontent-tvu-c497]:hover {
+            box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07), 1px 6px 12px rgba(39, 44, 49, 0.04);
+            -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease;
 
-    .card2[_ngcontent-tvu-c497] {
-        border-radius: 0;
-        /*top: 250px;*/
-        left: 0;
-        right: 0;
-    }
+            -webkit-transform: translate3D(0, -1px, 0) scale(1.2);
+            transform: translate3D(0, -1px, 0) scale(1.2);
+            color: #272727;
+            font-size: 100%;
+            background-color: #0094d8;
+        }
 
-    .div_subkategori{
-        margin-left:50px;
-        }</style>
+        .btn-primary[_ngcontent-tvu-c497],
+        .bg-primary[_ngcontent-tvu-c497] {
+            background-color: #0A80B6 !important;
+            border-color: #0A80B6;
+        }
+
+        .card2[_ngcontent-tvu-c497] {
+            border-radius: 0;
+            /*top: 250px;*/
+            left: 0;
+            right: 0;
+        }
+
+        .div_subkategori {
+            margin-left: 50px;
+        }
+
+    </style>
 
 
-<div _ngcontent-tvu-c497="" class="card22 mt-29 p-26" style="width:100%;background-color: rgba(255, 255, 255, 0.9);">
-    <div class="card-body">
-        <h1>Tatacara Permohonan</h1>
-        <br>
-        <div class="row">
-            <img width="750px" src="./afiqadminmygeo_files/dataAsasTutorial.png">
+    <div _ngcontent-tvu-c497="" class="card22 mt-29 p-26" style="width:100%;background-color: rgba(255, 255, 255, 0.9);">
+        <div class="card-body">
+            <h1>Tatacara Permohonan</h1>
+            <br>
+            <div class="row">
+<pre>
+    1) Daftar Pengguna
+    > Pemohon perlu daftar masuk aplikasi MyGeo Explorer sebagai Pemohon Data terlebih dahulu.
+    > Pilih Kategori pemohon sama ada G2C, G2G atau G2E.
+    > Isi maklumat pendaftaran dengan lengkap.
+
+    2) Isi Maklumat Permohonan
+    > Pemohon perlu log masuk ke sistem dan lengkapkan maklumat permohonan.
+    > Nyatakan tujuan, data yang dimohon dan kawasan lapisan data yang dimohon.
+    > Pemohon perlu memuat naik surat rasmi beserta dokumen berkaitan ketika mengisi maklumat permohonon.
+
+    3) Pengesahan Permohonan
+    > Pentadbir akan mengesahkan permohonan daripada pemohon.
+    > Sekiranya permohonan lengkap permohonan akan diluluskan dan dimajukan untuk pemprosesan data yang
+    dimohon.
+    > Pemohon akan menerima notifikasi melalui e-mel sekiranya permohonan ditolak
+
+    4) Proses Data
+    > Pentadbir akan memproses data dan menghantar surat balasan permohonan kepada pemohon.
+
+    5) Terima Data
+    > Pemohon akan menerima notifikasi muat turun data melalui e-mel berserta surat balasan permohonon.
+    > Pemohon log masuk sistem untuk muat turun data.
+    > Sistem akan meminta pengesahan sama ada pemohon berjaya atau tidak muat turun data dalam masa tiga (3)
+    jam setelah pemohon menekan poutan muat turun data. Jika tidak, pemohon boleh memuat turun semula dan
+    proses akan berulang sehingga pemohon berjaya memuat turun data.
+    > Pemohon membuat akuan penerimaan data selepas berjaya memohon data.
+    > Pautan data hanya sah untuk tempoh dua (2) minggu sahaja.
+
+    6) Membuat Penilaian
+    > Sistem menghantar notifikasi penilaian melalui e-mel setelah pemohon berjaya memuat turun data.
+    > Sekiranya pemohon masih belum membuat penilaian data, sistem akan menghantar notifikasi peringatan
+    berulang melalui e-mel setiap dua (2) bulan sekali dalam tempoh enam (6) bulan daripada proses berjaya
+    muat turun data.
+    > Mesej peringatan akan muncul apabila pemohon log masuk sistem sekiranya pemohon gagal untuk membuat
+    penilaian data dalam masa enam (6) bulan.
+</pre>
+                {{-- <img width="750px" src="./afiqadminmygeo_files/dataAsasTutorial.png"> --}}
+            </div>
         </div>
     </div>
-</div>
 
 
-<script>
-    $(document).ready(function () {
-        
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+
+        });
+    </script>
 @stop

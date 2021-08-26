@@ -145,6 +145,75 @@ class DataAsasController extends Controller
         return view('mygeo.penilaian_pemohon',compact('pemohon','penilaian'));
     }
 
+    public function store_penilaian(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:,png,jpeg,jpg|max:2048'
+            // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'
+        ]);
+
+            if ($request->file()) {
+                $fileName = time() . '_' . $request->file->getClientOriginalName();
+                $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+
+                //save senarai data
+                Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
+                    "kategori" => $request->kategori,
+                    "info_data" => $request->info_data,
+
+                    "bhg_b_a" => $request->bhg_b_a,
+                    "bhg_b_b" => $request->bhg_b_b,
+                    "bhg_b_c" => $request->bhg_b_c,
+                    "bhg_b_d" => $request->bhg_b_d,
+                    "bhg_b_e" => $request->bhg_b_e,
+                    "bhg_b_f" => $request->bhg_b_f,
+                    "bhg_b_g" => $request->bhg_b_g,
+
+                    "bhg_c_1" => $request->bhg_c_1,
+                    "bhg_c_2" => $request->bhg_c_2,
+                    "bhg_c_3" => $request->bhg_c_3,
+
+                    "bhg_c_4_file_path" => $request->bhg_c_4_file_path = '/storage/' . $filePath,
+                    "komen_cadangan" => $request->komen_cadangan,
+
+                ]);
+            } else {
+                //save senarai data
+                Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
+                    "kategori" => $request->kategori,
+                    "info_data" => $request->info_data,
+
+                    "bhg_b_a" => $request->bhg_b_a,
+                    "bhg_b_b" => $request->bhg_b_b,
+                    "bhg_b_c" => $request->bhg_b_c,
+                    "bhg_b_d" => $request->bhg_b_d,
+                    "bhg_b_e" => $request->bhg_b_e,
+                    "bhg_b_f" => $request->bhg_b_f,
+                    "bhg_b_g" => $request->bhg_b_g,
+
+                    "bhg_c_1" => $request->bhg_c_1,
+                    "bhg_c_2" => $request->bhg_c_2,
+                    "bhg_c_3" => $request->bhg_c_3,
+
+                    "komen_cadangan" => $request->komen_cadangan,
+
+                ]);
+            }
+            MohonData::where(["id" => $request->permohonan_id])->update([
+                "penilaian" => $request->penilaian = 1,
+            ]);
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Update';
+            $at->save();
+
+
+
+        return redirect('penilaian')->with('success', 'Penilaian disimpan!');
+    }
+
     public function akuan_terima($id)
     {
         $pemohon = MohonData::where('id', $id)->first();
@@ -174,27 +243,38 @@ class DataAsasController extends Controller
 
     public function update_proses_data(Request $request)
     {
-        DB::transaction(function () use ($request) {
-            //save senarai data
-            ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
-                "pautan_data" => $request->pautan_data,
-                "tempoh" => $request->tempoh,
-                "total_harga" => $request->total_harga,
-            ]);
+        $valid_surat = SuratBalasan::where([
+            ["permohonan_id","=", $request->permohonan_id],])
+            ->whereNotNull('tajuk_surat')
+            ->whereNotNull('no_rujukan')
+            ->whereNotNull('no_rujukan_mohon')
+            ->whereNotNull('date_mohon')
+            ->get();
 
-            Mohondata::where(["id" => $request->permohonan_id])->update([
-                "status" => $request->status = 3,
-            ]);
+        // dd($valid_surat);
+        if($valid_surat->isEmpty()){
+            return redirect('/proses_data')->with('warning', 'Sila Kemaskini Surat Balasan');
+        } else {
 
-            $at = new AuditTrail();
-            $at->path = url()->full();
-            $at->user_id = Auth::user()->id;
-            $at->data = 'Update';
-            $at->save();
+        ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
+            "pautan_data" => $request->pautan_data,
+            "tempoh" => $request->tempoh,
+            "total_harga" => $request->total_harga,
+        ]);
 
-        });
+        Mohondata::where(["id" => $request->permohonan_id])->update([
+            "status" => $request->status = 3,
+        ]);
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
+        $at->save();
+
 
         return redirect('/proses_data')->with('success', 'Data telah diproses');
+        }
     }
 
     public function mohon_data()
@@ -354,7 +434,23 @@ class DataAsasController extends Controller
 
     public function update_akuan_pelajar(Request $request)
     {
-        DB::transaction(function () use ($request) {
+
+        $valid_file = AkuanPelajar::where([
+            ["permohonan_id","=", $request->permohonan_id],])
+            ->whereNull('digital_sign')
+            ->get();
+
+// dd($valid_file);
+         if($valid_file->isEmpty()){
+            $request->validate([
+                'file' => 'mimes:png,jpeg,jpg|max:2048'
+                // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'
+            ]);
+        }
+
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('signatures', $fileName, 'public');
             //save senarai data
             AkuanPelajar::where(["permohonan_id" => $request->permohonan_id])->update([
                 "title" => $request->title,
@@ -367,19 +463,53 @@ class DataAsasController extends Controller
                 "lain_a" => $request->lain_a,
                 "lain_b" => $request->lain_b,
                 "lain_c" => $request->lain_c,
-                "digital_sign" => $request->digital_sign,
+                "digital_sign" => $request->digital_sign = '/storage/' . $filePath,
+
             ]);
 
-        });
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Update';
+            $at->save();
 
-        $at = new AuditTrail();
-        $at->path = url()->full();
-        $at->user_id = Auth::user()->id;
-        $at->data = 'Update';
-        $at->save();
+            $id = $request->permohonan_id;
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan !');
 
-        $id = $request->permohonan_id;
-        return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
+        } elseif($valid_file->isEmpty()) {
+
+            //save senarai data
+            AkuanPelajar::where(["permohonan_id" => $request->permohonan_id])->update([
+                "title" => $request->title,
+                "peta_topo_a" => $request->peta_topo_a,
+                "peta_topo_b" => $request->peta_topo_b,
+                "peta_topo_c" => $request->peta_topo_c,
+                "foto_udara_a" => $request->foto_udara_a,
+                "foto_udara_b" => $request->foto_udara_b,
+                "foto_udara_c" => $request->foto_udara_c,
+                "lain_a" => $request->lain_a,
+                "lain_b" => $request->lain_b,
+                "lain_c" => $request->lain_c,
+
+            ]);
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Update';
+            $at->save();
+
+            $id = $request->permohonan_id;
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
+
+        } else {
+
+            $id = $request->permohonan_id;
+            return redirect()->action('DataAsasController@akuan_pelajar', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang ini Berserta Tandatangan');
+        }
+
+
+
     }
 
     public function permohonan_baru()
@@ -525,20 +655,43 @@ class DataAsasController extends Controller
             return redirect('mohon_data')->with('success', 'Draf Permohonan Berjaya Disimpan');
         }
 
-
-
     }
 
     public function hantar_permohonan(Request $request)
     {
-        DB::transaction(function () use ($request) {
-            //hantar permohonan to admin
+
+        $valid_akuan_pelajar = AkuanPelajar::where([
+            ["permohonan_id","=", $request->permohonan_id],])
+            ->whereNotNull('title')
+            ->whereNotNull('digital_sign')
+            ->get();
+
+        $valid = SenaraiKawasanData::where([
+            ["permohonan_id","=", $request->permohonan_id],
+        ])->get();
+        $validfile = DokumenBerkaitan::where([
+            ["permohonan_id","=", $request->permohonan_id],
+        ])->get();
+
+
+        $id = $request->permohonan_id;
+        // dd($valid,$validfile);
+        if($valid_akuan_pelajar->isEmpty()){
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang Akuan Pelajar');
+        }
+        elseif($valid->isNotEmpty() && $validfile->isNotEmpty())
+        {
             MohonData::where(["id" => $request->permohonan_id])->update([
                 "dihantar" => $request->dihantar = 1,
             ]);
-        });
+            return redirect('mohon_data')->with('success', 'Permohonan anda berjaya dihantar');
 
-        return redirect('mohon_data')->with('success', 'Permohonan anda berjaya dihantar');
+        } else {
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Permohonan Anda');
+        }
+
+
+
     }
 
     public function store_permohonan_baru(Request $request)
@@ -553,6 +706,7 @@ class DataAsasController extends Controller
         $mdata->dihantar = $request->dihantar = 0;
         $mdata->status = $request->status = 0;
         $mdata->acceptance = $request->acceptance = 0;
+        $mdata->penilaian = $request->penilaian = 0;
         $mdata->user_id = $request->user_id = $user->id;
         $mdata->save();
 
@@ -585,72 +739,6 @@ class DataAsasController extends Controller
         return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Permohonan baru telah ditambah. Sila lengkapkan maklumat permohonan.');
     }
 
-    public function store_penilaian(Request $request)
-    {
-
-        DB::transaction(function () use ($request) {
-
-            if ($request->file()) {
-                $fileName = time() . '_' . $request->file->getClientOriginalName();
-                $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
-
-                //save senarai data
-                Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
-                    "kategori" => $request->kategori,
-                    "info_data" => $request->info_data,
-
-                    "bhg_b_a" => $request->bhg_b_a,
-                    "bhg_b_b" => $request->bhg_b_b,
-                    "bhg_b_c" => $request->bhg_b_c,
-                    "bhg_b_d" => $request->bhg_b_d,
-                    "bhg_b_e" => $request->bhg_b_e,
-                    "bhg_b_f" => $request->bhg_b_f,
-                    "bhg_b_g" => $request->bhg_b_g,
-
-                    "bhg_c_1" => $request->bhg_c_1,
-                    "bhg_c_2" => $request->bhg_c_2,
-                    "bhg_c_3" => $request->bhg_c_3,
-
-                    "bhg_c_4_file_path" => $request->bhg_c_4_file_path = '/storage/' . $filePath,
-                    "komen_cadangan" => $request->komen_cadangan,
-
-                ]);
-            } else {
-                //save senarai data
-                Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
-                    "kategori" => $request->kategori,
-                    "info_data" => $request->info_data,
-
-                    "bhg_b_a" => $request->bhg_b_a,
-                    "bhg_b_b" => $request->bhg_b_b,
-                    "bhg_b_c" => $request->bhg_b_c,
-                    "bhg_b_d" => $request->bhg_b_d,
-                    "bhg_b_e" => $request->bhg_b_e,
-                    "bhg_b_f" => $request->bhg_b_f,
-                    "bhg_b_g" => $request->bhg_b_g,
-
-                    "bhg_c_1" => $request->bhg_c_1,
-                    "bhg_c_2" => $request->bhg_c_2,
-                    "bhg_c_3" => $request->bhg_c_3,
-
-                    "komen_cadangan" => $request->komen_cadangan,
-
-                ]);
-            }
-            MohonData::where(["id" => $request->permohonan_id])->update([
-                "penilaian" => $request->penilaian = 1,
-            ]);
-
-            $at = new AuditTrail();
-            $at->path = url()->full();
-            $at->user_id = Auth::user()->id;
-            $at->data = 'Update';
-            $at->save();
-
-        });
-
-        return redirect('penilaian')->with('success', 'Penilaian disimpan!');
-    }
 
     public function store_dokumen_berkaitan(Request $request)
     {
