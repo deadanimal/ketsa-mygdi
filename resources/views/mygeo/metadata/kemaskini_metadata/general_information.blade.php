@@ -17,7 +17,9 @@
                 <p class="pl-lg-3 form-control-label">Content Information<span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                 <?php
                 $var = "";
-                if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
+                if(old('c1_content_info') != ""){
+                    $var = old('c1_content_info');
+                }elseif(isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
                     $var = trim($metadataxml->contact->CI_ResponsibleParty);
                 }
                 ?>

@@ -112,6 +112,6 @@
 
 <script>
     $(document).ready(function() {
-        $('#c1_content_info').val("{{old('c1_content_info')}}").trigger('change');
+        $('#content_info_dropdown').val("{{old('c1_content_info')}}").trigger('change');
     });
 </script>
