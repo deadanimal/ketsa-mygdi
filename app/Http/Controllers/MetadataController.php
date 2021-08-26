@@ -406,7 +406,7 @@ class MetadataController extends Controller {
             "publisher_phone" => 'required',
             "c2_metadataName" => 'required',
             "c2_product_type" => 'required',
-//            "c2_abstract" => 'required',
+            "c2_abstract" => 'required',
             "c2_contact_agensiorganisasi" => 'required',
             "c2_contact_state" => 'required',
             "c2_contact_email" => 'required',
@@ -448,6 +448,7 @@ class MetadataController extends Controller {
             $fields["c8_type"]= 'required';
             $fields["c8_op_identifier"]= 'required';
         }
+        /*
         if($request->c2_product_type == "Application"){
             $fields["abstractApplication_namaAplikasi"]= 'required';
             $fields["abstractApplication_tujuan"]= 'required';
@@ -521,6 +522,7 @@ class MetadataController extends Controller {
             $fields["abstractVectorData_skala"]= 'required';
             $fields["abstractVectorData_statusData"]= 'required';
         }
+        */
         
         $customMsg = [
             "c1_content_info.required" => 'Content Information required',
@@ -548,6 +550,7 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude.required" => 'North Bound Latitude required',
             "c10_keyword.required" => 'Browsing Information Keyword required',
             "topic_category.required" => 'Topic Category required',
+            /*
             "abstractApplication_namaAplikasi.required" => 'Abstract required',
             "abstractApplication_tujuan.required" => 'Abstract required',
             "abstractApplication_tahunPembangunan.required" => 'Abstract required',
@@ -612,6 +615,7 @@ class MetadataController extends Controller {
             "abstractVectorData_unit.required" => 'Abstract required',
             "abstractVectorData_skala.required" => 'Abstract required',
             "abstractVectorData_statusData.required" => 'Abstract required',
+            */
             "c10_file_url.required" => 'URL required',
             "c10_file_name.required" => 'File Name required',
             "c10_file_type.required" => 'File Type required',
@@ -846,7 +850,7 @@ class MetadataController extends Controller {
             "publisher_phone" => 'required',
             "c2_metadataName" => 'required',
             "c2_product_type" => 'required',
-//            "c2_abstract" => 'required',
+            "c2_abstract" => 'required',
             "c2_contact_agensiorganisasi" => 'required',
             "c2_contact_state" => 'required',
             "c2_contact_email" => 'required',
@@ -889,6 +893,7 @@ class MetadataController extends Controller {
             $fields["c8_type"]= 'required';
             $fields["c8_op_identifier"]= 'required';
         }
+        /*
         if($request->c2_product_type == "Application"){
             $fields["abstractApplication_namaAplikasi"]= 'required';
             $fields["abstractApplication_tujuan"]= 'required';
@@ -962,6 +967,7 @@ class MetadataController extends Controller {
             $fields["abstractVectorData_skala"]= 'required';
             $fields["abstractVectorData_statusData"]= 'required';
         }
+        */
         
         $customMsg = [
             "c1_content_info.required" => 'Content Information required',
@@ -989,6 +995,7 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude.required" => 'North Bound Latitude required',
             "c10_keyword.required" => 'Browsing Information Keyword required',
             "topic_category.required" => 'Topic Category required',
+            /*
             "abstractApplication_namaAplikasi.required" => 'Abstract required',
             "abstractApplication_tujuan.required" => 'Abstract required',
             "abstractApplication_tahunPembangunan.required" => 'Abstract required',
@@ -1053,6 +1060,7 @@ class MetadataController extends Controller {
             "abstractVectorData_unit.required" => 'Abstract required',
             "abstractVectorData_skala.required" => 'Abstract required',
             "abstractVectorData_statusData.required" => 'Abstract required',
+            */
             "c10_file_url.required" => 'URL required',
             "c10_file_name.required" => 'File Name required',
             "c10_file_type.required" => 'File Type required',

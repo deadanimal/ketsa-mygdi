@@ -670,24 +670,75 @@ if ($catSelected == "dataset" || $catSelected == "services") {
         $(document).on('change', '#c2_product_type', function() {
             var type = $(this).val();
             if (type == "Application") {
-                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
-            }else if (type == "Document") {
-                $('#c2_abstract').attr('placeholder','Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
-            }else if (type == "GIS Activity/Project") {
-                $('#c2_abstract').attr('placeholder','Nama Aktiviti –Tujuan – Lokasi – Tahun');
-            }else if (type == "Map") {
-                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit ');
-            }else if (type == "Raster Data") {
-                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
-            }else if (type == "Services") {
-                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
-            }else if (type == "Software") {
-                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
-            }else if (type == "Vector Data") {
-                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
+//                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
+                $('.abstractApplication').show();
+                $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Document") {
+//                $('#c2_abstract').attr('placeholder', 'Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
+                $('.abstractDocument').show();
+                $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "GIS Activity/Project") {
+//                $('#c2_abstract').attr('placeholder', 'Nama Aktiviti –Tujuan – Lokasi – Tahun');
+                $('.abstractGISActivityProject').show();
+                $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Map") {
+//                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit');
+                $('.abstractMap').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Raster Data") {
+//                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
+                $('.abstractRasterData').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Services") {
+//                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
+                $('.abstractServices').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Software") {
+//                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
+                $('.abstractSoftware').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
+            } else if (type == "Vector Data") {
+//                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
+                $('.abstractVectorData').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             }
+            
+            $('#c2_abstract').val("");
         });
 
+        $(".abstractElement").keyup(function(){
+            var type = $('#c2_product_type').val();
+            var abstractText = "";
+            var typeSelector = "";
+            
+            if (type == "Application") {
+                typeSelector = ".abstractApplication";
+            } else if (type == "Document") {
+                typeSelector = ".abstractDocument";
+            } else if (type == "GIS Activity/Project") {
+                typeSelector = ".abstractGISActivityProject";
+            } else if (type == "Map") {
+                typeSelector = ".abstractMap";
+            } else if (type == "Raster Data") {
+                typeSelector = ".abstractRasterData";
+            } else if (type == "Services") {
+                typeSelector = ".abstractServices";
+            } else if (type == "Software") {
+                typeSelector = ".abstractSoftware";
+            } else if (type == "Vector Data") {
+                typeSelector = ".abstractVectorData";
+            }
+            
+            var elements = $(typeSelector).find('.abstractElement');
+            $(elements).each(function(index){
+                if($(this).val() !== ""){
+                    abstractText += $(this).val()+' - ';
+                }
+            });
+            abstractText = abstractText.slice(0,-3);
+
+            $('#c2_abstract').val(abstractText);
+        });
 <?php
 if (!is_null(old('kategori'))) {
     ?>

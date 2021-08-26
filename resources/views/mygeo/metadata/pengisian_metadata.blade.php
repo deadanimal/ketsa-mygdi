@@ -527,6 +527,42 @@
                 $('.abstractVectorData').show();
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             }
+            
+            $('#c2_abstract').val("");
+        });
+        
+        $(".abstractElement").keyup(function(){
+            var type = $('#c2_product_type').val();
+            var abstractText = "";
+            var typeSelector = "";
+            
+            if (type == "Application") {
+                typeSelector = ".abstractApplication";
+            } else if (type == "Document") {
+                typeSelector = ".abstractDocument";
+            } else if (type == "GIS Activity/Project") {
+                typeSelector = ".abstractGISActivityProject";
+            } else if (type == "Map") {
+                typeSelector = ".abstractMap";
+            } else if (type == "Raster Data") {
+                typeSelector = ".abstractRasterData";
+            } else if (type == "Services") {
+                typeSelector = ".abstractServices";
+            } else if (type == "Software") {
+                typeSelector = ".abstractSoftware";
+            } else if (type == "Vector Data") {
+                typeSelector = ".abstractVectorData";
+            }
+            
+            var elements = $(typeSelector).find('.abstractElement');
+            $(elements).each(function(index){
+                if($(this).val() !== ""){
+                    abstractText += $(this).val()+' - ';
+                }
+            });
+            abstractText = abstractText.slice(0,-3);
+
+            $('#c2_abstract').val(abstractText);
         });
         
         <?php
