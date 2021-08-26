@@ -24,9 +24,11 @@
             <div class="row pl-lg-4 mt-4"> 
                 <?php
                 $tc = [];
-                foreach($metadataxml->identificationInfo->MD_DataIdentification->topicCategory as $tcd){
-                    if(trim($tcd->MD_TopicCategoryCode) != ""){
-                        $tc[]= trim($tcd->MD_TopicCategoryCode);
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->topicCategory) && trim($metadataxml->identificationInfo->MD_DataIdentification->topicCategory) != ""){
+                    foreach($metadataxml->identificationInfo->MD_DataIdentification->topicCategory as $tcd){
+                        if(trim($tcd->MD_TopicCategoryCode) != ""){
+                            $tc[]= trim($tcd->MD_TopicCategoryCode);
+                        }
                     }
                 }
                 ?>
