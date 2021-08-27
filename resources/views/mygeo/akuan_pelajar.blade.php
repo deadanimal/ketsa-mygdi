@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="card-body p-4">
-                                <form action="/simpan_akuan_pelajar" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('simpan_akuan_pelajar') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
 
                                     <h3 class="text-center">AKUAN PELAJAR</h3>
