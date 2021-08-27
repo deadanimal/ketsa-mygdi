@@ -287,6 +287,25 @@
         });
         $('.divIdentificationInformationUrl').hide();
         $('.inputIdentificationInformationUrl').prop('disabled',true);
+        
+        <?php
+        if(!is_null(old('kategori')) && old('kategori') == "Dataset" && !is_null(old('c1_content_info')) && old('c1_content_info') == "Application"){
+            ?>
+            $('.divIdentificationInformationUrl').show();
+            $('.inputIdentificationInformationUrl').prop('disabled',false);
+            $('.divBrowsingInformationUrl').hide();
+            $('.inputBrowsingInformationUrl').prop('disabled',true);
+            <?php
+        }else{
+            ?>
+            $('.divIdentificationInformationUrl').hide();
+            $('.inputIdentificationInformationUrl').prop('disabled',true);
+            $('.divBrowsingInformationUrl').show();
+            $('.inputBrowsingInformationUrl').prop('disabled',false);    
+            <?php
+        }
+        ?>
+        
         $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
         
         $(document).on("click", "#btnTestServiceUrl", function () {
@@ -528,8 +547,53 @@
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             }
             
+            $('.abstractElement').val("");
             $('#c2_abstract').val("");
         });
+        
+        <?php
+        if(!is_null(old('c2_product_type')) && old('c2_product_type') == "Application"){
+            ?>
+            $('.abstractApplication').show();
+            $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Document"){
+            ?>
+            $('.abstractDocument').show();
+            $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "GIS Activity/Project"){
+            ?>
+            $('.abstractGISActivityProject').show();
+            $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Map"){
+            ?>
+            $('.abstractMap').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Raster Data"){
+            ?>
+            $('.abstractRasterData').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Services"){
+            ?>
+            $('.abstractServices').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Software"){
+            ?>
+            $('.abstractSoftware').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Vector Data"){
+            ?>
+            $('.abstractVectorData').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
+            <?php
+        }
+        ?>
         
         $(".abstractElement").keyup(function(){
             var type = $('#c2_product_type').val();
@@ -557,10 +621,10 @@
             var elements = $(typeSelector).find('.abstractElement');
             $(elements).each(function(index){
                 if($(this).val() !== ""){
-                    abstractText += $(this).val()+' - ';
+                    abstractText += $(this).val()+'  ';
                 }
             });
-            abstractText = abstractText.slice(0,-3);
+            abstractText = abstractText.trim();
 
             $('#c2_abstract').val(abstractText);
         });

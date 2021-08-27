@@ -108,54 +108,6 @@
 
 <script>
   $(document).ready(function(){
-      <?php
-        $typeofProd = "";
-        if (isset($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString != "") {
-            $typeofProd = trim($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString);
-        }
-        if($typeofProd == "Application") {
-            ?>
-            $('.abstractApplication').show();
-            $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif ($typeofProd == "Document") {
-            ?>
-            $('.abstractDocument').show();
-            $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif ($typeofProd == "GIS Activity/Project") {
-            ?>
-            $('.abstractGISActivityProject').show();
-            $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif ($typeofProd == "Map") {
-            ?>
-            $('.abstractMap').show();
-            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif ($typeofProd == "Raster Data") {
-            ?>
-            $('.abstractRasterData').show();
-            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif ($typeofProd == "Services") {
-            ?>
-            $('.abstractServices').show();
-            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif ($typeofProd == "Software") {
-            ?>
-            $('.abstractSoftware').show();
-            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
-            <?php
-        }elseif ($typeofProd == "Vector Data") {
-            ?>
-            $('.abstractVectorData').show();
-            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
-            <?php
-        }
-        ?>
-                
     $('#c10_date_div,#c10_t1_commission_date_div,#c10_t1_omission_date_div,#c10_t2_conceptual_date_div,#c10_t2_domain_date_div,#c10_t2_format_date_div,#c10_t2_topological_date_div,#c10_t3_absExt_date_div,#c10_t3_relInt_date_div,#c10_t3_gridded_date_div,#c10_t4_accuTimeMeasure_date_div,#c10_t4_tempConsist_date_div,#c10_t4_tempValid_date_div,#c10_t5_classCorrect_date_div,#c10_t5_nonQuant_date_div,#c10_t5_quant_date_div').datetimepicker({
       // format:'DD/MM/YYYY',
       // format: 'L'

@@ -11,7 +11,7 @@
             <div class="form-group row">
                 <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                 <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;" id="content_info_dropdown">
-                    <option selected disabled>Select Content</option>
+                    <option value="" selected>Pilih...</option>
                     <option value="Application" class='optContentInfo_dataset'>Application</option>
                     <option value="Clearing House" class='optContentInfo_dataset'>Clearing House</option>
                     <option value="Downloadable Data" class='optContentInfo_dataset'>Downloadable Data</option>

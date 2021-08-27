@@ -293,7 +293,7 @@
         if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
             $var = trim($metadataxml->contact->CI_ResponsibleParty);
         }
-        if ($catSelected == "Dataset" && $var == "Application") {
+        if ($catSelected == "dataset" && $var == "Application") {
             ?>
             $('.divIdentificationInformationUrl').show();
             $('.inputIdentificationInformationUrl').prop('disabled',false);
@@ -703,6 +703,7 @@ if ($catSelected == "dataset" || $catSelected == "services") {
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             }
             
+            $('.abstractElement').val("");
             $('#c2_abstract').val("");
         });
 
@@ -732,10 +733,10 @@ if ($catSelected == "dataset" || $catSelected == "services") {
             var elements = $(typeSelector).find('.abstractElement');
             $(elements).each(function(index){
                 if($(this).val() !== ""){
-                    abstractText += $(this).val()+' - ';
+                    abstractText += $(this).val()+'  ';
                 }
             });
-            abstractText = abstractText.slice(0,-3);
+            abstractText = abstractText.trim();
 
             $('#c2_abstract').val(abstractText);
         });

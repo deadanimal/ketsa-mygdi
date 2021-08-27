@@ -15,35 +15,27 @@
         <div class="card-body">
             <div class="form-group row">
                 <p class="pl-lg-3 form-control-label">Content Information<span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
-                <?php
-                $var = "";
-                if(old('c1_content_info') != ""){
-                    $var = old('c1_content_info');
-                }elseif(isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
-                    $var = trim($metadataxml->contact->CI_ResponsibleParty);
-                }
-                ?>
                 <select name="c1_content_info" id="c1_content_info" class="form-control" style="width:175px;">
-                    <option disabled>Select Content</option>
-                    <option value="Application" class='optContentInfo_dataset' {{($var=="Application" ? "selected":"")}}>Application</option>
-                    <option value="Clearing House" class='optContentInfo_dataset' {{($var=='Clearing House' ? 'selected':'')}}>Clearing House</option>
-                    <option value="Downloadable Data" class='optContentInfo_dataset' {{($var=="Downloadable Data" ? "selected":"")}}>Downloadable Data</option>
-                    <option value="Geographic Activities" class='optContentInfo_dataset' {{($var=="Geographic Activities" ? "selected":"")}}>Geographic Activities</option>
-                    <option value="Geographic Services" class='optContentInfo_dataset' {{($var=="Geographic Services" ? "selected":"")}}>Geographic Services</option>
-                    <option value="Map File" class='optContentInfo_dataset' {{($var=="Map File" ? "selected":"")}}>Map File</option>
-                    <option value="Offline Data" class='optContentInfo_dataset' {{($var=="Offline Data" ? "selected":"")}}>Offline Data</option>
-                    <option value="Static Map Images" class='optContentInfo_dataset' {{($var=="Static Map Images" ? "selected":"")}}>Static Map Images</option>
-                    <option value="Other Documents" class='optContentInfo_dataset' {{($var=="Other Documents" ? "selected":"")}}>Other Documents</option>
+                    <option value="">Pilih...</option>
+                    <option value="Application" class='optContentInfo_dataset'>Application</option>
+                    <option value="Clearing House" class='optContentInfo_dataset'>Clearing House</option>
+                    <option value="Downloadable Data" class='optContentInfo_dataset'>Downloadable Data</option>
+                    <option value="Geographic Activities" class='optContentInfo_dataset'>Geographic Activities</option>
+                    <option value="Geographic Services" class='optContentInfo_dataset'>Geographic Services</option>
+                    <option value="Map File" class='optContentInfo_dataset'>Map File</option>
+                    <option value="Offline Data" class='optContentInfo_dataset'>Offline Data</option>
+                    <option value="Static Map Images" class='optContentInfo_dataset'>Static Map Images</option>
+                    <option value="Other Documents" class='optContentInfo_dataset'>Other Documents</option>
                     
-                    <option value="Live Data and Maps" class='optContentInfo_services' {{($var=="Live Data and Maps" ? "selected":"")}}>Live Data and Maps</option>
+                    <option value="Live Data and Maps" class='optContentInfo_services'>Live Data and Maps</option>
                     
-                    <option value="Gridded" class='optContentInfo_gridded' {{($var=="Gridded" ? "selected":"")}}>Gridded</option>
+                    <option value="Gridded" class='optContentInfo_gridded'>Gridded</option>
                     
-                    <option value="Imagery" class='optContentInfo_imagery' {{($var=="Imagery" ? "selected":"")}}>Imagery</option>
+                    <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                 </select>
                 
-                <p class="ml-3 mb-0 lblContentInfo">{{ $var }}</p>
-                <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled value="{{ $var }}">
+                <p class="ml-3 mb-0 lblContentInfo"></p>
+                <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled value="">
                 
                 @error('c1_content_info')
                 <div class="text-error">{{ $message }}</div>
@@ -163,5 +155,16 @@
 </div>
 
 <script>
-    $(document).ready(function() {});
+    $(document).ready(function() {
+        <?php
+        $var = "";
+        if(old('c1_content_info') != ""){
+            $var = old('c1_content_info');
+        }elseif(isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
+            $var = trim($metadataxml->contact->CI_ResponsibleParty);
+        }
+        ?>
+        $('#c1_content_info').val("{{ $var }}").trigger('change');
+        $('#content_info_text').val($var);
+    });
 </script>

@@ -1268,7 +1268,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
             }
             ?>
-            <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3">{{ $var }}</textarea>
+            <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3" readonly>{{ $var }}</textarea>
             @error('c2_abstract')
             <div class="text-error">{{ $message }}</div>
             @enderror
