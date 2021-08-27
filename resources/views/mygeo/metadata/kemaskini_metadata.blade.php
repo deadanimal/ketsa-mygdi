@@ -476,11 +476,6 @@
             }
             ?>
         });
-
-        $('#c15_date_div,#c15_t1_commission_date_div,#c15_t2_conceptual_date_div,#c15_t3_absExt_date_div,#c15_t4_accuTimeMeasure_date_div,c15_t5_classCorrect_date_div').datetimepicker({
-            format: 'DD/MM/YYYY',
-            format: 'L'
-        });
         
         window.onbeforeunload = function() {
             return 'Anda sedang meninggal. page ini. Sila simpan metadata terlebih dahulu.' ;

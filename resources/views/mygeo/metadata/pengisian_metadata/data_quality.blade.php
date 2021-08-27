@@ -20,6 +20,7 @@
                     </div>
                     <div class="col-xl-3">
                         <select name="c15_data_quality_info" id="c15_data_quality_info" class="form-control form-control-sm">
+                            <option value="">Pilih...</option>
                             <option value="Attribute" {{(old('c15_data_quality_info') == 'Attribute' ? "selected":"")}}>Attribute</option>
                             <option value="Attribute Type" {{(old('c15_data_quality_info') == 'Attribute Type' ? "selected":"")}}>Attribute Type</option>
                             <option value="Collection Session" {{(old('c15_data_quality_info') == 'Collection Session' ? "selected":"")}}>Collection Session</option>
@@ -132,11 +133,7 @@
                                                             <label class="form-check-label" for="c15_t1_commission_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
                                                                     <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control form-control-sm" value="{{old('c15_t1_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -196,11 +193,7 @@
                                                             <label class="form-check-label" for="c15_t1_commission_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
                                                                     <input type="date" name="c15_t1_date_2" id="c15_t1_date_2" class="form-control form-control-sm" value="{{old('c15_t1_date_2')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -294,11 +287,7 @@
                                                             <label class="form-check-label" for="c15_t2_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date" id="c15_t2_date" class="form-control form-control-sm" value="{{old('c15_t2_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -358,11 +347,7 @@
                                                             <label class="form-check-label" for="c15_t2_date_2">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm" value="{{old('c15_t2_date_2')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -422,11 +407,7 @@
                                                             <label class="form-check-label" for="c15_t2_date_3">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_3" id="c15_t2_date_3" class="form-control form-control-sm" value="{{old('c15_t2_date_3')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -486,11 +467,7 @@
                                                             <label class="form-check-label" for="c15_t2_date_4">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_4" id="c15_t2_date_4" class="form-control form-control-sm" value="{{old('c15_t2_date_4')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -579,11 +556,7 @@
                                                             <label class="form-check-label" for="c15_t3_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
                                                                     <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control form-control-sm" value="{{old('c15_t3_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -643,11 +616,7 @@
                                                             <label class="form-check-label" for="c15_t3_date_2">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
                                                                     <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm" value="{{old('c15_t3_date_2')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -707,11 +676,7 @@
                                                             <label class="form-check-label" for="c15_t3_date_3">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
                                                                     <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm" value="{{old('c15_t3_date_3')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -800,11 +765,7 @@
                                                             <label class="form-check-label" for="c15_t4_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
                                                                     <input type="date" name="c15_t4_date" id="c15_t4_date" class="form-control form-control-sm" value="{{old('c15_t4_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -864,11 +825,7 @@
                                                             <label class="form-check-label" for="c15_t4_date_2">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
                                                                     <input type="date" name="c15_t4_date_2" id="c15_t4_date_2" class="form-control form-control-sm" value="{{old('c15_t4_date_2')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -928,11 +885,7 @@
                                                             <label class="form-check-label" for="c15_t4_date_3">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
                                                                     <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{old('c15_t4_date_3')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -1021,11 +974,7 @@
                                                             <label class="form-check-label" for="c15_t5_classCorrect_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t5_classCorrect_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
                                                                     <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control form-control-sm" value="{{old('c15_t5_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -1085,11 +1034,7 @@
                                                             <label class="form-check-label" for="c15_t5_classCorrect_2_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t5_classCorrect_2_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
                                                                     <input type="date" name="c15_t5_date_2" id="c15_t5_date_2" class="form-control form-control-sm" value="{{old('c15_t5_date_2')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -1149,11 +1094,7 @@
                                                             <label class="form-check-label" for="c15_t5_classCorrect_date_3">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t5_classCorrect_date_div_3" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
                                                                     <input type="date" name="c15_t5_date_3" id="c15_t5_date_3" class="form-control form-control-sm" value="{{old('c15_t5_date_3')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>

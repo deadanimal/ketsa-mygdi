@@ -126,3 +126,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#c12_dataset_type').val("{{ $dataSetType }}").trigger('change');
+    });
+</script>

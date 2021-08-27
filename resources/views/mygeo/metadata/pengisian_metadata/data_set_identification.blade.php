@@ -18,12 +18,12 @@
                     <div class="col-xl-3">
                         <select class="form-control form-control-sm" id="c12_dataset_type" name="c12_dataset_type">
                             <option selected disabled hidden> Select Type </option>
-                            <option value="Grid" {{(old('c12_dataset_type') == 'grid' ? "selected":"")}}>Grid</option>
-                            <option value="Stereo Model" {{(old('c12_dataset_type') == 'stereo_model' ? "selected":"")}}>Stereo Model</option>
-                            <option value="Text Table" {{(old('c12_dataset_type') == 'text_table' ? "selected":"")}}>Text Table</option>
-                            <option value="Tin" {{(old('c12_dataset_type') == 'tin' ? "selected":"")}}>Tin</option>
-                            <option value="Vector" {{(old('c12_dataset_type') == 'vector' ? "selected":"")}}>Vector</option>
-                            <option value="Video" {{(old('c12_dataset_type') == 'video' ? "selected":"")}}>Video</option>
+                            <option value="Grid">Grid</option>
+                            <option value="Stereo Model">Stereo Model</option>
+                            <option value="Text Table">Text Table</option>
+                            <option value="Tin">Tin</option>
+                            <option value="Vector">Vector</option>
+                            <option value="Video">Video</option>
                         </select>
                     </div>
                 </div>
@@ -93,3 +93,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#c12_dataset_type').val("{{old('c12_dataset_type')}}").trigger('change');
+    });
+</script>

@@ -619,6 +619,7 @@ class MetadataController extends Controller {
             "c10_file_url.required" => 'URL required',
             "c10_file_name.required" => 'File Name required',
             "c10_file_type.required" => 'File Type required',
+            "c2_serviceUrl.required" => 'Service URL required',
         ];
         $this->validate($request, $fields, $customMsg);
 
@@ -1064,6 +1065,7 @@ class MetadataController extends Controller {
             "c10_file_url.required" => 'URL required',
             "c10_file_name.required" => 'File Name required',
             "c10_file_type.required" => 'File Type required',
+            "c2_serviceUrl.required" => 'Service URL required',
         ];
         $this->validate($request, $fields, $customMsg);
 

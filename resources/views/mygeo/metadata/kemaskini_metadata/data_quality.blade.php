@@ -178,11 +178,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
                                                                 <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control form-control-sm" value="{{ $t1Date }}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -270,11 +266,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
                                                                 <input type="date" name="c15_t1_date_2" id="c15_t1_date_2" class="form-control form-control-sm" value="{{$t1Date}}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -402,11 +394,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date" id="c15_t2_date" class="form-control form-control-sm" value="{{$t2Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -494,11 +482,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm" value="{{$t2Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -586,11 +570,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_3" id="c15_t2_date_3" class="form-control form-control-sm" value="{{$t2Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -678,11 +658,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_4" id="c15_t2_date_4" class="form-control form-control-sm" value="{{$t2Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -805,11 +781,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
                                                                 <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control form-control-sm" value="{{$t3Date}}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -897,11 +869,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
                                                                 <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm" value="{{$t3Date}}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -989,11 +957,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
                                                                 <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm" value="{{$t3Date}}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1116,11 +1080,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
                                                                     <input type="date" name="c15_t4_date" id="c15_t4_date" class="form-control form-control-sm" value="{{$t4Date}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1208,11 +1168,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
                                                                 <input type="date" name="c15_t4_date_2" id="c15_t4_date_2" class="form-control form-control-sm" value="{{$t4Date}}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1300,11 +1256,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
                                                                 <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{$t4Date}}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1428,11 +1380,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
                                                                 <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control form-control-sm" value="{{$t5Date}}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1521,11 +1469,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
                                                                 <input type="date" name="c15_t5_date_2" id="c15_t5_date_2" class="form-control form-control-sm" value="{{$t5Date}}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -1614,11 +1558,7 @@
                                                                 }
                                                                 ?>
                                                                 <b>Date:</b>
-                                                                <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
                                                                 <input type="date" name="c15_t5_date_3" id="c15_t5_date_3" class="form-control form-control-sm" value="{{$t5Date}}">
-                                                                <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
-                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                </div>-->
                                                             </label>
                                                         </td>
                                                     </tr>

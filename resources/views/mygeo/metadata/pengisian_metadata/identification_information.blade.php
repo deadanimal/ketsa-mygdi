@@ -286,7 +286,7 @@
                     </div>
                     <div class="col-7">
                         <input type="text" class="form-control form-control-sm ml-3" name="c2_operationName"
-                            id="c2_operationName">
+                            id="c2_operationName" value="{{ old('c2_operationName') }}">
                         @error('c2_operationName')
                             <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -299,7 +299,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" class="form-control form-control-sm ml-3" name="c2_serviceUrl" id="c2_serviceUrl">
+                        <input type="text" class="form-control form-control-sm ml-3" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ old('c2_serviceUrl') }}">
                     </div>
                     <div class="col-1">
                         <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
@@ -578,5 +578,6 @@
         $('#c2_product_type').val("{{ old('c2_product_type') }}").trigger('change');
         $('#c2_contact_state').val("{{ old('c2_contact_state') }}").trigger('change');
         $('#c2_contact_country').val("{{ old('c2_contact_country') }}").trigger('change');
+        $('#c2_metadataDateType').val("{{ old('c2_metadataDateType') }}").trigger('change');
     });
 </script>

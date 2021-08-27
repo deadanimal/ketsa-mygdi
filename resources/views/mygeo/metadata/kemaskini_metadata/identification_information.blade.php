@@ -156,22 +156,22 @@
                         ?>
                         <select name="c2_metadataDateType" id="c2_metadataDateType" class="form-control form-control-sm">
                             <option value="" selected>Pilih...</option>
-                            <option value="Adopted" {{ ($metDateType == "Adopted" ? "selected":"") }}>Adopted</option>
-                            <option value="Creation" {{ ($metDateType == "Creation" ? "selected":"") }}>Creation</option>
-                            <option value="Deprecated" {{ ($metDateType == "Deprecated" ? "selected":"") }}>Deprecated</option>
-                            <option value="Distribution" {{ ($metDateType == "Distribution" ? "selected":"") }}>Distribution</option>
-                            <option value="Expiry" {{ ($metDateType == "Expiry" ? "selected":"") }}>Expiry</option>
-                            <option value="In Force" {{ ($metDateType == "In Force" ? "selected":"") }}>In Force</option>
-                            <option value="Last Revison" {{ ($metDateType == "Last Revison" ? "selected":"") }}>Last Revison</option>
-                            <option value="Last Update" {{ ($metDateType == "Last Update" ? "selected":"") }}>Last Update</option>
-                            <option value="Next Update" {{ ($metDateType == "Next Update" ? "selected":"") }}>Next Update</option>
-                            <option value="Publication" {{ ($metDateType == "Publication" ? "selected":"") }}>Publication</option>
-                            <option value="Released" {{ ($metDateType == "Released" ? "selected":"") }}>Released</option>
-                            <option value="Revision" {{ ($metDateType == "Revision" ? "selected":"") }}>Revision</option>
-                            <option value="Superseded" {{ ($metDateType == "Superseded" ? "selected":"") }}>Superseded</option>
-                            <option value="Validity Begins" {{ ($metDateType == "Validity Begins" ? "selected":"") }}>Validity Begins</option>
-                            <option value="Validy Expires" {{ ($metDateType == "Validy Expires" ? "selected":"") }}>Validy Expires</option>
-                            <option value="Unavailable" {{ ($metDateType == "Unavailable" ? "selected":"") }}>Unavailable</option>
+                            <option value="Adopted">Adopted</option>
+                            <option value="Creation">Creation</option>
+                            <option value="Deprecated">Deprecated</option>
+                            <option value="Distribution">Distribution</option>
+                            <option value="Expiry">Expiry</option>
+                            <option value="In Force">In Force</option>
+                            <option value="Last Revison">Last Revison</option>
+                            <option value="Last Update">Last Update</option>
+                            <option value="Next Update">Next Update</option>
+                            <option value="Publication">Publication</option>
+                            <option value="Released">Released</option>
+                            <option value="Revision">Revision</option>
+                            <option value="Superseded">Superseded</option>
+                            <option value="Validity Begins">Validity Begins</option>
+                            <option value="Validy Expires">Validy Expires</option>
+                            <option value="Unavailable">Unavailable</option>
                         </select>
                         @error('c2_metadataDateType')
                         <div class="text-error">{{ $message }}</div>
@@ -571,3 +571,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#c2_metadataDateType').val("{{ $metDateType }}").trigger('change');
+    });
+</script>

@@ -58,7 +58,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3">
+                        <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ old('c10_keyword') }}">
                         @error('c10_keyword')
                         <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -71,7 +71,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3">
+                        <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ (isset(old('c10_additional_keyword')[0]) ? old('c10_additional_keyword')[0]:"") }}">
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -81,7 +81,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3">
+                        <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ (isset(old('c10_additional_keyword')[1]) ? old('c10_additional_keyword')[1]:"") }}">
                     </div>
                 </div>
             </div>
