@@ -398,24 +398,17 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="kategori">Kategori</label>
-                                        <select class="form-control" name="kategori">
+                                        <select class="form-control" id="kategori" name="kategori" onchange="selectKategori()">
                                             <option selected disabled>Pilih</option>
                                             @foreach ($senarai_data as $sdata)
                                                 <option value="{{ $sdata->kategori }}">{{ $sdata->kategori }}
                                                 </option>
                                             @endforeach
                                         </select>
+
                                     </div>
-                                    <div class="form-group">
-                                        <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
-                                        <select name="subkategori" class="form-control" autofocus>
-                                            <option selected disabled>Pilih</option>
-                                            @foreach ($senarai_data as $sdata)
-                                                <option value="{{ $sdata->subkategori }}">
-                                                    {{ $sdata->subkategori }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                    <div class="form-group" id="dynamicAddRemove">
+
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
@@ -463,9 +456,11 @@
                             <label for="tajuk_dokumen" class="form-control-label">Tajuk Dokumen</label>
                             <select name="tajuk_dokumen" class="form-control">
                                 <option disabled>Pilih</option>
-                                <option value="Salinan Kad Pengenalan">Salinan Kad Pengenalan</option>
-                                <option value="Borang PPNM">Borang PPNM</option>
-                                <option value="Borang Undertaking">Borang Undertaking</option>
+                                <option value="Salinan Kad Pengenalan">Salinan Kad Pengenalan (Wakil Agensi/Pelajar)</option>
+                                <option value="Borang PPNM">Borang PPNM (Wakil Agensi/Pelajar)</option>
+                                <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
+                                <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
+                                <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
                             </select>
                         </div>
                         <input type="file" name="file" class="form-control">
@@ -535,8 +530,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
+
                                         <label for="kategori">Kategori</label>
-                                        <select class="form-control" name="kategori">
+                                        <select class="form-control" name="kategori" >
                                             <option selected disabled>Pilih</option>
                                             @foreach ($senarai_data as $sdata)
                                                 <option value="{{ $sdata->kategori }}" @if($sk->kategori == $sdata->kategori) selected @endif>
@@ -544,7 +540,9 @@
                                                 </option>
                                             @endforeach
                                         </select>
+
                                     </div>
+
                                     <div class="form-group">
                                         <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
                                         <select name="subkategori" class="form-control" autofocus>
@@ -668,6 +666,7 @@
                 //            $("." + divname).show();
                 //            $(".subKategoriTitle").show();
             });
+
         });
     </script>
 
@@ -682,5 +681,39 @@
                 document.getElementById('hidden_div_pentadbir').style.display = "block";
             }
         }
+    </script>
+
+        <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+
+        function selectKategori() {
+            d = document.getElementById("kategori").value;
+            kategori = d.toString();
+            sdata = {!! $senarai_data !!}
+            senarai_append = ''
+            sdata.forEach(element => {
+                if(element['kategori'] ==  d) {
+                    senarai_append += `<option value="`+element['subkategori']+`">`+element['subkategori']+`</option>`
+                }
+            });
+
+            $("#dynamicAddRemove").empty();
+            $("#dynamicAddRemove").append(`<label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
+                                                <select name="subkategori" class="form-control" autofocus><option selected disabled>Pilih</option>'
+
+                                                    `+ senarai_append +`
+
+                                                 </select>`
+                );
+
+        }
+
+
+
+
+
+
     </script>
 @stop

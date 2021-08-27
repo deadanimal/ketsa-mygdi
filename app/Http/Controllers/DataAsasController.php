@@ -72,7 +72,7 @@ class DataAsasController extends Controller
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
         ])->get();
-        $senarai_data = SenaraiData::all();
+        $senarai_data = SenaraiData::orderBy('kategori')->get();
         return view('/data_asas_senarai',[
             'senarai_data' => $senarai_data,
             'subs'=> $subs,
@@ -557,13 +557,15 @@ class DataAsasController extends Controller
         $at->user_id = Auth::user()->id;
         $at->data = 'Create';
         $at->save();
+
         $valid = SenaraiData::where([
             ["kategori","=", $request->kategori],
             ["subkategori","=", $request->subkategori],
             ["lapisan_data","=", $request->lapisan_data],
         ])->first();
         if(empty($valid)){
-        } else{
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Padanan Data Senarai dan Kawasan Salah!');
+        } else {
             $skdata->harga_data = $valid->harga_data;
             $skdata->save();
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan ditambah!');
