@@ -646,10 +646,10 @@ class DataAsasController extends Controller
                 
                 if($request->status == '1'){ //lulus
                     $mail = "mails.exmpl13";
-                    $subject = "MyGeo Explorer - Permohonan Ditolak";
+                    $subject = "MyGeo Explorer - Permohonan Diluluskan";
                 }elseif($request->status == '2'){ //tolak
                     $mail = "mails.exmpl14";
-                    $subject = "MyGeo Explorer - Permohonan Diluluskan";
+                    $subject = "MyGeo Explorer - Permohonan Ditolak";
                 }
                 
                 if($request->status != '0'){
