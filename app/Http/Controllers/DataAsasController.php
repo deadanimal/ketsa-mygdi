@@ -708,7 +708,7 @@ class DataAsasController extends Controller
 
         $id = $request->permohonan_id;
         // dd($valid,$validfile);
-        if($valid_akuan_pelajar->isEmpty()){
+        if((Auth::user()->kategori == 'IPTA - Pelajar' || Auth::user()->kategori == 'IPTS - Pelajar') && $valid_akuan_pelajar->isEmpty()){
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang Akuan Pelajar');
         }elseif($valid->isNotEmpty() && $validfile->isNotEmpty()){
             MohonData::where(["id" => $request->permohonan_id])->update([
