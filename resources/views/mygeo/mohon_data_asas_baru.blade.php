@@ -109,8 +109,16 @@
                                                 </label>
                                             </div>
                                             <div class="col-8">
+                                                <?php
+                                                $var = "";
+                                                if($user->hasRole(['Pemohon Data'])) {
+                                                    $var = $user->agensi_organisasi;
+                                                }else{
+                                                    $var = (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"");
+                                                }
+                                                ?>
                                                 <input class="form-control form-control-sm ml-3" name="institusi"
-                                                    type="text" value="{{ $user->agensiOrganisasi->name }}" disabled />
+                                                    type="text" value="{{ $var }}" disabled />
                                             </div>
                                         </div>
                                         <div class="row mb-2">
@@ -304,7 +312,7 @@
 
                                     <hr class="my-4">
                                     <div class="row mb-3">
-                                        @if (Auth::user()->hasRole(['Pemohon Data']) && $pemohon->users->kategori == 'G2E - Pelajar')
+                                        @if (Auth::user()->hasRole(['Pemohon Data']) && ($pemohon->users->kategori == 'IPTA - Pelajar' || $pemohon->users->kategori == 'IPTS - Pelajar'))
                                             <div class="col-7 form-inline">
                                                 <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
                                                 <a href="{{ url('akuan_pelajar/'.$pemohon->id) }}"
