@@ -766,7 +766,7 @@ class DataAsasController extends Controller
         $surat->permohonan_id = $request->permohonan_id = $mdata->id;
         $surat->save();
 
-        if($user->kategori == 'G2E - Pelajar'){
+        if($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar'){
             $akuan_pelajar = new AkuanPelajar();
             $akuan_pelajar->permohonan_id = $request->permohonan_id = $mdata->id;
             $akuan_pelajar->save();

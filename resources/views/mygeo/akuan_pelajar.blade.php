@@ -77,7 +77,7 @@
                                             bertandatangan di bawah ini, sebagai
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
-                                                name="agensi_organisasi" disabled>{{ $pemohon->users->agensiOrganisasi->name }}, {{ $pemohon->users->alamat }}
+                                                name="agensi_organisasi" disabled>{{ $pemohon->users->agensi_organisasi }}, {{ $pemohon->users->alamat }}
                                                              </textarea>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
