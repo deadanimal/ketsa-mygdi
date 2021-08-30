@@ -32,7 +32,7 @@
             <h2 class="">Carian Metadata</h2>
         </div>
         <div class="col-12 form-inline my-4 justify-content-center">
-            <form method="post" class="navbar-search navbar-search-light" action="{{url('carian_metadata_nologin')}}" id="form_carian">
+            <form method="post" class="navbar-search navbar-search-light" action="{{url('senarai_metadata_nologin')}}" id="form_carian">
                 @csrf
                 <div class="form-inline mb-0">
                     <div class="input-group input-group-alternative input-group-merge" style="background-image: linear-gradient(to right, #ebba16, #ed8a19);">
@@ -41,7 +41,7 @@
                                 <i class="fas fa-search"></i>
                             </span>
                         </div>
-                        <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off">
+                        <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off" value="{{ $carian }}">
                     </div>
                 </div>
                 <button type="button" data-action="search-close" data-target="#navbar-search-main" aria-label="Close" class="close">
@@ -217,6 +217,7 @@
                                     }
                                     ?>
                                 </div>
+                                {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->links():"") }}
                             </div>
                         </div>
                     </div>

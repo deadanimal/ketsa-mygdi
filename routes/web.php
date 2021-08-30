@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-Route::get('/senarai_metadata_nologin', 'MetadataController@index_nologin');
+Route::any('/senarai_metadata_nologin', 'MetadataController@index_nologin');
 Route::post('/carian_metadata_nologin', 'MetadataController@search_nologin');
 Route::post('/lihat_metadata_nologin', 'MetadataController@show_nologin');
 Route::post('/lihat_xml_nologin', 'MetadataController@show_xml_nologin');

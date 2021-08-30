@@ -92,22 +92,48 @@ class MetadataController extends Controller {
         return User::where('id',$user_id)->get()->first();
     }
 
-    public function index_nologin() {
-        $metadatas = [];
-        /*
-          $metadatasdb = MetadataGeo::on('pgsql2')->where('disahkan','yes')->orderBy('id', 'DESC')->get()->all();
-          foreach($metadatasdb as $met){
-          $ftestxml2 = <<<XML
-          $met->data
-          XML;
-          $ftestxml2 = str_replace("gco:","",$ftestxml2);
-          $ftestxml2 = str_replace("gmd:","",$ftestxml2);
-          $xml2 = simplexml_load_string($ftestxml2);
-          $metadatas[$met->id]=$xml2;
-          }
-         */
+    public function index_nologin(Request $request) {
+        $metadatas = $metadatasdb = [];
+        $carian = isset($request->carian) ? $request->carian:"";
 
-        return view('senarai_metadata_nologin', compact('metadatas'));
+        if(isset($carian) && trim($carian) != ""){            
+            $query = MetadataGeo::on('pgsql2');
+            if(isset($carian)){
+                $query = $query->where('data', 'ilike', '%' . $carian . '%');
+            }
+            if(isset($request->content_type)){
+                $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
+            }
+            if(isset($request->topic_category)){
+                foreach($request->topic_category as $tc){
+                    $query = $query->where('data', 'ilike', '%' . $tc . '%');
+                }
+            }
+            if(isset($request->tarikh_mula)){
+                $query = $query->where('createdate', '>=', date('Y-m-d',strtotime($request->tarikh_mula)));
+            }
+            if(isset($request->tarikh_tamat)){
+                $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
+            }
+    //        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
+            $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
+
+
+            $metadatas = [];
+            foreach ($metadatasdb as $met) {
+                $ftestxml2 = <<<XML
+                        $met->data
+                        XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+                $xml2 = simplexml_load_string($ftestxml2);
+                $metadatas[$met->id] = $xml2;
+            }
+        }
+//        dd((isset($metadatasdb) && !empty($metadatasdb)));
+        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian'));
     }
 
     public function senarai_pengesahan_metadata() {
@@ -180,7 +206,8 @@ class MetadataController extends Controller {
         if(isset($request->tarikh_tamat)){
             $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
         }
-        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
+//        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
+        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
 
 
         $metadatas = [];
@@ -196,7 +223,7 @@ class MetadataController extends Controller {
             $metadatas[$met->id] = $xml2;
         }
 
-        return view('senarai_metadata_nologin', compact('metadatas'));
+        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb'));
     }
 
     public function create() {
