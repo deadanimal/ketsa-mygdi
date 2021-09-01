@@ -95,45 +95,42 @@ class MetadataController extends Controller {
     public function index_nologin(Request $request) {
         $metadatas = $metadatasdb = [];
         $carian = isset($request->carian) ? $request->carian:"";
+        $query = MetadataGeo::on('pgsql2');
 
         if(isset($carian) && trim($carian) != ""){            
-            $query = MetadataGeo::on('pgsql2');
-            if(isset($carian)){
-                $query = $query->where('data', 'ilike', '%' . $carian . '%');
-            }
-            if(isset($request->content_type)){
-                $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
-            }
-            if(isset($request->topic_category)){
-                foreach($request->topic_category as $tc){
-                    $query = $query->where('data', 'ilike', '%' . $tc . '%');
-                }
-            }
-            if(isset($request->tarikh_mula)){
-                $query = $query->where('createdate', '>=', date('Y-m-d',strtotime($request->tarikh_mula)));
-            }
-            if(isset($request->tarikh_tamat)){
-                $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
-            }
-    //        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
-            
-            $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
+            $query = $query->where('data', 'ilike', '%' . $carian . '%');
+        }
 
-
-            $metadatas = [];
-            foreach ($metadatasdb as $met) {
-                $ftestxml2 = <<<XML
-                        $met->data
-                        XML;
-                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-                $xml2 = simplexml_load_string($ftestxml2);
-                $metadatas[$met->id] = $xml2;
+        if(isset($request->content_type)){
+            $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
+        }
+        if(isset($request->topic_category)){
+            foreach($request->topic_category as $tc){
+                $query = $query->where('data', 'ilike', '%' . $tc . '%');
             }
         }
-//        dd($_GET);
+        if(isset($request->tarikh_mula)){
+            $query = $query->where('createdate', '>=', date('Y-m-d',strtotime($request->tarikh_mula)));
+        }
+        if(isset($request->tarikh_tamat)){
+            $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
+        }
+            
+        $metadatas = [];
+        foreach ($metadatasdb as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            $xml2 = simplexml_load_string($ftestxml2);
+            $metadatas[$met->id] = $xml2;
+        }
+        
+        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
+            
         return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian'));
     }
 
