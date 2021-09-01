@@ -234,6 +234,7 @@ Route::post('delete_agensi_organisasi','PortalController@delete_agensi_organisas
 Route::post('getTajukByCategory','MetadataController@getTajukByCategory');
 Route::post('getSubTajuk','MetadataController@getSubTajuk');
 Route::post('deleteElemenMetadata','MetadataController@deleteElemenMetadata');
+Route::post('findMetadataByName','MetadataController@findMetadataByName');
 
 Auth::routes();
 

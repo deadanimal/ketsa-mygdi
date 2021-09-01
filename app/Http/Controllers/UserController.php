@@ -462,6 +462,7 @@ class UserController extends Controller {
             $nu->password = Hash::make($pass);
             $nu->status = '1';
             $nu->disahkan = '1';
+            $nu->assigned_roles = $request->peranan;
             $nu->save();
 
             $nu->assignRole($request->peranan);

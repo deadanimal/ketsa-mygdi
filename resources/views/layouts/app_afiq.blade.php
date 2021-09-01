@@ -37,8 +37,6 @@
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
     <link href="assetsweb/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Vendor CSS Files -->
     <link href="assetsweb/vendor/icofont/icofont.min.css" rel="stylesheet">
     <link href="assetsweb/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="assetsweb/vendor/venobox/venobox.css" rel="stylesheet">
