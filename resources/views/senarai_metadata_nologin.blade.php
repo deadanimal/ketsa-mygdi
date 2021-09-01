@@ -25,38 +25,32 @@
         height: 200px;
     }
     
-    #ftest .clear{
-    clear:both;
-    margin-top: 20px;
+    .fautocomplete .clear{
+/*    clear:both;
+    margin-top: 20px;*/
    }
 
-   #ftest #searchResult{
+   .fautocomplete #searchResult{
     list-style: none;
     padding: 0px;
-    width: 250px;
     position: absolute;
     margin: 0;
+    z-index: 1;
    }
 
-   #ftest #searchResult li{
+   .fautocomplete #searchResult li{
     background: lavender;
     padding: 4px;
     margin-bottom: 1px;
    }
 
-   #ftest #searchResult li:nth-child(even){
-    background: cadetblue;
-    color: white;
+   .fautocomplete #searchResult li:nth-child(even){
+/*    background: cadetblue;
+    color: white;*/
    }
 
-   #ftest #searchResult li:hover{
+   .fautocomplete #searchResult li:hover{
     cursor: pointer;
-   }
-
-   #ftest input[type=text]{
-    padding: 5px;
-    width: 250px;
-    letter-spacing: 1px;
    }
 </style>
 
@@ -66,16 +60,6 @@
             <h2 class="">Carian Metadata</h2>
         </div>
         <div class="col-12 form-inline my-4 justify-content-center">
-            <div id="ftest">
-                <div>Enter Name </div>
-                <div>
-                    <input type="text" id="txt_search" name="txt_search">
-                </div>
-                <ul id="searchResult"></ul>
-                <div class="clear"></div>
-                <div id="userDetail"></div>
-            </div>
-            
             <form method="post" class="navbar-search navbar-search-light" action="{{url('senarai_metadata_nologin')}}" id="form_carian">
                 @csrf
                 <div class="form-inline mb-0">
@@ -85,7 +69,13 @@
                                 <i class="fas fa-search"></i>
                             </span>
                         </div>
-                        <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off" value="{{ $carian }}">
+                        <div class="fautocomplete">
+                            <div>
+                                <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off" value="{{ $carian }}">
+                            </div>
+                            <ul id="searchResult"></ul>
+                            <div class="clear"></div>
+                        </div>
                     </div>
                 </div>
                 <button type="button" data-action="search-close" data-target="#navbar-search-main" aria-label="Close" class="close">
@@ -315,72 +305,37 @@
 </section>
 
 <script>
-    // Set Text to search box and get details
     function setText(element){
-
         var value = $(element).text();
-        var userid = $(element).val();
-
-        $("#txt_search").val(value);
+        $("#carian").val(value);
         $("#searchResult").empty();
-
-        // Request User Details
-        $.ajax({
-            url: 'getSearch.php',
-            type: 'post',
-            data: {userid:userid, type:2},
-            dataType: 'json',
-            success: function(response){
-
-                var len = response.length;
-                $("#userDetail").empty();
-                if(len > 0){
-                    var username = response[0]['username'];
-                    var email = response[0]['email'];
-                    $("#userDetail").append("Username : " + username + "<br/>");
-                    $("#userDetail").append("Email : " + email);
-                }
-            }
-
-        });
     }
 
     $(document).ready(function() {
-        
-        //======todel=======
-        $("#txt_search").bind("keyup",function(event){
+        $("#carian").off().bind("keyup",function(event){
             event.stopImmediatePropagation();
-//            event.preventDefault();
             var carian = $(this).val();
-            console.log(carian);
-            if(carian != ""){
+            $("#searchResult").empty();
+            if(carian != "" && carian.length > 2){
                 $.ajax({
                     method: "POST",
                     url: "{{ url('findMetadataByName') }}",
                     data: {
-                        "_token": "{{ csrf_token() }}",
-                        data: {carian:carian},
+                        '_token': "{{ csrf_token() }}",
+                        'carian': carian,
                     },
                     dataType: 'json',
                 }).done(function(response) {
-                    var data = jQuery.parseJSON(response);
-                    console.log(data);
-//                    var len = response.length;
-//                    $("#searchResult").empty();
-//                    for( var i = 0; i<len; i++){
-//                        var id = response[i]['id'];
-//                        var name = response[i]['name'];
-//                        $("#searchResult").append("<li value='"+id+"'>"+name+"</li>");
-//
-//                    }
-//                    // binding click event to li
-//                    $("#searchResult li").bind("click",function(){
-//                        setText(this);
-//                    });
+                    $("#searchResult").empty();
+                    $.each(response, function(index,value) {
+                        $("#searchResult").append("<li value='"+index+"'>"+value[0]+"</li>");
+                    });
+                    $("#searchResult li").bind("click",function(){
+                        setText(this);
+                    });
                 });
             }
         });
-        //======todel=======
         
         <?php
         if (count($metadatas) > 0) {

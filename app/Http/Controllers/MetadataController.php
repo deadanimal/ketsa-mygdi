@@ -135,7 +135,6 @@ class MetadataController extends Controller {
     }
     
     public function findMetadataByName(Request $request){
-        echo json_encode($request->carian);exit();
         $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . $request->carian . '%')->where('disahkan','yes')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
         foreach ($metadatasdb as $met) {
@@ -147,8 +146,8 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
             $xml2 = simplexml_load_string($ftestxml2);
-            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != "" && strpos(trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString),strval($request->carian))){
-                $metadatas[] = [$met->id => $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString];
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != "" && stripos(trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString),strval($request->carian)) !== false){
+                $metadatas[$met->id] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
             }
         }
         echo json_encode($metadatas);exit();
