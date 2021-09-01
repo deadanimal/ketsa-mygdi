@@ -218,7 +218,6 @@
                                     ?>
                                 </div>
                                 {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->withQueryString()->links():"") }}
-                                {{ $metadatasdb->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
