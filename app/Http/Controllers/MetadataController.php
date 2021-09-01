@@ -116,6 +116,7 @@ class MetadataController extends Controller {
                 $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
             }
     //        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
+            
             $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
 
 
@@ -132,7 +133,7 @@ class MetadataController extends Controller {
                 $metadatas[$met->id] = $xml2;
             }
         }
-//        dd((isset($metadatasdb) && !empty($metadatasdb)));
+//        dd($_GET);
         return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian'));
     }
 
