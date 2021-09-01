@@ -237,54 +237,147 @@
         }
 
     </style>
-
-
-    <div _ngcontent-tvu-c497="" class="card22 mt-29 p-26" style="width:100%;background-color: rgba(255, 255, 255, 0.9);">
-        <div class="card-body">
-            <h1>Tatacara Permohonan</h1>
-            <br>
+    <!-- Content Wrapper. Contains page content -->
+    <section class="content p-4">
+        <div class="container-fluid">
+            <div class="section-title">
+                <h2>Tatacara Permohonan</h2>
+            </div>
             <div class="row">
-<pre>
-    1) Daftar Pengguna
-    > Pemohon perlu daftar masuk aplikasi MyGeo Explorer sebagai Pemohon Data terlebih dahulu.
-    > Pilih Kategori pemohon sama ada G2C, G2G atau G2E.
-    > Isi maklumat pendaftaran dengan lengkap.
-
-    2) Isi Maklumat Permohonan
-    > Pemohon perlu log masuk ke sistem dan lengkapkan maklumat permohonan.
-    > Nyatakan tujuan, data yang dimohon dan kawasan lapisan data yang dimohon.
-    > Pemohon perlu memuat naik surat rasmi beserta dokumen berkaitan ketika mengisi maklumat permohonon.
-
-    3) Pengesahan Permohonan
-    > Pentadbir akan mengesahkan permohonan daripada pemohon.
-    > Sekiranya permohonan lengkap permohonan akan diluluskan dan dimajukan untuk pemprosesan data yang
-    dimohon.
-    > Pemohon akan menerima notifikasi melalui e-mel sekiranya permohonan ditolak
-
-    4) Proses Data
-    > Pentadbir akan memproses data dan menghantar surat balasan permohonan kepada pemohon.
-
-    5) Terima Data
-    > Pemohon akan menerima notifikasi muat turun data melalui e-mel berserta surat balasan permohonon.
-    > Pemohon log masuk sistem untuk muat turun data.
-    > Sistem akan meminta pengesahan sama ada pemohon berjaya atau tidak muat turun data dalam masa tiga (3)
-    jam setelah pemohon menekan poutan muat turun data. Jika tidak, pemohon boleh memuat turun semula dan
-    proses akan berulang sehingga pemohon berjaya memuat turun data.
-    > Pemohon membuat akuan penerimaan data selepas berjaya memohon data.
-    > Pautan data hanya sah untuk tempoh dua (2) minggu sahaja.
-
-    6) Membuat Penilaian
-    > Sistem menghantar notifikasi penilaian melalui e-mel setelah pemohon berjaya memuat turun data.
-    > Sekiranya pemohon masih belum membuat penilaian data, sistem akan menghantar notifikasi peringatan
-    berulang melalui e-mel setiap dua (2) bulan sekali dalam tempoh enam (6) bulan daripada proses berjaya
-    muat turun data.
-    > Mesej peringatan akan muncul apabila pemohon log masuk sistem sekiranya pemohon gagal untuk membuat
-    penilaian data dalam masa enam (6) bulan.
-</pre>
-                {{-- <img width="750px" src="./afiqadminmygeo_files/dataAsasTutorial.png"> --}}
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img height="150"  class="img-center" src="afiqadminmygeo_files/dataapp.png" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <p class="heading text-muted">1) Daftar Pengguna</p>
+                                    <ul type="square">
+                                        <li>Pemohon perlu daftar masuk aplikasi MyGeo Explorer sebagai Pemohon Data terlebih
+                                            dahulu.</li>
+                                        <li>Pilih Kategori pemohon sama ada G2C, G2G atau G2E.</li>
+                                        <li>Isi maklumat pendaftaran dengan lengkap.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img height="150"  class="img-center" src="afiqadminmygeo_files/contact-form.png" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <p class="heading text-muted">2) Isi Maklumat Permohonan</p>
+                                    <ul type="square">
+                                        <li>Pentadbir akan mengesahkan permohonan daripada pemohon.</li>
+                                        <li>Nyatakan tujuan, data yang dimohon dan kawasan lapisan data yang dimohon.</li>
+                                        <li> Pemohon perlu memuat naik surat rasmi beserta dokumen berkaitan ketika mengisi
+                                            maklumat permohonon.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img height="150"  class="img-center" src="afiqadminmygeo_files/checklist.png" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <p class="heading text-muted">3) Pengesahan Permohonan</p>
+                                    <ul type="square">
+                                        <li>Pentadbir akan mengesahkan permohonan daripada pemohon.</li>
+                                        <li>Sekiranya permohonan lengkap permohonan akan diluluskan dan dimajukan untuk
+                                            pemprosesan data yang
+                                            dimohon.</li>
+                                        <li>Pemohon akan menerima notifikasi melalui e-mel sekiranya permohonan ditolak</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img height="150"  class="img-center" src="afiqadminmygeo_files/data.png" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <p class="heading text-muted">4) Proses Data</p>
+                                    <ul type="square">
+                                        <li>Pentadbir akan memproses data dan menghantar surat balasan permohonan kepada
+                                            pemohon.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img height="150"  class="img-center" src="afiqadminmygeo_files/direct-download.png" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <p class="heading text-muted">5) Terima Data</p>
+                                    <ul type="square">
+                                        <li>Pemohon akan menerima notifikasi muat turun data melalui e-mel berserta surat
+                                            balasan permohonon.</li>
+                                        <li>Pemohon log masuk sistem untuk muat turun data.</li>
+                                        <li>Sistem akan meminta pengesahan sama ada pemohon berjaya atau tidak muat turun
+                                            data dalam masa tiga (3)
+                                            jam setelah pemohon menekan poutan muat turun data. Jika tidak, pemohon boleh
+                                            memuat turun semula dan
+                                            proses akan berulang sehingga pemohon berjaya memuat turun data.</li>
+                                        <li>Pemohon membuat akuan penerimaan data selepas berjaya memohon data.</li>
+                                        <li>Pautan data hanya sah untuk tempoh dua (2) minggu sahaja.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img height="150"  class="img-center" src="afiqadminmygeo_files/comment.png" alt="Penilaian">
+                                </div>
+                                <div class="col-8">
+                                    <p class="heading text-muted">6) Membuat Penilaian</p>
+                                    <ul type="square">
+                                        <li>Sistem menghantar notifikasi penilaian melalui e-mel setelah pemohon berjaya
+                                            memuat turun data.</li>
+                                        <li>Sekiranya pemohon masih belum membuat penilaian data, sistem akan menghantar
+                                            notifikasi peringatan
+                                            berulang melalui e-mel setiap dua (2) bulan sekali dalam tempoh enam (6) bulan
+                                            daripada proses berjaya
+                                            muat turun data.</li>
+                                        <li>Mesej peringatan akan muncul apabila pemohon log masuk sistem sekiranya pemohon
+                                            gagal untuk membuat
+                                            penilaian data dalam masa enam (6) bulan.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
 
     <script>

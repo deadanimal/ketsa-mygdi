@@ -724,7 +724,7 @@ class DataAsasController extends Controller
         $surat->permohonan_id = $request->permohonan_id = $mdata->id;
         $surat->save();
 
-        if($user->kategori == 'G2E - Pelajar'){
+        if($user->kategori == '2_g2e_iptsPelajar' || $user->kategori == '2_g2e_iptaPelajar'){
             $akuan_pelajar = new AkuanPelajar();
             $akuan_pelajar->permohonan_id = $request->permohonan_id = $mdata->id;
             $akuan_pelajar->save();
@@ -827,7 +827,7 @@ class DataAsasController extends Controller
         SuratBalasan::where(["id" => $request->permohonan_id])->delete();
         ProsesData::where(["id" => $request->permohonan_id])->delete();
 
-        if($user->kategori == 'G2E - Pelajar'){
+        if($user->kategori == '2_g2e_iptsPelajar' || $user->kategori == '2_g2e_iptaPelajar'){
             AkuanPelajar::where(["id" => $request->permohonan_id])->delete();
         }
 

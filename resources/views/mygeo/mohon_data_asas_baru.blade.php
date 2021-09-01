@@ -79,7 +79,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-10 pl-lg-5">
+                                    <div class="col-11 pl-lg-5">
                                         <div class="row mb-2">
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4" for="nama_penuh">
@@ -171,8 +171,14 @@
                                                 </label>
                                             </div>
                                             <div class="col-3">
-                                                <input class="form-control form-control-sm ml-3" name="kategori" type="text"
-                                                    value="{{ $pemohon->users->kategori }}" disabled />
+                                                <input class="form-control form-control-sm ml-3" type="text"
+                                                @if($pemohon->users->kategori == '2_g2e_iptsPelajar')
+                                                    value="G2E - (IPTS) Pelajar"
+                                                @elseif($pemohon->users->kategori == '2_g2e_iptaPelajar')
+                                                    value="G2E - (IPTA) Pelajar"
+                                                @else
+                                                value="-"
+                                                @endif disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -304,7 +310,7 @@
 
                                     <hr class="my-4">
                                     <div class="row mb-3">
-                                        @if (Auth::user()->hasRole(['Pemohon Data']) && $pemohon->users->kategori == 'G2E - Pelajar')
+                                        @if (Auth::user()->hasRole(['Pemohon Data']) && ($pemohon->users->kategori == '2_g2e_iptsPelajar' || $pemohon->users->kategori == '2_g2e_iptaPelajar'))
                                             <div class="col-7 form-inline">
                                                 <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
                                                 <a href="/akuan_pelajar/{{ $pemohon->id }}"
