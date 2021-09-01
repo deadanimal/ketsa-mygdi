@@ -76,6 +76,13 @@
 
         }
 
+        .bg-custom{
+            background-image: url('afiqadminmygeo_files/navbar-mygeo.png');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
     </style>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -256,7 +263,8 @@
                                             <li class="nav-item">
                                                 <a href="{{ url('penilaian') }}" class="nav-link">
                                                     <i class="fas fa-file-signature text-primary"></i>
-                                                    <span class="nav-link-text">Akuan Penerimaan dan Penilaian Data</span>
+                                                    <span class="nav-link-text">Akuan Penerimaan dan Penilaian
+                                                        Data</span>
                                                 </a>
                                             </li>
                                         @endif
@@ -313,7 +321,8 @@
                                             <li class="nav-item">
                                                 <a href="{{ url('penilaian') }}" class="nav-link active">
                                                     <i class="fas fa-edit text-green"></i>
-                                                    <span class="nav-link-text">Akuan Penerimaan dan Penilaian Data</span>
+                                                    <span class="nav-link-text">Akuan Penerimaan dan Penilaian
+                                                        Data</span>
                                                 </a>
                                             </li>
                                         @endif
@@ -378,6 +387,12 @@
                                                         <a href="{{ url('mygeo_penyataan_privasi') }}"
                                                             class="nav-link">
                                                             <span class="nav-link-text">Penyataan Privasi</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('portal_tetapan') }}"
+                                                            class="nav-link">
+                                                            <span class="nav-link-text">Tetapan Portal</span>
                                                         </a>
                                                     </li>
                                                 </ul>

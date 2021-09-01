@@ -196,6 +196,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/senarai_agensi_organisasi','PortalController@senarai_agensi_organisasi');
     Route::get('/senarai_bahagian','PortalController@senarai_bahagian');
 
+    Route::get('/portal_tetapan','PortalController@show_portal_tetapan');
+    Route::post('/simpan_portal_tetapan','PortalController@update_portal_tetapan');
+
     Route::get('/pemindahan_akaun','UserController@pemindahan_akaun');
 
     Route::match(['get','post'],'/audit_trail','PortalController@audit_trail');

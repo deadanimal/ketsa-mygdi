@@ -25,6 +25,7 @@ use App\Mail\MailNotify;
 use App\AgensiOrganisasi;
 use App\Bahagian;
 use App\AuditTrail;
+use App\PortalTetapan;
 
 class PortalController extends Controller
 {
@@ -62,7 +63,7 @@ class PortalController extends Controller
                 "category" => $request->category_faq
             ]);
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -110,7 +111,7 @@ class PortalController extends Controller
                 "category" => $request->category_faq
             ]);
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -130,7 +131,7 @@ class PortalController extends Controller
 
     public function store_maklum_balas(Request $request)
     {
-        DB::transaction(function () use ($request) {    
+        DB::transaction(function () use ($request) {
             $maklum_balas = new MaklumBalas();
             $maklum_balas->category = $request->kategori;
             $maklum_balas->pertanyaan = $request->pertanyaan;
@@ -138,7 +139,7 @@ class PortalController extends Controller
             $maklum_balas->status = 0;
             $maklum_balas->save();
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -151,13 +152,13 @@ class PortalController extends Controller
     public function delete_maklum_balas(Request $request)
     {
         MaklumBalas::where(["id" => $request->id])->delete();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Delete';
         $at->save();
-        
+
         return redirect('maklum_balas')->with('success', 'Maklum Balas Dibuang');
     }
 
@@ -166,7 +167,7 @@ class PortalController extends Controller
         $maklum_balas = MaklumBalas::where('id',$request->mbid)->get()->first();
         $maklum_balas->status = 1;
         $maklum_balas->save();
-        
+
         //send email to the person created
         $to_name = $request->email;
         $to_email = $request->email;
@@ -175,7 +176,7 @@ class PortalController extends Controller
             $message->to($to_email, $to_name)->subject('MyGeo Explorer : Jawapan Maklum Balas MyGeo Explorer');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -209,7 +210,7 @@ class PortalController extends Controller
                 "content" => $request->content_panduan_pengguna
             ]);
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -242,7 +243,7 @@ class PortalController extends Controller
                 "content" => $request->content_penafian
             ]);
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -275,7 +276,7 @@ class PortalController extends Controller
                 "content" => $request->content_penyataan_privasi
             ]);
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -341,7 +342,7 @@ class PortalController extends Controller
             $pengumuman->gambar = $fileName;
             $pengumuman->save();
         });
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -358,34 +359,34 @@ class PortalController extends Controller
         $pengumuman->date = $request->date_pengumuman;
         $pengumuman->content = $request->content_pengumuman;
         $pengumuman->save();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Update';
         $at->save();
-        
+
         return redirect('pengumuman_edit')->with('success', 'Pengumuman Dikemaskini');
     }
 
     public function delete_pengumuman(Request $request)
     {
         Pengumuman::where(["id" => $request->umum_id])->delete();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Delete';
         $at->save();
-        
+
         return redirect('pengumuman_edit')->with('success', 'Pengumuman Dibuang');
     }
-    
+
     public function senarai_agensi_organisasi(){
         $aos = AgensiOrganisasi::orderBy('created_at','desc')->get();
         return view('mygeo.pengurusan_portal.senarai_agensi_organisasi', compact('aos'));
     }
-    
+
     public function simpan_agensi_organisasi(Request $request){
         $msg = "Penambahan Agensi / Organisasi berjaya.";
         $ao = new AgensiOrganisasi();
@@ -396,17 +397,17 @@ class PortalController extends Controller
             $msg = "Penambahan Bahagian berjaya.";
         }
         $ao->save();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Create';
         $at->save();
-        
+
         echo json_encode(["msg"=>$msg]);
         exit();
     }
-    
+
     public function simpan_kemaskini_agensi_organisasi(Request $request){
         $msg = "Agensi / Organisasi berjaya dikemaskini.";
         $ao = AgensiOrganisasi::where('id',$request->rowid)->get()->first();
@@ -417,17 +418,17 @@ class PortalController extends Controller
             $msg = "Bahagian berjaya dikemaskini.";
         }
         $ao->save();
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Update';
         $at->save();
-        
+
         echo json_encode(["msg"=>$msg]);
         exit();
     }
-    
+
     public function get_agensi_organisasi_by_sektor(Request $request){
         $aos = AgensiOrganisasi::where('sektor',$request->sektor)->distinct('name')->get();
         echo json_encode(["aos"=>$aos]);
@@ -437,13 +438,13 @@ class PortalController extends Controller
         $aos = "";
         $ao = AgensiOrganisasi::where('id',$request->rowid)->get()->first();
         if($ao->bahagian != ""){
-            //get all agensi_organisasi 
+            //get all agensi_organisasi
             $aos = AgensiOrganisasi::where('sektor',$ao->sektor)->distinct('name')->get();
         }
         echo json_encode(["ao"=>$ao,"aos"=>$aos]);
         exit();
     }
-    
+
     public function get_bahagian(Request $request){
         $bhgns = AgensiOrganisasi::where('name',$request->agensi_organisasi_name)->whereNotNull('bahagian')->get();
         $error = '0';
@@ -455,7 +456,7 @@ class PortalController extends Controller
         echo json_encode(["bhgns"=>$bhgns,"msg"=>$msg,"error"=>$error]);
         exit();
     }
-    
+
     public function delete_agensi_organisasi(Request $request){
         $type = ($request->type == "bahagian" ? "Bahagian":"Agensi/Organisasi");
         $msg = "";
@@ -464,20 +465,20 @@ class PortalController extends Controller
             $error = 0;
             $msg = $type." berjaya dipadam.";
         }else{
-            $error = 1;            
+            $error = 1;
             $msg = $type + " tidak berjaya dipadam.";
         }
-        
+
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Delete';
         $at->save();
-        
+
         echo json_encode(["msg"=>$msg,"error"=>$error]);
         exit();
     }
-    
+
     public function audit_trail(Request $request){
         $var = "";
         if(isset($request->dateRange)){
@@ -491,4 +492,29 @@ class PortalController extends Controller
         }
         return view('mygeo.pengurusan_portal.audit_trail', compact('audit_trails','var'));
     }
+
+    // ==================================== Tetapan Portal (Hubungi Kami, Emel Pentadbir, Masa Operasi)========================================
+
+
+    public function show_portal_tetapan(){
+
+        $portal = PortalTetapan::get()->first();
+
+        return view('mygeo.pengurusan_portal.portal_tetapan', compact('portal'));
+    }
+
+    public function update_portal_tetapan(Request $request){
+
+        PortalTetapan::where(["id" => $request->id_portal])->update([
+            "name" => $request->nama_lokasi,
+            "address" => $request->alamat,
+            "email_admin" => $request->emel_pentadbir,
+            "contact" => $request->contact,
+            "operation_time" => $request->masa_operasi,
+        ]);
+
+        return redirect('portal_tetapan')->with('success','Maklumat Portal Telah Disimpan');
+    }
+
+
 }
