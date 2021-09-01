@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{url('carian_metadata_nologin')}}" id="form_carian2">
+                        <form method="post" action="{{url('senarai_metadata_nologin')}}" id="form_carian2">
                             @csrf
                             <div class="container-fluid">
                                 <div class="row">
@@ -107,48 +107,46 @@
                                             <label for="exampleInputEmail1">Jenis Maklumat Kandungan (Content Type)</label>
                                             <select name="content_type" id="content_type" class="form-control form-control-sm" autofocus>
                                                 <option selected disabled>Select Content</option>
-                                                <option value="Application">Application</option>
-                                                <option value="Clearing House">Clearing House</option>
-                                                <option value="Downloadable Data">Downloadable Data</option>
-                                                <option value="Geographic Activities">Geographic Activities</option>
-                                                <option value="Geographic Services">Geographic Services</option>
-                                                <option value="Map File">Map File</option>
-                                                <option value="Offline Data">Offline Data</option>
-                                                <option value="Static Map Images">Static Map Images</option>
-                                                <option value="Other Documents">Other Documents</option>
+                                                <option value="Application" {{ (isset($params['content_type']) && $params['content_type'] == 'Application' ? 'selected':'') }}>Application</option>
+                                                <option value="Clearing House" {{ (isset($params['content_type']) && $params['content_type'] == 'Clearing House' ? 'selected':'') }}>Clearing House</option>
+                                                <option value="Downloadable Data" {{ (isset($params['content_type']) && $params['content_type'] == 'Downloadable Data' ? 'selected':'') }}>Downloadable Data</option>
+                                                <option value="Geographic Activities" {{ (isset($params['content_type']) && $params['content_type'] == 'Geographic Activities' ? 'selected':'') }}>Geographic Activities</option>
+                                                <option value="Geographic Services" {{ (isset($params['content_type']) && $params['content_type'] == 'Geographic Services' ? 'selected':'') }}>Geographic Services</option>
+                                                <option value="Map File" {{ (isset($params['content_type']) && $params['content_type'] == 'Map File' ? 'selected':'') }}>Map File</option>
+                                                <option value="Offline Data" {{ (isset($params['content_type']) && $params['content_type'] == 'Offline Data' ? 'selected':'') }}>Offline Data</option>
+                                                <option value="Static Map Images" {{ (isset($params['content_type']) && $params['content_type'] == 'Static Map Images' ? 'selected':'') }}>Static Map Images</option>
+                                                <option value="Other Documents" {{ (isset($params['content_type']) && $params['content_type'] == 'Other Documents' ? 'selected':'') }}>Other Documents</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Kategori Data (Topic Category)</label>
-                                            <select name="topic_category[]" id="topic_category" class="form-control form-control-sm" multiple>
-                                                <option value="Administrative and Political Boundaries">Administrative and Political Boundaries</option>
-                                                <option value="Agriculture and Farming">Agriculture and Farming</option>
-                                                <option value="Atmosphere and Climatic">Atmosphere and Climatic</option>
-                                                <option value="Biology and Ecology">Biology and Ecology</option>
-                                                <option value="Business and Economic">Business and Economic</option>
-                                                <option value="Cadastral">Cadastral</option>
-                                                <option value="Cultural, Society and Demography">Cultural, Society and Demography</option>
-                                                <option value="Elevation and Derived Products">Elevation and Derived Products</option>
-                                                <option value="Environment and Conservation">Environment and Conservation</option>
-                                                <option value="Facilities and Structures">Facilities and Structures</option>
-                                                <option value="Geological and Geophysical">Geological and Geophysical</option>
-                                                <option value="Human Health and Disease">Human Health and Disease</option>
-                                                <option value="Imagery and Base Maps">Imagery and Base Maps</option>
-                                                <option value="Inland Water Resources">Inland Water Resources</option>
-                                                <option value="Locations and Geodetic Networks">Locations and Geodetic Networks</option>
-                                                <option value="Military">Military</option>
-                                                <option value="Oceans and Estuaries">Oceans and Estuaries</option>
-                                                <option value="Transportation Networks">Transportation Networks</option>
-                                                <option value="Utilities and Communication">Utilities and Communication</option>
-                                            </select>
+                                            <label for="exampleInputEmail1">Kategori Topik (Topic Category)</label><br>
+                                            <input type="checkbox" name="topic_category[]"  value="Administrative and Political Boundaries" {{ (isset($params['topic_category']) && in_array('Administrative and Political Boundaries',$params['topic_category']) ? 'checked':'') }}> Administrative and Political Boundaries<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Agriculture and Farming" {{ (isset($params['topic_category']) && in_array('Agriculture and Farming',$params['topic_category']) ? 'checked':'') }}> Agriculture and Farming<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Atmosphere and Climatic" {{ (isset($params['topic_category']) && in_array('Atmosphere and Climatic',$params['topic_category']) ? 'checked':'') }}> Atmosphere and Climatic<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Biology and Ecology" {{ (isset($params['topic_category']) && in_array('Biology and Ecology',$params['topic_category']) ? 'checked':'') }}> Biology and Ecology<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Business and Economic" {{ (isset($params['topic_category']) && in_array('Business and Economic',$params['topic_category']) ? 'checked':'') }}> Business and Economic<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Cadastral" {{ (isset($params['topic_category']) && in_array('Cadastral',$params['topic_category']) ? 'checked':'') }}> Cadastral<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Cultural, Society and Demography" {{ (isset($params['topic_category']) && in_array('Cadastral',$params['topic_category']) ? 'checked':'') }}> Cultural, Society and Demography<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Elevation and Derived Products" {{ (isset($params['topic_category']) && in_array('Elevation and Derived Products',$params['topic_category']) ? 'checked':'') }}> Elevation and Derived Products<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Environment and Conservation" {{ (isset($params['topic_category']) && in_array('Environment and Conservation',$params['topic_category']) ? 'checked':'') }}> Environment and Conservation<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Facilities and Structures" {{ (isset($params['topic_category']) && in_array('Facilities and Structures',$params['topic_category']) ? 'checked':'') }}> Facilities and Structures<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Geological and Geophysical" {{ (isset($params['topic_category']) && in_array('Geological and Geophysical',$params['topic_category']) ? 'checked':'') }}> Geological and Geophysical<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Human Health and Disease" {{ (isset($params['topic_category']) && in_array('Human Health and Disease',$params['topic_category']) ? 'checked':'') }}> Human Health and Disease<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Imagery and Base Maps" {{ (isset($params['topic_category']) && in_array('Imagery and Base Maps',$params['topic_category']) ? 'checked':'') }}> Imagery and Base Maps<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Inland Water Resources" {{ (isset($params['topic_category']) && in_array('Inland Water Resources',$params['topic_category']) ? 'checked':'') }}> Inland Water Resources<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Locations and Geodetic Networks" {{ (isset($params['topic_category']) && in_array('Locations and Geodetic Networks',$params['topic_category']) ? 'checked':'') }}> Locations and Geodetic Networks<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Military" {{ (isset($params['topic_category']) && in_array('Military',$params['topic_category']) ? 'checked':'') }}> Military<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Oceans and Estuaries" {{ (isset($params['topic_category']) && in_array('Oceans and Estuaries',$params['topic_category']) ? 'checked':'') }}> Oceans and Estuaries<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Transportation Networks" {{ (isset($params['topic_category']) && in_array('Transportation Networks',$params['topic_category']) ? 'checked':'') }}> Transportation Networks<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Utilities and Communication" {{ (isset($params['topic_category']) && in_array('Utilities and Communication',$params['topic_category']) ? 'checked':'') }}> Utilities and Communication<br>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Tarikh Mula</label>
-                                            <input type="date" name="tarikh_mula" id="tarikh_mula" class="form-control form-control-sm" data-target="#tarikh_mula_div">
+                                            <input type="date" name="tarikh_mula" id="tarikh_mula" class="form-control form-control-sm" data-target="#tarikh_mula_div" value="{{ (isset($params['tarikh_mula']) ? $params['tarikh_mula']:'') }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Tarikh Tamat</label>
-                                            <input type="date" name="tarikh_tamat" id="tarikh_tamat" class="form-control form-control-sm" data-target="#tarikh_tamat_div">
+                                            <input type="date" name="tarikh_tamat" id="tarikh_tamat" class="form-control form-control-sm" data-target="#tarikh_tamat_div" value="{{ (isset($params['tarikh_tamat']) ? $params['tarikh_tamat']:'') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -251,7 +249,7 @@
                                     }
                                     ?>
                                 </div>
-                                {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->withQueryString()->links():"") }}
+                                {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->withQueryString()->appends($params)->links():"") }}
                             </div>
                         </div>
                     </div>

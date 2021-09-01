@@ -96,23 +96,30 @@ class MetadataController extends Controller {
         $metadatas = $metadatasdb = [];
         $carian = isset($request->carian) ? $request->carian:"";
         $query = MetadataGeo::on('pgsql2');
-
+        
+        $params = [];
+        
         if(isset($carian) && trim($carian) != ""){            
             $query = $query->where('data', 'ilike', '%' . $carian . '%');
         }
 
         if(isset($request->content_type)){
+            $params['content_type'] = $request->content_type;
             $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
         }
         if(isset($request->topic_category)){
+            $params['topic_category'] = [];
             foreach($request->topic_category as $tc){
-                $query = $query->where('data', 'ilike', '%' . $tc . '%');
+                $query = $query->orWhere('data', 'ilike', '%' . $tc . '%');
+                $params['topic_category'][] = $tc;
             }
         }
         if(isset($request->tarikh_mula)){
+            $params['tarikh_mula'] = $request->tarikh_mula;
             $query = $query->where('createdate', '>=', date('Y-m-d',strtotime($request->tarikh_mula)));
         }
         if(isset($request->tarikh_tamat)){
+            $params['tarikh_tamat'] = $request->tarikh_tamat;
             $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
         }
             
@@ -131,7 +138,7 @@ class MetadataController extends Controller {
             $metadatas[$met->id] = $xml2;
         }
             
-        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian'));
+        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian','params'));
     }
     
     public function findMetadataByName(Request $request){
