@@ -405,12 +405,9 @@
                         <i class="icofont-google-map"></i>
                         <h4>Lokasi</h4>
                         <p> <span style="font-weight: bold; font-size: medium;">
-                                Pusat Geospatial Negara (PGN) <br>
-                                Kementerian Tenaga dan Sumber Asli (KeTSA) <br>
-                            </span>
-                            Aras 7 & 8, Wisma Sumber Asli <br>
-                            No 25, Persiaran Perdana, Presint 4 <br>
-                            62574 Putrajaya, Malaysia
+                                {!!$portal->name!!}
+                            </span><br>
+                            {!!$portal->address!!}
                         </p>
                     </div>
                 </div>
@@ -420,14 +417,14 @@
                     <div class="email mt-0">
                         <i class="icofont-envelope"></i>
                         <h4>Emel</h4>
-                        <p>adminexplorer@ketsa.gov.my</p>
+                        <p>{!!$portal->email_admin!!}</p>
                     </div>
                 </div>
                 <div class="info">
                     <div class="phone">
                         <i class="icofont-phone"></i>
                         <h4>Hubungi</h4>
-                        <p>Tel: +603 8886 1156 | Faks: +603 8889 4851</p>
+                        <p>{{$portal->contact}}</p>
                     </div>
                 </div>
             </div>
