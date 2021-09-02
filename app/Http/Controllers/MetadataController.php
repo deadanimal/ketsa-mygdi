@@ -31,6 +31,7 @@ use App\ElemenMetadata;
 use App\Tajuk;
 use Session;
 use App\MetadataGeo;
+use App\PortalTetapan;
 use App\Mail\MailtrapExample;
 use App;
 use App\Http\Controllers\XmlController;
@@ -106,8 +107,9 @@ class MetadataController extends Controller {
           $metadatas[$met->id]=$xml2;
           }
          */
+        $portal = PortalTetapan::get()->first();
 
-        return view('senarai_metadata_nologin', compact('metadatas'));
+        return view('senarai_metadata_nologin', compact('metadatas','portal'));
     }
 
     public function senarai_pengesahan_metadata() {
@@ -196,7 +198,8 @@ class MetadataController extends Controller {
             $metadatas[$met->id] = $xml2;
         }
 
-        return view('senarai_metadata_nologin', compact('metadatas'));
+        $portal = PortalTetapan::get()->first();
+        return view('senarai_metadata_nologin', compact('metadatas','portal'));
     }
 
     public function create() {
@@ -318,7 +321,7 @@ class MetadataController extends Controller {
         }else{
             $countrySelected = Countries::where(['id' => 1])->get()->first();
         }
-        
+
         $refSys = ReferenceSystemIdentifier::all();
         if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != ""){
             $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
@@ -366,7 +369,8 @@ class MetadataController extends Controller {
             $refSys = [];
         }
 
-        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'));
+        $portal = PortalTetapan::get()->first();
+        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched','portal'));
     }
 
     public function show_xml_nologin(Request $request) {
@@ -417,7 +421,7 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
         ];
-        
+
         if(strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application'){
             $fields["c10_file_url"]= 'required';
         }
@@ -523,7 +527,7 @@ class MetadataController extends Controller {
             $fields["abstractVectorData_statusData"]= 'required';
         }
         */
-        
+
         $customMsg = [
             "c1_content_info.required" => 'Content Information required',
             "publisher_name.required" => 'Publisher Name required',
@@ -862,8 +866,8 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
         ];
-        
-          
+
+
         if(strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application'){
             $fields["c10_file_url"]= 'required';
         }
@@ -969,7 +973,7 @@ class MetadataController extends Controller {
             $fields["abstractVectorData_statusData"]= 'required';
         }
         */
-        
+
         $customMsg = [
             "c1_content_info.required" => 'Content Information required',
             "publisher_name.required" => 'Publisher Name required',

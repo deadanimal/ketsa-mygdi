@@ -46,7 +46,8 @@ class PortalController extends Controller
         $penyataan_privasi = PenyataanPrivasi::get()->first();
         $faq = Faq::get()->first();
         $pengumuman = Pengumuman::get();
-        return view('portal_settings', compact('hubungi_kami', 'panduan_pengguna', 'penafian', 'penyataan_privasi', 'faq', 'pengumuman'));
+        $portal = PortalTetapan::get()->first();
+        return view('portal_settings', compact('hubungi_kami', 'panduan_pengguna', 'penafian', 'penyataan_privasi', 'faq', 'pengumuman','portal'));
     }
     public function edit_faq()
     {
@@ -189,16 +190,18 @@ class PortalController extends Controller
     //=== Hubungi Kami Functions ==============================================================
     public function index_hubungi_kami()
     {
+        $portal = PortalTetapan::get()->first();
         $hubungi_kami = HubungiKami::get()->first();
-        return view('hubungi_kami', compact('hubungi_kami'));
+        return view('hubungi_kami', compact('hubungi_kami','portal'));
     }
 
 
     //=== Panduan Penggun Functions ===========================================================
     public function index_panduan_pengguna()
     {
+        $portal = PortalTetapan::get()->first();
         $panduan_pengguna = PanduanPengguna::get()->first();
-        return view('panduan_pengguna', compact('panduan_pengguna'));
+        return view('panduan_pengguna', compact('panduan_pengguna','portal'));
     }
 
     public function store_panduan_pengguna(Request $request)
@@ -224,8 +227,9 @@ class PortalController extends Controller
     //=== Penafian Functions ===========================================================
     public function index_penafian()
     {
+        $portal = PortalTetapan::get()->first();
         $penafian = Penafian::get()->first();
-        return view('penafian', compact('penafian'));
+        return view('penafian', compact('penafian','portal'));
     }
 
     public function index_penafian_mygeo()
@@ -257,8 +261,9 @@ class PortalController extends Controller
     //=== Penyataan Privasi Functions ===========================================================
     public function index_penyataan_privasi()
     {
+        $portal = PortalTetapan::get()->first();
         $penyataan_privasi = PenyataanPrivasi::get()->first();
-        return view('penyataan_privasi', compact('penyataan_privasi'));
+        return view('penyataan_privasi', compact('penyataan_privasi','portal'));
     }
 
     public function index_penyataan_privasi_mygeo()
@@ -290,28 +295,31 @@ class PortalController extends Controller
     //=== Soalan Lazim Functions ===========================================================
     public function index_faq()
     {
+        $portal = PortalTetapan::get()->first();
         $faqs = Faq::orderBy('id', 'ASC')->get();
-        return view('faq', compact('faqs'));
+        return view('faq', compact('faqs','portal'));
     }
 
 
     //=== Pengumuman Functions ===========================================================
     public function index_pengumuman()
     {
+        $portal = PortalTetapan::get()->first();
         $pengumuman = Pengumuman::orderBy('created_at', 'DESC')->get();
-        return view('pengumuman_index', compact('pengumuman'));
+        return view('pengumuman_index', compact('pengumuman','portal'));
     }
 
     public function show_pengumuman(Request $request)
     {
+        $portal = PortalTetapan::get()->first();
         $pengumuman = Pengumuman::where(["id" => $request->umum_id])->get()->first();
-        return view('pengumuman_show', compact('pengumuman'));
+        return view('pengumuman_show', compact('pengumuman','portal'));
     }
 
     public function show_pengumuman2(Request $request)
     {
         $pengumuman = Pengumuman::where(["id" => $request->umum_id])->get()->first();
-        return view('mygeo.pengumuman_show', compact('pengumuman'));
+        return view('mygeo.pengumuman_show', compact('pengumuman','portal'));
     }
 
     public function edit_pengumuman(Request $request)

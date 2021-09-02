@@ -163,6 +163,11 @@
                             <ul _ngcontent-lqr-c453="" id="button-animated"
                                 class="navbar-nav align-items-center ml-md-auto">
                                 <li class="nav-item dropdown">
+                                    <a class="nav-link nav-link-icon" href="{{ url('/panduan_pengguna') }}">
+                                        PANDUAN PENGGUNA
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
                                     @auth
                                         <a class="nav-link nav-link-icon" href="{{ url('/logout') }}">
                                             LOG KELUAR
