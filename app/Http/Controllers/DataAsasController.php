@@ -869,7 +869,7 @@ class DataAsasController extends Controller
         SuratBalasan::where(["id" => $request->permohonan_id])->delete();
         ProsesData::where(["id" => $request->permohonan_id])->delete();
 
-        if($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar')
+        if($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar'){
             AkuanPelajar::where(["id" => $request->permohonan_id])->delete();
         }
 
