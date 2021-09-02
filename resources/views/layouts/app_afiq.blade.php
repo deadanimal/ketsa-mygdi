@@ -286,8 +286,8 @@
                                 <div class="copyright text-xl-right text-light"> Sebarang pertanyaan, boleh menghubungi:
                                     <br>
                                     <br>
-                                    <i class="fas fa-envelope"></i> {{$portal->email_admin}}
-                                    <br> Masa Operasi: {{$portal->operation_time}}
+                                    <i class="fas fa-envelope"></i> {{$portal->email_admin ?? ''}}
+                                    <br> Masa Operasi: {{$portal->operation_time ?? ''}}
                                 </div>
                             </div>
                         </div>
