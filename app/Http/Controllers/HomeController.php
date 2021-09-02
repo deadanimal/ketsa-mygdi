@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PanduanPengguna;
 use Illuminate\Http\Request;
 use App\Pengumuman;
+use App\PortalTetapan;
 
 class HomeController extends Controller
 {
@@ -25,8 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $portal = PortalTetapan::get()->first();
         $pengumuman = Pengumuman::orderBy('created_at', 'DESC')->limit(5)->get();
         $panduan_pengguna = PanduanPengguna::get()->first();
-        return view('landing',compact('pengumuman','panduan_pengguna'));
+        return view('landing',compact('pengumuman','panduan_pengguna','portal'));
     }
 }

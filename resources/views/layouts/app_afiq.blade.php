@@ -286,8 +286,8 @@
                                 <div class="copyright text-xl-right text-light"> Sebarang pertanyaan, boleh menghubungi:
                                     <br>
                                     <br>
-                                    <i class="fas fa-envelope"></i> adminexplorer@ketsa.gov.my
-                                    <br> Masa Operasi: 8.00 Pagi - 5.00 Petang
+                                    <i class="fas fa-envelope"></i> {{$portal->email_admin}}
+                                    <br> Masa Operasi: {{$portal->operation_time}}
                                 </div>
                             </div>
                         </div>

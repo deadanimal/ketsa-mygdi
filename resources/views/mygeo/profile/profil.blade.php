@@ -245,6 +245,7 @@
                                         </button>
                                     </div>
                                 </div>
+                                </div>
                                 <div class="card-body">
                                     <div class="pl-lg-4 pb-lg-4">
                                         <input type="hidden" value="{{ $user->password }}">
