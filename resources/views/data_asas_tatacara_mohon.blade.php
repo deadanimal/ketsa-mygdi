@@ -246,11 +246,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-        <div class="card-body">
-            <div class="row">
+                        <div class="card-body">
+                            <div class="row">
                                 <div class="col-3">
                                     <img height="150"  class="img-center" src="afiqadminmygeo_files/dataapp.png" alt="">
-            </div>
+                                </div>
                                 <div class="col-8">
                                     <p class="heading text-muted">1) Daftar Pengguna</p>
                                     <ul type="square">
@@ -259,8 +259,8 @@
                                         <li>Pilih Kategori pemohon sama ada G2C, G2G atau G2E.</li>
                                         <li>Isi maklumat pendaftaran dengan lengkap.</li>
                                     </ul>
-        </div>
-    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -376,6 +376,14 @@
                     </div>
                 </div>
             </div>
+                                <div class="col-8">
+                                    <p class="heading text-muted">1) Daftar Pengguna</p>
+                                    <ul type="square">
+                                        <li>Pemohon perlu daftar masuk aplikasi MyGeo Explorer sebagai Pemohon Data terlebih
+                                            dahulu.</li>
+                                        <li>Pilih Kategori pemohon sama ada G2C, G2G atau G2E.</li>
+                                        <li>Isi maklumat pendaftaran dengan lengkap.</li>
+                                    </ul>
         </div>
     </section>
 
