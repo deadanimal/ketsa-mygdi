@@ -1374,10 +1374,10 @@ class MetadataController extends Controller {
                 $metadataxml = simplexml_load_string($ftestxml2);
 
                 $metadataName = "";
-                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                   $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                 }
-
+                
                 //create new pengumuman about the new metadata
                 $pengumuman = new Pengumuman();
                 $pengumuman->title = 'Metadata Baharu: '.$metadataName;
@@ -1415,8 +1415,8 @@ class MetadataController extends Controller {
             $metadataxml = simplexml_load_string($ftestxml2);
 
             $metadataName = "";
-            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-               $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+            if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+               $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
             }
 
             $user = User::where("id",$metadata->portal_user_id)->get()->first();
