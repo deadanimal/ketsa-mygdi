@@ -79,7 +79,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-10 pl-lg-5">
+                                    <div class="col-11 pl-lg-5">
                                         <div class="row mb-2">
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4" for="nama_penuh">
