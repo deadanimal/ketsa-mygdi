@@ -149,7 +149,7 @@
                                             <input class="form-control form-control-sm ml-3" id="phone_pejabat" type="text"
                                                 value="{{ $user->phone_pejabat }}" disabled />
                                         </div>
-                                        @if (!Auth::user()->hasRole('Penerbit Metadata', 'Pengesah Metadata'))
+                                        @if (!Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
                                             <div class="col-2">
                                                 <label class="form-control-label mr-4" for="phone_bimbit">
                                                     Telefon Bimbit
