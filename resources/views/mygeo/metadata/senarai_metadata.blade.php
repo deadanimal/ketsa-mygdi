@@ -81,6 +81,8 @@
                               <?php
                                 if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
                                    echo $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                               }elseif(isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                                   echo $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                                }
                                ?>
                           </td>

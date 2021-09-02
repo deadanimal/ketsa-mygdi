@@ -21,8 +21,8 @@
                         </div>
                         <?php
                         $scanRes = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->scanningResolution->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->scanningResolution->CharacterString != "") {
-                            $scanRes = $metadataxml->identificationInfo->SV_ServiceIdentification->scanningResolution->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString != "") {
+                            $scanRes = $metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString;
                         }
                         ?>
                         <input type="text" name="c4_scan_res" id="c4_scan_res" class="form-control form-control-sm" style="width :100px" placeholder="0.0" value="{{ $scanRes }}">
@@ -41,8 +41,8 @@
                         </div>
                         <?php
                         $groundScan = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->groundScanning->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->groundScanning->Decimal != "") {
-                            $groundScan = $metadataxml->identificationInfo->SV_ServiceIdentification->groundScanning->Decimal;;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal != "") {
+                            $groundScan = $metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal;
                         }
                         ?>
                         <input class="form-control form-control-sm" type="text" name="c4_ground_scan" id="c4_ground_scan" style="width :100px" placeholder="0.0" value="{{ $groundScan }}">

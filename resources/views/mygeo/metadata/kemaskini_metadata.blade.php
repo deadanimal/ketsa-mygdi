@@ -130,7 +130,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 
     <!-- Main content -->
     <section class="content">
@@ -168,10 +168,10 @@
                                     <select name="kategori" id="kategori" class="form-control float-left" style="width:175px;">
                                         <option disabled><?php echo __('lang.dropdown_choose'); ?></option>
                                         <?php
+                                        $catSelected = "";
                                         if (count($categories) > 0) {
-                                            $catSelected = "";
-                                            if (isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != "") {
-                                                $catSelected = strtolower(trim($metadataxml->categoryTitle->categoryItem->CharacterString));
+                                            if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != "") {
+                                                $catSelected = strtolower(trim($metadataxml->hierarchyLevel->MD_ScopeCode));
                                             }
                                             foreach ($categories as $cat) {
                                                 if (strtolower(trim($cat->name)) == $catSelected) {
@@ -274,6 +274,88 @@
     var pengesahs = [];
 
     $(document).ready(function () {
+        $(document).on('change','#c1_content_info',function(){
+            var cat = $('#kategori').val();
+            if(cat == "Dataset" && $(this).val() == "Application"){
+                $('.divIdentificationInformationUrl').show();
+                $('.inputIdentificationInformationUrl').prop('disabled',false);
+                $('.divBrowsingInformationUrl').hide();
+                $('.inputBrowsingInformationUrl').prop('disabled',true);
+            }else{
+                $('.divIdentificationInformationUrl').hide();
+                $('.inputIdentificationInformationUrl').prop('disabled',true);
+                $('.divBrowsingInformationUrl').show();
+                $('.inputBrowsingInformationUrl').prop('disabled',false);
+            }
+        });
+        <?php
+        $var = "";
+        if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
+            $var = trim($metadataxml->contact->CI_ResponsibleParty);
+        }
+        if ($catSelected == "dataset" && $var == "Application") {
+            ?>
+            $('.divIdentificationInformationUrl').show();
+            $('.inputIdentificationInformationUrl').prop('disabled',false);
+            $('.divBrowsingInformationUrl').show();
+            $('.inputBrowsingInformationUrl').prop('disabled',true);
+            <?php
+        }else{
+            ?>
+            $('.divIdentificationInformationUrl').hide();
+            $('.inputIdentificationInformationUrl').prop('disabled',true);
+            $('.divBrowsingInformationUrl').show();
+            $('.inputBrowsingInformationUrl').prop('disabled',false);
+            <?php
+        }
+        
+        $typeofProd = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString != "") {
+            $typeofProd = trim($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString);
+        }
+        if($typeofProd == "Application") {
+            ?>
+            $('.abstractApplication').show();
+            $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif ($typeofProd == "Document") {
+            ?>
+            $('.abstractDocument').show();
+            $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif ($typeofProd == "GIS Activity/Project") {
+            ?>
+            $('.abstractGISActivityProject').show();
+            $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif ($typeofProd == "Map") {
+            ?>
+            $('.abstractMap').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif ($typeofProd == "Raster Data") {
+            ?>
+            $('.abstractRasterData').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif ($typeofProd == "Services") {
+            ?>
+            $('.abstractServices').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif ($typeofProd == "Software") {
+            ?>
+            $('.abstractSoftware').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
+            <?php
+        }elseif ($typeofProd == "Vector Data") {
+            ?>
+            $('.abstractVectorData').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
+            <?php
+        }
+        ?>
+        
         <?php 
         if(auth::user()->hasRole(['Pengesah Metadata','Super Admin'])){
             ?>
@@ -322,6 +404,10 @@
             var mapurl = $('#c2_serviceUrl').val();
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
 //            $('#modal-showmap').modal('show');
+        });
+        $(document).on("click", ".btnTestUrl", function () {
+            var weburl = $(this).parent().parent().find('.urlToTest').val();
+            window.open(weburl, '_blank');
         });
         
         var oriMetadataName = $('#c2_metadataName').val();
@@ -390,11 +476,6 @@
             }
             ?>
         });
-
-        $('#c15_date_div,#c15_t1_commission_date_div,#c15_t2_conceptual_date_div,#c15_t3_absExt_date_div,#c15_t4_accuTimeMeasure_date_div,c15_t5_classCorrect_date_div').datetimepicker({
-            format: 'DD/MM/YYYY',
-            format: 'L'
-        });
         
         window.onbeforeunload = function() {
             return 'Anda sedang meninggal. page ini. Sila simpan metadata terlebih dahulu.' ;
@@ -413,7 +494,7 @@
                 window.location.href = url;
             }
         });
-
+        
         var kategori = "<?php echo strtolower($catSelected); ?>";
         if (kategori.toLowerCase() == "dataset") {
                 $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
@@ -584,24 +665,76 @@ if ($catSelected == "dataset" || $catSelected == "services") {
         $(document).on('change', '#c2_product_type', function() {
             var type = $(this).val();
             if (type == "Application") {
-                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
-            }else if (type == "Document") {
-                $('#c2_abstract').attr('placeholder','Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
-            }else if (type == "GIS Activity/Project") {
-                $('#c2_abstract').attr('placeholder','Nama Aktiviti –Tujuan – Lokasi – Tahun');
-            }else if (type == "Map") {
-                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit ');
-            }else if (type == "Raster Data") {
-                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
-            }else if (type == "Services") {
-                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
-            }else if (type == "Software") {
-                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
-            }else if (type == "Vector Data") {
-                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
+//                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
+                $('.abstractApplication').show();
+                $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Document") {
+//                $('#c2_abstract').attr('placeholder', 'Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
+                $('.abstractDocument').show();
+                $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "GIS Activity/Project") {
+//                $('#c2_abstract').attr('placeholder', 'Nama Aktiviti –Tujuan – Lokasi – Tahun');
+                $('.abstractGISActivityProject').show();
+                $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Map") {
+//                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit');
+                $('.abstractMap').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Raster Data") {
+//                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
+                $('.abstractRasterData').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Services") {
+//                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
+                $('.abstractServices').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
+            } else if (type == "Software") {
+//                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
+                $('.abstractSoftware').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
+            } else if (type == "Vector Data") {
+//                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
+                $('.abstractVectorData').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             }
+            
+            $('.abstractElement').val("");
+            $('#c2_abstract').val("");
         });
 
+        $(".abstractElement").keyup(function(){
+            var type = $('#c2_product_type').val();
+            var abstractText = "";
+            var typeSelector = "";
+            
+            if (type == "Application") {
+                typeSelector = ".abstractApplication";
+            } else if (type == "Document") {
+                typeSelector = ".abstractDocument";
+            } else if (type == "GIS Activity/Project") {
+                typeSelector = ".abstractGISActivityProject";
+            } else if (type == "Map") {
+                typeSelector = ".abstractMap";
+            } else if (type == "Raster Data") {
+                typeSelector = ".abstractRasterData";
+            } else if (type == "Services") {
+                typeSelector = ".abstractServices";
+            } else if (type == "Software") {
+                typeSelector = ".abstractSoftware";
+            } else if (type == "Vector Data") {
+                typeSelector = ".abstractVectorData";
+            }
+            
+            var elements = $(typeSelector).find('.abstractElement');
+            $(elements).each(function(index){
+                if($(this).val() !== ""){
+                    abstractText += $(this).val()+'  ';
+                }
+            });
+            abstractText = abstractText.trim();
+
+            $('#c2_abstract').val(abstractText);
+        });
 <?php
 if (!is_null(old('kategori'))) {
     ?>
@@ -637,10 +770,10 @@ if (!is_null(old('kategori'))) {
 </script>
 
 <?php
-$westBoundLongitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal : "");
-$eastBoundLongitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal : "");
-$southBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
-$northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
+$westBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal : "");
+$eastBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal : "");
+$southBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
+$northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
 ?>
 
 <script>

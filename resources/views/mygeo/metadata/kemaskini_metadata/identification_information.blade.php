@@ -18,8 +18,8 @@
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataName">
                             <?php
-                            if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
-                                if(strtolower($metadataxml->categoryTitle->categoryItem->CharacterString) == "dataset"){
+                            if(isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != ""){
+                                if(strtolower($metadataxml->hierarchyLevel->MD_ScopeCode) == "dataset"){
                                     echo "Title";
                                 }else{
                                     echo "Metadata Name";
@@ -72,6 +72,36 @@
                         @enderror
                     </div>
                 </div>
+                <h2 class="heading-small text-muted"><?php echo __('lang.abstract'); ?></h2>
+                <?php //=== abstract==============================================================
+                ?>
+                @include('mygeo.metadata.kemaskini_metadata.abstract')
+                <br>
+                
+                <div class="row mb-4 divIdentificationInformationUrl">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
+                            <?php echo __('lang.URL'); ?><span class="text-warning">*</span>
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-6">
+                        <?php
+                        $url = "";
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != "") {
+                            $url = $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString;
+                        }
+                        ?>
+                        <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest" value="{{ $url }}">
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal" data-target="#modal-showweb" data-backdrop="false">Test</button>
+                        @error('c2_serviceUrl')
+                            <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                
+                <?php /* ?>
                 <div class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_abstract">
@@ -91,6 +121,7 @@
                         @enderror
                     </div>
                 </div>
+                <?php */ ?>
                 <div class="row mb-2 divMetadataDate">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_date">
@@ -125,22 +156,22 @@
                         ?>
                         <select name="c2_metadataDateType" id="c2_metadataDateType" class="form-control form-control-sm">
                             <option value="" selected>Pilih...</option>
-                            <option value="Adopted" {{ ($metDateType == "Adopted" ? "selected":"") }}>Adopted</option>
-                            <option value="Creation" {{ ($metDateType == "Creation" ? "selected":"") }}>Creation</option>
-                            <option value="Deprecated" {{ ($metDateType == "Deprecated" ? "selected":"") }}>Deprecated</option>
-                            <option value="Distribution" {{ ($metDateType == "Distribution" ? "selected":"") }}>Distribution</option>
-                            <option value="Expiry" {{ ($metDateType == "Expiry" ? "selected":"") }}>Expiry</option>
-                            <option value="In Force" {{ ($metDateType == "In Force" ? "selected":"") }}>In Force</option>
-                            <option value="Last Revison" {{ ($metDateType == "Last Revison" ? "selected":"") }}>Last Revison</option>
-                            <option value="Last Update" {{ ($metDateType == "Last Update" ? "selected":"") }}>Last Update</option>
-                            <option value="Next Update" {{ ($metDateType == "Next Update" ? "selected":"") }}>Next Update</option>
-                            <option value="Publication" {{ ($metDateType == "Publication" ? "selected":"") }}>Publication</option>
-                            <option value="Released" {{ ($metDateType == "Released" ? "selected":"") }}>Released</option>
-                            <option value="Revision" {{ ($metDateType == "Revision" ? "selected":"") }}>Revision</option>
-                            <option value="Superseded" {{ ($metDateType == "Superseded" ? "selected":"") }}>Superseded</option>
-                            <option value="Validity Begins" {{ ($metDateType == "Validity Begins" ? "selected":"") }}>Validity Begins</option>
-                            <option value="Validy Expires" {{ ($metDateType == "Validy Expires" ? "selected":"") }}>Validy Expires</option>
-                            <option value="Unavailable" {{ ($metDateType == "Unavailable" ? "selected":"") }}>Unavailable</option>
+                            <option value="Adopted">Adopted</option>
+                            <option value="Creation">Creation</option>
+                            <option value="Deprecated">Deprecated</option>
+                            <option value="Distribution">Distribution</option>
+                            <option value="Expiry">Expiry</option>
+                            <option value="In Force">In Force</option>
+                            <option value="Last Revison">Last Revison</option>
+                            <option value="Last Update">Last Update</option>
+                            <option value="Next Update">Next Update</option>
+                            <option value="Publication">Publication</option>
+                            <option value="Released">Released</option>
+                            <option value="Revision">Revision</option>
+                            <option value="Superseded">Superseded</option>
+                            <option value="Validity Begins">Validity Begins</option>
+                            <option value="Validy Expires">Validy Expires</option>
+                            <option value="Unavailable">Unavailable</option>
                         </select>
                         @error('c2_metadataDateType')
                         <div class="text-error">{{ $message }}</div>
@@ -272,7 +303,7 @@
                         <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
                         @error('c2_serviceUrl')
                             <div class="text-error">{{ $message }}</div>
-                        @enderror <?php //ftestsmbgsini ?>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2 divTypeOfCouplingDataset">
@@ -284,8 +315,8 @@
                     <div class="col-7">
                         <?php
                         $typeCouplingDataset = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->SV_CouplingType) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->SV_CouplingType) != "") {
-                            $typeCouplingDataset = $metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->SV_CouplingType;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType) && trim($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType) != "") {
+                            $typeCouplingDataset = $metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType;
                         }
                         ?>
                         <select class="form-control form-control-sm" name="c2_typeOfCouplingDataset" id="c2_typeOfCouplingDataset">
@@ -311,8 +342,8 @@
                     <div class="col-7">
                         <?php
                         $respName = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString != "") {
-                            $respName = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString != "") {
+                            $respName = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString;
                         }
                         ?>
                         <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3" value="{{ $respName }}" >
@@ -330,8 +361,8 @@
                     <div class="col-7">
                         <?php
                         $respAgencyOrg = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString != "") {
-                            $respAgencyOrg = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString != "") {
+                            $respAgencyOrg = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString;
                         }
                         ?>
                         <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm" value="{{ $respAgencyOrg }}" >
@@ -349,8 +380,8 @@
                     <div class="col-7">
                         <?php
                         $positionName = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString != "") {
-                            $positionName = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString != "") {
+                            $positionName = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString;
                         }
                         ?>
                         <input type="text" name="c2_position_name" id="c2_position_name" class="form-control form-control-sm ml-3 mb-2" value="{{ $positionName }}">
@@ -368,8 +399,8 @@
                     <div class="col-6">
                         <?php
                         $respAddress = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString != "") {
-                            $respAddress = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString != "") {
+                            $respAddress = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString;
                         }
                         ?>
                         <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2" value="{{ $respAddress }}" >
@@ -380,16 +411,16 @@
                             <label class="form-control-label mr-4 divPostalCode" for="c2_contact_city">Postal Code :</label>
                             <?php
                                 $postalCode = "";
-                                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
-                                    $postalCode = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString;
+                                if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
+                                    $postalCode = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString;
                                 }
                             ?>
                             <input type="text" name="c2_postal_code" id="c2_postal_code" class="form-control form-control-sm ml-3 mb-2 divPostalCode" value="{{ $postalCode }}">
                             <label class="form-control-label mr-4 divCity" for="c2_contact_city">City :</label>
                             <?php
                                 $city = "";
-                                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
-                                    $city = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString;
+                                if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
+                                    $city = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString;
                                 }
                             ?>
                             <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm ml-3 mb-2 divCity" value="{{ $city }}">
@@ -398,8 +429,8 @@
                                 <option disabled>Select State</option>
                                 <?php
                                     $respState = "";
-                                    if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != ""){
-                                        $respState = strtolower(trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
+                                    if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != ""){
+                                        $respState = strtolower(trim($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
                                     }
                                 ?>
                                 <?php
@@ -422,7 +453,8 @@
                                 foreach ($countries as $country) {
                                     if ($country->id == $countrySelected->id) {
                                         ?><option value="<?php echo $country->id; ?>" selected><?php echo $country->name; ?></option><?php
-                                    } else {                                                                                                                                       ?><option value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option><?php                                              }                                                                                                                                      }                                                                                                                                          ?>
+                                    } else {                                                                                                                                                                  ?><option value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option><?php
+                                    }                                                                                                                                                                }                                                                                                                                                                    ?>
                             </select>
                         </div>
                     </div>
@@ -436,8 +468,8 @@
                     <div class="col-6">
                         <?php
                         $respEmail = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
-                            $respEmail = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
+                            $respEmail = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString;
                         }
                         ?>
                         <input type="email" name="c2_contact_email" id="c2_contact_email" class="form-control form-control-sm ml-3" value="{{ $respEmail }}" >
@@ -455,8 +487,8 @@
                     <div class="col-6">
                         <?php
                         $fax = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString != "") {
-                            $fax = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString != "") {
+                            $fax = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString;
                         }
                         ?>
                         <input type="text" name="c2_contact_fax" id="c2_contact_fax" value="{{ $fax }}" class="form-control form-control-sm ml-3">
@@ -471,8 +503,8 @@
                     <div class="col-6">
                         <?php
                         $respPhone = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != "") {
-                            $respPhone = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != "") {
+                            $respPhone = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
                         }
                         ?>
                         <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office" class="form-control form-control-sm ml-3" value="{{ $respPhone }}" >
@@ -490,8 +522,8 @@
                     <div class="col-6">
                         <?php
                         $respWebsite = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL != "") {
-                            $respWebsite = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL != "") {
+                            $respWebsite = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL;
                         }
                         ?>
                         <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3" value="{{ $respWebsite }}">
@@ -506,8 +538,8 @@
                     <div class="col-6">
                         <?php
                         $role = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->role->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->role->CharacterString != "") {
-                            $role = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->role->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode != "") {
+                            $role = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode;
                         }
                         ?>
                         <select name="c2_contact_role" id="c2_contact_role" class="form-control form-control-sm ml-3">
@@ -542,7 +574,6 @@
 
 <script>
     $(document).ready(function() {
-        //        $('#c2_product_type').val("{{old('c2_product_type')}}").trigger('change');
-        //        $('#c2_contact_state').val("{{old('c2_contact_state')}}").trigger('change');
+        $('#c2_metadataDateType').val("{{ $metDateType }}").trigger('change');
     });
 </script>

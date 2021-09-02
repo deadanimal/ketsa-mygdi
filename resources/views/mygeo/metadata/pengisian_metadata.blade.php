@@ -143,7 +143,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 
     <!-- Main content -->
     <section class="content">
@@ -271,10 +271,50 @@
 <script>
     var pengesahs = [];
     $(document).ready(function() {
+        $(document).on('change','#content_info_dropdown',function(){
+            var cat = $('#kategori').val();
+            if(cat == "Dataset" && $(this).val() == "Application"){
+                $('.divIdentificationInformationUrl').show();
+                $('.inputIdentificationInformationUrl').prop('disabled',false);
+                $('.divBrowsingInformationUrl').hide();
+                $('.inputBrowsingInformationUrl').prop('disabled',true);
+            }else{
+                $('.divIdentificationInformationUrl').hide();
+                $('.inputIdentificationInformationUrl').prop('disabled',true);
+                $('.divBrowsingInformationUrl').show();
+                $('.inputBrowsingInformationUrl').prop('disabled',false);
+            }
+        });
+        $('.divIdentificationInformationUrl').hide();
+        $('.inputIdentificationInformationUrl').prop('disabled',true);
+        
+        <?php
+        if(!is_null(old('kategori')) && old('kategori') == "Dataset" && !is_null(old('c1_content_info')) && old('c1_content_info') == "Application"){
+            ?>
+            $('.divIdentificationInformationUrl').show();
+            $('.inputIdentificationInformationUrl').prop('disabled',false);
+            $('.divBrowsingInformationUrl').hide();
+            $('.inputBrowsingInformationUrl').prop('disabled',true);
+            <?php
+        }else{
+            ?>
+            $('.divIdentificationInformationUrl').hide();
+            $('.inputIdentificationInformationUrl').prop('disabled',true);
+            $('.divBrowsingInformationUrl').show();
+            $('.inputBrowsingInformationUrl').prop('disabled',false);    
+            <?php
+        }
+        ?>
+        
+        $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+        
         $(document).on("click", "#btnTestServiceUrl", function () {
             var mapurl = $('#c2_serviceUrl').val();
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
-//            $('#modal-showmap').modal('show');
+        });
+        $(document).on("click", ".btnTestUrl", function () {
+            var weburl = $(this).parent().parent().find('.urlToTest').val();
+            window.open(weburl, '_blank');
         });
         
         $(document).on('click', '.btnSubmit', function() {
@@ -324,10 +364,7 @@
         }
         ?>
         $('#div_action_buttons').hide();
-        $('#c15_date_div,#c15_t1_commission_date_div,#c15_t2_conceptual_date_div,#c15_t3_absExt_date_div,#c15_t4_accuTimeMeasure_date_div,c15_t5_classCorrect_date_div').datetimepicker({
-            format: 'DD/MM/YYYY',
-                format: 'L'
-        });
+
         window.onbeforeunload = function() {
             return 'Anda sedang meninggal. page ini. Sila simpan metadata terlebih dahulu.';
         };
@@ -474,22 +511,119 @@
         $(document).on('change', '#c2_product_type', function() {
             var type = $(this).val();
             if (type == "Application") {
-                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
+//                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
+                $('.abstractApplication').show();
+                $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Document") {
-                $('#c2_abstract').attr('placeholder', 'Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
+//                $('#c2_abstract').attr('placeholder', 'Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
+                $('.abstractDocument').show();
+                $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "GIS Activity/Project") {
-                $('#c2_abstract').attr('placeholder', 'Nama Aktiviti –Tujuan – Lokasi – Tahun');
+//                $('#c2_abstract').attr('placeholder', 'Nama Aktiviti –Tujuan – Lokasi – Tahun');
+                $('.abstractGISActivityProject').show();
+                $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Map") {
-                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit');
+//                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit');
+                $('.abstractMap').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Raster Data") {
-                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
+//                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
+                $('.abstractRasterData').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Services") {
-                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
+//                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
+                $('.abstractServices').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Software") {
-                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
+//                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
+                $('.abstractSoftware').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
             } else if (type == "Vector Data") {
-                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
+//                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
+                $('.abstractVectorData').show();
+                $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             }
+            
+            $('.abstractElement').val("");
+            $('#c2_abstract').val("");
+        });
+        
+        <?php
+        if(!is_null(old('c2_product_type')) && old('c2_product_type') == "Application"){
+            ?>
+            $('.abstractApplication').show();
+            $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Document"){
+            ?>
+            $('.abstractDocument').show();
+            $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "GIS Activity/Project"){
+            ?>
+            $('.abstractGISActivityProject').show();
+            $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Map"){
+            ?>
+            $('.abstractMap').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Raster Data"){
+            ?>
+            $('.abstractRasterData').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Services"){
+            ?>
+            $('.abstractServices').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Software"){
+            ?>
+            $('.abstractSoftware').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
+            <?php
+        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Vector Data"){
+            ?>
+            $('.abstractVectorData').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
+            <?php
+        }
+        ?>
+        
+        $(".abstractElement").keyup(function(){
+            var type = $('#c2_product_type').val();
+            var abstractText = "";
+            var typeSelector = "";
+            
+            if (type == "Application") {
+                typeSelector = ".abstractApplication";
+            } else if (type == "Document") {
+                typeSelector = ".abstractDocument";
+            } else if (type == "GIS Activity/Project") {
+                typeSelector = ".abstractGISActivityProject";
+            } else if (type == "Map") {
+                typeSelector = ".abstractMap";
+            } else if (type == "Raster Data") {
+                typeSelector = ".abstractRasterData";
+            } else if (type == "Services") {
+                typeSelector = ".abstractServices";
+            } else if (type == "Software") {
+                typeSelector = ".abstractSoftware";
+            } else if (type == "Vector Data") {
+                typeSelector = ".abstractVectorData";
+            }
+            
+            var elements = $(typeSelector).find('.abstractElement');
+            $(elements).each(function(index){
+                if($(this).val() !== ""){
+                    abstractText += $(this).val()+'  ';
+                }
+            });
+            abstractText = abstractText.trim();
+
+            $('#c2_abstract').val(abstractText);
         });
         
         <?php

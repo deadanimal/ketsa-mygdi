@@ -76,7 +76,7 @@
                         ?>
                         <div class="col-xl-1">
                             <label class="form-control-label" for="input-language">
-                                Maintenance Information
+                                Maintenance and Update
                             </label>
                         </div>
                         <div class="col-xl-2">

@@ -192,7 +192,7 @@
                         },
                     })
                     .done(function(response) {
-                        alert("Metadata berjaya disahkankan.");
+                        alert("Metadata berjaya disahkan.");
                         location.reload();
                     });
             }
