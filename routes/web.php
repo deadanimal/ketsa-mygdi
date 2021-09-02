@@ -21,6 +21,7 @@ Route::post('/carian_metadata_nologin', 'MetadataController@search_nologin');
 Route::post('/lihat_metadata_nologin', 'MetadataController@show_nologin');
 Route::post('/lihat_xml_nologin', 'MetadataController@show_xml_nologin');
 Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
+Route::get('/downloadMetadataPdf/{id}', 'MetadataController@downloadMetadataPdf');
 
 Route::post('/loginf', 'AuthController@authenticate');
 //Route::post('/registerf','RegisterController@create');

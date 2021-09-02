@@ -39,6 +39,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
 use App\AuditTrail;
 use App\Pengumuman;
+use PDF;
 
 class MetadataController extends Controller {
 
@@ -418,6 +419,49 @@ class MetadataController extends Controller {
         }
 
         return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'));
+    }
+    
+    public function downloadMetadataPdf($id) {
+        ini_set('max_execution_time', '1000');
+        set_time_limit(1000);
+        $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();
+
+        $ftestxml2 = <<<XML
+                $metadataSearched->data
+                XML;
+        $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+        $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+        $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+        $metadataxml = simplexml_load_string($ftestxml2);
+
+        if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
+            App::setLocale(trim($metadataxml->language->CharacterString));
+        }
+
+        $categories = MCategory::all();
+        $contacts = User::all();
+        $states = States::where(['country' => 1])->get()->all();
+        $countryId = "";
+        if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString != ""){
+            $countryId = trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString);
+        }
+        if($countryId != ""){
+            $countries = Countries::where(['id' => $countryId])->get()->first();
+        }else{
+            $countries = Countries::where(['id' => 1])->get()->first();
+        }
+
+        if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && trim($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) != ""){
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
+            $refSys = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+        }else{
+            $refSys = [];
+        }
+
+        $pdf = PDF::loadView('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->setOptions(['defaultFont' => 'sans-serif']);
+        
+        return $pdf->download('disney.pdf');
     }
 
     public function show_xml_nologin(Request $request) {

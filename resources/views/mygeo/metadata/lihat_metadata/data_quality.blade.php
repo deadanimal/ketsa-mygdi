@@ -6,7 +6,7 @@
             </h4>
         </a>
     </div>
-    <div id="collapse15" class="panel-collapse collapse in show" data-parent="#div_c15"> <?php //### SMBG SINI - pull data quality from new format ### ?>
+    <div id="collapse15" class="panel-collapse collapse in show" data-parent="#div_c15">
         <div class="card-body">
             <div class="form-group row col-xl-6">
                 <b>Data Quality Information</b>

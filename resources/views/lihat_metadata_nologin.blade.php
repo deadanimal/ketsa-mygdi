@@ -42,13 +42,24 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-              <h1>
-                <?php 
-                if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                  echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                }
-                ?>
-              </h1>
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <h1>
+                                <?php 
+                                if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                                  echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                }
+                                ?>
+                            </h1>
+                        </div>
+                        <div class="col-7 text-right">
+                            <a href="{{ url('downloadMetadataPdf').'/'.$metadataSearched->id }}">
+                                <button type="button" class="btn btn-sm btn-default mr-2">Muat Turun PDF</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             <div class="card">
                 <input type="hidden" name="metadata_id" value="{{ $metadataSearched->id }}">
                 <div class="card-body">
