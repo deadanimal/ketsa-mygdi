@@ -192,14 +192,7 @@
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-8">
-                                                <input class="form-control form-control-sm ml-3" type="text"
-                                                @if($user->kategori == '2_g2e_iptsPelajar')
-                                                    value="G2E - (IPTS) Pelajar"
-                                                @elseif($user->kategori == '2_g2e_iptaPelajar')
-                                                    value="G2E - (IPTA) Pelajar"
-                                                @else
-                                                value="-"
-                                                @endif disabled />
+                                                <input class="form-control form-control-sm ml-3" type="text" value="{{ $user->kategori }}" disabled />
                                             </div>
                                         </div>
                                     @endif
