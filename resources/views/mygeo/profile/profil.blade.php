@@ -204,25 +204,6 @@
                                         </div>
                                     @endif
                                 </div>
-                                    @if (Auth::user()->hasRole('Pemohon Data'))
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4" for="email">
-                                                    Kategori
-                                                </label><label class="float-right">:</label>
-                            </div>
-                                            <div class="col-8">
-                                                <input class="form-control form-control-sm ml-3" type="text"
-                                                @if($user->kategori == '2_g2e_iptsPelajar')
-                                                    value="G2E - (IPTS) Pelajar"
-                                                @elseif($user->kategori == '2_g2e_iptaPelajar')
-                                                    value="G2E - (IPTA) Pelajar"
-                                                @else
-                                                value="-"
-                                                @endif disabled />
-                        </div>
-                    </div>
-                                    @endif
                 </div>
             </div>
                         </div>
