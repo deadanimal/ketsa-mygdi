@@ -288,6 +288,10 @@
     </section>
 </div>
 
+@if(Session::has('message'))
+    <script>alert("{{ Session::get('message') }}");</script>
+@endif
+
 <script>
     $(document).ready(function () {
 <?php

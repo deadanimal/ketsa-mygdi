@@ -213,6 +213,13 @@ class UserController extends Controller {
 //            }
 //        }
 //        exit();
+        if(Auth::user()->hasRole(['Pengesah Metadata'])){
+            $hasUnattended = $this->checkUnattendedMetadata();
+            if($hasUnattended > 0){
+                $request->session()->put('message', 'Ade metadata yg blom check lg la');
+            }
+        }
+        
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
 
@@ -221,11 +228,17 @@ class UserController extends Controller {
             return view('mygeo.profile.profil', compact('user'));
         } else {
             if(Auth::user()->hasRole(['Pemohon Data'])){
-            \Session::flash('warning','Anda perlu membuat penilaian kepada permohonan terbaru');
-            return view('mygeo.profile.profil', compact('user'));
+                \Session::flash('warning','Anda perlu membuat penilaian kepada permohonan terbaru');
+                return view('mygeo.profile.profil', compact('user'));
+            }
         }
-
-        }
+    }
+    
+    function checkUnattendedMetadata(){
+        $query = MetadataGeo::on('pgsql2')->where('disahkan','0');
+        $lastTwoWeeks = date('Y-m-d', strtotime("+2 weeks"));
+        $result = $query->whereDate('createdate',$lastTwoWeeks)->get();
+        return count($result);
     }
 
     public function edit(){
