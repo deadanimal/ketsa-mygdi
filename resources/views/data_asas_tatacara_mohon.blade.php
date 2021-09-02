@@ -376,15 +376,6 @@
                     </div>
                 </div>
             </div>
-                                <div class="col-8">
-                                    <p class="heading text-muted">1) Daftar Pengguna</p>
-                                    <ul type="square">
-                                        <li>Pemohon perlu daftar masuk aplikasi MyGeo Explorer sebagai Pemohon Data terlebih
-                                            dahulu.</li>
-                                        <li>Pilih Kategori pemohon sama ada G2C, G2G atau G2E.</li>
-                                        <li>Isi maklumat pendaftaran dengan lengkap.</li>
-                                    </ul>
-        </div>
     </section>
 
 
