@@ -1311,6 +1311,10 @@ class MetadataController extends Controller {
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                    $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                 }
+                $abstract = "";
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+                   $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
+                }
 
                 $user = User::where("id",$metadata->portal_user_id)->get()->first();
                 if(!empty($user)){
@@ -1326,10 +1330,10 @@ class MetadataController extends Controller {
 
                 //create new pengumuman about the new metadata
                 $pengumuman = new Pengumuman();
-                $pengumuman->title = 'Metadata Baharu: '.$metadataName;
+                $pengumuman->title = $metadataName;
                 $pengumuman->date = date('Y-m-d H:i:s',time());
                 $pengumuman->kategori = 'Metadata Baharu';
-                $pengumuman->content = 'Metadata Baharu telah diterbitkan bertajuk '.$metadataName;
+                $pengumuman->content = 'Abstract: '.$abstract;
                 $pengumuman->gambar = "banner2.jpeg";
                 $pengumuman->save();
 
@@ -1377,13 +1381,17 @@ class MetadataController extends Controller {
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
                    $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                 }
+                $abstract = "";
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+                   $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
+                }
                 
                 //create new pengumuman about the new metadata
                 $pengumuman = new Pengumuman();
-                $pengumuman->title = 'Metadata Baharu: '.$metadataName;
+                $pengumuman->title = $metadataName;
                 $pengumuman->date = date('Y-m-d H:i:s',time());
                 $pengumuman->kategori = 'Metadata Baharu';
-                $pengumuman->content = 'Metadata Baharu telah diterbitkan bertajuk '.$metadataName;
+                $pengumuman->content = 'Abstract: '.$abstract;
                 $pengumuman->gambar = "banner2.jpeg";
                 $pengumuman->save();
 
@@ -1418,6 +1426,10 @@ class MetadataController extends Controller {
             if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
                $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
             }
+            $abstract = "";
+            if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+               $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
+            }
 
             $user = User::where("id",$metadata->portal_user_id)->get()->first();
             if(!empty($user)){
@@ -1433,10 +1445,10 @@ class MetadataController extends Controller {
 
             //create new pengumuman about the new metadata
             $pengumuman = new Pengumuman();
-            $pengumuman->title = 'Metadata Baharu: '.$metadataName;
+            $pengumuman->title = $metadataName;
             $pengumuman->date = date('Y-m-d H:i:s',time());
             $pengumuman->kategori = 'Metadata Baharu';
-            $pengumuman->content = 'Metadata Baharu telah diterbitkan bertajuk '.$metadataName;
+            $pengumuman->content = 'Abstract: '.$abstract;
             $pengumuman->gambar = "banner2.jpeg";
             $pengumuman->save();
         }
