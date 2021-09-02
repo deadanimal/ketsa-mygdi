@@ -459,9 +459,14 @@ class MetadataController extends Controller {
             $refSys = [];
         }
 
-        $pdf = PDF::loadView('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->setOptions(['defaultFont' => 'sans-serif']);
+        $html = view('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->render();
+        $pdf = \App::make('dompdf.wrapper')->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf->loadHTML($html);
+        return $pdf->stream();
         
-        return $pdf->download('disney.pdf');
+//        $pdf = PDF::loadView('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->setOptions(['defaultFont' => 'sans-serif']);
+        
+//        return $pdf->download('disney.pdf');
     }
 
     public function show_xml_nologin(Request $request) {
@@ -471,6 +476,21 @@ class MetadataController extends Controller {
                 XML;
 
         return response($ftestxml2)->withHeaders(['Content-Type' => 'text/xml']);
+    }
+    
+    public function downloadMetadataXml($id) {
+        $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();
+        $ftestxml2 = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'.PHP_EOL.<<<XML
+                $metadataSearched->data
+                XML;
+
+        $response = response($ftestxml2);
+        $response->header('Content-Type', 'text/xml');
+        $response->header('Cache-Control', 'public');
+        $response->header('Content-Description', 'File Transfer');
+        $response->header('Content-Disposition', 'attachment; filename=ftestxml.xml');
+        $response->header('Content-Transfer-Encoding', 'binary');
+        return $response;
     }
 
     public function messages() {

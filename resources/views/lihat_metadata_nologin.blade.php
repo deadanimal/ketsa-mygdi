@@ -57,6 +57,9 @@
                             <a href="{{ url('downloadMetadataPdf').'/'.$metadataSearched->id }}">
                                 <button type="button" class="btn btn-sm btn-default mr-2">Muat Turun PDF</button>
                             </a>
+                            <a href="{{ url('downloadMetadataXml').'/'.$metadataSearched->id }}">
+                                <button type="button" class="btn btn-sm btn-default mr-2">Muat Turun XML</button>
+                            </a>
                         </div>
                     </div>
                 </div>
