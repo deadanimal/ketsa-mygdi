@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="d-flex flex-wrap bd-highlight">
                 <?php
-                if(isset($metadataxml->identificationInfo->MD_DataIdentification->topicCategory) && trim($metadataxml->identificationInfo->MD_DataIdentification->topicCategory) != ""){
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->topicCategory) && trim($metadataxml->identificationInfo->MD_DataIdentification->topicCategory->MD_TopicCategoryCode) != ""){
                     foreach($metadataxml->identificationInfo->MD_DataIdentification->topicCategory as $tc){
                         if(trim($tc->MD_TopicCategoryCode) != ""){
                             ?>
