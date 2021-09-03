@@ -284,7 +284,7 @@
                             <div class="col-xl-4">
                                 <div class="copyright text-center text-light mt-2"> Jumlah Pelawat:
                                     <br>
-                                    <span class="badge badge-custom badge-pill mt-1">{{ count($total_visitors) }}</span>
+                                    <span class="badge badge-custom badge-pill mt-1">{{ number_format(count($total_visitors), 0, ".", ",") }}</span>
                                 </div>
                             </div>
                             <div class="col-xl-4">
