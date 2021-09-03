@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\AuditTrail;
 use App\PortalTetapan;
 use Auth;
+use App\Visitors;
 
 class LoginController extends Controller
 {
@@ -44,7 +45,10 @@ class LoginController extends Controller
     public function showLoginForm()
   {
       $portal = PortalTetapan::get()->first();
-      return view('auth.login', compact('portal'));
+      $address = $_SERVER['REMOTE_ADDR'];
+        Visitors::firstOrCreate(['address'=>$address]);
+        $total_visitors = Visitors::get();
+      return view('auth.login', compact('portal','total_visitors'));
   }
 
     public function logout(){

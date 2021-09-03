@@ -543,7 +543,13 @@ class DataAsasController extends Controller
 
     public function permohonan_baru()
     {
-        $pemohons = MohonData::where(['dihantar' => 1,'status' => 0])->get();
+        $pemohons = MohonData::with('users')->where(['dihantar' => 1,'status' => 0])->get();
+        foreach($pemohons as $p){
+//            echo "<pre>";
+//            var_dump($p);
+//            echo "</pre>";
+        }
+//        exit();
         return view('mygeo.permohonan_baru', compact('pemohons'));
     }
 
