@@ -27,12 +27,7 @@ class AuthController extends Controller
 
     public function authenticate(Request $request)
     {
-        // echo "<pre>";
-        // var_dump($request->email);
-        // var_dump($request->password);  $2y$10$ds5kaqrIwRymOP.Fo0s5Feocrp6LE6GSoz91KlPVCjDAVkHdireqm
-        // var_dump(Hash::make($request->password));
-        // echo "</pre>";
-        // exit();
+//        dd(Hash::make('farhan.rimfiel@pipeline-network.comM2'));
 
         if ($_SERVER['HTTP_HOST'] != "localhost:8888") {
             if (!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == "") {
