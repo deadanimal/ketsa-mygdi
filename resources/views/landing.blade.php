@@ -161,9 +161,9 @@
     <nav class="nav-menu">
         <ul>
             <li class="active"><a href="#home"><i class="bx bx-home"></i> <span>Laman Utama</span></a></li>
-            <li><a href="#home2"><i class="bx bx-map-alt"></i> <span>Carian Metadata</span></a></li>
+                <li><a href="#home2"><i class="bx bx-map-alt"></i> <span>Carian Data</span></a></li>
             <li><a href="#about"><i class="bx bx-food-menu"></i> <span>Mengenai MyGeo Explorer</span></a></li>
-            <li><a href="#userguide"><i class="bx bx-mouse"></i> <span>Panduan Pengguna</span></a></li>
+                <li><a href="#vidtuto"><i class="bx bx-mouse"></i> <span>Video Tutorial</span></a></li>
             <li><a href="#feedback"><i class="bx bx-support"></i> <span>Maklum Balas</span></a></li>
             <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Hubungi Kami</span></a></li>
         </ul>
@@ -336,15 +336,19 @@
     </div>
 </section>
 
-<section id="userguide" class="">
+    <section id="vidtuto" class="">
     <div class="container" data-aos="fade-up" style="min-height: 500px;">
 
         <div class="section-title">
-            <h2>Panduan Pengguna</h2>
+                <h2>Video Tutorial</h2>
         </div>
-        <div class="row pb-7">
-            <div class="col-12">
-                <?php echo $panduan_pengguna->content; ?>
+            <div class="row">
+                <div class="col text-center">
+                    <iframe width="720" height="475" src="https://www.youtube.com/embed/I2P1zEBciq4?autoplay=1&mute=1&loop=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
             </div>
         </div>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\AuditTrail;
+use App\PortalTetapan;
 use Auth;
 
 class LoginController extends Controller
@@ -40,6 +41,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     
+    public function showLoginForm()
+  {
+      $portal = PortalTetapan::get()->first();
+      return view('auth.login', compact('portal'));
+  }
+
     public function logout(){
         $at = new AuditTrail();
         $at->path = url()->full();

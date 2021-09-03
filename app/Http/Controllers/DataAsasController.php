@@ -8,6 +8,7 @@ use App\DokumenBerkaitan;
 use App\SenaraiKawasanData;
 use App\MohonData;
 use App\ProsesData;
+use App\PortalTetapan;
 use App\Penilaian;
 use App\SenaraiData;
 use App\KelasKongsi;
@@ -63,7 +64,8 @@ class DataAsasController extends Controller
 
     public function data_asas_landing()
     {
-        return view('/data_asas_landing');
+        $portal = PortalTetapan::get()->first();
+        return view('/data_asas_landing', compact('portal'));
     }
 
     public function data_asas_senarai()
@@ -75,10 +77,13 @@ class DataAsasController extends Controller
             ['subkategori','=','LOL'],
         ])->get();
         $senarai_data = SenaraiData::orderBy('kategori')->get();
+
+        $portal = PortalTetapan::get()->first();
         return view('/data_asas_senarai',[
             'senarai_data' => $senarai_data,
             'subs'=> $subs,
-            'lapisan'=> $lapisan
+            'lapisan'=> $lapisan,
+            'portal'=> $portal
         ]);
     }
 
@@ -92,10 +97,13 @@ class DataAsasController extends Controller
             ['subkategori','=','LOL'],
         ])->get();
         $senarai_dataa = SenaraiData::all();
+        $portal = PortalTetapan::get()->first();
+
         return view('/data_asas_senarai',[
             'senarai_data' => $senarai_dataa,
             'subs'=> $subs,
-            'lapisan'=> $lapisan
+            'lapisan'=> $lapisan,
+            'portal'=> $portal
         ]);
     }
 
@@ -111,21 +119,25 @@ class DataAsasController extends Controller
             ['subkategori','=',$subkategori->subkategori],
         ])->get();
         $senarai_dataa = SenaraiData::all();
+        $portal = PortalTetapan::get()->first();
         return view('/data_asas_senarai',[
             'senarai_data' => $senarai_dataa,
             'subs'=> $subs,
-            'lapisan'=> $lapisan
+            'lapisan'=> $lapisan,
+            'portal'=> $portal
         ]);
     }
 
     public function data_asas_tatacara_mohon()
     {
-        return view('/data_asas_tatacara_mohon');
+        $portal = PortalTetapan::get()->first();
+        return view('/data_asas_tatacara_mohon',compact('portal'));
     }
 
     public function data_asas_dokumen_berkaitan()
     {
-        return view('/data_asas_dokumen_berkaitan');
+        $portal = PortalTetapan::get()->first();
+        return view('/data_asas_dokumen_berkaitan',compact('portal'));
     }
 
     public function penilaian()
@@ -485,7 +497,7 @@ class DataAsasController extends Controller
             $at->save();
 
             $id = $request->permohonan_id;
-            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan !');
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
 
         } elseif($valid_file->isEmpty()) {
 

@@ -18,10 +18,10 @@
 </style>
 <div class="content">
     <div class="card" style="background-color: rgba(255, 255, 255, 0.9);">
-        <div class="card-header">
-            <h1 class="card-title m-0">{!! (!is_null($panduan_pengguna) ? $panduan_pengguna->title:"") !!}</h1>
+        <div class="section-title">
+            <h2>{!! (!is_null($panduan_pengguna) ? $panduan_pengguna->title:"") !!}</h2>
         </div>
-        <div class="card-body" align="justify">
+        <div class="card-body" align="center">
             {!! (!is_null($panduan_pengguna) ? $panduan_pengguna->content:"") !!}
         </div>
     </div>

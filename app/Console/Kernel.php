@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 //        $schedule->command('demo:cron')->everyMinute();
-        $schedule->command('uncheckedMetadata:cron')->everyMinute();
+        $schedule->command('uncheckedMetadata:cron')->dailyAt('08:00');
     }
 
     /**

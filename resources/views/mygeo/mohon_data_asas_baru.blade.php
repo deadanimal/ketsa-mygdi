@@ -349,8 +349,12 @@
                                                 </select>
                                                 <div id="hidden_div_catatan" @if ($pemohon->status == 0 || $pemohon->status == 1) class="hide" @endif>
                                                     <h4 class="heading text-dark mr-2">Catatan Permohonan</h4>
-                                                    <input type="text" class="form-control form-control-sm mb-4"
-                                                        name="catatan" value="{{ $pemohon->catatan }}">
+                                                        <select name="catatan" class="form-control form-control-sm mb-4">
+                                                            <option value="Maklumat tidak lengkap,maklumat pemohon tidak sahih" @if($pemohon->catatan == "Maklumat tidak lengkap,maklumat pemohon tidak sahih") @endif>Maklumat tidak lengkap,maklumat pemohon tidak sahih</option>
+                                                            <option value="Data yang dipohon tiada dalam simpanan PGN" @if($pemohon->catatan == "Data yang dipohon tiada dalam simpanan PGN") @endif>Data yang dipohon tiada dalam simpanan PGN</option>
+                                                            <option value="Maklumat pemohon tidak sahih" @if($pemohon->catatan == "Maklumat pemohon tidak sahih") @endif>Maklumat pemohon tidak sahih</option>
+                                                            <option value="others" @if($pemohon->catatan == "others") @endif>Lain-lain</option>
+                                                        </select>
                                                 </div>
                                                 <div id="hidden_div_pentadbir" @if ($pemohon->status == 0 || $pemohon->status == 2) class="hide" @endif>
                                                     <h4 class="heading text-dark mr-2">Pentadbir Ditugaskan</h4>
@@ -472,8 +476,6 @@
                                 <option disabled>Pilih</option>
                                 <option value="Salinan Kad Pengenalan">Salinan Kad Pengenalan (Wakil Agensi/Pelajar)</option>
                                 <option value="Borang PPNM">Borang PPNM (Wakil Agensi/Pelajar)</option>
-                                <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
-                                <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
                                 <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
                             </select>
                         </div>

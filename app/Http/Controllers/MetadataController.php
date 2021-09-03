@@ -31,6 +31,7 @@ use App\ElemenMetadata;
 use App\Tajuk;
 use Session;
 use App\MetadataGeo;
+use App\PortalTetapan;
 use App\Mail\MailtrapExample;
 use App;
 use App\Http\Controllers\XmlController;
@@ -138,8 +139,10 @@ class MetadataController extends Controller {
             $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = $xml2;
         }
+         */
+        $portal = PortalTetapan::get()->first();
             
-        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian','params'));
+        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian','params','portal'));
     }
     
     public function findMetadataByName(Request $request){
@@ -248,7 +251,8 @@ class MetadataController extends Controller {
             $metadatas[$met->id] = $xml2;
         }
 
-        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb'));
+        $portal = PortalTetapan::get()->first();
+        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','portal'));
     }
 
     public function create() {
@@ -418,7 +422,8 @@ class MetadataController extends Controller {
             $refSys = [];
         }
 
-        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'));
+        $portal = PortalTetapan::get()->first();
+        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched','portal'));
     }
     
     public function downloadMetadataPdf($id) {
