@@ -18,6 +18,7 @@ use App\User;
 use Auth;
 use DB;
 use App\AuditTrail;
+use Dompdf\Dompdf;
 use phpDocumentor\Reflection\Types\Null_;
 
 class DataAsasController extends Controller
@@ -463,7 +464,7 @@ class DataAsasController extends Controller
         if ($request->file()) {
             $fileName = time() . '_' . $request->file->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('signatures', $fileName, 'public');
-            //save senarai data
+            //save akuan pelajar data
             AkuanPelajar::where(["permohonan_id" => $request->permohonan_id])->update([
                 "title" => $request->title,
                 "peta_topo_a" => $request->peta_topo_a,
@@ -515,6 +516,20 @@ class DataAsasController extends Controller
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
 
         } else {
+
+            AkuanPelajar::where(["permohonan_id" => $request->permohonan_id])->update([
+                "title" => $request->title,
+                "peta_topo_a" => $request->peta_topo_a,
+                "peta_topo_b" => $request->peta_topo_b,
+                "peta_topo_c" => $request->peta_topo_c,
+                "foto_udara_a" => $request->foto_udara_a,
+                "foto_udara_b" => $request->foto_udara_b,
+                "foto_udara_c" => $request->foto_udara_c,
+                "lain_a" => $request->lain_a,
+                "lain_b" => $request->lain_b,
+                "lain_c" => $request->lain_c,
+
+            ]);
 
             $id = $request->permohonan_id;
             return redirect()->action('DataAsasController@akuan_pelajar', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang ini Berserta Tandatangan');
@@ -856,5 +871,23 @@ class DataAsasController extends Controller
         $at->save();
 
         return redirect('mohon_data')->with('success', 'Permohonan Data dibuang!');
+    }
+
+    public function api_convert_and_watermark_dokumen(Request $request) {
+        //instatiate and use the dompdf class
+        $img = file_get_contents($request->gambar);
+        $base64 = 'data:image/png;base64,' . base64_encode($img);
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('<img src="'. $base64 .'" alt="front pic"/> <br> UNTUK KEGUNAAN KETSA SAHAJA');
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
     }
 }

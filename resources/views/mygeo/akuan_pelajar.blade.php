@@ -78,7 +78,7 @@
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
                                                 name="agensi_organisasi" disabled>{{ $pemohon->users->agensiOrganisasi->name }}, {{ $pemohon->users->alamat }}
-                                                             </textarea>
+                                                                 </textarea>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
                                             seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
@@ -159,25 +159,35 @@
                                     <br><br>
                                     <div class="mx-6 pl-lg-8">
                                         Tandatangan Pelajar:
-                                        <img src="{{$akuan->digital_sign}}" alt="Gambar Tandatangan" height="120">
-                                        <input type="file" class="form-control form-control-sm py-0"
-                                            name="file" placeholder="Digital Sign">
-                                            <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
-                                        Tarikh:<input type="text" class="form-control form-control-sm" placeholder="Auto Pilih Tarikh Semasa" value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
+                                        <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan" height="120">
+                                        <input type="file" class="form-control form-control-sm py-0" name="file"
+                                            placeholder="Digital Sign">
+                                        <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
+                                        Tarikh:<input type="text" class="form-control form-control-sm"
+                                            placeholder="Auto Pilih Tarikh Semasa" disabled
+                                            value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
                                         Nama:<input type="text" class="form-control form-control-sm"
-                                            value="{{ $pemohon->users->name }}">
-                                        Alamat:<textarea class="form-control form-control-sm" cols="30"
-                                            rows="6">{{ $pemohon->users->alamat }}</textarea>
+                                            value="{{ $pemohon->users->name }}" disabled>
+                                        Alamat:<textarea class="form-control form-control-sm" cols="30" rows="6"
+                                            disabled>{{ $pemohon->users->alamat }}</textarea>
                                     </div>
 
                                     <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
                                     <input type="hidden" name="id" value="{{ $pemohon->id }}">
 
-                                    @if (Auth::user()->hasRole(['Pemohon Data']))
-                                        <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-                                    @endif
                                     </p>
+
+                                    @if (Auth::user()->hasRole(['Pemohon Data']))
+                                        <button type="submit" class="btn float-right btn-primary">Simpan</button>
+                                    @endif
                                 </form>
+                                {{-- <form action="/api/dokumens" method="POST">
+                                    @csrf
+                                    Test PDFfff
+                                    <input type="hidden" name="gambar" class="form-control form-control-sm" value="{{ $akuan->digital_sign }}">
+
+                                    <button type="submit" class="btn btn-outline-primary">Test PDF</button>
+                                </form> --}}
                             </div>
                         </div>
                     </div>

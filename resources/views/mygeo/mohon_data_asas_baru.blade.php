@@ -341,12 +341,14 @@
                                                 </select>
                                                 <div id="hidden_div_catatan" @if ($pemohon->status == 0 || $pemohon->status == 1) class="hide" @endif>
                                                     <h4 class="heading text-dark mr-2">Catatan Permohonan</h4>
-                                                        <select name="catatan" class="form-control form-control-sm mb-4">
-                                                            <option value="Maklumat tidak lengkap,maklumat pemohon tidak sahih" @if($pemohon->catatan == "Maklumat tidak lengkap,maklumat pemohon tidak sahih") @endif>Maklumat tidak lengkap,maklumat pemohon tidak sahih</option>
-                                                            <option value="Data yang dipohon tiada dalam simpanan PGN" @if($pemohon->catatan == "Data yang dipohon tiada dalam simpanan PGN") @endif>Data yang dipohon tiada dalam simpanan PGN</option>
-                                                            <option value="Maklumat pemohon tidak sahih" @if($pemohon->catatan == "Maklumat pemohon tidak sahih") @endif>Maklumat pemohon tidak sahih</option>
-                                                            <option value="others" @if($pemohon->catatan == "others") @endif>Lain-lain</option>
+                                                        <select name="catatan" class="form-control form-control-sm mb-4" onchange="checkCatatan(this.value);">
+                                                            <option selected disabled>Pilih</option>
+                                                            <option value="Maklumat tidak lengkap,maklumat pemohon tidak sahih" @if($pemohon->catatan == "Maklumat tidak lengkap,maklumat pemohon tidak sahih") selected @endif>Maklumat tidak lengkap,maklumat pemohon tidak sahih</option>
+                                                            <option value="Data yang dipohon tiada dalam simpanan PGN" @if($pemohon->catatan == "Data yang dipohon tiada dalam simpanan PGN") selected @endif>Data yang dipohon tiada dalam simpanan PGN</option>
+                                                            <option value="Maklumat pemohon tidak sahih" @if($pemohon->catatan == "Maklumat pemohon tidak sahih") selected @endif>Maklumat pemohon tidak sahih</option>
+                                                            <option value="others" @if($pemohon->catatan == "others") selected @endif>Lain-lain</option>
                                                         </select>
+                                                        <input type="text" name="catatan_lain" id="catatan" class="form-control form-control-sm" style='display:none;'/>
                                                 </div>
                                                 <div id="hidden_div_pentadbir" @if ($pemohon->status == 0 || $pemohon->status == 2) class="hide" @endif>
                                                     <h4 class="heading text-dark mr-2">Pentadbir Ditugaskan</h4>
@@ -689,6 +691,17 @@
                 document.getElementById('hidden_div_pentadbir').style.display = "block";
             }
         }
+    </script>
+
+<script type="text/javascript">
+    function checkCatatan(val){
+     var element=document.getElementById('catatan');
+     if(val=='pick a color'||val=='others')
+       element.style.display='block';
+     else
+       element.style.display='none';
+    }
+
     </script>
 
         <!-- JavaScript -->
