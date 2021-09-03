@@ -1365,6 +1365,7 @@ class MetadataController extends Controller {
             foreach ($_POST['metadata_id'] as $mid) {
                 $metadata = MetadataGeo::on('pgsql2')->find($mid);
                 $metadata->timestamps = false;
+                $metadata->changedate = date("Y-m-d H:i:s");
                 $metadata->disahkan = 'yes';
                 $metadata->update();
 
@@ -1411,6 +1412,7 @@ class MetadataController extends Controller {
             $metadata = MetadataGeo::on('pgsql2')->find($_POST['metadata_id']);
             $metadata->timestamps = false;
             $metadata->disahkan = 'yes';
+            $metadata->changedate = date("Y-m-d H:i:s");
             $metadata->update();
 
             $ftestxml2 = <<<XML
@@ -1472,6 +1474,7 @@ class MetadataController extends Controller {
                 $metadata = MetadataGeo::on('pgsql2')->find($mid);
                 $metadata->timestamps = false;
                 $metadata->disahkan = 'no';
+                $metadata->changedate = date("Y-m-d H:i:s");
                 $metadata->update();
 
                 $ftestxml2 = <<<XML
@@ -1504,6 +1507,7 @@ class MetadataController extends Controller {
             $metadata = MetadataGeo::on('pgsql2')->find($_POST['metadata_id']);
             $metadata->timestamps = false;
             $metadata->disahkan = 'no';
+            $metadata->changedate = date("Y-m-d H:i:s");
             $metadata->update();
 
             $ftestxml2 = <<<XML

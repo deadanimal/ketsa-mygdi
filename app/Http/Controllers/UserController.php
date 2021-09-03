@@ -216,7 +216,7 @@ class UserController extends Controller {
         if(Auth::user()->hasRole(['Pengesah Metadata'])){
             $hasUnattended = $this->checkUnattendedMetadata();
             if($hasUnattended > 0){
-                $request->session()->put('message', 'Ade metadata yg blom check lg la');
+                \Session::flash('warning','Ade '.$hasUnattended.' metadata yg blom check lg');
             }
         }
         
@@ -236,8 +236,8 @@ class UserController extends Controller {
     
     function checkUnattendedMetadata(){
         $query = MetadataGeo::on('pgsql2')->where('disahkan','0');
-        $lastTwoWeeks = date('Y-m-d', strtotime("+2 weeks"));
-        $result = $query->whereDate('createdate',$lastTwoWeeks)->get();
+        $lastTwoWeeks = date('Y-m-d', strtotime("-2 weeks"));
+        $result = $query->whereDate('createdate','<',$lastTwoWeeks)->get();
         return count($result);
     }
 
