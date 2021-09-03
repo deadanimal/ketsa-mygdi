@@ -100,7 +100,7 @@
         .bgland {
             width: 100%;
             min-height: 100vh;
-            background: url("../assetsweb/img/bg4.png") top right no-repeat;
+            background: url("./assetsweb/img/bg4.png") top right no-repeat;
             background-size: cover;
             position: relative;
         }
@@ -291,8 +291,8 @@
                                 <div class="copyright text-xl-right text-light"> Sebarang pertanyaan, boleh menghubungi:
                                     <br>
                                     <br>
-                                    <i class="fas fa-envelope"></i> {{$portal->email_admin}}
-                                    <br> Masa Operasi: {{$portal->operation_time}}
+                                    <i class="fas fa-envelope"></i> {{$portal->email_admin ?? ''}}
+                                    <br> Masa Operasi: {{$portal->operation_time ?? ''}}
                                 </div>
                             </div>
                         </div>

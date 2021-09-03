@@ -140,19 +140,19 @@
                                                             </span>
                                                             <div class="ml-3 mt-2">
                                                                 <div class="custom-control custom-radio mb-3 2_g2g_agensiPersNeg">
-                                                                    <input class="custom-control-input" id="agensiPersNeg" name="perananSelect" type="radio" value="2_g2g_agensiPersNeg" />
+                                                                    <input class="custom-control-input" id="agensiPersNeg" name="perananSelect" type="radio" value="Agensi Persekutuan/Agensi Negeri" />
                                                                     <label class="custom-control-label" for="agensiPersNeg">
                                                                         Agensi Persekutuan/Agensi Negeri
                                                                     </label>
                                                                 </div>
                                                                 <div class="custom-control custom-radio mb-3 2_g2g_badanBerkanun">
-                                                                    <input class="custom-control-input" id="badanBerkanun" name="perananSelect" type="radio" value="2_g2g_badanBerkanun" />
+                                                                    <input class="custom-control-input" id="badanBerkanun" name="perananSelect" type="radio" value="Badan Berkanun" />
                                                                     <label class="custom-control-label" for="badanBerkanun">
                                                                         Badan Berkanun
                                                                     </label>
                                                                 </div>
                                                                 <div class=" custom-control custom-radio mb-3 2_glc">
-                                                                    <input class="custom-control-input" id="glc" name="perananSelect" type="radio" value="2_glc" />
+                                                                    <input class="custom-control-input" id="glc" name="perananSelect" type="radio" value="GLC" />
                                                                     <label class="custom-control-label" for="glc">
                                                                         GLC
                                                                     </label>
@@ -171,25 +171,25 @@
                                                         </span>
                                                         <div class="ml-3 mt-2 divthird" id="divthird">
                                                             <div class=" custom-control custom-radio mb-3 2_g2e_iptaSyarahSelidik">
-                                                                <input class="custom-control-input" id="iptaSyarahSelidik" name="perananSelect" type="radio" value="2_g2e_iptaSyarahSelidik" />
+                                                                <input class="custom-control-input" id="iptaSyarahSelidik" name="perananSelect" type="radio" value="IPTA - Pensyarah/Penyelidik" />
                                                                 <label class="custom-control-label" for="iptaSyarahSelidik">
                                                                     IPTA - Pensyarah/Penyelidik
                                                                 </label>
                                                             </div>
                                                             <div class="custom-control custom-radio mb-3 2_g2e_iptaPelajar">
-                                                                <input class="custom-control-input" id="iptaPelajar" name="perananSelect" type="radio" value="2_g2e_iptaPelajar" />
+                                                                <input class="custom-control-input" id="iptaPelajar" name="perananSelect" type="radio" value="IPTA - Pelajar" />
                                                                 <label class="custom-control-label" for="iptaPelajar">
                                                                     IPTA - Pelajar
                                                                 </label>
                                                             </div>
                                                             <div class=" custom-control custom-radio mb-3 2_g2e_iptsSyarahSelidik">
-                                                                <input class="custom-control-input" id="iptsSyarahSelidik" name="perananSelect" type="radio" value="2_g2e_iptsSyarahSelidik" />
+                                                                <input class="custom-control-input" id="iptsSyarahSelidik" name="perananSelect" type="radio" value="IPTS - Pensyarah/Penyelidik" />
                                                                 <label class="custom-control-label" for="iptsSyarahSelidik">
                                                                     IPTS - Pensyarah/Penyelidik
                                                                 </label>
                                                             </div>
                                                             <div class=" custom-control custom-radio mb-3 2_g2e_iptsPelajar">
-                                                                <input class="custom-control-input" id="iptsPelajar" name="perananSelect" type="radio" value="2_g2e_iptsPelajar" />
+                                                                <input class="custom-control-input" id="iptsPelajar" name="perananSelect" type="radio" value="IPTS - Pelajar" />
                                                                 <label class="custom-control-label" for="iptsPelajar">
                                                                     IPTS - Pelajar
                                                                 </label>
@@ -331,13 +331,13 @@
                                                 <div class="col-6">
                                                     <input type="hidden" name="kategori" id="hiddenKategori">
                                                     <select name="kategoriPemohonData" id="kategoriPemohonData" class="form-control form-control-sm ml-3 peranan">
-                                                        <option value="2_g2g_agensiPersNeg">G2G - Agensi Persekutuan/Agensi Negeri</option>
-                                                        <option value="2_g2g_badanBerkanun">G2G - Badan Berkanun</option>
-                                                        <option value="2_glc">G2G - GLC</option>
-                                                        <option value="2_g2e_iptaSyarahSelidik">G2E - IPTA - Pensyarah/Penyelidik</option>
-                                                        <option value="2_g2e_iptaPelajar">G2E - Pelajar</option>
-                                                        <option value="2_g2e_iptsSyarahSelidik">G2E - Pensyarah/Penyelidik</option>
-                                                        <option value="2_g2e_iptsPelajar">G2E - Pelajar</option>
+                                                        <option value="Agensi Persekutuan/Agensi Negeri">G2G - Agensi Persekutuan/Agensi Negeri</option>
+                                                        <option value="Badan Berkanun">G2G - Badan Berkanun</option>
+                                                        <option value="GLC">G2G - GLC</option>
+                                                        <option value="IPTA - Pensyarah/Penyelidik">G2E - IPTA - Pensyarah/Penyelidik</option>
+                                                        <option value="IPTA - Pelajar">G2E - Pelajar</option>
+                                                        <option value="IPTS - Pensyarah/Penyelidik">G2E - Pensyarah/Penyelidik</option>
+                                                        <option value="IPTS - Pelajar">G2E - Pelajar</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -566,7 +566,7 @@
             $(".btn_isi_borang").show();
             $(".divsecond").show();
             $(".divthird").show();
-        } else if (per == "2_g2g_agensiPersNeg" || per == "2_g2g_badanBerkanun" || per == "2_glc") {
+        } else if (per == "Agensi Persekutuan/Agensi Negeri" || per == "Badan Berkanun" || per == "GLC") {
             $(".divNama").show();
             $(".divNric").show();
             $(".divInstitusi").show();
@@ -588,7 +588,7 @@
             $('.btn_isi_borang').show();
             $("#hiddenKategori").val(per);
             $("#kategoriPemohonData").val(per).change().prop('disabled','disabled').show();
-        } else if (per == "2_g2e_iptaSyarahSelidik" || per == "2_g2e_iptaPelajar" || per == "2_g2e_iptsSyarahSelidik" || per == "2_g2e_iptsPelajar") {
+        } else if (per == "IPTA - Pensyarah/Penyelidik" || per == "IPTA - Pelajar" || per == "IPTS - Pensyarah/Penyelidik" || per == "IPTS - Pelajar") {
             $(".divNama").show();
             $(".divNric").show();
             $(".divInstitusi").show();

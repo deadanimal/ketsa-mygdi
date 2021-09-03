@@ -427,9 +427,9 @@
                             <i class="icofont-google-map"></i>
                             <h4>Lokasi</h4>
                             <p> <span style="font-weight: bold; font-size: medium;">
-                                    {!! $portal->name !!}
+                                {!! (isset($portal->name) ? $portal->name:"") !!}
                                 </span><br>
-                                {!! $portal->address !!}
+                            {!! (isset($portal->address) ? $portal->address:"") !!}
                             </p>
                         </div>
                     </div>
@@ -439,14 +439,14 @@
                         <div class="email mt-0">
                             <i class="icofont-envelope"></i>
                             <h4>Emel</h4>
-                            <p>{!! $portal->email_admin !!}</p>
+                        <p>{!! (isset($portal->email_admin) ? $portal->email_admin:"") !!}</p>
                         </div>
                     </div>
                     <div class="info">
                         <div class="phone">
                             <i class="icofont-phone"></i>
                             <h4>Hubungi</h4>
-                            <p>{{ $portal->contact }}</p>
+                        <p>{{ (isset($portal->contact) ? $portal->contact:"") }}</p>
                         </div>
                     </div>
                 </div>
@@ -462,8 +462,7 @@
         $(document).ready(function() {
             <?php
         if(Session::has('message')){
-            ?>alert("{{ Session::get('message') }}");
-            <?php
+            ?>alert("{{ Session::get('message') }}");<?php
         }
         ?>
             $(document).on("click", ".aUmum", function() {

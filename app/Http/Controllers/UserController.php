@@ -213,6 +213,13 @@ class UserController extends Controller {
 //            }
 //        }
 //        exit();
+        if(Auth::user()->hasRole(['Pengesah Metadata'])){
+            $hasUnattended = $this->checkUnattendedMetadata();
+            if($hasUnattended > 0){
+                \Session::flash('warning','Ade '.$hasUnattended.' metadata yg blom check lg');
+            }
+        }
+        
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
 
@@ -224,8 +231,14 @@ class UserController extends Controller {
             \Session::flash('warning','Anda perlu membuat penilaian kepada permohonan terbaru');
             return view('mygeo.profile.profil', compact('user'));
         }
-
         }
+    }
+
+    function checkUnattendedMetadata(){
+        $query = MetadataGeo::on('pgsql2')->where('disahkan','0');
+        $lastTwoWeeks = date('Y-m-d', strtotime("-2 weeks"));
+        $result = $query->whereDate('createdate','<',$lastTwoWeeks)->get();
+        return count($result);
     }
 
     public function edit(){
@@ -462,6 +475,7 @@ class UserController extends Controller {
             $nu->password = Hash::make($pass);
             $nu->status = '1';
             $nu->disahkan = '1';
+            $nu->assigned_roles = $request->peranan;
             $nu->save();
 
             $nu->assignRole($request->peranan);

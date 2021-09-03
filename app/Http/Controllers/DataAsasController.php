@@ -19,6 +19,8 @@ use Auth;
 use DB;
 use App\AuditTrail;
 use phpDocumentor\Reflection\Types\Null_;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
 
 class DataAsasController extends Controller
 {
@@ -277,6 +279,17 @@ class DataAsasController extends Controller
         Mohondata::where(["id" => $request->permohonan_id])->update([
             "status" => $request->status = 3,
         ]);
+
+            $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
+            
+            //send email to pemohon data
+            $to_name = $pemohon->users->name;
+            $to_email = $pemohon->users->email;
+            $data = array('cat'=>'cat');
+            Mail::send("mails.exmpl15", $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
+                $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+            });
 
         $at = new AuditTrail();
         $at->path = url()->full();
@@ -643,6 +656,27 @@ class DataAsasController extends Controller
                     "assign_admin" => $request->assign_admin,
                 ]);
 
+                $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
+                
+                if($request->status == '1'){ //lulus
+                    $mail = "mails.exmpl13";
+                    $subject = "MyGeo Explorer - Permohonan Diluluskan";
+                }elseif($request->status == '2'){ //tolak
+                    $mail = "mails.exmpl14";
+                    $subject = "MyGeo Explorer - Permohonan Ditolak";
+                }
+                
+                if($request->status != '0'){
+                    //send email to pemohon data
+                    $to_name = $pemohon->users->name;
+                    $to_email = $pemohon->users->email;
+                    $data = array('catatan'=>$request->catatan);
+                    Mail::send($mail, $data, function($message) use ($to_name, $to_email, $subject) {
+                        $message->to($to_email, $to_name)->subject($subject);
+                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                    });
+                }
+
                 $at = new AuditTrail();
                 $at->path = url()->full();
                 $at->user_id = Auth::user()->id;
@@ -666,7 +700,7 @@ class DataAsasController extends Controller
                 $at->data = 'Update';
                 $at->save();
             });
-            return redirect('mohon_data')->with('success', 'Draf Permohonan Berjaya Disimpan');
+            return redirect('mohon_data')->with('success', 'Permohonan disimpan sebagai draf');
         }
 
     }
@@ -690,28 +724,34 @@ class DataAsasController extends Controller
 
         $id = $request->permohonan_id;
         // dd($valid,$validfile);
-
-        if($valid->isNotEmpty() && $validfile->isNotEmpty())
-        {
-
-            if($valid_akuan_pelajar->isEmpty()){
-
+        if((Auth::user()->kategori == 'IPTA - Pelajar' || Auth::user()->kategori == 'IPTS - Pelajar') && $valid_akuan_pelajar->isEmpty()){
                 return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang Akuan Pelajar');
-            }
-            else {
-
+        }elseif($valid->isNotEmpty() && $validfile->isNotEmpty()){
                 MohonData::where(["id" => $request->permohonan_id])->update([
                     "dihantar" => $request->dihantar = 1,
                 ]);
-                return redirect('mohon_data')->with('success', 'Permohonan anda berjaya dihantar');
-            }
 
+            $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
+            
+            //get pentadbir data
+            $pentadbir = User::where('assigned_roles','LIKE','%Pentadbir Data%')->get();
+            if(isset($pentadbir) && count($pentadbir) > 0){
+                foreach($pentadbir as $p){
+                    //send email to pentadbir data
+                    $to_name = $p->name;
+                    $to_email = $p->email;
+                    $data = array('nama_pemohon'=>$pemohon->users->name);
+                    Mail::send('mails.exmpl12', $data, function($message) use ($to_name, $to_email, $pemohon) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  ('.$pemohon->users->name.')');
+                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                    });
         }
-        else {
+        }
+
+            return redirect('mohon_data')->with('success', 'Permohonan anda berjaya dihantar');
+        } else {
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Permohonan Anda');
-        }
-
-
+    }
     }
 
     public function store_permohonan_baru(Request $request)
@@ -742,7 +782,7 @@ class DataAsasController extends Controller
         $surat->permohonan_id = $request->permohonan_id = $mdata->id;
         $surat->save();
 
-        if($user->kategori == '2_g2e_iptsPelajar' || $user->kategori == '2_g2e_iptaPelajar'){
+        if($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar'){
             $akuan_pelajar = new AkuanPelajar();
             $akuan_pelajar->permohonan_id = $request->permohonan_id = $mdata->id;
             $akuan_pelajar->save();
@@ -845,7 +885,7 @@ class DataAsasController extends Controller
         SuratBalasan::where(["id" => $request->permohonan_id])->delete();
         ProsesData::where(["id" => $request->permohonan_id])->delete();
 
-        if($user->kategori == '2_g2e_iptsPelajar' || $user->kategori == '2_g2e_iptaPelajar'){
+        if($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar'){
             AkuanPelajar::where(["id" => $request->permohonan_id])->delete();
         }
 

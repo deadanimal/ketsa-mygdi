@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
 use App\AuditTrail;
 use App\Pengumuman;
+use PDF;
 
 class MetadataController extends Controller {
 
@@ -93,23 +94,74 @@ class MetadataController extends Controller {
         return User::where('id',$user_id)->get()->first();
     }
 
-    public function index_nologin() {
+    public function index_nologin(Request $request) {
+        $metadatas = $metadatasdb = [];
+        $carian = isset($request->carian) ? $request->carian:"";
+        $query = MetadataGeo::on('pgsql2');
+        
+        $params = [];
+        
+        if(isset($carian) && trim($carian) != ""){            
+            $query = $query->where('data', 'ilike', '%' . $carian . '%');
+        }
+
+        if(isset($request->content_type)){
+            $params['content_type'] = $request->content_type;
+            $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
+        }
+        if(isset($request->topic_category)){
+            $params['topic_category'] = [];
+            foreach($request->topic_category as $tc){
+                $query = $query->orWhere('data', 'ilike', '%' . $tc . '%');
+                $params['topic_category'][] = $tc;
+            }
+        }
+        if(isset($request->tarikh_mula)){
+            $params['tarikh_mula'] = $request->tarikh_mula;
+            $query = $query->where('createdate', '>=', date('Y-m-d',strtotime($request->tarikh_mula)));
+        }
+        if(isset($request->tarikh_tamat)){
+            $params['tarikh_tamat'] = $request->tarikh_tamat;
+            $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
+        }
+            
+        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
+        
         $metadatas = [];
-        /*
-          $metadatasdb = MetadataGeo::on('pgsql2')->where('disahkan','yes')->orderBy('id', 'DESC')->get()->all();
-          foreach($metadatasdb as $met){
+        foreach ($metadatasdb as $met) {
           $ftestxml2 = <<<XML
           $met->data
           XML;
-          $ftestxml2 = str_replace("gco:","",$ftestxml2);
-          $ftestxml2 = str_replace("gmd:","",$ftestxml2);
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
           $xml2 = simplexml_load_string($ftestxml2);
-          $metadatas[$met->id]=$xml2;
+            $metadatas[$met->id] = $xml2;
           }
          */
         $portal = PortalTetapan::get()->first();
 
-        return view('senarai_metadata_nologin', compact('metadatas','portal'));
+        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian','params','portal'));
+    }
+
+    public function findMetadataByName(Request $request){
+        $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . $request->carian . '%')->where('disahkan','yes')->orderBy('id', 'DESC')->get()->all();
+        $metadatas = [];
+        foreach ($metadatasdb as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            $xml2 = simplexml_load_string($ftestxml2);
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != "" && stripos(trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString),strval($request->carian)) !== false){
+                $metadatas[$met->id] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+            }
+        }
+        echo json_encode($metadatas);exit();
     }
 
     public function senarai_pengesahan_metadata() {
@@ -182,7 +234,8 @@ class MetadataController extends Controller {
         if(isset($request->tarikh_tamat)){
             $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
         }
-        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
+//        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get()->all();
+        $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
 
 
         $metadatas = [];
@@ -199,7 +252,7 @@ class MetadataController extends Controller {
         }
 
         $portal = PortalTetapan::get()->first();
-        return view('senarai_metadata_nologin', compact('metadatas','portal'));
+        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','portal'));
     }
 
     public function create() {
@@ -373,6 +426,54 @@ class MetadataController extends Controller {
         return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched','portal'));
     }
 
+    public function downloadMetadataPdf($id) {
+        ini_set('max_execution_time', '1000');
+        set_time_limit(1000);
+        $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();
+
+        $ftestxml2 = <<<XML
+                $metadataSearched->data
+                XML;
+        $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+        $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+        $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+        $metadataxml = simplexml_load_string($ftestxml2);
+
+        if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
+            App::setLocale(trim($metadataxml->language->CharacterString));
+        }
+
+        $categories = MCategory::all();
+        $contacts = User::all();
+        $states = States::where(['country' => 1])->get()->all();
+        $countryId = "";
+        if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString != ""){
+            $countryId = trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString);
+        }
+        if($countryId != ""){
+            $countries = Countries::where(['id' => $countryId])->get()->first();
+        }else{
+            $countries = Countries::where(['id' => 1])->get()->first();
+        }
+
+        if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && trim($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) != ""){
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
+            $refSys = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+        }else{
+            $refSys = [];
+        }
+
+        $html = view('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->render();
+        $pdf = \App::make('dompdf.wrapper')->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf->loadHTML($html);
+        return $pdf->stream();
+        
+//        $pdf = PDF::loadView('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->setOptions(['defaultFont' => 'sans-serif']);
+        
+//        return $pdf->download('disney.pdf');
+    }
+
     public function show_xml_nologin(Request $request) {
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $request->metadata_id)->get()->first();
         $ftestxml2 = <<<XML
@@ -380,6 +481,21 @@ class MetadataController extends Controller {
                 XML;
 
         return response($ftestxml2)->withHeaders(['Content-Type' => 'text/xml']);
+    }
+
+    public function downloadMetadataXml($id) {
+        $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();
+        $ftestxml2 = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'.PHP_EOL.<<<XML
+                $metadataSearched->data
+                XML;
+
+        $response = response($ftestxml2);
+        $response->header('Content-Type', 'text/xml');
+        $response->header('Cache-Control', 'public');
+        $response->header('Content-Description', 'File Transfer');
+        $response->header('Content-Disposition', 'attachment; filename=ftestxml.xml');
+        $response->header('Content-Transfer-Encoding', 'binary');
+        return $response;
     }
 
     public function messages() {
@@ -1200,6 +1316,10 @@ class MetadataController extends Controller {
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                    $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                 }
+                $abstract = "";
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+                   $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
+                }
 
                 $user = User::where("id",$metadata->portal_user_id)->get()->first();
                 if(!empty($user)){
@@ -1215,10 +1335,10 @@ class MetadataController extends Controller {
 
                 //create new pengumuman about the new metadata
                 $pengumuman = new Pengumuman();
-                $pengumuman->title = 'Metadata Baharu: '.$metadataName;
+                $pengumuman->title = $metadataName;
                 $pengumuman->date = date('Y-m-d H:i:s',time());
                 $pengumuman->kategori = 'Metadata Baharu';
-                $pengumuman->content = 'Metadata Baharu telah diterbitkan bertajuk '.$metadataName;
+                $pengumuman->content = 'Abstract: '.$abstract;
                 $pengumuman->gambar = "banner2.jpeg";
                 $pengumuman->save();
 
@@ -1250,6 +1370,7 @@ class MetadataController extends Controller {
             foreach ($_POST['metadata_id'] as $mid) {
                 $metadata = MetadataGeo::on('pgsql2')->find($mid);
                 $metadata->timestamps = false;
+                $metadata->changedate = date("Y-m-d H:i:s");
                 $metadata->disahkan = 'yes';
                 $metadata->update();
 
@@ -1263,16 +1384,20 @@ class MetadataController extends Controller {
                 $metadataxml = simplexml_load_string($ftestxml2);
 
                 $metadataName = "";
-                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                   $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                }
+                $abstract = "";
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+                   $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
                 }
 
                 //create new pengumuman about the new metadata
                 $pengumuman = new Pengumuman();
-                $pengumuman->title = 'Metadata Baharu: '.$metadataName;
+                $pengumuman->title = $metadataName;
                 $pengumuman->date = date('Y-m-d H:i:s',time());
                 $pengumuman->kategori = 'Metadata Baharu';
-                $pengumuman->content = 'Metadata Baharu telah diterbitkan bertajuk '.$metadataName;
+                $pengumuman->content = 'Abstract: '.$abstract;
                 $pengumuman->gambar = "banner2.jpeg";
                 $pengumuman->save();
 
@@ -1292,6 +1417,7 @@ class MetadataController extends Controller {
             $metadata = MetadataGeo::on('pgsql2')->find($_POST['metadata_id']);
             $metadata->timestamps = false;
             $metadata->disahkan = 'yes';
+            $metadata->changedate = date("Y-m-d H:i:s");
             $metadata->update();
 
             $ftestxml2 = <<<XML
@@ -1304,8 +1430,12 @@ class MetadataController extends Controller {
             $metadataxml = simplexml_load_string($ftestxml2);
 
             $metadataName = "";
-            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-               $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+            if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+               $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+            }
+            $abstract = "";
+            if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+               $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
             }
 
             $user = User::where("id",$metadata->portal_user_id)->get()->first();
@@ -1322,10 +1452,10 @@ class MetadataController extends Controller {
 
             //create new pengumuman about the new metadata
             $pengumuman = new Pengumuman();
-            $pengumuman->title = 'Metadata Baharu: '.$metadataName;
+            $pengumuman->title = $metadataName;
             $pengumuman->date = date('Y-m-d H:i:s',time());
             $pengumuman->kategori = 'Metadata Baharu';
-            $pengumuman->content = 'Metadata Baharu telah diterbitkan bertajuk '.$metadataName;
+            $pengumuman->content = 'Abstract: '.$abstract;
             $pengumuman->gambar = "banner2.jpeg";
             $pengumuman->save();
         }
@@ -1349,6 +1479,7 @@ class MetadataController extends Controller {
                 $metadata = MetadataGeo::on('pgsql2')->find($mid);
                 $metadata->timestamps = false;
                 $metadata->disahkan = 'no';
+                $metadata->changedate = date("Y-m-d H:i:s");
                 $metadata->update();
 
                 $ftestxml2 = <<<XML
@@ -1381,6 +1512,7 @@ class MetadataController extends Controller {
             $metadata = MetadataGeo::on('pgsql2')->find($_POST['metadata_id']);
             $metadata->timestamps = false;
             $metadata->disahkan = 'no';
+            $metadata->changedate = date("Y-m-d H:i:s");
             $metadata->update();
 
             $ftestxml2 = <<<XML

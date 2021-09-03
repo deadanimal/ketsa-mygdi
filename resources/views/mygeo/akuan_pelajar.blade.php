@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="card-body p-4">
-                                <form action="/simpan_akuan_pelajar" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('simpan_akuan_pelajar') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
 
                                     <h3 class="text-center">AKUAN PELAJAR</h3>
@@ -77,7 +77,7 @@
                                             bertandatangan di bawah ini, sebagai
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
-                                                name="agensi_organisasi" disabled>{{ $pemohon->users->agensiOrganisasi->name }}, {{ $pemohon->users->alamat }}
+                                                name="agensi_organisasi" disabled>{{ $pemohon->users->agensi_organisasi }}, {{ $pemohon->users->alamat }}
                                                              </textarea>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)

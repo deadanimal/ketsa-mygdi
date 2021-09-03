@@ -503,16 +503,12 @@ class PortalController extends Controller
 
     // ==================================== Tetapan Portal (Hubungi Kami, Emel Pentadbir, Masa Operasi)========================================
 
-
     public function show_portal_tetapan(){
-
         $portal = PortalTetapan::get()->first();
-
         return view('mygeo.pengurusan_portal.portal_tetapan', compact('portal'));
     }
 
     public function update_portal_tetapan(Request $request){
-
         PortalTetapan::where(["id" => $request->id_portal])->update([
             "name" => $request->nama_lokasi,
             "address" => $request->alamat,
@@ -520,9 +516,6 @@ class PortalController extends Controller
             "contact" => $request->contact,
             "operation_time" => $request->masa_operasi,
         ]);
-
         return redirect('portal_tetapan')->with('success','Maklumat Portal Telah Disimpan');
     }
-
-
 }
