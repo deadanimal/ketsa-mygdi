@@ -469,8 +469,6 @@
                                 <option value="Salinan Kad Pengenalan">Salinan Kad Pengenalan (Wakil Agensi/Pelajar)</option>
                                 <option value="Borang PPNM">Borang PPNM (Wakil Agensi/Pelajar)</option>
                                 <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
-                                <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
-                                <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
                             </select>
                         </div>
                         <input type="file" name="file" class="form-control">

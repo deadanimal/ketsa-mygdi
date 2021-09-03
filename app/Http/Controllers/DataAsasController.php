@@ -693,20 +693,23 @@ class DataAsasController extends Controller
 
         if($valid->isNotEmpty() && $validfile->isNotEmpty())
         {
-            MohonData::where(["id" => $request->permohonan_id])->update([
-                "dihantar" => $request->dihantar = 1,
-            ]);
-            return redirect('mohon_data')->with('success', 'Permohonan anda berjaya dihantar');
+
+            if($valid_akuan_pelajar->isEmpty()){
+
+                return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang Akuan Pelajar');
+            }
+            else {
+
+                MohonData::where(["id" => $request->permohonan_id])->update([
+                    "dihantar" => $request->dihantar = 1,
+                ]);
+                return redirect('mohon_data')->with('success', 'Permohonan anda berjaya dihantar');
+            }
 
         }
         else {
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Permohonan Anda');
         }
-
-        if($valid_akuan_pelajar->isEmpty()){
-            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang Akuan Pelajar');
-        }
-
 
 
     }
