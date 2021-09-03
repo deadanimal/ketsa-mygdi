@@ -284,7 +284,7 @@
                             <div class="col-xl-4">
                                 <div class="copyright text-center text-light mt-2"> Jumlah Pelawat:
                                     <br>
-                                    <span class="badge badge-custom badge-pill mt-1">1,098,034</span>
+                                    <span class="badge badge-custom badge-pill mt-1">{{ count($total_visitors) }}</span>
                                 </div>
                             </div>
                             <div class="col-xl-4">
