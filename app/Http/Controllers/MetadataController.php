@@ -374,7 +374,7 @@ class MetadataController extends Controller {
         }else{
             $countrySelected = Countries::where(['id' => 1])->get()->first();
         }
-        
+
         $refSys = ReferenceSystemIdentifier::all();
         if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != ""){
             $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
@@ -425,7 +425,7 @@ class MetadataController extends Controller {
         $portal = PortalTetapan::get()->first();
         return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched','portal'));
     }
-    
+
     public function downloadMetadataPdf($id) {
         ini_set('max_execution_time', '1000');
         set_time_limit(1000);
@@ -498,6 +498,21 @@ class MetadataController extends Controller {
         return $response;
     }
 
+    public function downloadMetadataXml($id) {
+        $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();
+        $ftestxml2 = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'.PHP_EOL.<<<XML
+                $metadataSearched->data
+                XML;
+
+        $response = response($ftestxml2);
+        $response->header('Content-Type', 'text/xml');
+        $response->header('Cache-Control', 'public');
+        $response->header('Content-Description', 'File Transfer');
+        $response->header('Content-Disposition', 'attachment; filename=ftestxml.xml');
+        $response->header('Content-Transfer-Encoding', 'binary');
+        return $response;
+    }
+
     public function messages() {
         return [
             'c2_metadataName.required' => 'ftest1test1',
@@ -537,7 +552,7 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
         ];
-        
+
         if(strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application'){
             $fields["c10_file_url"]= 'required';
         }
@@ -643,7 +658,7 @@ class MetadataController extends Controller {
             $fields["abstractVectorData_statusData"]= 'required';
         }
         */
-        
+
         $customMsg = [
             "c1_content_info.required" => 'Content Information required',
             "publisher_name.required" => 'Publisher Name required',
@@ -982,8 +997,8 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
         ];
-        
-          
+
+
         if(strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application'){
             $fields["c10_file_url"]= 'required';
         }
@@ -1089,7 +1104,7 @@ class MetadataController extends Controller {
             $fields["abstractVectorData_statusData"]= 'required';
         }
         */
-        
+
         $customMsg = [
             "c1_content_info.required" => 'Content Information required',
             "publisher_name.required" => 'Publisher Name required',

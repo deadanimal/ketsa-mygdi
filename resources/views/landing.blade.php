@@ -178,44 +178,46 @@
                 <p class="text-bl">Selamat Datang ke</p>
                 <h1><span class="typed" data-typed-items="MyGeo Explorer"></span></h1>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div id="demo" class="carousel slide mb-2" data-ride="carousel">
-                    <?php
+            <div class="row">
+                <div class="col-12">
+                    <div id="demo" class="carousel slide mb-2" data-ride="carousel">
+                        <?php
                     $bil = 0;
                     $bil2 = 0;
                     if (count($pengumuman) > 0) { ?>
                         <ul class="carousel-indicators">
                             <?php foreach ($pengumuman as $umum) { ?>
-                                <li data-target="#demo" data-slide-to="{{ $bil }}"></li>
+                            <li data-target="#demo" data-slide-to="{{ $bil }}"></li>
                             <?php $bil++;
                                 } ?>
                         </ul>
 
                         <div class="carousel-inner">
                             <?php foreach ($pengumuman as $umum) { ?>
-                                <div class="carousel-item <?php if ($bil2 == 0) {
-                                                                        echo 'active';
-                                                                    } ?>">
-                                    <form id="form_umum_{{ $umum->id }}" method="post" action="{{ url('/tunjuk_pengumuman') }}">
-                                        @csrf
-                                        <input type="hidden" name="umum_id" value="{{ $umum->id }}">
-                                        <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
-                                            <?php if ($bil2 % 2 == 1) { ?> <img src="{{ url('assetsweb/img/banner1.jpeg') }}" alt="{{ $bil2 }}"> <?php } ?>
-                                            <?php if ($bil2 % 2 == 0) { ?> <img src="{{ url('assetsweb/img/banner2.jpeg') }}" alt="{{ $bil2 }}"> <?php } ?>
-                                            <div class="carousel-caption">
-                                                <h2 class="text-caps text-white">
-                                                    <?php echo date('j M Y', strtotime($umum->created_at)); ?>
-                                                </h2>
-                                                <p class="text-white text-bold">
-                                                    <?php echo $umum->kategori; ?>: <br>
-                                                    <?php echo $umum->title; ?>
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </form>
-                                </div>
+                            <div class="carousel-item <?php if ($bil2 == 0) {
+    echo 'active';
+} ?>">
+                                <form id="form_umum_{{ $umum->id }}" method="post"
+                                    action="{{ url('/tunjuk_pengumuman') }}">
+                                    @csrf
+                                    <input type="hidden" name="umum_id" value="{{ $umum->id }}">
+                                    <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
+                                        <?php if ($bil2 % 2 == 1) { ?> <img src="{{ url('assetsweb/img/banner1.jpeg') }}"
+                                            alt="{{ $bil2 }}"> <?php } ?>
+                                        <?php if ($bil2 % 2 == 0) { ?> <img src="{{ url('assetsweb/img/banner2.jpeg') }}"
+                                            alt="{{ $bil2 }}"> <?php } ?>
+                                        <div class="carousel-caption">
+                                            <h2 class="text-caps text-white">
+                                                <?php echo date('j M Y', strtotime($umum->created_at)); ?>
+                                            </h2>
+                                            <p class="text-white text-bold">
+                                                <?php echo $umum->kategori; ?>: <br>
+                                                <?php echo $umum->title; ?>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </form>
+                            </div>
                             <?php $bil2++;
                                 } ?>
                         </div>
@@ -227,121 +229,129 @@
                         </a>
 
                         <!-- <form id="form_umum_{{ $umum->id }}" method="post" action="{{ url('/tunjuk_pengumuman') }}">
-                            @csrf
-                            <input type="hidden" name="umum_id" value="{{ $umum->id }}">
-                            <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
-                                <span style="color: #252525;">
-                                    <?php echo date('j M Y', strtotime($umum->created_at)); ?>
-                                </span>
-                                <p class="text-black">
-                                    <?php echo $umum->kategori; ?>: <br>
-                                    <?php echo $umum->title; ?>
-                                </p>
-                            </a>
-                        </form> -->
-                    <?php
+                                @csrf
+                                <input type="hidden" name="umum_id" value="{{ $umum->id }}">
+                                <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
+                                    <span style="color: #252525;">
+                                        <?php echo date('j M Y', strtotime($umum->created_at)); ?>
+                                    </span>
+                                    <p class="text-black">
+                                        <?php echo $umum->kategori; ?>: <br>
+                                        <?php echo $umum->title; ?>
+                                    </p>
+                                </a>
+                            </form> -->
+                        <?php
                     }
                     ?>
+                    </div>
+                    <a class="text-yellow float-right mr-2" style="font-weight: 600;"
+                        href="{{ url('/senarai_pengumuman') }}">PAPAR SEMUA >&gt;</a>
                 </div>
-                <a class="text-yellow float-right mr-2" style="font-weight: 600;" href="{{ url('/senarai_pengumuman') }}">PAPAR SEMUA >&gt;</a>
             </div>
         </div>
-    </div>
-    </div>
-</section>
-
-
-<section id="home2" class="d-flex flex-column justify-content-center">
-    <div class="container-fluid" data-aos="fade-up">
-        <div class="section-title">
-            <h2>Carian Metadata</h2>
         </div>
-        <div class="row pl-lg-7">
-            <div class="col-lg-12">
-                <div class="row mt-0 pt-0">
-                    <div class="col-12 form-inline justify-content-center">
-                        <form method="post" class="navbar-search navbar-search-light form-inline my-4 justify-content-center" action="{{url('carian_metadata_nologin')}}" id="form_carian">
-                            @csrf
-                            @include('modal_carian_tambahan')
-                            <div class="form-inline mb-0">
-                                <div class="input-group input-group-alternative input-group-merge" style="background-image: linear-gradient(to right, #ebba16, #ed8a19);">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-search"></i>
-                                        </span>
+    </section>
+
+
+    <section id="home2" class="d-flex flex-column justify-content-center">
+        <div class="container-fluid" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Carian Metadata</h2>
+            </div>
+            <div class="row pl-lg-7">
+                <div class="col-lg-12">
+                    <div class="row mt-0 pt-0">
+                        <div class="col-12 form-inline justify-content-center">
+                            <form method="post"
+                                class="navbar-search navbar-search-light form-inline my-4 justify-content-center"
+                                action="{{ url('carian_metadata_nologin') }}" id="form_carian">
+                                @csrf
+                                @include('modal_carian_tambahan')
+                                <div class="form-inline mb-0">
+                                    <div class="input-group input-group-alternative input-group-merge"
+                                        style="background-image: linear-gradient(to right, #ebba16, #ed8a19);">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                        <input placeholder="Carian..." type="text" name="carian" id="carian"
+                                            class="form-control" autocomplete="off">
                                     </div>
-                                    <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off">
                                 </div>
-                            </div>
-                            <button type="button" data-action="search-close" data-target="#navbar-search-main" aria-label="Close" class="close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </form>
-                        <a class="btn btn-success text-white text-center btn_cari_submit ml-3" style="cursor:pointer;">
-                            Cari
-                        </a>
+                                <button type="button" data-action="search-close" data-target="#navbar-search-main"
+                                    aria-label="Close" class="close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </form>
+                            <a class="btn btn-success text-white text-center btn_cari_submit ml-3" style="cursor:pointer;">
+                                Cari
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row my-2 mx-4">
-                    <div class="col-6">
-                        <a href="{{ url('senarai_metadata_nologin') }}">
-                            <div class="card fancy_card">
-                                <div class="card-body pointer form-inline" tabindex="0" ng-reflect-router-link="/metadata">
-                                    <img height="90" src="./afiqlogin_files/meta.png">
-                                    <h2 class="mx-auto mb-0">Metadata</h2>
+                    <div class="row my-2 mx-4">
+                        <div class="col-6">
+                            <a href="{{ url('senarai_metadata_nologin') }}">
+                                <div class="card fancy_card">
+                                    <div class="card-body pointer form-inline" tabindex="0"
+                                        ng-reflect-router-link="/metadata">
+                                        <img height="90" src="./afiqlogin_files/meta.png">
+                                        <h2 class="mx-auto mb-0">Metadata</h2>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <a href="{{ url('data_asas_landing') }}">
-                            <div class="card fancy_card">
-                                <div class="card-body pointer form-inline" tabindex="0" ng-reflect-router-link="/data-asas">
-                                    <img height="90" src="./afiqlogin_files/data.png">
-                                    <h2 class="mx-auto mb-0">Data Asas</h2>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="{{ url('data_asas_landing') }}">
+                                <div class="card fancy_card">
+                                    <div class="card-body pointer form-inline" tabindex="0"
+                                        ng-reflect-router-link="/data-asas">
+                                        <img height="90" src="./afiqlogin_files/data.png">
+                                        <h2 class="mx-auto mb-0">Data Asas</h2>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="about" class="bg-white">
-    <div class="container" data-aos="fade-up" style="min-height: 500px;">
+    <section id="about" class="bg-white">
+        <div class="container" data-aos="fade-up" style="min-height: 500px;">
 
-        <div class="section-title">
-            <h2>Mengenai MyGeo Explorer</h2>
-        </div>
-        <div class="row pb-7">
-            <div class="col-12">
-                <p align="center" class="my-4">
-                    MyGeo Explorer merupakan inisiatif Kerajaan untuk mengembangkan Infrastruktur Data Geospatial bagi
-                    meningkatkan kesedaran tentang ketersediaan data dan meningkatkan pautan akses ke maklumat
-                    geospatial dengan memudahkan perkongsian data di antara agensi yang mengambil bahagian.
-                    <br><br>
-                    MyGDI sebagai Infrastruktur Data Spatial Nasional (NSDI) untuk Malaysia, adalah infrastruktur data
-                    geospatial yang merangkumi teknologi, dasar, piawaian dan prosedur bagi agensi untuk menghasilkan
-                    dan berkongsi maklumat geospatial secara kerjasama.
-                    <br><br>
-                    MyGDI menyediakan dasar untuk eksplorasi, penilaian, dan aplikasi data geospatial untuk pengguna dan
-                    penyedia data dalam semua lapisan pemerintah, komersial, dan non-profit serta akademik dan
-                    masyarakat.
-                </p>
+            <div class="section-title">
+                <h2>Mengenai MyGeo Explorer</h2>
+            </div>
+            <div class="row pb-7">
+                <div class="col-12">
+                    <p align="center" class="my-4">
+                        MyGeo Explorer merupakan inisiatif Kerajaan untuk mengembangkan Infrastruktur Data Geospatial bagi
+                        meningkatkan kesedaran tentang ketersediaan data dan meningkatkan pautan akses ke maklumat
+                        geospatial dengan memudahkan perkongsian data di antara agensi yang mengambil bahagian.
+                        <br><br>
+                        MyGDI sebagai Infrastruktur Data Spatial Nasional (NSDI) untuk Malaysia, adalah infrastruktur data
+                        geospatial yang merangkumi teknologi, dasar, piawaian dan prosedur bagi agensi untuk menghasilkan
+                        dan berkongsi maklumat geospatial secara kerjasama.
+                        <br><br>
+                        MyGDI menyediakan dasar untuk eksplorasi, penilaian, dan aplikasi data geospatial untuk pengguna dan
+                        penyedia data dalam semua lapisan pemerintah, komersial, dan non-profit serta akademik dan
+                        masyarakat.
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section id="vidtuto" class="">
-    <div class="container" data-aos="fade-up" style="min-height: 500px;">
+        <div class="container" data-aos="fade-up" style="min-height: 500px;">
 
-        <div class="section-title">
+            <div class="section-title">
                 <h2>Video Tutorial</h2>
-        </div>
+            </div>
             <div class="row">
                 <div class="col text-center">
                     <iframe width="720" height="475" src="https://www.youtube.com/embed/I2P1zEBciq4?autoplay=1&mute=1&loop=1"
@@ -349,109 +359,113 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<section id="feedback" class="d-flex flex-column justify-content-center bg-white">
-    <div class="container-fluid pl-lg-7 pr-lg-5">
-        <div class="section-title">
-            <h2>Maklum Balas</h2>
-        </div>
-        <h2 class="text-center text-muted my-4">Anda perlukan sebarang bantuan atau pertanyaan?</h2>
-
-        <form method="POST" class="form-horizontal" action="{{url('simpan_maklum_balas')}}" id="form_maklum_balas" style="min-height: 300px;">
-            @csrf
-            <div class="pl-lg-6">
-                <div class="row mb-3">
-                    <div class="col-2"><label class="form-control-label ml-4"> Kategori </label>
-                    </div>
-                    <div class="col-9"><select name="kategori" class="form-control form-control-sm ml-3">
-                            <option selected disabled> Pilih Kategori </option>
-                            <option value="Metadata">Metadata</option>
-                            <option value="Data-data Asas">Permohonan Data-data Asas</option>
-                            <option value="Lain-lain">Lain-lain</option>
-                        </select></div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-2"><label for="input-feedback" class="form-control-label ml-4"> Pertanyaan </label>
-                    </div>
-                    <div class="col-9"><textarea name="pertanyaan" placeholder="Nyatakan maklum balas anda" type="text" rows="5" class="form-control form-control-sm ml-3"></textarea></div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-2"><label for="input-emel" class="form-control-label ml-4"> Emel Personal </label>
-                    </div>
-                    <div class="col-7">
-                        <input placeholder="Masukan E-mel anda" type="text" name="email" class="form-control form-control-sm ml-3">
-                    </div>
-                    <div class="col-2">
-                        <button type="submit" class="btn btn-primary float-right" id="btnHantar"><i class="fas fa-paper-plane mr-2"></i>Hantar</button>
-                    </div>
                 </div>
             </div>
-        </form>
-    </div>
-</section>
 
-<section id="contact" class="contact">
-    <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-            <h2>Hubungi Kami</h2>
         </div>
+    </section>
 
-        <div class="row pl-lg-7">
-            <div class="col-lg-6">
-                <div class="info">
-                    <div class="address">
-                        <i class="icofont-google-map"></i>
-                        <h4>Lokasi</h4>
-                        <p> <span style="font-weight: bold; font-size: medium;">
+    <section id="feedback" class="d-flex flex-column justify-content-center bg-white">
+        <div class="container-fluid pl-lg-7 pr-lg-5">
+            <div class="section-title">
+                <h2>Maklum Balas</h2>
+            </div>
+            <h2 class="text-center text-muted my-4">Anda perlukan sebarang bantuan atau pertanyaan?</h2>
+
+            <form method="POST" class="form-horizontal" action="{{ url('simpan_maklum_balas') }}" id="form_maklum_balas"
+                style="min-height: 300px;">
+                @csrf
+                <div class="pl-lg-6">
+                    <div class="row mb-3">
+                        <div class="col-2"><label class="form-control-label ml-4"> Kategori </label>
+                        </div>
+                        <div class="col-9"><select name="kategori" class="form-control form-control-sm ml-3">
+                                <option selected disabled> Pilih Kategori </option>
+                                <option value="Metadata">Metadata</option>
+                                <option value="Data-data Asas">Permohonan Data-data Asas</option>
+                                <option value="Lain-lain">Lain-lain</option>
+                            </select></div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-2"><label for="input-feedback" class="form-control-label ml-4"> Pertanyaan </label>
+                        </div>
+                        <div class="col-9"><textarea name="pertanyaan" placeholder="Nyatakan maklum balas anda" type="text"
+                                rows="5" class="form-control form-control-sm ml-3"></textarea></div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-2"><label for="input-emel" class="form-control-label ml-4"> Emel Personal </label>
+                        </div>
+                        <div class="col-7">
+                            <input placeholder="Masukan E-mel anda" type="text" name="email"
+                                class="form-control form-control-sm ml-3">
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary float-right" id="btnHantar"><i
+                                    class="fas fa-paper-plane mr-2"></i>Hantar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Hubungi Kami</h2>
+            </div>
+
+            <div class="row pl-lg-7">
+                <div class="col-lg-6">
+                    <div class="info">
+                        <div class="address">
+                            <i class="icofont-google-map"></i>
+                            <h4>Lokasi</h4>
+                            <p> <span style="font-weight: bold; font-size: medium;">
                                 {!! (isset($portal->name) ? $portal->name:"") !!}
-                            </span><br>
+                                </span><br>
                             {!! (isset($portal->address) ? $portal->address:"") !!}
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="info">
-                    <div class="email mt-0">
-                        <i class="icofont-envelope"></i>
-                        <h4>Emel</h4>
+                <div class="col-lg-6">
+                    <div class="info">
+                        <div class="email mt-0">
+                            <i class="icofont-envelope"></i>
+                            <h4>Emel</h4>
                         <p>{!! (isset($portal->email_admin) ? $portal->email_admin:"") !!}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="info">
-                    <div class="phone">
-                        <i class="icofont-phone"></i>
-                        <h4>Hubungi</h4>
+                    <div class="info">
+                        <div class="phone">
+                            <i class="icofont-phone"></i>
+                            <h4>Hubungi</h4>
                         <p>{{ (isset($portal->contact) ? $portal->contact:"") }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
-<div id="preloader"></div>
+    <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+    <div id="preloader"></div>
 
 
-<script>
-    $(document).ready(function() {
-        <?php
+    <script>
+        $(document).ready(function() {
+            <?php
         if(Session::has('message')){
             ?>alert("{{ Session::get('message') }}");<?php
         }
         ?>
-        $(document).on("click", ".aUmum", function() {
-            var umumid = $(this).data("umumid");
-            $("#form_umum_" + umumid).submit();
+            $(document).on("click", ".aUmum", function() {
+                var umumid = $(this).data("umumid");
+                $("#form_umum_" + umumid).submit();
+            });
         });
-    });
-</script>
+    </script>
 
 @stop

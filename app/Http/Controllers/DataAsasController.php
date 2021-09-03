@@ -275,6 +275,12 @@ class DataAsasController extends Controller
                 "total_harga" => $request->total_harga,
             ]);
 
+            ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
+                "pautan_data" => $request->pautan_data,
+                "tempoh" => $request->tempoh,
+                "total_harga" => $request->total_harga,
+            ]);
+
             Mohondata::where(["id" => $request->permohonan_id])->update([
                 "status" => $request->status = 3,
             ]);
@@ -675,6 +681,27 @@ class DataAsasController extends Controller
                     });
                 }
 
+                $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
+                
+                if($request->status == '1'){ //lulus
+                    $mail = "mails.exmpl13";
+                    $subject = "MyGeo Explorer - Permohonan Diluluskan";
+                }elseif($request->status == '2'){ //tolak
+                    $mail = "mails.exmpl14";
+                    $subject = "MyGeo Explorer - Permohonan Ditolak";
+                }
+                
+                if($request->status != '0'){
+                    //send email to pemohon data
+                    $to_name = $pemohon->users->name;
+                    $to_email = $pemohon->users->email;
+                    $data = array('catatan'=>$request->catatan);
+                    Mail::send($mail, $data, function($message) use ($to_name, $to_email, $subject) {
+                        $message->to($to_email, $to_name)->subject($subject);
+                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                    });
+                }
+
                 $at = new AuditTrail();
                 $at->path = url()->full();
                 $at->user_id = Auth::user()->id;
@@ -726,7 +753,7 @@ class DataAsasController extends Controller
             MohonData::where(["id" => $request->permohonan_id])->update([
                 "dihantar" => $request->dihantar = 1,
             ]);
-            
+       
             $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
             
             //get pentadbir data

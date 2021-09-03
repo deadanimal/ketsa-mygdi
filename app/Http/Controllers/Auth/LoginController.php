@@ -40,7 +40,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
+
     public function showLoginForm()
   {
       $portal = PortalTetapan::get()->first();
@@ -53,7 +53,7 @@ class LoginController extends Controller
         $at->user_id = Auth::user()->id;
         $at->data = 'Logout';
         $at->save();
-        
+
         Auth::logout();
         return redirect('/login');
     }
