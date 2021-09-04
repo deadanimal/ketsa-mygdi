@@ -11,6 +11,7 @@ use Auth;
 use Hash;
 use UxWeb\SweetAlert\SweetAlert;
 use App\AuditTrail;
+use App\MohonData;
 
 class AuthController extends Controller
 {
@@ -47,6 +48,8 @@ class AuthController extends Controller
         }
 
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password])) {
+//            Mohondata //SMBG SINI - get all permohonan datas whose data ready to download but haven't
+            
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;

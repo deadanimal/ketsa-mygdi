@@ -9,7 +9,7 @@ class XmlController extends Controller {
 
     function __construct() {}
 
-    public function createXml($request,$fileUrl="",$keywords="",$topicCategories="") {
+    public function createXml($request,$fileUrl="",$keywords="",$topicCategories="",$custom_inputs="") {
         $c2_metadataName = strtoupper($request->c2_metadataName);
         $xml = <<<XML
                 <MD_Metadata
@@ -1161,6 +1161,7 @@ class XmlController extends Controller {
                             </report>
                         </DQ_DataQuality>
                     </dataQualityInfo>
+                    $custom_inputs
                 </MD_Metadata>
         XML;
         return $xml;

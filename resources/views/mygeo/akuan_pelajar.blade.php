@@ -67,7 +67,7 @@
                                     <p class="mx-6 pr-lg-4">
                                         (Sila nyatakan tajuk tesis/projek/kajian
                                         <input type="text" class="form-control form-control-sm" name="title"
-                                            placeholder="Tajuk" value="{{ $akuan->title }}"><br>
+                                            placeholder="Tajuk" value="{{ (isset($akuan->title) ? $akuan->title:"") }}"><br>
                                     <ol align="justify" class="mx-5 pr-lg-4">
                                         <li>Saya (nyatakan nama) <input type="text" class="form-control form-control-sm"
                                                 name="nama" disabled value="{{ $pemohon->users->name }}">

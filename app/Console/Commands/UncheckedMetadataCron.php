@@ -45,7 +45,8 @@ class UncheckedMetadataCron extends Command
      */
     public function handle()
     {
-        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 weeks"));
+//        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 weeks")); //ori specs
+        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-1 hours"));
        
         //find metadata tak diusik lebih dari 2 minggu
         $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->whereDate('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();

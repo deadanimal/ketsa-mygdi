@@ -84,7 +84,7 @@
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a @if(!empty($pemohon->proses_datas->pautan_data)) class="text-success download" disabled href="{{ $pemohon->proses_datas->pautan_data }}" target="_blank" @endif><span
+                                                    <a data-pemohonid="{{ $pemohon->id }}" @if(!empty($pemohon->proses_datas->pautan_data)) class="text-success download" disabled href="{{ $pemohon->proses_datas->pautan_data }}" @endif><span
                                                             class="fas fa-download mr-2"></span>
                                                         Muat Turun</a>
                                                 </td>
@@ -125,6 +125,7 @@
         $('.download').on('click', function(event) {
             event.preventDefault();
             const url = $(this).attr('href');
+            var pemohonid = $(this).data('pemohonid');
             swal({
                 title: "Akuan Penerimaan Data",
                 type: "warning",
@@ -139,14 +140,9 @@
                     return !result && "Anda perlu sahkan akuan penerimaan data ini!";
                 },
             }).then(function(result) {
-                window.location.href = url;
-                swal({
-                    title: "Akuan Penerimaan Data",
-                    text: "Berjaya disahkan!",
-                    type: "success",
-                    showConfirmButton: false,
-                    timer: 1700,
-                })
+//                window.location.href = url;
+                window.location.href = "{{ url('/akuan_penerimaan/') }}"+"/"+pemohonid;
+//                window.open(url, '_blank');
             })
         });
     </script>

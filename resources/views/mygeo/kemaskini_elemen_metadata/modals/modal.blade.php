@@ -192,3 +192,62 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="modalCustomInput">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tambah Custom Input</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formTambahCustomInput" method="POST" action="{{ url('simpan_custom_input') }}" class="theForm">
+                @csrf
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="name">Nama:</label>
+                                    <input type="text" name="name" class="form-control kategori">
+                                </div>
+<!--                                <div class="form-group">
+                                    <label for="input_type">Data Type:</label>
+                                    <select name="input_type" class="form-control input_type" readonly>
+                                        <option value="">Pilih...</option>
+                                        <option value="Text" selected disabled>Text</option>
+                                        <option value="Textarea">Textarea</option>
+                                        <option value="Dropdown">Dropdown</option>
+                                        <option value="Date">Date</option>
+                                        <option value="Number">Number</option>
+                                    </select>
+                                </div>-->
+                                <div class="form-group">
+                                    <label for="mandatory">Mandatory:</label>
+                                    <select name="mandatory" class="form-control mandatory">
+                                        <option value="">Pilih...</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+<!--                                <div class="form-group">
+                                    <label for="status">Status:</label>
+                                    <select name="status" class="form-control status">
+                                        <option value="">Pilih...</option>
+                                        <option value="Active" selected disabled>Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between1">
+                    <button type="button" class="btn btn-primary btnSimpan" data-dismiss="modal">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

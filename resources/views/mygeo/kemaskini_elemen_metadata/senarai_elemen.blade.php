@@ -29,7 +29,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @csrf  
                         <div class="card-header">
                             <h3 class="card-title" style="font-size: 2rem;">Kemas Kini Elemen Metadata</h3>
                             <!--<button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal1">Tambah</button>-->
@@ -83,6 +82,51 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="font-size: 2rem;">Custom Metadata Input</h3>
+                            <div class="float-right">
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalCustomInput">Tambah</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="table_elemens" class="table table-bordered table-striped" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Bil</th>
+                                        <th>Nama</th>
+                                        <th>Input Type</th>
+                                        <th>Mandatory</th>
+                                        <th>Status</th>
+                                        <th>Tindakan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if (!empty($customMetadataInput) && count($customMetadataInput) > 0) {
+                                        $bil = 1;
+                                        foreach ($customMetadataInput as $cmi) {
+                                            ?>
+                                            <tr>
+                                                <td>{{ $bil }}</td>
+                                                <td>{{ $cmi->name }}</td>
+                                                <td>{{ $cmi->input_type }}</td>
+                                                <td>{{ $cmi->mandatory }}</td>
+                                                <td>{{ $cmi->status }}</td>
+                                                <td>
+                                                    <!--<button type="button" class="form-control btnEdit">Edit</button>-->
+                                                    <button type="button" class="form-control btnDeleteCustomInput" data-rowid="{{ $cmi->id }}">Delete</button>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            $bil++;
+                                        }
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,6 +163,23 @@
             $.ajax({
                 method: "POST",
                 url: "{{ url('deleteElemenMetadata') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "rowid": $(this).data('rowid'),
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                alert(data.msg);
+                if(data.error == '0'){
+                    window.location.reload();
+                }
+            });
+        });
+        
+        $(document).on('click', '.btnDeleteCustomInput', function () {
+            $.ajax({
+                method: "POST",
+                url: "{{ url('deleteCustomMetadataInput') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "rowid": $(this).data('rowid'),
