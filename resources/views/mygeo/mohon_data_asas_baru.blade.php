@@ -180,13 +180,7 @@
                                             </div>
                                             <div class="col-3">
                                                 <input class="form-control form-control-sm ml-3" type="text"
-                                                @if($pemohon->users->kategori == '2_g2e_iptsPelajar')
-                                                    value="G2E - (IPTS) Pelajar"
-                                                @elseif($pemohon->users->kategori == '2_g2e_iptaPelajar')
-                                                    value="G2E - (IPTA) Pelajar"
-                                                @else
-                                                value="-"
-                                                @endif disabled />
+                                                    value="{{ $pemohon->users->kategori }}" disabled />
                                             </div>
                                         </div>
                                     </div>
