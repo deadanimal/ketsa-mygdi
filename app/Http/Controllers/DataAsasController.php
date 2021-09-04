@@ -311,7 +311,7 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        $pemohons = MohonData::where(['dihantar' => 1])->get();
+        $pemohons = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
         return view('mygeo.muat_turun_data', compact('pemohons'));
     }
 

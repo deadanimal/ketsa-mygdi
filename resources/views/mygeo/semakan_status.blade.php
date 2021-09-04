@@ -69,7 +69,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $pemohon->name }}</td>
                                                 <td>
-                                                    @if ($pemohon->status == '1')
+                                                    @if ($pemohon->dihantar == '1')
                                                         <span class="badge badge-pill badge-warning">Dalam Proses</span>
                                                     @elseif($pemohon->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
