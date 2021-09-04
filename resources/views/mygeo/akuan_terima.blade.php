@@ -100,8 +100,8 @@
                                             </ol>
                                             <div class="custom-control custom-checkbox m-5">
                                                 <input class="custom-control-input checkAkuanTerima" id="customCheck1"
-                                                    type="checkbox" data-permohonanid="{{ $pemohon->id }}"
-                                                    {{ $pemohon->acceptance == '1' ? 'checked disabled' : '' }}>
+                                                    type="checkbox" data-permohonanid="{{ $permohonan->id }}"
+                                                    {{ $permohonan->acceptance == '1' ? 'checked disabled' : '' }}>
                                                 <label class="custom-control-label" for="customCheck1">Saya terima terma dan
                                                     syarat diatas berikut</label>
                                             </div>

@@ -71,23 +71,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pemohons as $pemohon)
+                                        @foreach ($permohonan_list as $permohonan)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pemohon->name }}</td>
+                                                <td>{{ $permohonan->name }}</td>
                                                 <td>
-                                                    @if (!$pemohon->dihantar == 1)
+                                                    @if (!$permohonan->dihantar == 1)
                                                         <span class="badge badge-pill badge-primary">Draf</span>
                                                     @else
                                                         <span class="badge badge-pill badge-info">Baru</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
+                                                <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a href="{{ url('lihat_permohonan/'.$pemohon->id) }}"
+                                                    <a href="{{ url('lihat_permohonan/'.$permohonan->id) }}"
                                                         class="btn btn-sm btn-success text-center"><i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button type="button" data-permohonanid="{{ $pemohon->id }}"
+                                                    <button type="button" data-permohonanid="{{ $permohonan->id }}"
                                                         class="btnDelete btn btn-sm btn-danger mr-2"><i
                                                             class="fas fa-trash"></i>
                                                     </button>

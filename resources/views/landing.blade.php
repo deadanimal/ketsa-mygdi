@@ -178,6 +178,7 @@
                 <p class="text-bl">Selamat Datang ke</p>
                 <h1><span class="typed" data-typed-items="MyGeo Explorer"></span></h1>
             </div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <div id="demo" class="carousel slide mb-2" data-ride="carousel">

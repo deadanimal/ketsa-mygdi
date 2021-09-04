@@ -71,23 +71,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pemohons as $pemohon)
-                                            @if(isset($pemohon->users))
+                                        @foreach ($permohonan_list as $permohonan)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $pemohon->name }}</td>
-                                                    <td>{{ $pemohon->users->name }}</td>
-                                                    <td>{{ $pemohon->users->kategori }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
+                                                    <td>{{ $permohonan->name }}</td>
+                                                    <td>{{ $permohonan->users->name }}</td>
+                                                    <td>{{ $permohonan->users->kategori }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                     <td>
-                                                        <a href="{{ url('lihat_permohonan/'.$pemohon->id) }}"
+                                                        <a href="{{ url('lihat_permohonan/'.$permohonan->id) }}"
+
                                                             class="btn btn-sm btn-success text-center">Semak</a>
-                                                        <button type="button" data-permohonanid="{{ $pemohon->id }}"
+                                                        <button type="button" data-permohonanid="{{ $permohonan->id }}"
                                                             class="btnDelete btn btn-sm btn-danger mr-2"><i
                                                                 class="fas fa-trash"></i></button>
                                                     </td>
                                                 </tr>
-                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>

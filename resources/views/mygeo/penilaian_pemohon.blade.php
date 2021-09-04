@@ -355,22 +355,22 @@
                                             <div class="row mb-2">
                                                 <div class="col-6">
                                                     <label class="form-control-label">Nama</label>
-                                                    <input class="form-control form-control-sm" type="text" value="{{$pemohon->users->name}}" disabled>
+                                                    <input class="form-control form-control-sm" type="text" value="{{$permohonan->users->name}}" disabled>
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="form-control-label">Emel</label>
-                                                    <input class="form-control form-control-sm" type="text" value="{{$pemohon->users->email}}" disabled>
+                                                    <input class="form-control form-control-sm" type="text" value="{{$permohonan->users->email}}" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <label class="form-control-label">No Telefon</label>
-                                                    <input class="form-control form-control-sm" type="text" value="{{$pemohon->users->phone_pejabat}}" disabled>
+                                                    <input class="form-control form-control-sm" type="text" value="{{$permohonan->users->phone_pejabat}}" disabled>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
+                                    <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                     @if (Auth::user()->hasRole(['Pemohon Data']))
                                     <button type="submit" class="btn btn-primary">Hantar</button>
                                     @endif

@@ -67,7 +67,7 @@
                                             <div class="form-inline">
                                                 Rujukan : KeTSA 606-4/3/2 Jld.13 (1q)
                                                 <input type="hidden" name="no_rujukan" value="KeTSA 606-4/3/2 Jld.13 (1q)">
-                                                <input type="hidden" name="date_mohon" value="{{$pemohon->date}}">
+                                                <input type="hidden" name="date_mohon" value="{{$permohonan->date}}">
                                             </div>
                                             <div class="form-inline">
                                                 Tarikh : {{ Carbon\Carbon::now()->format('d M Y') }}
@@ -88,7 +88,7 @@
                                             <input type="hidden" class="form-control form-control-sm col-3 mx-1"
                                                 name="no_rujukan_mohon" value="JPBD.Tr 1/1572/8(27)">
                                             bertarikh
-                                            <span class="mx-2">{{ Carbon\Carbon::parse($pemohon->date)->format('d M Y') }}</span>
+                                            <span class="mx-2">{{ Carbon\Carbon::parse($permohonan->date)->format('d M Y') }}</span>
                                             mengenai perkara di atas.</span><br><br>
 
                                         2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan
@@ -134,8 +134,8 @@
                                     </p>
                                     @csrf
 
-                                    <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
-                                    <input type="hidden" name="id" value="{{ $pemohon->id }}">
+                                    <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                    <input type="hidden" name="id" value="{{ $permohonan->id }}">
 
                                     @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                         <button type="submit" class="btn btn-primary float-right">Simpan</button>

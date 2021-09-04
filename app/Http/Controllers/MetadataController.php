@@ -753,9 +753,10 @@ class MetadataController extends Controller {
                     $customMsg[$cmi->input_name.'.required'] = $cmi->name." required";
                 }
                 if(isset($request->{$cmi->input_name})){ //dont remove white space below
+                    //smbg sini
                     $custom_inputs .= '
             <custom_input>
-                <
+                
                 <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
             </custom_input>';
                 }

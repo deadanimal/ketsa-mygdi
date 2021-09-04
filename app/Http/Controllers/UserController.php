@@ -227,6 +227,7 @@ class UserController extends Controller {
             }
         }
     }
+
     function checkUnattendedMetadata(){
         $query = MetadataGeo::on('pgsql2')->where('disahkan','0');
         $lastTwoWeeks = date('Y-m-d', strtotime("-2 weeks"));
