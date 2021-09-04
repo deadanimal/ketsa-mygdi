@@ -185,6 +185,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/penilaian','DataAsasController@penilaian');
     Route::get('/penilaian_pemohon/{id}','DataAsasController@penilaian_pemohon')->name('tambah.penilaian');
     Route::get('/akuan_penerimaan/{id}','DataAsasController@akuan_terima');
+    Route::post('/api/dokumens','DataAsasController@api_convert_and_watermark_dokumen')->name('janaSalinanIC');
 
     Route::get('/proses_data','DataAsasController@proses_data');
     Route::post('/simpan_proses_data','DataAsasController@update_proses_data');
@@ -208,6 +209,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/tukar_peranan','UserController@tukar_peranan');
 
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+
 });
 
 Route::get('/send-mail', function () {

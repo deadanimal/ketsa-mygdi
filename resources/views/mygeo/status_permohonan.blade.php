@@ -71,30 +71,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pemohons as $pemohon)
+                                        @foreach ($permohonan_list as $permohonan)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pemohon->name }}</td>
-                                                <td>{{ $pemohon->users->name }}</td>
-                                                <td>{{ $pemohon->users->kategori }}</td>
+                                                <td>{{ $permohonan->name }}</td>
+                                                <td>{{ $permohonan->users->name }}</td>
+                                                <td>{{ $permohonan->users->kategori }}</td>
                                                 <td>
-                                                    @if ($pemohon->status == '1')
+                                                    @if ($permohonan->status == '1')
                                                         <span class="badge badge-pill badge-warning">Dalam Proses</span>
-                                                    @elseif($pemohon->status == '2')
+                                                    @elseif($permohonan->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
-                                                    @elseif($pemohon->status == '3')
+                                                    @elseif($permohonan->status == '3')
                                                         <span class="badge badge-pill badge-success">Selesai</span>
-                                                    @elseif($pemohon->status == '0')
+                                                    @elseif($permohonan->status == '0')
                                                         <span class="badge badge-pill badge-info">Baru</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ($pemohon->acceptance == '1')
+                                                    @if ($permohonan->acceptance == '1')
                                                         <span class="badge badge-pill badge-success">Selesai</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ($pemohon->penilaian == '1')
+                                                    @if ($permohonan->penilaian == '1')
                                                         <span class="badge badge-pill badge-success">Selesai</span>
                                                     @endif
                                                 </td>

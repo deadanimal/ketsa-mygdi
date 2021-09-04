@@ -67,21 +67,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pemohons as $pemohon)
+                                        @foreach ($permohonan_list as $permohonan)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pemohon->name }}</td>
-                                                <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
+                                                <td>{{ $permohonan->name }}</td>
+                                                <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>
                                                     @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
-                                                        <a href="/akuan_penerimaan/{{ $pemohon->id }}"
+                                                        <a href="/akuan_penerimaan/{{ $permohonan->id }}"
                                                             class="btn btn-sm btn-primary text-center">
                                                             Lihat
                                                     @else
-                                                            @if($pemohon->acceptance == '1')
+                                                            @if($permohonan->acceptance == '1')
                                                             <span class="badge badge-pill badge-success">Selesai</span>
                                                             @endif
-                                                            <a href="/akuan_penerimaan/{{ $pemohon->id }}" @if ($pemohon->acceptance == '1') hidden @endif
+                                                            <a href="/akuan_penerimaan/{{ $permohonan->id }}" @if ($permohonan->acceptance == '1') hidden @endif
                                                                 class="btn btn-sm btn-primary text-center">
                                                                 Buat Akuan Penerimaan
                                                     @endif
@@ -90,14 +90,14 @@
                                                 </td>
                                                 <td>
                                                     @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
-                                                        <a href="/penilaian_pemohon/{{ $pemohon->id }}"
+                                                        <a href="/penilaian_pemohon/{{ $permohonan->id }}"
                                                             class="btn btn-sm btn-info text-center">
                                                             Lihat
                                                     @else
-                                                            @if($pemohon->penilaian == '1')
+                                                            @if($permohonan->penilaian == '1')
                                                             <span class="badge badge-pill badge-success">Selesai</span>
                                                             @endif
-                                                            <a href="/penilaian_pemohon/{{ $pemohon->id }}" @if ($pemohon->penilaian == '1') hidden @endif
+                                                            <a href="/penilaian_pemohon/{{ $permohonan->id }}" @if ($permohonan->penilaian == '1') hidden @endif
                                                                 class="btn btn-sm btn-info text-center">
                                                                 Buat Penilaian
                                                     @endif
