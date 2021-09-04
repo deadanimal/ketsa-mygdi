@@ -286,7 +286,6 @@
                                     <br>
                                     <span class="badge badge-custom badge-pill mt-1">
                                         <?php 
-                                        use Storage;
                                         $address = [];
                                         foreach (explode("\n", Storage::disk('public')->get('address.txt')) as $key=>$line){
                                             $address[]=$line;
