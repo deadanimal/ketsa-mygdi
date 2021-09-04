@@ -286,6 +286,7 @@
                                     <br>
                                     <span class="badge badge-custom badge-pill mt-1">
                                         <?php 
+                                        //get ip address =======================
                                         $address = [];
                                         foreach (explode("\n", Storage::disk('public')->get('address.txt')) as $key=>$line){
                                             $address[]=$line;
@@ -300,14 +301,39 @@
                                         }else{  
                                             //whether ip is from the remote address  
                                             $ip = $_SERVER['REMOTE_ADDR'];  
-                                        }   
+                                        }
+                                        //get browser ==========================
+                                        $browser = "";
+                                        $arr_browsers = ["Opera", "Edg", "Chrome", "Safari", "Firefox", "MSIE", "Trident"];
+                                        $agent = $_SERVER['HTTP_USER_AGENT'];
+                                        $user_browser = '';
+                                        foreach ($arr_browsers as $browser) {
+                                            if (strpos($agent, $browser) !== false) {
+                                                $user_browser = $browser;
+                                                break;
+                                            }   
+                                        }
+                                        switch ($user_browser) {
+                                            case 'MSIE':
+                                                $user_browser = 'Internet Explorer';
+                                                break;
+
+                                            case 'Trident':
+                                                $user_browser = 'Internet Explorer';
+                                                break;
+
+                                            case 'Edg':
+                                                $user_browser = 'Microsoft Edge';
+                                                break;
+                                        }
+                                        
                                         $total_visitors = 0;
                                         $total_visitors = (int) Storage::disk('public')->get('counter.txt');
-                                        if(!in_array($ip,$address)){
+                                        if(!in_array($ip." ".$user_browser,$address)){
                                             $total_visitors++;
                                             Storage::disk('public')->put('counter.txt',$total_visitors);
                                             $addresses = Storage::disk('public')->get('address.txt');
-                                            $addresses .= "\n".$ip;
+                                            $addresses .= "\n".$ip." ".$user_browser;
                                             Storage::disk('public')->put('address.txt',$addresses);
                                         }
                                         echo number_format($total_visitors, 0, ".", ",");
