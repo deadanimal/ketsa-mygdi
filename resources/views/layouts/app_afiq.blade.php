@@ -286,6 +286,7 @@
                                     <br>
                                     <span class="badge badge-custom badge-pill mt-1">
                                         <?php 
+                                        use Storage;
                                         $address = [];
                                         foreach (explode("\n", Storage::disk('public')->get('address.txt')) as $key=>$line){
                                             $address[]=$line;
@@ -305,10 +306,10 @@
                                         $total_visitors = (int) Storage::disk('public')->get('counter.txt');
                                         if(!in_array($ip,$address)){
                                             $total_visitors++;
-//                                            Storage::disk('public')->put('counter.txt',$total_visitors);
+                                            Storage::disk('public')->put('counter.txt',$total_visitors);
                                             $addresses = Storage::disk('public')->get('address.txt');
                                             $addresses .= "\n".$ip;
-//                                            Storage::disk('public')->put('address.txt',$addresses);
+                                            Storage::disk('public')->put('address.txt',$addresses);
                                         }
                                         echo number_format($total_visitors, 0, ".", ",");
                                         ?>
