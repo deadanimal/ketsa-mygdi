@@ -284,7 +284,35 @@
                             <div class="col-xl-4">
                                 <div class="copyright text-center text-light mt-2"> Jumlah Pelawat:
                                     <br>
-                                    <span class="badge badge-custom badge-pill mt-1">{{ number_format(count($total_visitors), 0, ".", ",") }}</span>
+                                    <span class="badge badge-custom badge-pill mt-1">
+                                        <?php 
+                                        $address = [];
+                                        foreach (explode("\n", Storage::disk('public')->get('address.txt')) as $key=>$line){
+                                            $address[]=$line;
+                                        }
+                                        $ip = "";
+                                        if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                                            //whether ip is from the share internet  
+                                            $ip = $_SERVER['HTTP_CLIENT_IP'];  
+                                        }elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                                            //whether ip is from the proxy  
+                                            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+                                        }else{  
+                                            //whether ip is from the remote address  
+                                            $ip = $_SERVER['REMOTE_ADDR'];  
+                                        }   
+                                        $total_visitors = 0;
+                                        $total_visitors = (int) Storage::disk('public')->get('counter.txt');
+                                        if(!in_array($ip,$address)){
+                                            $total_visitors++;
+                                            Storage::disk('public')->put('counter.txt',$total_visitors);
+                                            $addresses = Storage::disk('public')->get('address.txt');
+                                            $addresses .= "\n".$ip;
+                                            Storage::disk('public')->put('address.txt',$addresses);
+                                        }
+                                        echo number_format($total_visitors, 0, ".", ",");
+                                        ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-xl-4">
