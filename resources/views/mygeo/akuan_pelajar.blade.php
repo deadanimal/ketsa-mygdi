@@ -77,13 +77,8 @@
                                             bertandatangan di bawah ini, sebagai
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
-<<<<<<< HEAD
-                                                name="agensi_organisasi" disabled>{{ $pemohon->users->agensi_organisasi }}, {{ $pemohon->users->alamat }}
+                                                name="agensi_organisasi" disabled>{{ $permohonan->users->agensi_organisasi }}, {{ $permohonan->users->alamat }}
                                                              </textarea>
-=======
-                                                name="agensi_organisasi" disabled>{{ $permohonan->users->agensiOrganisasi->name }}, {{ $permohonan->users->alamat }}
-                                                                 </textarea>
->>>>>>> 522b50e10216115c3f64ba235c9f7d6e76192634
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
                                             seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
