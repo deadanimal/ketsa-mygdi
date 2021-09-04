@@ -139,7 +139,6 @@ class MetadataController extends Controller {
             $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = $xml2;
         }
-         */
         $portal = PortalTetapan::get()->first();
             
         return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian','params','portal'));

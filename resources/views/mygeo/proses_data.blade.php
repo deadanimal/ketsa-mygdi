@@ -78,7 +78,7 @@
                                                 <td>{{ $pemohon->users->kategori }}</td>
                                                 <td>{{ $pemohon->assign_admin }}</td>
                                                 <td>
-                                                    <a href="/lihat_permohonan/{{ $pemohon->id }}"
+                                                    <a href="{{ url('/lihat_permohonan/'.$pemohon->id) }}"
                                                         class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $pemohon->id }}"

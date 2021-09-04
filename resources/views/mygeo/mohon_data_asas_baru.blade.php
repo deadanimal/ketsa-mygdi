@@ -322,7 +322,7 @@
                                         @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <div class="col-7 form-inline">
                                                 <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
-                                                <a href="/akuan_pelajar/{{ $pemohon->id }}"
+                                                <a href="{{ url('/akuan_pelajar/'.$pemohon->id) }}"
                                                     class="btn btn-sm btn-default">Papar </a>
                                             </div>
                                         @endif

@@ -80,7 +80,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="/lihat_permohonan/{{ $pemohon->id }}"
+                                                    <a href="{{ url('/lihat_permohonan/'.$pemohon->id) }}"
                                                         class="btn btn-sm btn-success text-center"><i
                                                             class="fas fa-edit"></i>
                                                     </a>
