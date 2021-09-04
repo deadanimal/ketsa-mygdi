@@ -785,37 +785,3 @@
         }
     </script>
 @stop
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-
-    <div class="container pl-lg-7">
-        <br><br><br><br>
-        <div class="row align-items-center">
-            <div class="col-12">
-                <img src="'. $base64_front .'" class="text-center pb-5" alt="front pic" style="width: 300px;" />
-            </div>
-        </div><br><br>
-
-        <div class="row mt-7 ">
-            <div class="col-12 img-center">
-                <img src="'. $base64_back .'" class="text-center" alt="back pic" style="width: 300px;" />
-            </div>
-        </div><br>
-        UNTUK KEGUNAAN KETSA SAHAJA
-    </div>
-</body>
-
-</html>
