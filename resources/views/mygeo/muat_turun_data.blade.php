@@ -71,20 +71,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pemohons as $pemohon)
+                                        @foreach ($permohonan_list as $permohonan)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pemohon->name }}</td>
+                                                <td>{{ $permohonan->name }}</td>
                                                 <td>
-                                                    @if (!empty($pemohon->proses_datas->pautan_data))
+                                                    @if (!empty($permohonan->proses_datas->pautan_data))
                                                         <span class="badge badge-pill badge-success">Data Tersedia</span>
                                                     @else
                                                         <span class="badge badge-pill badge-danger">Dalam Proses</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ Carbon\Carbon::parse($pemohon->date)->format('d/m/Y') }}</td>
+                                                <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a @if(!empty($pemohon->proses_datas->pautan_data)) class="text-success download" disabled href="{{ $pemohon->proses_datas->pautan_data }}" target="_blank" @endif><span
+                                                    <a @if(!empty($permohonan->proses_datas->pautan_data)) class="text-success download" disabled href="{{ $permohonan->proses_datas->pautan_data }}" target="_blank" @endif><span
                                                             class="fas fa-download mr-2"></span>
                                                         Muat Turun</a>
                                                 </td>

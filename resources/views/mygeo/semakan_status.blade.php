@@ -64,27 +64,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pemohons as $pemohon)
+                                        @foreach ($permohonan_list as $permohonan)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pemohon->name }}</td>
+                                                <td>{{ $permohonan->name }}</td>
                                                 <td>
-                                                    @if ($pemohon->dihantar == '1')
+                                                    @if ($permohonan->dihantar == '1')
                                                         <span class="badge badge-pill badge-warning">Dalam Proses</span>
-                                                    @elseif($pemohon->status == '2')
+                                                    @elseif($permohonan->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
-                                                    @elseif($pemohon->status == '3')
+                                                    @elseif($permohonan->status == '3')
                                                         <span class="badge badge-pill badge-success">Data Tersedia</span>
-                                                    @elseif($pemohon->status == '0')
+                                                    @elseif($permohonan->status == '0')
                                                         <span class="badge badge-pill badge-info">Baru</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="/lihat_permohonan/{{ $pemohon->id }}"
+                                                    <a href="/lihat_permohonan/{{ $permohonan->id }}"
                                                         class="btn btn-sm btn-success text-center"><i
                                                             class="fas fa-edit"></i>
                                                     </a>
-                                                    <button type="button" data-permohonanid="{{ $pemohon->id }}"
+                                                    <button type="button" data-permohonanid="{{ $permohonan->id }}"
                                                         class="btnDelete btn btn-sm btn-danger mr-2"><i
                                                             class="fas fa-trash"></i>
                                                     </button>

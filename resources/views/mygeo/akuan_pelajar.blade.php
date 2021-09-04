@@ -70,14 +70,14 @@
                                             placeholder="Tajuk" value="{{ $akuan->title }}"><br>
                                     <ol align="justify" class="mx-5 pr-lg-4">
                                         <li>Saya (nyatakan nama) <input type="text" class="form-control form-control-sm"
-                                                name="nama" disabled value="{{ $pemohon->users->name }}">
+                                                name="nama" disabled value="{{ $permohonan->users->name }}">
                                             K.P. No <input type="text" class="form-control form-control-sm" name="nric"
                                                 disabled placeholder="No Kad Pengenalan"
-                                                value="{{ $pemohon->users->nric }}"> yang
+                                                value="{{ $permohonan->users->nric }}"> yang
                                             bertandatangan di bawah ini, sebagai
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
-                                                name="agensi_organisasi" disabled>{{ $pemohon->users->agensiOrganisasi->name }}, {{ $pemohon->users->alamat }}
+                                                name="agensi_organisasi" disabled>{{ $permohonan->users->agensiOrganisasi->name }}, {{ $permohonan->users->alamat }}
                                                                  </textarea>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
@@ -167,13 +167,13 @@
                                             placeholder="Auto Pilih Tarikh Semasa" disabled
                                             value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
                                         Nama:<input type="text" class="form-control form-control-sm"
-                                            value="{{ $pemohon->users->name }}" disabled>
+                                            value="{{ $permohonan->users->name }}" disabled>
                                         Alamat:<textarea class="form-control form-control-sm" cols="30" rows="6"
-                                            disabled>{{ $pemohon->users->alamat }}</textarea>
+                                            disabled>{{ $permohonan->users->alamat }}</textarea>
                                     </div>
 
-                                    <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
-                                    <input type="hidden" name="id" value="{{ $pemohon->id }}">
+                                    <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                    <input type="hidden" name="id" value="{{ $permohonan->id }}">
 
                                     </p>
 
@@ -181,13 +181,7 @@
                                         <button type="submit" class="btn float-right btn-primary">Simpan</button>
                                     @endif
                                 </form>
-                                {{-- <form action="/api/dokumens" method="POST">
-                                    @csrf
-                                    Test PDFfff
-                                    <input type="hidden" name="gambar" class="form-control form-control-sm" value="{{ $akuan->digital_sign }}">
 
-                                    <button type="submit" class="btn btn-outline-primary">Test PDF</button>
-                                </form> --}}
                             </div>
                         </div>
                     </div>

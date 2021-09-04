@@ -34,9 +34,9 @@ class DataAsasController extends Controller
         $user = User::where(["id" => Auth::user()->id])->get()->first();
         $skdatas = SenaraiKawasanData::all();
 
-        $pemohon = MohonData::all();
+        $permohonan = MohonData::all();
 
-        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'pemohon'));
+        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan'));
     }
 
     public function tambah($id)
@@ -54,11 +54,11 @@ class DataAsasController extends Controller
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
         $senarai_data = SenaraiData::orderBy('kategori','ASC')->get();
-        $pemohon = MohonData::where('id', $id)->first();
+        $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->get();
         //  return $dokumens;
 
-        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'pemohon','senarai_data','dokumens','pentadbirdata'));
+        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan','senarai_data','dokumens','pentadbirdata'));
     }
 
     public function data_asas_landing()
@@ -142,20 +142,20 @@ class DataAsasController extends Controller
     public function penilaian()
     {
         if (Auth::user()->hasRole(['Pentadbir Data','Super Admin'])) {
-            $pemohons = MohonData::where(['dihantar' => 1])->orderBy('created_at', 'DESC')->get();
+            $permohonan_list = MohonData::where(['dihantar' => 1])->orderBy('created_at', 'DESC')->get();
         } else {
-            $pemohons = MohonData::with('users')
+            $permohonan_list = MohonData::with('users')
             ->where(['dihantar' => 1, 'status' => 3])
             ->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         }
-        return view('mygeo.penilaian', compact('pemohons'));
+        return view('mygeo.penilaian', compact('permohonan_list'));
     }
 
-    public function penilaian_pemohon($id)
+    public function penilaian_permohonan($id)
     {
         $penilaian = Penilaian::where('permohonan_id', $id)->first();
-        $pemohon = MohonData::where('id', $id)->first();
-        return view('mygeo.penilaian_pemohon',compact('pemohon','penilaian'));
+        $permohonan = MohonData::where('id', $id)->first();
+        return view('mygeo.penilaian_permohonan',compact('permohonan','penilaian'));
     }
 
     public function store_penilaian(Request $request)
@@ -229,8 +229,8 @@ class DataAsasController extends Controller
 
     public function akuan_terima($id)
     {
-        $pemohon = MohonData::where('id', $id)->first();
-        return view('mygeo.akuan_terima',compact('pemohon'));
+        $permohonan = MohonData::where('id', $id)->first();
+        return view('mygeo.akuan_terima',compact('permohonan'));
     }
 
     public function change_akuan_terima(Request $request)
@@ -248,10 +248,10 @@ class DataAsasController extends Controller
 
     public function proses_data()
     {
-        $pemohons = MohonData::where(['status' => 1,'dihantar' => 1])->get();
+        $permohonan_list = MohonData::where(['status' => 1,'dihantar' => 1])->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();
-        return view('mygeo.proses_data', compact('pemohons','skdatas','proses'));
+        return view('mygeo.proses_data', compact('permohonan_list','skdatas','proses'));
     }
 
     public function update_proses_data(Request $request)
@@ -294,14 +294,14 @@ class DataAsasController extends Controller
     {
         $user = User::where(["id" => Auth::user()->id])->get()->first();
         if (Auth::user()->hasRole(['Pentadbir Data','Super Admin'])) {
-            $pemohons = MohonData::orderBy('created_at', 'DESC')->get();
+            $permohonan_list = MohonData::orderBy('created_at', 'DESC')->get();
         } else {
-            $pemohons = MohonData::with('users')
+            $permohonan_list = MohonData::with('users')
                 ->where(['dihantar' => 0])
                 ->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')
                 ->get();
         }
-        return view('mygeo.mohon_data', compact('pemohons', 'user'));
+        return view('mygeo.mohon_data', compact('permohonan_list', 'user'));
     }
 
     public function mohon_data_asas()
@@ -311,14 +311,14 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        $pemohons = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
-        return view('mygeo.muat_turun_data', compact('pemohons'));
+        $permohonan_list = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
+        return view('mygeo.muat_turun_data', compact('permohonan_list'));
     }
 
     public function status_permohonan()
     {
-        $pemohons = MohonData::where(['dihantar' => 1])->get();
-        return view('mygeo.status_permohonan', compact('pemohons'));
+        $permohonan_list = MohonData::where(['dihantar' => 1])->get();
+        return view('mygeo.status_permohonan', compact('permohonan_list'));
     }
 
     public function senarai_data()
@@ -356,7 +356,7 @@ class DataAsasController extends Controller
                 "kategori" => $request->kategori,
                 "subkategori" => $request->subkategori,
                 "lapisan_data" => $request->lapisan_data,
-                "kategori_pemohon" => $request->kategori_pemohon,
+                "kategori_permohonan" => $request->kategori_permohonan,
                 "kelas" => $request->kelas,
                 "status" => $request->status,
                 "harga_data" => $request->harga_data,
@@ -387,8 +387,8 @@ class DataAsasController extends Controller
 
     public function semakan_status()
     {
-        $pemohons = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
-        return view('mygeo.semakan_status', compact('pemohons'));
+        $permohonan_list = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        return view('mygeo.semakan_status', compact('permohonan_list'));
     }
 
     public function kategori_kelas_kongsi_data()
@@ -414,8 +414,8 @@ class DataAsasController extends Controller
     public function surat_balasan($id)
     {
         $surat = SuratBalasan::where('permohonan_id', $id)->first();
-        $pemohon = MohonData::where('id', $id)->first();
-        return view('mygeo.surat_balasan', compact('pemohon','surat'));
+        $permohonan = MohonData::where('id', $id)->first();
+        return view('mygeo.surat_balasan', compact('permohonan','surat'));
     }
 
     public function update_surat_balasan(Request $request)
@@ -441,8 +441,8 @@ class DataAsasController extends Controller
     public function akuan_pelajar($id)
     {
         $akuan = AkuanPelajar::where('permohonan_id', $id)->first();
-        $pemohon = MohonData::where('id', $id)->first();
-        return view('mygeo.akuan_pelajar', compact('pemohon','akuan'));
+        $permohonan = MohonData::where('id', $id)->first();
+        return view('mygeo.akuan_pelajar', compact('permohonan','akuan'));
     }
 
     public function update_akuan_pelajar(Request $request)
@@ -541,8 +541,8 @@ class DataAsasController extends Controller
 
     public function permohonan_baru()
     {
-        $pemohons = MohonData::where(['dihantar' => 1,'status' => 0])->get();
-        return view('mygeo.permohonan_baru', compact('pemohons'));
+        $permohonan_list = MohonData::where(['dihantar' => 1,'status' => 0])->get();
+        return view('mygeo.permohonan_baru', compact('permohonan_list'));
     }
 
 
@@ -655,6 +655,7 @@ class DataAsasController extends Controller
                 MohonData::where(["id" => $request->permohonan_id])->update([
                     "status" => $request->status,
                     "catatan" => $request->catatan,
+                    "catatan_lain" => $request->catatan_lain,
                     "assign_admin" => $request->assign_admin,
                 ]);
 
@@ -666,7 +667,7 @@ class DataAsasController extends Controller
             });
             return redirect('permohonan_baru')->with('success', 'Permohonan Berjaya Dihantar');
         }
-        elseif(Auth::user()->hasRole(['Pemohon Data']))
+        elseif(Auth::user()->hasRole(['permohonan Data']))
         {
             DB::transaction(function () use ($request) {
                 //simpan status permohonan ini
@@ -875,14 +876,48 @@ class DataAsasController extends Controller
 
     public function api_convert_and_watermark_dokumen(Request $request) {
         //instatiate and use the dompdf class
-        $img = file_get_contents($request->gambar);
-        $base64 = 'data:image/png;base64,' . base64_encode($img);
+        // dd($request->gambar);
+        $img_f = file_get_contents($request->ic_front);
+        $base64_front = 'data:image/png;base64,' . base64_encode($img_f);
+        $img_b = file_get_contents($request->ic_back);
+        $base64_back = 'data:image/png;base64,' . base64_encode($img_b);
 
         $dompdf = new Dompdf();
-        $dompdf->loadHtml('<img src="'. $base64 .'" alt="front pic"/> <br> UNTUK KEGUNAAN KETSA SAHAJA');
+        $dompdf->loadHtml('<!DOCTYPE html>
+        <html>
+
+        <head>
+            <title></title>
+        </head>
+        <style>
+        div {
+            align-content: center;
+          }
+        </style>
+
+        <body>
+
+            <div class="container">
+                <br><br><br><br>
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <img src="'. $base64_front .'" class="text-center pb-5" alt="front pic" style="width: 300px;" />
+                    </div>
+                </div><br><br>
+
+                <div class="row mt-7 align-items-center">
+                    <div class="col-12">
+                        <img src="'. $base64_back .'" class="text-center" alt="back pic" style="width: 300px;" />
+                    </div>
+                </div><br>
+                UNTUK KEGUNAAN KETSA SAHAJA
+            </div>
+        </body>
+
+        </html>');
 
         // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->setPaper('A4', 'potrait');
 
         // Render the HTML as PDF
         $dompdf->render();
