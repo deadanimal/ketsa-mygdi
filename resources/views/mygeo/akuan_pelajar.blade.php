@@ -67,7 +67,7 @@
                                     <p class="mx-6 pr-lg-4">
                                         (Sila nyatakan tajuk tesis/projek/kajian
                                         <input type="text" class="form-control form-control-sm" name="title"
-                                            placeholder="Tajuk" value="{{ old('title') }}"><br>
+                                            placeholder="Tajuk" value="{{ $akuan->title }}"><br>
                                     <ol align="justify" class="mx-5 pr-lg-4">
                                         <li>Saya (nyatakan nama) <input type="text" class="form-control form-control-sm"
                                                 name="nama" disabled value="{{ $pemohon->users->name }}">
@@ -91,15 +91,15 @@
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="peta_topo_a"
                                                             placeholder="Peta Topologi A"
-                                                            value="{{ old('akuan->peta_topo_a') }}"></span></li>
+                                                            value="{{ $akuan->peta_topo_a }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="peta_topo_b"
                                                             placeholder="Peta Topologi B"
-                                                            value="{{ old('akuan->peta_topo_b') }}"></span></li>
+                                                            value="{{ $akuan->peta_topo_b }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="peta_topo_c"
                                                             placeholder="Peta Topologi C"
-                                                            value="{{ old('akuan->peta_topo_c') }}"></span></li>
+                                                            value="{{ $akuan->peta_topo_c }}"></span></li>
                                             </ol>
                                             <br><br>
                                             <li>Foto Udara :</li>
@@ -107,15 +107,15 @@
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="foto_udara_a"
                                                             placeholder="Foto Udara A"
-                                                            value="{{ old('akuan->foto_udara_a') }}"></span></li>
+                                                            value="{{ $akuan->foto_udara_a }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="foto_udara_b"
                                                             placeholder="Foto Udara B"
-                                                            value="{{ old('akuan->foto_udara_b') }}"></span></li>
+                                                            value="{{ $akuan->foto_udara_b }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="foto_udara_c"
                                                             placeholder="Foto Udara C"
-                                                            value="{{ old('akuan->foto_udara_c') }}"></span></li>
+                                                            value="{{ $akuan->foto_udara_c }}"></span></li>
                                             </ol>
                                             <br><br>
                                             <li>Lain-lain :</li>
@@ -123,15 +123,15 @@
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="lain_a"
                                                             placeholder="Lain-lain A"
-                                                            value="{{ old('$akuan->lain_a') }}"></span></li>
+                                                            value="{{ $akuan->lain_a }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="lain_b"
                                                             placeholder="Lain-lain B"
-                                                            value="{{ old('$akuan->lain_b') }}"></span></li>
+                                                            value="{{ $akuan->lain_b }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="lain_c"
                                                             placeholder="Lain-lain C"
-                                                            value="{{ old('$akuan->lain_c') }}"></span></li>
+                                                            value="{{ $akuan->lain_c }}"></span></li>
                                             </ol>
                                         </ol>
                                         <br><br>
