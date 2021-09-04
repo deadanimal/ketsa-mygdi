@@ -72,33 +72,35 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($pemohons as $pemohon)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pemohon->name }}</td>
-                                                <td>{{ $pemohon->users->name }}</td>
-                                                <td>{{ $pemohon->users->kategori }}</td>
-                                                <td>
-                                                    @if ($pemohon->status == '1')
-                                                        <span class="badge badge-pill badge-warning">Dalam Proses</span>
-                                                    @elseif($pemohon->status == '2')
-                                                        <span class="badge badge-pill badge-danger">Ditolak</span>
-                                                    @elseif($pemohon->status == '3')
-                                                        <span class="badge badge-pill badge-success">Selesai</span>
-                                                    @elseif($pemohon->status == '0')
-                                                        <span class="badge badge-pill badge-info">Baru</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if ($pemohon->acceptance == '1')
-                                                        <span class="badge badge-pill badge-success">Selesai</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if ($pemohon->penilaian == '1')
-                                                        <span class="badge badge-pill badge-success">Selesai</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
+                                            @if(isset($pemohon->users))
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $pemohon->name }}</td>
+                                                    <td>{{ $pemohon->users->name }}</td>
+                                                    <td>{{ $pemohon->users->kategori }}</td>
+                                                    <td>
+                                                        @if ($pemohon->status == '1')
+                                                            <span class="badge badge-pill badge-warning">Dalam Proses</span>
+                                                        @elseif($pemohon->status == '2')
+                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        @elseif($pemohon->status == '3')
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @elseif($pemohon->status == '0')
+                                                            <span class="badge badge-pill badge-info">Baru</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($pemohon->acceptance == '1')
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($pemohon->penilaian == '1')
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
