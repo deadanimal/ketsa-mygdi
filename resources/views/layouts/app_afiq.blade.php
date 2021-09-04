@@ -305,7 +305,7 @@
                                         $total_visitors = (int) Storage::disk('public')->get('counter.txt');
                                         if(!in_array($ip,$address)){
                                             $total_visitors++;
-                                            Storage::disk('public')->put('counter.txt',$total_visitors);
+//                                            Storage::disk('public')->put('counter.txt',$total_visitors);
                                             $addresses = Storage::disk('public')->get('address.txt');
                                             $addresses .= "\n".$ip;
                                             Storage::disk('public')->put('address.txt',$addresses);
