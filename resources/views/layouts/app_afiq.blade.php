@@ -308,7 +308,7 @@
 //                                            Storage::disk('public')->put('counter.txt',$total_visitors);
                                             $addresses = Storage::disk('public')->get('address.txt');
                                             $addresses .= "\n".$ip;
-                                            Storage::disk('public')->put('address.txt',$addresses);
+//                                            Storage::disk('public')->put('address.txt',$addresses);
                                         }
                                         echo number_format($total_visitors, 0, ".", ",");
                                         ?>
