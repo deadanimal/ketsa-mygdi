@@ -168,7 +168,15 @@
                                         </div>
                                         <div class="form-inline">
                                             <label class="form-control-label mr-2">Surat Balasan Permohonan </label>
+<<<<<<< HEAD
                                             <a href="{{ url('surat_balasan/'.$permohonan->id) }}" class="btn btn-sm btn-danger mb-2">
+=======
+<<<<<<< HEAD
+                                            <a href="{{ url('surat_balasan/'.$pemohon->id) }}" class="btn btn-sm btn-danger mb-2">
+=======
+                                            <a href="/surat_balasan/{{$permohonan->id}}" class="btn btn-sm btn-danger mb-2">
+>>>>>>> 522b50e10216115c3f64ba235c9f7d6e76192634
+>>>>>>> webpadu
                                                 Kemaskini
                                             </a>
                                         </div>
@@ -231,7 +239,11 @@
                 // $('#total_{{$permohonan->id}}').val(tot);
                 // });
                 @endif
+<<<<<<< HEAD
         @endforeach
+=======
+            @endforeach
+>>>>>>> webpadu
         @endforeach
     </script>
     <script>

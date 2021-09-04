@@ -344,12 +344,18 @@
                                                 </select>
                                                 <div id="hidden_div_catatan" @if ($permohonan->status == 0 || $permohonan->status == 1) class="hide" @endif>
                                                     <h4 class="heading text-dark mr-2">Catatan Permohonan</h4>
-                                                        <select name="catatan" class="form-control form-control-sm mb-4">
-                                                            <option value="Maklumat tidak lengkap,maklumat pemohon tidak sahih" @if($permohonan->catatan == "Maklumat tidak lengkap,maklumat pemohon tidak sahih") @endif>Maklumat tidak lengkap,maklumat pemohon tidak sahih</option>
-                                                            <option value="Data yang dipohon tiada dalam simpanan PGN" @if($permohonan->catatan == "Data yang dipohon tiada dalam simpanan PGN") @endif>Data yang dipohon tiada dalam simpanan PGN</option>
-                                                            <option value="Maklumat pemohon tidak sahih" @if($permohonan->catatan == "Maklumat pemohon tidak sahih") @endif>Maklumat pemohon tidak sahih</option>
-                                                            <option value="others" @if($permohonan->catatan == "others") @endif>Lain-lain</option>
-                                                        </select>
+                                                    <select name="catatan" class="form-control form-control-sm mb-4"
+                                                        onchange="checkCatatan(this.value);">
+                                                        <option selected disabled>Pilih</option>
+                                                        <option value="Maklumat tidak lengkap,maklumat pemohon tidak sahih"
+                                                            @if ($permohonan->catatan == 'Maklumat tidak lengkap,maklumat pemohon tidak sahih') selected @endif>Maklumat tidak
+                                                            lengkap,maklumat pemohon tidak sahih</option>
+                                                        <option value="Data yang dipohon tiada dalam simpanan PGN" @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
+                                                            dalam simpanan PGN</option>
+                                                        <option value="Maklumat pemohon tidak sahih" @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat pemohon tidak
+                                                            sahih</option>
+                                                        <option value="others" @if ($permohonan->catatan == 'others') selected @endif>Lain-lain</option>
+                                                    </select>
                                                         <textarea name="catatan_lain" id="catatan"
                                                         class="form-control form-control-sm" @if ($permohonan->catatan == 'others') style="display:block;" @else style="display:none;" @endif cols="30" rows="5">{{$permohonan->catatan_lain}}</textarea>
                                                 </div>
@@ -383,7 +389,7 @@
                                     <form action="{{ url('hantar_permohonan') }}" method="POST" id="formHantarPermohonan">
                                         @csrf
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                        <button type="submit" class="btn btn-info">Hantar</button>
+                                        <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
                                     </form>
                                 @endif
                                 </button>
@@ -413,7 +419,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="kategori">Kategori</label>
-                                        <select class="form-control" id="kategori" name="kategori" onchange="selectKategori()">
+                                        <select class="form-control" id="kategori" name="kategori"
+                                            onchange="selectKategori()">
                                             <option selected disabled>Pilih</option>
                                             @foreach ($senarai_data as $sdata)
                                                 <option value="{{ $sdata->kategori }}">{{ $sdata->kategori }}
@@ -471,7 +478,8 @@
                             <label for="tajuk_dokumen" class="form-control-label">Tajuk Dokumen</label>
                             <select name="tajuk_dokumen" class="form-control">
                                 <option disabled>Pilih</option>
-                                <option value="Salinan Kad Pengenalan">Salinan Kad Pengenalan (Wakil Agensi/Pelajar)</option>
+                                <option value="Salinan Kad Pengenalan">Salinan Kad Pengenalan (Wakil Agensi/Pelajar)
+                                </option>
                                 <option value="Borang PPNM">Borang PPNM (Wakil Agensi/Pelajar)</option>
                                 <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
                             </select>
@@ -585,49 +593,48 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
-                                        <select name="subkategori" class="form-control" autofocus>
-                                            <option selected disabled>Pilih</option>
-                                            @foreach ($senarai_data as $sdata)
-                                                <option value="{{ $sdata->subkategori }}" @if($sk->subkategori == $sdata->subkategori) selected @endif>
-                                                    {{ $sdata->subkategori }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
-                                        <select name="lapisan_data" class="form-control" autofocus>
-                                            <option selected disabled>Pilih</option>
-                                            @foreach ($senarai_data as $sdata)
-                                                <option value="{{ $sdata->lapisan_data }}" @if($sk->lapisan_data == $sdata->lapisan_data) selected @endif>
-                                                    {{ $sdata->lapisan_data }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
-                                        <input name="kawasan_data" class="form-control"
-                                            value="{{$sk->kawasan_data}}" />
-                                    </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
+                                            <select name="subkategori" class="form-control" autofocus>
+                                                <option selected disabled>Pilih</option>
+                                                @foreach ($senarai_data as $sdata)
+                                                    <option value="{{ $sdata->subkategori }}" @if ($sk->subkategori == $sdata->subkategori) selected @endif>
+                                                        {{ $sdata->subkategori }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
+                                            <select name="lapisan_data" class="form-control" autofocus>
+                                                <option selected disabled>Pilih</option>
+                                                @foreach ($senarai_data as $sdata)
+                                                    <option value="{{ $sdata->lapisan_data }}" @if ($sk->lapisan_data == $sdata->lapisan_data) selected @endif>
+                                                        {{ $sdata->lapisan_data }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
+                                            <input name="kawasan_data" class="form-control"
+                                                value="{{ $sk->kawasan_data }}" />
+                                        </div>
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                    <input type="hidden" name="sk_id" value="{{ $sk->id }}">
+                                        <input type="hidden" name="sk_id" value="{{ $sk->id }}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer justify-content-between1">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
+                        <div class="modal-footer justify-content-between1">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-     @endforeach
+    @endforeach
 
 
     </div>
@@ -752,8 +759,6 @@
                 element.style.display = 'none';
         }
     </script>
-
-        <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">

@@ -556,7 +556,7 @@ class DataAsasController extends Controller
     {
         $permohonan_list = MohonData::where(['dihantar' => 1,'status' => 0])->get();
         return view('mygeo.permohonan_baru', compact('permohonan_list'));
-        }
+    }
 
 
     /**
@@ -701,7 +701,7 @@ class DataAsasController extends Controller
             });
             return redirect('permohonan_baru')->with('success', 'Permohonan Berjaya Dihantar');
         }
-        elseif(Auth::user()->hasRole(['Pemohon Data']))
+        elseif(Auth::user()->hasRole(['permohonan Data']))
         {
             DB::transaction(function () use ($request) {
                 //simpan status permohonan ini
@@ -932,7 +932,7 @@ class DataAsasController extends Controller
         <style>
         div {
             align-content: center;
-}
+          }
         </style>
 
         <body>

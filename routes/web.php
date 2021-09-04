@@ -209,6 +209,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/tukar_peranan','UserController@tukar_peranan');
 
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+
 });
 
 Route::get('/send-mail', function () {

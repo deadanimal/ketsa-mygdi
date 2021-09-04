@@ -72,33 +72,33 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>{{ $permohonan->users->name }}</td>
                                                 <td>{{ $permohonan->users->kategori }}</td>
-                                                    <td>
+                                                <td>
                                                     @if ($permohonan->status == '1')
-                                                            <span class="badge badge-pill badge-warning">Dalam Proses</span>
+                                                        <span class="badge badge-pill badge-warning">Dalam Proses</span>
                                                     @elseif($permohonan->status == '2')
-                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        <span class="badge badge-pill badge-danger">Ditolak</span>
                                                     @elseif($permohonan->status == '3')
-                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                        <span class="badge badge-pill badge-success">Selesai</span>
                                                     @elseif($permohonan->status == '0')
-                                                            <span class="badge badge-pill badge-info">Baru</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
+                                                        <span class="badge badge-pill badge-info">Baru</span>
+                                                    @endif
+                                                </td>
+                                                <td>
                                                     @if ($permohonan->acceptance == '1')
-                                                            <span class="badge badge-pill badge-success">Selesai</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
+                                                        <span class="badge badge-pill badge-success">Selesai</span>
+                                                    @endif
+                                                </td>
+                                                <td>
                                                     @if ($permohonan->penilaian == '1')
-                                                            <span class="badge badge-pill badge-success">Selesai</span>
-                                                        @endif
-                                                    </td>
-                                                </tr>
+                                                        <span class="badge badge-pill badge-success">Selesai</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>

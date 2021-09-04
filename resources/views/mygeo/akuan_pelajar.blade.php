@@ -162,7 +162,7 @@
                                         <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan" height="120">
                                         <input type="file" class="form-control form-control-sm py-0" name="file"
                                             placeholder="Digital Sign">
-                                            <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
+                                        <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
                                         Tarikh:<input type="text" class="form-control form-control-sm"
                                             placeholder="Auto Pilih Tarikh Semasa" disabled
                                             value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
