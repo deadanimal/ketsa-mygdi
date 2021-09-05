@@ -77,7 +77,7 @@
         }
 
         .bg-custom{
-            background-image: url('afiqadminmygeo_files/navbar-mygeo.png');
+            background-image: url("{{ asset('afiqadminmygeo_files/navbar-mygeo.png') }}");
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;

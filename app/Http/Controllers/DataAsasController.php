@@ -19,6 +19,7 @@ use Auth;
 use DB;
 use App\AuditTrail;
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\Null_;
 
 class DataAsasController extends Controller
@@ -276,8 +277,20 @@ class DataAsasController extends Controller
         ]);
 
         Mohondata::where(["id" => $request->permohonan_id])->update([
-            "status" => $request->status = 3,
+            // "status" => $request->status = 3,
         ]);
+
+    //     $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
+    //     foreach ($skdatas as $key => $val ) {
+    //         $data = array(
+    //             'saiz_data'=>$request->size_data[$key],
+    //         );
+
+    //         SenaraiKawasanData::where('id',$request->senarai_kawasan_id[$key])
+    //         ->update($data);
+
+    //   }
+
 
         $at = new AuditTrail();
         $at->path = url()->full();
@@ -705,12 +718,12 @@ class DataAsasController extends Controller
 
 
         $id = $request->permohonan_id;
-        // dd($valid,$validfile);
+        $permohonan = MohonData::where('id', $id)->first();
 
         if($valid->isNotEmpty() && $validfile->isNotEmpty())
         {
 
-            if($valid_akuan_pelajar->isEmpty()){
+            if(($permohonan->users->kategori == '2_g2e_iptsPelajar' || $permohonan->users->kategori == '2_g2e_iptaPelajar') && $valid_akuan_pelajar->isEmpty()){
 
                 return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang Akuan Pelajar');
             }
@@ -806,6 +819,14 @@ class DataAsasController extends Controller
         }
     }
 
+    public function delete_dokumen_berkaitan(Request $request)
+    {
+        $dokumen = DokumenBerkaitan::where(["id" => $request->dokumen_id])->first();
+        Storage::delete('public/uploads/'. $dokumen->nama_fail);
+        $dokumen->delete();
+        return redirect()->back()->with('success', 'Dokumen Berkaitan Telah Dibuang!');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -888,6 +909,12 @@ class DataAsasController extends Controller
 
         <head>
             <title></title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         </head>
         <style>
         div {
@@ -899,14 +926,16 @@ class DataAsasController extends Controller
 
             <div class="container">
                 <br><br><br><br>
-                <div class="row align-items-center">
-                    <div class="col-12">
+                <div class="row">
+                <div class="col-4"></div>
+                    <div class="col-8 d-flex justify-content-center">
                         <img src="'. $base64_front .'" class="text-center pb-5" alt="front pic" style="width: 300px;" />
                     </div>
                 </div><br><br>
 
-                <div class="row mt-7 align-items-center">
-                    <div class="col-12">
+                <div class="row mt-7">
+                <div class="col-4"></div>
+                    <div class="col-8 d-flex justify-content-center">
                         <img src="'. $base64_back .'" class="text-center" alt="back pic" style="width: 300px;" />
                     </div>
                 </div><br>
@@ -922,7 +951,19 @@ class DataAsasController extends Controller
         // Render the HTML as PDF
         $dompdf->render();
 
-        // Output the generated PDF to Browser
-        $dompdf->stream();
+        $failModel = new DokumenBerkaitan();
+        $content = $dompdf->output();
+
+        $failNama = time() . '_' .'nric_copy.pdf';
+        // dd($failNama);
+        Storage::put('public/uploads/'. $failNama, $content);
+        $failModel->tajuk_dokumen = "Salinan Kad Pengenalan";
+        $failModel->nama_fail = $failNama;
+        $failModel->file_path = '/storage/uploads/' . $failNama;
+        $failModel->permohonan_id = $request->permohonan_id;
+        $failModel->save();
+
+        $id = $request->permohonan_id;
+        return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Salinan Kad Pengenalan Berjaya Dijana dan Ditambah');
     }
 }

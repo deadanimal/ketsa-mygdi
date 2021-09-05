@@ -138,9 +138,10 @@
                                                     <td>{{ $data->kawasan_data }}</td>
                                                     <td>
                                                         <input class="form-control form-control-sm amount_{{$permohonan->id}}_{{$data->id}}"
-                                                            placeholder="Saiz Data" id="size_{{ $data->id }}" onchange="kiraharga()" name="saiz_data_{{$permohonan->id}}_{{$data->id}}" type="number" step="0.01">
+                                                            placeholder="Saiz Data" id="size_{{ $data->id }}" onchange="kiraharga()" name="saiz_data[]" type="number" step="0.01">
                                                         <label class="ml-2">× RM {{ $data->harga_data }} </label>
-                                                        <input type="hidden" class="price_{{$permohonan->id}}_{{$data->id}}"
+                                                        <input type="hidden" name="senarai_kawasan_id[]" value="{{$data->id}}">
+                                                        <input type="hidden" class="price_{{$permohonan->id}}"
                                                             value="{{ $data->harga_data }}">
                                                     </td>
                                                 </tr>

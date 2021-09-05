@@ -4,11 +4,6 @@
 
     <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
     <style>
-        .ftest {
-            display: inline;
-            width: auto;
-        }
-
         .hide {
             display: none;
         }
@@ -132,7 +127,8 @@
                                             </div>
                                             <div class="col-3">
                                                 <input class="form-control form-control-sm ml-3" name="tel_pejabat"
-                                                    type="text" value="{{ $permohonan->users->phone_pejabat }}" disabled />
+                                                    type="text" value="{{ $permohonan->users->phone_pejabat }}"
+                                                    disabled />
                                             </div>
                                             <div class="col-2">
                                                 <label class="form-control-label mr-4" for="tel_bimbit">
@@ -173,9 +169,9 @@
                                             <div class="col-3">
                                                 <input class="form-control form-control-sm ml-3" type="text" @if ($permohonan->users->kategori == '2_g2e_iptsPelajar') value="G2E - (IPTS) Pelajar"
                                                 @elseif($permohonan->users->kategori == '2_g2e_iptaPelajar')
-                                                            value="G2E - (IPTA) Pelajar"
+                                                                value="G2E - (IPTA) Pelajar"
                                                 @else
-                                                        value="-" @endif disabled />
+                                                            value="-" @endif disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -300,6 +296,10 @@
                                                             <button type="button"
                                                                 class="btn btn-sm btn-success">Lihat</button>
                                                         </a>
+                                                        <button type="button" data-dokumenid="{{ $dokumen->id }}"
+                                                            class="btnDeleteDokumen btn btn-sm btn-danger mx-2"><i
+                                                                class="fas fa-trash"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -351,8 +351,9 @@
                                                             sahih</option>
                                                         <option value="others" @if ($permohonan->catatan == 'others') selected @endif>Lain-lain</option>
                                                     </select>
-                                                        <textarea name="catatan_lain" id="catatan"
-                                                        class="form-control form-control-sm" @if ($permohonan->catatan == 'others') style="display:block;" @else style="display:none;" @endif cols="30" rows="5">{{$permohonan->catatan_lain}}</textarea>
+                                                    <textarea name="catatan_lain" id="catatan"
+                                                        class="form-control form-control-sm" @if ($permohonan->catatan == 'others') style="display:block;" @else style="display:none;" @endif cols="30"
+                                                        rows="5">{{ $permohonan->catatan_lain }}</textarea>
                                                 </div>
                                                 <div id="hidden_div_pentadbir" @if ($permohonan->status == 0 || $permohonan->status == 2) class="hide" @endif>
                                                     <h4 class="heading text-dark mr-2">Pentadbir Ditugaskan</h4>
@@ -513,8 +514,8 @@
                             <label for="ic_back" class="form-control-label">NRIC Belakang</label>
                             <input type="file" name="ic_back" class="form-control mb-2">
                         </div>
-                        {{-- <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                        <input type="hidden" name="id" value="{{ $permohonan->id }}"> --}}
+                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                        <input type="hidden" name="id" value="{{ $permohonan->id }}">
 
                         <button type="submit" class="btn btn-outline-success btn-block mt-4">
                             Simpan
@@ -634,7 +635,6 @@
         </div>
     @endforeach
 
-
     </div>
 
     <script>
@@ -651,6 +651,24 @@
                     },
                 }).done(function(response) {
                     alert("Senarai Data tersebut telah dibuang.");
+                    location.reload();
+                });
+            }
+        });
+
+        $(document).on("click", ".btnDeleteDokumen", function() {
+            var dokumen_id = $(this).data('dokumenid');
+            var r = confirm("Adakah anda pasti untuk buang data ini?");
+            if (r == true) {
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('delete_dokumen') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "dokumen_id": dokumen_id
+                    },
+                }).done(function(response) {
+                    alert("Dokumen tersebut telah dibuang.");
                     location.reload();
                 });
             }
@@ -695,27 +713,6 @@
                     }
                 }
             });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $(".div_sub").hide();
-            $(".subKategoriTitle").hide();
-
-            $(document).on("click", ".kategori", function() {
-                var divname = $(this).data('id');
-                $(".div_sub").hide();
-                $("." + divname).show();
-                $(".subKategoriTitle").show();
-            });
-
-            $(document).on("click", ".subkategori, function () {
-                //            var divname = $(this).data('id');
-                //            $(".div_sub").hide();
-                //            $("." + divname).show();
-                //            $(".subKategoriTitle").show();
-            });
-
         });
     </script>
 
@@ -769,37 +766,3 @@
         }
     </script>
 @stop
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-
-    <div class="container pl-lg-7">
-        <br><br><br><br>
-        <div class="row align-items-center">
-            <div class="col-12">
-                <img src="'. $base64_front .'" class="text-center pb-5" alt="front pic" style="width: 300px;" />
-            </div>
-        </div><br><br>
-
-        <div class="row mt-7 ">
-            <div class="col-12 img-center">
-                <img src="'. $base64_back .'" class="text-center" alt="back pic" style="width: 300px;" />
-            </div>
-        </div><br>
-        UNTUK KEGUNAAN KETSA SAHAJA
-    </div>
-</body>
-
-</html>

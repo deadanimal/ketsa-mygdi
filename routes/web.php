@@ -154,6 +154,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_penilaian', 'DataAsasController@store_penilaian');
 
     Route::post('/muatnaik_dokumen', 'DataAsasController@store_dokumen_berkaitan')->name('muatnaikFail');
+    Route::post('/delete_dokumen', 'DataAsasController@delete_dokumen_berkaitan');
 
     Route::get('/mohon_data','DataAsasController@mohon_data');
     Route::get('/mohon_data_asas_baru','DataAsasController@mohon_data_asas_baru');
