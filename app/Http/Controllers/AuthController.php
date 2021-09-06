@@ -48,7 +48,6 @@ class AuthController extends Controller
         }
 
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password])) {
-//            Mohondata //SMBG SINI - get all permohonan datas whose data ready to download but haven't
             
             $at = new AuditTrail();
             $at->path = url()->full();

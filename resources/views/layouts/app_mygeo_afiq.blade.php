@@ -635,6 +635,101 @@
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script>
+        @if (Auth::user()->hasRole(['Pemohon Data']))
+            setInterval(
+                function(){   
+                    //check for completed data downloads============================
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ url('checkThreeHourNotifySelesaiMuatTurun') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                        },
+                    }).done(function(response) {
+                        var res = JSON.parse(response);
+                        if(!jQuery.isEmptyObject(res)){
+                            var msg = "Data-data berikut telah diakui terima dan dimuat turun:<br>";
+                            var mohons = "";
+                            var counter = 1;
+                            jQuery.each(res,function(key,val) {
+                                msg = msg + counter + ") " + val + "<br>";
+                                counter++;
+                                mohons = mohons + key + ",";
+                            });
+                            swal({
+                                title: "Adakah anda berjaya memuat turun data?",
+                                html: msg,
+                                type: "warning",
+                                input: "checkbox",
+                                inputPlaceholder: " Saya berjaya memuat turun data",
+                                buttonsStyling: false,
+                                allowOutsideClick: true,
+                                showCancelButton: true,
+                                cancelButtonClass: "btn btn-warning",
+                                confirmButtonClass: "btn btn-success",
+                                cancelButtonText: "Belum Selesai Muat Turun",
+                                confirmButtonText: 'Selesai Muat Turun&nbsp;<i class="fa fa-arrow-right"></i>',
+                            }).then(function(result) {
+                                if(typeof(result.dismiss) != "undefined" && result.dismiss !== null && result.dismiss == "cancel") { //clicked belum selesai (cancel)
+
+                                }else if(typeof(result.dismiss) != "undefined" && result.dismiss !== null && result.dismiss == "overlay") { //clicked outside popup
+
+                                }else{ //clicked selesai muat turun
+                                    if($("#swal2-checkbox:checked").length > 0){
+                                        $.ajax({
+                                            method: "POST",
+                                            url: "{{ url('berjayaMuatTurun') }}",
+                                            data: {
+                                                "_token": "{{ csrf_token() }}",
+                                                "mohons": mohons
+                                            },
+                                        }).done(function(response) {
+
+                                        });
+                                    }
+                                }
+                            });     
+                        }
+                    });
+                    //check for completed penilaians================================
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ url('checkAfterSixMonthsPenilaian') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                        },
+                    }).done(function(response) {
+                        var res = JSON.parse(response);
+                        if(!jQuery.isEmptyObject(res)){
+                            var msg = "Data-data berikut telah dimuat turun tetapi belum dibuat penilaian:<br>";
+                            var mohons = "";
+                            var counter = 1;
+                            jQuery.each(res,function(key,val) {
+                                msg = msg + counter + ") " + val + "<br>";
+                                counter++;
+                                mohons = mohons + key + ",";
+                            });
+                            swal({
+                                title: "Sila buat penilaian",
+                                html: msg,
+                                type: "warning",
+                                buttonsStyling: false,
+                                allowOutsideClick: true,
+                                confirmButtonClass: "btn btn-success",
+                                confirmButtonText: 'Okay&nbsp;<i class="fa fa-arrow-right"></i>',
+                            }).then(function(result) {
+
+                            });     
+                        }
+                    });
+                },
+    //            10800000  /* 10800000 ms = 3 hrs */
+                300000  /* 300000 ms = 5 min */
+    //            5000  /* 10000 ms = 10 sec */
+           );
+        @endif
+    </script>
 </body>
 
 </html>

@@ -239,12 +239,75 @@ class DataAsasController extends Controller
     {
         DB::transaction(function () use ($request) {
             //save acceptance data
-            Mohondata::where(["id" => $request->permohonan_id])->update([
-                "acceptance" => $request->acceptance,
-            ]);
-
+            $vals = [];
+            if($request->acceptance == '1'){
+                $vals["threeHourNotifyStart"] = date('Y-m-d H:i:s',time());
+            }
+            $vals["acceptance"] = $request->acceptance;
+            MohonData::where(["id" => $request->permohonan_id])->update($vals);
         });
 
+        exit();
+    }
+    
+    public function checkThreeHourNotifySelesaiMuatTurun(Request $request)
+    {
+        $permohonanMoreThan3Hours = [];
+        //get mohon_data where threeHourNotifyStart is not null
+        $mohonData_3hourNotify = MohonData::where('berjayaMuatTurunStatus','0')->where('user_id',Auth::user()->id)->get();
+        if(count($mohonData_3hourNotify) > 0){
+            foreach($mohonData_3hourNotify as $m){
+                $interval = date_create('now')->diff(date_create($m->threeHourNotifyStart));
+                if($interval->h > 3){
+                    $permohonanMoreThan3Hours[$m->id] = $m->name;
+                    $vals = [];
+                    $vals["threeHourNotifyStart"] = date('Y-m-d H:i:s',time());
+                    MohonData::where(["id" => $m->id])->update($vals);
+                }
+            }
+        }
+        echo json_encode($permohonanMoreThan3Hours);
+        exit();
+    }
+    
+    public function berjayaMuatTurun(Request $request)
+    {
+        $mohons = explode(',',substr($request->mohons, 0, -1));
+        foreach($mohons as $m){
+            $vals = [];
+            $vals["berjayaMuatTurunStatus"] = '1';
+            $vals["berjayaMuatTurunTarikh"] = date('Y-m-d H:i:s',time());
+            MohonData::where(["id" => $m])->update($vals);
+        }
+        
+        $mohons2 = MohonData::whereIn('id',$mohons)->get();
+        
+        //send email to pemohon data
+        $to_name = Auth::user()->name;
+        $to_email = Auth::user()->email;
+        $data = array('mohons2'=>$mohons2);
+        Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+        });
+        
+        exit();
+    }
+    
+    public function checkAfterSixMonthsPenilaian(Request $request)
+    {
+        $mohonsAfterSixMonthsPenilaian = [];
+        //get mohon_data where berjayaMuatTurunTarikh is over 6 months and penilaian is 0 (penilaian not done)
+        $afterSixMonthsPenilaian = MohonData::whereNotNull('berjayaMuatTurunTarikh')->where('penilaian','0')->where('user_id',Auth::user()->id)->get();
+        if(count($afterSixMonthsPenilaian) > 0){
+            foreach($afterSixMonthsPenilaian as $a){
+                $interval = date_create('now')->diff(date_create($a->berjayaMuatTurunTarikh));
+                if($interval->m > 6){
+                    $mohonsAfterSixMonthsPenilaian[$a->id] = $a->name;
+                }
+            }
+        }
+        echo json_encode($mohonsAfterSixMonthsPenilaian);
         exit();
     }
 
@@ -324,7 +387,7 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        $permohonan_list = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
+        $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
         return view('mygeo.muat_turun_data', compact('permohonan_list'));
     }
 
@@ -668,7 +731,7 @@ class DataAsasController extends Controller
                 MohonData::where(["id" => $request->permohonan_id])->update([
                     "status" => $request->status,
                     "catatan" => $request->catatan,
-                    "catatan_lain" => $request->catatan_lain,
+//                    "catatan_lain" => $request->catatan_lain, //missing migration from afiq
                     "assign_admin" => $request->assign_admin,
                 ]);
                 

@@ -152,7 +152,7 @@
                     type: "success",
                     showConfirmButton: false,
                 }).then(function(result) {
-                    window.open("{{ $pemohon->proses_datas->pautan_data }}",'_blank');
+                    window.open("{{ $permohonan->proses_datas->pautan_data }}",'_blank');
                     window.location.reload();
                 });
             });

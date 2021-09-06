@@ -239,11 +239,7 @@
                 // $('#total_{{$permohonan->id}}').val(tot);
                 // });
                 @endif
-<<<<<<< HEAD
-        @endforeach
-=======
             @endforeach
->>>>>>> webpadu
         @endforeach
     </script>
     <script>
