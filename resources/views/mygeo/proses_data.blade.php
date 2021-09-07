@@ -137,8 +137,8 @@
                                                     <td>{{ $data->kategori }}</td>
                                                     <td>{{ $data->kawasan_data }}</td>
                                                     <td>
-                                                        <input class="form-control form-control-sm amount_{{$permohonan->id}}_{{$data->id}}"
-                                                            placeholder="Saiz Data" id="size_{{ $data->id }}" onchange="kiraharga()" name="saiz_data_{{$permohonan->id}}_{{$data->id}}" type="number" step="0.01">
+                                                        <input class="form-control form-control-sm amount_{{$permohonan->id}}_{{$data->id}} kiraHarga" data-hargadata="{{ $data->harga_data }}" 
+                                                            placeholder="Saiz Data" id="size_{{ $data->id }}" name="saiz_data_{{$permohonan->id}}_{{$data->id}}" type="number" step="0.01">
                                                         <label class="ml-2">× RM {{ $data->harga_data }} </label>
                                                         <input type="hidden" class="price_{{$permohonan->id}}_{{$data->id}}"
                                                             value="{{ $data->harga_data }}">
@@ -152,8 +152,8 @@
                                     <div class="col-xl-12">
                                         <div class="form-inline float-right">
                                             <label class="form-control-label mr-2">Jumlah Harga (RM)</label>
-                                            <input class="form-control form-control-sm" placeholder="0.00"
-                                                style="width: 90px;" type="text" name="total_harga" id="jumlah_harga_dokumen" step="0.01" value="{{$permohonan->proses_datas->total_harga}}">
+                                            <input class="form-control form-control-sm jumlah_harga_dokumen" placeholder="0.00"
+                                                style="width: 90px;" type="text" name="total_harga" step="0.01" value="{{$permohonan->proses_datas->total_harga}}">
                                         </div>
                                     </div>
                                 </div>
@@ -164,11 +164,11 @@
                                             <input class="form-control form-control-sm mb-2" name="pautan_data" placeholder="Masukkan Pautan Data" type="text" value="{{$permohonan->proses_datas->pautan_data}}">
 
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
-                                            <input class="form-control form-control-sm" name="tempoh" placeholder="" type="date" disabled>
-                                        </div>
-                                        <div class="form-inline">
+<!--                                            <input class="form-control form-control-sm" name="tempoh" placeholder="" type="date" disabled>-->
+                                            <input type="text" class="form-control form-control-sm float-right tempohMuatTurun" name="tempoh">
+                                            </div>
                                             <label class="form-control-label mr-2">Surat Balasan Permohonan </label>
-                                            <a href="{{ url('surat_balasan/'.$permohonan->id) }}" class="btn btn-sm btn-danger mb-2">
+                                            <a href="{{ url('surat_balasan/'.$permohonan->id) }}" class="btn btn-sm btn-danger mb-2" style="margin-top:7px;">
                                                 Kemaskini
                                             </a>
                                         </div>
@@ -190,29 +190,7 @@
 
     </div>
 
-
     <script>
-
-        function kiraharga() {
-            console.log('Kira harga');
-            var pembelian = {!! $skdatas !!}
-            var jumlahHarga = 0;
-            pembelian.forEach(element => {
-                var harga = parseFloat(element.harga_data);
-                var size = document.getElementById("size_"+element.id).value ;
-                var jumlah = harga * size;
-                // var hargaDoc = document.getElementById("harga_"+element.id);
-                // hargaDoc.value = jumlah;
-                jumlahHarga += jumlah
-                console.log('jumlah: ', jumlah);
-            });
-            jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
-            console.log('jumlahHarga: ', jumlahHarga);
-            var jumlah_harga = document.getElementById("jumlah_harga_dokumen");
-            console.log(jumlah_harga)
-            jumlah_harga.value = jumlahHarga;
-
-        }
         @foreach ($permohonan_list as $permohonan)
             @foreach ($skdatas as $data)
                 // @if ($data->permohonan_id == $permohonan->id)
@@ -236,6 +214,24 @@
     </script>
     <script>
         $(document).ready(function() {
+            $(document).on('change','.kiraHarga',function(){
+                var kiraHarga = $(this).parent().parent().parent().find('.kiraHarga');
+                var jumlahHarga = 0;
+                jQuery.each(kiraHarga,function(key,val) {
+                    var size = $(val).val();
+                    var hargadata = $(val).data('hargadata');
+                    jumlahHarga += (size * hargadata);
+                });
+                jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
+                $(".jumlah_harga_dokumen").val(jumlahHarga);
+            });
+            
+            $('.tempohMuatTurun').daterangepicker({
+                locale: {
+                    format: 'DD-MM-YYYY'
+                },
+            });
+            
             $("#table_metadatas").DataTable({
                 "ordering": false,
                 "responsive": true,

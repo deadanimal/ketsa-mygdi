@@ -319,7 +319,7 @@ class DataAsasController extends Controller
 
             ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
                 "pautan_data" => $request->pautan_data,
-                "tempoh" => $request->tempoh,
+                "tempoh_url" => $request->tempoh,
                 "total_harga" => $request->total_harga,
             ]);
 

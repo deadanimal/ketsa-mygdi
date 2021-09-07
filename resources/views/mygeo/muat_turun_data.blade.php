@@ -84,7 +84,21 @@
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a @if(!empty($permohonan->proses_datas->pautan_data)) data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $permohonan->proses_datas->pautan_data }}" @endif><span
+                                                    <?php
+                                                    $inTempohUrl = 0;
+                                                    $currentDate = date('Y-m-d');
+                                                    $explodedTempohUrl = explode(' - ',$permohonan->proses_datas->tempoh_url);
+                                                    $tempohUrlStart  = (isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0]:"");
+                                                    $tempohUrlEnd  = (isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1]:"");
+                                                    if($tempohUrlStart != "" && $tempohUrlEnd != ""){
+                                                        if (($currentDate >= $tempohUrlStart) && ($currentDate <= $tempohUrlEnd)){
+                                                            $inTempohUrl = 1;
+                                                        }else{
+                                                            $inTempohUrl = 0;
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <a @if(!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1) data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $permohonan->proses_datas->pautan_data }}" @endif><span
                                                             class="fas fa-download mr-2"></span>
                                                         Muat Turun</a>
                                                 </td>
