@@ -97,7 +97,7 @@
                                                             @if($permohonan->penilaian == '1')
                                                             <span class="badge badge-pill badge-success">Selesai</span>
                                                             @endif
-                                                            <a href="/penilaian_pemohon/{{ $permohonan->id }}" @if ($permohonan->penilaian == '1') hidden @endif
+                                                            <a href="{{ url('/penilaian_pemohon/'.$permohonan->id) }}" @if ($permohonan->penilaian == '1') hidden @endif
                                                                 class="btn btn-sm btn-info text-center">
                                                                 Buat Penilaian
                                                     @endif

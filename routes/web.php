@@ -166,6 +166,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/akuan_pelajar/{id}','DataAsasController@akuan_pelajar');
     Route::post('/simpan_akuan_pelajar', 'DataAsasController@update_akuan_pelajar');
     Route::post('/change_akuan_terima', 'DataAsasController@change_akuan_terima');
+    Route::post('/checkThreeHourNotifySelesaiMuatTurun', 'DataAsasController@checkThreeHourNotifySelesaiMuatTurun');
+    Route::post('/berjayaMuatTurun', 'DataAsasController@berjayaMuatTurun');
 
     Route::get('/surat_balasan/{id}','DataAsasController@surat_balasan');
     Route::post('/simpan_surat_balasan', 'DataAsasController@update_surat_balasan');
@@ -233,6 +235,7 @@ Route::post('simpan_kategori','MetadataController@simpan_kategori');
 Route::post('simpan_tajuk','MetadataController@simpan_tajuk');
 Route::post('simpan_sub_tajuk','MetadataController@simpan_sub_tajuk');
 Route::post('simpan_elemen','MetadataController@simpan_elemen');
+Route::post('simpan_custom_input','MetadataController@simpan_custom_input');
 Route::post('simpan_agensi_organisasi','PortalController@simpan_agensi_organisasi');
 Route::post('simpan_bahagian','PortalController@simpan_bahagian');
 Route::post('get_agensi_organisasi_by_sektor','PortalController@get_agensi_organisasi_by_sektor');
@@ -243,6 +246,7 @@ Route::post('delete_agensi_organisasi','PortalController@delete_agensi_organisas
 Route::post('getTajukByCategory','MetadataController@getTajukByCategory');
 Route::post('getSubTajuk','MetadataController@getSubTajuk');
 Route::post('deleteElemenMetadata','MetadataController@deleteElemenMetadata');
+Route::post('deleteCustomMetadataInput','MetadataController@deleteCustomMetadataInput');
 Route::post('findMetadataByName','MetadataController@findMetadataByName');
 
 Auth::routes();

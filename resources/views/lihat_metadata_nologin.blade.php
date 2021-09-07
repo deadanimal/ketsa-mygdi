@@ -45,13 +45,13 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-5">
-              <h1>
-                <?php 
-                if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                  echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                }
-                ?>
-              </h1>
+                            <h1>
+                                <?php 
+                                if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                                  echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                }
+                                ?>
+                            </h1>
                         </div>
                         <div class="col-7 text-right">
                             <a href="{{ url('downloadMetadataPdf').'/'.$metadataSearched->id }}">

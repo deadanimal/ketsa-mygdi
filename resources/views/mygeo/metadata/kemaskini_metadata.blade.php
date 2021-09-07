@@ -248,6 +248,11 @@
                                     <?php //=== collapse15 =============================================================
                                     ?>
                                     @include('mygeo.metadata.kemaskini_metadata.data_quality')
+                                    <?php //=== collapse16 =============================================================
+                                    ?>
+                                    @if(count($customMetadataInput) > 0)
+                                        @include('mygeo.metadata.kemaskini_metadata.custom_input')
+                                    @endif
                                 </div>
                                 <div id="div_action_buttons">
                                     @if(auth::user()->hasRole(['Penerbit Metadata','Super Admin']))

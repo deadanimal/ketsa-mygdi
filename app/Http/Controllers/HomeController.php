@@ -6,6 +6,7 @@ use App\PanduanPengguna;
 use Illuminate\Http\Request;
 use App\Pengumuman;
 use App\PortalTetapan;
+use App\Visitors;
 
 class HomeController extends Controller
 {

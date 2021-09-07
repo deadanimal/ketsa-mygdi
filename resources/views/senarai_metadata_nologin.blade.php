@@ -72,10 +72,10 @@
                         <div class="fautocomplete">
                             <div>
                                 <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off" value="{{ $carian }}">
-                    </div>
+                            </div>
                             <ul id="searchResult"></ul>
                             <div class="clear"></div>
-                </div>
+                        </div>
                     </div>
                 </div>
                 <button type="button" data-action="search-close" data-target="#navbar-search-main" aria-label="Close" class="close">

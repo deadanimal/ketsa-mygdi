@@ -213,12 +213,6 @@ class UserController extends Controller {
 //            }
 //        }
 //        exit();
-        if(Auth::user()->hasRole(['Pengesah Metadata'])){
-            $hasUnattended = $this->checkUnattendedMetadata();
-            if($hasUnattended > 0){
-                \Session::flash('warning','Ade '.$hasUnattended.' metadata yg blom check lg');
-            }
-        }
         
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
@@ -228,9 +222,9 @@ class UserController extends Controller {
             return view('mygeo.profile.profil', compact('user'));
         } else {
             if(Auth::user()->hasRole(['Pemohon Data'])){
-            \Session::flash('warning','Anda perlu membuat penilaian kepada permohonan terbaru');
-            return view('mygeo.profile.profil', compact('user'));
-        }
+                \Session::flash('warning','Anda perlu membuat penilaian kepada permohonan terbaru');
+                return view('mygeo.profile.profil', compact('user'));
+            }
         }
     }
 

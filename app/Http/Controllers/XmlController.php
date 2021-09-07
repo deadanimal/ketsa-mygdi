@@ -9,14 +9,14 @@ class XmlController extends Controller {
 
     function __construct() {}
 
-    public function createXml($request,$fileUrl="",$keywords="",$topicCategories="") {
+    public function createXml($request,$fileUrl="",$keywords="",$topicCategories="",$custom_inputs="") {
         $c2_metadataName = strtoupper($request->c2_metadataName);
         $xml = <<<XML
                 <MD_Metadata
                     xmlns:gmd="http://www.isotc211.org/2005/gmd"
                     xmlns:gco="http://www.isotc211.org/2005/gco"
-                    xmlns:gml="http://www.opengis.net/gml"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns:gml="http://www.opengis.net/gml" 
+                    xmlns:xlink="http://www.w3.org/1999/xlink" 
                     xmlns:srv="http://www.isotc211.org/2005/srv"
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/metadataEntity.xsd">
                     <fileIdentifier>
@@ -1161,6 +1161,7 @@ class XmlController extends Controller {
                             </report>
                         </DQ_DataQuality>
                     </dataQualityInfo>
+                    $custom_inputs
                 </MD_Metadata>
         XML;
         return $xml;

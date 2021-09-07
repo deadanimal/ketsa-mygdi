@@ -41,6 +41,7 @@ use App\Mail\MailNotify;
 use App\AuditTrail;
 use App\Pengumuman;
 use PDF;
+use App\CustomMetadataInput;
 
 class MetadataController extends Controller {
 
@@ -129,22 +130,21 @@ class MetadataController extends Controller {
         
         $metadatas = [];
         foreach ($metadatasdb as $met) {
-          $ftestxml2 = <<<XML
-          $met->data
-          XML;
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-          $xml2 = simplexml_load_string($ftestxml2);
+            $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = $xml2;
-          }
-         */
+        }
         $portal = PortalTetapan::get()->first();
-
+            
         return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian','params','portal'));
     }
-
+    
     public function findMetadataByName(Request $request){
         $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . $request->carian . '%')->where('disahkan','yes')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
@@ -277,8 +277,9 @@ class MetadataController extends Controller {
         $states = States::where(['country' => 1])->get()->all();
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
+        $customMetadataInput = CustomMetadataInput::all();
 
-        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs'));
+        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput'));
     }
 
     public function show(Request $request) {
@@ -382,8 +383,9 @@ class MetadataController extends Controller {
         }else{
             $refSysSelected = [];
         }
+        $customMetadataInput = CustomMetadataInput::all();
 
-        return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected','metadataxml', 'metadataSearched', 'pengesahs'));
+        return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected','metadataxml', 'metadataSearched', 'pengesahs', 'customMetadataInput'));
     }
 
     public function show_nologin(Request $request) {
@@ -537,7 +539,7 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
         ];
-
+    
         if(strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application'){
             $fields["c10_file_url"]= 'required';
         }
@@ -741,6 +743,26 @@ class MetadataController extends Controller {
             "c10_file_type.required" => 'File Type required',
             "c2_serviceUrl.required" => 'Service URL required',
         ];
+         
+        $customMetadataInput = CustomMetadataInput::all();
+        $custom_inputs = "";
+        if(count($customMetadataInput) > 0){
+            foreach($customMetadataInput as $cmi){
+                if($cmi->mandatory == "Yes"){
+                    $fields[$cmi->input_name] = 'required';
+                    $customMsg[$cmi->input_name.'.required'] = $cmi->name." required";
+                }
+                if(isset($request->{$cmi->input_name})){ //dont remove white space below
+                    //smbg sini
+                    $custom_inputs .= '
+            <custom_input>
+                
+                <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
+            </custom_input>';
+                }
+            }
+        }
+        
         $this->validate($request, $fields, $customMsg);
 
         $keywords = "";
@@ -785,7 +807,7 @@ class MetadataController extends Controller {
 //            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
 //        }
         $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request,$fileUrl,$keywords,$topicCategories);
+        $xml = $xmlcon->createXml($request,$fileUrl,$keywords,$topicCategories,trim($custom_inputs));
 
         $msg = "";
 
@@ -1187,6 +1209,24 @@ class MetadataController extends Controller {
             "c10_file_type.required" => 'File Type required',
             "c2_serviceUrl.required" => 'Service URL required',
         ];
+        
+        $customMetadataInput = CustomMetadataInput::all();
+        $custom_inputs = "";
+        if(count($customMetadataInput) > 0){
+            foreach($customMetadataInput as $cmi){
+                if($cmi->mandatory == "Yes"){
+                    $fields[$cmi->input_name] = 'required';
+                    $customMsg[$cmi->input_name.'.required'] = $cmi->name." required";
+                }
+                if(isset($request->{$cmi->input_name})){ //dont remove white space below
+                    $custom_inputs .= '
+            <custom_input>
+                <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
+            </custom_input>';
+                }
+            }
+        }
+        
         $this->validate($request, $fields, $customMsg);
 
         $fileUrl = "";
@@ -1232,7 +1272,7 @@ class MetadataController extends Controller {
         }
 
         $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request,$fileUrl,$keywords,$topicCategories);
+        $xml = $xmlcon->createXml($request,$fileUrl,$keywords,$topicCategories,trim($custom_inputs));
 
         $msg = $redirect = "";
 
@@ -1391,7 +1431,7 @@ class MetadataController extends Controller {
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
                    $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
                 }
-
+                
                 //create new pengumuman about the new metadata
                 $pengumuman = new Pengumuman();
                 $pengumuman->title = $metadataName;
@@ -1570,8 +1610,9 @@ class MetadataController extends Controller {
 
         $elemens = ElemenMetadata::with('getKategori','getTajuk','getSubTajuk')->get();
         $categories = MCategory::get();
+        $customMetadataInput = CustomMetadataInput::get();
 
-        return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('elemens','categories'));
+        return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('elemens','categories','customMetadataInput'));
     }
 
     public function simpan_kategori(Request $request) {
@@ -1666,6 +1707,35 @@ class MetadataController extends Controller {
 
         return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
     }
+    
+    public function simpan_custom_input(Request $request) {
+        if(!auth::user()->hasRole(['Pentadbir Metadata'])){
+            abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
+        }
+
+        $cmi = new CustomMetadataInput();
+        $cmi->name = $request->name;
+        $cmi->input_name = preg_replace("/\s+/","",trim(ucwords($request->name)));
+        $cmi->input_type = "Text";
+        $cmi->data = "";
+        $cmi->mandatory = ($request->mandatory == "" ? "No":"Yes");
+        $cmi->status = "Active";
+        $query = $cmi->save();
+
+        if($query){
+            $msg = "Custom Input berjaya ditambah.";
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Create';
+            $at->save();
+        }else{
+            $msg = "Custom Input tidak berjaya ditambah.";
+        }
+
+        return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
+    }
 
     public function getTajukByCategory(Request $request){
         $tajuks = Tajuk::where('kategori',$request->kategori)->whereNull('sub_tajuk')->get();
@@ -1695,6 +1765,27 @@ class MetadataController extends Controller {
         }else{
             $error = 1;
             $msg = "Elemen Metadata tidak berjaya dipadam";
+        }
+        echo json_encode(['error'=>$error,'msg'=>$msg]);
+        exit();
+    }
+    
+    public function deleteCustomMetadataInput(Request $request){
+        $msg = "";
+        $error = 0;
+        $delete = CustomMetadataInput::where('id',$request->rowid)->delete();
+        if($delete){
+            $error = 0;
+            $msg = "Custom Metadata Input telah dipadam";
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Delete';
+            $at->save();
+        }else{
+            $error = 1;
+            $msg = "Custom Metadata Input tidak berjaya dipadam";
         }
         echo json_encode(['error'=>$error,'msg'=>$msg]);
         exit();

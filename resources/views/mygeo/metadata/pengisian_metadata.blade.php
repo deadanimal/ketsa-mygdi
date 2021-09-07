@@ -243,6 +243,11 @@
                                     <?php //=== collapse15 =============================================================
                                     ?>
                                     @include('mygeo.metadata.pengisian_metadata.data_quality')
+                                    <?php //=== collapse16 =============================================================
+                                    ?>
+                                    @if(count($customMetadataInput) > 0)
+                                        @include('mygeo.metadata.pengisian_metadata.custom_input')
+                                    @endif
                                 </div>
                                 <div id="div_action_buttons">
                                     <input type="button" data-name="draf" value="Simpan"

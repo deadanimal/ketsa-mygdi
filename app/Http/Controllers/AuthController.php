@@ -11,6 +11,7 @@ use Auth;
 use Hash;
 use UxWeb\SweetAlert\SweetAlert;
 use App\AuditTrail;
+use App\MohonData;
 
 class AuthController extends Controller
 {
@@ -27,14 +28,9 @@ class AuthController extends Controller
 
     public function authenticate(Request $request)
     {
-        // echo "<pre>";
-        // var_dump($request->email);
-        // var_dump($request->password);  $2y$10$ds5kaqrIwRymOP.Fo0s5Feocrp6LE6GSoz91KlPVCjDAVkHdireqm
-        // var_dump(Hash::make($request->password));
-        // echo "</pre>";
-        // exit();
+//        dd(Hash::make('farhan.rimfiel@pipeline-network.comM2'));
 
-        if ($_SERVER['HTTP_HOST'] != "127.0.0.1:8003") {
+        if ($_SERVER['HTTP_HOST'] != "localhost:8888") {
             if (!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == "") {
                 return redirect('/login')->with(['msg' => 'Sila lengkapkan reCaptcha']);
             }
@@ -52,13 +48,20 @@ class AuthController extends Controller
         }
 
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password])) {
+            
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
             $at->data = 'Login';
             $at->save();
+            
+            //check for completed penilaians for pemohon datas==================
+            $msgPenilaian = "";
+            if(Auth::user()->hasRole(['Pemohon Data'])){
+                $msgPenilaian = $this->checkAfterSixMonthsPenilaian();
+            }
 
-            return redirect()->intended('/landing_mygeo');
+            return redirect()->intended('/landing_mygeo')->with(['msgPenilaian'=>$msgPenilaian]);
         }else{
             return redirect('/login')->with(['msg'=>'ID pengguna atau kata laluan tidak sah.']);
         }
@@ -84,5 +87,25 @@ class AuthController extends Controller
         } else {
             dd('everything is working when the correct data is supplied - so the problem is related to your forms and the data being passed to the function');
         }
+    }
+    
+    public function checkAfterSixMonthsPenilaian()
+    {
+        $msg = "Data-data berikut telah dimuat turun tetapi belum dibuat penilaian:<br>";
+        $mohonsAfterSixMonthsPenilaian = [];
+        //get mohon_data where berjayaMuatTurunTarikh is over 6 months and penilaian is 0 (penilaian not done)
+        $afterSixMonthsPenilaian = MohonData::whereNotNull('berjayaMuatTurunTarikh')->where('penilaian','0')->where('user_id',Auth::user()->id)->get();
+        if(count($afterSixMonthsPenilaian) > 0){
+            $counter = '1';
+            foreach($afterSixMonthsPenilaian as $a){
+                $interval = date_create('now')->diff(date_create($a->berjayaMuatTurunTarikh));
+//                if($interval->m > 6){ //ori specs
+                if($interval->i > 5){
+                    $msg .= $counter.') '.$a->name.'<br>';
+                    $counter++;
+                }
+            }
+        }
+        return $msg;
     }
 }

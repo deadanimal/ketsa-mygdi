@@ -144,8 +144,17 @@
                     "acceptance": newStatus
                 },
             }).done(function(response) {
-                alert("Akuan Penerimaan Data telah direkodkan.");
+//                alert("Akuan Penerimaan Data telah direkodkan.");
                 // $('#tdUserStatus' + userid).html(newStatusText);
+                swal({
+                    title: "Akuan Penerimaan Data",
+                    text: "Berjaya disahkan!",
+                    type: "success",
+                    showConfirmButton: false,
+                }).then(function(result) {
+                    window.open("{{ $permohonan->proses_datas->pautan_data }}",'_blank');
+                    window.location.reload();
+                });
             });
         });
 

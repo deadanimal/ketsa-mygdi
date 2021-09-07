@@ -614,6 +614,9 @@
         <div id="toast-container" class="toast-top-right toast-container"></div>
     </div>
 
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
@@ -635,6 +638,97 @@
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script>
+        function checkThreeHourNotifySelesaiMuatTurun(){
+            //check for completed data 
+            $.ajax({
+                method: "POST",
+                url: "{{ url('checkThreeHourNotifySelesaiMuatTurun') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+            }).done(function(response) {
+                var res = JSON.parse(response);
+                if(!jQuery.isEmptyObject(res)){
+                    var msg = "Data-data berikut telah diakui terima dan dimuat turun:<br>";
+                    var mohons = "";
+                    var counter = 1;
+                    jQuery.each(res,function(key,val) {
+                        msg = msg + counter + ") " + val + "<br>";
+                        counter++;
+                        mohons = mohons + key + ",";
+                    });
+                    swal({
+                        title: "Adakah anda berjaya memuat turun data?",
+                        text: msg,
+                        type: "warning",
+                        input: "checkbox",
+                        inputPlaceholder: " Saya berjaya memuat turun data",
+                        buttonsStyling: false,
+                        allowOutsideClick: true,
+                        showCancelButton: true,
+                        cancelButtonClass: "btn btn-warning",
+                        confirmButtonClass: "btn btn-success",
+                        cancelButtonText: "Belum Selesai Muat Turun",
+                        confirmButtonText: 'Selesai Muat Turun&nbsp;<i class="fa fa-arrow-right"></i>',
+                    }).then(function(result) {
+                        if(result.dismiss == "cancel"){ //clicked belum selesai (cancel)
+
+                        }else if(result.dismiss == "overlay"){ //clicked outside alert box
+
+                        }else{ //clicked selesai
+                            if($("#swal2-checkbox:checked").length > 0){
+                                $.ajax({
+                                    method: "POST",
+                                    url: "{{ url('berjayaMuatTurun') }}",
+                                    data: {
+                                        "_token": "{{ csrf_token() }}",
+                                        "mohons": mohons
+                                    },
+                                }).done(function(response) {
+
+                                });
+                            }
+                        }
+                    });     
+                }
+            });
+        }
+        $(document).ready(function(){
+            //check if user has completed download============================================================
+            <?php
+            if(Auth::user()->hasRole(['Pemohon Data'])){
+                ?>
+                setInterval(
+                    checkThreeHourNotifySelesaiMuatTurun(),
+//                    10800000  /* 10800000 ms = 3 hrs */ //ori specs
+                    300000  /* 300000 ms = 5 min for testing */
+                    10000  /* 10000 ms = 10 sec for farhan testing */
+                );
+                <?php
+            }
+            ?>
+            <?php
+            //notify user (pemohon data only) to do penilaian after 6 months==================================
+            if(Auth::user()->hasRole(['Pemohon Data']) && Session::has('msgPenilaian') && Session::get('msgPenilaian') !== ""){
+                ?>
+                var msg = "<?php echo htmlspecialchars_decode(Session::get('msgPenilaian')); ?>";
+                swal({
+                    title: "Sila buat penilaian untuk data yang anda berjaya muat turun",
+                    html: msg,
+                    type: "warning",
+                    buttonsStyling: false,
+                    allowOutsideClick: true,
+                    confirmButtonClass: "btn btn-success",
+                    confirmButtonText: 'Okay&nbsp;<i class="fa fa-arrow-right"></i>',
+                }).then(function(result) {
+                    
+                });
+                <?php
+            }
+            ?>
+        });
+    </script>
 </body>
 
 </html>

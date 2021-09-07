@@ -97,6 +97,10 @@
                     @include('mygeo.metadata.lihat_metadata.constraints')
                     <?php //=== collapse15 =============================================================?>
                     @include('mygeo.metadata.lihat_metadata.data_quality')
+                    <?php //=== collapse16 =============================================================?>
+                    @if(count($customMetadataInput) > 0)
+                        @include('mygeo.metadata.lihat_metadata.custom_input')
+                    @endif
                   </div>
                 </div>
             </div>

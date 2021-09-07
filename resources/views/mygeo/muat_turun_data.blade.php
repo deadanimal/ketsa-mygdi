@@ -84,7 +84,7 @@
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a @if(!empty($permohonan->proses_datas->pautan_data)) class="text-success download" disabled href="{{ $permohonan->proses_datas->pautan_data }}" target="_blank" @endif><span
+                                                    <a @if(!empty($permohonan->proses_datas->pautan_data)) data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $permohonan->proses_datas->pautan_data }}" @endif><span
                                                             class="fas fa-download mr-2"></span>
                                                         Muat Turun</a>
                                                 </td>
@@ -125,29 +125,32 @@
         $('.download').on('click', function(event) {
             event.preventDefault();
             const url = $(this).attr('href');
-            swal({
-                title: "Akuan Penerimaan Data",
-                type: "warning",
-                input: "checkbox",
-                inputPlaceholder: " Sila klik kotak 'checkbox' untuk mengesah akuan penerimaan data",
-                buttonsStyling: false,
-                allowOutsideClick: false,
-                confirmButtonClass: "btn btn-warning",
-                confirmButtonText: 'Seterusnya&nbsp;<i class="fa fa-arrow-right"></i>',
-                footer: '<a href>Baca Akuan Penerimaan Data</a>',
-                inputValidator: (result) => {
-                    return !result && "Anda perlu sahkan akuan penerimaan data ini!";
-                },
-            }).then(function(result) {
-                window.location.href = url;
+            var pemohonid = $(this).data('pemohonid');
+            var acceptance = $(this).data('acceptance');
+            
+            if(acceptance == '1'){
+                window.open("{{ (isset($permohonan->proses_datas) ? $permohonan->proses_datas->pautan_data:'') }}",'_blank');
+                window.location.reload();
+            }else{
                 swal({
                     title: "Akuan Penerimaan Data",
-                    text: "Berjaya disahkan!",
-                    type: "success",
-                    showConfirmButton: false,
-                    timer: 1700,
-                })
-            })
+                    type: "warning",
+                    input: "checkbox",
+                    inputPlaceholder: " Sila klik kotak 'checkbox' untuk mengesah akuan penerimaan data",
+                    buttonsStyling: false,
+                    allowOutsideClick: false,
+                    confirmButtonClass: "btn btn-warning",
+                    confirmButtonText: 'Seterusnya&nbsp;<i class="fa fa-arrow-right"></i>',
+                    footer: '<a href>Baca Akuan Penerimaan Data</a>',
+                    inputValidator: (result) => {
+                        return !result && "Anda perlu sahkan akuan penerimaan data ini!";
+                    },
+                }).then(function(result) {
+    //                window.location.href = url;
+                    window.location.href = "{{ url('/akuan_penerimaan/') }}"+"/"+pemohonid;
+    //                window.open(url, '_blank');
+                });     
+            }
         });
     </script>
 @stop

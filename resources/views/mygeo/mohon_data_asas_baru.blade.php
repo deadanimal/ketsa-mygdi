@@ -175,11 +175,16 @@
                                                 </label>
                                             </div>
                                             <div class="col-3">
+<<<<<<< HEAD
                                                 <input class="form-control form-control-sm ml-3" type="text" @if ($permohonan->users->kategori == '2_g2e_iptsPelajar') value="G2E - (IPTS) Pelajar"
                                                 @elseif($permohonan->users->kategori == '2_g2e_iptaPelajar')
                                                                 value="G2E - (IPTA) Pelajar"
                                                 @else
                                                             value="-" @endif disabled />
+=======
+                                                <input class="form-control form-control-sm ml-3" type="text"
+                                                    value="{{ $permohonan->users->kategori }}" disabled />
+>>>>>>> e28108c3dd99ea8b2eb42b6b872a950d511dbd38
                                             </div>
                                         </div>
                                     </div>
@@ -326,7 +331,7 @@
                                         @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <div class="col-7 form-inline">
                                                 <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
-                                                <a href="/akuan_pelajar/{{ $permohonan->id }}"
+                                                <a href="{{ url('/akuan_pelajar/'.$permohonan->id) }}"
                                                     class="btn btn-sm btn-default">Papar </a>
                                             </div>
                                         @endif
@@ -393,12 +398,14 @@
                                     <form action="{{ url('hantar_permohonan') }}" method="POST" id="formHantarPermohonan">
                                         @csrf
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                         <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
 =======
+=======
+>>>>>>> e28108c3dd99ea8b2eb42b6b872a950d511dbd38
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                        <button type="submit" class="btn btn-info">Hantar</button>
->>>>>>> 522b50e10216115c3f64ba235c9f7d6e76192634
+                                        <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
                                     </form>
                                 @endif
                                 </button>
@@ -574,6 +581,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 
      <!-- Modal Kemaskini Senarai Kawasan Data -->
      @foreach ($skdatas as $sk)
@@ -604,8 +612,37 @@
                                             @endforeach
                                         </select>
 
-                                        </div>
+=======
+    <!-- Modal Kemaskini Senarai Kawasan Data -->
+    @foreach ($skdatas as $sk)
+        <div class="modal fade" id="modal-skd-{{ $sk->id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary mb-0">
+                        <h4 class="text-white">Kemaskini Senarai Data dan Kawasan Data</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ url('kemaskini_senarai_kawasan') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
 
+                                            <label for="kategori">Kategori</label>
+                                            <select class="form-control" name="kategori">
+                                                <option selected disabled>Pilih</option>
+                                                @foreach ($senarai_data as $sdata)
+                                                    <option value="{{ $sdata->kategori }}" @if ($sk->kategori == $sdata->kategori) selected @endif>
+                                                        {{ $sdata->kategori }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+>>>>>>> e28108c3dd99ea8b2eb42b6b872a950d511dbd38
+                                        </div>
                                         <div class="form-group">
                                             <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
                                             <select name="subkategori" class="form-control" autofocus>
@@ -767,8 +804,6 @@
                 element.style.display = 'none';
         }
     </script>
-
-    <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
@@ -794,4 +829,8 @@
 
         }
     </script>
+<<<<<<< HEAD
 @stop
+=======
+@stop
+>>>>>>> e28108c3dd99ea8b2eb42b6b872a950d511dbd38
