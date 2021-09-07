@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\User;
 use App\Role;
+use App\MohonData;
 use App\ModelHasRoles;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
