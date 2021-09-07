@@ -258,7 +258,8 @@ class DataAsasController extends Controller
         if(count($mohonData_3hourNotify) > 0){
             foreach($mohonData_3hourNotify as $m){
                 $interval = date_create('now')->diff(date_create($m->threeHourNotifyStart));
-                if($interval->h > 3){
+//                if($interval->h > 3){ //ori specs
+                if($interval->i > 5){
                     $permohonanMoreThan3Hours[$m->id] = $m->name;
                     $vals = [];
                     $vals["threeHourNotifyStart"] = date('Y-m-d H:i:s',time());

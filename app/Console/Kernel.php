@@ -25,8 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('uncheckedMetadata:cron')->everyThirtyMinutes();
-        $schedule->command('penilaianMuatTurunData:cron')->everyThirtyMinutes();
+//        $schedule->command('uncheckedMetadata:cron')->everyThirtyMinutes(); //ori specs
+        $schedule->command('uncheckedMetadata:cron')->everyFiveMinutes();
+//        $schedule->command('penilaianMuatTurunData:cron')->everyThirtyMinutes(); //ori specs
+        $schedule->command('penilaianMuatTurunData:cron')->everyFiveMinutes();
     }
 
     /**

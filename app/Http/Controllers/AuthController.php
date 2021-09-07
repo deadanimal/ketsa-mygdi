@@ -99,7 +99,8 @@ class AuthController extends Controller
             $counter = '1';
             foreach($afterSixMonthsPenilaian as $a){
                 $interval = date_create('now')->diff(date_create($a->berjayaMuatTurunTarikh));
-                if($interval->m > 6){
+//                if($interval->m > 6){ //ori specs
+                if($interval->i > 5){
                     $msg .= $counter.') '.$a->name.'<br>';
                     $counter++;
                 }
