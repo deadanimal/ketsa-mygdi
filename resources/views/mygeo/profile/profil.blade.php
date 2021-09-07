@@ -101,12 +101,12 @@
                                         </div>
                                         <div class="col-8">
                                             <?php
-                                        if(Auth::user()->hasRole('Pemohon Data')){
+                                        if (Auth::user()->hasRole('Pemohon Data')) {
                                             ?>
                                             <input class="form-control form-control-sm ml-3" id="agensi_organisasi"
                                                 type="text" value="{{ $user->agensi_organisasi }}" disabled />
                                             <?php
-                                        }else{
+                                               } else {
                                             ?>
                                             <input class="form-control form-control-sm ml-3" id="agensi_organisasi"
                                                 type="text"
@@ -175,8 +175,7 @@
                                             foreach ($user->getRoleNames() as $role) {
                                                 ?><input class="form-control form-control-sm ml-3" id="peranan"
                                                 type="text" value="<?php echo $role; ?> "
-                                                disabled /><?php
-                                                if ($count != count($user->getRoleNames())) {                                                                                           ?>,<?php
+                                                       disabled /><?php if ($count != count($user->getRoleNames())) { ?>,<?php
                                                 }
                                                 $count++;
                                             }
@@ -192,14 +191,7 @@
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-8">
-                                                <input class="form-control form-control-sm ml-3" type="text"
-                                                @if($user->kategori == '2_g2e_iptsPelajar')
-                                                    value="G2E - (IPTS) Pelajar"
-                                                @elseif($user->kategori == '2_g2e_iptaPelajar')
-                                                    value="G2E - (IPTA) Pelajar"
-                                                @else
-                                                value="-"
-                                                @endif disabled />
+                                        <input class="form-control form-control-sm ml-3" type="text" value="{{ $user->kategori }}" disabled />
                                             </div>
                                         </div>
                                     @endif
@@ -208,11 +200,12 @@
                         </div>
                     </div>
                 </div>
+        </div>
+        <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <form method="post" class="form-horizontal" action="{{ url('simpan_kemaskini_password') }}"
-                                id="form_change_password">
+                    <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_password')}}" id="form_change_password">
                                 @csrf
                                 <div class="card-header">
                                     <div class="row align-items-center">
@@ -220,8 +213,7 @@
                                             <h3 class="mb-0">Tukar Kata Laluan</h3>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <button type="button"
-                                                class="btn btn-warning btn-sm text-white btn-icon btn-3 btnTukar">
+                                    <button type="button" class="btn btn-warning btn-sm text-white btn-icon btn-3 btnTukar">
                                                 <span class="btn-inner--icon"><i class="fas fa-wrench"></i></span>
                                                 <span class="btn-inner--text">Tukar</span>
                                             </button>
@@ -295,6 +287,10 @@
             </div>
         </section>
     </div>
+
+@if(Session::has('message'))
+    <script>alert("{{ Session::get('message') }}");</script>
+@endif
 
     <script>
         $(document).ready(function() {

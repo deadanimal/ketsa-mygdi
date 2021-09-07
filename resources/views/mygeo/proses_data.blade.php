@@ -113,7 +113,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="/simpan_proses_data" method="POST">
+                            <form action="{{ url('simpan_proses_data') }}" method="POST">
                                 @csrf
                                 <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
                                 <table id="table_metadatas2" class="table table-bordered table-striped" style="width:100%;">
@@ -169,7 +169,11 @@
                                         </div>
                                         <div class="form-inline">
                                             <label class="form-control-label mr-2">Surat Balasan Permohonan </label>
+<<<<<<< HEAD
+                                            <a href="{{ url('surat_balasan/'.$pemohon->id) }}" class="btn btn-sm btn-danger mb-2">
+=======
                                             <a href="/surat_balasan/{{$permohonan->id}}" class="btn btn-sm btn-danger mb-2">
+>>>>>>> 522b50e10216115c3f64ba235c9f7d6e76192634
                                                 Kemaskini
                                             </a>
                                         </div>

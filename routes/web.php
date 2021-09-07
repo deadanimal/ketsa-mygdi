@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-Route::get('/senarai_metadata_nologin', 'MetadataController@index_nologin');
+Route::any('/senarai_metadata_nologin', 'MetadataController@index_nologin');
 Route::post('/carian_metadata_nologin', 'MetadataController@search_nologin');
 Route::post('/lihat_metadata_nologin', 'MetadataController@show_nologin');
 Route::post('/lihat_xml_nologin', 'MetadataController@show_xml_nologin');
 Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
+Route::get('/downloadMetadataPdf/{id}', 'MetadataController@downloadMetadataPdf');
+Route::get('/downloadMetadataXml/{id}', 'MetadataController@downloadMetadataXml');
 
 Route::post('/loginf', 'AuthController@authenticate');
 //Route::post('/registerf','RegisterController@create');
@@ -241,6 +243,7 @@ Route::post('delete_agensi_organisasi','PortalController@delete_agensi_organisas
 Route::post('getTajukByCategory','MetadataController@getTajukByCategory');
 Route::post('getSubTajuk','MetadataController@getSubTajuk');
 Route::post('deleteElemenMetadata','MetadataController@deleteElemenMetadata');
+Route::post('findMetadataByName','MetadataController@findMetadataByName');
 
 Auth::routes();
 

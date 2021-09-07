@@ -104,8 +104,16 @@
                                                 </label>
                                             </div>
                                             <div class="col-8">
+                                                <?php
+                                                $var = "";
+                                                if($user->hasRole(['Pemohon Data'])) {
+                                                    $var = $user->agensi_organisasi;
+                                                }else{
+                                                    $var = (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"");
+                                                }
+                                                ?>
                                                 <input class="form-control form-control-sm ml-3" name="institusi"
-                                                    type="text" value="{{ $user->agensiOrganisasi->name }}" disabled />
+                                                    type="text" value="{{ $var }}" disabled />
                                             </div>
                                         </div>
                                         <div class="row mb-2">
@@ -186,7 +194,7 @@
                                         <!-- <button class="btn btn-sm btn-default" type=><span class="text-white">Tambah</span></button> -->
                                     </div>
                                 </div>
-                                <form action="/kemaskini_permohonan" method="POST">
+                                <form action="{{ url('kemaskini_permohonan') }}" method="POST" id="formHantarPermohonanPentadbir">
                                     @csrf
                                     <div class="row">
                                         <div class="col-10 pl-lg-5">
@@ -308,10 +316,10 @@
 
                                     <hr class="my-4">
                                     <div class="row mb-3">
-                                        @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->users->kategori == '2_g2e_iptsPelajar' || $permohonan->users->kategori == '2_g2e_iptaPelajar'))
+                                        @if (Auth::user()->hasRole(['Pemohon Data']) && ($pemohon->users->kategori == 'IPTA - Pelajar' || $pemohon->users->kategori == 'IPTS - Pelajar'))
                                             <div class="col-7 form-inline">
                                                 <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
-                                                <a href="/akuan_pelajar/{{ $permohonan->id }}"
+                                                <a href="{{ url('akuan_pelajar/'.$pemohon->id) }}"
                                                     class="btn btn-sm btn-default">Isi
                                                     Borang</a>
                                             </div>
@@ -373,19 +381,24 @@
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
 
                                         @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
-                                            <button type="submit" class="btn btn-success mx-2">
+                                            <button type="button" class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
                                                 Hantar
                                             @elseif(Auth::user()->hasRole(['Pemohon Data']))
-                                                <button type="submit" class="btn btn-outline-success mx-2">
+                                                <button type="button" class="btn btn-outline-success mx-2 btnSimpanDraf">
                                                     Simpan
                                         @endif
 
                                 </form>
                                 @if (Auth::user()->hasRole(['Pemohon Data']))
-                                    <form action="/hantar_permohonan" method="POST">
+                                    <form action="{{ url('hantar_permohonan') }}" method="POST" id="formHantarPermohonan">
                                         @csrf
+<<<<<<< HEAD
+                                        <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
+                                        <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
+=======
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                         <button type="submit" class="btn btn-info">Hantar</button>
+>>>>>>> 522b50e10216115c3f64ba235c9f7d6e76192634
                                     </form>
                                 @endif
                                 </button>
@@ -407,7 +420,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/simpan_senarai_kawasan" method="POST">
+                <form action="{{ url('simpan_senarai_kawasan') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="container-fluid">
@@ -562,34 +575,34 @@
         </div>
     </div>
 
-    <!-- Modal Kemaskini Senarai Kawasan Data -->
-    @foreach ($skdatas as $sk)
-        <div class="modal fade" id="modal-skd-{{ $sk->id }}">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary mb-0">
-                        <h4 class="text-white">Kemaskini Senarai Data dan Kawasan Data</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="/kemaskini_senarai_kawasan" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
+     <!-- Modal Kemaskini Senarai Kawasan Data -->
+     @foreach ($skdatas as $sk)
+          <div class="modal fade" id="modal-skd-{{$sk->id}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary mb-0">
+                    <h4 class="text-white">Kemaskini Senarai Data dan Kawasan Data</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ url('kemaskini_senarai_kawasan') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
 
-                                            <label for="kategori">Kategori</label>
-                                            <select class="form-control" name="kategori">
-                                                <option selected disabled>Pilih</option>
-                                                @foreach ($senarai_data as $sdata)
-                                                    <option value="{{ $sdata->kategori }}" @if ($sk->kategori == $sdata->kategori) selected @endif>
-                                                        {{ $sdata->kategori }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                        <label for="kategori">Kategori</label>
+                                        <select class="form-control" name="kategori" >
+                                            <option selected disabled>Pilih</option>
+                                            @foreach ($senarai_data as $sdata)
+                                                <option value="{{ $sdata->kategori }}" @if($sk->kategori == $sdata->kategori) selected @endif>
+                                                    {{ $sdata->kategori }}
+                                                </option>
+                                            @endforeach
+                                        </select>
 
                                         </div>
 
@@ -675,6 +688,22 @@
         });
 
         $(document).ready(function() {
+            $(document).on('click','.btnHantarPermohonanPentadbir',function(){
+                if(confirm('Anda pasti untuk menghantar permohonan?')){
+                    $('#formHantarPermohonanPentadbir').submit();
+                }
+            });
+            $(document).on('click','.btnHantarPermohonan',function(){
+                if(confirm('Anda pasti untuk menghantar permohonan?')){
+                    $('#formHantarPermohonan').submit();
+                }
+            });
+            $(document).on('click','.btnSimpanDraf',function(){
+                if(confirm('Anda pasti untuk menyimpan permohonan?')){
+                    $('#formHantarPermohonanPentadbir').submit();
+                }
+            });
+
             $("#table_metadatas").DataTable({
                 "ordering": false,
                 "responsive": true,

@@ -84,7 +84,11 @@
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>
+<<<<<<< HEAD
+                                                    <a href="{{ url('lihat_permohonan/'.$pemohon->id) }}"
+=======
                                                     <a href="/lihat_permohonan/{{ $permohonan->id }}"
+>>>>>>> 522b50e10216115c3f64ba235c9f7d6e76192634
                                                         class="btn btn-sm btn-success text-center"><i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $permohonan->id }}"
@@ -112,7 +116,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="POST" action="/simpan_permohonan_baru">
+                    <form method="POST" action="{{ url('simpan_permohonan_baru') }}">
                         @csrf
                         <div class="modal-body row">
                             <div class="col-12">
@@ -170,7 +174,7 @@
         $(document).on("click", ".btnDelete", function() {
             var user_id = $(this).data('permohonanid');
             var permohonan_id = $(this).data('permohonanid');
-            var r = confirm("Adakah anda pasti untuk padam permohonan ini?");
+            var r = confirm("Anda pasti untuk memadam permohonan?");
             if (r == true) {
                 $.ajax({
                     method: "POST",
