@@ -72,6 +72,6 @@ class PenilaianMuatTurunDataCron extends Command
             }
         }
         
-        \Log::info("UncheckedMetadataCron executed!");
+        \Log::info("PenilaianMuatTurunDataCron executed!");
     }
 }

@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\DemoCron::class,
         Commands\UncheckedMetadataCron::class,
         Commands\PenilaianMuatTurunDataCron::class,
     ];
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('demoMetadata:cron')->everyMinute();
 //        $schedule->command('uncheckedMetadata:cron')->everyThirtyMinutes(); //ori specs
         $schedule->command('uncheckedMetadata:cron')->everyFiveMinutes();
 //        $schedule->command('penilaianMuatTurunData:cron')->everyThirtyMinutes(); //ori specs

@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
 
 class DemoCron extends Command
 {
@@ -37,7 +39,14 @@ class DemoCron extends Command
      */
     public function handle()
     {
-        \Log::info("ftesterrrr!");
+        $to_name = "ftestttt";
+        $to_email = "farhan15959@gmail.com";
+        Mail::send('mails.exmpl7', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('ftestcronnnnnnnnnnn');
+            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+        });  
+        
+        \Log::info("ftestttttttttt executed!");
      
         /*
            Write your database logic we bellow:
