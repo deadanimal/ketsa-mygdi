@@ -72,6 +72,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
+                                            @if(isset($permohonan->users))
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $permohonan->name }}</td>
@@ -86,6 +87,7 @@
                                                                 class="fas fa-trash"></i></button>
                                                     </td>
                                                 </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
