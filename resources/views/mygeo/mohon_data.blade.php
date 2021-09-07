@@ -84,11 +84,7 @@
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>
-<<<<<<< HEAD
-                                                    <a href="{{ url('lihat_permohonan/'.$pemohon->id) }}"
-=======
-                                                    <a href="/lihat_permohonan/{{ $permohonan->id }}"
->>>>>>> 522b50e10216115c3f64ba235c9f7d6e76192634
+                                                    <a href="{{ url('lihat_permohonan/'.$permohonan->id) }}"
                                                         class="btn btn-sm btn-success text-center"><i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $permohonan->id }}"

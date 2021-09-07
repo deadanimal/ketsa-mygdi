@@ -316,10 +316,10 @@
 
                                     <hr class="my-4">
                                     <div class="row mb-3">
-                                        @if (Auth::user()->hasRole(['Pemohon Data']) && ($pemohon->users->kategori == 'IPTA - Pelajar' || $pemohon->users->kategori == 'IPTS - Pelajar'))
+                                        @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar'))
                                             <div class="col-7 form-inline">
                                                 <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
-                                                <a href="{{ url('akuan_pelajar/'.$pemohon->id) }}"
+                                                <a href="{{ url('akuan_pelajar/'.$permohonan->id) }}"
                                                     class="btn btn-sm btn-default">Isi
                                                     Borang</a>
                                             </div>
@@ -393,7 +393,7 @@
                                     <form action="{{ url('hantar_permohonan') }}" method="POST" id="formHantarPermohonan">
                                         @csrf
 <<<<<<< HEAD
-                                        <input type="hidden" name="permohonan_id" value="{{ $pemohon->id }}">
+                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                         <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
 =======
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
