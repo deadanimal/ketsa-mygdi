@@ -18,7 +18,7 @@ class PenilaianMuatTurunDataCron extends Command
      *
      * @var string
      */
-    protected $signature = 'PenilaianMuatTurunData:cron';
+    protected $signature = 'penilaianMuatTurunData:cron';
 
     /**
      * The console command description.
@@ -44,44 +44,32 @@ class PenilaianMuatTurunDataCron extends Command
      */
     public function handle()
     {
-//        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 weeks")); //ori specs
-        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-1 hours"));
-       
-        //find metadata tak diusik lebih dari 2 minggu
-        $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->whereDate('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
-        if(count($result1) > 0){
-            foreach($result1 as $r){
-                $r->cronned_metadata_tak_diusik = date('Y-m-d H:i:s',time());
-                $r->update();
-            }
-        }
-        
-        //find metadata that has been mailed(cronned) more than 2 minggu but still x diusik
-        $result2 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->whereDate('cronned_metadata_tak_diusik','<',$lastTwoWeeks)->get();
-        if(count($result2) > 0){
-            foreach($result2 as $r){
-                $r->cronned_metadata_tak_diusik = date('Y-m-d H:i:s',time());
-                $r->update();
-            }
-        }
-        
-        if(count($result1) > 0 || count($result2) > 0){
-            //send email notification to them pengesahs
-            $pengesahs = User::whereHas("roles", function ($q) {
-                            $q->where("name", "Pengesah Metadata");
-                        })->get();
-            if(count($pengesahs) > 0){
-                foreach($pengesahs as $p){
-                    $to_name = $p->name;
-                    $to_email = $p->email;
-                    $data = array('name'=>$p->name);
-                    Mail::send('mails.exmpl16', $data, function($message) use ($to_name, $to_email) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Metadata Tidak Diusik');
-                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-                    });            
+        $mohonsToDoPenilaian = [];
+        $mohons = MohonData::whereNotNull('berjayaMuatTurunTarikh')->where('berjayaMuatTurunStatus','1')->whereNotNull('emailPenilaianStart')->get();
+        if(count($mohons) > 0){
+            foreach($mohons as $m){
+                $interval = date_create('now')->diff(date_create($m->berjayaMuatTurunTarikh));
+                if($interval->m < 7){ //send email once every 2 months for 6 months
+                    $interval2 = date_create('now')->diff(date_create($m->emailPenilaianStart));
+                    if($interval2->m >= 2){ //check last time emailed was 2 months ago
+                        $mohonsToDoPenilaian[$m->id] = $m->name;
+                        $vals = [];
+                        $vals["emailPenilaianStart"] = date('Y-m-d H:i:s',time());
+                        MohonData::where(["id" => $m->id])->update($vals);
+                        
+                        //send email to pemohon data to do penilaian
+                        $to_name = Auth::user()->name;
+                        $to_email = Auth::user()->email;
+                        $data = array('m'=>$m);
+                        Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
+                            $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+                            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                        });
+                    }
                 }
             }
-            \Log::info("UncheckedMetadataCron executed!");
         }
+        
+        \Log::info("UncheckedMetadataCron executed!");
     }
 }

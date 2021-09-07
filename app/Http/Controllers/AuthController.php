@@ -54,8 +54,14 @@ class AuthController extends Controller
             $at->user_id = Auth::user()->id;
             $at->data = 'Login';
             $at->save();
+            
+            //check for completed penilaians for pemohon datas==================
+            $msgPenilaian = "";
+            if(Auth::user()->hasRole(['Pemohon Data'])){
+                $msgPenilaian = $this->checkAfterSixMonthsPenilaian();
+            }
 
-            return redirect()->intended('/landing_mygeo');
+            return redirect()->intended('/landing_mygeo')->with(['msgPenilaian'=>$msgPenilaian]);
         }else{
             return redirect('/login')->with(['msg'=>'ID pengguna atau kata laluan tidak sah.']);
         }
@@ -81,5 +87,24 @@ class AuthController extends Controller
         } else {
             dd('everything is working when the correct data is supplied - so the problem is related to your forms and the data being passed to the function');
         }
+    }
+    
+    public function checkAfterSixMonthsPenilaian()
+    {
+        $msg = "Data-data berikut telah dimuat turun tetapi belum dibuat penilaian:<br>";
+        $mohonsAfterSixMonthsPenilaian = [];
+        //get mohon_data where berjayaMuatTurunTarikh is over 6 months and penilaian is 0 (penilaian not done)
+        $afterSixMonthsPenilaian = MohonData::whereNotNull('berjayaMuatTurunTarikh')->where('penilaian','0')->where('user_id',Auth::user()->id)->get();
+        if(count($afterSixMonthsPenilaian) > 0){
+            $counter = '1';
+            foreach($afterSixMonthsPenilaian as $a){
+                $interval = date_create('now')->diff(date_create($a->berjayaMuatTurunTarikh));
+                if($interval->m > 6){
+                    $msg .= $counter.') '.$a->name.'<br>';
+                    $counter++;
+                }
+            }
+        }
+        return $msg;
     }
 }

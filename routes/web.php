@@ -167,7 +167,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/change_akuan_terima', 'DataAsasController@change_akuan_terima');
     Route::post('/checkThreeHourNotifySelesaiMuatTurun', 'DataAsasController@checkThreeHourNotifySelesaiMuatTurun');
     Route::post('/berjayaMuatTurun', 'DataAsasController@berjayaMuatTurun');
-    Route::post('/checkAfterSixMonthsPenilaian', 'DataAsasController@checkAfterSixMonthsPenilaian');
 
     Route::get('/surat_balasan/{id}','DataAsasController@surat_balasan');
     Route::post('/simpan_surat_balasan', 'DataAsasController@update_surat_balasan');

@@ -277,37 +277,19 @@ class DataAsasController extends Controller
             $vals = [];
             $vals["berjayaMuatTurunStatus"] = '1';
             $vals["berjayaMuatTurunTarikh"] = date('Y-m-d H:i:s',time());
+            $vals["emailPenilaianStart"] = date('Y-m-d H:i:s',time());
             MohonData::where(["id" => $m])->update($vals);
+            
+            //send email to pemohon data to do penilaian
+            $m2 = MohonData::where('id',$m)->get()->first();
+            $to_name = Auth::user()->name;
+            $to_email = Auth::user()->email;
+            $data = array('m'=>$m2);
+            Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+                $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+            });
         }
-        
-        $mohons2 = MohonData::whereIn('id',$mohons)->get();
-        
-        //send email to pemohon data
-        $to_name = Auth::user()->name;
-        $to_email = Auth::user()->email;
-        $data = array('mohons2'=>$mohons2);
-        Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-        });
-        
-        exit();
-    }
-    
-    public function checkAfterSixMonthsPenilaian(Request $request)
-    {
-        $mohonsAfterSixMonthsPenilaian = [];
-        //get mohon_data where berjayaMuatTurunTarikh is over 6 months and penilaian is 0 (penilaian not done)
-        $afterSixMonthsPenilaian = MohonData::whereNotNull('berjayaMuatTurunTarikh')->where('penilaian','0')->where('user_id',Auth::user()->id)->get();
-        if(count($afterSixMonthsPenilaian) > 0){
-            foreach($afterSixMonthsPenilaian as $a){
-                $interval = date_create('now')->diff(date_create($a->berjayaMuatTurunTarikh));
-                if($interval->m > 6){
-                    $mohonsAfterSixMonthsPenilaian[$a->id] = $a->name;
-                }
-            }
-        }
-        echo json_encode($mohonsAfterSixMonthsPenilaian);
         exit();
     }
 
