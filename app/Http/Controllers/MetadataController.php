@@ -329,6 +329,15 @@ class MetadataController extends Controller {
         if (!auth::user()->hasRole(['Pengesah Metadata','Penerbit Metadata', 'Super Admin'])) {
             exit();
         }
+        
+        //======================================================================
+//        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 minutes"));
+//        //find metadata tak diusik lebih dari 2 minggu
+//        $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
+//        //find metadata that has been mailed(cronned) more than 2 minggu but still x diusik
+//        $result2 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('cronned_metadata_tak_diusik','<',$lastTwoWeeks)->get();
+//        dd(count($result1),$lastTwoWeeks);
+        //======================================================================
 
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$id)->get()->first();
 

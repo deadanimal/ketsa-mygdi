@@ -46,10 +46,10 @@ class UncheckedMetadataCron extends Command
     public function handle()
     {
 //        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 weeks")); //ori specs
-        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-5 minutes"));
+        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 minutes"));
        
         //find metadata tak diusik lebih dari 2 minggu
-        $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->whereDate('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
+        $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
         if(count($result1) > 0){
             foreach($result1 as $r){
                 $r->cronned_metadata_tak_diusik = date('Y-m-d H:i:s',time());
@@ -58,7 +58,7 @@ class UncheckedMetadataCron extends Command
         }
         
         //find metadata that has been mailed(cronned) more than 2 minggu but still x diusik
-        $result2 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->whereDate('cronned_metadata_tak_diusik','<',$lastTwoWeeks)->get();
+        $result2 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('cronned_metadata_tak_diusik','<',$lastTwoWeeks)->get();
         if(count($result2) > 0){
             foreach($result2 as $r){
                 $r->cronned_metadata_tak_diusik = date('Y-m-d H:i:s',time());
