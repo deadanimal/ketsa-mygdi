@@ -119,7 +119,6 @@ class MetadataController extends Controller {
         }
         if(isset($request->tarikh_mula) && $request->tarikh_mula != "" && isset($request->tarikh_tamat) && $request->tarikh_tamat != "" && ($request->tarikh_mula == $request->tarikh_tamat)){
             $query = $query->whereBetween('createdate',[$request->tarikh_mula.' 00:00:01',$request->tarikh_tamat.' 59:59:59']);
-//            dd($request->tarikh_mula,$request->tarikh_tamat);
         }else{
             if(isset($request->tarikh_mula) && $request->tarikh_mula != ""){
                 $params['tarikh_mula'] = $request->tarikh_mula;
@@ -439,7 +438,9 @@ class MetadataController extends Controller {
         }
 
         $portal = PortalTetapan::get()->first();
-        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched','portal'));
+        $customMetadataInput = CustomMetadataInput::all();
+        
+        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched','portal','customMetadataInput'));
     }
 
     public function downloadMetadataPdf($id) {
@@ -769,10 +770,12 @@ class MetadataController extends Controller {
                 if(isset($request->{$cmi->input_name})){ //dont remove white space below
                     //smbg sini
                     $custom_inputs .= '
-            <custom_input>
-                
-                <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
-            </custom_input>';
+            <customInput>        
+                <'.$cmi->input_name.'>
+
+                    <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
+                </'.$cmi->input_name.'>
+            </customInput>';
                 }
             }
         }
@@ -1234,9 +1237,12 @@ class MetadataController extends Controller {
                 }
                 if(isset($request->{$cmi->input_name})){ //dont remove white space below
                     $custom_inputs .= '
-            <custom_input>
-                <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
-            </custom_input>';
+            <customInput>        
+                <'.$cmi->input_name.'>
+
+                    <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
+                </'.$cmi->input_name.'>
+            </customInput>';
                 }
             }
         }
