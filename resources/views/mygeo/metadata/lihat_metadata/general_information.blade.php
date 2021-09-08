@@ -10,11 +10,11 @@
     <div id="collapse1" class="panel-collapse collapse in show" data-parent="#div_c1">
         <div class="card-body">
             <?php
-            if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
+            if (isset($metadataxml->contact->CI_ResponsibleParty->contentInfo) && $metadataxml->contact->CI_ResponsibleParty->contentInfo != "") {
                 ?>
                 <div class="form-group row">
                     <p class="pl-lg-3 form-control-label">Content Information<span class="mx-3">:</span></p>
-                    <?php echo $metadataxml->contact->CI_ResponsibleParty; ?>
+                    <?php echo $metadataxml->contact->CI_ResponsibleParty->contentInfo; ?>
                 </div>
                 <?php
             }

@@ -78,7 +78,7 @@
                           <div class="form-group row">
                             <p>Content Information : &nbsp;&nbsp;&nbsp;</p>
                             <?php 
-                            $ci = trim((isset($metadata->contact->CI_ResponsibleParty) && $metadata->contact->CI_ResponsibleParty != "" ? $metadata->contact->CI_ResponsibleParty:""));
+                            $ci = trim((isset($metadata->contact->CI_ResponsibleParty->contentInfo) && $metadata->contact->CI_ResponsibleParty->contentInfo != "" ? $metadata->contact->CI_ResponsibleParty->contentInfo:""));
                             ?>
                           <select name="c1_content_info" class="form-control" style="width:175px;">
                             <option>Select Content</option>

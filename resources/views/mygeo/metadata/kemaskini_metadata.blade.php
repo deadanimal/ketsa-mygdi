@@ -295,8 +295,8 @@
         });
         <?php
         $var = "";
-        if (isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
-            $var = trim($metadataxml->contact->CI_ResponsibleParty);
+        if (isset($metadataxml->contact->CI_ResponsibleParty->contentInfo) && $metadataxml->contact->CI_ResponsibleParty->contentInfo != "") {
+            $var = trim($metadataxml->contact->CI_ResponsibleParty->contentInfo);
         }
         if ($catSelected == "dataset" && $var == "Application") {
             ?>

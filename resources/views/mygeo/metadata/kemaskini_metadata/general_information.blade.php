@@ -160,11 +160,11 @@
         $var = "";
         if(old('c1_content_info') != ""){
             $var = old('c1_content_info');
-        }elseif(isset($metadataxml->contact->CI_ResponsibleParty) && $metadataxml->contact->CI_ResponsibleParty != "") {
-            $var = trim($metadataxml->contact->CI_ResponsibleParty);
+        }elseif(isset($metadataxml->contact->CI_ResponsibleParty->contentInfo) && $metadataxml->contact->CI_ResponsibleParty->contentInfo != "") {
+            $var = trim($metadataxml->contact->CI_ResponsibleParty->contentInfo);
         }
         ?>
         $('#c1_content_info').val("{{ $var }}").trigger('change');
-        $('#content_info_text').val($var);
+        $('#content_info_text').val("{{ $var }}");
     });
 </script>

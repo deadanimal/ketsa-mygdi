@@ -106,7 +106,7 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Jenis Maklumat Kandungan (Content Type)</label>
                                             <select name="content_type" id="content_type" class="form-control form-control-sm" autofocus>
-                                                <option selected disabled>Select Content</option>
+                                                <option value="" selected disabled>Select Content</option>
                                                 <option value="Application" {{ (isset($params['content_type']) && $params['content_type'] == 'Application' ? 'selected':'') }}>Application</option>
                                                 <option value="Clearing House" {{ (isset($params['content_type']) && $params['content_type'] == 'Clearing House' ? 'selected':'') }}>Clearing House</option>
                                                 <option value="Downloadable Data" {{ (isset($params['content_type']) && $params['content_type'] == 'Downloadable Data' ? 'selected':'') }}>Downloadable Data</option>

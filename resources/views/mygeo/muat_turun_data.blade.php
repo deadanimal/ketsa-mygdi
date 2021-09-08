@@ -86,7 +86,7 @@
                                                 <td>
                                                     <?php
                                                     $inTempohUrl = 0;
-                                                    $currentDate = date('Y-m-d');
+                                                    $currentDate = date('d-m-Y');
                                                     $explodedTempohUrl = explode(' - ',$permohonan->proses_datas->tempoh_url);
                                                     $tempohUrlStart  = (isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0]:"");
                                                     $tempohUrlEnd  = (isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1]:"");
