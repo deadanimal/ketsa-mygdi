@@ -703,7 +703,7 @@
                     checkThreeHourNotifySelesaiMuatTurun(),
 //                    10800000  /* 10800000 ms = 3 hrs */ //ori specs
                     300000  /* 300000 ms = 5 min for testing */
-                    10000  /* 10000 ms = 10 sec for farhan testing */
+//                    10000  /* 10000 ms = 10 sec for farhan testing */
                 );
                 <?php
             }

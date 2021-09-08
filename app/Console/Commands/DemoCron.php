@@ -42,7 +42,7 @@ class DemoCron extends Command
         $to_name = "ftestttt";
         $to_email = "farhan15959@gmail.com";
         Mail::send('mails.exmpl7', [], function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('ftestcronnnnnnnnnnn');
+            $message->to($to_email, $to_name)->subject('ftestcronnnnnnnnnnn_LOCAL');
             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
         });  
         
@@ -53,6 +53,6 @@ class DemoCron extends Command
            Item::create(['name'=>'hello new']);
         */
       
-        $this->info('Demo:Cron Cummand Run successfully!');
+        $this->info('Demo:Cron Cummand Run successfully_LOCAL!');
     }
 }

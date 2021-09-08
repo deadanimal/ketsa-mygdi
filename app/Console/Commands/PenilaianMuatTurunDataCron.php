@@ -65,7 +65,7 @@ class PenilaianMuatTurunDataCron extends Command
                         $to_email = Auth::user()->email;
                         $data = array('m'=>$m);
                         Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
-                            $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+                            $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun_LOCAL");
                             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
                         });
                     }
@@ -73,6 +73,6 @@ class PenilaianMuatTurunDataCron extends Command
             }
         }
         
-        \Log::info("PenilaianMuatTurunDataCron executed!");
+        \Log::info("PenilaianMuatTurunDataCron executed_LOCAL!");
     }
 }
