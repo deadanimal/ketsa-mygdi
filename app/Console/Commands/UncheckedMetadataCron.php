@@ -77,12 +77,12 @@ class UncheckedMetadataCron extends Command
                     $to_email = $p->email;
                     $data = array('name'=>$p->name);
                     Mail::send('mails.exmpl16', $data, function($message) use ($to_name, $to_email) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Metadata Tidak Diusik_LOCAL');
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Metadata Tidak Diusik');
                         $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
                     });            
                 }
             }
-            \Log::info("UncheckedMetadataCron executed_LOCAL!");
+            \Log::info("UncheckedMetadataCron executed!");
         }
     }
 }
