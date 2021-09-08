@@ -153,28 +153,32 @@ class CountriesStatesSeeder extends Seeder
         ElemenMetadata::create(["label"=>"Result (Completeness Omission)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Conformance Result (Completeness Omission)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         //Data Quality - Conceptual Consistency
-        ElemenMetadata::create(["label"=>"Scope (Conceptual Consistency	)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
+        ElemenMetadata::create(["label"=>"Scope (Conceptual Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Compliance Level (Conceptual Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Date (Conceptual Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Result (Conceptual Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Conformance Result (Conceptual Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
-        ElemenMetadata::create(["label"=>"Scope (Domain Consistency	)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
+        ElemenMetadata::create(["label"=>"Scope (Domain Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Compliance Level (Domain Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Date (Domain Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Result (Domain Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Conformance Result (Domain Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
-        ElemenMetadata::create(["label"=>"Scope (Format Consistency	)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
+        ElemenMetadata::create(["label"=>"Scope (Format Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Compliance Level (Format Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Date (Format Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Result (Format Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Conformance Result (Format Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
-        ElemenMetadata::create(["label"=>"Scope (Topological Consistency	)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
+        ElemenMetadata::create(["label"=>"Scope (Topological Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Compliance Level (Topological Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Date (Topological Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Result (Topological Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Conformance Result (Topological Consistency)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
-        
-        
+        //Data Quality - Positional Consistency
+        ElemenMetadata::create(["label"=>"Scope (Absolute or External Accuracy)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
+        ElemenMetadata::create(["label"=>"Compliance Level (Absolute or External Accuracy)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
+        ElemenMetadata::create(["label"=>"Date (Absolute or External Accuracy)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
+        ElemenMetadata::create(["label"=>"Result (Absolute or External Accuracy)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
+        ElemenMetadata::create(["label"=>"Conformance Result (Absolute or External Accuracy)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         
         
         ElemenMetadata::create(["label"=>"Classification","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);

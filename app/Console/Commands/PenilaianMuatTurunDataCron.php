@@ -51,7 +51,7 @@ class PenilaianMuatTurunDataCron extends Command
             foreach($mohons as $m){
                 $interval = date_create('now')->diff(date_create($m->berjayaMuatTurunTarikh));
 //                if($interval->m < 7){ //send email once every 2 months for 6 months //ori specs
-                if($interval->i < 5){ //send email once every 2 months for 6 months
+                if($interval->i < 45){ //send email once every 2 months for 6 months
                     $interval2 = date_create('now')->diff(date_create($m->emailPenilaianStart));
                     //if($interval2->m >= 2){ //check last time emailed was 2 months ago //ori specs
                     if($interval2->i >= 1){ //check last time emailed was 2 months ago
