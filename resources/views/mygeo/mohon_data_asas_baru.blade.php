@@ -175,16 +175,11 @@
                                                 </label>
                                             </div>
                                             <div class="col-3">
-<<<<<<< HEAD
-                                                <input class="form-control form-control-sm ml-3" type="text" @if ($permohonan->users->kategori == '2_g2e_iptsPelajar') value="G2E - (IPTS) Pelajar"
-                                                @elseif($permohonan->users->kategori == '2_g2e_iptaPelajar')
+                                                <input class="form-control form-control-sm ml-3" type="text" @if ($permohonan->users->kategori == 'IPTS - Pelajar' ) value="G2E - (IPTS) Pelajar"
+                                                @elseif($permohonan->users->kategori == 'IPTA - Pelajar' )
                                                                 value="G2E - (IPTA) Pelajar"
                                                 @else
                                                             value="-" @endif disabled />
-=======
-                                                <input class="form-control form-control-sm ml-3" type="text"
-                                                    value="{{ $permohonan->users->kategori }}" disabled />
->>>>>>> e28108c3dd99ea8b2eb42b6b872a950d511dbd38
                                             </div>
                                         </div>
                                     </div>
@@ -356,8 +351,7 @@
                                                         onchange="checkCatatan(this.value);">
                                                         <option selected disabled>Pilih</option>
                                                         <option value="Maklumat tidak lengkap,maklumat pemohon tidak sahih"
-                                                            @if ($permohonan->catatan == 'Maklumat tidak lengkap,maklumat pemohon tidak sahih') selected @endif>Maklumat tidak
-                                                            lengkap,maklumat pemohon tidak sahih</option>
+                                                            @if ($permohonan->catatan == 'Maklumat tidak lengkap') selected @endif>Maklumat tidak lengkap</option>
                                                         <option value="Data yang dipohon tiada dalam simpanan PGN" @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
                                                             dalam simpanan PGN</option>
                                                         <option value="Maklumat pemohon tidak sahih" @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat pemohon tidak
@@ -397,13 +391,7 @@
                                 @if (Auth::user()->hasRole(['Pemohon Data']))
                                     <form action="{{ url('hantar_permohonan') }}" method="POST" id="formHantarPermohonan">
                                         @csrf
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                        <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
-=======
-=======
->>>>>>> e28108c3dd99ea8b2eb42b6b872a950d511dbd38
+
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                         <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
                                     </form>
@@ -434,12 +422,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="kategori">Kategori</label>
+                                        <label class="form-control-label" for="kategori">Kategori</label>
                                         <select class="form-control" id="kategori" name="kategori"
                                             onchange="selectKategori()">
                                             <option selected disabled>Pilih</option>
-                                            @foreach ($senarai_data as $sdata)
-                                                <option value="{{ $sdata->kategori }}">{{ $sdata->kategori }}
+                                            @foreach ($kategori_senarai_data as $kategori)
+                                                <option value="{{ $kategori->name }}">{{ $kategori->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -448,16 +436,8 @@
                                     <div class="form-group" id="dynamicAddRemove">
 
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
-                                        <select name="lapisan_data" class="form-control" autofocus>
-                                            <option selected disabled>Pilih</option>
-                                            @foreach ($senarai_data as $sdata)
-                                                <option value="{{ $sdata->lapisan_data }}">
-                                                    {{ $sdata->lapisan_data }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                    <div class="form-group" id="dynamicAddRemove2">
+
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
@@ -581,7 +561,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 
      <!-- Modal Kemaskini Senarai Kawasan Data -->
      @foreach ($skdatas as $sk)
@@ -612,36 +591,6 @@
                                             @endforeach
                                         </select>
 
-=======
-    <!-- Modal Kemaskini Senarai Kawasan Data -->
-    @foreach ($skdatas as $sk)
-        <div class="modal fade" id="modal-skd-{{ $sk->id }}">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary mb-0">
-                        <h4 class="text-white">Kemaskini Senarai Data dan Kawasan Data</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="{{ url('kemaskini_senarai_kawasan') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-
-                                            <label for="kategori">Kategori</label>
-                                            <select class="form-control" name="kategori">
-                                                <option selected disabled>Pilih</option>
-                                                @foreach ($senarai_data as $sdata)
-                                                    <option value="{{ $sdata->kategori }}" @if ($sk->kategori == $sdata->kategori) selected @endif>
-                                                        {{ $sdata->kategori }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
->>>>>>> e28108c3dd99ea8b2eb42b6b872a950d511dbd38
                                         </div>
                                         <div class="form-group">
                                             <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
@@ -820,8 +769,30 @@
             });
 
             $("#dynamicAddRemove").empty();
-            $("#dynamicAddRemove").append(`<label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
-                                                <select name="subkategori" class="form-control" autofocus><option selected disabled>Pilih</option>'
+            $("#dynamicAddRemove").append(`<label class="form-control-label" for="subkategori">Sub-Kategori</label>
+                                                <select name="subkategori" id="subkategori" class="form-control" onchange="selectSubKategori()" autofocus><option selected disabled>Pilih</option>'
+
+                                                    ` + senarai_append + `
+
+                                                 </select>`);
+
+        }
+
+        function selectSubKategori() {
+            d = document.getElementById("subkategori").value;
+            kategori = d.toString();
+            sdata = {!! $senarai_data !!}
+            senarai_append = ''
+            sdata.forEach(element => {
+                if (element['subkategori'] == d) {
+                    senarai_append += `<option value="` + element['lapisan_data'] + `">` + element['lapisan_data'] +
+                        `</option>`
+                }
+            });
+
+            $("#dynamicAddRemove2").empty();
+            $("#dynamicAddRemove2").append(`<label class="form-control-label" for="lapisan_data">Lapisan Data</label>
+                                                <select name="lapisan_data" class="form-control" autofocus><option selected disabled>Pilih</option>'
 
                                                     ` + senarai_append + `
 
@@ -829,8 +800,4 @@
 
         }
     </script>
-<<<<<<< HEAD
 @stop
-=======
-@stop
->>>>>>> e28108c3dd99ea8b2eb42b6b872a950d511dbd38

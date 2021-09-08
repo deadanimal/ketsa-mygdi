@@ -11,6 +11,8 @@ use App\ProsesData;
 use App\PortalTetapan;
 use App\Penilaian;
 use App\SenaraiData;
+use App\KategoriSenaraiData;
+use App\SubKategoriSenaraiData;
 use App\KelasKongsi;
 use App\SuratBalasan;
 use Illuminate\Http\Request;
@@ -57,11 +59,12 @@ class DataAsasController extends Controller
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
         $senarai_data = SenaraiData::orderBy('kategori','ASC')->get();
+        $kategori_senarai_data = KategoriSenaraiData::orderBy('name','ASC')->get();
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->get();
         //  return $dokumens;
 
-        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan','senarai_data','dokumens','pentadbirdata'));
+        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan','senarai_data','dokumens','pentadbirdata','kategori_senarai_data'));
     }
 
     public function data_asas_landing()
@@ -395,14 +398,17 @@ class DataAsasController extends Controller
     public function senarai_data()
     {
         $senarai_data = SenaraiData::orderBy('kategori','ASC')->get();
-        return view('mygeo.senarai_data', compact('senarai_data'));
+        $kategori_sd = KategoriSenaraiData::orderBy('name','ASC')->get();
+        $subkategori_sd = SubKategoriSenaraiData::orderBy('name','ASC')->get();
+        return view('mygeo.senarai_data', compact('senarai_data','kategori_sd','subkategori_sd'));
     }
 
     public function store_senarai_data(Request $request)
     {
         $senarai_data = new SenaraiData();
 
-        $senarai_data->kategori = $request->kategori;
+        $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
+        $senarai_data->kategori = $kategori_sd->name;
         $senarai_data->subkategori = $request->subkategori;
         $senarai_data->lapisan_data = $request->lapisan_data;
 
@@ -416,7 +422,38 @@ class DataAsasController extends Controller
         $at->data = 'Create';
         $at->save();
 
-        return redirect('senarai_data')->with('success', 'Permohonan ditambah. Sila klik pautan berkenaan');
+        return redirect('senarai_data')->with('success', 'Senarai Data Baru telah ditambah');
+    }
+
+    public function store_kategori_senarai_data(Request $request)
+    {
+        $kategori = new KategoriSenaraiData();
+        $kategori->name = $request->kategori;
+        $kategori->save();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
+        $at->save();
+
+        return redirect('senarai_data')->with('success', 'Kategori Senarai Data Ditambah !');
+    }
+
+    public function store_subkategori_senarai_data(Request $request)
+    {
+        $subkategori = new SubKategoriSenaraiData();
+        $subkategori->name = $request->subkategori;
+        $subkategori->kategori_id = $request->kategori_id;
+        $subkategori->save();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
+        $at->save();
+
+        return redirect('senarai_data')->with('success', 'Sub-Kategori Senarai Data Ditambah !');
     }
 
     public function update_senarai_data(Request $request)
@@ -759,7 +796,7 @@ class DataAsasController extends Controller
             });
             return redirect('permohonan_baru')->with('success', 'Permohonan Berjaya Dihantar');
         }
-        elseif(Auth::user()->hasRole(['permohonan Data']))
+        elseif(Auth::user()->hasRole(['Pemohon Data']))
         {
             DB::transaction(function () use ($request) {
                 //simpan status permohonan ini
@@ -773,8 +810,9 @@ class DataAsasController extends Controller
                 $at->user_id = Auth::user()->id;
                 $at->data = 'Update';
                 $at->save();
+
             });
-            return redirect('mohon_data')->with('success', 'Permohonan disimpan sebagai draf');
+            return redirect('mohon_data')->with('success', 'Permohonan Disimpan Sebagai Draf');
         }
 
     }

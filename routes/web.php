@@ -180,6 +180,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/kemaskini_senarai_data', 'DataAsasController@update_senarai_data');
     Route::post('/delete_senarai_data', 'DataAsasController@delete_senarai_data');
 
+    Route::post('/simpan_kategori_senarai_data', 'DataAsasController@store_kategori_senarai_data');
+    Route::post('/simpan_subkategori_senarai_data', 'DataAsasController@store_subkategori_senarai_data');
+
     Route::get('/kategori_kelas_kongsi_data','DataAsasController@kategori_kelas_kongsi_data');
     Route::post('/kemaskini_kelas_kongsi', 'DataAsasController@update_kelas_kongsi');
 

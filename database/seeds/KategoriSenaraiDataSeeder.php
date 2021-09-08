@@ -1,5 +1,6 @@
 <?php
 
+use App\KategoriSenaraiData;
 use Illuminate\Database\Seeder;
 
 class KategoriSenaraiDataSeeder extends Seeder
@@ -12,7 +13,7 @@ class KategoriSenaraiDataSeeder extends Seeder
     public function run()
     {
         KategoriSenaraiData::create(['name' => "Aeronautical"]);
-        KategoriSenaraiData::create(['name' => "Built Enviroment"]);
+        KategoriSenaraiData::create(['name' => "Built Environment"]);
         KategoriSenaraiData::create(['name' => "Demarcation"]);
         KategoriSenaraiData::create(['name' => "Geology"]);
         KategoriSenaraiData::create(['name' => "Hydrography"]);

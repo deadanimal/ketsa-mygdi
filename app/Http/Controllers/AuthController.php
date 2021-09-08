@@ -30,7 +30,7 @@ class AuthController extends Controller
     {
 //        dd(Hash::make('farhan.rimfiel@pipeline-network.comM2'));
 
-        if ($_SERVER['HTTP_HOST'] != "localhost:8888") {
+        if ($_SERVER['HTTP_HOST'] != "127.0.0.1:8003") {
             if (!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == "") {
                 return redirect('/login')->with(['msg' => 'Sila lengkapkan reCaptcha']);
             }
@@ -48,13 +48,13 @@ class AuthController extends Controller
         }
 
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password])) {
-            
+
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
             $at->data = 'Login';
             $at->save();
-            
+
             //check for completed penilaians for pemohon datas==================
             $msgPenilaian = "";
             if(Auth::user()->hasRole(['Pemohon Data'])){
@@ -88,7 +88,7 @@ class AuthController extends Controller
             dd('everything is working when the correct data is supplied - so the problem is related to your forms and the data being passed to the function');
         }
     }
-    
+
     public function checkAfterSixMonthsPenilaian()
     {
         $msg = "Data-data berikut telah dimuat turun tetapi belum dibuat penilaian:<br>";
