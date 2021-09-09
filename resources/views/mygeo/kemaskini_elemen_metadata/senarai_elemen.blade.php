@@ -37,8 +37,8 @@
                                     Tambah
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalKategori">Kategori +</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalTajuk">Tajuk +</a>
+                                    <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalKategori">Kategori +</a>-->
+                                    <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalTajuk">Tajuk +</a>-->
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalSubTajuk">Sub-Tajuk +</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalElemen">Elemen +</a>
                                 </div>
