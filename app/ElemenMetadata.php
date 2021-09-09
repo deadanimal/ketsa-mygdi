@@ -18,7 +18,7 @@ class ElemenMetadata extends Model
         return $this->hasOne('App\Tajuk', 'id', 'tajuk');
     }
     
-    public function getSubTajuk(){
-        return $this->hasOne('App\Tajuk', 'id', 'sub_tajuk');
-    }
+//    public function getSubTajuk(){
+//        return $this->hasOne('App\Tajuk', 'id', 'sub_tajuk');
+//    }
 }

@@ -65,7 +65,7 @@
                                             <tr>
                                                 <td>{{ $bil }}</td>
                                                 <td>{{ $elemen->getTajuk->name }}</td>
-                                                <td>{{ $elemen->getSubTajuk->sub_tajuk }}</td>
+                                                <td></td>
                                                 <td>{{ $elemen->elemen }}</td>
                                                 <td>{{ $elemen->getKategori->name }}</td>
                                                 <td>

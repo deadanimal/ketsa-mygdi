@@ -1631,7 +1631,8 @@ class MetadataController extends Controller {
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
         }
 
-        $elemens = ElemenMetadata::with('getKategori','getTajuk','getSubTajuk')->get();
+//        $elemens = ElemenMetadata::with('getKategori','getTajuk','getSubTajuk')->get();
+        $elemens = ElemenMetadata::with('getKategori','getTajuk')->get();
         $categories = MCategory::get();
         $customMetadataInput = CustomMetadataInput::get();
 
