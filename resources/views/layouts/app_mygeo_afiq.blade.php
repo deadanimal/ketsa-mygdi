@@ -321,8 +321,7 @@
                                             <li class="nav-item">
                                                 <a href="{{ url('penilaian') }}" class="nav-link active">
                                                     <i class="fas fa-edit text-green"></i>
-                                                    <span class="nav-link-text">Akuan Penerimaan dan Penilaian
-                                                        Data</span>
+                                                    <span class="nav-link-text">Penilaian Data</span>
                                                 </a>
                                             </li>
                                         @endif
@@ -640,7 +639,7 @@
     <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <script>
         function checkThreeHourNotifySelesaiMuatTurun(){
-            //check for completed data 
+            //check for completed data
             $.ajax({
                 method: "POST",
                 url: "{{ url('checkThreeHourNotifySelesaiMuatTurun') }}",
@@ -690,7 +689,7 @@
                                 });
                             }
                         }
-                    });     
+                    });
                 }
             });
         }
@@ -722,7 +721,7 @@
                     confirmButtonClass: "btn btn-success",
                     confirmButtonText: 'Okay&nbsp;<i class="fa fa-arrow-right"></i>',
                 }).then(function(result) {
-                    
+
                 });
                 <?php
             }
