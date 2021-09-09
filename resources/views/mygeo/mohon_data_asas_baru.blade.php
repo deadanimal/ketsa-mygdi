@@ -298,14 +298,21 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $dokumen->tajuk_dokumen }}</td>
-                                                    <td>{{ $dokumen->nama_fail }}</td>
+                                                    <td>{{ $dokumen->nama_fail }}{{ (isset($dokumen->nama_fail) ? $dokumen->nama_failt:"-") }}</td>
                                                     <td>
+                                                        <a data-toggle="modal"
+                                                                data-target="#modal-kemaskini-dokumen-{{ $dokumen->id }}">
+                                                                <button type="button" class="btn btn-sm btn-primary">Muat Naik</button>
+                                                            </a>
+                                                            @if (!$dokumen->file_path == null)
+
                                                         <a href="{{ $dokumen->file_path }}" target="_blank">
                                                             <button type="button"
-                                                                class="btn btn-sm btn-success">Lihat</button>
+                                                                class="btn btn-sm btn-success mx-2">Lihat</button>
                                                         </a>
+                                                            @endif
                                                         <button type="button" data-dokumenid="{{ $dokumen->id }}"
-                                                            class="btnDeleteDokumen btn btn-sm btn-danger mx-2"><i
+                                                            class="btnDeleteDokumen btn btn-sm btn-danger"><i
                                                                 class="fas fa-trash"></i>
                                                         </button>
                                                     </td>
@@ -457,6 +464,38 @@
             </div>
         </div>
     </div>
+    @foreach ($dokumens as $dokumen)
+    <div class="modal fade" id="modal-kemaskini-dokumen-{{$dokumen->id}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary mb-0">
+                    <h4 class="text-white">Kemaskini Dokumen Berkaitan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('updateDokumen') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="tajuk_dokumen" class="form-control-label">Tajuk Dokumen</label>
+                            <input type="text" class="form-control" value="{{$dokumen->tajuk_dokumen}}" disabled>
+                        </div>
+                        <input type="file" name="file" class="form-control">
+                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                        <input type="hidden" name="id" value="{{ $permohonan->id }}">
+                        <input type="hidden" name="dokumen_id" value="{{ $dokumen->id }}">
+
+                        <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">
+                            Simpan
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @endforeach
     <!--Modal Tambah Dokumen -->
     <div class="modal fade" id="modal-dokumen-berkaitan">
         <div class="modal-dialog">

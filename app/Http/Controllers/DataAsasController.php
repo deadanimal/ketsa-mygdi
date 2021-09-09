@@ -157,11 +157,11 @@ class DataAsasController extends Controller
         return view('mygeo.penilaian', compact('permohonan_list'));
     }
 
-    public function penilaian_permohonan($id)
+    public function penilaian_pemohon($id)
     {
         $penilaian = Penilaian::where('permohonan_id', $id)->first();
         $permohonan = MohonData::where('id', $id)->first();
-        return view('mygeo.penilaian_permohonan',compact('permohonan','penilaian'));
+        return view('mygeo.penilaian_pemohon',compact('permohonan','penilaian'));
     }
 
     public function store_penilaian(Request $request)
@@ -406,14 +406,11 @@ class DataAsasController extends Controller
     public function store_senarai_data(Request $request)
     {
         $senarai_data = new SenaraiData();
-
         $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
         $senarai_data->kategori = $kategori_sd->name;
         $senarai_data->subkategori = $request->subkategori;
         $senarai_data->lapisan_data = $request->lapisan_data;
-
         $senarai_data->data_id = $request->data_id;
-
         $senarai_data->save();
 
         $at = new AuditTrail();
@@ -427,6 +424,10 @@ class DataAsasController extends Controller
 
     public function store_kategori_senarai_data(Request $request)
     {
+        $duplicate_valid = KategoriSenaraiData::where(['name' => $request->kategori])->get();
+
+        if($duplicate_valid->isEmpty()){
+
         $kategori = new KategoriSenaraiData();
         $kategori->name = $request->kategori;
         $kategori->save();
@@ -437,7 +438,15 @@ class DataAsasController extends Controller
         $at->data = 'Create';
         $at->save();
 
+
         return redirect('senarai_data')->with('success', 'Kategori Senarai Data Ditambah !');
+
+        } else {
+
+            return redirect('senarai_data')->with('warning', 'Kategori Senarai Data Telah Wujud !');
+        }
+
+
     }
 
     public function store_subkategori_senarai_data(Request $request)
@@ -464,7 +473,7 @@ class DataAsasController extends Controller
                 "kategori" => $request->kategori,
                 "subkategori" => $request->subkategori,
                 "lapisan_data" => $request->lapisan_data,
-                "kategori_permohonan" => $request->kategori_permohonan,
+                // "kategori_permohonan" => $request->kategori_permohonan,
                 "kelas" => $request->kelas,
                 "status" => $request->status,
                 "harga_data" => $request->harga_data,
@@ -679,12 +688,7 @@ class DataAsasController extends Controller
     {
 
         // return $request;
-        $skdata = new SenaraiKawasanData();
-        $skdata->lapisan_data = $request->lapisan_data;
-        $skdata->kategori = $request->kategori;
-        $skdata->subkategori = $request->subkategori;
-        $skdata->kawasan_data = $request->kawasan_data;
-        $skdata->permohonan_id = $request->permohonan_id;
+
         $id = $request->permohonan_id;
 
         $at = new AuditTrail();
@@ -693,17 +697,95 @@ class DataAsasController extends Controller
         $at->data = 'Create';
         $at->save();
 
+        $valid_surat_rasmi = DokumenBerkaitan::where(['tajuk_dokumen' => 'Surat Permohonan Rasmi','permohonan_id' => $request->permohonan_id ])->get();
+        $valid_user = User::where(["id" => Auth::user()->id])->get()->first();
+        $valid_terhad = SenaraiKawasanData::where(['kelas' => 'Terhad','permohonan_id' => $request->permohonan_id ])->get();
+        $valid_tak_terhad = SenaraiKawasanData::where(['kelas' => 'Tidak Terhad','permohonan_id' => $request->permohonan_id ])->get();
+
+        $valid_nric = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan','permohonan_id' => $request->permohonan_id ])->get();
+        $valid_undertaking = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang Undertaking (optional)','permohonan_id' => $request->permohonan_id ])->get();
+        $valid_nric_pel = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Pelajar','permohonan_id' => $request->permohonan_id ])->get();
+        $valid_nric_dekan = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Dekan/Pustakawan','permohonan_id' => $request->permohonan_id ])->get();
+        $valid_ppnm = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang PPNM','permohonan_id' => $request->permohonan_id ])->get();
+
         $valid = SenaraiData::where([
             ["kategori","=", $request->kategori],
             ["subkategori","=", $request->subkategori],
             ["lapisan_data","=", $request->lapisan_data],
         ])->first();
+
         if(empty($valid)){
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Padanan Data Senarai dan Kawasan Salah!');
         } else {
-            $skdata->harga_data = $valid->harga_data;
+            $skdata = new SenaraiKawasanData();
+            $skdata->lapisan_data = $request->lapisan_data;
+            $skdata->kategori = $request->kategori;
+            $skdata->subkategori = $request->subkategori;
+            $skdata->kawasan_data = $request->kawasan_data;
+            $skdata->kelas = $valid->kelas;
+            $skdata->permohonan_id = $request->permohonan_id;
             $skdata->save();
-            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan ditambah!');
+
+            if($valid_surat_rasmi->isEmpty()){
+
+                $dokumen = new DokumenBerkaitan();
+                $dokumen->tajuk_dokumen = 'Surat Permohonan Rasmi';
+                $dokumen->permohonan_id = $request->permohonan_id;
+                $dokumen->save();
+            }
+
+            if($valid_terhad->isEmpty()){
+
+                if($valid_ppnm->isEmpty()){
+                    $dokumen2 = new DokumenBerkaitan();
+                    $dokumen->tajuk_dokumen = 'Borang PPNM';
+                    $dokumen->permohonan_id = $request->permohonan_id;
+                    $dokumen->save();
+                }
+
+                if(!$valid_user->kategori == 'IPTA - Pelajar' || !$valid_user->kategori == 'IPTS - Pelajar' ) {
+
+                    if($valid_nric->isEmpty()){
+                        $dokumen1 = new DokumenBerkaitan();
+                        $dokumen1->tajuk_dokumen = 'Salinan Kad Pengenalan';
+                        $dokumen1->permohonan_id = $request->permohonan_id;
+                        $dokumen1->save();
+                    }
+                    if($valid_undertaking->isEmpty()){
+                        $dokumen2 = new DokumenBerkaitan();
+                        $dokumen2->tajuk_dokumen = 'Borang Undertaking (optional)';
+                        $dokumen2->permohonan_id = $request->permohonan_id;
+                        $dokumen2->save();
+                    }
+                } else {
+
+                    if($valid_nric_pel->isEmpty()){
+                        $dokumen1 = new DokumenBerkaitan();
+                        $dokumen1->tajuk_dokumen = 'Salinan Kad Pengenalan Pelajar';
+                        $dokumen1->permohonan_id = $request->permohonan_id;
+                        $dokumen1->save();
+                    }
+                    if($valid_nric_dekan->isEmpty()){
+                        $dokumen2 = new DokumenBerkaitan();
+                        $dokumen2->tajuk_dokumen = 'Salinan Kad Pengenalan Dekan/Pustakawan';
+                        $dokumen2->permohonan_id = $request->permohonan_id;
+                        $dokumen2->save();
+                    }
+                }
+
+            }
+            elseif($valid_tak_terhad->isEmpty()){
+
+                if($valid_ppnm->isEmpty()){
+                    $dokumen2 = new DokumenBerkaitan();
+                    $dokumen->tajuk_dokumen = 'Borang PPNM';
+                    $dokumen->permohonan_id = $request->permohonan_id;
+                    $dokumen->save();
+                }
+
+            }
+
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan Ditambah!');
         }
 
     }
@@ -929,6 +1011,34 @@ class DataAsasController extends Controller
             $failModel->file_path = '/storage/' . $failPath;
             $failModel->permohonan_id = $request->permohonan_id;
             $failModel->save();
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Create';
+            $at->save();
+
+            return back()
+                ->with('success', 'Dokumen telah berjaya dimuat naik.')
+                ->with('file', $failNama);
+        }
+    }
+
+    public function update_dokumen_berkaitan(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:pdf|max:2048'
+            // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'
+        ]);
+
+        if ($request->file()) {
+            $failNama = time() . '_' . $request->file->getClientOriginalName();
+            $failPath = $request->file('file')->storeAs('uploads', $failNama, 'public');
+
+            DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
+                "nama_fail" => $failNama,
+                "file_path" => '/storage/' . $failPath,
+            ]);
 
             $at = new AuditTrail();
             $at->path = url()->full();

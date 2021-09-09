@@ -139,8 +139,8 @@
                                         <label class="form-control-label">Pengkelasan Lapisan Data</label>
                                         <select class="form-control form-control-sm" name="kelas">
                                             <option selected disabled>Pilih</option>
-                                            <option value="Terhad" >Terhad</option>
-                                            <option value="Tidak Terhad">Tidak Terhad</option>
+                                            <option value="Terhad" @if($sdata->kelas == "Terhad") selected @endif>Terhad</option>
+                                            <option value="Tidak Terhad" @if($sdata->kelas == "Tidak Terhad") selected @endif>Tidak Terhad</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -152,8 +152,8 @@
                                         <label class="form-control-label">Status Data</label>
                                         <select class="form-control form-control-sm" name="status">
                                             <option selected disabled>Pilih</option>
-                                            <option value="Tersedia">Tersedia</option>
-                                            <option value="Tiada">Tiada</option>
+                                            <option value="Tersedia" @if($sdata->status == "Tersedia") selected @endif>Tersedia</option>
+                                            <option value="Tiada" @if($sdata->status == "Tiada") selected @endif>Tiada</option>
                                         </select>
                                     </div>
 
