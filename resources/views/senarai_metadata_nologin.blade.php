@@ -119,11 +119,6 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <pre>
-                                                <?php
-                                                var_dump($params);
-                                                ?>
-                                            </pre>
                                             <label for="exampleInputEmail1">Kategori Topik (Topic Category)</label><br>
                                             <input type="checkbox" name="topic_category[]"  value="Administrative and Political Boundaries" {{ (isset($params['topic_category']) && in_array('Administrative and Political Boundaries',$params['topic_category']) ? 'checked':'') }}> Administrative and Political Boundaries<br>
                                             <input type="checkbox" name="topic_category[]"  value="Agriculture and Farming" {{ (isset($params['topic_category']) && in_array('Agriculture and Farming',$params['topic_category']) ? 'checked':'') }}> Agriculture and Farming<br>
