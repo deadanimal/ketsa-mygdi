@@ -697,16 +697,6 @@ class DataAsasController extends Controller
         $at->data = 'Create';
         $at->save();
 
-        $valid_surat_rasmi = DokumenBerkaitan::where(['tajuk_dokumen' => 'Surat Permohonan Rasmi','permohonan_id' => $request->permohonan_id ])->get();
-        $valid_user = User::where(["id" => Auth::user()->id])->get()->first();
-        $valid_terhad = SenaraiKawasanData::where(['kelas' => 'Terhad','permohonan_id' => $request->permohonan_id ])->get();
-        $valid_tak_terhad = SenaraiKawasanData::where(['kelas' => 'Tidak Terhad','permohonan_id' => $request->permohonan_id ])->get();
-
-        $valid_nric = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan','permohonan_id' => $request->permohonan_id ])->get();
-        $valid_undertaking = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang Undertaking (optional)','permohonan_id' => $request->permohonan_id ])->get();
-        $valid_nric_pel = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Pelajar','permohonan_id' => $request->permohonan_id ])->get();
-        $valid_nric_dekan = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Dekan/Pustakawan','permohonan_id' => $request->permohonan_id ])->get();
-        $valid_ppnm = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang PPNM','permohonan_id' => $request->permohonan_id ])->get();
 
         $valid = SenaraiData::where([
             ["kategori","=", $request->kategori],
@@ -723,9 +713,21 @@ class DataAsasController extends Controller
             $skdata->subkategori = $request->subkategori;
             $skdata->kawasan_data = $request->kawasan_data;
             $skdata->kelas = $valid->kelas;
-            $skdata->permohonan_id = $request->permohonan_id;
+            $skdata->permohonan_id = $id;
             $skdata->save();
 
+            $valid_surat_rasmi = DokumenBerkaitan::where(['tajuk_dokumen' => 'Surat Permohonan Rasmi','permohonan_id' => $id ])->get();
+            $valid_user = User::where(["id" => Auth::user()->id])->get()->first();
+            $valid_terhad = SenaraiKawasanData::where(['kelas' => 'Terhad','permohonan_id' => $id ])->get();
+            $valid_tak_terhad = SenaraiKawasanData::where(['kelas' => 'Tidak Terhad','permohonan_id' => $id ])->get();
+
+            $valid_nric = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan','permohonan_id' => $id ])->get();
+            $valid_undertaking = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang Undertaking (optional)','permohonan_id' => $id ])->get();
+            $valid_nric_pel = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Pelajar','permohonan_id' => $id ])->get();
+            $valid_nric_dekan = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Dekan/Pustakawan','permohonan_id' => $id ])->get();
+            $valid_ppnm = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang PPNM','permohonan_id' => $id ])->get();
+
+            // dd($valid_surat_rasmi);
             if($valid_surat_rasmi->isEmpty()){
 
                 $dokumen = new DokumenBerkaitan();
@@ -733,14 +735,13 @@ class DataAsasController extends Controller
                 $dokumen->permohonan_id = $request->permohonan_id;
                 $dokumen->save();
             }
-
-            if($valid_terhad->isEmpty()){
+            if($valid_terhad->isNotEmpty()){
 
                 if($valid_ppnm->isEmpty()){
-                    $dokumen2 = new DokumenBerkaitan();
-                    $dokumen->tajuk_dokumen = 'Borang PPNM';
-                    $dokumen->permohonan_id = $request->permohonan_id;
-                    $dokumen->save();
+                    $dokumen3 = new DokumenBerkaitan();
+                    $dokumen3->tajuk_dokumen = 'Borang PPNM';
+                    $dokumen3->permohonan_id = $request->permohonan_id;
+                    $dokumen3->save();
                 }
 
                 if(!$valid_user->kategori == 'IPTA - Pelajar' || !$valid_user->kategori == 'IPTS - Pelajar' ) {
@@ -771,16 +772,6 @@ class DataAsasController extends Controller
                         $dokumen2->permohonan_id = $request->permohonan_id;
                         $dokumen2->save();
                     }
-                }
-
-            }
-            elseif($valid_tak_terhad->isEmpty()){
-
-                if($valid_ppnm->isEmpty()){
-                    $dokumen2 = new DokumenBerkaitan();
-                    $dokumen->tajuk_dokumen = 'Borang PPNM';
-                    $dokumen->permohonan_id = $request->permohonan_id;
-                    $dokumen->save();
                 }
 
             }
@@ -1128,7 +1119,7 @@ class DataAsasController extends Controller
         return redirect('mohon_data')->with('success', 'Permohonan Data dibuang!');
     }
 
-    public function api_convert_and_watermark_dokumen(Request $request) {
+    public function api_store_generate_nric(Request $request) {
         //instatiate and use the dompdf class
         // dd($request->gambar);
         $img_f = file_get_contents($request->ic_front);
@@ -1195,6 +1186,77 @@ class DataAsasController extends Controller
         $failModel->file_path = '/storage/uploads/' . $failNama;
         $failModel->permohonan_id = $request->permohonan_id;
         $failModel->save();
+
+        $id = $request->permohonan_id;
+        return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Salinan Kad Pengenalan Berjaya Dijana dan Ditambah');
+    }
+
+    public function api_update_generate_nric(Request $request) {
+        //instatiate and use the dompdf class
+        // dd($request->gambar);
+        $img_f = file_get_contents($request->ic_front);
+        $base64_front = 'data:image/png;base64,' . base64_encode($img_f);
+        $img_b = file_get_contents($request->ic_back);
+        $base64_back = 'data:image/png;base64,' . base64_encode($img_b);
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('<!DOCTYPE html>
+        <html>
+
+        <head>
+            <title></title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </head>
+        <style>
+        div {
+            align-content: center;
+          }
+        </style>
+
+        <body>
+
+            <div class="container">
+                <br><br><br><br>
+                <div class="row">
+                <div class="col-4"></div>
+                    <div class="col-8 d-flex justify-content-center">
+                        <img src="'. $base64_front .'" class="text-center pb-5" alt="front pic" style="width: 300px;" />
+                    </div>
+                </div><br><br>
+
+                <div class="row mt-7">
+                <div class="col-4"></div>
+                    <div class="col-8 d-flex justify-content-center">
+                        <img src="'. $base64_back .'" class="text-center" alt="back pic" style="width: 300px;" />
+                    </div>
+                </div><br>
+                UNTUK KEGUNAAN KETSA SAHAJA
+            </div>
+        </body>
+
+        </html>');
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'potrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        $failModel = new DokumenBerkaitan();
+        $content = $dompdf->output();
+
+        $failNama = time() . '_' .'nric_copy.pdf';
+        // dd($failNama);
+        DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
+            "nama_fail" => $failNama,
+            "file_path" => '/storage/uploads/' . $failNama,
+        ]);
+        Storage::put('public/uploads/'. $failNama, $content);
 
         $id = $request->permohonan_id;
         return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Salinan Kad Pengenalan Berjaya Dijana dan Ditambah');

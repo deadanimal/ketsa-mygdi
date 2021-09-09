@@ -355,7 +355,7 @@
             </div>
             <div class="row">
                 <div class="col text-center">
-                    <iframe width="720" height="475" src="https://www.youtube.com/embed/I2P1zEBciq4?autoplay=1&mute=1&loop=1"
+                    <iframe width="900" height="475" src="https://www.youtube.com/embed/I2P1zEBciq4?autoplay=1&mute=1&loop=1"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
