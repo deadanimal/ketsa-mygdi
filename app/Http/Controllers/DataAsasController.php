@@ -259,9 +259,9 @@ class DataAsasController extends Controller
             foreach($mohonData_3hourNotify as $m){
                 $interval = date_create(date('Y-m-d H:i:s',time()))->diff(date_create($m->threeHourNotifyStart));
 //                if($interval->h > 3){ //ori specs
-                $permohonanMoreThan3Hours[$m->id] = $m->id.'___'.$interval->s;
+//                $permohonanMoreThan3Hours[$m->id] = $m->id.'___'.$interval->s;
                 if($interval->s > 0){
-                    $permohonanMoreThan3Hours[$m->id] = $m->name.'___'.$interval->s;
+                    $permohonanMoreThan3Hours[$m->id] = $m->name;
                     $vals = [];
                     $vals["threeHourNotifyStart"] = date('Y-m-d H:i:s',time());
                     MohonData::where(["id" => $m->id])->update($vals);

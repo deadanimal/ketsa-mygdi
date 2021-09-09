@@ -662,7 +662,7 @@
                     });
                     swal({
                         title: "Adakah anda berjaya memuat turun data?",
-                        text: msg,
+                        html: msg,
                         type: "warning",
                         input: "checkbox",
                         inputPlaceholder: " Saya berjaya memuat turun data",
@@ -702,7 +702,7 @@
             ?>
             setInterval(
                 checkThreeHourNotifySelesaiMuatTurun,
-                60000  /* 60000 ms = 1 min for farhan testing */
+                20000  /* 15000 ms = 20 seconds for farhan testing */
 //                    10800000  /* 10800000 ms = 3 hrs */ //ori specs
 //                    300000  /* 300000 ms = 5 min for testing */
             );

@@ -91,12 +91,13 @@ class AuthController extends Controller
     
     public function checkAfterSixMonthsPenilaian()
     {
-        $msg = "Data-data berikut telah dimuat turun tetapi belum dibuat penilaian:<br>";
+        $msg = "";
         $mohonsAfterSixMonthsPenilaian = [];
         //get mohon_data where berjayaMuatTurunTarikh is over 6 months and penilaian is 0 (penilaian not done)
         $afterSixMonthsPenilaian = MohonData::whereNotNull('berjayaMuatTurunTarikh')->where('penilaian','0')->where('user_id',Auth::user()->id)->get();
         if(count($afterSixMonthsPenilaian) > 0){
             $counter = '1';
+            $msg = "Data-data berikut telah dimuat turun tetapi belum dibuat penilaian:<br>";
             foreach($afterSixMonthsPenilaian as $a){
                 $interval = date_create('now')->diff(date_create($a->berjayaMuatTurunTarikh));
 //                if($interval->m > 6){ //ori specs
