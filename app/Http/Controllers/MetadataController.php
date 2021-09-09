@@ -110,15 +110,16 @@ class MetadataController extends Controller {
             $params['content_type'] = $request->content_type;
             $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
         }
+        $params['topic_category'] = [];
         if(isset($request->topic_category)){
-            $params['topic_category'] = [];
-            $query = $query->where(function ($query) use ($request) {
+            $query = $query->where(function ($query) use ($request,&$params) {
                 foreach($request->topic_category as $tc){
                     $query->orWhere('data', 'ilike', '%<MD_TopicCategoryCode>' . $tc . '</MD_TopicCategoryCode>%');
-                    $params['topic_category'][] = $tc;
+                    $params['topic_category'][]= $tc;
                 }
             });
         }
+        
         if(isset($request->tarikh_mula) && $request->tarikh_mula != "" && isset($request->tarikh_tamat) && $request->tarikh_tamat != "" && ($request->tarikh_mula == $request->tarikh_tamat)){
             $query = $query->whereBetween('createdate',[$request->tarikh_mula.' 00:00:01',$request->tarikh_tamat.' 59:59:59']);
         }else{
