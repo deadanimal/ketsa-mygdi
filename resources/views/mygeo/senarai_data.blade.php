@@ -110,7 +110,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header bg-primary mb-0">
-                            <h4 class="text-white">Kemaskini SenaraiData ID#{{ $loop->iteration }}</h4>
+                            <h4 class="text-white">Kemaskini Senarai Data</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

@@ -58,13 +58,14 @@ class DataAsasController extends Controller
             }
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
-        $senarai_data = SenaraiData::orderBy('kategori','ASC')->get();
+        $senarai_data = SenaraiData::distinct('subkategori')->get();
+        $lapisandata = SenaraiData::distinct('lapisan_data')->get();
         $kategori_senarai_data = KategoriSenaraiData::orderBy('name','ASC')->get();
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->get();
         //  return $dokumens;
 
-        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan','senarai_data','dokumens','pentadbirdata','kategori_senarai_data'));
+        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan','senarai_data','dokumens','pentadbirdata','kategori_senarai_data','lapisandata'));
     }
 
     public function data_asas_landing()
@@ -77,11 +78,11 @@ class DataAsasController extends Controller
     {
         $subs = SenaraiData::where([
             ['kategori','=','LOL']
-        ])->get();
+        ])->distinct('subkategori')->get();;
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
         ])->get();
-        $senarai_data = SenaraiData::orderBy('kategori')->get();
+        $senarai_data = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
 
         $portal = PortalTetapan::get()->first();
         return view('/data_asas_senarai',[
@@ -97,11 +98,11 @@ class DataAsasController extends Controller
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
             ['kategori','=',$kategori->kategori]
-        ])->get();
+        ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
         ])->get();
-        $senarai_dataa = SenaraiData::all();
+        $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
 
         return view('/data_asas_senarai',[
@@ -119,11 +120,11 @@ class DataAsasController extends Controller
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
             ['kategori','=',$kategori->kategori],
-        ])->get();
+        ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=',$subkategori->subkategori],
         ])->get();
-        $senarai_dataa = SenaraiData::all();
+        $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
         return view('/data_asas_senarai',[
             'senarai_data' => $senarai_dataa,
@@ -318,6 +319,12 @@ class DataAsasController extends Controller
 
         // dd($valid_surat);
         if($valid_surat->isEmpty()){
+
+            ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
+                "pautan_data" => $request->pautan_data,
+                "tempoh" => $request->tempoh,
+                "total_harga" => $request->total_harga,
+            ]);
             return redirect('/proses_data')->with('warning', 'Sila Kemaskini Surat Balasan');
         } else {
 
@@ -328,7 +335,7 @@ class DataAsasController extends Controller
         ]);
 
         Mohondata::where(["id" => $request->permohonan_id])->update([
-            // "status" => $request->status = 3,
+            "status" => $request->status = 3,
         ]);
 
     //     $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
@@ -713,6 +720,7 @@ class DataAsasController extends Controller
             $skdata->subkategori = $request->subkategori;
             $skdata->kawasan_data = $request->kawasan_data;
             $skdata->kelas = $valid->kelas;
+            $skdata->harga_data = $valid->harga_data;
             $skdata->permohonan_id = $id;
             $skdata->save();
 

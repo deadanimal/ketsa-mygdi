@@ -78,8 +78,9 @@
                                                 <td>{{ $permohonan->users->kategori }}</td>
                                                 <td>{{ $permohonan->assign_admin }}</td>
                                                 <td>
-                                                    <a href="{{ url('/lihat_permohonan/'.$permohonan->id) }}"
-                                                        class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i>
+                                                    <a href="{{ url('/lihat_permohonan/' . $permohonan->id) }}"
+                                                        class="btn btn-sm btn-info text-center"><i
+                                                            class="fas fa-eye"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $permohonan->id }}"
                                                         class="btnDelete btn btn-sm btn-danger mr-2"><i
@@ -137,11 +138,16 @@
                                                     <td>{{ $data->kategori }}</td>
                                                     <td>{{ $data->kawasan_data }}</td>
                                                     <td>
-                                                        <input class="form-control form-control-sm amount_{{$permohonan->id}}_{{$data->id}}"
-                                                            placeholder="Saiz Data" id="size_{{ $data->id }}" onchange="kiraharga()" name="saiz_data[]" type="number" step="0.01">
-                                                        <label class="ml-2">× RM {{ $data->harga_data }} </label>
-                                                        <input type="hidden" name="senarai_kawasan_id[]" value="{{$data->id}}">
-                                                        <input type="hidden" class="price_{{$permohonan->id}}"
+                                                        <input
+                                                            class="form-control form-control-sm amount_{{ $permohonan->id }}_{{ $data->id }}"
+                                                            placeholder="Saiz Data" id="size_{{ $data->id }}"
+                                                            onchange="kiraharga{{ $permohonan->id }}()" type="number"
+                                                            step="0.01">
+                                                        <label class="ml-2">× RM {{ $data->harga_data }}
+                                                        </label>
+                                                        <input type="hidden" name="senarai_kawasan_id[]"
+                                                            value="{{ $data->id }}">
+                                                        <input type="hidden" class="price_{{ $permohonan->id }}"
                                                             value="{{ $data->harga_data }}">
                                                     </td>
                                                 </tr>
@@ -154,7 +160,9 @@
                                         <div class="form-inline float-right">
                                             <label class="form-control-label mr-2">Jumlah Harga (RM)</label>
                                             <input class="form-control form-control-sm" placeholder="0.00"
-                                                style="width: 90px;" type="text" name="total_harga" id="jumlah_harga_dokumen" step="0.01" value="{{$permohonan->proses_datas->total_harga}}">
+                                                style="width: 90px;" type="text" name="total_harga"
+                                                id="jumlah_harga_dokumen_{{ $permohonan->id }}" step="0.01"
+                                                value="{{ $permohonan->proses_datas->total_harga }}">
                                         </div>
                                     </div>
                                 </div>
@@ -162,21 +170,25 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-control-label mr-2">Pautan Data </label>
-                                            <input class="form-control form-control-sm mb-2" name="pautan_data" placeholder="Masukkan Pautan Data" type="text" value="{{$permohonan->proses_datas->pautan_data}}">
+                                            <input class="form-control form-control-sm mb-2" name="pautan_data"
+                                                placeholder="Masukkan Pautan Data" type="text"
+                                                value="{{ $permohonan->proses_datas->pautan_data }}">
 
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
-                                            <input class="form-control form-control-sm" name="tempoh" placeholder="" type="date" disabled>
+                                            <input class="form-control form-control-sm" name="tempoh" placeholder=""
+                                                type="date" disabled>
                                         </div>
                                         <div class="form-inline">
                                             <label class="form-control-label mr-2">Surat Balasan Permohonan </label>
-                                            <a href="{{ url('surat_balasan/'.$permohonan->id) }}" class="btn btn-sm btn-danger mb-2">
+                                            <a href="{{ url('surat_balasan/' . $permohonan->id) }}"
+                                                class="btn btn-sm btn-danger mb-2">
                                                 Kemaskini
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 pt-9 text-right">
-                                        <input type="hidden" name="permohonan_id" value="{{$permohonan->id}}">
-                                        <input type="hidden" name="id" value="{{$permohonan->id}}">
+                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                        <input type="hidden" name="id" value="{{ $permohonan->id }}">
                                         <button class="btn btn-success ml-auto" type="submit">
                                             Hantar
                                         </button>
@@ -191,50 +203,30 @@
 
     </div>
 
+    @foreach ($permohonan_list as $permohonan)
+        <script>
+            function kiraharga{{ $permohonan->id }}() {
+                console.log('Kira harga_{{ $permohonan->id }}');
+                var pembelian = {!! $skdatas !!}
+                var jumlahHarga = 0;
+                pembelian.forEach(element => {
+                    var harga = parseFloat(element.harga_data);
+                    var size = document.getElementById("size_" + element.id).value;
+                    var jumlah = harga * size;
+                    // var hargaDoc = document.getElementById("harga_"+element.id);
+                    // hargaDoc.value = jumlah;
+                    jumlahHarga += jumlah
+                    console.log('jumlah: ', jumlah);
+                });
+                jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
+                console.log('jumlahHarga: ', jumlahHarga);
+                var jumlah_harga = document.getElementById("jumlah_harga_dokumen_{{ $permohonan->id }}");
+                console.log(jumlah_harga)
+                jumlah_harga.value = jumlahHarga;
 
-    <script>
-
-        function kiraharga() {
-            console.log('Kira harga');
-            var pembelian = {!! $skdatas !!}
-            var jumlahHarga = 0;
-            pembelian.forEach(element => {
-                var harga = parseFloat(element.harga_data);
-                var size = document.getElementById("size_"+element.id).value ;
-                var jumlah = harga * size;
-                // var hargaDoc = document.getElementById("harga_"+element.id);
-                // hargaDoc.value = jumlah;
-                jumlahHarga += jumlah
-                console.log('jumlah: ', jumlah);
-            });
-            jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
-            console.log('jumlahHarga: ', jumlahHarga);
-            var jumlah_harga = document.getElementById("jumlah_harga_dokumen");
-            console.log(jumlah_harga)
-            jumlah_harga.value = jumlahHarga;
-
-        }
-        @foreach ($permohonan_list as $permohonan)
-            @foreach ($skdatas as $data)
-                // @if ($data->permohonan_id == $permohonan->id)
-                // $('.amount_{{$permohonan->id}}_{{$data->id}}').change(function() {
-                // var tot = 0;
-
-                // $('.price_{{$permohonan->id}}_{{$data->id}}').each(function() {
-                // var mul = 0;
-                // price = +$(this).val();
-                // });
-                // $('.amount_{{$permohonan->id}}_{{$data->id}}').each(function() {
-                // result = +$(this).val();
-                // var mul = result * price;
-                // tot += mul;
-                // });
-                // $('#total_{{$permohonan->id}}').val(tot);
-                // });
-                @endif
-            @endforeach
-        @endforeach
-    </script>
+            }
+        </script>
+    @endforeach
     <script>
         $(document).ready(function() {
             $("#table_metadatas").DataTable({

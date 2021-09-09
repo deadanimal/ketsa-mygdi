@@ -300,19 +300,24 @@
                                                     <td>{{ $dokumen->nama_fail }}{{ isset($dokumen->nama_fail) ? $dokumen->nama_failt : '-' }}
                                                     </td>
                                                     <td>
-                                                        @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
-                                                            <a data-toggle="modal"
-                                                                data-target="#modal-pilih-upload-{{ $dokumen->id }}">
-                                                                <button type="button" class="btn btn-sm btn-primary mr-2">Muat
-                                                                    Naik</button>
-                                                            </a>
-                                                        @else
-                                                            <a data-toggle="modal"
-                                                                data-target="#modal-kemaskini-dokumen-{{ $dokumen->id }}">
-                                                                <button type="button" class="btn btn-sm btn-primary mr-2">Muat
-                                                                    Naik</button>
-                                                            </a>
+                                                        @if (Auth::user()->hasRole(['Pemohon Data']))
+                                                            @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
+                                                                <a data-toggle="modal"
+                                                                    data-target="#modal-pilih-upload-{{ $dokumen->id }}">
+                                                                    <button type="button"
+                                                                        class="btn btn-sm btn-primary mr-2">Muat
+                                                                        Naik</button>
+                                                                </a>
+                                                            @else
+                                                                <a data-toggle="modal"
+                                                                    data-target="#modal-kemaskini-dokumen-{{ $dokumen->id }}">
+                                                                    <button type="button"
+                                                                        class="btn btn-sm btn-primary mr-2">Muat
+                                                                        Naik</button>
+                                                                </a>
+                                                            @endif
                                                         @endif
+
                                                         @if (!$dokumen->file_path == null)
 
                                                             <a href="{{ $dokumen->file_path }}" target="_blank">
@@ -914,7 +919,7 @@
         function selectSubKategori() {
             d = document.getElementById("subkategori").value;
             kategori = d.toString();
-            sdata = {!! $senarai_data !!}
+            sdata = {!! $lapisandata !!}
             senarai_append = ''
             sdata.forEach(element => {
                 if (element['subkategori'] == d) {
