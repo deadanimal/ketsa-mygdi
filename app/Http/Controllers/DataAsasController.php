@@ -257,10 +257,11 @@ class DataAsasController extends Controller
         $mohonData_3hourNotify = MohonData::where('berjayaMuatTurunStatus','0')->where('user_id',Auth::user()->id)->get();
         if(count($mohonData_3hourNotify) > 0){
             foreach($mohonData_3hourNotify as $m){
-                $interval = date_create('now')->diff(date_create($m->threeHourNotifyStart));
+                $interval = date_create(date('Y-m-d H:i:s',time()))->diff(date_create($m->threeHourNotifyStart));
 //                if($interval->h > 3){ //ori specs
-                if($interval->i > 5){
-                    $permohonanMoreThan3Hours[$m->id] = $m->name;
+                $permohonanMoreThan3Hours[$m->id] = $m->id.'___'.$interval->s;
+                if($interval->s > 0){
+                    $permohonanMoreThan3Hours[$m->id] = $m->name.'___'.$interval->s;
                     $vals = [];
                     $vals["threeHourNotifyStart"] = date('Y-m-d H:i:s',time());
                     MohonData::where(["id" => $m->id])->update($vals);
@@ -804,7 +805,7 @@ class DataAsasController extends Controller
                     $to_email = $p->email;
                     $data = array('nama_pemohon'=>$pemohon->users->name);
                     Mail::send('mails.exmpl12', $data, function($message) use ($to_name, $to_email, $pemohon) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  ('.$pemohon->users->name.')');
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  ('.$pemohon->name.')');
                         $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
                     });
                 }

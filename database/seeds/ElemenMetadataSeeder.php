@@ -179,7 +179,7 @@ class CountriesStatesSeeder extends Seeder
         ElemenMetadata::create(["label"=>"Date (Absolute or External Accuracy)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Result (Absolute or External Accuracy)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Conformance Result (Absolute or External Accuracy)","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
-        
+        //SMBG SINI
         
         ElemenMetadata::create(["label"=>"Classification","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
         ElemenMetadata::create(["label"=>"Classification","tajuk"=>"Data Quality","input_name"=>"c14_reference","status"=>"1"]);
