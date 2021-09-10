@@ -9,6 +9,7 @@
     <div id="collapse12" class="panel-collapse collapse in show" data-parent="#div_c12">
         <div class="card-body">
             <div class="acard-body opacity-8">
+                @if($elemenMetadata['c12_dataset_type']->status == '1')
                 <div class="row mb-4">
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-dataset-type" data-toggle="tooltip" title="Jenis maklumat geospatial">
@@ -27,8 +28,11 @@
                         </select>
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c12_feature_scale']->status == '1' || $elemenMetadata['c12_image_res']->status == '1' || $elemenMetadata['c12_language']->status == '1')
                 <h6 class="heading-small text-muted mb-2"><?php echo __('lang.dataSetResolution'); ?></h6>
                 <div class="row mb-2">
+                    @if($elemenMetadata['c12_feature_scale']->status == '1')
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy" data-toggle="tooltip" title="Pengisian butiran skala (sekiranya ada). Contoh skala 1:50,000">
                             <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
@@ -38,6 +42,8 @@
                     <div class="col-xl-2">
                         <input class="form-control form-control-sm" name="c12_feature_scale" id="c12_feature_scale" placeholder="10:50000" type="text" value="{{old('c12_feature_scale')}}">
                     </div>
+                    @endif
+                    @if($elemenMetadata['c12_image_res']->status == '1')
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-imggsd" data-toggle="tooltip" title="Pengisian butiran resolusi (sekiranya ada). Contoh GSD (Ground Sample Distance) - Resolution = 0.5 meter">
                             <?php echo __('lang.image_resolution'); ?></label>
@@ -50,6 +56,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @if($elemenMetadata['c12_language']->status == '1')
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-language" data-toggle="tooltip" title="Penggunaan bahasa bagi maklumat geospatial">
                             <?php echo __('lang.data_set_language'); ?>
@@ -62,7 +70,10 @@
                             <option value="Bahasa Malaysia" {{(old('c12_language') == 'Bahasa Malaysia' ? "selected":"")}}>Bahasa Malaysia</option>
                         </select>
                     </div>
+                    @endif
                 </div>
+                @endif
+                @if($elemenMetadata['c12_maintenanceUpdate']->status == '1')
                 <h6 class="heading-small text-muted mb-2 divMaintenanceInfo"><?php echo __('lang.maintenanceInfomation'); ?></h6>
                 <div class="row mb-2 divMaintenanceInfo">
                     <div class="col-xl-3">
@@ -89,6 +100,7 @@
                         </select>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

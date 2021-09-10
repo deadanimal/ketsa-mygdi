@@ -275,6 +275,8 @@
     </section>
 </div>
 
+<div id='fimages'></div>
+
 <script>
     var pengesahs = [];
 
@@ -781,6 +783,8 @@ $southBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
 $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
 ?>
 
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js'></script>
+
 <script>
     var N = "<?php echo $northBoundLatitude; ?>";
     var W = "<?php echo $westBoundLongitude; ?>";
@@ -803,6 +807,19 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
     }).addTo(map);
     drawRectangleEditor();
     searchLocation();
+    
+    leafletImage(map, function(err, canvas) {
+        // now you have canvas
+        // example thing to do with that canvas:
+        var img = document.createElement('img');
+        var dimensions = map.getSize();
+        img.width = dimensions.x;
+        img.height = dimensions.y;
+        img.src = canvas.toDataURL();
+        document.getElementById('fimages').innerHTML = '';
+        document.getElementById('fimages').appendChild(img);
+    });
+    leafletImage(map, callback);
 
     // To trigger onchange function
 //    var el = document.getElementById('nblt');

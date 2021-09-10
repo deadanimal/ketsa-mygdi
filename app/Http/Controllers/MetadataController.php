@@ -285,8 +285,9 @@ class MetadataController extends Controller {
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
         $customMetadataInput = CustomMetadataInput::all();
+        $elemenMetadata = ElemenMetadata::get()->keyBy('input_name');
 
-        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput'));
+        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput','elemenMetadata'));
     }
 
     public function show(Request $request) {
@@ -761,7 +762,22 @@ class MetadataController extends Controller {
             "c10_file_type.required" => 'File Type required',
             "c2_serviceUrl.required" => 'Service URL required',
         ];
+        
+        $elemenMetadatacol = []; 
+        $elemenMetadata = ElemenMetadata::where('status','0')->get(); //get disabled inputs and remove their validation
+        if(count($elemenMetadata) > 0){
+            foreach($elemenMetadata as $em){
+                $elemenMetadatacol[] = $em->input_name;
+            }
+            foreach($fields as $key=>$val){
+                if(in_array($key,$elemenMetadatacol)){
+                    unset($fields[$key]); //remove them validations
+                }
+            }
+        }
          
+        $this->validate($request, $fields, $customMsg);
+        
         $customMetadataInput = CustomMetadataInput::all();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
@@ -771,7 +787,6 @@ class MetadataController extends Controller {
                     $customMsg[$cmi->input_name.'.required'] = $cmi->name." required";
                 }
                 if(isset($request->{$cmi->input_name})){ //dont remove white space below
-                    //smbg sini
                     $custom_inputs .= '
             <customInput>        
                 <'.$cmi->input_name.'>
@@ -783,8 +798,6 @@ class MetadataController extends Controller {
             }
         }
         
-        $this->validate($request, $fields, $customMsg);
-
         $keywords = "";
         if(count($request->c10_additional_keyword) > 0){
             foreach($request->c10_additional_keyword as $var){
@@ -1230,6 +1243,21 @@ class MetadataController extends Controller {
             "c2_serviceUrl.required" => 'Service URL required',
         ];
         
+        $elemenMetadatacol = []; 
+        $elemenMetadata = ElemenMetadata::where('status','0')->get(); //get disabled inputs and remove their validation
+        if(count($elemenMetadata) > 0){
+            foreach($elemenMetadata as $em){
+                $elemenMetadatacol[] = $em->input_name;
+            }
+            foreach($fields as $key=>$val){
+                if(in_array($key,$elemenMetadatacol)){
+                    unset($fields[$key]); //remove them validations
+                }
+            }
+        }
+        
+        $this->validate($request, $fields, $customMsg);
+
         $customMetadataInput = CustomMetadataInput::all();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
@@ -1250,7 +1278,6 @@ class MetadataController extends Controller {
             }
         }
         
-        $this->validate($request, $fields, $customMsg);
 
         $fileUrl = "";
         $fileUrl = $request->c11_order_instructions;
@@ -1632,11 +1659,25 @@ class MetadataController extends Controller {
         }
 
 //        $elemens = ElemenMetadata::with('getKategori','getTajuk','getSubTajuk')->get();
-        $elemens = ElemenMetadata::with('getKategori','getTajuk')->get();
+        $elemens = ElemenMetadata::with('getKategori','getTajuk')->orderBy('id', 'ASC')->get();
         $categories = MCategory::get();
         $customMetadataInput = CustomMetadataInput::get();
 
         return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('elemens','categories','customMetadataInput'));
+    }
+    
+    public function change_elemen_status(Request $request){
+        $em = ElemenMetadata::where(["id"=>$request->elemen_id])->get()->first();
+        $em->status = $request->status_id;
+        $em->update();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
+        $at->save();
+        
+        exit();
     }
 
     public function simpan_kategori(Request $request) {

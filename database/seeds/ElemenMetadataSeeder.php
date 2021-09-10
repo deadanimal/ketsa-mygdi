@@ -14,7 +14,7 @@ class ElemenMetadataSeeder extends Seeder
     {
         for($r=1;$r<5;$r++){ //seed for each kategori 1-4
             //General Information
-            ElemenMetadata::create(["label"=>"7","tajuk"=>"1","input_name"=>"c1_content_info","status"=>"1","kategori"=>$r]);
+            ElemenMetadata::create(["label"=>"Kategori","tajuk"=>"1","input_name"=>"c1_content_info","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Publisher Name","tajuk"=>"1","input_name"=>"publisher_name","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Organisation Name","tajuk"=>"1","input_name"=>"publisher_agensi_organisasi","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Email","tajuk"=>"1","input_name"=>"publisher_email","status"=>"1","kategori"=>$r]);
@@ -106,6 +106,7 @@ class ElemenMetadataSeeder extends Seeder
             ElemenMetadata::create(["label"=>"Postal Code","tajuk"=>"2","input_name"=>"c2_postal_code","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"City","tajuk"=>"2","input_name"=>"c2_contact_city","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Country","tajuk"=>"2","input_name"=>"c2_contact_country","status"=>"1","kategori"=>$r]);
+            ElemenMetadata::create(["label"=>"State","tajuk"=>"2","input_name"=>"c2_contact_state","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Email","tajuk"=>"2","input_name"=>"c2_contact_email","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Fax No","tajuk"=>"2","input_name"=>"c2_contact_fax","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Telephone (Office)","tajuk"=>"2","input_name"=>"c2_contact_phone_office","status"=>"1","kategori"=>$r]);
@@ -116,6 +117,7 @@ class ElemenMetadataSeeder extends Seeder
             ElemenMetadata::create(["label"=>"Agriculture and Farming","tajuk"=>"3","input_name"=>"topic_category[]","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Atmosphere and Climatic","tajuk"=>"3","input_name"=>"topic_category[]","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Biology and Ecology","tajuk"=>"3","input_name"=>"topic_category[]","status"=>"1","kategori"=>$r]);
+            ElemenMetadata::create(["label"=>"Business and Economic","tajuk"=>"3","input_name"=>"topic_category[]","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Cadastral","tajuk"=>"3","input_name"=>"topic_category[]","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Cultural, Society and Demography","tajuk"=>"3","input_name"=>"topic_category[]","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Elevation and Derived Products","tajuk"=>"3","input_name"=>"topic_category[]","status"=>"1","kategori"=>$r]);

@@ -1,4 +1,5 @@
 <div class="abstractApplication">
+    @if($elemenMetadata['abstractApplication_namaAplikasi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -12,6 +13,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractApplication_tujuan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -25,6 +28,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractApplication_tahunPembangunan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -38,6 +43,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractApplication_kemaskini']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -51,6 +58,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractApplication_dataTerlibat']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -64,6 +73,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractApplication_sasaranPengguna']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -77,6 +88,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractApplication_versi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -90,6 +103,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractApplication_perisianDigunaPembangunan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -103,11 +118,13 @@
             @enderror
         </div>
     </div>
+    @endif
 </div>
 
 <?php //###################################################################### ?>
 
 <div class="abstractDocument">
+    @if($elemenMetadata['abstractDocument_namaDokumen']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -121,6 +138,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractDocument_tujuan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -134,6 +153,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractDocument_tahunTerbitan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -147,6 +168,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractDocument_edisi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -160,11 +183,13 @@
             @enderror
         </div>
     </div>
+    @endif
 </div>
 
 <?php //###################################################################### ?>
 
 <div class="abstractGISActivityProject">
+    @if($elemenMetadata['abstractGISActivityProject_namaAktiviti']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -178,6 +203,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractGISActivityProject_tujuan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -191,6 +218,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractGISActivityProject_lokasi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -204,6 +233,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractGISActivityProject_tahun']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -217,11 +248,13 @@
             @enderror
         </div>
     </div>
+    @endif
 </div>
 
 <?php //###################################################################### ?>
 
 <div class="abstractMap">
+    @if($elemenMetadata['abstractMap_namaPeta']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -235,6 +268,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractMap_kawasan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -248,6 +283,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractMap_tujuan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -261,6 +298,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractMap_tahunTerbitan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -274,6 +313,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractMap_edisi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -287,6 +328,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractMap_noSiri']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -300,6 +343,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractMap_skala']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -313,6 +358,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractMap_unit']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -326,11 +373,13 @@
             @enderror
         </div>
     </div>
+    @endif
 </div>
 
 <?php //###################################################################### ?>
 
 <div class="abstractRasterData">
+    @if($elemenMetadata['abstractRasterData_namaData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -344,6 +393,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_lokasi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -357,6 +408,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_rumusanData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -370,6 +423,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_tujuanData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -383,6 +438,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_kaedahPenyediaanData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -396,6 +453,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_format']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -409,6 +468,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_unit']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -422,6 +483,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_skala']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -435,6 +498,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_statusData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -448,6 +513,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_tahunPerolehan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -461,6 +528,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_jenisSatelit']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -474,6 +543,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_format']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -487,6 +558,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_resolusi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -500,6 +573,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractRasterData_kawasanLitupan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -513,11 +588,13 @@
             @enderror
         </div>
     </div>
+    @endif
 </div>
 
 <?php //###################################################################### ?>
 
 <div class="abstractServices">
+    @if($elemenMetadata['abstractServices_namaServis']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -531,6 +608,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractServices_lokasi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -544,6 +623,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractServices_tujuan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -557,6 +638,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractServices_dataTerlibat']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -570,6 +653,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractServices_polisi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -583,6 +668,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractServices_peringkatCapaian']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -596,6 +683,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractServices_format']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -609,11 +698,13 @@
             @enderror
         </div>
     </div>
+    @endif
 </div>
 
 <?php //###################################################################### ?>
 
 <div class="abstractSoftware">
+    @if($elemenMetadata['abstractSoftware_namaPerisian']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -627,6 +718,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractSoftware_versi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -640,6 +733,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractSoftware_tujuan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -653,6 +748,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractSoftware_tahunPengunaanPerisian']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -666,6 +763,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractSoftware_kaedahPerolehan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -679,6 +778,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractSoftware_format']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -692,6 +793,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractSoftware_pengeluar']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -705,6 +808,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractSoftware_keupayaan']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -718,6 +823,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractSoftware_dataTerlibat']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -731,6 +838,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractSoftware_keperluanPerkakas']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -744,11 +853,13 @@
             @enderror
         </div>
     </div>
+    @endif
 </div>
 
 <?php //###################################################################### ?>
 
 <div class="abstractVectorData">
+    @if($elemenMetadata['abstractVectorData_namaData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -762,6 +873,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractVectorData_lokasi']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -775,6 +888,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractVectorData_rumusanData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -788,6 +903,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractVectorData_tujuanData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -801,6 +918,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractVectorData_kaedahPenyediaanData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -814,6 +933,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractVectorData_format']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -827,6 +948,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractVectorData_unit']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -840,6 +963,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractVectorData_skala']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -853,6 +978,8 @@
             @enderror
         </div>
     </div>
+    @endif
+    @if($elemenMetadata['abstractVectorData_statusData']->status == '1')
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -866,10 +993,11 @@
             @enderror
         </div>
     </div>
+    @endif
 </div>
 
 <?php //###################################################################### ?>
-
+@if($elemenMetadata['c2_abstract']->status == '1')
 <div class="">
     <div class="row mb-2">
         <div class="col-3">
@@ -885,3 +1013,4 @@
         </div>
     </div>
 </div>
+@endif

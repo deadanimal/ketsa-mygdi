@@ -89,6 +89,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/change_user_status', 'UserController@change_user_status');
     Route::post('/delete_user', 'UserController@delete_user');
 
+    Route::post('/change_elemen_status', 'MetadataController@change_elemen_status');
+    
     Route::get('/portal_settings', 'PortalController@index_portal_settings');
     Route::post('/simpan_portal_settings', 'PortalController@store_portal_settings');
 
