@@ -285,7 +285,7 @@ class MetadataController extends Controller {
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
         $customMetadataInput = CustomMetadataInput::all();
-        $elemenMetadata = ElemenMetadata::get()->keyBy('input_name');
+        $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
 
         return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput','elemenMetadata'));
     }
@@ -488,11 +488,11 @@ class MetadataController extends Controller {
         $html = view('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->render();
         $pdf = \App::make('dompdf.wrapper')->setOptions(['defaultFont' => 'sans-serif']);
         $pdf->loadHTML($html);
-        return $pdf->stream();
+//        return $pdf->stream();
         
 //        $pdf = PDF::loadView('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->setOptions(['defaultFont' => 'sans-serif']);
         
-//        return $pdf->download('disney.pdf');
+        return $pdf->download('disney.pdf');
     }
 
     public function show_xml_nologin(Request $request) {

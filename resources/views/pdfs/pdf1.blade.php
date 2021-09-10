@@ -232,7 +232,7 @@ $eastBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
 $southBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
 $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
 ?>
-
+<?php /* ?>
 <script>
   var N = "<?php echo $northBoundLatitude; ?>";
     var W = "<?php echo $westBoundLongitude; ?>";
@@ -387,5 +387,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
         alert(data);
     }
 </script>
+<?php */ ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 @stop
