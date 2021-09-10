@@ -317,6 +317,8 @@ class DataAsasController extends Controller
             ->whereNotNull('date_mohon')
             ->get();
 
+
+        $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
         // dd($valid_surat);
         if($valid_surat->isEmpty()){
 
@@ -325,6 +327,12 @@ class DataAsasController extends Controller
                 "tempoh" => $request->tempoh,
                 "total_harga" => $request->total_harga,
             ]);
+            foreach ($skdatas as $sk ) {
+                SenaraiKawasanData::where(["id" => $sk->id])->update([
+                    "saiz_data" => $request->saiz_data_.$sk->id,
+                ]);
+
+            }
             return redirect('/proses_data')->with('warning', 'Sila Kemaskini Surat Balasan');
         } else {
 
@@ -338,16 +346,12 @@ class DataAsasController extends Controller
             "status" => $request->status = 3,
         ]);
 
-    //     $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
-    //     foreach ($skdatas as $key => $val ) {
-    //         $data = array(
-    //             'saiz_data'=>$request->size_data[$key],
-    //         );
+        foreach ($skdatas as $sk ) {
+            SenaraiKawasanData::where(["id" => $sk->id])->update([
+                "saiz_data" => $request->saiz_data_.$sk->id,
+            ]);
 
-    //         SenaraiKawasanData::where('id',$request->senarai_kawasan_id[$key])
-    //         ->update($data);
-
-    //   }
+        }
 
             $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
 

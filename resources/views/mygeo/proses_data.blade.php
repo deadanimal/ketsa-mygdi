@@ -139,10 +139,10 @@
                                                     <td>{{ $data->kawasan_data }}</td>
                                                     <td>
                                                         <input
-                                                            class="form-control form-control-sm amount_{{ $permohonan->id }}_{{ $data->id }}"
+                                                            class="form-control form-control-sm"
                                                             placeholder="Saiz Data" id="size_{{ $data->id }}"
                                                             onchange="kiraharga{{ $permohonan->id }}()" type="number"
-                                                            step="0.01">
+                                                            step="0.01" name="saiz_data_{{$data->id}}" value="{{ $data->saiz_data }}">
                                                         <label class="ml-2">× RM {{ $data->harga_data }}
                                                         </label>
                                                         <input type="hidden" name="senarai_kawasan_id[]"
@@ -211,7 +211,7 @@
                 var jumlahHarga = 0;
                 pembelian.forEach(element => {
                     var harga = parseFloat(element.harga_data);
-                    var size = document.getElementById("size_" + element.id).value;
+                    var size = document.getElementById("size_"+element.id).value;
                     var jumlah = harga * size;
                     // var hargaDoc = document.getElementById("harga_"+element.id);
                     // hargaDoc.value = jumlah;
