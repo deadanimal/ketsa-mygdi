@@ -286,10 +286,6 @@ class MetadataController extends Controller {
         $refSys = ReferenceSystemIdentifier::all();
         $customMetadataInput = CustomMetadataInput::all();
         $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
-        foreach($elemenMetadata as $key=>$val){
-            echo "<br>__".$key;
-        }
-//        exit();
 
         return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput','elemenMetadata'));
     }
