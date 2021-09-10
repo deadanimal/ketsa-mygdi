@@ -138,17 +138,13 @@
                                                     <td>{{ $data->kategori }}</td>
                                                     <td>{{ $data->kawasan_data }}</td>
                                                     <td>
-                                                        <input
-                                                            class="form-control form-control-sm"
-                                                            placeholder="Saiz Data" id="size_{{ $data->id }}"
+                                                        <input class="form-control form-control-sm" placeholder="Saiz Data"
+                                                            id="size_{{ $data->id }}"
                                                             onchange="kiraharga{{ $permohonan->id }}()" type="number"
-                                                            step="0.01" name="saiz_data_{{$data->id}}" value="{{ $data->saiz_data }}">
+                                                            step="0.01" name="saiz_data_{{ $data->id }}"
+                                                            value="{{ $data->saiz_data }}">
                                                         <label class="ml-2">× RM {{ $data->harga_data }}
                                                         </label>
-                                                        <input type="hidden" name="senarai_kawasan_id[]"
-                                                            value="{{ $data->id }}">
-                                                        <input type="hidden" class="price_{{ $permohonan->id }}"
-                                                            value="{{ $data->harga_data }}">
                                                     </td>
                                                 </tr>
                                             @endif
@@ -206,17 +202,20 @@
     @foreach ($permohonan_list as $permohonan)
         <script>
             function kiraharga{{ $permohonan->id }}() {
-                console.log('Kira harga_{{ $permohonan->id }}');
+                console.log('Kira_Harga_{{ $permohonan->id }}');
                 var pembelian = {!! $skdatas !!}
                 var jumlahHarga = 0;
                 pembelian.forEach(element => {
-                    var harga = parseFloat(element.harga_data);
-                    var size = document.getElementById("size_"+element.id).value;
-                    var jumlah = harga * size;
-                    // var hargaDoc = document.getElementById("harga_"+element.id);
-                    // hargaDoc.value = jumlah;
-                    jumlahHarga += jumlah
-                    console.log('jumlah: ', jumlah);
+                    if (element.permohonan_id == {{ $permohonan->id }}) {
+                        var harga = parseFloat(element.harga_data);
+                        var size = document.getElementById("size_" + element.id).value;
+                        var jumlah = harga * size;
+                        // var hargaDoc = document.getElementById("harga_"+element.id);
+                        // hargaDoc.value = jumlah;
+                        jumlahHarga += jumlah
+                        console.log('jumlah: ', jumlah);
+
+                    }
                 });
                 jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
                 console.log('jumlahHarga: ', jumlahHarga);

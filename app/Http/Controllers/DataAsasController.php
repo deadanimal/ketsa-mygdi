@@ -328,8 +328,10 @@ class DataAsasController extends Controller
                 "total_harga" => $request->total_harga,
             ]);
             foreach ($skdatas as $sk ) {
+                $d = $request->saiz_data_.$sk->id;
+                // dd($d);
                 SenaraiKawasanData::where(["id" => $sk->id])->update([
-                    "saiz_data" => $request->saiz_data_.$sk->id,
+                    "saiz_data" => $request->input('saiz_data_'.$sk->id),
                 ]);
 
             }
@@ -347,8 +349,10 @@ class DataAsasController extends Controller
         ]);
 
         foreach ($skdatas as $sk ) {
+            $d = $request->saiz_data_.$sk->id;
+            // dd($d);
             SenaraiKawasanData::where(["id" => $sk->id])->update([
-                "saiz_data" => $request->saiz_data_.$sk->id,
+                "saiz_data" => $request->input('saiz_data_'.$sk->id),
             ]);
 
         }
