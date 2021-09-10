@@ -42,6 +42,7 @@ use App\AuditTrail;
 use App\Pengumuman;
 use PDF;
 use App\CustomMetadataInput;
+use Dompdf\Dompdf;
 
 class MetadataController extends Controller {
 
@@ -485,14 +486,15 @@ class MetadataController extends Controller {
             $refSys = [];
         }
 
-        $html = view('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->render();
-        $pdf = \App::make('dompdf.wrapper')->setOptions(['defaultFont' => 'sans-serif']);
-        $pdf->loadHTML($html);
-//        return $pdf->stream();
-        
-//        $pdf = PDF::loadView('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->setOptions(['defaultFont' => 'sans-serif']);
-        
+//        $html = view('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->render();
+//        $pdf = \App::make('dompdf.wrapper')->setOptions(['defaultFont' => 'sans-serif']);
+//        $pdf->loadHTML($html);
+////        return $pdf->stream();
+//        
+        $pdf = PDF::loadView('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->setOptions(['defaultFont' => 'sans-serif']);
+//        
         return $pdf->download('disney.pdf');
+        
     }
 
     public function show_xml_nologin(Request $request) {

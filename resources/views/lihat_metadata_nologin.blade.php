@@ -1,4 +1,4 @@
-@extends('layouts.app_afiq')
+@extends('layouts.app_afiq_pdf')
 
 @section('content')
 
@@ -25,18 +25,6 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="width:100%;">
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1></h1>
-          </div>
-          <div class="col-sm-6">
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -54,8 +42,11 @@
                             </h1>
                         </div>
                         <div class="col-7 text-right">
-                            <a href="{{ url('downloadMetadataPdf').'/'.$metadataSearched->id }}">
+<!--                            <a href="{{ url('downloadMetadataPdf').'/'.$metadataSearched->id }}">
                                 <button type="button" class="btn btn-sm btn-default mr-2">Muat Turun PDF</button>
+                            </a>-->
+                            <a href="#">
+                                <button type="button" class="btn btn-sm btn-default mr-2" onclick="window.print();">Muat Turun PDF</button>
                             </a>
                             <a href="{{ url('downloadMetadataXml').'/'.$metadataSearched->id }}">
                                 <button type="button" class="btn btn-sm btn-default mr-2">Muat Turun XML</button>
@@ -80,38 +71,38 @@
                   </div>
                   <div id="accordion" class="accordf">
                     <?php //=== collapse1 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.general_information')
+                    @include('mygeo.metadata.pdf_metadata.general_information')
                     <?php //=== collapse2 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.identification_information')
+                    @include('mygeo.metadata.pdf_metadata.identification_information')
                     <?php //=== collapse3 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.topic_category')
+                    @include('mygeo.metadata.pdf_metadata.topic_category')
                     <?php //=== collapse4 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.nominal_resolution')
+                    @include('mygeo.metadata.pdf_metadata.nominal_resolution')
                     <?php //=== collapse5 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.process_step_information')
+                    @include('mygeo.metadata.pdf_metadata.process_step_information')
                     <?php //=== collapse6 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.spatial_representation_information')
+                    @include('mygeo.metadata.pdf_metadata.spatial_representation_information')
                     <?php //=== collapse7 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.content_information')
+                    @include('mygeo.metadata.pdf_metadata.content_information')
                     <?php //=== collapse8 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.aquisition_information')
+                    @include('mygeo.metadata.pdf_metadata.aquisition_information')
                     <?php //=== collapse9 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.spatial_domain')
+                    @include('mygeo.metadata.pdf_metadata.spatial_domain')
                     <?php //=== collapse10 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.browsing_information')
+                    @include('mygeo.metadata.pdf_metadata.browsing_information')
                     <?php //=== collapse11 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.distribution_information')
+                    @include('mygeo.metadata.pdf_metadata.distribution_information')
                     <?php //=== collapse12 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.data_set_identification')
+                    @include('mygeo.metadata.pdf_metadata.data_set_identification')
                     <?php //=== collapse13 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.reference_system_information')
+                    @include('mygeo.metadata.pdf_metadata.reference_system_information')
                     <?php //=== collapse14 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.constraints')
+                    @include('mygeo.metadata.pdf_metadata.constraints')
                     <?php //=== collapse15 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.data_quality')
+                    @include('mygeo.metadata.pdf_metadata.data_quality')
                     <?php //=== collapse16 =============================================================?>
                     @if(count($customMetadataInput) > 0)
-                        @include('mygeo.metadata.lihat_metadata.custom_input')
+                        @include('mygeo.metadata.pdf_metadata.custom_input')
                     @endif
                   </div>
                 </div>
@@ -124,11 +115,6 @@
 
 <script>
   $(document).ready(function(){
-    $('#c10_date_div,#c10_t1_commission_date_div,#c10_t1_omission_date_div,#c10_t2_conceptual_date_div,#c10_t2_domain_date_div,#c10_t2_format_date_div,#c10_t2_topological_date_div,#c10_t3_absExt_date_div,#c10_t3_relInt_date_div,#c10_t3_gridded_date_div,#c10_t4_accuTimeMeasure_date_div,#c10_t4_tempConsist_date_div,#c10_t4_tempValid_date_div,#c10_t5_classCorrect_date_div,#c10_t5_nonQuant_date_div,#c10_t5_quant_date_div').datetimepicker({
-      // format:'DD/MM/YYYY',
-      // format: 'L'
-    });
-
     <?php
     if(count($categories) > 0){
       $type = (isset($metadataxml->hierarchyLevel->MD_ScopeCode) ? $metadataxml->hierarchyLevel->MD_ScopeCode:"");
@@ -265,7 +251,7 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
 
 // drawRectangleEditor()
 // var wblgValue = document.getElementById('wblg').value = '';
-    searchLocation()
+    searchLocation();
 
     function updateLayer() {
 

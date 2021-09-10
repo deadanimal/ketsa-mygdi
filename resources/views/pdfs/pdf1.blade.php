@@ -25,18 +25,6 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="width:100%;">
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1></h1>
-          </div>
-          <div class="col-sm-6">
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -108,7 +96,9 @@
                     <?php //=== collapse14 =============================================================?>
                     @include('mygeo.metadata.lihat_metadata.constraints')
                     <?php //=== collapse15 =============================================================?>
+                      <?php /* ?>
                     @include('mygeo.metadata.lihat_metadata.data_quality')
+                      <?php */ ?>
                   </div>
                 </div>
             </div>
