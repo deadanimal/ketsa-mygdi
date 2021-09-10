@@ -119,7 +119,7 @@ class ElemenMetadataSeeder extends Seeder
             ElemenMetadata::create(["label"=>"Biology and Ecology","tajuk"=>"3","input_name"=>"Biology and Ecology","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Business and Economic","tajuk"=>"3","input_name"=>"Business and Economic","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Cadastral","tajuk"=>"3","input_name"=>"Cadastral","status"=>"1","kategori"=>$r]);
-            ElemenMetadata::create(["label"=>"Cultural, Society and Demography","tajuk"=>"3","input_name"=>"Cultural","status"=>"1","kategori"=>$r]);
+            ElemenMetadata::create(["label"=>"Cultural, Society and Demography","tajuk"=>"3","input_name"=>"Cultural, Society and Demography","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Elevation and Derived Products","tajuk"=>"3","input_name"=>"Elevation and Derived Products","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Environment and Conservation","tajuk"=>"3","input_name"=>"Environment and Conservation","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Facilities and Structures","tajuk"=>"3","input_name"=>"Facilities and Structures","status"=>"1","kategori"=>$r]);
