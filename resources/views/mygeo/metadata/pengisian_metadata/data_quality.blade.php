@@ -13,6 +13,7 @@
             </div>
             <div class="pl-lg-2">
                 <div class="row mb-2">
+                    @if($elemenMetadata['c15_data_quality_info']->status == '1')
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-DQscope" data-toggle="tooltip" title="Pengisian secara Pilihan: Skop DQ">
                             <?php echo __('lang.dq_scope'); ?>
@@ -38,6 +39,8 @@
                             <option value="Tile" {{(old('c15_data_quality_info') == 'Tile' ? "selected":"")}}>Tile</option>
                         </select>
                     </div>
+                    @endif
+                    @if($elemenMetadata['c15_data_history']->status == '1')
                     <div class="col-xl-2">
                         <label class="form-control-label float-right" for="input-datahistory">
                             <?php echo __('lang.data_history'); ?></label>
@@ -45,6 +48,8 @@
                     <div class="col-md-2">
                         <input class="form-control form-control-sm" type="text" name="c15_data_history" id="c15_data_history" placeholder="None" value="{{old('c15_data_history')}}">
                     </div>
+                    @endif
+                    @if($elemenMetadata['c15_date']->status == '1')
                     <div class="col-xl-1">
                         <label class="form-control-label  float-right" for="input-date">
                             <?php echo __('lang.date_time'); ?>
@@ -53,6 +58,7 @@
                     <div class="col-xl-3">
                         <input class="form-control form-control-sm" type="date" name="c15_date" id="c15_date" value="{{old('c15_date')}}">
                     </div>
+                    @endif
                 </div>
             </div>
 
@@ -99,6 +105,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t1_scope']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -120,6 +127,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_comply_level']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
@@ -128,6 +137,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_date']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c15_t1_commission_date">
@@ -138,6 +149,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_result']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -150,6 +163,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_conform_result']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -158,7 +173,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t1_scope_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -180,6 +197,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_comply_level_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
@@ -188,6 +207,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_date_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c15_t1_commission_date">
@@ -198,6 +219,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_result_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -210,6 +233,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_conform_result_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -218,6 +243,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -253,6 +279,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t2_scope']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -274,6 +301,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_comply_level']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
@@ -282,6 +311,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_date']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_date">
@@ -292,6 +323,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_result']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -304,6 +337,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_conform_result']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -312,7 +347,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t2_scope_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -334,6 +371,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_comply_level_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
@@ -342,6 +381,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_date_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_date_2">
@@ -352,6 +393,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_result_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -364,6 +407,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_conform_result_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_conform_result_2">
@@ -372,7 +417,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t2_scope_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -394,6 +441,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_comply_level_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_comply_level_3">
@@ -402,6 +451,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_date_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_date_3">
@@ -412,6 +463,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_result_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -424,6 +477,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_conform_result_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -432,7 +487,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t2_scope_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_scope_4">
@@ -454,6 +511,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_comply_level_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_comply_level_4">
@@ -462,6 +521,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_date_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_date_4">
@@ -472,6 +533,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_result_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_result_4">
@@ -484,6 +547,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_conform_result_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_conform_result_4">
@@ -492,6 +557,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -522,6 +588,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t3_scope']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_scope">
@@ -543,6 +610,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_comply_level']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_comply_level">
@@ -551,6 +620,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_date']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_date">
@@ -561,6 +632,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_result']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_result">
@@ -573,6 +646,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_conform_result']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result">
@@ -581,7 +656,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t3_scope_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_scope_2">
@@ -603,6 +680,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_comply_level_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_comply_level_2">
@@ -611,6 +690,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_date_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_date_2">
@@ -621,6 +702,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_result_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_result_2">
@@ -633,6 +716,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_conform_result_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result_2">
@@ -641,7 +726,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t3_scope_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_scope_3">
@@ -663,6 +750,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_comply_level_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_comply_level_3">
@@ -671,6 +760,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_date_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_date_3">
@@ -681,6 +772,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_result_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_result_3">
@@ -693,6 +786,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_conform_result_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result_3">
@@ -701,6 +796,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -731,6 +827,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t4_scope']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_scope">
@@ -752,6 +849,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_comply_level']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_comply_level">
@@ -760,6 +859,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_date']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_date">
@@ -770,6 +871,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_result']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_result">
@@ -782,6 +885,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_conform_result']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_conform_result">
@@ -790,7 +895,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t4_scope_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_scope_2">
@@ -812,6 +919,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_comply_level_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_comply_level_2">
@@ -820,6 +929,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_date_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_date_2">
@@ -830,6 +941,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_result_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_result_2">
@@ -842,6 +955,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_conform_result_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_conform_result_2">
@@ -850,7 +965,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t4_scope_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_scope_3">
@@ -872,6 +989,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_comply_level_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_comply_level_3">
@@ -880,16 +999,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_comply_level_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_date_3">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                    <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{old('c15_t4_date_3')}}">
+                                                                    <input type="date" name="c15_t4_comply_level_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{old('c15_t4_date_3')}}">
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_result_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_result_3">
@@ -902,6 +1025,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_conform_result_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_conform_result_3">
@@ -910,6 +1035,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -940,6 +1066,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t5_scope']->status == '1')
                                                     <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_scope">
@@ -961,6 +1088,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_comply_level']->status == '1')
                                                     <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
@@ -969,6 +1098,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_date']->status == '1')
                                                     <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_date">
@@ -979,6 +1110,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_result']->status == '1')
                                                     <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -991,6 +1124,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_conform_result']->status == '1')
                                                     <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -999,7 +1134,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t5_scope_2']->status == '1')
                                                     <tr class='nonQuantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_scope_2">
@@ -1021,6 +1158,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_comply_level_2']->status == '1')
                                                     <tr class='nonQuantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_comply_level_2">
@@ -1029,6 +1168,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_date_2']->status == '1')
                                                     <tr class='nonQuantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_2_date">
@@ -1039,6 +1180,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_result_2']->status == '1')
                                                     <tr class='nonQuantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_result_2">
@@ -1051,6 +1194,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_conform_result_2']->status == '1')
                                                     <tr class='nonQuantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -1059,7 +1204,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t5_scope_3']->status == '1')
                                                     <tr class='quantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_scope_3">
@@ -1081,6 +1228,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_comply_level_3']->status == '1')
                                                     <tr class='quantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_comply_level_3">
@@ -1089,6 +1238,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_date_3']->status == '1')
                                                     <tr class='quantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_date_3">
@@ -1099,6 +1250,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_result_3']->status == '1')
                                                     <tr class='quantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_result_3">
@@ -1111,6 +1264,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_conform_result_3']->status == '1')
                                                     <tr class='quantitativeAttributeCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_conform_result_3">
@@ -1119,6 +1274,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>

@@ -33,7 +33,7 @@
                             <h3 class="card-title" style="font-size: 2rem;">Kemas Kini Elemen Metadata</h3>
                             <!--<button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal1">Tambah</button>-->
                             <div class="float-right">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+<!--                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                     Tambah
                                 </button>
                                 <div class="dropdown-menu">
@@ -41,7 +41,7 @@
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalTajuk">Tajuk +</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalSubTajuk">Sub-Tajuk +</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalElemen">Elemen +</a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                         <div class="card-body">
@@ -49,9 +49,8 @@
                                 <thead>
                                     <tr>
                                         <th>Bil</th>
+                                        <th>Nama Elemen</th>
                                         <th>Tajuk</th>
-                                        <th>Sub-Tajuk</th>
-                                        <th>Elemen</th>
                                         <th>Kategori</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -64,13 +63,18 @@
                                             ?>
                                             <tr>
                                                 <td>{{ $bil }}</td>
+                                                <td>{{ $elemen->label }}</td>
                                                 <td>{{ $elemen->getTajuk->name }}</td>
-                                                <td>{{ $elemen->getSubTajuk->sub_tajuk }}</td>
-                                                <td>{{ $elemen->elemen }}</td>
                                                 <td>{{ $elemen->getKategori->name }}</td>
                                                 <td>
-                                                    <!--<button type="button" class="form-control btnEdit">Edit</button>-->
-                                                    <button type="button" class="form-control btnDelete" data-rowid="{{ $elemen->id }}">Delete</button>
+                                                    <label class="custom-toggle">
+                                                        <input type="checkbox" class='btnStatusElemen'
+                                                            data-elemenid="{{ $elemen->id }}"
+                                                            {{ $elemen->status == '1' ? 'checked' : '' }}>
+                                                        <span class="custom-toggle-slider custom-toggle-success rounded-circle"
+                                                            data-label-off="Tak Aktif" data-label-on="Aktif"
+                                                            data-width="175"></span>
+                                                    </label>
                                                 </td>
                                             </tr>
                                             <?php
@@ -134,6 +138,27 @@
 </div>
 
 <script>
+    $('.btnStatusElemen').change(function() {
+        var userid = $(this).data('elemenid');
+        var newStatus = '';
+        var newStatusText = '';
+        if($(this).prop('checked')){
+            newStatus = '1';
+            newStatusText = 'Aktif';
+        }else{
+            newStatus = '0';
+            newStatusText = 'Tidak Aktif';
+        }
+        
+        $.ajax({
+            method: "POST",
+            url: "change_elemen_status",
+            data: {"_token": "{{ csrf_token() }}", "elemen_id": userid, "status_id": newStatus},
+        }).done(function (response) {
+            alert("Status elemen berjaya diubah.");
+        });
+    });
+    
     $(document).ready(function () {
         $("#table_elemens").DataTable({
             "ordering": false,

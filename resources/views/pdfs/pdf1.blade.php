@@ -25,18 +25,6 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="width:100%;">
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1></h1>
-          </div>
-          <div class="col-sm-6">
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -108,7 +96,9 @@
                     <?php //=== collapse14 =============================================================?>
                     @include('mygeo.metadata.lihat_metadata.constraints')
                     <?php //=== collapse15 =============================================================?>
+                      <?php /* ?>
                     @include('mygeo.metadata.lihat_metadata.data_quality')
+                      <?php */ ?>
                   </div>
                 </div>
             </div>
@@ -232,7 +222,7 @@ $eastBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
 $southBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
 $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
 ?>
-
+<?php /* ?>
 <script>
   var N = "<?php echo $northBoundLatitude; ?>";
     var W = "<?php echo $westBoundLongitude; ?>";
@@ -387,5 +377,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
         alert(data);
     }
 </script>
+<?php */ ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 @stop

@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(KategoriSenaraiDataSeeder::class);
         $this->call(PortalTetapanSeeder::class);
         $this->call(AgensiOrganisasiSeeder::class);
+        $this->call(ElemenMetadataSeeder::class);
+        $this->call(TajukSeeder::class);
     }
 }

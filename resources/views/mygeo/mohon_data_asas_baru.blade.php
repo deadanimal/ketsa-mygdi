@@ -371,10 +371,10 @@
                                                     <select name="catatan" class="form-control form-control-sm mb-4"
                                                         onchange="checkCatatan(this.value);">
                                                         <option selected disabled>Pilih</option>
-                                                        <option value="Maklumat tidak lengkap,maklumat pemohon tidak sahih"
-                                                            @if ($permohonan->catatan == 'Maklumat tidak lengkap') selected @endif>Maklumat tidak lengkap</option>
-                                                        <option value="Data yang dipohon tiada dalam simpanan PGN"
-                                                            @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
+                                                        <option value="Maklumat tidak lengkap"
+                                                            @if ($permohonan->catatan == 'Maklumat tidak lengkap') selected @endif>Maklumat tidak
+                                                            lengkap</option>
+                                                        <option value="Data yang dipohon tiada dalam simpanan PGN" @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
                                                             dalam simpanan PGN</option>
                                                         <option value="Maklumat pemohon tidak sahih"
                                                             @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat pemohon tidak

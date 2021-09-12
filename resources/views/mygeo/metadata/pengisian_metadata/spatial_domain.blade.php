@@ -25,6 +25,7 @@
                 <div class="col-lg-1"></div>
                 <div class="col col-lg-4">
                     <form id="formSpatialDomain">
+                        @if($elemenMetadata['c9_west_bound_longitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -43,6 +44,8 @@
                         <div class="row">
                             <p></p>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c9_east_bound_longitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -61,6 +64,8 @@
                         <div class="row">
                             <p></p>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c9_south_bound_latitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -79,6 +84,8 @@
                         <div class="row">
                             <p></p>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c9_north_bound_latitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -97,6 +104,7 @@
                         <div class="row">
                             <p></p>
                         </div>
+                        @endif
                         <div class="row">
                             <div class="col col-lg-12">
                                 <div class="btn-group" role="group" aria-label="Basic example"></div>

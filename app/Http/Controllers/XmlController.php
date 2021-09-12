@@ -32,7 +32,10 @@ class XmlController extends Controller {
                         <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset">$request->kategori</MD_ScopeCode>
                     </hierarchyLevel>
                     <contact>
-                        <CI_ResponsibleParty>$request->c1_content_info
+                        <CI_ResponsibleParty>
+                            <contentInfo>
+                                <gco:CharacterString>$request->c1_content_info</gco:CharacterString>
+                            </contentInfo>
                             <organisationName>
                                 <gco:CharacterString>$request->publisher_agensi_organisasi</gco:CharacterString>
                             </organisationName>

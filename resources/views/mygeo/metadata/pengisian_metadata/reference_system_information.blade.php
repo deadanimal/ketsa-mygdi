@@ -8,6 +8,7 @@
     </div>
     <div id="collapse13" class="panel-collapse collapse in" data-parent="#div_c13">
         <div class="card-body">
+            @if($elemenMetadata['c13_ref_sys_identify']->status == '1')
             <div class="row mb-5">
                 <div class="col-xl-3">
                     <b for="input-system-identifier" data-toggle="tooltip"
@@ -43,40 +44,59 @@
                     </select>
                 </div>
             </div>
+            @endif
+            @if($elemenMetadata['refsys_projection']->status == '1' || $elemenMetadata['refsys_axis_units']->status == '1')
             <div class="row mb-2">
+                @if($elemenMetadata['refsys_projection']->status == '1')
                 <div class="col-2"><b><?php echo __('lang.projection'); ?> :</b></div>
                 <div class="col-4">
                     <input class="form-control form-control-sm" type="text" name="refsys_projection"
                         id="refsys_projection" readonly value="{{ old('refsys_projection') }}">
                 </div>
+                @endif
+                @if($elemenMetadata['refsys_axis_units']->status == '1')
                 <div class="col-2"><b><?php echo __('lang.axis_units'); ?> :</b></div>
                 <div class="col-4"><input class="form-control form-control-sm" type="text" name="refsys_axis_units"
                         id="refsys_axis_units" readonly value="{{ old('refsys_axis_units') }}"></div>
+                @endif
             </div>
+            @endif
+            @if($elemenMetadata['refsys_semiMajorAxis']->status == '1' || $elemenMetadata['refsys_datum']->status == '1')
             <div class="row mb-2">
+                @if($elemenMetadata['refsys_semiMajorAxis']->status == '1')
                 <div class="col-2"><b><?php echo __('lang.semi_major_axis'); ?> :</b></div>
                 <div class="col-4">
                     <input class="form-control form-control-sm" type="text" name="refsys_semiMajorAxis"
                         id="refsys_semiMajorAxis" readonly value="{{ old('refsys_semiMajorAxis') }}">
                 </div>
+                @endif
+                @if($elemenMetadata['refsys_datum']->status == '1')
                 <div class="col-2"><b><?php echo __('lang.datum'); ?> :</b></div>
                 <div class="col-4">
                     <input class="form-control form-control-sm" type="text" name="refsys_datum" id="refsys_datum"
                         readonly value="{{ old('refsys_datum') }}">
                 </div>
+                @endif
             </div>
+            @endif
+            @if($elemenMetadata['refsys_ellipsoid']->status == '1' || $elemenMetadata['refsys_denomFlatRatio']->status == '1')
             <div class="row mb-2">
+                @if($elemenMetadata['refsys_ellipsoid']->status == '1')
                 <div class="col-2"><b><?php echo __('lang.ellipsoid'); ?> :</b></div>
                 <div class="col-4">
                     <input class="form-control form-control-sm" type="text" name="refsys_ellipsoid"
                         id="refsys_ellipsoid" readonly value="{{ old('refsys_ellipsoid') }}">
                 </div>
+                @endif
+                @if($elemenMetadata['refsys_denomFlatRatio']->status == '1')
                 <div class="col-2"><b><?php echo __('lang.denominator_of_flattening_ratio'); ?> :</b></div>
                 <div class="col-4">
                     <input class="form-control form-control-sm" type="text" name="refsys_denomFlatRatio"
                         id="refsys_denomFlatRatio" readonly value="{{ old('refsys_denomFlatRatio') }}">
                 </div>
+                @endif
             </div>
+            @endif
         </div>
     </div>
 </div>

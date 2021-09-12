@@ -9,6 +9,7 @@
     <div id="collapse6" class="panel-collapse collapse in show" data-parent="#div_c6">
         <div class="card-body">
             <div class="row">
+                @if($elemenMetadata['c6_collection_name']->status == '1')
                 <div class="col-xl-7">
                     <div class="form-inline ml-3">
                         <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan nama kumpulan GCP yang diambil/ dicerap">
@@ -20,6 +21,8 @@
                     <div class="text-error">{{ $message }}</div>
                     @enderror
                 </div>
+                @endif
+                @if($elemenMetadata['c6_collection_id']->status == '1')
                 <div class="col-xl-5">
                     <div class="form-inline">
                         <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan bilangan titik GCP ">
@@ -31,6 +34,7 @@
                     <div class="text-error">{{ $message }}</div>
                     @enderror
                 </div>
+                @endif
             </div>
         </div>
     </div>

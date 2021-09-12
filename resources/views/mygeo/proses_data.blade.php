@@ -228,6 +228,24 @@
     @endforeach
     <script>
         $(document).ready(function() {
+            $(document).on('change','.kiraHarga',function(){
+                var kiraHarga = $(this).parent().parent().parent().find('.kiraHarga');
+                var jumlahHarga = 0;
+                jQuery.each(kiraHarga,function(key,val) {
+                    var size = $(val).val();
+                    var hargadata = $(val).data('hargadata');
+                    jumlahHarga += (size * hargadata);
+                });
+                jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
+                $(".jumlah_harga_dokumen").val(jumlahHarga);
+            });
+
+            $('.tempohMuatTurun').daterangepicker({
+                locale: {
+                    format: 'DD-MM-YYYY'
+                },
+            });
+
             $("#table_metadatas").DataTable({
                 "ordering": false,
                 "responsive": true,

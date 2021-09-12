@@ -42,6 +42,7 @@ use App\AuditTrail;
 use App\Pengumuman;
 use PDF;
 use App\CustomMetadataInput;
+use Dompdf\Dompdf;
 
 class MetadataController extends Controller {
 
@@ -106,26 +107,33 @@ class MetadataController extends Controller {
             $query = $query->where('data', 'ilike', '%' . $carian . '%');
         }
 
-        if(isset($request->content_type)){
+        if(isset($request->content_type) && $request->content_type != ""){
             $params['content_type'] = $request->content_type;
             $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
         }
+        $params['topic_category'] = [];
         if(isset($request->topic_category)){
-            $params['topic_category'] = [];
-            foreach($request->topic_category as $tc){
-                $query = $query->orWhere('data', 'ilike', '%' . $tc . '%');
-                $params['topic_category'][] = $tc;
+            $query = $query->where(function ($query) use ($request,&$params) {
+                foreach($request->topic_category as $tc){
+                    $query->orWhere('data', 'ilike', '%<MD_TopicCategoryCode>' . $tc . '</MD_TopicCategoryCode>%');
+                    $params['topic_category'][]= $tc;
+                }
+            });
+        }
+        
+        if(isset($request->tarikh_mula) && $request->tarikh_mula != "" && isset($request->tarikh_tamat) && $request->tarikh_tamat != "" && ($request->tarikh_mula == $request->tarikh_tamat)){
+            $query = $query->whereBetween('createdate',[$request->tarikh_mula.' 00:00:01',$request->tarikh_tamat.' 59:59:59']);
+        }else{
+            if(isset($request->tarikh_mula) && $request->tarikh_mula != ""){
+                $params['tarikh_mula'] = $request->tarikh_mula;
+                $query = $query->where('createdate', '>=', date('Y-m-d H:i:s',strtotime($request->tarikh_mula.' 00:00:01')));
+            }
+            if(isset($request->tarikh_tamat) && $request->tarikh_tamat != ""){
+                $params['tarikh_tamat'] = $request->tarikh_tamat;
+                $query = $query->where('createdate', '<=', date('Y-m-d H:i:s',strtotime($request->tarikh_tamat.' 23:59:59')));
             }
         }
-        if(isset($request->tarikh_mula)){
-            $params['tarikh_mula'] = $request->tarikh_mula;
-            $query = $query->where('createdate', '>=', date('Y-m-d',strtotime($request->tarikh_mula)));
-        }
-        if(isset($request->tarikh_tamat)){
-            $params['tarikh_tamat'] = $request->tarikh_tamat;
-            $query = $query->where('createdate', '<=', date('Y-m-d',strtotime($request->tarikh_tamat)));
-        }
-            
+        
         $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
         
         $metadatas = [];
@@ -278,8 +286,9 @@ class MetadataController extends Controller {
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
         $customMetadataInput = CustomMetadataInput::all();
+        $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
 
-        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput'));
+        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput','elemenMetadata'));
     }
 
     public function show(Request $request) {
@@ -329,6 +338,15 @@ class MetadataController extends Controller {
         if (!auth::user()->hasRole(['Pengesah Metadata','Penerbit Metadata', 'Super Admin'])) {
             exit();
         }
+        
+        //testcron==============================================================
+//        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 minutes"));
+//        //find metadata tak diusik lebih dari 2 minggu
+//        $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
+//        //find metadata that has been mailed(cronned) more than 2 minggu but still x diusik
+//        $result2 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('cronned_metadata_tak_diusik','<',$lastTwoWeeks)->get();
+//        dd(count($result1),$lastTwoWeeks);
+        //======================================================================
 
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$id)->get()->first();
 
@@ -425,7 +443,9 @@ class MetadataController extends Controller {
         }
 
         $portal = PortalTetapan::get()->first();
-        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched','portal'));
+        $customMetadataInput = CustomMetadataInput::all();
+        
+        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched','portal','customMetadataInput'));
     }
 
     public function downloadMetadataPdf($id) {
@@ -466,14 +486,15 @@ class MetadataController extends Controller {
             $refSys = [];
         }
 
-        $html = view('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->render();
-        $pdf = \App::make('dompdf.wrapper')->setOptions(['defaultFont' => 'sans-serif']);
-        $pdf->loadHTML($html);
-        return $pdf->stream();
+//        $html = view('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->render();
+//        $pdf = \App::make('dompdf.wrapper')->setOptions(['defaultFont' => 'sans-serif']);
+//        $pdf->loadHTML($html);
+////        return $pdf->stream();
+//        
+        $pdf = PDF::loadView('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->setOptions(['defaultFont' => 'sans-serif']);
+//        
+        return $pdf->download('disney.pdf');
         
-//        $pdf = PDF::loadView('pdfs.pdf1', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'))->setOptions(['defaultFont' => 'sans-serif']);
-        
-//        return $pdf->download('disney.pdf');
     }
 
     public function show_xml_nologin(Request $request) {
@@ -743,7 +764,22 @@ class MetadataController extends Controller {
             "c10_file_type.required" => 'File Type required',
             "c2_serviceUrl.required" => 'Service URL required',
         ];
+        
+        $elemenMetadatacol = []; 
+        $elemenMetadata = ElemenMetadata::where('status','0')->get(); //get disabled inputs and remove their validation
+        if(count($elemenMetadata) > 0){
+            foreach($elemenMetadata as $em){
+                $elemenMetadatacol[] = $em->input_name;
+            }
+            foreach($fields as $key=>$val){
+                if(in_array($key,$elemenMetadatacol)){
+                    unset($fields[$key]); //remove them validations
+                }
+            }
+        }
          
+        $this->validate($request, $fields, $customMsg);
+        
         $customMetadataInput = CustomMetadataInput::all();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
@@ -753,18 +789,17 @@ class MetadataController extends Controller {
                     $customMsg[$cmi->input_name.'.required'] = $cmi->name." required";
                 }
                 if(isset($request->{$cmi->input_name})){ //dont remove white space below
-                    //smbg sini
                     $custom_inputs .= '
-            <custom_input>
-                
-                <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
-            </custom_input>';
+            <customInput>        
+                <'.$cmi->input_name.'>
+
+                    <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
+                </'.$cmi->input_name.'>
+            </customInput>';
                 }
             }
         }
         
-        $this->validate($request, $fields, $customMsg);
-
         $keywords = "";
         if(count($request->c10_additional_keyword) > 0){
             foreach($request->c10_additional_keyword as $var){
@@ -1210,6 +1245,21 @@ class MetadataController extends Controller {
             "c2_serviceUrl.required" => 'Service URL required',
         ];
         
+        $elemenMetadatacol = []; 
+        $elemenMetadata = ElemenMetadata::where('status','0')->get(); //get disabled inputs and remove their validation
+        if(count($elemenMetadata) > 0){
+            foreach($elemenMetadata as $em){
+                $elemenMetadatacol[] = $em->input_name;
+            }
+            foreach($fields as $key=>$val){
+                if(in_array($key,$elemenMetadatacol)){
+                    unset($fields[$key]); //remove them validations
+                }
+            }
+        }
+        
+        $this->validate($request, $fields, $customMsg);
+
         $customMetadataInput = CustomMetadataInput::all();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
@@ -1220,14 +1270,16 @@ class MetadataController extends Controller {
                 }
                 if(isset($request->{$cmi->input_name})){ //dont remove white space below
                     $custom_inputs .= '
-            <custom_input>
-                <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
-            </custom_input>';
+            <customInput>        
+                <'.$cmi->input_name.'>
+
+                    <CharacterString>'.$request->{$cmi->input_name}.'</CharacterString>
+                </'.$cmi->input_name.'>
+            </customInput>';
                 }
             }
         }
         
-        $this->validate($request, $fields, $customMsg);
 
         $fileUrl = "";
         $fileUrl = $request->c11_order_instructions;
@@ -1608,11 +1660,26 @@ class MetadataController extends Controller {
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
         }
 
-        $elemens = ElemenMetadata::with('getKategori','getTajuk','getSubTajuk')->get();
+//        $elemens = ElemenMetadata::with('getKategori','getTajuk','getSubTajuk')->get();
+        $elemens = ElemenMetadata::with('getKategori','getTajuk')->orderBy('id', 'ASC')->get();
         $categories = MCategory::get();
         $customMetadataInput = CustomMetadataInput::get();
 
         return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('elemens','categories','customMetadataInput'));
+    }
+    
+    public function change_elemen_status(Request $request){
+        $em = ElemenMetadata::where(["id"=>$request->elemen_id])->get()->first();
+        $em->status = $request->status_id;
+        $em->update();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
+        $at->save();
+        
+        exit();
     }
 
     public function simpan_kategori(Request $request) {

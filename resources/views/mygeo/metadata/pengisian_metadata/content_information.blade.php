@@ -11,6 +11,7 @@
             <div class="acard-body opacity-8">
                 <h6 class="heading-small text-muted mb-2"><?php echo __('lang.wavelengthBandInformation'); ?></h6>
                 <div class="pl-lg-3">
+                    @if($elemenMetadata['c7_band_boundary']->status == '1')
                     <div class="row mb-2">
                         <div class="col-xl-6">
                             <div class="form-inline">
@@ -28,7 +29,10 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @if($elemenMetadata['c7_trans_fn_type']->status == '1' || $elemenMetadata['c7_trans_polar']->status == '1')
                     <div class="row mb-2">
+                        @if($elemenMetadata['c7_trans_fn_type']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-4" data-toggle="tooltip" title="Jenis fungsi pemindahan yang digunakan dalam menentukan skala">
@@ -37,6 +41,8 @@
                                 <input class="form-control form-control-sm" type="text" style="width :200px" placeholder="Transfer Type" name="c7_trans_fn_type" id="c7_trans_fn_type" value="{{old('c7_trans_fn_type')}}">
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c7_trans_polar']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Polar radar yag dihantar">
@@ -45,8 +51,12 @@
                                 <input class="form-control form-control-sm" type="text" style="width :180px" placeholder="Transmitted Polarization" name="c7_trans_polar" id="c7_trans_polar" value="{{old('c7_trans_polar')}}">
                             </div>
                         </div>
+                        @endif
                     </div>
+                    @endif
+                    @if($elemenMetadata['c7_nominal_spatial_res']->status == '1' || $elemenMetadata['c7_detected_polar']->status == '1')
                     <div class="row mb-2">
+                        @if($elemenMetadata['c7_nominal_spatial_res']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-4" data-toggle="tooltip" title="Jarak terkecil antara titik">
@@ -58,6 +68,8 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c7_detected_polar']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Polar radar yang dikesan">
@@ -66,7 +78,9 @@
                                 <input class="form-control form-control-sm" type="text" style="width :180px" placeholder="Detected Polarization" name="c7_detected_polar" id="c7_detected_polar" value="{{old('c7_detected_polar')}}">
                             </div>
                         </div>
+                        @endif
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

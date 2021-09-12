@@ -648,6 +648,8 @@
                 },
             }).done(function(response) {
                 var res = JSON.parse(response);
+                console.log(res);
+                console.log(jQuery.isEmptyObject(res));
                 if(!jQuery.isEmptyObject(res)){
                     var msg = "Data-data berikut telah diakui terima dan dimuat turun:<br>";
                     var mohons = "";
@@ -659,7 +661,7 @@
                     });
                     swal({
                         title: "Adakah anda berjaya memuat turun data?",
-                        text: msg,
+                        html: msg,
                         type: "warning",
                         input: "checkbox",
                         inputPlaceholder: " Saya berjaya memuat turun data",
@@ -693,20 +695,20 @@
                 }
             });
         }
-        $(document).ready(function(){
-            //check if user has completed download============================================================
-            <?php
-            if(Auth::user()->hasRole(['Pemohon Data'])){
-                ?>
-                setInterval(
-                    checkThreeHourNotifySelesaiMuatTurun(),
-//                    10800000  /* 10800000 ms = 3 hrs */ //ori specs
-                    300000  /* 300000 ms = 5 min for testing */
-                    10000  /* 10000 ms = 10 sec for farhan testing */
-                );
-                <?php
-            }
+        //check if user has completed download============================================================
+        <?php
+        if(Auth::user()->hasRole(['Pemohon Data'])){
             ?>
+            setInterval(
+                checkThreeHourNotifySelesaiMuatTurun,
+                20000  /* 15000 ms = 20 seconds for farhan testing */
+//                    10800000  /* 10800000 ms = 3 hrs */ //ori specs
+//                    300000  /* 300000 ms = 5 min for testing */
+            );
+            <?php
+        }
+        ?>
+        $(document).ready(function(){
             <?php
             //notify user (pemohon data only) to do penilaian after 6 months==================================
             if(Auth::user()->hasRole(['Pemohon Data']) && Session::has('msgPenilaian') && Session::get('msgPenilaian') !== ""){

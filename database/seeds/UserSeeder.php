@@ -326,5 +326,41 @@ class UserSeeder extends Seeder
             'assigned_roles' => 'Pentadbir Data',
         ]);
         $user->assignRole('Pentadbir Data');
+        
+        $user = User::create([
+            'name' => "Ftest_pentadbirdata",
+            'email' => "ftestftest@ftestftest.com",
+            'password' => Hash::make('ftestftest@ftestftest.comM2'),
+            'nric' => '888888888888',
+            'agensi_organisasi' => '3',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 1,
+            'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
+            'gambar_profil' => 'mrt.jpg',
+            'status' => '1',
+            'assigned_roles' => 'Pentadbir Data',
+        ]);
+        $user->assignRole('Pentadbir Data');
+        
+        $user = User::create([
+            'name' => "Ftest_pemohondata",
+            'email' => "ftest1@ftest1.com",
+            'password' => Hash::make('ftest1@ftest1.comM2'),
+            'nric' => '888888888888',
+            'agensi_organisasi' => '3',
+            'bahagian' => 'IT',
+            'sektor' => 1,
+            'phone_pejabat' => '0888888888',
+            'phone_bimbit' => '0188888888',
+            'disahkan' => 1,
+            'alamat' => '34 Jalan Melur Taman Bunga 45502 Arau Perlis',
+            'gambar_profil' => 'mrt.jpg',
+            'status' => '1',
+            'assigned_roles' => 'Pemohon Data',
+        ]);
+        $user->assignRole('Pemohon Data');
     }
 }
