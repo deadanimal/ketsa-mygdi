@@ -210,7 +210,7 @@ class PortalController extends Controller
     public function index_panduan_pengguna()
     {
         $portal = PortalTetapan::get()->first();
-        $panduan_pengguna = PanduanPengguna::get()->first();
+        $panduan_pengguna = PanduanPengguna::get();
         return view('panduan_pengguna', compact('panduan_pengguna','portal'));
     }
 
