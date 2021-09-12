@@ -85,11 +85,6 @@ class PortalController extends Controller
         return view('mygeo.maklum_balas', compact('hubungi_kami', 'panduan_pengguna', 'penafian', 'penyataan_privasi', 'faq', 'pengumuman'));
     }
 
-    public function edit_panduan_pengguna()
-    {
-        $panduan_pengguna = PanduanPengguna::get()->first();
-        return view('mygeo.panduan_pengguna', compact('panduan_pengguna'));
-    }
 
     public function edit_pengumuman2()
     {
@@ -197,6 +192,21 @@ class PortalController extends Controller
 
 
     //=== Panduan Penggun Functions ===========================================================
+    public function edit_panduan_pengguna()
+    {
+        $panduan_pengguna = PanduanPengguna::get();
+        return view('mygeo.panduan_pengguna', compact('panduan_pengguna'));
+    }
+
+    public function store_kategori_panduan(Request $request){
+
+        $panduan = new PanduanPengguna();
+        $panduan->title = $request->kategori_panduan;
+        $panduan->save();
+
+        return redirect('/panduan_pengguna_edit')->with('success', 'Panduan Pengguna Disimpan');
+    }
+
     public function index_panduan_pengguna()
     {
         $portal = PortalTetapan::get()->first();
@@ -204,13 +214,14 @@ class PortalController extends Controller
         return view('panduan_pengguna', compact('panduan_pengguna','portal'));
     }
 
-    public function store_panduan_pengguna(Request $request)
+    public function update_panduan_pengguna(Request $request)
     {
         DB::transaction(function () use ($request) {
             //save panduan pengguna
             PanduanPengguna::where(["id" => $request->id_panduan_pengguna])->update([
-                "title" => $request->title_panduan_pengguna,
-                "content" => $request->content_panduan_pengguna
+                "title" => $request->title_panduan,
+                "content" => $request->content_panduan,
+                "video_link" => $request->video_link,
             ]);
         });
 

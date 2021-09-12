@@ -78,12 +78,11 @@ class DataAsasController extends Controller
     {
         $subs = SenaraiData::where([
             ['kategori','=','LOL']
-        ])->distinct('subkategori')->get();;
+        ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
         ])->get();
         $senarai_data = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
-
         $portal = PortalTetapan::get()->first();
         return view('/data_asas_senarai',[
             'senarai_data' => $senarai_data,

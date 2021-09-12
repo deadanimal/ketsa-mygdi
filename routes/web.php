@@ -102,10 +102,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Route::get('/panduan_pengguna','PortalController@index_panduan_pengguna');
     Route::get('/panduan_pengguna_edit', 'PortalController@edit_panduan_pengguna');
-    Route::post('/simpan_panduan_pengguna', 'PortalController@store_panduan_pengguna');
+    Route::post('/simpan_panduan_pengguna', 'PortalController@update_panduan_pengguna');
+    Route::post('/simpan_kategori_panduan', 'PortalController@store_kategori_panduan');
 
     Route::get('/pengumuman_edit', 'PortalController@edit_pengumuman2');
-    // Route::post('/simpan_pengumuman','PortalController@store_panduan_pengguna');
 
     // Route::get('/hubungi_kami','PortalController@index_hubungi_kami');
     Route::post('/simpan_hubungi_kami', 'PortalController@store_hubungi_kami');
