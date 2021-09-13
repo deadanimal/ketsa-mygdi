@@ -14,7 +14,7 @@ class ElemenMetadataSeeder extends Seeder
     {
         for($r=1;$r<5;$r++){ //seed for each kategori 1-4
             //General Information
-            ElemenMetadata::create(["label"=>"Kategori","tajuk"=>"1","input_name"=>"c1_content_info","status"=>"1","kategori"=>$r]);
+            ElemenMetadata::create(["label"=>"Content Information","tajuk"=>"1","input_name"=>"c1_content_info","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Publisher Name","tajuk"=>"1","input_name"=>"publisher_name","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Organisation Name","tajuk"=>"1","input_name"=>"publisher_agensi_organisasi","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Email","tajuk"=>"1","input_name"=>"publisher_email","status"=>"1","kategori"=>$r]);
