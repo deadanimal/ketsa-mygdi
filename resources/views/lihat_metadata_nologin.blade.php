@@ -46,10 +46,10 @@
                                 <button type="button" class="btn btn-sm btn-default mr-2">Muat Turun PDF</button>
                             </a>-->
                             <a href="#">
-                                <button type="button" class="btn btn-sm btn-default mr-2" onclick="window.print();">Muat Turun PDF</button>
+                                <button type="button" class="btn btn-sm btn-default mr-2 actionButtons" data-action="pdf">Muat Turun PDF</button>
                             </a>
-                            <a href="{{ url('downloadMetadataXml').'/'.$metadataSearched->id }}">
-                                <button type="button" class="btn btn-sm btn-default mr-2">Muat Turun XML</button>
+                            <a href="#">
+                                <button type="button" class="btn btn-sm btn-default mr-2 actionButtons" data-action="xml" data-href='{{ url('downloadMetadataXml').'/'.$metadataSearched->id }}'>Muat Turun XML</button>
                             </a>
                         </div>
                     </div>
@@ -115,6 +115,19 @@
 
 <script>
   $(document).ready(function(){
+      $(document).on('click','.actionButtons',function(){
+          $('.actionButtons').hide();
+         if($(this).data('action') == 'pdf'){
+             window.print();
+         }else if($(this).data('action') == 'xml'){
+             window.open($(this).data('href'), '_blank');
+         } 
+      });
+      
+        window.onafterprint = function(){
+            $('.actionButtons').show();
+        }
+      
     <?php
     if(count($categories) > 0){
       $type = (isset($metadataxml->hierarchyLevel->MD_ScopeCode) ? $metadataxml->hierarchyLevel->MD_ScopeCode:"");

@@ -17,6 +17,7 @@
                 <div class="col-xl-6">
                     <h6 class="heading-small text muted">Legal Constraints</h6>
                     <div class="pl-lg-3">
+                        @if($elemenMetadata['c14_useLimitation']->status == '1')
                         <div class="row mb-2 divUseLimitation">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">
@@ -33,6 +34,8 @@
                                 <input type="text" name="c14_useLimitation" id="c14_useLimitation" class="form-control form-control-sm" value="{{ $useLimitation }}">
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c14_access_constraint']->status == '1')
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">
@@ -61,6 +64,8 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c14_use_constraint']->status == '1')
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-use-cons">
@@ -89,12 +94,14 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <h6 class="heading-small text muted">Security Constraints
                     </h6>
                     <div class="pl-lg-3">
+                        @if($elemenMetadata['c14_classification_sys']->status == '1')
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">
@@ -121,6 +128,8 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c14_reference']->status == '1')
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-reference">
@@ -137,6 +146,7 @@
                                 <input type="text" name="c14_reference" id="c14_reference" class="form-control form-control-sm" placeholder="Standard/Policy/Act/Circular/Legal" value="{{ $ref }}">
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

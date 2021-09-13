@@ -13,6 +13,7 @@
     </div>
     <div id="collapse1" class="panel-collapse collapse in show" data-parent="#div_c1">
         <div class="card-body">
+            @if($elemenMetadata['c1_content_info']->status == '1')
             <div class="form-group row">
                 <p class="pl-lg-3 form-control-label">Content Information<span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                 <select name="c1_content_info" id="c1_content_info" class="form-control" style="width:175px;">
@@ -42,10 +43,12 @@
                 @enderror
                 </select>
             </div>
+            @endif
 
             <h2 class="heading-small text-muted">Metadata Publisher</h2>
 
             <div class="my-1">
+                @if($elemenMetadata['publisher_name']->status == '1')
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="uname">
@@ -63,6 +66,8 @@
                         <input class="form-control form-control-sm ml-3" type="text" name="publisher_name" value="{{ $pub_name }}">
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['publisher_agensi_organisasi']->status == '1')
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_agensi_organisasi">
@@ -87,6 +92,8 @@
                         <input type="hidden" name="publisher_bahagian" value="{{ $bahagian }}" />
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['publisher_email']->status == '1')
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_email">
@@ -104,6 +111,8 @@
                         <input class="form-control form-control-sm ml-3" type="text" name="publisher_email" value="{{ $pub_email }}">
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['publisher_phone']->status == '1')
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_phone">
@@ -121,6 +130,8 @@
                         <input class="form-control form-control-sm ml-3" type="text" name="publisher_phone" value="{{ $pub_phone }}">
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['publisher_role']->status == '1')
                 <div class="row my-0 py-0 divPublisherRole">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_role">
@@ -149,6 +160,7 @@
                         </select>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

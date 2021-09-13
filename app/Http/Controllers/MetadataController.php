@@ -402,8 +402,9 @@ class MetadataController extends Controller {
             $refSysSelected = [];
         }
         $customMetadataInput = CustomMetadataInput::all();
+        $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
 
-        return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected','metadataxml', 'metadataSearched', 'pengesahs', 'customMetadataInput'));
+        return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected','metadataxml', 'metadataSearched', 'pengesahs', 'customMetadataInput','elemenMetadata'));
     }
 
     public function show_nologin(Request $request) {

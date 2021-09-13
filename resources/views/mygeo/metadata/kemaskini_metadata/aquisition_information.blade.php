@@ -19,6 +19,7 @@
                         <h6 class="heading-small text-muted mb-3">Environment Record
                         </h6>
                         <div class="form-group">
+                            @if($elemenMetadata['c8_avg_air_temp']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-8">
                                     <div class="form-control-label">
@@ -35,6 +36,8 @@
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Celcius" name="c8_avg_air_temp" id="c8_avg_air_temp" value="{{ $avgAirTemp }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_altitude']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-8">
                                     <div class="form-control-label">
@@ -51,6 +54,8 @@
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Feet" name="c8_altitude" id="c8_altitude" value="{{ $alt }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_relative_humid']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-8">
                                     <div class="form-control-label">
@@ -67,6 +72,8 @@
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Humidity" name="c8_relative_humid" id="c8_relative_humid" value="{{ $relHumid }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_meteor_cond']->status == '1')
                             <div class="row mb">
                                 <div class="col-xl-8">
                                     <div class="form-control-label">
@@ -83,12 +90,14 @@
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Condition" name="c8_meteor_cond" id="c8_meteor_cond" value="{{ $metCond }}">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <h6 class="heading-small text-muted mb-3">Event Identifier
                         </h6>
                         <div class="form-group">
+                            @if($elemenMetadata['c8_identifier']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -108,6 +117,8 @@
                                     @enderror
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_trigger']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -129,6 +140,8 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_context']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -150,6 +163,8 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_sequence']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -171,6 +186,8 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_time']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -187,11 +204,13 @@
                                     <input class="form-control form-control-sm" type="time" style="width :120px" name="c8_time" id="c8_time" value="{{ $time }}">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <h6 class="heading-small text-muted mb-3">Instrument Identification</h6>
                         <div class="form-group">
+                            @if($elemenMetadata['c8_type']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -211,7 +230,9 @@
                                     @enderror
                                 </div>
                             </div>
+                            @endif
                             <h6 class="heading-small text-muted mt-2 mb-3">Operation</h6>
+                            @if($elemenMetadata['c8_op_identifier']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -228,6 +249,8 @@
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_op_identifier" id="c8_op_identifier" value="{{ $opId }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_op_status']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -244,6 +267,8 @@
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Status" name="c8_op_status" id="c8_op_status" value="{{ $opStatus }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_op_type']->status == '1')
                             <div class="row mb">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -260,12 +285,14 @@
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Type" name="c8_op_type" id="c8_op_type" value="{{ $opType }}">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-2 px-0">
                         <h6 class="heading-small text-muted mb-3">Request Data Range
                         </h6>
                         <div class="form-group">
+                            @if($elemenMetadata['c8_rdr_date']->status == '1')
                             <div class="form-control-label mr-3">
                                 Date
                             </div>
@@ -276,6 +303,8 @@
                             }
                             ?>
                             <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_rdr_date" id="c8_rdr_date" value="{{ $rdrDate }}">
+                            @endif
+                            @if($elemenMetadata['c8_last_accept_date']->status == '1')
                             <div class="form-control-label mt-3 mr-3">
                                 Last Acceptable Date
                             </div>
@@ -286,6 +315,7 @@
                             }
                             ?>
                             <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" class="form-control col-lg-4" value="{{ $lad }}">
+                            @endif
                         </div>
                     </div>
                 </div>
