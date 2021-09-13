@@ -416,9 +416,9 @@
                             <i class="icofont-google-map"></i>
                             <h4>Lokasi</h4>
                             <p> <span style="font-weight: bold; font-size: medium;">
-                                    {!! isset($portal->name) ? $portal->name : '' !!}
+                                {!! (isset($portal->name) ? $portal->name:"") !!}
                                 </span><br>
-                                {!! isset($portal->address) ? $portal->address : '' !!}
+                            {!! (isset($portal->address) ? $portal->address:"") !!}
                             </p>
                         </div>
                     </div>
@@ -428,14 +428,14 @@
                         <div class="email mt-0">
                             <i class="icofont-envelope"></i>
                             <h4>Emel</h4>
-                            <p>{!! isset($portal->email_admin) ? $portal->email_admin : '' !!}</p>
+                        <p>{!! (isset($portal->email_admin) ? $portal->email_admin:"") !!}</p>
                         </div>
                     </div>
                     <div class="info">
                         <div class="phone">
                             <i class="icofont-phone"></i>
                             <h4>Hubungi</h4>
-                            <p>{{ isset($portal->contact) ? $portal->contact : '' }}</p>
+                        <p>{{ (isset($portal->contact) ? $portal->contact:"") }}</p>
                         </div>
                     </div>
                 </div>

@@ -6,12 +6,10 @@
             width: 500px;
         }
 
-
         .row.form-group {
             padding-left: 15px;
             padding-right: 15px;
         }
-
 
         .change-link {
             background-color: #000;
@@ -38,7 +36,6 @@
         #editor-container {
             height: 130px;
         }
-
     </style>
 
     <div class="content-wrapper">

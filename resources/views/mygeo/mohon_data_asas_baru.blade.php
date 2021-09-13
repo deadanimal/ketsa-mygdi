@@ -108,8 +108,8 @@
                                                 $var = '';
                                                 if ($user->hasRole(['Pemohon Data'])) {
                                                     $var = $user->agensi_organisasi;
-                                                } else {
-                                                    $var = isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name : '';
+                                                }else{
+                                                    $var = (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"");
                                                 }
                                                 ?>
                                                 <input class="form-control form-control-sm ml-3" name="institusi"
@@ -135,8 +135,7 @@
                                             </div>
                                             <div class="col-3">
                                                 <input class="form-control form-control-sm ml-3" name="tel_pejabat"
-                                                    type="text" value="{{ $permohonan->users->phone_pejabat }}"
-                                                    disabled />
+                                                    type="text" value="{{ $permohonan->users->phone_pejabat }}" disabled />
                                             </div>
                                             <div class="col-2">
                                                 <label class="form-control-label mr-4" for="tel_bimbit">
@@ -191,8 +190,7 @@
                                         <!-- <button class="btn btn-sm btn-default" type=><span class="text-white">Tambah</span></button> -->
                                     </div>
                                 </div>
-                                <form action="{{ url('kemaskini_permohonan') }}" method="POST"
-                                    id="formHantarPermohonanPentadbir">
+                                <form action="{{ url('kemaskini_permohonan') }}" method="POST" id="formHantarPermohonanPentadbir">
                                     @csrf
                                     <div class="row">
                                         <div class="col-10 pl-lg-5">
@@ -728,7 +726,6 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-
                                         </div>
                                         <div class="form-group">
                                             <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
@@ -866,6 +863,27 @@
                     }
                 }
             });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $(".div_sub").hide();
+            $(".subKategoriTitle").hide();
+
+            $(document).on("click", ".kategori", function() {
+                var divname = $(this).data('id');
+                $(".div_sub").hide();
+                $("." + divname).show();
+                $(".subKategoriTitle").show();
+            });
+
+            $(document).on("click", ".subkategori", function () {
+                //            var divname = $(this).data('id');
+                //            $(".div_sub").hide();
+                //            $("." + divname).show();
+                //            $(".subKategoriTitle").show();
+            });
+
         });
     </script>
 

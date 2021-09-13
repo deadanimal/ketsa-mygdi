@@ -37,6 +37,7 @@
                                 <?php 
                                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
                                   echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                  $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                 }
                                 ?>
                             </h1>
@@ -49,7 +50,7 @@
                                 <button type="button" class="btn btn-sm btn-default mr-2 actionButtons" data-action="pdf">Muat Turun PDF</button>
                             </a>
                             <a href="#">
-                                <button type="button" class="btn btn-sm btn-default mr-2 actionButtons" data-action="xml" data-href='{{ url('downloadMetadataXml').'/'.$metadataSearched->id }}'>Muat Turun XML</button>
+                                <button type="button" class="btn btn-sm btn-default mr-2 actionButtons" data-action="xml" data-href='{{ url('downloadMetadataXml').'/'.$metadataSearched->id.'/'.$metadataName }}'>Muat Turun XML</button>
                             </a>
                         </div>
                     </div>
@@ -118,6 +119,7 @@
       $(document).on('click','.actionButtons',function(){
          if($(this).data('action') == 'pdf'){
             $('.actionButtons').hide();
+            document.title = '{{ $metadataName }}';
              window.print();
          }else if($(this).data('action') == 'xml'){
              window.open($(this).data('href'), '_blank');
@@ -252,6 +254,16 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
         tileSize: 512,
         zoomOffset: -1,
     }).addTo(map);
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.boxZoom.disable();
+    map.keyboard.disable();
+    if (map.tap) map.tap.disable();
+    document.getElementById('map').style.cursor='default';
+    $(".leaflet-control-zoom").css("visibility", "hidden");
+    $(".leaflet-top").hide();
 
         var setNbltValue = document.getElementById("nblt").value = N;
         var setWblgValue = document.getElementById("wblg").value = W;
@@ -262,12 +274,9 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
         var el = document.getElementById('nblt');
         el.dispatchEvent(new Event('change'));
 
-// drawRectangleEditor()
-// var wblgValue = document.getElementById('wblg').value = '';
     searchLocation();
 
     function updateLayer() {
-
         var nbltValue = document.getElementById("nblt").value;
         var wblgValue = document.getElementById("wblg").value;
         var sbltValue = document.getElementById("sblt").value;
@@ -278,24 +287,15 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
                 layer.remove();
             });
 
-            console.log("all onchange: " + wblgValue + "," + eblgValue + "," + nbltValue + "," + sbltValue);
-
             showRectangle(nbltValue, wblgValue, sbltValue, eblgValue)
         }
     }
 
-
     function searchLocation() {
-
         var markerIcon = L.icon({
             iconUrl: 'css/leaflet@1.7.1/images/marker-icon-2x.png',
-// shadowUrl: 'leaf-shadow.png',
-
             iconSize: [30, 53], // size of the icon [width, height] in px
-// shadowSize:   [50, 64], // size of the shadow
             iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-// shadowAnchor: [4, 62],  // the same for the shadow
-// popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
 
         var searchControl = new L.esri.Controls.Geosearch().addTo(map);
@@ -305,7 +305,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
         searchControl.on('results', function (data) {
             results.clearLayers();
             for (var i = data.results.length - 1; i >= 0; i--) {
-// results.addLayer(L.marker(data.results[i].latlng));
                 console.log(data.results[i].latlng.lat);
                 L.marker([data.results[i].latlng.lat, data.results[i].latlng.lng], {icon: markerIcon}).addTo(map);
             }
@@ -315,9 +314,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
 
     function showRectangle(nblt, wblg, sblt, eblg) {
         var rectangle;
-        // var resetBound = [[0, 0],[0, 0]];
-        // rectangle = L.rectangle(resetBound).addTo(map);
-        // var map = L.map('map').setView([4.6161396,101.8562205], 6);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 18,
@@ -328,36 +324,13 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
             zoomOffset: -1,
         }).addTo(map);
 
-        // nblt = parseFloat(nblt); 
-        // wblg = parseFloat(wblg); 
-        // sblt = parseFloat(sblt); 
-        // eblg = parseFloat(eblg); 
-
-        console.log(nblt); // 6.3171
-        console.log(wblg); // 101.7046
-        console.log(sblt); // 2.7158
-        console.log(eblg); // 104.4547
-
-        // var bounds = [[6.3171, 101.7046], [2.7158, 104.4547]];
-
-        // var bounds = [[0+nblt, 0+wblg], [0+sblt, 0+eblg]];
-
         var bounds = [[nblt, wblg], [sblt, eblg]];
 
         rectangle = L.rectangle(bounds).addTo(map);
 
         var zoomToRectangle = L.rectangle(bounds).addTo(map).getCenter();
 
-        console.log("zoomToRectangle values:");
-        console.log(zoomToRectangle);
-        
         map.fitBounds(bounds);
-
-        // var map = L.map('map').setView([5.3105,107.3854408], 5);
-
-        // rectangle.remove();
-
-        // rectangle = L.rectangle(bounds).addTo(map);
     }
 
     function cleaLayer() {
@@ -373,21 +346,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);
-    }
-
-    function saveData() {
-
-        var nbltValue = document.getElementById("nblt").value;
-        var wblgValue = document.getElementById("wblg").value;
-        var sbltValue = document.getElementById("sblt").value;
-        var eblgValue = document.getElementById("eblg").value;
-
-        // var data = "North Bound Latitude: "+nbltValue+"";
-        //     data += "West Bound Longitude: "+wblgValue+"";
-
-        var data = ["North Bound Latitude: " + nbltValue, "West Bound Longitude: " + wblgValue, "South Bound Latitude: " + sbltValue, "East Bound Longitude: " + eblgValue];
-
-        alert(data);
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

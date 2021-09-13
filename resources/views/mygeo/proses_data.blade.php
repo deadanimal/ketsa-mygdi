@@ -171,10 +171,9 @@
                                                 value="{{ $permohonan->proses_datas->pautan_data }}">
 
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
-                                            <input class="form-control form-control-sm" name="tempoh" placeholder=""
-                                                type="date" disabled>
+<!--                                            <input class="form-control form-control-sm" name="tempoh" placeholder="" type="date" disabled>-->
+                                            <input type="text" class="form-control form-control-sm float-right tempohMuatTurun" name="tempoh">
                                         </div>
-                                        <div class="form-inline">
                                             <label class="form-control-label mr-2">Surat Balasan Permohonan </label>
                                             <a href="{{ url('surat_balasan/' . $permohonan->id) }}"
                                                 class="btn btn-sm btn-danger mb-2">
@@ -199,33 +198,28 @@
 
     </div>
 
+    <script>
     @foreach ($permohonan_list as $permohonan)
-        <script>
-            function kiraharga{{ $permohonan->id }}() {
-                console.log('Kira_Harga_{{ $permohonan->id }}');
-                var pembelian = {!! $skdatas !!}
-                var jumlahHarga = 0;
-                pembelian.forEach(element => {
-                    if (element.permohonan_id == {{ $permohonan->id }}) {
-                        var harga = parseFloat(element.harga_data);
-                        var size = document.getElementById("size_" + element.id).value;
-                        var jumlah = harga * size;
-                        // var hargaDoc = document.getElementById("harga_"+element.id);
-                        // hargaDoc.value = jumlah;
-                        jumlahHarga += jumlah
-                        console.log('jumlah: ', jumlah);
+            @foreach ($skdatas as $data)
+                // @if ($data->permohonan_id == $permohonan->id)
+                // $('.amount_{{$permohonan->id}}_{{$data->id}}').change(function() {
+                // var tot = 0;
 
-                    }
-                });
-                jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
-                console.log('jumlahHarga: ', jumlahHarga);
-                var jumlah_harga = document.getElementById("jumlah_harga_dokumen_{{ $permohonan->id }}");
-                console.log(jumlah_harga)
-                jumlah_harga.value = jumlahHarga;
-
-            }
+                // $('.price_{{$permohonan->id}}_{{$data->id}}').each(function() {
+                // var mul = 0;
+                // price = +$(this).val();
+                // });
+                // $('.amount_{{$permohonan->id}}_{{$data->id}}').each(function() {
+                // result = +$(this).val();
+                // var mul = result * price;
+                // tot += mul;
+                // });
+                // $('#total_{{$permohonan->id}}').val(tot);
+                // });
+                @endif
+            @endforeach
+        @endforeach
         </script>
-    @endforeach
     <script>
         $(document).ready(function() {
             $(document).on('change','.kiraHarga',function(){

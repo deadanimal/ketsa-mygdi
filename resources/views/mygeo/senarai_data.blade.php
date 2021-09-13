@@ -224,7 +224,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-control-label">Sub-Kategori</label>
                                     <input type="text" class="form-control form-control-sm" name="subkategori" value="">

@@ -272,8 +272,7 @@
                         <div class="row align-items-center justify-content-xl-between">
                             <div class="col-xl-4">
                                 <div class="copyright text-xl-left text-light">
-                                    <a class="text-light" href="{{ url('/penyataan_privasi') }}">PENYATAAN
-                                        PRIVASI</a>
+                                    <a class="text-light" href="{{ url('/penyataan_privasi') }}">PENYATAAN PRIVASI</a>
                                     <span class="mr-2 ml-2">|</span>
                                     <a class="text-light" href="{{ url('/penafian') }}">PENAFIAN</a>
                                     <br>
