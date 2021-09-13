@@ -179,7 +179,7 @@
             <div class="row mt-0 pt-0 mb-5">
                 <div class="col-12">
                     <p class="text-bl">Selamat Datang ke</p>
-                    <h1><span class="typed" data-typed-items="MyGeo Explorer"></span></h1>
+                    <h1>MyGeo Explorer</h1>
                 </div>
             </div>
             <div class="row">

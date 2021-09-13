@@ -27,6 +27,24 @@
             bottom: -40px;
         }
 
+        @media (max-width: 767px) {
+
+            /* ... */
+
+            .top-content .carousel-control-prev,
+            .top-content .carousel-control-next {
+                display: none;
+            }
+
+            .top-content .carousel-indicators li {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            /* ... */
+
+        }
+
     </style>
     <div class="content">
         <div class="card" style="background-color: rgba(255, 255, 255, 0.9);">
@@ -47,14 +65,15 @@
 
                                 <ol class="carousel-indicators">
                                     @foreach ($panduan_pengguna as $panduan)
-                                        <li data-target="#panduan-pengguna" data-slide-to="{{ $loop->iteration }}" @if($loop->iteration == '1') class="active" @endif></li>
+                                        <li data-target="#panduan-pengguna" data-slide-to="{{ $loop->iteration }}"
+                                            @if ($loop->iteration == '1') class="active" @endif></li>
                                     @endforeach
 
                                 </ol>
 
                                 <div class="carousel-inner">
                                     @foreach ($panduan_pengguna as $panduan)
-                                        <div class="carousel-item @if($loop->iteration == '1') active @endif">
+                                        <div class="carousel-item @if ($loop->iteration == '1') active @endif">
                                             <div class="embed-responsive embed-responsive-16by9">
                                                 <iframe class="embed-responsive-item"
                                                     src="https://www.youtube.com/embed/I2P1zEBciq4?autoplay=1&mute=1&loop=1"
