@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/delete_user', 'UserController@delete_user');
 
     Route::post('/change_elemen_status', 'MetadataController@change_elemen_status');
-    
+
     Route::get('/portal_settings', 'PortalController@index_portal_settings');
     Route::post('/simpan_portal_settings', 'PortalController@store_portal_settings');
 
@@ -195,7 +195,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/penilaian_pemohon/{id}','DataAsasController@penilaian_pemohon')->name('tambah.penilaian');
     Route::get('/akuan_penerimaan/{id}','DataAsasController@akuan_terima');
     Route::post('/api/dokumens','DataAsasController@api_store_generate_nric')->name('janaSalinanIC');
-    Route::post('/api/kemaskini_dokumens','DataAsasController@api_store_generate_nric')->name('kemaskiniSalinanIC');
+    Route::post('/api/kemaskini_dokumens','DataAsasController@api_update_generate_nric')->name('kemaskiniSalinanIC');
 
     Route::get('/proses_data','DataAsasController@proses_data');
     Route::post('/simpan_proses_data','DataAsasController@update_proses_data');
