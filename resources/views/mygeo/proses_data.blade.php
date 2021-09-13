@@ -138,11 +138,10 @@
                                                     <td>{{ $data->kategori }}</td>
                                                     <td>{{ $data->kawasan_data }}</td>
                                                     <td>
-                                                        <input class="form-control form-control-sm" placeholder="Saiz Data"
-                                                            id="size_{{ $data->id }}"
-                                                            onchange="kiraharga{{ $permohonan->id }}()" type="number"
+                                                        <input class="form-control form-control-sm kiraHarga" placeholder="Saiz Data"
+                                                            id="size_{{ $data->id }}" type="number"
                                                             step="0.01" name="saiz_data_{{ $data->id }}"
-                                                            value="{{ $data->saiz_data }}">
+                                                            value="{{ $data->saiz_data }}" data-permohonanid="{{ $permohonan->id }}" data-hargadata="{{ $data->harga_data }}">
                                                         <label class="ml-2">× RM {{ $data->harga_data }}
                                                         </label>
                                                     </td>
@@ -223,15 +222,16 @@
     <script>
         $(document).ready(function() {
             $(document).on('change','.kiraHarga',function(){
-                var kiraHarga = $(this).parent().parent().parent().find('.kiraHarga');
+                var kiraHarga = $('.kiraHarga');
                 var jumlahHarga = 0;
+                var permohonanid = $(this).data('permohonanid');
                 jQuery.each(kiraHarga,function(key,val) {
                     var size = $(val).val();
                     var hargadata = $(val).data('hargadata');
                     jumlahHarga += (size * hargadata);
                 });
                 jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
-                $(".jumlah_harga_dokumen").val(jumlahHarga);
+                $("#jumlah_harga_dokumen_"+permohonanid).val(jumlahHarga);
             });
 
             $('.tempohMuatTurun').daterangepicker({

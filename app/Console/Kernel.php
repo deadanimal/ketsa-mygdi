@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel
 //        $schedule->command('demo:cron')->everyFiveMinutes();
         $schedule->command('uncheckedMetadata:cron')->twiceDaily(8,3); //ori specs
 //        $schedule->command('uncheckedMetadata:cron')->everyFiveMinutes();
-        $schedule->command('penilaianMuatTurunData:cron')->twiceDaily(8,3); //ori specs
+//        $schedule->command('penilaianMuatTurunData:cron')->twiceDaily(8,3); //ori specs
+        $schedule->command('penilaianMuatTurunData:cron')->dailyAt('20:00');
 //        $schedule->command('penilaianMuatTurunData:cron')->everyFiveMinutes();
     }
 

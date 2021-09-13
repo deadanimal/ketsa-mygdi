@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
 use Storage;
 use DB;
+use Auth;
 
 class PenilaianMuatTurunDataCron extends Command
 {
@@ -50,8 +51,7 @@ class PenilaianMuatTurunDataCron extends Command
         if(count($mohons) > 0){
             foreach($mohons as $m){
                 $interval = date_create('now')->diff(date_create($m->berjayaMuatTurunTarikh));
-//                if($interval->m < 7){ //send email once every 2 months for 6 months //ori specs
-                if($interval->i < 45){ //send email once every 2 months for 6 months
+                if($interval->m < 7){ //send email once every 2 months for 6 months //ori specs
                     $interval2 = date_create('now')->diff(date_create($m->emailPenilaianStart));
                     //if($interval2->m >= 2){ //check last time emailed was 2 months ago //ori specs
                     if($interval2->i >= 1){ //check last time emailed was 2 months ago
@@ -60,19 +60,21 @@ class PenilaianMuatTurunDataCron extends Command
                         $vals["emailPenilaianStart"] = date('Y-m-d H:i:s',time());
                         MohonData::where(["id" => $m->id])->update($vals);
                         
+                        //get user
+                        $user = User::where('id',$m->user_id)->get()->first();
+                                
                         //send email to pemohon data to do penilaian
-                        $to_name = Auth::user()->name;
-                        $to_email = Auth::user()->email;
+                        $to_name = $user->name;
+                        $to_email = $user->email;
                         $data = array('m'=>$m);
                         Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
                             $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
                             $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
                         });
+                        \Log::info("PenilaianMuatTurunDataCron executed! _1");
                     }
                 }
             }
         }
-        
-        \Log::info("PenilaianMuatTurunDataCron executed!");
     }
 }
