@@ -14,6 +14,7 @@
     <div id="collapse12" class="panel-collapse collapse in show" data-parent="#div_c12">
         <div class="card-body">
             <div class="acard-body opacity-8">
+                @if($elemenMetadata['c12_dataset_type']->status == '1')
                 <div class="row mb-4">
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-dataset-type">
@@ -37,8 +38,10 @@
                         </select>
                     </div>
                 </div>
+                @endif
                 <h6 class="heading-small text-muted mb-2">DATA SET RESOLUTION</h6>
                 <div class="row mb-2">
+                    @if($elemenMetadata['c12_feature_scale']->status == '1')
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy">
                             Scale in Hardcopy/Softcopy
@@ -54,6 +57,8 @@
                         ?>
                         <input type="text" name="c12_feature_scale" id="c12_feature_scale" class="form-control form-control-sm" placeholder="10:50000" value="{{ $scale }}">
                     </div>
+                    @endif
+                    @if($elemenMetadata['c12_image_res']->status == '1')
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-imggsd">
                             Image Resolution (GSD)</label>
@@ -72,6 +77,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @if($elemenMetadata['c12_language']->status == '1')
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-language">
                             Language
@@ -89,7 +96,9 @@
                             <option value="Bahasa Malaysia" {{($lang == 'Bahasa Malaysia' ? "selected":"")}}>Bahasa Malaysia</option>
                         </select>
                     </div>
+                    @endif
                 </div>
+                @if($elemenMetadata['c12_maintenanceUpdate']->status == '1')
                 <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
                 <div class="row mb-2 divMaintenanceInfo">
                     <div class="col-xl-3">
@@ -122,6 +131,7 @@
                         </select>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

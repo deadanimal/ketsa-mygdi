@@ -15,6 +15,7 @@
         <div class="card-body">
             <h2 class="heading-small text-muted">Browsing Graphic</h2>
             <div class="my-2">
+                @if($elemenMetadata['c10_file_name']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_name">
@@ -31,6 +32,8 @@
                         <input type="text" name="c10_file_name" id="c10_file_name" class="form-control from-control-sm ml-3" value="{{ $fileName }}">
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c10_file_type']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_type">
@@ -47,7 +50,8 @@
                         <input type="text" name="c10_file_type" id="c10_file_type" class="form-control form-control-sm ml-3" value="{{ $fileType }}">
                     </div>
                 </div>
-                
+                @endif
+                @if($elemenMetadata['c10_file_url']->status == '1')
                 <div class="row mb-2 divBrowsingInformationUrl">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
@@ -70,10 +74,11 @@
                         @enderror
                     </div>
                 </div>
-                
+                @endif
             </div>
             <h2 class="heading-small text-muted">Keywords</h2>
             <div class="my-2">
+                @if($elemenMetadata['c10_keyword']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_name">
@@ -99,6 +104,8 @@
                         ?>
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c10_additional_keyword[]']->status == '1')
                 <?php
                 $counter = 0;
                 foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
@@ -121,6 +128,7 @@
                     }
                 }
                 ?>
+                @endif
             </div>
         </div>
     </div>

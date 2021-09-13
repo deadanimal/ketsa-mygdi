@@ -1253,7 +1253,7 @@
 </div>
 
 <?php //###################################################################### ?>
-
+@if($elemenMetadata['c2_abstract']->status == '1')
 <div class="">
     <div class="row mb-2">
         <div class="col-3">
@@ -1275,3 +1275,4 @@
         </div>
     </div>
 </div>
+@endif

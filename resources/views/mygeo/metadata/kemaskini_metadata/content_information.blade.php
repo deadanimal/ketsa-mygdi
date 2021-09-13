@@ -17,6 +17,7 @@
                 <h6 class="heading-small text-muted mb-2">Wavelength Band
                     Information</h6>
                 <div class="pl-lg-3">
+                    @if($elemenMetadata['c7_band_boundary']->status == '1')
                     <div class="row mb-2">
                         <div class="col-xl-6">
                             <div class="form-inline">
@@ -40,7 +41,9 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="row mb-2">
+                        @if($elemenMetadata['c7_trans_fn_type']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-4">
@@ -55,6 +58,8 @@
                                 <input class="form-control form-control-sm" type="text" style="width :200px" name="c7_trans_fn_type" id="c7_trans_fn_type" value="{{ $transFnType }}">
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c7_trans_polar']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
@@ -69,8 +74,10 @@
                                 <input class="form-control form-control-sm" type="text" style="width :180px" name="c7_trans_polar" id="c7_trans_polar" value="{{ $transmitPolar }}">
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="row mb-2">
+                        @if($elemenMetadata['c7_nominal_spatial_res']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-4">
@@ -88,6 +95,8 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c7_detected_polar']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
@@ -102,6 +111,7 @@
                                 <input class="form-control form-control-sm" type="text" style="width :180px" placeholder="Detected Polarization" name="c7_detected_polar" id="c7_detected_polar" value="{{ $detectPolar }}">
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

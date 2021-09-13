@@ -36,6 +36,7 @@
                 <div class="col col-lg-1"></div>
                 <div class="col col-lg-5">
                     <form id="formSpatialDomain">
+                        @if($elemenMetadata['c9_west_bound_longitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -48,9 +49,11 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
                         <div class="row">
                             <p></p>
                         </div>
+                        @if($elemenMetadata['c9_east_bound_longitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -63,9 +66,11 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
                         <div class="row">
                             <p></p>
                         </div>
+                        @if($elemenMetadata['c9_south_bound_latitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -78,9 +83,11 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
                         <div class="row">
                             <p></p>
                         </div>
+                        @if($elemenMetadata['c9_north_bound_latitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -93,6 +100,7 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
                         <div class="row">
                             <p></p>
                         </div>

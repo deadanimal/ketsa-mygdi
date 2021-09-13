@@ -14,6 +14,7 @@
     <div id="collapse2" class="panel-collapse collapse in show" data-parent="#div_c2">
         <div class="card-body">
             <div class="my-2">
+                @if($elemenMetadata['c2_metadataName']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataName">
@@ -43,6 +44,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_product_type']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataName">
@@ -72,12 +75,13 @@
                         @enderror
                     </div>
                 </div>
+                @endif
                 <h2 class="heading-small text-muted"><?php echo __('lang.abstract'); ?></h2>
                 <?php //=== abstract==============================================================
                 ?>
                 @include('mygeo.metadata.kemaskini_metadata.abstract')
                 <br>
-                
+                @if($elemenMetadata['c10_file_url']->status == '1')
                 <div class="row mb-4 divIdentificationInformationUrl">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
@@ -100,6 +104,7 @@
                         @enderror
                     </div>
                 </div>
+                @endif
                 
                 <?php /* ?>
                 <div class="row mb-2">
@@ -122,6 +127,7 @@
                     </div>
                 </div>
                 <?php */ ?>
+                @if($elemenMetadata['c2_metadataDate']->status == '1')
                 <div class="row mb-2 divMetadataDate">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_date">
@@ -141,6 +147,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_metadataDateType']->status == '1')
                 <div class="row mb-2 divMetadataDateType">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_date">
@@ -178,6 +186,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_metadataStatus']->status == '1')
                 <div class="row mb-2 divMetadataStatus">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_metadataStatus">
@@ -226,6 +236,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_typeOfServices']->status == '1')
                 <div class="row mb-2 divTypeOfServices">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_typeOfServices">
@@ -262,6 +274,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_operationName']->status == '1')
                 <div class="row mb-2 divOperationName">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_operationName">
@@ -281,6 +295,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_serviceUrl']->status == '1')
                 <div class="row mb-2 divServiceUrl">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_serviceUrl">
@@ -306,6 +322,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_typeOfCouplingDataset']->status == '1')
                 <div class="row mb-2 divTypeOfCouplingDataset">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_typeOfCouplingDataset">
@@ -330,9 +348,11 @@
                         @enderror
                     </div>
                 </div>
+                @endif
             </div>
             <h2 class="heading-small text-muted">Responsible Party</h2>
             <div class="my-2">
+                @if($elemenMetadata['c2_contact_name']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_contact_name">
@@ -352,6 +372,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_contact_agensiorganisasi']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_contact_agensiorganisasi">
@@ -371,6 +393,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_position_name']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_contact_agensiorganisasi">
@@ -390,6 +414,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_contact_address1']->status == '1')
                 <div class="row mb-4">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName">
@@ -408,6 +434,7 @@
                         <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2" value="" >
                         <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="" >
                         <div class="form-inline row ml-3">
+                            @if($elemenMetadata['c2_postal_code']->status == '1')
                             <label class="form-control-label mr-4 divPostalCode" for="c2_contact_city">Postal Code :</label>
                             <?php
                                 $postalCode = "";
@@ -416,6 +443,8 @@
                                 }
                             ?>
                             <input type="text" name="c2_postal_code" id="c2_postal_code" class="form-control form-control-sm ml-3 mb-2 divPostalCode" value="{{ $postalCode }}">
+                            @endif
+                            @if($elemenMetadata['c2_contact_city']->status == '1')
                             <label class="form-control-label mr-4 divCity" for="c2_contact_city">City :</label>
                             <?php
                                 $city = "";
@@ -424,6 +453,8 @@
                                 }
                             ?>
                             <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm ml-3 mb-2 divCity" value="{{ $city }}">
+                            @endif
+                            @if($elemenMetadata['c2_contact_state']->status == '1')
                             <label class="form-control-label mr-4" for="c2_contact_state">State<span class="text-warning">*</span> :</label>
                             <select name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm">
                                 <option disabled>Select State</option>
@@ -446,6 +477,9 @@
                             @error('c2_contact_state')
                             <div class="text-error">{{ $message }}</div>
                             @enderror
+                            @endif
+                            
+                            @if($elemenMetadata['c2_contact_country']->status == '1')
                             <label class="form-control-label mx-4" for="c2_contact_country">Country :</label>
                             <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm ml-4" >
                                 <option selected disabled>Select Country</option>
@@ -456,9 +490,12 @@
                                     } else {                                                                                                                                                                  ?><option value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option><?php
                                     }                                                                                                                                                                }                                                                                                                                                                    ?>
                             </select>
+                            @endif
                         </div>
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_contact_email']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName">
@@ -478,6 +515,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_contact_fax']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName">
@@ -494,6 +533,8 @@
                         <input type="text" name="c2_contact_fax" id="c2_contact_fax" value="{{ $fax }}" class="form-control form-control-sm ml-3">
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_contact_phone_office']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName">
@@ -513,6 +554,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_contact_website']->status == '1')
                 <div class="row mb-4">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName">
@@ -529,6 +572,8 @@
                         <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3" value="{{ $respWebsite }}">
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c2_contact_role']->status == '1')
                 <div class="row mb-4 divResponsiblePartyRole">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_contact_role">
@@ -567,6 +612,7 @@
                         </select>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
