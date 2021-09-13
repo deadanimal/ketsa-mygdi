@@ -507,7 +507,7 @@ class MetadataController extends Controller {
         return response($ftestxml2)->withHeaders(['Content-Type' => 'text/xml']);
     }
 
-    public function downloadMetadataXml($id) {
+    public function downloadMetadataXml($id,$name) {
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();
         $ftestxml2 = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'.PHP_EOL.<<<XML
                 $metadataSearched->data
@@ -517,7 +517,7 @@ class MetadataController extends Controller {
         $response->header('Content-Type', 'text/xml');
         $response->header('Cache-Control', 'public');
         $response->header('Content-Description', 'File Transfer');
-        $response->header('Content-Disposition', 'attachment; filename=ftestxml.xml');
+        $response->header('Content-Disposition', 'attachment; filename='.$name.'.xml');
         $response->header('Content-Transfer-Encoding', 'binary');
         return $response;
     }
