@@ -116,8 +116,8 @@
 <script>
   $(document).ready(function(){
       $(document).on('click','.actionButtons',function(){
-          $('.actionButtons').hide();
          if($(this).data('action') == 'pdf'){
+            $('.actionButtons').hide();
              window.print();
          }else if($(this).data('action') == 'xml'){
              window.open($(this).data('href'), '_blank');
