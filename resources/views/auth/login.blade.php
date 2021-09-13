@@ -739,6 +739,7 @@
             },
         }).done(function(response) {
             var data = jQuery.parseJSON(response);
+            console.log(data);
             jQuery.each(data,function(key,val) {
                 if(val.category == "G2C" && val.subcategory == "Awam" && val.status == "1"){
                     $('#2_g2c').prop('disabled',false);
