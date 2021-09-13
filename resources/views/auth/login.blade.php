@@ -731,6 +731,60 @@
     }
 
     $(document).ready(function() {
+        $.ajax({
+            method: "POST",
+            url: "{{ url('getKelasKongsis') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            jQuery.each(data,function(key,val) {
+                if(val.category == "G2C" && val.subcategory == "Awam" && val.status == "1"){
+                    $('#2_g2c').prop('disabled',false);
+                }else if(val.category == "G2C" && val.subcategory == "Awam" && val.status == "0"){
+                    $('#2_g2c').prop('disabled',true);
+                }
+                
+                if(val.category == "G2G" && val.subcategory == "Badan Berkanun" && val.status == "1"){
+                    $('#badanBerkanun').prop('disabled',false);
+                }else if(val.category == "G2G" && val.subcategory == "Badan Berkanun" && val.status == "0"){
+                    $('#badanBerkanun').prop('disabled',true);
+                }
+                if(val.category == "G2G" && val.subcategory == "Agensi Persekutuan/Agensi Negeri" && val.status == "1"){
+                    $('#agensiPersNeg').prop('disabled',false);
+                }else if(val.category == "G2G" && val.subcategory == "Agensi Persekutuan/Agensi Negeri" && val.status == "0"){
+                    $('#agensiPersNeg').prop('disabled',true);
+                }
+                if(val.category == "G2G" && val.subcategory == "GLC" && val.status == "1"){
+                    $('#glc').prop('disabled',false);
+                }else if(val.category == "G2G" && val.subcategory == "GLC" && val.status == "0"){
+                    $('#glc').prop('disabled',true);
+                }
+                
+                if(val.category == "G2E" && val.subcategory == "IPTA - Pensyarah/Penyelidik" && val.status == "1"){
+                    $('#iptaSyarahSelidik').prop('disabled',false);
+                }else if(val.category == "G2E" && val.subcategory == "IPTA - Pensyarah/Penyelidik" && val.status == "0"){
+                    $('#iptaSyarahSelidik').prop('disabled',true);
+                }
+                if(val.category == "G2E" && val.subcategory == "IPTA - Pelajar" && val.status == "1"){
+                    $('#iptaPelajar').prop('disabled',false);
+                }else if(val.category == "G2E" && val.subcategory == "IPTA - Pelajar" && val.status == "0"){
+                    $('#iptaPelajar').prop('disabled',true);
+                }
+                if(val.category == "G2E" && val.subcategory == "IPTS - Pensyarah/Penyelidik" && val.status == "1"){
+                    $('#iptsSyarahSelidik').prop('disabled',false);
+                }else if(val.category == "G2E" && val.subcategory == "IPTS - Pensyarah/Penyelidik" && val.status == "0"){
+                    $('#iptsSyarahSelidik').prop('disabled',true);
+                }
+                if(val.category == "G2E" && val.subcategory == "IPTS - Pelajar" && val.status == "1"){
+                    $('#iptsPelajar').prop('disabled',false);
+                }else if(val.category == "G2E" && val.subcategory == "IPTS - Pelajar" && val.status == "0"){
+                    $('#iptsPelajar').prop('disabled',true);
+                }
+            });
+        });
+        
         var msg = "";
         <?php
         if($errors->any()){

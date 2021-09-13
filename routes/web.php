@@ -255,6 +255,7 @@ Route::post('getSubTajuk','MetadataController@getSubTajuk');
 Route::post('deleteElemenMetadata','MetadataController@deleteElemenMetadata');
 Route::post('deleteCustomMetadataInput','MetadataController@deleteCustomMetadataInput');
 Route::post('findMetadataByName','MetadataController@findMetadataByName');
+Route::post('getKelasKongsis','DataAsasController@getKelasKongsis');
 
 Auth::routes();
 

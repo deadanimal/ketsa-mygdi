@@ -539,6 +539,11 @@ class DataAsasController extends Controller
 
         return redirect('/kategori_kelas_kongsi_data')->with('success', 'Data Berjaya Dikemaskini');
     }
+    
+    public function getKelasKongsis(){
+        $kategori = KelasKongsi::get();
+        echo json_encode($kategori);
+    }
 
     public function surat_balasan($id)
     {
