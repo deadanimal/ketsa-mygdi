@@ -48,13 +48,13 @@ class AuthController extends Controller
         }
 
         if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password])) {
-            
+
             $at = new AuditTrail();
             $at->path = url()->full();
             $at->user_id = Auth::user()->id;
             $at->data = 'Login';
             $at->save();
-            
+
             //check for completed penilaians for pemohon datas==================
             $msgPenilaian = "";
             if(Auth::user()->hasRole(['Pemohon Data'])){
@@ -88,7 +88,7 @@ class AuthController extends Controller
             dd('everything is working when the correct data is supplied - so the problem is related to your forms and the data being passed to the function');
         }
     }
-    
+
     public function checkAfterSixMonthsPenilaian()
     {
         $msg = "";

@@ -264,7 +264,6 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
     document.getElementById('map').style.cursor='default';
     $(".leaflet-control-zoom").css("visibility", "hidden");
     $(".leaflet-top").hide();
-    
 
         var setNbltValue = document.getElementById("nblt").value = N;
         var setWblgValue = document.getElementById("wblg").value = W;

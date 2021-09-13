@@ -110,7 +110,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header bg-primary mb-0">
-                            <h4 class="text-white">Kemaskini SenaraiData ID#{{ $loop->iteration }}</h4>
+                            <h4 class="text-white">Kemaskini Senarai Data</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -139,8 +139,8 @@
                                         <label class="form-control-label">Pengkelasan Lapisan Data</label>
                                         <select class="form-control form-control-sm" name="kelas">
                                             <option selected disabled>Pilih</option>
-                                            <option value="Terhad" >Terhad</option>
-                                            <option value="Tidak Terhad">Tidak Terhad</option>
+                                            <option value="Terhad" @if($sdata->kelas == "Terhad") selected @endif>Terhad</option>
+                                            <option value="Tidak Terhad" @if($sdata->kelas == "Tidak Terhad") selected @endif>Tidak Terhad</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -152,8 +152,8 @@
                                         <label class="form-control-label">Status Data</label>
                                         <select class="form-control form-control-sm" name="status">
                                             <option selected disabled>Pilih</option>
-                                            <option value="Tersedia">Tersedia</option>
-                                            <option value="Tiada">Tiada</option>
+                                            <option value="Tersedia" @if($sdata->status == "Tersedia") selected @endif>Tersedia</option>
+                                            <option value="Tiada" @if($sdata->status == "Tiada") selected @endif>Tiada</option>
                                         </select>
                                     </div>
 
@@ -179,7 +179,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="POST" action="/simpan_senarai_data">
+                    <form method="POST" action="/simpan_kategori_senarai_data">
                         @csrf
                         <div class="modal-body row">
                             <div class="col-12">
@@ -211,16 +211,16 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="POST" action="/simpan_senarai_data">
+                    <form method="POST" action="/simpan_subkategori_senarai_data">
                         @csrf
                         <div class="modal-body row">
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-control-label">Kategori</label>
-                                    <select class="form-control form-control-sm" name="kategori">
+                                    <select class="form-control form-control-sm" name="kategori_id" id="kategori"  onchange="selectKategori()">
                                         <option selected disabled>Pilih</option>
-                                        @foreach ($senarai_data as $sdata)
-                                            <option value="{{ $sdata->kategori }}">{{ $sdata->kategori }}</option>
+                                        @foreach ($kategori_sd as $kategori)
+                                            <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -228,8 +228,6 @@
                                     <label class="form-control-label">Sub-Kategori</label>
                                     <input type="text" class="form-control form-control-sm" name="subkategori" value="">
                                 </div>
-                                {{-- <input type="hidden" name="id" value="{{ $user->id }}">
-                                <input type="hidden" name="data_id" value="{{ $user->id }}"> --}}
 
                                 <button class="btn btn-success float-right mt-4" type="submit">
                                     <span class="text-white">Tambah</span>
@@ -258,29 +256,20 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-control-label">Kategori</label>
-                                    <select class="form-control form-control-sm" name="kategori">
+                                    <select class="form-control form-control-sm" name="kategori" id="kategori_s" onchange="selectKategori()">
                                         <option selected disabled>Pilih</option>
-                                        @foreach ($senarai_data as $sdata)
-                                            <option value="{{ $sdata->kategori }}">{{ $sdata->kategori }}</option>
+                                        @foreach ($kategori_sd as $kategori)
+                                            <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-control-label">Sub-Kategori</label>
-                                    <select class="form-control form-control-sm" name="subkategori">
-                                        <option selected disabled>Pilih</option>
-                                        @foreach ($senarai_data as $sdata)
-                                            <option value="{{ $sdata->subkategori }}">{{ $sdata->subkategori }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <div class="form-group" id="dynamicAddRemove">
+
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Lapisan Data</label>
                                     <input type="text" class="form-control form-control-sm" name="lapisan_data" value="">
                                 </div>
-                                {{-- <input type="hidden" name="id" value="{{ $user->id }}">
-                                <input type="hidden" name="data_id" value="{{ $user->id }}"> --}}
 
                                 <button class="btn btn-success float-right mt-4" type="submit">
                                     <span class="text-white">Tambah</span>
@@ -334,5 +323,50 @@
                 });
             }
         });
+    </script>
+    <script type="text/javascript">
+        function selectKategori() {
+            d = document.getElementById("kategori_s").value;
+            kategori = d.toString();
+            sdata = {!! $subkategori_sd !!}
+            senarai_append = ''
+            sdata.forEach(element => {
+                if (element['kategori_id'] == d) {
+                    senarai_append += `<option value="` + element['name'] + `">` + element['name'] +
+                        `</option>`
+                }
+            });
+
+            $("#dynamicAddRemove").empty();
+            $("#dynamicAddRemove").append(`<label class="form-control-label" for="subkategori">Sub-Kategori</label>
+                                                <select name="subkategori" id="subkategori" class="form-control form-control-sm" onchange="selectSubKategori()" autofocus><option selected disabled>Pilih</option>'
+
+                                                    ` + senarai_append + `
+
+                                                 </select>`);
+
+        }
+
+        function selectSubKategori() {
+            d = document.getElementById("subkategori").value;
+            kategori = d.toString();
+            sdata = {!! $senarai_data !!}
+            senarai_append = ''
+            sdata.forEach(element => {
+                if (element['subkategori'] == d) {
+                    senarai_append += `<option value="` + element['lapisan_data'] + `">` + element['lapisan_data'] +
+                        `</option>`
+                }
+            });
+
+            $("#dynamicAddRemove2").empty();
+            $("#dynamicAddRemove2").append(`<label class="form-control-label" for="lapisan_data">Lapisan Data</label>
+                                                <select name="lapisan_data" class="form-control" autofocus><option selected disabled>Pilih</option>'
+
+                                                    ` + senarai_append + `
+
+                                                 </select>`);
+
+        }
     </script>
 @stop

@@ -2,182 +2,185 @@
 
 @section('content')
 
-<link href="{{ asset('css/afiq_mygeo.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
 
 
-<style>
-    /* Make the image fully responsive */
-    .carousel-inner img {
-        height: 430%;
-        width: 100%;
-    }
+    <style>
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            height: 430%;
+            width: 100%;
+        }
 
-    .ql-align-center{
-        text-align: center;
-    }
-</style>
-<style>
-    .card-header {
-        margin-top: 0;
-        padding: 1.25rem 1.5rem;
+        .ql-align-center {
+            text-align: center;
+        }
 
-        border-bottom: 1px solid rgba(255, 255, 255, 0);
-        background-color: #fff0;
-    }
+    </style>
+    <style>
+        .card-header {
+            margin-top: 0;
+            padding: 1.25rem 1.5rem;
 
-    .pcard {
-        border-radius: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0);
+            background-color: #fff0;
+        }
 
-    }
+        .pcard {
+            border-radius: 25px;
 
-    .card-body {
-        font-size: 90%;
-    }
+        }
 
-    .card-header {
-        padding-bottom: 0;
-    }
+        .card-body {
+            font-size: 90%;
+        }
 
-    .card-footer {
-        padding-top: 0;
-        border-top: 0px solid rgba(255, 255, 255, 0);
-        background-color: #fff0;
-    }
+        .card-header {
+            padding-bottom: 0;
+        }
 
-    .scroll {
-        max-height: 450px;
-        overflow-y: scroll;
-    }
+        .card-footer {
+            padding-top: 0;
+            border-top: 0px solid rgba(255, 255, 255, 0);
+            background-color: #fff0;
+        }
 
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .scroll::-webkit-scrollbar {
-        display: none;
-    }
+        .scroll {
+            max-height: 450px;
+            overflow-y: scroll;
+        }
 
-    /* Hide scrollbar for IE, Edge and Firefox */
-    .scroll {
-        -ms-overflow-style: none;
-        /* IE and Edge */
-        scrollbar-width: none;
-        /* Firefox */
-    }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scroll::-webkit-scrollbar {
+            display: none;
+        }
 
-    .badge-custom {
-        color: #303030;
-        background-image: linear-gradient(to right, #ebba16, #ed8a19);
-        font-size: 110%;
-        padding: .75rem 1.05rem;
-    }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scroll {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
 
-    .badge-custom[href]:hover,
-    .badge-custom[href]:focus {
-        text-decoration: none;
+        .badge-custom {
+            color: #303030;
+            background-image: linear-gradient(to right, #ebba16, #ed8a19);
+            font-size: 110%;
+            padding: .75rem 1.05rem;
+        }
 
-        color: #fff;
-        background-color: #fa3a0e;
-    }
+        .badge-custom[href]:hover,
+        .badge-custom[href]:focus {
+            text-decoration: none;
 
-    .fancy_card {
-        box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06), 1px 3px 8px rgba(39, 44, 49, 0.03);
-        -webkit-transition: all 0.7s ease;
-        transition: all 0.7s ease;
-        color: rgb(37, 37, 37);
-        text-transform: uppercase;
-        /* background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
-        background-image: linear-gradient(to right, #ebba16, #ed8a19); */
-    }
+            color: #fff;
+            background-color: #fa3a0e;
+        }
 
-    .fancy_card:hover {
-        box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07), 1px 6px 12px rgba(39, 44, 49, 0.04);
-        -webkit-transition: all 0.4s ease;
-        transition: all 0.4s ease;
+        .fancy_card {
+            box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06), 1px 3px 8px rgba(39, 44, 49, 0.03);
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
+            color: rgb(37, 37, 37);
+            text-transform: uppercase;
+            /* background-image: -webkit-gradient(linear, left top, right top, from(#ebba16), to(#ed8a19));
+            background-image: linear-gradient(to right, #ebba16, #ed8a19); */
+        }
 
-        -webkit-transform: translate3D(0, -1px, 0) scale(1.2);
-        transform: translate3D(0, -1px, 0) scale(1.05);
-        font-size: 150%;
-        color: black;
-        background-color: #6aaff0;
-        /* background-image: -webkit-gradient(linear, left top, right top, from(#ebc64c), to(#e4a053));
-        background-image: linear-gradient(to right, #ebc64c, #e4a053); */
-    }
+        .fancy_card:hover {
+            box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07), 1px 6px 12px rgba(39, 44, 49, 0.04);
+            -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease;
 
-    .navbar-search .form-control {
-        width: 590px;
-    }
+            -webkit-transform: translate3D(0, -1px, 0) scale(1.2);
+            transform: translate3D(0, -1px, 0) scale(1.05);
+            font-size: 150%;
+            color: black;
+            background-color: #6aaff0;
+            /* background-image: -webkit-gradient(linear, left top, right top, from(#ebc64c), to(#e4a053));
+            background-image: linear-gradient(to right, #ebc64c, #e4a053); */
+        }
 
-    .navbar-search .form-control:focus {
-        width: 630px;
-    }
-</style>
-<style>
-    .umum_card {
-        border-radius: 25px;
-    }
+        .navbar-search .form-control {
+            width: 590px;
+        }
 
-    .umum_header {
-        background-color: #fff0;
-        padding-bottom: 0px;
-    }
+        .navbar-search .form-control:focus {
+            width: 630px;
+        }
 
-    .umum_body {
-        border-radius: 25px;
-    }
+    </style>
+    <style>
+        .umum_card {
+            border-radius: 25px;
+        }
 
-    .umum_footer {
-        padding-top: 0px;
-        background-color: #fff0;
-    }
+        .umum_header {
+            background-color: #fff0;
+            padding-bottom: 0px;
+        }
 
-    .scrollf {
-        max-height: 450px;
-        overflow-y: scroll;
-        scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
-        /* Internet Explorer 10+ */
-    }
+        .umum_body {
+            border-radius: 25px;
+        }
 
-    .scrollf::-webkit-scrollbar {
-        /* WebKit */
-        width: 0;
-        height: 0;
-    }
+        .umum_footer {
+            padding-top: 0px;
+            background-color: #fff0;
+        }
 
-    .text-bl {
-        color: #0563bb;
-    }
+        .scrollf {
+            max-height: 450px;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* Internet Explorer 10+ */
+        }
 
-    .text-caps {
-        text-transform: uppercase;
-    }
+        .scrollf::-webkit-scrollbar {
+            /* WebKit */
+            width: 0;
+            height: 0;
+        }
 
-    .text-bold {
-        font-weight: 500;
-    }
-</style>
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex flex-column justify-content-center">
+        .text-bl {
+            color: #0563bb;
+        }
 
-    <nav class="nav-menu">
-        <ul>
-            <li class="active"><a href="#home"><i class="bx bx-home"></i> <span>Laman Utama</span></a></li>
+        .text-caps {
+            text-transform: uppercase;
+        }
+
+        .text-bold {
+            font-weight: 500;
+        }
+
+    </style>
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex flex-column justify-content-center">
+
+        <nav class="nav-menu">
+            <ul>
+                <li class="active"><a href="#home"><i class="bx bx-home"></i> <span>Laman Utama</span></a></li>
                 <li><a href="#home2"><i class="bx bx-map-alt"></i> <span>Carian Data</span></a></li>
-            <li><a href="#about"><i class="bx bx-food-menu"></i> <span>Mengenai MyGeo Explorer</span></a></li>
+                <li><a href="#about"><i class="bx bx-food-menu"></i> <span>Mengenai MyGeo Explorer</span></a></li>
                 <li><a href="#vidtuto"><i class="bx bx-mouse"></i> <span>Video Tutorial</span></a></li>
-            <li><a href="#feedback"><i class="bx bx-support"></i> <span>Maklum Balas</span></a></li>
-            <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Hubungi Kami</span></a></li>
-        </ul>
-    </nav><!-- .nav-menu -->
+                <li><a href="#feedback"><i class="bx bx-support"></i> <span>Maklum Balas</span></a></li>
+                <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Hubungi Kami</span></a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
 
-</header>
-<!-- ======= Laman Utama Section ======= -->
-<section id="home" class="d-flex flex-column justify-content-center">
-    <div class="container-fluid pr-lg-5" data-aos="fade-up">
-        <div class="row mt-0 pt-0 mb-5">
-            <div class="col-12">
-                <p class="text-bl">Selamat Datang ke</p>
-                <h1><span class="typed" data-typed-items="MyGeo Explorer"></span></h1>
-            </div>
+    </header>
+    <!-- ======= Laman Utama Section ======= -->
+    <section id="home" class="d-flex flex-column justify-content-center">
+        <div class="container-fluid pr-lg-5" data-aos="fade-up">
+            <div class="row mt-0 pt-0 mb-5">
+                <div class="col-12">
+                    <p class="text-bl">Selamat Datang ke</p>
+                    <h1>MyGeo Explorer</h1>
+                </div>
             </div>
             <div class="row">
                 <div class="col-12">
@@ -229,19 +232,6 @@
                             <span class="carousel-control-next-icon"></span>
                         </a>
 
-                        <!-- <form id="form_umum_{{ $umum->id }}" method="post" action="{{ url('/tunjuk_pengumuman') }}">
-                                @csrf
-                                <input type="hidden" name="umum_id" value="{{ $umum->id }}">
-                                <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
-                                    <span style="color: #252525;">
-                                        <?php echo date('j M Y', strtotime($umum->created_at)); ?>
-                                    </span>
-                                    <p class="text-black">
-                                        <?php echo $umum->kategori; ?>: <br>
-                                        <?php echo $umum->title; ?>
-                                    </p>
-                                </a>
-                            </form> -->
                         <?php
                     }
                     ?>
@@ -258,7 +248,7 @@
     <section id="home2" class="d-flex flex-column justify-content-center">
         <div class="container-fluid" data-aos="fade-up">
             <div class="section-title">
-                <h2>Carian Metadata</h2>
+                <h2>Carian Data</h2>
             </div>
             <div class="row pl-lg-7">
                 <div class="col-lg-12">
@@ -348,20 +338,20 @@
     </section>
 
     <section id="vidtuto" class="">
-        <div class="container" data-aos="fade-up" style="min-height: 500px;">
+        <div class=" container" data-aos="fade-up" style="min-height: 500px;">
 
-            <div class="section-title">
-                <h2>Video Tutorial</h2>
+        <div class="section-title">
+            <h2>Video Tutorial</h2>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <iframe width="900" height="475" src="https://www.youtube.com/embed/I2P1zEBciq4?autoplay=1&mute=1&loop=1"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
             </div>
-            <div class="row">
-                <div class="col text-center">
-                    <iframe width="720" height="475" src="https://www.youtube.com/embed/I2P1zEBciq4?autoplay=1&mute=1&loop=1"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
+        </div>
 
         </div>
     </section>
@@ -388,13 +378,15 @@
                             </select></div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-2"><label for="input-feedback" class="form-control-label ml-4"> Pertanyaan </label>
+                        <div class="col-2"><label for="input-feedback" class="form-control-label ml-4"> Pertanyaan
+                            </label>
                         </div>
-                        <div class="col-9"><textarea name="pertanyaan" placeholder="Nyatakan maklum balas anda" type="text"
-                                rows="5" class="form-control form-control-sm ml-3"></textarea></div>
+                        <div class="col-9"><textarea name="pertanyaan" placeholder="Nyatakan maklum balas anda"
+                                type="text" rows="5" class="form-control form-control-sm ml-3"></textarea></div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-2"><label for="input-emel" class="form-control-label ml-4"> Emel Personal </label>
+                        <div class="col-2"><label for="input-emel" class="form-control-label ml-4"> Emel Personal
+                            </label>
                         </div>
                         <div class="col-7">
                             <input placeholder="Masukan E-mel anda" type="text" name="email"
@@ -459,7 +451,8 @@
         $(document).ready(function() {
             <?php
         if(Session::has('message')){
-            ?>alert("{{ Session::get('message') }}");<?php
+            ?>alert("{{ Session::get('message') }}");
+            <?php
         }
         ?>
             $(document).on("click", ".aUmum", function() {

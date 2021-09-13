@@ -32,7 +32,7 @@ class SenaraiDataSeeder extends Seeder
             'kategori' => "Built Environment",
             'subkategori' => "Kediaman (Residential - BA)",
             'lapisan_data' => "Transitional Surface",
-            'kelas' => 'Terhad',
+            'kelas' => 'Tidak Terhad',
             'status' => 'Tersedia',
             'harga_data' => "1.50"]);
     }

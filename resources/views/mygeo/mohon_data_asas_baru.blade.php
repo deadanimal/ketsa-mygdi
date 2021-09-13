@@ -4,11 +4,6 @@
 
     <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
     <style>
-        .ftest {
-            display: inline;
-            width: auto;
-        }
-
         .hide {
             display: none;
         }
@@ -110,8 +105,8 @@
                                             </div>
                                             <div class="col-8">
                                                 <?php
-                                                $var = "";
-                                                if($user->hasRole(['Pemohon Data'])) {
+                                                $var = '';
+                                                if ($user->hasRole(['Pemohon Data'])) {
                                                     $var = $user->agensi_organisasi;
                                                 }else{
                                                     $var = (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"");
@@ -279,7 +274,8 @@
                                         <div class="col-5 text-right">
                                             @if (Auth::user()->hasRole(['Pemohon Data']))
                                                 <a class="btn btn-sm btn-default" data-toggle="modal"
-                                                    data-target="#modal-pilih-upload"><span class="text-white">Tambah</span>
+                                                    data-target="#modal-pilih-upload"><span
+                                                        class="text-white">Tambah</span>
                                                 </a>
                                             @endif
                                         </div>
@@ -299,12 +295,38 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $dokumen->tajuk_dokumen }}</td>
-                                                    <td>{{ $dokumen->nama_fail }}</td>
+                                                    <td>{{ $dokumen->nama_fail }}{{ isset($dokumen->nama_fail) ? $dokumen->nama_failt : '-' }}
+                                                    </td>
                                                     <td>
-                                                        <a href="{{ $dokumen->file_path }}" target="_blank">
-                                                            <button type="button"
-                                                                class="btn btn-sm btn-success">Lihat</button>
-                                                        </a>
+                                                        @if (Auth::user()->hasRole(['Pemohon Data']))
+                                                            @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
+                                                                <a data-toggle="modal"
+                                                                    data-target="#modal-pilih-upload-{{ $dokumen->id }}">
+                                                                    <button type="button"
+                                                                        class="btn btn-sm btn-primary mr-2">Muat
+                                                                        Naik</button>
+                                                                </a>
+                                                            @else
+                                                                <a data-toggle="modal"
+                                                                    data-target="#modal-kemaskini-dokumen-{{ $dokumen->id }}">
+                                                                    <button type="button"
+                                                                        class="btn btn-sm btn-primary mr-2">Muat
+                                                                        Naik</button>
+                                                                </a>
+                                                            @endif
+                                                        @endif
+
+                                                        @if (!$dokumen->file_path == null)
+
+                                                            <a href="{{ $dokumen->file_path }}" target="_blank">
+                                                                <button type="button"
+                                                                    class="btn btn-sm btn-success mr-2">Lihat</button>
+                                                            </a>
+                                                        @endif
+                                                        <button type="button" data-dokumenid="{{ $dokumen->id }}"
+                                                            class="btnDeleteDokumen btn btn-sm btn-danger"><i
+                                                                class="fas fa-trash"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -316,14 +338,14 @@
                                         @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar'))
                                             <div class="col-7 form-inline">
                                                 <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
-                                                <a href="{{ url('akuan_pelajar/'.$permohonan->id) }}"
+                                                <a href="{{ url('akuan_pelajar/' . $permohonan->id) }}"
                                                     class="btn btn-sm btn-default">Isi
                                                     Borang</a>
                                             </div>
                                         @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <div class="col-7 form-inline">
                                                 <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
-                                                <a href="{{ url('/akuan_pelajar/'.$permohonan->id) }}"
+                                                <a href="{{ url('/akuan_pelajar/' . $permohonan->id) }}"
                                                     class="btn btn-sm btn-default">Papar </a>
                                             </div>
                                         @endif
@@ -352,12 +374,14 @@
                                                             lengkap</option>
                                                         <option value="Data yang dipohon tiada dalam simpanan PGN" @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
                                                             dalam simpanan PGN</option>
-                                                        <option value="Maklumat pemohon tidak sahih" @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat pemohon tidak
+                                                        <option value="Maklumat pemohon tidak sahih"
+                                                            @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat pemohon tidak
                                                             sahih</option>
                                                         <option value="others" @if ($permohonan->catatan == 'others') selected @endif>Lain-lain</option>
                                                     </select>
-                                                        <textarea name="catatan_lain" id="catatan"
-                                                        class="form-control form-control-sm" @if ($permohonan->catatan == 'others') style="display:block;" @else style="display:none;" @endif cols="30" rows="5">{{$permohonan->catatan_lain}}</textarea>
+                                                    <textarea name="catatan_lain" id="catatan"
+                                                        class="form-control form-control-sm" @if ($permohonan->catatan == 'others') style="display:block;" @else style="display:none;" @endif
+                                                        cols="30" rows="5">{{ $permohonan->catatan_lain }}</textarea>
                                                 </div>
                                                 <div id="hidden_div_pentadbir" @if ($permohonan->status == 0 || $permohonan->status == 2) class="hide" @endif>
                                                     <h4 class="heading text-dark mr-2">Pentadbir Ditugaskan</h4>
@@ -377,7 +401,8 @@
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
 
                                         @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
-                                            <button type="button" class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
+                                            <button type="button"
+                                                class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
                                                 Hantar
                                             @elseif(Auth::user()->hasRole(['Pemohon Data']))
                                                 <button type="button" class="btn btn-outline-success mx-2 btnSimpanDraf">
@@ -386,8 +411,10 @@
 
                                 </form>
                                 @if (Auth::user()->hasRole(['Pemohon Data']))
-                                    <form action="{{ url('hantar_permohonan') }}" method="POST" id="formHantarPermohonan">
+                                    <form action="{{ url('hantar_permohonan') }}" method="POST"
+                                        id="formHantarPermohonan">
                                         @csrf
+
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                         <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
                                     </form>
@@ -418,12 +445,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="kategori">Kategori</label>
+                                        <label class="form-control-label" for="kategori">Kategori</label>
                                         <select class="form-control" id="kategori" name="kategori"
                                             onchange="selectKategori()">
                                             <option selected disabled>Pilih</option>
-                                            @foreach ($senarai_data as $sdata)
-                                                <option value="{{ $sdata->kategori }}">{{ $sdata->kategori }}
+                                            @foreach ($kategori_senarai_data as $kategori)
+                                                <option value="{{ $kategori->name }}">{{ $kategori->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -432,16 +459,8 @@
                                     <div class="form-group" id="dynamicAddRemove">
 
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
-                                        <select name="lapisan_data" class="form-control" autofocus>
-                                            <option selected disabled>Pilih</option>
-                                            @foreach ($senarai_data as $sdata)
-                                                <option value="{{ $sdata->lapisan_data }}">
-                                                    {{ $sdata->lapisan_data }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                    <div class="form-group" id="dynamicAddRemove2">
+
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
@@ -461,6 +480,79 @@
             </div>
         </div>
     </div>
+    @foreach ($dokumens as $dokumen)
+        <div class="modal fade" id="modal-kemaskini-dokumen-{{ $dokumen->id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary mb-0">
+                        <h4 class="text-white">Kemaskini Dokumen Berkaitan</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('updateDokumen') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="tajuk_dokumen" class="form-control-label">Tajuk Dokumen</label>
+                                <input type="text" class="form-control" value="{{ $dokumen->tajuk_dokumen }}"
+                                    disabled>
+                            </div>
+                            <input type="file" name="file" class="form-control">
+                            <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                            <input type="hidden" name="id" value="{{ $permohonan->id }}">
+                            <input type="hidden" name="dokumen_id" value="{{ $dokumen->id }}">
+
+                            <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">
+                                Simpan
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endforeach
+    @foreach ($dokumens as $dokumen)
+        @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
+            <!--Modal Jana IC Depan/Belakang -->
+            <div class="modal fade" id="modal-nric-{{ $dokumen->id }}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary mb-0">
+                            <h4 class="text-white">Jana Salinan Kad Pengenalan</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('kemaskiniSalinanIC') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="tajuk_dokumen" class="form-control-label">Tajuk Dokumen</label>
+                                    <input type="text" class="form-control" value="{{ $dokumen->tajuk_dokumen }}"
+                                        disabled>
+
+                                    <label for="ic_front" class="form-control-label">NRIC Depan</label>
+                                    <input type="file" name="ic_front" class="form-control mb-2">
+
+                                    <label for="ic_back" class="form-control-label">NRIC Belakang</label>
+                                    <input type="file" name="ic_back" class="form-control mb-2">
+                                </div>
+                                <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                <input type="hidden" name="id" value="{{ $permohonan->id }}">
+                                <input type="hidden" name="dokumen_id" value="{{ $dokumen->id }}">
+
+                                <button type="submit" class="btn btn-outline-success btn-block mt-4">
+                                    Simpan
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endforeach
     <!--Modal Tambah Dokumen -->
     <div class="modal fade" id="modal-dokumen-berkaitan">
         <div class="modal-dialog">
@@ -503,7 +595,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary mb-0">
-                    <h4 class="text-white">Jana Salinan Kad Pengelanan</h4>
+                    <h4 class="text-white">Jana Salinan Kad Pengenalan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -518,8 +610,8 @@
                             <label for="ic_back" class="form-control-label">NRIC Belakang</label>
                             <input type="file" name="ic_back" class="form-control mb-2">
                         </div>
-                        {{-- <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                        <input type="hidden" name="id" value="{{ $permohonan->id }}"> --}}
+                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                        <input type="hidden" name="id" value="{{ $permohonan->id }}">
 
                         <button type="submit" class="btn btn-outline-success btn-block mt-4">
                             Simpan
@@ -565,6 +657,47 @@
             </div>
         </div>
     </div>
+    @foreach ($dokumens as $dokumen)
+        @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
+            <div class="modal fade" id="modal-pilih-upload-{{ $dokumen->id }}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary mb-0">
+                            <h4 class="text-white">Muat Naik</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a data-toggle="modal" data-target="#modal-nric-{{ $dokumen->id }}"
+                                        data-dismiss="modal">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4>Muat Naik Gambar</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a data-toggle="modal" data-target="#modal-kemaskini-dokumen-{{ $dokumen->id }}"
+                                        data-dismiss="modal">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4>Muat Naik Dokumen</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endforeach
+
     <!-- Modal Kemaskini Senarai Kawasan Data -->
     @foreach ($skdatas as $sk)
         <div class="modal fade" id="modal-skd-{{ $sk->id }}">
@@ -636,7 +769,6 @@
         </div>
     @endforeach
 
-
     </div>
 
     <script>
@@ -658,23 +790,41 @@
             }
         });
 
+        $(document).on("click", ".btnDeleteDokumen", function() {
+            var dokumen_id = $(this).data('dokumenid');
+            var r = confirm("Adakah anda pasti untuk buang data ini?");
+            if (r == true) {
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('delete_dokumen') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "dokumen_id": dokumen_id
+                    },
+                }).done(function(response) {
+                    alert("Dokumen tersebut telah dibuang.");
+                    location.reload();
+                });
+            }
+        });
+
         $(document).ready(function() {
-            $(document).on('click','.btnHantarPermohonanPentadbir',function(){
-                if(confirm('Anda pasti untuk menghantar permohonan?')){
+            $(document).on('click', '.btnHantarPermohonanPentadbir', function() {
+                if (confirm('Anda pasti untuk menghantar permohonan?')) {
                     $('#formHantarPermohonanPentadbir').submit();
                 }
             });
-            $(document).on('click','.btnHantarPermohonan',function(){
-                if(confirm('Anda pasti untuk menghantar permohonan?')){
+            $(document).on('click', '.btnHantarPermohonan', function() {
+                if (confirm('Anda pasti untuk menghantar permohonan?')) {
                     $('#formHantarPermohonan').submit();
                 }
             });
-            $(document).on('click','.btnSimpanDraf',function(){
-                if(confirm('Anda pasti untuk menyimpan permohonan?')){
+            $(document).on('click', '.btnSimpanDraf', function() {
+                if (confirm('Anda pasti untuk menyimpan permohonan?')) {
                     $('#formHantarPermohonanPentadbir').submit();
                 }
             });
-            
+
             $("#table_metadatas").DataTable({
                 "ordering": false,
                 "responsive": true,
@@ -775,8 +925,30 @@
             });
 
             $("#dynamicAddRemove").empty();
-            $("#dynamicAddRemove").append(`<label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
-                                                <select name="subkategori" class="form-control" autofocus><option selected disabled>Pilih</option>'
+            $("#dynamicAddRemove").append(`<label class="form-control-label" for="subkategori">Sub-Kategori</label>
+                                                <select name="subkategori" id="subkategori" class="form-control" onchange="selectSubKategori()" autofocus><option selected disabled>Pilih</option>'
+
+                                                    ` + senarai_append + `
+
+                                                 </select>`);
+
+        }
+
+        function selectSubKategori() {
+            d = document.getElementById("subkategori").value;
+            kategori = d.toString();
+            sdata = {!! $lapisandata !!}
+            senarai_append = ''
+            sdata.forEach(element => {
+                if (element['subkategori'] == d) {
+                    senarai_append += `<option value="` + element['lapisan_data'] + `">` + element['lapisan_data'] +
+                        `</option>`
+                }
+            });
+
+            $("#dynamicAddRemove2").empty();
+            $("#dynamicAddRemove2").append(`<label class="form-control-label" for="lapisan_data">Lapisan Data</label>
+                                                <select name="lapisan_data" class="form-control" autofocus><option selected disabled>Pilih</option>'
 
                                                     ` + senarai_append + `
 

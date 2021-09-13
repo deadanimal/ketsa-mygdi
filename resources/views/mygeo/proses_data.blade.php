@@ -78,8 +78,9 @@
                                                 <td>{{ $permohonan->users->kategori }}</td>
                                                 <td>{{ $permohonan->assign_admin }}</td>
                                                 <td>
-                                                    <a href="{{ url('/lihat_permohonan/'.$permohonan->id) }}"
-                                                        class="btn btn-sm btn-info text-center"><i class="fas fa-eye"></i>
+                                                    <a href="{{ url('/lihat_permohonan/' . $permohonan->id) }}"
+                                                        class="btn btn-sm btn-info text-center"><i
+                                                            class="fas fa-eye"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $permohonan->id }}"
                                                         class="btnDelete btn btn-sm btn-danger mr-2"><i
@@ -137,11 +138,13 @@
                                                     <td>{{ $data->kategori }}</td>
                                                     <td>{{ $data->kawasan_data }}</td>
                                                     <td>
-                                                        <input class="form-control form-control-sm amount_{{$permohonan->id}}_{{$data->id}} kiraHarga" data-hargadata="{{ $data->harga_data }}" 
-                                                            placeholder="Saiz Data" id="size_{{ $data->id }}" name="saiz_data_{{$permohonan->id}}_{{$data->id}}" type="number" step="0.01">
-                                                        <label class="ml-2">× RM {{ $data->harga_data }} </label>
-                                                        <input type="hidden" class="price_{{$permohonan->id}}_{{$data->id}}"
-                                                            value="{{ $data->harga_data }}">
+                                                        <input class="form-control form-control-sm" placeholder="Saiz Data"
+                                                            id="size_{{ $data->id }}"
+                                                            onchange="kiraharga{{ $permohonan->id }}()" type="number"
+                                                            step="0.01" name="saiz_data_{{ $data->id }}"
+                                                            value="{{ $data->saiz_data }}">
+                                                        <label class="ml-2">× RM {{ $data->harga_data }}
+                                                        </label>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -152,8 +155,10 @@
                                     <div class="col-xl-12">
                                         <div class="form-inline float-right">
                                             <label class="form-control-label mr-2">Jumlah Harga (RM)</label>
-                                            <input class="form-control form-control-sm jumlah_harga_dokumen" placeholder="0.00"
-                                                style="width: 90px;" type="text" name="total_harga" step="0.01" value="{{$permohonan->proses_datas->total_harga}}">
+                                            <input class="form-control form-control-sm" placeholder="0.00"
+                                                style="width: 90px;" type="text" name="total_harga"
+                                                id="jumlah_harga_dokumen_{{ $permohonan->id }}" step="0.01"
+                                                value="{{ $permohonan->proses_datas->total_harga }}">
                                         </div>
                                     </div>
                                 </div>
@@ -161,21 +166,24 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-control-label mr-2">Pautan Data </label>
-                                            <input class="form-control form-control-sm mb-2" name="pautan_data" placeholder="Masukkan Pautan Data" type="text" value="{{$permohonan->proses_datas->pautan_data}}">
+                                            <input class="form-control form-control-sm mb-2" name="pautan_data"
+                                                placeholder="Masukkan Pautan Data" type="text"
+                                                value="{{ $permohonan->proses_datas->pautan_data }}">
 
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
 <!--                                            <input class="form-control form-control-sm" name="tempoh" placeholder="" type="date" disabled>-->
                                             <input type="text" class="form-control form-control-sm float-right tempohMuatTurun" name="tempoh">
-                                            </div>
+                                        </div>
                                             <label class="form-control-label mr-2">Surat Balasan Permohonan </label>
-                                            <a href="{{ url('surat_balasan/'.$permohonan->id) }}" class="btn btn-sm btn-danger mb-2" style="margin-top:7px;">
+                                            <a href="{{ url('surat_balasan/' . $permohonan->id) }}"
+                                                class="btn btn-sm btn-danger mb-2">
                                                 Kemaskini
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 pt-9 text-right">
-                                        <input type="hidden" name="permohonan_id" value="{{$permohonan->id}}">
-                                        <input type="hidden" name="id" value="{{$permohonan->id}}">
+                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                        <input type="hidden" name="id" value="{{ $permohonan->id }}">
                                         <button class="btn btn-success ml-auto" type="submit">
                                             Hantar
                                         </button>
@@ -191,7 +199,7 @@
     </div>
 
     <script>
-        @foreach ($permohonan_list as $permohonan)
+    @foreach ($permohonan_list as $permohonan)
             @foreach ($skdatas as $data)
                 // @if ($data->permohonan_id == $permohonan->id)
                 // $('.amount_{{$permohonan->id}}_{{$data->id}}').change(function() {
@@ -211,7 +219,7 @@
                 @endif
             @endforeach
         @endforeach
-    </script>
+        </script>
     <script>
         $(document).ready(function() {
             $(document).on('change','.kiraHarga',function(){
@@ -225,13 +233,13 @@
                 jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
                 $(".jumlah_harga_dokumen").val(jumlahHarga);
             });
-            
+
             $('.tempohMuatTurun').daterangepicker({
                 locale: {
                     format: 'DD-MM-YYYY'
                 },
             });
-            
+
             $("#table_metadatas").DataTable({
                 "ordering": false,
                 "responsive": true,

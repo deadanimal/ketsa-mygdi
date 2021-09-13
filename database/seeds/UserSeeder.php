@@ -233,7 +233,7 @@ class UserSeeder extends Seeder
             'gambar_profil' => 'mrt.jpg',
             'status' => '1',
             'assigned_roles' => 'Pemohon Data',
-            'kategori' => '2_g2e_iptsPelajar'
+            'kategori' => 'IPTA - Pelajar'
         ]);
         $user->assignRole('Pemohon Data');
 
