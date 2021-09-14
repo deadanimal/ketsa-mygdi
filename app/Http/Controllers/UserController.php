@@ -499,7 +499,7 @@ class UserController extends Controller {
         $at->data = 'Create';
         $at->save();
 
-        return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan');
+        return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan.');
     }
 
 
