@@ -292,7 +292,7 @@
         });
         $('.divIdentificationInformationUrl').hide();
         $('.inputIdentificationInformationUrl').prop('disabled',true);
-        
+
         <?php
         if(!is_null(old('kategori')) && old('kategori') == "Dataset" && !is_null(old('c1_content_info')) && old('c1_content_info') == "Application"){
             ?>
@@ -306,13 +306,13 @@
             $('.divIdentificationInformationUrl').hide();
             $('.inputIdentificationInformationUrl').prop('disabled',true);
             $('.divBrowsingInformationUrl').show();
-            $('.inputBrowsingInformationUrl').prop('disabled',false);    
+            $('.inputBrowsingInformationUrl').prop('disabled',false);
             <?php
         }
         ?>
-        
+
         $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-        
+
         $(document).on("click", "#btnTestServiceUrl", function () {
             var mapurl = $('#c2_serviceUrl').val();
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
@@ -321,7 +321,7 @@
             var weburl = $(this).parent().parent().find('.urlToTest').val();
             window.open(weburl, '_blank');
         });
-        
+
         $(document).on('click', '.btnSubmit', function() {
             var btnSubmit = $(this);
             window.onbeforeunload = null; //remove double alert
@@ -512,7 +512,7 @@
                 $('#div_action_buttons').show();
             }
         });
-        
+
         $(document).on('change', '#c2_product_type', function() {
             var type = $(this).val();
             if (type == "Application") {
@@ -548,11 +548,11 @@
                 $('.abstractVectorData').show();
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             }
-            
+
             $('.abstractElement').val("");
             $('#c2_abstract').val("");
         });
-        
+
         <?php
         if(!is_null(old('c2_product_type')) && old('c2_product_type') == "Application"){
             ?>
@@ -596,12 +596,12 @@
             <?php
         }
         ?>
-        
+
         $(".abstractElement").keyup(function(){
             var type = $('#c2_product_type').val();
             var abstractText = "";
             var typeSelector = "";
-            
+
             if (type == "Application") {
                 typeSelector = ".abstractApplication";
             } else if (type == "Document") {
@@ -619,7 +619,7 @@
             } else if (type == "Vector Data") {
                 typeSelector = ".abstractVectorData";
             }
-            
+
             var elements = $(typeSelector).find('.abstractElement');
             $(elements).each(function(index){
                 if($(this).val() !== ""){
@@ -630,7 +630,7 @@
 
             $('#c2_abstract').val(abstractText);
         });
-        
+
         <?php
         if (!is_null(old('kategori'))) {
             ?>
