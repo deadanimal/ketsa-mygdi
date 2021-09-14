@@ -502,8 +502,19 @@
             }
         });
 
-        var kategori = "<?php echo strtolower($catSelected); ?>";
-        if (kategori.toLowerCase() == "dataset") {
+        $(document).on('change', '#kategori', function(){
+            var url = '{{ url("/kemaskini_metadata/".$metadataSearched->id) }}';
+            url += '?kategori='+$(this).val();
+            
+            window.location.href = url;
+        });
+        
+        <?php
+        if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
+            ?>
+            $('#kategori').val("{{ $_GET['kategori'] }}");
+            var kategori = "{{ $_GET['kategori'] }}";
+            if (kategori.toLowerCase() == "dataset") {
                 $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
                 $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?><span class="text-warning">*</span>');
                 $('.divPublisherRole').show();
@@ -602,72 +613,130 @@
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }
 
-<?php
-if ($catSelected == "dataset" || $catSelected == "services") {
-    ?>
-            $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
-    <?php
-} elseif ($catSelected == "imagery" || $catSelected == "gridded") {
-    ?>
-            $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
-    <?php
-}
-?>
-
-        $(document).on('change', '#kategori', function () {
-            var kategori = $(this).val();
-            if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {
-                $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
-                $('#accordion').show();
-                $('.divMaintenanceInfo').hide();
-                $('#c12_maintenanceUpdate').prop('disabled',true);
-            } else if (kategori.toLowerCase() == "imagery" || kategori.toLowerCase() == "gridded") {
-                $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
-                $('#accordion').show();
-                $('.divMaintenanceInfo').show();
-                $('#c12_maintenanceUpdate').prop('disabled',false);
+            <?php
+            if ($catSelected == "dataset" || $catSelected == "services") {
+                ?>
+                        $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
+                <?php
+            } elseif ($catSelected == "imagery" || $catSelected == "gridded") {
+                ?>
+                        $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
+                <?php
             }
-
-            //for content info
-            if (kategori.toLowerCase() == "dataset"){
-                $('#c1_content_info').prop('disabled',false);
-                $('#content_info_text').prop('disabled',true);
-                $('#c1_content_info').show();
-                $('#content_info_text').hide();
+        }else{
+            ?>
+            var kategori = "<?php echo strtolower($catSelected); ?>";
+            if (kategori.toLowerCase() == "dataset") {
+                $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
+                $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?><span class="text-warning">*</span>');
+                $('.divPublisherRole').show();
+                $('.divMetadataDate').show();
+                $('.divMetadataDateType').show();
+                $('.divMetadataStatus').show();
+                $('.divResponsiblePartyRole').show();
                 $('.optContentInfo_dataset').show();
                 $('.optContentInfo_services').hide();
                 $('.optContentInfo_gridded').hide();
                 $('.optContentInfo_imagery').hide();
-                $('#c1_content_info').val('').change();
+                $('.optStatus_dataset').show();
+                $('.optStatus_services').hide();
+                $('.divTypeOfServices').hide();
+                $('.divOperationName').hide();
+                $('.divServiceUrl').hide();
+                $('.divTypeOfCouplingDataset').hide();
+                $('.refSys_Services').hide();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').show();
+                $('.divUseLimitation').hide();
+                $('#c1_content_info').prop('disabled',false);
+                $('#content_info_text').prop('disabled',true);
+                $('#c1_content_info').show();
                 $('.lblContentInfo').hide();
-            }else if (kategori.toLowerCase() == "services"){
+                $('.divMaintenanceInfo').hide();
+                $('#c12_maintenanceUpdate').prop('disabled',true);
+            }else if (kategori.toLowerCase() == "services") {
+                $('.optContentInfo_dataset').hide();
+                $('.optContentInfo_services').show();
+                $('.optContentInfo_gridded').hide();
+                $('.optContentInfo_imagery').hide();
+                $('.optStatus_dataset').hide();
+                $('.optStatus_services').show();
+                $('.divTypeOfServices').show();
+                $('.divOperationName').show();
+                $('.divServiceUrl').show();
+                $('.divTypeOfCouplingDataset').show();
+                $('.refSys_Services').show();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').hide();
+                $('.divUseLimitation').show();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
-                $('.lblContentInfo').html('Services');
-                $('#content_info_text').val('Services');
+                $('.lblContentInfo').html('Live Data and Maps');
+                $('#content_info_text').val('Live Data and Maps');
                 $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-            }else if (kategori.toLowerCase() == "imagery"){
-                $('#c1_content_info').prop('disabled',true);
-                $('#content_info_text').prop('disabled',false);
-                $('.lblContentInfo').html('Imagery');
-                $('#content_info_text').val('Imagery');
-                $('.lblContentInfo').show();
-                $('#c1_content_info').hide();
-            }else if (kategori.toLowerCase() == "gridded"){
+                $('.divMaintenanceInfo').hide();
+                $('#c12_maintenanceUpdate').prop('disabled',true);
+            }else if (kategori.toLowerCase() == "gridded") {
+                $('.optContentInfo_dataset').hide();
+                $('.optContentInfo_services').hide();
+                $('.optContentInfo_gridded').show();
+                $('.optContentInfo_imagery').hide();
+                $('.optStatus_dataset').hide();
+                $('.optStatus_services').show()
+                $('.divTypeOfServices').hide();
+                $('.divOperationName').hide();
+                $('.divServiceUrl').hide();
+                $('.divTypeOfCouplingDataset').hide();
+                $('.refSys_Services').hide();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').show();
+                $('.divUseLimitation').hide();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Gridded');
                 $('#content_info_text').val('Gridded');
                 $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-            }else{
+                $('.divMaintenanceInfo').show();
+                $('#c12_maintenanceUpdate').prop('disabled',false);
+            }else if (kategori.toLowerCase() == "imagery") {
+                $('.optContentInfo_dataset').hide();
+                $('.optContentInfo_services').hide();
+                $('.optContentInfo_gridded').hide();
+                $('.optContentInfo_imagery').show();
+                $('.optStatus_dataset').hide();
+                $('.optStatus_services').show();
+                $('.divTypeOfServices').hide();
+                $('.divOperationName').hide();
+                $('.divServiceUrl').hide();
+                $('.divTypeOfCouplingDataset').hide();
+                $('.refSys_Services').hide();
+                $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
+                $('.divDataQualityTabs').show();
+                $('.divUseLimitation').hide();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
+                $('.lblContentInfo').html('Imagery');
+                $('#content_info_text').val('Imagery');
+                $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-                $('#content_info_text').show();
+                $('.divMaintenanceInfo').show();
+                $('#c12_maintenanceUpdate').prop('disabled',false);
             }
-        });
+
+            <?php
+            if ($catSelected == "dataset" || $catSelected == "services") {
+                ?>
+                        $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
+                <?php
+            } elseif ($catSelected == "imagery" || $catSelected == "gridded") {
+                ?>
+                        $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
+                <?php
+            }
+        }
+        ?>
 
         $(document).on('change', '#c2_product_type', function() {
             var type = $(this).val();
