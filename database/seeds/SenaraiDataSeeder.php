@@ -15,7 +15,7 @@ class SenaraiDataSeeder extends Seeder
         SenaraiData::create([
             'kategori' => "Aeronautical",
             'subkategori' => "Ruang Udara (Air Space - AA)",
-            'lapisan_data' => "Transitional Surface",
+            'lapisan_data' => "Transitional Surface 3",
             'kelas' => 'Terhad',
             'status' => 'Tersedia',
             'harga_data' => "4.50"]);
@@ -23,7 +23,7 @@ class SenaraiDataSeeder extends Seeder
         SenaraiData::create([
             'kategori' => "Aeronautical",
             'subkategori' => "Lapangan Terbang (Aerodrome-AB)",
-            'lapisan_data' => "Transitional Surface",
+            'lapisan_data' => "Transitional Surface 2",
             'kelas' => 'Terhad',
             'status' => 'Tersedia',
             'harga_data' => "2.55"]);
@@ -31,7 +31,7 @@ class SenaraiDataSeeder extends Seeder
         SenaraiData::create([
             'kategori' => "Built Environment",
             'subkategori' => "Kediaman (Residential - BA)",
-            'lapisan_data' => "Transitional Surface",
+            'lapisan_data' => "Transitional",
             'kelas' => 'Tidak Terhad',
             'status' => 'Tersedia',
             'harga_data' => "1.50"]);

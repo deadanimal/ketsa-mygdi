@@ -69,7 +69,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>
-                                                    @if ($permohonan->dihantar == '1')
+                                                    @if ($permohonan->status == '1')
                                                         <span class="badge badge-pill badge-warning">Dalam Proses</span>
                                                     @elseif($permohonan->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
@@ -81,11 +81,11 @@
                                                 </td>
                                                 <td>
                                                     <a href="{{ url('/lihat_permohonan/'.$permohonan->id) }}"
-                                                        class="btn btn-sm btn-success text-center"><i
+                                                        class="btn btn-sm btn-success text-center" @if($permohonan->status != 2) disabled @endif><i
                                                             class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $permohonan->id }}"
-                                                        class="btnDelete btn btn-sm btn-danger mr-2"><i
+                                                        class="btnDelete btn btn-sm btn-danger mr-2" @if($permohonan->status != 2) disabled @endif><i
                                                             class="fas fa-trash"></i>
                                                     </button>
                                                 </td>

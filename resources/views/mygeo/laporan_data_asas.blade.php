@@ -85,12 +85,9 @@
                                                 <td></td>
 
                                             </tr>
-
                                         @endforeach
+
                                     </tbody>
-                                    <tfoot>
-                                        <th colspan="7">JUMLAH PERMOHONAN DATA</th>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -112,7 +109,7 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan Keseluruhan Permohonan Data </h4>
-                                <table id="table_datas_all" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="laporan_seluruh" class="table table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -149,14 +146,11 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <th colspan="7">JUMLAH PERMOHONAN DATA</th>
-                                    </tfoot>
                                 </table>
                             </div>
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan permohonan data yang telah diluluskan </h4>
-                                <table id="table_datas_lulus" class="table table-bordered table-striped"
+                                <table id="laporan_lulus" class="table table-bordered table-striped"
                                     style="width:100%;">
                                     <thead>
                                         <tr>
@@ -174,19 +168,15 @@
                                                 <td>{{ $mohon->users->name }}</td>
                                                 <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
                                                 <td>{{ $mohon->users->kategori }}</td>
-                                                <td>
-
-                                                </td>
+                                                <td></td>
                                             </tr>
                                         @endforeach
+
                                     </tbody>
-                                    <tfoot>
-                                        <th colspan="7">JUMLAH PERMOHONAN DATA</th>
-                                    </tfoot>
                                 </table>
                             </div>
                             <div class="card-body">
-                                <h4 class="heading text-muted">Bilangan permohonan data mengikut kategori</h4>
+                                <h4 class="heading text-muted">Bilangan permohonan Data mengikut Kategori</h4>
                                 <div class="table-responsive">
                                     <table id="laporan_kategori" class="table table-bordered table-striped"
                                         style="width:100%;">
@@ -205,6 +195,34 @@
                                                     <td>{{ $mohon->username }}</td>
                                                     <td>{{ $mohon->name }}</td>
                                                     <td>{{ $mohon->total }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="heading text-muted">Statistik permohonan data mengikut tahun</h4>
+                                <div class="table-responsive">
+                                    <table id="laporan_statistik" class="table table-bordered table-striped"
+                                        style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>BIL</th>
+                                                <th>NAMA PEMOHON</th>
+                                                <th>AGENSI</th>
+                                                <th>JUMLAH PERMOHONAN DATA</th>
+                                                <th>TAHUN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($permohonan_kategori as $mohon)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $mohon->username }}</td>
+                                                    <td>{{ $mohon->name }}</td>
+                                                    <td>{{ $mohon->total }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($mohon->date)->format('Y') }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -254,6 +272,7 @@
                         title: 'Laporan Perincian Permohonan Data-data Asas',
                     }
                 ],
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,
@@ -280,19 +299,20 @@
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
-                        title: 'Laporan Perincian Permohonan Data-data Asas',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
                     },
                     {
                         extend: 'excel',
                         className: 'btn btn-sm btn-success',
-                        title: 'Laporan Perincian Permohonan Data-data Asas',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
                     },
                     {
                         extend: 'print',
                         className: 'btn btn-sm btn-primary',
-                        title: 'Laporan Perincian Permohonan Data-data Asas',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
                     }
                 ],
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,
@@ -316,97 +336,106 @@
 
     <script>
         $(document).ready(function() {
-            $("#table_datas").DataTable({
-                "dom": 'Bfrtip',
-                "buttons": [{
-                        extend: 'csv',
-                        className: 'btn btn-sm btn-danger'
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn btn-sm btn-success'
-                    },
-                    {
-                        extend: 'print',
-                        className: 'btn btn-sm btn-primary'
-                    }
-                ],
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
-                    }
-                }
-            });
-        });
-        $(document).ready(function() {
-            $("#table_datas_lulus").DataTable({
-                "dom": 'Bfrtip',
-                "buttons": [{
-                        extend: 'csv',
-                        className: 'btn btn-sm btn-danger'
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn btn-sm btn-success'
-                    },
-                    {
-                        extend: 'print',
-                        className: 'btn btn-sm btn-primary'
-                    }
-                ],
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
-                    }
-                }
-            });
-        });
-        $(document).ready(function() {
-            $("#table_datas_all").DataTable({
+            $("#laporan_statistik").DataTable({
                 "dom": 'Bfrtip',
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
-                        title: 'Bilangan Keseluruhan Permohonan Data'
+                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
                     },
                     {
                         extend: 'excel',
                         className: 'btn btn-sm btn-success',
-                        title: 'Bilangan Keseluruhan Permohonan Data'
+                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
                     },
                     {
                         extend: 'print',
                         className: 'btn btn-sm btn-primary',
-                        title: 'Bilangan Keseluruhan Permohonan Data'
+                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
                     }
                 ],
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,
+                "oLanguage": {
+                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sEmptyTable": "Tiada rekod ditemui",
+                    "sZeroRecords": "Tiada rekod ditemui",
+                    "sLengthMenu": "Papar _MENU_ rekod",
+                    "sLoadingRecords": "Sila tunggu...",
+                    "sSearch": "Carian:",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": ">",
+                        "sPrevious": "<",
+                    }
+                }
+            });
+        });
+        $(document).ready(function() {
+            $("#laporan_lulus").DataTable({
+                "dom": 'Bfrtip',
+                "buttons": [{
+                        extend: 'csv',
+                        className: 'btn btn-sm btn-danger',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-sm btn-primary',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
+                    }
+                ],
+                "scrollX": true,
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": false,
+                "oLanguage": {
+                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sEmptyTable": "Tiada rekod ditemui",
+                    "sZeroRecords": "Tiada rekod ditemui",
+                    "sLengthMenu": "Papar _MENU_ rekod",
+                    "sLoadingRecords": "Sila tunggu...",
+                    "sSearch": "Carian:",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": ">",
+                        "sPrevious": "<",
+                    }
+                }
+            });
+        });
+        $(document).ready(function() {
+            $("#laporan_seluruh").DataTable({
+                "dom": 'Bfrtip',
+                "buttons": [{
+                        extend: 'csv',
+                        className: 'btn btn-sm btn-danger',
+                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-sm btn-primary',
+                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                    }
+                ],
+                "scrollX": true,
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": true,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
                     "sEmptyTable": "Tiada rekod ditemui",
