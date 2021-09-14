@@ -173,7 +173,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-3">
-                                            <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="text" value="{{ $user->phone_pejabat }}" />
+                                            <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="number" value="{{ $user->phone_pejabat }}" />
                                         </div>
                                         <?php
                                         if(!Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata'])){
@@ -184,7 +184,7 @@
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-3">
-                                                <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="text" value="{{ $user->phone_bimbit }}" />
+                                                <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="number" value="{{ $user->phone_bimbit }}" />
                                             </div>
                                             <?php
                                         }
