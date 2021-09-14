@@ -163,7 +163,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="email" type="email" value="{{ $user->email }}" />
+                                            <input class="form-control form-control-sm ml-3" id="email" name="email" type="email" value="{{ $user->email }}" />
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -176,7 +176,7 @@
                                             <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="text" value="{{ $user->phone_pejabat }}" />
                                         </div>
                                         <?php
-                                        if(Auth::user()->hasRole('Pemohon Data')){
+                                        if(!Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata'])){
                                             ?>
                                             <div class="col-2">
                                                 <label class="form-control-label mr-4" for="phone_bimbit">
@@ -259,11 +259,15 @@ $(document).ready(function(){
                 
     $(document).on('click','.btn_simpan',function(){
         var nric = $("#nric").val();
+        var email = $("#email").val();
         var agensi_organisasi = $("#agensi_organisasi").val();
         var bahagian = $("#bahagian").val();
         var msg = "";
         if(nric.length < 12){
             msg = msg + "Nombor NRIC tidak lengkap\r\n\r\n";
+        }
+        if(!isEmail(email)){
+            msg = msg + "Emel tidak sah\r\n\r\n";
         }
         if(agensi_organisasi == ""){
             msg = msg + "Sila pilih agensi / organisasi\r\n\r\n";
@@ -330,6 +334,11 @@ $(document).ready(function(){
         $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
     }, 1000);
 });
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
 </script>
 
 @stop
