@@ -591,11 +591,18 @@ class UserController extends Controller {
         $this->validate($request, $fields, $customMsg);
 
         $password = "";
+        
+        $sektor = "";
+        if($request->agensi_organisasi != ""){
+            $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
+            $sektor = $ao->sektor;
+        }
 
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;
             $nu->email = $request->email;
+            $nu->sektor = $sektor;
             $nu->agensi_organisasi = $request->agensi_organisasi;
             $pass = $this->generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',20);
             $password = $pass;
