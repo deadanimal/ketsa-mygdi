@@ -226,7 +226,7 @@
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString != "") {
                     ?>
-                    <div class="row mb-4">
+                    <div class="row mb-2">
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="c2_metadataName">
                                 Address
@@ -242,7 +242,7 @@
                 <?php
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
                     ?>
-                    <div class="row mb-4 divPostalCode">
+                    <div class="row mb-2 divPostalCode">
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="c2_metadataName">
                                 Postal Code:
@@ -258,7 +258,7 @@
                 <?php
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
                     ?>
-                    <div class="row mb-4 divCity">
+                    <div class="row mb-2 divCity">
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="c2_metadataName">
                                 City
@@ -274,7 +274,7 @@
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != "") {
                     ?>
-                    <div class="row mb-4 divCity">
+                    <div class="row mb-2 divCity">
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="c2_metadataName">
                                 State
@@ -287,10 +287,10 @@
                     <?php
                 }
                 ?>
-                <?php 
+                <?php
                 if(isset($countries->name) && $countries->name != ""){
                     ?>
-                    <div class="row mb-4 divCity">
+                    <div class="row mb-2 divCity">
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="c2_metadataName">
                                 Country
@@ -366,7 +366,7 @@
                     </div>
                     <?php
                 }
-                ?>  
+                ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode != "") {
                     ?>

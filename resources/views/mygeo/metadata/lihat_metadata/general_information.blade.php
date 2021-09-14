@@ -1,5 +1,5 @@
 <div class="card card-primary div_c1" id="div_c1">
-    <div class="card-header">
+    <div class="card-header pb-0 mb-0">
         <a data-toggle="collapse" href="#collapse1">
             <h4 class="card-title">
                 <?php echo __('lang.accord_1'); ?>
@@ -23,7 +23,7 @@
             if (isset($metadataxml->language->CharacterString) && $metadataxml->language->CharacterString != "") {
                 ?>
                 <div class="form-group row">
-                    <p class="pl-lg-3 form-control-label">Metadata Language<span class="mx-3">:</span></p>    
+                    <p class="pl-lg-3 form-control-label">Metadata Language<span class="mx-3">:</span></p>
                     <?php
                     if($metadataxml->language->CharacterString == 'en'){
                         echo "English";
@@ -31,7 +31,7 @@
                         echo "Bahasa Malaysia";
                     }
                     ?>
-                </div>    
+                </div>
                 <?php
             }
             ?>
@@ -56,7 +56,7 @@
                                 Name
                             </label><label class="float-right">:</label>
                         </div>
-                        <div class="col-8">    
+                        <div class="col-8">
                             <?php echo $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString; ?>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                                 Agency/Organization
                             </label><label class="float-right">:</label>
                         </div>
-                        <div class="col-8">    
+                        <div class="col-8">
                         <?php echo $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString; ?>
                         </div>
                     </div>

@@ -30,7 +30,7 @@
                 </div>
             </div>
             <br><br>
-            <div class="row justify-content-md-center" style="height:425px;">
+            <div class="row justify-content-md-center mb-4">
                 <table>
                     <tr>
                         <td>

@@ -436,9 +436,9 @@ class DataAsasController extends Controller
 
     public function store_kategori_senarai_data(Request $request)
     {
-        $duplicate_valid = KategoriSenaraiData::where(['name' => $request->kategori])->get();
+        $duplicate_valid_cat = KategoriSenaraiData::where(['name' => $request->kategori])->get();
 
-        if($duplicate_valid->isEmpty()){
+        if($duplicate_valid_cat->isEmpty()){
 
         $kategori = new KategoriSenaraiData();
         $kategori->name = $request->kategori;
@@ -463,18 +463,28 @@ class DataAsasController extends Controller
 
     public function store_subkategori_senarai_data(Request $request)
     {
-        $subkategori = new SubKategoriSenaraiData();
-        $subkategori->name = $request->subkategori;
-        $subkategori->kategori_id = $request->kategori_id;
-        $subkategori->save();
 
-        $at = new AuditTrail();
-        $at->path = url()->full();
-        $at->user_id = Auth::user()->id;
-        $at->data = 'Create';
-        $at->save();
+        $duplicate_valid_sub = SubKategoriSenaraiData::where(['name' => $request->subkategori])->get();
 
-        return redirect('senarai_data')->with('success', 'Sub-Kategori Senarai Data Ditambah !');
+        if($duplicate_valid_sub->isEmpty()){
+
+            $subkategori = new SubKategoriSenaraiData();
+            $subkategori->name = $request->subkategori;
+            $subkategori->kategori_id = $request->kategori_id;
+            $subkategori->save();
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Create';
+            $at->save();
+
+            return redirect('senarai_data')->with('success', 'Sub-Kategori Senarai Data Ditambah !');
+        }else {
+
+            return redirect('senarai_data')->with('warning', 'Sub-Kategori Senarai Data Telah Wujud !');
+        }
+
     }
 
     public function update_senarai_data(Request $request)
@@ -539,7 +549,7 @@ class DataAsasController extends Controller
 
         return redirect('/kategori_kelas_kongsi_data')->with('success', 'Data Berjaya Dikemaskini');
     }
-    
+
     public function getKelasKongsis(){
         $kategori = KelasKongsi::get();
         echo json_encode($kategori);

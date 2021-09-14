@@ -14,10 +14,10 @@
                     ?>
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-distribution-format">
-                            Format Name </label>
+                            Format Name :</label>
                     </div>
                     <div class="col-xl-3">
-                        <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString . "</p>"; ?>
+                        <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString . "</p>"; ?>
                     </div>
                     <?php
                 }
@@ -27,10 +27,10 @@
                     ?>
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-version">
-                            Version </label>
+                            Version :</label>
                     </div>
                     <div class="col-xl-2">
-                        <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString . "</p>"; ?>
+                        <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString . "</p>"; ?>
                      </div>
                     <?php
                 }
@@ -40,10 +40,10 @@
                     ?>
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-medium">
-                            Medium </label>
+                            Medium :</label>
                     </div>
                     <div class="col-xl-3">
-                        <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode . "</p>"; ?>
+                        <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode . "</p>"; ?>
                     </div>
                     <?php
                 }
@@ -55,10 +55,10 @@
                 <div class="row mb-2">
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-distributor">
-                            Organisation Name </label>
+                            Organisation Name :</label>
                     </div>
                     <div class="col-xl-6">
-                        <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString . "</p>"; ?>
+                        <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString . "</p>"; ?>
                     </div>
                 </div>
                 <?php
@@ -75,10 +75,10 @@
                         ?>
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-unit-distribution">
-                                Units of Distribution </label>
+                                Units of Distribution :</label>
                         </div>
                         <div class="col-xl-3">
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString . "</p>"; ?>
+                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString . "</p>"; ?>
                         </div>
                         <?php
                     }
@@ -92,8 +92,8 @@
                                 Size (Megabytes) </label>
                         </div>
                         <div class="col-xl-2">
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real . "</p>"; ?>
-                        </div>  
+                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real . "</p>"; ?>
+                        </div>
                         <?php
                     }
                     ?>
@@ -103,10 +103,10 @@
                         ?>
                         <div class="col-xl-1">
                             <label class="form-control-label" for="input-fees">
-                                Fees </label>
+                                Fees :</label>
                         </div>
                         <div class="col-xl-2">
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString . "</p>"; ?>
+                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString . "</p>"; ?>
                         </div>
                         <?php
                     }
@@ -119,10 +119,10 @@
                         ?>
                         <div class="col-xl-1">
                             <label class="form-control-label" for="input-distributor">
-                                Link </label>
+                                Link :</label>
                         </div>
                         <div class="col-xl-4">
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL . "</p>"; ?>
+                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL . "</p>"; ?>
                         </div>
                         <?php
                     }
@@ -133,10 +133,10 @@
                         ?>
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-instructionorder">
-                                Ordering Instruction </label>
+                                Ordering Instruction :</label>
                         </div>
                         <div class="col-xl-5">
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString . "</p>"; ?>
+                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString . "</p>"; ?>
                         </div>
                         <?php
                     }
@@ -152,7 +152,7 @@
         <?php
         if($flag1 == 1){
             ?>
-            $('.distInfoSubtajuk1').hide();    
+            $('.distInfoSubtajuk1').hide();
             <?php
         }else{
             ?>

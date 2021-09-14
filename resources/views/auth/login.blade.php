@@ -405,7 +405,7 @@
     $(document).on("click", ".btn_login", function() {
         var captcha = $('#g-recaptcha-response').val();
         <?php
-        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
+        if($_SERVER['HTTP_HOST'] == "127.0.0.1:8003"){
             ?>
             $("#formLogin").submit();
             <?php
@@ -746,7 +746,7 @@
                 }else if(val.category == "G2C" && val.subcategory == "Awam" && val.status == "0"){
                     $('#2_g2c').prop('disabled',true);
                 }
-                
+
                 if(val.category == "G2G" && val.subcategory == "Badan Berkanun" && val.status == "1"){
                     $('#badanBerkanun').prop('disabled',false);
                 }else if(val.category == "G2G" && val.subcategory == "Badan Berkanun" && val.status == "0"){
@@ -762,7 +762,7 @@
                 }else if(val.category == "G2G" && val.subcategory == "GLC" && val.status == "0"){
                     $('#glc').prop('disabled',true);
                 }
-                
+
                 if(val.category == "G2E" && val.subcategory == "IPTA - Pensyarah/Penyelidik" && val.status == "1"){
                     $('#iptaSyarahSelidik').prop('disabled',false);
                 }else if(val.category == "G2E" && val.subcategory == "IPTA - Pensyarah/Penyelidik" && val.status == "0"){
@@ -785,7 +785,7 @@
                 }
             });
         });
-        
+
         var msg = "";
         <?php
         if($errors->any()){
