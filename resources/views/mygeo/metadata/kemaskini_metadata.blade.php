@@ -55,7 +55,9 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-
+                        <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
+                            <?php echo __('lang.btn_upload_xml'); ?>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -146,16 +148,14 @@
                         </ul>
                     </div>
                     @endif
-                    <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
-                        <?php echo __('lang.btn_upload_xml'); ?>
-                    </button>
+
                 </div>
                 <div class="col-12">
                     <div class="card">
                         <form method="post" class="form-horizontal" id="form_metadata" action="{{url('simpan_kemaskini_metadata')}}" enctype="multipart/form-data">
                             @csrf
                             @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")
-                            <input type="hidden" name="newStatus" value="0"> 
+                            <input type="hidden" name="newStatus" value="0">
                             @endif
                             <input type="hidden" name="metadata_id" value="{{ $metadataSearched->id }}">
                             @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata','Super Admin']))
@@ -263,7 +263,7 @@
                                     <input type="button" data-name="save" value="Simpan" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
                                     <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
                                     @endif
-                                    
+
                                     <input type="hidden" name="submitAction" id="submitAction" value="save">
                                 </div>
                             </div>
@@ -315,7 +315,7 @@
             $('.inputBrowsingInformationUrl').prop('disabled',false);
             <?php
         }
-        
+
         $typeofProd = "";
         if (isset($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString != "") {
             $typeofProd = trim($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString);
@@ -362,8 +362,8 @@
             <?php
         }
         ?>
-        
-        <?php 
+
+        <?php
         if(auth::user()->hasRole(['Pengesah Metadata','Super Admin'])){
             ?>
             $(document).on('focusout','.catatan',function(){
@@ -416,15 +416,15 @@
             var weburl = $(this).parent().parent().find('.urlToTest').val();
             window.open(weburl, '_blank');
         });
-        
+
         var oriMetadataName = $('#c2_metadataName').val();
-        
+
         $(document).on('click','.btnSubmit',function(){
             var btnSubmit = $(this);
             window.onbeforeunload = null; //remove double alert
             $('#submitAction').val($(this).data('name'));
             var currentName = $('#c2_metadataName').val().trim();
-            
+
             <?php
             if(auth::user()->hasRole(['Penerbit Metadata'])){
                 ?>
@@ -483,14 +483,14 @@
             }
             ?>
         });
-        
+
         window.onbeforeunload = function() {
             return 'Anda sedang meninggal. page ini. Sila simpan metadata terlebih dahulu.' ;
         }
 
         $('input:radio[name="flanguage"]').change(function () {
             window.onbeforeunload = null;
-            
+
             if ($(this).val() == 'bm') {
                 var url = '{{ url("/kemaskini_metadata/$metadataSearched->id") }}';
                 url += '?bhs=bm'
@@ -501,7 +501,7 @@
                 window.location.href = url;
             }
         });
-        
+
         var kategori = "<?php echo strtolower($catSelected); ?>";
         if (kategori.toLowerCase() == "dataset") {
                 $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
@@ -601,7 +601,7 @@
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }
-        
+
 <?php
 if ($catSelected == "dataset" || $catSelected == "services") {
     ?>
@@ -627,9 +627,9 @@ if ($catSelected == "dataset" || $catSelected == "services") {
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
             }
-            
+
             //for content info
-            if (kategori.toLowerCase() == "dataset"){ 
+            if (kategori.toLowerCase() == "dataset"){
                 $('#c1_content_info').prop('disabled',false);
                 $('#content_info_text').prop('disabled',true);
                 $('#c1_content_info').show();
@@ -640,21 +640,21 @@ if ($catSelected == "dataset" || $catSelected == "services") {
                 $('.optContentInfo_imagery').hide();
                 $('#c1_content_info').val('').change();
                 $('.lblContentInfo').hide();
-            }else if (kategori.toLowerCase() == "services"){ 
+            }else if (kategori.toLowerCase() == "services"){
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Services');
                 $('#content_info_text').val('Services');
                 $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-            }else if (kategori.toLowerCase() == "imagery"){ 
+            }else if (kategori.toLowerCase() == "imagery"){
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Imagery');
                 $('#content_info_text').val('Imagery');
                 $('.lblContentInfo').show();
                 $('#c1_content_info').hide();
-            }else if (kategori.toLowerCase() == "gridded"){ 
+            }else if (kategori.toLowerCase() == "gridded"){
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Gridded');
@@ -668,7 +668,7 @@ if ($catSelected == "dataset" || $catSelected == "services") {
                 $('#content_info_text').show();
             }
         });
-        
+
         $(document).on('change', '#c2_product_type', function() {
             var type = $(this).val();
             if (type == "Application") {
@@ -704,7 +704,7 @@ if ($catSelected == "dataset" || $catSelected == "services") {
                 $('.abstractVectorData').show();
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             }
-            
+
             $('.abstractElement').val("");
             $('#c2_abstract').val("");
         });
@@ -713,7 +713,7 @@ if ($catSelected == "dataset" || $catSelected == "services") {
             var type = $('#c2_product_type').val();
             var abstractText = "";
             var typeSelector = "";
-            
+
             if (type == "Application") {
                 typeSelector = ".abstractApplication";
             } else if (type == "Document") {
@@ -731,7 +731,7 @@ if ($catSelected == "dataset" || $catSelected == "services") {
             } else if (type == "Vector Data") {
                 typeSelector = ".abstractVectorData";
             }
-            
+
             var elements = $(typeSelector).find('.abstractElement');
             $(elements).each(function(index){
                 if($(this).val() !== ""){
@@ -751,7 +751,7 @@ if (!is_null(old('kategori'))) {
 ?>
 
         updateLayer();
-        
+
         $(document).on("click", ".btn_terbit", function() {
             if (confirm("Adakah anda pasti untuk mengesahkan metadata ini?")) {
                 $('#submitAction').val('terbit');
@@ -807,7 +807,7 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
     }).addTo(map);
     drawRectangleEditor();
     searchLocation();
-    
+
     leafletImage(map, function(err, canvas) {
         // now you have canvas
         // example thing to do with that canvas:
