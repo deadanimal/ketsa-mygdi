@@ -98,46 +98,176 @@ class UserController extends Controller {
     public function get_user_details(){
         $user_id = $_POST['user_id'];
         $user_details = User::where(["id"=>$user_id])->get()->first();
+//        $html_details = '
+//            <div class="form-group row">
+//                <label for="inputEmail3" class="col-sm-2">Nama Penuh</label>
+//                <div class="col-sm-10">
+//                    :'.$user_details->name.'
+//                </div>
+//            </div>
+//            <div class="form-group row">
+//                <label for="inputEmail3" class="col-sm-2">Agensi</label>
+//                <div class="col-sm-10">
+//                    :'.($user_details->hasRole('Pemohon Data') ? $user_details->agensi_organisasi:$user_details->agensiOrganisasi->name).'
+//                </div>
+//            </div>
+//            <div class="form-group row">
+//                <label for="inputEmail3" class="col-sm-2">Bahagian</label>
+//                <div class="col-sm-10">
+//                    :'.$user_details->bahagian.'
+//                </div>
+//            </div>
+//            <div class="form-group row">
+//                <label for="inputEmail3" class="col-sm-2">Telefon Pejabat</label>
+//                <div class="col-sm-10">
+//                    :'.$user_details->phone_pejabat.'
+//                </div>
+//            </div>
+//            <div class="form-group row">
+//                <label for="inputEmail3" class="col-sm-2">Emel</label>
+//                <div class="col-sm-10">
+//                    :'.$user_details->email.'
+//                </div>
+//            </div>
+//            <div class="form-group row">
+//                <label for="inputEmail3" class="col-sm-2">Peranan</label>
+//                <div class="col-sm-10">
+//                    :
+//        ';
         $html_details = '
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Nama Penuh</label>
-                <div class="col-sm-10">
-                    :'.$user_details->name.'
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="uname">
+                        Nama Penuh
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="uname" type="text"
+                           value="'.$user_details->name.'" disabled />
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Agensi</label>
-                <div class="col-sm-10">
-                    :'.($user_details->hasRole('Pemohon Data') ? $user_details->agensi_organisasi:$user_details->agensiOrganisasi->name).'
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="nric">
+                        No Kad Pengenalan
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="input-nric" type="text"
+                           value="'.$user_details->nric.'" disabled />
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Bahagian</label>
-                <div class="col-sm-10">
-                    :'.$user_details->bahagian.'
+            <div class="row mb-2 divSektor">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="sektor">
+                        Sektor
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="sektor" type="text"
+                           value="'.($user_details->sektor == '1' ? 'Kerajaan' : 'Swasta').'" disabled />
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Telefon Pejabat</label>
-                <div class="col-sm-10">
-                    :'.$user_details->phone_pejabat.'
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="agensi_organisasi">
+                        Agensi / Organisasi
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">';
+        if (Auth::user()->hasRole("Pemohon Data")) {
+            $html_details .= '
+                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi"
+                               type="text" value="'.$user_details->agensi_organisasi.'" disabled />
+                    ';
+        } else {
+            $html_details .= '
+                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi"
+                               type="text"
+                               value="'.(is_numeric($user_details->agensi_organisasi) && isset($user_details->agensiOrganisasi) ? $user_details->agensiOrganisasi->name : $user_details->agensi_organisasi).'"
+                               disabled />
+                    ';
+        }
+        $html_details .= '
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Emel</label>
-                <div class="col-sm-10">
-                    :'.$user_details->email.'
+            <div class="row mb-2 divBahagian">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="bahagian">
+                        Bahagian
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="bahagian" type="text"
+                           value="'.$user_details->bahagian.'" disabled />
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Peranan</label>
-                <div class="col-sm-10">
-                    :
-        ';
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="email">
+                        Emel
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="email" type="text"
+                           value="'.$user_details->email.'" disabled />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="phone_pejabat">
+                        Telefon Pejabat
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-3">
+                    <input class="form-control form-control-sm ml-3" id="phone_pejabat" type="text"
+                           value="'.$user_details->phone_pejabat.'" disabled />
+                </div>';
+        if(!Auth::user()->hasRole(["Penerbit Metadata","Pengesah Metadata"])){
+            $html_details .= '
+                <div class="col-2">
+                    <label class="form-control-label mr-4" for="phone_bimbit">
+                        Telefon Bimbit
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-3">
+                    <input class="form-control form-control-sm ml-3" id="phone_bimbit"
+                           type="text" value="'.$user_details->phone_bimbit.'" disabled />
+                </div>';
+        }
+        $html_details .= '
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="peranan">
+                        Peranan
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">';
         if(count($user_details->getRoleNames()) > 0){
+            $var = "";
             foreach($user_details->getRoleNames() as $role){
-                $html_details .= $role.'<br>';
+                $var .= $role.',';
             }
+            $var = rtrim($var, ",");
+            $html_details .= '<input class="form-control form-control-sm ml-3" id="peranan" type="text" value="'.$var.'" disabled />';
+        }
+        $html_details .= '
+                </div>
+            </div>';
+        if(Auth::user()->hasRole("Pemohon Data")){
+            $html_details .= '
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="email">
+                            Kategori
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm ml-3" type="text" value="'.$user_details->kategori.'" disabled />
+                    </div>
+                </div>
+            ';
         }
         $html_details .= '
                 </div>
