@@ -1,4 +1,4 @@
-@extends('layouts.app_afiq')
+@extends('layouts.app_ketsa')
 
 @section('content')
 <div class="container">
@@ -105,7 +105,7 @@
             }
         });
     });
-    
+
     function myFunction3() {
         var x = document.getElementById("password");
         if (x.type === "password") {
@@ -114,7 +114,7 @@
             x.type = "password";
         }
     }
-    
+
     function myFunction4() {
         var x = document.getElementById("password-confirm");
         if (x.type === "password") {
@@ -123,7 +123,7 @@
             x.type = "password";
         }
     }
-    
+
     function checkPassword(str){
         // at least one number, one lowercase and one uppercase letter, at least 12 characters
         var regex = /^(?=^.{12,40}$)(?=.*\d)(?=.*[\W_])(?=.*[a-z])(?=.*[A-Z])(?!^.*\n).*$/;

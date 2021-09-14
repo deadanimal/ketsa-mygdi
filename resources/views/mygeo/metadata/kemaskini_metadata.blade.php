@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -55,7 +55,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
+                        <button type="button" class="btn btn-sm btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
                             <?php echo __('lang.btn_upload_xml'); ?>
                         </button>
                     </div>

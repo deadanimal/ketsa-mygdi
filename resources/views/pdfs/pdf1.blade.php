@@ -1,4 +1,4 @@
-@extends('layouts.app_afiq')
+@extends('layouts.app_ketsa')
 
 @section('content')
 
@@ -34,7 +34,7 @@
                     <div class="row align-items-center">
                         <div class="col-5">
                             <h1>
-                                <?php 
+                                <?php
                                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
                                   echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                 }
@@ -129,7 +129,7 @@
       }
     }
     ?>
-            
+
     var kategori = "<?php echo $category; ?>";
     if (kategori.toLowerCase() == "dataset") {
         $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
@@ -315,10 +315,10 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
             zoomOffset: -1,
         }).addTo(map);
 
-        // nblt = parseFloat(nblt); 
-        // wblg = parseFloat(wblg); 
-        // sblt = parseFloat(sblt); 
-        // eblg = parseFloat(eblg); 
+        // nblt = parseFloat(nblt);
+        // wblg = parseFloat(wblg);
+        // sblt = parseFloat(sblt);
+        // eblg = parseFloat(eblg);
 
         console.log(nblt); // 6.3171
         console.log(wblg); // 101.7046
@@ -337,7 +337,7 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentifica
 
         console.log("zoomToRectangle values:");
         console.log(zoomToRectangle);
-        
+
         map.fitBounds(bounds);
 
         // var map = L.map('map').setView([5.3105,107.3854408], 5);

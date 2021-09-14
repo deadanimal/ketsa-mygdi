@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -170,7 +170,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="modal fade" id="modal_kemaskini_agensi_organisasi">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -271,7 +271,7 @@
                     }
                 }
             });
-            
+
             // Setup - add a text input to each footer cell
             $('#table_agensi_organisasi thead tr').clone(true).appendTo('#table_agensi_organisasi thead');
             $('#table_agensi_organisasi thead tr:eq(1) th').each( function (i) {
@@ -284,20 +284,20 @@
                 });
             });
         });
-        
+
 
         $(document).on("click", ".btnSimpanAgensiOrganisasi", function() {
             var sektor = $('#formTambahAgensiOrganisasi .sektor').val().trim();
             var namaAgensiOrganisasi = $('#formTambahAgensiOrganisasi .namaAgensiOrganisasi').val().trim();
             var msg = "";
-            
+
             if(sektor == ""){
                 msg = msg + "Sila pilih sektor.\r\n"
             }
             if(namaAgensiOrganisasi == ""){
                 msg = msg + "Sila isi nama Agensi / Organisasi.\r\n";
             }
-            
+
             if(msg == ""){
                 $.ajax({
                     method: "POST",
@@ -321,14 +321,14 @@
             var sektor = $('#formKemaskiniAgensiOrganisasi .sektor').val().trim();
             var namaAgensiOrganisasi = $('#formKemaskiniAgensiOrganisasi .namaAgensiOrganisasi').val().trim();
             var msg = "";
-            
+
             if(sektor == ""){
                 msg = msg + "Sila pilih sektor.\r\n"
             }
             if(namaAgensiOrganisasi == ""){
                 msg = msg + "Sila isi nama Agensi / Organisasi.\r\n";
             }
-            
+
             if(msg == ""){
                 $.ajax({
                     method: "POST",
@@ -354,7 +354,7 @@
             var agensi_organisasi = $('#formKemaskiniBahagian .agensi_organisasi').val().trim();
             var namaBahagian = $('#formKemaskiniBahagian .namaBahagian').val().trim();
             var msg = "";
-            
+
             if(sektor == ""){
                 msg = msg + "Sila pilih sektor.\r\n"
             }
@@ -364,7 +364,7 @@
             if(namaBahagian == ""){
                 msg = msg + "Sila isi nama Bahagian.\r\n";
             }
-            
+
             if(msg == ""){
                 $.ajax({
                     method: "POST",
@@ -385,13 +385,13 @@
                 alert(msg);
             }
         });
-        
+
         $(document).on("click", ".btnSimpanBahagian", function() {
             var sektor = $('#formTambahBahagian .sektor').val().trim();
             var agensi_organisasi = $('#formTambahBahagian .agensi_organisasi').val().trim();
             var namaBahagian = $('#formTambahBahagian .namaBahagian').val().trim();
             var msg = "";
-            
+
             if(sektor == ""){
                 msg = msg + "Sila pilih sektor.\r\n"
             }
@@ -401,7 +401,7 @@
             if(namaBahagian == ""){
                 msg = msg + "Sila isi nama Bahagian.\r\n";
             }
-            
+
             if(msg == ""){
                 $.ajax({
                     method: "POST",
@@ -421,18 +421,18 @@
                 alert(msg);
             }
         });
-        
+
         $(document).on("click", ".btnDelete", function() {
             var rowid = $(this).data('rowid');
             var type = $(this).data('type');
             var confirmMsg = "";
-            
+
             if(type == 'bahagian'){
                 confirmMsg = "Adakah anda pasti untuk buang Bahagian ini?";
             }else{
                 confirmMsg = "Adakah anda pasti untuk buang Agensi/Organisasi ini?";
             }
-            
+
         var r = confirm(confirmMsg);
             if (r == true) {
                 $.ajax({
@@ -450,7 +450,7 @@
                 });
             }
         });
-        
+
         $('#formTambahBahagian .sektor').change(function() {
             $.ajax({
                 method: "POST",
@@ -485,7 +485,7 @@
                 });
             });
         });
-        
+
         $(document).on('click','.btnKemaskiniAgensiOrganisasi',function(){
             var rowid = $(this).data('rowid');
 
@@ -498,7 +498,7 @@
                 },
             }).done(function(response) {
                 var data = jQuery.parseJSON(response);
-                
+
                 //rowid
                 $("#formKemaskiniAgensiOrganisasi .rowid").val(data.ao.id).change();
                 //sektor
@@ -519,7 +519,7 @@
                 },
             }).done(function(response) {
                 var data = jQuery.parseJSON(response);
-                
+
                 //rowid
                 $("#formKemaskiniBahagian .rowid").val(data.ao.id).change();
                 //sektor

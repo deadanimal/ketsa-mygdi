@@ -1,4 +1,4 @@
-@extends('layouts.app_afiq_pdf')
+@extends('layouts.app_ketsa_pdf')
 
 @section('content')
     <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">

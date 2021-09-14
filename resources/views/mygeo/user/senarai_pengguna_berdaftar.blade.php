@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -297,7 +297,7 @@
             newStatus = '0';
             newStatusText = 'Tidak Aktif';
         }
-        
+
         $.ajax({
             method: "POST",
             url: "change_user_status",
@@ -307,7 +307,7 @@
             $('#tdUserStatus'+userid).html(newStatusText);
         });
     });
-     
+
     $(function () {
         var table = $("#table_newUsers").DataTable({
             "orderCellsTop": true,
@@ -329,7 +329,7 @@
                 }
             },
         });
-        
+
         // Setup - add a text input to each footer cell
         $('#table_newUsers thead tr').clone(true).appendTo('#table_newUsers thead');
         $('#table_newUsers thead tr:eq(1) th').each( function (i) {

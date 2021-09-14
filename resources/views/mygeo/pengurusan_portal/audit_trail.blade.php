@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -46,7 +46,7 @@
                                             </span>
                                         </div>
                                         <input type="text" class="form-control float-right" name="dateRange" id="dateRange" value="{{ $var }}">
-                                    </div>  
+                                    </div>
                                 </form>
                                 <br><br>
                                 <table id="table_audit_trail" class="table table-bordered table-striped" style="width:100%;">
@@ -112,7 +112,7 @@
                     }
                 }
             });
-            
+
             $('#dateRange').daterangepicker({
                 locale: {
                     format: 'DD/M/Y'
@@ -121,7 +121,7 @@
             $('#dateRange').on('apply.daterangepicker', function(ev, picker) {
                 $('#formFilter').submit();
             });
-            
+
             $('#table_agensi_organisasi thead tr').clone(true).appendTo('#table_agensi_organisasi thead');
             $('#table_agensi_organisasi thead tr:eq(1) th').each( function (i) {
                 var title = $(this).text();
@@ -133,7 +133,7 @@
                 });
             });
         });
-        
+
         $('#formKemaskiniBahagian .sektor').change(function() {
             $.ajax({
                 method: "POST",

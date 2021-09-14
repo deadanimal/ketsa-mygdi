@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -149,7 +149,7 @@
             newStatus = '0';
             newStatusText = 'Tidak Aktif';
         }
-        
+
         $.ajax({
             method: "POST",
             url: "change_elemen_status",
@@ -158,7 +158,7 @@
             alert("Status elemen berjaya diubah.");
         });
     });
-    
+
     $(document).ready(function () {
         $("#table_elemens").DataTable({
             "ordering": false,
@@ -183,7 +183,7 @@
         $(document).on('click', '.btnSimpan', function () {
             $(this).parent().parent().submit();
         });
-        
+
         $(document).on('click', '.btnDelete', function () {
             $.ajax({
                 method: "POST",
@@ -200,7 +200,7 @@
                 }
             });
         });
-        
+
         $(document).on('click', '.btnDeleteCustomInput', function () {
             $.ajax({
                 method: "POST",
@@ -218,7 +218,7 @@
             });
         });
     });
-    
+
     $('#formTambahSubTajuk .kategori').change(function() {
         $.ajax({
             method: "POST",
@@ -236,7 +236,7 @@
             });
         });
     });
-    
+
     $('#formTambahElemen .kategori').change(function() {
         $.ajax({
             method: "POST",
@@ -254,7 +254,7 @@
             });
         });
     });
-    
+
     $('#formTambahElemen .tajuk').change(function() {
         var selectedTajuk = $(this).find(':selected').data('rowid')
         $.ajax({

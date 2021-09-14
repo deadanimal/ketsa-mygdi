@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -56,8 +56,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <table id="table_metadatas" class="table table-bordered table-striped">
+                            <div class="card-body" style="overflow-x:auto;">
+                                <table id="table_senarai_data" class="table table-bordered table-striped" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -285,7 +285,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#table_metadatas").DataTable({
+            $("#table_senarai_data").DataTable({
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,

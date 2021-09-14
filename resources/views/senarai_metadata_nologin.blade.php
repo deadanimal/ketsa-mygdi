@@ -1,4 +1,4 @@
-@extends('layouts.app_afiq')
+@extends('layouts.app_ketsa')
 
 @section('content')
 
@@ -24,7 +24,7 @@
     .cardw {
         height: 200px;
     }
-    
+
     .fautocomplete .clear{
 /*    clear:both;
     margin-top: 20px;*/
@@ -188,7 +188,7 @@
                                                     <div class="card card-primary" id="divParentCollapse{{ $bil }}">
                                                         <div class="card-header cardw">
                                                             <a class="a_title" data-toggle="collapse" href="#divCollapse{{ $bil }}">
-                                                                <?php 
+                                                                <?php
                                                                 if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
                                                                   echo $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                                                 }else{
@@ -257,7 +257,7 @@
             </div>
         </div>
     </div>
-    
+
     <!--===== MODALS show map =====-->
     <div class="modal fade" id="modal-showmap">
         <div class="modal-dialog modal-xl">
@@ -297,7 +297,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
     @include('modal_carian_tambahan')
     <div id="preloader"></div>
 </section>
@@ -334,7 +334,7 @@
                 });
             }
         });
-        
+
         <?php
         if (count($metadatas) > 0) {
             ?>$(".divSenaraiMetadata").show();
@@ -382,7 +382,7 @@
         var mapurl = $(this).data('mapurl');
         var abstract = $(this).parent().find('.p_abstract').val();
         var title = $(this).parent().parent().parent().find('.a_title').html();
-        
+
         $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
         $('#modal_abstract').html(abstract);
         $('#modal_title').html(title);
