@@ -215,7 +215,18 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" type="text" name="kategori" value="{{ $user->kategori }}" disabled/>
+                                            <select class="form-control form-control-sm ml-3" type="text" name="kategori">
+                                                <option value="">Pilih...</option>
+                                                <?php
+                                                if(count($kategori) > 0){
+                                                    foreach($kategori as $k){
+                                                        ?>
+                                                <option value="{{ $k->name }}" {{ ($k->name == $user->kategori ? "selected":"") }}>{{ $k->name }}</option>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
                                     </div>
                                     @endif

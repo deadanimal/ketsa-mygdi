@@ -18,6 +18,7 @@ use App\MetadataGeo;
 use DB;
 use App\Mail\MailNotify;
 use App\AuditTrail;
+use App\Kategori;
 
 class UserController extends Controller {
 
@@ -238,7 +239,8 @@ class UserController extends Controller {
     public function edit(){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $roles = Role::get();
-        return view('mygeo.profile.profil_edit', compact('user','roles'));
+        $kategori = Kategori::get();
+        return view('mygeo.profile.profil_edit', compact('user','roles','kategori'));
     }
 
     public function update_profile(Request $request){
