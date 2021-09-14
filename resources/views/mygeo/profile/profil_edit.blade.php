@@ -295,7 +295,7 @@ $(document).ready(function(){
         if(agensi_organisasi == ""){
             msg = msg + "Sila pilih agensi / organisasi\r\n\r\n";
         }
-        @if(!Auth::user()->hasRole('Pemohon Data')){
+        @if(!Auth::user()->hasRole('Pemohon Data'))
         if(bahagian == ""){
             msg = msg + "Sila pilih bahagian\r\n\r\n";
         }
