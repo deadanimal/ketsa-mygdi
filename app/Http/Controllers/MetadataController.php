@@ -286,7 +286,12 @@ class MetadataController extends Controller {
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
         $customMetadataInput = CustomMetadataInput::all();
-        $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+        if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
+            $kategori = MCategory::where('name',$_GET['kategori'])->get()->first();
+            $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
+        }else{
+            $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+        }
 
         return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput','elemenMetadata'));
     }
@@ -402,7 +407,18 @@ class MetadataController extends Controller {
             $refSysSelected = [];
         }
         $customMetadataInput = CustomMetadataInput::all();
-        $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+        if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
+            $kategori = MCategory::where('name',$_GET['kategori'])->get()->first();
+            $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
+        }else{
+            if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != "") {
+                $catSelected = trim($metadataxml->hierarchyLevel->MD_ScopeCode);
+                $kategori = MCategory::where('name',$catSelected)->get()->first();
+                $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
+            }else{
+                $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+            }
+        }
 
         return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected','metadataxml', 'metadataSearched', 'pengesahs', 'customMetadataInput','elemenMetadata'));
     }

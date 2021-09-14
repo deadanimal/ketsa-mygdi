@@ -400,9 +400,11 @@
             }
         }
         ?>
-
-        $(document).on('change', '#kategori', function() {
-            var kategori = $(this).val();
+        <?php
+        if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
+            ?>
+            $('#kategori').val("{{ $_GET['kategori'] }}");
+            var kategori = "{{ $_GET['kategori'] }}";
             if (kategori.toLowerCase() == "dataset") {
                 $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
                 $('.aTopicCategory').html('<?php echo __('lang.accord_3'); ?><span class="text-warning">*</span>');
@@ -511,6 +513,26 @@
                 $('#accordion').show();
                 $('#div_action_buttons').show();
             }
+            <?php
+        }
+        ?>
+
+        $(document).on('change', '#kategori', function(){
+            var url = '{{ url("/mygeo_pengisian_metadata") }}';
+            <?php
+            if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
+                ?>
+                url += '?bhs={{ $_GET["bhs"] }}';
+                url += '&kategori='+$(this).val();
+                <?php
+            }else{
+                ?>
+                url += '?kategori='+$(this).val();
+                <?php
+            }
+            ?>
+            
+            window.location.href = url;
         });
 
         $(document).on('change', '#c2_product_type', function() {
