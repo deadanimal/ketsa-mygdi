@@ -18,6 +18,7 @@ use App\MetadataGeo;
 use DB;
 use App\Mail\MailNotify;
 use App\AuditTrail;
+use App\Kategori;
 
 class UserController extends Controller {
 
@@ -98,46 +99,141 @@ class UserController extends Controller {
         $user_id = $_POST['user_id'];
         $user_details = User::where(["id"=>$user_id])->get()->first();
         $html_details = '
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3">Nama Penuh</label>
-                <div class="col-sm-7">
-                    : <span class="ml-3">'.$user_details->name.'</span>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="uname">
+                        Nama Penuh
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="uname" type="text"
+                           value="'.$user_details->name.'" disabled />
+            </div>
+                </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="nric">
+                        No Kad Pengenalan
+                    </label><label class="float-right">:</label>
+            </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="input-nric" type="text"
+                           value="'.$user_details->nric.'" disabled />
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3">Agensi</label>
-                <div class="col-sm-7">
-                    : <span class="ml-3">'.(isset($user_details->agensiOrganisasi->name) ? $user_details->agensiOrganisasi->name:"").'</span>
+            <div class="row mb-2 divSektor">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="sektor">
+                        Sektor
+                    </label><label class="float-right">:</label>
                 </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="sektor" type="text"
+                           value="'.($user_details->sektor == '1' ? 'Kerajaan' : 'Swasta').'" disabled />
             </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3">Bahagian</label>
-                <div class="col-sm-7">
-                    : <span class="ml-3">'.$user_details->bahagian.'</span>
                 </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="agensi_organisasi">
+                        Agensi / Organisasi
+                    </label><label class="float-right">:</label>
             </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3">Telefon Pejabat</label>
-                <div class="col-sm-7">
-                    : <span class="ml-3">'.$user_details->phone_pejabat.'</span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3">Emel</label>
-                <div class="col-sm-7">
-                    : <span class="ml-3">'.$user_details->email.'</span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3">Peranan</label>
-                <div class="col-sm-7">
-                    : <span class="ml-3">';
-        if(count($user_details->getRoleNames()) > 0){
-            foreach($user_details->getRoleNames() as $role){
-                $html_details .= $role.'<br>';
-            }
+                <div class="col-8">';
+        if (Auth::user()->hasRole("Pemohon Data")) {
+            $html_details .= '
+                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi"
+                               type="text" value="'.$user_details->agensi_organisasi.'" disabled />
+                    ';
+        } else {
+            $html_details .= '
+                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi"
+                               type="text"
+                               value="'.(is_numeric($user_details->agensi_organisasi) && isset($user_details->agensiOrganisasi) ? $user_details->agensiOrganisasi->name : $user_details->agensi_organisasi).'"
+                               disabled />
+                    ';
         }
-        $html_details .= '</span>
+        $html_details .= '
+                </div>
+            </div>
+            <div class="row mb-2 divBahagian">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="bahagian">
+                        Bahagian
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="bahagian" type="text"
+                           value="'.$user_details->bahagian.'" disabled />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="email">
+                        Emel
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm ml-3" id="email" type="text"
+                           value="'.$user_details->email.'" disabled />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="phone_pejabat">
+                        Telefon Pejabat
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-3">
+                    <input class="form-control form-control-sm ml-3" id="phone_pejabat" type="text"
+                           value="'.$user_details->phone_pejabat.'" disabled />
+                </div>';
+        if(!Auth::user()->hasRole(["Penerbit Metadata","Pengesah Metadata"])){
+            $html_details .= '
+                <div class="col-2">
+                    <label class="form-control-label mr-4" for="phone_bimbit">
+                        Telefon Bimbit
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-3">
+                    <input class="form-control form-control-sm ml-3" id="phone_bimbit"
+                           type="text" value="'.$user_details->phone_bimbit.'" disabled />
+                </div>';
+        }
+        $html_details .= '
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="peranan">
+                        Peranan
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">';
+        if(count($user_details->getRoleNames()) > 0){
+            $var = "";
+            foreach($user_details->getRoleNames() as $role){
+                $var .= $role.',';
+            }
+            $var = rtrim($var, ",");
+            $html_details .= '<input class="form-control form-control-sm ml-3" id="peranan" type="text" value="'.$var.'" disabled />';
+        }
+        $html_details .= '
+                </div>
+            </div>';
+        if(Auth::user()->hasRole("Pemohon Data")){
+            $html_details .= '
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="email">
+                            Kategori
+                        </label><label class="float-right">:</label>
+            </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm ml-3" type="text" value="'.$user_details->kategori.'" disabled />
+                    </div>
+                </div>
+        ';
+        }
+        $html_details .= '
                 </div>
             </div>
         ';
@@ -237,7 +333,8 @@ class UserController extends Controller {
     public function edit(){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $roles = Role::get();
-        return view('mygeo.profile.profil_edit', compact('user','roles'));
+        $kategori = Kategori::get();
+        return view('mygeo.profile.profil_edit', compact('user','roles','kategori'));
     }
 
     public function update_profile(Request $request){
@@ -250,6 +347,7 @@ class UserController extends Controller {
         $user->sektor = $request->sektor;
         $user->phone_pejabat = $request->phone_pejabat;
         $user->phone_bimbit = $request->phone_bimbit;
+        $user->kategori = $request->kategori;
         if($user->editable == "1"){
             $user->editable = "0";
         }
@@ -345,7 +443,7 @@ class UserController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
             exit();
         }
-        $agensi = AgensiOrganisasi::get()->all();
+        $agensi = AgensiOrganisasi::distinct('name')->get()->all();
         return view('mygeo.user.pemindahan_akaun', compact('agensi'));
     }
 
@@ -458,10 +556,17 @@ class UserController extends Controller {
 
         $password = "";
 
+        $sektor = "";
+        if($request->agensi_organisasi != ""){
+            $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
+            $sektor = $ao->sektor;
+        }
+
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;
             $nu->email = $request->email;
+            $nu->sektor = $sektor;
             $nu->agensi_organisasi = $request->agensi_organisasi;
             $pass = $this->generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',20);
             $password = $pass;
@@ -495,7 +600,7 @@ class UserController extends Controller {
         $at->data = 'Create';
         $at->save();
 
-        return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan');
+        return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Pengguna berjaya didaftarkan.');
     }
 
 

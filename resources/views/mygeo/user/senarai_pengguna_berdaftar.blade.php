@@ -70,7 +70,7 @@
                                             <div class="col-12">
                                                 <label class="form-control-label">Peranan</label><span
                                                     class="text-warning">*</span>
-                                                <select name="peranan" class="form-control form-control-sm">
+                                                <select name="peranan" class="form-control form-control-sm" id="peranan">
                                                     <option value="" selected disabled>Pilih</option>
                                                     <?php
                                                 if (!empty($peranans)) {
@@ -101,12 +101,11 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
                                     <div class="row mb-2">
                                         <div class="col-12">
                                             <label class="form-control-label">Agensi / Organisasi</label><span class="text-warning">*</span>
-                                            <select name="agensi_organisasi" id="agensi_organisasi" class="form-control form-control-sm">
-                                                <option value="">Pilih...</option>
+                                                <select name="agensi_organisasi" id="agensi_organisasi_dropdown" class="form-control form-control-sm">
+                                                    <!--<option value="">Pilih...</option>-->
                                                 <?php
                                                 if (!empty($aos)) {
                                                     foreach ($aos as $ao) {
@@ -115,6 +114,7 @@
                                                 }
                                                 ?>
                                             </select>
+                                                <input type="text" name="agensi_organisasi" id="agensi_organisasi_text" class="form-control form-control-sm">
                                             @error('agensi_organisasi')
                                             <div class="text-warning">{{ $message }}</div>
                                             @enderror
@@ -122,6 +122,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                         <div class="modal-footer justify-content-between1">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
@@ -131,7 +132,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modalChangeStatus">
+<!--        <div class="modal fade" id="modalChangeStatus">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -151,7 +152,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <!-- Main content -->
         <section class="content">
@@ -309,6 +310,19 @@
     });
 
     $(function () {
+        $(document).on('change','#peranan',function(){
+            var per = $(this).val();
+            if(per == "Pemohon Data"){
+                $('#agensi_organisasi_text').prop('disabled',false).show();
+                $('#agensi_organisasi_dropdown').prop('disabled',true).hide();
+            }else{
+                $('#agensi_organisasi_text').prop('disabled',true).hide();
+                $('#agensi_organisasi_dropdown').prop('disabled',false).show();
+            }
+        });
+        
+        $('#agensi_organisasi_text').prop('disabled',true).hide();
+        
         var table = $("#table_newUsers").DataTable({
             "orderCellsTop": true,
             "ordering": false,
@@ -342,28 +356,6 @@
             });
         });
 
-            $.ajax({
-                method: "POST",
-                url: "change_user_status",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "user_id": userid,
-                    "status_id": newStatus
-                },
-            }).done(function(response) {
-                alert("Status pengguna berjaya diubah.");
-                $('#tdUserStatus' + userid).html(newStatusText);
-            });
-        });
-
-        $(function() {
-            <?php
-            if (Session::has('message')) {
-                ?>alert("{{ Session::get('message') }}");
-                <?php
-            }
-            ?>
-
             $(document).on("click", ".butiran", function() {
                 // ajax get user details
                 var user_id = $(this).data('userid');
@@ -394,6 +386,7 @@
                 }
             });
 
+        /*
             $(document).on("click", ".btnChangeStatusAjax", function() {
                 var userid = $(this).data('userid');
                 var statusid = $(this).val();
@@ -411,6 +404,7 @@
                     window.location.reload();
                 });
             });
+        */
 
             $(document).on("click", ".btnDelete", function() {
                 var user_id = $(this).data('userid');
@@ -432,7 +426,8 @@
 
             <?php
     if ($errors->any()) {
-        ?>$('#modalPenggunaBaru').modal('show');
+            ?>
+            $('#modalPenggunaBaru').modal('show');
             <?php
     }
     ?>
