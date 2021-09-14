@@ -215,7 +215,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" type="text" name="kategori" value="{{ $user->kategori }}" />
+                                            <input class="form-control form-control-sm ml-3" type="text" name="kategori" value="{{ $user->kategori }}" disabled/>
                                         </div>
                                     </div>
                                     @endif
