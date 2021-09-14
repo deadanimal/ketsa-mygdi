@@ -207,6 +207,18 @@
                                             ?>
                                         </div>
                                     </div>
+                                    @if (Auth::user()->hasRole('Pemohon Data'))
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="email">
+                                                Kategori
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" type="text" name="kategori" value="{{ $user->kategori }}" />
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             </form>
 
@@ -272,9 +284,11 @@ $(document).ready(function(){
         if(agensi_organisasi == ""){
             msg = msg + "Sila pilih agensi / organisasi\r\n\r\n";
         }
+        @if(!Auth::user()->hasRole('Pemohon Data')){
         if(bahagian == ""){
             msg = msg + "Sila pilih bahagian\r\n\r\n";
         }
+        @endif
         if(msg.length > 0){
             alert(msg);
         }else{

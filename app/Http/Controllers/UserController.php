@@ -251,6 +251,7 @@ class UserController extends Controller {
         $user->sektor = $request->sektor;
         $user->phone_pejabat = $request->phone_pejabat;
         $user->phone_bimbit = $request->phone_bimbit;
+        $user->kategori = $request->kategori;
         if($user->editable == "1"){
             $user->editable = "0";
         }

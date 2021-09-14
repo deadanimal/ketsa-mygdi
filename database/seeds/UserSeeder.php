@@ -360,6 +360,7 @@ class UserSeeder extends Seeder
             'gambar_profil' => 'mrt.jpg',
             'status' => '1',
             'assigned_roles' => 'Pemohon Data',
+            'kategori' => 'IPTA - Pelajar',
         ]);
         $user->assignRole('Pemohon Data');
     }
