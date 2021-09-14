@@ -479,7 +479,7 @@ class UserController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
             exit();
         }
-        $agensi = AgensiOrganisasi::get()->all();
+        $agensi = AgensiOrganisasi::distinct('name')->get()->all();
         return view('mygeo.user.pemindahan_akaun', compact('agensi'));
     }
 
