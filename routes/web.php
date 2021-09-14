@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/mygeo_simpan_pengumuman', 'PortalController@update_pengumuman');
     Route::post('/mygeo_buang_pengumuman', 'PortalController@delete_pengumuman');
 
-    Route::get('/mygeo_dashboard', function() { return view('mygeo.dashboard'); });
+    Route::get('/mygeo_dashboard', 'LaporanDashboardController@index_mygeo_dashboard');
 
     Route::get('/landing', function () {
         return view('landing');

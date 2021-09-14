@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -96,7 +96,7 @@
                                             <?php
 //                                            if($user->editable == "1"){
                                                 ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ $user->nric }}"><?php
-                                            
+
                                                 /*
                                                 }else{
                                                 ?>
@@ -279,7 +279,7 @@ $(document).ready(function(){
         <?php
     }
     ?>
-                
+
     $(document).on('click','.btn_simpan',function(){
         var nric = $("#nric").val();
         var email = $("#email").val();
@@ -306,7 +306,7 @@ $(document).ready(function(){
             $("#form_kemaskini_profil").submit();
         }
     });
-    
+
     $('#sektor').change(function() {
         $.ajax({
             method: "POST",
@@ -322,14 +322,14 @@ $(document).ready(function(){
             $.each(data.aos, function(index,value) {
                 $('#agensi_organisasi').append('<option value="'+value.id+'" data-name="'+value.name+'">'+value.name+'</option>');
             });
-            
+
             $('#bahagian').html('');
             $('#bahagian').append('<option value="">Pilih...</option>');
         });
     });
     $('#agensi_organisasi').change(function() {
         var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
-        
+
         $.ajax({
             method: "POST",
             url: "{{ url('get_bahagian') }}",
@@ -350,7 +350,7 @@ $(document).ready(function(){
             }
         });
     });
-    
+
     $('#sektor').val('<?php echo $user->sektor; ?>').change();
     setTimeout(function(){
         $('#agensi_organisasi').val('<?php echo $user->agensi_organisasi; ?>').change();

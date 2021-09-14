@@ -46,10 +46,13 @@
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- Main Quill library -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap4.min.js"></script>
+    <!-- DataTable -->
 
 
     <style>
@@ -618,12 +621,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('/dist/js/adminlte.min.js') }}"></script>
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script> --}}
     <!-- Datatables -->
-    <script src="{{ asset('/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    {{-- <script src="{{ asset('/plugins/datatables/jquery.dataTables.min.js') }}"></script> --}}
     <script src="{{ asset('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    {{-- <script src="{{ asset('/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script> --}}
     <!-- <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script> -->
     <!-- Bootstrap 4 -->

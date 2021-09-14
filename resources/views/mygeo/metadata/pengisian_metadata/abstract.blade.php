@@ -1006,7 +1006,7 @@
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
-            <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3" readonly>{{ old('c2_abstract') }}</textarea>
+            <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3" >{{ old('c2_abstract') }}</textarea>
             @error('c2_abstract')
             <div class="text-error">{{ $message }}</div>
             @enderror

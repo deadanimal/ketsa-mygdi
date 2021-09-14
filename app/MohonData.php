@@ -34,4 +34,9 @@ class MohonData extends Model
         return $this->hasOne(SuratBalasan::class,'permohonan_id','id');
     }
 
+    public function mohonSenaraiKawasan()
+    {
+        return $this->hasOne(SenaraiKawasanData::class,'permohonan_id','id');
+    }
+
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -123,6 +123,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                         <div class="modal-footer justify-content-between1">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
@@ -298,7 +299,7 @@
             newStatus = '0';
             newStatusText = 'Tidak Aktif';
         }
-        
+
         $.ajax({
             method: "POST",
             url: "change_user_status",
@@ -308,7 +309,7 @@
             $('#tdUserStatus'+userid).html(newStatusText);
         });
     });
-     
+
     $(function () {
         $(document).on('change','#peranan',function(){
             var per = $(this).val();
@@ -343,7 +344,7 @@
                 }
             },
         });
-        
+
         // Setup - add a text input to each footer cell
         $('#table_newUsers thead tr').clone(true).appendTo('#table_newUsers thead');
         $('#table_newUsers thead tr:eq(1) th').each( function (i) {

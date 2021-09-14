@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -141,7 +141,7 @@
             const url = $(this).attr('href');
             var pemohonid = $(this).data('pemohonid');
             var acceptance = $(this).data('acceptance');
-            
+
             if(acceptance == '1'){
                 window.open("{{ (isset($permohonan->proses_datas) ? $permohonan->proses_datas->pautan_data:'') }}",'_blank');
                 window.location.reload();
@@ -163,7 +163,7 @@
     //                window.location.href = url;
                     window.location.href = "{{ url('/akuan_penerimaan/') }}"+"/"+pemohonid;
     //                window.open(url, '_blank');
-                });     
+                });
             }
         });
     </script>

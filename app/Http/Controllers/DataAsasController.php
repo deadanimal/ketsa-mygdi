@@ -60,7 +60,7 @@ class DataAsasController extends Controller
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
         $senarai_data = SenaraiData::distinct('subkategori')->get();
-        $lapisandata = SenaraiData::distinct('lapisan_data')->get();
+        $lapisandata = SenaraiData::distinct('subkategori')->get();
         $kategori_senarai_data = KategoriSenaraiData::orderBy('name','ASC')->get();
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->get();
@@ -941,7 +941,8 @@ class DataAsasController extends Controller
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang Akuan Pelajar');
         }elseif($valid->isNotEmpty() && $validfile->isNotEmpty()){
             MohonData::where(["id" => $request->permohonan_id])->update([
-                "dihantar" => $request->dihantar = 1,
+                "dihantar" => 1,
+                "status" => 0,
             ]);
 
             $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();

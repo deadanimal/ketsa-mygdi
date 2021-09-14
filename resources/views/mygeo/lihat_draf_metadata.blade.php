@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -69,7 +69,7 @@
                       <div class="card-header ftest">
                         <h4 class="card-title">
                           <a data-toggle="collapse" href="#collapse1">
-                            GENERAL INFORMATION  
+                            GENERAL INFORMATION
                           </a>
                         </h4>
                       </div>
@@ -77,7 +77,7 @@
                         <div class="card-body">
                           <div class="form-group row">
                             <p>Content Information : &nbsp;&nbsp;&nbsp;</p>
-                            <?php 
+                            <?php
                             $ci = trim((isset($metadata->contact->CI_ResponsibleParty->contentInfo->CharacterString) && $metadata->contact->CI_ResponsibleParty->contentInfo->CharacterString != "" ? $metadata->contact->CI_ResponsibleParty->contentInfo->CharacterString:""));
                             ?>
                           <select name="c1_content_info" class="form-control" style="width:175px;">
@@ -171,7 +171,7 @@
                                   <td>Metadata Name&nbsp;</td>
                                   <td>:&nbsp;&nbsp;&nbsp;</td>
                                   <td>
-                                    <?php 
+                                    <?php
                                     $metadata_name = (isset($metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString:"");
                                     ?>
                                     <input type="text" name="c2_metadataName" id="c2_metadataName" class="form-control" value="{{ $metadata_name }}">
@@ -198,7 +198,7 @@
                                   <td>Abstract&nbsp;</td>
                                   <td>:&nbsp;&nbsp;&nbsp;</td>
                                   <td>
-                                    <?php 
+                                    <?php
                                     $abstract = (isset($metadata->identificationInfo->MD_DataIdentification->abstract->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->abstract->CharacterString:"");
                                     ?>
                                     <textarea name="c2_abstract" id="c2_abstract" class="form-control">{{ $abstract }}</textarea>
@@ -217,7 +217,7 @@
                                   <td>Name: &nbsp;</td>
                                   <td>:&nbsp;&nbsp;&nbsp;</td>
                                   <td>
-                                    <?php 
+                                    <?php
                                     $cp = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString:"");
                                     ?>
                                     <input name="c2_contact_name" class="form-control" value="{{ $cp }}">
@@ -227,7 +227,7 @@
                                   <td>Agency/Organization: &nbsp;</td>
                                   <td>:&nbsp;&nbsp;&nbsp;</td>
                                   <td>
-                                    <?php 
+                                    <?php
                                     $org = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString:"");
                                     echo $org;
                                     ?>
@@ -238,19 +238,19 @@
                                   <td style="vertical-align: top;">Address &nbsp;</td>
                                   <td style="vertical-align: top;">:&nbsp;&nbsp;&nbsp;</td>
                                   <td>
-                                    <?php 
+                                    <?php
                                     $add1 = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString:"");
                                     ?>
                                     <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control" value="{{ $add1 }}"><br>
-                                    <?php 
+                                    <?php
                                     $city = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString:"");
                                     ?>
                                     <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control" value="{{ $city }}"><br>
-                                    <?php 
+                                    <?php
                                     $postal = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString:"");
                                     ?>
                                     <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control" value="{{ $postal }}"><br>
-                                    <?php 
+                                    <?php
                                     $admin_area = (isset($metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) ? $metadata->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString:"");
                                     ?>
                                     <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control" value="{{ $admin_area }}"><br>
@@ -266,7 +266,7 @@
                                             }
                                           foreach($states as $st){
                                               if($st->name == $admin_area){
-                                                ?><option value="<?php echo $st->id; ?>" selected><?php echo $st->name; ?></option><?php  
+                                                ?><option value="<?php echo $st->id; ?>" selected><?php echo $st->name; ?></option><?php
                                               }else{
                                                 ?><option value="<?php echo $st->id; ?>"><?php echo $st->name; ?></option><?php
                                               }
@@ -281,13 +281,13 @@
                                         if(count($countries) > 0){
                                           foreach($countries as $country){
                                               if(strtolower($country->name) == strtolower($country2)){
-                                                ?><option value="<?php echo $country->id; ?>" selected><?php echo $country->name; ?></option><?php  
+                                                ?><option value="<?php echo $country->id; ?>" selected><?php echo $country->name; ?></option><?php
                                               }else{
-                                                ?><option value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option><?php                                      
+                                                ?><option value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option><?php
                                               }
                                           }
                                         }
-                                        ?>                                      
+                                        ?>
                                       </select>
                                     </div>
                                   </td>
@@ -428,10 +428,10 @@
                           <p><b>Browsing Graphic</b></p>
                           <div class="form-group row">
                             File Name:
-                            <input type="text" name="c4_file_name" id="c4_file_name" class="form-control col-lg-4"> 
+                            <input type="text" name="c4_file_name" id="c4_file_name" class="form-control col-lg-4">
                             &nbsp;&nbsp;&nbsp;
                             URL:
-                            <input type="text" name="c4_url" id="c4_url" class="form-control col-lg-4"> 
+                            <input type="text" name="c4_url" id="c4_url" class="form-control col-lg-4">
                           </div>
                         </div>
                       </div>
@@ -450,10 +450,10 @@
                           <p><b>Browsing Graphic</b></p>
                           <div class="form-group row">
                             File Name:
-                            <input type="text" name="c5_file_name" id="c5_file_name" class="form-control col-lg-4"> 
+                            <input type="text" name="c5_file_name" id="c5_file_name" class="form-control col-lg-4">
                             &nbsp;&nbsp;&nbsp;
                             URL:
-                            <input type="text" name="c5_url" id="c5_url" class="form-control col-lg-4"> 
+                            <input type="text" name="c5_url" id="c5_url" class="form-control col-lg-4">
                           </div>
                         </div>
                       </div>
@@ -472,10 +472,10 @@
                           <p><b>Browsing Graphic</b></p>
                           <div class="form-group row">
                             File Name:
-                            <input type="text" name="c6_file_name" id="c6_file_name" class="form-control col-lg-4"> 
+                            <input type="text" name="c6_file_name" id="c6_file_name" class="form-control col-lg-4">
                             &nbsp;&nbsp;&nbsp;
                             URL:
-                            <input type="text" name="c6_url" id="c6_url" class="form-control col-lg-4"> 
+                            <input type="text" name="c6_url" id="c6_url" class="form-control col-lg-4">
                           </div>
                         </div>
                       </div>
@@ -494,10 +494,10 @@
                           <p><b>Browsing Graphic</b></p>
                           <div class="form-group row">
                             File Name:
-                            <input type="text" name="c7_file_name" id="c7_file_name" class="form-control col-lg-4"> 
+                            <input type="text" name="c7_file_name" id="c7_file_name" class="form-control col-lg-4">
                             &nbsp;&nbsp;&nbsp;
                             URL:
-                            <input type="text" name="c7_url" id="c7_url" class="form-control col-lg-4"> 
+                            <input type="text" name="c7_url" id="c7_url" class="form-control col-lg-4">
                           </div>
                         </div>
                       </div>
@@ -516,10 +516,10 @@
                           <p><b>Browsing Graphic</b></p>
                           <div class="form-group row">
                             File Name:
-                            <input type="text" name="c8_file_name" id="c8_file_name" class="form-control col-lg-4"> 
+                            <input type="text" name="c8_file_name" id="c8_file_name" class="form-control col-lg-4">
                             &nbsp;&nbsp;&nbsp;
                             URL:
-                            <input type="text" name="c8_url" id="c8_url" class="form-control col-lg-4"> 
+                            <input type="text" name="c8_url" id="c8_url" class="form-control col-lg-4">
                           </div>
                         </div>
                       </div>
@@ -541,7 +541,7 @@
                             $southBoundLatitude = (isset($metadata->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadata->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal:"");
                             $northBoundLatitude = (isset($metadata->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadata->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal:"");
                             ?>
-                          
+
                           <div class="float-right col-lg-2">
                             West Bound Longitude: <input type="text" name="c9_west_bound_longitude" id="west_bound_longitude" value="{{ $westBoundLongitude }}"> <br>
                             East Bound Longitude: <input type="text" name="c9_east_bound_longitude" id="east_bound_longitude" value="{{ $eastBoundLongitude }}"> <br>
@@ -632,10 +632,10 @@
                         <div class="card-body">
                           <div class="form-group row">
                             Distribution Format:
-                            <input type="text" name="c11_dist_format" id="c11_dist_format" class="form-control col-lg-2"> 
+                            <input type="text" name="c11_dist_format" id="c11_dist_format" class="form-control col-lg-2">
                             &nbsp;&nbsp;&nbsp;
                             Version:
-                            <input type="text" name="c11_version" id="c11_version" class="form-control col-lg-2"> 
+                            <input type="text" name="c11_version" id="c11_version" class="form-control col-lg-2">
                             &nbsp;&nbsp;&nbsp;
                             Medium:
                             <?php
@@ -645,7 +645,7 @@
                           </div>
                           <div class="form-group row">
                             Distributor:
-                            <input type="text" name="c11_distributor" id="c11_distributor" class="form-control col-lg-4"> 
+                            <input type="text" name="c11_distributor" id="c11_distributor" class="form-control col-lg-4">
                           </div>
                           <div class="form-group row">
                             <p><b>Distribution Order Process</b></p>
@@ -655,30 +655,30 @@
                             $unit_distribute = (isset($metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString) ? $metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString:"");
                             ?>
                             Units of Distribution:
-                            <input type="text" name="c11_units_of_dist" id="c11_units_of_dist" class="form-control col-lg-2" value="{{ $unit_distribute }}"> 
+                            <input type="text" name="c11_units_of_dist" id="c11_units_of_dist" class="form-control col-lg-2" value="{{ $unit_distribute }}">
                             &nbsp;&nbsp;&nbsp;
                             <?php
                             $size = (isset($metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real) ? $metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real:"");
                             ?>
                             Size (Megabytes):
-                            <input type="text" name="c11_size" id="c11_size" class="form-control col-lg-2" value="{{ $size }}"> 
+                            <input type="text" name="c11_size" id="c11_size" class="form-control col-lg-2" value="{{ $size }}">
                             &nbsp;&nbsp;&nbsp;
                             Fees:
-                            <input type="text" name="c11_fees" id="c11_fees" class="form-control col-lg-2" placeholder="RM 0.00"> 
+                            <input type="text" name="c11_fees" id="c11_fees" class="form-control col-lg-2" placeholder="RM 0.00">
                           </div>
                           <div class="form-group row">
                             <?php
                             $link = (isset($metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL) ? $metadata->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL:"");
                             ?>
                             Link:
-                            <input type="text" name="c11_link" id="c11_link" class="form-control col-lg-3"> 
+                            <input type="text" name="c11_link" id="c11_link" class="form-control col-lg-3">
                             &nbsp;&nbsp;&nbsp;
                             <?php
                             $order_instruct = (isset($metadata->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) ? $metadata->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString:"");
                             ?>
                             Ordering Instructions:
-                            <input type="text" name="c11_order_instructions" id="c11_order_instructions" class="form-control col-lg-5" value="{{ $order_instruct }}"> 
-                            <!--<input type="file" name="c11_order_instructions" id="c11_order_instructions" class="form-control col-lg-5">--> 
+                            <input type="text" name="c11_order_instructions" id="c11_order_instructions" class="form-control col-lg-5" value="{{ $order_instruct }}">
+                            <!--<input type="file" name="c11_order_instructions" id="c11_order_instructions" class="form-control col-lg-5">-->
                           </div>
                         </div>
                       </div>
@@ -696,7 +696,7 @@
                         <div class="card-body">
                           <div class="form-group row">
                             Data Set Type:
-                            <select name="c12_dataset_type" id="c12_dataset_type" class="form-control col-lg-2"> 
+                            <select name="c12_dataset_type" id="c12_dataset_type" class="form-control col-lg-2">
                               <option value="grid">Grid</option>
                               <option value="stereo_model">Stereo Model</option>
                               <option value="text_table">Text Table</option>
@@ -708,7 +708,7 @@
                           <div class="form-group row">
                             <div class="col-lg-4">
                               Scale in Hardcopy / Softcopy (feature scale):
-                              <input type="text" name="c12_feature_scale" id="c12_feature_scale" class="form-control col-lg-7" placeholder="10:50000"> 
+                              <input type="text" name="c12_feature_scale" id="c12_feature_scale" class="form-control col-lg-7" placeholder="10:50000">
                               &nbsp;&nbsp;&nbsp;
                             </div>
                             <div class="col-lg-4">
@@ -723,7 +723,7 @@
                             </div>
                             <div class="col-lg-4">
                               Language:
-                              <select name="c12_language" id="c12_language" class="form-control col-lg-7"> 
+                              <select name="c12_language" id="c12_language" class="form-control col-lg-7">
                                 <option value="english">English</option>
                                 <option value="bahasa_malaysia">Bahasa Malaysia</option>
                               </select>
@@ -745,7 +745,7 @@
                         <div class="card-body">
                           <div class="form-group row">
                             Reference System Identifier:
-                            <select name="c13_ref_sys_identify" id="c13_ref_sys_identify" class="form-control col-lg-2"> 
+                            <select name="c13_ref_sys_identify" id="c13_ref_sys_identify" class="form-control col-lg-2">
                               <option selected disabled>Select Identifier</option>
                               <?php
                               if(count($refSysIds) > 0){
@@ -824,7 +824,7 @@
                                   </td>
                                   <td>
                                     Classification System:
-                                    <select name="c14_classification_sys" id="c14_classification_sys" class="form-control col-lg-4"> 
+                                    <select name="c14_classification_sys" id="c14_classification_sys" class="form-control col-lg-4">
                                       <option value="limited">Limited</option>
                                       <option value="open">Open</option>
                                       <option value="secret">Secret</option>
@@ -882,8 +882,8 @@
                                   <tr>
                                     <td>&nbsp;DQ Scope</td>
                                     <td>&nbsp;:</td>
-                                    <td> 
-                                      <select name="c15_data_quality_info" id="c15_data_quality_info" style="max-width: 100%;" class="form-control col-lg-3"> 
+                                    <td>
+                                      <select name="c15_data_quality_info" id="c15_data_quality_info" style="max-width: 100%;" class="form-control col-lg-3">
                                         <option value="attribute">Attribute</option>
                                         <option value="attribute_type">Attribute Type</option>
                                         <option value="collection_session">Collection Session</option>
@@ -949,7 +949,7 @@
                                           <table class="table-borderless">
                                             <tbody>
                                               <tr>
-                                                <td> 
+                                                <td>
                                                   <label class="form-check-label" for="c3_1">
                                                       <input type="radio" name="c15_t1_complete_comm_or_omit" checked="">&nbsp;Completeness Commission
                                                   </label>
@@ -961,10 +961,10 @@
                                                 </td>
                                               </tr>
                                               <tr>
-                                                  <td> 
+                                                  <td>
                                                     <label class="form-check-label" for="c3_1">
                                                         <b>Scope:</b>
-                                                        <select name="c15_t1_commission_scope" id="c15_t1_commission_scope" class="form-control"> 
+                                                        <select name="c15_t1_commission_scope" id="c15_t1_commission_scope" class="form-control">
                                                         <option value="attribute">Aeronautical</option>
                                                         <option value="attribute_type">Built Environment</option>
                                                         <option value="collection_session">Demarcation</option>
@@ -983,7 +983,7 @@
                                                   <td>
                                                     <label class="form-check-label" for="c3_1">
                                                       <b>Scope:</b>
-                                                      <select name="c15_t1_omission_scope" id="c15_t1_omission_scope" class="form-control"> 
+                                                      <select name="c15_t1_omission_scope" id="c15_t1_omission_scope" class="form-control">
                                                         <option value="attribute">Aeronautical</option>
                                                         <option value="attribute_type">Built Environment</option>
                                                         <option value="collection_session">Demarcation</option>
@@ -1001,7 +1001,7 @@
                                                 </td>
                                               </tr>
                                               <tr>
-                                                <td> 
+                                                <td>
                                                     <label class="form-check-label" for="c3_3">
                                                     <b>Compliance Level:</b>
                                                     <input type="text" name="c15_t1_commission_comply_level" id="c15_t1_commission_comply_level" class="form-control">
@@ -1015,7 +1015,7 @@
                                                 </td>
                                               </tr>
                                               <tr>
-                                                <td> 
+                                                <td>
                                                     <label class="form-check-label" for="c3_5">
                                                         <b>Date:</b>
                                                         <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
@@ -1039,10 +1039,10 @@
                                                 </td>
                                               </tr>
                                               <tr>
-                                                <td> 
+                                                <td>
                                                     <label class="form-check-label" for="c3_2">
                                                       <b>Result:</b>
-                                                      <select name="c15_t1_commission_result" id="c15_t1_commission_result" class="form-control"> 
+                                                      <select name="c15_t1_commission_result" id="c15_t1_commission_result" class="form-control">
                                                         <option value="attribute">Pass</option>
                                                         <option value="attribute_type">Fail</option>
                                                         <option value="collection_session">Not Relevant</option>
@@ -1052,7 +1052,7 @@
                                                 <td>
                                                    <label class="form-check-label" for="c3_2">
                                                       <b>Result:</b>
-                                                      <select name="c15_t1_omission_result" id="c15_t1_omission_result" class="form-control"> 
+                                                      <select name="c15_t1_omission_result" id="c15_t1_omission_result" class="form-control">
                                                         <option value="attribute">Pass</option>
                                                         <option value="attribute_type">Fail</option>
                                                         <option value="collection_session">Not Relevant</option>
@@ -1061,7 +1061,7 @@
                                                 </td>
                                               </tr>
                                               <tr>
-                                                <td> 
+                                                <td>
                                                     <label class="form-check-label" for="c3_4">
                                                       <b>Conformance Result:</b>
                                                       <input type="text" name="c15_t1_commission_conform_result" id="c15_t1_commission_conform_result" class="form-control">
@@ -1087,7 +1087,7 @@
                                             <table class="table-borderless">
                                               <tbody>
                                                 <tr>
-                                                  <td> 
+                                                  <td>
                                                     <label class="form-check-label" for="c3_1">
                                                         <input type="radio" name="c15_t2_type" checked="">&nbsp;Conceptual
                                                     </label>
@@ -1109,10 +1109,10 @@
                                                 </td>
                                                 </tr>
                                                 <tr>
-                                                  <td> 
+                                                  <td>
                                                     <label class="form-check-label" for="c3_1">
                                                       <b>Scope:</b>
-                                                      <select name="c15_t2_conceptual_scope" id="c15_t2_conceptual_scope" class="form-control"> 
+                                                      <select name="c15_t2_conceptual_scope" id="c15_t2_conceptual_scope" class="form-control">
                                                         <option value="attribute">Aeronautical</option>
                                                         <option value="attribute_type">Built Environment</option>
                                                         <option value="collection_session">Demarcation</option>
@@ -1131,7 +1131,7 @@
                                                   <td>
                                                         <label class="form-check-label" for="c3_1">
                                                         <b>Scope:</b>
-                                                         <select name="c15_t2_domain_scope" id="c15_t2_domain_scope" class="form-control"> 
+                                                         <select name="c15_t2_domain_scope" id="c15_t2_domain_scope" class="form-control">
                                                             <option value="attribute">Aeronautical</option>
                                                             <option value="attribute_type">Built Environment</option>
                                                             <option value="collection_session">Demarcation</option>
@@ -1150,7 +1150,7 @@
                                                     <td>
                                                          <label class="form-check-label" for="c3_1">
                                                          <b>Scope:</b>
-                                                          <select name="c15_t2_format_scope" id="c15_t2_format_scope" class="form-control"> 
+                                                          <select name="c15_t2_format_scope" id="c15_t2_format_scope" class="form-control">
                                                             <option value="attribute">Aeronautical</option>
                                                             <option value="attribute_type">Built Environment</option>
                                                             <option value="collection_session">Demarcation</option>
@@ -1169,7 +1169,7 @@
                                                     <td>
                                                         <label class="form-check-label" for="c3_1">
                                                           <b>Scope:</b>
-                                                          <select name="c15_t2_topological_scope" id="c15_t2_topological_scope" class="form-control"> 
+                                                          <select name="c15_t2_topological_scope" id="c15_t2_topological_scope" class="form-control">
                                                             <option value="attribute">Aeronautical</option>
                                                             <option value="attribute_type">Built Environment</option>
                                                             <option value="collection_session">Demarcation</option>
@@ -1187,7 +1187,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                         <label class="form-check-label" for="c3_3">
                                                             <b>Compliance Level:</b>
                                                             <input type="text" name="c15_t2_conceptual_comply_level" id="c15_t2_conceptual_comply_level" class="form-control">
@@ -1213,7 +1213,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                          <label class="form-check-label" for="c3_5">
                                                             <b>Date:</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
@@ -1259,10 +1259,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                         <label class="form-check-label" for="c3_2">
                                                           <b>Result:</b>
-                                                          <select name="c15_t2_conceptual_result" id="c15_t2_conceptual_result" class="form-control"> 
+                                                          <select name="c15_t2_conceptual_result" id="c15_t2_conceptual_result" class="form-control">
                                                             <option value="attribute">Pass</option>
                                                             <option value="attribute_type">Fail</option>
                                                             <option value="collection_session">Not Relevant</option>
@@ -1272,7 +1272,7 @@
                                                     <td>
                                                         <label class="form-check-label" for="c3_2">
                                                               <b>Result:</b>
-                                                              <select name="c15_t2_domain_result" id="c15_t2_domain_result" class="form-control"> 
+                                                              <select name="c15_t2_domain_result" id="c15_t2_domain_result" class="form-control">
                                                                 <option value="attribute">Pass</option>
                                                                 <option value="attribute_type">Fail</option>
                                                                 <option value="collection_session">Not Relevant</option>
@@ -1282,7 +1282,7 @@
                                                     <td>
                                                         <label class="form-check-label" for="c3_2">
                                                           <b>Result:</b>
-                                                          <select name="c15_t2_format_result" id="c15_t2_format_result" class="form-control"> 
+                                                          <select name="c15_t2_format_result" id="c15_t2_format_result" class="form-control">
                                                             <option value="attribute">Pass</option>
                                                             <option value="attribute_type">Fail</option>
                                                             <option value="collection_session">Not Relevant</option>
@@ -1292,7 +1292,7 @@
                                                     <td>
                                                         <label class="form-check-label" for="c3_2">
                                                           <b>Result:</b>
-                                                          <select name="c15_t2_topological_result" id="c15_t2_topological_result" class="form-control"> 
+                                                          <select name="c15_t2_topological_result" id="c15_t2_topological_result" class="form-control">
                                                             <option value="attribute">Pass</option>
                                                             <option value="attribute_type">Fail</option>
                                                             <option value="collection_session">Not Relevant</option>
@@ -1301,7 +1301,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                         <label class="form-check-label" for="c3_4">
                                                               <b>Conformance Result:</b>
                                                               <input type="text" name="c15_t2_conceptual_conform_result" id="c15_t2_conceptual_conform_result" class="form-control">
@@ -1331,7 +1331,7 @@
                                           </div>
                                       </div>
                                      </div>
-                                  </div>  
+                                  </div>
                                 <div class="tab-pane fade" id="position_accuracy" role="tabpanel" aria-labelledby="tab_position_accuracy">
                                      <div class="form-group row">
                                       <div class="d-flex flex-wrap bd-highlight">
@@ -1339,7 +1339,7 @@
                                             <table class="table-borderless">
                                               <tbody>
                                                 <tr>
-                                                  <td> 
+                                                  <td>
                                                     <label class="form-check-label" for="c3_1">
                                                       <input type="radio" name="c15_t3_type" checked="">&nbsp;Absolute or External
                                                     </label>
@@ -1356,10 +1356,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                  <td> 
+                                                  <td>
                                                     <label class="form-check-label" for="c3_1">
                                                       <b>Scope:</b>
-                                                      <select name="c15_t3_absExt_scope" id="c15_t3_absExt_scope" class="form-control"> 
+                                                      <select name="c15_t3_absExt_scope" id="c15_t3_absExt_scope" class="form-control">
                                                         <option value="attribute">Aeronautical</option>
                                                         <option value="attribute_type">Built Environment</option>
                                                         <option value="collection_session">Demarcation</option>
@@ -1378,7 +1378,7 @@
                                                   <td>
                                                        <label class="form-check-label" for="c3_1">
                                                           <b>Scope:</b>
-                                                          <select name="c15_t3_relInt_scope" id="c15_t3_relInt_scope" class="form-control"> 
+                                                          <select name="c15_t3_relInt_scope" id="c15_t3_relInt_scope" class="form-control">
                                                             <option value="attribute">Aeronautical</option>
                                                             <option value="attribute_type">Built Environment</option>
                                                             <option value="collection_session">Demarcation</option>
@@ -1397,7 +1397,7 @@
                                                     <td>
                                                          <label class="form-check-label" for="c3_1">
                                                               <b>Scope:</b>
-                                                              <select name="c15_t3_gridded_scope" id="c15_t3_gridded_scope" class="form-control"> 
+                                                              <select name="c15_t3_gridded_scope" id="c15_t3_gridded_scope" class="form-control">
                                                                 <option value="attribute">Aeronautical</option>
                                                                 <option value="attribute_type">Built Environment</option>
                                                                 <option value="collection_session">Demarcation</option>
@@ -1415,7 +1415,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                         <label class="form-check-label" for="c3_3">
                                                           <b>Compliance Level:</b>
                                                           <input type="text" name="c15_t3_absExt_comply_level" id="c15_t3_absExt_comply_level" class="form-control">
@@ -1435,7 +1435,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                          <label class="form-check-label" for="c3_5">
                                                           <b>Date:</b>
                                                           <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
@@ -1470,10 +1470,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                        <label class="form-check-label" for="c3_2">
                                                           <b>Result:</b>
-                                                          <select name="c15_t3_absExt_result" id="c15_t3_absExt_result" class="form-control"> 
+                                                          <select name="c15_t3_absExt_result" id="c15_t3_absExt_result" class="form-control">
                                                             <option value="attribute">Pass</option>
                                                             <option value="attribute_type">Fail</option>
                                                             <option value="collection_session">Not Relevant</option>
@@ -1483,7 +1483,7 @@
                                                     <td>
                                                         <label class="form-check-label" for="c3_2">
                                                               <b>Result:</b>
-                                                              <select name="c15_t3_relInt_result" id="c15_t3_relInt_result" class="form-control"> 
+                                                              <select name="c15_t3_relInt_result" id="c15_t3_relInt_result" class="form-control">
                                                                 <option value="attribute">Pass</option>
                                                                 <option value="attribute_type">Fail</option>
                                                                 <option value="collection_session">Not Relevant</option>
@@ -1493,7 +1493,7 @@
                                                     <td>
                                                         <label class="form-check-label" for="c3_2">
                                                           <b>Result:</b>
-                                                          <select name="c15_t3_gridded_result" id="c15_t3_gridded_result" class="form-control"> 
+                                                          <select name="c15_t3_gridded_result" id="c15_t3_gridded_result" class="form-control">
                                                             <option value="attribute">Pass</option>
                                                             <option value="attribute_type">Fail</option>
                                                             <option value="collection_session">Not Relevant</option>
@@ -1502,7 +1502,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                         <label class="form-check-label" for="c3_4">
                                                           <b>Conformance Result:</b>
                                                           <input type="text" name="c15_t3_absExt_conform_result" id="c15_t3_absExt_conform_result" class="form-control">
@@ -1526,7 +1526,7 @@
                                           </div>
                                       </div>
                                       </div>
-                                      </div>                        
+                                      </div>
                                 <div class="tab-pane fade" id="temp_accuracy" role="tabpanel" aria-labelledby="tab_temp_accuracy">
                                      <div class="form-group row">
                                         <div class="bd-highlight">
@@ -1534,7 +1534,7 @@
                                             <table class="table-borderless">
                                               <tbody>
                                                 <tr>
-                                                  <td> 
+                                                  <td>
                                                      <label class="form-check-label" for="c3_1">
                                                       <input type="radio" name="c15_t4_type" checked="">&nbsp;Accuracy or Time Measurement
                                                     </label>
@@ -1551,10 +1551,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                  <td> 
+                                                  <td>
                                                     <label class="form-check-label" for="c3_1">
                                                           <b>Scope:</b>
-                                                          <select name="c15_t4_accuTimeMeasure_scope" id="c15_t4_accuTimeMeasure_scope" class="form-control"> 
+                                                          <select name="c15_t4_accuTimeMeasure_scope" id="c15_t4_accuTimeMeasure_scope" class="form-control">
                                                             <option value="attribute">Aeronautical</option>
                                                             <option value="attribute_type">Built Environment</option>
                                                             <option value="collection_session">Demarcation</option>
@@ -1573,7 +1573,7 @@
                                                   <td>
                                                        <label class="form-check-label" for="c3_1">
                                                           <b>Scope:</b>
-                                                          <select name="c15_t4_tempConsist_scope" id="c15_t4_tempConsist_scope" class="form-control"> 
+                                                          <select name="c15_t4_tempConsist_scope" id="c15_t4_tempConsist_scope" class="form-control">
                                                             <option value="attribute">Aeronautical</option>
                                                             <option value="attribute_type">Built Environment</option>
                                                             <option value="collection_session">Demarcation</option>
@@ -1592,7 +1592,7 @@
                                                     <td>
                                                          <label class="form-check-label" for="c3_1">
                                                               <b>Scope:</b>
-                                                              <select name="c15_t4_tempValid_scope" id="c15_t4_tempValid_scope" class="form-control"> 
+                                                              <select name="c15_t4_tempValid_scope" id="c15_t4_tempValid_scope" class="form-control">
                                                                 <option value="attribute">Aeronautical</option>
                                                                 <option value="attribute_type">Built Environment</option>
                                                                 <option value="collection_session">Demarcation</option>
@@ -1610,7 +1610,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                         <label class="form-check-label" for="c3_3">
                                                           <b>Compliance Level:</b>
                                                           <input type="text" name="c15_t4_accuTimeMeasure_comply_level" id="c15_t4_accuTimeMeasure_comply_level" class="form-control">
@@ -1630,7 +1630,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                         <label class="form-check-label" for="c3_5">
                                                               <b>Date:</b>
                                                               <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
@@ -1665,10 +1665,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                        <label class="form-check-label" for="c3_2">
                                                           <b>Result:</b>
-                                                          <select name="c15_t4_accuTimeMeasure_result" id="c15_t4_accuTimeMeasure_result" class="form-control"> 
+                                                          <select name="c15_t4_accuTimeMeasure_result" id="c15_t4_accuTimeMeasure_result" class="form-control">
                                                             <option value="attribute">Pass</option>
                                                             <option value="attribute_type">Fail</option>
                                                             <option value="collection_session">Not Relevant</option>
@@ -1678,7 +1678,7 @@
                                                     <td>
                                                         <label class="form-check-label" for="c3_2">
                                                           <b>Result:</b>
-                                                          <select name="c15_t4_tempConsist_result" id="c15_t4_tempConsist_result" class="form-control"> 
+                                                          <select name="c15_t4_tempConsist_result" id="c15_t4_tempConsist_result" class="form-control">
                                                             <option value="attribute">Pass</option>
                                                             <option value="attribute_type">Fail</option>
                                                             <option value="collection_session">Not Relevant</option>
@@ -1688,7 +1688,7 @@
                                                     <td>
                                                          <label class="form-check-label" for="c3_2">
                                                               <b>Result:</b>
-                                                              <select name="c15_t4_tempValid_result" id="c15_t4_tempValid_result" class="form-control"> 
+                                                              <select name="c15_t4_tempValid_result" id="c15_t4_tempValid_result" class="form-control">
                                                                 <option value="attribute">Pass</option>
                                                                 <option value="attribute_type">Fail</option>
                                                                 <option value="collection_session">Not Relevant</option>
@@ -1697,7 +1697,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> 
+                                                    <td>
                                                          <label class="form-check-label" for="c3_4">
                                                               <b>Conformance Result:</b>
                                                               <input type="text" name="c15_t4_accuTimeMeasure_conform_result" id="c15_t4_accuTimeMeasure_conform_result" class="form-control">
@@ -1729,7 +1729,7 @@
                                         <table class="table-borderless">
                                           <tbody>
                                             <tr>
-                                              <td> 
+                                              <td>
                                                 <label class="form-check-label" for="c3_1">
                                                   <input type="radio" name="c15_t5_type" checked="">&nbsp;Classification Correctness
                                                 </label>
@@ -1746,10 +1746,10 @@
                                               </td>
                                             </tr>
                                             <tr>
-                                              <td> 
+                                              <td>
                                                 <label class="form-check-label" for="c3_1">
                                                   <b>Scope:</b>
-                                                  <select name="c15_t5_classCorrect_scope" id="c15_t5_classCorrect_scope" class="form-control"> 
+                                                  <select name="c15_t5_classCorrect_scope" id="c15_t5_classCorrect_scope" class="form-control">
                                                     <option value="attribute">Aeronautical</option>
                                                     <option value="attribute_type">Built Environment</option>
                                                     <option value="collection_session">Demarcation</option>
@@ -1768,7 +1768,7 @@
                                               <td>
                                                 <label class="form-check-label" for="c3_1">
                                                   <b>Scope:</b>
-                                                  <select name="c15_t5_nonQuant_scope" id="c15_t5_nonQuant_scope" class="form-control"> 
+                                                  <select name="c15_t5_nonQuant_scope" id="c15_t5_nonQuant_scope" class="form-control">
                                                     <option value="attribute">Aeronautical</option>
                                                     <option value="attribute_type">Built Environment</option>
                                                     <option value="collection_session">Demarcation</option>
@@ -1787,7 +1787,7 @@
                                               <td>
                                                 <label class="form-check-label" for="c3_1">
                                                   <b>Scope:</b>
-                                                  <select name="c15_t5_quant_scope" id="c15_t5_quant_scope" class="form-control"> 
+                                                  <select name="c15_t5_quant_scope" id="c15_t5_quant_scope" class="form-control">
                                                     <option value="attribute">Aeronautical</option>
                                                     <option value="attribute_type">Built Environment</option>
                                                     <option value="collection_session">Demarcation</option>
@@ -1805,7 +1805,7 @@
                                               </td>
                                             </tr>
                                             <tr>
-                                              <td> 
+                                              <td>
                                                 <label class="form-check-label" for="c3_3">
                                                   <b>Compliance Level:</b>
                                                   <input type="text" name="c15_t5_classCorrect_comply_level" id="c15_t5_classCorrect_comply_level" class="form-control">
@@ -1825,7 +1825,7 @@
                                               </td>
                                             </tr>
                                             <tr>
-                                              <td> 
+                                              <td>
                                                 <label class="form-check-label" for="c3_5">
                                                   <b>Date:</b>
                                                   <div class="input-group date" id="c15_t5_classCorrect_date_div" data-target-input="nearest">
@@ -1860,10 +1860,10 @@
                                               </td>
                                             </tr>
                                             <tr>
-                                              <td> 
+                                              <td>
                                                 <label class="form-check-label" for="c3_2">
                                                   <b>Result:</b>
-                                                  <select name="c15_t5_classCorrect_result" id="c15_t5_classCorrect_result" class="form-control"> 
+                                                  <select name="c15_t5_classCorrect_result" id="c15_t5_classCorrect_result" class="form-control">
                                                     <option value="attribute">Pass</option>
                                                     <option value="attribute_type">Fail</option>
                                                     <option value="collection_session">Not Relevant</option>
@@ -1873,7 +1873,7 @@
                                               <td>
                                                 <label class="form-check-label" for="c3_2">
                                                   <b>Result:</b>
-                                                  <select name="c15_t5_nonQuant_result" id="c15_t5_nonQuant_result" class="form-control"> 
+                                                  <select name="c15_t5_nonQuant_result" id="c15_t5_nonQuant_result" class="form-control">
                                                     <option value="attribute">Pass</option>
                                                     <option value="attribute_type">Fail</option>
                                                     <option value="collection_session">Not Relevant</option>
@@ -1883,7 +1883,7 @@
                                               <td>
                                                 <label class="form-check-label" for="c3_2">
                                                   <b>Result:</b>
-                                                  <select name="c15_t5_quant_result" id="c15_t5_quant_result" class="form-control"> 
+                                                  <select name="c15_t5_quant_result" id="c15_t5_quant_result" class="form-control">
                                                     <option value="attribute">Pass</option>
                                                     <option value="attribute_type">Fail</option>
                                                     <option value="collection_session">Not Relevant</option>
@@ -1892,7 +1892,7 @@
                                               </td>
                                             </tr>
                                             <tr>
-                                              <td> 
+                                              <td>
                                                 <label class="form-check-label" for="c3_4">
                                                   <b>Conformance Result:</b>
                                                   <input type="text" name="c15_t5_classCorrect_conform_result" id="c15_t5_classCorrect_conform_result" class="form-control">
@@ -1979,7 +1979,7 @@
   });
 
   $(document).on("click",".fixMap",function(){
-    setTimeout(function() { map.resize(); }, 1500); 
+    setTimeout(function() { map.resize(); }, 1500);
   });
 
 
@@ -2012,10 +2012,10 @@
         map.removeLayer('ftest').removeSource('ftest');
     }
   });
-  
-  
+
+
   $(document).ready(function(){
-    $('.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_trash').click(function(){ 
+    $('.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_trash').click(function(){
       //delete any existing drawings
       var mapLayer = map.getLayer('ftest');
       if(typeof mapLayer !== 'undefined') {
@@ -2071,7 +2071,7 @@
       alert("Isi semua maklumat Longitude dan Latitude");
       return false;
     }
-    
+
     //add preloaded points to map
     var polygon2 = {
       "type": "FeatureCollection",
@@ -2092,7 +2092,7 @@
     var ts = Date.now();
     map.addSource('ftest', {
       'type': 'geojson',
-      'data': polygon2     
+      'data': polygon2
     });
     map.addLayer({
       'id': 'ftest',

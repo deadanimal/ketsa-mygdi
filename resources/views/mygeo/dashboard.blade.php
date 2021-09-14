@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
     <style>
@@ -72,10 +72,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h2 class="font-weight-bold text-uppercase mb-0">
+                                        <h2 class="font-weight-bold text-white text-uppercase mb-0">
                                             Jumlah Metadata Yang Telah Diterbitkan
                                         </h2>
-                                        <span class="text-dark text-uppercase mb-0"> Agensi: Kementerian Sumber dan
+                                        <span class="text-white text-uppercase mb-0"> Agensi: Kementerian Sumber dan
                                             Asli</span>
                                     </div>
 
@@ -87,7 +87,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 mr-2">234
+                                    <span class="h2 text-white mr-2">234
                                     </span>
                                 </p>
                             </div>
@@ -170,7 +170,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h2 class="card-title font-weight-bold text-uppercase mb-0">
+                                        <h2 class="card-title font-weight-bold text-uppercase text-white mb-0">
                                             Bilangan Keseluruhan Permohonan Data
                                         </h2>
                                     </div>
@@ -183,7 +183,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 mr-2">234
+                                    <span class="h2 text-white mr-2">{{$total_permohonan}}
                                     </span>
                                 </p>
                             </div>
@@ -194,7 +194,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h2 class="card-title font-weight-bold text-uppercase mb-0">
+                                        <h2 class="card-title font-weight-bold text-white text-uppercase mb-0">
                                             Bilangan Permohonan Data Diluluskan
                                         </h2>
                                     </div>
@@ -207,7 +207,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 mr-2">234
+                                    <span class="h2 text-white mr-2">{{$total_permohonan_lulus}}
                                     </span>
                                 </p>
                             </div>
@@ -218,7 +218,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h2 class="card-title font-weight-bold text-uppercase mb-0">
+                                        <h2 class="card-title font-weight-bold text-white text-uppercase mb-0">
                                             Bilangan Permohonan Data Ditolak
                                         </h2>
                                     </div>
@@ -231,7 +231,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 mr-2">234
+                                    <span class="h2 text-white mr-2">{{$total_permohonan_tolak}}
                                     </span>
                                 </p>
                             </div>

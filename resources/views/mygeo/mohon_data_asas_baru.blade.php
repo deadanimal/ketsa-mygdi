@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -135,7 +135,8 @@
                                             </div>
                                             <div class="col-3">
                                                 <input class="form-control form-control-sm ml-3" name="tel_pejabat"
-                                                    type="text" value="{{ $permohonan->users->phone_pejabat }}" disabled />
+                                                    type="text" value="{{ $permohonan->users->phone_pejabat }}"
+                                                    disabled />
                                             </div>
                                             <div class="col-2">
                                                 <label class="form-control-label mr-4" for="tel_bimbit">
@@ -190,7 +191,8 @@
                                         <!-- <button class="btn btn-sm btn-default" type=><span class="text-white">Tambah</span></button> -->
                                     </div>
                                 </div>
-                                <form action="{{ url('kemaskini_permohonan') }}" method="POST" id="formHantarPermohonanPentadbir">
+                                <form action="{{ url('kemaskini_permohonan') }}" method="POST"
+                                    id="formHantarPermohonanPentadbir">
                                     @csrf
                                     <div class="row">
                                         <div class="col-10 pl-lg-5">
@@ -369,10 +371,11 @@
                                                     <select name="catatan" class="form-control form-control-sm mb-4"
                                                         onchange="checkCatatan(this.value);">
                                                         <option selected disabled>Pilih</option>
-                                                        <option value="Maklumat tidak lengkap"
-                                                            @if ($permohonan->catatan == 'Maklumat tidak lengkap') selected @endif>Maklumat tidak
+                                                        <option value="Maklumat tidak lengkap" @if ($permohonan->catatan == 'Maklumat tidak lengkap') selected @endif>
+                                                            Maklumat tidak
                                                             lengkap</option>
-                                                        <option value="Data yang dipohon tiada dalam simpanan PGN" @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
+                                                        <option value="Data yang dipohon tiada dalam simpanan PGN"
+                                                            @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
                                                             dalam simpanan PGN</option>
                                                         <option value="Maklumat pemohon tidak sahih"
                                                             @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat pemohon tidak
@@ -405,12 +408,16 @@
                                                 class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
                                                 Hantar
                                             @elseif(Auth::user()->hasRole(['Pemohon Data']))
-                                                <button type="button" class="btn btn-outline-success mx-2 btnSimpanDraf">
-                                                    Simpan
+                                                @if ($permohonan->dihantar != 1 || $permohonan->status == 2)
+                                                    <button type="button"
+                                                        class="btn btn-outline-success mx-2 btnSimpanDraf">
+                                                        Simpan
+                                                @endif
+
                                         @endif
 
                                 </form>
-                                @if (Auth::user()->hasRole(['Pemohon Data']))
+                                @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->dihantar != 1 || $permohonan->status == 2))
                                     <form action="{{ url('hantar_permohonan') }}" method="POST"
                                         id="formHantarPermohonan">
                                         @csrf
@@ -877,7 +884,7 @@
                 $(".subKategoriTitle").show();
             });
 
-            $(document).on("click", ".subkategori", function () {
+            $(document).on("click", ".subkategori", function() {
                 //            var divname = $(this).data('id');
                 //            $(".div_sub").hide();
                 //            $("." + divname).show();

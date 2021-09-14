@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\LaporanDashboard;
 use App\MohonData;
 use Illuminate\Http\Request;
+use DB;
 
 class LaporanDashboardController extends Controller
 {
@@ -15,8 +16,26 @@ class LaporanDashboardController extends Controller
      */
     public function index_laporan_data()
     {
-        $permohonans = MohonData::all();
-        return view('mygeo.laporan_data_asas', compact('permohonans'));
+        $permohonans = MohonData::get();
+        $permohonan_perincian = MohonData::get();
+        $permohonan_lulus = MohonData::where(['status' => 3])->get();
+        $permohonan_kategori = DB::table('users')
+                                ->join('mohon_data','users.id','=','mohon_data.user_id')
+                                ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+                                ->select('agensi_organisasi.name','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'))
+                                ->groupBy('users.name','agensi_organisasi.name','mohon_data.date')
+                                ->get();
+        // dd($permohonan_kategori);
+        $permohonan_kategori_count = count($permohonan_kategori);
+        return view('mygeo.laporan_data_asas', compact('permohonans','permohonan_kategori','permohonan_lulus','permohonan_perincian'));
+    }
+
+    public function index_mygeo_dashboard(){
+        $total_permohonan = MohonData::where('status','!=',0)->get()->count();
+        $total_permohonan_lulus = MohonData::where('status','=',3)->get()->count();
+        $total_permohonan_tolak = MohonData::where('status','=',2)->get()->count();
+
+        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak'));
     }
 
     /**

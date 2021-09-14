@@ -344,7 +344,7 @@ class UserController extends Controller {
 //            }
 //        }
 //        exit();
-        
+
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
 
@@ -592,6 +592,12 @@ class UserController extends Controller {
 
         $password = "";
         
+        $sektor = "";
+        if($request->agensi_organisasi != ""){
+            $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
+            $sektor = $ao->sektor;
+        }
+
         $sektor = "";
         if($request->agensi_organisasi != ""){
             $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
