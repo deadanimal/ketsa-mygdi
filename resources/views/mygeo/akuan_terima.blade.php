@@ -111,7 +111,7 @@
                                 </form>
                                 <div class="row mb-0 mt-5">
                                     <div class="col-xl-12">
-                                        <h6 class="heading text-muted">PGN-ISMS-P3-019-002-260</h6>
+                                        <h6 class="heading text-muted">PGN-ISMS-P3-019-002-{{ $permohonan->id }}</h6>
                                     </div>
                                 </div>
                             </div>

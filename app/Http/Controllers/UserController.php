@@ -99,46 +99,45 @@ class UserController extends Controller {
         $user_details = User::where(["id"=>$user_id])->get()->first();
         $html_details = '
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Nama Penuh</label>
-                <div class="col-sm-10">
-                    :'.$user_details->name.'
+                <label for="inputEmail3" class="col-sm-3">Nama Penuh</label>
+                <div class="col-sm-7">
+                    : <span class="ml-3">'.$user_details->name.'</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Agensi</label>
-                <div class="col-sm-10">
-                    :'.(isset($user_details->agensiOrganisasi->name) ? $user_details->agensiOrganisasi->name:"").'
+                <label for="inputEmail3" class="col-sm-3">Agensi</label>
+                <div class="col-sm-7">
+                    : <span class="ml-3">'.(isset($user_details->agensiOrganisasi->name) ? $user_details->agensiOrganisasi->name:"").'</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Bahagian</label>
-                <div class="col-sm-10">
-                    :'.$user_details->bahagian.'
+                <label for="inputEmail3" class="col-sm-3">Bahagian</label>
+                <div class="col-sm-7">
+                    : <span class="ml-3">'.$user_details->bahagian.'</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Telefon Pejabat</label>
-                <div class="col-sm-10">
-                    :'.$user_details->phone_pejabat.'
+                <label for="inputEmail3" class="col-sm-3">Telefon Pejabat</label>
+                <div class="col-sm-7">
+                    : <span class="ml-3">'.$user_details->phone_pejabat.'</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Emel</label>
-                <div class="col-sm-10">
-                    :'.$user_details->email.'
+                <label for="inputEmail3" class="col-sm-3">Emel</label>
+                <div class="col-sm-7">
+                    : <span class="ml-3">'.$user_details->email.'</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2">Peranan</label>
-                <div class="col-sm-10">
-                    :
-        ';
+                <label for="inputEmail3" class="col-sm-3">Peranan</label>
+                <div class="col-sm-7">
+                    : <span class="ml-3">';
         if(count($user_details->getRoleNames()) > 0){
             foreach($user_details->getRoleNames() as $role){
                 $html_details .= $role.'<br>';
             }
         }
-        $html_details .= '
+        $html_details .= '</span>
                 </div>
             </div>
         ';
@@ -213,7 +212,7 @@ class UserController extends Controller {
 //            }
 //        }
 //        exit();
-        
+
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
 
