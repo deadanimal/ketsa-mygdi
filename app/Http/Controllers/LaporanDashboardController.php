@@ -6,6 +6,9 @@ use App\LaporanDashboard;
 use App\MohonData;
 use Illuminate\Http\Request;
 use DB;
+use App\MetadataGeo;
+use App\User;
+use App\MCategory;
 
 class LaporanDashboardController extends Controller
 {
@@ -39,8 +42,68 @@ class LaporanDashboardController extends Controller
         $total_permohonan = MohonData::where('status','!=',0)->get()->count();
         $total_permohonan_lulus = MohonData::where('status','=',3)->get()->count();
         $total_permohonan_tolak = MohonData::where('status','=',2)->get()->count();
-
-        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak'));
+        
+        //JUMLAH METADATA YANG TELAH DITERBITKAN
+        $metadataTerbit = count(MetadataGeo::on('pgsql2')->where('disahkan','=','yes')->get());
+        
+        //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
+        $metadataTerbitByAgency = [];
+        $metadataTerbitByAgencyKeys = [];
+        $metadataTerbitByAgencyVals = [];
+        $agencies = User::all();
+        $agencyIds = $agencies->groupBy('agensi_organisasi');
+        foreach($agencyIds as $ai){
+            $count = 0;
+            $idsToSearch = [];
+            $agencyName = "";
+            foreach($ai as $user){
+                if($user->hasRole('Pemohon Data')){
+                    $agencyName = $user->agensi_organisasi;
+                }else{
+                    $agencyName = $user->agensiOrganisasi->name;
+                }
+                $idsToSearch[] = $user->id;
+            }
+            $count = count(MetadataGeo::on('pgsql2')->whereIn('portal_user_id',$idsToSearch)->get());
+            $metadataTerbitByAgency[$agencyName] = $count;
+            $metadataTerbitByAgencyKeys[] = $agencyName;
+            $metadataTerbitByAgencyVals[] = $count;
+        }
+        
+        //Bilangan metadata yang belum diterbitkan (Draf dan Perlu Pengesahan)
+        $metadataBelumTerbit = count(MetadataGeo::on('pgsql2')->where('disahkan','=','0')->orWhere('is_draf','=','yes')->get());
+        
+        //Bilangan metadata mengikut kategori
+        $metadataByCategory = [];
+        $metadataByCategoryKeys = [];
+        $metadataByCategoryVals = [];
+        $categories = MCategory::get();
+        foreach($categories as $c){
+            $metadataByCategory[$c->name] = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%codeListValue="dataset">'.$c->name.'<%')->get());
+            $metadataByCategoryKeys[] = $c->name;
+            $metadataByCategoryVals[] = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%codeListValue="dataset">'.$c->name.'<%')->get());
+        }
+        
+        //Statistik penerbitan metadata mengikut tahun
+        $metadataByYear = [];
+        $metadataByYearKeys = [];
+        $metadataByYearVals = [];
+        $metadatas = MetadataGeo::on('pgsql2')->get();
+        $years = [];
+        foreach($metadatas as $m){
+            $year = date('Y',strtotime($m->createdate));
+            if(array_key_exists($year,$metadataByYear)){
+                $metadataByYear[$year] += 1;
+            }else{
+                $metadataByYear[$year] = 1;
+            }
+        }
+        foreach($metadataByYear as $key=>$val){
+            $metadataByYearKeys[] = $key;
+            $metadataByYearVals[] = $val;
+        }
+        
+        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak','metadataTerbit','metadataTerbitByAgency','metadataTerbitByAgencyKeys','metadataTerbitByAgencyVals','metadataBelumTerbit','metadataByCategory','metadataByCategoryKeys','metadataByCategoryVals','metadataByYear','metadataByYearKeys','metadataByYearVals'));
     }
 
     /**
