@@ -9,72 +9,82 @@
     <div id="collapse12" class="panel-collapse collapse in show" data-parent="#div_c12">
         <div class="card-body">
             <div class="acard-body opacity-8">
-                <div class="row mb-4">
-                    <div class="col-xl-2">
-                        <label class="form-control-label" for="input-dataset-type">
-                            Spatial Data Set Type
-                        </label>
+                <?php
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) && trim($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) != "") {
+                    ?>
+                    <div class="row mb-4">
+                        <div class="col-xl-2">
+                            <label class="form-control-label" for="input-dataset-type">
+                                Spatial Data Set Type
+                            </label>
+                        </div>
+                        <div class="col-xl-3">
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode . "</p>"; ?>
+                        </div>
                     </div>
-                    <div class="col-xl-3">
-                        <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType != "") {
-                            echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType . "</p>";
-                        }
-                        ?>
-                    </div>
-                </div>
+                    <?php
+                }
+                ?>
+                
                 <div class="row mb-2">
-                    <div class="col-xl-3">
-                        <label class="form-control-label" for="input-hardsoftcopy">
-                            Scale in Hardcopy/Softcopy
-                            <span style="font-size: smaller;">(feature scale)</span>
-                        </label>
-                    </div>
-                    <div class="col-xl-2">
-                        <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator != "") {
-                            echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator . "</p>";
-                        }
+                    <?php
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) && trim($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) != "") {
                         ?>
-                    </div>
-                    <div class="col-xl-2">
-                        <label class="form-control-label" for="input-imggsd">
-                            Image Resolution (GSD)</label>
-                    </div>
-                    <div class="col-md-2">
+                        <div class="col-xl-3">
+                            <label class="form-control-label" for="input-hardsoftcopy">
+                                Scale in Hardcopy/Softcopy
+                                <span style="font-size: smaller;">(feature scale)</span>
+                            </label>
+                        </div>
+                        <div class="col-xl-2">
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer . "</p>"; ?>
+                        </div>
                         <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance != "") {
-                            echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance . " meter</p>";
-                        }
+                    }
+                    ?>
+                    <?php
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance) && trim($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance) != "") {
                         ?>
-                    </div>
-                    <div class="col-xl-1">
-                        <label class="form-control-label" for="input-language">
-                            Language
-                        </label>
-                    </div>
-                    <div class="col-xl-2">
+                        <div class="col-xl-2">
+                            <label class="form-control-label" for="input-imggsd">
+                                Image Resolution (GSD)</label>
+                        </div>
+                        <div class="col-md-2">
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance . " meter</p>"; ?>
+                        </div>
                         <?php
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->language) && $metadataxml->identificationInfo->SV_ServiceIdentification->language != "") {
-                            echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->SV_ServiceIdentification->language . "</p>";
-                        }
+                    }
+                    ?>
+                    <?php
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) && trim($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) != "") {
                         ?>
-                    </div>
-                    <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
-                    <div class="col-xl-1">
-                        <label class="form-control-label" for="input-language">
-                            MAINTENANCE INFORMATION
-                        </label>
-                    </div>
-                    <div class="col-xl-2">
+                        <div class="col-xl-1">
+                            <label class="form-control-label" for="input-language">
+                                Language
+                            </label>
+                        </div>
+                        <div class="col-xl-2">
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString . "</p>"; ?>
+                        </div>
+                        <?php 
+                    }
+                    ?>
+                    
+                    <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6> 
+                    <?php
+                    if (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) != "") {
+                        ?>
+                        <div class="col-xl-1">
+                            <label class="form-control-label" for="input-language">
+                                Maintenance and Update
+                            </label>
+                        </div>
+                        <div class="col-xl-2">
+                            <?php echo trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode); ?>
+                        </div>
                         <?php
-                        $maintenanceUpdate = "";
-                        if (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && $metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode != "") {
-                            $maintenanceUpdate = trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode);
-                        }
-                        echo $maintenanceUpdate;
-                        ?>
-                    </div>
+                    }
+                    ?>
                 </div>
             </div>
         </div>

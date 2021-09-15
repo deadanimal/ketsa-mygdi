@@ -15,10 +15,10 @@ class CreateTajukTable extends Migration
     {
         Schema::create('tajuk', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('kategori');
-            $table->string('label');
-            $table->string('sub_tajuk');
+            $table->string('name')->nullable();
+            $table->string('kategori')->nullable();
+            $table->string('label')->nullable();
+            $table->string('sub_tajuk')->nullable();
             $table->timestamps();
         });
     }

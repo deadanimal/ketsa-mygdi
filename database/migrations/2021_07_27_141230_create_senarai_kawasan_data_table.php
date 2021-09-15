@@ -16,10 +16,13 @@ class CreateSenaraiKawasanDataTable extends Migration
         Schema::create('senarai_kawasan_data', function (Blueprint $table) {
             $table->id();
 
-            $table->string('lapisan_data', 50);
-            $table->string('kategori',50);
-            $table->string('subkategori', 50);
-            $table->string('kawasan_data', 50);
+            $table->string('lapisan_data')->nullable();
+            $table->string('kategori')->nullable();
+            $table->string('subkategori')->nullable();
+            $table->string('kawasan_data')->nullable();
+            $table->string('harga_data')->nullable();
+            $table->string('saiz_data')->nullable();
+            $table->string('kelas')->nullable();
 
             $table->foreignId('permohonan_id');
 

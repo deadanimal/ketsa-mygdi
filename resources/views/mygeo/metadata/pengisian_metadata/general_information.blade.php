@@ -8,34 +8,40 @@
     </div>
     <div id="collapse1" class="panel-collapse collapse in show" data-parent="#div_c1">
         <div class="card-body">
-            <div class="form-group row">
-                <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
-                <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;">
-                    <option selected disabled>Select Content</option>
-                    <option value="Application" class='optContentInfo_dataset'>Application</option>
-                    <option value="Clearing House" class='optContentInfo_dataset'>Clearing House</option>
-                    <option value="Downloadable Data" class='optContentInfo_dataset'>Downloadable Data</option>
-                    <option value="Geographic Activities" class='optContentInfo_dataset'>Geographic Activities</option>
-                    <option value="Geographic Services" class='optContentInfo_dataset'>Geographic Services</option>
-                    <option value="Map File" class='optContentInfo_dataset'>Map File</option>
-                    <option value="Offline Data" class='optContentInfo_dataset'>Offline Data</option>
-                    <option value="Static Map Images" class='optContentInfo_dataset'>Static Map Images</option>
-                    <option value="Other Documents" class='optContentInfo_dataset'>Other Documents</option>
+            @if($elemenMetadata['c1_content_info']->status == '1')
+                <div class="form-group row">
+                    <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
+                    <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;" id="content_info_dropdown">
+                        <option value="" selected>Pilih...</option>
+                        <option value="Application" class='optContentInfo_dataset'>Application</option>
+                        <option value="Clearing House" class='optContentInfo_dataset'>Clearing House</option>
+                        <option value="Downloadable Data" class='optContentInfo_dataset'>Downloadable Data</option>
+                        <option value="Geographic Activities" class='optContentInfo_dataset'>Geographic Activities</option>
+                        <option value="Geographic Services" class='optContentInfo_dataset'>Geographic Services</option>
+                        <option value="Map File" class='optContentInfo_dataset'>Map File</option>
+                        <option value="Offline Data" class='optContentInfo_dataset'>Offline Data</option>
+                        <option value="Static Map Images" class='optContentInfo_dataset'>Static Map Images</option>
+                        <option value="Other Documents" class='optContentInfo_dataset'>Other Documents</option>
 
-                    <option value="Live Data and Maps" class='optContentInfo_services'>Live Data and Maps</option>
+                        <option value="Live Data and Maps" class='optContentInfo_services'>Live Data and Maps</option>
 
-                    <option value="Gridded" class='optContentInfo_gridded'>Gridded</option>
+                        <option value="Gridded" class='optContentInfo_gridded'>Gridded</option>
 
-                    <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
-                </select>
+                        <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
+                    </select>
 
-                @error('c1_content_info')
-                <div class="text-error ml-3">{{ $message }}</div>
-                @enderror
-            </div>
+                    <p class="ml-3 mb-0 lblContentInfo">Live Data and Maps</p>
+                    <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled>
+
+                    @error('c1_content_info')
+                    <div class="text-error ml-3">{{ $message }}</div>
+                    @enderror
+                </div>
+            @endif
 
             <h2 class="heading-small text-muted"><?php echo __('lang.metadataPublisher'); ?></h2>
             <div class="my-1">
+                @if($elemenMetadata['publisher_name']->status == '1')
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="uname">
@@ -43,20 +49,25 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        <p class="ml-3 mb-0">{{ auth::user()->name }}</p>
-                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_name" value="{{ auth::user()->name }}" />
+                        <!--<p class="ml-3 mb-0">{{ auth::user()->name }}</p>-->
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_name" value="{{ auth::user()->name }}" />
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['publisher_agensi_organisasi']->status == '1')
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_agensi_organisasi"><?php echo __('lang.organisation_name'); ?>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        <p class="ml-3 mb-0">{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}</p>
-                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}" />
+                        <!--<p class="ml-3 mb-0">{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}</p>-->
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}" />
+                        <input type="hidden" name="publisher_bahagian" value="{{ auth::user()->bahagian }}" />
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['publisher_email']->status == '1')
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_email">
@@ -64,10 +75,12 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        <p class="mb-0 ml-3">{{ auth::user()->email }}</p>
-                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_email" value="{{ auth::user()->email }}" />
+                        <!--<p class="mb-0 ml-3">{{ auth::user()->email }}</p>-->
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_email" value="{{ auth::user()->email }}" />
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['publisher_phone']->status == '1')
                 <div class="row my-0 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_phone">
@@ -75,10 +88,12 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        <p class="ml-3 mb-0">{{ auth::user()->phone_pejabat }}</p>
-                        <input class="form-control form-control-sm ml-3" type="hidden" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
+                        <!--<p class="ml-3 mb-0">{{ auth::user()->phone_pejabat }}</p>-->
+                        <input class="form-control form-control-sm ml-3" type="text" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['publisher_role']->status == '1')
                 <div class="row my-0 py-0 divPublisherRole">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_role">
@@ -101,6 +116,7 @@
                         </select>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
@@ -108,6 +124,6 @@
 
 <script>
     $(document).ready(function() {
-        $('#c1_content_info').val("{{old('c1_content_info')}}").trigger('change');
+        $('#content_info_dropdown').val("{{old('c1_content_info')}}").trigger('change');
     });
 </script>

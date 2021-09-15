@@ -13,6 +13,7 @@
     </div>
     <div id="collapse13" class="panel-collapse collapse in show" data-parent="#div_c13">
         <div class="card-body">
+            @if($elemenMetadata['c13_ref_sys_identify']->status == '1')
             <div class="row mb-2">
                 <div class="col-xl-3">
                     <label class="form-control-label" for="input-system-identifier">
@@ -20,7 +21,7 @@
                     </label>
                 </div>
                 <div class="col-xl-3">
-                    <select class="form-control form-control-sm" name="c13_ref_sys_identify" id="c13_ref_sys_identify">
+                    <select class="form-control form-control-sm" name="c13_ref_sys_identify" id="c13_ref_sys_identify" readonly>
                         <option selected disabled>Select Identifier</option>
                         <?php
                         if (count($refSys) > 0) {
@@ -48,47 +49,60 @@
                     </select>
                 </div>
             </div>
+            @endif
             <div class="form-group row">
                 <div class="col-xl-12">
                     <table>
                         <tr>
                             <td>
+                                @if($elemenMetadata['refsys_projection']->status == '1')
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Projection:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_projection" id="refsys_projection" class="form-control form-control-sm" readonly value="{{old('refsys_projection')}}">
                                 </label>
+                                @endif
                             </td>
                             <td>
+                                @if($elemenMetadata['refsys_semiMajorAxis']->status == '1')
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Semi Major Axis:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" class="form-control form-control-sm" readonly value="{{old('refsys_semiMajorAxis')}}">
                                 </label>
+                                @endif
                             </td>
                             <td>
+                                @if($elemenMetadata['refsys_ellipsoid']->status == '1')
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Ellipsoid:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_ellipsoid" id="refsys_ellipsoid" class="form-control form-control-sm" readonly value="{{old('refsys_ellipsoid')}}">
                                 </label>
+                                @endif
                             </td>
                         </tr>
                         <tr>
                             <td>
+                                @if($elemenMetadata['refsys_axis_units']->status == '1')
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Axis Units:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_axis_units" id="refsys_axis_units" class="form-control form-control-sm" readonly value="{{old('refsys_axis_units')}}">
                                 </label>
+                                @endif
                             </td>
                             <td>
+                                @if($elemenMetadata['refsys_datum']->status == '1')
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Datum:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_datum" id="refsys_datum" class="form-control form-control-sm" readonly value="{{old('refsys_datum')}}">
                                 </label>
+                                @endif
                             </td>
                             <td>
+                                @if($elemenMetadata['refsys_denomFlatRatio']->status == '1')
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Denominator of Flattening Ratio:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" class="form-control form-control-sm" readonly value="{{old('refsys_denomFlatRatio')}}">
                                 </label>
+                                @endif
                             </td>
                         </tr>
                     </table>

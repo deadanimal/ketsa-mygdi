@@ -1,0 +1,485 @@
+@extends('layouts.app_mygeo_afiq2')
+
+@section('content')
+
+    <style>
+        .ftest {
+            display: inline;
+            width: auto;
+        }
+
+    </style>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="header">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center p-3 py-4">
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-dark d-inline-block mb-0">Laporan Metadata</h6>
+
+                            <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class=" breadcrumb-item">
+                                        <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                    </li>
+                                    <li aria-current="page" class="breadcrumb-item active">
+                                        Laporan Metadata
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="col-lg-6 col-5 text-right">
+
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            @csrf
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">Laporan Perincian Metadata</h3>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body" style="overflow-x:auto;">
+                                <table id="laporan_perincian" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>BIL</th>
+                                            <th>TAJUK LAPORAN</th>
+                                            <th>PERINCIAN MAKLUMAT METADATA</th>
+                                            <th>STATUS PENERBITAN METADATA</th>
+                                            <th>TARIKH PENJANAAN LAPORAN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($metadatas as $key=>$val)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <?php
+                                                    $title = "";
+                                                    if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                        $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                                    } 
+                                                    echo $title;
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <form action='{{ url('lihat_metadata_nologin') }}' method='POST'>
+                                                        @csrf
+                                                        <input type='hidden' name='metadata_id' value='{{ $key }}'>
+                                                        <button type="submit" class="btn btn-sm btn-default mr-2">Perinchian</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    $status = "";
+                                                    if($val[1]->is_draf == "yes"){
+                                                        $status = "Draf";
+                                                    }else{
+                                                        if($val[1]->disahkan == "0"){
+                                                            $status = "Perlu Pengesahan";
+                                                        }elseif($val[1]->disahkan == "yes"){
+                                                            $status = "Diterbitkan";
+                                                        }elseif($val[1]->disahkan == "yes"){
+                                                            $status = "Perlu Pembetulan";
+                                                        }
+                                                    }
+                                                    echo $status;
+                                                    ?>
+                                                </td>
+                                                <td>{{ date('d/m/Y',strtotime($val[1]->changedate)) }}</td>
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            @csrf
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">Laporan Statistik Penerbitan Metadata</h3>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="heading text-muted">Bilangan keseluruhan metadata yang diterbitkan (Mengikut agensi)</h4>
+                                <table id="laporan_seluruh" class="table table-bordered table-striped" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>BIL</th>
+                                            <th>NAMA METADATA</th>
+                                            <th>PENERBIT</th>
+                                            <th>TARIKH DITERBITKAN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="heading text-muted">Bilangan metadata data yang telah diluluskan </h4>
+                                <table id="laporan_lulus" class="table table-bordered table-striped"
+                                    style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>BIL</th>
+                                            <th>NAMA PEMOHON</th>
+                                            <th>AGENSI</th>
+                                            <th>KATEGORI</th>
+                                            <th>JUMLAH PERMOHONAN DATA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($permohonan_lulus as $mohon)
+                                            @if(isset($mohon->users))
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $mohon->users->name }}</td>
+                                                    @if($mohon->users->hasRole('Pemohon Data'))
+                                                        <td>{{ $mohon->users->agensi_organisasi }}</td>
+                                                    @else
+                                                        <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
+                                                    @endif
+                                                    <td>{{ $mohon->users->kategori }}</td>
+                                                    <td></td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="heading text-muted">Bilangan metadata Data mengikut Kategori</h4>
+                                <div class="table-responsive">
+                                    <table id="laporan_kategori" class="table table-bordered table-striped"
+                                        style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>BIL</th>
+                                                <th>NAMA PEMOHON</th>
+                                                <th>AGENSI</th>
+                                                <th>JUMLAH PERMOHONAN DATA</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($permohonan_kategori as $mohon)
+                                                @if(isset($mohon->users))
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $mohon->username }}</td>
+                                                        <td>{{ $mohon->name }}</td>
+                                                        <td>{{ $mohon->total }}</td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="heading text-muted">Statistik metadata data mengikut tahun</h4>
+                                <div class="table-responsive">
+                                    <table id="laporan_statistik" class="table table-bordered table-striped"
+                                        style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>BIL</th>
+                                                <th>NAMA PEMOHON</th>
+                                                <th>AGENSI</th>
+                                                <th>JUMLAH PERMOHONAN DATA</th>
+                                                <th>TAHUN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($permohonan_kategori as $mohon)
+                                                @if(isset($mohon->users))
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $mohon->username }}</td>
+                                                        <td>{{ $mohon->name }}</td>
+                                                        <td>{{ $mohon->total }}</td>
+                                                        <td>{{ Carbon\Carbon::parse($mohon->date)->format('Y') }}</td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#laporan_perincian").DataTable({
+                "dom": 'Bfrtip',
+                "buttons": [{
+                        extend: 'csv',
+                        className: 'btn btn-sm btn-danger',
+                        title: 'Laporan Perincian Permohonan Metadata',
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        title: 'Laporan Perincian Permohonan Metadata',
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-sm btn-primary',
+                        title: 'Laporan Perincian Permohonan Metadata',
+                    }
+                ],
+                "scrollX": true,
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": false,
+                "oLanguage": {
+                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sEmptyTable": "Tiada rekod ditemui",
+                    "sZeroRecords": "Tiada rekod ditemui",
+                    "sLengthMenu": "Papar _MENU_ rekod",
+                    "sLoadingRecords": "Sila tunggu...",
+                    "sSearch": "Carian:",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": ">",
+                        "sPrevious": "<",
+                    }
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $("#laporan_kategori").DataTable({
+                "dom": 'Bfrtip',
+                "buttons": [{
+                        extend: 'csv',
+                        className: 'btn btn-sm btn-danger',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-sm btn-primary',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
+                    }
+                ],
+                "scrollX": true,
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": false,
+                "oLanguage": {
+                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sEmptyTable": "Tiada rekod ditemui",
+                    "sZeroRecords": "Tiada rekod ditemui",
+                    "sLengthMenu": "Papar _MENU_ rekod",
+                    "sLoadingRecords": "Sila tunggu...",
+                    "sSearch": "Carian:",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": ">",
+                        "sPrevious": "<",
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#laporan_statistik").DataTable({
+                "dom": 'Bfrtip',
+                "buttons": [{
+                        extend: 'csv',
+                        className: 'btn btn-sm btn-danger',
+                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-sm btn-primary',
+                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
+                    }
+                ],
+                "scrollX": true,
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": false,
+                "oLanguage": {
+                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sEmptyTable": "Tiada rekod ditemui",
+                    "sZeroRecords": "Tiada rekod ditemui",
+                    "sLengthMenu": "Papar _MENU_ rekod",
+                    "sLoadingRecords": "Sila tunggu...",
+                    "sSearch": "Carian:",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": ">",
+                        "sPrevious": "<",
+                    }
+                }
+            });
+        });
+        $(document).ready(function() {
+            $("#laporan_lulus").DataTable({
+                "dom": 'Bfrtip',
+                "buttons": [{
+                        extend: 'csv',
+                        className: 'btn btn-sm btn-danger',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-sm btn-primary',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
+                    }
+                ],
+                "scrollX": true,
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": false,
+                "oLanguage": {
+                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sEmptyTable": "Tiada rekod ditemui",
+                    "sZeroRecords": "Tiada rekod ditemui",
+                    "sLengthMenu": "Papar _MENU_ rekod",
+                    "sLoadingRecords": "Sila tunggu...",
+                    "sSearch": "Carian:",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": ">",
+                        "sPrevious": "<",
+                    }
+                }
+            });
+        });
+        $(document).ready(function() {
+            $("#laporan_seluruh").DataTable({
+                "dom": 'Bfrtip',
+                "buttons": [{
+                        extend: 'csv',
+                        className: 'btn btn-sm btn-danger',
+                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-sm btn-primary',
+                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                    }
+                ],
+                "scrollX": true,
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": true,
+                "oLanguage": {
+                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sEmptyTable": "Tiada rekod ditemui",
+                    "sZeroRecords": "Tiada rekod ditemui",
+                    "sLengthMenu": "Papar _MENU_ rekod",
+                    "sLoadingRecords": "Sila tunggu...",
+                    "sSearch": "Carian:",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": ">",
+                        "sPrevious": "<",
+                    }
+                }
+            });
+        });
+
+
+        $(document).on("click", ".btnDelete", function() {
+            var user_id = $(this).data('permohonanid');
+            var permohonan_id = $(this).data('permohonanid');
+            var r = confirm("Adakah anda pasti untuk padam metadata ini?");
+            if (r == true) {
+                $.ajax({
+                    method: "POST",
+                    url: "delete_permohonan",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "user_id": user_id,
+                        "permohonan_id": permohonan_id
+                    },
+                }).done(function(response) {
+                    alert("Permohonan berjaya dipadam.");
+                    location.reload();
+                });
+            }
+        });
+    </script>
+
+
+
+@stop

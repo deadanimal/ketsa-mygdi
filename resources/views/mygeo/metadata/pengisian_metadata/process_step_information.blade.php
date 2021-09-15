@@ -9,6 +9,7 @@
     <div id="collapse5" class="panel-collapse collapse in " data-parent="#div_c5">
         <div class="card-body">
             <div class="row">
+                @if($elemenMetadata['c5_process_lvl']->status == '1')
                 <div class="col-xl-6">
                     <div class="form-inline ml-3">
                         <div class="form-control-label mr-3" data-toggle="tooltip" title="Tahap pemprosesan data">
@@ -17,6 +18,8 @@
                         <input class="form-control form-control-sm" type="text" style="width :120px" placeholder="Insert Process Level" name="c5_process_lvl" id="c5_process_lvl" value="{{old('c5_process_lvl')}}">
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c5_resolution']->status == '1')
                 <div class="col-xl-6">
                     <div class="form-inline">
                         <div class="form-control-label mr-3" data-toggle="tooltip" title="Resolusi data">
@@ -28,6 +31,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

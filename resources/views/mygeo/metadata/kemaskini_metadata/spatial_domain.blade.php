@@ -24,10 +24,10 @@
     <div id="collapse9" class="panel-collapse collapse in show" data-parent="#div_c9">
         <div class="card-body">
             <?php
-            $westBoundLongitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal : "");
-            $eastBoundLongitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal : "");
-            $southBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
-            $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
+            $westBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal : "");
+            $eastBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal : "");
+            $southBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
+            $northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
             ?>
             <div class="row justify-content-md-center" style="height:425px;">
                 <div class="col col-lg-6">
@@ -36,6 +36,7 @@
                 <div class="col col-lg-1"></div>
                 <div class="col col-lg-5">
                     <form id="formSpatialDomain">
+                        @if($elemenMetadata['c9_west_bound_longitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -48,9 +49,11 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
                         <div class="row">
                             <p></p>
                         </div>
+                        @if($elemenMetadata['c9_east_bound_longitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -63,9 +66,11 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
                         <div class="row">
                             <p></p>
                         </div>
+                        @if($elemenMetadata['c9_south_bound_latitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -78,9 +83,11 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
                         <div class="row">
                             <p></p>
                         </div>
+                        @if($elemenMetadata['c9_north_bound_latitude']->status == '1')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
@@ -93,6 +100,7 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
                         <div class="row">
                             <p></p>
                         </div>

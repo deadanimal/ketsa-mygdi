@@ -14,6 +14,7 @@
     <div id="collapse12" class="panel-collapse collapse in show" data-parent="#div_c12">
         <div class="card-body">
             <div class="acard-body opacity-8">
+                @if($elemenMetadata['c12_dataset_type']->status == '1')
                 <div class="row mb-4">
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-dataset-type">
@@ -23,8 +24,8 @@
                     <div class="col-xl-3">
                         <?php
                         $dataSetType = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType != "") {
-                            $dataSetType = trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType);
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) && $metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode != "") {
+                            $dataSetType = trim($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode);
                         }
                         ?>
                         <select name="c12_dataset_type" id="c12_dataset_type" class="form-control form-control-sm">
@@ -37,8 +38,10 @@
                         </select>
                     </div>
                 </div>
+                @endif
                 <h6 class="heading-small text-muted mb-2">DATA SET RESOLUTION</h6>
                 <div class="row mb-2">
+                    @if($elemenMetadata['c12_feature_scale']->status == '1')
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy">
                             Scale in Hardcopy/Softcopy
@@ -48,12 +51,14 @@
                     <div class="col-xl-2">
                         <?php
                         $scale = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator != "") {
-                            $scale = $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) && $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer != "") {
+                            $scale = $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer;
                         }
                         ?>
                         <input type="text" name="c12_feature_scale" id="c12_feature_scale" class="form-control form-control-sm" placeholder="10:50000" value="{{ $scale }}">
                     </div>
+                    @endif
+                    @if($elemenMetadata['c12_image_res']->status == '1')
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-imggsd">
                             Image Resolution (GSD)</label>
@@ -62,8 +67,8 @@
                         <div class="input-group">
                             <?php
                             $imgRes = "";
-                            if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance != "") {
-                                $imgRes = $metadataxml->identificationInfo->SV_ServiceIdentification->spatialResolution->MD_Resolution->distance;
+                            if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance) && $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance != "") {
+                                $imgRes = $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance;
                             }
                             ?>
                             <input type="text" class="form-control form-control-sm" name="c12_image_res" id="c12_image_res" placeholder="10.5" value="{{ $imgRes }}">
@@ -72,6 +77,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @if($elemenMetadata['c12_language']->status == '1')
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-language">
                             Language
@@ -80,8 +87,8 @@
                     <div class="col-xl-2">
                         <?php
                         $lang = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->language) && $metadataxml->identificationInfo->SV_ServiceIdentification->language != "") {
-                            $lang = trim($metadataxml->identificationInfo->SV_ServiceIdentification->language);
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString != "") {
+                            $lang = trim($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString);
                         }
                         ?>
                         <select name="c12_language" id="c12_language" class="form-control form-control-sm">
@@ -89,7 +96,9 @@
                             <option value="Bahasa Malaysia" {{($lang == 'Bahasa Malaysia' ? "selected":"")}}>Bahasa Malaysia</option>
                         </select>
                     </div>
+                    @endif
                 </div>
+                @if($elemenMetadata['c12_maintenanceUpdate']->status == '1')
                 <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
                 <div class="row mb-2 divMaintenanceInfo">
                     <div class="col-xl-3">
@@ -122,7 +131,14 @@
                         </select>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#c12_dataset_type').val("{{ $dataSetType }}").trigger('change');
+    });
+</script>

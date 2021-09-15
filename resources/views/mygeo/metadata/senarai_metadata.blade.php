@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 <style>
@@ -79,20 +79,22 @@
                           <td>{{ $bil }}</td>
                           <td>
                               <?php
-                                if(isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                                if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                                   echo $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                               }elseif(isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                                    echo $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                                }
                                ?>
                           </td>
-                          @if(Auth::user()->hasRole(['Pengesah Metadata'])) 
-                              <?php //################################## ?>                          
+                          @if(Auth::user()->hasRole(['Pengesah Metadata']))
+                              <?php //################################## ?>
                           <td>
                             {{ (isset($val[2]->name) ? $val[2]->name:"") }}
                           </td>
                             <td>
                                 <?php
-                                   if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
-                                      echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
                                   }
                                   ?>
                              </td>
@@ -137,7 +139,7 @@
                               </div>
                           </td>
                          @elseif(auth::user()->hasRole(['Pentadbir Metadata']))
-                             <?php //################################## ?>                          
+                             <?php //################################## ?>
                          <td>
                               {{ (isset($val[2]->name) ? $val[2]->name:"") }}
                           </td>
@@ -146,8 +148,8 @@
                           </td>
                             <td>
                                 <?php
-                                   if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
-                                      echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
                                   }
                                   ?>
                              </td>
@@ -192,11 +194,11 @@
                               </div>
                           </td>
                          @elseif(auth::user()->hasRole(['Penerbit Metadata','Pentadbir Aplikasi']))
-                             <?php //################################## ?>                          
+                             <?php //################################## ?>
                             <td>
                                 <?php
-                                   if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
-                                      echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
                                   }
                                   ?>
                              </td>
@@ -240,12 +242,12 @@
                                 </form>
                               </div>
                           </td>
-                         @else 
-                             <?php //################################## ?>                          
+                         @else
+                             <?php //################################## ?>
                             <td>
                                 <?php
-                                   if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
-                                      echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
                                   }
                                   ?>
                              </td>
@@ -303,7 +305,7 @@
       </div>
     </section>
   </div>
-  
+
 <script>
   $(document).ready(function(){
     var table = $("#table_metadatas").DataTable({
@@ -326,7 +328,7 @@
         }
       },
     });
-    
+
     // Setup - add a text input to each footer cell
     $('#table_metadatas thead tr').clone(true).appendTo('#table_metadatas thead');
     $('#table_metadatas thead tr:eq(1) th').each( function (i) {
@@ -350,12 +352,6 @@
           $(this).parent().submit();
         }
     });
-    
-    <?php
-    if(Session::has('message')){
-        ?>alert("{{ Session::get('message') }}");<?php
-    }
-    ?>
   });
 </script>
 @stop

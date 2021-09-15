@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+//        Commands\DemoCron::class,
+        Commands\UncheckedMetadataCron::class,
+        Commands\PenilaianMuatTurunDataCron::class,
     ];
 
     /**
@@ -24,7 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+//        $schedule->command('demo:cron')->everyFiveMinutes();
+        $schedule->command('uncheckedMetadata:cron')->dailyAt('20:00'); //ori specs
+//        $schedule->command('uncheckedMetadata:cron')->everyFiveMinutes();
+        $schedule->command('penilaianMuatTurunData:cron')->dailyAt('20:00');
+//        $schedule->command('penilaianMuatTurunData:cron')->everyFiveMinutes();
     }
 
     /**

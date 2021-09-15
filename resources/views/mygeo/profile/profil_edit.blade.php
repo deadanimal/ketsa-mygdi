@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -96,7 +96,7 @@
                                             <?php
 //                                            if($user->editable == "1"){
                                                 ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ $user->nric }}"><?php
-                                            
+
                                                 /*
                                                 }else{
                                                 ?>
@@ -108,7 +108,7 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-2 divSektor">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="sektor">
                                                 Sektor
@@ -129,12 +129,22 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
-                                                <option value="">Pilih...</option>
-                                            </select>
+                                            <?php
+                                            if (Auth::user()->hasRole(['Pemohon Data'])) {
+                                                ?>
+                                                <input type="text" name="agensi_organisasi" class="form-control form-control-sm ml-3" value="{{ $user->agensi_organisasi }}">
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                                                    <option value="">Pilih...</option>
+                                                </select>
+                                                <?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-2 divBahagian">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="bahagian">
                                                 Bahagian
@@ -153,7 +163,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" name="email" type="email" value="{{ $user->email }}" />
+                                            <input class="form-control form-control-sm ml-3" id="email" name="email" type="email" value="{{ $user->email }}" />
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -163,10 +173,10 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-3">
-                                            <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="text" value="{{ $user->phone_pejabat }}" />
+                                            <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="number" value="{{ $user->phone_pejabat }}" />
                                         </div>
                                         <?php
-                                        if(Auth::user()->hasRole('Pemohon Data')){
+                                        if(!Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata'])){
                                             ?>
                                             <div class="col-2">
                                                 <label class="form-control-label mr-4" for="phone_bimbit">
@@ -174,7 +184,7 @@
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-3">
-                                                <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="text" value="{{ $user->phone_bimbit }}" />
+                                                <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="number" value="{{ $user->phone_bimbit }}" />
                                             </div>
                                             <?php
                                         }
@@ -197,6 +207,29 @@
                                             ?>
                                         </div>
                                     </div>
+                                    @if (Auth::user()->hasRole('Pemohon Data'))
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="email">
+                                                Kategori
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <select class="form-control form-control-sm ml-3" type="text" name="kategori">
+                                                <option value="">Pilih...</option>
+                                                <?php
+                                                if(count($kategori) > 0){
+                                                    foreach($kategori as $k){
+                                                        ?>
+                                                <option value="{{ $k->name }}" {{ ($k->name == $user->kategori ? "selected":"") }}>{{ $k->name }}</option>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             </form>
 
@@ -239,27 +272,41 @@
 
 <script>
 $(document).ready(function(){
+    <?php
+    if(Auth::user()->hasRole('Pemohon Data')){
+        ?>
+        $('.divSektor,.divBahagian').hide();
+        <?php
+    }
+    ?>
+
     $(document).on('click','.btn_simpan',function(){
         var nric = $("#nric").val();
+        var email = $("#email").val();
         var agensi_organisasi = $("#agensi_organisasi").val();
         var bahagian = $("#bahagian").val();
         var msg = "";
         if(nric.length < 12){
             msg = msg + "Nombor NRIC tidak lengkap\r\n\r\n";
         }
+        if(!isEmail(email)){
+            msg = msg + "Emel tidak sah\r\n\r\n";
+        }
         if(agensi_organisasi == ""){
             msg = msg + "Sila pilih agensi / organisasi\r\n\r\n";
         }
+        @if(!Auth::user()->hasRole('Pemohon Data'))
         if(bahagian == ""){
             msg = msg + "Sila pilih bahagian\r\n\r\n";
         }
+        @endif
         if(msg.length > 0){
             alert(msg);
         }else{
             $("#form_kemaskini_profil").submit();
         }
     });
-    
+
     $('#sektor').change(function() {
         $.ajax({
             method: "POST",
@@ -275,14 +322,14 @@ $(document).ready(function(){
             $.each(data.aos, function(index,value) {
                 $('#agensi_organisasi').append('<option value="'+value.id+'" data-name="'+value.name+'">'+value.name+'</option>');
             });
-            
+
             $('#bahagian').html('');
             $('#bahagian').append('<option value="">Pilih...</option>');
         });
     });
     $('#agensi_organisasi').change(function() {
         var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
-        
+
         $.ajax({
             method: "POST",
             url: "{{ url('get_bahagian') }}",
@@ -303,7 +350,7 @@ $(document).ready(function(){
             }
         });
     });
-    
+
     $('#sektor').val('<?php echo $user->sektor; ?>').change();
     setTimeout(function(){
         $('#agensi_organisasi').val('<?php echo $user->agensi_organisasi; ?>').change();
@@ -312,6 +359,11 @@ $(document).ready(function(){
         $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
     }, 1000);
 });
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
 </script>
 
 @stop

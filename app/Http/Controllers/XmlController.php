@@ -9,238 +9,433 @@ class XmlController extends Controller {
 
     function __construct() {}
 
-    public function createXml($request,$fileUrl="") {
+    public function createXml($request,$fileUrl="",$keywords="",$topicCategories="",$custom_inputs="") {
         $c2_metadataName = strtoupper($request->c2_metadataName);
         $xml = <<<XML
-                <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                    <gmd:fileIdentifier>
+                <MD_Metadata
+                    xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                    xmlns:gco="http://www.isotc211.org/2005/gco"
+                    xmlns:gml="http://www.opengis.net/gml" 
+                    xmlns:xlink="http://www.w3.org/1999/xlink" 
+                    xmlns:srv="http://www.isotc211.org/2005/srv"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/metadataEntity.xsd">
+                    <fileIdentifier>
                         <gco:CharacterString>{82EB5705-61EA-41A7-BAF5-183B3B3EA010}</gco:CharacterString>
-                    </gmd:fileIdentifier>
-                    <gmd:language>
+                    </fileIdentifier>
+                    <language>
                         <gco:CharacterString>$request->flanguage</gco:CharacterString>
-                    </gmd:language>
-                    <gmd:characterSet>
-                        <gmd:MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part3"></gmd:MD_CharacterSetCode>
-                    </gmd:characterSet>
-                    <gmd:hierarchyLevel>
-                        <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset"></gmd:MD_ScopeCode>
-                    </gmd:hierarchyLevel>
-
-                    <gmd:categoryTitle>
-                        <gmd:categoryItem>
-                            <gco:CharacterString>$request->kategori</gco:CharacterString>
-                        </gmd:categoryItem>
-                    </gmd:categoryTitle>
-
-                    <gmd:contact>
-                        <gmd:CI_ResponsibleParty>$request->c1_content_info
-                            <gmd:organisationName>
+                    </language>
+                    <characterSet>
+                        <MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part3">8859part3</MD_CharacterSetCode>
+                    </characterSet>
+                    <hierarchyLevel>
+                        <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset">$request->kategori</MD_ScopeCode>
+                    </hierarchyLevel>
+                    <contact>
+                        <CI_ResponsibleParty>
+                            <contentInfo>
+                                <gco:CharacterString>$request->c1_content_info</gco:CharacterString>
+                            </contentInfo>
+                            <organisationName>
                                 <gco:CharacterString>$request->publisher_agensi_organisasi</gco:CharacterString>
-                            </gmd:organisationName>
-                            <gmd:individualName>
+                            </organisationName>
+                            <departmentName>
+                                <gco:CharacterString>$request->publisher_bahagian</gco:CharacterString>
+                            </departmentName>
+                            <individualName>
                                 <gco:CharacterString>$request->publisher_name</gco:CharacterString>
-                            </gmd:individualName>
-                            <gmd:role>
-                                <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="custodian"></gmd:CI_RoleCode>
-                            </gmd:role>
-                            <gmd:contactInfo>
-                                <gmd:CI_Contact>
-                                    <gmd:phone>
-                                        <gmd:CI_Telephone>
-                                            <gmd:voice>
+                            </individualName>
+                            <role>
+                                <CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="custodian">$request->publisher_role</CI_RoleCode>
+                            </role>
+                            <contactInfo>
+                                <CI_Contact>
+                                    <phone>
+                                        <CI_Telephone>
+                                            <voice>
                                                 <gco:CharacterString>$request->publisher_phone</gco:CharacterString>
-                                            </gmd:voice>
-                                        </gmd:CI_Telephone>
-                                    </gmd:phone>
-                                    <gmd:address>
-                                        <gmd:CI_Address>
-                                            <gmd:electronicMailAddress>
+                                            </voice>
+                                        </CI_Telephone>
+                                    </phone>
+                                    <address>
+                                        <CI_Address>
+                                            <electronicMailAddress>
                                                 <gco:CharacterString>$request->publisher_email</gco:CharacterString>
-                                            </gmd:electronicMailAddress>
-                                        </gmd:CI_Address>
-                                    </gmd:address>
-                                </gmd:CI_Contact>
-                            </gmd:contactInfo>
-                            <gmd:publisherRole>
-                                <gco:CharacterString>$request->publisher_role</gco:CharacterString>
-                            </gmd:publisherRole>
-                        </gmd:CI_ResponsibleParty>
-                    </gmd:contact>
-                    <gmd:dateStamp>
-                        <gco:Date></gco:Date>
-                    </gmd:dateStamp>
-                    <gmd:metadataStandardName>
-                        <gco:CharacterString></gco:CharacterString>
-                    </gmd:metadataStandardName>
-                    <gmd:metadataStandardVersion>
-                        <gco:CharacterString></gco:CharacterString>
-                    </gmd:metadataStandardVersion>
-                    <gmd:metadataMaintenance>
-                        <gmd:MD_MaintenanceInformation>
-                            <gmd:maintenanceAndUpdateFrequency>
-                                <gmd:MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="">$request->c12_maintenanceUpdate
-                                </gmd:MD_MaintenanceFrequencyCode>
-                            </gmd:maintenanceAndUpdateFrequency>
-                        </gmd:MD_MaintenanceInformation>
-                    </gmd:metadataMaintenance>
-                    <gmd:referenceSystemInfo>
-                        <gmd:MD_ReferenceSystem>
-                            <gmd:referenceSystemIdentifier>
-                                <gmd:RS_Identifier>
-                                    <gmd:codeSpace>
+                                            </electronicMailAddress>
+                                        </CI_Address>
+                                    </address>
+                                </CI_Contact>
+                            </contactInfo>
+                        </CI_ResponsibleParty>
+                    </contact>
+                    <dateStamp>
+                        <gco:Date>2013-03-05</gco:Date>
+                    </dateStamp>
+                    <metadataStandardName>
+                        <gco:CharacterString>MyGDI Metadata Standard (Dataset)</gco:CharacterString>
+                    </metadataStandardName>
+                    <metadataStandardVersion>
+                        <gco:CharacterString>Version 1.0 2011</gco:CharacterString>
+                    </metadataStandardVersion>
+                    <metadataMaintenance>
+                        <MD_MaintenanceInformation>
+                            <maintenanceAndUpdateFrequency>
+                                <MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="">$request->c12_maintenanceUpdate</MD_MaintenanceFrequencyCode>
+                            </maintenanceAndUpdateFrequency>
+                        </MD_MaintenanceInformation>
+                    </metadataMaintenance>
+                    <referenceSystemInfo>
+                        <MD_ReferenceSystem>
+                            <referenceSystemIdentifier>
+                                <RS_Identifier>
+                                    <codeSpace>
                                         <gco:CharacterString>$request->c13_ref_sys_identify</gco:CharacterString>
-                                    </gmd:codeSpace>
-                                </gmd:RS_Identifier>
-                            </gmd:referenceSystemIdentifier>
-                        </gmd:MD_ReferenceSystem>
-                        <gmd:MD_CRS>
-                            <gmd:projection>
-                                <gmd:RS_Identifier>
-                                    <gmd:codeSpace>
+                                    </codeSpace>
+                                </RS_Identifier>
+                            </referenceSystemIdentifier>
+                        </MD_ReferenceSystem>
+                        <MD_CRS>
+                            <projection>
+                                <RS_Identifier>
+                                    <codeSpace>
                                         <gco:CharacterString>$request->c13_projection</gco:CharacterString>
-                                    </gmd:codeSpace>
-                                </gmd:RS_Identifier>
-                            </gmd:projection>
-                            <gmd:ellipsoid>
-                                <gmd:RS_Identifier>
-                                    <gmd:codeSpace>
+                                    </codeSpace>
+                                </RS_Identifier>
+                            </projection>
+                            <ellipsoid>
+                                <RS_Identifier>
+                                    <codeSpace>
                                         <gco:CharacterString>$request->c13_ellipsoid</gco:CharacterString>
-                                    </gmd:codeSpace>
-                                </gmd:RS_Identifier>
-                            </gmd:ellipsoid>
-                            <gmd:datum>
-                                <gmd:RS_Identifier>
-                                    <gmd:codeSpace>
+                                    </codeSpace>
+                                </RS_Identifier>
+                            </ellipsoid>
+                            <datum>
+                                <RS_Identifier>
+                                    <codeSpace>
                                         <gco:CharacterString>$request->c13_datum</gco:CharacterString>
-                                    </gmd:codeSpace>
-                                </gmd:RS_Identifier>
-                            </gmd:datum>
-                            <gmd:ellipsoidParameters>
-                                <gmd:MD_EllipsoidParameters>
-                                    <gmd:semiMajorAxis>
+                                    </codeSpace>
+                                </RS_Identifier>
+                            </datum>
+                            <ellipsoidParameters>
+                                <MD_EllipsoidParameters>
+                                    <semiMajorAxis>
                                         <gco:CharacterString>$request->c13_semi_major_axis</gco:CharacterString>
-                                    </gmd:semiMajorAxis>
-                                    <gmd:axisUnits>
+                                    </semiMajorAxis>
+                                    <axisUnits>
                                         <gco:UomLength>$request->c13_axis_units Meter</gco:UomLength>
-                                    </gmd:axisUnits>
-                                    <gmd:denominatorOfFlatteningRatio>
+                                    </axisUnits>
+                                    <denominatorOfFlatteningRatio>
                                         <gco:CharacterString>$request->c13_denom_flat_ratio</gco:CharacterString>
-                                    </gmd:denominatorOfFlatteningRatio>
-                                </gmd:MD_EllipsoidParameters>
-                            </gmd:ellipsoidParameters>
-                        </gmd:MD_CRS>
-                    </gmd:referenceSystemInfo>
-                    <gmd:identificationInfo>
-                        <srv:SV_ServiceIdentification>
-                            <gmd:citation>
-                                <gmd:CI_Citation>
-                                    <gmd:title>
+                                    </denominatorOfFlatteningRatio>
+                                </MD_EllipsoidParameters>
+                            </ellipsoidParameters>
+                        </MD_CRS>
+                    </referenceSystemInfo>
+                    <contentInfo>
+                        <MD_FeatureCatalogueDescription>
+                            <complianceCode>
+                                <gco:Boolean/>
+                            </complianceCode>
+                            <language>
+                                <gco:CharacterString/>
+                            </language>
+                            <featureCatalogueCitation>
+                                <CI_Citation>
+                                    <edition>
+                                        <gco:CharacterString/>
+                                    </edition>
+                                    <editionDate>
+                                        <gco:Date>1970</gco:Date>
+                                    </editionDate>
+                                </CI_Citation>
+                            </featureCatalogueCitation>
+                        </MD_FeatureCatalogueDescription>
+                    </contentInfo>
+                    <identificationInfo>
+                        <MD_DataIdentification>
+                            <citation>
+                                <CI_Citation>
+                                    <title>
                                         <gco:CharacterString>$c2_metadataName</gco:CharacterString>
-                                    </gmd:title>
-                                    <gmd:date>
-                                        <gmd:CI_Date>
-                                            <gmd:date>
-                                                <gco:Date></gco:Date>
-                                            </gmd:date>
-                                            <gmd:dateType>
-                                                <gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="creation"></gmd:CI_DateTypeCode>
-                                            </gmd:dateType>
-                                        </gmd:CI_Date>
-                                    </gmd:date>
-                                    <gmd:series>
-                                        <gmd:CI_Series />
-                                    </gmd:series>
-                                    <gmd:edition>
-                                        <gco:CharacterString />
-                                    </gmd:edition>
-                                    <gmd:editionDate>
-                                        <gco:Date></gco:Date>
-                                    </gmd:editionDate>
-                                </gmd:CI_Citation>
-                            </gmd:citation>
-                            <gmd:productType>$request->c2_product_type
-                                <gmd:productTypeItem>
-                                    <gco:CharacterString></gco:CharacterString>
-                                </gmd:productTypeItem>
-                            </gmd:productType>
-                            <gmd:abstract>
-                                <gco:CharacterString>$request->c2_abstract</gco:CharacterString>
-                            </gmd:abstract>
-                            <gmd:purpose>
-                                <gco:CharacterString />
-                            </gmd:purpose>
-                            <gmd:credit>
-                                <gco:CharacterString />
-                            </gmd:credit>
-                            <gmd:status>
-                                <gmd:MD_ProgressCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode" codeListValue="completed"></gmd:MD_ProgressCode>
-                            </gmd:status>
-                            <gmd:metadataDate>
-                                <gco:CharacterString>$request->c2_metadataDate</gco:CharacterString>
-                            </gmd:metadataDate>
-                            <gmd:metadataDateType>
-                                <gco:CharacterString>$request->c2_metadataDateType</gco:CharacterString>
-                            </gmd:metadataDateType>
-                            <gmd:metadataStatus>
+                                    </title>
+                                    <date>
+                                        <CI_Date>
+                                            <date>
+                                                <gco:Date>$request->c2_metadataDate</gco:Date>
+                                            </date>
+                                            <dateType>
+                                                <CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="creation">$request->c2_metadataDateType</CI_DateTypeCode>
+                                            </dateType>
+                                        </CI_Date>
+                                    </date>
+                                    <series>
+                                        <CI_Series></CI_Series>
+                                    </series>
+                                </CI_Citation>
+                            </citation>
+                            <metadataStatus>
                                 <gco:CharacterString>$request->c2_metadataStatus</gco:CharacterString>
-                            </gmd:metadataStatus>
+                            </metadataStatus>
                             <gmd:typeOfServices>
                                 <gco:CharacterString>$request->c2_typeOfServices</gco:CharacterString>
                             </gmd:typeOfServices>
-                            <gmd:operationName>
-                                <gco:CharacterString></gco:CharacterString>
-                            </gmd:operationName>
                             <gmd:serviceUrl>
                                 <gco:CharacterString>$request->c2_serviceUrl</gco:CharacterString>
                             </gmd:serviceUrl>
-                            <gmd:pointOfContact>
-                                <gmd:CI_ResponsibleParty>
-                                    <gmd:organisationName>
+                            <gmd:productType>
+                                <gmd:productTypeItem>
+                                    <gco:CharacterString>$request->c2_product_type</gco:CharacterString>
+                                </gmd:productTypeItem>
+                            </gmd:productType>
+                            <abstract>
+                                <gco:CharacterString>$request->c2_abstract</gco:CharacterString>
+                            </abstract>
+                            <gmd:abstractApplication_namaAplikasi>
+                                <gco:CharacterString>$request->abstractApplication_namaAplikasi</gco:CharacterString>
+                            </gmd:abstractApplication_namaAplikasi>
+                            <gmd:abstractApplication_tujuan>
+                                <gco:CharacterString>$request->abstractApplication_tujuan</gco:CharacterString>
+                            </gmd:abstractApplication_tujuan>
+                            <gmd:abstractApplication_tahunPembangunan>
+                                <gco:CharacterString>$request->abstractApplication_tahunPembangunan</gco:CharacterString>
+                            </gmd:abstractApplication_tahunPembangunan>
+                            <gmd:abstractApplication_kemaskini>
+                                <gco:CharacterString>$request->abstractApplication_kemaskini</gco:CharacterString>
+                            </gmd:abstractApplication_kemaskini>
+                            <gmd:abstractApplication_dataTerlibat>
+                                <gco:CharacterString>$request->abstractApplication_dataTerlibat</gco:CharacterString>
+                            </gmd:abstractApplication_dataTerlibat>
+                            <gmd:abstractApplication_sasaranPengguna>
+                                <gco:CharacterString>$request->abstractApplication_sasaranPengguna</gco:CharacterString>
+                            </gmd:abstractApplication_sasaranPengguna>
+                            <gmd:abstractApplication_versi>
+                                <gco:CharacterString>$request->abstractApplication_versi</gco:CharacterString>
+                            </gmd:abstractApplication_versi>
+                            <gmd:abstractApplication_perisianDigunaPembangunan>
+                                <gco:CharacterString>$request->abstractApplication_perisianDigunaPembangunan</gco:CharacterString>
+                            </gmd:abstractApplication_perisianDigunaPembangunan>
+                            <gmd:abstractDocument_namaDokumen>
+                                <gco:CharacterString>$request->abstractDocument_namaDokumen</gco:CharacterString>
+                            </gmd:abstractDocument_namaDokumen>
+                            <gmd:abstractDocument_tujuan>
+                                <gco:CharacterString>$request->abstractDocument_tujuan</gco:CharacterString>
+                            </gmd:abstractDocument_tujuan>
+                            <gmd:abstractDocument_tahunTerbitan>
+                                <gco:CharacterString>$request->abstractDocument_tahunTerbitan</gco:CharacterString>
+                            </gmd:abstractDocument_tahunTerbitan>
+                            <gmd:abstractDocument_edisi>
+                                <gco:CharacterString>$request->abstractDocument_edisi</gco:CharacterString>
+                            </gmd:abstractDocument_edisi>
+                            <gmd:abstractGISActivityProject_namaAktiviti>
+                                <gco:CharacterString>$request->abstractGISActivityProject_namaAktiviti</gco:CharacterString>
+                            </gmd:abstractGISActivityProject_namaAktiviti>
+                            <gmd:abstractGISActivityProject_tujuan>
+                                <gco:CharacterString>$request->abstractGISActivityProject_tujuan</gco:CharacterString>
+                            </gmd:abstractGISActivityProject_tujuan>
+                            <gmd:abstractGISActivityProject_lokasi>
+                                <gco:CharacterString>$request->abstractGISActivityProject_lokasi</gco:CharacterString>
+                            </gmd:abstractGISActivityProject_lokasi>
+                            <gmd:abstractGISActivityProject_tahun>
+                                <gco:CharacterString>$request->abstractGISActivityProject_tahun</gco:CharacterString>
+                            </gmd:abstractGISActivityProject_tahun>
+                            <gmd:abstractMap_namaPeta>
+                                <gco:CharacterString>$request->abstractMap_namaPeta</gco:CharacterString>
+                            </gmd:abstractMap_namaPeta>
+                            <gmd:abstractMap_kawasan>
+                                <gco:CharacterString>$request->abstractMap_kawasan</gco:CharacterString>
+                            </gmd:abstractMap_kawasan>
+                            <gmd:abstractMap_tujuan>
+                                <gco:CharacterString>$request->abstractMap_tujuan</gco:CharacterString>
+                            </gmd:abstractMap_tujuan>
+                            <gmd:abstractMap_tahunTerbitan>
+                                <gco:CharacterString>$request->abstractMap_tahunTerbitan</gco:CharacterString>
+                            </gmd:abstractMap_tahunTerbitan>
+                            <gmd:abstractMap_edisi>
+                                <gco:CharacterString>$request->abstractMap_edisi</gco:CharacterString>
+                            </gmd:abstractMap_edisi>
+                            <gmd:abstractMap_noSiri>
+                                <gco:CharacterString>$request->abstractMap_noSiri</gco:CharacterString>
+                            </gmd:abstractMap_noSiri>
+                            <gmd:abstractMap_skala>
+                                <gco:CharacterString>$request->abstractMap_skala</gco:CharacterString>
+                            </gmd:abstractMap_skala>
+                            <gmd:abstractMap_unit>
+                                <gco:CharacterString>$request->abstractMap_unit</gco:CharacterString>
+                            </gmd:abstractMap_unit>
+                            <gmd:abstractRasterData_namaData>
+                                <gco:CharacterString>$request->abstractRasterData_namaData</gco:CharacterString>
+                            </gmd:abstractRasterData_namaData>
+                            <gmd:abstractRasterData_lokasi>
+                                <gco:CharacterString>$request->abstractRasterData_lokasi</gco:CharacterString>
+                            </gmd:abstractRasterData_lokasi>
+                            <gmd:abstractRasterData_rumusanData>
+                                <gco:CharacterString>$request->abstractRasterData_rumusanData</gco:CharacterString>
+                            </gmd:abstractRasterData_rumusanData>
+                            <gmd:abstractRasterData_tujuanData>
+                                <gco:CharacterString>$request->abstractRasterData_tujuanData</gco:CharacterString>
+                            </gmd:abstractRasterData_tujuanData>
+                            <gmd:abstractRasterData_kaedahPenyediaanData>
+                                <gco:CharacterString>$request->abstractRasterData_kaedahPenyediaanData</gco:CharacterString>
+                            </gmd:abstractRasterData_kaedahPenyediaanData>
+                            <gmd:abstractRasterData_format>
+                                <gco:CharacterString>$request->abstractRasterData_format</gco:CharacterString>
+                            </gmd:abstractRasterData_format>
+                            <gmd:abstractRasterData_unit>
+                                <gco:CharacterString>$request->abstractRasterData_unit</gco:CharacterString>
+                            </gmd:abstractRasterData_unit>
+                            <gmd:abstractRasterData_skala>
+                                <gco:CharacterString>$request->abstractRasterData_skala</gco:CharacterString>
+                            </gmd:abstractRasterData_skala>
+                            <gmd:abstractRasterData_statusData>
+                                <gco:CharacterString>$request->abstractRasterData_statusData</gco:CharacterString>
+                            </gmd:abstractRasterData_statusData>
+                            <gmd:abstractRasterData_tahunPerolehan>
+                                <gco:CharacterString>$request->abstractRasterData_tahunPerolehan</gco:CharacterString>
+                            </gmd:abstractRasterData_tahunPerolehan>
+                            <gmd:abstractRasterData_jenisSatelit>
+                                <gco:CharacterString>$request->abstractRasterData_jenisSatelit</gco:CharacterString>
+                            </gmd:abstractRasterData_jenisSatelit>
+                            <gmd:abstractRasterData_format>
+                                <gco:CharacterString>$request->abstractRasterData_format</gco:CharacterString>
+                            </gmd:abstractRasterData_format>
+                            <gmd:abstractRasterData_resolusi>
+                                <gco:CharacterString>$request->abstractRasterData_resolusi</gco:CharacterString>
+                            </gmd:abstractRasterData_resolusi>
+                            <gmd:abstractRasterData_kawasanLitupan>
+                                <gco:CharacterString>$request->abstractRasterData_kawasanLitupan</gco:CharacterString>
+                            </gmd:abstractRasterData_kawasanLitupan>
+                            <gmd:abstractServices_namaServis>
+                                <gco:CharacterString>$request->abstractServices_namaServis</gco:CharacterString>
+                            </gmd:abstractServices_namaServis>
+                            <gmd:abstractServices_lokasi>
+                                <gco:CharacterString>$request->abstractServices_lokasi</gco:CharacterString>
+                            </gmd:abstractServices_lokasi>
+                            <gmd:abstractServices_tujuan>
+                                <gco:CharacterString>$request->abstractServices_tujuan</gco:CharacterString>
+                            </gmd:abstractServices_tujuan>
+                            <gmd:abstractServices_dataTerlibat>
+                                <gco:CharacterString>$request->abstractServices_dataTerlibat</gco:CharacterString>
+                            </gmd:abstractServices_dataTerlibat>
+                            <gmd:abstractServices_polisi>
+                                <gco:CharacterString>$request->abstractServices_polisi</gco:CharacterString>
+                            </gmd:abstractServices_polisi>
+                            <gmd:abstractServices_peringkatCapaian>
+                                <gco:CharacterString>$request->abstractServices_peringkatCapaian</gco:CharacterString>
+                            </gmd:abstractServices_peringkatCapaian>
+                            <gmd:abstractServices_format>
+                                <gco:CharacterString>$request->abstractServices_format</gco:CharacterString>
+                            </gmd:abstractServices_format>
+                            <gmd:abstractSoftware_namaPerisian>
+                                <gco:CharacterString>$request->abstractSoftware_namaPerisian</gco:CharacterString>
+                            </gmd:abstractSoftware_namaPerisian>
+                            <gmd:abstractSoftware_versi>
+                                <gco:CharacterString>$request->abstractSoftware_versi</gco:CharacterString>
+                            </gmd:abstractSoftware_versi>
+                            <gmd:abstractSoftware_tujuan>
+                                <gco:CharacterString>$request->abstractSoftware_tujuan</gco:CharacterString>
+                            </gmd:abstractSoftware_tujuan>
+                            <gmd:abstractSoftware_tahunPengunaanPerisian>
+                                <gco:CharacterString>$request->abstractSoftware_tahunPengunaanPerisian</gco:CharacterString>
+                            </gmd:abstractSoftware_tahunPengunaanPerisian>
+                            <gmd:abstractSoftware_kaedahPerolehan>
+                                <gco:CharacterString>$request->abstractSoftware_kaedahPerolehan</gco:CharacterString>
+                            </gmd:abstractSoftware_kaedahPerolehan>
+                            <gmd:abstractSoftware_format>
+                                <gco:CharacterString>$request->abstractSoftware_format</gco:CharacterString>
+                            </gmd:abstractSoftware_format>
+                            <gmd:abstractSoftware_pengeluar>
+                                <gco:CharacterString>$request->abstractSoftware_pengeluar</gco:CharacterString>
+                            </gmd:abstractSoftware_pengeluar>
+                            <gmd:abstractSoftware_keupayaan>
+                                <gco:CharacterString>$request->abstractSoftware_keupayaan</gco:CharacterString>
+                            </gmd:abstractSoftware_keupayaan>
+                            <gmd:abstractSoftware_dataTerlibat>
+                                <gco:CharacterString>$request->abstractSoftware_dataTerlibat</gco:CharacterString>
+                            </gmd:abstractSoftware_dataTerlibat>
+                            <gmd:abstractSoftware_keperluanPerkakas>
+                                <gco:CharacterString>$request->abstractSoftware_keperluanPerkakas</gco:CharacterString>
+                            </gmd:abstractSoftware_keperluanPerkakas>
+                            <gmd:abstractVectorData_namaData>
+                                <gco:CharacterString>$request->abstractVectorData_namaData</gco:CharacterString>
+                            </gmd:abstractVectorData_namaData>
+                            <gmd:abstractVectorData_lokasi>
+                                <gco:CharacterString>$request->abstractVectorData_lokasi</gco:CharacterString>
+                            </gmd:abstractVectorData_lokasi>
+                            <gmd:abstractVectorData_rumusanData>
+                                <gco:CharacterString>$request->abstractVectorData_rumusanData</gco:CharacterString>
+                            </gmd:abstractVectorData_rumusanData>
+                            <gmd:abstractVectorData_tujuanData>
+                                <gco:CharacterString>$request->abstractVectorData_tujuanData</gco:CharacterString>
+                            </gmd:abstractVectorData_tujuanData>
+                            <gmd:abstractVectorData_kaedahPenyediaanData>
+                                <gco:CharacterString>$request->abstractVectorData_kaedahPenyediaanData</gco:CharacterString>
+                            </gmd:abstractVectorData_kaedahPenyediaanData>
+                            <gmd:abstractVectorData_format>
+                                <gco:CharacterString>$request->abstractVectorData_format</gco:CharacterString>
+                            </gmd:abstractVectorData_format>
+                            <gmd:abstractVectorData_unit>
+                                <gco:CharacterString>$request->abstractVectorData_unit</gco:CharacterString>
+                            </gmd:abstractVectorData_unit>
+                            <gmd:abstractVectorData_skala>
+                                <gco:CharacterString>$request->abstractVectorData_skala</gco:CharacterString>
+                            </gmd:abstractVectorData_skala>
+                            <gmd:abstractVectorData_statusData>
+                                <gco:CharacterString>$request->abstractVectorData_statusData</gco:CharacterString>
+                            </gmd:abstractVectorData_statusData>
+                            <purpose>
+                                <gco:CharacterString/>
+                            </purpose>
+                            <credit>
+                                <gco:CharacterString/>
+                            </credit>
+                            <status>
+                                <MD_ProgressCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode" codeListValue="completed">completed</MD_ProgressCode>
+                            </status>
+                            <pointOfContact>
+                                <CI_ResponsibleParty>
+                                    <organisationName>
                                         <gco:CharacterString>$request->c2_contact_agensiorganisasi</gco:CharacterString>
-                                    </gmd:organisationName>
-                                    <gmd:individualName>
+                                    </organisationName>
+                                    <individualName>
                                         <gco:CharacterString>$request->c2_contact_name</gco:CharacterString>
-                                    </gmd:individualName>
+                                    </individualName>
                                     <gmd:positionName>
                                         <gco:CharacterString>$request->c2_position_name</gco:CharacterString>
                                     </gmd:positionName>
-                                    <gmd:contactInfo>
-                                        <gmd:CI_Contact>
-                                            <gmd:phone>
-                                                <gmd:CI_Telephone>
-                                                    <gmd:voice>
+                                    <contactInfo>
+                                        <CI_Contact>
+                                            <phone>
+                                                <CI_Telephone>
+                                                    <voice>
                                                         <gco:CharacterString>$request->c2_contact_phone_office</gco:CharacterString>
-                                                    </gmd:voice>
+                                                    </voice>
                                                     <gmd:facsimile>
                                                         <gco:CharacterString>$request->c2_contact_fax</gco:CharacterString>
                                                     </gmd:facsimile>
-                                                </gmd:CI_Telephone>
-                                            </gmd:phone>
-                                            <gmd:address>
-                                                <gmd:CI_Address>
-                                                    <gmd:deliveryPoint>
+                                                </CI_Telephone>
+                                            </phone>
+                                            <address>
+                                                <CI_Address>
+                                                    <deliveryPoint>
                                                         <gco:CharacterString>$request->c2_contact_address1</gco:CharacterString>
-                                                    </gmd:deliveryPoint>
-                                                    <gmd:city>
+                                                    </deliveryPoint>
+                                                    <city>
                                                         <gco:CharacterString>$request->c2_contact_city</gco:CharacterString>
-                                                    </gmd:city>
-                                                    <gmd:administrativeArea>
+                                                    </city>
+                                                    <administrativeArea>
                                                         <gco:CharacterString>$request->c2_contact_state</gco:CharacterString>
-                                                    </gmd:administrativeArea>
-                                                    <gmd:postalCode>
+                                                    </administrativeArea>
+                                                    <postalCode>
                                                         <gco:CharacterString>$request->c2_postal_code</gco:CharacterString>
-                                                    </gmd:postalCode>
-                                                    <gmd:country>
+                                                    </postalCode>
+                                                    <country>
                                                         <gco:CharacterString>$request->c2_contact_country</gco:CharacterString>
-                                                    </gmd:country>
-                                                    <gmd:electronicMailAddress>
+                                                    </country>
+                                                    <electronicMailAddress>
                                                         <gco:CharacterString>$request->c2_contact_email</gco:CharacterString>
-                                                    </gmd:electronicMailAddress>
-                                                    <gmd:role>
-                                                        <gco:CharacterString>$request->c2_contact_role</gco:CharacterString>
-                                                    </gmd:role>
-                                                </gmd:CI_Address>
-                                            </gmd:address>
+                                                    </electronicMailAddress>
+                                                </CI_Address>
+                                            </address>
                                             <gmd:onlineResource>
                                                 <gmd:CI_OnlineResource>
                                                     <gmd:linkage>
@@ -248,54 +443,46 @@ class XmlController extends Controller {
                                                     </gmd:linkage>
                                                 </gmd:CI_OnlineResource>
                                             </gmd:onlineResource>
-                                            <gmd:hoursOfService>
-                                                <gco:CharacterString></gco:CharacterString>
-                                            </gmd:hoursOfService>
-                                        </gmd:CI_Contact>
-                                    </gmd:contactInfo>
-                                    <gmd:role>
-                                        <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact"></gmd:CI_RoleCode>
-                                    </gmd:role>
-                                </gmd:CI_ResponsibleParty>
-                            </gmd:pointOfContact>
-                            <srv:serviceType>
-                                <gco:LocalName></gco:LocalName>
-                            </srv:serviceType>
-                            <gmd:descriptiveKeywords>
-                                <gmd:MD_Keywords>
-                                    <gmd:keyword>
-                                        <gco:CharacterString></gco:CharacterString>
-                                    </gmd:keyword>
-                                    <gmd:keyword>
-                                        <gco:CharacterString>$request->c10_additional_keyword</gco:CharacterString>
-                                    </gmd:keyword>
-                                    <gmd:keyword>
-                                        <gco:CharacterString>$request->c10_additional_keyword</gco:CharacterString>
-                                    </gmd:keyword>
-                                </gmd:MD_Keywords>
-                            </gmd:descriptiveKeywords>
-                            <gmd:spatialRepresentationType>$request->c12_dataset_type
-                                <gmd:MD_SpatialRepresentationTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="" />
-                            </gmd:spatialRepresentationType>
-                            <gmd:spatialResolution>
-                                <gmd:MD_Resolution>
-                                    <gmd:equivalentScale>
-                                        <gmd:MD_RepresentativeFraction>
-                                            <gmd:denominator>$request->c12_feature_scale
-                                                <gco:Integer />
-                                            </gmd:denominator>
-                                        </gmd:MD_RepresentativeFraction>
-                                    </gmd:equivalentScale>
-                                    <gmd:distance>$request->c12_image_res
-                                        <gco:Distance />
+                                            <hoursOfService>
+                                                <gco:CharacterString>08.00-17.00(GMT+8)</gco:CharacterString>
+                                            </hoursOfService>
+                                        </CI_Contact>
+                                    </contactInfo>
+                                    <role>
+                                        <CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="custodian">$request->c2_contact_role</CI_RoleCode>
+                                    </role>
+                                </CI_ResponsibleParty>
+                            </pointOfContact>
+                            <graphicOverview></graphicOverview>
+                            <descriptiveKeywords>
+                                <MD_Keywords>
+                                    <keyword>
+                                        <gco:CharacterString>$request->c10_keyword</gco:CharacterString>
+                                    </keyword>
+                                    $keywords
+                                </MD_Keywords>
+                            </descriptiveKeywords>
+                            <spatialRepresentationType>
+                                <MD_SpatialRepresentationTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="vector">$request->c12_dataset_type</MD_SpatialRepresentationTypeCode>
+                            </spatialRepresentationType>
+                            <spatialResolution>
+                                <MD_Resolution>
+                                    <equivalentScale>
+                                        <MD_RepresentativeFraction>
+                                            <denominator>
+                                                <gco:Integer>$request->c12_feature_scale</gco:Integer>
+                                            </denominator>
+                                        </MD_RepresentativeFraction>
+                                    </equivalentScale>
+                                    <gmd:distance>
+                                        <gco:Distance>$request->c12_image_res</gco:Distance>
                                     </gmd:distance>
-                                </gmd:MD_Resolution>
-                            </gmd:spatialResolution>
-                            <gmd:language>$request->c12_language
-                                <gco:CharacterString />
-                            </gmd:language>
-                            <gmd:topicCategory>$request->topic_category
-                            </gmd:topicCategory>
+                                </MD_Resolution>
+                            </spatialResolution>
+                            <language>
+                                <gco:CharacterString>$request->c12_language</gco:CharacterString>
+                            </language>
+                            $topicCategories
                             <gmd:scanningResolution>
                                 <gco:CharacterString>$request->c4_scan_res</gco:CharacterString>
                             </gmd:scanningResolution>
@@ -374,10 +561,10 @@ class XmlController extends Controller {
                             <gmd:lastAcceptableDate>
                                 <gco:Date>$request->c8_last_accept_date</gco:Date>
                             </gmd:lastAcceptableDate>
-                            <srv:extent>
-                                <gmd:EX_Extent>
-                                    <gmd:geographicElement>
-                                        <gmd:EX_GeographicBoundingBox>
+                            <extent>
+                                <EX_Extent>
+                                    <geographicElement>
+                                        <EX_GeographicBoundingBox>
                                             <gmd:westBoundLongitude>
                                                 <gco:Decimal>$request->c9_west_bound_longitude</gco:Decimal>
                                             </gmd:westBoundLongitude>
@@ -390,10 +577,10 @@ class XmlController extends Controller {
                                             <gmd:northBoundLatitude>
                                                 <gco:Decimal>$request->c9_north_bound_latitude</gco:Decimal>
                                             </gmd:northBoundLatitude>
-                                        </gmd:EX_GeographicBoundingBox>
-                                    </gmd:geographicElement>
-                                </gmd:EX_Extent>
-                            </srv:extent>
+                                        </EX_GeographicBoundingBox>
+                                    </geographicElement>
+                                </EX_Extent>
+                            </extent>
                             <gmd:fileName>
                                 <gco:CharacterString>$request->c10_file_name</gco:CharacterString>
                             </gmd:fileName>
@@ -403,12 +590,6 @@ class XmlController extends Controller {
                             <gmd:fileURL>
                                 <gco:CharacterString>$request->c10_file_url</gco:CharacterString>
                             </gmd:fileURL>
-                            <gmd:searchKeyword>
-                                <gco:CharacterString>$request->c10_keyword</gco:CharacterString>
-                            </gmd:searchKeyword>
-                            <gmd:searchAddtionalKeyword>
-                                <gco:CharacterString>$request->c10_additional_keyword</gco:CharacterString>
-                            </gmd:searchAddtionalKeyword>
                             <srv:couplingType>
                                 <!-- Mandated by ISO 19119-->
                                 <srv:SV_CouplingType codeList="#SV_CouplingType" codeListValue="">$request->c2_typeOfCouplingDataset</srv:SV_CouplingType>
@@ -418,585 +599,573 @@ class XmlController extends Controller {
                                     <srv:operationName>
                                         <gco:CharacterString>$request->c2_operationName</gco:CharacterString>
                                     </srv:operationName>
-                                    <srv:DCP>
-                                        <srv:DCPList codeList="#DCPList" codeListValue="WebServices"></srv:DCPList>
-                                    </srv:DCP>
-                                    <srv:connectPoint>
-                                        <gmd:CI_OnlineResource>
-                                            <gmd:linkage>
-                                                <gmd:URL></gmd:URL>
-                                            </gmd:linkage>
-                                        </gmd:CI_OnlineResource>
-                                    </srv:connectPoint>
                                 </srv:SV_OperationMetadata>
                             </srv:containsOperations>
-                            <gmd:resourceSpecificUsage>
-                                <gmd:MD_Usage>
-                                    <gmd:specificUsage>
-                                        <gco:CharacterString />
-                                    </gmd:specificUsage>
-                                    <gmd:userDeterminedLimitations>
+                            <supplementalInformation>
+                                <gco:CharacterString/>
+                            </supplementalInformation>
+                            <resourceSpecificUsage>
+                                <MD_Usage>
+                                    <specificUsage>
+                                        <gco:CharacterString/>
+                                    </specificUsage>
+                                    <userDeterminedLimitations>
                                         <gco:CharacterString>$request->c14_useLimitation</gco:CharacterString>
-                                    </gmd:userDeterminedLimitations>
-                                </gmd:MD_Usage>
-                            </gmd:resourceSpecificUsage>
-                            <gmd:resourceConstraints>
-                                <gmd:MD_Constraints />
-                                <gmd:MD_LegalConstraints>
-                                    <gmd:accessConstraints>$request->c14_access_constraint</gmd:accessConstraints>
-                                    <gmd:useConstraints>$request->c14_use_constraint</gmd:useConstraints>
-                                </gmd:MD_LegalConstraints>
-                                <gmd:MD_SecurityConstraints>
-                                    <gmd:classification>$request->c14_classification_sys</gmd:classification>
+                                    </userDeterminedLimitations>
+                                </MD_Usage>
+                            </resourceSpecificUsage>
+                            <resourceConstraints>
+                                <MD_Constraints></MD_Constraints>
+                                <MD_LegalConstraints>
+                                    <accessConstraints>
+                                        <MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode" codeListValue="restricted">$request->c14_access_constraint</MD_RestrictionCode>
+                                    </accessConstraints>
+                                    <useConstraints>
+                                        <MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode" codeListValue="restricted">$request->c14_use_constraint</MD_RestrictionCode>
+                                    </useConstraints>
+                                </MD_LegalConstraints>
+                                <MD_SecurityConstraints>
+                                    <classification>
+                                        <MD_ClassificationCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ClassificationCode" codeListValue="restricted">$request->c14_classification_sys</MD_ClassificationCode>
+                                    </classification>
                                     <gmd:constraintsReference>$request->c14_reference</gmd:constraintsReference>
-                                </gmd:MD_SecurityConstraints>
-                            </gmd:resourceConstraints>
-                        </srv:SV_ServiceIdentification>
-                        <gmd:MD_FeatureCatalogueDescription>
-                            <gmd:complianceCode>
-                                <gco:Boolean />
-                            </gmd:complianceCode>
-                            <gmd:language>
-                                <gco:CharacterString />
-                            </gmd:language>
-                        </gmd:MD_FeatureCatalogueDescription>
-                    </gmd:identificationInfo>
-                    <gmd:distributionInfo>
-                        <gmd:MD_Distribution>
-                            <gmd:distributionFormat>
-                                <gmd:MD_Format>
-                                    <gmd:name>
+                                </MD_SecurityConstraints>
+                            </resourceConstraints>
+                        </MD_DataIdentification>
+                    </identificationInfo>
+                    <distributionInfo>
+                        <MD_Distribution>
+                            <distributionFormat>
+                                <MD_Format>
+                                    <name>
                                         <gco:CharacterString>$request->c11_dist_format</gco:CharacterString>
-                                    </gmd:name>
-                                    <gmd:version>
+                                    </name>
+                                    <version>
                                         <gco:CharacterString>$request->c11_version</gco:CharacterString>
-                                    </gmd:version>
-                                </gmd:MD_Format>
-                            </gmd:distributionFormat>
-                            <gmd:distributor>
-                                <gmd:MD_Distributor>
-                                    <gmd:distributorContact>
-                                        <gmd:CI_ResponsibleParty>
-                                            <gmd:organisationName>$request->c11_distributor
-                                                <gco:CharacterString />
-                                            </gmd:organisationName>
-                                            <gmd:role>
-                                                <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="custodian"></gmd:CI_RoleCode>
-                                            </gmd:role>
-                                        </gmd:CI_ResponsibleParty>
-                                    </gmd:distributorContact>
-                                    <gmd:distributionOrderProcess>
-                                        <gmd:MD_StandardOrderProcess>
-                                            <gmd:fees>$request->c11_fees
-                                                <gco:CharacterString />
-                                            </gmd:fees>
-                                            <gmd:plannedAvailableDateTime>
-                                                <gco:DateTime></gco:DateTime>
-                                            </gmd:plannedAvailableDateTime>
-                                            <gmd:orderingInstructions>
+                                    </version>
+                                </MD_Format>
+                            </distributionFormat>
+                            <distributor>
+                                <MD_Distributor>
+                                    <distributorContact>
+                                        <CI_ResponsibleParty>
+                                            <organisationName>
+                                                <gco:CharacterString>$request->c11_distributor</gco:CharacterString>
+                                            </organisationName>
+                                            <role>
+                                                <CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="custodian">custodian</CI_RoleCode>
+                                            </role>
+                                        </CI_ResponsibleParty>
+                                    </distributorContact>
+                                    <distributionOrderProcess>
+                                        <MD_StandardOrderProcess>
+                                            <fees>
+                                                <gco:CharacterString>$request->c11_fees</gco:CharacterString>
+                                            </fees>
+                                            <plannedAvailableDateTime>
+                                                <gco:DateTime>2013-03-05</gco:DateTime>
+                                            </plannedAvailableDateTime>
+                                            <orderingInstructions>
                                                 <gco:CharacterString>$fileUrl</gco:CharacterString>
-                                            </gmd:orderingInstructions>
-                                        </gmd:MD_StandardOrderProcess>
-                                    </gmd:distributionOrderProcess>
-                                </gmd:MD_Distributor>
-                            </gmd:distributor>
-                            <gmd:transferOptions>
-                                <gmd:MD_DigitalTransferOptions>
-                                    <gmd:unitsOfDistribution>$request->c11_units_of_dist
-                                        <gco:CharacterString />
-                                    </gmd:unitsOfDistribution>
-                                    <gmd:transferSize>$request->c11_size
-                                        <gco:CharacterString />
-                                    </gmd:transferSize>
-                                    <gmd:onLine>
-                                        <gmd:CI_OnlineResource>
-                                            <gmd:linkage>$request->c11_link
-                                                <gmd:URL />
-                                            </gmd:linkage>
-                                            <gmd:description>
-                                                <gco:CharacterString></gco:CharacterString>
-                                            </gmd:description>
-                                            <gmd:function>
-                                                <gmd:CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="" />
-                                            </gmd:function>
-                                        </gmd:CI_OnlineResource>
-                                    </gmd:onLine>
-                                    <gmd:offLine>
-                                        <gmd:MD_Medium>
-                                            <gmd:name>$request->c11_medium</gmd:name>
-                                        </gmd:MD_Medium>
-                                    </gmd:offLine>
-                                </gmd:MD_DigitalTransferOptions>
-                            </gmd:transferOptions>
-                        </gmd:MD_Distribution>
-                    </gmd:distributionInfo>
-                    <gmd:dataQualityInfo>
-                        <gmd:DQ_DataQuality>
-                            <gmd:scope>
-                                <gmd:DQ_Scope>
-                                    <gmd:level>$request->c15_data_quality_info
-                                        <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="" />
-                                    </gmd:level>
-                                </gmd:DQ_Scope>
-                            </gmd:scope>
-                            <gmd:lineage>
-                                <gmd:LI_Lineage>
-                                    <gmd:statement>$request->c15_data_history
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                </gmd:LI_Lineage>
-                            </gmd:lineage>
-                            <gmd:report>
-                                <gmd:DQ_Element>
-                                    <gmd:dateTime>
+                                            </orderingInstructions>
+                                        </MD_StandardOrderProcess>
+                                    </distributionOrderProcess>
+                                </MD_Distributor>
+                            </distributor>
+                            <transferOptions>
+                                <MD_DigitalTransferOptions>
+                                    <unitsOfDistribution>
+                                        <gco:CharacterString>$request->c11_units_of_dist</gco:CharacterString>
+                                    </unitsOfDistribution>
+                                    <transferSize>
+                                        <gco:Real>$request->c11_size</gco:Real>
+                                    </transferSize>
+                                    <onLine>
+                                        <CI_OnlineResource>
+                                            <linkage>
+                                                <URL>$request->c11_link</URL>
+                                            </linkage>
+                                            <description>
+                                                <gco:CharacterString>mapFiles</gco:CharacterString>
+                                            </description>
+                                            <function>
+                                                <CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue=""/>
+                                            </function>
+                                        </CI_OnlineResource>
+                                    </onLine>
+                                    <offLine>
+                                        <MD_Medium>
+                                            <name>
+                                                <MD_MediumNameCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MediumNameCode" codeListValue="cdRom">$request->c11_medium</MD_MediumNameCode>
+                                            </name>
+                                        </MD_Medium>
+                                    </offLine>
+                                </MD_DigitalTransferOptions>
+                            </transferOptions>
+                        </MD_Distribution>
+                    </distributionInfo>
+                    <dataQualityInfo>
+                        <DQ_DataQuality>
+                            <scope>
+                                <DQ_Scope>
+                                    <level>
+                                        <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="">$request->c15_data_quality_info</MD_ScopeCode>
+                                    </level>
+                                </DQ_Scope>
+                            </scope>
+                            <lineage>
+                                <LI_Lineage>
+                                    <statement>
+                                        <gco:CharacterString>$request->c15_data_history</gco:CharacterString>
+                                    </statement>
+                                </LI_Lineage>
+                            </lineage>
+                            <report>
+                                <DQ_Element>
+                                    <dateTime>
                                         <gco:Date>$request->c15_date</gco:Date>
-                                    </gmd:dateTime>
-                                </gmd:DQ_Element>
-                                <gmd:DQ_CompletenessCommission>
-                                    <gmd:radio>
-                                        $request->c15_t1_complete_comm_or_omit
-                                    </gmd:radio>
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:compCommissScope>$request->c15_t1_scope
+                                    </dateTime>
+                                </DQ_Element>
+                                <DQ_CompletenessCommission>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:compCommissScope>
                                         <gmd:compCommissScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t1_scope</gco:CharacterString>
                                         </gmd:compCommissScopeItem>
                                     </gmd:compCommissScope>
-                                    <gmd:compCommissComplLevel>$request->c15_t1_comply_level
-                                        <gco:CharacterString></gco:CharacterString>
+                                    <gmd:compCommissComplLevel>
+                                        <gco:CharacterString>$request->c15_t1_comply_level</gco:CharacterString>
                                     </gmd:compCommissComplLevel>
-                                    <gmd:dateTime>
+                                    <dateTime>
                                         <gco:Date>$request->c15_t1_date</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t1_result
-                                                <gco:Boolean />
+                                    </dateTime>
+                                    <measureDescription>
+                                        <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t1_result</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t1_conform_result
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_CompletenessCommission>
-                                <gmd:DQ_CompletenessOmission>
-                                    <gmd:radio>
-                                        $request->c15_t1_complete_comm_or_omit
-                                    </gmd:radio>
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:compOmissScope>$request->c15_t1_scope_2
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t1_conform_result</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_CompletenessCommission>
+                                <DQ_CompletenessOmission>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:compOmissScope>
                                         <gmd:compOmissScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t1_scope_2</gco:CharacterString>
                                         </gmd:compOmissScopeItem>
                                     </gmd:compOmissScope>
-                                    <gmd:compOmissComplLevel>$request->c15_t1_comply_level_2
-                                        <gco:CharacterString></gco:CharacterString>
+                                    <gmd:compOmissComplLevel>
+                                        <gco:CharacterString>$request->c15_t1_comply_level_2</gco:CharacterString>
                                     </gmd:compOmissComplLevel>
-                                    <gmd:dateTime>
-                                        <gco:Date>$request->c15_t1_date_2</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t1_result_2
-                                                <gco:Boolean />
+                                    <dateTime>
+                                            <gco:Date>$request->c15_t1_date_2</gco:Date>
+                                    </dateTime>
+                                    <measureDescription>
+                                            <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t1_result_2</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t1_conform_result_2
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_CompletenessOmission>
-                                <gmd:DQ_ConceptualConsistency>$request->c15_t2_type
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:consistConceptScope>$request->c15_t2_scope
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t1_conform_result_2</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_CompletenessOmission>
+                                <DQ_ConceptualConsistency>
+                                    <statement>
+                                            <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:consistConceptScope>
                                         <gmd:consistConceptScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t2_scope</gco:CharacterString>
                                         </gmd:consistConceptScopeItem>
                                     </gmd:consistConceptScope>
-                                    <gmd:compOmissLevel>$request->c15_t2_comply_level
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:compOmissLevel>
+                                        <gco:CharacterString>$request->c15_t2_comply_level</gco:CharacterString >
                                     </gmd:compOmissLevel>
-                                    <gmd:dateTime>
-                                        <gco:Date>$request->c15_t2_date</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t2_result
-                                                <gco:Boolean />
+                                    <dateTime>
+                                            <gco:Date>$request->c15_t2_date</gco:Date>
+                                    </dateTime>
+                                    <measureDescription>
+                                            <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t2_result</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t2_conform_result
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_ConceptualConsistency>
-                                <gmd:DQ_DomainConsistency>$request->c15_t2_type_2
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:consistDomainScope>$request->c15_t2_scope_2
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t2_conform_result</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_ConceptualConsistency>
+                                <DQ_DomainConsistency>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:consistDomainScope>
                                         <gmd:consistConceptScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t2_scope_2</gco:CharacterString>
                                         </gmd:consistConceptScopeItem>
                                     </gmd:consistDomainScope>
-                                    <gmd:compDomainLevel>$request->c15_t2_comply_level_2
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:compDomainLevel>
+                                        <gco:CharacterString>$request->c15_t2_comply_level_2</gco:CharacterString>
                                     </gmd:compDomainLevel>
-                                    <gmd:dateTime>
-                                        <gco:Date>$request->c15_t2_date_2</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t2_result_2
-                                                <gco:Boolean />
+                                    <dateTime>
+                                            <gco:Date>$request->c15_t2_date_2</gco:Date>
+                                    </dateTime>
+                                    <measureDescription>
+                                            <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t2_result_2</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t2_conform_result_2
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_DomainConsistency>
-                                <gmd:DQ_FormatConsistency> $request->c15_t2_type_3
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:consistFormatScope>$request->c15_t2_scope_3
+                                            <explanation>
+                                                    <gco:CharacterString>$request->c15_t2_conform_result_2</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_DomainConsistency>
+                                <DQ_FormatConsistency>
+                                    <statement>
+                                            <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:consistFormatScope>
                                         <gmd:consistFormatScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t2_scope_3</gco:CharacterString>
                                         </gmd:consistFormatScopeItem>
                                     </gmd:consistFormatScope>
                                     <gmd:compFormatLevel>
                                         <gco:CharacterString>$request->c15_t2_comply_level_3</gco:CharacterString>
                                     </gmd:compFormatLevel>
-                                    <gmd:dateTime>
-                                        <gco:Date>$request->c15_t2_date_3</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t2_result_3
-                                                <gco:Boolean />
+                                    <dateTime>
+                                            <gco:Date>$request->c15_t2_date_3</gco:Date>
+                                    </dateTime>
+                                    <measureDescription>
+                                            <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t2_result_3</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t2_conform_result_3
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_FormatConsistency>
-                                <gmd:DQ_TopologicalConsistency>$request->c15_t2_type_4
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:consistTopoScope>$request->c15_t2_scope_4
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t2_conform_result_3</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_FormatConsistency>
+                                <DQ_TopologicalConsistency>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:consistTopoScope>
                                         <gmd:consistTopoScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t2_scope_4</gco:CharacterString>
                                         </gmd:consistTopoScopeItem>
                                     </gmd:consistTopoScope>
                                     <gmd:compTopoLevel>
                                         <gco:CharacterString>$request->c15_t2_comply_level_4</gco:CharacterString>
                                     </gmd:compTopoLevel>
-                                    <gmd:dateTime>
+                                    <dateTime>
                                         <gco:Date>$request->c15_t2_date_4</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t2_result_4
-                                                <gco:Boolean />
+                                    </dateTime>
+                                    <measureDescription>
+                                        <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t2_result_4</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t2_conform_result_4
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_TopologicalConsistency>
-                                <gmd:DQ_AbsoluteExternalPositionalAccuracy>$request->c15_t3_type
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:posAccAbsoluteScope>$request->c15_t3_scope
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t2_conform_result_4</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_TopologicalConsistency>
+                                <DQ_AbsoluteExternalPositionalAccuracy>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:posAccAbsoluteScope>
                                         <gmd:posAccAbsoluteScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t3_scope</gco:CharacterString>
                                         </gmd:posAccAbsoluteScopeItem>
                                     </gmd:posAccAbsoluteScope>
-                                    <gmd:compPosAccAbsoluteLevel>$request->c15_t3_comply_level
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:compPosAccAbsoluteLevel>
+                                        <gco:CharacterString>$request->c15_t3_comply_level</gco:CharacterString>
                                     </gmd:compPosAccAbsoluteLevel>
-                                    <gmd:dateTime>
-                                        <gco:Date>$request->c15_t3_date</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t3_result
-                                                <gco:Boolean />
+                                    <dateTime>
+                                            <gco:Date>$request->c15_t3_date</gco:Date>
+                                    </dateTime>
+                                    <measureDescription>
+                                            <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t3_result</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t3_conform_result
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_AbsoluteExternalPositionalAccuracy>
-                                <gmd:DQ_RelativeInternalPositionalAccuracy>$request->c15_t3_type_2
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:posAccRelativeScope>$request->c15_t3_scope_2
+                                            <explanation>
+                                                    <gco:CharacterString>$request->c15_t3_conform_result</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_AbsoluteExternalPositionalAccuracy>
+                                <DQ_RelativeInternalPositionalAccuracy>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:posAccRelativeScope>
                                         <gmd:posAccRelativeScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t3_scope_2</gco:CharacterString>
                                         </gmd:posAccRelativeScopeItem>
                                     </gmd:posAccRelativeScope>
-                                    <gmd:posAccRelativeLevel>$request->c15_t3_comply_level_2
-                                        <gco:CharacterString></gco:CharacterString>
+                                    <gmd:posAccRelativeLevel>
+                                        <gco:CharacterString>$request->c15_t3_comply_level_2</gco:CharacterString>
                                     </gmd:posAccRelativeLevel>
-                                    <gmd:dateTime>
+                                    <dateTime>
                                         <gco:Date>$request->c15_t3_date_2</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t3_result_2
-                                                <gco:Boolean />
+                                    </dateTime>
+                                    <measureDescription>
+                                        <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t3_result_2</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t3_conform_result_2
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_RelativeInternalPositionalAccuracy>
-                                <gmd:DQ_GriddedDataPositionalAccuracy>$request->c15_t3_type_3
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:posAccGridScope>$request->c15_t3_scope_3
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t3_conform_result_2</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_RelativeInternalPositionalAccuracy>
+                                <DQ_GriddedDataPositionalAccuracy>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:posAccGridScope>
                                         <gmd:posAccGridScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t3_scope_3</gco:CharacterString>
                                         </gmd:posAccGridScopeItem>
                                     </gmd:posAccGridScope>
                                     <gmd:posAccGridLevel>
-                                        <gco:CharacterString>$request->c15_t3_comply_level_3</gco:CharacterString >
+                                        <gco:CharacterString>$request->c15_t3_comply_level_3</gco:CharacterString>
                                     </gmd:posAccGridLevel>
-                                    <gmd:dateTime>
+                                    <dateTime>
                                         <gco:Date>$request->c15_t3_date_3</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t3_result_3
-                                                <gco:Boolean />
+                                    </dateTime>
+                                    <measureDescription>
+                                        <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t3_result_3</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>
-                                                <gco:CharacterString>$request->c15_t3_conform_result_3</gco:CharacterString>
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_GriddedDataPositionalAccuracy>
-                                <gmd:DQ_AccuracyOfATimeMeasurement> $request->c15_t4_type
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:AccuracyOfATimeMeasurementScope>$request->c15_t4_scope
+                                            <explanation>
+                                                    <gco:CharacterString>$request->c15_t3_conform_result_3</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_GriddedDataPositionalAccuracy>
+                                <DQ_AccuracyOfATimeMeasurement>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:AccuracyOfATimeMeasurementScope>
                                         <gmd:AccuracyOfATimeMeasurementItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t4_scope</gco:CharacterString>
                                         </gmd:AccuracyOfATimeMeasurementItem>
                                     </gmd:AccuracyOfATimeMeasurementScope>
-                                    <gmd:AccuracyOfATimeMeasurementLevel>$request->c15_t4_comply_level
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:AccuracyOfATimeMeasurementLevel>
+                                        <gco:CharacterString>$request->c15_t4_comply_level</gco:CharacterString>
                                     </gmd:AccuracyOfATimeMeasurementLevel>
-                                    <gmd:dateTime>
+                                    <dateTime>
                                         <gco:Date>$request->c15_t4_date</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t4_result
-                                                <gco:Boolean />
+                                    </dateTime>
+                                    <measureDescription>
+                                        <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t4_result</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t4_conform_result
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_AccuracyOfATimeMeasurement>
-                                <gmd:DQ_TemporalConsistency>$request->c15_t4_type_2
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:TemporalConsistencyScope>$request->c15_t4_scope_2
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t4_conform_result</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_AccuracyOfATimeMeasurement>
+                                <DQ_TemporalConsistency>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:TemporalConsistencyScope>
                                         <gmd:TemporalConsistencyItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t4_scope_2</gco:CharacterString>
                                         </gmd:TemporalConsistencyItem>
                                     </gmd:TemporalConsistencyScope>
                                     <gmd:TemporalConsistencyLevel>
-                                        <gco:CharacterString>$request->c15_t4_comply_level_2</gco:CharacterString >
+                                        <gco:CharacterString>$request->c15_t4_comply_level_2</gco:CharacterString>
                                     </gmd:TemporalConsistencyLevel>
-                                    <gmd:dateTime>
+                                    <dateTime>
                                         <gco:Date>$request->c15_t4_date_2</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t4_result_2
-                                                <gco:Boolean />
+                                    </dateTime>
+                                    <measureDescription>
+                                        <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t4_result_2</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>
+                                            <explanation>
                                                 <gco:CharacterString>$request->c15_t4_conform_result_2</gco:CharacterString>
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_TemporalConsistency>
-                                <gmd:DQ_TemporalValidity> $request->c15_t4_type_3
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:TemporalValidityScope>$request->c15_t4_scope_3
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_TemporalConsistency>
+                                <DQ_TemporalValidity>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:TemporalValidityScope>
                                         <gmd:TemporalValidityItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t4_scope_3</gco:CharacterString>
                                         </gmd:TemporalValidityItem>
                                     </gmd:TemporalValidityScope>
                                     <gmd:TemporalValidityLevel>
                                         <gco:CharacterString>$request->c15_t4_comply_level_3</gco:CharacterString>
                                     </gmd:TemporalValidityLevel>
-                                    <gmd:dateTime>
+                                    <dateTime>
                                         <gco:Date>$request->c15_t4_date_3</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t4_result_3
-                                                <gco:Boolean />
+                                    </dateTime>
+                                    <measureDescription>
+                                        <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t4_result_3</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t4_conform_result_3
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_TemporalValidity>
-                                <gmd:DQ_ThematicClassificationCorrectness>$request->c15_t5_type
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:ThematicClassificationCorrectnessScope>$request->c15_t5_scope
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t4_conform_result_3</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                        </result>
+                                </DQ_TemporalValidity>
+                                <DQ_ThematicClassificationCorrectness>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:ThematicClassificationCorrectnessScope>
                                         <gmd:ThematicClassificationCorrectnessItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t5_scope</gco:CharacterString>
                                         </gmd:ThematicClassificationCorrectnessItem>
                                     </gmd:ThematicClassificationCorrectnessScope>
-                                    <gmd:ThematicClassificationCorrectnessLevel>$request->c15_t5_comply_level
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:ThematicClassificationCorrectnessLevel>
+                                        <gco:CharacterString>$request->c15_t5_comply_level</gco:CharacterString>
                                     </gmd:ThematicClassificationCorrectnessLevel>
-                                    <gmd:dateTime>
-                                        <gco:Date>$request->c15_t5_date</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t5_result
-                                                <gco:Boolean />
-                                            </gmd:pass>
-                                            <gmd:explanation>$request->c15_t5_conform_result
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_ThematicClassificationCorrectness>
-                                <gmd:DQ_NonQuantitativeAttributeAccuracy> $request->c15_t5_type
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:NonQuantitativeAttributeAccuracyScope>$request->c15_t5_scope
+                                        <dateTime>
+                                            <gco:Date>$request->c15_t5_date</gco:Date>
+                                        </dateTime>
+                                        <measureDescription>
+                                            <gco:CharacterString/>
+                                        </measureDescription>
+                                        <result>
+                                            <DQ_ConformanceResult>
+                                                <gmd:pass>
+                                                    <gco:Boolean>$request->c15_t5_result</gco:Boolean>
+                                                </gmd:pass>
+                                                <explanation>
+                                                    <gco:CharacterString>$request->c15_t5_conform_result</gco:CharacterString>
+                                                </explanation>
+                                            </DQ_ConformanceResult>
+                                        </result>
+                                </DQ_ThematicClassificationCorrectness>
+                                <DQ_NonQuantitativeAttributeAccuracy>
+                                    <statement>
+                                        <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:NonQuantitativeAttributeAccuracyScope>
                                         <gmd:NonQuantitativeAttributeAccuracyScopeItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t5_scope_2</gco:CharacterString>
                                         </gmd:NonQuantitativeAttributeAccuracyScopeItem>
                                     </gmd:NonQuantitativeAttributeAccuracyScope>
-                                    <gmd:NonQuantitativeAttributeAccuracyLevel>$request->c15_t5_comply_level
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:NonQuantitativeAttributeAccuracyLevel>
+                                        <gco:CharacterString>$request->c15_t5_comply_level_2</gco:CharacterString>
                                     </gmd:NonQuantitativeAttributeAccuracyLevel>
-                                    <gmd:dateTime>
-                                        <gco:Date>$request->c15_t5_date</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t5_result
-                                                <gco:Boolean />
+                                    <dateTime>
+                                        <gco:Date>$request->c15_t5_date_2</gco:Date>
+                                    </dateTime>
+                                    <measureDescription>
+                                        <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                               <gco:Boolean>$request->c15_t5_result_2</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t5_conform_result
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_NonQuantitativeAttributeAccuracy>
-                                <gmd:DQ_QuantitativeAttributeAccuracy>$request->c15_t5_type
-                                    <gmd:statement>
-                                        <gco:CharacterString />
-                                    </gmd:statement>
-                                    <gmd:QuantitativeAttributeAccuracyScope>$request->c15_t5_scope
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t5_conform_result_2</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_NonQuantitativeAttributeAccuracy>
+                                <DQ_QuantitativeAttributeAccuracy>
+                                    <statement>
+                                            <gco:CharacterString/>
+                                    </statement>
+                                    <gmd:QuantitativeAttributeAccuracyScope>
                                         <gmd:QuantitativeAttributeAccuracyItem>
-                                            <gco:CharacterString></gco:CharacterString>
+                                            <gco:CharacterString>$request->c15_t5_scope_3</gco:CharacterString>
                                         </gmd:QuantitativeAttributeAccuracyItem>
                                     </gmd:QuantitativeAttributeAccuracyScope>
-                                    <gmd:QuantitativeAttributeAccuracyLevel>$request->c15_t5_comply_level
-                                        <gco:CharacterString></gco:CharacterString >
+                                    <gmd:QuantitativeAttributeAccuracyLevel>
+                                        <gco:CharacterString>$request->c15_t5_comply_level_3</gco:CharacterString>
                                     </gmd:QuantitativeAttributeAccuracyLevel>
-                                    <gmd:dateTime>
-                                        <gco:Date>$request->c15_t5_date</gco:Date>
-                                    </gmd:dateTime>
-                                    <gmd:measureDescription>
-                                        <gco:CharacterString />
-                                    </gmd:measureDescription>
-                                    <gmd:result>
-                                        <gmd:DQ_ConformanceResult>
-                                            <gmd:pass>$request->c15_t5_result
-                                                <gco:Boolean />
+                                    <dateTime>
+                                        <gco:Date>$request->c15_t5_date_3</gco:Date>
+                                    </dateTime>
+                                    <measureDescription>
+                                        <gco:CharacterString/>
+                                    </measureDescription>
+                                    <result>
+                                        <DQ_ConformanceResult>
+                                            <gmd:pass>
+                                                <gco:Boolean>$request->c15_t5_result_3</gco:Boolean>
                                             </gmd:pass>
-                                            <gmd:explanation>$request->c15_t5_conform_result
-                                                <gco:CharacterString />
-                                            </gmd:explanation>
-                                        </gmd:DQ_ConformanceResult>
-                                    </gmd:result>
-                                </gmd:DQ_QuantitativeAttributeAccuracy>
-                            </gmd:report>
-                        </gmd:DQ_DataQuality>
-                    </gmd:dataQualityInfo>
-                </gmd:MD_Metadata>
+                                            <explanation>
+                                                <gco:CharacterString>$request->c15_t5_conform_result_3</gco:CharacterString>
+                                            </explanation>
+                                        </DQ_ConformanceResult>
+                                    </result>
+                                </DQ_QuantitativeAttributeAccuracy>
+                            </report>
+                        </DQ_DataQuality>
+                    </dataQualityInfo>
+                    $custom_inputs
+                </MD_Metadata>
         XML;
         return $xml;
     }

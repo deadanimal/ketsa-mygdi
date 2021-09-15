@@ -17,6 +17,7 @@
                 <h6 class="heading-small text-muted mb-2">Wavelength Band
                     Information</h6>
                 <div class="pl-lg-3">
+                    @if($elemenMetadata['c7_band_boundary']->status == '1')
                     <div class="row mb-2">
                         <div class="col-xl-6">
                             <div class="form-inline">
@@ -25,8 +26,8 @@
                                 </div>
                                 <?php
                                 $bandBound = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->bandBoundry->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->bandBoundry->CharacterString != "") {
-                                    $bandBound = $metadataxml->identificationInfo->SV_ServiceIdentification->bandBoundry->CharacterString;
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString != "") {
+                                    $bandBound = $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString;
                                 }
                                 ?>
                                 <select name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm">
@@ -40,7 +41,9 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="row mb-2">
+                        @if($elemenMetadata['c7_trans_fn_type']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-4">
@@ -48,13 +51,15 @@
                                 </div>
                                 <?php
                                 $transFnType = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->transferFunctionType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->transferFunctionType->CharacterString != "") {
-                                    $transFnType = $metadataxml->identificationInfo->SV_ServiceIdentification->transferFunctionType->CharacterString;
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString != "") {
+                                    $transFnType = $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString;
                                 }
                                 ?>
                                 <input class="form-control form-control-sm" type="text" style="width :200px" name="c7_trans_fn_type" id="c7_trans_fn_type" value="{{ $transFnType }}">
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c7_trans_polar']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
@@ -62,15 +67,17 @@
                                 </div>
                                 <?php
                                 $transmitPolar = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->nominalSpatialResolution->CharacterString != "") {
-                                    $transmitPolar = $metadataxml->identificationInfo->SV_ServiceIdentification->nominalSpatialResolution->CharacterString;
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString != "") {
+                                    $transmitPolar = $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString;
                                 }
                                 ?>
                                 <input class="form-control form-control-sm" type="text" style="width :180px" name="c7_trans_polar" id="c7_trans_polar" value="{{ $transmitPolar }}">
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="row mb-2">
+                        @if($elemenMetadata['c7_nominal_spatial_res']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-4">
@@ -78,8 +85,8 @@
                                 </div>
                                 <?php
                                 $nomSpatRes = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->nominalSpatialResolution->CharacterString != "") {
-                                    $nomSpatRes = $metadataxml->identificationInfo->SV_ServiceIdentification->nominalSpatialResolution->CharacterString;
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString != "") {
+                                    $nomSpatRes = $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString;
                                 }
                                 ?>
                                 <input class="form-control form-control-sm" type="text" style="width :100px" placeholder="0.0" name="c7_nominal_spatial_res" id="c7_nominal_spatial_res" value="{{ $nomSpatRes }}">
@@ -88,6 +95,8 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c7_detected_polar']->status == '1')
                         <div class="col-xl-6">
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
@@ -95,13 +104,14 @@
                                 </div>
                                 <?php
                                 $detectPolar = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->detectedPolarisation->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->detectedPolarisation->CharacterString != "") {
-                                    $detectPolar = $metadataxml->identificationInfo->SV_ServiceIdentification->detectedPolarisation->CharacterString;
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString != "") {
+                                    $detectPolar = $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString;
                                 }
                                 ?>
                                 <input class="form-control form-control-sm" type="text" style="width :180px" placeholder="Detected Polarization" name="c7_detected_polar" id="c7_detected_polar" value="{{ $detectPolar }}">
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

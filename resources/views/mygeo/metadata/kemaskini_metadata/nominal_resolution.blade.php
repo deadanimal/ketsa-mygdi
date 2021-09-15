@@ -14,6 +14,7 @@
     <div id="collapse4" class="panel-collapse collapse in show" data-parent="#div_c4">
         <div class="card-body">
             <div class="row">
+                @if($elemenMetadata['c4_scan_res']->status == '1')
                 <div class="col-xl-6">
                     <div class="form-inline ml-3">
                         <div class="form-control-label mr-3">
@@ -21,8 +22,8 @@
                         </div>
                         <?php
                         $scanRes = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->scanningResolution->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->scanningResolution->CharacterString != "") {
-                            $scanRes = $metadataxml->identificationInfo->SV_ServiceIdentification->scanningResolution->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString != "") {
+                            $scanRes = $metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString;
                         }
                         ?>
                         <input type="text" name="c4_scan_res" id="c4_scan_res" class="form-control form-control-sm" style="width :100px" placeholder="0.0" value="{{ $scanRes }}">
@@ -34,6 +35,8 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c4_ground_scan']->status == '1')
                 <div class="col-xl-6">
                     <div class="form-inline">
                         <div class="form-control-label mr-3">
@@ -41,8 +44,8 @@
                         </div>
                         <?php
                         $groundScan = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->groundScanning->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->groundScanning->Decimal != "") {
-                            $groundScan = $metadataxml->identificationInfo->SV_ServiceIdentification->groundScanning->Decimal;;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal != "") {
+                            $groundScan = $metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal;
                         }
                         ?>
                         <input class="form-control form-control-sm" type="text" name="c4_ground_scan" id="c4_ground_scan" style="width :100px" placeholder="0.0" value="{{ $groundScan }}">
@@ -54,6 +57,7 @@
                         @enderror
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

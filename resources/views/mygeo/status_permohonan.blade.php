@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -13,13 +13,27 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
+        <section class="header">
             <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1></h1>
-                    </div>
-                    <div class="col-sm-6">
+                <div class="header-body">
+                    <div class="row align-items-center p-3 py-4">
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-dark d-inline-block mb-0">Status Permohonan</h6>
+
+                            <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class=" breadcrumb-item">
+                                        <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
+                                    </li>
+                                    <li aria-current="page" class="breadcrumb-item active">
+                                        Status Permohonan
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="col-lg-6 col-5 text-right">
+
+                        </div>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -33,10 +47,15 @@
                         <div class="card">
                             @csrf
                             <div class="card-header">
-                                <h3 class="card-title" style="font-size: 2rem;">Status Permohonan</h3>
-                                <!--                            <a href="{{ url('mohon_data_asas_baru') }}">
-                                    <button type="button" class="btn btn-default float-right">Tambah</button>
-                                </a>-->
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">Senarai Status Permohonan</h3>
+                                    </div>
+
+                                    <div class="col-4 text-right">
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
@@ -52,16 +71,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pemohons as $pemohon)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pemohon->name }}</td>
-                                                <td>{{ $pemohon->users->name }}</td>
-                                                <td>{{ $pemohon->users->kategori }}</td>
-                                                <td><span class="badge badge-pill badge-info">Baru</span></td>
-                                                <td><span class="badge badge-pill badge-success">Selesai</span></td>
-                                                <td><span class="badge badge-pill badge-warning">Tidak</span></td>
-                                            </tr>
+                                        @foreach ($permohonan_list as $permohonan)
+                                            @if($permohonan->users)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $permohonan->name }}</td>
+                                                    <td>{{ $permohonan->users->name }}</td>
+                                                    <td>{{ $permohonan->users->kategori }}</td>
+                                                    <td>
+                                                        @if ($permohonan->status == '1')
+                                                            <span class="badge badge-pill badge-warning">Dalam Proses</span>
+                                                        @elseif($permohonan->status == '2')
+                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        @elseif($permohonan->status == '3')
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @elseif($permohonan->status == '0')
+                                                            <span class="badge badge-pill badge-info">Baru</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($permohonan->acceptance == '1')
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($permohonan->penilaian == '1')
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>

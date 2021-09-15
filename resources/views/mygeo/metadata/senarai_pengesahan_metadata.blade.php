@@ -7,7 +7,6 @@
 
 </style>
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <section class="header">
         <div class="container-fluid">
@@ -32,10 +31,9 @@
                     </div>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -82,8 +80,8 @@
                                                 <td>{{ $bil }}</td>
                                                 <td>
                                                     <?php
-                                                        if(isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                                                           echo $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                                                        if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                                                           echo $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                                        }
                                                        ?>
                                                 </td>
@@ -92,13 +90,13 @@
                                                 </td>
                                                 <td>
                                                     <?php
-                                                       if(isset($val[0]->categoryTitle->categoryItem->CharacterString) && $val[0]->categoryTitle->categoryItem->CharacterString != ""){
-                                                          echo $val[0]->categoryTitle->categoryItem->CharacterString;
+                                                       if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                                          echo $val[0]->hierarchyLevel->MD_ScopeCode;
                                                       }
                                                       ?>
                                                  </td>
                                                  <td>
-                                                    {{ date('d/m/Y',strtotime($val[1]->created_at)) }}
+                                                    {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
                                                 </td>
                                                 <td>
                                                     <?php //sahkan(kemaskini)======================================= ?>
@@ -168,7 +166,7 @@
                 }
             }
         });
-        
+
     // Setup - add a text input to each footer cell
     $('#table_metadatas thead tr').clone(true).appendTo('#table_metadatas thead');
     $('#table_metadatas thead tr:eq(1) th').each( function (i) {
@@ -194,7 +192,7 @@
                         },
                     })
                     .done(function(response) {
-                        alert("Metadata berjaya disahkankan.");
+                        alert("Metadata berjaya disahkan.");
                         location.reload();
                     });
             }

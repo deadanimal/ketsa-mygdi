@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\AuditTrail;
+use App\PortalTetapan;
+use Auth;
+use App\Visitors;
 
 class LoginController extends Controller
 {
@@ -36,5 +40,25 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        $portal = PortalTetapan::get()->first();
+//        $address = $_SERVER['REMOTE_ADDR'];
+//          Visitors::firstOrCreate(['address'=>$address]);
+//          $total_visitors = Visitors::get();
+        return view('auth.login', compact('portal'));
+    }
+
+    public function logout(){
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Logout';
+        $at->save();
+
+        Auth::logout();
+        return redirect('/login');
     }
 }

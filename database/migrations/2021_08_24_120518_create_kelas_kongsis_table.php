@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCategoryToFaqTable extends Migration
+class CreateKelasKongsisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddCategoryToFaqTable extends Migration
      */
     public function up()
     {
-        Schema::table('faq', function (Blueprint $table) {
-            $table->string('category')->nullable();
+        Schema::create('kelas_kongsis', function (Blueprint $table) {
+            $table->id();
+            $table->string('category');
+            $table->string('subcategory');
+            $table->string('status');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddCategoryToFaqTable extends Migration
      */
     public function down()
     {
-        Schema::table('faq', function (Blueprint $table) {
-            $table->dropColumn(['category']);
-        });
+        Schema::dropIfExists('kelas_kongsis');
     }
 }

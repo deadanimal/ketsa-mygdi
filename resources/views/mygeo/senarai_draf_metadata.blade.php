@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -179,7 +179,7 @@
     </section>
   </div>
 
-<script>  
+<script>
   $(document).ready(function(){
     $("#table_metadatas").DataTable({
       "responsive": true,

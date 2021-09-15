@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -44,18 +44,24 @@
                                         <tr>
                                             <th>BIL</th>
                                             <th>KATEGORI</th>
-                                            <th>SUB_KATEGORI</th>
+                                            <th>SUB-KATEGORI</th>
                                             <th>STATUS</th>
                                             <th>TINDAKAN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($senarai_data as $sdata)
+                                        @foreach ($kategori as $sdata)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $sdata->kategori }}</td>
-                                                <td>{{ $sdata->subkategori }}</td>
-                                                <td>{{ $sdata->status }}</td>
+                                                <td>{{ $sdata->category }}</td>
+                                                <td>{{ $sdata->subcategory }}</td>
+                                                <td>
+                                                    @if ($sdata->status == '1')
+                                                        <span class="badge badge-pill badge-success">Aktif</span>
+                                                    @elseif($sdata->status == '0')
+                                                        <span class="badge badge-pill badge-danger">Tak Aktif</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a data-toggle="modal"
                                                         data-target="#modal-kemaskinidata-{{ $sdata->id }}">
@@ -80,63 +86,42 @@
         </section>
 
         <!-- Modal Kemaskini Data-->
-        @foreach ($senarai_data as $sdata)
+        @foreach ($kategori as $sdata)
             <div class="modal fade" id="modal-kemaskinidata-{{ $sdata->id }}">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header bg-primary mb-0">
-                            <h4 class="text-white">Data ID#{{ $loop->iteration }}</h4>
+                            <h4 class="text-white">Kategori Pengkelasan Perkongsian Data ID#{{ $loop->iteration }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form method="POST" action="/kemaskini_senarai_data">
+                        <form method="POST" action="/kemaskini_kelas_kongsi">
                             @csrf
                             <div class="modal-body row">
                                 <div class="col-12">
-                                    <input type="hidden" name="id_senarai_data" value="{{ $sdata->id }}">
+                                    <input type="hidden" name="id_kelas_kongsi" value="{{ $sdata->id }}">
                                     <div class="form-group">
                                         <label class="form-control-label">Kategori</label>
                                         <input type="text" class="form-control form-control-sm" name="kategori"
-                                            value="{{ $sdata->kategori }}">
+                                            value="{{ $sdata->category }}">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Sub-Kategori</label>
                                         <input type="text" class="form-control form-control-sm" name="subkategori"
-                                            value="{{ $sdata->subkategori }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Lapisan Data</label>
-                                        <input type="text" class="form-control form-control-sm" name="lapisan_data"
-                                            value="{{ $sdata->lapisan_data }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Kategori Pemohon</label>
-                                        <input type="text" class="form-control form-control-sm" name="kategori_pemohon"
-                                            value="{{ $sdata->kategori_pemohon }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Kelas</label>
-                                        <input type="text" class="form-control form-control-sm" name="kelas"
-                                            value="{{ $sdata->kelas }}">
+                                            value="{{ $sdata->subcategory }}">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Status</label>
                                         <select class="form-control form-control-sm" name="status">
-                                            <option value="Aktif">Aktif</option>
-                                            <option value="Tak Aktif">Tak Aktif</option>
+                                            <option disabled selected>Pilih</option>
+                                            <option value="1" {{ $sdata->status == '1' ? 'selected' : '' }}>Aktif</option>
+                                            <option value="0" {{ $sdata->status == '0' ? 'selected' : '' }}>Tak Aktif</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Harga Data</label>
-                                        <input type="text" class="form-control form-control-sm" name="harga_data"
-                                            value="{{ $sdata->harga_data }}">
-                                    </div>
-
                                     <button class="btn btn-success float-right" type="submit">
                                         <span class="text-white">Simpan</span>
                                     </button>
-
                                 </div>
                             </div>
                         </form>

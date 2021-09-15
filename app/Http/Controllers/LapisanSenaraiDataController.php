@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\SenaraiData;
+use App\LapisanSenaraiData;
 use Illuminate\Http\Request;
 
-class SenaraiDataController extends Controller
+class LapisanSenaraiDataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SenaraiDataController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SenaraiData  $senaraiData
+     * @param  \App\LapisanSenaraiData  $lapisanSenaraiData
      * @return \Illuminate\Http\Response
      */
-    public function show(SenaraiData $senaraiData)
+    public function show(LapisanSenaraiData $lapisanSenaraiData)
     {
         //
     }
@@ -52,10 +52,10 @@ class SenaraiDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SenaraiData  $senaraiData
+     * @param  \App\LapisanSenaraiData  $lapisanSenaraiData
      * @return \Illuminate\Http\Response
      */
-    public function edit(SenaraiData $senaraiData)
+    public function edit(LapisanSenaraiData $lapisanSenaraiData)
     {
         //
     }
@@ -64,10 +64,10 @@ class SenaraiDataController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SenaraiData  $senaraiData
+     * @param  \App\LapisanSenaraiData  $lapisanSenaraiData
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SenaraiData $senaraiData)
+    public function update(Request $request, LapisanSenaraiData $lapisanSenaraiData)
     {
         //
     }
@@ -75,10 +75,10 @@ class SenaraiDataController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SenaraiData  $senaraiData
+     * @param  \App\LapisanSenaraiData  $lapisanSenaraiData
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SenaraiData $senaraiData)
+    public function destroy(LapisanSenaraiData $lapisanSenaraiData)
     {
         //
     }

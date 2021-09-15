@@ -1,6 +1,6 @@
     // Grab id from url parameter
     var baseUrl = (window.location).href; // You can also use document.URL
-    var url = baseUrl.substring(baseUrl.lastIndexOf('=') + 1);
+    var url = baseUrl.substring(baseUrl.lastIndexOf('url=') + 4);
     var mapServiceUrl;
 
     if (baseUrl == url) {

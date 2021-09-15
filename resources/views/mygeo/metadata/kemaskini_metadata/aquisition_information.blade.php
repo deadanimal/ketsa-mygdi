@@ -16,9 +16,10 @@
             <div class="acard-body opacity-8">
                 <div class="row">
                     <div class="col-xl-4">
-                        <h6 class="heading-small text-muted mb-3">Enviroment Record
+                        <h6 class="heading-small text-muted mb-3">Environment Record
                         </h6>
                         <div class="form-group">
+                            @if($elemenMetadata['c8_avg_air_temp']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-8">
                                     <div class="form-control-label">
@@ -28,13 +29,15 @@
                                 <div class="col-xl-4">
                                     <?php
                                     $avgAirTemp = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->averageAirTemperature->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->averageAirTemperature->CharacterString != "") {
-                                        $avgAirTemp = $metadataxml->identificationInfo->SV_ServiceIdentification->averageAirTemperature->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->averageAirTemperature->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->averageAirTemperature->CharacterString != "") {
+                                        $avgAirTemp = $metadataxml->identificationInfo->MD_DataIdentification->averageAirTemperature->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Celcius" name="c8_avg_air_temp" id="c8_avg_air_temp" value="{{ $avgAirTemp }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_altitude']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-8">
                                     <div class="form-control-label">
@@ -44,13 +47,15 @@
                                 <div class="col-xl-4">
                                     <?php
                                     $alt = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->altitude->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->altitude->CharacterString != "") {
-                                        $alt = $metadataxml->identificationInfo->SV_ServiceIdentification->altitude->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->altitude->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->altitude->CharacterString != "") {
+                                        $alt = $metadataxml->identificationInfo->MD_DataIdentification->altitude->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Feet" name="c8_altitude" id="c8_altitude" value="{{ $alt }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_relative_humid']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-8">
                                     <div class="form-control-label">
@@ -60,13 +65,15 @@
                                 <div class="col-xl-4">
                                     <?php
                                     $relHumid = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->relativeHumidity->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->relativeHumidity->CharacterString != "") {
-                                        $relHumid = $metadataxml->identificationInfo->SV_ServiceIdentification->relativeHumidity->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->relativeHumidity->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->relativeHumidity->CharacterString != "") {
+                                        $relHumid = $metadataxml->identificationInfo->MD_DataIdentification->relativeHumidity->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Humidity" name="c8_relative_humid" id="c8_relative_humid" value="{{ $relHumid }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_meteor_cond']->status == '1')
                             <div class="row mb">
                                 <div class="col-xl-8">
                                     <div class="form-control-label">
@@ -76,19 +83,21 @@
                                 <div class="col-xl-4">
                                     <?php
                                     $metCond = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->meteorologicalCondition->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->meteorologicalCondition->CharacterString != "") {
-                                        $metCond = $metadataxml->identificationInfo->SV_ServiceIdentification->meteorologicalCondition->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->meteorologicalCondition->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->meteorologicalCondition->CharacterString != "") {
+                                        $metCond = $metadataxml->identificationInfo->MD_DataIdentification->meteorologicalCondition->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Condition" name="c8_meteor_cond" id="c8_meteor_cond" value="{{ $metCond }}">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <h6 class="heading-small text-muted mb-3">Event Identifier
                         </h6>
                         <div class="form-group">
+                            @if($elemenMetadata['c8_identifier']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -98,8 +107,8 @@
                                 <div class="col-xl-7">
                                     <?php
                                     $eventId = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->identifier->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->identifier->CharacterString != "") {
-                                        $eventId = $metadataxml->identificationInfo->SV_ServiceIdentification->identifier->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->identifier->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->identifier->CharacterString != "") {
+                                        $eventId = $metadataxml->identificationInfo->MD_DataIdentification->identifier->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_identifier" id="c8_identifier" value="{{ $eventId }}">
@@ -108,6 +117,8 @@
                                     @enderror
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_trigger']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -117,8 +128,8 @@
                                 <div class="col-xl-7">
                                     <?php
                                     $trigger = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->trigger->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->trigger->CharacterString != "") {
-                                        $trigger = $metadataxml->identificationInfo->SV_ServiceIdentification->trigger->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->trigger->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->trigger->CharacterString != "") {
+                                        $trigger = $metadataxml->identificationInfo->MD_DataIdentification->trigger->CharacterString;
                                     }
                                     ?>
                                     <select class="form-control form-control-sm" name="c8_trigger" id="c8_trigger">
@@ -129,6 +140,8 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_context']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -138,8 +151,8 @@
                                 <div class="col-xl-7">
                                     <?php
                                     $context = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->context->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->context->CharacterString != "") {
-                                        $context = $metadataxml->identificationInfo->SV_ServiceIdentification->context->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->context->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->context->CharacterString != "") {
+                                        $context = $metadataxml->identificationInfo->MD_DataIdentification->context->CharacterString;
                                     }
                                     ?>
                                     <select class="form-control form-control-sm" name="c8_context" id="c8_context">
@@ -150,6 +163,8 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_sequence']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -159,8 +174,8 @@
                                 <div class="col-xl-7">
                                     <?php
                                     $sequence = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->sequence->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->sequence->CharacterString != "") {
-                                        $sequence = $metadataxml->identificationInfo->SV_ServiceIdentification->sequence->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->sequence->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->sequence->CharacterString != "") {
+                                        $sequence = $metadataxml->identificationInfo->MD_DataIdentification->sequence->CharacterString;
                                     }
                                     ?>
                                     <select class="form-control form-control-sm" name="c8_sequence" id="c8_sequence">
@@ -171,6 +186,8 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_time']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -180,18 +197,20 @@
                                 <div class="col-xl-7">
                                     <?php
                                     $time = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->EvtIdentifiertime->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->EvtIdentifiertime->CharacterString != "") {
-                                        $time = $metadataxml->identificationInfo->SV_ServiceIdentification->EvtIdentifiertime->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->EvtIdentifiertime->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->EvtIdentifiertime->CharacterString != "") {
+                                        $time = $metadataxml->identificationInfo->MD_DataIdentification->EvtIdentifiertime->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="time" style="width :120px" name="c8_time" id="c8_time" value="{{ $time }}">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <h6 class="heading-small text-muted mb-3">Instrument Identification</h6>
                         <div class="form-group">
+                            @if($elemenMetadata['c8_type']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -201,8 +220,8 @@
                                 <div class="col-xl-7">
                                     <?php
                                     $instruIdType = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->typeInstrumentIdentification->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->typeInstrumentIdentification->CharacterString != "") {
-                                        $instruIdType = $metadataxml->identificationInfo->SV_ServiceIdentification->typeInstrumentIdentification->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->typeInstrumentIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->typeInstrumentIdentification->CharacterString != "") {
+                                        $instruIdType = $metadataxml->identificationInfo->MD_DataIdentification->typeInstrumentIdentification->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Type" name="c8_type" id="c8_type" value="{{ $instruIdType }}">
@@ -211,7 +230,9 @@
                                     @enderror
                                 </div>
                             </div>
+                            @endif
                             <h6 class="heading-small text-muted mt-2 mb-3">Operation</h6>
+                            @if($elemenMetadata['c8_op_identifier']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -221,13 +242,15 @@
                                 <div class="col-xl-7">
                                     <?php
                                     $opId = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->operationIdentifier->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->operationIdentifier->CharacterString != "") {
-                                        $opId = $metadataxml->identificationInfo->SV_ServiceIdentification->operationIdentifier->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString != "") {
+                                        $opId = $metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_op_identifier" id="c8_op_identifier" value="{{ $opId }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_op_status']->status == '1')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -237,13 +260,15 @@
                                 <div class="col-xl-7">
                                     <?php
                                     $opStatus = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->operationStatus->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->operationStatus->CharacterString != "") {
-                                        $opStatus = $metadataxml->identificationInfo->SV_ServiceIdentification->operationStatus->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationStatus->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationStatus->CharacterString != "") {
+                                        $opStatus = $metadataxml->identificationInfo->MD_DataIdentification->operationStatus->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Status" name="c8_op_status" id="c8_op_status" value="{{ $opStatus }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($elemenMetadata['c8_op_type']->status == '1')
                             <div class="row mb">
                                 <div class="col-xl-5">
                                     <div class="form-control-label">
@@ -253,39 +278,44 @@
                                 <div class="col-xl-7">
                                     <?php
                                     $opType = "";
-                                    if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->operationType->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->operationType->CharacterString != "") {
-                                        $opType = $metadataxml->identificationInfo->SV_ServiceIdentification->operationType->CharacterString;
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationType->CharacterString != "") {
+                                        $opType = $metadataxml->identificationInfo->MD_DataIdentification->operationType->CharacterString;
                                     }
                                     ?>
                                     <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Type" name="c8_op_type" id="c8_op_type" value="{{ $opType }}">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-2 px-0">
                         <h6 class="heading-small text-muted mb-3">Request Data Range
                         </h6>
                         <div class="form-group">
+                            @if($elemenMetadata['c8_rdr_date']->status == '1')
                             <div class="form-control-label mr-3">
                                 Date
                             </div>
                             <?php
                             $rdrDate = "";
-                            if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->operationDate->Date) && $metadataxml->identificationInfo->SV_ServiceIdentification->operationDate->Date != "") {
-                                $rdrDate = $metadataxml->identificationInfo->SV_ServiceIdentification->operationDate->Date;
+                            if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date) && $metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date != "") {
+                                $rdrDate = $metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date;
                             }
                             ?>
                             <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_rdr_date" id="c8_rdr_date" value="{{ $rdrDate }}">
+                            @endif
+                            @if($elemenMetadata['c8_last_accept_date']->status == '1')
                             <div class="form-control-label mt-3 mr-3">
                                 Last Acceptable Date
                             </div>
                             <?php
                             $lad = "";
-                            if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->lastAcceptableDate->Date) && $metadataxml->identificationInfo->SV_ServiceIdentification->lastAcceptableDate->Date != "") {
-                                $lad = $metadataxml->identificationInfo->SV_ServiceIdentification->lastAcceptableDate->Date;
+                            if (isset($metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date) && $metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date != "") {
+                                $lad = $metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date;
                             }
                             ?>
                             <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" class="form-control col-lg-4" value="{{ $lad }}">
+                            @endif
                         </div>
                     </div>
                 </div>

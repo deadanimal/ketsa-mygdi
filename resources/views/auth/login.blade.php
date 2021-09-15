@@ -1,4 +1,4 @@
-@extends('layouts.app_afiq')
+@extends('layouts.app_ketsa')
 
 @section('content')
 <style>
@@ -140,19 +140,19 @@
                                                             </span>
                                                             <div class="ml-3 mt-2">
                                                                 <div class="custom-control custom-radio mb-3 2_g2g_agensiPersNeg">
-                                                                    <input class="custom-control-input" id="agensiPersNeg" name="perananSelect" type="radio" value="2_g2g_agensiPersNeg" />
+                                                                    <input class="custom-control-input" id="agensiPersNeg" name="perananSelect" type="radio" value="Agensi Persekutuan/Agensi Negeri" />
                                                                     <label class="custom-control-label" for="agensiPersNeg">
                                                                         Agensi Persekutuan/Agensi Negeri
                                                                     </label>
                                                                 </div>
                                                                 <div class="custom-control custom-radio mb-3 2_g2g_badanBerkanun">
-                                                                    <input class="custom-control-input" id="badanBerkanun" name="perananSelect" type="radio" value="2_g2g_badanBerkanun" />
+                                                                    <input class="custom-control-input" id="badanBerkanun" name="perananSelect" type="radio" value="Badan Berkanun" />
                                                                     <label class="custom-control-label" for="badanBerkanun">
                                                                         Badan Berkanun
                                                                     </label>
                                                                 </div>
                                                                 <div class=" custom-control custom-radio mb-3 2_glc">
-                                                                    <input class="custom-control-input" id="glc" name="perananSelect" type="radio" value="2_glc" />
+                                                                    <input class="custom-control-input" id="glc" name="perananSelect" type="radio" value="GLC" />
                                                                     <label class="custom-control-label" for="glc">
                                                                         GLC
                                                                     </label>
@@ -171,25 +171,25 @@
                                                         </span>
                                                         <div class="ml-3 mt-2 divthird" id="divthird">
                                                             <div class=" custom-control custom-radio mb-3 2_g2e_iptaSyarahSelidik">
-                                                                <input class="custom-control-input" id="iptaSyarahSelidik" name="perananSelect" type="radio" value="2_g2e_iptaSyarahSelidik" />
+                                                                <input class="custom-control-input" id="iptaSyarahSelidik" name="perananSelect" type="radio" value="IPTA - Pensyarah/Penyelidik" />
                                                                 <label class="custom-control-label" for="iptaSyarahSelidik">
                                                                     IPTA - Pensyarah/Penyelidik
                                                                 </label>
                                                             </div>
                                                             <div class="custom-control custom-radio mb-3 2_g2e_iptaPelajar">
-                                                                <input class="custom-control-input" id="iptaPelajar" name="perananSelect" type="radio" value="2_g2e_iptaPelajar" />
+                                                                <input class="custom-control-input" id="iptaPelajar" name="perananSelect" type="radio" value="IPTA - Pelajar" />
                                                                 <label class="custom-control-label" for="iptaPelajar">
                                                                     IPTA - Pelajar
                                                                 </label>
                                                             </div>
                                                             <div class=" custom-control custom-radio mb-3 2_g2e_iptsSyarahSelidik">
-                                                                <input class="custom-control-input" id="iptsSyarahSelidik" name="perananSelect" type="radio" value="2_g2e_iptsSyarahSelidik" />
+                                                                <input class="custom-control-input" id="iptsSyarahSelidik" name="perananSelect" type="radio" value="IPTS - Pensyarah/Penyelidik" />
                                                                 <label class="custom-control-label" for="iptsSyarahSelidik">
                                                                     IPTS - Pensyarah/Penyelidik
                                                                 </label>
                                                             </div>
                                                             <div class=" custom-control custom-radio mb-3 2_g2e_iptsPelajar">
-                                                                <input class="custom-control-input" id="iptsPelajar" name="perananSelect" type="radio" value="2_g2e_iptsPelajar" />
+                                                                <input class="custom-control-input" id="iptsPelajar" name="perananSelect" type="radio" value="IPTS - Pelajar" />
                                                                 <label class="custom-control-label" for="iptsPelajar">
                                                                     IPTS - Pelajar
                                                                 </label>
@@ -249,10 +249,10 @@
                                             </div>
                                             <div class="row mb-2 divInstitusi">
                                                 <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="input-agensi">Institusi</label>
+                                                    <label class="form-control-label mr-4" for="input-agensi">Agensi/Organisasi/Institusi</label>
                                                 </div>
                                                 <div class="col-8">
-                                                    <input class="form-control form-control-sm ml-3" placeholder="Nama Institusi" type="text" name="institusi" />
+                                                    <input class="form-control form-control-sm ml-3" placeholder="Nama Institusi" type="text" name="agensi_organisasi" id="agensi_organisasi2"/>
                                                 </div>
                                             </div>
                                             <div class="row mb-2 divBahagian">
@@ -331,13 +331,13 @@
                                                 <div class="col-6">
                                                     <input type="hidden" name="kategori" id="hiddenKategori">
                                                     <select name="kategoriPemohonData" id="kategoriPemohonData" class="form-control form-control-sm ml-3 peranan">
-                                                        <option value="2_g2g_agensiPersNeg">G2G - Agensi Persekutuan/Agensi Negeri</option>
-                                                        <option value="2_g2g_badanBerkanun">G2G - Badan Berkanun</option>
-                                                        <option value="2_glc">G2G - GLC</option>
-                                                        <option value="2_g2e_iptaSyarahSelidik">G2E - IPTA - Pensyarah/Penyelidik</option>
-                                                        <option value="2_g2e_iptaPelajar">G2E - Pelajar</option>
-                                                        <option value="2_g2e_iptsSyarahSelidik">G2E - Pensyarah/Penyelidik</option>
-                                                        <option value="2_g2e_iptsPelajar">G2E - Pelajar</option>
+                                                        <option value="Agensi Persekutuan/Agensi Negeri">G2G - Agensi Persekutuan/Agensi Negeri</option>
+                                                        <option value="Badan Berkanun">G2G - Badan Berkanun</option>
+                                                        <option value="GLC">G2G - GLC</option>
+                                                        <option value="IPTA - Pensyarah/Penyelidik">G2E - IPTA - Pensyarah/Penyelidik</option>
+                                                        <option value="IPTA - Pelajar">G2E - Pelajar</option>
+                                                        <option value="IPTS - Pensyarah/Penyelidik">G2E - Pensyarah/Penyelidik</option>
+                                                        <option value="IPTS - Pelajar">G2E - Pelajar</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -435,7 +435,7 @@
         $('#btn_daftar').hide();
         $('#btn_batal').hide();
     });
-    
+
     $('#sektor').change(function() {
         $.ajax({
             method: "POST",
@@ -451,14 +451,14 @@
             $.each(data.aos, function(index,value) {
                 $('#agensi_organisasi').append('<option value="'+value.id+'" data-name="'+value.name+'">'+value.name+'</option>');
             });
-            
+
             $('#bahagian').html('');
             $('#bahagian').append('<option value="">Pilih...</option>');
         });
     });
     $('#agensi_organisasi').change(function() {
         var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
-        
+
         $.ajax({
             method: "POST",
             url: "{{ url('get_bahagian') }}",
@@ -500,6 +500,8 @@
             $(".divPeranan").show();
             $(".divAgensiOrganisasiAlamat").show();
             $(".divInstitusi").hide();
+            $("#agensi_organisasi").prop('disabled',false);
+            $("#agensi_organisasi2").prop('disabled',true);
             $(".divKategori").hide();
             $('.btn_isi_borang').show();
             $(".divsecond").hide();
@@ -564,11 +566,13 @@
             $(".btn_isi_borang").show();
             $(".divsecond").show();
             $(".divthird").show();
-        } else if (per == "2_g2g_agensiPersNeg" || per == "2_g2g_badanBerkanun" || per == "2_glc") {
+        } else if (per == "Agensi Persekutuan/Agensi Negeri" || per == "Badan Berkanun" || per == "GLC") {
             $(".divNama").show();
             $(".divNric").show();
-            $(".divInstitusi").hide();
-            $(".divAgensiOrganisasi").show();
+            $(".divInstitusi").show();
+            $(".divAgensiOrganisasi").hide();
+            $("#agensi_organisasi").prop('disabled',true);
+            $("#agensi_organisasi2").prop('disabled',false);
             $(".divAgensiOrganisasiAlamat").show();
             $(".divBahagian").hide();
             $(".divSektor").hide();
@@ -584,11 +588,13 @@
             $('.btn_isi_borang').show();
             $("#hiddenKategori").val(per);
             $("#kategoriPemohonData").val(per).change().prop('disabled','disabled').show();
-        } else if (per == "2_g2e_iptaSyarahSelidik" || per == "2_g2e_iptaPelajar" || per == "2_g2e_iptsSyarahSelidik" || per == "2_g2e_iptsPelajar") {
+        } else if (per == "IPTA - Pensyarah/Penyelidik" || per == "IPTA - Pelajar" || per == "IPTS - Pensyarah/Penyelidik" || per == "IPTS - Pelajar") {
             $(".divNama").show();
             $(".divNric").show();
             $(".divInstitusi").show();
             $(".divAgensiOrganisasi").hide();
+            $("#agensi_organisasi").prop('disabled',true);
+            $("#agensi_organisasi2").prop('disabled',false);
             $(".divAgensiOrganisasiAlamat").show();
             $(".divBahagian").hide();
             $(".divSektor").hide();
@@ -614,7 +620,9 @@
             $(".2_g2e").show();
             $(".divNama").hide();
             $(".divNric").hide();
-            $(".divInstitusi").hide();
+            $(".divInstitusi").show();
+            $("#agensi_organisasi").prop('disabled',true);
+            $("#agensi_organisasi2").prop('disabled',false);
             $(".divAgensiOrganisasi").hide();
             $(".divAgensiOrganisasiAlamat").hide();
             $(".divBahagian").hide();
@@ -641,7 +649,9 @@
             $(".2_g2e").show();
             $(".divNama").hide();
             $(".divNric").hide();
-            $(".divInstitusi").hide();
+            $(".divInstitusi").show();
+            $("#agensi_organisasi").prop('disabled',true);
+            $("#agensi_organisasi2").prop('disabled',false);
             $(".divAgensiOrganisasi").hide();
             $(".divAgensiOrganisasiAlamat").hide();
             $(".divBahagian").hide();
@@ -721,6 +731,61 @@
     }
 
     $(document).ready(function() {
+        $.ajax({
+            method: "POST",
+            url: "{{ url('getKelasKongsis') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            console.log(data);
+            jQuery.each(data,function(key,val) {
+                if(val.category == "G2C" && val.subcategory == "Awam" && val.status == "1"){
+                    $('#2_g2c').prop('disabled',false);
+                }else if(val.category == "G2C" && val.subcategory == "Awam" && val.status == "0"){
+                    $('#2_g2c').prop('disabled',true);
+                }
+
+                if(val.category == "G2G" && val.subcategory == "Badan Berkanun" && val.status == "1"){
+                    $('#badanBerkanun').prop('disabled',false);
+                }else if(val.category == "G2G" && val.subcategory == "Badan Berkanun" && val.status == "0"){
+                    $('#badanBerkanun').prop('disabled',true);
+                }
+                if(val.category == "G2G" && val.subcategory == "Agensi Persekutuan/Agensi Negeri" && val.status == "1"){
+                    $('#agensiPersNeg').prop('disabled',false);
+                }else if(val.category == "G2G" && val.subcategory == "Agensi Persekutuan/Agensi Negeri" && val.status == "0"){
+                    $('#agensiPersNeg').prop('disabled',true);
+                }
+                if(val.category == "G2G" && val.subcategory == "GLC" && val.status == "1"){
+                    $('#glc').prop('disabled',false);
+                }else if(val.category == "G2G" && val.subcategory == "GLC" && val.status == "0"){
+                    $('#glc').prop('disabled',true);
+                }
+
+                if(val.category == "G2E" && val.subcategory == "IPTA - Pensyarah/Penyelidik" && val.status == "1"){
+                    $('#iptaSyarahSelidik').prop('disabled',false);
+                }else if(val.category == "G2E" && val.subcategory == "IPTA - Pensyarah/Penyelidik" && val.status == "0"){
+                    $('#iptaSyarahSelidik').prop('disabled',true);
+                }
+                if(val.category == "G2E" && val.subcategory == "IPTA - Pelajar" && val.status == "1"){
+                    $('#iptaPelajar').prop('disabled',false);
+                }else if(val.category == "G2E" && val.subcategory == "IPTA - Pelajar" && val.status == "0"){
+                    $('#iptaPelajar').prop('disabled',true);
+                }
+                if(val.category == "G2E" && val.subcategory == "IPTS - Pensyarah/Penyelidik" && val.status == "1"){
+                    $('#iptsSyarahSelidik').prop('disabled',false);
+                }else if(val.category == "G2E" && val.subcategory == "IPTS - Pensyarah/Penyelidik" && val.status == "0"){
+                    $('#iptsSyarahSelidik').prop('disabled',true);
+                }
+                if(val.category == "G2E" && val.subcategory == "IPTS - Pelajar" && val.status == "1"){
+                    $('#iptsPelajar').prop('disabled',false);
+                }else if(val.category == "G2E" && val.subcategory == "IPTS - Pelajar" && val.status == "0"){
+                    $('#iptsPelajar').prop('disabled',true);
+                }
+            });
+        });
+
         var msg = "";
         <?php
         if($errors->any()){
@@ -769,7 +834,7 @@
         });
 
         <?php
-        
+
         if (null !== Session::get('msg') && !is_null(Session::get('msg')) && 'NULL' != Session::get('msg')) {
             ?>alert("<?php echo Session::get('msg'); ?>");
         <?php

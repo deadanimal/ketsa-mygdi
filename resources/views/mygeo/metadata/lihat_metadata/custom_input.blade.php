@@ -1,0 +1,40 @@
+<div class="card card-primary mb-4 div_c16" id="div_c16">
+    <div class="card-header">
+        <h4 class="card-title">
+            <a data-toggle="collapse" href="#collapse16">
+                CUSTOM INPUT
+            </a>
+        </h4>
+    </div>
+    <div id="collapse16" class="panel-collapse collapse in show" data-parent="#div_c16">
+        <div class="card-body">
+            <?php
+            if(count($metadataxml->customInput) > 0){
+                foreach($metadataxml->customInput as $ci){
+                    foreach($customMetadataInput as $cmi){
+                        $val = "";
+                        if(!empty($ci->{$cmi->input_name})){
+                            $val = $ci->{$cmi->input_name}->CharacterString;
+                            ?>
+                            <div class="my-1">
+                                <div class="row my-0 py-0">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="uname">
+                                            {{ $cmi->name }}
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        {{ $val }}
+                                    </div>
+                                </div>
+                            </div>    
+                            <?php
+                            break;
+                        }
+                    }
+                }
+            }
+            ?>
+        </div>
+    </div>
+</div>

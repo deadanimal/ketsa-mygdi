@@ -13,6 +13,7 @@
             </div>
             <div class="pl-lg-2">
                 <div class="row mb-2">
+                    @if($elemenMetadata['c15_data_quality_info']->status == '1')
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-DQscope" data-toggle="tooltip" title="Pengisian secara Pilihan: Skop DQ">
                             <?php echo __('lang.dq_scope'); ?>
@@ -20,6 +21,7 @@
                     </div>
                     <div class="col-xl-3">
                         <select name="c15_data_quality_info" id="c15_data_quality_info" class="form-control form-control-sm">
+                            <option value="">Pilih...</option>
                             <option value="Attribute" {{(old('c15_data_quality_info') == 'Attribute' ? "selected":"")}}>Attribute</option>
                             <option value="Attribute Type" {{(old('c15_data_quality_info') == 'Attribute Type' ? "selected":"")}}>Attribute Type</option>
                             <option value="Collection Session" {{(old('c15_data_quality_info') == 'Collection Session' ? "selected":"")}}>Collection Session</option>
@@ -37,6 +39,8 @@
                             <option value="Tile" {{(old('c15_data_quality_info') == 'Tile' ? "selected":"")}}>Tile</option>
                         </select>
                     </div>
+                    @endif
+                    @if($elemenMetadata['c15_data_history']->status == '1')
                     <div class="col-xl-2">
                         <label class="form-control-label float-right" for="input-datahistory">
                             <?php echo __('lang.data_history'); ?></label>
@@ -44,6 +48,8 @@
                     <div class="col-md-2">
                         <input class="form-control form-control-sm" type="text" name="c15_data_history" id="c15_data_history" placeholder="None" value="{{old('c15_data_history')}}">
                     </div>
+                    @endif
+                    @if($elemenMetadata['c15_date']->status == '1')
                     <div class="col-xl-1">
                         <label class="form-control-label  float-right" for="input-date">
                             <?php echo __('lang.date_time'); ?>
@@ -52,6 +58,7 @@
                     <div class="col-xl-3">
                         <input class="form-control form-control-sm" type="date" name="c15_date" id="c15_date" value="{{old('c15_date')}}">
                     </div>
+                    @endif
                 </div>
             </div>
 
@@ -98,6 +105,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t1_scope']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -119,6 +127,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_comply_level']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
@@ -127,20 +137,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_date']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c15_t1_commission_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
                                                                     <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control form-control-sm" value="{{old('c15_t1_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_result']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -153,6 +163,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_conform_result']->status == '1')
                                                     <tr class="Completeness_Commission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -161,7 +173,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t1_scope_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -183,6 +197,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_comply_level_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
@@ -191,20 +207,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_date_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c15_t1_commission_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t1_commission_date" id="c15_t1_commission_date" class="form-control datetimepicker-input" data-target="#c15_t1_commission_date_div" value="{{old('c15_t1_commission_date')}}">-->
                                                                     <input type="date" name="c15_t1_date_2" id="c15_t1_date_2" class="form-control form-control-sm" value="{{old('c15_t1_date_2')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t1_commission_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_result_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -217,6 +233,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t1_conform_result_2']->status == '1')
                                                     <tr class="Completeness_Omission">
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -225,6 +243,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -260,6 +279,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t2_scope']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -281,6 +301,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_comply_level']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
@@ -289,20 +311,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_date']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date" id="c15_t2_date" class="form-control form-control-sm" value="{{old('c15_t2_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_result']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -315,6 +337,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_conform_result']->status == '1')
                                                     <tr class='Conceptual'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -323,7 +347,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t2_scope_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -345,6 +371,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_comply_level_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
@@ -353,20 +381,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_date_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_date_2">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm" value="{{old('c15_t2_date_2')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_result_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -379,6 +407,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_conform_result_2']->status == '1')
                                                     <tr class='Domain'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_conform_result_2">
@@ -387,7 +417,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t2_scope_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_1">
@@ -409,6 +441,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_comply_level_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_comply_level_3">
@@ -417,20 +451,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_date_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_date_3">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_3" id="c15_t2_date_3" class="form-control form-control-sm" value="{{old('c15_t2_date_3')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_result_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
@@ -443,6 +477,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_conform_result_3']->status == '1')
                                                     <tr class='Format'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
@@ -451,7 +487,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t2_scope_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_scope_4">
@@ -473,6 +511,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_comply_level_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_comply_level_4">
@@ -481,20 +521,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_date_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_date_4">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t2_conceptual_date" id="c15_t2_conceptual_date" class="form-control datetimepicker-input" data-target="#c15_t2_conceptual_date_div" value="{{old('c15_t2_conceptual_date')}}">-->
                                                                     <input type="date" name="c15_t2_date_4" id="c15_t2_date_4" class="form-control form-control-sm" value="{{old('c15_t2_date_4')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t2_conceptual_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_result_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_result_4">
@@ -507,6 +547,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t2_conform_result_4']->status == '1')
                                                     <tr class='Topological'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t2_conform_result_4">
@@ -515,6 +557,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -545,6 +588,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t3_scope']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_scope">
@@ -566,6 +610,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_comply_level']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_comply_level">
@@ -574,20 +620,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_date']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
                                                                     <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control form-control-sm" value="{{old('c15_t3_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_result']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_result">
@@ -600,6 +646,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_conform_result']->status == '1')
                                                     <tr class='AbsoluteorExternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result">
@@ -608,7 +656,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t3_scope_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_scope_2">
@@ -630,6 +680,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_comply_level_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_comply_level_2">
@@ -638,20 +690,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_date_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_date_2">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
                                                                     <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm" value="{{old('c15_t3_date_2')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_result_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_result_2">
@@ -664,6 +716,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_conform_result_2']->status == '1')
                                                     <tr class='RelativeorInternal'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result_2">
@@ -672,7 +726,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t3_scope_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_scope_3">
@@ -694,6 +750,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_comply_level_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_comply_level_3">
@@ -702,20 +760,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_date_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_date_3">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t3_absExt_date" id="c15_t3_absExt_date" class="form-control datetimepicker-input" data-target="#c15_t3_absExt_date_div" value="{{old('c15_t3_absExt_date')}}">-->
                                                                     <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm" value="{{old('c15_t3_date_3')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t3_absExt_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_result_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_result_3">
@@ -728,6 +786,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t3_conform_result_3']->status == '1')
                                                     <tr class='GriddedData'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t3_conform_result_3">
@@ -736,6 +796,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -766,6 +827,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t4_scope']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_scope">
@@ -787,6 +849,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_comply_level']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_comply_level">
@@ -795,20 +859,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_date']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
                                                                     <input type="date" name="c15_t4_date" id="c15_t4_date" class="form-control form-control-sm" value="{{old('c15_t4_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_result']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_result">
@@ -821,6 +885,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_conform_result']->status == '1')
                                                     <tr class='AccuracyorTimeMeasurement'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_conform_result">
@@ -829,7 +895,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t4_scope_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_scope_2">
@@ -851,6 +919,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_comply_level_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_comply_level_2">
@@ -859,20 +929,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_date_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_date_2">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
                                                                     <input type="date" name="c15_t4_date_2" id="c15_t4_date_2" class="form-control form-control-sm" value="{{old('c15_t4_date_2')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_result_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_result_2">
@@ -885,6 +955,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_conform_result_2']->status == '1')
                                                     <tr class='TemporalConsistency'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_conform_result_2">
@@ -893,7 +965,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                     <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t4_scope_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_scope_3">
@@ -915,6 +989,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_comply_level_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_comply_level_3">
@@ -923,20 +999,20 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_comply_level_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_date_3">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t4_accuTimeMeasure_date" id="c15_t4_accuTimeMeasure_date" class="form-control datetimepicker-input" data-target="#c15_t4_accuTimeMeasure_date_div" value="{{old('c15_t4_accuTimeMeasure_date')}}">-->
-                                                                    <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{old('c15_t4_date_3')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t4_accuTimeMeasure_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
+                                                                    <input type="date" name="c15_t4_comply_level_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{old('c15_t4_date_3')}}">
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_result_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_result_3">
@@ -949,6 +1025,8 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t4_conform_result_3']->status == '1')
                                                     <tr class='TemporalValidity'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t4_conform_result_3">
@@ -957,6 +1035,7 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -972,11 +1051,23 @@
                                                     <tr>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_type">
-                                                                <input type="radio" name="c15_t5_type" value="Classification Correctness" checked>&nbsp;<?php echo __('lang.classificationCorrectness'); ?>
+                                                                <input type="radio" name="c15_t5_type" id="ClassificationCorrectness" value="Classification Correctness" checked>&nbsp;<?php echo __('lang.classificationCorrectness'); ?>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_type">
+                                                                <input type="radio" name="c15_t5_type" value="Non Quantitative Attribute Correctness">&nbsp;<?php echo __('lang.nonQuantitativeAttributeCorrectness'); ?>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_type">
+                                                                <input type="radio" name="c15_t5_type" value="Quantitative Attribute Accuracy">&nbsp;<?php echo __('lang.quantitativeAttributeCorrectness'); ?>
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t5_scope']->status == '1')
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_scope">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
@@ -997,7 +1088,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_comply_level']->status == '1')
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_3">
                                                                 <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
@@ -1005,21 +1098,21 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_date']->status == '1')
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c15_t5_classCorrect_date">
                                                                 <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                 <div class="input-group date" id="c15_t5_classCorrect_date_div" data-target-input="nearest">
-                                                                    <!--<input type="text" name="c15_t5_classCorrect_date" id="c15_t5_classCorrect_date" class="form-control datetimepicker-input" data-target="#c15_t5_classCorrect_date_div" value="{{old('c15_t5_classCorrect_date')}}">-->
                                                                     <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control form-control-sm" value="{{old('c15_t5_date')}}">
-                                                                    <!--                                                                    <div class="input-group-append" data-target="#c15_t5_classCorrect_date_div" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>-->
                                                                 </div>
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_result']->status == '1')
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
@@ -1031,7 +1124,9 @@
                                                             </label>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_conform_result']->status == '1')
+                                                    <tr class='classificationCorrectness'>
                                                         <td>
                                                             <label class="form-check-label" for="c3_4">
                                                                 <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
@@ -1039,6 +1134,147 @@
                                                             </label>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t5_scope_2']->status == '1')
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_scope_2">
+                                                                <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+                                                                <select name="c15_t5_scope_2" id="c15_t5_scope_2" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{(old('c15_t5_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{(old('c15_t5_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{(old('c15_t5_scope_2') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{(old('c15_t5_scope_2') == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{(old('c15_t5_scope_2') == 'feature' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{(old('c15_t5_scope_2') == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{(old('c15_t5_scope_2') == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{(old('c15_t5_scope_2') == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{(old('c15_t5_scope_2') == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{(old('c15_t5_scope_2') == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{(old('c15_t5_scope_2') == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{(old('c15_t5_scope_2') == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_comply_level_2']->status == '1')
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_comply_level_2">
+                                                                <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+                                                                <input type="text" name="c15_t5_comply_level_2" id="c15_t5_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t5_comply_level_2')}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_date_2']->status == '1')
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_classCorrect_2_date">
+                                                                <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
+                                                                <div class="input-group date" id="c15_t5_classCorrect_2_date_div" data-target-input="nearest">
+                                                                    <input type="date" name="c15_t5_date_2" id="c15_t5_date_2" class="form-control form-control-sm" value="{{old('c15_t5_date_2')}}">
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_result_2']->status == '1')
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_result_2">
+                                                                <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+                                                                <select name="c15_t5_result_2" id="c15_t5_result_2" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{(old('c15_t5_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{(old('c15_t5_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{(old('c15_t5_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_conform_result_2']->status == '1')
+                                                    <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c3_4">
+                                                                <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+                                                                <input type="text" name="c15_t5_conform_result_2" id="c15_t5_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t5_conform_result_2')}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
+                                                    <?php //================= ?>
+                                                    @if($elemenMetadata['c15_t5_scope_3']->status == '1')
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_scope_3">
+                                                                <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+                                                                <select name="c15_t5_scope_3" id="c15_t5_scope_3" class="form-control form-control-sm">
+                                                                    <option value="Aeronautical" {{(old('c15_t5_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
+                                                                    <option value="Built Environment" {{(old('c15_t5_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
+                                                                    <option value="Demarcation" {{(old('c15_t5_scope_3') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
+                                                                    <option value="General" {{(old('c15_t5_scope_3') == 'General' ? "selected":"")}}>General</option>
+                                                                    <option value="Geology" {{(old('c15_t5_scope_3') == 'feature' ? "selected":"")}}>Geology</option>
+                                                                    <option value="Hydrography" {{(old('c15_t5_scope_3') == 'Hydrography' ? "selected":"")}}>Hydrography</option>
+                                                                    <option value="Hypsography" {{(old('c15_t5_scope_3') == 'Hypsography' ? "selected":"")}}>Hypsography</option>
+                                                                    <option value="Soil" {{(old('c15_t5_scope_3') == 'Soil' ? "selected":"")}}>Soil</option>
+                                                                    <option value="Special Use" {{(old('c15_t5_scope_3') == 'Special Use' ? "selected":"")}}>Special Use</option>
+                                                                    <option value="Transportation" {{(old('c15_t5_scope_3') == 'Transportation' ? "selected":"")}}>Transportation</option>
+                                                                    <option value="Utility" {{(old('c15_t5_scope_3') == 'Utility' ? "selected":"")}}>Utility</option>
+                                                                    <option value="Vegetation" {{(old('c15_t5_scope_3') == 'Vegetation' ? "selected":"")}}>Vegetation</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_comply_level_3']->status == '1')
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_comply_level_3">
+                                                                <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+                                                                <input type="text" name="c15_t5_comply_level_3" id="c15_t5_comply_level_3" class="form-control form-control-sm" value="{{old('c15_t5_comply_level_3')}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_date_3']->status == '1')
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_classCorrect_date_3">
+                                                                <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
+                                                                <div class="input-group date" id="c15_t5_classCorrect_date_div_3" data-target-input="nearest">
+                                                                    <input type="date" name="c15_t5_date_3" id="c15_t5_date_3" class="form-control form-control-sm" value="{{old('c15_t5_date_3')}}">
+                                                                </div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_result_3']->status == '1')
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_result_3">
+                                                                <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+                                                                <select name="c15_t5_result_3" id="c15_t5_result_3" class="form-control form-control-sm">
+                                                                    <option value="Pass" {{(old('c15_t5_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                    <option value="Fail" {{(old('c15_t5_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                    <option value="Not Relevant" {{(old('c15_t5_result_3') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                </select>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($elemenMetadata['c15_t5_conform_result_3']->status == '1')
+                                                    <tr class='quantitativeAttributeCorrectness'>
+                                                        <td>
+                                                            <label class="form-check-label" for="c15_t5_conform_result_3">
+                                                                <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+                                                                <input type="text" name="c15_t5_conform_result_3" id="c15_t5_conform_result_3" class="form-control form-control-sm" value="{{old('c15_t5_conform_result_3')}}">
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1075,6 +1311,11 @@
         $('.TemporalConsistency').hide();
         $('.TemporalValidity').hide();
         $("#AccuracyorTimeMeasurement").prop("checked", true);
+        //t5
+        $('.classificationCorrectness').show();
+        $('.nonQuantitativeAttributeCorrectness').hide();
+        $('.quantitativeAttributeCorrectness').hide();
+        $("#ClassificationCorrectness").prop("checked", true);
     });
 
     $('input:radio[name="c15_t1_complete_comm_or_omit"]').change(function() {
@@ -1137,6 +1378,21 @@
             $('.AccuracyorTimeMeasurement').hide();
             $('.TemporalConsistency').hide();
             $('.TemporalValidity').show();
+        }
+    });
+    $('input:radio[name="c15_t5_type"]').change(function() {
+        if ($(this).val() == 'Classification Correctness') {
+            $('.classificationCorrectness').show();
+            $('.nonQuantitativeAttributeCorrectness').hide();
+            $('.quantitativeAttributeCorrectness').hide();
+        } else if ($(this).val() == 'Non Quantitative Attribute Correctness') {
+            $('.classificationCorrectness').hide();
+            $('.nonQuantitativeAttributeCorrectness').show();
+            $('.quantitativeAttributeCorrectness').hide();
+        } else if ($(this).val() == 'Quantitative Attribute Accuracy') {
+            $('.classificationCorrectness').hide();
+            $('.nonQuantitativeAttributeCorrectness').hide();
+            $('.quantitativeAttributeCorrectness').show();
         }
     });
 </script>

@@ -14,6 +14,7 @@
     <div id="collapse6" class="panel-collapse collapse in show" data-parent="#div_c6">
         <div class="card-body">
             <div class="row">
+                @if($elemenMetadata['c6_collection_name']->status == '1')
                 <div class="col-xl-7">
                     <div class="form-inline ml-3">
                         <div class="form-control-label mr-3">
@@ -21,8 +22,8 @@
                         </div>
                         <?php
                         $colName = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->collectionName->CharacterString != "") {
-                            $colName = $metadataxml->identificationInfo->SV_ServiceIdentification->collectionName->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
+                            $colName = $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString;
                         }
                         ?>
                         <input type="text" name="c6_collection_name" id="c6_collection_name" class="form-control form-control-sm" value="{{ $colName }}" style="width :280px" placeholder="Insert Collection Name">
@@ -31,14 +32,16 @@
                     <div class="text-error">{{ $message }}</div>
                     @enderror
                 </div>
+                @endif
+                @if($elemenMetadata['c6_collection_id']->status == '1')
                 <div class="col-xl-5">
                     <div class="form-inline">
                         <div class="form-control-label mr-3">
                             Collection Identification<span class="text-warning">*</span>
                             <?php
                             $collId = "";
-                            if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->collectionIdentification->CharacterString != "") {
-                                $collId = $metadataxml->identificationInfo->SV_ServiceIdentification->collectionIdentification->CharacterString;
+                            if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {
+                                $collId = $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString;
                             }
                             ?>
                             <input type="text" name="c6_collection_id" id="c6_collection_id" value="{{ $collId }}" class="form-control form-control-sm" style="width :150px" placeholder="Identification">
@@ -48,6 +51,7 @@
                         @enderror
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

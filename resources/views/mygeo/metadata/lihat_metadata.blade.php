@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -43,9 +43,9 @@
         <div class="row">
           <div class="col-12">
               <h1>
-                <?php 
-                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                  echo $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                <?php
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                  echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                 }
                 ?>
               </h1>
@@ -57,9 +57,9 @@
                         Category:
                         <?php
                         $category = "";
-                        if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){
-                            echo $metadataxml->categoryTitle->categoryItem->CharacterString;
-                            $category = $metadataxml->categoryTitle->categoryItem->CharacterString;
+                        if(isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != ""){
+                            echo $metadataxml->hierarchyLevel->MD_ScopeCode;
+                            $category = $metadataxml->hierarchyLevel->MD_ScopeCode;
                         }
                         ?>
                     </p>
@@ -90,11 +90,17 @@
                     <?php //=== collapse12 =============================================================?>
                     @include('mygeo.metadata.lihat_metadata.data_set_identification')
                     <?php //=== collapse13 =============================================================?>
-                    @include('mygeo.metadata.lihat_metadata.reference_system_information')
+                    <?php if (!empty($refSys) > 0) { ?>
+                        @include('mygeo.metadata.lihat_metadata.reference_system_information')
+                    <?php } ?>
                     <?php //=== collapse14 =============================================================?>
                     @include('mygeo.metadata.lihat_metadata.constraints')
                     <?php //=== collapse15 =============================================================?>
                     @include('mygeo.metadata.lihat_metadata.data_quality')
+                    <?php //=== collapse16 =============================================================?>
+                    @if(count($customMetadataInput) > 0)
+                        @include('mygeo.metadata.lihat_metadata.custom_input')
+                    @endif
                   </div>
                 </div>
             </div>
@@ -125,7 +131,7 @@
       }
     }
     ?>
-            
+
     var kategori = "<?php echo $category; ?>";
     if (kategori.toLowerCase() == "dataset") {
         $('.lblMetadataName').html('Title<span class="text-warning">*</span>');
@@ -213,10 +219,10 @@
 </script>
 
 <?php
-$westBoundLongitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal : "");
-$eastBoundLongitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal : "");
-$southBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
-$northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
+$westBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal : "");
+$eastBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal : "");
+$southBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
+$northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
 ?>
 
 <script>
@@ -330,10 +336,10 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
         }).addTo(map);
 
 
-        // nblt = parseFloat(nblt); 
-        // wblg = parseFloat(wblg); 
-        // sblt = parseFloat(sblt); 
-        // eblg = parseFloat(eblg); 
+        // nblt = parseFloat(nblt);
+        // wblg = parseFloat(wblg);
+        // sblt = parseFloat(sblt);
+        // eblg = parseFloat(eblg);
 
         console.log(nblt); // 6.3171
         console.log(wblg); // 101.7046
@@ -352,7 +358,7 @@ $northBoundLatitude = (isset($metadataxml->identificationInfo->SV_ServiceIdentif
 
         console.log("zoomToRectangle values:");
         console.log(zoomToRectangle);
-        
+
         map.fitBounds(bounds);
 
         // var map = L.map('map').setView([5.3105,107.3854408], 5);

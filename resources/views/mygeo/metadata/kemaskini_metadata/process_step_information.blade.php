@@ -14,6 +14,7 @@
     <div id="collapse5" class="panel-collapse collapse in show" data-parent="#div_c5">
         <div class="card-body">
             <div class="row">
+                @if($elemenMetadata['c5_process_lvl']->status == '1')
                 <div class="col-xl-6">
                     <div class="form-inline ml-3">
                         <div class="form-control-label mr-3">
@@ -21,13 +22,15 @@
                         </div>
                         <?php
                         $processLevel = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->processLevel->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->processLevel->CharacterString != "") {
-                            $processLevel = $metadataxml->identificationInfo->SV_ServiceIdentification->processLevel->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString != "") {
+                            $processLevel = $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString;
                         }
                         ?>
                         <input type="text" name="c5_process_lvl" id="c5_process_lvl" class="form-control form-control-sm" value="{{ $processLevel }}" style="width :120pxpx" placeholder="Insert Process Level">
                     </div>
                 </div>
+                @endif
+                @if($elemenMetadata['c5_resolution']->status == '1')
                 <div class="col-xl-6">
                     <div class="form-inline">
                         <div class="form-control-label mr-3">
@@ -35,8 +38,8 @@
                         </div>
                         <?php
                         $res = "";
-                        if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->processResolution->Decimal) && $metadataxml->identificationInfo->SV_ServiceIdentification->processResolution->Decimal != "") {
-                            $res = $metadataxml->identificationInfo->SV_ServiceIdentification->processResolution->Decimal;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal != "") {
+                            $res = $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal;
                         }
                         ?>
                         <input type="text" name="c5_resolution" id="c5_resolution" class="form-control form-control-sm" value="{{ $res }}" style="width :100px" placeholder="0.0">
@@ -45,6 +48,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

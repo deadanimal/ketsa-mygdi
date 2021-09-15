@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_afiq')
+@extends('layouts.app_mygeo_ketsa')
 
 @section('content')
 
@@ -128,7 +128,7 @@
                 }
             },
         });
-        
+
         // Setup - add a text input to each footer cell
         $('#table_newUsers thead tr').clone(true).appendTo('#table_newUsers thead');
         $('#table_newUsers thead tr:eq(1) th').each( function (i) {
@@ -143,10 +143,11 @@
 
         <?php
         if (Session::has('message')) {
-            ?>alert("{{ Session::get('message') }}");
-    <?php
-    }
-    ?>
+            ?>
+            //alert("{{ Session::get('message') }}");
+            <?php
+        }
+        ?>
     });
 </script>
 

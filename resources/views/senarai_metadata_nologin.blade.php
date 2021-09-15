@@ -1,4 +1,4 @@
-@extends('layouts.app_afiq')
+@extends('layouts.app_ketsa')
 
 @section('content')
 
@@ -24,6 +24,34 @@
     .cardw {
         height: 200px;
     }
+
+    .fautocomplete .clear{
+/*    clear:both;
+    margin-top: 20px;*/
+   }
+
+   .fautocomplete #searchResult{
+    list-style: none;
+    padding: 0px;
+    position: absolute;
+    margin: 0;
+    z-index: 1;
+   }
+
+   .fautocomplete #searchResult li{
+    background: lavender;
+    padding: 4px;
+    margin-bottom: 1px;
+   }
+
+   .fautocomplete #searchResult li:nth-child(even){
+/*    background: cadetblue;
+    color: white;*/
+   }
+
+   .fautocomplete #searchResult li:hover{
+    cursor: pointer;
+   }
 </style>
 
 <section class="content pb-4">
@@ -32,7 +60,7 @@
             <h2 class="">Carian Metadata</h2>
         </div>
         <div class="col-12 form-inline my-4 justify-content-center">
-            <form method="post" class="navbar-search navbar-search-light" action="{{url('carian_metadata_nologin')}}" id="form_carian">
+            <form method="post" class="navbar-search navbar-search-light" action="{{url('senarai_metadata_nologin')}}" id="form_carian">
                 @csrf
                 <div class="form-inline mb-0">
                     <div class="input-group input-group-alternative input-group-merge" style="background-image: linear-gradient(to right, #ebba16, #ed8a19);">
@@ -41,7 +69,13 @@
                                 <i class="fas fa-search"></i>
                             </span>
                         </div>
-                        <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off">
+                        <div class="fautocomplete">
+                            <div>
+                                <input placeholder="Carian..." type="text" name="carian" id="carian" class="form-control" autocomplete="off" value="{{ $carian }}">
+                            </div>
+                            <ul id="searchResult"></ul>
+                            <div class="clear"></div>
+                        </div>
                     </div>
                 </div>
                 <button type="button" data-action="search-close" data-target="#navbar-search-main" aria-label="Close" class="close">
@@ -64,7 +98,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{url('carian_metadata_nologin')}}" id="form_carian2">
+                        <form method="post" action="{{url('senarai_metadata_nologin')}}" id="form_carian2">
                             @csrf
                             <div class="container-fluid">
                                 <div class="row">
@@ -72,50 +106,47 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Jenis Maklumat Kandungan (Content Type)</label>
                                             <select name="content_type" id="content_type" class="form-control form-control-sm" autofocus>
-                                                <option selected disabled>Select Content</option>
-                                                <option value="Application">Application</option>
-                                                <option value="Clearing House">Clearing House</option>
-                                                <option value="Downloadable Data">Downloadable Data</option>
-                                                <option value="Geographic Activities">Geographic Activities</option>
-                                                <option value="Geographic Services">Geographic Services</option>
-                                                <option value="Map File">Map File</option>
-                                                <option value="Offline Data">Offline Data</option>
-                                                <option value="Static Map Images">Static Map Images</option>
-                                                <option value="Other Documents">Other Documents</option>
+                                                <option value="" selected disabled>Select Content</option>
+                                                <option value="Application" {{ (isset($params['content_type']) && $params['content_type'] == 'Application' ? 'selected':'') }}>Application</option>
+                                                <option value="Clearing House" {{ (isset($params['content_type']) && $params['content_type'] == 'Clearing House' ? 'selected':'') }}>Clearing House</option>
+                                                <option value="Downloadable Data" {{ (isset($params['content_type']) && $params['content_type'] == 'Downloadable Data' ? 'selected':'') }}>Downloadable Data</option>
+                                                <option value="Geographic Activities" {{ (isset($params['content_type']) && $params['content_type'] == 'Geographic Activities' ? 'selected':'') }}>Geographic Activities</option>
+                                                <option value="Geographic Services" {{ (isset($params['content_type']) && $params['content_type'] == 'Geographic Services' ? 'selected':'') }}>Geographic Services</option>
+                                                <option value="Map File" {{ (isset($params['content_type']) && $params['content_type'] == 'Map File' ? 'selected':'') }}>Map File</option>
+                                                <option value="Offline Data" {{ (isset($params['content_type']) && $params['content_type'] == 'Offline Data' ? 'selected':'') }}>Offline Data</option>
+                                                <option value="Static Map Images" {{ (isset($params['content_type']) && $params['content_type'] == 'Static Map Images' ? 'selected':'') }}>Static Map Images</option>
+                                                <option value="Other Documents" {{ (isset($params['content_type']) && $params['content_type'] == 'Other Documents' ? 'selected':'') }}>Other Documents</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Kategori Data (Topic Category)</label>
-                                            <select name="topic_category[]" id="topic_category" class="form-control form-control-sm" multiple>
-                                                <option value="Biota">Biota</label>
-                                                <option value="Boundaries">Boundaries</label>
-                                                <option value="Climatology Meteorology Atmosphere">Climatology Meteorology Atmosphere</label>
-                                                <option value="Disaster">Disaster</label>
-                                                <option value="Economy">Economy</label>
-                                                <option value="Elevation">Elevation</label>
-                                                <option value="Environment">Environment</label>
-                                                <option value="Farming">Farming</label>
-                                                <option value="Geoscientific Information">Geoscientific Information</label>
-                                                <option value="Health">Health</label>
-                                                <option value="Imagery Base Maps-Earth Cover">Imagery Base Maps-Earth Cover</label>
-                                                <option value="Intelligence Military">Intelligence Military</label>
-                                                <option value="Inland Waters">Inland Waters</label>
-                                                <option value="Location">Location</label>
-                                                <option value="Oceans">Oceans</label>
-                                                <option value="Planning Cadastre">Planning Cadastre</label>
-                                                <option value="Society">Society</label>
-                                                <option value="Structure">Structure</label>
-                                                <option value="Transportation">Transportation</label>
-                                                <option value="Utilities and Communication">Utilities and Communication</label>
-                                            </select>
+                                            <label for="exampleInputEmail1">Kategori Topik (Topic Category)</label><br>
+                                            <input type="checkbox" name="topic_category[]"  value="Administrative and Political Boundaries" {{ (isset($params['topic_category']) && in_array('Administrative and Political Boundaries',$params['topic_category']) ? 'checked':'') }}> Administrative and Political Boundaries<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Agriculture and Farming" {{ (isset($params['topic_category']) && in_array('Agriculture and Farming',$params['topic_category']) ? 'checked':'') }}> Agriculture and Farming<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Atmosphere and Climatic" {{ (isset($params['topic_category']) && in_array('Atmosphere and Climatic',$params['topic_category']) ? 'checked':'') }}> Atmosphere and Climatic<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Biology and Ecology" {{ (isset($params['topic_category']) && in_array('Biology and Ecology',$params['topic_category']) ? 'checked':'') }}> Biology and Ecology<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Business and Economic" {{ (isset($params['topic_category']) && in_array('Business and Economic',$params['topic_category']) ? 'checked':'') }}> Business and Economic<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Cadastral" {{ (isset($params['topic_category']) && in_array('Cadastral',$params['topic_category']) ? 'checked':'') }}> Cadastral<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Cultural, Society and Demography" {{ (isset($params['topic_category']) && in_array('Cadastral',$params['topic_category']) ? 'checked':'') }}> Cultural, Society and Demography<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Elevation and Derived Products" {{ (isset($params['topic_category']) && in_array('Elevation and Derived Products',$params['topic_category']) ? 'checked':'') }}> Elevation and Derived Products<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Environment and Conservation" {{ (isset($params['topic_category']) && in_array('Environment and Conservation',$params['topic_category']) ? 'checked':'') }}> Environment and Conservation<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Facilities and Structures" {{ (isset($params['topic_category']) && in_array('Facilities and Structures',$params['topic_category']) ? 'checked':'') }}> Facilities and Structures<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Geological and Geophysical" {{ (isset($params['topic_category']) && in_array('Geological and Geophysical',$params['topic_category']) ? 'checked':'') }}> Geological and Geophysical<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Human Health and Disease" {{ (isset($params['topic_category']) && in_array('Human Health and Disease',$params['topic_category']) ? 'checked':'') }}> Human Health and Disease<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Imagery and Base Maps" {{ (isset($params['topic_category']) && in_array('Imagery and Base Maps',$params['topic_category']) ? 'checked':'') }}> Imagery and Base Maps<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Inland Water Resources" {{ (isset($params['topic_category']) && in_array('Inland Water Resources',$params['topic_category']) ? 'checked':'') }}> Inland Water Resources<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Locations and Geodetic Networks" {{ (isset($params['topic_category']) && in_array('Locations and Geodetic Networks',$params['topic_category']) ? 'checked':'') }}> Locations and Geodetic Networks<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Military" {{ (isset($params['topic_category']) && in_array('Military',$params['topic_category']) ? 'checked':'') }}> Military<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Oceans and Estuaries" {{ (isset($params['topic_category']) && in_array('Oceans and Estuaries',$params['topic_category']) ? 'checked':'') }}> Oceans and Estuaries<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Transportation Networks" {{ (isset($params['topic_category']) && in_array('Transportation Networks',$params['topic_category']) ? 'checked':'') }}> Transportation Networks<br>
+                                            <input type="checkbox" name="topic_category[]"  value="Utilities and Communication" {{ (isset($params['topic_category']) && in_array('Utilities and Communication',$params['topic_category']) ? 'checked':'') }}> Utilities and Communication<br>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Tarikh Mula</label>
-                                            <input type="date" name="tarikh_mula" id="tarikh_mula" class="form-control form-control-sm" data-target="#tarikh_mula_div">
+                                            <input type="date" name="tarikh_mula" id="tarikh_mula" class="form-control form-control-sm" data-target="#tarikh_mula_div" value="{{ (isset($params['tarikh_mula']) ? $params['tarikh_mula']:'') }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Tarikh Tamat</label>
-                                            <input type="date" name="tarikh_tamat" id="tarikh_tamat" class="form-control form-control-sm" data-target="#tarikh_tamat_div">
+                                            <input type="date" name="tarikh_tamat" id="tarikh_tamat" class="form-control form-control-sm" data-target="#tarikh_tamat_div" value="{{ (isset($params['tarikh_tamat']) ? $params['tarikh_tamat']:'') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -157,9 +188,9 @@
                                                     <div class="card card-primary" id="divParentCollapse{{ $bil }}">
                                                         <div class="card-header cardw">
                                                             <a class="a_title" data-toggle="collapse" href="#divCollapse{{ $bil }}">
-                                                                <?php 
-                                                                if(isset($val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                                                                  echo $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                                                                <?php
+                                                                if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
+                                                                  echo $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                                                 }else{
                                                                     ?>--no title set--<?php
                                                                 }
@@ -172,6 +203,7 @@
                                                                 ?>
                                                                 <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>
                                                             </a>
+                                                            <?php /* @include('abstract') */ ?>
                                                         </div>
                                                         <div id="divCollapse{{ $bil }}" class="panel-collapse collapse in" data-parent="#divParentCollapse{{ $bil }}">
                                                             <div class="card-body">
@@ -217,6 +249,7 @@
                                     }
                                     ?>
                                 </div>
+                                {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->withQueryString()->appends($params)->links():"") }}
                             </div>
                         </div>
                     </div>
@@ -224,7 +257,7 @@
             </div>
         </div>
     </div>
-    
+
     <!--===== MODALS show map =====-->
     <div class="modal fade" id="modal-showmap">
         <div class="modal-dialog modal-xl">
@@ -264,13 +297,44 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
     @include('modal_carian_tambahan')
     <div id="preloader"></div>
 </section>
 
 <script>
+    function setText(element){
+        var value = $(element).text();
+        $("#carian").val(value);
+        $("#searchResult").empty();
+    }
+
     $(document).ready(function() {
+        $("#carian").off().bind("keyup",function(event){
+            event.stopImmediatePropagation();
+            var carian = $(this).val();
+            $("#searchResult").empty();
+            if(carian != "" && carian.length > 2){
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('findMetadataByName') }}",
+                    data: {
+                        '_token': "{{ csrf_token() }}",
+                        'carian': carian,
+                    },
+                    dataType: 'json',
+                }).done(function(response) {
+                    $("#searchResult").empty();
+                    $.each(response, function(index,value) {
+                        $("#searchResult").append("<li value='"+index+"'>"+value[0]+"</li>");
+                    });
+                    $("#searchResult li").bind("click",function(){
+                        setText(this);
+                    });
+                });
+            }
+        });
+
         <?php
         if (count($metadatas) > 0) {
             ?>$(".divSenaraiMetadata").show();
@@ -318,7 +382,7 @@
         var mapurl = $(this).data('mapurl');
         var abstract = $(this).parent().find('.p_abstract').val();
         var title = $(this).parent().parent().parent().find('.a_title').html();
-        
+
         $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
         $('#modal_abstract').html(abstract);
         $('#modal_title').html(title);

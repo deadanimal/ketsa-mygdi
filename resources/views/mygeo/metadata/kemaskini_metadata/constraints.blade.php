@@ -17,6 +17,7 @@
                 <div class="col-xl-6">
                     <h6 class="heading-small text muted">Legal Constraints</h6>
                     <div class="pl-lg-3">
+                        @if($elemenMetadata['c14_useLimitation']->status == '1')
                         <div class="row mb-2 divUseLimitation">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">
@@ -26,13 +27,15 @@
                             <div class="col-xl-7">
                                 <?php
                                 $useLimitation = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
-                                    $useLimitation = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString);
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+                                    $useLimitation = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString);
                                 }
                                 ?>
                                 <input type="text" name="c14_useLimitation" id="c14_useLimitation" class="form-control form-control-sm" value="{{ $useLimitation }}">
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c14_access_constraint']->status == '1')
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">
@@ -42,8 +45,8 @@
                             <div class="col-xl-7">
                                 <?php
                                 $accessConst = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints != "") {
-                                    $accessConst = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints);
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
+                                    $accessConst = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode);
                                 }
                                 ?>
                                 <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm">
@@ -61,6 +64,8 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c14_use_constraint']->status == '1')
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-use-cons">
@@ -70,8 +75,8 @@
                             <div class="col-xl-7">
                                 <?php
                                 $useConst = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints != "") {
-                                    $useConst = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints);
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
+                                    $useConst = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode);
                                 }
                                 ?>
                                 <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm">
@@ -89,12 +94,14 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <h6 class="heading-small text muted">Security Constraints
                     </h6>
                     <div class="pl-lg-3">
+                        @if($elemenMetadata['c14_classification_sys']->status == '1')
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-access-cons">
@@ -104,8 +111,8 @@
                             <div class="col-xl-7">
                                 <?php
                                 $classSys = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification != "") {
-                                    $classSys = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification);
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
+                                    $classSys = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode);
                                 }
                                 ?>
                                 <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
@@ -121,6 +128,8 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
+                        @if($elemenMetadata['c14_reference']->status == '1')
                         <div class="row mb-2">
                             <div class="col-xl-5">
                                 <label class="form-control-label" for="input-reference">
@@ -130,13 +139,14 @@
                             <div class="col-xl-7">
                                 <?php
                                 $ref = "";
-                                if (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
-                                    $ref = $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference;
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
+                                    $ref = $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference;
                                 }
                                 ?>
                                 <input type="text" name="c14_reference" id="c14_reference" class="form-control form-control-sm" placeholder="Standard/Policy/Act/Circular/Legal" value="{{ $ref }}">
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

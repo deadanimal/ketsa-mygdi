@@ -18,6 +18,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ReferenceSystemIdentifierSeeder::class);
         $this->call(PortalSettingsSeeder::class);
         $this->call(KategoriSeeder::class);
+        $this->call(KelasKongsiSeeder::class);
+        $this->call(SenaraiDataSeeder::class);
+        $this->call(KategoriSenaraiDataSeeder::class);
+        $this->call(PortalTetapanSeeder::class);
         $this->call(AgensiOrganisasiSeeder::class);
+        $this->call(ElemenMetadataSeeder::class);
+        $this->call(TajukSeeder::class);
     }
 }
