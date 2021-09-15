@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/mygeo_buang_pengumuman', 'PortalController@delete_pengumuman');
 
     Route::get('/mygeo_dashboard', 'LaporanDashboardController@index_mygeo_dashboard');
+    Route::get('/lihat_laporan_data/{id}', 'LaporanDashboardController@laporan_data_detail');
 
     Route::get('/landing', function () {
         return view('landing');
@@ -149,6 +150,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/mygeo_profil','UserController@show');
 
     Route::get('/lihat_permohonan/{id}', 'DataAsasController@tambah')->name('tambah.permohonan');
+
     Route::get('/mohon_data', 'DataAsasController@mohon_data');
     Route::post('/simpan_permohonan_baru', 'DataAsasController@store_permohonan_baru');
     Route::post('/simpan_senarai_kawasan', 'DataAsasController@store_senarai_kawasan');

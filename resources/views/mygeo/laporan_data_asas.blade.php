@@ -42,6 +42,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -63,35 +64,24 @@
                                             <th>TAJUK PERMOHONAN</th>
                                             <th>NAMA PEMOHON</th>
                                             <th>AGENSI/ORGANISASI</th>
-                                            <th>EMEL</th>
-                                            <th>NOMBOR TELEFON</th>
-                                            <th>JUMLAH DATA YANG DIPOHON</th>
-                                            <th>TARIKH PERMOHONAN DATA</th>
-                                            <th>TARIKH PENJANAAN LAPORAN</th>
+                                            <th>TINDAKAN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($permohonan_perincian as $mohon)
-                                            @if(isset($mohon->users))
+                                        @foreach ($permohonans as $mohon)
+                                            @if (isset($mohon->users))
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $mohon->name }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
-                                                    @if($mohon->users->hasRole('Pemohon Data'))
-                                                        <td>{{ $mohon->users->agensi_organisasi }}</td>
-                                                    @else
-                                                        <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
-                                                    @endif
-                                                    <td>{{ $mohon->users->email }}</td>
-                                                    <td>{{ $mohon->users->phone_bimbit }}</td>
-                                                    <td></td>
-                                                    <td>{{ Carbon\Carbon::parse($mohon->date)->format('d/m/Y') }}</td>
-                                                    <td></td>
-
+                                                    <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
+                                                    <td>
+                                                        <a href="lihat_laporan_data/{{ $mohon->id }}"
+                                                            class="btn btn-sm btn-primary">Laporan Perincian</a>
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
@@ -124,46 +114,38 @@
                                             <th>STATUS</th>
                                             <th>TARIKH PERMOHONAN</th>
                                             <th>TARIKH SERAHAN</th>
+                                            <th>KPI</th>
+                                            <th>KPI(+/-)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonans as $mohon)
-                                            @if(isset($mohon->users))
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $mohon->username }}</td>
-                                                <td>{{ $mohon->agensi_name }}</td>
-                                                <td>{{ $mohon->kategori }}</td>
-                                                <td>
-                                                    @if ($mohon->status == '1')
-                                                        <span class="badge badge-pill badge-success">Dalam Proses</span>
-                                                    @elseif($mohon->status == '2')
-                                                        <span class="badge badge-pill badge-danger">Ditolak</span>
-                                                    @elseif($mohon->status == '0')
-                                                        <span class="badge badge-pill badge-info">Baru</span>
-                                                    @endif
-                                                </td>
-                                                <td>{{ Carbon\Carbon::parse($mohon->date)->format('d/m/Y') }}</td>
-                                                <td>
-                                                    @if ($mohon->acceptance == '1')
-                                                        {{ Carbon\Carbon::parse($mohon->updated_date)->format('d/m/Y') }}
-                                                    @endif
+                                            @if (isset($mohon->users))
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $mohon->users->name }}</td>
+                                                    <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
                                                     <td>{{ $mohon->users->kategori }}</td>
                                                     <td>
                                                         @if ($mohon->status == '1')
-                                                            <span class="badge badge-pill badge-success">Dalam Proses</span>
+                                                            <span class="badge badge-pill badge-primary">Dalam Proses</span>
                                                         @elseif($mohon->status == '2')
                                                             <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        @elseif($mohon->status == '3')
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
                                                         @elseif($mohon->status == '0')
                                                             <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif
                                                     </td>
-                                                    <td>{{ Carbon\Carbon::parse($mohon->date)->format('d/m/Y') }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($mohon->created_at)->format('d/m/Y') }}
+                                                    </td>
                                                     <td>
                                                         @if ($mohon->acceptance == '1')
                                                             {{ Carbon\Carbon::parse($mohon->updated_date)->format('d/m/Y') }}
                                                         @endif
                                                     </td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -172,30 +154,23 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan permohonan data yang telah diluluskan </h4>
-                                <table id="laporan_lulus" class="table table-bordered table-striped"
-                                    style="width:100%;">
+                                <table id="laporan_lulus" class="table table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
                                             <th>NAMA PEMOHON</th>
                                             <th>AGENSI</th>
                                             <th>KATEGORI</th>
-                                            <th>JUMLAH PERMOHONAN DATA</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_lulus as $mohon)
-                                            @if(isset($mohon->users))
+                                            @if (isset($mohon->users))
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
-                                                    @if($mohon->users->hasRole('Pemohon Data'))
-                                                        <td>{{ $mohon->users->agensi_organisasi }}</td>
-                                                    @else
-                                                        <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
-                                                    @endif
+                                                    <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
                                                     <td>{{ $mohon->users->kategori }}</td>
-                                                    <td></td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -213,19 +188,21 @@
                                                 <th>BIL</th>
                                                 <th>NAMA PEMOHON</th>
                                                 <th>AGENSI</th>
+                                                <th>KATEGORI</th>
                                                 <th>JUMLAH PERMOHONAN DATA</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($permohonan_kategori as $mohon)
-                                                @if(isset($mohon->users))
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $mohon->username }}</td>
-                                                        <td>{{ $mohon->name }}</td>
-                                                        <td>{{ $mohon->total }}</td>
-                                                    </tr>
-                                                @endif
+                                                {{-- @if (isset($mohon->users)) --}}
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $mohon->username }}</td>
+                                                    <td>{{ $mohon->name }}</td>
+                                                    <td>{{ $mohon->kategori}}</td>
+                                                    <td>{{ $mohon->total }}</td>
+                                                </tr>
+                                                {{-- @endif --}}
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -239,23 +216,23 @@
                                         <thead>
                                             <tr>
                                                 <th>BIL</th>
-                                                <th>NAMA PEMOHON</th>
                                                 <th>AGENSI</th>
                                                 <th>JUMLAH PERMOHONAN DATA</th>
+                                                <th>BILANGAN KESELURUHAN</th>
                                                 <th>TAHUN</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($permohonan_kategori as $mohon)
-                                                @if(isset($mohon->users))
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $mohon->username }}</td>
-                                                        <td>{{ $mohon->name }}</td>
-                                                        <td>{{ $mohon->total }}</td>
-                                                        <td>{{ Carbon\Carbon::parse($mohon->date)->format('Y') }}</td>
-                                                    </tr>
-                                                @endif
+                                            @foreach ($permohonan_statistik as $mohon)
+                                                {{-- @if (isset($mohon->users)) --}}
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $mohon->agensi_name }}</td>
+                                                    <td>{{ $mohon->total_permohonan }}</td>
+                                                    <td>{{ $permohonan_count }}</td>
+                                                    <td>{{ $mohon->tahun }}</td>
+                                                </tr>
+                                                {{-- @endif --}}
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -300,6 +277,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'Laporan Perincian Permohonan Data-data Asas',
                     }
@@ -340,6 +318,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
                     }
@@ -382,6 +361,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
                     }
@@ -421,6 +401,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
                     }
@@ -460,6 +441,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
                     }
