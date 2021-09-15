@@ -797,7 +797,7 @@ class MetadataController extends Controller {
                 }
             }
         }
-        
+
         $customMetadataInput = CustomMetadataInput::with(array('getKategori' => function($query)use($request) {
                 $query->where('name',$request->kategori);
             }))->get();
@@ -821,7 +821,7 @@ class MetadataController extends Controller {
         }
         
         $this->validate($request, $fields, $customMsg);
-        exit();
+        
         $keywords = "";
         if(count($request->c10_additional_keyword) > 0){
             foreach($request->c10_additional_keyword as $var){

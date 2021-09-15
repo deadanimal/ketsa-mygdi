@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Ajaxray\PHPWatermark\Watermark;
 use Carbon\Carbon;
 use App\AkuanPelajar;
 use App\DokumenBerkaitan;
@@ -1031,6 +1032,13 @@ class DataAsasController extends Controller
             $failModel->file_path = '/storage/' . $failPath;
             $failModel->permohonan_id = $request->permohonan_id;
             $failModel->save();
+
+            $watermark = new Watermark(public_path('/storage/' . $failPath));
+            $watermark->setFontSize(32)
+                      ->setRotate(25)
+                      ->setOpacity(.4);
+            // Watermark with Text
+            $watermark->withText('UNTUK KEGUNAAN KETSA SAHAJA', public_path('/storage/' . $failPath));
 
             $at = new AuditTrail();
             $at->path = url()->full();
