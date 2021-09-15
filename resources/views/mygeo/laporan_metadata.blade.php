@@ -106,8 +106,11 @@
                                                 <td>{{ date('d/m/Y',strtotime($val[1]->changedate)) }}</td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
+                                    <tfoot>
+                                        <th>JUMLAH KESELURUHAN METADATA</th>
+                                        <th>{{ count($metadatas) }}</th>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -134,103 +137,259 @@
                                         <tr>
                                             <th>BIL</th>
                                             <th>NAMA METADATA</th>
+                                            <th>AGENSI</th>
                                             <th>PENERBIT</th>
+                                            <th>KATEGORI</th>
                                             <th>TARIKH DITERBITKAN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        <?php $counter = 0; ?>
+                                        @foreach ($metadatas as $key=>$val)
+                                            @if($val[1]->disahkan == "yes")
+                                                <?php $counter++; ?>
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>
+                                                        <?php
+                                                        $title = "";
+                                                        if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                            $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                                        } 
+                                                        echo $title;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $agency = "";
+                                                        if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                                                            $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
+                                                        } 
+                                                        echo $agency;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $publisher = "";
+                                                        if(isset($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) != ""){
+                                                            $publisher = $val[0]->contact->CI_ResponsibleParty->individualName->CharacterString;
+                                                        } 
+                                                        echo $publisher;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $category = "";
+                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != "") {
+                                                            $category = trim($val[0]->hierarchyLevel->MD_ScopeCode);
+                                                        }
+                                                        echo $category;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        {{ date('d/m/Y',strtotime($val[1]->changedate)) }}
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
                                     </tbody>
+                                    <tfoot>
+                                        <th>JUMLAH KESELURUHAN METADATA</th>
+                                        <th>{{ $counter }}</th>
+                                    </tfoot>
                                 </table>
                             </div>
                             <div class="card-body">
-                                <h4 class="heading text-muted">Bilangan metadata data yang telah diluluskan </h4>
+                                <h4 class="heading text-muted">Bilangan metadata yang belum diterbitkan</h4>
                                 <table id="laporan_lulus" class="table table-bordered table-striped"
                                     style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
-                                            <th>NAMA PEMOHON</th>
+                                            <th>NAMA METADATA</th>
                                             <th>AGENSI</th>
+                                            <th>STATUS</th>
                                             <th>KATEGORI</th>
-                                            <th>JUMLAH PERMOHONAN DATA</th>
+                                            <th>TARIKH DITERBITKAN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($permohonan_lulus as $mohon)
-                                            @if(isset($mohon->users))
+                                        <?php $counter = 0; ?>
+                                        @foreach($metadatas as $key=>$val)
+                                            @if($val[1]->disahkan == "no" || $val[1]->disahkan == "0" || $val[1]->is_draf == "yes")
+                                                <?php $counter++; ?>
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $mohon->users->name }}</td>
-                                                    @if($mohon->users->hasRole('Pemohon Data'))
-                                                        <td>{{ $mohon->users->agensi_organisasi }}</td>
-                                                    @else
-                                                        <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
-                                                    @endif
-                                                    <td>{{ $mohon->users->kategori }}</td>
-                                                    <td></td>
+                                                    <td>
+                                                        <?php
+                                                        $title = "";
+                                                        if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                            $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                                        } 
+                                                        echo $title;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $agency = "";
+                                                        if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                                                            $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
+                                                        } 
+                                                        echo $agency;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $status = "";
+                                                        if($val[1]->is_draf == "yes"){
+                                                            $status = "Draf";
+                                                        }else{
+                                                            if($val[1]->disahkan == "0"){
+                                                                $status = "Perlu Pengesahan";
+                                                            }elseif($val[1]->disahkan == "yes"){
+                                                                $status = "Diterbitkan";
+                                                            }elseif($val[1]->disahkan == "yes"){
+                                                                $status = "Perlu Pembetulan";
+                                                            }
+                                                        }
+                                                        echo $status;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $category = "";
+                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != "") {
+                                                            $category = trim($val[0]->hierarchyLevel->MD_ScopeCode);
+                                                        }
+                                                        echo $category;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        {{ date('d/m/Y',strtotime($val[1]->changedate)) }}
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach
-
                                     </tbody>
+                                    <tfoot>
+                                        <th>JUMLAH KESELURUHAN METADATA</th>
+                                        <th>{{ $counter }}</th>
+                                    </tfoot>
                                 </table>
                             </div>
                             <div class="card-body">
-                                <h4 class="heading text-muted">Bilangan metadata Data mengikut Kategori</h4>
+                                <h4 class="heading text-muted">Bilangan metadata mengikut kategori</h4>
                                 <div class="table-responsive">
                                     <table id="laporan_kategori" class="table table-bordered table-striped"
                                         style="width:100%;">
                                         <thead>
                                             <tr>
                                                 <th>BIL</th>
-                                                <th>NAMA PEMOHON</th>
+                                                <th>NAMA METADATA</th>
                                                 <th>AGENSI</th>
-                                                <th>JUMLAH PERMOHONAN DATA</th>
+                                                <th>STATUS</th>
+                                                <th>KATEGORI</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($permohonan_kategori as $mohon)
-                                                @if(isset($mohon->users))
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $mohon->username }}</td>
-                                                        <td>{{ $mohon->name }}</td>
-                                                        <td>{{ $mohon->total }}</td>
-                                                    </tr>
-                                                @endif
+                                            <?php $counter = 0; ?>
+                                            @foreach ($metadatas as $key=>$val)
+                                                <?php $counter++; ?>
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>
+                                                        <?php
+                                                        $title = "";
+                                                        if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                            $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                                        } 
+                                                        echo $title;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $agency = "";
+                                                        if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                                                            $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
+                                                        } 
+                                                        echo $agency;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $status = "";
+                                                        if($val[1]->is_draf == "yes"){
+                                                            $status = "Draf";
+                                                        }else{
+                                                            if($val[1]->disahkan == "0"){
+                                                                $status = "Perlu Pengesahan";
+                                                            }elseif($val[1]->disahkan == "yes"){
+                                                                $status = "Diterbitkan";
+                                                            }elseif($val[1]->disahkan == "yes"){
+                                                                $status = "Perlu Pembetulan";
+                                                            }
+                                                        }
+                                                        echo $status;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $category = "";
+                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != "") {
+                                                            $category = trim($val[0]->hierarchyLevel->MD_ScopeCode);
+                                                        }
+                                                        echo $category;
+                                                        ?>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
+                                        <tfoot>
+                                            <th>JUMLAH KESELURUHAN METADATA</th>
+                                            <th>{{ $counter }}</th>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h4 class="heading text-muted">Statistik metadata data mengikut tahun</h4>
+                                <h4 class="heading text-muted">Statistik penerbitan metadata mengikut tahun/bulan</h4>
                                 <div class="table-responsive">
                                     <table id="laporan_statistik" class="table table-bordered table-striped"
                                         style="width:100%;">
                                         <thead>
                                             <tr>
                                                 <th>BIL</th>
-                                                <th>NAMA PEMOHON</th>
                                                 <th>AGENSI</th>
-                                                <th>JUMLAH PERMOHONAN DATA</th>
-                                                <th>TAHUN</th>
+                                                <th>BILANGAN METADATA DITERBITKAN</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($permohonan_kategori as $mohon)
-                                                @if(isset($mohon->users))
+                                            <?php $counter = 0; ?>
+                                            @foreach ($metadatas as $key=>$val)
+                                                @if($val[1]->disahkan == "yes")
+                                                    <?php $counter++; ?>
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $mohon->username }}</td>
-                                                        <td>{{ $mohon->name }}</td>
-                                                        <td>{{ $mohon->total }}</td>
-                                                        <td>{{ Carbon\Carbon::parse($mohon->date)->format('Y') }}</td>
+                                                        <td>
+                                                            <?php
+                                                            $agency = "";
+                                                            if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                                                                $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
+                                                            } 
+                                                            echo $agency;
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            TBA
+                                                        </td>
                                                     </tr>
                                                 @endif
                                             @endforeach
                                         </tbody>
+                                        <tfoot>
+                                            <th>JUMLAH KESELURUHAN METADATA</th>
+                                            <th>{{ $counter }}</th>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -424,17 +583,17 @@
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
-                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
                     },
                     {
                         extend: 'excel',
                         className: 'btn btn-sm btn-success',
-                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
                     },
                     {
                         extend: 'print',
                         className: 'btn btn-sm btn-primary',
-                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
                     }
                 ],
                 "scrollX": true,

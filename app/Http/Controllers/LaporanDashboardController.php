@@ -40,6 +40,7 @@ class LaporanDashboardController extends Controller
     
     public function index_laporan_metadata()
     {
+        //perincian
         $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
         foreach ($metadatasdb as $met) {
@@ -55,6 +56,24 @@ class LaporanDashboardController extends Controller
             $metadatas[$met->id] = [$xml2, $met];
         }
         
+        $categories = MCategory::get();
+        
+        //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
+//        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+//        $metadatas = [];
+//        foreach ($metadatasdb as $met) {
+//            $ftestxml2 = <<<XML
+//                    $met->data
+//                    XML;
+//            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+//            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+//            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+//            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+//
+//            $xml2 = simplexml_load_string($ftestxml2);
+//            $metadatas[$met->id] = [$xml2, $met];
+//        }
+        
         $permohonan_perincian = MohonData::get();
         $permohonan_lulus = MohonData::where(['status' => 3])->get();
         $permohonan_kategori = DB::table('users')
@@ -65,7 +84,7 @@ class LaporanDashboardController extends Controller
                                 ->get();
         // dd($permohonan_kategori);
         $permohonan_kategori_count = count($permohonan_kategori);
-        return view('mygeo.laporan_metadata', compact('metadatas','permohonan_kategori','permohonan_lulus','permohonan_perincian'));
+        return view('mygeo.laporan_metadata', compact('metadatas','categories','permohonan_kategori','permohonan_lulus','permohonan_perincian'));
     }
 
     public function index_mygeo_dashboard(){
@@ -101,7 +120,7 @@ class LaporanDashboardController extends Controller
         }
         
         //Bilangan metadata yang belum diterbitkan (Draf dan Perlu Pengesahan)
-        $metadataBelumTerbit = count(MetadataGeo::on('pgsql2')->where('disahkan','=','0')->orWhere('is_draf','=','yes')->get());
+        $metadataBelumTerbit = count(MetadataGeo::on('pgsql2')->where('disahkan','=','0')->orWhere('disahkan','=','no')->orWhere('is_draf','=','yes')->get());
         
         //Bilangan metadata mengikut kategori
         $metadataByCategory = [];
