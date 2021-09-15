@@ -123,7 +123,7 @@
                     </div>
                 @endif
 
-                <?php /* ?> ?> ?> ?> ?>
+                <?php /* ?>
                 <div class="row mb-2">
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_abstract">

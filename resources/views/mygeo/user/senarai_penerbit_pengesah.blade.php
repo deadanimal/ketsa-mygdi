@@ -143,10 +143,11 @@
 
         <?php
         if (Session::has('message')) {
-            ?>alert("{{ Session::get('message') }}");
-    <?php
-    }
-    ?>
+            ?>
+            //alert("{{ Session::get('message') }}");
+            <?php
+        }
+        ?>
     });
 </script>
 

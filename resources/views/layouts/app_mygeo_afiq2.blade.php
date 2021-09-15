@@ -55,10 +55,6 @@
     <!-- DataTable -->
 
 
-
-
-
-
     <style>
         #map {
             position: absolute;

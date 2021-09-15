@@ -42,7 +42,6 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -73,18 +72,24 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_perincian as $mohon)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $mohon->name }}</td>
-                                                <td>{{ $mohon->users->name }}</td>
-                                                <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
-                                                <td>{{ $mohon->users->email }}</td>
-                                                <td>{{ $mohon->users->phone_bimbit }}</td>
-                                                <td></td>
-                                                <td>{{ Carbon\Carbon::parse($mohon->date)->format('d/m/Y') }}</td>
-                                                <td></td>
+                                            @if(isset($mohon->users))
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $mohon->name }}</td>
+                                                    <td>{{ $mohon->users->name }}</td>
+                                                    @if($mohon->users->hasRole('Pemohon Data'))
+                                                        <td>{{ $mohon->users->agensi_organisasi }}</td>
+                                                    @else
+                                                        <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
+                                                    @endif
+                                                    <td>{{ $mohon->users->email }}</td>
+                                                    <td>{{ $mohon->users->phone_bimbit }}</td>
+                                                    <td></td>
+                                                    <td>{{ Carbon\Carbon::parse($mohon->date)->format('d/m/Y') }}</td>
+                                                    <td></td>
 
-                                            </tr>
+                                                </tr>
+                                            @endif
                                         @endforeach
 
                                     </tbody>
@@ -142,8 +147,24 @@
                                                     @if ($mohon->acceptance == '1')
                                                         {{ Carbon\Carbon::parse($mohon->updated_date)->format('d/m/Y') }}
                                                     @endif
-                                                </td>
-                                            </tr>
+                                                    <td>{{ $mohon->users->kategori }}</td>
+                                                    <td>
+                                                        @if ($mohon->status == '1')
+                                                            <span class="badge badge-pill badge-success">Dalam Proses</span>
+                                                        @elseif($mohon->status == '2')
+                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        @elseif($mohon->status == '0')
+                                                            <span class="badge badge-pill badge-info">Baru</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ Carbon\Carbon::parse($mohon->date)->format('d/m/Y') }}</td>
+                                                    <td>
+                                                        @if ($mohon->acceptance == '1')
+                                                            {{ Carbon\Carbon::parse($mohon->updated_date)->format('d/m/Y') }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -163,13 +184,19 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_lulus as $mohon)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $mohon->users->name }}</td>
-                                                <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
-                                                <td>{{ $mohon->users->kategori }}</td>
-                                                <td></td>
-                                            </tr>
+                                            @if(isset($mohon->users))
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $mohon->users->name }}</td>
+                                                    @if($mohon->users->hasRole('Pemohon Data'))
+                                                        <td>{{ $mohon->users->agensi_organisasi }}</td>
+                                                    @else
+                                                        <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
+                                                    @endif
+                                                    <td>{{ $mohon->users->kategori }}</td>
+                                                    <td></td>
+                                                </tr>
+                                            @endif
                                         @endforeach
 
                                     </tbody>
@@ -190,12 +217,14 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($permohonan_kategori as $mohon)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $mohon->username }}</td>
-                                                    <td>{{ $mohon->name }}</td>
-                                                    <td>{{ $mohon->total }}</td>
-                                                </tr>
+                                                @if(isset($mohon->users))
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $mohon->username }}</td>
+                                                        <td>{{ $mohon->name }}</td>
+                                                        <td>{{ $mohon->total }}</td>
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -217,13 +246,15 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($permohonan_kategori as $mohon)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $mohon->username }}</td>
-                                                    <td>{{ $mohon->name }}</td>
-                                                    <td>{{ $mohon->total }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($mohon->date)->format('Y') }}</td>
-                                                </tr>
+                                                @if(isset($mohon->users))
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $mohon->username }}</td>
+                                                        <td>{{ $mohon->name }}</td>
+                                                        <td>{{ $mohon->total }}</td>
+                                                        <td>{{ Carbon\Carbon::parse($mohon->date)->format('Y') }}</td>
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                         </tbody>
                                     </table>

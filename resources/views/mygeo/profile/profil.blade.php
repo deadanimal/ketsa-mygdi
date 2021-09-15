@@ -288,19 +288,19 @@
     </section>
 </div>
 
-@if(Session::has('message'))
-    <script>alert("{{ Session::get('message') }}");</script>
+@if(Session::has('message')) //apparently sweetalert is configured to auto-read and auto-display sessions with name 'message'
+    <script>//alert("{{ Session::get('message') }}");</script>
 @endif
 
 <script>
     $(document).ready(function () {
-<?php
-if (Auth::user()->hasRole('Pemohon Data')) {
-    ?>
+        <?php
+        if (Auth::user()->hasRole('Pemohon Data')) {
+            ?>
             $('.divSektor,.divBahagian').hide();
-    <?php
-}
-?>
+            <?php
+        }
+        ?>
 
         $(document).on('click', '.btnTukar', function () {
             var passold = $('#password_old').val();
