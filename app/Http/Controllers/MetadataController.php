@@ -1416,6 +1416,7 @@ class MetadataController extends Controller {
                 $metadata = MetadataGeo::on('pgsql2')->find($mg->id);
                 $metadata->timestamps = false;
                 $metadata->disahkan = 'yes';
+                $metadata->changedate = date("Y-m-d H:i:s");
                 $metadata->update();
 
                 $ftestxml2 = <<<XML

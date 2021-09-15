@@ -53,6 +53,7 @@ Route::post('/reply_maklum_balas', 'PortalController@reply_maklum_balas');
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/laporan_data_asas', 'LaporanDashboardController@index_laporan_data');
+    Route::get('/laporan_metadata', 'LaporanDashboardController@index_laporan_metadata');
 
     Route::get('/senarai_pengumuman', 'PortalController@index_pengumuman');
     Route::post('/tunjuk_pengumuman', 'PortalController@show_pengumuman');
