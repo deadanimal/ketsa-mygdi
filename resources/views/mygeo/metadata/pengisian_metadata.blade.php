@@ -656,7 +656,7 @@
         <?php
         if (!is_null(old('kategori'))) {
             ?>
-            $("#kategori").val("{{ old('kategori') }}").trigger('change');
+            //$("#kategori").val("{{ old('kategori') }}").trigger('change');
             <?php
         }
         ?>

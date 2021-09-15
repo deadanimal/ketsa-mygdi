@@ -285,12 +285,13 @@ class MetadataController extends Controller {
         $states = States::where(['country' => 1])->get()->all();
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
-        $customMetadataInput = CustomMetadataInput::all();
         if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
             $kategori = MCategory::where('name',$_GET['kategori'])->get()->first();
             $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
+            $customMetadataInput = CustomMetadataInput::where('kategori',$kategori->id)->get()->all();
         }else{
             $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+            $customMetadataInput = CustomMetadataInput::all();
         }
 
         return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput','elemenMetadata'));
@@ -415,8 +416,10 @@ class MetadataController extends Controller {
                 $catSelected = trim($metadataxml->hierarchyLevel->MD_ScopeCode);
                 $kategori = MCategory::where('name',$catSelected)->get()->first();
                 $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
+                $customMetadataInput = CustomMetadataInput::where('kategori',$kategori->id)->get()->all();
             }else{
                 $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+                $customMetadataInput = CustomMetadataInput::get()->all();
             }
         }
 
@@ -794,10 +797,10 @@ class MetadataController extends Controller {
                 }
             }
         }
-         
-        $this->validate($request, $fields, $customMsg);
         
-        $customMetadataInput = CustomMetadataInput::all();
+        $customMetadataInput = CustomMetadataInput::with(array('getKategori' => function($query)use($request) {
+                $query->where('name',$request->kategori);
+            }))->get();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
             foreach($customMetadataInput as $cmi){
@@ -817,6 +820,8 @@ class MetadataController extends Controller {
             }
         }
         
+        $this->validate($request, $fields, $customMsg);
+        exit();
         $keywords = "";
         if(count($request->c10_additional_keyword) > 0){
             foreach($request->c10_additional_keyword as $var){
@@ -1275,9 +1280,9 @@ class MetadataController extends Controller {
             }
         }
         
-        $this->validate($request, $fields, $customMsg);
-
-        $customMetadataInput = CustomMetadataInput::all();
+        $customMetadataInput = CustomMetadataInput::with(array('getKategori' => function($query)use($request) {
+                $query->where('name',$request->kategori);
+            }))->get();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
             foreach($customMetadataInput as $cmi){
@@ -1297,6 +1302,7 @@ class MetadataController extends Controller {
             }
         }
         
+        $this->validate($request, $fields, $customMsg);
 
         $fileUrl = "";
         $fileUrl = $request->c11_order_instructions;
@@ -1804,6 +1810,7 @@ class MetadataController extends Controller {
         $cmi->data = "";
         $cmi->mandatory = ($request->mandatory == "" ? "No":"Yes");
         $cmi->status = "Active";
+        $cmi->kategori = $request->kategori;
         $query = $cmi->save();
 
         if($query){

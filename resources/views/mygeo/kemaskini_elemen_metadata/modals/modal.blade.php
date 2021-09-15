@@ -213,6 +213,15 @@
                                     <label for="name">Nama:</label>
                                     <input type="text" name="name" class="form-control kategori">
                                 </div>
+                                <div class="form-group">
+                                    <label for="kategori">Kategori:</label>
+                                    <select name="kategori" class="form-control kategori">
+                                        <option value="">Pilih...</option>
+                                        @foreach($categories as $cat)
+                                            <option value="{{ $cat-> id }}">{{ $cat->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 <!--                                <div class="form-group">
                                     <label for="input_type">Data Type:</label>
                                     <select name="input_type" class="form-control input_type" readonly>
