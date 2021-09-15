@@ -128,6 +128,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonans as $mohon)
+                                            @if(isset($mohon->users))
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $mohon->username }}</td>
