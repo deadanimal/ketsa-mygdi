@@ -85,6 +85,9 @@
     '900' => $fontDir . '/font_awesome_5_free_900_a496f8644d2cd386b5617d8f041a0ea0',
   ),
   'boxicons' => array(
-    'normal' => $fontDir . '/boxicons_normal_a61bd97ac69aa3ec4173e38642ea69b5',
+    'normal' => $fontDir . '/boxicons_normal_1d9f4332ad398c01d69b5263c6e17950',
+  ),
+  'glyphicons halflings' => array(
+    'normal' => $fontDir . '/glyphicons_halflings_normal_91a063d0f3772b152f606edc0383c99d',
   ),
 ) ?>

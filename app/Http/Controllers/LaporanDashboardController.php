@@ -7,6 +7,7 @@ use App\MohonData;
 use App\SenaraiKawasanData;
 use Illuminate\Http\Request;
 use DB;
+use PDF;
 
 class LaporanDashboardController extends Controller
 {
@@ -23,8 +24,9 @@ class LaporanDashboardController extends Controller
         $permohonan_kategori = DB::table('users')
                                 ->join('mohon_data','users.id','=','mohon_data.user_id')
                                 ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
-                                ->select('agensi_organisasi.name','users.kategori',DB::raw('count(*) as total'),DB::raw('users.name as username'))
-                                ->groupBy('users.name','agensi_organisasi.name','users.kategori')
+                                ->join('senarai_kawasan_data','mohon_data.id','=','senarai_kawasan_data.permohonan_id')
+                                ->select('agensi_organisasi.name','senarai_kawasan_data.kategori',DB::raw('count(*) as total'),DB::raw('users.name as username'))
+                                ->groupBy('users.name','agensi_organisasi.name','senarai_kawasan_data.kategori')
                                 ->get();
         $permohonan_statistik = DB::table('users')
                                 ->join('mohon_data','users.id','=','mohon_data.user_id')
@@ -38,11 +40,11 @@ class LaporanDashboardController extends Controller
     }
 
     public function index_mygeo_dashboard(){
-        $total_permohonan = MohonData::where('status','!=',0)->get()->count();
+        $total_permohonan = MohonData::get()->count();
         $total_permohonan_lulus = MohonData::where('status','=',3)->get()->count();
         $total_permohonan_tolak = MohonData::where('status','=',2)->get()->count();
 
-        return view('mygeo.dashboard', compact('total_permohonan',));
+        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak'));
     }
 
     public function laporan_data_detail($id){
@@ -51,6 +53,19 @@ class LaporanDashboardController extends Controller
         $senarai_kawasan = SenaraiKawasanData::where('permohonan_id', $id)->get();
 
         return view('mygeo.laporan_data_perincian', compact('permohonan','senarai_kawasan'));
+    }
+
+    public function generate_pdf_laporan_perincian_data(Request $request){
+
+        $permohonan = MohonData::where('id', $request->permohonan_id)->first();
+        $senarai_kawasan = SenaraiKawasanData::where('permohonan_id', $request->permohonan_id)->get();
+        $pdf = PDF::loadView('pdfs.laporan_data', compact('senarai_kawasan','permohonan'));
+
+        // (Optional) Setup the paper size and orientation
+        $pdf->setPaper('A4', 'potrait');
+
+        // Render the HTML as PDF
+        return $pdf->stream();
     }
 
     /**

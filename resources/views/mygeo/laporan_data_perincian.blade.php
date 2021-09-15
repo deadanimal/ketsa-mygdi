@@ -120,6 +120,12 @@
                                             <p>{{ Carbon\Carbon::parse($permohonan->updated_at)->format('d/m/Y') }}</p>
                                         </div>
                                     </div>
+
+                                    <form action="{{ url('api/laporan_perincian_data') }}" method="POST" target="_blank">
+                                        @csrf
+                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                        <button type=submit class="btn btn-sm btn-primary mt-2">Cetak PDF</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

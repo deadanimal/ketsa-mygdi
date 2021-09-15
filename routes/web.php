@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/mygeo_dashboard', 'LaporanDashboardController@index_mygeo_dashboard');
     Route::get('/lihat_laporan_data/{id}', 'LaporanDashboardController@laporan_data_detail');
+    Route::post('/api/laporan_perincian_data', 'LaporanDashboardController@generate_pdf_laporan_perincian_data');
 
     Route::get('/landing', function () {
         return view('landing');
