@@ -99,8 +99,9 @@
                                     <tr>
                                         <th>Bil</th>
                                         <th>Nama</th>
-                                        <th>Input Type</th>
+                                        <!--<th>Input Type</th>-->
                                         <th>Mandatory</th>
+                                        <th>Kategori</th>
                                         <th>Status</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -114,8 +115,9 @@
                                             <tr>
                                                 <td>{{ $bil }}</td>
                                                 <td>{{ $cmi->name }}</td>
-                                                <td>{{ $cmi->input_type }}</td>
+                                                <!--<td>{{ $cmi->input_type }}</td>-->
                                                 <td>{{ $cmi->mandatory }}</td>
+                                                <td>{{ $cmi->getKategori->name }}</td>
                                                 <td>{{ $cmi->status }}</td>
                                                 <td>
                                                     <!--<button type="button" class="form-control btnEdit">Edit</button>-->

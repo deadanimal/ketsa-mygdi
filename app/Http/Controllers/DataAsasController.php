@@ -1017,7 +1017,6 @@ class DataAsasController extends Controller
 
     public function store_dokumen_berkaitan(Request $request)
     {
-
         $request->validate([
             'file' => 'required|mimes:pdf|max:2048'
             // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'

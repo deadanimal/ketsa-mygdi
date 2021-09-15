@@ -9,12 +9,16 @@
     <div id="collapse16" class="panel-collapse collapse in show" data-parent="#div_c16">
         <div class="card-body">
             <?php
+            foreach($customMetadataInput as $cmi){
+                $val = "";
             if(count($metadataxml->customInput) > 0){
                 foreach($metadataxml->customInput as $ci){
-                    foreach($customMetadataInput as $cmi){
-                        $val = "";
                         if(!empty($ci->{$cmi->input_name})){
                             $val = $ci->{$cmi->input_name}->CharacterString;
+                            break;
+                        }
+                    }
+                }
                             ?>
                             <div class="my-1">
                                 <div class="row my-0 py-0">
@@ -54,11 +58,7 @@
                                 </div>
                             </div>    
                             <?php
-                            break;
                         }
-                    }
-                }
-            }
             ?>
         </div>
     </div>

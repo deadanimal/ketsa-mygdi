@@ -75,8 +75,7 @@
                                         <h2 class="font-weight-bold text-white text-uppercase mb-0">
                                             Jumlah Metadata Yang Telah Diterbitkan
                                         </h2>
-                                        <span class="text-white text-uppercase mb-0"> Agensi: Kementerian Sumber dan
-                                            Asli</span>
+                                        <!--<span class="text-white text-uppercase mb-0"> Agensi: Kementerian Sumber danAsli</span>-->
                                     </div>
 
                                     <div class="col-auto">
@@ -87,7 +86,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 text-white mr-2">234
+                                    <span class="h2 text-white mr-2">{{ $metadataTerbit }}
                                     </span>
                                 </p>
                             </div>
@@ -99,7 +98,7 @@
                         <div class="card">
                             <div class=" card-header bg-secondary">
                                 <h6 class=" surtitle">Bar Chart</h6>
-                                <h5 class=" h2 mb-0">Jumlah Metadata Diterbitkan Mengikut Bahagian dalam Agensi</h5>
+                                <h5 class=" h2 mb-0">Jumlah Metadata Mengikut Kategori</h5>
                             </div>
                             <div class="card-body">
                                 <div class="chart">
@@ -112,7 +111,7 @@
                         <div class="card">
                             <div class=" card-header bg-secondary">
                                 <h6 class="surtitle">Bar Chart</h6>
-                                <h5 class=" h2 mb-0">Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia</h5>
+                                <h5 class=" h2 mb-0">Jumlah Metadata Mengikut Agensi</h5>
                             </div>
                             <div class="card-body">
                                 <div class="chart">
@@ -130,7 +129,7 @@
                                     <div class="col">
                                         <h6 class="surtitle">Bar Chart</h6>
 
-                                        <h5 class="h2 mb-0">Jumlah Metadata Diterbitkan Mengikutkan Tahun</h5>
+                                        <h5 class="h2 mb-0">Jumlah Metadata Mengikutkan Tahun</h5>
                                     </div>
                                 </div>
                             </div>
@@ -292,14 +291,14 @@
         new Chart(bar1, {
             type: "bar",
             data: {
-                labels: ['BPM', 'BPB', 'BUP', 'BPP', 'BG'],
+                labels: <?php echo json_encode($metadataByCategoryKeys); ?>,
                 datasets: [{
                     label: "Jumlah Metadata / Bahagian",
                     weight: 5,
                     borderWidth: 0,
                     borderRadius: 10,
                     backgroundColor: '#3eb8f0',
-                    data: [125, 80, 65, 60, 70, 30],
+                    data: <?php echo json_encode($metadataByCategoryVals); ?>,
                     fill: true,
                     maxBarThickness: 65,
                 }],
@@ -350,14 +349,15 @@
         new Chart(bar2, {
             type: "bar",
             data: {
-                labels: ['A', 'B', 'C', 'D', 'E', 'F'],
+//                labels: ['A', 'B', 'C', 'D', 'E', 'F'],
+                labels: <?php echo json_encode($metadataTerbitByAgencyKeys); ?>,
                 datasets: [{
                     label: "Jumlah Metadata / Bahagian",
                     weight: 5,
                     borderWidth: 0,
                     borderRadius: 8,
                     backgroundColor: '#b061ff',
-                    data: [3025, 1382, 925, 1282, 825, 1882],
+                    data: <?php echo json_encode($metadataTerbitByAgencyVals); ?>,
                     fill: false,
                     maxBarThickness: 35
                 }],
@@ -408,14 +408,14 @@
         new Chart(bar3, {
             type: "bar",
             data: {
-                labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+                labels: <?php echo json_encode($metadataByYearKeys); ?>,
                 datasets: [{
                     label: "Jumlah Metadata / Bahagian",
                     weight: 5,
                     borderWidth: 0,
                     borderRadius: 20,
                     backgroundColor: '#ffa361',
-                    data: [3025, 1382, 925, 1282, 825, 1882, 825, 1882, 1282, 825, 2009],
+                    data: <?php echo json_encode($metadataByYearVals); ?>,
                     fill: false,
                     maxBarThickness: 20
                 }],
