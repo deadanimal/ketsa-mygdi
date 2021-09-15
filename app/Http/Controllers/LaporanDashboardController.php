@@ -16,7 +16,12 @@ class LaporanDashboardController extends Controller
      */
     public function index_laporan_data()
     {
-        $permohonans = MohonData::get();
+        $permohonans = DB::table('users')
+                                ->join('mohon_data','users.id','=','mohon_data.user_id')
+                                ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+                                ->select('mohon_data.status','users.kategori','mohon_data.date','mohon_data.acceptance',DB::raw('count(*) as total'),DB::raw('users.name as username'),DB::raw('agensi_organisasi.name as agensi_name'),)
+                                ->groupBy('agensi_organisasi.name','mohon_data.status','users.kategori','mohon_data.date','mohon_data.acceptance','users.name')
+                                ->get();
         $permohonan_perincian = MohonData::get();
         $permohonan_lulus = MohonData::where(['status' => 3])->get();
         $permohonan_kategori = DB::table('users')

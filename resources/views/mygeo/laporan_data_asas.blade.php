@@ -125,9 +125,9 @@
                                         @foreach ($permohonans as $mohon)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $mohon->users->name }}</td>
-                                                <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
-                                                <td>{{ $mohon->users->kategori }}</td>
+                                                <td>{{ $mohon->username }}</td>
+                                                <td>{{ $mohon->agensi_name }}</td>
+                                                <td>{{ $mohon->kategori }}</td>
                                                 <td>
                                                     @if ($mohon->status == '1')
                                                         <span class="badge badge-pill badge-success">Dalam Proses</span>
