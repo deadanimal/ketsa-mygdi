@@ -17,7 +17,7 @@ class LaporanDashboardController extends Controller
     public function index_laporan_data()
     {
         $permohonans = MohonData::get();
-        $permohonan_perincian = MohonData::get();
+        $permohonan_perincian = MohonData::with('users')->get();
         $permohonan_lulus = MohonData::where(['status' => 3])->get();
         $permohonan_kategori = DB::table('users')
                                 ->join('mohon_data','users.id','=','mohon_data.user_id')
