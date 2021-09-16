@@ -755,6 +755,7 @@ class DataAsasController extends Controller
             $valid_nric_pel = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Pelajar','permohonan_id' => $id ])->get();
             $valid_nric_dekan = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Dekan/Pustakawan','permohonan_id' => $id ])->get();
             $valid_ppnm = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang PPNM','permohonan_id' => $id ])->get();
+            $valid_borang_lot = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Lesen Hak Cipta','permohonan_id' => $id ])->get();
 
             // dd($valid_surat_rasmi);
             if($valid_surat_rasmi->isEmpty()){
@@ -764,6 +765,16 @@ class DataAsasController extends Controller
                 $dokumen->permohonan_id = $request->permohonan_id;
                 $dokumen->save();
             }
+
+            if($valid_lot_kadaster->isNotEmpty()){
+                if($valid_borang_lot->isEmpty()){
+                    $dokumen4 = new DokumenBerkaitan();
+                    $dokumen4->tajuk_dokumen = 'Salinan Lesen Hak Cipta';
+                    $dokumen4->permohonan_id = $request->permohonan_id;
+                    $dokumen4->save();
+                }
+            }
+
             if($valid_terhad->isNotEmpty()){
 
                 if($valid_ppnm->isEmpty()){
@@ -772,13 +783,6 @@ class DataAsasController extends Controller
                     $dokumen3->permohonan_id = $request->permohonan_id;
                     $dokumen3->save();
                 }
-                if($valid_lot_kadaster->isEmpty()){
-                    $dokumen4 = new DokumenBerkaitan();
-                    $dokumen4->tajuk_dokumen = 'Salinan Lesen Hak Cipta';
-                    $dokumen4->permohonan_id = $request->permohonan_id;
-                    $dokumen4->save();
-                }
-
                 if(!$valid_user->kategori == 'IPTA - Pelajar' || !$valid_user->kategori == 'IPTS - Pelajar' ) {
 
                     if($valid_nric->isEmpty()){
@@ -1047,12 +1051,11 @@ class DataAsasController extends Controller
             //Put the watermark
             $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
 
-            $failNama = time() . '_' . $request->file('file')->getClientOriginalName();
-
+            $failNama = time() . '_' . $request->file->getClientOriginalName();
             $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
 
             $failModel->tajuk_dokumen = $request->tajuk_dokumen;
-            $failModel->nama_fail = time() . '_' . $request->file('file')->getClientOriginalName();
+            $failModel->nama_fail = $failNama;
             $failModel->file_path = '/storage/uploads/' . $failNama;
             $failModel->permohonan_id = $request->permohonan_id;
             $failModel->save();
@@ -1077,12 +1080,24 @@ class DataAsasController extends Controller
         ]);
 
         if ($request->file()) {
+            $pdf = new Fpdi();
+            // add a page
+            $pdf->AddPage();
+            // set the source file
+            $pdf->setSourceFile($request->file('file')->path());
+            // import page 1
+            $tplId = $pdf->importPage(1);
+            // use the imported page and place it at point 10,10 with a width of 100 mm
+            $pdf->useTemplate($tplId, 10, 10, 200);
+            //Put the watermark
+            $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
+
             $failNama = time() . '_' . $request->file->getClientOriginalName();
-            $failPath = $request->file('file')->storeAs('uploads', $failNama, 'public');
+            $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
 
             DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
                 "nama_fail" => $failNama,
-                "file_path" => '/storage/' . $failPath,
+                "file_path" => '/storage/uploads' . $failNama,
             ]);
 
             $at = new AuditTrail();
