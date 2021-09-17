@@ -131,6 +131,7 @@
                     </form>
                 </div>
             </div>
+        </div>
 
         <!-- Main content -->
         <section class="content">
