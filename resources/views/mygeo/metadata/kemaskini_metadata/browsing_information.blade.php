@@ -88,18 +88,34 @@
                     <div class="col-6">
                         <?php
                         $counter = 0;
-                        foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                            if(trim($keyword->CharacterString) != ""){
-                                if($counter == 0){
-                                    ?>
-                                    <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
-                                    @error('c10_keyword')
-                                    <div class="text-error">{{ $message }}</div>
-                                    @enderror
-                                    <?php
+                        if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
+                            foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                                if(trim($keyword->CharacterString) != ""){
+                                    if($counter == 0){
+                                        ?>
+                                        <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
+                                        @error('c10_keyword')
+                                        <div class="text-error">{{ $message }}</div>
+                                        @enderror
+                                        <?php
+                                    }
+                                    $counter++;
                                 }
-                                $counter++;
                             }
+                        }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
+                           foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                                if(trim($keyword->CharacterString) != ""){
+                                    if($counter == 0){
+                                        ?>
+                                        <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
+                                        @error('c10_keyword')
+                                        <div class="text-error">{{ $message }}</div>
+                                        @enderror
+                                        <?php
+                                    }
+                                    $counter++;
+                                }
+                            } 
                         }
                         ?>
                     </div>
@@ -108,23 +124,45 @@
                 @if($elemenMetadata['c10_additional_keyword[]']->status == '1')
                 <?php
                 $counter = 0;
-                foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                    if(trim($keyword->CharacterString) != ""){
-                        if($counter == 0){
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-3 pl-5">
-                                    <label class="form-control-label mr-4" for="c10_file_type">
-                                        Additional Keywords
-                                    </label><label class="float-right">:</label>
+                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
+                    foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                        if(trim($keyword->CharacterString) != ""){
+                            if($counter == 0){
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_type">
+                                            Additional Keywords
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
-                                </div>
-                            </div>
-                            <?php
+                                <?php
+                            }
+                            $counter++;
                         }
-                        $counter++;
+                    }
+                }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
+                    foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                        if(trim($keyword->CharacterString) != ""){
+                            if($counter == 0){
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_type">
+                                            Additional Keywords
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            $counter++;
+                        }
                     }
                 }
                 ?>
