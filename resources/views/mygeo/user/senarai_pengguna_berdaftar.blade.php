@@ -124,7 +124,6 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
                         <div class="modal-footer justify-content-between1">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
                             <button type="submit" class="btn btn-primary">Tambah</button>
