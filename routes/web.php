@@ -50,13 +50,14 @@ Route::get('/data_asas_dokumen_berkaitan', 'DataAsasController@data_asas_dokumen
 Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
 Route::post('/reply_maklum_balas', 'PortalController@reply_maklum_balas');
 
+Route::get('/senarai_pengumuman', 'PortalController@index_pengumuman');
+Route::post('/tunjuk_pengumuman', 'PortalController@show_pengumuman');
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/laporan_data_asas', 'LaporanDashboardController@index_laporan_data');
     Route::get('/laporan_metadata', 'LaporanDashboardController@index_laporan_metadata');
 
-    Route::get('/senarai_pengumuman', 'PortalController@index_pengumuman');
-    Route::post('/tunjuk_pengumuman', 'PortalController@show_pengumuman');
     Route::get('/kemaskini_pengumuman', 'PortalController@edit_pengumuman');
     Route::post('/simpan_pengumuman', 'PortalController@update_pengumuman');
     Route::post('/tambah_pengumuman', 'PortalController@store_pengumuman');
