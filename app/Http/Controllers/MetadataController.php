@@ -415,12 +415,21 @@ class MetadataController extends Controller {
             if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != "") {
                 $catSelected = trim($metadataxml->hierarchyLevel->MD_ScopeCode);
                 $kategori = MCategory::where('name',$catSelected)->get()->first();
-                $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
-                $customMetadataInput = CustomMetadataInput::where('kategori',$kategori->id)->get()->all();
+                if($kategori){   
+                    $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
+                    $customMetadataInput = CustomMetadataInput::where('kategori',$kategori->id)->get()->all();
+                }else{
+                    $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+                    $customMetadataInput = CustomMetadataInput::get()->all();
+                }
             }else{
                 $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
                 $customMetadataInput = CustomMetadataInput::get()->all();
             }
+            }else{
+                $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+                $customMetadataInput = CustomMetadataInput::get()->all();
+        }
         }
 
         return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected','metadataxml', 'metadataSearched', 'pengesahs', 'customMetadataInput','elemenMetadata'));
@@ -797,7 +806,7 @@ class MetadataController extends Controller {
                 }
             }
         }
-        
+
         $customMetadataInput = CustomMetadataInput::with(array('getKategori' => function($query)use($request) {
                 $query->where('name',$request->kategori);
             }))->get();
@@ -821,7 +830,7 @@ class MetadataController extends Controller {
         }
         
         $this->validate($request, $fields, $customMsg);
-        exit();
+        
         $keywords = "";
         if(count($request->c10_additional_keyword) > 0){
             foreach($request->c10_additional_keyword as $var){
@@ -934,6 +943,7 @@ class MetadataController extends Controller {
     }
 
     public function store_xml(Request $request) {
+        $newMetadataId = '';
         if (file_exists($_FILES['file_xml']['tmp_name'])) {
             //store uploaded xml
             $fileName = time() . '_' . $request->file_xml->getClientOriginalName();
@@ -946,7 +956,7 @@ class MetadataController extends Controller {
             $xml_array = json_decode($json, true);
 
             //save in geonetwork
-            DB::connection('pgsql2')->transaction(function () use ($request, $uploaded_xml) {
+            DB::connection('pgsql2')->transaction(function () use ($request, $uploaded_xml, &$newMetadataId) {
                 $maxid = MetadataGeo::on('pgsql2')->max('id');
 
                 // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
@@ -978,6 +988,8 @@ class MetadataController extends Controller {
                 $mg->disahkan = "0";
                 $mg->portal_user_id = Auth::user()->id;
                 $mg->save();
+                
+                $newMetadataId = $mg->id;
             });
 
             //delete uploaded xml
@@ -990,7 +1002,7 @@ class MetadataController extends Controller {
         $at->data = 'Create';
         $at->save();
 
-        return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
+        return redirect('kemaskini_metadata/'.$newMetadataId)->with('success', 'Metadata Saved');
     }
 
     public function store_todel() {

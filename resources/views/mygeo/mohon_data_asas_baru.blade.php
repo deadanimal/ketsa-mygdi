@@ -576,11 +576,17 @@
                         <div class="form-group">
                             <label for="tajuk_dokumen" class="form-control-label">Tajuk Dokumen</label>
                             <select name="tajuk_dokumen" class="form-control">
-                                <option disabled>Pilih</option>
-                                <option value="Salinan Kad Pengenalan">Salinan Kad Pengenalan (Wakil Agensi/Pelajar)
+                                <option selected disabled>Pilih</option>
+                                <option value="Salinan Kad Pengenalan">Salinan Kad Pengenalan
+                                </option>
+                                <option value="Salinan Kad Pengenalan Pelajar">Salinan Kad Pengenalan Pelajar
+                                </option>
+                                <option value="Salinan Kad Pengenalan Dekan/Pustakawan">Salinan Kad Pengenalan
+                                    Dekan/Pustakawan
                                 </option>
                                 <option value="Borang PPNM">Borang PPNM (Wakil Agensi/Pelajar)</option>
                                 <option value="Borang Undertaking">Borang Undertaking (Kontraktor)</option>
+                                <option value="Salinan Lesen Hak Cipta">Salinan Lesen Hak Cipta (Lot Kadaster)</option>
                             </select>
                         </div>
                         <input type="file" name="file" class="form-control">

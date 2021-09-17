@@ -373,10 +373,22 @@ class PortalController extends Controller
 
     public function update_pengumuman(Request $request)
     {
+        //save gambar
+        if(isset($_FILES['gambar']) && (file_exists($_FILES['gambar']['tmp_name']))){
+            $this->validate($request,['gambar' => 'required|image|mimes:jpeg,png,jpg']);
+            $exists = Storage::exists($request->gambar->getClientOriginalName());
+            $time = date('Y-m-d'.'_'.'H_i_s');
+            $fileName = $time.'_'.$request->gambar->getClientOriginalName();
+            $imageUrl = Storage::putFileAs('/public/', $request->file('gambar'), $fileName);
+        }
+        
         $pengumuman = Pengumuman::find($request->id_pengumuman);
         $pengumuman->title = $request->title_pengumuman;
         $pengumuman->date = $request->date_pengumuman;
         $pengumuman->content = $request->content_pengumuman;
+        if(isset($imageUrl)){
+            $pengumuman->gambar = $fileName;
+        }
         $pengumuman->save();
 
         $at = new AuditTrail();
