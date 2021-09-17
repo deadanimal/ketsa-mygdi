@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="post" class="form-horizontal" action="{{url('simpan_pengumuman')}}" id="form_kemaskini_pengumuman">
+                            <form method="post" class="form-horizontal" action="{{url('simpan_pengumuman')}}" id="form_kemaskini_pengumuman" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id_pengumuman" value="{{ (!is_null($pengumuman) ? $pengumuman->id:'') }}">
                                 <input type="hidden" name="content_pengumuman" id="content_pengumuman">
@@ -87,7 +87,33 @@
 
                                 <label class="form-control-label">Kandungan</label>
                                 <div id="content_pengumuman_input"></div>
-
+                                
+                                <label class="form-control-label">Gambar</label>
+                                <!--<form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_gambarprofil')}}" id="form_kemaskini_gambarprofil" enctype="multipart/form-data">-->
+                                    <div class="pl-lg-4">
+                                        <div class="row mb-2">
+                                            <div class="col-3">
+                                                <?php
+                                                if($pengumuman->gambar != ""){
+                                                    ?>
+                                                    <image id="gambar" alt="Image placeholder" src="{{ asset('storage/'.$pengumuman->gambar) }}" style="border-radius: .95rem;max-width:250px;">
+                                                    <?php
+                                                }else{
+                                                    ?>
+                                                    <image id="gambar" alt="Image placeholder" src="./assetsweb/img/banner2.jpeg" style="border-radius: .95rem;width:100%;padding-top:10px;">
+                                                    <?php
+                                                }
+                                                ?>
+                                            </div>
+                                            <div class="col-6 ml-4 ">
+                                                <label class="form-control-label">Pilih Gambar</label>
+                                                <div class="form-inline">
+                                                    <input id="imageUpload" type="file" name="gambar" placeholder="Photo" class="form-control form-control-sm p-0">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                                 <button type="submit" id="btn_submit" class="btn btn-success float-right mt-4">Submit</button>
                             </form>
                         </div>
