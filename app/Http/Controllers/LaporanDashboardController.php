@@ -11,6 +11,7 @@ use PDF;
 use App\MetadataGeo;
 use App\User;
 use App\MCategory;
+use Auth;
 
 class LaporanDashboardController extends Controller
 {
@@ -97,8 +98,13 @@ class LaporanDashboardController extends Controller
         $total_permohonan_tolak = MohonData::where('status','=',2)->get()->count();
 
         //JUMLAH METADATA YANG TELAH DITERBITKAN
-        $metadataTerbit = count(MetadataGeo::on('pgsql2')->where('disahkan','=','yes')->get());
-        
+        if(Auth::user()->hasRole('Pemohon Data')){
+            $agencyName = Auth::user()->agensi_organisasi;
+        }else{
+            $agencyName = Auth::user()->agensiOrganisasi->name;
+        }
+        $metadataTerbit = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%>'.$agencyName.'<%')->get());
+
         //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
         $metadataTerbitByAgency = [];
         $metadataTerbitByAgencyKeys = [];

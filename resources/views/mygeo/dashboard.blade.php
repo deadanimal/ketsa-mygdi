@@ -75,7 +75,15 @@
                                         <h2 class="font-weight-bold text-white text-uppercase mb-0">
                                             Jumlah Metadata Yang Telah Diterbitkan
                                         </h2>
-                                        <!--<span class="text-white text-uppercase mb-0"> Agensi: Kementerian Sumber danAsli</span>-->
+                                        <span class="text-white text-uppercase mb-0">
+                                            <?php
+                                            if(Auth::user()->hasRole('Pemohon Data')){
+                                                echo Auth::user()->agensi_organisasi;
+                                            }else{
+                                                echo Auth::user()->agensiOrganisasi->name;
+                                            }
+                                            ?>
+                                        </span>
                                     </div>
 
                                     <div class="col-auto">
