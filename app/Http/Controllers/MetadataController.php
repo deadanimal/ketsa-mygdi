@@ -426,6 +426,10 @@ class MetadataController extends Controller {
                 $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
                 $customMetadataInput = CustomMetadataInput::get()->all();
             }
+            }else{
+                $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+                $customMetadataInput = CustomMetadataInput::get()->all();
+        }
         }
 
         return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected','metadataxml', 'metadataSearched', 'pengesahs', 'customMetadataInput','elemenMetadata'));

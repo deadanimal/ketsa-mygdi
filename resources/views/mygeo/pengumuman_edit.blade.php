@@ -87,7 +87,7 @@
 
                                 <label class="form-control-label">Kandungan</label>
                                 <div id="content_pengumuman_input"></div>
-                                
+
                                 <label class="form-control-label">Gambar</label>
                                 <!--<form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_gambarprofil')}}" id="form_kemaskini_gambarprofil" enctype="multipart/form-data">-->
                                     <div class="pl-lg-4">
