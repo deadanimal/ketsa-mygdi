@@ -54,14 +54,14 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
+<!--                    <div class="col-lg-6 col-5 text-right">
                         <button type="button" class="btn btn-sm btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
-                            <?php echo __('lang.btn_upload_xml'); ?>
+                            <?php //echo __('lang.btn_upload_xml'); ?>
                         </button>
+                    </div>-->
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!--===== MODALS =====-->

@@ -355,6 +355,7 @@ class DataAsasController extends Controller
             ]);
 
         }
+
             $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
 
             //send email to pemohon data
@@ -783,6 +784,7 @@ class DataAsasController extends Controller
                     $dokumen3->permohonan_id = $request->permohonan_id;
                     $dokumen3->save();
                 }
+
                 if(!$valid_user->kategori == 'IPTA - Pelajar' || !$valid_user->kategori == 'IPTS - Pelajar' ) {
 
                     if($valid_nric->isEmpty()){
