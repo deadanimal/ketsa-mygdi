@@ -67,9 +67,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $counter = 0; ?>
                                         @foreach ($metadatas as $key=>$val)
+                                            <?php $counter++; ?>
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $counter }}</td>
                                                 <td>
                                                     <?php
                                                     $title = "";
@@ -149,7 +151,7 @@
                                             @if($val[1]->disahkan == "yes")
                                                 <?php $counter++; ?>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>
                                                         <?php
                                                         $title = "";
@@ -219,7 +221,7 @@
                                             @if($val[1]->disahkan == "no" || $val[1]->disahkan == "0" || $val[1]->is_draf == "yes")
                                                 <?php $counter++; ?>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>
                                                         <?php
                                                         $title = "";
@@ -296,7 +298,7 @@
                                             @foreach ($metadatas as $key=>$val)
                                                 <?php $counter++; ?>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>
                                                         <?php
                                                         $title = "";
@@ -369,7 +371,7 @@
                                                 @if($val[1]->disahkan == "yes")
                                                     <?php $counter++; ?>
                                                     <tr>
-                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $counter }}</td>
                                                         <td>
                                                             <?php
                                                             $agency = "";

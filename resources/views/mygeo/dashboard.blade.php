@@ -73,7 +73,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h2 class="font-weight-bold text-white text-uppercase mb-0">
-                                            Jumlah Metadata Yang Telah Diterbitkan
+                                            Jumlah Metadata Yang Telah Diterbit
                                         </h2>
                                         <span class="text-white text-uppercase mb-0">
                                             <?php
@@ -137,7 +137,7 @@
                                     <div class="col">
                                         <h6 class="surtitle">Bar Chart</h6>
 
-                                        <h5 class="h2 mb-0">Jumlah Metadata Mengikutkan Tahun</h5>
+                                        <h5 class="h2 mb-0">Jumlah Metadata Mengikut Tahun</h5>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                                     <div class="col">
                                         <h6 class="surtitle">Pie Chart</h6>
 
-                                        <h5 class="h2 mb-0">Jumlah Metadata Diterbitkan Mengikutkan Kategori</h5>
+                                        <h5 class="h2 mb-0">Jumlah Metadata Diterbit Mengikut Topik Kategori</h5>
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h2 class="card-title font-weight-bold text-white text-uppercase mb-0">
-                                            Bilangan Permohonan Data Diluluskan
+                                            Bilangan Permohonan Data Dilulus
                                         </h2>
                                     </div>
 
@@ -253,7 +253,7 @@
                                     <div class="col">
                                         <h6 class="surtitle">Bar Chart</h6>
 
-                                        <h5 class="h2 mb-0">Jumlah Permohonan Data Mengikutkan Tahun</h5>
+                                        <h5 class="h2 mb-0">Jumlah Permohonan Data Mengikut Tahun</h5>
                                     </div>
                                 </div>
                             </div>
@@ -274,7 +274,7 @@
                                     <div class="col">
                                         <h6 class="surtitle">Pie Chart</h6>
 
-                                        <h5 class="h2 mb-0">Jumlah Permohonan Data Mengikutkan Kategori</h5>
+                                        <h5 class="h2 mb-0">Jumlah Permohonan Data Mengikut Kategori</h5>
                                     </div>
                                 </div>
                             </div>
@@ -532,8 +532,7 @@
         new Chart(pie1, {
             type: "pie",
             data: {
-                labels: ['Climatology Meteorology Atmosphere', 'Imagery Base Maps-Earth Cover',
-                    'Geoscientific Information', 'Transportation', 'Inland Waters'
+                labels: ['Administrative and Political Boundaries','Agriculture and Farming','Atmosphere and Climatic','Biology and Ecology','Business and Economic','Cadastral','Cultural, Society and Demography','Elevation and Derived Products','Environment and Conservation','Facilities and Structures','Geological and Geophysical','Human Health and Disease','Imagery and Base Maps','Inland Water Resources','Locations and Geodetic Networks','Military','Oceans and Estuaries','Transportation Networks','Utilities and Communication'
                 ],
                 datasets: [{
                     label: "Projects",
@@ -543,7 +542,27 @@
                     pointRadius: 2,
                     borderWidth: 2,
                     backgroundColor: ['#17c1e8', '#cb0c9f', '#a8b8d8', '#3A415F', '#a8b8d8'],
-                    data: [139.9, 501.9, 301.9, 201.1, 165.8],
+                    data: [
+                        {{ $metadataByTopicCategory['Administrative and Political Boundaries'] }},
+                        {{ $metadataByTopicCategory['Agriculture and Farming'] }},
+                        {{ $metadataByTopicCategory['Atmosphere and Climatic'] }},
+                        {{ $metadataByTopicCategory['Biology and Ecology'] }},
+                        {{ $metadataByTopicCategory['Business and Economic'] }},
+                        {{ $metadataByTopicCategory['Cadastral'] }},
+                        {{ $metadataByTopicCategory['Cultural, Society and Demography'] }},
+                        {{ $metadataByTopicCategory['Elevation and Derived Products'] }},
+                        {{ $metadataByTopicCategory['Environment and Conservation'] }},
+                        {{ $metadataByTopicCategory['Facilities and Structures'] }},
+                        {{ $metadataByTopicCategory['Geological and Geophysical'] }},
+                        {{ $metadataByTopicCategory['Human Health and Disease'] }},
+                        {{ $metadataByTopicCategory['Imagery and Base Maps'] }},
+                        {{ $metadataByTopicCategory['Inland Water Resources'] }},
+                        {{ $metadataByTopicCategory['Locations and Geodetic Networks'] }},
+                        {{ $metadataByTopicCategory['Military'] }},
+                        {{ $metadataByTopicCategory['Oceans and Estuaries'] }},
+                        {{ $metadataByTopicCategory['Transportation Networks'] }},
+                        {{ $metadataByTopicCategory['Utilities and Communication'] }},
+                    ],
                     fill: false
                 }],
             },

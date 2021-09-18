@@ -116,10 +116,10 @@ class LaporanDashboardController extends Controller
             $idsToSearch = [];
             $agencyName = "";
             foreach($ai as $user){
-                if($user->hasRole('Pemohon Data')){
-                    $agencyName = $user->agensi_organisasi;
-                }else{
+                if(!$user->hasRole('Pemohon Data')){
                     $agencyName = $user->agensiOrganisasi->name;
+                }else{
+                    break 2;
                 }
                 $idsToSearch[] = $user->id;
             }
@@ -162,7 +162,34 @@ class LaporanDashboardController extends Controller
             $metadataByYearVals[] = $val;
         }
         
-        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak','metadataTerbit','metadataTerbitByAgency','metadataTerbitByAgencyKeys','metadataTerbitByAgencyVals','metadataBelumTerbit','metadataByCategory','metadataByCategoryKeys','metadataByCategoryVals','metadataByYear','metadataByYearKeys','metadataByYearVals'));
+        //Jumlah metadata diterbitkan mengikut topik kategori
+        $metadataByTopicCategory = [
+            'Administrative and Political Boundaries' => 0,
+            'Agriculture and Farming' => 0,
+            'Atmosphere and Climatic' => 0,
+            'Biology and Ecology' => 0,
+            'Business and Economic' => 0,
+            'Cadastral' => 0,
+            'Cultural, Society and Demography' => 0,
+            'Elevation and Derived Products' => 0,
+            'Environment and Conservation' => 0,
+            'Facilities and Structures' => 0,
+            'Geological and Geophysical' => 0,
+            'Human Health and Disease' => 0,
+            'Imagery and Base Maps' => 0,
+            'Inland Water Resources' => 0,
+            'Locations and Geodetic Networks' => 0,
+            'Military' => 0,
+            'Oceans and Estuaries' => 0,
+            'Transportation Networks' => 0,
+            'Utilities and Communication' => 0,
+        ];
+        foreach($metadataByTopicCategory as $key=>$val){
+            $metadatas = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%<MD_TopicCategoryCode>'.$key.'<%')->get());
+            $metadataByTopicCategory[$key] = $metadatas;
+        }
+        
+        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak','metadataTerbit','metadataTerbitByAgency','metadataTerbitByAgencyKeys','metadataTerbitByAgencyVals','metadataBelumTerbit','metadataByCategory','metadataByCategoryKeys','metadataByCategoryVals','metadataByYear','metadataByYearKeys','metadataByYearVals','metadataByTopicCategory'));
     }
 
     public function generate_pdf_laporan_perincian_data(Request $request){
