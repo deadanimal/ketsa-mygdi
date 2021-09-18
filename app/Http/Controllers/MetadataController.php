@@ -1918,6 +1918,81 @@ class MetadataController extends Controller {
         exit;
     }
 
+    public function simpan_kemaskini_custom_input(Request $request) {
+        if(!auth::user()->hasRole(['Pentadbir Metadata'])){
+            abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
+        }
+
+        $cmi = CustomMetadataInput::where('id',$request->customInputId)->get()->first();
+        $cmi->name = $request->name;
+        $cmi->name_bm = $request->name_bm;
+        $cmi->input_name = preg_replace("/\s+/","",trim(ucwords($request->name)));
+        $cmi->input_type = "Text";
+        $cmi->data = "";
+        if($request->mandatory == ""){
+           $mand = "No"; 
+        }else{
+           $mand = $request->mandatory;
+        } 
+        $cmi->mandatory = $mand;
+        $cmi->status = "Active";
+        $cmi->kategori = $request->kategori;
+        $query = $cmi->save();
+
+        if($query){
+            $msg = "Custom Input berjaya dikemaskini.";
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Update';
+            $at->save();
+        }else{
+            $msg = "Custom Input tidak berjaya dikemaskini.";
+        }
+
+        return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
+    }
+    
+    public function get_custom_input_details(){
+        $custom_input_id = $_POST['custom_input_id'];
+        $cmi = CustomMetadataInput::where(["id"=>$custom_input_id])->get()->first();
+        $categories = MCategory::get();
+        $html_details = '
+            <input type="hidden" name="customInputId" id="kemaskiniCustomInputId" value="'.$cmi->id.'">
+            <div class="form-group">
+                <label for="name">Nama EN:</label>
+                <input type="text" name="name" class="form-control name" id="kemaskiniCustomInputName" value="'.$cmi->name.'">
+            </div>
+            <div class="form-group">
+                <label for="name">Nama BM:</label>
+                <input type="text" name="name_bm" class="form-control name_bm" id="kemaskiniCustomInputNameBm" value="'.$cmi->name_bm.'">
+            </div>
+            <div class="form-group">
+                <label for="kategori">Kategori:</label>
+                <select name="kategori" class="form-control thekategori">
+                    <option value="">Pilih...</option>';
+        foreach($categories as $cat){
+            $html_details .= '
+                <option value="'.$cat->id.'" '.($cat->id == $cmi->kategori ? "selected":"").'>'.$cat->name.'</option>
+            ';
+        }
+        $html_details .= '
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="mandatory">Mandatory:</label>
+                <select name="mandatory" class="form-control mandatory" id="kemaskiniCustomInputMandatory">
+                    <option value="">Pilih...</option>
+                    <option value="Yes" '.($cmi->mandatory == "Yes" ? "selected":"").'>Yes</option>
+                    <option value="No" '.($cmi->mandatory == "No" ? "selected":"").'>No</option>
+                </select>
+            </div>
+        ';
+        echo $html_details;
+        exit;
+    }
+
     public function getTajukByCategory(Request $request){
         $tajuks = Tajuk::where('kategori',$request->kategori)->whereNull('sub_tajuk')->get();
         echo json_encode($tajuks);

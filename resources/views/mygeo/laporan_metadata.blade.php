@@ -77,7 +77,7 @@
                                                     $title = "";
                                                     if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
                                                         $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                    } 
+                                                    }
                                                     echo $title;
                                                     ?>
                                                 </td>
@@ -157,7 +157,7 @@
                                                         $title = "";
                                                         if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
                                                             $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                        } 
+                                                        }
                                                         echo $title;
                                                         ?>
                                                     </td>
@@ -166,7 +166,7 @@
                                                         $agency = "";
                                                         if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
                                                             $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
-                                                        } 
+                                                        }
                                                         echo $agency;
                                                         ?>
                                                     </td>
@@ -175,7 +175,7 @@
                                                         $publisher = "";
                                                         if(isset($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) != ""){
                                                             $publisher = $val[0]->contact->CI_ResponsibleParty->individualName->CharacterString;
-                                                        } 
+                                                        }
                                                         echo $publisher;
                                                         ?>
                                                     </td>
@@ -227,7 +227,7 @@
                                                         $title = "";
                                                         if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
                                                             $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                        } 
+                                                        }
                                                         echo $title;
                                                         ?>
                                                     </td>
@@ -236,7 +236,7 @@
                                                         $agency = "";
                                                         if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
                                                             $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
-                                                        } 
+                                                        }
                                                         echo $agency;
                                                         ?>
                                                     </td>
@@ -304,7 +304,7 @@
                                                         $title = "";
                                                         if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
                                                             $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                        } 
+                                                        }
                                                         echo $title;
                                                         ?>
                                                     </td>
@@ -313,7 +313,7 @@
                                                         $agency = "";
                                                         if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
                                                             $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
-                                                        } 
+                                                        }
                                                         echo $agency;
                                                         ?>
                                                     </td>
@@ -377,7 +377,7 @@
                                                             $agency = "";
                                                             if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
                                                                 $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
-                                                            } 
+                                                            }
                                                             echo $agency;
                                                             ?>
                                                         </td>
@@ -421,7 +421,9 @@
     <script>
         $(document).ready(function() {
             $("#laporan_perincian").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
@@ -461,7 +463,9 @@
 
         $(document).ready(function() {
             $("#laporan_kategori").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
@@ -503,7 +507,9 @@
     <script>
         $(document).ready(function() {
             $("#laporan_statistik").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
@@ -542,7 +548,9 @@
         });
         $(document).ready(function() {
             $("#laporan_lulus").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
@@ -581,7 +589,9 @@
         });
         $(document).ready(function() {
             $("#laporan_seluruh").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',

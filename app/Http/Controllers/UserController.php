@@ -190,8 +190,10 @@ class UserController extends Controller {
         }
         $html_details .= '
                 </div>
-            </div>
-            <div class="row mb-2 divBahagian">
+            </div>';
+
+            if(!$user_details->hasRole("Pemohon Data")){
+                $html_details .= '<div class="row mb-2 divBahagian">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="bahagian">
                         Bahagian
@@ -201,8 +203,11 @@ class UserController extends Controller {
                     <input class="form-control form-control-sm ml-3" id="bahagian" type="text"
                            value="'.$user_details->bahagian.'" disabled />
                 </div>
-            </div>
-            <div class="row mb-2">
+            </div>';
+
+            }
+
+            $html_details .= '<div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="email">
                         Emel
@@ -223,7 +228,7 @@ class UserController extends Controller {
                     <input class="form-control form-control-sm ml-3" id="phone_pejabat" type="text"
                            value="'.$user_details->phone_pejabat.'" disabled />
                 </div>';
-        if(!Auth::user()->hasRole(["Penerbit Metadata","Pengesah Metadata"])){
+        if(!$user_details->hasRole(["Penerbit Metadata","Pengesah Metadata"])){
             $html_details .= '
                 <div class="col-2">
                     <label class="form-control-label mr-4" for="phone_bimbit">
@@ -255,7 +260,7 @@ class UserController extends Controller {
         $html_details .= '
                 </div>
             </div>';
-        if(Auth::user()->hasRole("Pemohon Data")){
+        if($user_details->hasRole("Pemohon Data")){
             $html_details .= '
                 <div class="row mb-2">
                     <div class="col-3">
@@ -596,7 +601,7 @@ class UserController extends Controller {
         $this->validate($request, $fields, $customMsg);
 
         $password = "";
-        
+
         $sektor = "";
         if($request->agensi_organisasi != ""){
             $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();

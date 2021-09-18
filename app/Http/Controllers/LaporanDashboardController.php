@@ -42,7 +42,7 @@ class LaporanDashboardController extends Controller
         $permohonan_count = count($permohonans);
         return view('mygeo.laporan_data_asas', compact('permohonans','permohonan_kategori','permohonan_lulus','permohonan_statistik','permohonan_count'));
     }
-    
+
     public function index_laporan_metadata()
     {
         //perincian
@@ -60,9 +60,9 @@ class LaporanDashboardController extends Controller
             $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = [$xml2, $met];
         }
-        
+
         $categories = MCategory::get();
-        
+
         //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
 //        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
 //        $metadatas = [];
@@ -78,7 +78,7 @@ class LaporanDashboardController extends Controller
 //            $xml2 = simplexml_load_string($ftestxml2);
 //            $metadatas[$met->id] = [$xml2, $met];
 //        }
-        
+
         $permohonan_perincian = MohonData::get();
         $permohonan_lulus = MohonData::where(['status' => 3])->get();
         $permohonan_kategori = DB::table('users')
@@ -96,6 +96,16 @@ class LaporanDashboardController extends Controller
         $total_permohonan = MohonData::get()->count();
         $total_permohonan_lulus = MohonData::where('status','=',3)->get()->count();
         $total_permohonan_tolak = MohonData::where('status','=',2)->get()->count();
+        $permohonans = DB::table('mohon_data')
+                                ->select(DB::raw('EXTRACT( year from date) as tahun'),DB::raw('count(*) as total_permohonan'))
+                                ->groupBy('tahun')
+                                ->get();
+        $permohonan_kategori = DB::table('mohon_data')
+                                ->join('senarai_kawasan_data','mohon_data.id','=','senarai_kawasan_data.permohonan_id')
+                                ->select('senarai_kawasan_data.kategori',DB::raw('count(*) as total'))
+                                ->groupBy('senarai_kawasan_data.kategori')
+                                ->get();
+        // dd($permohonan_kategori);
 
         //JUMLAH METADATA YANG TELAH DITERBITKAN
         if(Auth::user()->hasRole('Pemohon Data')){
@@ -131,7 +141,7 @@ class LaporanDashboardController extends Controller
 
         //Bilangan metadata yang belum diterbitkan (Draf dan Perlu Pengesahan)
         $metadataBelumTerbit = count(MetadataGeo::on('pgsql2')->where('disahkan','=','0')->orWhere('disahkan','=','no')->orWhere('is_draf','=','yes')->get());
-        
+
         //Bilangan metadata mengikut kategori
         $metadataByCategory = [];
         $metadataByCategoryKeys = [];
@@ -161,7 +171,7 @@ class LaporanDashboardController extends Controller
             $metadataByYearKeys[] = $key;
             $metadataByYearVals[] = $val;
         }
-        
+
         //Jumlah metadata diterbitkan mengikut topik kategori
         $metadataByTopicCategory = [
             'Administrative and Political Boundaries' => 0,
@@ -188,8 +198,8 @@ class LaporanDashboardController extends Controller
             $metadatas = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%<MD_TopicCategoryCode>'.$key.'<%')->get());
             $metadataByTopicCategory[$key] = $metadatas;
         }
-        
-        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak','metadataTerbit','metadataTerbitByAgency','metadataTerbitByAgencyKeys','metadataTerbitByAgencyVals','metadataBelumTerbit','metadataByCategory','metadataByCategoryKeys','metadataByCategoryVals','metadataByYear','metadataByYearKeys','metadataByYearVals','metadataByTopicCategory'));
+
+        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak','metadataTerbit','metadataTerbitByAgency','metadataTerbitByAgencyKeys','metadataTerbitByAgencyVals','metadataBelumTerbit','metadataByCategory','metadataByCategoryKeys','metadataByCategoryVals','metadataByYear','metadataByYearKeys','metadataByYearVals','metadataByTopicCategory','permohonan_kategori','permohonans'));
     }
 
     public function generate_pdf_laporan_perincian_data(Request $request){
