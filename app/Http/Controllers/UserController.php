@@ -603,17 +603,11 @@ class UserController extends Controller {
         $password = "";
 
         $sektor = "";
-        if($request->agensi_organisasi != ""){
+        if($request->agensi_organisasi != "" && $request->peranan != "Pemohon Data"){
             $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
             $sektor = $ao->sektor;
         }
-
-        $sektor = "";
-        if($request->agensi_organisasi != ""){
-            $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
-            $sektor = $ao->sektor;
-        }
-
+        
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;
