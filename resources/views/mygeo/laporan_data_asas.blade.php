@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="card-body" style="overflow-x:auto;">
-                                <table id="laporan_perincian" class="table table-bordered table-striped">
+                                <table id="laporan_perincian" class="display table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -68,10 +68,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $counter = 0; ?>
                                         @foreach ($permohonans as $mohon)
                                             @if (isset($mohon->users))
+                                            <?php $counter++; ?>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->name }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
@@ -91,6 +93,10 @@
                                             @endif
                                         @endforeach
                                     </tbody>
+                                    <tfoot>
+                                        <th>JUMLAH KESELURUHAN DATA</th>
+                                        <th>{{ $counter }}</th>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -112,7 +118,7 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan Keseluruhan Permohonan Data </h4>
-                                <table id="laporan_seluruh" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="laporan_seluruh" class="display table table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -127,10 +133,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $counter = 0; ?>
                                         @foreach ($permohonans as $mohon)
                                             @if (isset($mohon->users))
+                                            <?php $counter++; ?>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
                                                         <?php
@@ -166,11 +174,15 @@
                                             @endif
                                         @endforeach
                                     </tbody>
+                                    <tfoot>
+                                        <th>JUMLAH KESELURUHAN DATA</th>
+                                        <th>{{ $counter }}</th>
+                                    </tfoot>
                                 </table>
                             </div>
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan permohonan data yang telah diluluskan </h4>
-                                <table id="laporan_lulus" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="laporan_lulus" class="display table table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -180,10 +192,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $counter = 0; ?>
                                         @foreach ($permohonan_lulus as $mohon)
                                             @if (isset($mohon->users))
+                                            <?php $counter++; ?>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
                                                         <?php
@@ -205,7 +219,7 @@
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan permohonan Data mengikut Kategori</h4>
                                 <div class="table-responsive">
-                                    <table id="laporan_kategori" class="table table-bordered table-striped"
+                                    <table id="laporan_kategori" class="display table table-bordered table-striped"
                                         style="width:100%;">
                                         <thead>
                                             <tr>
@@ -217,25 +231,29 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $counter = 0; ?>
                                             @foreach ($permohonan_kategori as $mohon)
-                                                {{-- @if (isset($mohon->users)) --}}
+                                                <?php $counter++; ?>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->username }}</td>
                                                     <td>{{ $mohon->name }}</td>
                                                     <td>{{ $mohon->kategori}}</td>
                                                     <td>{{ $mohon->total }}</td>
                                                 </tr>
-                                                {{-- @endif --}}
                                             @endforeach
                                         </tbody>
+                                        <tfoot>
+                                            <th>JUMLAH KESELURUHAN DATA</th>
+                                            <th>{{ $counter }}</th>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h4 class="heading text-muted">Statistik permohonan data mengikut tahun</h4>
                                 <div class="table-responsive">
-                                    <table id="laporan_statistik" class="table table-bordered table-striped"
+                                    <table id="laporan_statistik" class="display table table-bordered table-striped"
                                         style="width:100%;">
                                         <thead>
                                             <tr>
@@ -247,18 +265,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $counter = 0; ?>
                                             @foreach ($permohonan_statistik as $mohon)
-                                                {{-- @if (isset($mohon->users)) --}}
+                                            <?php $counter++; ?>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->agensi_name }}</td>
                                                     <td>{{ $mohon->total_permohonan }}</td>
                                                     <td>{{ $permohonan_count }}</td>
                                                     <td>{{ $mohon->tahun }}</td>
                                                 </tr>
-                                                {{-- @endif --}}
                                             @endforeach
                                         </tbody>
+                                        <tfoot>
+                                            <th>JUMLAH KESELURUHAN DATA</th>
+                                            <th>{{ $counter }}</th>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -288,7 +310,9 @@
     <script>
         $(document).ready(function() {
             $("#laporan_perincian").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
@@ -329,7 +353,9 @@
 
         $(document).ready(function() {
             $("#laporan_kategori").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
@@ -372,7 +398,9 @@
     <script>
         $(document).ready(function() {
             $("#laporan_statistik").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
@@ -412,7 +440,9 @@
         });
         $(document).ready(function() {
             $("#laporan_lulus").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
@@ -452,7 +482,9 @@
         });
         $(document).ready(function() {
             $("#laporan_seluruh").DataTable({
-                "dom": 'Bfrtip',
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',

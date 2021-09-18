@@ -175,6 +175,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/change_akuan_terima', 'DataAsasController@change_akuan_terima');
     Route::post('/checkThreeHourNotifySelesaiMuatTurun', 'DataAsasController@checkThreeHourNotifySelesaiMuatTurun');
     Route::post('/berjayaMuatTurun', 'DataAsasController@berjayaMuatTurun');
+    Route::post('/api/dokumen/akuan_pelajar', 'DataAsasController@generate_pdf_akuan_pelajar');
+
 
     Route::get('/surat_balasan/{id}','DataAsasController@surat_balasan');
     Route::post('/simpan_surat_balasan', 'DataAsasController@update_surat_balasan');

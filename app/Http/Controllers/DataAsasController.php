@@ -61,9 +61,13 @@ class DataAsasController extends Controller
             }
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
-        $senarai_data = SenaraiData::distinct('subkategori')->get();
-        $lapisandata = SenaraiData::distinct('subkategori')->get();
-        $kategori_senarai_data = KategoriSenaraiData::orderBy('name','ASC')->get();
+        $senarai_data = SenaraiData::where('status','Tersedia')->distinct('subkategori')->get();
+        $lapisandata = DB::table('senarai_data')
+                                ->where('status','Tersedia')
+                                ->select('subkategori','lapisan_data')
+                                ->groupBy('subkategori','lapisan_data')
+                                ->get();
+        $kategori_senarai_data  = SenaraiData::where('status','Tersedia')->distinct('kategori')->get();
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->get();
         //  return $dokumens;
@@ -80,10 +84,12 @@ class DataAsasController extends Controller
     public function data_asas_senarai()
     {
         $subs = SenaraiData::where([
-            ['kategori','=','LOL']
+            ['kategori','=','LOL'],
+            ['status','=','Tersedia']
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
+            ['status','=','Tersedia']
         ])->get();
         $senarai_data = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
@@ -99,10 +105,12 @@ class DataAsasController extends Controller
     {
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
-            ['kategori','=',$kategori->kategori]
+            ['kategori','=',$kategori->kategori],
+            ['status','=','Tersedia']
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
+            ['status','=','Tersedia']
         ])->get();
         $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
@@ -122,9 +130,11 @@ class DataAsasController extends Controller
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
             ['kategori','=',$kategori->kategori],
+            ['status','=','Tersedia']
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=',$subkategori->subkategori],
+            ['status','=','Tersedia']
         ])->get();
         $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
@@ -1248,5 +1258,18 @@ class DataAsasController extends Controller
 
         $id = $request->permohonan_id;
         return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Salinan Kad Pengenalan Berjaya Dijana dan Ditambah');
+    }
+
+    public function generate_pdf_akuan_pelajar(Request $request){
+
+        $permohonan = MohonData::where('id', $request->permohonan_id)->first();
+        $akuan = AkuanPelajar::where('permohonan_id', $request->permohonan_id)->first();
+        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan'));
+
+        // (Optional) Setup the paper size and orientation
+        $pdf->setPaper('A4', 'potrait');
+
+        // Render the HTML as PDF
+        return $pdf->stream();
     }
 }

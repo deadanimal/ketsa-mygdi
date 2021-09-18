@@ -243,7 +243,7 @@
     </div>
 
     <div class="modal fade" id="modal-butiran">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Maklumat Pengguna</h4>
@@ -299,9 +299,9 @@
                 $('#agensi_organisasi_dropdown').prop('disabled',false).show();
             }
         });
-        
+
         $('#agensi_organisasi_text').prop('disabled',true).hide();
-        
+
         var table = $("#table_newUsers").DataTable({
             "orderCellsTop": true,
             "ordering": false,

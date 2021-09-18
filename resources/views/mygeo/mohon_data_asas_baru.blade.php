@@ -457,7 +457,7 @@
                                             onchange="selectKategori()">
                                             <option selected disabled>Pilih</option>
                                             @foreach ($kategori_senarai_data as $kategori)
-                                                <option value="{{ $kategori->name }}">{{ $kategori->name }}
+                                                <option value="{{ $kategori->kategori }}">{{ $kategori->kategori }}
                                                 </option>
                                             @endforeach
                                         </select>

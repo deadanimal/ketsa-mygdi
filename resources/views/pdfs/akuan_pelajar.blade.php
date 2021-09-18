@@ -1,50 +1,20 @@
-@extends('layouts.app_mygeo_ketsa')
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MyGeo Explorer</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      </head>
+<style>
 
-@section('content')
+</style>
 
-    <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
-    <style>
-        .ftest {
-            display: inline;
-            width: auto;
-        }
-
-    </style>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="header">
-            <div class=" container-fluid">
-                <div class="header-body">
-                    <div class="row align-items-center p-3 py-4">
-                        <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-dark d-inline-block mb-0">Akuan Pelajar</h6>
-
-                            <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
-                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class=" breadcrumb-item">
-                                        <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
-                                    </li>
-                                    <li aria-current="page" class="breadcrumb-item active">
-                                        Mohon Data
-                                    </li>
-                                    <li aria-current="page" class="breadcrumb-item active">
-                                        Akuan Pelajar
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
-                        <div class="col-lg-6 col-5 text-right">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
+<body>
+    <div class="content-wrapper" style="width:100%;">
+        <div class="content">
             <div class=" container-fluid">
                 <div class=" row">
                     <div class=" col">
@@ -60,9 +30,6 @@
                                 </div>
                             </div>
                             <div class="card-body p-4">
-                                <form action="{{ url('simpan_akuan_pelajar') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-
                                     <h3 class="text-center">AKUAN PELAJAR</h3>
                                     <p class="mx-6 pr-lg-4">
                                         (Sila nyatakan tajuk tesis/projek/kajian
@@ -159,7 +126,7 @@
                                     <br><br>
                                     <div class="mx-6 pl-lg-8">
                                         Tandatangan Pelajar:
-                                        <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan" height="120">
+                                        {{-- <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan" height="120">
                                         <input type="file" class="form-control form-control-sm py-0" name="file"
                                             placeholder="Digital Sign">
                                         <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
@@ -169,7 +136,7 @@
                                         Nama:<input type="text" class="form-control form-control-sm"
                                             value="{{ $permohonan->users->name }}" disabled>
                                         Alamat:<textarea class="form-control form-control-sm" cols="30" rows="6"
-                                            disabled>{{ $permohonan->users->alamat }}</textarea>
+                                            disabled>{{ $permohonan->users->alamat }}</textarea> --}}
                                     </div>
 
                                     <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
@@ -177,45 +144,13 @@
 
                                     </p>
 
-                                    @if (Auth::user()->hasRole(['Pemohon Data']))
-                                        <button type="submit" class="btn float-right btn-primary">Simpan</button>
-                                    @endif
-                                </form>
-                                <form action="{{ url('api/dokumen/akuan_pelajar') }}" method="POST" target="_blank">
-                                    @csrf
-                                    <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                    <button type=submit class="btn btn-sm btn-primary mt-2">Cetak PDF</button>
-                                </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
+</body>
 
-    <script>
-        $(document).ready(function() {
-            $("#table_metadatas").DataTable({
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
-                    }
-                }
-            });
-        });
-    </script>
-@stop
+</html>
