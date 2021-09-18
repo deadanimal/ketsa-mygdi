@@ -100,6 +100,7 @@ class MetadataController extends Controller {
         $metadatas = $metadatasdb = [];
         $carian = isset($request->carian) ? $request->carian:"";
         $query = MetadataGeo::on('pgsql2');
+        $query2 = MetadataGeo::on('pgsql2');
         
         $params = [];
         
@@ -135,6 +136,7 @@ class MetadataController extends Controller {
         }
         
         $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
+        $metadatasdbtitle = $query->select('id','data')->get();
         
         $metadatas = [];
         foreach ($metadatasdb as $met) {
@@ -148,9 +150,25 @@ class MetadataController extends Controller {
             $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = $xml2;
         }
+        
+        $metadataTitles = [];
+        foreach ($metadatasdbtitle as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            $xml2 = simplexml_load_string($ftestxml2);
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                $metadataTitles[] = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
+            }
+        }
+        
         $portal = PortalTetapan::get()->first();
             
-        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian','params','portal'));
+        return view('senarai_metadata_nologin', compact('metadatas','metadatasdb','carian','params','portal','metadataTitles'));
     }
     
     public function findMetadataByName(Request $request){
@@ -169,7 +187,8 @@ class MetadataController extends Controller {
                 $metadatas[$met->id] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
             }
         }
-        echo json_encode($metadatas);exit();
+        echo json_encode($metadatas);
+        exit();
     }
 
     public function senarai_pengesahan_metadata() {
