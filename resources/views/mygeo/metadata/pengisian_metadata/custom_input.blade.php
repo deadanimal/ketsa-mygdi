@@ -2,7 +2,7 @@
     <div class="card-header">
         <h4 class="card-title">
             <a data-toggle="collapse" href="#collapse16">
-                CUSTOM INPUT
+                <?php echo __('lang.accord_16'); ?>
             </a>
         </h4>
     </div>
@@ -13,7 +13,16 @@
                     <div class="row my-0 py-0">
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="uname">
-                                {{ $cmi->name }} {!! ($cmi->mandatory == "Yes" ? '<span class="text-warning">*</span>':"") !!}
+                                <?php
+                                if(isset($_GET['bhs'])){
+                                    if($_GET['bhs'] == 'bm'){
+                                        echo $cmi->name_bm;
+                                    }if($_GET['bhs'] == 'en'){
+                                        echo $cmi->name;
+                                    }
+                                }
+                                ?>
+                                {!! ($cmi->mandatory == "Yes" ? '<span class="text-warning">*</span>':"") !!}
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">

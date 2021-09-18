@@ -19,6 +19,7 @@
     'accord_13'=> 'REFERENCE SYSTEM INFORMATION',
     'accord_14'=> 'CONSTRAINTS',
     'accord_15'=> 'DATA QUALITY',
+    'accord_16'=> 'OTHER ELEMENTS',
 
     //WANI: contoh formatting seperti di bawah: (add je berapa byk yg diperlukan, nnti sy just copy paste)
     'nama_label_tanpa_space/jarak'=> 'perkataan yg perlu display',

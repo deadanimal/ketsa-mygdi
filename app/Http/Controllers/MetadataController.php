@@ -406,7 +406,11 @@ class MetadataController extends Controller {
         $refSys = ReferenceSystemIdentifier::all();
         if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != ""){
             $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
-            $refSysSelected = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+            if(is_numeric($refSysId)){
+                $refSysSelected = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+            }else{
+                $refSysSelected = ReferenceSystemIdentifier::where('name',$refSysId)->get()->first();
+            }
         }else{
             $refSysSelected = [];
         }

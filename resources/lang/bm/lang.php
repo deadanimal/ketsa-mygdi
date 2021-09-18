@@ -19,6 +19,7 @@
     'accord_13'=> 'MAKLUMAT SISTEM RUJUKAN',
     'accord_14'=> 'KEKANGAN',
     'accord_15'=> 'KUALITI DATA',
+    'accord_16'=> 'ELEMEN TAMBAHAN',
 
     //WANI: contoh formatting seperti di bawah: (add je berapa byk yg diperlukan, nnti sy just copy paste)
     'nama_label_tanpa_space/jarak'=> 'perkataan yg perlu display',
