@@ -43,8 +43,19 @@ class LaporanDashboardController extends Controller
         $total_permohonan = MohonData::get()->count();
         $total_permohonan_lulus = MohonData::where('status','=',3)->get()->count();
         $total_permohonan_tolak = MohonData::where('status','=',2)->get()->count();
+        $permohonans = DB::table('mohon_data')
+                                ->select(DB::raw('EXTRACT( year from date) as tahun'),DB::raw('count(*) as total_permohonan'))
+                                ->groupBy('tahun')
+                                ->get();
+        $permohonan_kategori = DB::table('mohon_data')
+                                ->join('senarai_kawasan_data','mohon_data.id','=','senarai_kawasan_data.permohonan_id')
+                                ->select('senarai_kawasan_data.kategori',DB::raw('count(*) as total'))
+                                ->groupBy('senarai_kawasan_data.kategori')
+                                ->get();
+        // dd($permohonan_kategori);
 
-        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak'));
+
+        return view('mygeo.dashboard', compact('permohonan_kategori','total_permohonan','total_permohonan_lulus','total_permohonan_tolak','permohonans'));
     }
 
     public function laporan_data_detail($id){

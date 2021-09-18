@@ -183,7 +183,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 text-white mr-2">{{$total_permohonan}}
+                                    <span class="h2 text-white mr-2">{{ $total_permohonan }}
                                     </span>
                                 </p>
                             </div>
@@ -207,7 +207,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 text-white mr-2">{{$total_permohonan_lulus}}
+                                    <span class="h2 text-white mr-2">{{ $total_permohonan_lulus }}
                                     </span>
                                 </p>
                             </div>
@@ -231,7 +231,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 text-white mr-2">{{$total_permohonan_tolak}}
+                                    <span class="h2 text-white mr-2">{{ $total_permohonan_tolak }}
                                     </span>
                                 </p>
                             </div>
@@ -466,14 +466,22 @@
         new Chart(bar4, {
             type: "bar",
             data: {
-                labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+                labels: [
+                    @foreach ($permohonans as $mohon)
+                        '{{ $mohon->tahun }}'
+                    @endforeach
+                ],
                 datasets: [{
-                    label: "Jumlah Metadata / Bahagian",
+                    label: "Jumlah Permohonan Data / Tahun",
                     weight: 5,
                     borderWidth: 0,
                     borderRadius: 20,
                     backgroundColor: '#35b83e',
-                    data: [3025, 1382, 925, 1282, 825, 1882, 825, 1882, 1282, 825, 2009],
+                    data: [
+                        @foreach ($permohonans as $mohon)
+                        '{{ $mohon->total_permohonan }}'
+                    @endforeach
+                    ],
                     fill: false,
                     maxBarThickness: 20
                 }],
@@ -584,7 +592,11 @@
         new Chart(pie2, {
             type: "pie",
             data: {
-                labels: ['General', 'Aeronautical','Demarcation', 'Built Environment', 'Hydrography'],
+                labels: [
+                    @foreach ($permohonan_kategori as $mohon)
+                        '{{ $mohon->kategori }}',
+                    @endforeach
+                ],
                 datasets: [{
                     label: "Projects",
                     weight: 9,
@@ -592,8 +604,12 @@
                     tension: 0.9,
                     pointRadius: 2,
                     borderWidth: 2,
-                    backgroundColor: ['#17c1e8', '#cb0c9a', '#a8c8d8', '#3A416F', '#a8b8d8'],
-                    data: [139.9, 341.9, 301.9, 251.1, 165.8],
+                    backgroundColor: ['#17c1e8', '#cb0c9f', '#a8b8d8', '#3A415F', '#a8b8d8'],
+                    data: [
+                        @foreach ($permohonan_kategori as $mohon)
+                        '{{ $mohon->total }}',
+                    @endforeach
+                    ],
                     fill: false
                 }],
             },
