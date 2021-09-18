@@ -336,8 +336,11 @@ class MetadataController extends Controller {
         }else{
             $refSys = [];
         }
+        
+        $portal = PortalTetapan::get()->first();
+        $customMetadataInput = CustomMetadataInput::all();
 
-        return view('mygeo.metadata.lihat_metadata', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched'));
+        return view('mygeo.metadata.lihat_metadata', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched','portal','customMetadataInput'));
     }
 
     public function edit($id) {
