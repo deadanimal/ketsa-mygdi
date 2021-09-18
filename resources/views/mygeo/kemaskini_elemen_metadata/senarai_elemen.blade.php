@@ -88,7 +88,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="font-size: 2rem;">Custom Metadata Input</h3>
+                            <h3 class="card-title" style="font-size: 2rem;">Elemen Tambahan</h3>
                             <div class="float-right">
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalCustomInput">Tambah</button>
                             </div>
