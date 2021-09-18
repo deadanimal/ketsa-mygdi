@@ -183,7 +183,19 @@
         });
 
         $(document).on('click', '.btnSimpan', function () {
-            $(this).parent().parent().submit();
+            if($(this).parent().parent().attr('id') == "formTambahCustomInput"){
+                var name = $('.name').val();
+                var kategori = $('.thekategori').val();
+                var mandatory = $('.mandatory').val();
+                console.log(name,kategori,mandatory);
+                if(name == "" || kategori == "" || mandatory == ""){
+                    alert("Sila lengkapkan borang");
+                }else{
+                    $(this).parent().parent().submit();
+                }
+            }else{
+                $(this).parent().parent().submit();
+            }
         });
 
         $(document).on('click', '.btnDelete', function () {

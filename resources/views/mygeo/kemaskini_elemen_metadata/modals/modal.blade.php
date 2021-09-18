@@ -211,11 +211,11 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="name">Nama:</label>
-                                    <input type="text" name="name" class="form-control kategori">
+                                    <input type="text" name="name" class="form-control name">
                                 </div>
                                 <div class="form-group">
                                     <label for="kategori">Kategori:</label>
-                                    <select name="kategori" class="form-control kategori">
+                                    <select name="kategori" class="form-control thekategori">
                                         <option value="">Pilih...</option>
                                         @foreach($categories as $cat)
                                             <option value="{{ $cat-> id }}">{{ $cat->name }}</option>
@@ -254,7 +254,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between1">
-                    <button type="button" class="btn btn-primary btnSimpan" data-dismiss="modal">Simpan</button>
+                    <button type="button" class="btn btn-primary btnSimpan">Simpan</button>
                 </div>
             </form>
         </div>
