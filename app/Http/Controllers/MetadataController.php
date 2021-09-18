@@ -1817,7 +1817,12 @@ class MetadataController extends Controller {
         $cmi->input_name = preg_replace("/\s+/","",trim(ucwords($request->name)));
         $cmi->input_type = "Text";
         $cmi->data = "";
-        $cmi->mandatory = ($request->mandatory == "" ? "No":"Yes");
+        if($request->mandatory == ""){
+           $mand = "No"; 
+        }else{
+           $mand = $request->mandatory;
+        } 
+        $cmi->mandatory = $mand;
         $cmi->status = "Active";
         $cmi->kategori = $request->kategori;
         $query = $cmi->save();
