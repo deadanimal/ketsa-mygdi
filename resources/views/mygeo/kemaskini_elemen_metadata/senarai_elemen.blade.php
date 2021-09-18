@@ -120,7 +120,7 @@
                                                 <td>{{ $cmi->getKategori->name }}</td>
                                                 <td>{{ $cmi->status }}</td>
                                                 <td>
-                                                    <!--<button type="button" class="form-control btnEdit">Edit</button>-->
+                                                    <button type="button" class="form-control btnEdit">Edit</button>
                                                     <button type="button" class="form-control btnDeleteCustomInput" data-rowid="{{ $cmi->id }}">Delete</button>
                                                 </td>
                                             </tr>
