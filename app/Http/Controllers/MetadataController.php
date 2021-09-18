@@ -805,10 +805,8 @@ class MetadataController extends Controller {
                 }
             }
         }
-
-        $customMetadataInput = CustomMetadataInput::with(array('getKategori' => function($query)use($request) {
-                $query->where('name',$request->kategori);
-            }))->get();
+        $cat = MCategory::where('name',$request->kategori)->get()->first();
+        $customMetadataInput = CustomMetadataInput::where('kategori',$cat->id)->get();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
             foreach($customMetadataInput as $cmi){
@@ -1291,9 +1289,8 @@ class MetadataController extends Controller {
             }
         }
         
-        $customMetadataInput = CustomMetadataInput::with(array('getKategori' => function($query)use($request) {
-                $query->where('name',$request->kategori);
-            }))->get();
+        $cat = MCategory::where('name',$request->kategori)->get()->first();
+        $customMetadataInput = CustomMetadataInput::where('kategori',$cat->id)->get();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
             foreach($customMetadataInput as $cmi){
