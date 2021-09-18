@@ -120,7 +120,7 @@
                                                 <td>{{ $cmi->getKategori->name }}</td>
                                                 <td>{{ $cmi->status }}</td>
                                                 <td>
-                                                    <button type="button" class="form-control btnEdit">Edit</button>
+                                                    <button type="button" class="form-control btnEdit" data-toggle="modal" data-target="#modalKemaskiniCustomInput" data-custominputid="{{ $cmi->id }}">Edit</button>
                                                     <button type="button" class="form-control btnDeleteCustomInput" data-rowid="{{ $cmi->id }}">Delete</button>
                                                 </td>
                                             </tr>
@@ -183,11 +183,12 @@
         });
 
         $(document).on('click', '.btnSimpan', function () {
-            if($(this).parent().parent().attr('id') == "formTambahCustomInput"){
-                var name = $('.name').val();
-                var kategori = $('.thekategori').val();
-                var mandatory = $('.mandatory').val();
-                console.log(name,kategori,mandatory);
+            if($(this).parent().parent().attr('id') == "formTambahCustomInput" || $(this).parent().parent().attr('id') == "formKemaskiniCustomInput"){
+                var form = '#' + $(this).parent().parent().attr('id');
+                var name = $(form + ' .name').val();
+                var kategori = $(form + ' .thekategori').val();
+                var mandatory = $(form + ' .mandatory').val();
+//                console.log(name,kategori,mandatory);
                 if(name == "" || kategori == "" || mandatory == ""){
                     alert("Sila lengkapkan borang");
                 }else{
@@ -229,6 +230,21 @@
                 if(data.error == '0'){
                     window.location.reload();
                 }
+            });
+        });
+        
+        $(document).on("click", ".btnEdit", function() {
+            // ajax get custom input details
+            var custominputid = $(this).data('custominputid');
+            $.ajax({
+                method: "POST",
+                url: "get_custom_input_details",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "custom_input_id": custominputid
+                },
+            }).done(function(response) {
+                $('.ajaxHtml').html(response);
             });
         });
     });

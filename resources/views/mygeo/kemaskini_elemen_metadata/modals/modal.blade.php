@@ -270,53 +270,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="formTambahCustomInput" method="POST" action="{{ url('simpan_kemaskini_custom_input') }}" class="theForm">
+            <form id="formKemaskiniCustomInput" method="POST" action="{{ url('simpan_kemaskini_custom_input') }}" class="theForm">
                 @csrf
-                <input type="hidden" name="id" id="kemaskiniCustomInputId">
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="name">Nama:</label>
-                                    <input type="text" name="name" class="form-control name" id="kemaskiniCustomInputName">
-                                </div>
-                                <div class="form-group">
-                                    <label for="kategori">Kategori:</label>
-                                    <select name="kategori" class="form-control thekategori">
-                                        <option value="">Pilih...</option>
-                                        @foreach($categories as $cat)
-                                            <option value="{{ $cat-> id }}">{{ $cat->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-<!--                                <div class="form-group">
-                                    <label for="input_type">Data Type:</label>
-                                    <select name="input_type" class="form-control input_type" readonly>
-                                        <option value="">Pilih...</option>
-                                        <option value="Text" selected disabled>Text</option>
-                                        <option value="Textarea">Textarea</option>
-                                        <option value="Dropdown">Dropdown</option>
-                                        <option value="Date">Date</option>
-                                        <option value="Number">Number</option>
-                                    </select>
-                                </div>-->
-                                <div class="form-group">
-                                    <label for="mandatory">Mandatory:</label>
-                                    <select name="mandatory" class="form-control mandatory" id="kemaskiniCustomInputMandatory">
-                                        <option value="">Pilih...</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </div>
-<!--                                <div class="form-group">
-                                    <label for="status">Status:</label>
-                                    <select name="status" class="form-control status">
-                                        <option value="">Pilih...</option>
-                                        <option value="Active" selected disabled>Active</option>
-                                        <option value="Inactive">Inactive</option>
-                                    </select>
-                                </div>-->
+                            <div class="col-md-12 ajaxHtml">
+                                
                             </div>
                         </div>
                     </div>
