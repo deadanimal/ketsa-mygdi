@@ -88,7 +88,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="font-size: 2rem;">Custom Metadata Input</h3>
+                            <h3 class="card-title" style="font-size: 2rem;">Elemen Tambahan</h3>
                             <div class="float-right">
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalCustomInput">Tambah</button>
                             </div>
@@ -98,7 +98,8 @@
                                 <thead>
                                     <tr>
                                         <th>Bil</th>
-                                        <th>Nama</th>
+                                        <th>Nama EN</th>
+                                        <th>Nama BM</th>
                                         <!--<th>Input Type</th>-->
                                         <th>Mandatory</th>
                                         <th>Kategori</th>
@@ -115,12 +116,13 @@
                                             <tr>
                                                 <td>{{ $bil }}</td>
                                                 <td>{{ $cmi->name }}</td>
+                                                <td>{{ $cmi->name_bm }}</td>
                                                 <!--<td>{{ $cmi->input_type }}</td>-->
                                                 <td>{{ $cmi->mandatory }}</td>
                                                 <td>{{ $cmi->getKategori->name }}</td>
                                                 <td>{{ $cmi->status }}</td>
                                                 <td>
-                                                    <!--<button type="button" class="form-control btnEdit">Edit</button>-->
+                                                    <button type="button" class="form-control btnEdit" data-toggle="modal" data-target="#modalKemaskiniCustomInput" data-custominputid="{{ $cmi->id }}">Edit</button>
                                                     <button type="button" class="form-control btnDeleteCustomInput" data-rowid="{{ $cmi->id }}">Delete</button>
                                                 </td>
                                             </tr>
@@ -183,7 +185,20 @@
         });
 
         $(document).on('click', '.btnSimpan', function () {
+            if($(this).parent().parent().attr('id') == "formTambahCustomInput" || $(this).parent().parent().attr('id') == "formKemaskiniCustomInput"){
+                var form = '#' + $(this).parent().parent().attr('id');
+                var name = $(form + ' .name').val();
+                var kategori = $(form + ' .thekategori').val();
+                var mandatory = $(form + ' .mandatory').val();
+//                console.log(name,kategori,mandatory);
+                if(name == "" || kategori == "" || mandatory == ""){
+                    alert("Sila lengkapkan borang");
+                }else{
             $(this).parent().parent().submit();
+                }
+            }else{
+                $(this).parent().parent().submit();
+            }
         });
 
         $(document).on('click', '.btnDelete', function () {
@@ -218,6 +233,21 @@
                     window.location.reload();
                 }
             });
+        });
+        
+        $(document).on("click", ".btnEdit", function() {
+            // ajax get custom input details
+            var custominputid = $(this).data('custominputid');
+            $.ajax({
+                method: "POST",
+                url: "get_custom_input_details",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "custom_input_id": custominputid
+                },
+            }).done(function(response) {
+                $('.ajaxHtml').html(response);
+    });
         });
     });
 

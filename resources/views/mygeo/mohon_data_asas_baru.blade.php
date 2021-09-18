@@ -319,8 +319,7 @@
                                                         @endif
 
                                                         @if (!$dokumen->file_path == null)
-
-                                                            <a href="{{ $dokumen->file_path }}" target="_blank">
+                                                            <a href="{{ url('/').$dokumen->file_path }}" target="_blank">
                                                                 <button type="button"
                                                                     class="btn btn-sm btn-success mr-2">Lihat</button>
                                                             </a>

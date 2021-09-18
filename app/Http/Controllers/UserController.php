@@ -489,7 +489,12 @@ class UserController extends Controller {
     }
 
     public function getUsersByAgensi(Request $request){
-        $usersByAgensi = User::where(['agensi_organisasi'=>$request->agensi])->get();
+        $agensiOrg = AgensiOrganisasi::where('name',$request->agensi)->get();
+        $agensiOrgFixed = [];
+        foreach($agensiOrg as $ao){
+            $agensiOrgFixed[] = $ao->id;
+        }
+        $usersByAgensi = User::whereIn('agensi_organisasi',$agensiOrgFixed)->get();
         $usersByPenerbit = '<option selected disabled>Pilih</option>';
         foreach($usersByAgensi as $uba){
             if($uba->hasRole('Penerbit Metadata')){

@@ -107,8 +107,6 @@ class LaporanDashboardController extends Controller
                                 ->get();
         // dd($permohonan_kategori);
 
-
-
         //JUMLAH METADATA YANG TELAH DITERBITKAN
         if(Auth::user()->hasRole('Pemohon Data')){
             $agencyName = Auth::user()->agensi_organisasi;
@@ -201,7 +199,7 @@ class LaporanDashboardController extends Controller
             $metadataByTopicCategory[$key] = $metadatas;
         }
 
-        return view('mygeo.dashboard', compact('permohonan_kategori','total_permohonan','total_permohonan_lulus','total_permohonan_tolak','permohonans'));
+        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak','metadataTerbit','metadataTerbitByAgency','metadataTerbitByAgencyKeys','metadataTerbitByAgencyVals','metadataBelumTerbit','metadataByCategory','metadataByCategoryKeys','metadataByCategoryVals','metadataByYear','metadataByYearKeys','metadataByYearVals','metadataByTopicCategory','permohonan_kategori','permohonans'));
     }
 
     public function generate_pdf_laporan_perincian_data(Request $request){
