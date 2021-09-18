@@ -528,9 +528,10 @@ class UserController extends Controller {
             }
             //metadata name
             $name = "";
-            if(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                $name = trim($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString);
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $name = trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
             }
+            
             //status
             $status = "";
             if($met->disahkan == '0'){
