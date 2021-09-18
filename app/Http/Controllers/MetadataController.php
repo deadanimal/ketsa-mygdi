@@ -1917,42 +1917,6 @@ class MetadataController extends Controller {
         echo $html_details;
         exit;
     }
-
-    public function simpan_kemaskini_custom_input(Request $request) {
-        if(!auth::user()->hasRole(['Pentadbir Metadata'])){
-            abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
-        }
-
-        $cmi = CustomMetadataInput::where('id',$request->customInputId)->get()->first();
-        $cmi->name = $request->name;
-        $cmi->name_bm = $request->name_bm;
-        $cmi->input_name = preg_replace("/\s+/","",trim(ucwords($request->name)));
-        $cmi->input_type = "Text";
-        $cmi->data = "";
-        if($request->mandatory == ""){
-           $mand = "No"; 
-        }else{
-           $mand = $request->mandatory;
-        } 
-        $cmi->mandatory = $mand;
-        $cmi->status = "Active";
-        $cmi->kategori = $request->kategori;
-        $query = $cmi->save();
-
-        if($query){
-            $msg = "Custom Input berjaya dikemaskini.";
-
-            $at = new AuditTrail();
-            $at->path = url()->full();
-            $at->user_id = Auth::user()->id;
-            $at->data = 'Update';
-            $at->save();
-        }else{
-            $msg = "Custom Input tidak berjaya dikemaskini.";
-        }
-
-        return redirect('mygeo_kemaskini_elemen_metadata')->with('message', $msg);
-    }
     
     public function get_custom_input_details(){
         $custom_input_id = $_POST['custom_input_id'];
