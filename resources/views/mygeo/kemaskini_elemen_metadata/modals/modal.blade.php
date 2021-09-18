@@ -210,8 +210,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="name">Nama:</label>
+                                    <label for="name">Nama EN:</label>
                                     <input type="text" name="name" class="form-control name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name_bm">Nama BM:</label>
+                                    <input type="text" name="name_bm" class="form-control name_bm">
                                 </div>
                                 <div class="form-group">
                                     <label for="kategori">Kategori:</label>

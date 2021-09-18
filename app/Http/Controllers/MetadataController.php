@@ -1817,6 +1817,7 @@ class MetadataController extends Controller {
 
         $cmi = new CustomMetadataInput();
         $cmi->name = $request->name;
+        $cmi->name_bm = $request->name_bm;
         $cmi->input_name = preg_replace("/\s+/","",trim(ucwords($request->name)));
         $cmi->input_type = "Text";
         $cmi->data = "";
@@ -1852,6 +1853,7 @@ class MetadataController extends Controller {
 
         $cmi = CustomMetadataInput::where('id',$request->customInputId)->get()->first();
         $cmi->name = $request->name;
+        $cmi->name_bm = $request->name_bm;
         $cmi->input_name = preg_replace("/\s+/","",trim(ucwords($request->name)));
         $cmi->input_type = "Text";
         $cmi->data = "";
@@ -1887,8 +1889,12 @@ class MetadataController extends Controller {
         $html_details = '
             <input type="hidden" name="customInputId" id="kemaskiniCustomInputId" value="'.$cmi->id.'">
             <div class="form-group">
-                <label for="name">Nama:</label>
+                <label for="name">Nama EN:</label>
                 <input type="text" name="name" class="form-control name" id="kemaskiniCustomInputName" value="'.$cmi->name.'">
+            </div>
+            <div class="form-group">
+                <label for="name">Nama BM:</label>
+                <input type="text" name="name_bm" class="form-control name_bm" id="kemaskiniCustomInputNameBm" value="'.$cmi->name_bm.'">
             </div>
             <div class="form-group">
                 <label for="kategori">Kategori:</label>

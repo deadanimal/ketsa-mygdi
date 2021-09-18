@@ -98,7 +98,8 @@
                                 <thead>
                                     <tr>
                                         <th>Bil</th>
-                                        <th>Nama</th>
+                                        <th>Nama EN</th>
+                                        <th>Nama BM</th>
                                         <!--<th>Input Type</th>-->
                                         <th>Mandatory</th>
                                         <th>Kategori</th>
@@ -115,6 +116,7 @@
                                             <tr>
                                                 <td>{{ $bil }}</td>
                                                 <td>{{ $cmi->name }}</td>
+                                                <td>{{ $cmi->name_bm }}</td>
                                                 <!--<td>{{ $cmi->input_type }}</td>-->
                                                 <td>{{ $cmi->mandatory }}</td>
                                                 <td>{{ $cmi->getKategori->name }}</td>
