@@ -117,21 +117,6 @@
                     </div>
                     <div class="col-6">
                         <div class="card">
-                            <div class=" card-header bg-secondary">
-                                <h6 class="surtitle">Bar Chart</h6>
-                                <h5 class=" h2 mb-0">Jumlah Metadata Mengikut Agensi</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart">
-                                    <canvas id="bar-chart2" class="chart-canvas" height="300"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="card">
                             <div class="card-header bg-secondary">
                                 <div class="row align-items-center">
                                     <div class="col">
@@ -145,6 +130,21 @@
                             <div class="card-body">
                                 <div class="chart">
                                     <canvas id="bar-chart3" class="chart-canvas" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class=" card-header bg-secondary">
+                                <h6 class="surtitle">Bar Chart</h6>
+                                <h5 class=" h2 mb-0">Jumlah Metadata Mengikut Agensi</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart">
+                                    <canvas id="bar-chart2" class="chart-canvas" height="300"></canvas>
                                 </div>
                             </div>
                         </div>
