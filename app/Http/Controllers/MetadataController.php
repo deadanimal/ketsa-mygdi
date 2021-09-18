@@ -285,12 +285,13 @@ class MetadataController extends Controller {
         $states = States::where(['country' => 1])->get()->all();
         $countries = Countries::where(['id' => 1])->get()->all();
         $refSys = ReferenceSystemIdentifier::all();
-        $customMetadataInput = CustomMetadataInput::all();
         if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
             $kategori = MCategory::where('name',$_GET['kategori'])->get()->first();
             $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
+            $customMetadataInput = CustomMetadataInput::where('kategori',$kategori->id)->get()->all();
         }else{
             $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+            $customMetadataInput = CustomMetadataInput::all();
         }
 
         return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs','customMetadataInput','elemenMetadata'));
@@ -414,9 +415,16 @@ class MetadataController extends Controller {
             if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != "") {
                 $catSelected = trim($metadataxml->hierarchyLevel->MD_ScopeCode);
                 $kategori = MCategory::where('name',$catSelected)->get()->first();
-                $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
+                if($kategori){   
+                    $elemenMetadata = ElemenMetadata::where('kategori',$kategori->id)->get()->keyBy('input_name');
+                    $customMetadataInput = CustomMetadataInput::where('kategori',$kategori->id)->get()->all();
+                }else{
+                    $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+                    $customMetadataInput = CustomMetadataInput::get()->all();
+                }
             }else{
                 $elemenMetadata = ElemenMetadata::where('kategori','4')->get()->keyBy('input_name');
+                $customMetadataInput = CustomMetadataInput::get()->all();
             }
         }
 
@@ -794,10 +802,10 @@ class MetadataController extends Controller {
                 }
             }
         }
-         
-        $this->validate($request, $fields, $customMsg);
-        
-        $customMetadataInput = CustomMetadataInput::all();
+
+        $customMetadataInput = CustomMetadataInput::with(array('getKategori' => function($query)use($request) {
+                $query->where('name',$request->kategori);
+            }))->get();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
             foreach($customMetadataInput as $cmi){
@@ -816,6 +824,8 @@ class MetadataController extends Controller {
                 }
             }
         }
+        
+        $this->validate($request, $fields, $customMsg);
         
         $keywords = "";
         if(count($request->c10_additional_keyword) > 0){
@@ -929,6 +939,7 @@ class MetadataController extends Controller {
     }
 
     public function store_xml(Request $request) {
+        $newMetadataId = '';
         if (file_exists($_FILES['file_xml']['tmp_name'])) {
             //store uploaded xml
             $fileName = time() . '_' . $request->file_xml->getClientOriginalName();
@@ -941,7 +952,7 @@ class MetadataController extends Controller {
             $xml_array = json_decode($json, true);
 
             //save in geonetwork
-            DB::connection('pgsql2')->transaction(function () use ($request, $uploaded_xml) {
+            DB::connection('pgsql2')->transaction(function () use ($request, $uploaded_xml, &$newMetadataId) {
                 $maxid = MetadataGeo::on('pgsql2')->max('id');
 
                 // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
@@ -973,6 +984,8 @@ class MetadataController extends Controller {
                 $mg->disahkan = "0";
                 $mg->portal_user_id = Auth::user()->id;
                 $mg->save();
+                
+                $newMetadataId = $mg->id;
             });
 
             //delete uploaded xml
@@ -985,7 +998,7 @@ class MetadataController extends Controller {
         $at->data = 'Create';
         $at->save();
 
-        return redirect('mygeo_senarai_metadata')->with('success', 'Metadata Saved');
+        return redirect('kemaskini_metadata/'.$newMetadataId)->with('success', 'Metadata Saved');
     }
 
     public function store_todel() {
@@ -1275,9 +1288,9 @@ class MetadataController extends Controller {
             }
         }
         
-        $this->validate($request, $fields, $customMsg);
-
-        $customMetadataInput = CustomMetadataInput::all();
+        $customMetadataInput = CustomMetadataInput::with(array('getKategori' => function($query)use($request) {
+                $query->where('name',$request->kategori);
+            }))->get();
         $custom_inputs = "";
         if(count($customMetadataInput) > 0){
             foreach($customMetadataInput as $cmi){
@@ -1297,6 +1310,7 @@ class MetadataController extends Controller {
             }
         }
         
+        $this->validate($request, $fields, $customMsg);
 
         $fileUrl = "";
         $fileUrl = $request->c11_order_instructions;
@@ -1410,6 +1424,7 @@ class MetadataController extends Controller {
                 $metadata = MetadataGeo::on('pgsql2')->find($mg->id);
                 $metadata->timestamps = false;
                 $metadata->disahkan = 'yes';
+                $metadata->changedate = date("Y-m-d H:i:s");
                 $metadata->update();
 
                 $ftestxml2 = <<<XML
@@ -1804,6 +1819,7 @@ class MetadataController extends Controller {
         $cmi->data = "";
         $cmi->mandatory = ($request->mandatory == "" ? "No":"Yes");
         $cmi->status = "Active";
+        $cmi->kategori = $request->kategori;
         $query = $cmi->save();
 
         if($query){

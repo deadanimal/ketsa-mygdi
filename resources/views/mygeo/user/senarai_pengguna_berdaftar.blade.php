@@ -124,7 +124,6 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
                         <div class="modal-footer justify-content-between1">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
                             <button type="submit" class="btn btn-primary">Tambah</button>
@@ -133,27 +132,6 @@
                 </div>
             </div>
         </div>
-<!--        <div class="modal fade" id="modalChangeStatus">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <button class="btnStatusInactive btnChangeStatusAjax form-control" value="0"
-                                    data-userid="">Aktif</button>
-                                <button class="btnStatusActive btnChangeStatusAjax form-control" value="1"
-                                    data-userid="">Tidak Aktif</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
 
         <!-- Main content -->
         <section class="content">

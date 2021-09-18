@@ -14,6 +14,12 @@ class CustomMetadataInput extends Model
         'data_type',
         'data',
         'mandatory',
+        'kategori',
         'status',
     ];
+    
+    //relationships
+    public function getKategori(){
+        return $this->belongsTo(MCategory::class,'kategori','id');
+    }
 }

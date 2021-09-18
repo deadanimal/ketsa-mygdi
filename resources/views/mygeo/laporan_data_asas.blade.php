@@ -74,7 +74,15 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $mohon->name }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
-                                                    <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
+                                                    <td>
+                                                        <?php
+                                                        if($mohon->users->hasRole('Pemohon Data')){
+                                                            $mohon->users->agensi_organisasi;
+                                                        }else{
+                                                            $mohon->users->agensiOrganisasi->name;
+                                                        }
+                                                        ?>
+                                                    </td>
                                                     <td>
                                                         <a href="lihat_laporan_data/{{ $mohon->id }}"
                                                             class="btn btn-sm btn-primary">Laporan Perincian</a>
@@ -124,7 +132,15 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
-                                                    <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
+                                                    <td>
+                                                        <?php
+                                                        if($mohon->users->hasRole('Pemohon Data')){
+                                                            $mohon->users->agensi_organisasi;
+                                                        }else{
+                                                            $mohon->users->agensiOrganisasi->name;
+                                                        }
+                                                        ?>
+                                                    </td>
                                                     <td>{{ $mohon->users->kategori }}</td>
                                                     <td>
                                                         @if ($mohon->status == '1')
@@ -169,7 +185,15 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
-                                                    <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
+                                                    <td>
+                                                        <?php
+                                                        if($mohon->users->hasRole('Pemohon Data')){
+                                                            $mohon->users->agensi_organisasi;
+                                                        }else{
+                                                            $mohon->users->agensiOrganisasi->name;
+                                                        }
+                                                        ?>
+                                                    </td>
                                                     <td>{{ $mohon->users->kategori }}</td>
                                                 </tr>
                                             @endif

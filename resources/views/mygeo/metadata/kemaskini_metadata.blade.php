@@ -54,14 +54,13 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
+<!--                    <div class="col-lg-6 col-5 text-right">
                         <button type="button" class="btn btn-sm btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
-                            <?php echo __('lang.btn_upload_xml'); ?>
+                            <?php //echo __('lang.btn_upload_xml'); ?>
                         </button>
-                    </div>
+                    </div>-->
                 </div>
             </div>
-        </div>
     </section>
 
     <!--===== MODALS =====-->
@@ -357,6 +356,25 @@
             <?php
         }elseif ($typeofProd == "Vector Data") {
             ?>
+            $('.abstractVectorData').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
+            <?php
+        }else{
+            ?>
+            $('.abstractApplication').show();
+            $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            $('.abstractDocument').show();
+            $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            $('.abstractGISActivityProject').show();
+            $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            $('.abstractMap').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            $('.abstractRasterData').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
+            $('.abstractServices').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
+            $('.abstractSoftware').show();
+            $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
             $('.abstractVectorData').show();
             $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             <?php

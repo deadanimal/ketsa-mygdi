@@ -108,8 +108,8 @@
                                                 $var = '';
                                                 if ($user->hasRole(['Pemohon Data'])) {
                                                     $var = $user->agensi_organisasi;
-                                                } else {
-                                                    $var = isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name : '';
+                                                }else{
+                                                    $var = (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"");
                                                 }
                                                 ?>
                                                 <input class="form-control form-control-sm ml-3" name="institusi"

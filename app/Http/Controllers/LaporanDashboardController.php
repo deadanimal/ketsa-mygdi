@@ -8,6 +8,10 @@ use App\SenaraiKawasanData;
 use Illuminate\Http\Request;
 use DB;
 use PDF;
+use App\MetadataGeo;
+use App\User;
+use App\MCategory;
+use Auth;
 
 class LaporanDashboardController extends Controller
 {
@@ -39,6 +43,55 @@ class LaporanDashboardController extends Controller
         return view('mygeo.laporan_data_asas', compact('permohonans','permohonan_kategori','permohonan_lulus','permohonan_statistik','permohonan_count'));
     }
 
+    public function index_laporan_metadata()
+    {
+        //perincian
+        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+        $metadatas = [];
+        foreach ($metadatasdb as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            $xml2 = simplexml_load_string($ftestxml2);
+            $metadatas[$met->id] = [$xml2, $met];
+        }
+
+        $categories = MCategory::get();
+
+        //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
+//        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+//        $metadatas = [];
+//        foreach ($metadatasdb as $met) {
+//            $ftestxml2 = <<<XML
+//                    $met->data
+//                    XML;
+//            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+//            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+//            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+//            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+//
+//            $xml2 = simplexml_load_string($ftestxml2);
+//            $metadatas[$met->id] = [$xml2, $met];
+//        }
+
+        $permohonan_perincian = MohonData::get();
+        $permohonan_lulus = MohonData::where(['status' => 3])->get();
+        $permohonan_kategori = DB::table('users')
+                                ->join('mohon_data','users.id','=','mohon_data.user_id')
+                                ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+                                ->select('agensi_organisasi.name','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'))
+                                ->groupBy('users.name','agensi_organisasi.name','mohon_data.date')
+                                ->get();
+        // dd($permohonan_kategori);
+        $permohonan_kategori_count = count($permohonan_kategori);
+        return view('mygeo.laporan_metadata', compact('metadatas','categories','permohonan_kategori','permohonan_lulus','permohonan_perincian'));
+    }
+
     public function index_mygeo_dashboard(){
         $total_permohonan = MohonData::get()->count();
         $total_permohonan_lulus = MohonData::where('status','=',3)->get()->count();
@@ -55,15 +108,100 @@ class LaporanDashboardController extends Controller
         // dd($permohonan_kategori);
 
 
+
+        //JUMLAH METADATA YANG TELAH DITERBITKAN
+        if(Auth::user()->hasRole('Pemohon Data')){
+            $agencyName = Auth::user()->agensi_organisasi;
+        }else{
+            $agencyName = Auth::user()->agensiOrganisasi->name;
+        }
+        $metadataTerbit = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%>'.$agencyName.'<%')->get());
+
+        //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
+        $metadataTerbitByAgency = [];
+        $metadataTerbitByAgencyKeys = [];
+        $metadataTerbitByAgencyVals = [];
+        $agencies = User::all();
+        $agencyIds = $agencies->groupBy('agensi_organisasi');
+        foreach($agencyIds as $ai){
+            $count = 0;
+            $idsToSearch = [];
+            $agencyName = "";
+            foreach($ai as $user){
+                if(!$user->hasRole('Pemohon Data')){
+                    $agencyName = $user->agensiOrganisasi->name;
+                }else{
+                    break 2;
+                }
+                $idsToSearch[] = $user->id;
+            }
+            $count = count(MetadataGeo::on('pgsql2')->whereIn('portal_user_id',$idsToSearch)->get());
+            $metadataTerbitByAgency[$agencyName] = $count;
+            $metadataTerbitByAgencyKeys[] = $agencyName;
+            $metadataTerbitByAgencyVals[] = $count;
+        }
+
+        //Bilangan metadata yang belum diterbitkan (Draf dan Perlu Pengesahan)
+        $metadataBelumTerbit = count(MetadataGeo::on('pgsql2')->where('disahkan','=','0')->orWhere('disahkan','=','no')->orWhere('is_draf','=','yes')->get());
+
+        //Bilangan metadata mengikut kategori
+        $metadataByCategory = [];
+        $metadataByCategoryKeys = [];
+        $metadataByCategoryVals = [];
+        $categories = MCategory::get();
+        foreach($categories as $c){
+            $metadataByCategory[$c->name] = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%codeListValue="dataset">'.$c->name.'<%')->get());
+            $metadataByCategoryKeys[] = $c->name;
+            $metadataByCategoryVals[] = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%codeListValue="dataset">'.$c->name.'<%')->get());
+        }
+
+        //Statistik penerbitan metadata mengikut tahun
+        $metadataByYear = [];
+        $metadataByYearKeys = [];
+        $metadataByYearVals = [];
+        $metadatas = MetadataGeo::on('pgsql2')->get();
+        $years = [];
+        foreach($metadatas as $m){
+            $year = date('Y',strtotime($m->createdate));
+            if(array_key_exists($year,$metadataByYear)){
+                $metadataByYear[$year] += 1;
+            }else{
+                $metadataByYear[$year] = 1;
+            }
+        }
+        foreach($metadataByYear as $key=>$val){
+            $metadataByYearKeys[] = $key;
+            $metadataByYearVals[] = $val;
+        }
+
+        //Jumlah metadata diterbitkan mengikut topik kategori
+        $metadataByTopicCategory = [
+            'Administrative and Political Boundaries' => 0,
+            'Agriculture and Farming' => 0,
+            'Atmosphere and Climatic' => 0,
+            'Biology and Ecology' => 0,
+            'Business and Economic' => 0,
+            'Cadastral' => 0,
+            'Cultural, Society and Demography' => 0,
+            'Elevation and Derived Products' => 0,
+            'Environment and Conservation' => 0,
+            'Facilities and Structures' => 0,
+            'Geological and Geophysical' => 0,
+            'Human Health and Disease' => 0,
+            'Imagery and Base Maps' => 0,
+            'Inland Water Resources' => 0,
+            'Locations and Geodetic Networks' => 0,
+            'Military' => 0,
+            'Oceans and Estuaries' => 0,
+            'Transportation Networks' => 0,
+            'Utilities and Communication' => 0,
+        ];
+        foreach($metadataByTopicCategory as $key=>$val){
+            $metadatas = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%<MD_TopicCategoryCode>'.$key.'<%')->get());
+            $metadataByTopicCategory[$key] = $metadatas;
+        }
+
         return view('mygeo.dashboard', compact('permohonan_kategori','total_permohonan','total_permohonan_lulus','total_permohonan_tolak','permohonans'));
-    }
-
-    public function laporan_data_detail($id){
-
-        $permohonan = MohonData::where('id', $id)->first();
-        $senarai_kawasan = SenaraiKawasanData::where('permohonan_id', $id)->get();
-
-        return view('mygeo.laporan_data_perincian', compact('permohonan','senarai_kawasan'));
     }
 
     public function generate_pdf_laporan_perincian_data(Request $request){

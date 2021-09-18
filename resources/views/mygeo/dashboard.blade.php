@@ -73,10 +73,17 @@
                                 <div class="row">
                                     <div class="col">
                                         <h2 class="font-weight-bold text-white text-uppercase mb-0">
-                                            Jumlah Metadata Yang Telah Diterbitkan
+                                            Jumlah Metadata Yang Telah Diterbit
                                         </h2>
-                                        <span class="text-white text-uppercase mb-0"> Agensi: Kementerian Sumber dan
-                                            Asli</span>
+                                        <span class="text-white text-uppercase mb-0">
+                                            <?php
+                                            if(Auth::user()->hasRole('Pemohon Data')){
+                                                echo Auth::user()->agensi_organisasi;
+                                            }else{
+                                                echo Auth::user()->agensiOrganisasi->name;
+                                            }
+                                            ?>
+                                        </span>
                                     </div>
 
                                     <div class="col-auto">
@@ -87,7 +94,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 text-white mr-2">234
+                                    <span class="h2 text-white mr-2">{{ $metadataTerbit }}
                                     </span>
                                 </p>
                             </div>
@@ -99,7 +106,7 @@
                         <div class="card">
                             <div class=" card-header bg-secondary">
                                 <h6 class=" surtitle">Bar Chart</h6>
-                                <h5 class=" h2 mb-0">Jumlah Metadata Diterbitkan Mengikut Bahagian dalam Agensi</h5>
+                                <h5 class=" h2 mb-0">Jumlah Metadata Mengikut Kategori</h5>
                             </div>
                             <div class="card-body">
                                 <div class="chart">
@@ -112,7 +119,7 @@
                         <div class="card">
                             <div class=" card-header bg-secondary">
                                 <h6 class="surtitle">Bar Chart</h6>
-                                <h5 class=" h2 mb-0">Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia</h5>
+                                <h5 class=" h2 mb-0">Jumlah Metadata Mengikut Agensi</h5>
                             </div>
                             <div class="card-body">
                                 <div class="chart">
@@ -130,7 +137,7 @@
                                     <div class="col">
                                         <h6 class="surtitle">Bar Chart</h6>
 
-                                        <h5 class="h2 mb-0">Jumlah Metadata Diterbitkan Mengikutkan Tahun</h5>
+                                        <h5 class="h2 mb-0">Jumlah Metadata Mengikut Tahun</h5>
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +158,7 @@
                                     <div class="col">
                                         <h6 class="surtitle">Pie Chart</h6>
 
-                                        <h5 class="h2 mb-0">Jumlah Metadata Diterbitkan Mengikutkan Kategori</h5>
+                                        <h5 class="h2 mb-0">Jumlah Metadata Diterbit Mengikut Topik Kategori</h5>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +202,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h2 class="card-title font-weight-bold text-white text-uppercase mb-0">
-                                            Bilangan Permohonan Data Diluluskan
+                                            Bilangan Permohonan Data Dilulus
                                         </h2>
                                     </div>
 
@@ -246,7 +253,7 @@
                                     <div class="col">
                                         <h6 class="surtitle">Bar Chart</h6>
 
-                                        <h5 class="h2 mb-0">Jumlah Permohonan Data Mengikutkan Tahun</h5>
+                                        <h5 class="h2 mb-0">Jumlah Permohonan Data Mengikut Tahun</h5>
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +274,7 @@
                                     <div class="col">
                                         <h6 class="surtitle">Pie Chart</h6>
 
-                                        <h5 class="h2 mb-0">Jumlah Permohonan Data Mengikutkan Kategori</h5>
+                                        <h5 class="h2 mb-0">Jumlah Permohonan Data Mengikut Kategori</h5>
                                     </div>
                                 </div>
                             </div>
@@ -283,7 +290,7 @@
             </div>
         </section>
     </div>
-
+<?php //dd(json_encode($metadataTerbitByAgencyKeys));?>
     <script src="assets/js/plugins/chartjs.min.js"></script>
     <script>
         // Bar chart 1
@@ -292,14 +299,14 @@
         new Chart(bar1, {
             type: "bar",
             data: {
-                labels: ['BPM', 'BPB', 'BUP', 'BPP', 'BG'],
+                labels: <?php echo json_encode($metadataByCategoryKeys); ?>,
                 datasets: [{
                     label: "Jumlah Metadata / Bahagian",
                     weight: 5,
                     borderWidth: 0,
                     borderRadius: 10,
                     backgroundColor: '#3eb8f0',
-                    data: [125, 80, 65, 60, 70, 30],
+                    data: <?php echo json_encode($metadataByCategoryVals); ?>,
                     fill: true,
                     maxBarThickness: 65,
                 }],
@@ -350,14 +357,15 @@
         new Chart(bar2, {
             type: "bar",
             data: {
-                labels: ['A', 'B', 'C', 'D', 'E', 'F'],
+//                labels: ['A', 'B', 'C', 'D', 'E', 'F'],
+                labels: <?php echo json_encode($metadataTerbitByAgencyKeys); ?>,
                 datasets: [{
                     label: "Jumlah Metadata / Bahagian",
                     weight: 5,
                     borderWidth: 0,
                     borderRadius: 8,
                     backgroundColor: '#b061ff',
-                    data: [3025, 1382, 925, 1282, 825, 1882],
+                    data: <?php echo json_encode($metadataTerbitByAgencyVals); ?>,
                     fill: false,
                     maxBarThickness: 35
                 }],
@@ -408,14 +416,14 @@
         new Chart(bar3, {
             type: "bar",
             data: {
-                labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+                labels: <?php echo json_encode($metadataByYearKeys); ?>,
                 datasets: [{
                     label: "Jumlah Metadata / Bahagian",
                     weight: 5,
                     borderWidth: 0,
                     borderRadius: 20,
                     backgroundColor: '#ffa361',
-                    data: [3025, 1382, 925, 1282, 825, 1882, 825, 1882, 1282, 825, 2009],
+                    data: <?php echo json_encode($metadataByYearVals); ?>,
                     fill: false,
                     maxBarThickness: 20
                 }],
@@ -532,8 +540,7 @@
         new Chart(pie1, {
             type: "pie",
             data: {
-                labels: ['Climatology Meteorology Atmosphere', 'Imagery Base Maps-Earth Cover',
-                    'Geoscientific Information', 'Transportation', 'Inland Waters'
+                labels: ['Administrative and Political Boundaries','Agriculture and Farming','Atmosphere and Climatic','Biology and Ecology','Business and Economic','Cadastral','Cultural, Society and Demography','Elevation and Derived Products','Environment and Conservation','Facilities and Structures','Geological and Geophysical','Human Health and Disease','Imagery and Base Maps','Inland Water Resources','Locations and Geodetic Networks','Military','Oceans and Estuaries','Transportation Networks','Utilities and Communication'
                 ],
                 datasets: [{
                     label: "Projects",
@@ -543,7 +550,27 @@
                     pointRadius: 2,
                     borderWidth: 2,
                     backgroundColor: ['#17c1e8', '#cb0c9f', '#a8b8d8', '#3A415F', '#a8b8d8'],
-                    data: [139.9, 501.9, 301.9, 201.1, 165.8],
+                    data: [
+                        {{ $metadataByTopicCategory['Administrative and Political Boundaries'] }},
+                        {{ $metadataByTopicCategory['Agriculture and Farming'] }},
+                        {{ $metadataByTopicCategory['Atmosphere and Climatic'] }},
+                        {{ $metadataByTopicCategory['Biology and Ecology'] }},
+                        {{ $metadataByTopicCategory['Business and Economic'] }},
+                        {{ $metadataByTopicCategory['Cadastral'] }},
+                        {{ $metadataByTopicCategory['Cultural, Society and Demography'] }},
+                        {{ $metadataByTopicCategory['Elevation and Derived Products'] }},
+                        {{ $metadataByTopicCategory['Environment and Conservation'] }},
+                        {{ $metadataByTopicCategory['Facilities and Structures'] }},
+                        {{ $metadataByTopicCategory['Geological and Geophysical'] }},
+                        {{ $metadataByTopicCategory['Human Health and Disease'] }},
+                        {{ $metadataByTopicCategory['Imagery and Base Maps'] }},
+                        {{ $metadataByTopicCategory['Inland Water Resources'] }},
+                        {{ $metadataByTopicCategory['Locations and Geodetic Networks'] }},
+                        {{ $metadataByTopicCategory['Military'] }},
+                        {{ $metadataByTopicCategory['Oceans and Estuaries'] }},
+                        {{ $metadataByTopicCategory['Transportation Networks'] }},
+                        {{ $metadataByTopicCategory['Utilities and Communication'] }},
+                    ],
                     fill: false
                 }],
             },
