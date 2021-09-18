@@ -1098,7 +1098,7 @@ class DataAsasController extends Controller
 
             DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
                 "nama_fail" => $failNama,
-                "file_path" => '/storage/uploads' . $failNama,
+                "file_path" => '/storage/uploads/' . $failNama,
             ]);
 
             $at = new AuditTrail();
