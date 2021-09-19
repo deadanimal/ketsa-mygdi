@@ -217,8 +217,8 @@ class MetadataController extends Controller {
 
             $agensi = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
             if (strtolower($agensi) == strtolower(auth::user()->agensiOrganisasi->name)) {
-                $metadatas[$met->id] = [$xml2,$met];
-                $metadatas[$met->id] = [$xml2, $met, $penerbit];
+//                $metadatas[$met->id] = [$xml2,$met];
+                $metadatas[$met->id] = [$xml2,$met,$penerbit];
             }
         }
         return view('mygeo.metadata.senarai_pengesahan_metadata', compact('metadatas'));
@@ -297,7 +297,12 @@ class MetadataController extends Controller {
 //        $pengesahs = User::whereHas("roles", function ($q) {
 //                    $q->where("name", "Pengesah Metadata");
 //                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
-        $pengesahs = User::where('assigned_roles','LIKE','%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+        $agencyIds = [];
+        $agencies = AgensiOrganisasi::where('name',auth::user()->agensiOrganisasi->name)->get();
+        foreach($agencies as $a){
+            $agencyIds[] = $a->id;
+        }
+        $pengesahs = User::where('assigned_roles','LIKE','%Pengesah Metadata%')->whereIn('agensi_organisasi',$agencyIds)->where('bahagian', auth::user()->bahagian)->get()->first();
         if(empty($pengesahs)){
             $pengesahs = User::where(['id'=>'9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
         }
