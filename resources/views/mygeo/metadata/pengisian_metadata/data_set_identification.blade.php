@@ -36,7 +36,7 @@
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy" data-toggle="tooltip" title="Pengisian butiran skala (sekiranya ada). Contoh skala 1:50,000">
                             <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
-                            <span style="font-size: smaller;"><?php echo __('lang.feature_scale'); ?></span>
+                            <span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span>
                         </label>
                     </div>
                     <div class="col-xl-2">

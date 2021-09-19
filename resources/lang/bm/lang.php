@@ -145,6 +145,7 @@
     'spatial_data_set_type'=>'Jenis Set Data Spatial',
     'dataSetResolution'=>'PENYELESAIAN SET DATA',
     'scale_in_hardcopy_softcopy'=>'Skala dalam Hardcopy/ Softcopy (skala ciri)',
+    'features_scale'=>'(skala ciri)',
     'image_resolution'=>'Resolusi Gambar (GSD)',
     'data_set_language'=>'Bahasa Data Set',
     'maintenanceInfomation'=>'MAKLUMAT PENYELENGGARAAN',
