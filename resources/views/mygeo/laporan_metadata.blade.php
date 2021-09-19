@@ -55,11 +55,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body" style="overflow-x:auto;">
+                            <div class="card-body">
                                 <table id="laporan_perincian" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>BIL</th>
+                                            <th style="width: 30%;">BIL</th>
                                             <th>TAJUK LAPORAN</th>
                                             <th>PERINCIAN MAKLUMAT METADATA</th>
                                             <th>STATUS PENERBITAN METADATA</th>

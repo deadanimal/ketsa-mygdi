@@ -90,4 +90,7 @@
   'glyphicons halflings' => array(
     'normal' => $fontDir . '/glyphicons_halflings_normal_91a063d0f3772b152f606edc0383c99d',
   ),
+  'elegance' => array(
+    'normal' => $fontDir . '/elegance_normal_6f19c9e3a03bf4bfd9187749fb698cbe',
+  ),
 ) ?>
