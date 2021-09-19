@@ -944,7 +944,7 @@ class MetadataController extends Controller {
                     $user = User::where('email',$request->c2_contact_email)->get()->first();
                     $to_name = $user->name;
                     $to_email = $user->email;
-                    $data = array('title'=>$request->c2_metadataName);
+                    $data = array('title'=>$request->c2_metadataName, 'namaPenerbit'=>Auth::user()->name);
                     Mail::send('mails.exmpl10', $data, function($message) use ($to_name, $to_email, $request) {
                         $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
                         $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
@@ -1132,81 +1132,6 @@ class MetadataController extends Controller {
             $fields["c8_type"]= 'required';
             $fields["c8_op_identifier"]= 'required';
         }
-        /*
-        if($request->c2_product_type == "Application"){
-            $fields["abstractApplication_namaAplikasi"]= 'required';
-            $fields["abstractApplication_tujuan"]= 'required';
-            $fields["abstractApplication_tahunPembangunan"]= 'required';
-            $fields["abstractApplication_kemaskini"]= 'required';
-            $fields["abstractApplication_dataTerlibat"]= 'required';
-            $fields["abstractApplication_sasaranPengguna"]= 'required';
-            $fields["abstractApplication_versi"]= 'required';
-            $fields["abstractApplication_perisianDigunaPembangunan"]= 'required';
-        }elseif($request->c2_product_type == "Document"){
-            $fields["abstractDocument_namaDokumen"]= 'required';
-            $fields["abstractDocument_tujuan"]= 'required';
-            $fields["abstractDocument_tahunTerbitan"]= 'required';
-            $fields["abstractDocument_edisi"]= 'required';
-        }elseif($request->c2_product_type == "GIS Activity/Project"){
-            $fields["abstractGISActivityProject_namaAktiviti"]= 'required';
-            $fields["abstractGISActivityProject_tujuan"]= 'required';
-            $fields["abstractGISActivityProject_lokasi"]= 'required';
-            $fields["abstractGISActivityProject_tahun"]= 'required';
-        }elseif($request->c2_product_type == "Map"){
-            $fields["abstractMap_namaPeta"]= 'required';
-            $fields["abstractMap_kawasan"]= 'required';
-            $fields["abstractMap_tujuan"]= 'required';
-            $fields["abstractMap_tahunTerbitan"]= 'required';
-            $fields["abstractMap_edisi"]= 'required';
-            $fields["abstractMap_noSiri"]= 'required';
-            $fields["abstractMap_skala"]= 'required';
-            $fields["abstractMap_unit"]= 'required';
-        }elseif($request->c2_product_type == "Raster Data"){
-            $fields["abstractRasterData_namaData"]= 'required';
-            $fields["abstractRasterData_lokasi"]= 'required';
-            $fields["abstractRasterData_rumusanData"]= 'required';
-            $fields["abstractRasterData_tujuanData"]= 'required';
-            $fields["abstractRasterData_kaedahPenyediaanData"]= 'required';
-            $fields["abstractRasterData_format"]= 'required';
-            $fields["abstractRasterData_unit"]= 'required';
-            $fields["abstractRasterData_skala"]= 'required';
-            $fields["abstractRasterData_statusData"]= 'required';
-            $fields["abstractRasterData_tahunPerolehan"]= 'required';
-            $fields["abstractRasterData_jenisSatelit"]= 'required';
-            $fields["abstractRasterData_format"]= 'required';
-            $fields["abstractRasterData_resolusi"]= 'required';
-            $fields["abstractRasterData_kawasanLitupan"]= 'required';
-        }elseif($request->c2_product_type == "Services"){
-            $fields["abstractServices_namaServis"]= 'required';
-            $fields["abstractServices_lokasi"]= 'required';
-            $fields["abstractServices_tujuan"]= 'required';
-            $fields["abstractServices_dataTerlibat"]= 'required';
-            $fields["abstractServices_polisi"]= 'required';
-            $fields["abstractServices_peringkatCapaian"]= 'required';
-            $fields["abstractServices_format"]= 'required';
-        }elseif($request->c2_product_type == "Software"){
-            $fields["abstractSoftware_namaPerisian"]= 'required';
-            $fields["abstractSoftware_versi"]= 'required';
-            $fields["abstractSoftware_tujuan"]= 'required';
-            $fields["abstractSoftware_tahunPengunaanPerisian"]= 'required';
-            $fields["abstractSoftware_kaedahPerolehan"]= 'required';
-            $fields["abstractSoftware_format"]= 'required';
-            $fields["abstractSoftware_pengeluar"]= 'required';
-            $fields["abstractSoftware_keupayaan"]= 'required';
-            $fields["abstractSoftware_dataTerlibat"]= 'required';
-            $fields["abstractSoftware_keperluanPerkakas"]= 'required';
-        }elseif($request->c2_product_type == "Vector Data"){
-            $fields["abstractVectorData_namaData"]= 'required';
-            $fields["abstractVectorData_lokasi"]= 'required';
-            $fields["abstractVectorData_rumusanData"]= 'required';
-            $fields["abstractVectorData_tujuanData"]= 'required';
-            $fields["abstractVectorData_kaedahPenyediaanData"]= 'required';
-            $fields["abstractVectorData_format"]= 'required';
-            $fields["abstractVectorData_unit"]= 'required';
-            $fields["abstractVectorData_skala"]= 'required';
-            $fields["abstractVectorData_statusData"]= 'required';
-        }
-        */
 
         $customMsg = [
             "c1_content_info.required" => 'Content Information required',
@@ -1234,72 +1159,6 @@ class MetadataController extends Controller {
             "c9_north_bound_latitude.required" => 'North Bound Latitude required',
             "c10_keyword.required" => 'Browsing Information Keyword required',
             "topic_category.required" => 'Topic Category required',
-            /*
-            "abstractApplication_namaAplikasi.required" => 'Abstract required',
-            "abstractApplication_tujuan.required" => 'Abstract required',
-            "abstractApplication_tahunPembangunan.required" => 'Abstract required',
-            "abstractApplication_kemaskini.required" => 'Abstract required',
-            "abstractApplication_dataTerlibat.required" => 'Abstract required',
-            "abstractApplication_sasaranPengguna.required" => 'Abstract required',
-            "abstractApplication_versi.required" => 'Abstract required',
-            "abstractApplication_perisianDigunaPembangunan.required" => 'Abstract required',
-            "abstractDocument_namaDokumen.required" => 'Abstract required',
-            "abstractDocument_tujuan.required" => 'Abstract required',
-            "abstractDocument_tahunTerbitan.required" => 'Abstract required',
-            "abstractDocument_edisi.required" => 'Abstract required',
-            "abstractGISActivityProject_namaAktiviti.required" => 'Abstract required',
-            "abstractGISActivityProject_tujuan.required" => 'Abstract required',
-            "abstractGISActivityProject_lokasi.required" => 'Abstract required',
-            "abstractGISActivityProject_tahun.required" => 'Abstract required',
-            "abstractMap_namaPeta.required" => 'Abstract required',
-            "abstractMap_kawasan.required" => 'Abstract required',
-            "abstractMap_tujuan.required" => 'Abstract required',
-            "abstractMap_tahunTerbitan.required" => 'Abstract required',
-            "abstractMap_edisi.required" => 'Abstract required',
-            "abstractMap_noSiri.required" => 'Abstract required',
-            "abstractMap_skala.required" => 'Abstract required',
-            "abstractMap_unit.required" => 'Abstract required',
-            "abstractRasterData_namaData.required" => 'Abstract required',
-            "abstractRasterData_lokasi.required" => 'Abstract required',
-            "abstractRasterData_rumusanData.required" => 'Abstract required',
-            "abstractRasterData_tujuanData.required" => 'Abstract required',
-            "abstractRasterData_kaedahPenyediaanData.required" => 'Abstract required',
-            "abstractRasterData_format.required" => 'Abstract required',
-            "abstractRasterData_unit.required" => 'Abstract required',
-            "abstractRasterData_skala.required" => 'Abstract required',
-            "abstractRasterData_statusData.required" => 'Abstract required',
-            "abstractRasterData_tahunPerolehan.required" => 'Abstract required',
-            "abstractRasterData_jenisSatelit.required" => 'Abstract required',
-            "abstractRasterData_format.required" => 'Abstract required',
-            "abstractRasterData_resolusi.required" => 'Abstract required',
-            "abstractRasterData_kawasanLitupan.required" => 'Abstract required',
-            "abstractServices_namaServis.required" => 'Abstract required',
-            "abstractServices_lokasi.required" => 'Abstract required',
-            "abstractServices_tujuan.required" => 'Abstract required',
-            "abstractServices_dataTerlibat.required" => 'Abstract required',
-            "abstractServices_polisi.required" => 'Abstract required',
-            "abstractServices_peringkatCapaian.required" => 'Abstract required',
-            "abstractServices_format.required" => 'Abstract required',
-            "abstractSoftware_namaPerisian.required" => 'Abstract required',
-            "abstractSoftware_versi.required" => 'Abstract required',
-            "abstractSoftware_tujuan.required" => 'Abstract required',
-            "abstractSoftware_tahunPengunaanPerisian.required" => 'Abstract required',
-            "abstractSoftware_kaedahPerolehan.required" => 'Abstract required',
-            "abstractSoftware_format.required" => 'Abstract required',
-            "abstractSoftware_pengeluar.required" => 'Abstract required',
-            "abstractSoftware_keupayaan.required" => 'Abstract required',
-            "abstractSoftware_dataTerlibat.required" => 'Abstract required',
-            "abstractSoftware_keperluanPerkakas.required" => 'Abstract required',
-            "abstractVectorData_namaData.required" => 'Abstract required',
-            "abstractVectorData_lokasi.required" => 'Abstract required',
-            "abstractVectorData_rumusanData.required" => 'Abstract required',
-            "abstractVectorData_tujuanData.required" => 'Abstract required',
-            "abstractVectorData_kaedahPenyediaanData.required" => 'Abstract required',
-            "abstractVectorData_format.required" => 'Abstract required',
-            "abstractVectorData_unit.required" => 'Abstract required',
-            "abstractVectorData_skala.required" => 'Abstract required',
-            "abstractVectorData_statusData.required" => 'Abstract required',
-            */
             "c10_file_url.required" => 'URL required',
             "c10_file_name.required" => 'File Name required',
             "c10_file_type.required" => 'File Type required',
