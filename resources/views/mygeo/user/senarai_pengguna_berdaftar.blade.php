@@ -184,13 +184,13 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>
                                                     <?php
-                                                    if($user->hasRole(['Pemohon Data'])) {
+                                                    if(!is_numeric($user->agensi_organisasi)) {
                                                         ?>
                                                         {{ $user->agensi_organisasi }}
                                                         <?php
                                                     }else{
                                                         ?>
-                                                        {{ (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"") }}
+                                                        {{ (isset($user->agensiOrganisasi) ? $user->agensiOrganisasi->name:"") }}
                                                         <?php
                                                     }
                                                     ?>
