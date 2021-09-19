@@ -50,8 +50,23 @@ class UncheckedMetadataCron extends Command
        
         //find metadata tak diusik lebih dari 2 minggu
         $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
+        
+        $metadataTitles = [];
+        
         if(count($result1) > 0){
             foreach($result1 as $r){
+                $ftestxml2 = <<<XML
+                        $r->data
+                        XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+                $xml2 = simplexml_load_string($ftestxml2);
+                if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                    $metadataTitles[] = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
+                }
+                
                 $r->cronned_metadata_tak_diusik = date('Y-m-d H:i:s',time());
                 $r->update();
             }
@@ -61,10 +76,24 @@ class UncheckedMetadataCron extends Command
         $result2 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('cronned_metadata_tak_diusik','<',$lastTwoWeeks)->get();
         if(count($result2) > 0){
             foreach($result2 as $r){
+                $ftestxml2 = <<<XML
+                        $r->data
+                        XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+                $xml2 = simplexml_load_string($ftestxml2);
+                if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                    $metadataTitles[] = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
+                }
+                
                 $r->cronned_metadata_tak_diusik = date('Y-m-d H:i:s',time());
                 $r->update();
             }
         }
+        
+        $metadataTitles = array_unique($metadataTitles);
         
         if(count($result1) > 0 || count($result2) > 0){
             //send email notification to them pengesahs
@@ -75,9 +104,9 @@ class UncheckedMetadataCron extends Command
                 foreach($pengesahs as $p){
                     $to_name = $p->name;
                     $to_email = $p->email;
-                    $data = array('name'=>$p->name);
+                    $data = array('metadataTitles'=>$metadataTitles);
                     Mail::send('mails.exmpl16', $data, function($message) use ($to_name, $to_email) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Metadata Tidak Diusik');
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Peringatan Pengesahan Metadata');
                         $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
                     });            
                 }
