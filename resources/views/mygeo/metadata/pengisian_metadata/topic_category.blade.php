@@ -10,6 +10,7 @@
                     }
                 }
                 ?>
+                <span class="text-warning">*</span>
             </h4>
         </a>
     </div>
