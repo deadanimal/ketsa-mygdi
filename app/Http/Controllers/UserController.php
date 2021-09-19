@@ -383,9 +383,11 @@ class UserController extends Controller {
             "uname" => 'required',
             "nric" => 'required',
             "agensi_organisasi" => 'required',
-            "email" => 'required|unique:App\User,email',
             "phone_pejabat" => 'required',          
         ];
+        if(Auth::user()->email != $request->email){
+            $fields["email"]= 'required|unique:App\User,email';
+        }
         if(Auth::user()->hasRole('Pemohon Data')){
             $fields["phone_bimbit"]= 'required';
         }else{
