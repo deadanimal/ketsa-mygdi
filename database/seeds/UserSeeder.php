@@ -223,7 +223,7 @@ class UserSeeder extends Seeder
             'email' => "pemohondata1@pipeline.com",
             'password' => Hash::make('pemohondata1@pipeline.com'),
             'nric' => '888888888888',
-            'agensi_organisasi' => 'KFC',
+            'agensi_organisasi' => '6',
             'bahagian' => 'IT',
             'sektor' => 1,
             'phone_pejabat' => '0888888888',
@@ -243,7 +243,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('pemohondata2@pipeline.com'),
             'nric' => '888888888888',
             'agensi_organisasi' => '3',
-            'bahagian' => 'Burger King',
+            'bahagian' => 'IT',
             'sektor' => 1,
             'phone_pejabat' => '0888888888',
             'phone_bimbit' => '0188888888',
@@ -260,7 +260,7 @@ class UserSeeder extends Seeder
             'email' => "pemohondata3@pipeline.com",
             'password' => Hash::make('pemohondata3@pipeline.com'),
             'nric' => '888888888888',
-            'agensi_organisasi' => 'Wendys',
+            'agensi_organisasi' => '4',
             'bahagian' => 'IT',
             'sektor' => 1,
             'phone_pejabat' => '0888888888',
@@ -326,7 +326,7 @@ class UserSeeder extends Seeder
             'assigned_roles' => 'Pentadbir Data',
         ]);
         $user->assignRole('Pentadbir Data');
-        
+
         $user = User::create([
             'name' => "Ftest_pentadbirdata",
             'email' => "ftestftest@ftestftest.com",
@@ -344,7 +344,7 @@ class UserSeeder extends Seeder
             'assigned_roles' => 'Pentadbir Data',
         ]);
         $user->assignRole('Pentadbir Data');
-        
+
         $user = User::create([
             'name' => "Ftest_pemohondata",
             'email' => "ftest1@ftest1.com",
