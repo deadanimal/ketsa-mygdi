@@ -46,7 +46,7 @@
                                             K.P. No <u>{{ $permohonan->nric }}</u> yang
                                             bertandatangan di bawah ini, sebagai
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
-                                            <u>{{ $permohonan->agensi_name }}</u>
+                                            <u>{{ $agensi_name }}</u>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
                                             seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
