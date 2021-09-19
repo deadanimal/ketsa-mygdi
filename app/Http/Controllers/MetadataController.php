@@ -1006,6 +1006,7 @@ class MetadataController extends Controller {
                 $mg->source = "e1be8c47-7b4b-4fb9-862a-16a349e5f586";
                 $mg->uuid = $uuid;
                 $mg->disahkan = "0";
+                $mg->is_draf = "yes";
                 $mg->portal_user_id = Auth::user()->id;
                 $mg->save();
                 
