@@ -60,7 +60,8 @@
                                 </div>
                             </div>
                             <div class="card-body p-4">
-                                <form action="{{ url('simpan_akuan_pelajar') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('simpan_akuan_pelajar') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
 
                                     <h3 class="text-center">AKUAN PELAJAR</h3>
@@ -78,7 +79,7 @@
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
                                                 name="agensi_organisasi" disabled>{{ $permohonan->users->agensi_organisasi }}, {{ $permohonan->users->alamat }}
-                                                             </textarea>
+                                                                 </textarea>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
                                             seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
@@ -181,12 +182,13 @@
                                         <button type="submit" class="btn float-right btn-primary">Simpan</button>
                                     @endif
                                 </form>
-                                <form action="{{ url('api/dokumen/akuan_pelajar') }}" method="POST" target="_blank">
-                                    @csrf
-                                    <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                    <button type=submit class="btn btn-sm btn-primary mt-2">Cetak PDF</button>
-                                </form>
-
+                                @if (isset($akuan->title))
+                                    <form action="{{ url('api/dokumen/akuan_pelajar') }}" method="POST" target="_blank">
+                                        @csrf
+                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                        <button type=submit class="btn btn-sm btn-primary mt-2">Cetak PDF</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>

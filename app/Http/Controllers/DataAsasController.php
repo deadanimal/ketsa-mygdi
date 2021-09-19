@@ -1262,13 +1262,28 @@ class DataAsasController extends Controller
 
     public function generate_pdf_akuan_pelajar(Request $request){
 
-        $permohonan = MohonData::where('id', $request->permohonan_id)->first();
+        $permohonan = DB::table('users')
+                    ->join('mohon_data','users.id','=','mohon_data.user_id')
+                    ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+                    ->where('mohon_data.id',$request->permohonan_id)
+                    ->select('users.nric','users.alamat','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'),DB::raw('agensi_organisasi.name as agensi_name'))
+                    ->groupBy('users.nric','users.name','users.alamat','agensi_organisasi.name','mohon_data.date')
+                    ->first();
+        // $permohonan = MohonData::where('id', $request->permohonan_id)->first();
         $akuan = AkuanPelajar::where('permohonan_id', $request->permohonan_id)->first();
         $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan'));
-
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
+        // Render the HTML as PDF
+        return $pdf->stream();
+    }
 
+    public function generate_pdf_surat_balasan(Request $request){
+
+        $suratbalasan = SuratBalasan::where('permohonan_id', $request->permohonan_id)->first();
+        $pdf = PDF::loadView('pdfs.surat_balasan', compact('suratbalasan'));
+        // (Optional) Setup the paper size and orientation
+        $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF
         return $pdf->stream();
     }
