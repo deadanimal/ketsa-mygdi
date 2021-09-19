@@ -111,6 +111,7 @@
                                                             <label class="form-check-label" for="c3_1">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t1_scope" id="c15_t1_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t1_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t1_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t1_scope') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -156,6 +157,7 @@
                                                             <label class="form-check-label" for="c3_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t1_result" id="c15_t1_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t1_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t1_result') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t1_result') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -181,6 +183,7 @@
                                                             <label class="form-check-label" for="c3_1">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t1_scope_2" id="c15_t1_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t1_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t1_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t1_scope_2') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -226,6 +229,7 @@
                                                             <label class="form-check-label" for="c3_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t1_result_2" id="c15_t1_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t1_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t1_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t1_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -285,6 +289,7 @@
                                                             <label class="form-check-label" for="c3_1">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t2_scope" id="c15_t2_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t2_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t2_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t2_scope') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -330,6 +335,7 @@
                                                             <label class="form-check-label" for="c3_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t2_result" id="c15_t2_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t2_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t2_result') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t2_result') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -355,6 +361,7 @@
                                                             <label class="form-check-label" for="c3_1">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t2_scope_2" id="c15_t2_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t2_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t2_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t2_scope_2') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -400,6 +407,7 @@
                                                             <label class="form-check-label" for="c3_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t2_result_2" id="c15_t2_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t2_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t2_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t2_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -425,6 +433,7 @@
                                                             <label class="form-check-label" for="c3_1">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t2_scope_3" id="c15_t2_scope_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t2_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t2_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t2_scope_3') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -470,6 +479,7 @@
                                                             <label class="form-check-label" for="c3_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t2_result_3" id="c15_t2_result_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t2_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t2_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t2_result_3') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -495,6 +505,7 @@
                                                             <label class="form-check-label" for="c15_t2_scope_4">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t2_scope_4" id="c15_t2_scope_4" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t2_scope_4') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t2_scope_4') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t2_scope_4') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -540,6 +551,7 @@
                                                             <label class="form-check-label" for="c15_t2_result_4">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t2_result_4" id="c15_t2_result_4" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t2_result_4') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t2_result_4') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t2_result_4') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -594,6 +606,7 @@
                                                             <label class="form-check-label" for="c15_t3_scope">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t3_scope" id="c15_t3_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t3_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t3_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t3_scope') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -639,6 +652,7 @@
                                                             <label class="form-check-label" for="c15_t3_result">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t3_result" id="c15_t3_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t3_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t3_result') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t3_result') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -664,6 +678,7 @@
                                                             <label class="form-check-label" for="c15_t3_scope_2">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t3_scope_2" id="c15_t3_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t3_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t3_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t3_scope_2') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -709,6 +724,7 @@
                                                             <label class="form-check-label" for="c15_t3_result_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t3_result_2" id="c15_t3_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t3_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t3_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t3_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -734,6 +750,7 @@
                                                             <label class="form-check-label" for="c15_t3_scope_3">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t3_scope_3" id="c15_t3_scope_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t3_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t3_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t3_scope_3') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -779,6 +796,7 @@
                                                             <label class="form-check-label" for="c15_t3_result_3">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t3_result_3" id="c15_t3_result_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t3_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t3_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t3_result_3') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -833,6 +851,7 @@
                                                             <label class="form-check-label" for="c15_t4_scope">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t4_scope" id="c15_t4_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t4_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t4_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t4_scope') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -878,6 +897,7 @@
                                                             <label class="form-check-label" for="c15_t4_result">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t4_result" id="c15_t4_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t4_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t4_result') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t4_result') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -903,6 +923,7 @@
                                                             <label class="form-check-label" for="c15_t4_scope_2">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t4_scope_2" id="c15_t4_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t4_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t4_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t4_scope_2') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -948,6 +969,7 @@
                                                             <label class="form-check-label" for="c15_t4_result_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t4_result_2" id="c15_t4_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t4_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t4_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t4_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -973,6 +995,7 @@
                                                             <label class="form-check-label" for="c15_t4_scope_3">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t4_scope_3" id="c15_t4_scope_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t4_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t4_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t4_scope_3') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1018,6 +1041,7 @@
                                                             <label class="form-check-label" for="c15_t4_result_3">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t4_result_3" id="c15_t4_result_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t4_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t4_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t4_result_3') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1072,6 +1096,7 @@
                                                             <label class="form-check-label" for="c15_t5_classCorrect_scope">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t5_scope" id="c15_t5_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t5_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t5_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t5_scope') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1117,6 +1142,7 @@
                                                             <label class="form-check-label" for="c3_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t5_result" id="c15_t5_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t5_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t5_result') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t5_result') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1142,6 +1168,7 @@
                                                             <label class="form-check-label" for="c15_t5_scope_2">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t5_scope_2" id="c15_t5_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t5_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t5_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t5_scope_2') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1187,6 +1214,7 @@
                                                             <label class="form-check-label" for="c15_t5_result_2">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t5_result_2" id="c15_t5_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t5_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t5_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t5_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1212,6 +1240,7 @@
                                                             <label class="form-check-label" for="c15_t5_scope_3">
                                                                 <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
                                                                 <select name="c15_t5_scope_3" id="c15_t5_scope_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{(old('c15_t5_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{(old('c15_t5_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{(old('c15_t5_scope_3') == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1257,6 +1286,7 @@
                                                             <label class="form-check-label" for="c15_t5_result_3">
                                                                 <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
                                                                 <select name="c15_t5_result_3" id="c15_t5_result_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t5_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t5_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t5_result_3') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>

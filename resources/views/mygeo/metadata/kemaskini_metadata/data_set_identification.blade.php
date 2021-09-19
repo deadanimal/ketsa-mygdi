@@ -29,6 +29,7 @@
                         }
                         ?>
                         <select name="c12_dataset_type" id="c12_dataset_type" class="form-control form-control-sm">
+                            <option value="">Pilih...</option>
                             <option value="Grid" {{($dataSetType == 'Grid' ? "selected":"")}}>Grid</option>
                             <option value="Stereo Model" {{($dataSetType == 'Stereo Model' ? "selected":"")}}>Stereo Model</option>
                             <option value="Text Table" {{($dataSetType == 'Text Table' ? "selected":"")}}>Text Table</option>
@@ -92,6 +93,7 @@
                         }
                         ?>
                         <select name="c12_language" id="c12_language" class="form-control form-control-sm">
+                            <option value="">Pilih...</option>
                             <option value="English" {{($lang == 'English' ? "selected":"")}}>English</option>
                             <option value="Bahasa Malaysia" {{($lang == 'Bahasa Malaysia' ? "selected":"")}}>Bahasa Malaysia</option>
                         </select>

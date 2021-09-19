@@ -102,6 +102,7 @@
                     </div>
                     <div class="col-7">
                         <select name='publisher_role' class='form-control form-control-sm ml-3'>
+                            <option value="">Pilih...</option>
                             <option value="Author">Author</option>
                             <option value="Custodian">Custodian</option>
                             <option value="Distributor">Distributor</option>
