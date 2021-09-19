@@ -68,36 +68,38 @@
                 <?php
                 $flag2 = 1;
                 $counter = 0;
-                foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                    if(trim($keyword->CharacterString) != ""){
-                        if($counter == 0){
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-3 pl-5">
-                                    <label class="form-control-label mr-4" for="c10_file_name">
-                                        Keywords<span class="text-warning">*</span>
-                                    </label><label class="float-right">:</label>
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
+                    foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                        if(trim($keyword->CharacterString) != ""){
+                            if($counter == 0){
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_name">
+                                            Keywords<span class="text-warning">*</span>
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <?php echo "&nbsp;&nbsp;" . $keyword->CharacterString; ?>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <?php echo "&nbsp;&nbsp;" . $keyword->CharacterString; ?>
+                                <?php
+                            }else{
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_type">
+                                            Additional Keywords
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <?php echo "&nbsp;&nbsp;" . $keyword->CharacterString; ?>
+                                    </div>
                                 </div>
-                            </div>
-                            <?php
-                        }else{
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-3 pl-5">
-                                    <label class="form-control-label mr-4" for="c10_file_type">
-                                        Additional Keywords
-                                    </label><label class="float-right">:</label>
-                                </div>
-                                <div class="col-6">
-                                    <?php echo "&nbsp;&nbsp;" . $keyword->CharacterString; ?>
-                                </div>
-                            </div>
-                            <?php
+                                <?php
+                            }
+                            $counter++;
                         }
-                        $counter++;
                     }
                 }
                 ?>
