@@ -274,7 +274,7 @@ input[type=submit] {
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
                                                                 </form>
-                                                                <a href="#" class="btn btn-sm btn-primary metadataActionLinks aViewMetadata col-12 mb-2" onClick="return false;" data-metid="{{$key}}">Metadata Details</a><br>
+                                                                <a href="#" class="btn btn-sm btn-primary metadataActionLinks aViewMetadata col-12 mb-2" onClick="return false;" data-metid="{{$key}}">Perincian Metadata</a><br>
                                                                 <a href="#" class="btn btn-sm btn-warning metadataActionLinks aViewXml col-12 mb-2" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><br>
                                                                 <?php
                                                                 $url = (isset($val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString) ? $val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString : "");
