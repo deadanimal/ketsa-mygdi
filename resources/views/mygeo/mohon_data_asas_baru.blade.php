@@ -106,10 +106,10 @@
                                             <div class="col-8">
                                                 <?php
                                                 $var = '';
-                                                if ($user->hasRole(['Pemohon Data'])) {
-                                                    $var = $user->agensi_organisasi;
+                                                if (Auth::user()->hasRole(['Pemohon Data'])) {
+                                                    $var = Auth::user()->agensi_organisasi;
                                                 }else{
-                                                    $var = (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"");
+                                                    $var = (isset(Auth::user()->agensiOrganisasi) ? Auth::user()->agensiOrganisasi->name:"");
                                                 }
                                                 ?>
                                                 <input class="form-control form-control-sm ml-3" name="institusi"
