@@ -180,6 +180,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/surat_balasan/{id}','DataAsasController@surat_balasan');
     Route::post('/simpan_surat_balasan', 'DataAsasController@update_surat_balasan');
+    Route::post('/api/dokumen/surat_balasan', 'DataAsasController@generate_pdf_surat_balasan');
 
     Route::get('/semakan_status','DataAsasController@semakan_status');
 

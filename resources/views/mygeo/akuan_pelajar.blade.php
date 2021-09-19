@@ -161,9 +161,12 @@
                                     <div class="mx-6 pl-lg-8">
                                         Tandatangan Pelajar:
                                         <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan" height="120">
+                                        @if (Auth::user()->hasRole(['Pemohon Data']))
                                         <input type="file" class="form-control form-control-sm py-0" name="file"
                                             placeholder="Digital Sign">
+                                        @endif
                                         <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
+                                        <br>
                                         Tarikh:<input type="text" class="form-control form-control-sm"
                                             placeholder="Auto Pilih Tarikh Semasa" disabled
                                             value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">

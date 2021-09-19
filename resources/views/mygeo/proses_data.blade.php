@@ -58,7 +58,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="table_proses_data" class="table table-bordered table-striped"
+                                    style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -108,7 +109,7 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header bg-primary mb-0">
-                            <h4 class="modal-title text-white">Proses Data - {{ $permohonan->id }}</h4>
+                            <h4 class="modal-title text-white">Proses Data</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -117,7 +118,8 @@
                             <form action="{{ url('simpan_proses_data') }}" method="POST">
                                 @csrf
                                 <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
-                                <table id="table_metadatas2" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="table_proses_data2" class="table table-bordered table-striped"
+                                    style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -125,7 +127,7 @@
                                             <th>SUB-KATEGORI</th>
                                             <th>KATEGORI</th>
                                             <th>KAWASAN DATA</th>
-                                            <th>SAIZ × HARGA</th>
+                                            <th>SAIZ(MB) × HARGA</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -138,10 +140,12 @@
                                                     <td>{{ $data->kategori }}</td>
                                                     <td>{{ $data->kawasan_data }}</td>
                                                     <td>
-                                                        <input class="form-control form-control-sm kiraHarga" placeholder="Saiz Data"
-                                                            id="size_{{ $data->id }}" type="number"
-                                                            step="0.01" name="saiz_data_{{ $data->id }}"
-                                                            value="{{ $data->saiz_data }}" data-permohonanid="{{ $permohonan->id }}" data-hargadata="{{ $data->harga_data }}">
+                                                        <input class="form-control form-control-sm kiraHarga"
+                                                            placeholder="Saiz Data" id="size_{{ $data->id }}"
+                                                            type="number" step="0.01" name="saiz_data_{{ $data->id }}"
+                                                            value="{{ $data->saiz_data }}"
+                                                            data-permohonanid="{{ $permohonan->id }}"
+                                                            data-hargadata="{{ $data->harga_data }}">
                                                         <label class="ml-2">× RM {{ $data->harga_data }}
                                                         </label>
                                                     </td>
@@ -150,8 +154,10 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
                                 <div class="row">
                                     <div class="col-xl-12">
+                                        <i>*Sila kemaskini surat balasan sebelum isi maklumat proses data</i>
                                         <div class="form-inline float-right">
                                             <label class="form-control-label mr-2">Jumlah Harga (RM)</label>
                                             <input class="form-control form-control-sm" placeholder="0.00"
@@ -170,15 +176,15 @@
                                                 value="{{ $permohonan->proses_datas->pautan_data }}">
 
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
-<!--                                            <input class="form-control form-control-sm" name="tempoh" placeholder="" type="date" disabled>-->
-                                            <input type="text" class="form-control form-control-sm float-right tempohMuatTurun" name="tempoh">
+                                            <input type="text"
+                                                class="form-control form-control-sm float-right tempohMuatTurun"
+                                                name="tempoh">
                                         </div>
-                                            <label class="form-control-label mr-2">Surat Balasan Permohonan </label>
-                                            <a href="{{ url('surat_balasan/' . $permohonan->id) }}"
-                                                class="btn btn-sm btn-danger mb-2">
-                                                Kemaskini
-                                            </a>
-                                        </div>
+                                        <label class="form-control-label mt-4 mr-2">Surat Balasan Permohonan </label>
+                                        <a href="{{ url('surat_balasan/' . $permohonan->id) }}"
+                                            class="btn btn-sm btn-danger mb-2">
+                                            Kemaskini
+                                        </a>
                                     </div>
                                     <div class="col-xl-6 pt-9 text-right">
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
@@ -188,50 +194,29 @@
                                         </button>
                                     </div>
                                 </div>
-                            </form>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        @endforeach
+    </div>
+    @endforeach
 
     </div>
 
     <script>
-    @foreach ($permohonan_list as $permohonan)
-            @foreach ($skdatas as $data)
-                // @if ($data->permohonan_id == $permohonan->id)
-                // $('.amount_{{$permohonan->id}}_{{$data->id}}').change(function() {
-                // var tot = 0;
-
-                // $('.price_{{$permohonan->id}}_{{$data->id}}').each(function() {
-                // var mul = 0;
-                // price = +$(this).val();
-                // });
-                // $('.amount_{{$permohonan->id}}_{{$data->id}}').each(function() {
-                // result = +$(this).val();
-                // var mul = result * price;
-                // tot += mul;
-                // });
-                // $('#total_{{$permohonan->id}}').val(tot);
-                // });
-                @endif
-            @endforeach
-        @endforeach
-        </script>
-    <script>
         $(document).ready(function() {
-            $(document).on('change','.kiraHarga',function(){
+            $(document).on('change', '.kiraHarga', function() {
                 var kiraHarga = $('.kiraHarga');
                 var jumlahHarga = 0;
                 var permohonanid = $(this).data('permohonanid');
-                jQuery.each(kiraHarga,function(key,val) {
+                jQuery.each(kiraHarga, function(key, val) {
                     var size = $(val).val();
                     var hargadata = $(val).data('hargadata');
                     jumlahHarga += (size * hargadata);
                 });
                 jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
-                $("#jumlah_harga_dokumen_"+permohonanid).val(jumlahHarga);
+                $("#jumlah_harga_dokumen_" + permohonanid).val(jumlahHarga);
             });
 
             $('.tempohMuatTurun').daterangepicker({
@@ -240,7 +225,11 @@
                 },
             });
 
-            $("#table_metadatas").DataTable({
+            $("#table_proses_data").DataTable({
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,

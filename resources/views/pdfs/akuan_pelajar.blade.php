@@ -10,22 +10,68 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
-    h3,body {
+    h3,
+    body {
         font-family: Arial, Helvetica, sans-serif;
     }
-    .text-center{
-        text-align:center !important;
+
+    .text-center {
+        text-align: center !important;
         font-size: 18;
         font-weight: bold;
     }
 
 </style>
 <style type="text/css">
-    /* u {
-        padding-bottom: 10px;
-        border-bottom: 1px dotted #000;
-        text-decoration: none;
+    .text-custom {
+        /* text-align:center !important; */
+        font-size: 10;
+        font-weight: bold;
+    }
+
+    .mx-6 {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+        float: left;
+        width: 30%;
+        padding: 10px;
+        height: auto;
+        /* Should be removed. Only for demonstration */
+    }
+
+    .column-auto {
+        float: left;
+        width: auto;
+        padding: 10px;
+        height: auto;
+        /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        padding-top: 0px;
+    }
+
+    hr {
+        border-top: 1px solid black;
+        padding-top: 0;
+    }
+
+    /* ol {
+        margin: 0;
+        padding: 0;
     } */
+
+    li {
+        text-align: justify;
+    }
 
 </style>
 
@@ -41,8 +87,8 @@
                                 <div class="mx-6 pr-lg-5">
                                     (Sila nyatakan tajuk tesis/projek/kajian
                                     <u>{{ $akuan->title }}</u>
-                                    <ol align="justify" class="mx-5 pr-lg-4">
-                                        <li>Saya (nyatakan nama) <u>{{ $permohonan->username }}</u>
+                                    <ol>
+                                        <li align="justify">Saya (nyatakan nama) <u>{{ $permohonan->username }}</u>
                                             K.P. No <u>{{ $permohonan->nric }}</u> yang
                                             bertandatangan di bawah ini, sebagai
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
@@ -76,7 +122,7 @@
                                             </ol>
                                         </ol>
                                         <br><br>
-                                        <li>Syarat-syarat</li>
+                                        <li>Syarat-syarat :</li>
                                         <br>
                                         <ol type="i" align="justify">
                                             <li>Di samping syarat-syarat yang dinyatakan di dalam Borang
@@ -94,15 +140,17 @@
                                                 tarikh bahan-bahan dibawa keluar dan dikembalikan ke Malaysia.<br><br>
                                         </ol>
                                     </ol>
-                                    <br>
-                                    <div class="container mx-7">
-                                        Tandatangan Pelajar:
-                                        <img src="{{ public_path($akuan->digital_sign) }}" alt="Gambar Tandatangan"
-                                            height="70"><br>
-                                        Tarikh:
-                                        <u>{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d/m/Y') }}</u><br>
-                                        Nama: <u>{{ $permohonan->username }}</u><br>
-                                        Alamat: <u>{{ $permohonan->alamat }}</u>
+                                    <div class="row">
+                                        <div class="column"></div>
+                                        <div class="column-auto">
+                                            Tandatangan Pelajar:
+                                            <img src="{{ public_path($akuan->digital_sign) }}"
+                                                alt="Gambar Tandatangan" height="70"><br>
+                                            Tarikh:
+                                            <u>{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d/m/Y') }}</u><br>
+                                            Nama: <u>{{ $permohonan->username }}</u><br>
+                                            Alamat: <u>{{ $permohonan->alamat }}</u>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

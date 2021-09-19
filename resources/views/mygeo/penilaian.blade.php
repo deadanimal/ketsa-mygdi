@@ -76,7 +76,9 @@
                                             <th>BIL</th>
                                             <th>NAMA PERMOHONAN</th>
                                             <th>TARIKH</th>
+                                            @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <th>AKUAN PENERIMAAN</th>
+                                            @endif
                                             <th>PENILAIAN</th>
                                         </tr>
                                     </thead>
@@ -86,15 +88,16 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
-                                                <td>
-                                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+
+                                                @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                                    <td>
                                                         <a href="/akuan_penerimaan/{{ $permohonan->id }}"
                                                             class="btn btn-sm btn-primary text-center">
                                                             Lihat
-                                                    @endif
+                                                        </a>
+                                                    </td>
+                                                @endif
 
-                                                    </a>
-                                                </td>
                                                 <td>
                                                     @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                                         <a href="/penilaian_pemohon/{{ $permohonan->id }}"
