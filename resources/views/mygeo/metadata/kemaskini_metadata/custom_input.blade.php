@@ -30,6 +30,12 @@
                                         }if($_GET['bhs'] == 'en'){
                                             echo $cmi->name;
                                         }
+                                    }else{
+                                        if($langSelected != "" && $langSelected == "bm"){
+                                            echo $cmi->name_bm;
+                                        }elseif($langSelected != "" && $langSelected == "en"){
+                                            echo $cmi->name;
+                                        }
                                     }
                                     ?>
                                     {!! ($cmi->mandatory == "Yes" ? '<span class="text-warning">*</span>':"") !!}
