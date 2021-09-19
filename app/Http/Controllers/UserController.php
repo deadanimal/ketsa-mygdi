@@ -389,7 +389,7 @@ class UserController extends Controller {
         if(Auth::user()->hasRole('Pemohon Data')){
             $fields["phone_bimbit"]= 'required';
         }else{
-            $fields["bahagian"] = 'required',
+            $fields["bahagian"] = 'required';
             $fields["sektor"] = 'required';
         }
         $customMsg = [
