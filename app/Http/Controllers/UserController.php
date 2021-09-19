@@ -385,12 +385,12 @@ class UserController extends Controller {
             "agensi_organisasi" => 'required',
             "email" => 'required|unique:App\User,email',
             "phone_pejabat" => 'required',          
-            "bahagian" => 'required',
         ];
         if(Auth::user()->hasRole('Pemohon Data')){
             $fields["phone_bimbit"]= 'required';
         }else{
-            $fields["sektor"]= 'required';
+            $fields["bahagian"] = 'required',
+            $fields["sektor"] = 'required';
         }
         $customMsg = [
             "uname.required" => 'Name required',
