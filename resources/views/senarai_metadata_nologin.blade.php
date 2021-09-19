@@ -277,7 +277,12 @@ input[type=submit] {
                                                                 <a href="#" class="btn btn-sm btn-primary metadataActionLinks aViewMetadata col-12 mb-2" onClick="return false;" data-metid="{{$key}}">Perincian Metadata</a><br>
                                                                 <a href="#" class="btn btn-sm btn-warning metadataActionLinks aViewXml col-12 mb-2" onClick="return false;" data-metid="{{$key}}">Metadata (XML)</a><br>
                                                                 <?php
-                                                                $url = (isset($val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString) ? $val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString : "");
+                                                                $url = "";
+                                                                if(isset($val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString)){
+                                                                    $url = $val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString;   
+                                                                }elseif(isset($val->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString)){
+                                                                    $url = $val->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString;   
+                                                                }
                                                                 if(trim($url) != ""){
                                                                     ?>
                                                                     <a href="#" class="btn btn-sm btn-success metadataActionLinks aViewMap col-12 mb-2" onClick="return false;" data-metid="{{$key}}" data-toggle="modal" data-target="#modal-showmap" data-mapurl="{{ $url }}" data-backdrop="false">Show map</a>
