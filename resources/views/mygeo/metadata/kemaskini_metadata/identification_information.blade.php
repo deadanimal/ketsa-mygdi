@@ -27,6 +27,8 @@
                                     } else {
                                         echo 'Metadata Name';
                                     }
+                                }else{
+                                    echo 'Title';
                                 }
                                 ?>
                                 <span class="text-warning">*</span>
