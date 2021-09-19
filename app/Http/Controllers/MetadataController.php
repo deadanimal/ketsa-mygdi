@@ -110,7 +110,7 @@ class MetadataController extends Controller {
 
         if(isset($request->content_type) && $request->content_type != ""){
             $params['content_type'] = $request->content_type;
-            $query = $query->where('data', 'ilike', '%' . $request->content_type . '%');
+            $query = $query->where('data', 'ilike', '%>' . $request->content_type . '<%');
         }
         $params['topic_category'] = [];
         if(isset($request->topic_category)){
