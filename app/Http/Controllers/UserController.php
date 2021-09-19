@@ -379,6 +379,31 @@ class UserController extends Controller {
     }
 
     public function update_profile(Request $request){
+        $fields = [
+            "uname" => 'required',
+            "nric" => 'required',
+            "agensi_organisasi" => 'required',
+            "email" => 'required|unique:App\User,email',
+            "phone_pejabat" => 'required',          
+            "bahagian" => 'required',
+        ];
+        if(Auth::user()->hasRole('Pemohon Data')){
+            $fields["phone_bimbit"]= 'required';
+        }else{
+            $fields["sektor"]= 'required';
+        }
+        $customMsg = [
+            "uname.required" => 'Name required',
+            "nric.required" => 'NRIC required',
+            "sektor.required" => 'Sektor required',
+            "agensi_organisasi.required" => 'Agensi/Organisasi required',
+            "bahagian.required" => 'Bahagian required',
+            "email.required" => 'Email required',
+            "phone_pejabat.required" => 'Phone Pejabat required',
+            "phone_bimbit.required" => 'Phone Bimbit required',
+        ];
+        $this->validate($request, $fields, $customMsg);
+        
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
