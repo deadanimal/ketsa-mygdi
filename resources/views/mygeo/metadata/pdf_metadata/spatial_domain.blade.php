@@ -7,16 +7,8 @@
 <script src="{{ asset('intecxmap/js/esri-leaflet/0.0.1-beta.5/esri-leaflet.js') }}"></script>
 <script src="{{ asset('intecxmap/js/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ asset('intecxmap/css/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css') }}">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="card card-primary div_c9" id="div_c9">
+
+<div class="card card-primary div_c9" id="div_c9" style="page-break-before: always;">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse9" class="fixMap">
             <h4 class="card-title">
