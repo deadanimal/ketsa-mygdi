@@ -79,7 +79,7 @@
                                                     <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
                                                     <td>
                                                         <a href="lihat_laporan_data/{{ $mohon->id }}"
-                                                            class="btn btn-sm btn-primary">Laporan Perincian</a>
+                                                            class="btn btn-sm btn-primary">Perincian</a>
                                                     </td>
                                                 </tr>
                                             @endif

@@ -300,6 +300,7 @@ class DataAsasController extends Controller
         foreach($mohons as $m){
             $vals = [];
             $vals["berjayaMuatTurunStatus"] = '1';
+            $vals["download"] = '1';
             $vals["berjayaMuatTurunTarikh"] = date('Y-m-d H:i:s',time());
             $vals["emailPenilaianStart"] = date('Y-m-d H:i:s',time());
             MohonData::where(["id" => $m])->update($vals);

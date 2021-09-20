@@ -129,10 +129,8 @@
             var newStatusText = '';
             if ($(this).prop('checked')) {
                 newStatus = '1';
-                newStatusText = 'Aktif';
             } else {
                 newStatus = '0';
-                newStatusText = 'Tidak Aktif';
             }
 
             $.ajax({
