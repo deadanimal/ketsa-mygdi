@@ -79,7 +79,7 @@
                                                     <td>{{ $mohon->users->agensiOrganisasi->name }}</td>
                                                     <td>
                                                         <a href="lihat_laporan_data/{{ $mohon->id }}"
-                                                            class="btn btn-sm btn-primary">Laporan Perincian</a>
+                                                            class="btn btn-sm btn-primary">Perincian</a>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -133,13 +133,7 @@
                                                     <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
-                                                        <?php
-                                                        if($mohon->users->hasRole('Pemohon Data')){
-                                                            $mohon->users->agensi_organisasi;
-                                                        }else{
-                                                            $mohon->users->agensiOrganisasi->name;
-                                                        }
-                                                        ?>
+                                                        {{$mohon->users->agensiOrganisasi->name}}
                                                     </td>
                                                     <td>{{ $mohon->users->kategori }}</td>
                                                     <td>
@@ -192,13 +186,7 @@
                                                     <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
-                                                        <?php
-                                                        if($mohon->users->hasRole('Pemohon Data')){
-                                                            $mohon->users->agensi_organisasi;
-                                                        }else{
-                                                            $mohon->users->agensiOrganisasi->name;
-                                                        }
-                                                        ?>
+                                                        {{$mohon->users->agensiOrganisasi->name}}
                                                     </td>
                                                     <td>{{ $mohon->users->kategori }}</td>
                                                 </tr>
@@ -252,7 +240,6 @@
                                                 <th>BIL</th>
                                                 <th>AGENSI</th>
                                                 <th>JUMLAH PERMOHONAN DATA</th>
-                                                <th>BILANGAN KESELURUHAN</th>
                                                 <th>TAHUN</th>
                                             </tr>
                                         </thead>
@@ -264,7 +251,6 @@
                                                     <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->agensi_name }}</td>
                                                     <td>{{ $mohon->total_permohonan }}</td>
-                                                    <td>{{ $permohonan_count }}</td>
                                                     <td>{{ $mohon->tahun }}</td>
                                                 </tr>
                                             @endforeach

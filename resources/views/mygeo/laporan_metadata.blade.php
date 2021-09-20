@@ -85,7 +85,7 @@
                                                     <form action='{{ url('lihat_metadata_nologin') }}' method='POST'>
                                                         @csrf
                                                         <input type='hidden' name='metadata_id' value='{{ $key }}'>
-                                                        <button type="submit" class="btn btn-sm btn-default mr-2">Perinchian</button>
+                                                        <button type="submit" class="btn btn-sm btn-primary mr-2">Perincian</button>
                                                     </form>
                                                 </td>
                                                 <td>

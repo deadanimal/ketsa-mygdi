@@ -90,7 +90,7 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if ($permohonan->acceptance == '1')
+                                                        @if ($permohonan->acceptance == '1' && $permohonan->download == '1')
                                                             <span class="badge badge-pill badge-success">Selesai</span>
                                                         @endif
                                                     </td>

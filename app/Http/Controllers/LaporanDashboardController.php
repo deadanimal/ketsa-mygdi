@@ -139,7 +139,7 @@ class LaporanDashboardController extends Controller
 //            $metadataTerbitByAgencyKeys[] = $agencyName;
 //            $metadataTerbitByAgencyVals[] = $count;
 //        }
-        
+
         //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
         $metadataTerbitByAgency = [];
         $metadataTerbitByAgencyKeys = [];
