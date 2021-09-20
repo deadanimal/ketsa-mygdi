@@ -84,8 +84,9 @@
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a href="{{ url('lihat_permohonan/'.$permohonan->id) }}"
-                                                        class="btn btn-sm btn-success text-center"><i class="fas fa-edit"></i>
+                                                    <a href="{{ url('lihat_permohonan/' . $permohonan->id) }}"
+                                                        class="btn btn-sm btn-success text-center"><i
+                                                            class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $permohonan->id }}"
                                                         class="btnDelete btn btn-sm btn-danger mr-2"><i
@@ -127,7 +128,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tujuan" class="form-control-label">Tujuan Permohonan</label>
-                                    <textarea name="tujuan" class="form-control form-control-sm" cols="30" rows="10"></textarea>
+                                    <textarea name="tujuan" class="form-control form-control-sm" cols="30"
+                                        rows="10"></textarea>
                                 </div>
                                 <input type="hidden" name="id" value="{{ $user->id }}">
                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -147,6 +149,10 @@
     <script>
         $(document).ready(function() {
             $("#table_metadatas").DataTable({
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,

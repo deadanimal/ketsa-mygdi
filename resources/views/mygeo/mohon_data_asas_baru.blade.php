@@ -108,8 +108,8 @@
                                                 $var = '';
                                                 if ($permohonan->users->hasRole(['Pemohon Data'])) {
                                                     $var = $permohonan->users->agensi_organisasi;
-                                                }else{
-                                                    $var = (isset($permohonan->users->agensiOrganisasi) ? $permohonan->users->agensiOrganisasi->name:"");
+                                                } else {
+                                                    $var = isset($permohonan->users->agensiOrganisasi) ? $permohonan->users->agensiOrganisasi->name : '';
                                                 }
                                                 ?>
                                                 <input class="form-control form-control-sm ml-3" name="institusi"
@@ -319,7 +319,8 @@
                                                         @endif
 
                                                         @if (!$dokumen->file_path == null)
-                                                            <a href="{{ url('/').$dokumen->file_path }}" target="_blank">
+                                                            <a href="{{ url('/') . $dokumen->file_path }}"
+                                                                target="_blank">
                                                                 <button type="button"
                                                                     class="btn btn-sm btn-success mr-2">Lihat</button>
                                                             </a>
@@ -344,11 +345,13 @@
                                                     Borang</a>
                                             </div>
                                         @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
-                                            <div class="col-7 form-inline">
-                                                <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
-                                                <a href="{{ url('/akuan_pelajar/' . $permohonan->id) }}"
-                                                    class="btn btn-sm btn-default">Papar </a>
-                                            </div>
+                                            @if ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar')
+                                                <div class="col-7 form-inline">
+                                                    <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
+                                                    <a href="{{ url('/akuan_pelajar/' . $permohonan->id) }}"
+                                                        class="btn btn-sm btn-default">Papar </a>
+                                                </div>
+                                            @endif
                                         @endif
                                     </div>
                                     @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
