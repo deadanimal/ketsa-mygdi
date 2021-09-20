@@ -62,6 +62,11 @@ class DataAsasController extends Controller
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
         $senarai_data = SenaraiData::where('status','Tersedia')->distinct('subkategori')->get();
+        // $senarai_data = DB::table('senarai_data')
+        //                         ->where('status','Tersedia')
+        //                         ->select('kategori','subkategori','lapisan_data')
+        //                         ->groupBy('kategori','subkategori','lapisan_data')
+        //                         ->get();
         $lapisandata = DB::table('senarai_data')
                                 ->where('status','Tersedia')
                                 ->select('subkategori','lapisan_data')
@@ -322,6 +327,7 @@ class DataAsasController extends Controller
 
     public function update_proses_data(Request $request)
     {
+        $id = $request->permohonan_id;
         $valid_surat = SuratBalasan::where([
             ["permohonan_id","=", $request->permohonan_id],])
             ->whereNotNull('tajuk_surat')
@@ -346,12 +352,12 @@ class DataAsasController extends Controller
                 ]);
 
             }
-            return redirect('/proses_data')->with('warning', 'Sila Kemaskini Surat Balasan');
+            return redirect()->action('DataAsasController@surat_balasan', ['id' => $id])->with('warning', 'Sila Kemaskini Surat Balasan');
         } else {
 
         ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
             "pautan_data" => $request->pautan_data,
-                "tempoh_url" => $request->tempoh,
+            "tempoh_url" => $request->tempoh,
             "total_harga" => $request->total_harga,
         ]);
 
@@ -567,8 +573,22 @@ class DataAsasController extends Controller
         echo json_encode($kategori);
     }
 
-    public function surat_balasan($id)
+    public function surat_balasan($id, Request $request)
     {
+        $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
+
+        ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
+            "pautan_data" => $request->pautan_data,
+            "tempoh_url" => $request->tempoh,
+            "total_harga" => $request->total_harga,
+        ]);
+        foreach ($skdatas as $sk ) {
+            SenaraiKawasanData::where(["id" => $sk->id])->update([
+                "saiz_data" => $request->input('saiz_data_'.$sk->id),
+            ]);
+
+        }
+
         $surat = SuratBalasan::where('permohonan_id', $id)->first();
         $permohonan = MohonData::where('id', $id)->first();
         return view('mygeo.surat_balasan', compact('permohonan','surat'));
@@ -576,7 +596,6 @@ class DataAsasController extends Controller
 
     public function update_surat_balasan(Request $request)
     {
-        DB::transaction(function () use ($request) {
             //save senarai data
             SuratBalasan::where(["permohonan_id" => $request->permohonan_id])->update([
                 "no_rujukan" => $request->no_rujukan,
@@ -590,7 +609,6 @@ class DataAsasController extends Controller
             $at->user_id = Auth::user()->id;
             $at->data = 'Update';
             $at->save();
-        });
         return redirect('proses_data')->with('success', 'Surat Balasan Disimpan');
     }
 
@@ -795,22 +813,7 @@ class DataAsasController extends Controller
                     $dokumen3->save();
                 }
 
-                if(!$valid_user->kategori == 'IPTA - Pelajar' || !$valid_user->kategori == 'IPTS - Pelajar' ) {
-
-                    if($valid_nric->isEmpty()){
-                        $dokumen1 = new DokumenBerkaitan();
-                        $dokumen1->tajuk_dokumen = 'Salinan Kad Pengenalan';
-                        $dokumen1->permohonan_id = $request->permohonan_id;
-                        $dokumen1->save();
-                    }
-
-                    if($valid_undertaking->isEmpty()){
-                        $dokumen2 = new DokumenBerkaitan();
-                        $dokumen2->tajuk_dokumen = 'Borang Undertaking (optional)';
-                        $dokumen2->permohonan_id = $request->permohonan_id;
-                        $dokumen2->save();
-                    }
-                } else {
+                if($valid_user->kategori == 'IPTA - Pelajar' || $valid_user->kategori == 'IPTS - Pelajar' ) {
 
                     if($valid_nric_pel->isEmpty()){
                         $dokumen1 = new DokumenBerkaitan();
@@ -825,6 +828,22 @@ class DataAsasController extends Controller
                         $dokumen2->permohonan_id = $request->permohonan_id;
                         $dokumen2->save();
                     }
+                } else {
+
+                    if($valid_nric->isEmpty()){
+                        $dokumen1 = new DokumenBerkaitan();
+                        $dokumen1->tajuk_dokumen = 'Salinan Kad Pengenalan';
+                        $dokumen1->permohonan_id = $request->permohonan_id;
+                        $dokumen1->save();
+                    }
+
+                    if($valid_undertaking->isEmpty()){
+                        $dokumen2 = new DokumenBerkaitan();
+                        $dokumen2->tajuk_dokumen = 'Borang Undertaking (optional)';
+                        $dokumen2->permohonan_id = $request->permohonan_id;
+                        $dokumen2->save();
+                    }
+
                 }
 
             }
@@ -1050,20 +1069,24 @@ class DataAsasController extends Controller
 
         if ($request->file()) {
 
-            $pdf = new Fpdi();
-            // add a page
-            $pdf->AddPage();
-            // set the source file
-            $pdf->setSourceFile($request->file('file')->path());
-            // import page 1
-            $tplId = $pdf->importPage(1);
-            // use the imported page and place it at point 10,10 with a width of 100 mm
-            $pdf->useTemplate($tplId, 10, 10, 200);
-            //Put the watermark
-            $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
-
             $failNama = time() . '_' . $request->file->getClientOriginalName();
-            $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+            if($request->tajuk_dokumen == 'Salinan Kad Pengenalan' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $request->tajuk_dokumen == 'Salinan Lesen Hak Cipta'){
+                $pdf = new Fpdi();
+                // add a page
+                $pdf->AddPage();
+                // set the source file
+                $pdf->setSourceFile($request->file('file')->path());
+                // import page 1
+                $tplId = $pdf->importPage(1);
+                // use the imported page and place it at point 10,10 with a width of 100 mm
+                $pdf->useTemplate($tplId, 10, 10, 200);
+                //Put the watermark
+                $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
+                $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+
+            } else {
+                $request->file->storeAs('uploads', $failNama, 'public');
+            }
 
             $failModel->tajuk_dokumen = $request->tajuk_dokumen;
             $failModel->nama_fail = $failNama;
@@ -1090,21 +1113,29 @@ class DataAsasController extends Controller
             // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'
         ]);
 
+        $valid_tajuk_dokumen = DokumenBerkaitan::where(["id" => $request->dokumen_id])->first();
+
         if ($request->file()) {
-            $pdf = new Fpdi();
-            // add a page
-            $pdf->AddPage();
-            // set the source file
-            $pdf->setSourceFile($request->file('file')->path());
-            // import page 1
-            $tplId = $pdf->importPage(1);
-            // use the imported page and place it at point 10,10 with a width of 100 mm
-            $pdf->useTemplate($tplId, 10, 10, 200);
-            //Put the watermark
-            $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
 
             $failNama = time() . '_' . $request->file->getClientOriginalName();
-            $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+
+            if($valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Lesen Hak Cipta'){
+                $pdf = new Fpdi();
+                // add a page
+                $pdf->AddPage();
+                // set the source file
+                $pdf->setSourceFile($request->file('file')->path());
+                // import page 1
+                $tplId = $pdf->importPage(1);
+                // use the imported page and place it at point 10,10 with a width of 100 mm
+                $pdf->useTemplate($tplId, 10, 10, 200);
+                //Put the watermark
+                $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
+                $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+
+            } else {
+                $request->file->storeAs('uploads', $failNama, 'public');
+            }
 
             DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
                 "nama_fail" => $failNama,
@@ -1291,8 +1322,15 @@ class DataAsasController extends Controller
 
     public function generate_pdf_surat_balasan(Request $request){
 
-        $suratbalasan = SuratBalasan::where('permohonan_id', $request->permohonan_id)->first();
-        $pdf = PDF::loadView('pdfs.surat_balasan', compact('suratbalasan'));
+        $permohonan = DB::table('users')
+                    ->join('mohon_data','users.id','=','mohon_data.user_id')
+                    ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+                    ->where('mohon_data.id',$request->permohonan_id)
+                    ->select('users.nric','users.alamat','mohon_data.date','mohon_data.id',DB::raw('count(*) as total'),DB::raw('users.name as username'),DB::raw('agensi_organisasi.name as agensi_name'))
+                    ->groupBy('users.nric','users.name','users.alamat','agensi_organisasi.name','mohon_data.date','mohon_data.id')
+                    ->first();
+        $surat = SuratBalasan::where('permohonan_id', $request->permohonan_id)->first();
+        $pdf = PDF::loadView('pdfs.surat_balasan', compact('surat','permohonan'));
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF

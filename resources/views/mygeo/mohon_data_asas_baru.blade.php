@@ -106,10 +106,10 @@
                                             <div class="col-8">
                                                 <?php
                                                 $var = '';
-                                                if (Auth::user()->hasRole(['Pemohon Data'])) {
-                                                    $var = Auth::user()->agensi_organisasi;
+                                                if ($permohonan->users->hasRole(['Pemohon Data'])) {
+                                                    $var = $permohonan->users->agensi_organisasi;
                                                 }else{
-                                                    $var = (isset(Auth::user()->agensiOrganisasi) ? Auth::user()->agensiOrganisasi->name:"");
+                                                    $var = (isset($permohonan->users->agensiOrganisasi) ? $permohonan->users->agensiOrganisasi->name:"");
                                                 }
                                                 ?>
                                                 <input class="form-control form-control-sm ml-3" name="institusi"
@@ -402,7 +402,7 @@
                                     <div class="float-right">
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
 
-                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']) && $permohonan->status != 1)
                                             <button type="button"
                                                 class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
                                                 Hantar
@@ -729,10 +729,10 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
 
-                                            <label for="kategori">Kategori</label>
-                                            <select class="form-control" name="kategori">
+                                            <label class="form-control-label" for="kategori">Kategori</label>
+                                            <select class="form-control" name="kategori" disabled>
                                                 <option selected disabled>Pilih</option>
-                                                @foreach ($senarai_data as $sdata)
+                                                @foreach ($kategori_senarai_data as $sdata)
                                                     <option value="{{ $sdata->kategori }}" @if ($sk->kategori == $sdata->kategori) selected @endif>
                                                         {{ $sdata->kategori }}
                                                     </option>
@@ -740,24 +740,30 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="subKategoriTitle" for="subkategori">Sub-Kategori</label>
+                                            <label class="form-control-label" for="subkategori">Sub-Kategori</label>
                                             <select name="subkategori" class="form-control" autofocus>
                                                 <option selected disabled>Pilih</option>
                                                 @foreach ($senarai_data as $sdata)
-                                                    <option value="{{ $sdata->subkategori }}" @if ($sk->subkategori == $sdata->subkategori) selected @endif>
-                                                        {{ $sdata->subkategori }}
-                                                    </option>
+                                                    @if ($sdata->kategori == $sk->kategori)
+                                                        <option value="{{ $sdata->subkategori }}"
+                                                            @if ($sk->subkategori == $sdata->subkategori) selected @endif>
+                                                            {{ $sdata->subkategori }}
+                                                        </option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-control-label" for="lapisan_data">Lapisan Data</label>
                                             <select name="lapisan_data" class="form-control" autofocus>
-                                                <option selected disabled>Pilih</option>
-                                                @foreach ($senarai_data as $sdata)
-                                                    <option value="{{ $sdata->lapisan_data }}" @if ($sk->lapisan_data == $sdata->lapisan_data) selected @endif>
-                                                        {{ $sdata->lapisan_data }}
-                                                    </option>
+                                                <option disabled>Pilih</option>
+                                                @foreach ($lapisandata as $sdata)
+                                                    @if ($sdata->subkategori == $sk->subkategori)
+                                                        <option value="{{ $sdata->lapisan_data }}"
+                                                            @if ($sk->lapisan_data == $sdata->lapisan_data) selected @endif>
+                                                            {{ $sdata->lapisan_data }}
+                                                        </option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                         </div>

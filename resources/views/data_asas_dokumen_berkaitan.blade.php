@@ -238,7 +238,7 @@
         <p>Bagi permohonan yang melibatkan lapisan <b>data terhad</b>, pemohon perlu memuat naik bersama:</p>
         <p><b>1) Salinan Kad Pengenalan</b></p>
         <p><b>1) Borang PPNM-1 Permohonan Lesen Hak Cipta / Membeli Dokumen Geospatial Secara Terperingkat</b></p>
-        <p><b>1) Borang Undertaking by Appointed Consulted/Contractor</b> (Sekiranya permohonan menguunakan khidmat kontraktor)</p>
+        <p><b>1) Borang Undertaking by Appointed Consulted/Contractor</b> (Sekiranya permohonan menggunakan khidmat kontraktor)</p>
         <p><b>1) Borang Akuan Pelajar</b> (Diisi melalui sistem melalui Pemohon Data memilih kategori Pelajar)</p>
         <br>
         <h3>MUAT TURUN BORANG DAN CONTOH SURAT RASMI PERMOHONAN DATA-DATA ASAS</h3>

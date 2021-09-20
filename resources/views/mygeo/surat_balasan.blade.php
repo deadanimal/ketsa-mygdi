@@ -36,7 +36,11 @@
                             </nav>
                         </div>
                         <div class="col-lg-6 col-5 text-right">
-
+                            <form action="{{ url('api/dokumen/surat_balasan') }}" method="POST" target="_blank">
+                                @csrf
+                                <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                <button type=submit class="btn btn-sm btn-primary mt-2">Cetak PDF</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -84,9 +88,9 @@
                                         <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
                                             placeholder="Tajuk Surat Balasan Permohonan" value="{{$surat->tajuk_surat}}">
 
-                                        <span class="form-inline">Dengan segala hormatnya merujuk kepada surat tuan/puan <i class="mx-2"> JPBD.Tr 1/1572/8(27) </i>
+                                        <span class="form-inline">Dengan segala hormatnya merujuk kepada surat tuan/puan <i class="mx-2"> JPBD.Tr 1/1572/8({{$permohonan->id}}) </i>
                                             <input type="hidden" class="form-control form-control-sm col-3 mx-1"
-                                                name="no_rujukan_mohon" value="JPBD.Tr 1/1572/8(27)">
+                                                name="no_rujukan_mohon" value="JPBD.Tr 1/1572/8({{$permohonan->id}})">
                                             bertarikh
                                             <span class="mx-2">{{ Carbon\Carbon::parse($permohonan->date)->format('d M Y') }}</span>
                                             mengenai perkara di atas.</span><br><br>
