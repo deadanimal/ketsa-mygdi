@@ -59,11 +59,11 @@
                                 <table id="laporan_perincian" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th style="width: 30%;">BIL</th>
+                                            <th>BIL</th>
                                             <th>TAJUK LAPORAN</th>
-                                            <th>PERINCIAN MAKLUMAT METADATA</th>
                                             <th>STATUS PENERBITAN METADATA</th>
                                             <th>TARIKH PENJANAAN LAPORAN</th>
+                                            <th>PERINCIAN MAKLUMAT METADATA</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -80,13 +80,6 @@
                                                     }
                                                     echo $title;
                                                     ?>
-                                                </td>
-                                                <td>
-                                                    <form action='{{ url('lihat_metadata_nologin') }}' method='POST'>
-                                                        @csrf
-                                                        <input type='hidden' name='metadata_id' value='{{ $key }}'>
-                                                        <button type="submit" class="btn btn-sm btn-primary mr-2">Perincian</button>
-                                                    </form>
                                                 </td>
                                                 <td>
                                                     <?php
@@ -106,6 +99,13 @@
                                                     ?>
                                                 </td>
                                                 <td>{{ date('d/m/Y',strtotime($val[1]->changedate)) }}</td>
+                                                <td>
+                                                    <form action='{{ url('lihat_metadata_nologin') }}' method='POST'>
+                                                        @csrf
+                                                        <input type='hidden' name='metadata_id' value='{{ $key }}'>
+                                                        <button type="submit" class="btn btn-sm btn-primary mr-2">Perincian</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -436,6 +436,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'Laporan Perincian Permohonan Metadata',
                     }
@@ -478,6 +479,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
                     }
@@ -522,6 +524,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
                     }
@@ -563,6 +566,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
                     }
@@ -604,6 +608,7 @@
                     },
                     {
                         extend: 'print',
+                        text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
                     }

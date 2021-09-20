@@ -72,16 +72,17 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
-                                            @if(isset($permohonan->users))
+                                            @if (isset($permohonan->users))
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $permohonan->name }}</td>
                                                     <td>{{ $permohonan->users->name }}</td>
                                                     <td>{{ $permohonan->users->kategori }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}
+                                                    </td>
                                                     <td>
-                                                        <a href="{{ url('lihat_permohonan/'.$permohonan->id) }}"
-                                                        class="btn btn-sm btn-success text-center">Semak</a>
+                                                        <a href="{{ url('lihat_permohonan/' . $permohonan->id) }}"
+                                                            class="btn btn-sm btn-success text-center">Semak</a>
                                                         <button type="button" data-permohonanid="{{ $permohonan->id }}"
                                                             class="btnDelete btn btn-sm btn-danger mr-2"><i
                                                                 class="fas fa-trash"></i></button>
@@ -102,6 +103,10 @@
     <script>
         $(document).ready(function() {
             $("#table_metadatas").DataTable({
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,

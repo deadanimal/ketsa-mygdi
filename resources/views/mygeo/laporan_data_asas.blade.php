@@ -7,6 +7,9 @@
             display: inline;
             width: auto;
         }
+        th,td{
+            width: fit-content;
+        }
 
     </style>
 
@@ -57,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="card-body" style="overflow-x:auto;">
-                                <table id="laporan_perincian" class="display table table-bordered table-striped">
+                                <table id="laporan_perincian" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -71,7 +74,7 @@
                                         <?php $counter = 0; ?>
                                         @foreach ($permohonans as $mohon)
                                             @if (isset($mohon->users))
-                                            <?php $counter++; ?>
+                                                <?php $counter++; ?>
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->name }}</td>
@@ -110,7 +113,8 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan Keseluruhan Permohonan Data </h4>
-                                <table id="laporan_seluruh" class="display table table-bordered table-striped" style="width:100%;">
+                                <table id="laporan_seluruh" class="display table table-bordered table-striped"
+                                    style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -128,12 +132,12 @@
                                         <?php $counter = 0; ?>
                                         @foreach ($permohonans as $mohon)
                                             @if (isset($mohon->users))
-                                            <?php $counter++; ?>
+                                                <?php $counter++; ?>
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
-                                                        {{$mohon->users->agensiOrganisasi->name}}
+                                                        {{ $mohon->users->agensiOrganisasi->name }}
                                                     </td>
                                                     <td>{{ $mohon->users->kategori }}</td>
                                                     <td>
@@ -168,7 +172,8 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan permohonan data yang telah diluluskan </h4>
-                                <table id="laporan_lulus" class="display table table-bordered table-striped" style="width:100%;">
+                                <table id="laporan_lulus" class="display table table-bordered table-striped"
+                                    style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -181,12 +186,12 @@
                                         <?php $counter = 0; ?>
                                         @foreach ($permohonan_lulus as $mohon)
                                             @if (isset($mohon->users))
-                                            <?php $counter++; ?>
+                                                <?php $counter++; ?>
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
-                                                        {{$mohon->users->agensiOrganisasi->name}}
+                                                        {{ $mohon->users->agensiOrganisasi->name }}
                                                     </td>
                                                     <td>{{ $mohon->users->kategori }}</td>
                                                 </tr>
@@ -218,7 +223,7 @@
                                                     <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->username }}</td>
                                                     <td>{{ $mohon->name }}</td>
-                                                    <td>{{ $mohon->kategori}}</td>
+                                                    <td>{{ $mohon->kategori }}</td>
                                                     <td>{{ $mohon->total }}</td>
                                                 </tr>
                                             @endforeach
@@ -246,7 +251,7 @@
                                         <tbody>
                                             <?php $counter = 0; ?>
                                             @foreach ($permohonan_statistik as $mohon)
-                                            <?php $counter++; ?>
+                                                <?php $counter++; ?>
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>{{ $mohon->agensi_name }}</td>

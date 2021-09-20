@@ -18,7 +18,7 @@ class CreateMohonDataTable extends Migration
 
             $table->string('name');
             $table->timestamp('date');
-            $table->text('tujuan');
+            $table->text('tujuan')->nullable();
             $table->string('dihantar')->nullable();
             $table->string('status')->nullable();
             $table->string('download')->nullable();
