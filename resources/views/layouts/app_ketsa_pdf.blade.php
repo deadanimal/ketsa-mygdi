@@ -109,7 +109,7 @@
     </style>
 </head>
 
-<body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0">
+<body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0" style="height: auto;width:1400px;">
     <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark"
         style="background-color: #0563bb;">
         <div class="container-fluid">
