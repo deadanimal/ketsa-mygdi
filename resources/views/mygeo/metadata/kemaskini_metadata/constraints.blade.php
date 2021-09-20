@@ -50,6 +50,7 @@
                                 }
                                 ?>
                                 <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm">
+                                    <option value="">Pilih...</option>
                                     <option value="Copyright" {{($accessConst == 'Copyright' ? "selected":"")}}>Copyright</option>
                                     <option value="Intellectual Property Rights" {{($accessConst == 'Intellectual Property Rights' ? "selected":"")}}>Intellectual Property Rights</option>
                                     <option value="License" {{($accessConst == 'License' ? "selected":"")}}>License</option>
@@ -80,6 +81,7 @@
                                 }
                                 ?>
                                 <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm">
+                                    <option value="">Pilih...</option>
                                     <option value="Copyright" {{($useConst == 'Copyright' ? "selected":"")}}>Copyright</option>
                                     <option value="Intellectual Property Rights" {{($useConst == 'Intellectual Property Rights' ? "selected":"")}}>Intellectual Property Rights</option>
                                     <option value="License" {{($useConst == 'License' ? "selected":"")}}>License</option>
@@ -116,6 +118,7 @@
                                 }
                                 ?>
                                 <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
+                                    <option value="">Pilih...</option>
                                     <option value="Confidential" {{($classSys == 'Confidential' ? "selected":"")}}>Confidential</option>
                                     <option value="For Official Use Only" {{($classSys == 'For Official Use Only' ? "selected":"")}}>For Official Use Only</option>
                                     <option value="Limited Distribution" {{($classSys == 'Limited Distribution' ? "selected":"")}}>Limited Distribution</option>

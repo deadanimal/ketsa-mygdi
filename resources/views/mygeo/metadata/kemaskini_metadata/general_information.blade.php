@@ -146,6 +146,7 @@
                         }
                         ?>
                         <select name='publisher_role' class='form-control form-control-sm ml-3'>
+                            <option value="">Pilih...</option>
                             <option value="Author" {{ ($pub_role == "Author" ? "selected":"") }}>Author</option>
                             <option value="Custodian" {{ ($pub_role == "Custodian" ? "selected":"") }}>Custodian</option>
                             <option value="Distributor" {{ ($pub_role == "Distributor" ? "selected":"") }}>Distributor</option>

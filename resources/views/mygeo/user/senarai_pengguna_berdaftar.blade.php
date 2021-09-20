@@ -105,7 +105,7 @@
                                             <div class="col-12">
                                                 <label class="form-control-label">Agensi / Organisasi</label><span class="text-warning">*</span>
                                                 <select name="agensi_organisasi" id="agensi_organisasi_dropdown" class="form-control form-control-sm">
-                                                    <!--<option value="">Pilih...</option>-->
+                                                    <option value="">Pilih...</option>
                                                     <?php
                                                     if (!empty($aos)) {
                                                         foreach ($aos as $ao) {
@@ -184,13 +184,13 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>
                                                     <?php
-                                                    if($user->hasRole(['Pemohon Data'])) {
+                                                    if(!is_numeric($user->agensi_organisasi)) {
                                                         ?>
                                                         {{ $user->agensi_organisasi }}
                                                         <?php
                                                     }else{
                                                         ?>
-                                                        {{ (isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name:"") }}
+                                                        {{ (isset($user->agensiOrganisasi) ? $user->agensiOrganisasi->name:"") }}
                                                         <?php
                                                     }
                                                     ?>

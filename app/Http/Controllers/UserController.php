@@ -379,6 +379,33 @@ class UserController extends Controller {
     }
 
     public function update_profile(Request $request){
+        $fields = [
+            "uname" => 'required',
+            "nric" => 'required',
+            "agensi_organisasi" => 'required',
+            "phone_pejabat" => 'required',          
+        ];
+        if(Auth::user()->email != $request->email){
+            $fields["email"]= 'required|unique:App\User,email';
+        }
+        if(Auth::user()->hasRole('Pemohon Data')){
+            $fields["phone_bimbit"]= 'required';
+        }else{
+            $fields["bahagian"] = 'required';
+            $fields["sektor"] = 'required';
+        }
+        $customMsg = [
+            "uname.required" => 'Name required',
+            "nric.required" => 'NRIC required',
+            "sektor.required" => 'Sektor required',
+            "agensi_organisasi.required" => 'Agensi/Organisasi required',
+            "bahagian.required" => 'Bahagian required',
+            "email.required" => 'Email required',
+            "phone_pejabat.required" => 'Phone Pejabat required',
+            "phone_bimbit.required" => 'Phone Bimbit required',
+        ];
+        $this->validate($request, $fields, $customMsg);
+        
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
@@ -489,7 +516,12 @@ class UserController extends Controller {
     }
 
     public function getUsersByAgensi(Request $request){
-        $usersByAgensi = User::where(['agensi_organisasi'=>$request->agensi])->get();
+        $agensiOrg = AgensiOrganisasi::where('name',$request->agensi)->get();
+        $agensiOrgFixed = [];
+        foreach($agensiOrg as $ao){
+            $agensiOrgFixed[] = $ao->id;
+        }
+        $usersByAgensi = User::whereIn('agensi_organisasi',$agensiOrgFixed)->get();
         $usersByPenerbit = '<option selected disabled>Pilih</option>';
         foreach($usersByAgensi as $uba){
             if($uba->hasRole('Penerbit Metadata')){
@@ -523,9 +555,10 @@ class UserController extends Controller {
             }
             //metadata name
             $name = "";
-            if(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                $name = trim($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString);
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $name = trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
             }
+            
             //status
             $status = "";
             if($met->disahkan == '0'){
@@ -598,17 +631,11 @@ class UserController extends Controller {
         $password = "";
 
         $sektor = "";
-        if($request->agensi_organisasi != ""){
+        if($request->agensi_organisasi != "" && $request->peranan != "Pemohon Data"){
             $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
             $sektor = $ao->sektor;
         }
-
-        $sektor = "";
-        if($request->agensi_organisasi != ""){
-            $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
-            $sektor = $ao->sektor;
-        }
-
+        
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;

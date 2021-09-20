@@ -70,7 +70,7 @@
                                                         if (isset($agensi) && count($agensi) > 0) {
                                                             foreach ($agensi as $a) {
                                                                 ?>
-                                                                <option value="{{ $a->id }}">{{ $a->name }}</option>
+                                                                <option value="{{ $a->name }}">{{ $a->name }}</option>
                                                         <?php
                                                             }
                                                         }

@@ -472,7 +472,7 @@
                             <div class="col-3 px-0">
                                 <select name="c2_contact_state" id="c2_contact_state"
                                     class="form-control form-control-sm">
-                                    <option selected disabled>Select State</option>
+                                    <option selected disabled>Pilih...</option>
                                     <?php
                                     if (count($states) > 0) {
                                         foreach ($states as $st) {
@@ -497,7 +497,7 @@
                             <div class="col-3 px-0">
                                 <select name="c2_contact_country" id="c2_contact_country"
                                     class="form-control form-control-sm">
-                                    <option selected disabled>Select Country</option>
+                                    <option selected disabled>Pilih...</option>
                                     <?php
                                 if (count($countries) > 0) {
                                     foreach ($countries as $country) {
@@ -583,7 +583,7 @@
                     </div>
                     <div class="col-6">
                         <select name="c2_contact_role" id="c2_contact_role" class="form-control form-control-sm ml-3">
-                            <option value="">Pilih...
+                            <option value="">Pilih...</option>
                             <option value="Author" {{ old('c2_contact_role') == 'Author' ? 'selected' : '' }}>Author
                             </option>
                             <option value="Co Author" {{ old('c2_contact_role') == 'Co Author' ? 'selected' : '' }}>

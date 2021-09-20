@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-xl-3">
                         <select class="form-control form-control-sm" id="c12_dataset_type" name="c12_dataset_type">
-                            <option selected disabled hidden> Select Type </option>
+                            <option selected disabled>Pilih...</option>
                             <option value="Grid">Grid</option>
                             <option value="Stereo Model">Stereo Model</option>
                             <option value="Text Table">Text Table</option>
@@ -36,7 +36,7 @@
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy" data-toggle="tooltip" title="Pengisian butiran skala (sekiranya ada). Contoh skala 1:50,000">
                             <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
-                            <span style="font-size: smaller;"><?php echo __('lang.feature_scale'); ?></span>
+                            <span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span>
                         </label>
                     </div>
                     <div class="col-xl-2">
@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-xl-2">
                         <select class="form-control form-control-sm" name="c12_language" id="c12_language">
-                            <option selected disabled hidden> Language </option>
+                            <option selected disabled>Pilih...</option>
                             <option value="English" {{(old('c12_language') == 'English' ? "selected":"")}}>English</option>
                             <option value="Bahasa Malaysia" {{(old('c12_language') == 'Bahasa Malaysia' ? "selected":"")}}>Bahasa Malaysia</option>
                         </select>

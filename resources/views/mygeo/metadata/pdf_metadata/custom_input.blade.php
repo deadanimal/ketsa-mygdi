@@ -2,7 +2,7 @@
     <div class="card-header">
         <h4 class="card-title">
             <a data-toggle="collapse" href="#collapse16">
-                CUSTOM INPUT
+                <?php echo __('lang.accord_16'); ?>
             </a>
         </h4>
     </div>

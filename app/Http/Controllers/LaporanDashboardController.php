@@ -107,8 +107,6 @@ class LaporanDashboardController extends Controller
                                 ->get();
         // dd($permohonan_kategori);
 
-
-
         //JUMLAH METADATA YANG TELAH DITERBITKAN
         if(Auth::user()->hasRole('Pemohon Data')){
             $agencyName = Auth::user()->agensi_organisasi;
@@ -118,26 +116,58 @@ class LaporanDashboardController extends Controller
         $metadataTerbit = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%>'.$agencyName.'<%')->get());
 
         //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
+//        $metadataTerbitByAgency = [];
+//        $metadataTerbitByAgencyKeys = [];
+//        $metadataTerbitByAgencyVals = [];
+//        $agencies = User::all();
+//        $agencyIds = $agencies->groupBy('agensi_organisasi');
+//        foreach($agencyIds as $key=>$val){
+//            $count = 0;
+//            $idsToSearch = [];
+//            $agencyName = "";
+//            foreach($val as $user){
+//                $userRoles = explode(',',$user->assigned_roles);
+//                if(!in_array('Pemohon Data',$userRoles)){
+//                    $agencyName = $user->agensiOrganisasi->name;
+//                }else{
+//                    break 2;
+//                }
+//                $idsToSearch[] = $user->id;
+//            }
+//            $count = count(MetadataGeo::on('pgsql2')->whereIn('portal_user_id',$idsToSearch)->get());
+//            $metadataTerbitByAgency[$agencyName] = $count;
+//            $metadataTerbitByAgencyKeys[] = $agencyName;
+//            $metadataTerbitByAgencyVals[] = $count;
+//        }
+        
+        //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
         $metadataTerbitByAgency = [];
         $metadataTerbitByAgencyKeys = [];
         $metadataTerbitByAgencyVals = [];
+        $agencyBhgnsToSearch = [];
         $agencies = User::all();
         $agencyIds = $agencies->groupBy('agensi_organisasi');
-        foreach($agencyIds as $ai){
-            $count = 0;
-            $idsToSearch = [];
-            $agencyName = "";
-            foreach($ai as $user){
-                if(!$user->hasRole('Pemohon Data')){
-                    $agencyName = $user->agensiOrganisasi->name;
-                }else{
-                    break 2;
+        $idsToSearch = [];
+        foreach($agencyIds as $key=>$val){
+            foreach($val as $user){
+                $userRoles = explode(",",$user->assigned_roles);
+                if(in_array('Pemohon Data',$userRoles)){
+                    break;
                 }
-                $idsToSearch[] = $user->id;
+                if(trim($user->bahagian) == ""){
+                    $var = $user->agensiOrganisasi->name;
+                }else{
+                    $var = $user->agensiOrganisasi->name.' ('.$user->bahagian.')';
+                }
+                $idsToSearch[$var][] = $user->id;
             }
-            $count = count(MetadataGeo::on('pgsql2')->whereIn('portal_user_id',$idsToSearch)->get());
-            $metadataTerbitByAgency[$agencyName] = $count;
-            $metadataTerbitByAgencyKeys[] = $agencyName;
+        }
+        foreach($idsToSearch as $key=>$val){
+            $count = 0;
+            foreach($val as $userid){
+                $count += count(MetadataGeo::on('pgsql2')->where('portal_user_id',$userid)->get());
+            }
+            $metadataTerbitByAgencyKeys[] = $key;
             $metadataTerbitByAgencyVals[] = $count;
         }
 
@@ -201,7 +231,7 @@ class LaporanDashboardController extends Controller
             $metadataByTopicCategory[$key] = $metadatas;
         }
 
-        return view('mygeo.dashboard', compact('permohonan_kategori','total_permohonan','total_permohonan_lulus','total_permohonan_tolak','permohonans'));
+        return view('mygeo.dashboard', compact('total_permohonan','total_permohonan_lulus','total_permohonan_tolak','metadataTerbit','metadataTerbitByAgency','metadataTerbitByAgencyKeys','metadataTerbitByAgencyVals','metadataBelumTerbit','metadataByCategory','metadataByCategoryKeys','metadataByCategoryVals','metadataByYear','metadataByYearKeys','metadataByYearVals','metadataByTopicCategory','permohonan_kategori','permohonans'));
     }
 
     public function generate_pdf_laporan_perincian_data(Request $request){

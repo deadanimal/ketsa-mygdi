@@ -32,6 +32,7 @@
                         }
                         ?>
                         <select name="c15_data_quality_info" id="c15_data_quality_info" style="max-width: 100%;" class="form-control form-control-sm">
+                            <option value="">Pilih...</option>
                             <option value="Attribute" {{($dqScope == 'Attribute' ? "selected":"")}}>Attribute</option>
                             <option value="Attribute Type" {{($dqScope == 'Attribute Type' ? "selected":"")}}>Attribute Type</option>
                             <option value="Collection Session" {{($dqScope == 'Collection Session' ? "selected":"")}}>Collection Session</option>
@@ -145,6 +146,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t1_scope" id="c15_t1_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t1Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t1Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t1Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -206,6 +208,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t1_result" id="c15_t1_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t1Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t1Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t1Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -243,6 +246,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t1_scope_2" id="c15_t1_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t1Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t1Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t1Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -304,6 +308,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t1_result_2" id="c15_t1_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t1Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t1Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t1Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -381,6 +386,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t2_scope" id="c15_t2_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t2Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t2Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t2Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -442,6 +448,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t2_result" id="c15_t2_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t2Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t2Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t2Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -479,6 +486,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t2_scope_2" id="c15_t2_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t2Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t2Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t2Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -540,6 +548,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t2_result_2" id="c15_t2_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t2Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t2Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t2Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -577,6 +586,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t2_scope_3" id="c15_t2_scope_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t2Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t2Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t2Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -638,6 +648,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t2_result_3" id="c15_t2_result_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t2Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t2Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t2Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -675,6 +686,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t2_scope_4" id="c15_t2_scope_4" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t2Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t2Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t2Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -736,6 +748,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t2_result_4" id="c15_t2_result_4" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t2Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t2Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t2Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -808,6 +821,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t3_scope" id="c15_t3_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t3Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t3Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t3Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -869,6 +883,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t3_result" id="c15_t3_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t3Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t3Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t3Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -906,6 +921,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t3_scope_2" id="c15_t3_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t3Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t3Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t3Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -967,6 +983,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t3_result_2" id="c15_t3_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{(old('c15_t3_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{(old('c15_t3_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{(old('c15_t3_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1004,6 +1021,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t3_scope_3" id="c15_t3_scope_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t3Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t3Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t3Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1065,6 +1083,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t3_result_3" id="c15_t3_result_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t3Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t3Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t3Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1137,6 +1156,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t4_scope" id="c15_t4_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t4Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t4Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t4Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1198,6 +1218,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t4_result" id="c15_t4_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t4Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t4Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t4Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1235,6 +1256,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t4_scope_2" id="c15_t4_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t4Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t4Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t4Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1296,6 +1318,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t4_result_2" id="c15_t4_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t4Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t4Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t4Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1333,6 +1356,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t4_scope_3" id="c15_t4_scope_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t4Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t4Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t4Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1394,6 +1418,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t4_result_3" id="c15_t4_result_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t4Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t4Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t4Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1467,6 +1492,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t5_scope" id="c15_t5_scope" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t5Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t5Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t5Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1528,6 +1554,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t5_result" id="c15_t5_result" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t5Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t5Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t5Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1566,6 +1593,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t5_scope_2" id="c15_t5_scope_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t5Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t5Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t5Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1627,6 +1655,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t5_result_2" id="c15_t5_result_2" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t5Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t5Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t5Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
@@ -1665,6 +1694,7 @@
                                                                 ?>
                                                                 <b>Scope:</b>
                                                                 <select name="c15_t5_scope_3" id="c15_t5_scope_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Aeronautical" {{($t5Scope == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                     <option value="Built Environment" {{($t5Scope == 'Built Environment' ? "selected":"")}}>Built Environment</option>
                                                                     <option value="Demarcation" {{($t5Scope == 'Demarcation' ? "selected":"")}}>Demarcation</option>
@@ -1726,6 +1756,7 @@
                                                                 ?>
                                                                 <b>Result:</b>
                                                                 <select name="c15_t5_result_3" id="c15_t5_result_3" class="form-control form-control-sm">
+                                                                    <option value="">Pilih...</option>
                                                                     <option value="Pass" {{($t5Res == 'Pass' ? "selected":"")}}>Pass</option>
                                                                     <option value="Fail" {{($t5Res == 'Fail' ? "selected":"")}}>Fail</option>
                                                                     <option value="Not Relevant" {{($t5Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>

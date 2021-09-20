@@ -177,7 +177,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/berjayaMuatTurun', 'DataAsasController@berjayaMuatTurun');
     Route::post('/api/dokumen/akuan_pelajar', 'DataAsasController@generate_pdf_akuan_pelajar');
 
-
     Route::get('/surat_balasan/{id}','DataAsasController@surat_balasan');
     Route::post('/simpan_surat_balasan', 'DataAsasController@update_surat_balasan');
     Route::post('/api/dokumen/surat_balasan', 'DataAsasController@generate_pdf_surat_balasan');
@@ -237,6 +236,7 @@ Route::get('/send-mail', function () {
 
 Route::post('get_roles','RoleController@get_roles');
 Route::post('get_user_details','UserController@get_user_details');
+Route::post('get_custom_input_details','MetadataController@get_custom_input_details');
 Route::post('user_sahkan','UserController@user_sahkan');
 Route::post('user_pengesahan_ditolak','UserController@user_pengesahan_ditolak');
 Route::post('metadata_sahkan','MetadataController@metadata_sahkan');
@@ -250,6 +250,7 @@ Route::post('simpan_tajuk','MetadataController@simpan_tajuk');
 Route::post('simpan_sub_tajuk','MetadataController@simpan_sub_tajuk');
 Route::post('simpan_elemen','MetadataController@simpan_elemen');
 Route::post('simpan_custom_input','MetadataController@simpan_custom_input');
+Route::post('simpan_kemaskini_custom_input','MetadataController@simpan_kemaskini_custom_input');
 Route::post('simpan_agensi_organisasi','PortalController@simpan_agensi_organisasi');
 Route::post('simpan_bahagian','PortalController@simpan_bahagian');
 Route::post('get_agensi_organisasi_by_sektor','PortalController@get_agensi_organisasi_by_sektor');

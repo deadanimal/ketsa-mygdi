@@ -59,6 +59,17 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="col-12 my-2">
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+                            </div>
                         </div>
                         <div class="card-body">
                             <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil">

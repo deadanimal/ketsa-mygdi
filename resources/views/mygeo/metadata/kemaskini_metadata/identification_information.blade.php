@@ -27,6 +27,8 @@
                                     } else {
                                         echo 'Metadata Name';
                                     }
+                                }else{
+                                    echo 'Title';
                                 }
                                 ?>
                                 <span class="text-warning">*</span>
@@ -572,7 +574,7 @@
                                     <div class="col-3 px-0">
                                         <select name="c2_contact_state" id="c2_contact_state"
                                             class="form-control form-control-sm">
-                                            <option disabled>Select State</option>
+                                            <option disabled>Pilih...</option>
                                             <?php
                                             $respState = '';
                                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != '') {
@@ -606,7 +608,7 @@
                                     <div class="col-3 px-0">
                                         <select name="c2_contact_country" id="c2_contact_country"
                                             class="form-control form-control-sm ml-4">
-                                            <option selected disabled>Select Country</option>
+                                            <option selected disabled>Pilih...</option>
                                             <?php
                                 foreach ($countries as $country) {
                                     if ($country->id == $countrySelected->id) {

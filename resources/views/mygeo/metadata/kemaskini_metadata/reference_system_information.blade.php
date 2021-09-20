@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-xl-3">
                     <select class="form-control form-control-sm" name="c13_ref_sys_identify" id="c13_ref_sys_identify" readonly>
-                        <option selected disabled>Select Identifier</option>
+                        <option selected disabled>Pilih...</option>
                         <?php
                         if (count($refSys) > 0) {
                             foreach ($refSys as $ids) {

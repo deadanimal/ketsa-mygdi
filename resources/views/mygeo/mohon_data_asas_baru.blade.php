@@ -106,10 +106,10 @@
                                             <div class="col-8">
                                                 <?php
                                                 $var = '';
-                                                if ($user->hasRole(['Pemohon Data'])) {
-                                                    $var = $user->agensi_organisasi;
-                                                } else {
-                                                    $var = isset($user->agensiOrganisasi->name) ? $user->agensiOrganisasi->name : '';
+                                                if ($permohonan->users->hasRole(['Pemohon Data'])) {
+                                                    $var = $permohonan->users->agensi_organisasi;
+                                                }else{
+                                                    $var = (isset($permohonan->users->agensiOrganisasi) ? $permohonan->users->agensiOrganisasi->name:"");
                                                 }
                                                 ?>
                                                 <input class="form-control form-control-sm ml-3" name="institusi"
@@ -319,8 +319,7 @@
                                                         @endif
 
                                                         @if (!$dokumen->file_path == null)
-
-                                                            <a href="{{ $dokumen->file_path }}" target="_blank">
+                                                            <a href="{{ url('/').$dokumen->file_path }}" target="_blank">
                                                                 <button type="button"
                                                                     class="btn btn-sm btn-success mr-2">Lihat</button>
                                                             </a>

@@ -1293,16 +1293,28 @@ class DataAsasController extends Controller
     }
 
     public function generate_pdf_akuan_pelajar(Request $request){
-
+// $permohonan = DB::table('users')
+        //             ->join('mohon_data','users.id','=','mohon_data.user_id')
+        //             ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+        //             ->where('mohon_data.id',$request->permohonan_id)
+        //             ->select('users.nric','users.alamat','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'),DB::raw('agensi_organisasi.name as agensi_name'))
+        //             ->groupBy('users.nric','users.name','users.alamat','agensi_organisasi.name','mohon_data.date')
+        //             ->first();
         $permohonan = DB::table('users')
                     ->join('mohon_data','users.id','=','mohon_data.user_id')
-                    ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
                     ->where('mohon_data.id',$request->permohonan_id)
-                    ->select('users.nric','users.alamat','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'),DB::raw('agensi_organisasi.name as agensi_name'))
-                    ->groupBy('users.nric','users.name','users.alamat','agensi_organisasi.name','mohon_data.date')
+                    ->select('users.nric','users.alamat','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'))
+                    ->groupBy('users.nric','users.name','users.alamat','mohon_data.date')
                     ->first();
+        $user = User::where('nric',$permohonan->nric)->get()->first();
+        if($user->hasRole('Pemohon Data')){
+            $agensi_name = $user->agensi_organisasi;
+        }else{
+            $agensi_name = $user->agensiOrganisasi->name;
+        }
+        // $permohonan = MohonData::where('id', $request->permohonan_id)->first();
         $akuan = AkuanPelajar::where('permohonan_id', $request->permohonan_id)->first();
-        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan'));
+        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan','agensi_name'));
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF

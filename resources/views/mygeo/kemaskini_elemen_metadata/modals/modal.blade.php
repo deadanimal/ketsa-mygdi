@@ -210,12 +210,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="name">Nama:</label>
-                                    <input type="text" name="name" class="form-control kategori">
+                                    <label for="name">Nama EN:</label>
+                                    <input type="text" name="name" class="form-control name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name_bm">Nama BM:</label>
+                                    <input type="text" name="name_bm" class="form-control name_bm">
                                 </div>
                                 <div class="form-group">
                                     <label for="kategori">Kategori:</label>
-                                    <select name="kategori" class="form-control kategori">
+                                    <select name="kategori" class="form-control thekategori">
                                         <option value="">Pilih...</option>
                                         @foreach($categories as $cat)
                                             <option value="{{ $cat-> id }}">{{ $cat->name }}</option>
@@ -254,7 +258,35 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between1">
-                    <button type="button" class="btn btn-primary btnSimpan" data-dismiss="modal">Simpan</button>
+                    <button type="button" class="btn btn-primary btnSimpan">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalKemaskiniCustomInput">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Kemaskini Custom Input</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formKemaskiniCustomInput" method="POST" action="{{ url('simpan_kemaskini_custom_input') }}" class="theForm">
+                @csrf
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 ajaxHtml">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between1">
+                    <button type="button" class="btn btn-primary btnSimpan">Simpan</button>
                 </div>
             </form>
         </div>

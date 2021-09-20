@@ -11,6 +11,7 @@ class CustomMetadataInput extends Model
 
     protected $fillable = [
         'name',
+        'name_bm',
         'data_type',
         'data',
         'mandatory',

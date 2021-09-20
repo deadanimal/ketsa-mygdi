@@ -287,8 +287,8 @@
         </div>
     </section>
 </div>
-
-@if(Session::has('message')) //apparently sweetalert is configured to auto-read and auto-display sessions with name 'message'
+<?php //apparently sweetalert is configured to auto-read and auto-display sessions with name 'message' ?>
+@if(Session::has('message'))
     <script>//alert("{{ Session::get('message') }}");</script>
 @endif
 

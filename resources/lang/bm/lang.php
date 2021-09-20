@@ -19,6 +19,7 @@
     'accord_13'=> 'MAKLUMAT SISTEM RUJUKAN',
     'accord_14'=> 'KEKANGAN',
     'accord_15'=> 'KUALITI DATA',
+    'accord_16'=> 'ELEMEN TAMBAHAN',
 
     //WANI: contoh formatting seperti di bawah: (add je berapa byk yg diperlukan, nnti sy just copy paste)
     'nama_label_tanpa_space/jarak'=> 'perkataan yg perlu display',
@@ -144,6 +145,7 @@
     'spatial_data_set_type'=>'Jenis Set Data Spatial',
     'dataSetResolution'=>'PENYELESAIAN SET DATA',
     'scale_in_hardcopy_softcopy'=>'Skala dalam Hardcopy/ Softcopy (skala ciri)',
+    'features_scale'=>'(skala ciri)',
     'image_resolution'=>'Resolusi Gambar (GSD)',
     'data_set_language'=>'Bahasa Data Set',
     'maintenanceInfomation'=>'MAKLUMAT PENYELENGGARAAN',
