@@ -29,7 +29,7 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
 //        dd(Hash::make('farhan.rimfiel@pipeline-network.comM2'));
-
+ 
         if ($_SERVER['HTTP_HOST'] != "localhost:8888") {
             if (!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == "") {
                 return redirect('/login')->with(['msg' => 'Sila lengkapkan reCaptcha']);

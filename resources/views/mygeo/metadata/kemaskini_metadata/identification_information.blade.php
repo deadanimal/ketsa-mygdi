@@ -44,7 +44,7 @@
                             }
                             ?>
                             <input type="text" name="c2_metadataName" id="c2_metadataName"
-                                class="form-control form-control-sm ml-3" value="{{ $met_name }}">
+                                class="form-control form-control-sm " value="{{ $met_name }}">
                             <input type="hidden" name="c2_saveAsNew" id="c2_saveAsNew" value="no">
                             @error('c2_metadataName')
                                 <div class="text-error">{{ $message }}</div>
@@ -55,8 +55,8 @@
                 @if ($elemenMetadata['c2_product_type']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3">
-                            <label class="form-control-label mr-4" for="c2_metadataName">
-                                Type of Product<span class="text-warning">*</span>
+                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Pemilihan jenis abstrak">
+                            <?php echo __('lang.type_of_product'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
@@ -66,7 +66,7 @@
                                 $typeofProd = trim($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString);
                             }
                             ?>
-                            <select name="c2_product_type" id="c2_product_type" class="form-control form-control ml-3">
+                            <select name="c2_product_type" id="c2_product_type" class="form-control form-control">
                                 <option value="" selected>Pilih...</option>
                                 <option value="Application" {{ $typeofProd == 'Application' ? 'selected' : '' }}>
                                     Application</option>
@@ -114,7 +114,7 @@
                             }
                             ?>
                             <input type="text" name="c10_file_url"
-                                class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest"
+                                class="form-control form-control-sm  inputIdentificationInformationUrl urlToTest"
                                 value="{{ $url }}">
                         </div>
                         <div class="col-1">
@@ -142,7 +142,7 @@
                         }
                         ?>
                         <textarea name="c2_abstract" id="c2_abstract"
-                            class="form-control form-control-sm ml-3">{{ $abstract }}</textarea>
+                            class="form-control form-control-sm ">{{ $abstract }}</textarea>
                         @error('c2_abstract')
                             <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -152,8 +152,8 @@
                 @if ($elemenMetadata['c2_metadataDate']->status == '1')
                     <div class="row mb-2 divMetadataDate">
                         <div class="col-3">
-                            <label class="form-control-label mr-4" for="c2_date">
-                                Date
+                        <label class="form-control-label mr-4" for="c2_metadataDate" data-toggle="tooltip" title="Tarikh berkaitan  bagi maklumat geospatial.">
+                            <?php echo __('lang.date'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
@@ -176,8 +176,8 @@
                 @if ($elemenMetadata['c2_metadataDateType']->status == '1')
                     <div class="row mb-2 divMetadataDateType">
                         <div class="col-3">
-                            <label class="form-control-label mr-4" for="c2_date">
-                                Date Type
+                        <label class="form-control-label mr-4" for="c2_metadataDateType" data-toggle="tooltip" title="Pengisian secara pilihan mengenai peringkat maklumat geospatial">
+                            <?php echo __('lang.date_type'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
@@ -190,7 +190,7 @@
                             }
                             ?>
                             <select name="c2_metadataDateType" id="c2_metadataDateType"
-                                class="form-control form-control-sm">
+                            class="form-control form-control-sm ">
                                 <option value="" selected>Pilih...</option>
                                 <option value="Adopted">Adopted</option>
                                 <option value="Creation">Creation</option>
@@ -206,7 +206,7 @@
                                 <option value="Revision">Revision</option>
                                 <option value="Superseded">Superseded</option>
                                 <option value="Validity Begins">Validity Begins</option>
-                                <option value="Validy Expires">Validy Expires</option>
+                            <option value="Validity Expires">Validity Expires</option>
                                 <option value="Unavailable">Unavailable</option>
                             </select>
                             @error('c2_metadataDateType')
@@ -218,8 +218,8 @@
                 @if ($elemenMetadata['c2_metadataStatus']->status == '1')
                     <div class="row mb-2 divMetadataStatus">
                         <div class="col-3">
-                            <label class="form-control-label mr-4" for="c2_metadataStatus">
-                                Status
+                        <label class="form-control-label mr-4" for="c2_metadataStatus" data-toggle="tooltip" title="Status bagi maklumat geospatial merujuk dokumen MGMS (LAMPIRAN D)">
+                            <?php echo __('lang.status'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
@@ -301,8 +301,8 @@
                 @if ($elemenMetadata['c2_typeOfServices']->status == '1')
                     <div class="row mb-2 divTypeOfServices">
                         <div class="col-3">
-                            <label class="form-control-label mr-4" for="c2_typeOfServices">
-                                Type of Services
+                        <label class="form-control-label mr-4" for="c2_typeOfServices" data-toggle="tooltip" title="Pengisian secara pilihan, jenis service bagi maklumat geospatial">
+                            <?php echo __('lang.type_of_services'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
@@ -395,8 +395,8 @@
                 @if ($elemenMetadata['c2_serviceUrl']->status == '1')
                     <div class="row mb-2 divServiceUrl">
                         <div class="col-3">
-                            <label class="form-control-label mr-4" for="c2_serviceUrl">
-                                Service URL<span class="text-warning">*</span>
+                        <label class="form-control-label mr-4" for="c2_serviceUrl" data-toggle="tooltip" title="URL bagi service berkenaan. Klik ‘Test’ bagi percubaan URL berkenaan.">
+                            <?php echo __('lang.service_URL'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
@@ -424,8 +424,8 @@
                 @if ($elemenMetadata['c2_typeOfCouplingDataset']->status == '1')
                     <div class="row mb-2 divTypeOfCouplingDataset">
                         <div class="col-3">
-                            <label class="form-control-label mr-4" for="c2_typeOfCouplingDataset">
-                                Type of Coupling with Dataset
+                        <label class="form-control-label mr-4" for="c2_typeOfCouplingDataset" data-toggle="tooltip" title="Pilihan jenis gandingan bagi Dataset">
+                            <?php echo __('lang.type_of_coupling_with_dataset'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
@@ -457,8 +457,8 @@
                 @if ($elemenMetadata['c2_contact_name']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="c2_contact_name">
-                                Name<span class="text-warning">*</span>
+                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nama individu yang mewakili organisasi bagi maklumat geospatial">
+                            <?php echo __('lang.name'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
@@ -471,7 +471,7 @@
                             }
                             ?>
                             <input type="text" name="c2_contact_name" id="c2_contact_name"
-                                class="form-control form-control-sm ml-3" value="{{ $respName }}">
+                                class="form-control form-control-sm " value="{{ $respName }}">
                             @error('c2_contact_name')
                                 <div class="text-error">{{ $message }}</div>
                             @enderror
@@ -481,8 +481,8 @@
                 @if ($elemenMetadata['c2_contact_agensiorganisasi']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="c2_contact_agensiorganisasi">
-                                Agency/Organization
+                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nama organisasi yang bertanggungjawab terhadap maklumat geospatial">
+                            <?php echo __('lang.organisation_name'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
@@ -505,8 +505,8 @@
                 @if ($elemenMetadata['c2_position_name']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="c2_contact_agensiorganisasi">
-                                Position Name
+                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Jawatan individu yang mewakili organisasi bagi maklumat geospatial">
+                            <?php echo __('lang.position_name'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
@@ -517,18 +517,18 @@
                             }
                             ?>
                             <input type="text" name="c2_position_name" id="c2_position_name"
-                                class="form-control form-control-sm ml-3 mb-2" value="{{ $positionName }}">
+                                class="form-control form-control-sm  mb-2" value="{{ $positionName }}">
                             @error('c2_position_name')
                                 <div class="text-error">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                 @endif
-                @if ($elemenMetadata['c2_contact_address1']->status == '1')
+                @if($elemenMetadata['c2_postal_code']->status == '1' || $elemenMetadata['c2_contact_city']->status == '1' || $elemenMetadata['c2_contact_state']->status == '1' || $elemenMetadata['c2_contact_country']->status == '1' || $elemenMetadata['c2_contact_address1']->status == '1' || $elemenMetadata['c2_contact_address2']->status == '1' || $elemenMetadata['c2_contact_address3']->status == '1' || $elemenMetadata['c2_contact_address4']->status == '1')
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="c2_metadataName">
-                                Address
+                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Alamat organisasi yang bertanggungjawab terhadap maklumat geospatial">
+                            <?php echo __('lang.address'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
@@ -541,14 +541,20 @@
                             }
                             ?>
                             <input type="text" name="c2_contact_address1" id="c2_contact_address1"
-                                class="form-control form-control-sm ml-3 mb-2" value="{{ $respAddress }}">
+                                class="form-control form-control-sm  mb-2" value="{{ $respAddress }}">
                             <input type="text" name="c2_contact_address2" id="c2_contact_address2"
-                                class="form-control form-control-sm ml-3 mb-2" value="">
+                                class="form-control form-control-sm mb-2" value="">
+                        @endif
+                        @if($elemenMetadata['c2_contact_address3']->status == '1')
                             <input type="text" name="c2_contact_address3" id="c2_contact_address3"
-                                class="form-control form-control-sm ml-3 mb-2" value="">
+                                class="form-control form-control-sm mb-2" value="">
+                        @endif
+                        @if($elemenMetadata['c2_contact_address4']->status == '1')
                             <input type="text" name="c2_contact_address4" id="c2_contact_address4"
-                                class="form-control form-control-sm ml-3 mb-2" value="">
-                            <div class="row ml-3">
+                                class="form-control form-control-sm mb-2" value="">
+                        @endif
+                        @if($elemenMetadata['c2_postal_code']->status == '1' || $elemenMetadata['c2_contact_city']->status == '1')
+                            <div class="row ">
                                 @if ($elemenMetadata['c2_postal_code']->status == '1')
                                     <?php
                                     $postalCode = '';
@@ -565,7 +571,7 @@
                                     </div>
                                     <div class="col-3 px-0">
                                         <input type="text" name="c2_postal_code" id="c2_postal_code"
-                                            class="form-control form-control-sm ml-3 mb-2 divPostalCode"
+                                            class="form-control form-control-sm mb-2 divPostalCode"
                                             value="{{ $postalCode }}">
                                     </div>
                                 @endif
@@ -579,12 +585,12 @@
                                     }
                                     ?>
                                     <div class="col-3 px-0">
-                                        <label class="form-control-label mr-4 divCity" for="c2_contact_city">City
-                                            :</label>
+                                        <label class="form-control-label mx-3 divCity" for="c2_contact_city" data-toggle="tooltip" title="Bandar">
+                                            <?php echo __('lang.city'); ?> :</label>
                                     </div>
                                     <div class="col-3 px-0">
                                         <input type="text" name="c2_contact_city" id="c2_contact_city"
-                                            class="form-control form-control-sm ml-3 mb-2 divCity"
+                                            class="form-control form-control-sm ml-4 divCity"
                                             value="{{ $city }}">
                                     </div>
                                 @endif
@@ -626,14 +632,15 @@
                                 @endif
                                 @if ($elemenMetadata['c2_contact_country']->status == '1')
                                     <div class="col-3 px-0">
-                                        <label class="form-control-label mx-4" for="c2_contact_country">Country
-                                            :</label>
+                                        <label class="form-control-label mx-3" for="c2_contact_country" data-toggle="tooltip" title="Negara">
+                                            <?php echo __('lang.country'); ?> :</label>
                                     </div>
                                     <div class="col-3 px-0">
                                         <select name="c2_contact_country" id="c2_contact_country"
                                             class="form-control form-control-sm ml-4">
                                             <option selected disabled>Pilih...</option>
                                             <?php
+                                            if (count($countries) > 0) {
                                 foreach ($countries as $country) {
                                     if ($country->id == $countrySelected->id) {
                                         ?><option value="<?php echo $country->id; ?>" selected>
@@ -641,7 +648,9 @@
                                     } else {                                                                                                                                                                  ?><option
                                                 value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option>
                                             <?php
-                                    }                                                                                                                                                                }                                                                                                                                                                    ?>
+                                    }                                                                                                                                                                }
+                                    }
+                                    ?>
                                         </select>
                                     </div>
 
@@ -653,8 +662,8 @@
                 @if ($elemenMetadata['c2_contact_email']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="c2_metadataName">
-                                Email
+                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Alamat emel rasmi">
+                            <?php echo __('lang.email'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
@@ -667,7 +676,7 @@
                             }
                             ?>
                             <input type="email" name="c2_contact_email" id="c2_contact_email"
-                                class="form-control form-control-sm ml-3" value="{{ $respEmail }}">
+                                class="form-control form-control-sm" value="{{ $respEmail }}">
                             @error('c2_contact_email')
                                 <div class="text-error">{{ $message }}</div>
                             @enderror
@@ -677,8 +686,8 @@
                 @if ($elemenMetadata['c2_contact_fax']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="c2_metadataName">
-                                Fax No
+                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nombor faksimili organisasi">
+                            <?php echo __('lang.fax_no'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
@@ -691,15 +700,15 @@
                             }
                             ?>
                             <input type="text" name="c2_contact_fax" id="c2_contact_fax" value="{{ $fax }}"
-                                class="form-control form-control-sm ml-3">
+                                class="form-control form-control-sm">
                         </div>
                     </div>
                 @endif
                 @if ($elemenMetadata['c2_contact_phone_office']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="c2_metadataName">
-                                Telephone (Office)
+                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nombor telefon organisasi">
+                            <?php echo __('lang.telephone_office'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
@@ -712,7 +721,7 @@
                             }
                             ?>
                             <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office"
-                                class="form-control form-control-sm ml-3" value="{{ $respPhone }}">
+                                class="form-control form-control-sm" value="{{ $respPhone }}">
                             @error('c2_contact_phone_office')
                                 <div class="text-error">{{ $message }}</div>
                             @enderror
@@ -722,8 +731,8 @@
                 @if ($elemenMetadata['c2_contact_website']->status == '1')
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="c2_metadataName">
-                                Contact Website
+                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Alamat laman web organisasi">
+                            <?php echo __('lang.contact_website'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
@@ -736,15 +745,15 @@
                             }
                             ?>
                             <input type="text" name="c2_contact_website" id="c2_contact_website"
-                                class="form-control form-control-sm ml-3" value="{{ $respWebsite }}">
+                                class="form-control form-control-sm " value="{{ $respWebsite }}">
                         </div>
                     </div>
                 @endif
                 @if ($elemenMetadata['c2_contact_role']->status == '1')
                     <div class="row mb-4 divResponsiblePartyRole">
                         <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="c2_contact_role">
-                                Role
+                        <label class="form-control-label mr-4" for="c2_contact_role" data-toggle="tooltip" title="Peranan yang dijalankan oleh organisasi berkenaan Metadata ">
+                            <?php echo __('lang.role'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
@@ -757,7 +766,7 @@
                             }
                             ?>
                             <select name="c2_contact_role" id="c2_contact_role"
-                                class="form-control form-control-sm ml-3">
+                                class="form-control form-control-sm ">
                                 <option value="">Pilih...</option>
                                 <option value="Author" {{ $role == 'Author' ? 'selected' : '' }}>Author</option>
                                 <option value="Co Author" {{ $role == 'Co Author' ? 'selected' : '' }}>Co Author
