@@ -195,7 +195,7 @@
                             <?php $bil++;
                                 } ?>
                         </ul>
-
+                        
                         <div class="carousel-inner">
                             <?php foreach ($pengumuman as $umum) { ?>
                             <div class="carousel-item <?php if ($bil2 == 0) {
@@ -206,10 +206,17 @@
                                     @csrf
                                     <input type="hidden" name="umum_id" value="{{ $umum->id }}">
                                     <a href="#" class="aUmum" data-umumid="{{ $umum->id }}">
-                                        <?php if ($bil2 % 2 == 1) { ?> <img src="{{ url('assetsweb/img/banner1.jpeg') }}"
-                                            alt="{{ $bil2 }}"> <?php } ?>
-                                        <?php if ($bil2 % 2 == 0) { ?> <img src="{{ url('assetsweb/img/banner2.jpeg') }}"
-                                            alt="{{ $bil2 }}"> <?php } ?>
+                                        <?php 
+                                        if ($umum->gambar != ""){ 
+                                            ?> 
+                                            <img src="{{ asset('storage/'.$umum->gambar) }}" alt="{{ $bil2 }}">
+                                            <?php 
+                                        }else{
+                                            ?>
+                                            <img src="{{ url('assetsweb/img/banner2.jpeg') }}" alt="{{ $bil2 }}"> 
+                                            <?php
+                                        } 
+                                        ?>
                                         <div class="carousel-caption">
                                             <h2 class="text-caps text-white">
                                                 <?php echo date('j M Y', strtotime($umum->created_at)); ?>
