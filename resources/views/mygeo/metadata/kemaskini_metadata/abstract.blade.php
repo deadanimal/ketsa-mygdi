@@ -1266,6 +1266,8 @@
             $var = "";
             if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
+            }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != ""){
+                $var = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
             }
             ?>
             <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3" readonly>{{ $var }}</textarea>

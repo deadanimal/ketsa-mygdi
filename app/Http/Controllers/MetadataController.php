@@ -835,10 +835,13 @@ class MetadataController extends Controller {
             Storage::putFileAs('public', $request->file('file_xml'), $fileName); //don't forget to set permissions at the public folder
             //read stored xml
             $uploaded_xml = Storage::disk('public')->get($fileName);
+            $uploaded_xml = str_replace("gco:", "", $uploaded_xml);
+            $uploaded_xml = str_replace("gmd:", "", $uploaded_xml);
+            $uploaded_xml = str_replace("srv:", "", $uploaded_xml);
             $uploaded_xml = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $uploaded_xml);
-            $xmlObject = simplexml_load_string($uploaded_xml);
-            $json = json_encode($xmlObject);
-            $xml_array = json_decode($json, true);
+//            $xmlObject = simplexml_load_string($uploaded_xml);
+//            $json = json_encode($xmlObject);
+//            $xml_array = json_decode($json, true);
 
             //save in geonetwork
             DB::connection('pgsql2')->transaction(function () use ($request, $uploaded_xml, &$newMetadataId) {

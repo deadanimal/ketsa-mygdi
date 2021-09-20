@@ -32,6 +32,14 @@
                             }
                         }
                     }
+                }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory)){
+                    if(count($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory) > 0){
+                        foreach($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd){
+                            if(trim($tcd->MD_TopicCategoryCode) != ""){
+                                $tc[]= trim($tcd->MD_TopicCategoryCode);
+                            }
+                        }
+                    }
                 }
                 ?>
                 <div class="form-group col-4">
