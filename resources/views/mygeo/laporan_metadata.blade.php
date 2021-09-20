@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" style="overflow-x:auto;">
                                 <table id="laporan_perincian" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
