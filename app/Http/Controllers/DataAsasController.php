@@ -949,7 +949,11 @@ class DataAsasController extends Controller
                     //send email to pemohon data
                     $to_name = $pemohon->users->name;
                     $to_email = $pemohon->users->email;
-                    $data = array('catatan'=>$request->catatan);
+                    if($request->catatan == 'others'){
+                        $data = array('catatan_lain'=>$request->catatan_lain);
+                    } else {
+                        $data = array('catatan'=>$request->catatan);
+                    }
                     Mail::send($mail, $data, function($message) use ($to_name, $to_email, $subject) {
                         $message->to($to_email, $to_name)->subject($subject);
                         $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
