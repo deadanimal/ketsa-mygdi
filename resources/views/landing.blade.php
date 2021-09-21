@@ -209,11 +209,11 @@
                                         <?php 
                                         if ($umum->gambar != ""){ 
                                             ?> 
-                                            <img src="{{ asset('storage/'.$umum->gambar) }}" alt="{{ $bil2 }}">
+                                            <img src="{{ asset('storage/'.$umum->gambar) }}" alt="{{ $bil2 }}" style="max-height: 380px;">
                                             <?php 
                                         }else{
                                             ?>
-                                            <img src="{{ url('assetsweb/img/banner2.jpeg') }}" alt="{{ $bil2 }}"> 
+                                            <img src="{{ url('assetsweb/img/banner2.jpeg') }}" alt="{{ $bil2 }}" style="max-height: 380px;"> 
                                             <?php
                                         } 
                                         ?>
