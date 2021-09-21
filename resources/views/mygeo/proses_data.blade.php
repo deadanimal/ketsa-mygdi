@@ -118,6 +118,7 @@
                             <form action="{{ url('simpan_proses_data') }}" method="POST">
                                 @csrf
                                 <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
+                                <i class="text-warning float-right" style="font-size: 13px">**Sila kemaskini surat balasan sebelum isi maklumat proses data</i>
                                 <table id="table_proses_data2" class="table table-bordered table-striped"
                                     style="width:100%;">
                                     <thead>
@@ -157,7 +158,6 @@
 
                                 <div class="row">
                                     <div class="col-xl-12">
-                                        <i>*Sila kemaskini surat balasan sebelum isi maklumat proses data</i>
                                         <div class="form-inline float-right">
                                             <label class="form-control-label mr-2">Jumlah Harga (RM)</label>
                                             <input class="form-control form-control-sm" placeholder="0.00"
