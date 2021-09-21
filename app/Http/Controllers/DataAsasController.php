@@ -401,7 +401,7 @@ class DataAsasController extends Controller
             $to_email = $pemohon->users->email;
 //            $to_email = 'farhan15959@gmail.com';
             $data = array('cat'=>'cat');
-            Mail::send("mails.exmpl15", $data, function($message) use ($to_name, $to_email, $file) {
+            Mail::send("mails.exmpl15", $data, function($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
                 $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
 //                $message->attach($file);
