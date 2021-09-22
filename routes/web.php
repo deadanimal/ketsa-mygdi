@@ -208,6 +208,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/kemaskini_profil','UserController@edit');
     Route::post('/simpan_kemaskini_profil','UserController@update_profile');
+    Route::post('/simpan_kemaskini_superadmin','UserController@update_profile_superadmin');
     Route::post('/simpan_kemaskini_gambarprofil','UserController@update_gambarprofile');
     Route::post('/simpan_kemaskini_password','UserController@update_password');
     Route::post('/tambahPenggunaBaru','UserController@tambahPenggunaBaru');
@@ -236,6 +237,7 @@ Route::get('/send-mail', function () {
 
 Route::post('get_roles','RoleController@get_roles');
 Route::post('get_user_details','UserController@get_user_details');
+Route::post('get_user_details_kemaskini','UserController@get_user_details_kemaskini');
 Route::post('get_custom_input_details','MetadataController@get_custom_input_details');
 Route::post('user_sahkan','UserController@user_sahkan');
 Route::post('user_pengesahan_ditolak','UserController@user_pengesahan_ditolak');

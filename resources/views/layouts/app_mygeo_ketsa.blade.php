@@ -16,6 +16,9 @@
     <!--<link rel="stylesheet" href="{{ asset('afiqadminmygeo_files/css') }}">-->
     <link href="{{ asset('afiqadminmygeo_files/mapbox-gl.css') }}" rel="stylesheet">
     <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
 
     <!-- jQuery -->
@@ -622,6 +625,8 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <!-- daterange picker -->
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <!-- Datatables -->
     <script src="{{ asset('/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>

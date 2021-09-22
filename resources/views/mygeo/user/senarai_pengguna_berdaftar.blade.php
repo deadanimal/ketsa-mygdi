@@ -220,7 +220,13 @@
                                                             data-target="#modal-butiran" data-userid="{{ $user->id }}"
                                                             class="butiran btn btn-sm btn-info mr-2"><i
                                                                 class="fas fa-eye"></i></button>
-                                                        <!--<button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>-->
+                                                        <?php
+                                                        if(Auth::user()->hasRole('Super Admin')){
+                                                            ?>
+                                                            <button type="button" data-toggle="modal" data-target="#modal-kemaskini" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="kemaskini btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>
+                                                            <?php
+                                                        }
+                                                        ?>
                                                         <button type="button" data-userid="{{ $user->id }}"
                                                             class="btnDelete btn btn-sm btn-danger mr-2"><i
                                                                 class="fas fa-trash"></i></button>
@@ -264,6 +270,30 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-kemaskini">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Kemaskini Maklumat Pengguna</h4>
+                </div>
+                <form id='kemaskiniMaklumatPengguna' action='{{ url('simpan_kemaskini_profil') }}' method='POST'>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card-body modal_user_detail_kemaskini">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between1">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kemaskini</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 <script>
     $('.btnStatusUser').change(function() {
@@ -289,6 +319,8 @@
     });
 
     $(function () {
+        $('.select2').select2();
+        
         $(document).on('change','#peranan',function(){
             var per = $(this).val();
             if(per == "Pemohon Data"){
@@ -338,7 +370,6 @@
         $(document).on("click", ".butiran", function() {
             // ajax get user details
             var user_id = $(this).data('userid');
-            console.log('USER_ID: '+user_id);
             $.ajax({
                 method: "POST",
                 url: "get_user_details",
@@ -348,6 +379,24 @@
                 },
             }).done(function(response) {
                 $('.modal_user_detail').html(response);
+            });
+        });
+        $(document).on("click", ".kemaskini", function() {
+            // ajax get user details
+            var user_id = $(this).data('userid');
+            $.ajax({
+                method: "POST",
+                url: "get_user_details_kemaskini",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "user_id": user_id
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                $('.modal_user_detail_kemaskini').html(data.html);
+                $('.thePeranan').select2({
+                    tags: true
+                });
             });
         });
 

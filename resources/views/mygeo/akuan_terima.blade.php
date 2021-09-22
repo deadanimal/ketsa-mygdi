@@ -151,7 +151,7 @@
                     showConfirmButton: false,
                 }).then(function(result) {
                     window.open("{{ $permohonan->proses_datas->pautan_data }}",'_blank');
-                    window.location.reload();
+                    window.history.back();
                 });
             });
         });

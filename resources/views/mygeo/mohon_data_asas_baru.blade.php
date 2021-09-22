@@ -409,15 +409,13 @@
                                             <button type="button"
                                                 class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
                                                 Hantar
-                                            @elseif(Auth::user()->hasRole(['Pemohon Data']))
-                                                @if ($permohonan->dihantar != 1 || $permohonan->status == 2)
-                                                    <button type="button"
-                                                        class="btn btn-outline-success mx-2 btnSimpanDraf">
-                                                        Simpan
-                                                @endif
-
+                                        @elseif(Auth::user()->hasRole(['Pemohon Data']))
+                                            @if ($permohonan->dihantar != 1 || $permohonan->status == 2)
+                                                <button type="button"
+                                                    class="btn btn-outline-success mx-2 btnSimpanDraf">
+                                                    Simpan
+                                            @endif
                                         @endif
-
                                 </form>
                                 @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->dihantar != 1 || $permohonan->status == 2))
                                     <form action="{{ url('hantar_permohonan') }}" method="POST"
