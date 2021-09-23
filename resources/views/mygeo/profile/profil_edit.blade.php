@@ -148,7 +148,7 @@
                                             }else{
                                                 ?>
                                                 <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
-                                                    <option value="">Pilih...</option>
+                                                    <option disabled>Pilih...</option>
                                                 </select>
                                                 <?php
                                             }
@@ -338,6 +338,7 @@ $(document).ready(function(){
             $('#bahagian').append('<option value="">Pilih...</option>');
         });
     });
+
     $('#agensi_organisasi').change(function() {
         var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
 

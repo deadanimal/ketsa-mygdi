@@ -1,7 +1,5 @@
 <style>
-    td {
-padding-right: 2rem;
-    }
+
 </style>
 <div class="card card-primary mb-4 div_c15" id="div_c15">
     <div class="card-header">

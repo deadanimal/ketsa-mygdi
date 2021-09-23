@@ -29,6 +29,10 @@
 
                         <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                     </select>
+                    <a href="lampiran/content_information" class="text-yellow" target="_blank">
+                        <i class="fas fa-lightbulb mx-2"></i>
+                    </a>
+
 
                     <p class="ml-3 mb-0 lblContentInfo">Live Data and Maps</p>
                     <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled>
@@ -42,7 +46,7 @@
             <h2 class="heading-small text-muted"><?php echo __('lang.metadataPublisher'); ?></h2>
             <div class="my-1">
                 @if($elemenMetadata['publisher_name']->status == '1')
-                <div class="row my-0 py-0">
+                <div class="row mb-2 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="uname">
                             <?php echo __('lang.name'); ?>
@@ -55,7 +59,7 @@
                 </div>
                 @endif
                 @if($elemenMetadata['publisher_agensi_organisasi']->status == '1')
-                <div class="row my-0 py-0">
+                <div class="row mb-2 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_agensi_organisasi"><?php echo __('lang.organisation_name'); ?>
                         </label><label class="float-right">:</label>
@@ -68,7 +72,7 @@
                 </div>
                 @endif
                 @if($elemenMetadata['publisher_email']->status == '1')
-                <div class="row my-0 py-0">
+                <div class="row mb-2 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_email">
                             <?php echo __('lang.email'); ?>
@@ -81,7 +85,7 @@
                 </div>
                 @endif
                 @if($elemenMetadata['publisher_phone']->status == '1')
-                <div class="row my-0 py-0">
+                <div class="row mb-2 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_phone">
                             <?php echo __('lang.telephone_office'); ?>
@@ -94,7 +98,7 @@
                 </div>
                 @endif
                 @if($elemenMetadata['publisher_role']->status == '1')
-                <div class="row my-0 py-0 divPublisherRole">
+                <div class="row mb-2 py-0 divPublisherRole">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_role">
                             <?php echo __('lang.role'); ?>

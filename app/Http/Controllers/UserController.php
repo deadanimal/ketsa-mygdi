@@ -98,42 +98,6 @@ class UserController extends Controller {
     public function get_user_details(){
         $user_id = $_POST['user_id'];
         $user_details = User::where(["id"=>$user_id])->get()->first();
-//        $html_details = '
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Nama Penuh</label>
-//                <div class="col-sm-10">
-//                    :'.$user_details->name.'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Agensi</label>
-//                <div class="col-sm-10">
-//                    :'.($user_details->hasRole('Pemohon Data') ? $user_details->agensi_organisasi:$user_details->agensiOrganisasi->name).'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Bahagian</label>
-//                <div class="col-sm-10">
-//                    :'.$user_details->bahagian.'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Telefon Pejabat</label>
-//                <div class="col-sm-10">
-//                    :'.$user_details->phone_pejabat.'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Emel</label>
-//                <div class="col-sm-10">
-//                    :'.$user_details->email.'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Peranan</label>
-//                <div class="col-sm-10">
-//                    :
-//        ';
         $html_details = '
             <div class="row mb-2">
                 <div class="col-3">
@@ -383,7 +347,7 @@ class UserController extends Controller {
             "uname" => 'required',
             "nric" => 'required',
             "agensi_organisasi" => 'required',
-            "phone_pejabat" => 'required',          
+            "phone_pejabat" => 'required',
         ];
         if(Auth::user()->email != $request->email){
             $fields["email"]= 'required|unique:App\User,email';
@@ -405,7 +369,7 @@ class UserController extends Controller {
             "phone_bimbit.required" => 'Phone Bimbit required',
         ];
         $this->validate($request, $fields, $customMsg);
-        
+
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
@@ -558,7 +522,7 @@ class UserController extends Controller {
             if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
                 $name = trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
             }
-            
+
             //status
             $status = "";
             if($met->disahkan == '0'){
@@ -635,7 +599,7 @@ class UserController extends Controller {
             $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
             $sektor = $ao->sektor;
         }
-        
+
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;

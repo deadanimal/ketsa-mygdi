@@ -269,3 +269,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// =================== Redirect Tooltips =====================
+
+Route::get('lampiran/content_information', function(){return view('tooltips/content_information');});
+Route::get('lampiran/title', function(){return view('tooltips/title');});
+Route::get('lampiran/abstract', function(){return view('tooltips/abstract');});
+Route::get('lampiran/topic_category', function(){return view('tooltips/topic_category');});
+Route::get('lampiran/keyword', function(){return view('tooltips/keyword');});
+Route::get('lampiran/ordering_instruction', function(){return view('tooltips/ordering_instruction');});
+

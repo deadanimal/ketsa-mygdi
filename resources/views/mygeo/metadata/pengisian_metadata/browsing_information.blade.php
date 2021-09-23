@@ -68,6 +68,11 @@
                         <div class="text-error">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="col-1">
+                        <a href="lampiran/keyword" class="text-yellow" target="_blank">
+                            <i class="fas fa-lightbulb"></i>
+                        </a>
+                    </div>
                 </div>
                 @endif
                 @if($elemenMetadata['c10_additional_keyword[]']->status == '1')
