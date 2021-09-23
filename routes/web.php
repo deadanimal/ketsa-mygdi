@@ -227,7 +227,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
     
-    Route::get('/laporan_perincian_metadata','LaporanDashboardController@laporan_perincian_metadata');
+    Route::get('/download_laporan_perincian_metadata','LaporanDashboardController@laporan_perincian_metadata');
+    Route::get('/download_laporan_bil_metadata_terbit_ikut_agensi','LaporanDashboardController@laporan_bil_metadata_terbit_ikut_agensi');
+    Route::get('/download_laporan_bil_mohon_lulus','LaporanDashboardController@laporan_bil_mohon_lulus');
+    Route::get('/download_laporan_bil_mohon_ikut_kategori','LaporanDashboardController@laporan_bil_mohon_ikut_kategori');
+    Route::get('/download_laporan_stat_mohon_ikut_tahun','LaporanDashboardController@laporan_stat_mohon_ikut_tahun');
 });
 
 Route::get('/send-mail', function () {
