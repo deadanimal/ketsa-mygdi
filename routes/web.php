@@ -23,6 +23,7 @@ Route::post('/lihat_xml_nologin', 'MetadataController@show_xml_nologin');
 Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
 Route::get('/downloadMetadataPdf/{id}', 'MetadataController@downloadMetadataPdf');
 Route::get('/downloadMetadataXml/{id}/{name}', 'MetadataController@downloadMetadataXml');
+Route::get('/downloadMetadataExcel/{id}', 'MetadataController@downloadMetadataExcel');
 
 Route::post('/loginf', 'AuthController@authenticate');
 //Route::post('/registerf','RegisterController@create');

@@ -44,6 +44,8 @@ use PDF;
 use App\CustomMetadataInput;
 use Dompdf\Dompdf;
 use App\AgensiOrganisasi;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class MetadataController extends Controller {
 
@@ -576,6 +578,43 @@ class MetadataController extends Controller {
         $response->header('Content-Disposition', 'attachment; filename='.$name.'.xml');
         $response->header('Content-Transfer-Encoding', 'binary');
         return $response;
+    }
+    
+    public function downloadMetadataExcel($id) {
+        $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();
+        // (B) CREATE A NEW SPREADSHEET
+        $spreadsheet = new Spreadsheet();
+
+        // (C) GET WORKSHEET
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('Basic');
+        $sheet->setCellValue('A1', 'Hello World !');
+        $sheet->setCellValue('A2', 'Goodbye World !');
+
+        // (D) ADD NEW WORKSHEET + YOU CAN ALSO USE FORMULAS!
+        $spreadsheet->createSheet();
+        $sheet = $spreadsheet->getSheet(1);
+        $sheet->setTitle('Formula');
+        $sheet->setCellValue('A1', '5');
+        $sheet->setCellValue('A2', '6');
+        $sheet->setCellValue('A3', '=SUM(A1:A2)');
+
+        // (E) OUTPUT
+        $writer = new Xlsx($spreadsheet);
+
+        // (E1) SAVE TO A FILE ON THE SERVER
+//        $writer->save('demoA.xlsx');
+//        echo "OK!";
+
+        // (E2) OR FORCE DOWNLOAD
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="demoA.xlsx"');
+        header('Cache-Control: max-age=0');
+        header('Expires: Fri, 11 Nov 2011 11:11:11 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+        $writer->save('php://output');
     }
 
     public function messages() {

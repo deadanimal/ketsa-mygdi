@@ -12,6 +12,7 @@ use App\MetadataGeo;
 use App\User;
 use App\MCategory;
 use Auth;
+use PhpOffice\PhpWord\PhpWord;
 
 class LaporanDashboardController extends Controller
 {
@@ -95,7 +96,7 @@ class LaporanDashboardController extends Controller
     
     public function laporan_perincian_metadata(){
         //initialize
-        $wordTest = new \PhpOffice\PhpWord\PhpWord();
+        $wordTest = new PhpWord();
  
         //add section
         $newSection = $wordTest->addSection();
@@ -166,7 +167,7 @@ class LaporanDashboardController extends Controller
     }
     public function laporan_bil_metadata_terbit_ikut_agensi(){
         //initialize
-        $wordTest = new \PhpOffice\PhpWord\PhpWord();
+        $wordTest = new PhpWord();
  
         //add section
         $newSection = $wordTest->addSection();
@@ -244,7 +245,7 @@ class LaporanDashboardController extends Controller
     }
     public function laporan_bil_mohon_lulus(){
         //initialize
-        $wordTest = new \PhpOffice\PhpWord\PhpWord();
+        $wordTest = new PhpWord();
  
         //add section
         $newSection = $wordTest->addSection();
@@ -315,7 +316,7 @@ class LaporanDashboardController extends Controller
     }
     public function laporan_bil_mohon_ikut_kategori(){
         //initialize
-        $wordTest = new \PhpOffice\PhpWord\PhpWord();
+        $wordTest = new PhpWord();
  
         //add section
         $newSection = $wordTest->addSection();

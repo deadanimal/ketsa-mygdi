@@ -71,6 +71,12 @@
                                     </a>
                                     <a href="#">
                                         <button type="button" class="btn btn-sm btn-default mr-2 actionButtons"
+                                            data-action="excel"
+                                            data-href='{{ url('downloadMetadataExcel') . '/' . $metadataSearched->id }}'>Muat
+                                            Turun Excel</button>
+                                    </a>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-sm btn-default mr-2 actionButtons"
                                             data-action="xml"
                                             data-href='{{ url('downloadMetadataXml') . '/' . $metadataSearched->id . '/' . $metadataName }}'>Muat
                                             Turun XML</button>
@@ -163,6 +169,8 @@
                     document.title = '{{ $metadataName }}';
                     window.print();
                 } else if ($(this).data('action') == 'xml') {
+                    window.open($(this).data('href'), '_blank');
+                } else if ($(this).data('action') == 'excel') {
                     window.open($(this).data('href'), '_blank');
                 }
             });
