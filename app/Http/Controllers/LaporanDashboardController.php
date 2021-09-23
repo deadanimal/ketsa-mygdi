@@ -89,7 +89,81 @@ class LaporanDashboardController extends Controller
                                 ->get();
         // dd($permohonan_kategori);
         $permohonan_kategori_count = count($permohonan_kategori);
+        
         return view('mygeo.laporan_metadata', compact('metadatas','categories','permohonan_kategori','permohonan_lulus','permohonan_perincian'));
+    }
+    
+    public function laporan_perincian_metadata(){
+        //initialize
+        $wordTest = new \PhpOffice\PhpWord\PhpWord();
+ 
+        //add section
+        $newSection = $wordTest->addSection();
+        
+        //add text to section
+        $newSection->addText("Laporan Perincian Metadata",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
+        
+        //set table style
+        $tableStyle = array(
+            'borderColor' => '006699',
+            'borderSize'  => 6,
+            'cellMargin'  => 50
+        );
+        //set first row style
+        $firstRowStyle = array('bgColor' => '66BBFF');
+        //add styles to the document (at this point it is not yet applied. this is similar to linking css)
+        $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
+        
+        //add table to document and apply style created in previous lines
+        $table = $newSection->addTable('myTable');
+            $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+            $counter = 0;
+            foreach ($metadatasdb as $met) {
+                $ftestxml2 = <<<XML
+                        $met->data
+                        XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+                $xml2 = simplexml_load_string($ftestxml2);
+                $metadatas[$met->id] = [$xml2, $met];
+                
+                $counter++;
+                $table->addRow();
+                //add cell
+                $table->addCell(900)->addText($counter);
+                //add cell
+                $title = "";
+                if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                    $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                }
+                $table->addCell(5000)->addText(htmlspecialchars($title));
+                //add cell
+                $status = "";
+                if($met->is_draf == "yes"){
+                    $status = "Draf";
+                }else{
+                    if($met->disahkan == "0"){
+                        $status = "Perlu Pengesahan";
+                    }elseif($met->disahkan == "yes"){
+                        $status = "Diterbitkan";
+                    }elseif($met->disahkan == "yes"){
+                        $status = "Perlu Pembetulan";
+                    }
+                }
+                $table->addCell(2500)->addText($status);
+                //add cell
+                $table->addCell(1750)->addText(date('d/m/Y',strtotime($met->changedate)));
+            }
+        $objectWriter = \PhpOffice\PhpWord\IOFactory::createWriter($wordTest, 'Word2007');
+        try {
+            $objectWriter->save(storage_path('Laporan_Perincian_Metadata.docx'));
+        } catch (Exception $e) {
+        }
+
+        return response()->download(storage_path('Laporan_Perincian_Metadata.docx'));
     }
 
     public function index_mygeo_dashboard(){

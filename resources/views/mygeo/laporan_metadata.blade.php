@@ -439,6 +439,11 @@
                         text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'Laporan Perincian Permohonan Metadata',
+                    },
+                    {
+                        text: 'Word',
+                        className: 'btn btn-sm btn-primary btn_download_word',
+                        title: 'Laporan Perincian Permohonan Metadata',
                     }
                 ],
                 "scrollX": true,
@@ -634,25 +639,30 @@
             });
         });
 
-
-        $(document).on("click", ".btnDelete", function() {
-            var user_id = $(this).data('permohonanid');
-            var permohonan_id = $(this).data('permohonanid');
-            var r = confirm("Adakah anda pasti untuk padam metadata ini?");
-            if (r == true) {
-                $.ajax({
-                    method: "POST",
-                    url: "delete_permohonan",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "user_id": user_id,
-                        "permohonan_id": permohonan_id
-                    },
-                }).done(function(response) {
-                    alert("Permohonan berjaya dipadam.");
-                    location.reload();
-                });
-            }
+        $(document).ready(function(){
+            $(document).on("click", ".btn_download_word", function() {
+                window.open("{{ url('laporan_perincian_metadata') }}",'_blank');
+            });
+            
+            $(document).on("click", ".btnDelete", function() {
+                var user_id = $(this).data('permohonanid');
+                var permohonan_id = $(this).data('permohonanid');
+                var r = confirm("Adakah anda pasti untuk padam metadata ini?");
+                if (r == true) {
+                    $.ajax({
+                        method: "POST",
+                        url: "delete_permohonan",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "user_id": user_id,
+                            "permohonan_id": permohonan_id
+                        },
+                    }).done(function(response) {
+                        alert("Permohonan berjaya dipadam.");
+                        location.reload();
+                    });
+                }
+            });
         });
     </script>
 

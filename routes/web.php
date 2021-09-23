@@ -226,8 +226,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/tukar_peranan','UserController@tukar_peranan');
 
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-
+    
+    Route::get('/laporan_perincian_metadata','LaporanDashboardController@laporan_perincian_metadata');
 });
 
 Route::get('/send-mail', function () {
