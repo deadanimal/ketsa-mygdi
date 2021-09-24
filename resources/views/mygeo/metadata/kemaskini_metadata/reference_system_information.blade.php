@@ -45,7 +45,8 @@
                                     ?><option value="<?php echo $ids->id; ?>" class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
                                 }
                             }
-                        }                                                                                                                                   ?>
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
