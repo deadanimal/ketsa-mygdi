@@ -90,7 +90,7 @@
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
                                         <div class="form-control-label">
-                                            Identifier<span class="text-warning">*</span>
+                                            Identifier
                                         </div>
                                     </div>
                                     <div class="col-xl-7">
@@ -175,7 +175,7 @@
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
                                         <div class="form-control-label">
-                                            Type<span class="text-warning">*</span>
+                                            Type
                                         </div>
                                     </div>
                                     <div class="col-xl-7">
@@ -185,7 +185,7 @@
                                 <?php
                             }
                             ?>
-                            
+
                             <h6 class="heading-small text-muted mt-2 mb-3">Operation</h6>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString != "") {
@@ -193,7 +193,7 @@
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
                                         <div class="form-control-label">
-                                            Identifier<span class="text-warning">*</span>
+                                            Identifier
                                         </div>
                                     </div>
                                     <div class="col-xl-7">

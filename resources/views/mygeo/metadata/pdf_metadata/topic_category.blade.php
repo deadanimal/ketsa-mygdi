@@ -16,8 +16,8 @@
                             ?>
                             <div class="p-2 bd-highlight">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="topic_category[]" checked=""checked" disabled>
-                                    <label class="form-check-label" for="c3_1"><?php echo $tc->MD_TopicCategoryCode; ?></label>
+                                    {{-- <input type="checkbox" class="form-check-input" name="topic_category[]" checked disabled> --}}
+                                    <li><label class="form-check-label" for="c3_1"><?php echo $tc->MD_TopicCategoryCode; ?></label></li>
                                 </div>
                             </div>
                             <?php

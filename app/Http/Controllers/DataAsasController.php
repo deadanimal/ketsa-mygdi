@@ -909,7 +909,7 @@ class DataAsasController extends Controller
                 MohonData::where(["id" => $request->permohonan_id])->update([
                     "status" => $request->status,
                     "catatan" => $request->catatan,
-//                    "catatan_lain" => $request->catatan_lain, //missing migration from afiq
+                   "catatan_lain" => $request->catatan_lain, //missing migration from afiq
                     "assign_admin" => $request->assign_admin,
                 ]);
 

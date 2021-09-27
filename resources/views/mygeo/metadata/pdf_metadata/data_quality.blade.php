@@ -76,7 +76,7 @@
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -241,7 +241,7 @@
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -533,7 +533,7 @@
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -760,7 +760,7 @@
                                 <div class="form-group row">
                                     <div class="bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -995,7 +995,7 @@
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>

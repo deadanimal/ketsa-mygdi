@@ -15,7 +15,7 @@
                     <div class="col-xl-6">
                         <div class="form-inline ml-3">
                             <div class="form-control-label mr-3">
-                                Scanning Resolution<span class="text-warning">*</span> :
+                                Scanning Resolution :
                             </div>
                             <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString . "</p>"; ?>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="col-xl-6">
                         <div class="form-inline">
                             <div class="form-control-label mr-3">
-                                Ground Scanning<span class="text-warning">*</span> :
+                                Ground Scanning :
                             </div>
                             <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal . " meter</p>"; ?>
                         </div>
