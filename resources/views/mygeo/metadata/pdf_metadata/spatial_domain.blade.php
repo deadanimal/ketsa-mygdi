@@ -64,7 +64,7 @@
                                     $west = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal;
                                 }
                                 ?>
-                                <div class="input-group-text" id="btnGroupAddon">W<span class="required">*</span></div>
+                                <div class="input-group-text" id="btnGroupAddon">W</div>
                                 <input type="number" step="any" id="wblg" onchange="updateLayer()" class="form-control" placeholder="West Bound Longitude"  aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="West Bound Longitude" value="{{ $west }}" name="c9_west_bound_longitude">
                             </div>
                         </td>
@@ -76,7 +76,7 @@
                                     $east = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal;
                                 }
                                 ?>
-                                <div class="input-group-text" id="btnGroupAddon">E<span class="required">*</span></div>
+                                <div class="input-group-text" id="btnGroupAddon">E</div>
                                 <input type="number" id="eblg" onchange="updateLayer()"  step="any" class="form-control" placeholder="East Bound Longitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="East Bound Longitude" value="{{ $east }}" name="c9_east_bound_longitude">
                             </div>
                         </td>
@@ -90,7 +90,7 @@
                                     $south = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal;
                                 }
                                 ?>
-                                <div class="input-group-text" id="btnGroupAddon">S<span class="required">*</span></div>
+                                <div class="input-group-text" id="btnGroupAddon">S</div>
                                 <input type="number" id="sblt" onchange="updateLayer()" step="any" class="form-control" placeholder="South Bound Latitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="South Bound Latitude" value="{{ $south }}" name="c9_south_bound_latitude">
                             </div>
                         </td>
@@ -102,7 +102,7 @@
                                     $north = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal;
                                 }
                                 ?>
-                                <div class="input-group-text" id="btnGroupAddon">N<span class="required">*</span></div>
+                                <div class="input-group-text" id="btnGroupAddon">N</div>
                                 <input type="number" id="nblt" onchange="updateLayer()" step="any" class="form-control" placeholder="North Bound Latitude" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="top" title="North Bound Latitude" value="{{ $north }}" name="c9_north_bound_latitude">
                             </div>
                         </td>

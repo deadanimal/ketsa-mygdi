@@ -76,7 +76,7 @@
                                 <div class="row mb-2">
                                     <div class="col-3 pl-5">
                                         <label class="form-control-label mr-4" for="c10_file_name">
-                                            Keywords<span class="text-warning">*</span>
+                                            Keywords
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-6">

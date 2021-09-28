@@ -709,8 +709,8 @@
             ?>
             setInterval(
                 checkThreeHourNotifySelesaiMuatTurun,
-                20000  /* 15000 ms = 20 seconds for farhan testing */
-//                    10800000  /* 10800000 ms = 3 hrs */ //ori specs
+//                20000  /* 15000 ms = 20 seconds for farhan testing */
+                    10800000  /* 10800000 ms = 3 hrs */ //ori specs
 //                    300000  /* 300000 ms = 5 min for testing */
             );
             <?php

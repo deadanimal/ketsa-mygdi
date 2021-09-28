@@ -90,7 +90,7 @@
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
                                         <div class="form-control-label">
-                                            Identifier<span class="text-warning">*</span>
+                                            Identifier
                                         </div>
                                     </div>
                                     <div class="col-xl-7">
@@ -175,7 +175,7 @@
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
                                         <div class="form-control-label">
-                                            Type<span class="text-warning">*</span>
+                                            Type
                                         </div>
                                     </div>
                                     <div class="col-xl-7">
@@ -193,7 +193,7 @@
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
                                         <div class="form-control-label">
-                                            Identifier<span class="text-warning">*</span>
+                                            Identifier
                                         </div>
                                     </div>
                                     <div class="col-xl-7">

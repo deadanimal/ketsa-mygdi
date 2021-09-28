@@ -276,7 +276,8 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Kemaskini Maklumat Pengguna</h4>
                 </div>
-                <form id='kemaskiniMaklumatPengguna' action='{{ url('simpan_kemaskini_profil') }}' method='POST'>
+                <form id='kemaskiniMaklumatPengguna' action='{{ url('simpan_kemaskini_superadmin') }}' method='POST'>
+                    @csrf
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row">
@@ -288,7 +289,7 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between1">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Kemaskini</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="kemaskini_profil">Kemaskini</button>
                     </div>
                 </form>
             </div>
@@ -321,6 +322,11 @@
     $(function () {
         $('.select2').select2();
         
+        $(document).on('click','#kemaskini_profil',function(){
+            $('#kemaskiniMaklumatPengguna').submit();
+        });
+        
+        /*
         $(document).on('change','#peranan',function(){
             var per = $(this).val();
             if(per == "Pemohon Data"){
@@ -331,6 +337,7 @@
                 $('#agensi_organisasi_dropdown').prop('disabled',false).show();
             }
         });
+        */
 
         $('#agensi_organisasi_text').prop('disabled',true).hide();
 
@@ -395,7 +402,16 @@
                 var data = jQuery.parseJSON(response);
                 $('.modal_user_detail_kemaskini').html(data.html);
                 $('.thePeranan').select2({
-                    tags: true
+                    tags: true,
+                });
+                $(".thePeranan").on('select2:select',function () {
+                    var sels = $(".thePeranan").val();
+                    sels.forEach(function(item) {
+                        console.log(item);
+                        $(".thePeranan option[value='" + item + "']").prop("selected", true);
+                    });
+//                    $('#unit').val('21'); // Select the option with a value of '21'
+//                    $('#unit').trigger('change'); // Notify any JS components that the value changed
                 });
             });
         });

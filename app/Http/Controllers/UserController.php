@@ -287,7 +287,7 @@ class UserController extends Controller {
         $user_id = $_POST['user_id'];
         $user_details = User::where(["id"=>$user_id])->get()->first();
         $html_details = '
-            <input type="hidden" name="user_id" val="'.$user_id.'">
+            <input type="hidden" name="user_id" value="'.$user_id.'">
             <div class="row mb-2">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="uname">
@@ -295,7 +295,7 @@ class UserController extends Controller {
                     </label><label class="float-right">:</label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" id="uname" type="text"
+                    <input class="form-control form-control-sm" id="uname" name="uname" type="text"
                            value="'.$user_details->name.'" />
                 </div>
             </div>
@@ -306,7 +306,7 @@ class UserController extends Controller {
                     </label><label class="float-right">:</label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" id="input-nric" type="text"
+                    <input class="form-control form-control-sm" id="input-nric" type="text" name="nric"
                            value="'.$user_details->nric.'" />
                 </div>
             </div>
@@ -317,7 +317,7 @@ class UserController extends Controller {
                     </label><label class="float-right">:</label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" id="sektor" type="text"
+                    <input class="form-control form-control-sm" id="sektor" type="text" name="sektor"
                            value="'.($user_details->sektor == '1' ? 'Kerajaan' : 'Swasta').'" />
                 </div>
             </div>
@@ -330,12 +330,12 @@ class UserController extends Controller {
                 <div class="col-8">';
         if (Auth::user()->hasRole("Pemohon Data")) {
             $html_details .= '
-                        <input class="form-control form-control-sm" id="agensi_organisasi"
+                        <input class="form-control form-control-sm" id="agensi_organisasi" name="agensi_organisasi"
                                type="text" value="'.$user_details->agensi_organisasi.'" />
                     ';
         } else {
             $html_details .= '
-                        <input class="form-control form-control-sm" id="agensi_organisasi"
+                        <input class="form-control form-control-sm" id="agensi_organisasi" name="agensi_organisasi"
                                type="text"
                                value="'.(is_numeric($user_details->agensi_organisasi) && isset($user_details->agensiOrganisasi) ? $user_details->agensiOrganisasi->name : $user_details->agensi_organisasi).'"
                                />
@@ -353,7 +353,7 @@ class UserController extends Controller {
                     </label><label class="float-right">:</label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" id="bahagian" type="text"
+                    <input class="form-control form-control-sm" id="bahagian" type="text" name="bahagian"
                            value="'.$user_details->bahagian.'" />
                 </div>
             </div>';
@@ -367,7 +367,7 @@ class UserController extends Controller {
                     </label><label class="float-right">:</label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" id="email" type="text"
+                    <input class="form-control form-control-sm" id="email" type="text" name="email"
                            value="'.$user_details->email.'" />
                 </div>
             </div>
@@ -378,7 +378,7 @@ class UserController extends Controller {
                     </label><label class="float-right">:</label>
                 </div>
                 <div class="col-3">
-                    <input class="form-control form-control-sm" id="phone_pejabat" type="text"
+                    <input class="form-control form-control-sm" id="phone_pejabat" type="text" name="phone_pejabat"
                            value="'.$user_details->phone_pejabat.'" />
                 </div>';
         if(!$user_details->hasRole(["Penerbit Metadata","Pengesah Metadata"])){
@@ -389,7 +389,7 @@ class UserController extends Controller {
                     </label><label class="float-right">:</label>
                 </div>
                 <div class="col-3">
-                    <input class="form-control form-control-sm" id="phone_bimbit"
+                    <input class="form-control form-control-sm" id="phone_bimbit" name="phone_bimbit"
                            type="text" value="'.$user_details->phone_bimbit.'" />
                 </div>
             </div>
@@ -403,8 +403,6 @@ class UserController extends Controller {
                     </label><label class="float-right">:</label>
                 </div>
                 <div class="col-8">
-                    <select name="peranan" class="form-control form-control-sm select2 thePeranan" multiple="multiple">
-                        <option value="">Pilih...</option>
         ';
         $peranans = Role::get();
         $ids = [ 5, 6, 3, 4, 2];
@@ -418,13 +416,12 @@ class UserController extends Controller {
         }
         foreach($peranans as $p){
             if(in_array($p->name,$urs)){
-                $html_details .= '<option value="'.$p->name.'" selected>'.$p->name.'</option>';            
+                $html_details .= '<div class="col-10"><input type="checkbox" class="form-check-input mr-4" name="peranan[]" value="'.$p->name.'" checked>'.$p->name.'</div>';
             }else{
-                $html_details .= '<option value="'.$p->name.'">'.$p->name.'</option>';
+                $html_details .= '<div class="col-10"><input type="checkbox" class="form-check-input mr-4" name="peranan[]" value="'.$p->name.'">'.$p->name.'</div>';
             }
         }
         $html_details .= '
-                    </select>
                 </div>
             </div>
         ';
@@ -445,7 +442,7 @@ class UserController extends Controller {
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        <input class="form-control form-control-sm" type="text" value="'.$user_details->kategori.'" />
+                        <input class="form-control form-control-sm" type="text" value="'.$user_details->kategori.'" name="kategori"/>
                     </div>
                 </div>
             ';
@@ -616,7 +613,7 @@ class UserController extends Controller {
     }
     
     public function update_profile_superadmin(Request $request){
-        $user = User::where(["id"=>$request->user_id])->get()->first();
+        $user = User::where("id",$request->user_id)->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
         $user->email = $request->email;
@@ -627,6 +624,18 @@ class UserController extends Controller {
         $user->phone_bimbit = $request->phone_bimbit;
         $user->kategori = $request->kategori;
         $user->save();
+        
+        //save user's role
+        if(!is_null($request->peranan)){
+            ModelHasRoles::where(["model_id"=>$user->id,"model_type"=>"App\User"])->delete();
+            $assigned_roles = "";
+            foreach($request->peranan as $role){
+                $user->assignRole($role);
+                $assigned_roles .= $role.",";
+            }
+            $assigned_roles = rtrim($assigned_roles, ",");
+            User::where(["id"=>$user->id])->update(["assigned_roles" => $assigned_roles]);
+        }
 
         $at = new AuditTrail();
         $at->path = url()->full();
