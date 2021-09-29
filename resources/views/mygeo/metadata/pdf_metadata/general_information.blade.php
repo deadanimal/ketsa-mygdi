@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary div_c1" id="div_c1">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse1">
@@ -11,6 +12,7 @@
         <div class="card-body">
             <?php
             if (isset($metadataxml->contact->CI_ResponsibleParty->contentInfo->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contentInfo->CharacterString != "") {
+                $flag *= 0;
                 ?>
                 <div class="form-group row">
                     <p class="pl-lg-3 form-control-label">Content Information<span class="mx-3">:</span></p>
@@ -21,6 +23,7 @@
             ?>
             <?php
             if (isset($metadataxml->language->CharacterString) && $metadataxml->language->CharacterString != "") {
+                $flag *= 0;
                 ?>
                 <div class="form-group row">
                     <p class="pl-lg-3 form-control-label">Metadata Language<span class="mx-3">:</span></p>    
@@ -37,6 +40,7 @@
             ?>
             <?php
             if($metadataSearched->createdate != ""){
+                $flag *= 0;
                 ?>
                 <div class="form-group row">
                     <p class="pl-lg-3 form-control-label">Metadata Create Date<span class="mx-3">:</span></p>
@@ -49,6 +53,7 @@
             <div class="">
                 <?php
                 if (isset($metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row my-0 py-0">
                         <div class="col-3 pl-5">
@@ -65,6 +70,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row my-0 py-0">
                         <div class="col-3 pl-5">
@@ -81,6 +87,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row my-0 py-0">
                         <div class="col-3 pl-5">
@@ -97,6 +104,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row my-0 py-0">
                         <div class="col-3 pl-5">
@@ -113,6 +121,7 @@
                 ?>
                 <?php
                 if(isset($metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode != ""){
+                    $flag *= 0;
                     ?>
                     <div class="row my-0 py-0 divPublisherRole">
                         <div class="col-3 pl-5">
@@ -129,6 +138,7 @@
                 ?>
                 <?php
                 if(isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != ""){
+                    $flag *= 0;
                     ?>
                     <div class="row my-0 py-0">
                         <div class="col-3 pl-5">
@@ -158,3 +168,15 @@
         </div>
     </div>
 </div>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c1').hide();
+        });
+    </script>
+        <?php
+}
+?>
