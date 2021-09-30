@@ -19,6 +19,7 @@ use DB;
 use App\Mail\MailNotify;
 use App\AuditTrail;
 use App\Kategori;
+use App\Ftesttodel2;
 
 class UserController extends Controller {
 
@@ -520,6 +521,26 @@ class UserController extends Controller {
 //            foreach (Auth::user()->getRoleNames() as $role) {
 //                echo "<br>".$role;
 //            }
+//        }
+//        exit();
+        
+//        $usersToMigrate = Ftesttodel2::get();
+//        foreach($usersToMigrate as $u){
+//            $theUser = User::create([
+//                'name' => $u->fname.' '.$u->lname,
+//                'email' => $u->mail,
+//                'phone_bimbit' => $u->phone,
+//                'password' => Hash::make($u->pwd),
+//                'alamat' => $u->addr.' '.$u->addr2.' '.$u->pcode.' '.$u->addr2.' '.$u->city.' '.$u->neg,
+//                'postcode' => $u->pcode,
+//                'city' => $u->city,
+//                'state' => $u->neg,
+//                'status' => ($u->status == "Yes" ? "1":"0"),
+//                'disahkan' => '1',
+//                'assigned_roles' => "Penerbit Metadata",
+//                'mygdix_user_id' => $u->id_user 
+//            ]);
+//            $theUser->assignRole('Penerbit Metadata');
 //        }
 //        exit();
 

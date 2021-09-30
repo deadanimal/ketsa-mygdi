@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','email','password','nric','agensi_organisasi','bahagian','sektor','phone_pejabat','surat_sokongan','alamat','status','disahkan','institusi','kategori','assigned_roles'
+        'name','email','password','nric','agensi_organisasi','bahagian','sektor','phone_pejabat','surat_sokongan','alamat','status','disahkan','institusi','kategori','assigned_roles','mygdix_user_id'
     ];
 
     /**
