@@ -76,6 +76,7 @@ class MetadataController extends Controller {
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
         }
 
+        libxml_use_internal_errors(true); //Disable libxml errors and allow user to fetch error information as needed
         $metadatas = [];
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
@@ -88,8 +89,11 @@ class MetadataController extends Controller {
 
             $penerbit = $this->getUser($met->portal_user_id);
 
-            $xml2 = simplexml_load_string($ftestxml2);
-            $metadatas[$met->id] = [$xml2, $met, $penerbit];
+            if(simplexml_load_string($ftestxml2) === false){
+            }else{
+                $xml2 = simplexml_load_string($ftestxml2);
+                $metadatas[$met->id] = [$xml2, $met, $penerbit];
+            }
         }
 
         return view('mygeo.metadata.senarai_metadata', compact('metadatas'));
