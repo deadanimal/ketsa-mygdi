@@ -96,6 +96,10 @@ class RegisterController extends Controller
                 'phone_bimbit' => $data['phone_bimbit'],
                 'password' => Hash::make($data['password']),
                 'alamat' => $data['alamat'],
+                'postcode' => $data['postcode'],
+                'city' => $data['city'],
+                'state' => $data['state'],
+                'country' => $data['country'],
                 'kategori' => $data['kategori'],
                 'status' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
                 'disahkan' => ($data['peranan'] == "Pemohon Data" ? "1":"0"),
@@ -145,6 +149,7 @@ class RegisterController extends Controller
     {
         $theUser = User::where('email',$request->email)->get()->first();
         if($theUser){
+            //check if user already has 2 roles. max 2 roles per user
             if(count($theUser->getRoleNames()) == 2){
                 return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda dah ade 2 role dah']);
             }
@@ -153,8 +158,19 @@ class RegisterController extends Controller
             foreach($roles as $role){
                 $r2[] = $role;
             }
+            //check if user already registered with the role selected
             if(in_array($request->peranan,$r2)){
                 return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda telah didaftar dengan peranan dipilih.']);
+            }
+        }
+        
+        //if role selected is pengesah, check if there is already a pengesah in the bahagian selected
+        if($request->peranan == 'Pengesah Metadata' && $request->bahagian != ""){
+            $pengesahs = User::whereHas("roles", function ($q) {
+                $q->where("name", "Pengesah Metadata");
+            })->where('bahagian', $request->bahagian)->get(); //SMBG SINI
+            if($pengesahs){
+                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
             }
         }
         

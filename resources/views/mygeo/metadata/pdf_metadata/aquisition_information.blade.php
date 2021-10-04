@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary div_c8" id="div_c8">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse8">
@@ -16,6 +17,7 @@
                         <div class="form-group">
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->averageAirTemperature->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->averageAirTemperature->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-8">
@@ -32,6 +34,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->altitude->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->altitude->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-8">
@@ -48,6 +51,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->relativeHumidity->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->relativeHumidity->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-8">
@@ -64,6 +68,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->meteorologicalCondition->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->meteorologicalCondition->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb">
                                     <div class="col-xl-8">
@@ -86,6 +91,7 @@
                         <div class="form-group">
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->identifier->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->identifier->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
@@ -102,6 +108,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->trigger->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->trigger->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
@@ -118,6 +125,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->context->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->context->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
@@ -134,6 +142,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->sequence->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->sequence->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
@@ -150,6 +159,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->EvtIdentifiertime->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->EvtIdentifiertime->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
@@ -171,6 +181,7 @@
                         <div class="form-group">
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->typeInstrumentIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->typeInstrumentIdentification->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
@@ -189,6 +200,7 @@
                             <h6 class="heading-small text-muted mt-2 mb-3">Operation</h6>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
@@ -205,6 +217,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationStatus->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationStatus->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb-2">
                                     <div class="col-xl-5">
@@ -221,6 +234,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationType->CharacterString != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="row mb">
                                     <div class="col-xl-5">
@@ -243,6 +257,7 @@
                         <div class="form-group">
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date) && $metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="form-control-label mr-3">
                                     Date
@@ -253,6 +268,7 @@
                             ?>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date) && $metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date != "") {
+                                $flag *= 0;
                                 ?>
                                 <div class="form-control-label mt-3 mr-3">
                                     Last Acceptable Date
@@ -268,3 +284,15 @@
         </div>
     </div>
 </div>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c8').hide();
+        });
+    </script>
+        <?php
+}
+?>

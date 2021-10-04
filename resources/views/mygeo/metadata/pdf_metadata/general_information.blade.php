@@ -177,6 +177,6 @@ if($flag == 1){
             $('#div_c1').hide();
         });
     </script>
-        <?php
+    <?php
 }
 ?>

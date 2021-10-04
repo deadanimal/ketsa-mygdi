@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary div_c13" id="div_c13">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse13">
@@ -10,6 +11,7 @@
         <div class="card-body">
             <?php
             if (!empty($refSys)) {
+                $flag *= 0;
                 ?>
                 <div class="row mb-2">
                     <div class="col-xl-3">
@@ -57,3 +59,15 @@
         </div>
     </div>
 </div>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c13').hide();
+        });
+    </script>
+    <?php
+}
+?>

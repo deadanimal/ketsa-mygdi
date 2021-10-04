@@ -567,8 +567,15 @@ class UserController extends Controller {
 
     public function edit(){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
+        if(strpos($user->kategori,"IPTA") !== false){
+            $kategori = Kategori::where('name','ilike','%IPTA%')->get();
+        }elseif(strpos($user->kategori,"IPTS") !== false){
+            $kategori = Kategori::where('name','ilike','%IPTS%')->get();
+        }else{
+            $kategori = Kategori::get();
+        }
+
         $roles = Role::get();
-        $kategori = Kategori::get();
         return view('mygeo.profile.profil_edit', compact('user','roles','kategori'));
     }
 

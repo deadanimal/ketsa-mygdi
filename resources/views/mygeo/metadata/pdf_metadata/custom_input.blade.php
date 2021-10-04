@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary mb-4 div_c16" id="div_c16">
     <div class="card-header">
         <h4 class="card-title">
@@ -15,6 +16,7 @@
                         $val = "";
                         if(!empty($ci->{$cmi->input_name})){
                             $val = $ci->{$cmi->input_name}->CharacterString;
+                            $flag *= 0;
                             ?>
                             <div class="my-1">
                                 <div class="row my-0 py-0">
@@ -38,3 +40,15 @@
         </div>
     </div>
 </div>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c16').hide();
+        });
+    </script>
+    <?php
+}
+?>

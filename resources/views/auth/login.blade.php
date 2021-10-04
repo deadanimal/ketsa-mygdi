@@ -387,6 +387,46 @@
                                                     name="alamat"></textarea>
                                                 <p class="error-message"><span></span></p>
                                             </div>
+                                            <div class="col-3">
+                                                <label class="form-control-label mr-4" for="input-address">
+                                                    Poskod
+                                                </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control form-control-sm ml-3" id="input-postcode"
+                                                    placeholder="Poskod"name="postcode">
+                                                <p class="error-message"><span></span></p>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="form-control-label mr-4" for="input-address">
+                                                    City
+                                                </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <textarea class="form-control form-control-sm ml-3" id="input-city"
+                                                    row="2" placeholder="City" name="city"></textarea>
+                                                <p class="error-message"><span></span></p>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="form-control-label mr-4" for="input-address">
+                                                    State
+                                                </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <textarea class="form-control form-control-sm ml-3" id="input-state"
+                                                    row="2" placeholder="State" name="state"></textarea>
+                                                <p class="error-message"><span></span></p>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="form-control-label mr-4" for="input-address">
+                                                    Country
+                                                </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <textarea class="form-control form-control-sm ml-3" id="input-country"
+                                                    row="2" placeholder="Country" name="country"></textarea>
+                                                <p class="error-message"><span></span></p>
+                                            </div>
                                         </div>
                                         <div class="row mb-2 divKategori">
                                             <div class="col-3">
