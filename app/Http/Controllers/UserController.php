@@ -318,8 +318,11 @@ class UserController extends Controller {
                     </label><label class="float-right">:</label>
                 </div>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" id="sektor" type="text" name="sektor"
-                           value="'.($user_details->sektor == '1' ? 'Kerajaan' : 'Swasta').'" />
+                    <select class="form-control form-control-sm" name="sektor" id="sektor">
+                        <option value="">Pilih...</option>
+                        <option value="1" '.($user_details->sektor == '1' ? 'selected':'').'>Kerajaan</option>
+                        <option value="2" '.($user_details->sektor == '2' ? 'selected':'').'>Swasta</option>
+                    </select>
                 </div>
             </div>
             <div class="row mb-2">
@@ -328,7 +331,12 @@ class UserController extends Controller {
                         Agensi / Organisasi
                     </label><label class="float-right">:</label>
                 </div>
-                <div class="col-8">';
+                <div class="col-8">
+                <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                    <option value="">Pilih...</option>
+                </select>
+';
+        
         if (Auth::user()->hasRole("Pemohon Data")) {
             $html_details .= '
                         <input class="form-control form-control-sm" id="agensi_organisasi" name="agensi_organisasi"
@@ -578,6 +586,21 @@ class UserController extends Controller {
         $roles = Role::get();
         return view('mygeo.profile.profil_edit', compact('user','roles','kategori'));
     }
+    
+    public function edit_admin($id){
+        $user = User::where(["id"=>$id])->get()->first();
+        if(strpos($user->kategori,"IPTA") !== false){
+            $kategori = Kategori::where('name','ilike','%IPTA%')->get();
+        }elseif(strpos($user->kategori,"IPTS") !== false){
+            $kategori = Kategori::where('name','ilike','%IPTS%')->get();
+        }else{
+            $kategori = Kategori::get();
+        }
+
+        $roles = Role::get();
+//        dd('ftester');
+        return view('mygeo.profile.profil_edit_admin', compact('user','roles','kategori'));
+    }
 
     public function update_profile(Request $request){
         $fields = [
@@ -640,8 +663,8 @@ class UserController extends Controller {
         return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
     }
     
-    public function update_profile_superadmin(Request $request){
-        $user = User::where("id",$request->user_id)->get()->first();
+    public function update_profile_admin(Request $request){
+        $user = User::where("id",$request->userid)->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
         $user->email = $request->email;
@@ -697,6 +720,31 @@ class UserController extends Controller {
         $at->save();
 
         return redirect('mygeo_profil')->with('message','Gambar profil berjaya dikemas kini.');
+    }
+    
+    public function update_gambarprofile_admin(Request $request){
+        //save gambar profil
+        if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
+            $this->validate($request,['gambar_profil' => 'required|image|mimes:jpeg,png,jpg']);
+            $exists = Storage::exists($request->gambar_profil->getClientOriginalName());
+            $time = date('Y-m-d'.'_'.'H_i_s');
+            $fileName = $time.'_'.$request->gambar_profil->getClientOriginalName();
+            $imageUrl = Storage::putFileAs('/public/', $request->file('gambar_profil'), $fileName);
+        }
+
+        $user = User::where(["id"=>$request->userid])->get()->first();
+        if(isset($imageUrl)){
+            $user->gambar_profil = $fileName;
+        }
+        $user->save();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
+        $at->save();
+
+        return redirect('kemaskini_profil_admin/'.$request->userid)->with('message','Gambar profil berjaya dikemas kini.');
     }
 
     public function update_password(Request $request){

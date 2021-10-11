@@ -229,9 +229,10 @@
                                                             class="butiran btn btn-sm btn-info mr-2"><i
                                                                 class="fas fa-eye"></i></button>
                                                         <?php
-                                                        if(Auth::user()->hasRole('Super Admin','Pentadbir Aplikasi')){
+                                                        if(Auth::user()->hasAnyRole('Super Admin','Pentadbir Aplikasi')){
                                                             ?>
-                                                            <button type="button" data-toggle="modal" data-target="#modal-kemaskini" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="kemaskini btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>
+                                                            <!--<button type="button" data-toggle="modal" data-target="#modal-kemaskini" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="kemaskini btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>-->
+                                                            <button type="button" data-userid="{{ $user->id }}" class="kemaskini btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>
                                                             <?php
                                                         }
                                                         ?>
@@ -278,6 +279,7 @@
             </div>
         </div>
     </div>
+    <?php /*
     <div class="modal fade" id="modal-kemaskini">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -303,6 +305,7 @@
             </div>
         </div>
     </div>
+    */ ?>
 
 <script>
     $('.btnStatusUser').change(function() {
@@ -397,6 +400,11 @@
             });
         });
         $(document).on("click", ".kemaskini", function() {
+            var userid = $(this).data('userid');
+            window.location.replace("{{ url('kemaskini_profil_admin/') }}/"+userid);
+        });
+        /*
+        $(document).on("click", ".kemaskini", function() {
             // ajax get user details
             var user_id = $(this).data('userid');
             $.ajax({
@@ -423,6 +431,7 @@
                 });
             });
         });
+        */
 
         $(document).on("click", ".btnChangeStatus", function() {
             var userid = $(this).data('userid');
@@ -499,6 +508,27 @@
                             .bahagian + '</option>');
                     });
                 }
+            });
+        });
+        
+        $('#sektor').change(function() {
+            $.ajax({
+                method: "POST",
+                url: "{{ url('get_agensi_organisasi_by_sektor') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "sektor": $(this).val(),
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                $('#agensi_organisasi').html('');
+                $('#agensi_organisasi').append('<option value="">Pilih...</option>');
+                $.each(data.aos, function(index,value) {
+                    $('#agensi_organisasi').append('<option value="'+value.id+'" data-name="'+value.name+'">'+value.name+'</option>');
+                });
+
+                $('#bahagian').html('');
+                $('#bahagian').append('<option value="">Pilih...</option>');
             });
         });
 

@@ -208,9 +208,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_proses_data','DataAsasController@update_proses_data');
 
     Route::get('/kemaskini_profil','UserController@edit');
+    Route::get('/kemaskini_profil_admin/{id}','UserController@edit_admin');
     Route::post('/simpan_kemaskini_profil','UserController@update_profile');
-    Route::post('/simpan_kemaskini_superadmin','UserController@update_profile_superadmin');
+    Route::post('/simpan_kemaskini_admin','UserController@update_profile_admin');
     Route::post('/simpan_kemaskini_gambarprofil','UserController@update_gambarprofile');
+    Route::post('/simpan_kemaskini_gambarprofil_admin','UserController@update_gambarprofile_admin');
     Route::post('/simpan_kemaskini_password','UserController@update_password');
     Route::post('/tambahPenggunaBaru','UserController@tambahPenggunaBaru');
 
