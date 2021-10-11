@@ -202,8 +202,7 @@
                                                         <i class="far fa-question-circle"></i>
                                                     </span>
                                                     <div class="ml-3 mt-2 divthird" id="divthird">
-                                                        <div
-                                                            class=" custom-control custom-radio mb-3 2_g2e_iptaSyarahSelidik">
+                                                        <div class=" custom-control custom-radio mb-3 2_g2e_iptaSyarahSelidik">
                                                             <input class="custom-control-input" id="iptaSyarahSelidik"
                                                                 name="perananSelect" type="radio"
                                                                 value="IPTA - Pensyarah/Penyelidik" />
@@ -293,6 +292,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <?php /*
                                         <div class="row mb-2 divOrganisasi">
                                             <div class="col-3">
                                                 <label class="InstitusiLabel form-control-label mr-4"
@@ -312,6 +312,7 @@
                                                     agensi. Contoh: Agensi Anti Dadah Kebangsaan (AADK)</i>
                                             </div>
                                         </div>
+                                        */ ?>
                                         <div class="row mb-2 divBahagian">
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4" for="bahagian">Bahagian</label>
@@ -576,28 +577,31 @@
             });
         });
         $('#agensi_organisasi').change(function() {
-            var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
+            var sel = $('input[name="perananSelect"]:checked').val();
+            if(sel == "3" || sel == "4"){
+                var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
 
-            $.ajax({
-                method: "POST",
-                url: "{{ url('get_bahagian') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "agensi_organisasi_name": agensi_organisasi_name,
-                },
-            }).done(function(response) {
-                var data = jQuery.parseJSON(response);
-                if (data.error == '1') {
-                    alert(data.msg);
-                } else {
-                    $('#bahagian').html('');
-                    $('#bahagian').append('<option value="">Pilih...</option>');
-                    $.each(data.bhgns, function(index, value) {
-                        $('#bahagian').append('<option value="' + value.bahagian + '">' + value
-                            .bahagian + '</option>');
-                    });
-                }
-            });
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('get_bahagian') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "agensi_organisasi_name": agensi_organisasi_name,
+                    },
+                }).done(function(response) {
+                    var data = jQuery.parseJSON(response);
+                    if (data.error == '1') {
+                        alert(data.msg);
+                    } else {
+                        $('#bahagian').html('');
+                        $('#bahagian').append('<option value="">Pilih...</option>');
+                        $.each(data.bhgns, function(index, value) {
+                            $('#bahagian').append('<option value="' + value.bahagian + '">' + value
+                                .bahagian + '</option>');
+                        });
+                    }
+                });
+            }
         });
 
         $('input:radio[name="perananSelect"]').change(function() {
@@ -619,9 +623,9 @@
                 $(".divPhoneBimbit").hide();
                 $(".divPeranan").show();
                 $(".divAgensiOrganisasiAlamat").show();
-                $(".divOrganisasi").hide();
+//                $(".divOrganisasi").hide();
                 $("#agensi_organisasi").prop('disabled', false);
-                $("#agensi_organisasi2").prop('disabled', true);
+//                $("#agensi_organisasi2").prop('disabled', true);
                 $(".divKategori").hide();
                 $('.btn_isi_borang').show();
                 $(".AgensiOrganisasiLabel").show();
@@ -629,6 +633,8 @@
                 $(".divsecond").hide();
                 $(".divthird").hide();
                 $("#kategoriPemohonData").hide();
+                $('#agensi_organisasi').html('');
+                $('#agensi_organisasi').append('<option value="">Pilih...</option>');
             } else if (per == "2") {
                 $(".2_g2c").show();
                 $(".2_g2g").show();
@@ -644,7 +650,7 @@
                 $(".2_g2e").show();
                 $(".divNama").hide();
                 $(".divNric").hide();
-                $(".divOrganisasi").hide();
+//                $(".divOrganisasi").hide();
                 $(".divAgensiOrganisasi").hide();
                 $(".divAgensiOrganisasiAlamat").hide();
                 $(".divBahagian").hide();
@@ -676,8 +682,8 @@
                 $(".2_g2e").show();
                 $(".divNama").hide();
                 $(".divNric").hide();
-                $(".divOrganisasi").hide();
-                $(".divAgensiOrganisasi").hide();
+//                $(".divOrganisasi").hide();
+                $(".divAgensiOrganisasi").show();
                 $(".divAgensiOrganisasiAlamat").hide();
                 $(".divBahagian").hide();
                 $(".divSektor").hide();
@@ -693,15 +699,34 @@
                 $(".divsecond").show();
                 $(".divthird").show();
             } else if (per == "Agensi Persekutuan/Agensi Negeri" || per == "Badan Berkanun" || per == "GLC") {
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('get_agensi_organisasi_by_sektor') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "sektor": 1,
+                    },
+                }).done(function(response) {
+                    var data = jQuery.parseJSON(response);
+                    $('#agensi_organisasi').html('');
+                    $('#agensi_organisasi').append('<option value="">Pilih...</option>');
+                    $.each(data.aos, function(index, value) {
+                        $('#agensi_organisasi').append('<option value="' + value.id + '" data-name="' +
+                            value.name + '">' + value.name + '</option>');
+                    });
+                    $('#bahagian').html('');
+                    $('#bahagian').append('<option value="">Pilih...</option>');
+                });
                 $(".divNama").show();
                 $(".divNric").show();
-                $(".divOrganisasi").show();
-                $(".divAgensiOrganisasi").hide();
-                $("#agensi_organisasi").prop('disabled', true);
-                $("#agensi_organisasi2").prop('disabled', false);
+//                $(".divOrganisasi").show();
+                $(".divAgensiOrganisasi").show();
+                $("#agensi_organisasi").prop('disabled', false);
+//                $("#agensi_organisasi2").prop('disabled', false);
                 $(".divAgensiOrganisasiAlamat").show();
                 $(".divBahagian").hide();
                 $(".divSektor").hide();
+                $("#sektor").val('1');
                 $(".divEmel").hide();
                 $(".divEmelRasmi").show();
                 $(".divPhonePejabat").show();
@@ -718,15 +743,34 @@
                 $("#kategoriPemohonData").val(per).change().prop('disabled', 'disabled').show();
             } else if (per == "IPTA - Pensyarah/Penyelidik" || per == "IPTA - Pelajar" || per ==
                 "IPTS - Pensyarah/Penyelidik" || per == "IPTS - Pelajar") {
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('get_agensi_organisasi_by_sektor') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "sektor": 2,
+                    },
+                }).done(function(response) {
+                    var data = jQuery.parseJSON(response);
+                    $('#agensi_organisasi').html('');
+                    $('#agensi_organisasi').append('<option value="">Pilih...</option>');
+                    $.each(data.aos, function(index, value) {
+                        $('#agensi_organisasi').append('<option value="' + value.id + '" data-name="' +
+                            value.name + '">' + value.name + '</option>');
+                    });
+                    $('#bahagian').html('');
+                    $('#bahagian').append('<option value="">Pilih...</option>');
+                });
                 $(".divNama").show();
                 $(".divNric").show();
-                $(".divOrganisasi").show();
-                $(".divAgensiOrganisasi").hide();
-                $("#agensi_organisasi").prop('disabled', true);
-                $("#agensi_organisasi2").prop('disabled', false);
+//                $(".divOrganisasi").show();
+                $(".divAgensiOrganisasi").show();
+                $("#agensi_organisasi").prop('disabled', false);
+//                $("#agensi_organisasi2").prop('disabled', false);
                 $(".divAgensiOrganisasiAlamat").show();
                 $(".divBahagian").hide();
                 $(".divSektor").hide();
+                $("#sektor").val('2');
                 $(".divEmel").show();
                 $(".divEmelRasmi").hide();
                 $(".divPhonePejabat").show();
@@ -752,9 +796,9 @@
                 $(".divNama").hide();
                 $(".divNric").hide();
                 $(".divOrganisasi").show();
-                $("#agensi_organisasi").prop('disabled', true);
-                $("#agensi_organisasi2").prop('disabled', false);
-                $(".divAgensiOrganisasi").hide();
+                $("#agensi_organisasi").prop('disabled', false);
+//                $("#agensi_organisasi2").prop('disabled', false);
+                $(".divAgensiOrganisasi").show();
                 $(".divAgensiOrganisasiAlamat").hide();
                 $(".divBahagian").hide();
                 $(".divSektor").hide();
@@ -783,9 +827,9 @@
                 $(".divNama").hide();
                 $(".divNric").hide();
                 $(".divOrganisasi").show();
-                $("#agensi_organisasi").prop('disabled', true);
-                $("#agensi_organisasi2").prop('disabled', false);
-                $(".divAgensiOrganisasi").hide();
+                $("#agensi_organisasi").prop('disabled', false);
+//                $("#agensi_organisasi2").prop('disabled', false);
+                $(".divAgensiOrganisasi").show();
                 $(".divAgensiOrganisasiAlamat").hide();
                 $(".divBahagian").hide();
                 $(".divSektor").hide();

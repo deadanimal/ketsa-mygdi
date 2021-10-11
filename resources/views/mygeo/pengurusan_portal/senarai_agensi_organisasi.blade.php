@@ -81,10 +81,10 @@
                         <div class="card">
                             @csrf
                             <div class="card-header">
-                                <h3 class="card-title" style="font-size: 2rem;">Senarai Agensi / Organisasi</h3>
+                                <h3 class="card-title" style="font-size: 2rem;">Senarai Agensi / Organisasi / Institusi</h3>
                                 <button type="button" class="btn btn-sm btn-default float-right dropdown-toggle" data-toggle="dropdown"><i class="fas fa-plus mr-2"></i>Tambah</button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_tambah_agensi_organisasi">Agensi / Organisasi +</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_tambah_agensi_organisasi">Agensi / Organisasi / Institusi +</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_tambah_bahagian">Bahagian +</a>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                         <tr>
                                             <th>BIL</th>
                                             <th>SEKTOR</th>
-                                            <th>AGENSI / ORGANISASI</th>
+                                            <th>AGENSI / ORGANISASI / INSTITUSI</th>
                                             <th>BAHAGIAN</th>
                                             <th>TINDAKAN</th>
                                         </tr>
@@ -148,7 +148,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-primary mb-0">
-                        <h4 class="text-white">Tambah Agensi / Organisasi</h4>
+                        <h4 class="text-white">Tambah Agensi / Organisasi / Institusi</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -166,19 +166,16 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-control-label">Nama Agensi / Organisasi</label>
-                                    <!--<input type="text" name="namaAgensiOrganisasi" class="form-control form-control-sm namaAgensiOrganisasi">-->
-                                    
+                                    <label class="form-control-label">Nama Agensi / Organisasi / Institusi</label>
                                     <div class="fautocomplete">
                                         <div>
-                                            <div class="autocomplete" style="width:300px;">
+                                            <div class="autocomplete" style="width:100%;">
                                                 <input type="text" name="namaAgensiOrganisasi" id="namaAgensiOrganisasi" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
                                         <ul id="searchResult"></ul>
                                         <div class="clear"></div>
                                     </div>
-                                    
                                 </div>
                                 <button type="button" class="btn btn-success float-right btnSimpanAgensiOrganisasi">
                                     <span class="text-white">Simpan</span>
@@ -211,14 +208,22 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-control-label">Agensi / Organisasi</label>
-                                    <select name="agensi_organisasi" class="form-control form-control-sm agensi_organisasi">
+                                    <label class="form-control-label">Agensi / Organisasi / Institusi</label>
+                                    <select name="agensi_organisasi" id="namaAgensiOrganisasi2" class="form-control form-control-sm agensi_organisasi">
                                         <option value="">Pilih...</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Nama</label>
-                                    <input type="text" name="namaBahagian" class="form-control form-control-sm namaBahagian">
+                                    <div class="fautocomplete">
+                                        <div>
+                                            <div class="autocomplete" style="width:100%;">
+                                                <input type="text" name="namaBahagian" id="namaBahagian2" class="form-control namaBahagian" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <ul id="searchResult"></ul>
+                                        <div class="clear"></div>
+                                    </div>
                                 </div>
                                 <button type="button" class="btn btn-success float-right btnSimpanBahagian">
                                     <span class="text-white">Simpan</span>
@@ -254,7 +259,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Nama Agensi / Organisasi</label>
-                                    <input type="text" name="namaAgensiOrganisasi" class="form-control form-control-sm namaAgensiOrganisasi">
+                                    <div class="fautocomplete">
+                                        <div>
+                                            <div class="autocomplete" style="width:100%;">
+                                                <input type="text" name="namaAgensiOrganisasi" id="namaAgensiOrganisasi3" class="form-control" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <ul id="searchResult"></ul>
+                                        <div class="clear"></div>
+                                    </div>
                                 </div>
                                 <button type="button" class="btn btn-success float-right btnSimpanKemaskiniAgensiOrganisasi">
                                     <span class="text-white">Simpan</span>
@@ -410,7 +423,8 @@
 
         $(document).ready(function() {
             var availableTags = <?php echo json_encode($agensiOrganisasi); ?>;
-            autocomplete(document.getElementById("namaAgensiOrganisasi"), availableTags);
+            autocomplete(document.getElementById("namaAgensiOrganisasi"), availableTags); //create form
+            autocomplete(document.getElementById("namaAgensiOrganisasi3"), availableTags); //edit form
             
             var table = $("#table_agensi_organisasi").DataTable({
                 "orderCellsTop": true,
@@ -627,6 +641,27 @@
                 $.each(data.aos, function(index,value) {
                     $('#formTambahBahagian .agensi_organisasi').append('<option value="'+value.name+'">'+value.name+'</option>');
                 });
+            });
+        });
+        $('#namaAgensiOrganisasi2').change(function() {
+            $.ajax({
+                method: "POST",
+                url: "{{ url('get_bahagian') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "agensi_organisasi_name": $(this).val(),
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                if (data.error == '1') {
+//                    alert(data.msg);
+                } else {
+                    var availableTags = [];
+                    $.each(data.bhgns, function(index, value) {
+                        availableTags.push(value.bahagian);
+                    });
+                    autocomplete(document.getElementById("namaBahagian2"), availableTags);
+                }
             });
         });
         $('#formKemaskiniBahagian .sektor').change(function() {

@@ -103,13 +103,13 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
-                                                <label class="form-control-label">Agensi / Organisasi</label><span class="text-warning">*</span>
+                                                <label class="form-control-label">Agensi / Organisasi / Institusi</label><span class="text-warning">*</span>
                                                 <select name="agensi_organisasi" id="agensi_organisasi_dropdown" class="form-control form-control-sm">
                                                     <option value="">Pilih...</option>
                                                     <?php
                                                     if (!empty($aos)) {
                                                         foreach ($aos as $ao) {
-                                                            ?><option value="<?php echo $ao->id; ?>"><?php echo $ao->name; ?></option><?php
+                                                            ?><option value="<?php echo $ao->id; ?>" data-name="<?php echo $ao->name; ?>"><?php echo $ao->name; ?></option><?php
                                                         }
                                                     }
                                                     ?>
@@ -118,6 +118,14 @@
                                                 @error('agensi_organisasi')
                                                 <div class="text-warning">{{ $message }}</div>
                                                 @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <label class="form-control-label">Bahagian</label>
+                                                <select name="bahagian" id="bahagian" class="form-control form-control-sm">
+                                                    <option value="">Pilih...</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +176,7 @@
                                             <tr>
                                                 <th>Bil</th>
                                                 <th>Nama</th>
-                                                <th>Agensi</th>
+                                                <th>Agensi / Organisasi / Institusi</th>
                                                 <th>Peranan</th>
                                                 <th>Status</th>
                                                 <th>Tindakan</th>
@@ -467,6 +475,31 @@
                     location.reload();
                 });
             }
+        });
+        
+        $('#agensi_organisasi_dropdown').change(function() {
+            var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
+
+            $.ajax({
+                method: "POST",
+                url: "{{ url('get_bahagian') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "agensi_organisasi_name": agensi_organisasi_name,
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                if (data.error == '1') {
+                    alert(data.msg);
+                } else {
+                    $('#bahagian').html('');
+                    $('#bahagian').append('<option value="">Pilih...</option>');
+                    $.each(data.bhgns, function(index, value) {
+                        $('#bahagian').append('<option value="' + value.bahagian + '">' + value
+                            .bahagian + '</option>');
+                    });
+                }
+            });
         });
 
         <?php
