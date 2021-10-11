@@ -83,18 +83,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <?php
-//                                            if($user->editable == "1"){
-                                                ?><input type="text" name="uname" id="uname" class="form-control form-control-sm ml-3" value="{{ $user->name }}"><?php
-                                                /*
-                                            }else{
-                                                ?>
-                                                <p class="ml-3 mb-0">{{ $user->name }}</p>
-                                                <input type="hidden" name="uname" id="uname" value="{{ $user->name }}">
-                                                <?php
-                                            }
-                                                 */
-                                            ?>
+                                            <input type="text" name="uname" id="uname" class="form-control form-control-sm ml-3" value="{{ $user->name }}">
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -104,19 +93,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <?php
-//                                            if($user->editable == "1"){
-                                                ?><input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ $user->nric }}"><?php
-
-                                                /*
-                                                }else{
-                                                ?>
-                                                <p class="ml-3 mb-0">{{ $user->nric }}</p>
-                                                <input type="hidden" name="nric" id="nric" value="{{ $user->nric }}">
-                                                <?php
-                                            }
-                                                 */
-                                            ?>
+                                            <input type = "number" maxlength = "12" name="nric" id="nric" class="form-control form-control-sm ml-3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ $user->nric }}">
                                         </div>
                                     </div>
                                     <div class="row mb-2 divSektor">
