@@ -21,7 +21,7 @@
                             <h6 class="h2 text-dark d-inline-block mb-0">
                                 @if (Auth::user()->hasRole(['Pemohon Data']))
                                     Mohon Data
-                                @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
                                     Permohonan Baru
                                 @endif
 
@@ -344,7 +344,7 @@
                                                     class="btn btn-sm btn-default">Isi
                                                     Borang</a>
                                             </div>
-                                        @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                        @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
                                             @if ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar')
                                                 <div class="col-7 form-inline">
                                                     <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
@@ -354,7 +354,7 @@
                                             @endif
                                         @endif
                                     </div>
-                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
                                         <div class="row">
                                             <div class="col-4">
                                                 <h4 class="heading text-dark mr-2">Status Permohonan</h4>
@@ -405,7 +405,7 @@
                                     <div class="float-right">
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
 
-                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']) && $permohonan->status != 1)
+                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']) && $permohonan->status != 1)
                                             <button type="button"
                                                 class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
                                                 Hantar

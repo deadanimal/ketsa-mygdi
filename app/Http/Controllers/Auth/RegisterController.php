@@ -168,7 +168,7 @@ class RegisterController extends Controller
         if($request->peranan == 'Pengesah Metadata' && $request->bahagian != ""){
             $pengesahs = User::whereHas("roles", function ($q) {
                 $q->where("name", "Pengesah Metadata");
-            })->where('bahagian', $request->bahagian)->get(); //SMBG SINI
+            })->where('bahagian', $request->bahagian)->get();
             if($pengesahs){
                 return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
             }

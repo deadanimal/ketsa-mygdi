@@ -203,7 +203,7 @@ class MetadataController extends Controller {
             $this->store_todel();
         }
 
-        if (!auth::user()->hasRole(['Pentadbir Metadata','Pengesah Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Pentadbir Metadata','Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
 
@@ -290,7 +290,7 @@ class MetadataController extends Controller {
     }
 
     public function create() {
-        if (!auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Penerbit Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
 
@@ -379,7 +379,7 @@ class MetadataController extends Controller {
     }
 
     public function edit($id) {
-        if (!auth::user()->hasRole(['Pengesah Metadata','Penerbit Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Pengesah Metadata','Penerbit Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
         
@@ -2740,7 +2740,7 @@ class MetadataController extends Controller {
             $mg->data = $xml;
             $mg->changedate = date("Y-m-d H:i:s");
 
-            if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+            if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
 //                $mg->disahkan = "no";
                 $mg->catatan1 = $request->catatan1;
                 $mg->catatan2 = $request->catatan2;
@@ -2805,9 +2805,9 @@ class MetadataController extends Controller {
             $msg = "";
             if($request->submitAction == "save"){
                 $mg->is_draf = "no";
-                if(auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+                if(auth::user()->hasRole(['Pengesah Metadata'])) {
                     $msg = "Catatan berjaya disimpan.";
-                }elseif(auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+                }elseif(auth::user()->hasRole(['Penerbit Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
                     $mg->disahkan = '0';
                     $msg = "Metadata berjaya dihantar.";
                     
@@ -2883,7 +2883,7 @@ class MetadataController extends Controller {
             }
         });
 
-        if(auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+        if(auth::user()->hasRole(['Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             $redirect = "mygeo_pengesahan_metadata";
         }elseif(auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
             $redirect = "mygeo_senarai_metadata";
@@ -2899,7 +2899,7 @@ class MetadataController extends Controller {
     }
 
     public function metadata_sahkan() {
-        if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
 
@@ -3012,7 +3012,7 @@ class MetadataController extends Controller {
     }
 
     public function metadata_tidak_disahkan() {
-        if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
 

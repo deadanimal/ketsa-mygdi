@@ -33,7 +33,7 @@ class UserController extends Controller {
     }
 
     public function index() {
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -48,7 +48,7 @@ class UserController extends Controller {
     }
 
     public function index_berdaftar() {
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -73,7 +73,7 @@ class UserController extends Controller {
     }
 
     public function index_penerbit_pengesah() {
-        if(!auth::user()->hasRole(['Pentadbir Metadata','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Metadata','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -458,7 +458,7 @@ class UserController extends Controller {
     }
 
     public function user_sahkan(){
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -487,7 +487,7 @@ class UserController extends Controller {
     }
 
     public function user_pengesahan_ditolak(){
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -744,7 +744,7 @@ class UserController extends Controller {
     }
 
     public function pemindahan_akaun(){
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
         $agensi = AgensiOrganisasi::distinct('name')->get()->all();
@@ -847,7 +847,7 @@ class UserController extends Controller {
     }
 
     public function tambahPenggunaBaru(Request $request){
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
         $fields = [

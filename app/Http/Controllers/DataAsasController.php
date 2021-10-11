@@ -165,7 +165,7 @@ class DataAsasController extends Controller
 
     public function penilaian()
     {
-        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin'])) {
+        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
             $permohonan_list = MohonData::where(['dihantar' => 1])->orderBy('created_at', 'DESC')->get();
         } else {
             $permohonan_list = MohonData::with('users')
@@ -420,7 +420,7 @@ class DataAsasController extends Controller
     public function mohon_data()
     {
         $user = User::where(["id" => Auth::user()->id])->get()->first();
-        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin'])) {
+        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
             $permohonan_list = MohonData::orderBy('created_at', 'DESC')->get();
         } else {
             $permohonan_list = MohonData::with('users')
@@ -924,7 +924,7 @@ class DataAsasController extends Controller
 
     public function kemaskini_permohonan(Request $request)
     {
-        if(Auth::user()->hasRole(['Pentadbir Data','Super Admin']))
+        if(Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi']))
         {
             DB::transaction(function () use ($request) {
                 //simpan status permohonan ini

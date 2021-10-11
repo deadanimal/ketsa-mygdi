@@ -157,7 +157,7 @@
                             <input type="hidden" name="newStatus" value="0">
                             @endif
                             <input type="hidden" name="metadata_id" value="{{ $metadataSearched->id }}">
-                            @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata','Super Admin']))
+                            @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata','Super Admin','Pentadbir Aplikasi']))
                             @include('mygeo.metadata.modal_metadata.modal_catatan')
                             @endif
                             <div class="card-body">
@@ -254,11 +254,11 @@
                                     @endif
                                 </div>
                                 <div id="div_action_buttons">
-                                    @if(auth::user()->hasRole(['Penerbit Metadata','Super Admin']))
+                                    @if(auth::user()->hasRole(['Penerbit Metadata']))
                                     <input type="button" data-name="draf" value="Simpan" class="btn btn-primary btnSubmit">
                                     <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSubmit">
                                     @endif
-                                    @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
+                                    @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin','Pentadbir Aplikasi']))
                                     <input type="button" data-name="save" value="Simpan" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
                                     <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
                                     @endif
@@ -382,7 +382,7 @@
         ?>
 
         <?php
-        if(auth::user()->hasRole(['Pengesah Metadata','Super Admin'])){
+        if(auth::user()->hasRole(['Pengesah Metadata','Super Admin','Pentadbir Aplikasi'])){
             ?>
             $(document).on('focusout','.catatan',function(){
                 if($(this).val().trim() != ""){

@@ -221,7 +221,7 @@
                                                             class="butiran btn btn-sm btn-info mr-2"><i
                                                                 class="fas fa-eye"></i></button>
                                                         <?php
-                                                        if(Auth::user()->hasRole('Super Admin')){
+                                                        if(Auth::user()->hasRole('Super Admin','Pentadbir Aplikasi')){
                                                             ?>
                                                             <button type="button" data-toggle="modal" data-target="#modal-kemaskini" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="kemaskini btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>
                                                             <?php

@@ -169,24 +169,7 @@
                                                 </ul>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
-                                            <li class="nav-item has-treeview">
-                                                <a class="nav-link ng-star-inserted" href="#">
-                                                    <i class="fa-braille fas text-indigo"></i>
-                                                    <span class="nav-link-text">Pengurusan Metadata</span>
-                                                    <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
-                                                </a>
-                                                <ul class="nav nav-sm nav-treeview">
-                                                    <li class="nav-item">
-                                                        <a href="{{ url('mygeo_senarai_metadata') }}"
-                                                            class="nav-link active">
-                                                            <span class="nav-link-text">Senarai Metadata</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Metadata', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Metadata', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item has-treeview">
                                                 <a class="nav-link ng-star-inserted" href="#">
                                                     <i class="fa-braille fas text-indigo"></i>
@@ -209,7 +192,7 @@
                                                 </ul>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item has-treeview">
                                                 <a class="nav-link ng-star-inserted" href="#">
                                                     <i class="fas fa-magic text-red"></i>
@@ -241,7 +224,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('permohonan_baru') }}" class="nav-link">
                                                     <i class="far fa-id-card text-green"></i>
@@ -249,7 +232,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('status_permohonan') }}" class="nav-link">
                                                     <i class="fas fa-book text-purple"></i>
@@ -257,7 +240,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('proses_data') }}" class="nav-link">
                                                     <i class="fas fa-sync-alt text-cyan"></i>
@@ -265,7 +248,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('penilaian') }}" class="nav-link">
                                                     <i class="fas fa-file-signature text-primary"></i>
@@ -307,7 +290,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('semakan_status') }}" class="nav-link active">
                                                     <i class="fas fa-search text-danger"></i>
@@ -315,7 +298,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('muat_turun_data') }}" class="nav-link active">
                                                     <i class="fas fa-cloud-download-alt text-purple"></i>
@@ -323,7 +306,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('penilaian') }}" class="nav-link active">
                                                     <i class="fas fa-edit text-green"></i>
@@ -331,7 +314,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('mygeo_pengisian_metadata') }}"
                                                     class="nav-link active">
