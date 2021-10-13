@@ -118,23 +118,26 @@
                                   }
                                   ?>
                              </td>
-                             <td>
                                 <?php
+                                $status = $style = "";
                                 if($val[1]->is_draf == 'yes'){
-                                  ?>Draf<?php
+                                  $status = "Draf";
                                 }else{
                                     if($val[1]->disahkan == '0'){
-                                        ?>Perlu Pengesahan<?php
+                                        $status = "Perlu Pengesahan";
                                     }elseif($val[1]->disahkan == 'yes'){
-                                        ?>Diterbitkan<?php
+                                        $status = "Diterbitkan";
                                     }elseif($val[1]->disahkan == 'no'){
-                                        ?><span style="color:red;"><strong>Perlu Pembetulan</strong></span><?php
+                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
                                     }elseif($val[1]->disahkan == 'delete'){
-                                        ?>Dipadam<?php
+                                        $status = "Dipadam";
                                     }
                                 }
                                 ?>
-                          </td>
+                            <td <?php echo $style; ?>>
+                                <?php echo $status; ?>
+                            </td>
                           <td>
                               {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
                           </td>
@@ -173,23 +176,26 @@
                                   }
                                   ?>
                              </td>
-                             <td>
-                                <?php
+                             <?php
+                                $status = $style = "";
                                 if($val[1]->is_draf == 'yes'){
-                                  ?>Draf<?php
+                                  $status = "Draf";
                                 }else{
                                     if($val[1]->disahkan == '0'){
-                                        ?>Perlu Pengesahan<?php
+                                        $status = "Perlu Pengesahan";
                                     }elseif($val[1]->disahkan == 'yes'){
-                                        ?>Diterbitkan<?php
+                                        $status = "Diterbitkan";
                                     }elseif($val[1]->disahkan == 'no'){
-                                        ?><span style="color:red;"><strong>Perlu Pembetulan</strong></span><?php
+                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
                                     }elseif($val[1]->disahkan == 'delete'){
-                                        ?>Dipadam<?php
+                                        $status = "Dipadam";
                                     }
                                 }
                                 ?>
-                          </td>
+                            <td <?php echo $style; ?>>
+                                <?php echo $status; ?>
+                            </td>
                           <td>
                               {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
                           </td>
@@ -222,22 +228,25 @@
                                   }
                                   ?>
                              </td>
-                             <td>
-                                <?php
+                             <?php
+                                $status = $style = "";
                                 if($val[1]->is_draf == 'yes'){
-                                  ?>Draf<?php
+                                  $status = "Draf";
                                 }else{
                                     if($val[1]->disahkan == '0'){
-                                        ?>Perlu Pengesahan<?php
+                                        $status = "Perlu Pengesahan";
                                     }elseif($val[1]->disahkan == 'yes'){
-                                        ?>Diterbitkan<?php
+                                        $status = "Diterbitkan";
                                     }elseif($val[1]->disahkan == 'no'){
-                                        ?><span style="color:red;"><strong>Perlu Pembetulan</strong></span><?php
+                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
                                     }elseif($val[1]->disahkan == 'delete'){
-                                        ?>Dipadam<?php
+                                        $status = "Dipadam";
                                     }
                                 }
                                 ?>
+                             <td <?php echo $style; ?>>
+                                <?php echo $status; ?>
                           </td>
                           <td>
                               {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
@@ -271,22 +280,25 @@
                                   }
                                   ?>
                              </td>
-                             <td>
-                                <?php
+                             <?php
+                                $status = $style = "";
                                 if($val[1]->is_draf == 'yes'){
-                                  ?>Draf<?php
+                                  $status = "Draf";
                                 }else{
                                     if($val[1]->disahkan == '0'){
-                                        ?>Perlu Pengesahan<?php
+                                        $status = "Perlu Pengesahan";
                                     }elseif($val[1]->disahkan == 'yes'){
-                                        ?>Diterbitkan<?php
+                                        $status = "Diterbitkan";
                                     }elseif($val[1]->disahkan == 'no'){
-                                        ?><span style="color:red;"><strong>Perlu Pembetulan</strong></span><?php
+                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
                                     }elseif($val[1]->disahkan == 'delete'){
-                                        ?>Dipadam<?php
+                                        $status = "Dipadam";
                                     }
                                 }
                                 ?>
+                             <td <?php echo $style; ?>>
+                                <?php echo $status; ?>
                           </td>
                           <td class="pr-1">
                             <div class="form-inline">
