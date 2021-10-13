@@ -414,8 +414,18 @@
                                                 </label>
                                             </div>
                                             <div class="col-8">
-                                                <textarea class="form-control form-control-sm ml-3" id="input-state"
-                                                    row="2" placeholder="State" name="state"></textarea>
+                                                <select name="state" class="form-control form-control-sm ml-3">
+                                                    <option selected disabled>Pilih...</option>
+                                                    <?php
+                                                    if (count($states) > 0) {
+                                                        foreach ($states as $st) {
+                                                            ?><option value="<?php echo $st->name; ?>"
+                                                        {{ $st->name == old('c2_contact_state') ? 'selected' : '' }}>
+                                                        <?php echo $st->name; ?>
+                                                    </option><?php
+                                                        }
+                                                    }                                                                                                                                                                   ?>
+                                                </select>
                                                 <p class="error-message"><span></span></p>
                                             </div>
                                             <div class="col-3">
@@ -424,8 +434,18 @@
                                                 </label>
                                             </div>
                                             <div class="col-8">
-                                                <textarea class="form-control form-control-sm ml-3" id="input-country"
-                                                    row="2" placeholder="Country" name="country"></textarea>
+                                                <select name="country" class="form-control form-control-sm ml-3">
+                                                    <option selected disabled>Pilih...</option>
+                                                    <?php
+                                                    if (count($countries) > 0) {
+                                                        foreach ($countries as $country) {
+                                                            ?><option value="<?php echo $country->id; ?>"
+                                                            {{ $country->id == old('c2_contact_country') ? 'selected' : '' }}>
+                                                            <?php echo $country->name; ?></option><?php
+                                                        }
+                                                    }                                                                                                              
+                                                    ?>
+                                                </select>
                                                 <p class="error-message"><span></span></p>
                                             </div>
                                         </div>
