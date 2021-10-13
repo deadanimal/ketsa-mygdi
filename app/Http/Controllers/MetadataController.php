@@ -440,15 +440,18 @@ class MetadataController extends Controller {
         }
 
         $refSys = ReferenceSystemIdentifier::all();
+        $refSysId = "";
         if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != ""){
             $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
-            if(is_numeric($refSysId)){
-                $refSysSelected = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
-            }else{
-                $refSysSelected = ReferenceSystemIdentifier::where('name',$refSysId)->get()->first();
-            }
+        }elseif(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString != ""){
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString;
         }else{
             $refSysSelected = [];
+        }
+        if($refSysId != "" && is_numeric($refSysId)){
+            $refSysSelected = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+        }elseif($refSysId != "" && !is_numeric($refSysId)){
+            $refSysSelected = ReferenceSystemIdentifier::where('name',$refSysId)->get()->first();
         }
         $customMetadataInput = CustomMetadataInput::all();
         if (isset($_GET['kategori']) && $_GET['kategori'] != "") {

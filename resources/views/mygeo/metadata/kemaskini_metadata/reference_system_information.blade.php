@@ -21,6 +21,25 @@
                     </label>
                 </div>
                 <div class="col-xl-3">
+                    <?php
+                    /*
+                    var_dump($refSysSelected->id);
+                    if(count($refSys) > 0){
+                        foreach($refSys as $ids) {
+                            echo "<pre>";
+                            var_dump($ids->id);
+                            echo "</pre>";
+
+                            if(isset($refSysSelected->id) && $ids->id == $refSysSelected->id) {
+                                echo "<br>Yes";
+                            }else{
+                                echo "<br>No";
+                            }
+                            
+                        }
+                    }
+                    */
+                    ?>
                     <select class="form-control form-control-sm" name="c13_ref_sys_identify" id="c13_ref_sys_identify" readonly>
                         <option selected disabled>Pilih...</option>
                         <?php
@@ -40,9 +59,9 @@
                                 }
                                 
                                 if (isset($refSysSelected->id) && $ids->id == $refSysSelected->id) {
-                                    ?><option value="<?php echo $ids->id; ?>" selected class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
+                                    ?><option value="<?php echo $ids->name; ?>"  class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
                                 } else {
-                                    ?><option value="<?php echo $ids->id; ?>" class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
+                                    ?><option value="<?php echo $ids->name; ?>" class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
                                 }
                             }
                         }
@@ -120,7 +139,7 @@
         $(document).on("change", "#c13_ref_sys_identify", function() {
             var selectedId = $(this).val();
             $.each(refSys, function(key, val) {
-                if (val.id == selectedId) {
+                if (val.name == selectedId) {
                     $("#refsys_projection").val(val.projection);
                     $("#refsys_semiMajorAxis").val(val.semi_major_axis);
                     $("#refsys_ellipsoid").val(val.ellipsoid);
@@ -130,13 +149,15 @@
                 }
             });
         });
-
-        <?php
-        if(isset($refSysSelected->id)){
-            ?>
-            $("#c13_ref_sys_identify").val("{{ $refSysSelected->id }}").trigger('change');
+                
+        setTimeout(function(){
             <?php
-        }
-        ?>
+            if(isset($refSysSelected->id)){
+                ?>
+                $("#c13_ref_sys_identify").val("{{ $refSysSelected->name }}").trigger('change');
+                <?php
+            }
+            ?>
+        }, 1000);
     });
 </script>
