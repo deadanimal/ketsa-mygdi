@@ -2809,6 +2809,7 @@ class MetadataController extends Controller {
             if($request->submitAction == "save"){
                 $mg->is_draf = "no";
                 if(auth::user()->hasRole(['Pengesah Metadata'])) {
+                    $mg->disahkan = "no";
                     $msg = "Catatan berjaya disimpan.";
                 }elseif(auth::user()->hasRole(['Penerbit Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
                     $mg->disahkan = '0';

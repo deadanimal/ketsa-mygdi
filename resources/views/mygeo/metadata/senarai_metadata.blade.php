@@ -128,7 +128,7 @@
                                     }elseif($val[1]->disahkan == 'yes'){
                                         ?>Diterbitkan<?php
                                     }elseif($val[1]->disahkan == 'no'){
-                                        ?>Perlu Pembetulan<?php
+                                        ?><span style="color:red;"><strong>Perlu Pembetulan</strong></span><?php
                                     }elseif($val[1]->disahkan == 'delete'){
                                         ?>Dipadam<?php
                                     }
@@ -183,7 +183,7 @@
                                     }elseif($val[1]->disahkan == 'yes'){
                                         ?>Diterbitkan<?php
                                     }elseif($val[1]->disahkan == 'no'){
-                                        ?>Perlu Pembetulan<?php
+                                        ?><span style="color:red;"><strong>Perlu Pembetulan</strong></span><?php
                                     }elseif($val[1]->disahkan == 'delete'){
                                         ?>Dipadam<?php
                                     }
@@ -232,7 +232,7 @@
                                     }elseif($val[1]->disahkan == 'yes'){
                                         ?>Diterbitkan<?php
                                     }elseif($val[1]->disahkan == 'no'){
-                                        ?>Perlu Pembetulan<?php
+                                        ?><span style="color:red;"><strong>Perlu Pembetulan</strong></span><?php
                                     }elseif($val[1]->disahkan == 'delete'){
                                         ?>Dipadam<?php
                                     }
@@ -281,7 +281,7 @@
                                     }elseif($val[1]->disahkan == 'yes'){
                                         ?>Diterbitkan<?php
                                     }elseif($val[1]->disahkan == 'no'){
-                                        ?>Perlu Pembetulan<?php
+                                        ?><span style="color:red;"><strong>Perlu Pembetulan</strong></span><?php
                                     }elseif($val[1]->disahkan == 'delete'){
                                         ?>Dipadam<?php
                                     }
