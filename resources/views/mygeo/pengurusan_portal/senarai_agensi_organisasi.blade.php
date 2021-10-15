@@ -524,10 +524,10 @@
             }
         });
         $(document).on("click", ".btnSimpanKemaskiniBahagian", function() {
-            var rowid = $('#formKemaskiniBahagian .rowid').val().trim();
-            var sektor = $('#formKemaskiniBahagian .sektor').val().trim();
-            var agensi_organisasi = $('#formKemaskiniBahagian .agensi_organisasi').val().trim();
-            var namaBahagian = $('#formKemaskiniBahagian .namaBahagian').val().trim();
+            var rowid = $.trim($('#formKemaskiniBahagian .rowid').val());
+            var sektor = $.trim($('#formKemaskiniBahagian .sektor').val());
+            var agensi_organisasi = $.trim($('#formKemaskiniBahagian .agensi_organisasi').val());
+            var namaBahagian = $.trim($('#formKemaskiniBahagian .namaBahagian').val());
             var msg = "";
 
             if(sektor == ""){
