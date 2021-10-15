@@ -678,6 +678,7 @@ class UserController extends Controller {
                         return redirect('kemaskini_profil_admin/'.$request->userid)->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
                     }
                 }
+                $user = User::where("id",$request->userid)->get()->first();
                 $user->assignRole($role);
                 $assigned_roles .= $role.",";
             }
