@@ -467,7 +467,7 @@ class PortalController extends Controller
     public function get_agensi_organisasi_by_sektor(Request $request){
         $aos = AgensiOrganisasi::where('sektor',$request->sektor)->whereNull('bahagian')->distinct('name')->get();
         echo json_encode(["aos"=>$aos]);
-        exit();
+        exit(); 
     }
     public function get_agensi_organisasi(Request $request){
         $aos = "";
