@@ -67,7 +67,7 @@ class UserController extends Controller {
             return array_search($model->getKey(), $ids);
         });
 
-        $aos = AgensiOrganisasi::distinct('name')->get();
+        $aos = AgensiOrganisasi::distinct('name')->whereNull('bahagian')->get();
 
         return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans','aos'));
     }
