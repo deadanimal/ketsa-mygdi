@@ -342,10 +342,10 @@ $(document).ready(function(){
     $('#sektor').val('<?php echo $user->sektor; ?>').change();
     setTimeout(function(){
         $('#agensi_organisasi').val('<?php echo $user->agensi_organisasi; ?>').change();
-    }, 750);
+    }, 1000);
     setTimeout(function(){
         $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
-    }, 1000);
+    }, 3000);
 });
 
 function isEmail(email) {
