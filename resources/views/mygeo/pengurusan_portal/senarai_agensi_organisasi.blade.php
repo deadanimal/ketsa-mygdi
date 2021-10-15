@@ -462,8 +462,8 @@
 
 
         $(document).on("click", ".btnSimpanAgensiOrganisasi", function() {
-            var sektor = $('#formTambahAgensiOrganisasi .sektor').val().trim();
-            var namaAgensiOrganisasi = $('#formTambahAgensiOrganisasi .namaAgensiOrganisasi').val().trim();
+            var sektor = $.trim($('#formTambahAgensiOrganisasi .sektor').val());
+            var namaAgensiOrganisasi = $.trim($('#formTambahAgensiOrganisasi .namaAgensiOrganisasi').val());
             var msg = "";
 
             if(sektor == ""){
@@ -562,9 +562,9 @@
         });
 
         $(document).on("click", ".btnSimpanBahagian", function() {
-            var sektor = $('#formTambahBahagian .sektor').val().trim();
-            var agensi_organisasi = $('#formTambahBahagian .agensi_organisasi').val().trim();
-            var namaBahagian = $('#formTambahBahagian .namaBahagian').val().trim();
+            var sektor = $.trim($('#formTambahBahagian .sektor').val());
+            var agensi_organisasi = $.trim($('#formTambahBahagian .agensi_organisasi').val());
+            var namaBahagian = $.trim($('#formTambahBahagian .namaBahagian').val());
             var msg = "";
 
             if(sektor == ""){
