@@ -346,6 +346,7 @@ $(document).ready(function(){
     setTimeout(function(){
         $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
     }, 3000);
+    
 });
 
 function isEmail(email) {

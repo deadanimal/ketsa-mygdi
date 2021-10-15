@@ -65,7 +65,7 @@ class UserController extends Controller {
         $ids = [ 5, 6, 3, 4, 2];
         $peranans = $peranans->sortBy(function($model) use ($ids) {
             return array_search($model->getKey(), $ids);
-        });
+        }); 
 
         $aos = AgensiOrganisasi::distinct('name')->whereNull('bahagian')->get();
 
