@@ -169,7 +169,7 @@ class RegisterController extends Controller
             $pengesahs = User::whereHas("roles", function ($q) {
                 $q->where("name", "Pengesah Metadata");
             })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
-            if(!empty($pengesahs) && count($pengesahs) > 1){
+            if(!empty($pengesahs) && count($pengesahs) > 0){
                 return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
             }
         }

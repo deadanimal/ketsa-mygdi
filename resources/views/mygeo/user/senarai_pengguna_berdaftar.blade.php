@@ -120,7 +120,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2 divBahagian">
                                             <div class="col-12">
                                                 <label class="form-control-label">Bahagian</label>
                                                 <select name="bahagian" id="bahagian" class="form-control form-control-sm">
@@ -530,6 +530,16 @@
                 $('#bahagian').html('');
                 $('#bahagian').append('<option value="">Pilih...</option>');
             });
+        });
+        
+        $('#peranan').change(function() {
+            var per = $(this).val();
+            
+            if(per == "Pemohon Data"){
+                $(".divBahagian").hide();
+            }else{
+                $(".divBahagian").show();
+            }
         });
 
         <?php

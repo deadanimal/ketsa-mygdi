@@ -920,6 +920,16 @@ class UserController extends Controller {
             $sektor = $ao->sektor;
         }
         
+        //if role selected is pengesah, check if there is already a pengesah in the bahagian selected
+        if($request->peranan == 'Pengesah Metadata' && $request->bahagian != ""){
+            $pengesahs = User::whereHas("roles", function ($q) {
+                $q->where("name", "Pengesah Metadata");
+            })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
+            if(!empty($pengesahs) && count($pengesahs) > 0){
+                return redirect('mygeo_senarai_pengguna_berdaftar')->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
+            }
+        }
+        
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;

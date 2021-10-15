@@ -7,6 +7,7 @@ use App\MetadataGeo;
 use App\User;
 use App\Role;
 use App\ModelHasRoles;
+use App\AgensiOrganisasi;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
 use Storage;
@@ -52,6 +53,7 @@ class UncheckedMetadataCron extends Command
         $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
         
         $metadataTitles = [];
+        $metadatasByAgensi = [];
         
         if(count($result1) > 0){
             foreach($result1 as $r){
@@ -63,9 +65,25 @@ class UncheckedMetadataCron extends Command
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $xml2 = simplexml_load_string($ftestxml2);
-                if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
-                    $metadataTitles[] = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
+                
+                $title = "";
+                if(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+//                   $metadataTitles[] = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                   $title = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                }elseif(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+//                   $metadataTitles[] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                   $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                 }
+                
+                //===================
+                $agensixml = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
+                $agensi = AgensiOrganisasi::where('name',$agensixml)->get();
+                if(!empty($agensi) && count($agensi) > 0){
+                    $metadatasByAgensi[$agency->id][] = $title;
+                }else{
+                    $metadatasByAgensi['no_agensi_organisasi'][] = $title;
+                }
+                //===================
                 
                 $r->cronned_metadata_tak_diusik = date('Y-m-d H:i:s',time());
                 $r->update();
@@ -84,16 +102,38 @@ class UncheckedMetadataCron extends Command
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $xml2 = simplexml_load_string($ftestxml2);
-                if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
-                    $metadataTitles[] = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
+                
+                $title = "";
+                if(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+//                   $metadataTitles[] = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                   $title[] = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                }elseif(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+//                   $metadataTitles[] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                   $title[] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                 }
+                
+                //===================
+                $agensixml = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
+                $agensi = AgensiOrganisasi::where('name',$agensixml)->get();
+                if(!empty($agensi) && count($agensi) > 0){
+                    $metadatasByAgensi[$agency->id][] = $title;
+                }else{
+                    $metadatasByAgensi['no_agensi_organisasi'][] = $title;
+                }
+                //===================
                 
                 $r->cronned_metadata_tak_diusik = date('Y-m-d H:i:s',time());
                 $r->update();
             }
         }
         
-        $metadataTitles = array_unique($metadataTitles);
+//        $metadataTitles = array_unique($metadataTitles);
+        
+        foreach($metadatasByAgensi as $mba){
+            //SMBG SINI - dah collect metadatas by agensi id, continue next line
+            
+        }
+        
         
         if(count($result1) > 0 || count($result2) > 0){
             //send email notification to them pengesahs
