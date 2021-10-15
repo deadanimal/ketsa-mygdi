@@ -631,16 +631,6 @@ class UserController extends Controller {
         
         $this->validate($request, $fields, $customMsg);
         
-        //if role selected is pengesah, check if there is already a pengesah in the bahagian selected
-        if($request->peranan == 'Pengesah Metadata' && $request->bahagian != ""){
-            $pengesahs = User::whereHas("roles", function ($q) {
-                $q->where("name", "Pengesah Metadata");
-            })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
-            if(!empty($pengesahs) && count($pengesahs) > 0){
-                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
-            }
-        }
-        
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
@@ -674,6 +664,27 @@ class UserController extends Controller {
     }
     
     public function update_profile_admin(Request $request){
+        //save user's role
+        if(!is_null($request->peranan)){
+            ModelHasRoles::where(["model_id"=>$request->userid,"model_type"=>"App\User"])->delete();
+            $assigned_roles = "";
+            foreach($request->peranan as $role){
+                //if role selected is pengesah, check if there is already a pengesah in the bahagian selected
+                if($role == 'Pengesah Metadata' && $request->bahagian != ""){
+                    $pengesahs = User::whereHas("roles", function ($q) {
+                        $q->where("name", "Pengesah Metadata");
+                    })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
+                    if(!empty($pengesahs) && count($pengesahs) > 0){
+                        return redirect('mygeo_senarai_pengguna_berdaftar')->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
+                    }
+                }
+                $user->assignRole($role);
+                $assigned_roles .= $role.",";
+            }
+            $assigned_roles = rtrim($assigned_roles, ",");
+            User::where(["id"=>$request->userid])->update(["assigned_roles" => $assigned_roles]);
+        }
+
         $user = User::where("id",$request->userid)->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
@@ -685,18 +696,6 @@ class UserController extends Controller {
         $user->phone_bimbit = $request->phone_bimbit;
         $user->kategori = $request->kategori;
         $user->save();
-        
-        //save user's role
-        if(!is_null($request->peranan)){
-            ModelHasRoles::where(["model_id"=>$user->id,"model_type"=>"App\User"])->delete();
-            $assigned_roles = "";
-            foreach($request->peranan as $role){
-                $user->assignRole($role);
-                $assigned_roles .= $role.",";
-            }
-            $assigned_roles = rtrim($assigned_roles, ",");
-            User::where(["id"=>$user->id])->update(["assigned_roles" => $assigned_roles]);
-        }
 
         $at = new AuditTrail();
         $at->path = url()->full();
