@@ -462,8 +462,8 @@
 
 
         $(document).on("click", ".btnSimpanAgensiOrganisasi", function() {
-            var sektor = $.trim($('#formTambahAgensiOrganisasi .sektor').val());
-            var namaAgensiOrganisasi = $.trim($('#formTambahAgensiOrganisasi .namaAgensiOrganisasi').val());
+            var sektor = $('#formTambahAgensiOrganisasi .sektor').val();
+            var namaAgensiOrganisasi = $('#formTambahAgensiOrganisasi .namaAgensiOrganisasi').val();
             var msg = "";
 
             if(sektor == ""){
@@ -492,9 +492,9 @@
             }
         });
         $(document).on("click", ".btnSimpanKemaskiniAgensiOrganisasi", function() {
-            var rowid = $.trim($('#formKemaskiniAgensiOrganisasi .rowid').val());
-            var sektor = $.trim($('#formKemaskiniAgensiOrganisasi .sektor').val());
-            var namaAgensiOrganisasi = $.trim($('#formKemaskiniAgensiOrganisasi .namaAgensiOrganisasi').val());
+            var rowid = $('#formKemaskiniAgensiOrganisasi .rowid').val();
+            var sektor = $('#formKemaskiniAgensiOrganisasi .sektor').val();
+            var namaAgensiOrganisasi = $('#formKemaskiniAgensiOrganisasi .namaAgensiOrganisasi').val();
             var msg = "";
 
             if(sektor == ""){
@@ -524,10 +524,10 @@
             }
         });
         $(document).on("click", ".btnSimpanKemaskiniBahagian", function() {
-            var rowid = $.trim($('#formKemaskiniBahagian .rowid').val());
-            var sektor = $.trim($('#formKemaskiniBahagian .sektor').val());
-            var agensi_organisasi = $.trim($('#formKemaskiniBahagian .agensi_organisasi').val());
-            var namaBahagian = $.trim($('#formKemaskiniBahagian .namaBahagian').val());
+            var rowid = $('#formKemaskiniBahagian .rowid').val();
+            var sektor = $('#formKemaskiniBahagian .sektor').val();
+            var agensi_organisasi = $('#formKemaskiniBahagian .agensi_organisasi').val();
+            var namaBahagian = $('#formKemaskiniBahagian .namaBahagian').val();
             var msg = "";
 
             if(sektor == ""){
@@ -562,9 +562,9 @@
         });
 
         $(document).on("click", ".btnSimpanBahagian", function() {
-            var sektor = $.trim($('#formTambahBahagian .sektor').val());
-            var agensi_organisasi = $.trim($('#formTambahBahagian .agensi_organisasi').val());
-            var namaBahagian = $.trim($('#formTambahBahagian .namaBahagian').val());
+            var sektor = $('#formTambahBahagian .sektor').val();
+            var agensi_organisasi = $('#formTambahBahagian .agensi_organisasi').val();
+            var namaBahagian = $('#formTambahBahagian .namaBahagian').val();
             var msg = "";
 
             if(sektor == ""){
