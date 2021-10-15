@@ -675,7 +675,7 @@ class UserController extends Controller {
                         $q->where("name", "Pengesah Metadata");
                     })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
                     if(!empty($pengesahs) && count($pengesahs) > 0){
-                        return redirect('mygeo_senarai_pengguna_berdaftar')->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
+                        return redirect('kemaskini_profil_admin/'.$request->userid)->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
                     }
                 }
                 $user->assignRole($role);
