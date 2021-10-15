@@ -631,6 +631,16 @@ class UserController extends Controller {
         
         $this->validate($request, $fields, $customMsg);
         
+        //if role selected is pengesah, check if there is already a pengesah in the bahagian selected
+        if($request->peranan == 'Pengesah Metadata' && $request->bahagian != ""){
+            $pengesahs = User::whereHas("roles", function ($q) {
+                $q->where("name", "Pengesah Metadata");
+            })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
+            if(!empty($pengesahs) && count($pengesahs) > 0){
+                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
+            }
+        }
+        
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
