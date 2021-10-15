@@ -342,7 +342,7 @@ $(document).ready(function(){
     $('#sektor').val('<?php echo $user->sektor; ?>').change();
     setTimeout(function(){
         $('#agensi_organisasi').val('<?php echo $user->agensi_organisasi; ?>').change();
-    }, 1000);
+    }, 2000);
     setTimeout(function(){
         $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
     }, 3000);
