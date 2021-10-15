@@ -492,9 +492,9 @@
             }
         });
         $(document).on("click", ".btnSimpanKemaskiniAgensiOrganisasi", function() {
-            var rowid = $.trim($('#formKemaskiniAgensiOrganisasi .rowid').val().trim());
-            var sektor = $.trim($('#formKemaskiniAgensiOrganisasi .sektor').val().trim());
-            var namaAgensiOrganisasi = $.trim($('#formKemaskiniAgensiOrganisasi .namaAgensiOrganisasi').val().trim());
+            var rowid = $.trim($('#formKemaskiniAgensiOrganisasi .rowid').val());
+            var sektor = $.trim($('#formKemaskiniAgensiOrganisasi .sektor').val());
+            var namaAgensiOrganisasi = $.trim($('#formKemaskiniAgensiOrganisasi .namaAgensiOrganisasi').val());
             var msg = "";
 
             if(sektor == ""){
