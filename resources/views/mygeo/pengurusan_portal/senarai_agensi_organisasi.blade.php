@@ -170,7 +170,7 @@
                                     <div class="fautocomplete">
                                         <div>
                                             <div class="autocomplete" style="width:100%;">
-                                                <input type="text" name="namaAgensiOrganisasi" id="namaAgensiOrganisasi" class="form-control" autocomplete="off">
+                                                <input type="text" name="namaAgensiOrganisasi" id="namaAgensiOrganisasi" class="form-control namaAgensiOrganisasi" autocomplete="off">
                                             </div>
                                         </div>
                                         <ul id="searchResult"></ul>
