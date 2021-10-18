@@ -395,6 +395,22 @@
                 </div>
                 @endif
                 
+                @if($elemenMetadata['c2_contact_bahagian']->status == '1')
+                <div class="row mb-2">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c2_contact_bahagian" data-toggle="tooltip" title="Nama bahagian yang bertanggungjawab terhadap maklumat geospatial">
+                            <?php echo __('lang.bahagian_name'); ?><span class="text-warning">*</span>
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <input type="text" name="c2_contact_bahagian" id="c2_contact_bahagian" class="form-control form-control-sm ml-3" value="{{ (isset($pengesahs->bahagian) ? $pengesahs->bahagian:"") }}" >
+                        @error('c2_contact_bahagian')
+                            <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                @endif
+                
                 @if($elemenMetadata['c2_position_name']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">

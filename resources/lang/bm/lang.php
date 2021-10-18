@@ -32,6 +32,7 @@
     'metadata_create_date'=>'Tarikh Metadata Diterbitkan',
     'metadataPublisher'=>'PENERBIT METADATA',
     'organisation_name'=>'Nama Organisasi',
+    'bahagian_name'=>'Nama Bahagian',
     'name'=>'Nama',
     'telephone_office'=>'Telefon (Pejabat)',
     'email'=>'E-mel',

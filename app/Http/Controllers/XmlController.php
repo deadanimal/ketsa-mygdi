@@ -396,6 +396,9 @@ class XmlController extends Controller {
                                     <organisationName>
                                         <gco:CharacterString>$request->c2_contact_agensiorganisasi</gco:CharacterString>
                                     </organisationName>
+                                    <bahagianName>
+                                        <gco:CharacterString>$request->c2_contact_bahagian</gco:CharacterString>
+                                    </bahagianName>
                                     <individualName>
                                         <gco:CharacterString>$request->c2_contact_name</gco:CharacterString>
                                     </individualName>

@@ -224,6 +224,22 @@
                 }
                 ?>
                 <?php
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString != "") {
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c2_metadataName">
+                                Bahagian
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-7">
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString; ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString != "") {
                     ?>
                     <div class="row mb-2">

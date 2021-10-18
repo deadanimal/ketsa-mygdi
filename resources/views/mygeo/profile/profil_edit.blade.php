@@ -107,6 +107,8 @@
                                                 <option value="">Pilih...</option>
                                                 <option value="1">Kerajaan</option>
                                                 <option value="2">Swasta</option>
+                                                <option value="3">Institusi Awam</option>
+                                                <option value="4">Institusi Swasta</option>
                                             </select>
                                         </div>
                                     </div>

@@ -55,9 +55,14 @@ class AgensiOrganisasiSeeder extends Seeder
         AgensiOrganisasi::create(['name' => "Tenaga Nasional Berhad (TNB)",'sektor'=>'1']);
         AgensiOrganisasi::create(['name' => "Unit Perancang Ekonomi Negeri (UPEN)",'sektor'=>'1']);
         AgensiOrganisasi::create(['name' => "Petroliam Nasional Berhad",'sektor'=>'1']);
-        AgensiOrganisasi::create(['name' => "SEGi College",'sektor'=>'2']);
-        AgensiOrganisasi::create(['name' => "Open University",'sektor'=>'2']);
-        AgensiOrganisasi::create(['name' => "UniKL",'sektor'=>'2']);
-        AgensiOrganisasi::create(['name' => "Cosmopoint College",'sektor'=>'2']);
+        AgensiOrganisasi::create(['name' => "KFC",'sektor'=>'2']);
+        AgensiOrganisasi::create(['name' => "Dominos",'sektor'=>'2']);
+        AgensiOrganisasi::create(['name' => "Marrybrown",'sektor'=>'2']);
+        AgensiOrganisasi::create(['name' => "Open University",'sektor'=>'4']);
+        AgensiOrganisasi::create(['name' => "UniKL",'sektor'=>'4']);
+        AgensiOrganisasi::create(['name' => "Cosmopoint College",'sektor'=>'4']);
+        AgensiOrganisasi::create(['name' => "UITM",'sektor'=>'3']);
+        AgensiOrganisasi::create(['name' => "UKM",'sektor'=>'3']);
+        AgensiOrganisasi::create(['name' => "UNISEL",'sektor'=>'3']);
     }
 }

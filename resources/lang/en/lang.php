@@ -33,6 +33,7 @@
     'metadata_create_date'=>'Metadata Create Date',
     'metadataPublisher'=>'METADATA PUBLISHER',
     'organisation_name'=>'Organisation Name',
+    'bahagian_name'=>'Division Name',
     'name'=>'Name',
     'telephone_office'=>'Telephone (Office)',
     'email'=>'Email',
