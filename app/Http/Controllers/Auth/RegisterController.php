@@ -170,7 +170,7 @@ class RegisterController extends Controller
                 $q->where("name", "Pengesah Metadata");
             })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
             if(!empty($pengesahs) && count($pengesahs) > 0){
-                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Bahagian dipilih sudah ada Pengesah.']);
+                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda telah memilih Bahagian yang telah mempunyai Pengesah Metadata yang berdaftar. Hanya satu Pengesah Metadata yang akan didaftarkan dalam satu Agensi dan Bahagian yang sama. Sila hubungi Pentadbir Aplikasi untuk maklumat lanjut.']);
             }
         }
         
