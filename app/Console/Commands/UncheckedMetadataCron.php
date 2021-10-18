@@ -62,8 +62,8 @@ class UncheckedMetadataCron extends Command
                 $ftestxml2 = str_replace("gco:", "", $ftestxml2);
                 $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&lt;', $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $xml2 = simplexml_load_string($ftestxml2);
                 
                 $title = "";
@@ -104,8 +104,8 @@ class UncheckedMetadataCron extends Command
                 $ftestxml2 = str_replace("gco:", "", $ftestxml2);
                 $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&lt;', $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $xml2 = simplexml_load_string($ftestxml2);
                 
                 $title = "";
