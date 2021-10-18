@@ -50,7 +50,7 @@ class UncheckedMetadataCron extends Command
         $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 minutes"));
        
         //find metadata tak diusik lebih dari 2 minggu
-        $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
+        $result1 = MetadataGeo::on('pgsql2')->where('id','>',130739)->whereRaw('createdate = changedate')->where('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
         
         $metadataTitles = [];
         $metadatasByAgensi = [];
@@ -99,7 +99,7 @@ class UncheckedMetadataCron extends Command
         }
         
         //find metadata that has been mailed(cronned) more than 2 minggu but still x diusik
-        $result2 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('cronned_metadata_tak_diusik','<',$lastTwoWeeks)->get();
+        $result2 = MetadataGeo::on('pgsql2')->where('id','>',130739)->whereRaw('createdate = changedate')->where('cronned_metadata_tak_diusik','<',$lastTwoWeeks)->get();
         if(count($result2) > 0){
             foreach($result2 as $r){
                 $ftestxml2 = <<<XML
