@@ -414,15 +414,17 @@ class PortalController extends Controller
     }
 
     public function senarai_agensi_organisasi(){
-        $aos = AgensiOrganisasi::orderBy('created_at','desc')->get();
+        $aos2 = AgensiOrganisasi::orderBy('created_at','desc')->get();
+        $aos = [];
         $agensiOrganisasi = [];
-        foreach($aos as $ao){
-            if($ao->bahagian == null){
+        foreach($aos2 as $ao){
+            if($ao->bahagian == null || $ao->bahagian == ""){
                 $taos = AgensiOrganisasi::where('name',$ao->name)->whereNotNull('bahagian')->get();
                 if(!empty($taos) && count($taos) > 0){
                     continue;
                 }
             }
+            $aos[] = $ao;
             $agensiOrganisasi[] = $ao->name;
         }
         return view('mygeo.pengurusan_portal.senarai_agensi_organisasi', compact('aos','agensiOrganisasi'));
