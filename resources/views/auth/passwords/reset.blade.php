@@ -5,7 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Tukar Kata Laluan</div>
+                <div class="card-header">
+                    Tukar Kata Laluan
+                    <br>
+                    <i class="text-warning" style="font-size:11px;">* Kata laluan mestilah mempunyai
+                                            sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil,
+                                            nombor dan simbol.</i>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update') }}" id="formTukarPassword">

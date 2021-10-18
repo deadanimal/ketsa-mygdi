@@ -211,6 +211,9 @@
                             <div class="row align-items-center">
                                 <div class="col-8">
                                     <h3 class="mb-0">Tukar Kata Laluan</h3>
+                                    <i class="text-warning" style="font-size:11px;">* Kata laluan mestilah mempunyai
+                                            sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil,
+                                            nombor dan simbol.</i>
                                 </div>
                                 <div class="col-4 text-right">
                                     <button type="button" class="btn btn-warning btn-sm text-white btn-icon btn-3 btnTukar">
