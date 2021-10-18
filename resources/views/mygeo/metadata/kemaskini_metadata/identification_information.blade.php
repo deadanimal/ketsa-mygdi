@@ -518,7 +518,7 @@
                             $respAgencyBhgn = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString;
                         }
                         ?>
-                        <input type="text" name="c2_contact_bahagian" id="c2_contact_bahagian" class="form-control form-control-sm ml-3" value="{{ $respAgencyBhgn }}" >
+                        <input type="text" name="c2_contact_bahagian" id="c2_contact_bahagian" class="form-control form-control-sm" value="{{ $respAgencyBhgn }}" >
                         @error('c2_contact_bahagian')
                             <div class="text-error">{{ $message }}</div>
                         @enderror

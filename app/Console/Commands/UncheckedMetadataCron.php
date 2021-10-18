@@ -46,7 +46,6 @@ class UncheckedMetadataCron extends Command
      */
     public function handle()
     {
-//        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 weeks")); //ori specs
         $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 minutes"));
        
         //find metadata tak diusik lebih dari 2 minggu
@@ -69,19 +68,23 @@ class UncheckedMetadataCron extends Command
                 $title = "";
                 if(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
 //                   $metadataTitles[] = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-                   $title = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                   $title = strval($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString);
                 }elseif(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
 //                   $metadataTitles[] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                   $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                   $title = strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
                 }
                 
                 //===================
-                $agensixml = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
-                $agensi = AgensiOrganisasi::where('name',$agensixml)->get();
-                if(!empty($agensi) && count($agensi) > 0){
-                    $metadatasByAgensi[$agency->id][] = $title;
+                $agensixml = strval(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString : "");
+                $bahagianxml = strval(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString : "");
+
+                $agensi = AgensiOrganisasi::where('name',$agensixml)->get()->first();
+                if(!empty($agensi) && $bahagianxml != ""){
+                    $metadatasByAgensi[$agensi->id][$bahagianxml][] = $title;
+                }elseif(!empty($agensi) && $bahagianxml == ""){
+                    $metadatasByAgensi[$agensi->id]['noBahagian'][] = $title;
                 }else{
-                    $metadatasByAgensi['no_agensi_organisasi'][] = $title;
+                    $metadatasByAgensi['noAgensiOrganisasi'][] = $title;
                 }
                 //===================
                 
@@ -106,19 +109,23 @@ class UncheckedMetadataCron extends Command
                 $title = "";
                 if(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
 //                   $metadataTitles[] = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-                   $title[] = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                   $title = strval($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString);
                 }elseif(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
 //                   $metadataTitles[] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                   $title[] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                   $title = strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
                 }
                 
                 //===================
-                $agensixml = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
-                $agensi = AgensiOrganisasi::where('name',$agensixml)->get();
-                if(!empty($agensi) && count($agensi) > 0){
-                    $metadatasByAgensi[$agency->id][] = $title;
+                $agensixml = strval(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString : "");
+                $bahagianxml = strval(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString : "");
+                
+                $agensi = AgensiOrganisasi::where('name',$agensixml)->get()->first();
+                if(!empty($agensi) && $bahagianxml != ""){
+                    $metadatasByAgensi[$agensi->id][$bahagianxml][] = $title;
+                }elseif(!empty($agensi) && $bahagianxml == ""){
+                    $metadatasByAgensi[$agensi->id]['noBahagian'][] = $title;
                 }else{
-                    $metadatasByAgensi['no_agensi_organisasi'][] = $title;
+                    $metadatasByAgensi['noAgensiOrganisasi'][] = $title;
                 }
                 //===================
                 
@@ -127,31 +134,44 @@ class UncheckedMetadataCron extends Command
             }
         }
         
-//        $metadataTitles = array_unique($metadataTitles);
-        
-        foreach($metadatasByAgensi as $mba){
-            //SMBG SINI - dah collect metadatas by agensi id, continue next line
-            
-        }
-        
-        
-        if(count($result1) > 0 || count($result2) > 0){
-            //send email notification to them pengesahs
-            $pengesahs = User::whereHas("roles", function ($q) {
-                            $q->where("name", "Pengesah Metadata");
-                        })->get();
-            if(count($pengesahs) > 0){
-                foreach($pengesahs as $p){
-                    $to_name = $p->name;
-                    $to_email = $p->email;
-                    $data = array('metadataTitles'=>$metadataTitles);
-                    Mail::send('mails.exmpl16', $data, function($message) use ($to_name, $to_email) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Peringatan Pengesahan Metadata');
-                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-                    });            
+        if(!empty($metadatasByAgensi)){
+            foreach($metadatasByAgensi as $key=>$val){
+                if($key == "noAgensiOrganisasi"){ //no agensi and bahagian
+                    $p = User::whereHas("roles", function ($q) {
+                            $q->where("name", "Pentadbir Metadata");
+                        })->get()->first();
+
+                    if(!empty($p)){
+                        $to_name = $p->name;
+                        $to_email = $p->email;
+                        $data = array('metadataTitles'=>$val);
+                        Mail::send('mails.exmpl16', $data, function($message) use ($to_name, $to_email) {
+                            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Peringatan Pengesahan Metadata');
+                            $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                        });  
+                    }
+                }else{
+                    foreach($val as $k=>$v){
+                        if($k == "noBahagian"){ //no bahagian
+                            $p = User::where('agensi_organisasi',$key)->get()->first();
+                        }else{
+                            $p = User::where('agensi_organisasi',$key)->where('bahagian',$k)->get()->first();
+                        }
+                        
+                        if(!empty($p)){
+                            $to_name = $p->name;
+                            $to_email = $p->email;
+                            $data = array('metadataTitles'=>$v);
+                            Mail::send('mails.exmpl16', $data, function($message) use ($to_name, $to_email) {
+                                $message->to($to_email, $to_name)->subject('MyGeo Explorer - Peringatan Pengesahan Metadata');
+                                $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                            });  
+                        }
+                    }
                 }
+                 
+                \Log::info("UncheckedMetadataCron executed!");
             }
-            \Log::info("UncheckedMetadataCron executed!");
         }
     }
 }
