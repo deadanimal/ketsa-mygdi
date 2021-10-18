@@ -65,6 +65,9 @@ class UncheckedMetadataCron extends Command
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&lt;', $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $xml2 = simplexml_load_string($ftestxml2);
+                if (false === $xml2) {
+                    continue;
+                }
                 
                 $title = "";
                 if(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
@@ -107,6 +110,9 @@ class UncheckedMetadataCron extends Command
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&lt;', $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
                 $xml2 = simplexml_load_string($ftestxml2);
+                if (false === $xml2) {
+                    continue;
+                }
                 
                 $title = "";
                 if(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
