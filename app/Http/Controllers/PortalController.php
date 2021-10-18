@@ -417,7 +417,7 @@ class PortalController extends Controller
         $aos = AgensiOrganisasi::orderBy('created_at','desc')->get();
         $agensiOrganisasi = [];
         foreach($aos as $ao){
-            if($ao->bahagian == ""){
+            if($ao->bahagian == null){
                 $taos = AgensiOrganisasi::where('name',$ao->name)->whereNotNull('bahagian')->get();
                 if(!empty($taos) && count($taos) > 0){
                     continue;
