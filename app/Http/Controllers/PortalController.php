@@ -417,6 +417,12 @@ class PortalController extends Controller
         $aos = AgensiOrganisasi::orderBy('created_at','desc')->get();
         $agensiOrganisasi = [];
         foreach($aos as $ao){
+            if($ao->bahagian == ""){
+                $taos = AgensiOrganisasi::where('name',$ao->name)->whereNotNull('bahagian')->get();
+                if(!empty($taos) && count($taos) > 0){
+                    continue;
+                }
+            }
             $agensiOrganisasi[] = $ao->name;
         }
         return view('mygeo.pengurusan_portal.senarai_agensi_organisasi', compact('aos','agensiOrganisasi'));
