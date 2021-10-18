@@ -46,6 +46,7 @@ class UncheckedMetadataCron extends Command
      */
     public function handle()
     {
+        libxml_use_internal_errors(true);
         $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 minutes"));
        
         //find metadata tak diusik lebih dari 2 minggu
