@@ -106,16 +106,28 @@
                                             ?>
                                             <tr>
                                                 <td>{{ $counter }}</td>
-                                                <td>{{ ($ao->sektor == '1' ? 'Kerajaan':'Swasta') }}</td>
+                                                <td>
+                                                    <?php
+                                                    if($ao->sektor == '1'){
+                                                        echo "Kerajaan";
+                                                    }elseif($ao->sektor == '2'){
+                                                        echo "Swasta";
+                                                    }elseif($ao->sektor == '3'){
+                                                        echo "Institusi Awam";
+                                                    }elseif($ao->sektor == '4'){
+                                                        echo "Institusi Swasta";
+                                                    }       
+                                                    ?>
+                                                </td>
                                                 <td>{{ $ao->name }}</td>
-                                                <td>{{ ($ao->bahagian != "" ? $ao->bahagian:'-') }}</td>
+                                                <td>{{ ($ao->bahagian != "" ? $ao->bahagian:$ao->name) }}</td>
                                                 <td>
                                                     @if($ao->bahagian != "")
                                                     <button type="button" class="btn btn-sm btn-success btnKemaskiniBahagian" data-rowid="{{ $ao->id }}" data-toggle="modal" data-target="#modal_kemaskini_bahagian">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                     @else
-                                                    <button type="button" class="btn btn-sm btn-success btnKemaskiniAgensiOrganisasi" data-rowid="{{ $ao->id }}" data-toggle="modal" data-target="#modal_kemaskini_agensi_organisasi">
+                                                    <button type="button" class="btn btn-sm btn-success btnKemaskiniAgensiOrganisasi" data-rowid="{{ $ao->id }}" data-agensiname="{{ $ao->name }}" data-toggle="modal" data-target="#modal_kemaskini_agensi_organisasi">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                     @endif
@@ -702,13 +714,15 @@
                 },
             }).done(function(response) {
                 var data = jQuery.parseJSON(response);
+                console.log(data.ao.name);
 
                 //rowid
                 $("#formKemaskiniAgensiOrganisasi .rowid").val(data.ao.id).change();
                 //sektor
                 $("#formKemaskiniAgensiOrganisasi .sektor").val(data.ao.sektor).change();
                 //nama
-                $('#formKemaskiniAgensiOrganisasi .namaAgensiOrganisasi').val(data.ao.name);
+//                $('#formKemaskiniAgensiOrganisasi .namaAgensiOrganisasi').val(data.ao.name);
+                $('#namaAgensiOrganisasi3').val(data.ao.name);
             });
         });
         $(document).on('click','.btnKemaskiniBahagian',function(){
