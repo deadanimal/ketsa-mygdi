@@ -166,6 +166,12 @@
                                                                 Berdaftar</span>
                                                         </a>
                                                     </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('mygeo_senarai_penerbit_pengesah') }}"
+                                                            class="nav-link active">
+                                                            <span class="nav-link-text">Senarai Penerbit / Pengesah</span>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         @endif
@@ -177,6 +183,12 @@
                                                     <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
                                                 </a>
                                                 <ul class="nav nav-sm nav-treeview">
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('mygeo_pengisian_metadata') }}"
+                                                            class="nav-link active">
+                                                            <span class="nav-link-text">Pengisian Metadata</span>
+                                                        </a>
+                                                    </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('mygeo_pengesahan_metadata') }}"
                                                             class="nav-link active">
@@ -192,155 +204,81 @@
                                                 </ul>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
+                                        
+                                        @if (auth::user()->hasRole(['Super Admin','Pentadbir Aplikasi']))
                                             <li class="nav-item has-treeview">
                                                 <a class="nav-link ng-star-inserted" href="#">
-                                                    <i class="fas fa-magic text-red"></i>
-                                                    <span class="nav-link-text">Kemas Kini Data</span>
+                                                    <i class="fa-braille fas text-indigo"></i>
+                                                    <span class="nav-link-text">Pengurusan Data Asas</span>
                                                     <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
                                                 </a>
                                                 <ul class="nav nav-sm nav-treeview">
                                                     <li class="nav-item">
-                                                        <a href="{{ url('senarai_data') }}" class="nav-link active">
-                                                            <span class="nav-link-text">Senarai Data</span>
+                                                        <a href="{{ url('mohon_data') }}" class="nav-link active">
+                                                            <span class="nav-link-text">Mohon Data</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('kategori_kelas_kongsi_data') }}"
-                                                            class="nav-link active">
-                                                            <span class="nav-link-text">Kategori Pengkelasan Perkongsian
+                                                        <a href="{{ url('permohonan_baru') }}" class="nav-link">
+                                                            <span class="nav-link-text">Permohonan Baru</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('semakan_status') }}" class="nav-link active">
+                                                            <span class="nav-link-text">Semakan Status</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('status_permohonan') }}" class="nav-link">
+                                                            <span class="nav-link-text">Status Permohonan</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('proses_data') }}" class="nav-link">
+                                                            <span class="nav-link-text">Proses Data</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('muat_turun_data') }}" class="nav-link active">
+                                                            <span class="nav-link-text">Muat Turun Data</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('penilaian') }}" class="nav-link active">
+                                                            <span class="nav-link-text">Penilaian Data</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('penilaian') }}" class="nav-link">
+                                                            <span class="nav-link-text">Akuan Penerimaan dan Penilaian
                                                                 Data</span>
                                                         </a>
+                                                    </li>
+                                                    <li class="nav-item has-treeview">
+                                                        <a class="nav-link ng-star-inserted" href="#">
+                                                            <i class="fas fa-magic text-red"></i>
+                                                            <span class="nav-link-text">Kemas Kini Data</span>
+                                                            <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
+                                                        </a>
+                                                        <ul class="nav nav-sm nav-treeview">
+                                                            <li class="nav-item">
+                                                                <a href="{{ url('senarai_data') }}" class="nav-link active">
+                                                                    <span class="nav-link-text">Senarai Data</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a href="{{ url('kategori_kelas_kongsi_data') }}"
+                                                                    class="nav-link active">
+                                                                    <span class="nav-link-text">Kategori Pengkelasan Perkongsian
+                                                                        Data</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
                                                     </li>
                                                 </ul>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Metadata']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}"
-                                                    class="nav-link">
-                                                    <i class="far fa-id-card text-green"></i>
-                                                    <span class="nav-link-text">Kemas Kini Elemen</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('permohonan_baru') }}" class="nav-link">
-                                                    <i class="far fa-id-card text-green"></i>
-                                                    <span class="nav-link-text">Permohonan Baru</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('status_permohonan') }}" class="nav-link">
-                                                    <i class="fas fa-book text-purple"></i>
-                                                    <span class="nav-link-text">Status Permohonan</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('proses_data') }}" class="nav-link">
-                                                    <i class="fas fa-sync-alt text-cyan"></i>
-                                                    <span class="nav-link-text">Proses Data</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('penilaian') }}" class="nav-link">
-                                                    <i class="fas fa-file-signature text-primary"></i>
-                                                    <span class="nav-link-text">Akuan Penerimaan dan Penilaian
-                                                        Data</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin', 'Pentadbir Metadata', 'Pentadbir Data']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('maklum_balas') }}" class="nav-link active">
-                                                    <i class="fa-comments fas text-green"></i>
-                                                    <span class="nav-link-text">Maklum Balas</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('audit_trail') }}" class="nav-link active">
-                                                    <i class="fa-comments fas text-green"></i>
-                                                    <span class="nav-link-text">Audit Trail</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('mygeo_pengesahan_metadata') }}"
-                                                    class="nav-link active">
-                                                    <i class="fas fa-edit text-green"></i>
-                                                    <span class="nav-link-text">Semakan Metadata</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('mohon_data') }}" class="nav-link active">
-                                                    <i class="fas fa-pen-alt text-warning"></i>
-                                                    <span class="nav-link-text">Mohon Data</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin','Pentadbir Aplikasi']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('semakan_status') }}" class="nav-link active">
-                                                    <i class="fas fa-search text-danger"></i>
-                                                    <span class="nav-link-text">Semakan Status</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin','Pentadbir Aplikasi']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('muat_turun_data') }}" class="nav-link active">
-                                                    <i class="fas fa-cloud-download-alt text-purple"></i>
-                                                    <span class="nav-link-text">Muat Turun Data</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin','Pentadbir Aplikasi']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('penilaian') }}" class="nav-link active">
-                                                    <i class="fas fa-edit text-green"></i>
-                                                    <span class="nav-link-text">Penilaian Data</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin','Pentadbir Aplikasi']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('mygeo_pengisian_metadata') }}"
-                                                    class="nav-link active">
-                                                    <i class="fa-edit fas text-warning"></i>
-                                                    <span class="nav-link-text">Pengisian Metadata</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Pengesah Metadata']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('mygeo_senarai_metadata') }}"
-                                                    class="nav-link active">
-                                                    <i class="fas fa-list-ul text-indigo"></i>
-                                                    <span class="nav-link-text">Senarai Metadata</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Metadata']))
-                                            <li class="nav-item">
-                                                <a href="{{ url('mygeo_senarai_penerbit_pengesah') }}"
-                                                    class="nav-link active">
-                                                    <i class="fas fa-list-ul text-indigo"></i>
-                                                    <span class="nav-link-text">Senarai Penerbit / Pengesah</span>
-                                                </a>
-                                            </li>
-                                        @endif
+                                        
                                         @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item has-treeview">
                                                 <a class="nav-link ng-star-inserted" href="#">
@@ -386,11 +324,162 @@
                                                 </ul>
                                             </li>
                                         @endif
+                                        
                                         @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item">
                                                 <a href="{{ url('senarai_agensi_organisasi') }}" class="nav-link">
                                                     <i class="fas fa-list-ul text-indigo"></i>
                                                     <span class="nav-link-text">Kemaskini Agensi / Organisasi</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                            <li class="nav-item has-treeview">
+                                                <a class="nav-link ng-star-inserted" href="#">
+                                                    <i class="fas fa-magic text-red"></i>
+                                                    <span class="nav-link-text">Kemas Kini Data</span>
+                                                    <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
+                                                </a>
+                                                <ul class="nav nav-sm nav-treeview">
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('senarai_data') }}" class="nav-link active">
+                                                            <span class="nav-link-text">Senarai Data</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('kategori_kelas_kongsi_data') }}"
+                                                            class="nav-link active">
+                                                            <span class="nav-link-text">Kategori Pengkelasan Perkongsian
+                                                                Data</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pentadbir Metadata']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}"
+                                                    class="nav-link">
+                                                    <i class="far fa-id-card text-green"></i>
+                                                    <span class="nav-link-text">Kemas Kini Elemen</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('permohonan_baru') }}" class="nav-link">
+                                                    <i class="far fa-id-card text-green"></i>
+                                                    <span class="nav-link-text">Permohonan Baru</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('status_permohonan') }}" class="nav-link">
+                                                    <i class="fas fa-book text-purple"></i>
+                                                    <span class="nav-link-text">Status Permohonan</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('proses_data') }}" class="nav-link">
+                                                    <i class="fas fa-sync-alt text-cyan"></i>
+                                                    <span class="nav-link-text">Proses Data</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('penilaian') }}" class="nav-link">
+                                                    <i class="fas fa-file-signature text-primary"></i>
+                                                    <span class="nav-link-text">Akuan Penerimaan dan Penilaian
+                                                        Data</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('audit_trail') }}" class="nav-link active">
+                                                    <i class="fa-comments fas text-green"></i>
+                                                    <span class="nav-link-text">Audit Trail</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin', 'Pentadbir Metadata', 'Pentadbir Data']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('maklum_balas') }}" class="nav-link active">
+                                                    <i class="fa-comments fas text-green"></i>
+                                                    <span class="nav-link-text">Maklum Balas</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('mygeo_pengesahan_metadata') }}"
+                                                    class="nav-link active">
+                                                    <i class="fas fa-edit text-green"></i>
+                                                    <span class="nav-link-text">Semakan Metadata</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('mohon_data') }}" class="nav-link active">
+                                                    <i class="fas fa-pen-alt text-warning"></i>
+                                                    <span class="nav-link-text">Mohon Data</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('semakan_status') }}" class="nav-link active">
+                                                    <i class="fas fa-search text-danger"></i>
+                                                    <span class="nav-link-text">Semakan Status</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('muat_turun_data') }}" class="nav-link active">
+                                                    <i class="fas fa-cloud-download-alt text-purple"></i>
+                                                    <span class="nav-link-text">Muat Turun Data</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pemohon Data', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('penilaian') }}" class="nav-link active">
+                                                    <i class="fas fa-edit text-green"></i>
+                                                    <span class="nav-link-text">Penilaian Data</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('mygeo_pengisian_metadata') }}"
+                                                    class="nav-link active">
+                                                    <i class="fa-edit fas text-warning"></i>
+                                                    <span class="nav-link-text">Pengisian Metadata</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Pengesah Metadata']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('mygeo_senarai_metadata') }}"
+                                                    class="nav-link active">
+                                                    <i class="fas fa-list-ul text-indigo"></i>
+                                                    <span class="nav-link-text">Senarai Metadata</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pentadbir Metadata']))
+                                            <li class="nav-item">
+                                                <a href="{{ url('mygeo_senarai_penerbit_pengesah') }}"
+                                                    class="nav-link active">
+                                                    <i class="fas fa-list-ul text-indigo"></i>
+                                                    <span class="nav-link-text">Senarai Penerbit / Pengesah</span>
                                                 </a>
                                             </li>
                                         @endif

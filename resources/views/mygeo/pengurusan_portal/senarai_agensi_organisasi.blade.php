@@ -108,7 +108,7 @@
                                                 <td>{{ $counter }}</td>
                                                 <td>{{ ($ao->sektor == '1' ? 'Kerajaan':'Swasta') }}</td>
                                                 <td>{{ $ao->name }}</td>
-                                                <td>{{ ($ao->bahagian != "" ? $ao->bahagian:$ao->name) }}</td>
+                                                <td>{{ ($ao->bahagian != "" ? $ao->bahagian:'-') }}</td>
                                                 <td>
                                                     @if($ao->bahagian != "")
                                                     <button type="button" class="btn btn-sm btn-success btnKemaskiniBahagian" data-rowid="{{ $ao->id }}" data-toggle="modal" data-target="#modal_kemaskini_bahagian">
