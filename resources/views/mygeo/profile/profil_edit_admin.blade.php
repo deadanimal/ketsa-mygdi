@@ -116,7 +116,7 @@
                                     <div class="row mb-2">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="agensi_organisasi">
-                                                Agensi / Organisasi
+                                                Agensi / Organisasi / Institusi
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">

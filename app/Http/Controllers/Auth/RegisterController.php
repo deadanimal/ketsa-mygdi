@@ -56,17 +56,17 @@ class RegisterController extends Controller
     {
         $criterias = [
             'name' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
         
-        $user = User::where('email',$data['email'])->get()->first();
-        if($user){
-            $criterias = [
-                'name' => ['required', 'string'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ];
-        }
+//        $user = User::where('email',$data['email'])->get()->first();
+//        if($user){
+//            $criterias = [
+//                'name' => ['required', 'string'],
+//                'password' => ['required', 'string', 'min:8', 'confirmed'],
+//            ];
+//        }
         
         $valid = Validator::make($data,$criterias);
 
@@ -81,6 +81,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $userdaftaremail = $data['email'];
         $user = User::where('email',$data['email'])->get()->first();
         if(!$user){
             $user = User::create([
@@ -88,7 +89,6 @@ class RegisterController extends Controller
                 'nric' => $data['nric'],
                 'email' => $data['email'],
                 'agensi_organisasi' => $data['agensi_organisasi'],
-//                'institusi' => $data['institusi'],
                 'bahagian' => $data['bahagian'],
                 'sektor' => $data['sektor'],
                 'email' => $data['email'],
@@ -107,34 +107,44 @@ class RegisterController extends Controller
             ]);
         }else{
             $var = $user->assigned_roles;
-            $var = $var.",".$data['peranan'];
+            if($var == ""){
+                $var = $data['peranan'];
+            }else{
+                $var = $var.",".$data['peranan'];
+            }
             $user->assigned_roles = $var;
             $user->save();
             
             $user->syncRoles([]);
         }
 
-        $user->assignRole($data['peranan']);
-
-        if($data['peranan'] == "Pemohon Data"){
-            //send email to the pemohon data
-            $to_name = $data['name'];
-            $to_email = $data['email'];
-            $data = array('name'=>$data['name']);
-            Mail::send('mails.exmpl7', $data, function($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Berjaya');
-                $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-            });
-        }else{
-            //send email to the pentadbiraplikasi
-            $to_name = 'pentadbiraplikasi@gmail.com';
-            $to_email = 'pentadbiraplikasi@gmail.com';
-            $data = array('name'=>$data['name']);
-            Mail::send('mails.exmpl2', $data, function($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject('Pengesahan Pendaftaran Penerbit/Pengesah Metadata MyGeo Explorer');
-                $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-            });
+        $requestPeranans = explode(',',$data['peranan']);
+        foreach($requestPeranans as $rp){
+            //assign roles to user
+            $user->assignRole($rp);
+            
+            //email user based on role
+            if($rp == "Pemohon Data"){
+                //send email to the pemohon data
+                $to_name = $data['name'];
+                $to_email = $userdaftaremail;
+                $data = array('name'=>$data['name']);
+                Mail::send('mails.exmpl7', $data, function($message) use ($to_name, $to_email) {
+                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pendaftaran Berjaya');
+                    $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                });
+            }else{
+                //send email to the pentadbiraplikasi
+                $to_name = 'pentadbiraplikasi@gmail.com';
+                $to_email = 'pentadbiraplikasi@gmail.com';
+                $data = array('name'=>$data['name']);
+                Mail::send('mails.exmpl2', $data, function($message) use ($to_name, $to_email) {
+                    $message->to($to_email, $to_name)->subject('Pengesahan Pendaftaran Penerbit/Pengesah Metadata MyGeo Explorer');
+                    $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                });
+            }
         }
+
         
         $at = new AuditTrail();
         $at->path = url()->full();
@@ -150,27 +160,34 @@ class RegisterController extends Controller
         $theUser = User::where('email',$request->email)->get()->first();
         if($theUser){
             //check if user already has 2 roles. max 2 roles per user
-            if(count($theUser->getRoleNames()) == 2){
-                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda dah ade 2 role dah']);
-            }
+//            if(count($theUser->getRoleNames()) == 2){
+//                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda dah ade 2 role dah']);
+//            }
+            
+            //check if user already registered with the role selected
             $roles = $theUser->getRoleNames();
             $r2 = [];
             foreach($roles as $role){
                 $r2[] = $role;
             }
-            //check if user already registered with the role selected
-            if(in_array($request->peranan,$r2)){
-                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda telah didaftar dengan peranan dipilih.']);
+            $requestPeranans = explode(',',$request->peranan);
+            foreach($requestPeranans as $rp){
+                if(in_array($rp,$r2)){
+                    return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda telah didaftar dengan peranan dipilih.']);
+                }
             }
         }
         
         //if role selected is pengesah, check if there is already a pengesah in the bahagian selected
-        if($request->peranan == 'Pengesah Metadata' && $request->bahagian != ""){
-            $pengesahs = User::whereHas("roles", function ($q) {
-                $q->where("name", "Pengesah Metadata");
-            })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
-            if(!empty($pengesahs) && count($pengesahs) > 0){
-                return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda telah memilih Bahagian yang telah mempunyai Pengesah Metadata yang berdaftar. Hanya satu Pengesah Metadata yang akan didaftarkan dalam satu Agensi dan Bahagian yang sama. Sila hubungi Pentadbir Aplikasi untuk maklumat lanjut.']);
+        $requestPeranans = explode(',',$request->peranan);
+        foreach($requestPeranans as $rp){
+            if($rp == 'Pengesah Metadata' && $request->bahagian != ""){
+                $pengesahs = User::whereHas("roles", function ($q) {
+                    $q->where("name", "Pengesah Metadata");
+                })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
+                if(!empty($pengesahs) && count($pengesahs) > 0){
+                    return redirect($this->redirectPath())->with(['error'=>'1','message'=>'Anda telah memilih Bahagian yang telah mempunyai Pengesah Metadata yang berdaftar. Hanya satu Pengesah Metadata yang akan didaftarkan dalam satu Agensi dan Bahagian yang sama. Sila hubungi Pentadbir Aplikasi untuk maklumat lanjut.']);
+                }
             }
         }
         

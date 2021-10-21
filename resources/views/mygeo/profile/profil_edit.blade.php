@@ -115,23 +115,13 @@
                                     <div class="row mb-2">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="agensi_organisasi">
-                                                Agensi / Organisasi
+                                                Agensi / Organisasi / Institusi
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <?php
-                                            if (Auth::user()->hasRole(['Pemohon Data'])) {
-                                                ?>
-                                                <input type="text" name="agensi_organisasi" class="form-control form-control-sm ml-3" value="{{ $user->agensi_organisasi }}">
-                                                <?php
-                                            }else{
-                                                ?>
-                                                <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
-                                                    <option value="">Pilih...</option>
-                                                </select>
-                                                <?php
-                                            }
-                                            ?>
+                                            <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                                                <option value="">Pilih...</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-2 divBahagian">
