@@ -86,15 +86,19 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
 
             $penerbit = $this->getUser($met->portal_user_id);
 
-            if(simplexml_load_string($ftestxml2) === false){
-            }else{
-                $xml2 = simplexml_load_string($ftestxml2);
-                $metadatas[$met->id] = [$xml2, $met, $penerbit];
+            $sxe = simplexml_load_string($ftestxml2);
+            if (false === $sxe) {
+                continue;
             }
+            
+            $xml2 = simplexml_load_string($ftestxml2);
+            $metadatas[$met->id] = [$xml2, $met, $penerbit];
         }
 
         return view('mygeo.metadata.senarai_metadata', compact('metadatas'));
