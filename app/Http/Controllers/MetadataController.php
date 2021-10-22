@@ -92,12 +92,11 @@ class MetadataController extends Controller {
 
             $penerbit = $this->getUser($met->portal_user_id);
 
-            $sxe = simplexml_load_string($ftestxml2);
-            if (false === $sxe) {
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
                 continue;
             }
             
-            $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = [$xml2, $met, $penerbit];
         }
 
@@ -158,9 +157,16 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-            $xml2 = simplexml_load_string($ftestxml2);
-            $metadatas[$met->id] = $xml2;
+            
+            $sxe = simplexml_load_string($ftestxml2);
+            if (false === $sxe) {
+                continue;
+            }
+            
+            $metadatas[$met->id] = $sxe;
         }
         
         $metadataTitles = [];
@@ -171,8 +177,15 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
             if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
                 $metadataTitles[] = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
             }
@@ -193,8 +206,15 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
             if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != "" && stripos(trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString),strval($request->carian)) !== false){
                 $metadatas[$met->id] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
             }
@@ -222,8 +242,14 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
 
             $penerbit = $this->getUser($met->portal_user_id);
 
@@ -245,9 +271,16 @@ class MetadataController extends Controller {
                     XML;
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
             $metadatas[$met->id] = [$xml2, $met, 'not_draft'];
         }
 
@@ -285,8 +318,15 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
             $metadatas[$met->id] = $xml2;
         }
 
@@ -337,8 +377,14 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
         $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
 
         if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
             App::setLocale(trim($metadataxml->language->CharacterString));
@@ -391,8 +437,14 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
         $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
 
         if (isset($_GET['bhs']) && $_GET['bhs'] == 'bm'){
             App::setLocale('bm');
@@ -480,8 +532,14 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
         $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
 
         if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
             App::setLocale(trim($metadataxml->language->CharacterString));
@@ -524,8 +582,14 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
         $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
 
         if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
             App::setLocale(trim($metadataxml->language->CharacterString));
@@ -594,8 +658,14 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
         $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
 
         
         // (B) CREATE A NEW SPREADSHEET
@@ -2459,7 +2529,15 @@ class MetadataController extends Controller {
             $uploaded_xml = str_replace("gco:", "", $uploaded_xml);
             $uploaded_xml = str_replace("gmd:", "", $uploaded_xml);
             $uploaded_xml = str_replace("srv:", "", $uploaded_xml);
+            $uploaded_xml = str_replace("&#13;", "", $uploaded_xml);
+            $uploaded_xml = str_replace("\r", "", $uploaded_xml);
             $uploaded_xml = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $uploaded_xml);
+         
+            $uploaded_xml = simplexml_load_string($ftestxml2);
+            if (false === $uploaded_xml) {
+    //            continue;
+            }
+            
 //            $xmlObject = simplexml_load_string($uploaded_xml);
 //            $json = json_encode($xmlObject);
 //            $xml_array = json_decode($json, true);
@@ -2836,13 +2914,19 @@ class MetadataController extends Controller {
                 $metadata->update();
 
                 $ftestxml2 = <<<XML
-                $metadata->data
-                XML;
+                        $metadata->data
+                    XML;
                 $ftestxml2 = str_replace("gco:", "", $ftestxml2);
                 $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+                $ftestxml2 = str_replace("\r", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
                 $metadataxml = simplexml_load_string($ftestxml2);
+                if (false === $metadataxml) {
+        //            continue;
+                }
 
                 $metadataName = "";
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
@@ -2915,9 +2999,15 @@ class MetadataController extends Controller {
                 $ftestxml2 = str_replace("gco:", "", $ftestxml2);
                 $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+                $ftestxml2 = str_replace("\r", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-                $metadataxml = simplexml_load_string($ftestxml2);
 
+                $metadataxml = simplexml_load_string($ftestxml2);
+                if (false === $metadataxml) {
+                    continue;
+                }
+                
                 $metadataName = "";
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                    $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
@@ -2964,8 +3054,14 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
             $metadataxml = simplexml_load_string($ftestxml2);
+            if (false === $metadataxml) {
+    //            continue;
+            }
 
             $metadataName = "";
             if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
@@ -3028,8 +3124,14 @@ class MetadataController extends Controller {
                 $ftestxml2 = str_replace("gco:", "", $ftestxml2);
                 $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+                $ftestxml2 = str_replace("\r", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
                 $metadataxml = simplexml_load_string($ftestxml2);
+                if (false === $metadataxml) {
+        //            continue;
+                }
 
                 $metadataName = "";
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
@@ -3063,8 +3165,14 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
             $metadataxml = simplexml_load_string($ftestxml2);
+            if (false === $metadataxml) {
+    //            continue;
+            }
 
             $metadataName = "";
             if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
