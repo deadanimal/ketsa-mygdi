@@ -66,16 +66,23 @@ class MetadataController extends Controller {
         //$response,$response->body(),$response->json(),$response->status(),$response->ok(),$response->successful(),$response->failed(),$response->serverError(),$response->clientError(),$response->headers()
         //);
 
+        
+        $metadatas = $metadatasdb = [];
+        $carian = isset($request->carian) ? $request->carian:"";
+        $query = MetadataGeo::on('pgsql2');
+        
         if(auth::user()->hasRole(['Penerbit Metadata'])){
             //see own metadatas
-            $metadatasdb = MetadataGeo::on('pgsql2')->where('portal_user_id','=',auth::user()->id)->orderBy('id', 'DESC')->get()->all();
+            $query = $query->where('portal_user_id','=',auth::user()->id);
         }elseif(auth::user()->hasRole(['Pengesah Metadata'])){
             //see all metadatas with same agensi_organisasi and bahagian
-            $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . auth::user()->agensiOrganisasi->name . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%')->orderBy('id', 'DESC')->get()->all();
+            $query = $query->where('data', 'ilike', '%' . auth::user()->agensiOrganisasi->name . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%');
         }elseif(auth::user()->hasRole(['Pentadbir Aplikasi','Pentadbir Metadata','Super Admin'])){
             //see all metadatas regardless
-            $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
         }
+        
+        $metadatasdb = $query->orderBy('id', 'DESC')->paginate(12);
+        $metadatasdbtitle = $query->select('id','data')->get();
 
         libxml_use_internal_errors(true); //Disable libxml errors and allow user to fetch error information as needed
         $metadatas = [];
@@ -99,8 +106,30 @@ class MetadataController extends Controller {
             
             $metadatas[$met->id] = [$xml2, $met, $penerbit];
         }
+        
+        $metadataTitles = [];
+        foreach ($metadatasdbtitle as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                $metadataTitles[] = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
+            }
+        }
 
-        return view('mygeo.metadata.senarai_metadata', compact('metadatas'));
+        return view('mygeo.metadata.senarai_metadata', compact('metadatas','metadataTitles'));
     }
 
     function getUser($user_id){
@@ -111,7 +140,6 @@ class MetadataController extends Controller {
         $metadatas = $metadatasdb = [];
         $carian = isset($request->carian) ? $request->carian:"";
         $query = MetadataGeo::on('pgsql2');
-        $query2 = MetadataGeo::on('pgsql2');
         
         $params = [];
         

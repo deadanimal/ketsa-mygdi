@@ -130,7 +130,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/store_metadata', 'MetadataController@store');
     Route::post('/muat_naik_xml', 'MetadataController@store_xml');
 
-    Route::get('/mygeo_senarai_metadata', 'MetadataController@index');
+    Route::any('/mygeo_senarai_metadata', 'MetadataController@index');
     Route::post('/carian_metadata', 'MetadataController@search');
 
     Route::get('/mygeo_kemaskini_elemen_metadata','MetadataController@kemaskini_elemen_metadata');
