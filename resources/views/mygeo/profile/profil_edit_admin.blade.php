@@ -153,7 +153,7 @@
                                                 Telefon Pejabat
                                             </label><label class="float-right">:</label>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="number" value="{{ $user->phone_pejabat }}" />
                                         </div>
                                         <div class="col-2">
@@ -161,7 +161,7 @@
                                                 Telefon Bimbit
                                             </label><label class="float-right">:</label>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="number" value="{{ $user->phone_bimbit }}" />
                                         </div>
                                     </div>

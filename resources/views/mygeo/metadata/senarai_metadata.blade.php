@@ -329,6 +329,18 @@
                     ?>
                   </tbody>
                 </table>
+                
+                      <table id="table_metadatas2" class="table table-bordered table-striped" style="overflow: auto;">
+                  <thead>
+                    <tr>
+                        <th>Bil</th>
+                        <th>Metadata</th>
+                        <th>Kategori</th>
+                        <th>Status</th>
+                        <th>Tindakan</th>
+                    </tr>
+                  </thead>
+                </table>
               </div>
               </div>
             </div>
@@ -342,24 +354,63 @@
   $(document).ready(function(){
     var table = $("#table_metadatas").DataTable({
         "orderCellsTop": true,
-      "ordering": false,
-      "responsive": false,
-      "autoWidth": true,
-      "oLanguage": {
-        "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-        "sEmptyTable": "Tiada rekod ditemui",
-         "sZeroRecords": "Tiada rekod ditemui",
-        "sLengthMenu": "Papar _MENU_ rekod",
-        "sLoadingRecords": "Sila tunggu...",
-        "sSearch": "Carian:",
-        "oPaginate": {
-           "sFirst": "Pertama",
-           "sLast": "Terakhir",
-           "sNext": ">",
-           "sPrevious": "<",
-        }
-      },
+        "ordering": false,
+        "responsive": false,
+        "autoWidth": true,
+        "oLanguage": {
+            "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+            "sEmptyTable": "Tiada rekod ditemui",
+             "sZeroRecords": "Tiada rekod ditemui",
+            "sLengthMenu": "Papar _MENU_ rekod",
+            "sLoadingRecords": "Sila tunggu...",
+            "sSearch": "Carian:",
+            "oPaginate": {
+               "sFirst": "Pertama",
+               "sLast": "Terakhir",
+               "sNext": ">",
+               "sPrevious": "<",
+            }
+        },
     });
+    
+    var table2 = $("#table_metadatas2").DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "<?php echo url('getSenaraiMetadata'); ?>",
+            "type": "POST",
+            "data": {
+                "_token": "{{ csrf_token() }}",
+            },
+        },
+        "columns": [
+            { "data": "bil" },
+            { "data": "title" },
+            { "data": "kategori" },
+            { "data": "status" },
+            { "data": "tindakan" },
+        ],
+        "orderCellsTop": true,
+        "ordering": false,
+        "responsive": false,
+        "autoWidth": true,
+        "oLanguage": {
+            "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+            "sEmptyTable": "Tiada rekod ditemui",
+             "sZeroRecords": "Tiada rekod ditemui",
+            "sLengthMenu": "Papar _MENU_ rekod",
+            "sLoadingRecords": "Sila tunggu...",
+            "sSearch": "Carian:",
+            "oPaginate": {
+               "sFirst": "Pertama",
+               "sLast": "Terakhir",
+               "sNext": ">",
+               "sPrevious": "<",
+            }
+        },
+    });
+    
+    
 
     // Setup - add a text input to each footer cell
     $('#table_metadatas thead tr').clone(true).appendTo('#table_metadatas thead');
@@ -369,6 +420,18 @@
         $('input',this).on('keyup change', function(){
             if(table.column(i).search() !== this.value){
                 table.column(i).search(this.value).draw();
+            }
+        });
+    });
+    
+    // Setup - add a text input to each footer cell
+    $('#table_metadatas2 thead tr').clone(true).appendTo('#table_metadatas2 thead');
+    $('#table_metadatas2 thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
+        $('input',this).on('keyup change', function(){
+            if(table2.column(i).search() !== this.value){
+                table2.column(i).search(this.value).draw();
             }
         });
     });

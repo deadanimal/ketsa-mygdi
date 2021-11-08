@@ -164,6 +164,17 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+                        <div class="col-12 my-2">
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
                     </div>
                     <form method="POST" action="{{ url('simpan_agensi_organisasi') }}" id="formTambahAgensiOrganisasi">
                         @csrf

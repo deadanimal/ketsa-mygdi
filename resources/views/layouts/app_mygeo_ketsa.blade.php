@@ -329,7 +329,7 @@
                                             <li class="nav-item">
                                                 <a href="{{ url('senarai_agensi_organisasi') }}" class="nav-link">
                                                     <i class="fas fa-list-ul text-indigo"></i>
-                                                    <span class="nav-link-text">Kemaskini Agensi / Organisasi</span>
+                                                    <span class="nav-link-text">Kemaskini Agensi / Organisasi / Institusi</span>
                                                 </a>
                                             </li>
                                         @endif
@@ -559,13 +559,14 @@
                                     <ul class="navbar-nav align-items-center ml-auto ml-md-0">
                                         <li placement="bottom-right" class="nav-item dropdown">
                                             <!--<a role="button" dropdowntoggle="" class="nav-link pr-0 dropdown-toggle" aria-haspopup="true">-->
-                                            <a class="nav-link pr-0 dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <!--<a class="nav-link pr-0 dropdown-toggle" data-toggle="dropdown" href="#">-->
                                                 <div class="media align-items-center pointer">
-                                                    <div class="media-body ml-2 d-none d-lg-block"><span
-                                                            class="mb-0 text-sm font-weight-bold ng-star-inserted">{{ strtoupper(auth::user()->name) }}
-                                                        </span><br>
-                                                        <span
-                                                            class="float-right text-sm font-weight-light ng-star-inserted">
+                                                    <div class="media-body ml-2 d-none d-lg-block">
+                                                        <span class="mb-0 text-sm font-weight-bold ng-star-inserted">
+                                                            {{ strtoupper(auth::user()->name) }}
+                                                        </span>
+                                                        <br>
+                                                        <span class="float-right text-sm font-weight-light ng-star-inserted">
                                                             <?php
                                                             $roles = '';
                                                             if (!empty(auth::user()->getRoleNames())) {
@@ -573,9 +574,10 @@
                                                                     $roles .= $role . ', ';
                                                                 }
                                                             }
-                                                            echo rtrim($roles, ', ');
+                                                            echo rtrim($roles, ', ').' (<a href="#" data-toggle="modal" data-target="#modal_tukar_peranan">Tukar</a>)';
                                                             ?>
                                                         </span>
+                                                        </a>
                                                     </div>
                                                     <span class="avatar avatar-md rounded-circle ml-3">
                                                         <?php
@@ -592,13 +594,13 @@
                                                         ?>
                                                     </span>
                                                 </div>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                            <!--</a>-->
+<!--                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                                 <a href="#" class="dropdown-item" data-toggle="modal"
                                                     data-target="#modal_tukar_peranan">
                                                     <i class="fas fa-users mr-2 tukarPeranan"></i> Tukar Peranan
                                                 </a>
-                                            </div>
+                                            </div>-->
                                             <!--container-->
                                         </li>
                                         <!--container-->

@@ -419,19 +419,28 @@ class PortalController extends Controller
         $agensiOrganisasi = [];
         foreach($aos2 as $ao){
             if($ao->bahagian == null || $ao->bahagian == ""){
+                //get all agensi / organisasi / institusi that have bahagians only
                 $taos = AgensiOrganisasi::where('name',$ao->name)->whereNotNull('bahagian')->get();
                 if(!empty($taos) && count($taos) > 0){
                     continue;
                 }
             }
             $aos[] = $ao;
-            $agensiOrganisasi[] = $ao->name;
+            $agensiOrganisasi[] = $ao->name; //for autocomplete
         }
         return view('mygeo.pengurusan_portal.senarai_agensi_organisasi', compact('aos','agensiOrganisasi'));
     }
 
     public function simpan_agensi_organisasi(Request $request){
-        $msg = "Penambahan Agensi / Organisasi berjaya.";
+        if($request->namaAgensiOrganisasi != "" && !isset($request->namaBahagian)){
+            $aoi = AgensiOrganisasi::where('name','ILIKE',$request->namaAgensiOrganisasi)->whereNull('bahagian')->get()->first();
+            if(!empty($aoi)){
+                echo json_encode(["error"=>"1","msg"=>"Nama Agensi / Organisasi / Instutisi telah wujud. Sila pilih nama lain."]);
+                exit();
+            }
+        }
+        
+        $msg = "Penambahan Agensi / Organisasi / Institusi berjaya.";
         $ao = new AgensiOrganisasi();
         $ao->sektor = $request->sektor;
         $ao->name = $request->namaAgensiOrganisasi;
@@ -447,7 +456,7 @@ class PortalController extends Controller
         $at->data = 'Create';
         $at->save();
 
-        echo json_encode(["msg"=>$msg]);
+        echo json_encode(["error"=>"0","msg"=>$msg]);
         exit();
     }
 

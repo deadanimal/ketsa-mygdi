@@ -273,6 +273,7 @@ Route::post('deleteElemenMetadata','MetadataController@deleteElemenMetadata');
 Route::post('deleteCustomMetadataInput','MetadataController@deleteCustomMetadataInput');
 Route::post('findMetadataByName','MetadataController@findMetadataByName');
 Route::post('getKelasKongsis','DataAsasController@getKelasKongsis');
+Route::post('/getSenaraiMetadata', 'MetadataController@getSenaraiMetadata');
 
 Auth::routes();
 

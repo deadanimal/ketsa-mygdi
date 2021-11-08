@@ -131,6 +131,113 @@ class MetadataController extends Controller {
 
         return view('mygeo.metadata.senarai_metadata', compact('metadatas','metadataTitles'));
     }
+    
+    public function getSenaraiMetadata(Request $request) {
+        $data = [];
+        $data['draw'] = $request->draw;
+        
+        $query = MetadataGeo::on('pgsql2');
+        
+        if(auth::user()->hasRole(['Penerbit Metadata'])){
+            //see own metadatas
+            $query = $query->where('portal_user_id','=',auth::user()->id);
+        }elseif(auth::user()->hasRole(['Pengesah Metadata'])){
+            //see all metadatas with same agensi_organisasi and bahagian
+            $query = $query->where('data', 'ilike', '%' . auth::user()->agensiOrganisasi->name . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%');
+        }elseif(auth::user()->hasRole(['Pentadbir Aplikasi','Pentadbir Metadata','Super Admin'])){
+            //see all metadatas regardless
+        }
+        
+        $metadatas = $query->orderBy('id', 'DESC')->offset($request->start)->limit($request->length)->get();
+        
+        $data['recordsTotal'] = count($metadatas);
+        $data['recordsFiltered'] = count($metadatas);
+
+        libxml_use_internal_errors(true); //Disable libxml errors and allow user to fetch error information as needed
+        $counter = 1;
+//        echo "<pre>";
+//        var_dump($request->start);
+//        var_dump($request->length);
+//        var_dump(count($metadatas));
+//        var_dump($query->toSql());
+//        var_dump(auth::user()->name);
+//        echo "</pre>";
+        $data['data'] = [];
+        
+        foreach ($metadatas as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
+            $penerbit = $this->getUser($met->portal_user_id);
+            
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
+            $title = "";
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $title =  strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
+            }elseif(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $title =  strval($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString);
+            }
+            
+            $kategori = "";
+            if(isset($xml2->hierarchyLevel->MD_ScopeCode) && $xml2->hierarchyLevel->MD_ScopeCode != ""){
+                $kategori =  strval($xml2->hierarchyLevel->MD_ScopeCode);
+            }
+            
+            $status = "";
+            if($met->is_draf == 'yes'){
+              $status = "Draf";
+            }else{
+                if($met->disahkan == '0'){
+                    $status = "Perlu Pengesahan";
+                }elseif($met->disahkan == 'yes'){
+                    $status = "Diterbitkan";
+                }elseif($met->disahkan == 'no'){
+                    $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
+                }elseif($met->disahkan == 'delete'){
+                    $status = "Dipadam";
+                }
+            }
+            
+            $tindakan = "";
+            $tindakan .= '<form method="post" action="'.url('/lihat_metadata').'">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="metadata_id" value="'.$met->id.'">
+                <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+            </form>';
+            $tindakan .= '<a href="'.url('/kemaskini_metadata/'.$met->id).'">
+                <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+            </a>';
+            $tindakan .= '<form method="post" action="'.url('/delete_metadata').'">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="metadata_id" value="'.$met->id.'">
+                <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+            </form>';
+            
+            $data['data'][] = [
+                "bil"=> $counter,
+                "title"=> $title,
+                "kategori"=> $kategori,
+                "status"=> $status,
+                "tindakan"=> $tindakan,
+            ];
+            
+            $counter++;
+        }
+
+        echo json_encode($data);
+        exit();
+    }
 
     function getUser($user_id){
         return User::where('id',$user_id)->get()->first();
@@ -2536,7 +2643,7 @@ class MetadataController extends Controller {
             }
             $mg->save();
         });
-
+        
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;

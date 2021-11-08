@@ -143,6 +143,7 @@ class RegisterController extends Controller
                     $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
                 });
             }
+            break; //just assign one role at a time
         }
 
         

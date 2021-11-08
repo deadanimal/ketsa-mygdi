@@ -124,18 +124,20 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row mb-2 divBahagian">
-                                        <div class="col-3">
-                                            <label class="form-control-label mr-4" for="bahagian">
-                                                Bahagian
-                                            </label><label class="float-right">:</label>
+                                    @if (Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
+                                        <div class="row mb-2 divBahagian">
+                                            <div class="col-3">
+                                                <label class="form-control-label mr-4" for="bahagian">
+                                                    Bahagian
+                                                </label><label class="float-right">:</label>
+                                            </div>
+                                            <div class="col-8">
+                                                <select id="bahagian" name="bahagian" class="form-control form-control-sm ml-3">
+                                                    <option value="">Pilih...</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="col-8">
-                                            <select id="bahagian" name="bahagian" class="form-control form-control-sm ml-3">
-                                                <option value="">Pilih...</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    @endif
                                     <div class="row mb-2">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="email">
@@ -152,18 +154,20 @@
                                                 Telefon Pejabat
                                             </label><label class="float-right">:</label>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="number" value="{{ $user->phone_pejabat }}" />
                                         </div>
+                                    </div>
+                                    <div class="row mb-2">
                                         <?php
                                         if(!Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata'])){
                                             ?>
-                                            <div class="col-2">
+                                            <div class="col-3">
                                                 <label class="form-control-label mr-4" for="phone_bimbit">
                                                     Telefon Bimbit
                                                 </label><label class="float-right">:</label>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-8">
                                                 <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="number" value="{{ $user->phone_bimbit }}" />
                                             </div>
                                             <?php
@@ -177,14 +181,7 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <?php
-                                            $roles = Auth::user()->getRoleNames();
-                                            if(!empty($roles) && count($roles) > 0){
-                                                foreach($roles as $r){
-                                                    ?><p class="ml-3 mb-0">{{ $r }}</p><?php
-                                                }
-                                            }
-                                            ?>
+                                            <input class="form-control form-control-sm ml-3" id="peranan" type="text" value="<?php echo $user->assigned_roles; ?>" disabled />
                                         </div>
                                     </div>
                                     @if (Auth::user()->hasRole('Pemohon Data'))
@@ -275,7 +272,7 @@ $(document).ready(function(){
         if(agensi_organisasi == ""){
             msg = msg + "Sila pilih agensi / organisasi\r\n\r\n";
         }
-        @if(!Auth::user()->hasRole('Pemohon Data'))
+        @if(Auth::user()->hasRole('Penerbit Metadata, Pengesah Metadata'))
         if(bahagian == ""){
             msg = msg + "Sila pilih bahagian\r\n\r\n";
         }
@@ -307,37 +304,42 @@ $(document).ready(function(){
             $('#bahagian').append('<option value="">Pilih...</option>');
         });
     });
-    $('#agensi_organisasi').change(function() {
-        var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
+    @if (Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
+        $('#agensi_organisasi').change(function() {
+            var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
 
-        $.ajax({
-            method: "POST",
-            url: "{{ url('get_bahagian') }}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "agensi_organisasi_name": agensi_organisasi_name,
-            },
-        }).done(function(response) {
-            var data = jQuery.parseJSON(response);
-            if(data.error == '1'){
-                alert(data.msg);
-            }else{
-                $('#bahagian').html('');
-                $('#bahagian').append('<option value="">Pilih...</option>');
-                $.each(data.bhgns, function(index,value) {
-                    $('#bahagian').append('<option value="'+value.bahagian+'">'+value.bahagian+'</option>');
-                });
-            }
+            $.ajax({
+                method: "POST",
+                url: "{{ url('get_bahagian') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "agensi_organisasi_name": agensi_organisasi_name,
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                if(data.error == '1'){
+                    alert(data.msg);
+                }else{
+                    $('#bahagian').html('');
+                    $('#bahagian').append('<option value="">Pilih...</option>');
+                    $.each(data.bhgns, function(index,value) {
+                        $('#bahagian').append('<option value="'+value.bahagian+'">'+value.bahagian+'</option>');
+                    });
+                }
+            });
         });
-    });
+    @endif
 
     $('#sektor').val('<?php echo $user->sektor; ?>').change();
     setTimeout(function(){
         $('#agensi_organisasi').val('<?php echo $user->agensi_organisasi; ?>').change();
+        console.log('agensasi: <?php echo $user->agensi_organisasi; ?>');
     }, 750);
-    setTimeout(function(){
-        $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
-    }, 1000);
+    @if (Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
+        setTimeout(function(){
+            $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
+        }, 1000);
+    @endif
 });
 
 function isEmail(email) {
