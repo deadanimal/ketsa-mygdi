@@ -13,14 +13,11 @@
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/app/Http/Controllers/MetadataController.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/metadata/senarai_metadata.blade.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/app/Http/Controllers/XmlController.php</file>
-            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/pengurusan_portal/senarai_agensi_organisasi.blade.php</file>
-            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/app/User.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/app/Console/Kernel.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/layouts/app_mygeo_ketsa.blade.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mails/exmpl16.blade.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/profile/profil.blade.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/routes/web.php</file>
-            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/app/Http/Controllers/PortalController.php</file>
         </group>
     </open-files>
 </project-private>

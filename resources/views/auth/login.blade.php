@@ -362,7 +362,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <select name="state" class="form-control form-control-sm ml-3">
-                                                    <option selected disabled>Pilih...</option>
+                                                    <option selected disabled>Pilih...</option> 
                                                     <?php
                                                     if (count($states) > 0) {
                                                         foreach ($states as $st) {
