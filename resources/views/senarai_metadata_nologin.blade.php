@@ -255,8 +255,10 @@ input[type=submit] {
                                                                 ?>
                                                                 <?php
                                                                 $abstract = "";
-                                                                if(isset($val->identificationInfo->SV_ServiceIdentification->abstract) && $val->identificationInfo->SV_ServiceIdentification->abstract != ""){
-                                                                    $abstract = trim($val->identificationInfo->SV_ServiceIdentification->abstract);
+                                                                if(isset($val->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $val->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != ""){
+                                                                    $abstract = trim($val->identificationInfo->SV_ServiceIdentification->abstract->CharacterString);
+                                                                }elseif(isset($val->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $val->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+                                                                    $abstract = trim($val->identificationInfo->MD_DataIdentification->abstract->CharacterString);
                                                                 }
                                                                 ?>
                                                                 <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>

@@ -55,7 +55,7 @@
                 @if ($elemenMetadata['c2_product_type']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3">
-                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Pemilihan jenis abstrak">
+                        <label class="form-control-label mr-4" for="c2_metadataNam3" data-toggle="tooltip" title="Pemilihan jenis abstrak">
                             <?php echo __('lang.type_of_product'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
@@ -457,7 +457,7 @@
                 @if ($elemenMetadata['c2_contact_name']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nama individu yang mewakili organisasi bagi maklumat geospatial">
+                        <label class="form-control-label mr-4" for="c2_metadataNam2e" data-toggle="tooltip" title="Nama individu yang mewakili organisasi bagi maklumat geospatial">
                             <?php echo __('lang.name'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
@@ -481,7 +481,7 @@
                 @if ($elemenMetadata['c2_contact_agensiorganisasi']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nama organisasi yang bertanggungjawab terhadap maklumat geospatial">
+                        <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Nama organisasi yang bertanggungjawab terhadap maklumat geospatial">
                             <?php echo __('lang.organisation_name'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
@@ -528,7 +528,7 @@
                 @if ($elemenMetadata['c2_position_name']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Jawatan individu yang mewakili organisasi bagi maklumat geospatial">
+                        <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Jawatan individu yang mewakili organisasi bagi maklumat geospatial">
                             <?php echo __('lang.position_name'); ?>
                             </label><label class="float-right">:</label>
                         </div>
@@ -550,7 +550,7 @@
                 @if($elemenMetadata['c2_postal_code']->status == '1' || $elemenMetadata['c2_contact_city']->status == '1' || $elemenMetadata['c2_contact_state']->status == '1' || $elemenMetadata['c2_contact_country']->status == '1' || $elemenMetadata['c2_contact_address1']->status == '1' || $elemenMetadata['c2_contact_address2']->status == '1' || $elemenMetadata['c2_contact_address3']->status == '1' || $elemenMetadata['c2_contact_address4']->status == '1')
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Alamat organisasi yang bertanggungjawab terhadap maklumat geospatial">
+                        <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Alamat organisasi yang bertanggungjawab terhadap maklumat geospatial">
                             <?php echo __('lang.address'); ?>
                             </label><label class="float-right">:</label>
                         </div>
@@ -685,7 +685,7 @@
                 @if ($elemenMetadata['c2_contact_email']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Alamat emel rasmi">
+                        <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Alamat emel rasmi">
                             <?php echo __('lang.email'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
@@ -709,7 +709,7 @@
                 @if ($elemenMetadata['c2_contact_fax']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nombor faksimili organisasi">
+                        <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Nombor faksimili organisasi">
                             <?php echo __('lang.fax_no'); ?>
                             </label><label class="float-right">:</label>
                         </div>
@@ -730,7 +730,7 @@
                 @if ($elemenMetadata['c2_contact_phone_office']->status == '1')
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nombor telefon organisasi">
+                        <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Nombor telefon organisasi">
                             <?php echo __('lang.telephone_office'); ?><span class="text-warning">*</span>
                             </label><label class="float-right">:</label>
                         </div>
@@ -754,7 +754,7 @@
                 @if ($elemenMetadata['c2_contact_website']->status == '1')
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
-                        <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Alamat laman web organisasi">
+                        <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Alamat laman web organisasi">
                             <?php echo __('lang.contact_website'); ?>
                             </label><label class="float-right">:</label>
                         </div>

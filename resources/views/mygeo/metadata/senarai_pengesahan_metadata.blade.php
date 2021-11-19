@@ -48,7 +48,7 @@
                                 <div class="col-4 text-right">
                                     <button type="button" class="btn btn-sm btn-primary float-right btn_lulus_multi">
                                         <i class="fas fa-check mr-2"></i>
-                                        Lulus
+                                        Terbit
                                     </button>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                             <table id="table_metadatas" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        <th><input type="checkbox" name="selectAll" id="selectAll"></th>
                                         <th>Bil</th>
                                         <th>Nama Metadata</th>
                                         <th>Penerbit</th>
@@ -71,19 +71,21 @@
                                     $bil = 1;
                                     if (count($metadatas) > 0) {
                                         foreach ($metadatas as $key => $val) {
-                                            if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString)) {
-                                                //                              echo "<pre>";var_dump($metadata->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);echo "</pre>";
-                                            }
                                             ?>
                                             <tr>
-                                                <td><input type="checkbox" class="checkbox_metadatas" name="checkbox_metadatas" value="{{ $key }}"></td>
-                                                <td>{{ $bil }}</td>
                                                 <td>
                                                     <?php
-                                                        if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                                                           echo $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                       }
-                                                       ?>
+                                                    $met_name = '';
+                                                    if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
+                                                        $met_name = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                                    }elseif (isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != '') {
+                                                        $met_name = $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                                                    }
+                                                    ?>
+                                                    <input type="checkbox" class="checkbox_metadatas" name="checkbox_metadatas" data-metadataid="{{ $key }}" data-title="{{ $met_name }}" value="{{ $key }}"></td>
+                                                <td>{{ $bil }}</td>
+                                                <td>
+                                                    <?php echo $met_name; ?>
                                                 </td>
                                                 <td>
                                                     {{ (isset($val[2]->name) ? $val[2]->name:"") }}
@@ -137,20 +139,21 @@
             "ordering": false,
             "responsive": false,
             "autoWidth": true,
-            "drawCallback": function(settings) {
-                $(".checkbox_metadatas").on("click", function() {
-                    if ($(this).is(":checked")) {
-                        checked_metadatas.push($(this).val())
-                    } else {
-                        for (var i = 0; i < checked_metadatas.length; i++) {
-                            if (checked_metadatas[i] === $(this).val()) {
-                                checked_metadatas.splice(i, 1);
-                                break;
-                            }
-                        }
-                    }
-                });
-            },
+            "pageLength" : 5, //temp
+//            "drawCallback": function(settings) {
+//                $(".checkbox_metadatas").on("click", function() {
+//                    if ($(this).is(":checked")) {
+//                        checked_metadatas.push($(this).val())
+//                    } else {
+//                        for (var i = 0; i < checked_metadatas.length; i++) {
+//                            if (checked_metadatas[i] === $(this).val()) {
+//                                checked_metadatas.splice(i, 1);
+//                                break;
+//                            }
+//                        }
+//                    }
+//                });
+//            },
             "oLanguage": {
                 "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
                 "sEmptyTable": "Tiada rekod ditemui",
@@ -166,17 +169,33 @@
                 }
             }
         });
+        
+        $(document).on('change','#selectAll',function(){
+            if($(this).is(":checked")){
+                table.$('.checkbox_metadatas').each( function (i) {
+                    $(this).prop('checked',true);
+                });
+            }else{
+                table.$('.checkbox_metadatas').each( function (i) {
+                    $(this).prop('checked',false);
+                });
+            }
+        });
 
     // Setup - add a text input to each footer cell
     $('#table_metadatas thead tr').clone(true).appendTo('#table_metadatas thead');
+    var toExclude = 0;
     $('#table_metadatas thead tr:eq(1) th').each( function (i) {
         var title = $(this).text();
-        $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
-        $('input',this).on('keyup change', function(){
-            if(table.column(i).search() !== this.value){
-                table.column(i).search(this.value).draw();
-            }
-        });
+        $(this).html('');
+        if(title != "" && title != "Bil" && title != "Tindakan"){
+            $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
+            $('input',this).on('keyup change', function(){
+                if(table.column(i).search() !== this.value){
+                    table.column(i).search(this.value).draw();
+                }
+            });
+        }
     });
 
         $(document).on("click", ".btn_sahkan", function() {
@@ -219,8 +238,14 @@
 
         $(document).on("click", ".btn_lulus_multi", function() {
             var checkbox_metadatas = [];
+            
+            table.$('.checkbox_metadatas').each( function (i) {
+                if($(this).is(":checked")){
+                    checkbox_metadatas.push($(this).data('metadataid'));
+                }
+            });
 
-            if (checked_metadatas.length === 0) {
+            if (checkbox_metadatas.length === 0) {
                 alert("Sila pilih sekurang-kurangnya satu metadata.");
             } else {
                 if (confirm("Adakah anda pasti untuk mengesahkan pilihan metadata ini?")) {
@@ -230,7 +255,7 @@
                         url: "metadata_sahkan",
                         data: {
                             "_token": "{{ csrf_token() }}",
-                            "metadata_id": checked_metadatas
+                            "metadata_id": checkbox_metadatas
                         },
                     }).done(function(response) {
                         alert("Metadata berjaya disahkan.");

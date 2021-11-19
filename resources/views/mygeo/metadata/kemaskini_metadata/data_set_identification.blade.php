@@ -11,7 +11,7 @@
         <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal12">Catatan</button>
         @endif
     </div>
-    <div id="collapse12" class="panel-collapse collapse in show" data-parent="#div_c12">
+    <div id="collapse12" class="panel-collapse collapse in" data-parent="#div_c12">
         <div class="card-body">
             <div class="acard-body opacity-8">
                 @if($elemenMetadata['c12_dataset_type']->status == '1')

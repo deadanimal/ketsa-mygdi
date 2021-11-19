@@ -259,10 +259,14 @@
                                     <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSubmit">
                                     @endif
                                     @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin','Pentadbir Aplikasi']))
+                                    <?php /* 
                                     <input type="button" data-name="save" value="Simpan" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
                                     <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
+                                    */ //SMBG SINI - the 2 buttons below randomly disappear apparently triggered by scrolling toward the top of the page ?>
+                                    <input type="button" data-name="save" value="Tolak" class="btn btn-danger btnSubmit btn_hantar" style="display:none;">
+                                    <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
                                     @endif
-
+                                    
                                     <input type="hidden" name="submitAction" id="submitAction" value="save">
                                 </div>
                             </div>
@@ -465,12 +469,12 @@
                                     $('#c2_saveAsNew').val('no');
                                 }
                             }
-
-                            if($(this).data('name') == 'save'){
+                            
+                            if(btnSubmit.data('name') == 'save'){
                                 if(confirm('Anda pasti untuk menghantar metadata?')){
                                     $('#form_metadata').submit();
                                 }
-                            }else if($(this).data('name') == 'draf'){
+                            }else if(btnSubmit.data('name') == 'draf'){
                                 if(confirm('Anda pasti untuk menyimpan metadata?')){
                                     $('#form_metadata').submit();
                                 }
@@ -832,7 +836,7 @@
 <?php
 if (!is_null(old('kategori'))) {
     ?>
-            $("#kategori").val("{{old('kategori')}}").trigger('change');
+            //$("#kategori").val("{{old('kategori')}}").trigger('change');
     <?php
 }
 ?>

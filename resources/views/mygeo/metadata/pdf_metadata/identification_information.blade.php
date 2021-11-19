@@ -156,6 +156,7 @@
                 }
                 ?>
                 <?php
+                /*
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString != "") {
                     $flag *= 0;
                     ?>
@@ -171,6 +172,7 @@
                     </div>
                     <?php
                 }
+                */
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType) && $metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType != "") {

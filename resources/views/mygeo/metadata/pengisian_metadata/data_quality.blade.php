@@ -94,12 +94,12 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t1_complete_comm_or_omit">
+                                                            <label class="form-check-label" for="c15_t1_complete_comm_or_omit" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t1_complete_comm_or_omit" id='completeness_comission' value='Completeness Commission' {{(old('c15_t1_complete_comm_or_omit') == 'Completeness Commission' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.completenessCommission'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t1_complete_comm_or_omit">
+                                                            <label class="form-check-label" for="c15_t1_complete_comm_or_omit" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t1_complete_comm_or_omit" value='Completeness Omission' {{(old('c15_t1_complete_comm_or_omit') == 'Completeness Omission' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.completenessOmmission'); ?>
                                                             </label>
                                                         </td>
@@ -262,22 +262,22 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_type">
+                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t2_type" id='conceptual' value="Conceptual" {{(old('c15_t2_type') == 'Conceptual' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.conceptual_consistency'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_type">
+                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t2_type" value="Domain" {{(old('c15_t2_type') == 'Domain' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.domainConsistency'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_type">
+                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t2_type" value="Format" {{(old('c15_t2_type') == 'Format' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.formatConsistency'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_type">
+                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t2_type" value="Topological" {{(old('c15_t2_type') == 'Topological' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.topologicalConsistency'); ?>
                                                             </label>
                                                         </td>
@@ -584,17 +584,17 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t3_type">
+                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t3_type" id='AbsoluteOrExternal' value="Absolute or External" {{(old('c15_t3_type') == 'Absolute or External' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.absoluteOrExternalAccuracy'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t3_type">
+                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t3_type" value="Relative or Internal" {{(old('c15_t3_type') == 'Relative or Internal' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.relativeOrInternalAccuracy'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t3_type">
+                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t3_type" value="Gridded Data" {{(old('c15_t3_type') == 'Gridded Data' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.griddedDataPositionalAccuracy'); ?>
                                                             </label>
                                                         </td>
@@ -829,17 +829,17 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_type">
+                                                            <label class="form-check-label" for="c15_t4_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t4_type" id='AccuracyorTimeMeasurement' value="Accuracy or Time Measurement" {{(old('c15_t4_type') == 'Accuracy or Time Measurement' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.accuracyOfATimeMeasurement'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_type">
+                                                            <label class="form-check-label" for="c15_t4_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t4_type" value="Temporal Consistency" {{(old('c15_t4_type') == 'Temporal Consistency' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.temporalConsistency'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_type">
+                                                            <label class="form-check-label" for="c15_t4_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t4_type" value="Temporal Validity" {{(old('c15_t4_type') == 'Temporal Validity' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.temporalValidity'); ?>
                                                             </label>
                                                         </td>
@@ -1074,17 +1074,17 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t5_type">
+                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t5_type" id="ClassificationCorrectness" value="Classification Correctness" checked>&nbsp;<?php echo __('lang.classificationCorrectness'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t5_type">
+                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t5_type" value="Non Quantitative Attribute Correctness">&nbsp;<?php echo __('lang.nonQuantitativeAttributeCorrectness'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t5_type">
+                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t5_type" value="Quantitative Attribute Accuracy">&nbsp;<?php echo __('lang.quantitativeAttributeCorrectness'); ?>
                                                             </label>
                                                         </td>
@@ -1322,30 +1322,30 @@
 <script>
     $(document).ready(function(){
         //t1
-        $('.Completeness_Commission').show();
+        $('.Completeness_Commission').hide();
         $('.Completeness_Omission').hide();
-        $("#completeness_comission").prop("checked", true);
+//        $("#completeness_comission").prop("checked", true);
         //t2
-        $('.Conceptual').show();
+        $('.Conceptual').hide();
         $('.Domain').hide();
         $('.Format').hide();
         $('.Topological').hide();
-        $("#conceptual").prop("checked", true);
+//        $("#conceptual").prop("checked", true);
         //t3
-        $('.AbsoluteorExternal').show();
+        $('.AbsoluteorExternal').hide();
         $('.RelativeorInternal').hide();
         $('.GriddedData').hide();
-        $("#AbsoluteOrExternal").prop("checked", true);
+//        $("#AbsoluteOrExternal").prop("checked", true);
         //t4
-        $('.AccuracyorTimeMeasurement').show();
+        $('.AccuracyorTimeMeasurement').hide();
         $('.TemporalConsistency').hide();
         $('.TemporalValidity').hide();
-        $("#AccuracyorTimeMeasurement").prop("checked", true);
+//        $("#AccuracyorTimeMeasurement").prop("checked", true);
         //t5
-        $('.classificationCorrectness').show();
+        $('.classificationCorrectness').hide();
         $('.nonQuantitativeAttributeCorrectness').hide();
         $('.quantitativeAttributeCorrectness').hide();
-        $("#ClassificationCorrectness").prop("checked", true);
+//        $("#ClassificationCorrectness").prop("checked", true);
     });
 
     $('input:radio[name="c15_t1_complete_comm_or_omit"]').change(function() {

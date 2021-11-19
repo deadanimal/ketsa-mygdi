@@ -49,7 +49,7 @@ class UncheckedMetadataCron extends Command
         libxml_use_internal_errors(true);
         $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 minutes"));
        
-        //find metadata tak diusik lebih dari 2 minggu
+        //find metadata tak diusik lebih dari 2 minggu.
         $result1 = MetadataGeo::on('pgsql2')->where('id','>',130739)->whereRaw('createdate = changedate')->where('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
         
         $metadataTitles = [];
@@ -162,9 +162,13 @@ class UncheckedMetadataCron extends Command
                 }else{
                     foreach($val as $k=>$v){
                         if($k == "noBahagian"){ //no bahagian
-                            $p = User::where('agensi_organisasi',$key)->get()->first();
+                            $p = User::whereHas("roles", function ($q) {
+                                    $q->where("name", "Pengesah Metadata");
+                                })->where('agensi_organisasi',$key)->get()->first();
                         }else{
-                            $p = User::where('agensi_organisasi',$key)->where('bahagian',$k)->get()->first();
+                            $p = User::whereHas("roles", function ($q) {
+                                    $q->where("name", "Pengesah Metadata");
+                                })->where('agensi_organisasi',$key)->where('bahagian',$k)->get()->first();
                         }
                         
                         if(!empty($p)){
