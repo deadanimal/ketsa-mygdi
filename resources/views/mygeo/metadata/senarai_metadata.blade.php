@@ -330,6 +330,7 @@
                   </tbody>
                 </table>
                 
+                      <?php /* ?>
                       <table id="table_metadatas2" class="table table-bordered table-striped" style="overflow: auto;">
                   <thead>
                     <tr>
@@ -341,6 +342,7 @@
                     </tr>
                   </thead>
                 </table>
+                     <?php */ ?>
               </div>
               </div>
             </div>
@@ -373,11 +375,12 @@
         },
     });
     
+    /*
     var table2 = $("#table_metadatas2").DataTable({
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "<?php echo url('getSenaraiMetadata'); ?>",
+            "url": "<?php //echo url('getSenaraiMetadata'); ?>",
             "type": "POST",
             "data": {
                 "_token": "{{ csrf_token() }}",
@@ -409,6 +412,7 @@
             }
         },
     });
+    */
     
     
 
