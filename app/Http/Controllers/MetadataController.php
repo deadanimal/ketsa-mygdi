@@ -81,9 +81,10 @@ class MetadataController extends Controller {
             //see all metadatas regardless
         }
         
-        $metadatasdb = $query->orderBy('id', 'DESC')->paginate(12);
-        $metadatasdbtitle = $query->select('id','data')->get();
-
+        $metadatasdb = $query->orderBy('id', 'DESC')->get();
+//        $metadatasdbtitle = $query->select('id','data')->get();
+        $metadatasdbtitle = [];
+        
         libxml_use_internal_errors(true); //Disable libxml errors and allow user to fetch error information as needed
         $metadatas = [];
         foreach ($metadatasdb as $met) {
@@ -108,6 +109,7 @@ class MetadataController extends Controller {
         }
         
         $metadataTitles = [];
+        /*
         foreach ($metadatasdbtitle as $met) {
             $ftestxml2 = <<<XML
                     $met->data
@@ -130,6 +132,7 @@ class MetadataController extends Controller {
                $metadataTitles[] = strtolower(strval($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
             }
         }
+        */
 
         return view('mygeo.metadata.senarai_metadata', compact('metadatas','metadataTitles'));
     }
