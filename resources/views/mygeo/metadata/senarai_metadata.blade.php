@@ -375,9 +375,10 @@
         },
     });
     
-    /*
+    <?php /* ?>
     var table2 = $("#table_metadatas2").DataTable({
         "processing": true,
+        "pageLength": 5,
         "serverSide": true,
         "ajax": {
             "url": "<?php //echo url('getSenaraiMetadata'); ?>",
@@ -412,7 +413,7 @@
             }
         },
     });
-    */
+    <?php */ ?>
     
     
 
