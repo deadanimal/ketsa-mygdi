@@ -376,6 +376,9 @@ class MetadataController extends Controller {
         // auth::user()->agensi_organisasi, auth::user()->agensi_organisasi
         $metadatasdb = MetadataGeo::on('pgsql2')->where('disahkan', '0')->where('is_draf','no')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
+        
+        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
                     $met->data
