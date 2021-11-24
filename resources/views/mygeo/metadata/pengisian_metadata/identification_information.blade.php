@@ -494,7 +494,7 @@
                                             $selected = "";
                                             if(null !== old('c2_contact_state') && !empty(old('c2_contact_state')) && $st->name == old('c2_contact_state')){
                                                 $selected = "selected";
-                                            }elseif($st->id == $pengesahs->state){
+                                            }elseif($st->name == $pengesahs->state){
                                                 $selected = "selected";
                                             }
                                             ?>
