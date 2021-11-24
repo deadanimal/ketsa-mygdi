@@ -174,6 +174,11 @@ input[type=submit] {
                                                 <option value="Offline Data" {{ (isset($params['content_type']) && $params['content_type'] == 'Offline Data' ? 'selected':'') }}>Offline Data</option>
                                                 <option value="Static Map Images" {{ (isset($params['content_type']) && $params['content_type'] == 'Static Map Images' ? 'selected':'') }}>Static Map Images</option>
                                                 <option value="Other Documents" {{ (isset($params['content_type']) && $params['content_type'] == 'Other Documents' ? 'selected':'') }}>Other Documents</option>
+                                                <option value="Live Data and Maps" {{ (isset($params['content_type']) && $params['content_type'] == 'Live Data and Maps' ? 'selected':'') }}>Live Data and Maps</option>
+
+                                                <option value="Gridded" {{ (isset($params['content_type']) && $params['content_type'] == 'Gridded' ? 'selected':'') }}>Gridded</option>
+
+                                                <option value="Imagery" {{ (isset($params['content_type']) && $params['content_type'] == 'Imagery' ? 'selected':'') }}>Imagery</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
