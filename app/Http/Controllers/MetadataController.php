@@ -385,6 +385,7 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
             $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
             $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = str_replace("\n", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
             
             $xml2 = simplexml_load_string($ftestxml2);

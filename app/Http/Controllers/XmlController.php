@@ -11,6 +11,7 @@ class XmlController extends Controller {
 
     public function createXml($request,$fileUrl="",$keywords="",$topicCategories="",$custom_inputs="") {
         $c2_metadataName = strtoupper($request->c2_metadataName);
+        $c2_abstract = trim(preg_replace('/\s+/',' ',$request->c2_abstract));
         $xml = <<<XML
                 <MD_Metadata
                     xmlns:gmd="http://www.isotc211.org/2005/gmd"
@@ -188,7 +189,7 @@ class XmlController extends Controller {
                                 </gmd:productTypeItem>
                             </gmd:productType>
                             <abstract>
-                                <gco:CharacterString>$request->c2_abstract</gco:CharacterString>
+                                <gco:CharacterString>$c2_abstract</gco:CharacterString>
                             </abstract>
                             <gmd:abstractApplication_namaAplikasi>
                                 <gco:CharacterString>$request->abstractApplication_namaAplikasi</gco:CharacterString>
