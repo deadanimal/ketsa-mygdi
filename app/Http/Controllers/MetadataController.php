@@ -2705,7 +2705,7 @@ class MetadataController extends Controller {
             $uploaded_xml = str_replace("\r", "", $uploaded_xml);
             $uploaded_xml = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $uploaded_xml);
          
-            $uploaded_xml = simplexml_load_string($ftestxml2);
+            $uploaded_xml = simplexml_load_string($uploaded_xml);
             if (false === $uploaded_xml) {
     //            continue;
             }
