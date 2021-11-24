@@ -286,7 +286,8 @@
                                   $status = "Draf";
                                 }else{
                                     if($val[1]->disahkan == '0'){
-                                        $status = "Perlu Pengesahan";
+                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pengesahan</strong></span>';
                                     }elseif($val[1]->disahkan == 'yes'){
                                         $status = "Diterbitkan";
                                     }elseif($val[1]->disahkan == 'no'){
