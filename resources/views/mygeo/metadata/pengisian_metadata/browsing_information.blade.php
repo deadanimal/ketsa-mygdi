@@ -8,6 +8,12 @@
     </div>
     <div id="collapse10" class="panel-collapse collapse in show" data-parent="#div_c10">
         <div class="card-body">
+            <div class="my-2">
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-muat-naik-contohJenisMetadata">
+                    Contoh jenis metadata yang dimasukkan
+                </button>
+            </div>
+            <br>
             <h2 class="heading-small text-muted"><?php echo __('lang.browsingGraphic'); ?></h2>
             <div class="my-2">
                 @if($elemenMetadata['c10_file_name']->status == '1')

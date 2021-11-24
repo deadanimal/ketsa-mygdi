@@ -2554,6 +2554,23 @@ class MetadataController extends Controller {
         
         $this->validate($request, $fields, $customMsg);
         
+        //SMBG SINI - save contoh jenis metadata file upload from Browsing Graphic part===========================================
+//        if (file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
+//            //store uploaded contoh jenis metadata file
+//            $fileName = time() . '_' . $request->file_contohJenisMetadata->getClientOriginalName();
+//            Storage::putFileAs('public', $request->file('file_contohJenisMetadata'), $fileName);
+//            //read stored contoh jenis metadata file
+//            $uploaded_xml = Storage::disk('public')->get($fileName);
+////            $uploaded_xml = str_replace("gco:", "", $uploaded_xml);
+//
+//            //delete uploaded contoh jenis metadata file
+//            Storage::disk('public')->delete($fileName);
+//        }
+//        exit();
+        //============================================================================================================
+        
+        
+        
         $keywords = "";
         if(count($request->c10_additional_keyword) > 0){
             foreach($request->c10_additional_keyword as $var){
@@ -2739,7 +2756,7 @@ class MetadataController extends Controller {
 
         return redirect('kemaskini_metadata/'.$newMetadataId)->with('success', 'Metadata Saved');
     }
-
+    
     public function store_todel() {
         for ($r = 0; $r < 20; $r++) {
             DB::connection('pgsql2')->transaction(function () use (&$r) {
