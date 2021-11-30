@@ -42,7 +42,7 @@
     'metadata_standard_version'=>'Metadata Standard Version',
 
     'accord_2'=> 'IDENTIFICATION INFORMATION',
-    'title'=>'Title',
+    'title'=>'TITLE',
     'type_of_product'=>'Type of Product',
     'abstract'=>'Abstract',
     'date'=>'Date',

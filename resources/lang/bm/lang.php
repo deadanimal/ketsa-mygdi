@@ -41,7 +41,7 @@
     'metadata_standard_version'=>'Versi Metadata Standard',
 
     'accord_2'=> 'MAKLUMAT PENGENALAN',
-    'title'=>'Tajuk',
+    'title'=>'TAJUK',
     'type_of_product'=>'Jenis Produk/Data/Maklumat Geospatial',
     'abstract'=>'Abstrak',
     'date'=>'Tarikh',

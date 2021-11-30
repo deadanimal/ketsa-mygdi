@@ -23,12 +23,12 @@
                                 <?php
                                 if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != '') {
                                     if (strtolower($metadataxml->hierarchyLevel->MD_ScopeCode) == 'dataset') {
-                                        echo 'Title';
+                                        echo strtoupper(__('lang.title'));
                                     } else {
                                         echo 'Metadata Name';
                                     }
                                 }else{
-                                    echo 'Title';
+                                    echo strtoupper(__('lang.title'));
                                 }
                                 ?>
                                 <span class="text-warning">*</span>
