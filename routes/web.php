@@ -274,6 +274,7 @@ Route::post('deleteCustomMetadataInput','MetadataController@deleteCustomMetadata
 Route::post('findMetadataByName','MetadataController@findMetadataByName');
 Route::post('getKelasKongsis','DataAsasController@getKelasKongsis');
 Route::post('/getSenaraiMetadata', 'MetadataController@getSenaraiMetadata');
+Route::get('/download_file_contohjenismetadata/{id}', 'MetadataController@download_file_contohjenismetadata');
 
 Auth::routes();
 

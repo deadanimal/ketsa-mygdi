@@ -284,6 +284,10 @@
     var pengesahs = [];
 
     $(document).ready(function () {
+        $(document).on('click','.btn_file_contohjenismetadata',function(){
+            window.open($(this).data('href'), '_blank');
+        });
+        
         $(document).on('change','#c1_content_info',function(){
             var cat = $('#kategori').val();
             if(cat == "Dataset" && $(this).val() == "Application"){
@@ -564,6 +568,7 @@
                 $('.lblContentInfo').hide();
                 $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').show();
             }else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').show();
@@ -587,6 +592,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').hide();
             }else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -610,6 +616,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -633,6 +640,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }
 
             <?php
@@ -676,6 +684,7 @@
                 $('.lblContentInfo').hide();
                 $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').show();
             }else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').show();
@@ -699,6 +708,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').hide();
             }else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -722,6 +732,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -745,6 +756,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }
 
             <?php

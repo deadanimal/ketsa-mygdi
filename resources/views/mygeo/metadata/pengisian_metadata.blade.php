@@ -144,42 +144,6 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modal-muat-naik-contohJenisMetadata">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="POST" action="{{ url('muat_naik_contohJenisMetadata') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row mb-2">
-                                        <div class="col-3">
-                                            <label class="form-control-label mr-4" for="file_contohJenisMetadata">
-                                                Muat Naik Fail Contoh Jenis Metadata
-                                            </label>
-                                        </div>
-                                        <div class="col-8">
-                                            <input class="form-control ml-3" id="file_contohJenisMetadata" type="file" name="file_contohJenisMetadata" />
-                                            <p class="error-message"><span></span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between1">
-                        <button type="submit" class="btn btn-primary" id="btn_muat_naik_contohJenisMetadata">Muat Naik</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Main content -->
     <section class="content">
@@ -469,6 +433,7 @@
                 $('#content_info_dropdown').show();
                 $('.lblContentInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').show();
             } else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').show();
@@ -492,6 +457,7 @@
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').hide();
             } else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -515,6 +481,7 @@
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             } else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -538,6 +505,7 @@
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }
 
             if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {

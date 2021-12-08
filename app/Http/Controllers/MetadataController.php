@@ -2442,6 +2442,32 @@ class MetadataController extends Controller {
         }
         exit();
     }
+    
+    public function muat_naik_contohJenisMetadata($request){
+        $file_contohJenisMetadata = "";
+        if (file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
+            //store uploaded contoh jenis metadata file
+            $fileName = time() . '_' . $request->file_contohJenisMetadata->getClientOriginalName();
+            Storage::putFileAs('public', $request->file('file_contohJenisMetadata'), $fileName);
+            
+            $file_contohJenisMetadata = $fileName;
+            
+            //read stored contoh jenis metadata file
+//            $uploaded_xml = Storage::disk('public')->get($fileName);
+
+            //delete uploaded contoh jenis metadata file
+//            Storage::disk('public')->delete($fileName);
+        }
+        
+        return $file_contohJenisMetadata;
+    }
+    
+    public function download_file_contohjenismetadata($id){
+        $metadata = MetadataGeo::where('id',$id)->get()->first();
+        if($metadata->file_contohjenismetadata != ""){
+            return Storage::download('public/'.$metadata->file_contohjenismetadata);
+        }
+    }
 
     public function store(Request $request) {
         $fields = [
@@ -2562,23 +2588,6 @@ class MetadataController extends Controller {
         
         $this->validate($request, $fields, $customMsg);
         
-        //SMBG SINI - save contoh jenis metadata file upload from Browsing Graphic part===========================================
-//        if (file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
-//            //store uploaded contoh jenis metadata file
-//            $fileName = time() . '_' . $request->file_contohJenisMetadata->getClientOriginalName();
-//            Storage::putFileAs('public', $request->file('file_contohJenisMetadata'), $fileName);
-//            //read stored contoh jenis metadata file
-//            $uploaded_xml = Storage::disk('public')->get($fileName);
-////            $uploaded_xml = str_replace("gco:", "", $uploaded_xml);
-//
-//            //delete uploaded contoh jenis metadata file
-//            Storage::disk('public')->delete($fileName);
-//        }
-//        exit();
-        //============================================================================================================
-        
-        
-        
         $keywords = "";
         if(count($request->c10_additional_keyword) > 0){
             foreach($request->c10_additional_keyword as $var){
@@ -2656,6 +2665,10 @@ class MetadataController extends Controller {
             $mg->uuid = $uuid;
             $mg->disahkan = "0";
             $mg->portal_user_id = auth::user()->id;
+            
+            if(strtolower($request->kategori) != 'services'){
+                $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
+            }
 
             $msg = "";
             if(isset($request->btn_save) || (isset($request->submitAction) && $request->submitAction == "save")){
@@ -2986,6 +2999,13 @@ class MetadataController extends Controller {
             $mg->timestamps = false;
             $mg->data = $xml;
             $mg->changedate = date("Y-m-d H:i:s");
+            
+            if(strtolower($request->kategori) != 'services'){
+                if (file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
+                    Storage::disk('public')->delete($mg->file_contohjenismetadata);
+                    $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
+                }
+            }
 
             if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
 //                $mg->disahkan = "no";
