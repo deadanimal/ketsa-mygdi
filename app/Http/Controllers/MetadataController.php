@@ -44,6 +44,8 @@ use PDF;
 use App\CustomMetadataInput;
 use Dompdf\Dompdf;
 use App\AgensiOrganisasi;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class MetadataController extends Controller {
 
@@ -57,23 +59,33 @@ class MetadataController extends Controller {
     }
 
     public function index() {
+        
         //call geonetwork api to retrieve metadata by uuid. missing other datas. currently not in use
         //$response = Http::withBasicAuth('admin', 'admin')->get('http://localhost:8080/geonetwork/srv/api/records/e4e26aba-8add-4168-ac10-1dc22d0bbf6f/formatters/xml?addSchemaLocation=true&increasePopularity=true&approved=true');
         //dd(
         //$response,$response->body(),$response->json(),$response->status(),$response->ok(),$response->successful(),$response->failed(),$response->serverError(),$response->clientError(),$response->headers()
         //);
 
+        
+        $metadatas = $metadatasdb = [];
+        $carian = isset($request->carian) ? $request->carian:"";
+        $query = MetadataGeo::on('pgsql2');
+        
         if(auth::user()->hasRole(['Penerbit Metadata'])){
             //see own metadatas
-            $metadatasdb = MetadataGeo::on('pgsql2')->where('portal_user_id','=',auth::user()->id)->orderBy('id', 'DESC')->get()->all();
+            $query = $query->where('portal_user_id','=',auth::user()->id);
         }elseif(auth::user()->hasRole(['Pengesah Metadata'])){
             //see all metadatas with same agensi_organisasi and bahagian
-            $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . auth::user()->agensiOrganisasi->name . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%')->orderBy('id', 'DESC')->get()->all();
+            $query = $query->where('data', 'ilike', '%' . auth::user()->agensiOrganisasi->name . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%');
         }elseif(auth::user()->hasRole(['Pentadbir Aplikasi','Pentadbir Metadata','Super Admin'])){
             //see all metadatas regardless
-            $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
         }
-
+        
+        $metadatasdb = $query->orderBy('id', 'DESC')->get();
+//        $metadatasdbtitle = $query->select('id','data')->get();
+        $metadatasdbtitle = [];
+        
+        libxml_use_internal_errors(true); //Disable libxml errors and allow user to fetch error information as needed
         $metadatas = [];
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
@@ -82,15 +94,155 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
 
             $penerbit = $this->getUser($met->portal_user_id);
 
             $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
             $metadatas[$met->id] = [$xml2, $met, $penerbit];
         }
+        
+        $metadataTitles = [];
+        /*
+        foreach ($metadatasdbtitle as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
+            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+               $metadataTitles[] = strtolower(strval($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString));
+            }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+               $metadataTitles[] = strtolower(strval($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
+            }
+        }
+        */
 
-        return view('mygeo.metadata.senarai_metadata', compact('metadatas'));
+        return view('mygeo.metadata.senarai_metadata', compact('metadatas','metadataTitles'));
+    }
+    
+    public function getSenaraiMetadata(Request $request) {
+        $data = [];
+        $data['draw'] = $request->draw;
+        
+        $query = MetadataGeo::on('pgsql2');
+        
+        if(auth::user()->hasRole(['Penerbit Metadata'])){
+            //see own metadatas
+            $query = $query->where('portal_user_id','=',auth::user()->id);
+        }elseif(auth::user()->hasRole(['Pengesah Metadata'])){
+            //see all metadatas with same agensi_organisasi and bahagian
+            $query = $query->where('data', 'ilike', '%' . auth::user()->agensiOrganisasi->name . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%');
+        }elseif(auth::user()->hasRole(['Pentadbir Aplikasi','Pentadbir Metadata','Super Admin'])){
+            //see all metadatas regardless
+        }
+        
+        $metadatas = $query->orderBy('id', 'DESC')->offset($request->start)->limit($request->length)->get();
+        
+        $data['recordsTotal'] = count($metadatas);
+        $data['recordsFiltered'] = count($metadatas);
+
+        libxml_use_internal_errors(true); //Disable libxml errors and allow user to fetch error information as needed
+        $counter = 1;
+//        echo "<pre>";
+//        var_dump($request->start);
+//        var_dump($request->length);
+//        var_dump(count($metadatas));
+//        var_dump($query->toSql());
+//        var_dump(auth::user()->name);
+//        echo "</pre>";
+        $data['data'] = [];
+        
+        foreach ($metadatas as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = str_replace("\n", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
+            $penerbit = $this->getUser($met->portal_user_id);
+            
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
+            $title = "";
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $title =  strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
+            }elseif(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $title =  strval($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString);
+            }
+            
+            $kategori = "";
+            if(isset($xml2->hierarchyLevel->MD_ScopeCode) && $xml2->hierarchyLevel->MD_ScopeCode != ""){
+                $kategori =  strval($xml2->hierarchyLevel->MD_ScopeCode);
+            }
+            
+            $status = "";
+            if($met->is_draf == 'yes'){
+              $status = "Draf";
+            }else{
+                if($met->disahkan == '0'){
+                    $status = "Perlu Pengesahan";
+                }elseif($met->disahkan == 'yes'){
+                    $status = "Diterbitkan";
+                }elseif($met->disahkan == 'no'){
+                    $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
+                }elseif($met->disahkan == 'delete'){
+                    $status = "Dipadam";
+                }
+            }
+            
+            $tindakan = "";
+            $tindakan .= '<form method="post" action="'.url('/lihat_metadata').'">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="metadata_id" value="'.$met->id.'">
+                <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+            </form>';
+            $tindakan .= '<a href="'.url('/kemaskini_metadata/'.$met->id).'">
+                <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+            </a>';
+            $tindakan .= '<form method="post" action="'.url('/delete_metadata').'">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="metadata_id" value="'.$met->id.'">
+                <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+            </form>';
+            
+            $data['data'][] = [
+                "bil"=> $counter,
+                "title"=> $title,
+                "kategori"=> $kategori,
+                "status"=> $status,
+                "tindakan"=> $tindakan,
+            ];
+            
+            $counter++;
+        }
+
+        echo json_encode($data);
+        exit();
     }
 
     function getUser($user_id){
@@ -101,7 +253,6 @@ class MetadataController extends Controller {
         $metadatas = $metadatasdb = [];
         $carian = isset($request->carian) ? $request->carian:"";
         $query = MetadataGeo::on('pgsql2');
-        $query2 = MetadataGeo::on('pgsql2');
         
         $params = [];
         
@@ -147,9 +298,16 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-            $xml2 = simplexml_load_string($ftestxml2);
-            $metadatas[$met->id] = $xml2;
+            
+            $sxe = simplexml_load_string($ftestxml2);
+            if (false === $sxe) {
+                continue;
+            }
+            
+            $metadatas[$met->id] = $sxe;
         }
         
         $metadataTitles = [];
@@ -160,10 +318,19 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
-            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+            if (false === $xml2) {
+                continue;
+            }
+            
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
                 $metadataTitles[] = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
+            }elseif(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $metadataTitles[] = strtolower(strval($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString));
             }
         }
         
@@ -182,10 +349,19 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
-            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != "" && stripos(trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString),strval($request->carian)) !== false){
+            if (false === $xml2) {
+                continue;
+            }
+            
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
                 $metadatas[$met->id] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+            }elseif(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $metadatas[$met->id] = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
             }
         }
         echo json_encode($metadatas);
@@ -197,13 +373,16 @@ class MetadataController extends Controller {
             $this->store_todel();
         }
 
-        if (!auth::user()->hasRole(['Pentadbir Metadata','Pengesah Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Pentadbir Metadata','Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
 
         // auth::user()->agensi_organisasi, auth::user()->agensi_organisasi
         $metadatasdb = MetadataGeo::on('pgsql2')->where('disahkan', '0')->where('is_draf','no')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
+        
+        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
                     $met->data
@@ -211,8 +390,15 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = str_replace("\n", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
 
             $penerbit = $this->getUser($met->portal_user_id);
 
@@ -234,9 +420,16 @@ class MetadataController extends Controller {
                     XML;
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
             $metadatas[$met->id] = [$xml2, $met, 'not_draft'];
         }
 
@@ -274,8 +467,15 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
             $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
             $metadatas[$met->id] = $xml2;
         }
 
@@ -284,7 +484,7 @@ class MetadataController extends Controller {
     }
 
     public function create() {
-        if (!auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Penerbit Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
 
@@ -298,12 +498,7 @@ class MetadataController extends Controller {
 //        $pengesahs = User::whereHas("roles", function ($q) {
 //                    $q->where("name", "Pengesah Metadata");
 //                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
-        $agencyIds = [];
-        $agencies = AgensiOrganisasi::where('name',auth::user()->agensiOrganisasi->name)->get();
-        foreach($agencies as $a){
-            $agencyIds[] = $a->id;
-        }
-        $pengesahs = User::where('assigned_roles','LIKE','%Pengesah Metadata%')->whereIn('agensi_organisasi',$agencyIds)->where('bahagian', auth::user()->bahagian)->get()->first();
+        $pengesahs = User::where('assigned_roles','LIKE','%Pengesah Metadata%')->where('agensi_organisasi',auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
         if(empty($pengesahs)){
             $pengesahs = User::where(['id'=>'9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
         }
@@ -331,8 +526,14 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
         $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
 
         if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
             App::setLocale(trim($metadataxml->language->CharacterString));
@@ -346,7 +547,11 @@ class MetadataController extends Controller {
             $countryId = trim($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString);
         }
         if($countryId != ""){
-            $countries = Countries::where(['name' => $countryId])->get()->first();
+            if(is_numeric($countryId)){
+                $countries = Countries::where('id',$countryId)->get()->first();
+            }else{
+                $countries = Countries::where('name', $countryId)->get()->first();
+            }
         }else{
             $countries = Countries::where(['id' => 1])->get()->first();
         }
@@ -369,18 +574,9 @@ class MetadataController extends Controller {
     }
 
     public function edit($id) {
-        if (!auth::user()->hasRole(['Pengesah Metadata','Penerbit Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Pengesah Metadata','Penerbit Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
-        
-        //testcron==============================================================
-//        $lastTwoWeeks = date('Y-m-d H:i:s', strtotime("-2 minutes"));
-//        //find metadata tak diusik lebih dari 2 minggu
-//        $result1 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('createdate','<',$lastTwoWeeks)->whereNull('cronned_metadata_tak_diusik')->get();
-//        //find metadata that has been mailed(cronned) more than 2 minggu but still x diusik
-//        $result2 = MetadataGeo::on('pgsql2')->whereRaw('createdate = changedate')->where('cronned_metadata_tak_diusik','<',$lastTwoWeeks)->get();
-//        dd(count($result1),$lastTwoWeeks);
-        //======================================================================
 
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id',$id)->get()->first();
 
@@ -390,8 +586,14 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
         $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
 
         if (isset($_GET['bhs']) && $_GET['bhs'] == 'bm'){
             App::setLocale('bm');
@@ -406,7 +608,10 @@ class MetadataController extends Controller {
 //        $pengesahs = User::whereHas("roles", function ($q) {
 //                    $q->where("name", "Pengesah Metadata");
 //                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
-        $pengesahs = User::where('assigned_roles','LIKE','%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+        $pengesahs = User::where('assigned_roles','LIKE','%Pengesah Metadata%')->where('agensi_organisasi',auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+        if(empty($pengesahs)){
+            $pengesahs = User::where(['id'=>'9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
+        }
         $categories = MCategory::all();
         $contacts = User::all();
         $states = States::where(['country' => 1])->get()->all();
@@ -420,6 +625,7 @@ class MetadataController extends Controller {
                 $countrySelected = Countries::where(['id' => $countryId])->get()->first();
             }else{
                 $countrySelected = Countries::where('name','LIKE','%'.$countryId.'asdsadss%')->get()->first();
+//                $countrySelected = Countries::where('id',$countryId)->get()->first();
                 if(!$countrySelected){
                     $countrySelected = Countries::where(['id' => 1])->get()->first();
                 }
@@ -429,15 +635,18 @@ class MetadataController extends Controller {
         }
 
         $refSys = ReferenceSystemIdentifier::all();
+        $refSysId = "";
         if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != ""){
             $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
-            if(is_numeric($refSysId)){
-                $refSysSelected = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
-            }else{
-                $refSysSelected = ReferenceSystemIdentifier::where('name',$refSysId)->get()->first();
-            }
+        }elseif(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString != ""){
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString;
         }else{
             $refSysSelected = [];
+        }
+        if($refSysId != "" && is_numeric($refSysId)){
+            $refSysSelected = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+        }elseif($refSysId != "" && !is_numeric($refSysId)){
+            $refSysSelected = ReferenceSystemIdentifier::where('name',$refSysId)->get()->first();
         }
         $customMetadataInput = CustomMetadataInput::all();
         if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
@@ -472,8 +681,14 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
         $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
 
         if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
             App::setLocale(trim($metadataxml->language->CharacterString));
@@ -516,8 +731,14 @@ class MetadataController extends Controller {
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
         $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
         $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
 
         if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != ""){
             App::setLocale(trim($metadataxml->language->CharacterString));
@@ -577,6 +798,1631 @@ class MetadataController extends Controller {
         $response->header('Content-Transfer-Encoding', 'binary');
         return $response;
     }
+    
+    public function downloadMetadataExcel($id) {
+        $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();
+        $ftestxml2 = <<<XML
+                $metadataSearched->data
+                XML;
+        $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+        $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+        $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+        $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+        $ftestxml2 = str_replace("\r", "", $ftestxml2);
+        $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+        $metadataxml = simplexml_load_string($ftestxml2);
+        if (false === $metadataxml) {
+//            continue;
+        }
+
+        
+        // (B) CREATE A NEW SPREADSHEET
+        $spreadsheet = new Spreadsheet();
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(80);
+
+        // (C) GET WORKSHEET
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        $row = 1;
+        
+        $category = '';
+        if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != '') {
+            $category = $metadataxml->hierarchyLevel->MD_ScopeCode;
+        }
+        $sheet->setCellValue('A'.$row, 'Kategori');
+        $sheet->setCellValue('B'.$row, $category);
+
+        //General Information===================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'General Information');
+        
+        $content_info = "";
+        if(isset($metadataxml->contact->CI_ResponsibleParty->contentInfo->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contentInfo->CharacterString != "") {
+            $content_info = trim($metadataxml->contact->CI_ResponsibleParty->contentInfo->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Content Information');
+        $sheet->setCellValue('B'.$row, $content_info);
+        
+        $pub_name = "";
+        if (isset($metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
+            $pub_name = $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Publisher Name');
+        $sheet->setCellValue('B'.$row, $pub_name);
+        $pub_agencyOrg = "";
+        if (isset($metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString != "") {
+            $pub_agencyOrg = $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Publisher Agency/Organisation');
+        $sheet->setCellValue('B'.$row, $pub_agencyOrg);
+        
+        $bahagian = "";
+        if (isset($metadataxml->contact->CI_ResponsibleParty->departmentName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->departmentName->CharacterString != "") {
+            $bahagian = $metadataxml->contact->CI_ResponsibleParty->departmentName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Publisher Bahagian');
+        $sheet->setCellValue('B'.$row, $bahagian);
+        
+        $pub_email = "";
+        if (isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
+            $pub_email = $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Publisher Bahagian');
+        $sheet->setCellValue('B'.$row, $pub_email);
+        
+        $pub_phone = "";
+        if(isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != ""){
+            $pub_phone = $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Publisher Phone');
+        $sheet->setCellValue('B'.$row, $pub_phone);
+        
+        $pub_role = "";
+        if(isset($metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode != ""){
+            $pub_role = $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Publisher Role');
+        $sheet->setCellValue('B'.$row, $pub_role);
+        
+        //Identification Information============================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Identification Information');
+        
+        $met_name = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
+            $met_name = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != '') {
+            $met_name = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Metadata Name');
+        $sheet->setCellValue('B'.$row, $met_name);
+        
+        $typeofProd = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString != '') {
+            $typeofProd = trim($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Type Of Product');
+        $sheet->setCellValue('B'.$row, $typeofProd);
+        
+        $abstract = "";
+        if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+            $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
+        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != ""){
+            $abstract = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Abstract');
+        $sheet->setCellValue('B'.$row, $abstract);
+        
+        $fileUrl = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != '') {
+            $fileUrl = $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'File URL');
+        $sheet->setCellValue('B'.$row, $fileUrl);
+        
+        $metDate = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date != '') {
+            $metDate = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->date->Date != '') {
+            $metDate = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->date->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $metDate);
+        
+        $metDateType = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode != '') {
+            $metDateType = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode != '') {
+            $metDateType = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date Type');
+        $sheet->setCellValue('B'.$row, $metDateType);
+        
+        $metStatus = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString != '') {
+            $metStatus = $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode != '') {
+            $metStatus = $metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Status');
+        $sheet->setCellValue('B'.$row, $metStatus);
+        
+        $typeOfServices = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString != '') {
+            $typeOfServices = $metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->serviceType->LocalName) && $metadataxml->identificationInfo->SV_ServiceIdentification->serviceType->LocalName != '') {
+            $typeOfServices = $metadataxml->identificationInfo->SV_ServiceIdentification->serviceType->LocalName;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Type Of Services');
+        $sheet->setCellValue('B'.$row, $typeOfServices);
+        
+        $operationName = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString != '') {
+            $operationName = $metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString != '') {
+            $operationName = $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Operation Name');
+        $sheet->setCellValue('B'.$row, $operationName);
+        
+        $serviceUrl = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString != '') {
+            $serviceUrl = $metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Service URL');
+        $sheet->setCellValue('B'.$row, $serviceUrl);
+        
+        $typeCouplingDataset = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType) && trim($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType) != '') {
+            $typeCouplingDataset = $metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Type of Coupling with Dataset');
+        $sheet->setCellValue('B'.$row, $typeCouplingDataset);
+        
+        $respName = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString != '') {
+            $respName = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString != '') {
+            $respName = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Name');
+        $sheet->setCellValue('B'.$row, $respName);
+        
+        $respAgencyOrg = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString != '') {
+            $respAgencyOrg = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString != '') {
+            $respAgencyOrg = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Agency');
+        $sheet->setCellValue('B'.$row, $respAgencyOrg);
+        
+        $positionName = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString != '') {
+            $positionName = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->positionName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Position Name');
+        $sheet->setCellValue('B'.$row, $positionName);
+        
+        $respAddress = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString != '') {
+            $respAddress = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString != '') {
+            $respAddress = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Address');
+        $sheet->setCellValue('B'.$row, $respAddress);
+        
+        $postalCode = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != '') {
+            $postalCode = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != '') {
+            $postalCode = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Postal Code');
+        $sheet->setCellValue('B'.$row, $postalCode);
+        
+        $city = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != '') {
+            $city = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != '') {
+            $city = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party City');
+        $sheet->setCellValue('B'.$row, $city);
+        
+        $respState = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != '') {
+            $respState = strtolower(trim($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != '') {
+            $respState = strtolower(trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party State');
+        $sheet->setCellValue('B'.$row, $respState);
+        
+        $countries = [];
+        $countryId = 1;
+        if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString != ""){
+            $countryId = trim($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->country->CharacterString);
+//            $countrySelected = Countries::where(['id'=>$countryName])->get()->first();
+        }
+        $countries = Countries::where(['id' => 1])->get();
+        $countryExcel = "Malaysia";
+        if($countries){
+            foreach($countries as $country){
+                if($country->id == $countryId){
+                    $countryExcel = $country->name;
+                }                                                                                                                                                               }
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Country');
+        $sheet->setCellValue('B'.$row, $countryExcel);
+        
+        $respEmail = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != '') {
+            $respEmail = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != '') {
+            $respEmail = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Email');
+        $sheet->setCellValue('B'.$row, $respEmail);
+        
+        $fax = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString != '') {
+            $fax = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString != '') {
+            $fax = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Fax');
+        $sheet->setCellValue('B'.$row, $fax);
+        
+        $respPhone = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != '') {
+            $respPhone = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != '') {
+            $respPhone = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Telephone (Office)');
+        $sheet->setCellValue('B'.$row, $respPhone);
+        
+        $respWebsite = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL != '') {
+            $respWebsite = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL != '') {
+            $respWebsite = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Website');
+        $sheet->setCellValue('B'.$row, $respWebsite);
+        
+        $role = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode != '') {
+            $role = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode != '') {
+            $role = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Responsible Party Role');
+        $sheet->setCellValue('B'.$row, $role);
+        
+        //Topic Category========================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Topic Category');
+        
+        $tc = [];
+        if(isset($metadataxml->identificationInfo->MD_DataIdentification->topicCategory)){
+            if(count($metadataxml->identificationInfo->MD_DataIdentification->topicCategory) > 0){
+                foreach($metadataxml->identificationInfo->MD_DataIdentification->topicCategory as $tcd){
+                    if(trim($tcd->MD_TopicCategoryCode) != ""){
+                        $tc[]= trim($tcd->MD_TopicCategoryCode);
+                    }
+                }
+            }
+        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory)){
+            if(count($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory) > 0){
+                foreach($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd){
+                    if(trim($tcd->MD_TopicCategoryCode) != ""){
+                        $tc[]= trim($tcd->MD_TopicCategoryCode);
+                    }
+                }
+            }
+        }
+        $row ++;
+        $sheet->setCellValue('A'.$row, 'Topic Category');
+        if(count($tc) > 0){
+            foreach($tc as $t){   
+                $sheet->setCellValue('B'.$row, $t);
+                $row++;
+            }
+        }
+        
+        //Nominal Resolution====================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Nominal Resolution');
+        
+        $scanRes = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString != "") {
+            $scanRes = $metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scanning Resolution');
+        $sheet->setCellValue('B'.$row, $scanRes);
+        
+        $groundScan = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal != "") {
+            $groundScan = $metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Ground Scanning');
+        $sheet->setCellValue('B'.$row, $groundScan);
+        
+        //Process Step Information====================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Process Step Information');
+        
+        $processLevel = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString != "") {
+            $processLevel = $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Process Level');
+        $sheet->setCellValue('B'.$row, $processLevel);
+        
+        $res = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal != "") {
+            $res = $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Resolution');
+        $sheet->setCellValue('B'.$row, $res);
+        
+        //Spatial Representation Information====================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Spatial Representation Information');
+        
+        $colName = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
+            $colName = $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Collection Name');
+        $sheet->setCellValue('B'.$row, $colName);
+        
+        $collId = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {
+            $collId = $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Collection Identification');
+        $sheet->setCellValue('B'.$row, $collId);
+        
+        //Content Information====================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Content Information');
+        
+        $bandBound = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString != "") {
+            $bandBound = $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Band Boundry');
+        $sheet->setCellValue('B'.$row, $bandBound);
+        
+        $transFnType = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString != "") {
+            $transFnType = $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Transfer Function Type');
+        $sheet->setCellValue('B'.$row, $transFnType);
+        
+        $transmitPolar = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString != "") {
+            $transmitPolar = $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Transmitted Polarization');
+        $sheet->setCellValue('B'.$row, $transmitPolar);
+        
+        $nomSpatRes = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString != "") {
+            $nomSpatRes = $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Nominal Spatial Resolution');
+        $sheet->setCellValue('B'.$row, $nomSpatRes);
+        
+        $detectPolar = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString != "") {
+            $detectPolar = $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Detected Polarization');
+        $sheet->setCellValue('B'.$row, $detectPolar);
+        
+        //ACQUISITION INFORMATION====================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'ACQUISITION INFORMATION');
+        
+        $avgAirTemp = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->averageAirTemperature->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->averageAirTemperature->CharacterString != "") {
+            $avgAirTemp = $metadataxml->identificationInfo->MD_DataIdentification->averageAirTemperature->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Average Air Temperature');
+        $sheet->setCellValue('B'.$row, $avgAirTemp);
+        
+        $alt = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->altitude->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->altitude->CharacterString != "") {
+            $alt = $metadataxml->identificationInfo->MD_DataIdentification->altitude->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Altitude');
+        $sheet->setCellValue('B'.$row, $alt);
+        
+        $relHumid = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->relativeHumidity->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->relativeHumidity->CharacterString != "") {
+            $relHumid = $metadataxml->identificationInfo->MD_DataIdentification->relativeHumidity->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Relative Humidity');
+        $sheet->setCellValue('B'.$row, $relHumid);
+        
+        $metCond = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->meteorologicalCondition->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->meteorologicalCondition->CharacterString != "") {
+            $metCond = $metadataxml->identificationInfo->MD_DataIdentification->meteorologicalCondition->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Meteorological Condition');
+        $sheet->setCellValue('B'.$row, $metCond);
+        
+        $eventId = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->identifier->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->identifier->CharacterString != "") {
+            $eventId = $metadataxml->identificationInfo->MD_DataIdentification->identifier->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Identifier');
+        $sheet->setCellValue('B'.$row, $eventId);
+        
+        $trigger = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->trigger->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->trigger->CharacterString != "") {
+            $trigger = $metadataxml->identificationInfo->MD_DataIdentification->trigger->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Trigger');
+        $sheet->setCellValue('B'.$row, $trigger);
+        
+        $context = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->context->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->context->CharacterString != "") {
+            $context = $metadataxml->identificationInfo->MD_DataIdentification->context->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Context');
+        $sheet->setCellValue('B'.$row, $context);
+        
+        $sequence = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->sequence->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->sequence->CharacterString != "") {
+            $sequence = $metadataxml->identificationInfo->MD_DataIdentification->sequence->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Sequence');
+        $sheet->setCellValue('B'.$row, $sequence);
+        
+        $time = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->EvtIdentifiertime->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->EvtIdentifiertime->CharacterString != "") {
+            $time = $metadataxml->identificationInfo->MD_DataIdentification->EvtIdentifiertime->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Time');
+        $sheet->setCellValue('B'.$row, $time);
+        
+        $instruIdType = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->typeInstrumentIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->typeInstrumentIdentification->CharacterString != "") {
+            $instruIdType = $metadataxml->identificationInfo->MD_DataIdentification->typeInstrumentIdentification->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Type');
+        $sheet->setCellValue('B'.$row, $instruIdType);
+        
+        $opId = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString != "") {
+            $opId = $metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Identifier');
+        $sheet->setCellValue('B'.$row, $opId);
+        
+        $opStatus = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationStatus->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationStatus->CharacterString != "") {
+            $opStatus = $metadataxml->identificationInfo->MD_DataIdentification->operationStatus->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Status');
+        $sheet->setCellValue('B'.$row, $opStatus);
+        
+        $opType = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationType->CharacterString != "") {
+            $opType = $metadataxml->identificationInfo->MD_DataIdentification->operationType->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Type');
+        $sheet->setCellValue('B'.$row, $opType);
+        
+        $rdrDate = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date) && $metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date != "") {
+            $rdrDate = $metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $rdrDate);
+        
+        $lad = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date) && $metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date != "") {
+            $lad = $metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Last Acceptable Date');
+        $sheet->setCellValue('B'.$row, $lad);
+        
+        //Spatial Domain========================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Spatial Domain');
+        
+        $westBoundLongitude = "";
+        if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal)){
+            $westBoundLongitude = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal;
+        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal)){
+            $westBoundLongitude = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'West');
+        $sheet->setCellValue('B'.$row, $westBoundLongitude);
+        
+        $eastBoundLongitude = "";
+        if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal)){
+            $eastBoundLongitude = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal;
+        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal)){
+            $eastBoundLongitude = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'East');
+        $sheet->setCellValue('B'.$row, $eastBoundLongitude);
+        
+        $southBoundLatitude = "";
+        if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal)){
+            $southBoundLatitude = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal;
+        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal)){
+            $southBoundLatitude = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'South');
+        $sheet->setCellValue('B'.$row, $southBoundLatitude);
+        
+        $northBoundLatitude = "";
+        if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal)){
+            $northBoundLatitude = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal;
+        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal)){
+            $northBoundLatitude = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'North');
+        $sheet->setCellValue('B'.$row, $northBoundLatitude);
+        
+        //Browsing Information==================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Browsing Information');
+        
+        $fileName = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString != "") {
+            $fileName = $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'File Name');
+        $sheet->setCellValue('B'.$row, $fileName);
+        
+        $fileType = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString != "") {
+            $fileType = $metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'File Type');
+        $sheet->setCellValue('B'.$row, $fileType);
+        
+        $url = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != "") {
+            $url = $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'File URL');
+        $sheet->setCellValue('B'.$row, $url);
+        
+        $keywords = "";
+        if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
+            foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                if(trim($keyword->CharacterString) != ""){
+                    $keywords .= $keyword->CharacterString.', ';
+                }
+            }
+        }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
+           foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                if(trim($keyword->CharacterString) != ""){
+                    $keywords .= $keyword->CharacterString.', ';
+                }
+            } 
+        }
+        $keywords = rtrim($keywords, ',');
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Keywords');
+        $sheet->setCellValue('B'.$row, $keywords);
+        
+        //Distribution Information==============================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Distribution Information');
+        
+        $distFormat = "";
+        if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString != "") {
+            $distFormat = $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Format Name');
+        $sheet->setCellValue('B'.$row, $distFormat);
+        
+        $version = "";
+        if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString != "") {
+            $version = $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Format Version');
+        $sheet->setCellValue('B'.$row, $version);
+        
+        $dist = "";
+        if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString != "") {
+            $dist = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Organisation Name');
+        $sheet->setCellValue('B'.$row, $dist);
+        
+        $dist = "";
+        if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString != "") {
+            $dist = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Units of Distribution');
+        $sheet->setCellValue('B'.$row, $dist);
+        
+        $size = "";
+        if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real != "") {
+            $size = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Size (Megabytes)');
+        $sheet->setCellValue('B'.$row, $size);
+        
+        $link = "";
+        if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL != "") {
+            $link = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->connectPoint->CI_OnlineResource->linkage->URL) && $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->connectPoint->CI_OnlineResource->linkage->URL != "") {
+            $link = $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->connectPoint->CI_OnlineResource->linkage->URL;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Link');
+        $sheet->setCellValue('B'.$row, $link);
+        
+        $medium = "";
+        if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode != "") {
+            $medium = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Medium Name');
+        $sheet->setCellValue('B'.$row, $medium);
+        
+        $fees = "";
+        if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString != "") {
+            $fees = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Fees');
+        $sheet->setCellValue('B'.$row, $fees);
+        
+        $orderInstruct = "";
+        if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) != "") {
+            $orderInstruct = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Ordering Instructions');
+        $sheet->setCellValue('B'.$row, $orderInstruct);
+        
+        //Data Set Identification===============================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Data Set Identification');
+        
+        $dataSetType = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) && $metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode != "") {
+            $dataSetType = trim($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode);
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode != "") {
+            $dataSetType = trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Spatial Data Set Type');
+        $sheet->setCellValue('B'.$row, $dataSetType);
+        
+        $scale = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) && $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer != "") {
+            $scale = $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scale in Hardcopy/Softcopy');
+        $sheet->setCellValue('B'.$row, $scale);
+        
+        $imgRes = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance) && $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance != "") {
+            $imgRes = $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Image Resolution (GSD)');
+        $sheet->setCellValue('B'.$row, $imgRes);
+        
+        $lang = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString != "") {
+            $lang = trim($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString);
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->language->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->language->CharacterString != "") {
+            $lang = trim($metadataxml->identificationInfo->SV_ServiceIdentification->language->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Language');
+        $sheet->setCellValue('B'.$row, $lang);
+        
+        $maintenanceUpdate = "";
+        if (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && $metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode != "") {
+            $maintenanceUpdate = trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode);
+        }elseif (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && $metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode != "") {
+            $maintenanceUpdate = trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Maintenance and Update');
+        $sheet->setCellValue('B'.$row, $maintenanceUpdate);
+        
+        //Reference System Information==========================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Reference System Information');
+        
+        if(isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != ""){
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
+            if(is_numeric($refSysId)){
+                $refSysSelected = ReferenceSystemIdentifier::where('id',$refSysId)->get()->first();
+            }else{
+                $refSysSelected = ReferenceSystemIdentifier::where('name',$refSysId)->get()->first();
+            }
+        }else{
+            $refSysSelected = [];
+        }
+        if ($refSysSelected){
+            $row++;
+            $sheet->setCellValue('A'.$row, 'Reference System Identifier');
+            $sheet->setCellValue('B'.$row, $refSysSelected->name);
+            $row++;
+            $sheet->setCellValue('A'.$row, 'Projection');
+            $sheet->setCellValue('B'.$row, $refSysSelected->projection);
+            $row++;
+            $sheet->setCellValue('A'.$row, 'Semi Major Axis');
+            $sheet->setCellValue('B'.$row, $refSysSelected->semi_major_axis);
+            $row++;
+            $sheet->setCellValue('A'.$row, 'Ellipsoid');
+            $sheet->setCellValue('B'.$row, $refSysSelected->ellipsoid);
+            $row++;
+            $sheet->setCellValue('A'.$row, 'Axis Units');
+            $sheet->setCellValue('B'.$row, $refSysSelected->axis_units);
+            $row++;
+            $sheet->setCellValue('A'.$row, 'Datum');
+            $sheet->setCellValue('B'.$row, $refSysSelected->datum);
+            $row++;
+            $sheet->setCellValue('A'.$row, 'Denominator of Flattening Ratio');
+            $sheet->setCellValue('B'.$row, $refSysSelected->denominator_flattening_ratio);
+        }
+        
+        //Constraints==========================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Constraints');
+        
+        $useLimitation = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+            $useLimitation = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString);
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+            $useLimitation = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Use Limitation');
+        $sheet->setCellValue('B'.$row, $useLimitation);
+        
+        $accessConst = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
+            $accessConst = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode);
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
+            $accessConst = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Access Constraints');
+        $sheet->setCellValue('B'.$row, $accessConst);
+        
+        $useConst = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
+            $useConst = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode);
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
+            $useConst = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Use Constraints');
+        $sheet->setCellValue('B'.$row, $useConst);
+        
+        $classSys = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
+            $classSys = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode);
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
+            $classSys = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Classification');
+        $sheet->setCellValue('B'.$row, $classSys);
+        
+        $ref = "";
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
+            $ref = $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference;
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
+            $ref = $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Reference');
+        $sheet->setCellValue('B'.$row, $ref);
+        
+        //Data Quality==========================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Data Quality');
+        
+        $dqScope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode) && $metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode != "") {
+            $dqScope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'DQ Scope');
+        $sheet->setCellValue('B'.$row, $dqScope);
+        
+        $dataHist = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement->CharacterString != "") {
+            $dataHist = $metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Data History');
+        $sheet->setCellValue('B'.$row, $dataHist);
+        
+        $dqDate = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date != "") {
+            $dqDate = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $dqDate);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Completeness Commission'); //===========
+        
+        $t1Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString != "") {
+            $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t1Scope);
+        
+        $compLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel->CharacterString != "") {
+            $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $compLvl);
+        
+        $t1Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date != "") {
+            $t1Date = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t1Date);
+        
+        $t1Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t1Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t1Res);
+        
+        $conformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $conformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $conformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Completeness Omission'); //=============
+        
+        $t1Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString != "") {
+            $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t1Scope);
+        
+        $compLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel->CharacterString != "") {
+            $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $compLvl);
+        
+        $t1Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date != "") {
+            $t1Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t1Date);
+        
+        $t1Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t1Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t1Res);
+        
+        $conformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $conformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $conformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conceptual Consistency'); //============
+        
+        $t2Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString != "") {
+            $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t2Scope);
+        
+        $compLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel->CharacterString != "") {
+            $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $compLvl);
+        
+        $t2Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date != "") {
+            $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t2Date);
+        
+        $t2Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t2Res);
+        
+        $t2ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t2ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Domain Consistency'); //================
+        
+        $t2Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString != "") {
+            $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t2Scope);
+        
+        $compLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel->CharacterString != "") {
+            $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $compLvl);
+        
+        $t2Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date != "") {
+            $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t2Date);
+        
+        $t2Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t2Res);
+        
+        $t2ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t2ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Format Consistency'); //================
+        
+        $t2Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString != "") {
+            $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t2Scope);
+        
+        $compLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString != "") {
+            $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $compLvl);
+        
+        $t2Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date != "") {
+            $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t2Date);
+        
+        $t2Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t2Res);
+        
+        $t2ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t2ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Topological Consistency'); //===========
+        
+        $t2Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString != "") {
+            $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t2Scope);
+        
+        $compLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString != "") {
+            $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $compLvl);
+        
+        $t2Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date != "") {
+            $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t2Date);
+        
+        $t2Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t2Res);
+        
+        $t2ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t2ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Absolute or External Accuracy'); //=====
+        
+        $t3Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString != "") {
+            $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t3Scope);
+        
+        $t3CompLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel->CharacterString != "") {
+            $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $t3CompLvl);
+        
+        $t3Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date != "") {
+            $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t3Date);
+        
+        $t3Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t3Res);
+        
+        $t3ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t3ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Relative or Internal Accuracy'); //=====
+        
+        $t3Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString != "") {
+            $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t3Scope);
+        
+        $t3CompLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel->CharacterString != "") {
+            $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $t3CompLvl);
+        
+        $t3Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date != "") {
+            $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t3Date);
+        
+        $t3Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t3Res);
+        
+        $t3ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t3ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Gridded Data Positional Accuracy'); //==
+        
+        $t3Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString != "") {
+            $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t3Scope);
+        
+        $t3CompLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString != "") {
+            $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $t3CompLvl);
+        
+        $t3Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date != "") {
+            $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t3Date);
+        
+        $t3Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t3Res);
+        
+        $t3ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t3ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Accuracy of A Time Measurement'); //====
+        
+        $t4Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString != "") {
+            $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t4Scope);
+        
+        $t4CompLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel->CharacterString != "") {
+            $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $t4CompLvl);
+       
+        $t4Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date != "") {
+            $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t4Date);
+        
+        $t4Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t4Res);
+        
+        $t4ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t4ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Temporal Consistency'); //==============
+        
+        $t4Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString != "") {
+            $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t4Scope);
+        
+        $t4CompLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString != "") {
+            $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $t4CompLvl);
+        
+        $t4Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date != "") {
+            $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t4Date);
+        
+        $t4Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t4Res);
+        
+        $t4ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t4ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Temporal Validity'); //=================
+        
+        $t4Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString != "") {
+            $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t4Scope);
+        
+        $t4CompLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString != "") {
+            $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $t4CompLvl);
+        
+        $t4Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date != "") {
+            $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t4Date);
+        
+        $t4Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t4Res);
+        
+        $t4ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t4ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Classification Correctness'); //========
+        
+        $t5Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString != "") {
+            $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t5Scope);
+        
+        $t5CompLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel->CharacterString != "") {
+            $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $t5CompLvl);
+        
+        $t5Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date != "") {
+            $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t5Date);
+        
+        $t5Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t5Res);
+        
+        $t5ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t5ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Non-Quantitative Attribute Correctness'); //========
+        
+        $t5Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString != "") {
+            $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t5Scope);
+        
+        $t5CompLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyLevel->CharacterString != "") {
+            $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Compliance Level');
+        $sheet->setCellValue('B'.$row, $t5CompLvl);
+        
+        $t5Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->dateTime->Date != "") {
+            $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t5Date);
+        
+        $t5Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t5Res);
+        
+        $t5ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t5ConformRes);
+        
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Quantitative Attribute Correctness'); //========
+        
+        $t5Scope = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString != "") {
+            $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Scope');
+        $sheet->setCellValue('B'.$row, $t5Scope);
+        
+        $t5CompLvl = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyLevel->CharacterString != "") {
+            $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyLevel->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conpliance Level');
+        $sheet->setCellValue('B'.$row, $t5CompLvl);
+        
+        $t5Date = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->dateTime->Date != "") {
+            $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->dateTime->Date;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Date');
+        $sheet->setCellValue('B'.$row, $t5Date);
+        
+        $t5Res = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+            $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Result');
+        $sheet->setCellValue('B'.$row, $t5Res);
+        
+        $t5ConformRes = "";
+        if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+            $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
+        }
+        $row++;
+        $sheet->setCellValue('A'.$row, 'Conformance Result');
+        $sheet->setCellValue('B'.$row, $t5ConformRes);
+        
+        //Additional Elements===================================================
+        $row += 2;
+        $sheet->setCellValue('A'.$row, 'Additional Elements');
+        
+        $category = MCategory::where('name',$category)->get()->first();
+        $customMetadataInput = CustomMetadataInput::where('kategori',$category->id)->get();
+        $custom_inputs = "";
+        foreach($customMetadataInput as $cmi){
+            $row++;
+            $sheet->setCellValue('A'.$row, $cmi->name);
+            if(count($metadataxml->customInput) > 0){
+                foreach($metadataxml->customInput as $ci){
+                    if(!empty($ci->{$cmi->input_name})){
+                        $val = $ci->{$cmi->input_name}->CharacterString;
+                        $sheet->setCellValue('B'.$row, $val);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // (E) OUTPUT
+        $writer = new Xlsx($spreadsheet);
+
+        // (E2) OR FORCE DOWNLOAD
+        $metadataName = "Metadata";
+        
+        $name = '';
+        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
+            $name = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+            $metadataName = preg_replace("/\s+/","",trim(ucwords($name)));
+        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != '') {
+            $name = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+            $metadataName = preg_replace("/\s+/","",trim(ucwords($name)));
+        }
+        
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$metadataName.'.xlsx"');
+        header('Cache-Control: max-age=0');
+        header('Expires: Fri, 11 Nov 2011 11:11:11 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+        $writer->save('php://output');
+    }
 
     public function messages() {
         return [
@@ -595,6 +2441,32 @@ class MetadataController extends Controller {
             return "found";
         }
         exit();
+    }
+    
+    public function muat_naik_contohJenisMetadata($request){
+        $file_contohJenisMetadata = "";
+        if (file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
+            //store uploaded contoh jenis metadata file
+            $fileName = time() . '_' . $request->file_contohJenisMetadata->getClientOriginalName();
+            Storage::putFileAs('public', $request->file('file_contohJenisMetadata'), $fileName);
+            
+            $file_contohJenisMetadata = $fileName;
+            
+            //read stored contoh jenis metadata file
+//            $uploaded_xml = Storage::disk('public')->get($fileName);
+
+            //delete uploaded contoh jenis metadata file
+//            Storage::disk('public')->delete($fileName);
+        }
+        
+        return $file_contohJenisMetadata;
+    }
+    
+    public function download_file_contohjenismetadata($id){
+        $metadata = MetadataGeo::where('id',$id)->get()->first();
+        if($metadata->file_contohjenismetadata != ""){
+            return Storage::download('public/'.$metadata->file_contohjenismetadata);
+        }
     }
 
     public function store(Request $request) {
@@ -793,6 +2665,10 @@ class MetadataController extends Controller {
             $mg->uuid = $uuid;
             $mg->disahkan = "0";
             $mg->portal_user_id = auth::user()->id;
+            
+            if(strtolower($request->kategori) != 'services'){
+                $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
+            }
 
             $msg = "";
             if(isset($request->btn_save) || (isset($request->submitAction) && $request->submitAction == "save")){
@@ -817,7 +2693,7 @@ class MetadataController extends Controller {
             }
             $mg->save();
         });
-
+        
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
@@ -835,10 +2711,21 @@ class MetadataController extends Controller {
             Storage::putFileAs('public', $request->file('file_xml'), $fileName); //don't forget to set permissions at the public folder
             //read stored xml
             $uploaded_xml = Storage::disk('public')->get($fileName);
+            $uploaded_xml = str_replace("gco:", "", $uploaded_xml);
+            $uploaded_xml = str_replace("gmd:", "", $uploaded_xml);
+            $uploaded_xml = str_replace("srv:", "", $uploaded_xml);
+            $uploaded_xml = str_replace("&#13;", "", $uploaded_xml);
+            $uploaded_xml = str_replace("\r", "", $uploaded_xml);
             $uploaded_xml = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $uploaded_xml);
-            $xmlObject = simplexml_load_string($uploaded_xml);
-            $json = json_encode($xmlObject);
-            $xml_array = json_decode($json, true);
+         
+            $uploaded_xml = simplexml_load_string($uploaded_xml);
+            if (false === $uploaded_xml) {
+    //            continue;
+            }
+            
+//            $xmlObject = simplexml_load_string($uploaded_xml);
+//            $json = json_encode($xmlObject);
+//            $xml_array = json_decode($json, true);
 
             //save in geonetwork
             DB::connection('pgsql2')->transaction(function () use ($request, $uploaded_xml, &$newMetadataId) {
@@ -890,7 +2777,7 @@ class MetadataController extends Controller {
 
         return redirect('kemaskini_metadata/'.$newMetadataId)->with('success', 'Metadata Saved');
     }
-
+    
     public function store_todel() {
         for ($r = 0; $r < 20; $r++) {
             DB::connection('pgsql2')->transaction(function () use (&$r) {
@@ -1112,8 +2999,15 @@ class MetadataController extends Controller {
             $mg->timestamps = false;
             $mg->data = $xml;
             $mg->changedate = date("Y-m-d H:i:s");
+            
+            if(strtolower($request->kategori) != 'services'){
+                if (file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
+                    Storage::disk('public')->delete($mg->file_contohjenismetadata);
+                    $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
+                }
+            }
 
-            if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+            if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
 //                $mg->disahkan = "no";
                 $mg->catatan1 = $request->catatan1;
                 $mg->catatan2 = $request->catatan2;
@@ -1178,9 +3072,10 @@ class MetadataController extends Controller {
             $msg = "";
             if($request->submitAction == "save"){
                 $mg->is_draf = "no";
-                if(auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+                if(auth::user()->hasRole(['Pengesah Metadata'])) {
+                    $mg->disahkan = "no";
                     $msg = "Catatan berjaya disimpan.";
-                }elseif(auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+                }elseif(auth::user()->hasRole(['Penerbit Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
                     $mg->disahkan = '0';
                     $msg = "Metadata berjaya dihantar.";
                     
@@ -1211,13 +3106,19 @@ class MetadataController extends Controller {
                 $metadata->update();
 
                 $ftestxml2 = <<<XML
-                $metadata->data
-                XML;
+                        $metadata->data
+                    XML;
                 $ftestxml2 = str_replace("gco:", "", $ftestxml2);
                 $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+                $ftestxml2 = str_replace("\r", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
                 $metadataxml = simplexml_load_string($ftestxml2);
+                if (false === $metadataxml) {
+        //            continue;
+                }
 
                 $metadataName = "";
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
@@ -1256,7 +3157,7 @@ class MetadataController extends Controller {
             }
         });
 
-        if(auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+        if(auth::user()->hasRole(['Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             $redirect = "mygeo_pengesahan_metadata";
         }elseif(auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
             $redirect = "mygeo_senarai_metadata";
@@ -1272,7 +3173,7 @@ class MetadataController extends Controller {
     }
 
     public function metadata_sahkan() {
-        if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
 
@@ -1290,9 +3191,15 @@ class MetadataController extends Controller {
                 $ftestxml2 = str_replace("gco:", "", $ftestxml2);
                 $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+                $ftestxml2 = str_replace("\r", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-                $metadataxml = simplexml_load_string($ftestxml2);
 
+                $metadataxml = simplexml_load_string($ftestxml2);
+                if (false === $metadataxml) {
+                    continue;
+                }
+                
                 $metadataName = "";
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                    $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
@@ -1339,8 +3246,14 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
             $metadataxml = simplexml_load_string($ftestxml2);
+            if (false === $metadataxml) {
+    //            continue;
+            }
 
             $metadataName = "";
             if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
@@ -1385,7 +3298,7 @@ class MetadataController extends Controller {
     }
 
     public function metadata_tidak_disahkan() {
-        if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin'])) {
+        if (!auth::user()->hasRole(['Pengesah Metadata', 'Super Admin','Pentadbir Aplikasi'])) {
             exit();
         }
 
@@ -1403,8 +3316,14 @@ class MetadataController extends Controller {
                 $ftestxml2 = str_replace("gco:", "", $ftestxml2);
                 $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
                 $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+                $ftestxml2 = str_replace("\r", "", $ftestxml2);
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
                 $metadataxml = simplexml_load_string($ftestxml2);
+                if (false === $metadataxml) {
+        //            continue;
+                }
 
                 $metadataName = "";
                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
@@ -1438,12 +3357,20 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("gco:", "", $ftestxml2);
             $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-            $metadataxml = simplexml_load_string($ftestxml2);
 
+            $metadataxml = simplexml_load_string($ftestxml2);
+            if (false === $metadataxml) {
+    //            continue;
+            }
+            
             $metadataName = "";
             if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
                $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+            }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+               $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
             }
 
             $user = User::where("id",$metadata->portal_user_id)->get()->first();

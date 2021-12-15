@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary div_c6" id="div_c6">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse6">
@@ -11,6 +12,7 @@
             <div class="row">
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="col-xl-7">
                         <div class="form-inline ml-3">
@@ -25,6 +27,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="col-xl-5">
                         <div class="form-inline">
@@ -41,3 +44,15 @@
         </div>
     </div>
 </div>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c6').hide();
+        });
+    </script>
+        <?php
+}
+?>

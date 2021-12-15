@@ -7,12 +7,35 @@
         </a>
         @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")
         <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal10">Catatan</button>
-        @elseif(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
+        @elseif(auth::user()->hasRole(['Pengesah Metadata','Super Admin','Pentadbir Aplikasi']))
         <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal10">Catatan</button>
         @endif
     </div>
     <div id="collapse10" class="panel-collapse collapse in show" data-parent="#div_c10">
         <div class="card-body">
+            <div class="row mb-2" id="div_contohJenisMetadata">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="file_contohJenisMetadata">
+                        Muat Naik Fail Contoh Jenis Metadata Yang Dimasukkan
+                    </label>
+                </div>
+                <div class="col-8">
+                    <?php
+                    if($metadataSearched->file_contohjenismetadata != ""){
+                        ?>
+                        <div class="row">
+                            <button type="button" class="btn btn-sm btn-default btn_file_contohjenismetadata" data-href='{{ url('download_file_contohjenismetadata').'/'.$metadataSearched->id }}'>Muat Turun</button>
+                        </div>
+                        <br>
+                        <?php
+                    }
+                    ?>
+                    <div class="row">
+                        <input class="form-control ml-3" id="file_contohJenisMetadata" type="file" name="file_contohJenisMetadata" />
+                    </div>
+                    <p class="error-message"><span></span></p>
+                </div>
+            </div>
             <h2 class="heading-small text-muted">Browsing Graphic</h2>
             <div class="my-2">
                 @if($elemenMetadata['c10_file_name']->status == '1')

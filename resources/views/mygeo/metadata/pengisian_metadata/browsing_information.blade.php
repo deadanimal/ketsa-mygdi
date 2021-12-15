@@ -8,6 +8,17 @@
     </div>
     <div id="collapse10" class="panel-collapse collapse in show" data-parent="#div_c10">
         <div class="card-body">
+            <div class="row mb-2" id="div_contohJenisMetadata">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="file_contohJenisMetadata">
+                        Muat Naik Fail Contoh Jenis Metadata Yang Dimasukkan
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control ml-3" id="file_contohJenisMetadata" type="file" name="file_contohJenisMetadata" />
+                    <p class="error-message"><span></span></p>
+                </div>
+            </div>
             <h2 class="heading-small text-muted"><?php echo __('lang.browsingGraphic'); ?></h2>
             <div class="my-2">
                 @if($elemenMetadata['c10_file_name']->status == '1')

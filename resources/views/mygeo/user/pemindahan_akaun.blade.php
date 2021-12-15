@@ -7,6 +7,9 @@
         display: inline;
         width: auto;
     }
+    select option[disabled] {
+        display: none;
+    }
 </style>
 
 <!-- Content Wrapper. Contains page content -->

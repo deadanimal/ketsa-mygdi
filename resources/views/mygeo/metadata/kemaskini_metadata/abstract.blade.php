@@ -12,7 +12,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractApplication_namaAplikasi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractApplication_namaAplikasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractApplication_namaAplikasi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractApplication_namaAplikasi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -31,7 +31,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractApplication_tujuan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractApplication_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractApplication_tujuan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractApplication_tujuan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -50,7 +50,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractApplication_tahunPembangunan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractApplication_tahunPembangunan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractApplication_tahunPembangunan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractApplication_tahunPembangunan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -69,7 +69,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractApplication_kemaskini->CharacterString;
             }
             ?>
-            <input type="text" name="abstractApplication_kemaskini" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractApplication_kemaskini" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractApplication_kemaskini')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -88,7 +88,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractApplication_dataTerlibat->CharacterString;
             }
             ?>
-            <input type="text" name="abstractApplication_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractApplication_dataTerlibat" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractApplication_dataTerlibat')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -107,7 +107,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractApplication_sasaranPengguna->CharacterString;
             }
             ?>
-            <input type="text" name="abstractApplication_sasaranPengguna" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractApplication_sasaranPengguna" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractApplication_sasaranPengguna')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -126,7 +126,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractApplication_versi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractApplication_versi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractApplication_versi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractApplication_versi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -145,7 +145,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractApplication_perisianDigunaPembangunan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractApplication_perisianDigunaPembangunan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractApplication_perisianDigunaPembangunan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractApplication_perisianDigunaPembangunan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -169,7 +169,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractDocument_namaDokumen->CharacterString;
             }
             ?>
-            <input type="text" name="abstractDocument_namaDokumen" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractDocument_namaDokumen" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractDocument_namaDokumen')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -188,7 +188,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractDocument_tujuan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractDocument_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractDocument_tujuan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractDocument_tujuan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -207,7 +207,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractDocument_tahunTerbitan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractDocument_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractDocument_tahunTerbitan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractDocument_tahunTerbitan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -226,7 +226,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractDocument_edisi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractDocument_edisi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractDocument_edisi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractDocument_edisi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -250,7 +250,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractGISActivityProject_namaAktiviti->CharacterString;
             }
             ?>
-            <input type="text" name="abstractGISActivityProject_namaAktiviti" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractGISActivityProject_namaAktiviti" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractGISActivityProject_namaAktiviti')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -269,7 +269,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractGISActivityProject_tujuan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractGISActivityProject_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractGISActivityProject_tujuan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractGISActivityProject_tujuan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -288,7 +288,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractGISActivityProject_lokasi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractGISActivityProject_lokasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractGISActivityProject_lokasi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractGISActivityProject_lokasi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -307,7 +307,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractGISActivityProject_tahun->CharacterString;
             }
             ?>
-            <input type="text" name="abstractGISActivityProject_tahun" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractGISActivityProject_tahun" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractGISActivityProject_tahun')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -331,7 +331,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractMap_namaPeta->CharacterString;
             }
             ?>
-            <input type="text" name="abstractMap_namaPeta" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractMap_namaPeta" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractMap_namaPeta')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -350,7 +350,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractMap_kawasan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractMap_kawasan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractMap_kawasan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractMap_kawasan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -369,7 +369,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractMap_tujuan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractMap_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractMap_tujuan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractMap_tujuan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -388,7 +388,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractMap_tahunTerbitan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractMap_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractMap_tahunTerbitan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractMap_tahunTerbitan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -407,7 +407,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractMap_edisi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractMap_edisi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractMap_edisi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractMap_edisi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -426,7 +426,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractMap_noSiri->CharacterString;
             }
             ?>
-            <input type="text" name="abstractMap_noSiri" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractMap_noSiri" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractMap_noSiri')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -445,7 +445,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractMap_skala->CharacterString;
             }
             ?>
-            <input type="text" name="abstractMap_skala" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractMap_skala" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractMap_skala')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -464,7 +464,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractMap_unit->CharacterString;
             }
             ?>
-            <input type="text" name="abstractMap_unit" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractMap_unit" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractMap_unit')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -488,7 +488,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_namaData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_namaData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_namaData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_namaData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -507,7 +507,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_lokasi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_lokasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_lokasi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_lokasi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -526,7 +526,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_rumusanData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_rumusanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_rumusanData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_rumusanData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -545,7 +545,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_tujuanData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_tujuanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_tujuanData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_tujuanData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -564,7 +564,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_kaedahPenyediaanData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_kaedahPenyediaanData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_kaedahPenyediaanData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -583,7 +583,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_format->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_format" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_format')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -602,7 +602,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_unit->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_unit" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_unit" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_unit')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -621,7 +621,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_skala->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_skala" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_skala" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_skala')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -640,7 +640,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_statusData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_statusData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_statusData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_statusData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -659,7 +659,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_tahunPerolehan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_tahunPerolehan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_tahunPerolehan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_tahunPerolehan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -678,7 +678,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_jenisSatelit->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_jenisSatelit" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_jenisSatelit" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_jenisSatelit')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -697,7 +697,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_format->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_format" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_format')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -716,7 +716,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_resolusi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_resolusi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_resolusi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_resolusi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -735,7 +735,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractRasterData_kawasanLitupan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractRasterData_kawasanLitupan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractRasterData_kawasanLitupan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractRasterData_kawasanLitupan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -759,7 +759,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractServices_namaServis->CharacterString;
             }
             ?>
-            <input type="text" name="abstractServices_namaServis" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractServices_namaServis" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractServices_namaServis')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -778,7 +778,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractServices_lokasi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractServices_lokasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractServices_lokasi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractServices_lokasi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -797,7 +797,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractServices_tujuan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractServices_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractServices_tujuan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractServices_tujuan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -816,7 +816,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractServices_dataTerlibat->CharacterString;
             }
             ?>
-            <input type="text" name="abstractServices_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractServices_dataTerlibat" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractServices_dataTerlibat')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -835,7 +835,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractServices_polisi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractServices_polisi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractServices_polisi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractServices_polisi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -854,7 +854,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractServices_peringkatCapaian->CharacterString;
             }
             ?>
-            <input type="text" name="abstractServices_peringkatCapaian" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractServices_peringkatCapaian" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractServices_peringkatCapaian')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -873,7 +873,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractServices_format->CharacterString;
             }
             ?>
-            <input type="text" name="abstractServices_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractServices_format" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractServices_format')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -897,7 +897,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_namaPerisian->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_namaPerisian" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_namaPerisian" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_namaPerisian')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -916,7 +916,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_versi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_versi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_versi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_versi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -935,7 +935,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_tujuan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_tujuan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_tujuan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -954,7 +954,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_tahunPengunaanPerisian->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_tahunPengunaanPerisian" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_tahunPengunaanPerisian" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_tahunPengunaanPerisian')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -973,7 +973,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_kaedahPerolehan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_kaedahPerolehan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_kaedahPerolehan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_kaedahPerolehan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -992,7 +992,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_format->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_format" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_format')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1011,7 +1011,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_pengeluar->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_pengeluar" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_pengeluar" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_pengeluar')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1030,7 +1030,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_keupayaan->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_keupayaan" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_keupayaan" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_keupayaan')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1049,7 +1049,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_dataTerlibat->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_dataTerlibat" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_dataTerlibat')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1068,7 +1068,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractSoftware_keperluanPerkakas->CharacterString;
             }
             ?>
-            <input type="text" name="abstractSoftware_keperluanPerkakas" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractSoftware_keperluanPerkakas" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractSoftware_keperluanPerkakas')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1092,7 +1092,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractVectorData_namaData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractVectorData_namaData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractVectorData_namaData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractVectorData_namaData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1111,7 +1111,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractVectorData_lokasi->CharacterString;
             }
             ?>
-            <input type="text" name="abstractVectorData_lokasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractVectorData_lokasi" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractVectorData_lokasi')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1130,7 +1130,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractVectorData_rumusanData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractVectorData_rumusanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractVectorData_rumusanData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractVectorData_rumusanData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1149,7 +1149,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractVectorData_tujuanData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractVectorData_tujuanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractVectorData_tujuanData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractVectorData_tujuanData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1168,7 +1168,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractVectorData_kaedahPenyediaanData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractVectorData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractVectorData_kaedahPenyediaanData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractVectorData_kaedahPenyediaanData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1187,7 +1187,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractVectorData_format->CharacterString;
             }
             ?>
-            <input type="text" name="abstractVectorData_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractVectorData_format" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractVectorData_format')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1206,7 +1206,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractVectorData_unit->CharacterString;
             }
             ?>
-            <input type="text" name="abstractVectorData_unit" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractVectorData_unit" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractVectorData_unit')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1225,7 +1225,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractVectorData_skala->CharacterString;
             }
             ?>
-            <input type="text" name="abstractVectorData_skala" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractVectorData_skala" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractVectorData_skala')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1244,7 +1244,7 @@
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstractVectorData_statusData->CharacterString;
             }
             ?>
-            <input type="text" name="abstractVectorData_statusData" class="form-control form-control-sm ml-3 abstractElement" value="{{ $var }}">
+            <input type="text" name="abstractVectorData_statusData" class="form-control form-control-sm  abstractElement" value="{{ $var }}">
             @error('abstractVectorData_statusData')
             <div class="text-error">{{ $message }}</div>
             @enderror
@@ -1266,9 +1266,11 @@
             $var = "";
             if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
                 $var = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
+            }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != ""){
+                $var = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
             }
             ?>
-            <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3" readonly>{{ $var }}</textarea>
+            <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm " readonly>{{ $var }}</textarea>
             @error('c2_abstract')
             <div class="text-error">{{ $message }}</div>
             @enderror

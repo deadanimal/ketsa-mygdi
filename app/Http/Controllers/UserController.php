@@ -19,6 +19,7 @@ use DB;
 use App\Mail\MailNotify;
 use App\AuditTrail;
 use App\Kategori;
+use App\Ftesttodel2;
 
 class UserController extends Controller {
 
@@ -32,7 +33,7 @@ class UserController extends Controller {
     }
 
     public function index() {
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -47,7 +48,7 @@ class UserController extends Controller {
     }
 
     public function index_berdaftar() {
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -66,13 +67,13 @@ class UserController extends Controller {
             return array_search($model->getKey(), $ids);
         });
 
-        $aos = AgensiOrganisasi::distinct('name')->get();
+        $aos = AgensiOrganisasi::distinct('name')->whereNull('bahagian')->get();
 
         return view('mygeo.user.senarai_pengguna_berdaftar', compact('users','peranans','aos'));
     }
 
     public function index_penerbit_pengesah() {
-        if(!auth::user()->hasRole(['Pentadbir Metadata','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Metadata','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -247,8 +248,189 @@ class UserController extends Controller {
         exit;
     }
 
+    public function get_user_details_kemaskini(){
+        $user_id = $_POST['user_id'];
+        $user_details = User::where(["id"=>$user_id])->get()->first();
+        $html_details = '
+            <input type="hidden" name="user_id" value="'.$user_id.'">
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="uname">
+                        Nama Penuh
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" id="uname" name="uname" type="text"
+                           value="'.$user_details->name.'" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="nric">
+                        No Kad Pengenalan
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" id="input-nric" type="text" name="nric"
+                           value="'.$user_details->nric.'" />
+                </div>
+            </div>
+            <div class="row mb-2 divSektor">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="sektor">
+                        Sektor
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" name="sektor" id="sektor">
+                        <option value="">Pilih...</option>
+                        <option value="1" '.($user_details->sektor == '1' ? 'selected':'').'>Kerajaan</option>
+                        <option value="2" '.($user_details->sektor == '2' ? 'selected':'').'>Swasta</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="agensi_organisasi">
+                        Agensi / Organisasi
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                <select id="agensi_organisasi" name="agensi_organisasi" class="form-control form-control-sm ml-3">
+                    <option value="">Pilih...</option>
+                </select>
+';
+
+        if (Auth::user()->hasRole("Pemohon Data")) {
+            $html_details .= '
+                        <input class="form-control form-control-sm" id="agensi_organisasi" name="agensi_organisasi"
+                               type="text" value="'.$user_details->agensi_organisasi.'" />
+                    ';
+        } else {
+            $html_details .= '
+                        <input class="form-control form-control-sm" id="agensi_organisasi" name="agensi_organisasi"
+                               type="text"
+                               value="'.(is_numeric($user_details->agensi_organisasi) && isset($user_details->agensiOrganisasi) ? $user_details->agensiOrganisasi->name : $user_details->agensi_organisasi).'"
+                               />
+                    ';
+        }
+        $html_details .= '
+                </div>
+            </div>';
+
+            if(!$user_details->hasRole("Pemohon Data")){
+                $html_details .= '<div class="row mb-2 divBahagian">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="bahagian">
+                        Bahagian
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" id="bahagian" type="text" name="bahagian"
+                           value="'.$user_details->bahagian.'" />
+                </div>
+            </div>';
+
+            }
+
+            $html_details .= '<div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="email">
+                        Emel
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" id="email" type="text" name="email"
+                           value="'.$user_details->email.'" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="phone_pejabat">
+                        Telefon Pejabat
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-3">
+                    <input class="form-control form-control-sm" id="phone_pejabat" type="text" name="phone_pejabat"
+                           value="'.$user_details->phone_pejabat.'" />
+                </div>';
+        if(!$user_details->hasRole(["Penerbit Metadata","Pengesah Metadata"])){
+            $html_details .= '
+                <div class="col-2">
+                    <label class="form-control-label mr-4" for="phone_bimbit">
+                        Telefon Bimbit
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-3">
+                    <input class="form-control form-control-sm" id="phone_bimbit" name="phone_bimbit"
+                           type="text" value="'.$user_details->phone_bimbit.'" />
+                </div>
+            </div>
+            ';
+        }
+        $html_details .= '
+            <div class="row mb-2">
+                <div class="col-3">
+                    <label class="form-control-label mr-4" for="peranan">
+                        Peranan
+                    </label><label class="float-right">:</label>
+                </div>
+                <div class="col-8">
+        ';
+        $peranans = Role::get();
+        $ids = [ 5, 6, 3, 4, 2];
+        $peranans = $peranans->sortBy(function($model) use ($ids) {
+            return array_search($model->getKey(), $ids);
+        });
+        $ur = $user_details->getRoleNames();
+        $urs = [];
+        foreach($ur as $r){
+            $urs[] = $r;
+        }
+        foreach($peranans as $p){
+            if(in_array($p->name,$urs)){
+                $html_details .= '<div class="col-10"><input type="checkbox" class="form-check-input mr-4" name="peranan[]" value="'.$p->name.'" checked>'.$p->name.'</div>';
+            }else{
+                $html_details .= '<div class="col-10"><input type="checkbox" class="form-check-input mr-4" name="peranan[]" value="'.$p->name.'">'.$p->name.'</div>';
+            }
+        }
+        $html_details .= '
+                </div>
+            </div>
+        ';
+//        if(count($user_details->getRoleNames()) > 0){
+//            $var = "";
+//            foreach($user_details->getRoleNames() as $role){
+//                $var .= $role.',';
+//            }
+//            $var = rtrim($var, ",");
+//            $html_details .= '<input class="form-control form-control-sm" id="peranan" type="text" value="'.$var.'" />';
+//        }
+        if($user_details->hasRole("Pemohon Data")){
+            $html_details .= '
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="email">
+                            Kategori
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" value="'.$user_details->kategori.'" name="kategori"/>
+                    </div>
+                </div>
+            ';
+        }
+        $html_details .= '
+                </div>
+            </div>
+        ';
+
+        echo json_encode(['html'=>$html_details,$peranans]);
+        exit;
+    }
+
     public function user_sahkan(){
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -277,7 +459,7 @@ class UserController extends Controller {
     }
 
     public function user_pengesahan_ditolak(){
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
 
@@ -314,6 +496,26 @@ class UserController extends Controller {
 //        }
 //        exit();
 
+//        $usersToMigrate = Ftesttodel2::get();
+//        foreach($usersToMigrate as $u){
+//            $theUser = User::create([
+//                'name' => $u->fname.' '.$u->lname,
+//                'email' => $u->mail,
+//                'phone_bimbit' => $u->phone,
+//                'password' => Hash::make($u->pwd),
+//                'alamat' => $u->addr.' '.$u->addr2.' '.$u->pcode.' '.$u->addr2.' '.$u->city.' '.$u->neg,
+//                'postcode' => $u->pcode,
+//                'city' => $u->city,
+//                'state' => $u->neg,
+//                'status' => ($u->status == "Yes" ? "1":"0"),
+//                'disahkan' => '1',
+//                'assigned_roles' => "Penerbit Metadata",
+//                'mygdix_user_id' => $u->id_user
+//            ]);
+//            $theUser->assignRole('Penerbit Metadata');
+//        }
+//        exit();
+
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
 
@@ -337,9 +539,31 @@ class UserController extends Controller {
 
     public function edit(){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
+        if(strpos($user->kategori,"IPTA") !== false){
+            $kategori = Kategori::where('name','ilike','%IPTA%')->get();
+        }elseif(strpos($user->kategori,"IPTS") !== false){
+            $kategori = Kategori::where('name','ilike','%IPTS%')->get();
+        }else{
+            $kategori = Kategori::get();
+        }
+
         $roles = Role::get();
-        $kategori = Kategori::get();
         return view('mygeo.profile.profil_edit', compact('user','roles','kategori'));
+    }
+
+    public function edit_admin($id){
+        $user = User::where(["id"=>$id])->get()->first();
+        if(strpos($user->kategori,"IPTA") !== false){
+            $kategori = Kategori::where('name','ilike','%IPTA%')->get();
+        }elseif(strpos($user->kategori,"IPTS") !== false){
+            $kategori = Kategori::where('name','ilike','%IPTS%')->get();
+        }else{
+            $kategori = Kategori::get();
+        }
+
+        $roles = Role::get();
+//        dd('ftester');
+        return view('mygeo.profile.profil_edit_admin', compact('user','roles','kategori'));
     }
 
     public function update_profile(Request $request){
@@ -349,14 +573,14 @@ class UserController extends Controller {
             "agensi_organisasi" => 'required',
             "phone_pejabat" => 'required',
         ];
+        $fields["sektor"] = 'required';
         if(Auth::user()->email != $request->email){
             $fields["email"]= 'required|unique:App\User,email';
         }
         if(Auth::user()->hasRole('Pemohon Data')){
             $fields["phone_bimbit"]= 'required';
-        }else{
+        }else if(Auth::user()->hasRole('Penerbit Metadata', 'Pengesah Metadata')){
             $fields["bahagian"] = 'required';
-            $fields["sektor"] = 'required';
         }
         $customMsg = [
             "uname.required" => 'Name required',
@@ -368,6 +592,7 @@ class UserController extends Controller {
             "phone_pejabat.required" => 'Phone Pejabat required',
             "phone_bimbit.required" => 'Phone Bimbit required',
         ];
+
         $this->validate($request, $fields, $customMsg);
 
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
@@ -402,6 +627,50 @@ class UserController extends Controller {
         return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
     }
 
+    public function update_profile_admin(Request $request){
+        //save user's role
+        if(!is_null($request->peranan)){
+            ModelHasRoles::where(["model_id"=>$request->userid,"model_type"=>"App\User"])->delete();
+            $assigned_roles = "";
+            foreach($request->peranan as $role){
+                //if role selected is pengesah, check if there is already a pengesah in the bahagian selected
+                if($role == 'Pengesah Metadata' && $request->bahagian != ""){
+                    $pengesahs = User::whereHas("roles", function ($q) {
+                        $q->where("name", "Pengesah Metadata");
+                    })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
+                    if(!empty($pengesahs) && count($pengesahs) > 0){
+                        return redirect('kemaskini_profil_admin/'.$request->userid)->with(['error'=>'1','message'=>'Anda telah memilih Bahagian yang telah mempunyai Pengesah Metadata yang berdaftar. Hanya satu Pengesah Metadata yang akan didaftarkan dalam satu Agensi dan Bahagian yang sama. Sila hubungi Pentadbir Aplikasi untuk maklumat lanjut.']);
+                    }
+                }
+                $user = User::where("id",$request->userid)->get()->first();
+                $user->assignRole($role);
+                $assigned_roles .= $role.",";
+            }
+            $assigned_roles = rtrim($assigned_roles, ",");
+            User::where(["id"=>$request->userid])->update(["assigned_roles" => $assigned_roles]);
+        }
+
+        $user = User::where("id",$request->userid)->get()->first();
+        $user->name = $request->uname;
+        $user->nric = $request->nric;
+        $user->email = $request->email;
+        $user->agensi_organisasi = $request->agensi_organisasi;
+        $user->bahagian = $request->bahagian;
+        $user->sektor = $request->sektor;
+        $user->phone_pejabat = $request->phone_pejabat;
+        $user->phone_bimbit = $request->phone_bimbit;
+        $user->kategori = $request->kategori;
+        $user->save();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
+        $at->save();
+
+        return redirect('mygeo_senarai_pengguna_berdaftar')->with('message','Maklumat pengguna berjaya dikemas kini.');
+    }
+
     public function update_gambarprofile(Request $request){
         //save gambar profil
         if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
@@ -425,6 +694,31 @@ class UserController extends Controller {
         $at->save();
 
         return redirect('mygeo_profil')->with('message','Gambar profil berjaya dikemas kini.');
+    }
+
+    public function update_gambarprofile_admin(Request $request){
+        //save gambar profil
+        if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
+            $this->validate($request,['gambar_profil' => 'required|image|mimes:jpeg,png,jpg']);
+            $exists = Storage::exists($request->gambar_profil->getClientOriginalName());
+            $time = date('Y-m-d'.'_'.'H_i_s');
+            $fileName = $time.'_'.$request->gambar_profil->getClientOriginalName();
+            $imageUrl = Storage::putFileAs('/public/', $request->file('gambar_profil'), $fileName);
+        }
+
+        $user = User::where(["id"=>$request->userid])->get()->first();
+        if(isset($imageUrl)){
+            $user->gambar_profil = $fileName;
+        }
+        $user->save();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
+        $at->save();
+
+        return redirect('kemaskini_profil_admin/'.$request->userid)->with('message','Gambar profil berjaya dikemas kini.');
     }
 
     public function update_password(Request $request){
@@ -472,7 +766,7 @@ class UserController extends Controller {
     }
 
     public function pemindahan_akaun(){
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
         $agensi = AgensiOrganisasi::distinct('name')->get()->all();
@@ -575,7 +869,7 @@ class UserController extends Controller {
     }
 
     public function tambahPenggunaBaru(Request $request){
-        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin'])){
+        if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
         $fields = [
@@ -600,12 +894,23 @@ class UserController extends Controller {
             $sektor = $ao->sektor;
         }
 
+        //if role selected is pengesah, check if there is already a pengesah in the bahagian selected
+        if($request->peranan == 'Pengesah Metadata' && $request->bahagian != ""){
+            $pengesahs = User::whereHas("roles", function ($q) {
+                $q->where("name", "Pengesah Metadata");
+            })->where('agensi_organisasi', $request->agensi_organisasi)->where('bahagian', $request->bahagian)->get();
+            if(!empty($pengesahs) && count($pengesahs) > 0){
+                return redirect('mygeo_senarai_pengguna_berdaftar')->with(['error'=>'1','message'=>'Anda telah memilih Bahagian yang telah mempunyai Pengesah Metadata yang berdaftar. Hanya satu Pengesah Metadata yang akan didaftarkan dalam satu Agensi dan Bahagian yang sama. Sila hubungi Pentadbir Aplikasi untuk maklumat lanjut.']);
+            }
+        }
+
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;
             $nu->email = $request->email;
             $nu->sektor = $sektor;
             $nu->agensi_organisasi = $request->agensi_organisasi;
+            $nu->bahagian = $request->bahagian;
             $pass = $this->generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',20);
             $password = $pass;
             $nu->password = Hash::make($pass);

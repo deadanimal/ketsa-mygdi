@@ -6,7 +6,7 @@
             </h4>
         </a>
     </div>
-    <div id="collapse12" class="panel-collapse collapse in show" data-parent="#div_c12">
+    <div id="collapse12" class="panel-collapse collapse in" data-parent="#div_c12">
         <div class="card-body">
             <div class="acard-body opacity-8">
                 <?php

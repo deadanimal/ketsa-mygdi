@@ -96,38 +96,26 @@
                                 <div class="row mb-2">
                                     <div class="col-3">
                                         <label class="form-control-label mr-4" for="agensi_organisasi">
-                                            Agensi / Organisasi
+                                            Agensi / Organisasi / Institusi
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-8">
-                                        <?php
-                                        if (Auth::user()->hasRole('Pemohon Data')) {
-                                            ?>
-                                            <input class="form-control form-control-sm ml-3" id="agensi_organisasi"
-                                                   type="text" value="{{ $user->agensi_organisasi }}" disabled />
-                                                   <?php
-                                               } else {
-                                                   ?>
-                                            <input class="form-control form-control-sm ml-3" id="agensi_organisasi"
-                                                   type="text"
-                                                   value="{{ is_numeric($user->agensi_organisasi) && isset($user->agensiOrganisasi) ? $user->agensiOrganisasi->name : $user->agensi_organisasi }}"
-                                                   disabled />
-                                                   <?php
-                                               }
-                                               ?>
+                                        <input class="form-control form-control-sm ml-3" id="agensi_organisasi" type="text" value="{{ is_numeric($user->agensi_organisasi) && isset($user->agensiOrganisasi) ? $user->agensiOrganisasi->name : $user->agensi_organisasi }}" disabled />
                                     </div>
                                 </div>
-                                <div class="row mb-2 divBahagian">
-                                    <div class="col-3">
-                                        <label class="form-control-label mr-4" for="bahagian">
-                                            Bahagian
-                                        </label><label class="float-right">:</label>
+                                @if (Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
+                                    <div class="row mb-2 divBahagian">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="bahagian">
+                                                Bahagian
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" id="bahagian" type="text"
+                                                   value="{{ $user->bahagian }}" disabled />
+                                        </div>
                                     </div>
-                                    <div class="col-8">
-                                        <input class="form-control form-control-sm ml-3" id="bahagian" type="text"
-                                               value="{{ $user->bahagian }}" disabled />
-                                    </div>
-                                </div>
+                                @endif
                                 <div class="row mb-2">
                                     <div class="col-3">
                                         <label class="form-control-label mr-4" for="email">
@@ -145,23 +133,24 @@
                                             Telefon Pejabat
                                         </label><label class="float-right">:</label>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-8">
                                         <input class="form-control form-control-sm ml-3" id="phone_pejabat" type="text"
                                                value="{{ $user->phone_pejabat }}" disabled />
                                     </div>
-                                    @if (!Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
-                                    <div class="col-2">
+                                </div>
+                                @if (!Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
+                                <div class="row mb-2">
+                                    <div class="col-3">
                                         <label class="form-control-label mr-4" for="phone_bimbit">
                                             Telefon Bimbit
                                         </label><label class="float-right">:</label>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-8">
                                         <input class="form-control form-control-sm ml-3" id="phone_bimbit"
                                                type="text" value="{{ $user->phone_bimbit }}" disabled />
                                     </div>
-                                    @endif
-
                                 </div>
+                                @endif
                                 <div class="row mb-2">
                                     <div class="col-3">
                                         <label class="form-control-label mr-4" for="peranan">
@@ -169,18 +158,7 @@
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-8">
-                                        <?php
-                                        if (!empty($user->getRoleNames())) {
-                                            $count = 1;
-                                            foreach ($user->getRoleNames() as $role) {
-                                                ?><input class="form-control form-control-sm ml-3" id="peranan"
-                                                       type="text" value="<?php echo $role; ?> "
-                                                       disabled /><?php if ($count != count($user->getRoleNames())) { ?>,<?php
-                                                }
-                                                $count++;
-                                            }
-                                        }
-                                        ?>
+                                        <input class="form-control form-control-sm ml-3" id="peranan" type="text" value="<?php echo $user->assigned_roles; ?>" disabled />
                                     </div>
                                 </div>
                                 @if (Auth::user()->hasRole('Pemohon Data'))
@@ -211,6 +189,9 @@
                             <div class="row align-items-center">
                                 <div class="col-8">
                                     <h3 class="mb-0">Tukar Kata Laluan</h3>
+                                    <i class="text-warning" style="font-size:11px;">* Kata laluan mestilah mempunyai
+                                            sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil,
+                                            nombor dan simbol.</i>
                                 </div>
                                 <div class="col-4 text-right">
                                     <button type="button" class="btn btn-warning btn-sm text-white btn-icon btn-3 btnTukar">

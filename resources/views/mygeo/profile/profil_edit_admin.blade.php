@@ -49,7 +49,7 @@
                                     <h3 class="mb-0">Kemaskini Profil Pengguna</h3>
                                 </div>
                                 <div class="col-4 text-right">
-                                    <a href="{{ url('mygeo_profil') }}" class="btn btn-danger btn-sm text-white btn-icon btn-3">
+                                    <a href="{{ url('mygeo_senarai_pengguna_berdaftar') }}" class="btn btn-danger btn-sm text-white btn-icon btn-3">
                                         <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
                                         <span class="btn-inner--text">Kembali</span>
                                     </a>
@@ -72,8 +72,9 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_profil')}}" id="form_kemaskini_profil">
+                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_admin')}}" id="form_kemaskini_profil">
                                 @csrf
+                                <input type="hidden" name="userid" value="{{ $user->id }}">
                                 <h6 class="heading-small text-muted mt-0 mb-4">Maklumat Pengguna</h6>
                                 <div class="pl-lg-4 pb-lg-4">
                                     <div class="row mb-2">
@@ -124,20 +125,18 @@
                                             </select>
                                         </div>
                                     </div>
-                                    @if (Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
-                                        <div class="row mb-2 divBahagian">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4" for="bahagian">
-                                                    Bahagian
-                                                </label><label class="float-right">:</label>
-                                            </div>
-                                            <div class="col-8">
-                                                <select id="bahagian" name="bahagian" class="form-control form-control-sm ml-3">
-                                                    <option value="">Pilih...</option>
-                                                </select>
-                                            </div>
+                                    <div class="row mb-2 divBahagian">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="bahagian">
+                                                Bahagian
+                                            </label><label class="float-right">:</label>
                                         </div>
-                                    @endif
+                                        <div class="col-8">
+                                            <select id="bahagian" name="bahagian" class="form-control form-control-sm ml-3">
+                                                <option value="">Pilih...</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="row mb-2">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="email">
@@ -157,22 +156,14 @@
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="number" value="{{ $user->phone_pejabat }}" />
                                         </div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <?php
-                                        if(!Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata'])){
-                                            ?>
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4" for="phone_bimbit">
-                                                    Telefon Bimbit
-                                                </label><label class="float-right">:</label>
-                                            </div>
-                                            <div class="col-8">
-                                                <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="number" value="{{ $user->phone_bimbit }}" />
-                                            </div>
-                                            <?php
-                                        }
-                                        ?>
+                                        <div class="col-2">
+                                            <label class="form-control-label mr-4" for="phone_bimbit">
+                                                Telefon Bimbit
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" name="phone_bimbit" type="number" value="{{ $user->phone_bimbit }}" />
+                                        </div>
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-3">
@@ -181,10 +172,31 @@
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3" id="peranan" type="text" value="<?php echo $user->assigned_roles; ?>" disabled />
+                                            <?php
+                                            $ids = [ 5, 6, 3, 4, 2];
+                                            $peranans = $roles->sortBy(function($model) use ($ids) {
+                                                return array_search($model->getKey(), $ids);
+                                            });
+                                            $ur = $user->getRoleNames();
+                                            $urs = [];
+                                            foreach($ur as $r){
+                                                $urs[] = $r;
+                                            }
+                                            foreach($peranans as $p){
+                                                if(in_array($p->name,$urs)){
+                                                    ?>
+                                                    <div class="col-10"><input type="checkbox" class="form-check-input mr-4" name="peranan[]" value="<?php echo $p->name; ?>" checked><?php echo $p->name; ?></div>
+                                                    <?php
+                                                }else{
+                                                    ?>
+                                                    <div class="col-10"><input type="checkbox" class="form-check-input mr-4" name="peranan[]" value="<?php echo $p->name; ?>"><?php echo $p->name; ?></div>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
                                         </div>
                                     </div>
-                                    @if (Auth::user()->hasRole('Pemohon Data'))
+                                    @if ($user->hasRole('Pemohon Data'))
                                     <div class="row mb-2">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="email">
@@ -212,15 +224,16 @@
 
                             <hr class="my-4">
                             <h6 class="heading-small text-muted mt-0 mb-4">Gambar Profil</h6>
-                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_gambarprofil')}}" id="form_kemaskini_gambarprofil" enctype="multipart/form-data">
+                            <form method="post" class="form-horizontal" action="{{url('simpan_kemaskini_gambarprofil_admin')}}" id="form_kemaskini_gambarprofil" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="userid" value="{{ $user->id }}">
                                 <div class="pl-lg-4">
                                     <div class="row mb-2">
                                         <div class="col-3">
                                             <?php
-                                            if(auth::user()->gambar_profil != ""){
+                                            if($user->gambar_profil != ""){
                                                 ?>
-                                                <image id="profileImage" alt="Image placeholder" src="{{ asset('storage/'.auth::user()->gambar_profil) }}" style="border-radius: .95rem;max-width:250px;">
+                                                <image id="profileImage" alt="Image placeholder" src="{{ asset('storage/'.$user->gambar_profil) }}" style="border-radius: .95rem;max-width:250px;">
                                                 <?php
                                             }else{
                                                 ?>
@@ -250,7 +263,7 @@
 <script>
 $(document).ready(function(){
     <?php
-    if(Auth::user()->hasRole('Pemohon Data')){
+    if($user->hasRole('Pemohon Data')){
         ?>
         $('.divSektor,.divBahagian').hide();
         <?php
@@ -272,7 +285,7 @@ $(document).ready(function(){
         if(agensi_organisasi == ""){
             msg = msg + "Sila pilih agensi / organisasi\r\n\r\n";
         }
-        @if(Auth::user()->hasRole('Penerbit Metadata, Pengesah Metadata'))
+        @if(!$user->hasRole('Pemohon Data'))
         if(bahagian == ""){
             msg = msg + "Sila pilih bahagian\r\n\r\n";
         }
@@ -304,42 +317,38 @@ $(document).ready(function(){
             $('#bahagian').append('<option value="">Pilih...</option>');
         });
     });
-    @if (Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
-        $('#agensi_organisasi').change(function() {
-            var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
+    $('#agensi_organisasi').change(function() {
+        var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
 
-            $.ajax({
-                method: "POST",
-                url: "{{ url('get_bahagian') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "agensi_organisasi_name": agensi_organisasi_name,
-                },
-            }).done(function(response) {
-                var data = jQuery.parseJSON(response);
-                if(data.error == '1'){
-                    alert(data.msg);
-                }else{
-                    $('#bahagian').html('');
-                    $('#bahagian').append('<option value="">Pilih...</option>');
-                    $.each(data.bhgns, function(index,value) {
-                        $('#bahagian').append('<option value="'+value.bahagian+'">'+value.bahagian+'</option>');
-                    });
-                }
-            });
+        $.ajax({
+            method: "POST",
+            url: "{{ url('get_bahagian') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "agensi_organisasi_name": agensi_organisasi_name,
+            },
+        }).done(function(response) {
+            var data = jQuery.parseJSON(response);
+            if(data.error == '1'){
+                alert(data.msg);
+            }else{
+                $('#bahagian').html('');
+                $('#bahagian').append('<option value="">Pilih...</option>');
+                $.each(data.bhgns, function(index,value) {
+                    $('#bahagian').append('<option value="'+value.bahagian+'">'+value.bahagian+'</option>');
+                });
+            }
         });
-    @endif
+    });
 
     $('#sektor').val('<?php echo $user->sektor; ?>').change();
     setTimeout(function(){
         $('#agensi_organisasi').val('<?php echo $user->agensi_organisasi; ?>').change();
-        console.log('agensasi: <?php echo $user->agensi_organisasi; ?>');
-    }, 750);
-    @if (Auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata']))
-        setTimeout(function(){
-            $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
-        }, 1000);
-    @endif
+    }, 2000);
+    setTimeout(function(){
+        $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
+    }, 3000);
+    
 });
 
 function isEmail(email) {

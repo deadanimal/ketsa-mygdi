@@ -32,6 +32,7 @@
     'metadata_create_date'=>'Tarikh Metadata Diterbitkan',
     'metadataPublisher'=>'PENERBIT METADATA',
     'organisation_name'=>'Nama Organisasi',
+    'bahagian_name'=>'Nama Bahagian',
     'name'=>'Nama',
     'telephone_office'=>'Telefon (Pejabat)',
     'email'=>'E-mel',
@@ -40,7 +41,7 @@
     'metadata_standard_version'=>'Versi Metadata Standard',
 
     'accord_2'=> 'MAKLUMAT PENGENALAN',
-    'title'=>'Tajuk',
+    'title'=>'TAJUK',
     'type_of_product'=>'Jenis Produk/Data/Maklumat Geospatial',
     'abstract'=>'Abstrak',
     'date'=>'Tarikh',

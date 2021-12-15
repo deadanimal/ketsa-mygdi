@@ -165,7 +165,7 @@ class DataAsasController extends Controller
 
     public function penilaian()
     {
-        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin'])) {
+        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
             $permohonan_list = MohonData::where(['dihantar' => 1])->orderBy('created_at', 'DESC')->get();
         } else {
             $permohonan_list = MohonData::with('users')
@@ -356,32 +356,55 @@ class DataAsasController extends Controller
             return redirect()->action('DataAsasController@surat_balasan', ['id' => $id])->with('warning', 'Sila Kemaskini Surat Balasan');
         } else {
 
-        ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
-            "pautan_data" => $request->pautan_data,
-            "tempoh_url" => $request->tempoh,
-            "total_harga" => $request->total_harga,
-        ]);
-
-        Mohondata::where(["id" => $request->permohonan_id])->update([
-            "status" => $request->status = 3,
-        ]);
-
-        foreach ($skdatas as $sk ) {
-            SenaraiKawasanData::where(["id" => $sk->id])->update([
-                "saiz_data" => $request->input('saiz_data_'.$sk->id),
+            ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
+                "pautan_data" => $request->pautan_data,
+                "tempoh_url" => $request->tempoh,
+                "total_harga" => $request->total_harga,
             ]);
 
-        }
+            Mohondata::where(["id" => $request->permohonan_id])->update([
+                "status" => $request->status = 3,
+            ]);
+
+            foreach ($skdatas as $sk ) {
+                SenaraiKawasanData::where(["id" => $sk->id])->update([
+                    "saiz_data" => $request->input('saiz_data_'.$sk->id),
+                ]);
+
+            }
+
+            //====attachement for email=========================================
+//            $permohonan = DB::table('users')
+//                    ->join('mohon_data','users.id','=','mohon_data.user_id')
+//                    ->where('mohon_data.id',$request->permohonan_id)
+//                    ->select('users.nric','users.alamat','mohon_data.date','mohon_data.id',DB::raw('count(*) as total'),DB::raw('users.name as username'))
+//                    ->groupBy('users.nric','users.name','users.alamat','mohon_data.date','mohon_data.id')
+//                    ->first();
+//            $user = User::where('nric',$permohonan->nric)->get()->first();
+//            if($user->hasRole('Pemohon Data')){
+//                $agensi_name = $user->agensi_organisasi;
+//            }else{
+//                $agensi_name = $user->agensiOrganisasi->name;
+//            }
+//            $surat = SuratBalasan::where('permohonan_id', $request->permohonan_id)->first();
+//            $pdf = PDF::loadView('pdfs.surat_balasan', compact('surat','permohonan','agensi_name'));
+//            $pdf->setPaper('A4', 'potrait');
+//            $file = $pdf->download()->getOriginalContent();
+//            Storage::put('public/name.pdf',$content); //this is working
+//            exit();
+            //==================================================================
 
             $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
-
+            
             //send email to pemohon data
             $to_name = $pemohon->users->name;
             $to_email = $pemohon->users->email;
+//            $to_email = 'farhan15959@gmail.com';
             $data = array('cat'=>'cat');
             Mail::send("mails.exmpl15", $data, function($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
                 $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+//                $message->attach($file);
             });
 
             $at = new AuditTrail();
@@ -390,7 +413,6 @@ class DataAsasController extends Controller
             $at->data = 'Update';
             $at->save();
 
-
             return redirect('/proses_data')->with('success', 'Data telah diproses');
         }
     }
@@ -398,7 +420,7 @@ class DataAsasController extends Controller
     public function mohon_data()
     {
         $user = User::where(["id" => Auth::user()->id])->get()->first();
-        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin'])) {
+        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
             $permohonan_list = MohonData::orderBy('created_at', 'DESC')->get();
         } else {
             $permohonan_list = MohonData::with('users')
@@ -902,7 +924,7 @@ class DataAsasController extends Controller
 
     public function kemaskini_permohonan(Request $request)
     {
-        if(Auth::user()->hasRole(['Pentadbir Data','Super Admin']))
+        if(Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi']))
         {
             DB::transaction(function () use ($request) {
                 //simpan status permohonan ini
@@ -1329,13 +1351,19 @@ class DataAsasController extends Controller
 
         $permohonan = DB::table('users')
                     ->join('mohon_data','users.id','=','mohon_data.user_id')
-                    ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+//                    ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
                     ->where('mohon_data.id',$request->permohonan_id)
-                    ->select('users.nric','users.alamat','mohon_data.date','mohon_data.id',DB::raw('count(*) as total'),DB::raw('users.name as username'),DB::raw('agensi_organisasi.name as agensi_name'))
-                    ->groupBy('users.nric','users.name','users.alamat','agensi_organisasi.name','mohon_data.date','mohon_data.id')
+                    ->select('users.nric','users.alamat','mohon_data.date','mohon_data.id',DB::raw('count(*) as total'),DB::raw('users.name as username'))
+                    ->groupBy('users.nric','users.name','users.alamat','mohon_data.date','mohon_data.id')
                     ->first();
+        $user = User::where('nric',$permohonan->nric)->get()->first();
+        if($user->hasRole('Pemohon Data')){
+            $agensi_name = $user->agensi_organisasi;
+        }else{
+            $agensi_name = $user->agensiOrganisasi->name;
+        }
         $surat = SuratBalasan::where('permohonan_id', $request->permohonan_id)->first();
-        $pdf = PDF::loadView('pdfs.surat_balasan', compact('surat','permohonan'));
+        $pdf = PDF::loadView('pdfs.surat_balasan', compact('surat','permohonan','agensi_name'));
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF

@@ -103,13 +103,13 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
-                                                <label class="form-control-label">Agensi / Organisasi</label><span class="text-warning">*</span>
+                                                <label class="form-control-label">Agensi / Organisasi / Institusi</label><span class="text-warning">*</span>
                                                 <select name="agensi_organisasi" id="agensi_organisasi_dropdown" class="form-control form-control-sm">
                                                     <option value="">Pilih...</option>
                                                     <?php
                                                     if (!empty($aos)) {
                                                         foreach ($aos as $ao) {
-                                                            ?><option value="<?php echo $ao->id; ?>"><?php echo $ao->name; ?></option><?php
+                                                            ?><option value="<?php echo $ao->id; ?>" data-name="<?php echo $ao->name; ?>"><?php echo $ao->name; ?></option><?php
                                                         }
                                                     }
                                                     ?>
@@ -118,6 +118,14 @@
                                                 @error('agensi_organisasi')
                                                 <div class="text-warning">{{ $message }}</div>
                                                 @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 divBahagian">
+                                            <div class="col-12">
+                                                <label class="form-control-label">Bahagian</label>
+                                                <select name="bahagian" id="bahagian" class="form-control form-control-sm">
+                                                    <option value="">Pilih...</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +176,7 @@
                                             <tr>
                                                 <th>Bil</th>
                                                 <th>Nama</th>
-                                                <th>Agensi</th>
+                                                <th>Agensi / Organisasi / Institusi</th>
                                                 <th>Peranan</th>
                                                 <th>Status</th>
                                                 <th>Tindakan</th>
@@ -220,7 +228,14 @@
                                                             data-target="#modal-butiran" data-userid="{{ $user->id }}"
                                                             class="butiran btn btn-sm btn-info mr-2"><i
                                                                 class="fas fa-eye"></i></button>
-                                                        <!--<button type="button" data-toggle="modal" data-target="#modalChangeStatus" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="btnChangeStatus btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>-->
+                                                        <?php
+                                                        if(Auth::user()->hasAnyRole('Super Admin','Pentadbir Aplikasi')){
+                                                            ?>
+                                                            <!--<button type="button" data-toggle="modal" data-target="#modal-kemaskini" data-userid="{{ $user->id }}" data-statusid="{{ $user->status }}" class="kemaskini btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>-->
+                                                            <button type="button" data-userid="{{ $user->id }}" class="kemaskini btn btn-sm btn-success mr-2"><i class="fas fa-edit"></i></button>
+                                                            <?php
+                                                        }
+                                                        ?>
                                                         <button type="button" data-userid="{{ $user->id }}"
                                                             class="btnDelete btn btn-sm btn-danger mr-2"><i
                                                                 class="fas fa-trash"></i></button>
@@ -264,6 +279,33 @@
             </div>
         </div>
     </div>
+    <?php /*
+    <div class="modal fade" id="modal-kemaskini">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Kemaskini Maklumat Pengguna</h4>
+                </div>
+                <form id='kemaskiniMaklumatPengguna' action='{{ url('simpan_kemaskini_superadmin') }}' method='POST'>
+                    @csrf
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card-body modal_user_detail_kemaskini">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between1">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="kemaskini_profil">Kemaskini</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    */ ?>
 
 <script>
     $('.btnStatusUser').change(function() {
@@ -289,6 +331,13 @@
     });
 
     $(function () {
+        $('.select2').select2();
+        
+        $(document).on('click','#kemaskini_profil',function(){
+            $('#kemaskiniMaklumatPengguna').submit();
+        });
+        
+        /*
         $(document).on('change','#peranan',function(){
             var per = $(this).val();
             if(per == "Pemohon Data"){
@@ -299,6 +348,7 @@
                 $('#agensi_organisasi_dropdown').prop('disabled',false).show();
             }
         });
+        */
 
         $('#agensi_organisasi_text').prop('disabled',true).hide();
 
@@ -338,7 +388,6 @@
         $(document).on("click", ".butiran", function() {
             // ajax get user details
             var user_id = $(this).data('userid');
-            console.log('USER_ID: '+user_id);
             $.ajax({
                 method: "POST",
                 url: "get_user_details",
@@ -350,6 +399,39 @@
                 $('.modal_user_detail').html(response);
             });
         });
+        $(document).on("click", ".kemaskini", function() {
+            var userid = $(this).data('userid');
+            window.location.replace("{{ url('kemaskini_profil_admin/') }}/"+userid);
+        });
+        /*
+        $(document).on("click", ".kemaskini", function() {
+            // ajax get user details
+            var user_id = $(this).data('userid');
+            $.ajax({
+                method: "POST",
+                url: "get_user_details_kemaskini",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "user_id": user_id
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                $('.modal_user_detail_kemaskini').html(data.html);
+                $('.thePeranan').select2({
+                    tags: true,
+                });
+                $(".thePeranan").on('select2:select',function () {
+                    var sels = $(".thePeranan").val();
+                    sels.forEach(function(item) {
+                        console.log(item);
+                        $(".thePeranan option[value='" + item + "']").prop("selected", true);
+                    });
+//                    $('#unit').val('21'); // Select the option with a value of '21'
+//                    $('#unit').trigger('change'); // Notify any JS components that the value changed
+                });
+            });
+        });
+        */
 
         $(document).on("click", ".btnChangeStatus", function() {
             var userid = $(this).data('userid');
@@ -401,6 +483,62 @@
                     alert("Pengguna berjaya dipadam.");
                     location.reload();
                 });
+            }
+        });
+        
+        $('#agensi_organisasi_dropdown').change(function() {
+            var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
+
+            $.ajax({
+                method: "POST",
+                url: "{{ url('get_bahagian') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "agensi_organisasi_name": agensi_organisasi_name,
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                if (data.error == '1') {
+                    alert(data.msg);
+                } else {
+                    $('#bahagian').html('');
+                    $('#bahagian').append('<option value="">Pilih...</option>');
+                    $.each(data.bhgns, function(index, value) {
+                        $('#bahagian').append('<option value="' + value.bahagian + '">' + value
+                            .bahagian + '</option>');
+                    });
+                }
+            });
+        });
+        
+        $('#sektor').change(function() {
+            $.ajax({
+                method: "POST",
+                url: "{{ url('get_agensi_organisasi_by_sektor') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "sektor": $(this).val(),
+                },
+            }).done(function(response) {
+                var data = jQuery.parseJSON(response);
+                $('#agensi_organisasi').html('');
+                $('#agensi_organisasi').append('<option value="">Pilih...</option>');
+                $.each(data.aos, function(index,value) {
+                    $('#agensi_organisasi').append('<option value="'+value.id+'" data-name="'+value.name+'">'+value.name+'</option>');
+                });
+
+                $('#bahagian').html('');
+                $('#bahagian').append('<option value="">Pilih...</option>');
+            });
+        });
+        
+        $('#peranan').change(function() {
+            var per = $(this).val();
+            
+            if(per == "Pemohon Data"){
+                $(".divBahagian").hide();
+            }else{
+                $(".divBahagian").show();
             }
         });
 

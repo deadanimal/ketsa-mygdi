@@ -23,6 +23,7 @@ Route::post('/lihat_xml_nologin', 'MetadataController@show_xml_nologin');
 Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
 Route::get('/downloadMetadataPdf/{id}', 'MetadataController@downloadMetadataPdf');
 Route::get('/downloadMetadataXml/{id}/{name}', 'MetadataController@downloadMetadataXml');
+Route::get('/downloadMetadataExcel/{id}', 'MetadataController@downloadMetadataExcel');
 
 Route::post('/loginf', 'AuthController@authenticate');
 //Route::post('/registerf','RegisterController@create');
@@ -129,7 +130,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/store_metadata', 'MetadataController@store');
     Route::post('/muat_naik_xml', 'MetadataController@store_xml');
 
-    Route::get('/mygeo_senarai_metadata', 'MetadataController@index');
+    Route::any('/mygeo_senarai_metadata', 'MetadataController@index');
     Route::post('/carian_metadata', 'MetadataController@search');
 
     Route::get('/mygeo_kemaskini_elemen_metadata','MetadataController@kemaskini_elemen_metadata');
@@ -207,8 +208,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_proses_data','DataAsasController@update_proses_data');
 
     Route::get('/kemaskini_profil','UserController@edit');
+    Route::get('/kemaskini_profil_admin/{id}','UserController@edit_admin');
     Route::post('/simpan_kemaskini_profil','UserController@update_profile');
+    Route::post('/simpan_kemaskini_admin','UserController@update_profile_admin');
     Route::post('/simpan_kemaskini_gambarprofil','UserController@update_gambarprofile');
+    Route::post('/simpan_kemaskini_gambarprofil_admin','UserController@update_gambarprofile_admin');
     Route::post('/simpan_kemaskini_password','UserController@update_password');
     Route::post('/tambahPenggunaBaru','UserController@tambahPenggunaBaru');
 
@@ -225,8 +229,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/tukar_peranan','UserController@tukar_peranan');
 
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-
+    
+    Route::get('/download_laporan_perincian_metadata','LaporanDashboardController@laporan_perincian_metadata');
+    Route::get('/download_laporan_bil_metadata_terbit_ikut_agensi','LaporanDashboardController@laporan_bil_metadata_terbit_ikut_agensi');
+    Route::get('/download_laporan_bil_mohon_lulus','LaporanDashboardController@laporan_bil_mohon_lulus');
+    Route::get('/download_laporan_bil_mohon_ikut_kategori','LaporanDashboardController@laporan_bil_mohon_ikut_kategori');
+    Route::get('/download_laporan_stat_mohon_ikut_tahun','LaporanDashboardController@laporan_stat_mohon_ikut_tahun');
 });
 
 Route::get('/send-mail', function () {
@@ -236,6 +244,7 @@ Route::get('/send-mail', function () {
 
 Route::post('get_roles','RoleController@get_roles');
 Route::post('get_user_details','UserController@get_user_details');
+Route::post('get_user_details_kemaskini','UserController@get_user_details_kemaskini');
 Route::post('get_custom_input_details','MetadataController@get_custom_input_details');
 Route::post('user_sahkan','UserController@user_sahkan');
 Route::post('user_pengesahan_ditolak','UserController@user_pengesahan_ditolak');
@@ -264,6 +273,8 @@ Route::post('deleteElemenMetadata','MetadataController@deleteElemenMetadata');
 Route::post('deleteCustomMetadataInput','MetadataController@deleteCustomMetadataInput');
 Route::post('findMetadataByName','MetadataController@findMetadataByName');
 Route::post('getKelasKongsis','DataAsasController@getKelasKongsis');
+Route::post('/getSenaraiMetadata', 'MetadataController@getSenaraiMetadata');
+Route::get('/download_file_contohjenismetadata/{id}', 'MetadataController@download_file_contohjenismetadata');
 
 Auth::routes();
 

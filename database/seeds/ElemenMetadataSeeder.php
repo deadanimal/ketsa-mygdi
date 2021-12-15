@@ -98,6 +98,7 @@ class ElemenMetadataSeeder extends Seeder
             ElemenMetadata::create(["label"=>"Type of Coupling Dataset","tajuk"=>"2","input_name"=>"c2_typeOfCouplingDataset","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Name","tajuk"=>"2","input_name"=>"c2_contact_name","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Organisation Name","tajuk"=>"2","input_name"=>"c2_contact_agensiorganisasi","status"=>"1","kategori"=>$r]);
+            ElemenMetadata::create(["label"=>"Bahagian Name","tajuk"=>"2","input_name"=>"c2_contact_bahagian","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Position Name","tajuk"=>"2","input_name"=>"c2_position_name","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Address","tajuk"=>"2","input_name"=>"c2_contact_address1","status"=>"1","kategori"=>$r]);
             ElemenMetadata::create(["label"=>"Address","tajuk"=>"2","input_name"=>"c2_contact_address2","status"=>"1","kategori"=>$r]);

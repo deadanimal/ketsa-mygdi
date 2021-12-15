@@ -444,6 +444,7 @@
                 $('#content_info_dropdown').show();
                 $('.lblContentInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').show();
             } else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').show();
@@ -467,6 +468,7 @@
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').hide();
             } else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -490,6 +492,7 @@
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             } else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -513,6 +516,7 @@
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }
 
             if (kategori.toLowerCase() == "dataset" || kategori.toLowerCase() == "services") {

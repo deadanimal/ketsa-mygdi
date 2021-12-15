@@ -12,8 +12,8 @@
                 @if($elemenMetadata['c2_metadataName']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3">
-                        <label class="form-control-label mr-4 lblMetadataName" for="c2_metadataName" data-toggle="tooltip" title="Nama metadata">
-                            <?php echo __('lang.title'); ?>
+                        <label class="form-control-label mr-4 lblMetadataNameBekap" for="c2_metadataName" data-toggle="tooltip" title="Nama metadata">
+                            <?php echo __('lang.title'); ?><span style="color:red;">*</span>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">
@@ -401,6 +401,22 @@
                 </div>
                 @endif
 
+                @if($elemenMetadata['c2_contact_bahagian']->status == '1')
+                <div class="row mb-2">
+                    <div class="col-3 pl-5">
+                        <label class="form-control-label mr-4" for="c2_contact_bahagian" data-toggle="tooltip" title="Nama bahagian yang bertanggungjawab terhadap maklumat geospatial">
+                            <?php echo __('lang.bahagian_name'); ?><span class="text-warning">*</span>
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-7">
+                        <input type="text" name="c2_contact_bahagian" id="c2_contact_bahagian" class="form-control form-control-sm ml-3" value="{{ (isset($pengesahs->bahagian) ? $pengesahs->bahagian:"") }}" >
+                        @error('c2_contact_bahagian')
+                            <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                @endif
+
                 @if($elemenMetadata['c2_position_name']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
@@ -444,13 +460,13 @@
                         <div class="row ml-3">
                             @if($elemenMetadata['c2_postal_code']->status == '1')
                             <div class="col-3 px-0">
-                                <label class="form-control-label divPostalCode" for="c2_contact_city" data-toggle="tooltip" title="Poskod"><?php echo __('lang.postal_code'); ?>
+                                <label class="form-control-label divPostalCode" for="c2_postal_code" data-toggle="tooltip" title="Poskod"><?php echo __('lang.postal_code'); ?>
                                     :</label>
                             </div>
                             <div class="col-3 px-0">
                                 <input type="text" name="c2_postal_code" id="c2_postal_code"
                                     class="form-control form-control-sm mb-2 divPostalCode"
-                                    value="{{ old('c2_postal_code') }}">
+                                    value="{{ (null !== old('c2_postal_code') ? old('c2_postal_code'):$pengesahs->postcode) }}">
                             </div>
                             @endif
                             @if($elemenMetadata['c2_contact_city']->status == '1')
@@ -461,7 +477,7 @@
                             <div class="col-3 px-0">
                                 <input type="text" name="c2_contact_city" id="c2_contact_city"
                                     class="form-control form-control-sm mb-2 divCity"
-                                    value="{{ old('c2_contact_city') }}">
+                                    value="{{ (null !== old('c2_contact_city') ? old('c2_contact_city'):$pengesahs->city) }}">
                             </div>
                             @endif
                         </div>
@@ -476,19 +492,22 @@
                                         class="text-warning">*</span> :</label>
                             </div>
                             <div class="col-3 px-0">
-                                <select name="c2_contact_state" id="c2_contact_state"
-                                    class="form-control form-control-sm">
-                                    <option selected disabled>Pilih...</option>
+                                <select name="c2_contact_state" id="c2_contact_state"class="form-control form-control-sm">
+                                    <option disabled>Pilih...</option>
                                     <?php
                                     if (count($states) > 0) {
                                         foreach ($states as $st) {
-                                            ?><option value="<?php echo $st->name; ?>"
-                                        {{ $st->name == old('c2_contact_state') ? 'selected' : '' }}>
-                                        <?php echo $st->name; ?>
-                                    </option><?php
+                                            $selected = "";
+                                            if(null !== old('c2_contact_state') && !empty(old('c2_contact_state')) && $st->name == old('c2_contact_state')){
+                                                $selected = "selected";
+                                            }elseif($st->name == $pengesahs->state){
+                                                $selected = "selected";
+                                            }
+                                            ?>
+                                            <option value="<?php echo $st->name; ?>" <?php echo $selected; ?>><?php echo $st->name; ?></option><?php
                                         }
                                     }
-                                                                                                                                                            ?>
+                                    ?>
                                 </select>
                                 @error('c2_contact_state')
                                     <div class="text-error">{{ $message }}</div>
@@ -501,17 +520,22 @@
                                     <?php echo __('lang.country'); ?> :</label>
                             </div>
                             <div class="col-3 px-0">
-                                <select name="c2_contact_country" id="c2_contact_country"
-                                    class="form-control form-control-sm">
-                                    <option selected disabled>Pilih...</option>
+                                <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm">
+                                    <option disabled>Pilih...</option>
                                     <?php
-                                if (count($countries) > 0) {
-                                    foreach ($countries as $country) {
-                                        ?><option value="<?php echo $country->id; ?>"
-                                        {{ $country->id == old('c2_contact_country') ? 'selected' : '' }}>
-                                        <?php echo $country->name; ?></option><?php
+                                    if (count($countries) > 0) {
+                                        foreach ($countries as $country) {
+                                            $selected = "";
+                                            if(null !== old('c2_contact_country') && !empty(old('c2_contact_country')) && $country->name == old('c2_contact_country')){
+                                                $selected = "selected";
+                                            }elseif($st->$country == $pengesahs->country){
+                                                $selected = "selected";
+                                            }
+                                            ?>
+                                            <option value="<?php echo $country->name; ?>" <?php echo $selected; ?>><?php echo $country->name; ?></option><?php
+                                        }
                                     }
-                                }                                                                                                                ?>
+                                    ?>
                                 </select>
                             </div>
                             @endif
@@ -647,8 +671,8 @@
 <script>
     $(document).ready(function() {
         $('#c2_product_type').val("{{ old('c2_product_type') }}").trigger('change');
-        $('#c2_contact_state').val("{{ old('c2_contact_state') }}").trigger('change');
-        $('#c2_contact_country').val("{{ old('c2_contact_country') }}").trigger('change');
+//        $('#c2_contact_state').val("{{ old('c2_contact_state') }}").trigger('change');
+//        $('#c2_contact_country').val("{{ old('c2_contact_country') }}").trigger('change');
         $('#c2_metadataDateType').val("{{ old('c2_metadataDateType') }}").trigger('change');
     });
 </script>

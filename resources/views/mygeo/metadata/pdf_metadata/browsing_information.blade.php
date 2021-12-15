@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary div_c10" id="div_c10">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse10">
@@ -14,6 +15,7 @@
                 $flag1 = 1;
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString != "") {
                     $flag1 *= 0;
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -31,6 +33,7 @@
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString != "") {
                     $flag1 *= 0;
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -48,6 +51,7 @@
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != "") {
                     $flag1 *= 0;
+                    $flag *= 0;
                     ?>
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
@@ -71,6 +75,7 @@
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
                     foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
                         if(trim($keyword->CharacterString) != ""){
+                            $flag *= 0;
                             if($counter == 0){
                                 ?>
                                 <div class="row mb-2">
@@ -133,3 +138,15 @@
         ?>
     });
 </script>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c10').hide();
+        });
+    </script>
+    <?php
+}
+?>

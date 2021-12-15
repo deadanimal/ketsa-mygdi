@@ -12,6 +12,7 @@ use App\MetadataGeo;
 use App\User;
 use App\MCategory;
 use Auth;
+use PhpOffice\PhpWord\PhpWord;
 
 class LaporanDashboardController extends Controller
 {
@@ -89,7 +90,376 @@ class LaporanDashboardController extends Controller
                                 ->get();
         // dd($permohonan_kategori);
         $permohonan_kategori_count = count($permohonan_kategori);
+        
         return view('mygeo.laporan_metadata', compact('metadatas','categories','permohonan_kategori','permohonan_lulus','permohonan_perincian'));
+    }
+    
+    public function laporan_perincian_metadata(){
+        //initialize
+        $wordTest = new PhpWord();
+ 
+        //add section
+        $newSection = $wordTest->addSection();
+        
+        //add text to section
+        $newSection->addText("Laporan Perincian Metadata",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
+        
+        //set table style
+        $tableStyle = array(
+            'borderColor' => '006699',
+            'borderSize'  => 6,
+            'cellMargin'  => 50
+        );
+        //set first row style
+        $firstRowStyle = array('bgColor' => '66BBFF');
+        //add styles to the document (at this point it is not yet applied. this is similar to linking css)
+        $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
+        
+        //add table to document and apply style created in previous lines
+        $table = $newSection->addTable('myTable');
+            $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+            $counter = 0;
+            foreach ($metadatasdb as $met) {
+                $ftestxml2 = <<<XML
+                        $met->data
+                        XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+                $xml2 = simplexml_load_string($ftestxml2);
+                
+                $counter++;
+                $table->addRow();
+                //add cell
+                $table->addCell(900)->addText($counter);
+                //add cell
+                $title = "";
+                if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                    $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                }
+                $table->addCell(5000)->addText(htmlspecialchars($title));
+                //add cell
+                $status = "";
+                if($met->is_draf == "yes"){
+                    $status = "Draf";
+                }else{
+                    if($met->disahkan == "0"){
+                        $status = "Perlu Pengesahan";
+                    }elseif($met->disahkan == "yes"){
+                        $status = "Diterbitkan";
+                    }elseif($met->disahkan == "yes"){
+                        $status = "Perlu Pembetulan";
+                    }
+                }
+                $table->addCell(2500)->addText($status);
+                //add cell
+                $table->addCell(1750)->addText(date('d/m/Y',strtotime($met->changedate)));
+            }
+        $objectWriter = \PhpOffice\PhpWord\IOFactory::createWriter($wordTest, 'Word2007');
+        try {
+            $objectWriter->save(storage_path('Laporan_Perincian_Metadata.docx'));
+        } catch (Exception $e) {
+        }
+
+        return response()->download(storage_path('Laporan_Perincian_Metadata.docx'));
+    }
+    public function laporan_bil_metadata_terbit_ikut_agensi(){
+        //initialize
+        $wordTest = new PhpWord();
+ 
+        //add section
+        $newSection = $wordTest->addSection();
+        
+        //add text to section
+        $newSection->addText("Bilangan Keseluruhan Metadata Diterbitkan Mengikut Agensi",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
+        
+        //set table style
+        $tableStyle = array(
+            'borderColor' => '006699',
+            'borderSize'  => 6,
+            'cellMargin'  => 50
+        );
+        //set first row style
+        $firstRowStyle = array('bgColor' => '66BBFF');
+        //add styles to the document (at this point it is not yet applied. this is similar to linking css)
+        $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
+        
+        //add table to document and apply style created in previous lines
+        $table = $newSection->addTable('myTable');
+            $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+            $counter = 0;
+            foreach ($metadatasdb as $met) {
+                if($met->disahkan == "yes"){
+                    $ftestxml2 = <<<XML
+                            $met->data
+                            XML;
+                    $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                    $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                    $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                    $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+                    $xml2 = simplexml_load_string($ftestxml2);
+                    $metadatas[$met->id] = [$xml2, $met];
+
+                    $counter++;
+                    $table->addRow();
+                    //add cell
+                    $table->addCell(900)->addText($counter);
+                    //add cell
+                    $title = "";
+                    if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                        $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                    }
+                    $table->addCell(3500)->addText(htmlspecialchars($title));
+                    //add cell
+                    $agency = "";
+                    if(isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                        $agency = $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString;
+                    }
+                    $table->addCell(2500)->addText(htmlspecialchars($agency));
+                    //add cell
+                    $publisher = "";
+                    if(isset($xml2->contact->CI_ResponsibleParty->individualName->CharacterString) && trim($xml2->contact->CI_ResponsibleParty->individualName->CharacterString) != ""){
+                        $publisher = $xml2->contact->CI_ResponsibleParty->individualName->CharacterString;
+                    }
+                    $table->addCell(2500)->addText(htmlspecialchars($publisher));
+                    //add cell
+                    $category = "";
+                    if (isset($xml2->hierarchyLevel->MD_ScopeCode) && $xml2->hierarchyLevel->MD_ScopeCode != "") {
+                        $category = trim($xml2->hierarchyLevel->MD_ScopeCode);
+                    }
+                    $table->addCell(1800)->addText(htmlspecialchars($category));
+                    //add cell
+                    $table->addCell(1750)->addText(date('d/m/Y',strtotime($met->changedate)));  
+                }
+            }
+        $objectWriter = \PhpOffice\PhpWord\IOFactory::createWriter($wordTest, 'Word2007');
+        try {
+            $objectWriter->save(storage_path('Bilangan_Keseluruhan_Metadata_Diterbitkan_Mengikut_Agensi.docx'));
+        } catch (Exception $e) {
+        }
+
+        return response()->download(storage_path('Bilangan_Keseluruhan_Metadata_Diterbitkan_Mengikut_Agensi.docx'));
+    }
+    public function laporan_bil_mohon_lulus(){
+        //initialize
+        $wordTest = new PhpWord();
+ 
+        //add section
+        $newSection = $wordTest->addSection();
+        
+        //add text to section
+        $newSection->addText("Bilangan Metadata Yang Belum Diterbitkan",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
+        
+        //set table style
+        $tableStyle = array(
+            'borderColor' => '006699',
+            'borderSize'  => 6,
+            'cellMargin'  => 50
+        );
+        //set first row style
+        $firstRowStyle = array('bgColor' => '66BBFF');
+        //add styles to the document (at this point it is not yet applied. this is similar to linking css)
+        $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
+        
+        //add table to document and apply style created in previous lines
+        $table = $newSection->addTable('myTable');
+            $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+            $counter = 0;
+            foreach ($metadatasdb as $met) {
+                if($met->disahkan == "no" || $met->disahkan == "0" || $met->is_draf == "yes"){
+                    $ftestxml2 = <<<XML
+                            $met->data
+                            XML;
+                    $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                    $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                    $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                    $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+                    $xml2 = simplexml_load_string($ftestxml2);
+
+                    $counter++;
+                    $table->addRow();
+                    //add cell
+                    $table->addCell(900)->addText($counter);
+                    //add cell
+                    $title = "";
+                    if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                        $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                    }
+                    $table->addCell(5000)->addText(htmlspecialchars($title));
+                    //add cell
+                    $agency = "";
+                    if(isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                        $agency = $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString;
+                    }
+                    $table->addCell(2500)->addText($agency);
+                    //add cell
+                    $category = "";
+                    if (isset($xml2->hierarchyLevel->MD_ScopeCode) && $xml2->hierarchyLevel->MD_ScopeCode != "") {
+                        $category = trim($xml2->hierarchyLevel->MD_ScopeCode);
+                    }
+                    $table->addCell(2500)->addText($category);
+                    //add cell
+                    $table->addCell(1750)->addText(date('d/m/Y',strtotime($met->changedate)));
+                }
+            }
+        $objectWriter = \PhpOffice\PhpWord\IOFactory::createWriter($wordTest, 'Word2007');
+        try {
+            $objectWriter->save(storage_path('Bilangan_Metadata_Yang_Belum_Diterbitkan.docx'));
+        } catch (Exception $e) {
+        }
+
+        return response()->download(storage_path('Bilangan_Metadata_Yang_Belum_Diterbitkan.docx'));
+    }
+    public function laporan_bil_mohon_ikut_kategori(){
+        //initialize
+        $wordTest = new PhpWord();
+ 
+        //add section
+        $newSection = $wordTest->addSection();
+        
+        //add text to section
+        $newSection->addText("Bilangan Metadata Mengikut Kategori",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
+        
+        //set table style
+        $tableStyle = array(
+            'borderColor' => '006699',
+            'borderSize'  => 6,
+            'cellMargin'  => 50
+        );
+        //set first row style
+        $firstRowStyle = array('bgColor' => '66BBFF');
+        //add styles to the document (at this point it is not yet applied. this is similar to linking css)
+        $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
+        
+        //add table to document and apply style created in previous lines
+        $table = $newSection->addTable('myTable');
+            $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+            $counter = 0;
+            foreach ($metadatasdb as $met) {
+                $ftestxml2 = <<<XML
+                        $met->data
+                        XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+                $xml2 = simplexml_load_string($ftestxml2);
+                
+                $counter++;
+                $table->addRow();
+                //add cell
+                $table->addCell(900)->addText($counter);
+                //add cell
+                $title = "";
+                if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                    $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                }
+                $table->addCell(4000)->addText(htmlspecialchars($title));
+                //add cell
+                $agency = "";
+                if(isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                    $agency = $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString;
+                }
+                $table->addCell(2500)->addText(htmlspecialchars($agency));
+                //add cell
+                $status = "";
+                if($met->is_draf == "yes"){
+                    $status = "Draf";
+                }else{
+                    if($met->disahkan == "0"){
+                        $status = "Perlu Pengesahan";
+                    }elseif($met->disahkan == "yes"){
+                        $status = "Diterbitkan";
+                    }elseif($met->disahkan == "yes"){
+                        $status = "Perlu Pembetulan";
+                    }
+                }
+                $table->addCell(2500)->addText($status);
+                //add cell
+                $category = "";
+                if (isset($xml2->hierarchyLevel->MD_ScopeCode) && $xml2->hierarchyLevel->MD_ScopeCode != "") {
+                    $category = trim($xml2->hierarchyLevel->MD_ScopeCode);
+                }
+                $table->addCell(2500)->addText(htmlspecialchars($category));
+            }
+        $objectWriter = \PhpOffice\PhpWord\IOFactory::createWriter($wordTest, 'Word2007');
+        try {
+            $objectWriter->save(storage_path('Bilangan_Metadata_Mengikut_Kategori.docx'));
+        } catch (Exception $e) {
+        }
+
+        return response()->download(storage_path('Bilangan_Metadata_Mengikut_Kategori.docx'));
+    }
+    public function laporan_stat_mohon_ikut_tahun(){
+        //initialize
+        $wordTest = new \PhpOffice\PhpWord\PhpWord();
+ 
+        //add section
+        $newSection = $wordTest->addSection();
+        
+        //add text to section
+        $newSection->addText("Statistik Penerbitan Metadata Mengikut Tahun/Bulan",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
+        
+        //set table style
+        $tableStyle = array(
+            'borderColor' => '006699',
+            'borderSize'  => 6,
+            'cellMargin'  => 50
+        );
+        //set first row style
+        $firstRowStyle = array('bgColor' => '66BBFF');
+        //add styles to the document (at this point it is not yet applied. this is similar to linking css)
+        $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
+        
+        //add table to document and apply style created in previous lines
+        $table = $newSection->addTable('myTable');
+            $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+            $counter = 0;
+            foreach ($metadatasdb as $met) {
+                if($met->disahkan == "yes"){
+                    $ftestxml2 = <<<XML
+                            $met->data
+                            XML;
+                    $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                    $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                    $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                    $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+                    $xml2 = simplexml_load_string($ftestxml2);
+                    $metadatas[$met->id] = [$xml2, $met];
+
+                    $counter++;
+                    $table->addRow();
+                    //add cell
+                    $table->addCell(900)->addText($counter);
+                    //add cell
+                    $title = "";
+                    if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                        $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                    }
+                    $table->addCell(4000)->addText(htmlspecialchars($title));
+                    //add cell
+                    $agency = "";
+                    if(isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                        $agency = $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString;
+                    }
+                    $table->addCell(5000)->addText(htmlspecialchars($agency));
+                    //add cell
+                    $table->addCell(2500)->addText("TBA");
+                }
+            }
+        $objectWriter = \PhpOffice\PhpWord\IOFactory::createWriter($wordTest, 'Word2007');
+        try {
+            $objectWriter->save(storage_path('Statistik_Penerbitan_Metadata_Mengikut_Tahun_Bulan.docx'));
+        } catch (Exception $e) {
+        }
+
+        return response()->download(storage_path('Statistik_Penerbitan_Metadata_Mengikut_Tahun_Bulan.docx'));
     }
 
     public function index_mygeo_dashboard(){

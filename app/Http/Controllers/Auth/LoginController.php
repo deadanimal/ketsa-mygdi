@@ -9,6 +9,8 @@ use App\AuditTrail;
 use App\PortalTetapan;
 use Auth;
 use App\Visitors;
+use App\States;
+use App\Countries;
 
 class LoginController extends Controller
 {
@@ -45,10 +47,12 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $portal = PortalTetapan::get()->first();
+        $states = States::where(['country' => 1])->get()->all();
+        $countries = Countries::where(['id' => 1])->get()->all();
 //        $address = $_SERVER['REMOTE_ADDR'];
 //          Visitors::firstOrCreate(['address'=>$address]);
 //          $total_visitors = Visitors::get();
-        return view('auth.login', compact('portal'));
+        return view('auth.login', compact('portal','states','countries'));
     }
 
     public function logout(){

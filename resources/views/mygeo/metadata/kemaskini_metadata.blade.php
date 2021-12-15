@@ -157,7 +157,7 @@
                             <input type="hidden" name="newStatus" value="0">
                             @endif
                             <input type="hidden" name="metadata_id" value="{{ $metadataSearched->id }}">
-                            @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata','Super Admin']))
+                            @if(auth::user()->hasRole(['Penerbit Metadata','Pengesah Metadata','Super Admin','Pentadbir Aplikasi']))
                             @include('mygeo.metadata.modal_metadata.modal_catatan')
                             @endif
                             <div class="card-body">
@@ -254,15 +254,19 @@
                                     @endif
                                 </div>
                                 <div id="div_action_buttons">
-                                    @if(auth::user()->hasRole(['Penerbit Metadata','Super Admin']))
+                                    @if(auth::user()->hasRole(['Penerbit Metadata']))
                                     <input type="button" data-name="draf" value="Simpan" class="btn btn-primary btnSubmit">
                                     <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSubmit">
                                     @endif
-                                    @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
+                                    @if(auth::user()->hasRole(['Pengesah Metadata','Super Admin','Pentadbir Aplikasi']))
+                                    <?php /* 
                                     <input type="button" data-name="save" value="Simpan" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
                                     <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
+                                    */ //SMBG SINI - the 2 buttons below randomly disappear apparently triggered by scrolling toward the top of the page ?>
+                                    <input type="button" data-name="save" value="Tolak" class="btn btn-danger btnSubmit btn_hantar" style="display:none;">
+                                    <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
                                     @endif
-
+                                    
                                     <input type="hidden" name="submitAction" id="submitAction" value="save">
                                 </div>
                             </div>
@@ -280,6 +284,10 @@
     var pengesahs = [];
 
     $(document).ready(function () {
+        $(document).on('click','.btn_file_contohjenismetadata',function(){
+            window.open($(this).data('href'), '_blank');
+        });
+        
         $(document).on('change','#c1_content_info',function(){
             var cat = $('#kategori').val();
             if(cat == "Dataset" && $(this).val() == "Application"){
@@ -382,7 +390,7 @@
         ?>
 
         <?php
-        if(auth::user()->hasRole(['Pengesah Metadata','Super Admin'])){
+        if(auth::user()->hasRole(['Pengesah Metadata','Super Admin','Pentadbir Aplikasi'])){
             ?>
             $(document).on('focusout','.catatan',function(){
                 if($(this).val().trim() != ""){
@@ -465,12 +473,12 @@
                                     $('#c2_saveAsNew').val('no');
                                 }
                             }
-
-                            if($(this).data('name') == 'save'){
+                            
+                            if(btnSubmit.data('name') == 'save'){
                                 if(confirm('Anda pasti untuk menghantar metadata?')){
                                     $('#form_metadata').submit();
                                 }
-                            }else if($(this).data('name') == 'draf'){
+                            }else if(btnSubmit.data('name') == 'draf'){
                                 if(confirm('Anda pasti untuk menyimpan metadata?')){
                                     $('#form_metadata').submit();
                                 }
@@ -560,6 +568,7 @@
                 $('.lblContentInfo').hide();
                 $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').show();
             }else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').show();
@@ -583,6 +592,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').hide();
             }else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -606,6 +616,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -629,6 +640,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }
 
             <?php
@@ -672,6 +684,7 @@
                 $('.lblContentInfo').hide();
                 $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').show();
             }else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').show();
@@ -695,6 +708,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#div_contohJenisMetadata').hide();
             }else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -718,6 +732,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
                 $('.optContentInfo_services').hide();
@@ -741,6 +756,7 @@
                 $('#c1_content_info').hide();
                 $('.divMaintenanceInfo').show();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#div_contohJenisMetadata').show();
             }
 
             <?php
@@ -832,7 +848,7 @@
 <?php
 if (!is_null(old('kategori'))) {
     ?>
-            $("#kategori").val("{{old('kategori')}}").trigger('change');
+            //$("#kategori").val("{{old('kategori')}}").trigger('change');
     <?php
 }
 ?>
@@ -864,10 +880,33 @@ if (!is_null(old('kategori'))) {
 </script>
 
 <?php
-$westBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal : "");
-$eastBoundLongitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal : "");
-$southBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal : "");
-$northBoundLatitude = (isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal) ? $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal : "");
+$westBoundLongitude = "";
+if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal)){
+    $westBoundLongitude = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal;
+}elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal)){
+    $westBoundLongitude = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->westBoundLongitude->Decimal;
+}
+
+$eastBoundLongitude = "";
+if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal)){
+    $eastBoundLongitude = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal;
+}elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal)){
+    $eastBoundLongitude = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->eastBoundLongitude->Decimal;
+}
+
+$southBoundLatitude = "";
+if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal)){
+    $southBoundLatitude = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal;
+}elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal)){
+    $southBoundLatitude = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->southBoundLatitude->Decimal;
+}
+
+$northBoundLatitude = "";
+if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal)){
+    $northBoundLatitude = $metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal;
+}elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal)){
+    $northBoundLatitude = $metadataxml->identificationInfo->SV_ServiceIdentification->extent->EX_Extent->geographicElement->EX_GeographicBoundingBox->northBoundLatitude->Decimal;
+}
 ?>
 
 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js'></script>

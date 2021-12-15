@@ -6,7 +6,7 @@
             </a>
         </h4>
     </div>
-    <div id="collapse12" class="panel-collapse collapse in " data-parent="#div_c12">
+    <div id="collapse12" class="panel-collapse collapse in" data-parent="#div_c12">
         <div class="card-body">
             <div class="acard-body opacity-8">
                 @if($elemenMetadata['c12_dataset_type']->status == '1')

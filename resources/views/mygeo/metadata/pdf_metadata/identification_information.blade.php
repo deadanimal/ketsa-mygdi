@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary div_c2" id="div_c2">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse2">
@@ -11,6 +12,7 @@
             <div class="mt-2 mb-4 pl-lg-3">
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3">
@@ -35,6 +37,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3">
@@ -52,6 +55,7 @@
                 <?php
                 $abstract = "";
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3">
@@ -68,6 +72,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divMetadataDate">
                         <div class="col-3">
@@ -84,6 +89,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divMetadataDateType">
                         <div class="col-3">
@@ -100,6 +106,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divMetadataStatus">
                         <div class="col-3">
@@ -116,6 +123,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->typeOfServices->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divTypeOfServices">
                         <div class="col-3">
@@ -132,6 +140,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->containsOperations->SV_OperationMetadata->operationName->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divOperationName">
                         <div class="col-3">
@@ -147,7 +156,9 @@
                 }
                 ?>
                 <?php
+                /*
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divServiceUrl">
                         <div class="col-3">
@@ -161,9 +172,11 @@
                     </div>
                     <?php
                 }
+                */
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType) && $metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divTypeOfCouplingDataset">
                         <div class="col-3">
@@ -183,6 +196,7 @@
             <div class="my-2 pl-lg-3">
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->individualName->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -209,6 +223,7 @@
                 </div>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->organisationName->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -224,7 +239,25 @@
                 }
                 ?>
                 <?php
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString != "") {
+                    $flag *= 0;
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c2_metadataName">
+                                Bahagian
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-7">
+                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->bahagianName->CharacterString; ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->deliveryPoint->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -241,6 +274,7 @@
                 ?>
                 <?php
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->postalCode->CharacterString != ""){
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divPostalCode">
                         <div class="col-3 pl-5">
@@ -257,6 +291,7 @@
                 ?>
                 <?php
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->city->CharacterString != ""){
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divCity">
                         <div class="col-3 pl-5">
@@ -273,6 +308,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divCity">
                         <div class="col-3 pl-5">
@@ -289,6 +325,7 @@
                 ?>
                 <?php
                 if(isset($countries->name) && $countries->name != ""){
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2 divCity">
                         <div class="col-3 pl-5">
@@ -305,6 +342,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                             <div class="col-3 pl-5">
@@ -321,6 +359,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->facsimile->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -337,6 +376,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-2">
                         <div class="col-3 pl-5">
@@ -353,6 +393,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->onlineResource->CI_OnlineResource->linkage->URL != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
@@ -369,6 +410,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode != "") {
+                    $flag *= 0;
                     ?>
                     <div class="row mb-4">
                         <div class="col-3 pl-5">
@@ -387,3 +429,15 @@
         </div>
     </div>
 </div>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c2').hide();
+        });
+    </script>
+        <?php
+}
+?>

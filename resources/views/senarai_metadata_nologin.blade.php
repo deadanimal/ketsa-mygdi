@@ -174,6 +174,11 @@ input[type=submit] {
                                                 <option value="Offline Data" {{ (isset($params['content_type']) && $params['content_type'] == 'Offline Data' ? 'selected':'') }}>Offline Data</option>
                                                 <option value="Static Map Images" {{ (isset($params['content_type']) && $params['content_type'] == 'Static Map Images' ? 'selected':'') }}>Static Map Images</option>
                                                 <option value="Other Documents" {{ (isset($params['content_type']) && $params['content_type'] == 'Other Documents' ? 'selected':'') }}>Other Documents</option>
+                                                <option value="Live Data and Maps" {{ (isset($params['content_type']) && $params['content_type'] == 'Live Data and Maps' ? 'selected':'') }}>Live Data and Maps</option>
+
+                                                <option value="Gridded" {{ (isset($params['content_type']) && $params['content_type'] == 'Gridded' ? 'selected':'') }}>Gridded</option>
+
+                                                <option value="Imagery" {{ (isset($params['content_type']) && $params['content_type'] == 'Imagery' ? 'selected':'') }}>Imagery</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -255,8 +260,10 @@ input[type=submit] {
                                                                 ?>
                                                                 <?php
                                                                 $abstract = "";
-                                                                if(isset($val->identificationInfo->SV_ServiceIdentification->abstract) && $val->identificationInfo->SV_ServiceIdentification->abstract != ""){
-                                                                    $abstract = trim($val->identificationInfo->SV_ServiceIdentification->abstract);
+                                                                if(isset($val->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $val->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != ""){
+                                                                    $abstract = trim($val->identificationInfo->SV_ServiceIdentification->abstract->CharacterString);
+                                                                }elseif(isset($val->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $val->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+                                                                    $abstract = trim($val->identificationInfo->MD_DataIdentification->abstract->CharacterString);
                                                                 }
                                                                 ?>
                                                                 <p style="white-space: normal;width:100%;height:50px;overflow: hidden;"><?php echo (strlen($abstract) > 225 ? substr($abstract, 0, 225) . "..." : $abstract); ?></p>

@@ -29,8 +29,8 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
 //        dd(Hash::make('farhan.rimfiel@pipeline-network.comM2'));
-
-        if ($_SERVER['HTTP_HOST'] != "127.0.0.1:8003") {
+ 
+        if ($_SERVER['HTTP_HOST'] != "localhost:8888") {
             if (!isset($request->{'g-recaptcha-response'}) || $request->{'g-recaptcha-response'} == "") {
                 return redirect('/login')->with(['msg' => 'Sila lengkapkan reCaptcha']);
             }
@@ -100,8 +100,8 @@ class AuthController extends Controller
             $msg = "Data-data berikut telah dimuat turun tetapi belum dibuat penilaian:<br>";
             foreach($afterSixMonthsPenilaian as $a){
                 $interval = date_create('now')->diff(date_create($a->berjayaMuatTurunTarikh));
-//                if($interval->m > 6){ //ori specs
-                if($interval->i > 5){
+                if($interval->m > 6){ //ori specs
+//                if($interval->i >= 5){
                     $msg .= $counter.') '.$a->name.'<br>';
                     $counter++;
                 }

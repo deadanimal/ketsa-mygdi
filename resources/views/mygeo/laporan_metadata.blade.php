@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" style="overflow-x:auto;">
                                 <table id="laporan_perincian" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
@@ -361,6 +361,7 @@
                                         <thead>
                                             <tr>
                                                 <th>BIL</th>
+                                                <th>NAMA METADATA</th>
                                                 <th>AGENSI</th>
                                                 <th>BILANGAN METADATA DITERBITKAN</th>
                                             </tr>
@@ -372,6 +373,15 @@
                                                     <?php $counter++; ?>
                                                     <tr>
                                                         <td>{{ $counter }}</td>
+                                                        <td>
+                                                            <?php
+                                                            $title = "";
+                                                            if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                                $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                                            }
+                                                            echo $title;
+                                                            ?>
+                                                        </td>
                                                         <td>
                                                             <?php
                                                             $agency = "";
@@ -439,6 +449,11 @@
                         text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'Laporan Perincian Permohonan Metadata',
+                    },
+                    {
+                        text: 'Word',
+                        className: 'btn btn-sm btn-primary btn_download_word_laporan_perincian_metadata',
+                        title: 'Laporan Perincian Permohonan Metadata',
                     }
                 ],
                 "scrollX": true,
@@ -481,6 +496,11 @@
                         extend: 'print',
                         text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
+                    },
+                    {
+                        text: 'Word',
+                        className: 'btn btn-sm btn-primary btn_download_word_laporan_bil_mohon_ikut_kategori',
                         title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
                     }
                 ],
@@ -527,6 +547,11 @@
                         text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
+                    },
+                    {
+                        text: 'Word',
+                        className: 'btn btn-sm btn-primary btn_download_word_laporan_stat_mohon_ikut_tahun',
+                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
                     }
                 ],
                 "scrollX": true,
@@ -568,6 +593,11 @@
                         extend: 'print',
                         text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
+                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
+                    },
+                    {
+                        text: 'Word',
+                        className: 'btn btn-sm btn-primary btn_download_word_laporan_bil_mohon_lulus',
                         title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
                     }
                 ],
@@ -611,6 +641,11 @@
                         text: 'Cetak',
                         className: 'btn btn-sm btn-primary',
                         title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
+                    },
+                    {
+                        text: 'Word',
+                        className: 'btn btn-sm btn-primary btn_download_word_laporan_bil_metadata_terbit_ikut_agensi',
+                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)',
                     }
                 ],
                 "scrollX": true,
@@ -634,25 +669,42 @@
             });
         });
 
-
-        $(document).on("click", ".btnDelete", function() {
-            var user_id = $(this).data('permohonanid');
-            var permohonan_id = $(this).data('permohonanid');
-            var r = confirm("Adakah anda pasti untuk padam metadata ini?");
-            if (r == true) {
-                $.ajax({
-                    method: "POST",
-                    url: "delete_permohonan",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "user_id": user_id,
-                        "permohonan_id": permohonan_id
-                    },
-                }).done(function(response) {
-                    alert("Permohonan berjaya dipadam.");
-                    location.reload();
-                });
-            }
+        $(document).ready(function(){
+            $(document).on("click", ".btn_download_word_laporan_perincian_metadata", function() {
+                window.open("{{ url('download_laporan_perincian_metadata') }}",'_blank');
+            });
+            $(document).on("click", ".btn_download_word_laporan_bil_metadata_terbit_ikut_agensi", function() {
+                window.open("{{ url('download_laporan_bil_metadata_terbit_ikut_agensi') }}",'_blank');
+            });
+            $(document).on("click", ".btn_download_word_laporan_bil_mohon_lulus", function() {
+                window.open("{{ url('download_laporan_bil_mohon_lulus') }}",'_blank');
+            });
+            $(document).on("click", ".btn_download_word_laporan_bil_mohon_ikut_kategori", function() {
+                window.open("{{ url('download_laporan_bil_mohon_ikut_kategori') }}",'_blank');
+            });
+            $(document).on("click", ".btn_download_word_laporan_stat_mohon_ikut_tahun", function() {
+                window.open("{{ url('download_laporan_stat_mohon_ikut_tahun') }}",'_blank');
+            });
+            
+            $(document).on("click", ".btnDelete", function() {
+                var user_id = $(this).data('permohonanid');
+                var permohonan_id = $(this).data('permohonanid');
+                var r = confirm("Adakah anda pasti untuk padam metadata ini?");
+                if (r == true) {
+                    $.ajax({
+                        method: "POST",
+                        url: "delete_permohonan",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "user_id": user_id,
+                            "permohonan_id": permohonan_id
+                        },
+                    }).done(function(response) {
+                        alert("Permohonan berjaya dipadam.");
+                        location.reload();
+                    });
+                }
+            });
         });
     </script>
 

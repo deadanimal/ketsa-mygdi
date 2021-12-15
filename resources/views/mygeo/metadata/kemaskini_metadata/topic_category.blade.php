@@ -15,7 +15,7 @@
         </a>
         @if(auth::user()->hasRole(['Penerbit Metadata']) && $metadataSearched->disahkan == "no")
         <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal3">Catatan</button>
-        @elseif(auth::user()->hasRole(['Pengesah Metadata','Super Admin']))
+        @elseif(auth::user()->hasRole(['Pengesah Metadata','Super Admin','Pentadbir Aplikasi']))
         <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal3">Catatan</button>
         @endif
     </div>
@@ -27,6 +27,14 @@
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->topicCategory)){
                     if(count($metadataxml->identificationInfo->MD_DataIdentification->topicCategory) > 0){
                         foreach($metadataxml->identificationInfo->MD_DataIdentification->topicCategory as $tcd){
+                            if(trim($tcd->MD_TopicCategoryCode) != ""){
+                                $tc[]= trim($tcd->MD_TopicCategoryCode);
+                            }
+                        }
+                    }
+                }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory)){
+                    if(count($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory) > 0){
+                        foreach($metadataxml->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd){
                             if(trim($tcd->MD_TopicCategoryCode) != ""){
                                 $tc[]= trim($tcd->MD_TopicCategoryCode);
                             }

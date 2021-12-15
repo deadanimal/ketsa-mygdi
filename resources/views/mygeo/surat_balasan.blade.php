@@ -141,7 +141,7 @@
                                     <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                     <input type="hidden" name="id" value="{{ $permohonan->id }}">
 
-                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
+                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
                                         <button type="submit" class="btn btn-primary float-right">Simpan</button>
                                     @endif
                                 </form>

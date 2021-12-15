@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary div_c7" id="div_c7">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse7">
@@ -14,6 +15,7 @@
                 <div class="pl-lg-3">
                     <?php
                     if (isset($metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString != "") {
+                        $flag *= 0;
                         ?>
                         <div class="row mb-2">
                             <div class="col-xl-6">
@@ -33,6 +35,7 @@
                     <div class="row mb-2">
                         <?php
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString != "") {
+                            $flag *= 0;
                             ?>
                             <div class="col-xl-6">
                                 <div class="form-inline">
@@ -47,6 +50,7 @@
                         ?>
                         <?php
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString != "") {
+                            $flag *= 0;
                             ?>
                             <div class="col-xl-6">
                                 <div class="form-inline">
@@ -63,6 +67,7 @@
                     <div class="row mb-2">
                         <?php
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString != "") {
+                            $flag *= 0;
                             ?>
                             <div class="col-xl-6">
                                 <div class="form-inline">
@@ -80,6 +85,7 @@
                         ?>
                         <?php
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString != "") {
+                            $flag *= 0;
                             ?>
                             <div class="col-xl-6">
                                 <div class="form-inline">
@@ -98,3 +104,15 @@
         </div>
     </div>
 </div>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c7').hide();
+        });
+    </script>
+        <?php
+}
+?>

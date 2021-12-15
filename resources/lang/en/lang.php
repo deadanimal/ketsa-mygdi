@@ -33,6 +33,7 @@
     'metadata_create_date'=>'Metadata Create Date',
     'metadataPublisher'=>'METADATA PUBLISHER',
     'organisation_name'=>'Organisation Name',
+    'bahagian_name'=>'Division Name',
     'name'=>'Name',
     'telephone_office'=>'Telephone (Office)',
     'email'=>'Email',
@@ -41,7 +42,7 @@
     'metadata_standard_version'=>'Metadata Standard Version',
 
     'accord_2'=> 'IDENTIFICATION INFORMATION',
-    'title'=>'Title',
+    'title'=>'TITLE',
     'type_of_product'=>'Type of Product',
     'abstract'=>'Abstract',
     'date'=>'Date',

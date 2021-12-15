@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary div_c11" id="div_c11">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse11">
@@ -11,6 +12,7 @@
             <div class="row mb-2">
                 <?php
                 if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-distribution-format">
@@ -24,6 +26,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString != "") {
+                    $flag *= 0;
                     ?>
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-version">
@@ -37,6 +40,7 @@
                 ?>
                 <?php
                 if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode != "") {
+                    $flag *= 0;
                     ?>
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-medium">
@@ -51,6 +55,7 @@
             </div>
             <?php
             if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString) != "") {
+                $flag *= 0;
                 ?>
                 <div class="row mb-2">
                     <div class="col-xl-2">
@@ -72,6 +77,7 @@
                     $flag1 = 1;
                     if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString) != "") {
                         $flag1 *= 0;
+                        $flag *= 0;
                         ?>
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-unit-distribution">
@@ -86,6 +92,7 @@
                     <?php
                     if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real) && trim($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real) != "") {
                         $flag1 *= 0;
+                        $flag *= 0;
                         ?>
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-sizemb">
@@ -100,6 +107,7 @@
                     <?php
                     if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString) != "") {
                         $flag1 *= 0;
+                        $flag *= 0;
                         ?>
                         <div class="col-xl-1">
                             <label class="form-control-label" for="input-fees">
@@ -116,6 +124,7 @@
                     <?php
                     if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL) && trim($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL) != "") {
                         $flag1 *= 0;
+                        $flag *= 0;
                         ?>
                         <div class="col-xl-1">
                             <label class="form-control-label" for="input-distributor">
@@ -130,6 +139,7 @@
                     <?php
                     if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString != "") {
                         $flag1 *= 0;
+                        $flag *= 0;
                         ?>
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-instructionorder">
@@ -162,3 +172,15 @@
         ?>
     });
 </script>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c11').hide();
+        });
+    </script>
+    <?php
+}
+?>

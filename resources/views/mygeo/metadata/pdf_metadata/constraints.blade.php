@@ -1,3 +1,4 @@
+<?php $flag = 1; ?>
 <div class="card card-primary div_c14" id="div_c14">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse14">
@@ -16,6 +17,7 @@
                         $flag1 = 1;
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
                             $flag1 *= 0;
+                            $flag *= 0;
                             ?>
                             <div class="row mb-2 divUseLimitation">
                                 <div class="col-xl-5">
@@ -33,6 +35,7 @@
                         <?php
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
                             $flag1 *= 0;
+                            $flag *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
@@ -50,6 +53,7 @@
                         <?php
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
                             $flag1 *= 0;
+                            $flag *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
@@ -74,6 +78,7 @@
                         $flag2 = 1;
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
                             $flag2 *= 0;
+                            $flag *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
@@ -91,6 +96,7 @@
                         <?php
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
                             $flag2 *= 0;
+                            $flag *= 0;
                             ?>
                             <div class="row mb-2">
                                 <div class="col-xl-5">
@@ -137,3 +143,15 @@
         ?>
     });
 </script>
+
+<?php
+if($flag == 1){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#div_c14').hide();
+        });
+    </script>
+    <?php
+}
+?>
