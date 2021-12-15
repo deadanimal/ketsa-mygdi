@@ -1,8 +1,6 @@
 @extends('layouts.app_ketsa')
 
 @section('content')
-<<<<<<< HEAD
-=======
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,7 +12,6 @@
                                             sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil,
                                             nombor dan simbol.</i>
                 </div>
->>>>>>> a0b6bed940e76df38c23b27876282d1dc6c203e4
 
     <style>
         .logo-box .logo {
