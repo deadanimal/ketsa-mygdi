@@ -101,14 +101,20 @@
                                             <div class="custom-control custom-checkbox m-5">
                                                 <input class="custom-control-input checkAkuanTerima" id="customCheck1"
                                                     type="checkbox" data-permohonanid="{{ $permohonan->id }}"
-                                                    {{ $permohonan->acceptance == '1' ? 'checked disabled' : '' }}>
+                                                    {{ $permohonan->acceptance == '1' ? 'checked disabled' : '' }} {{ Auth::user()->hasRole(['Pemohon Data']) ? '' : 'disabled' }}>
                                                 <label class="custom-control-label" for="customCheck1">Saya terima terma dan
                                                     syarat diatas berikut</label>
                                             </div>
                                         </dl>
                                     </ol>
-
                                 </form>
+                                @if (isset($permohonan->acceptance))
+                                    <form action="{{ url('api/dokumen/akuan_terima') }}" method="POST" target="_blank">
+                                        @csrf
+                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}" >
+                                        <button type="submit" class="btn btn-sm btn-primary mt-2" {{ $permohonan->acceptance != '1' ? 'disabled' : '' }}>Cetak PDF</button>
+                                    </form>
+                                @endif
                                 <div class="row mb-0 mt-5">
                                     <div class="col-xl-12">
                                         <h6 class="heading text-muted">PGN-ISMS-P3-019-002-{{ $permohonan->id }}</h6>

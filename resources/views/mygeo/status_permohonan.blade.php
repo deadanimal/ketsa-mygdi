@@ -3,9 +3,16 @@
 @section('content')
 
     <style>
-        .ftest {
-            display: inline;
-            width: auto;
+        .badge {
+            color: rgb(44, 44, 44)
+        }
+
+        .bg-user {
+            background-color: lightpink
+        }
+
+        .bg-admin {
+            background-color: #C8A2C8
         }
 
     </style>
@@ -13,7 +20,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header">
+        <section class="header bg-admin">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -22,7 +29,7 @@
 
                             <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class=" breadcrumb-item">
+                                    <li class=" breadcrumb-item active">
                                         <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
                                     </li>
                                     <li aria-current="page" class="breadcrumb-item active">
@@ -38,7 +45,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -72,18 +79,19 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
-                                            @if($permohonan->users)
+                                            @if ($permohonan->users)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $permohonan->name }}</td>
                                                     <td>{{ $permohonan->users->name }}</td>
                                                     <td>{{ $permohonan->users->kategori }}</td>
                                                     <td>
-                                                        @if (($permohonan->status == '1') || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))
+                                                        @if ($permohonan->status == '1' || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))
                                                             <span class="badge badge-pill badge-warning">Dalam Proses</span>
                                                         @elseif($permohonan->status == '2')
                                                             <span class="badge badge-pill badge-danger">Ditolak</span>
-                                                        @elseif($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 1)
+                                                        @elseif($permohonan->status == '3' &&
+                                                            $permohonan->berjayaMuatTurunStatus == 1)
                                                             <span class="badge badge-pill badge-success">Selesai</span>
                                                         @elseif($permohonan->status == '0')
                                                             <span class="badge badge-pill badge-info">Baru</span>
@@ -118,7 +126,7 @@
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                    "scrollX":true,
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,

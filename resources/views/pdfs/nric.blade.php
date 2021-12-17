@@ -12,7 +12,7 @@
 </head>
 <style>
     div {
-        align-content: center;
+        align-content.container: center;
     }
 
     h4.a {
@@ -24,8 +24,8 @@
         transform: rotate(-25deg);
         text-decoration: underline;
         position: relative;
-        left:-70px;
-        top:40px;
+        left: -70px;
+        top: 40px;
         opacity: 0.4;
 
     }
@@ -40,7 +40,7 @@
             <div class="col-12">
                 <img src="{{ $base64_front }}" class="text-center" alt="front pic" style="width: 300px;" />
                 <br>
-                <h4 class="a mt-0">UNTUK KEGUNAAN KETSA SAHAJA</h4>
+                <h4 class="a mt-0">UNTUK KEGUNAAN PGN SAHAJA</h4>
                 <br><br>
                 <img src="{{ $base64_back }}" class="text-center" alt="back pic" style="width: 300px;" />
             </div>

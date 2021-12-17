@@ -79,7 +79,7 @@
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
                                                 name="agensi_organisasi" disabled>{{ $permohonan->users->agensi_organisasi }}, {{ $permohonan->users->alamat }}
-                                                                 </textarea>
+                                                                     </textarea>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
                                             seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
@@ -90,16 +90,13 @@
                                             <li>Peta Topografi :</li>
                                             <ol type="a">
                                                 <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="peta_topo_a"
-                                                            placeholder="Peta Topologi A"
+                                                            class="form-control form-control-sm" name="peta_topo_a" disabled
                                                             value="{{ $akuan->peta_topo_a }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="peta_topo_b"
-                                                            placeholder="Peta Topologi B"
+                                                            class="form-control form-control-sm" name="peta_topo_b" disabled
                                                             value="{{ $akuan->peta_topo_b }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="peta_topo_c"
-                                                            placeholder="Peta Topologi C"
+                                                            class="form-control form-control-sm" name="peta_topo_c" disabled
                                                             value="{{ $akuan->peta_topo_c }}"></span></li>
                                             </ol>
                                             <br><br>
@@ -107,32 +104,22 @@
                                             <ol type="a">
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="foto_udara_a"
-                                                            placeholder="Foto Udara A"
-                                                            value="{{ $akuan->foto_udara_a }}"></span></li>
+                                                            disabled value="{{ $akuan->foto_udara_a }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="foto_udara_b"
-                                                            placeholder="Foto Udara B"
-                                                            value="{{ $akuan->foto_udara_b }}"></span></li>
+                                                            disabled value="{{ $akuan->foto_udara_b }}"></span></li>
                                                 <li><span class="form-inline"><input type="text"
                                                             class="form-control form-control-sm" name="foto_udara_c"
-                                                            placeholder="Foto Udara C"
-                                                            value="{{ $akuan->foto_udara_c }}"></span></li>
+                                                            disabled value="{{ $akuan->foto_udara_c }}"></span></li>
                                             </ol>
                                             <br><br>
                                             <li>Lain-lain :</li>
                                             <ol type="a">
-                                                <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="lain_a"
-                                                            placeholder="Lain-lain A"
-                                                            value="{{ $akuan->lain_a }}"></span></li>
-                                                <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="lain_b"
-                                                            placeholder="Lain-lain B"
-                                                            value="{{ $akuan->lain_b }}"></span></li>
-                                                <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="lain_c"
-                                                            placeholder="Lain-lain C"
-                                                            value="{{ $akuan->lain_c }}"></span></li>
+                                                @foreach ($skdatas as $sk)
+                                                    <li><span class="form-inline"><input type="text"
+                                                                class="form-control form-control-sm" name="lain_a" disabled
+                                                                value="{{ $sk->lapisan_data }}"></span></li>
+                                                @endforeach
                                             </ol>
                                         </ol>
                                         <br><br>
@@ -162,8 +149,8 @@
                                         Tandatangan Pelajar:
                                         <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan" height="120">
                                         @if (Auth::user()->hasRole(['Pemohon Data']))
-                                        <input type="file" class="form-control form-control-sm py-0" name="file"
-                                            placeholder="Digital Sign">
+                                            <input type="file" class="form-control form-control-sm py-0" name="file"
+                                                placeholder="Digital Sign">
                                         @endif
                                         <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
                                         <br>

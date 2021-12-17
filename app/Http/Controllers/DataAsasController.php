@@ -29,6 +29,9 @@ use App\Mail\MailNotify;
 use PDF;
 use \setasign\Fpdi\Fpdi;
 
+use function GuzzleHttp\json_decode;
+use function GuzzleHttp\json_encode;
+
 class DataAsasController extends Controller
 {
     /**
@@ -62,11 +65,6 @@ class DataAsasController extends Controller
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
         $senarai_data = SenaraiData::where('status','Tersedia')->distinct('subkategori')->get();
-        // $senarai_data = DB::table('senarai_data')
-        //                         ->where('status','Tersedia')
-        //                         ->select('kategori','subkategori','lapisan_data')
-        //                         ->groupBy('kategori','subkategori','lapisan_data')
-        //                         ->get();
         $lapisandata = DB::table('senarai_data')
                                 ->where('status','Tersedia')
                                 ->select('subkategori','lapisan_data')
@@ -320,6 +318,9 @@ class DataAsasController extends Controller
 
     public function proses_data()
     {
+        if (!Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
+            return redirect('/mygeo_profil');
+        } 
         $permohonan_list = MohonData::where(['status' => 1,'dihantar' => 1])->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();
@@ -328,6 +329,14 @@ class DataAsasController extends Controller
 
     public function update_proses_data(Request $request)
     {
+        $append = [];
+        foreach ($request->pautan_data as $key => $value) {
+            if($value != null ){
+                $append[] = $value;
+            }
+        }
+        // dd($append);
+
         $id = $request->permohonan_id;
         $valid_surat = SuratBalasan::where([
             ["permohonan_id","=", $request->permohonan_id],])
@@ -343,7 +352,7 @@ class DataAsasController extends Controller
         if($valid_surat->isEmpty()){
 
             ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
-                "pautan_data" => $request->pautan_data,
+                "pautan_data" => json_encode($append),
                 "tempoh_url" => $request->tempoh,
                 "total_harga" => $request->total_harga,
             ]);
@@ -395,7 +404,7 @@ class DataAsasController extends Controller
             //==================================================================
 
             $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
-            
+
             //send email to pemohon data
             $to_name = $pemohon->users->name;
             $to_email = $pemohon->users->email;
@@ -439,6 +448,9 @@ class DataAsasController extends Controller
     public function muat_turun_data()
     {
         $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
+        $permohonan = ProsesData::where('id', 8)->get();
+        $m = json_decode($permohonan[0]->pautan_data);
+        // dd($m);
         return view('mygeo.muat_turun_data', compact('permohonan_list'));
     }
 
@@ -450,7 +462,7 @@ class DataAsasController extends Controller
 
     public function senarai_data()
     {
-        $senarai_data = SenaraiData::orderBy('kategori','ASC')->get();
+        $senarai_data = SenaraiData::orderBy('kod','ASC')->get();
         $kategori_sd = KategoriSenaraiData::orderBy('name','ASC')->get();
         $subkategori_sd = SubKategoriSenaraiData::orderBy('name','ASC')->get();
         return view('mygeo.senarai_data', compact('senarai_data','kategori_sd','subkategori_sd'));
@@ -464,6 +476,7 @@ class DataAsasController extends Controller
         $senarai_data->subkategori = $request->subkategori;
         $senarai_data->lapisan_data = $request->lapisan_data;
         $senarai_data->data_id = $request->data_id;
+        $senarai_data->kod = $request->kod;
         $senarai_data->save();
 
         $at = new AuditTrail();
@@ -639,7 +652,8 @@ class DataAsasController extends Controller
     {
         $akuan = AkuanPelajar::where('permohonan_id', $id)->first();
         $permohonan = MohonData::where('id', $id)->first();
-        return view('mygeo.akuan_pelajar', compact('permohonan','akuan'));
+        $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
+        return view('mygeo.akuan_pelajar', compact('permohonan','akuan', 'skdatas'));
     }
 
     public function update_akuan_pelajar(Request $request)
@@ -1319,13 +1333,6 @@ class DataAsasController extends Controller
     }
 
     public function generate_pdf_akuan_pelajar(Request $request){
-// $permohonan = DB::table('users')
-        //             ->join('mohon_data','users.id','=','mohon_data.user_id')
-        //             ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
-        //             ->where('mohon_data.id',$request->permohonan_id)
-        //             ->select('users.nric','users.alamat','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'),DB::raw('agensi_organisasi.name as agensi_name'))
-        //             ->groupBy('users.nric','users.name','users.alamat','agensi_organisasi.name','mohon_data.date')
-        //             ->first();
         $permohonan = DB::table('users')
                     ->join('mohon_data','users.id','=','mohon_data.user_id')
                     ->where('mohon_data.id',$request->permohonan_id)
@@ -1364,6 +1371,17 @@ class DataAsasController extends Controller
         }
         $surat = SuratBalasan::where('permohonan_id', $request->permohonan_id)->first();
         $pdf = PDF::loadView('pdfs.surat_balasan', compact('surat','permohonan','agensi_name'));
+        // (Optional) Setup the paper size and orientation
+        $pdf->setPaper('A4', 'potrait');
+        // Render the HTML as PDF
+        return $pdf->stream();
+    }
+
+    public function generate_pdf_akuan_terima(Request $request){
+
+        $permohonan = MohonData::where('id', $request->permohonan_id)->first();
+
+        $pdf = PDF::loadView('pdfs.akuan_terima', compact('permohonan'));
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF

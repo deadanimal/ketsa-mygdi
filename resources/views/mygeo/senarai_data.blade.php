@@ -3,9 +3,12 @@
 @section('content')
 
     <style>
-        .ftest {
-            display: inline;
-            width: auto;
+        .bg-user {
+            background-color: lightpink
+        }
+
+        .bg-admin {
+            background-color: #C8A2C8
         }
 
     </style>
@@ -13,7 +16,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header">
+        <section class="header bg-admin">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -38,7 +41,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -78,6 +81,7 @@
                                             <th>KATEGORI</th>
                                             <th>SUB-KATEGORI</th>
                                             <th>LAPISAN DATA</th>
+                                            <th>KOD (MS1759)</th>
                                             <th>KELAS</th>
                                             <th>HARGA DATA</th>
                                             <th>STATUS</th>
@@ -91,6 +95,7 @@
                                                 <td>{{ $sdata->kategori }}</td>
                                                 <td>{{ $sdata->subkategori }}</td>
                                                 <td>{{ $sdata->lapisan_data }}</td>
+                                                <td>{{ $sdata->kod }}</td>
                                                 <td>{{ $sdata->kelas }}</td>
                                                 <td>{{ $sdata->harga_data }}</td>
                                                 <td>{{ $sdata->status }}</td>
@@ -152,8 +157,8 @@
                                         <label class="form-control-label">Pengkelasan Lapisan Data</label>
                                         <select class="form-control form-control-sm" name="kelas">
                                             <option selected disabled>Pilih</option>
-                                            <option value="Terhad" @if($sdata->kelas == "Terhad") selected @endif>Terhad</option>
-                                            <option value="Tidak Terhad" @if($sdata->kelas == "Tidak Terhad") selected @endif>Tidak Terhad</option>
+                                            <option value="Terhad" @if ($sdata->kelas == 'Terhad') selected @endif>Terhad</option>
+                                            <option value="Tidak Terhad" @if ($sdata->kelas == 'Tidak Terhad') selected @endif>Tidak Terhad</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -165,8 +170,8 @@
                                         <label class="form-control-label">Status Data</label>
                                         <select class="form-control form-control-sm" name="status">
                                             <option selected disabled>Pilih</option>
-                                            <option value="Tersedia" @if($sdata->status == "Tersedia") selected @endif>Tersedia</option>
-                                            <option value="Tiada" @if($sdata->status == "Tiada") selected @endif>Tiada</option>
+                                            <option value="Tersedia" @if ($sdata->status == 'Tersedia') selected @endif>Tersedia</option>
+                                            <option value="Tiada" @if ($sdata->status == 'Tiada') selected @endif>Tiada</option>
                                         </select>
                                     </div>
 
@@ -230,7 +235,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-control-label">Kategori</label>
-                                    <select class="form-control form-control-sm" name="kategori_id" id="kategori"  onchange="selectKategori()">
+                                    <select class="form-control form-control-sm" name="kategori_id" id="kategori"
+                                        onchange="selectKategori()">
                                         <option selected disabled>Pilih</option>
                                         @foreach ($kategori_sd as $kategori)
                                             <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
@@ -269,7 +275,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-control-label">Kategori</label>
-                                    <select class="form-control form-control-sm" name="kategori" id="kategori_s" onchange="selectKategori()">
+                                    <select class="form-control form-control-sm" name="kategori" id="kategori_s"
+                                        onchange="selectKategori()">
                                         <option selected disabled>Pilih</option>
                                         @foreach ($kategori_sd as $kategori)
                                             <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
@@ -277,8 +284,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group" id="dynamicAddRemove">
-
                                 </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Kod (MS1759)</label>
+                                    <input type="text" class="form-control form-control-sm" name="kod" value="">
+                                </div>
+
                                 <div class="form-group">
                                     <label class="form-control-label">Lapisan Data</label>
                                     <input type="text" class="form-control form-control-sm" name="lapisan_data" value="">
@@ -299,10 +310,13 @@
     <script>
         $(document).ready(function() {
             $("#table_senarai_data").DataTable({
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,
-                "scrollX": true,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
                     "sEmptyTable": "Tiada rekod ditemui",

@@ -145,7 +145,7 @@
                                                         </label>
                                                         <span class="ml-3" tooltip="Awam"tooltipPlacement="right"><i class="far fa-question-circle"></i></span>
                                                     </div>
-                                                    
+
                                                     <div class="custom-control custom-radio mb-3">
                                                         <input class="custom-control-input" id="2_options_g2g" name="2_options" type="radio" value="2_g2g" />
                                                         <label class="custom-control-label" for="2_options_g2g">
@@ -175,7 +175,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class=" custom-control custom-radio mb-3 divG2e">
                                                         <input class="custom-control-input" id="2_options_g2e" name="2_options" type="radio" value="2_g2e" />
                                                         <label class="custom-control-label" for="2_options_g2e">
@@ -218,7 +218,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>                                                
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -362,7 +362,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <select name="state" class="form-control form-control-sm ml-3">
-                                                    <option selected disabled>Pilih...</option> 
+                                                    <option selected disabled>Pilih...</option>
                                                     <?php
                                                     if (count($states) > 0) {
                                                         foreach ($states as $st) {
@@ -375,7 +375,7 @@
                                                 </select>
                                                 <p class="error-message"><span></span></p>
                                             </div>
-                                            <div class="col-3"> 
+                                            <div class="col-3">
                                                 <label class="form-control-label mr-4" for="input-address">
                                                     Negara
                                                 </label>
@@ -387,11 +387,11 @@
                                                     <?php
                                                     if (count($countries) > 0) {
                                                         foreach ($countries as $country) {
-                                                            ?><option value="<?php echo $country->id; ?>" selected 
+                                                            ?><option value="<?php echo $country->id; ?>" selected
                                                             {{ $country->id == old('c2_contact_country') ? 'selected' : '' }}>
                                                             <?php echo $country->name; ?></option><?php
                                                         }
-                                                    }                                                                                                              
+                                                    }
                                                     ?>
                                                 </select>
                                                 <p class="error-message"><span></span></p>
@@ -503,7 +503,7 @@
     $(document).on("click", ".btn_login", function() {
         var captcha = $('#g-recaptcha-response').val();
         <?php
-        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
+        if($_SERVER['HTTP_HOST'] == "127.0.0.1:8000"){
             ?>
             $("#formLogin").submit();
             <?php
@@ -582,17 +582,17 @@
                 });
             }
         });
-        
+
         $(document).on('click','.perananCheckbox',function(){
             var clickedElement = $(this);
-            
+
             //show options when selecting Pemohon Data role
             if($(this).prop('checked') == true && $(this).val() == "2"){
                 $(".divsecond").show();
             }else if($(this).prop('checked') == false && $(this).val() == "2"){
                 $(".divsecond").hide();
             }
-            
+
             //check if at least one peranan is selected before showing the Isi Borang button
             var hasChecked = 1;
             $('.perananCheckbox').each(function(i, obj) {
@@ -605,7 +605,7 @@
             }else{
                 $('.btn_isi_borang').hide();
             }
-            
+
             //pre-set form peranan input based on role selected
             var selectedPeranan = "";
             if(clickedElement.prop('checked') == true){
@@ -632,7 +632,7 @@
                 $('.divG2e').show();
             }
         });
-        
+
         $(document).on('click','.2_options_g2g_sub',function(){
             $("#2_options_g2g").prop('checked',true);
             $('.2_options_g2e_sub').each(function() {
@@ -644,7 +644,7 @@
             $(".2_options_g2g_sub").each(function() {
                 $(this).prop('checked',false);
             });
-            
+
             //pre-set form peranan input based on role selected
             var selectedPeranan = "";
             $('.perananCheckbox').each(function() {
@@ -664,7 +664,7 @@
                 alert('Sekiranya anda memilih peranan Penerbit/Pengesah Metadata dan ingin mendaftar sebagai Pemohon Data juga, kategori yang boleh dipilih hanya G2G sahaja.');
             }
         });
-        
+
         $(document).on('click','#2_options_g2g',function(){
             $(".2_options_g2e_sub").each(function() {
                 $(this).prop('checked',false);
@@ -732,7 +732,7 @@
             }else{
                 $('.divPhoneBimbit').hide();
             }
-            
+
             $('#div_pilihan_peranan').hide();
             $('#form_registration').show();
             $('#btn_daftar').show();
@@ -869,7 +869,7 @@
             }
             ?>
             <?php
-            if(Session::has('message')){                            
+            if(Session::has('message')){
                 ?>alert("{{ Session::get('message') }}");<?php
             }
             ?>

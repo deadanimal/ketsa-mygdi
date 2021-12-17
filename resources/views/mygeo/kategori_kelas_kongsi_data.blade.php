@@ -3,9 +3,12 @@
 @section('content')
 
     <style>
-        .ftest {
-            display: inline;
-            width: auto;
+        .bg-user {
+            background-color: lightpink
+        }
+
+        .bg-admin {
+            background-color: #C8A2C8
         }
 
     </style>
@@ -13,7 +16,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header">
+        <section class="header bg-admin">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -38,7 +41,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+<br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">

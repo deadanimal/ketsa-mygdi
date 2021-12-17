@@ -8,12 +8,20 @@
             width: auto;
         }
 
+        .bg-user {
+            background-color: lightpink
+        }
+
+        .bg-admin {
+            background-color: #C8A2C8
+        }
+
     </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header">
+        <section class="header bg-admin">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -38,7 +46,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -68,14 +76,14 @@
                                     </thead>
                                     <tbody>
                                         <?php $counter = 0; ?>
-                                        @foreach ($metadatas as $key=>$val)
+                                        @foreach ($metadatas as $key => $val)
                                             <?php $counter++; ?>
                                             <tr>
                                                 <td>{{ $counter }}</td>
                                                 <td>
                                                     <?php
-                                                    $title = "";
-                                                    if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                    $title = '';
+                                                    if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
                                                         $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                                     }
                                                     echo $title;
@@ -83,27 +91,28 @@
                                                 </td>
                                                 <td>
                                                     <?php
-                                                    $status = "";
-                                                    if($val[1]->is_draf == "yes"){
-                                                        $status = "Draf";
-                                                    }else{
-                                                        if($val[1]->disahkan == "0"){
-                                                            $status = "Perlu Pengesahan";
-                                                        }elseif($val[1]->disahkan == "yes"){
-                                                            $status = "Diterbitkan";
-                                                        }elseif($val[1]->disahkan == "yes"){
-                                                            $status = "Perlu Pembetulan";
+                                                    $status = '';
+                                                    if ($val[1]->is_draf == 'yes') {
+                                                        $status = 'Draf';
+                                                    } else {
+                                                        if ($val[1]->disahkan == '0') {
+                                                            $status = 'Perlu Pengesahan';
+                                                        } elseif ($val[1]->disahkan == 'yes') {
+                                                            $status = 'Diterbitkan';
+                                                        } elseif ($val[1]->disahkan == 'yes') {
+                                                            $status = 'Perlu Pembetulan';
                                                         }
                                                     }
                                                     echo $status;
                                                     ?>
                                                 </td>
-                                                <td>{{ date('d/m/Y',strtotime($val[1]->changedate)) }}</td>
+                                                <td>{{ date('d/m/Y', strtotime($val[1]->changedate)) }}</td>
                                                 <td>
                                                     <form action='{{ url('lihat_metadata_nologin') }}' method='POST'>
                                                         @csrf
                                                         <input type='hidden' name='metadata_id' value='{{ $key }}'>
-                                                        <button type="submit" class="btn btn-sm btn-primary mr-2">Perincian</button>
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-primary mr-2">Perincian</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -133,7 +142,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h4 class="heading text-muted">Bilangan keseluruhan metadata yang diterbitkan (Mengikut agensi)</h4>
+                                <h4 class="heading text-muted">Bilangan keseluruhan metadata yang diterbitkan (Mengikut
+                                    agensi)</h4>
                                 <table id="laporan_seluruh" class="table table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
@@ -147,15 +157,15 @@
                                     </thead>
                                     <tbody>
                                         <?php $counter = 0; ?>
-                                        @foreach ($metadatas as $key=>$val)
-                                            @if($val[1]->disahkan == "yes")
+                                        @foreach ($metadatas as $key => $val)
+                                            @if ($val[1]->disahkan == 'yes')
                                                 <?php $counter++; ?>
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>
                                                         <?php
-                                                        $title = "";
-                                                        if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                        $title = '';
+                                                        if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
                                                             $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                                         }
                                                         echo $title;
@@ -163,8 +173,8 @@
                                                     </td>
                                                     <td>
                                                         <?php
-                                                        $agency = "";
-                                                        if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                                                        $agency = '';
+                                                        if (isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != '') {
                                                             $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
                                                         }
                                                         echo $agency;
@@ -172,8 +182,8 @@
                                                     </td>
                                                     <td>
                                                         <?php
-                                                        $publisher = "";
-                                                        if(isset($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) != ""){
+                                                        $publisher = '';
+                                                        if (isset($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) != '') {
                                                             $publisher = $val[0]->contact->CI_ResponsibleParty->individualName->CharacterString;
                                                         }
                                                         echo $publisher;
@@ -181,15 +191,15 @@
                                                     </td>
                                                     <td>
                                                         <?php
-                                                        $category = "";
-                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != "") {
+                                                        $category = '';
+                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != '') {
                                                             $category = trim($val[0]->hierarchyLevel->MD_ScopeCode);
                                                         }
                                                         echo $category;
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        {{ date('d/m/Y',strtotime($val[1]->changedate)) }}
+                                                        {{ date('d/m/Y', strtotime($val[1]->changedate)) }}
                                                     </td>
                                                 </tr>
                                             @endif
@@ -203,8 +213,7 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan metadata yang belum diterbitkan</h4>
-                                <table id="laporan_lulus" class="table table-bordered table-striped"
-                                    style="width:100%;">
+                                <table id="laporan_lulus" class="table table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -217,15 +226,15 @@
                                     </thead>
                                     <tbody>
                                         <?php $counter = 0; ?>
-                                        @foreach($metadatas as $key=>$val)
-                                            @if($val[1]->disahkan == "no" || $val[1]->disahkan == "0" || $val[1]->is_draf == "yes")
+                                        @foreach ($metadatas as $key => $val)
+                                            @if ($val[1]->disahkan == 'no' || $val[1]->disahkan == '0' || $val[1]->is_draf == 'yes')
                                                 <?php $counter++; ?>
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>
                                                         <?php
-                                                        $title = "";
-                                                        if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                        $title = '';
+                                                        if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
                                                             $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                                         }
                                                         echo $title;
@@ -233,8 +242,8 @@
                                                     </td>
                                                     <td>
                                                         <?php
-                                                        $agency = "";
-                                                        if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                                                        $agency = '';
+                                                        if (isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != '') {
                                                             $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
                                                         }
                                                         echo $agency;
@@ -242,16 +251,16 @@
                                                     </td>
                                                     <td>
                                                         <?php
-                                                        $status = "";
-                                                        if($val[1]->is_draf == "yes"){
-                                                            $status = "Draf";
-                                                        }else{
-                                                            if($val[1]->disahkan == "0"){
-                                                                $status = "Perlu Pengesahan";
-                                                            }elseif($val[1]->disahkan == "yes"){
-                                                                $status = "Diterbitkan";
-                                                            }elseif($val[1]->disahkan == "yes"){
-                                                                $status = "Perlu Pembetulan";
+                                                        $status = '';
+                                                        if ($val[1]->is_draf == 'yes') {
+                                                            $status = 'Draf';
+                                                        } else {
+                                                            if ($val[1]->disahkan == '0') {
+                                                                $status = 'Perlu Pengesahan';
+                                                            } elseif ($val[1]->disahkan == 'yes') {
+                                                                $status = 'Diterbitkan';
+                                                            } elseif ($val[1]->disahkan == 'yes') {
+                                                                $status = 'Perlu Pembetulan';
                                                             }
                                                         }
                                                         echo $status;
@@ -259,15 +268,15 @@
                                                     </td>
                                                     <td>
                                                         <?php
-                                                        $category = "";
-                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != "") {
+                                                        $category = '';
+                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != '') {
                                                             $category = trim($val[0]->hierarchyLevel->MD_ScopeCode);
                                                         }
                                                         echo $category;
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        {{ date('d/m/Y',strtotime($val[1]->changedate)) }}
+                                                        {{ date('d/m/Y', strtotime($val[1]->changedate)) }}
                                                     </td>
                                                 </tr>
                                             @endif
@@ -295,14 +304,14 @@
                                         </thead>
                                         <tbody>
                                             <?php $counter = 0; ?>
-                                            @foreach ($metadatas as $key=>$val)
+                                            @foreach ($metadatas as $key => $val)
                                                 <?php $counter++; ?>
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>
                                                         <?php
-                                                        $title = "";
-                                                        if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                        $title = '';
+                                                        if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
                                                             $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                                         }
                                                         echo $title;
@@ -310,8 +319,8 @@
                                                     </td>
                                                     <td>
                                                         <?php
-                                                        $agency = "";
-                                                        if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                                                        $agency = '';
+                                                        if (isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != '') {
                                                             $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
                                                         }
                                                         echo $agency;
@@ -319,16 +328,16 @@
                                                     </td>
                                                     <td>
                                                         <?php
-                                                        $status = "";
-                                                        if($val[1]->is_draf == "yes"){
-                                                            $status = "Draf";
-                                                        }else{
-                                                            if($val[1]->disahkan == "0"){
-                                                                $status = "Perlu Pengesahan";
-                                                            }elseif($val[1]->disahkan == "yes"){
-                                                                $status = "Diterbitkan";
-                                                            }elseif($val[1]->disahkan == "yes"){
-                                                                $status = "Perlu Pembetulan";
+                                                        $status = '';
+                                                        if ($val[1]->is_draf == 'yes') {
+                                                            $status = 'Draf';
+                                                        } else {
+                                                            if ($val[1]->disahkan == '0') {
+                                                                $status = 'Perlu Pengesahan';
+                                                            } elseif ($val[1]->disahkan == 'yes') {
+                                                                $status = 'Diterbitkan';
+                                                            } elseif ($val[1]->disahkan == 'yes') {
+                                                                $status = 'Perlu Pembetulan';
                                                             }
                                                         }
                                                         echo $status;
@@ -336,8 +345,8 @@
                                                     </td>
                                                     <td>
                                                         <?php
-                                                        $category = "";
-                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != "") {
+                                                        $category = '';
+                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != '') {
                                                             $category = trim($val[0]->hierarchyLevel->MD_ScopeCode);
                                                         }
                                                         echo $category;
@@ -368,15 +377,15 @@
                                         </thead>
                                         <tbody>
                                             <?php $counter = 0; ?>
-                                            @foreach ($metadatas as $key=>$val)
-                                                @if($val[1]->disahkan == "yes")
+                                            @foreach ($metadatas as $key => $val)
+                                                @if ($val[1]->disahkan == 'yes')
                                                     <?php $counter++; ?>
                                                     <tr>
                                                         <td>{{ $counter }}</td>
                                                         <td>
                                                             <?php
-                                                            $title = "";
-                                                            if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
+                                                            $title = '';
+                                                            if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
                                                                 $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
                                                             }
                                                             echo $title;
@@ -384,8 +393,8 @@
                                                         </td>
                                                         <td>
                                                             <?php
-                                                            $agency = "";
-                                                            if(isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != ""){
+                                                            $agency = '';
+                                                            if (isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != '') {
                                                                 $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
                                                             }
                                                             echo $agency;
@@ -669,23 +678,23 @@
             });
         });
 
-        $(document).ready(function(){
+        $(document).ready(function() {
             $(document).on("click", ".btn_download_word_laporan_perincian_metadata", function() {
-                window.open("{{ url('download_laporan_perincian_metadata') }}",'_blank');
+                window.open("{{ url('download_laporan_perincian_metadata') }}", '_blank');
             });
             $(document).on("click", ".btn_download_word_laporan_bil_metadata_terbit_ikut_agensi", function() {
-                window.open("{{ url('download_laporan_bil_metadata_terbit_ikut_agensi') }}",'_blank');
+                window.open("{{ url('download_laporan_bil_metadata_terbit_ikut_agensi') }}", '_blank');
             });
             $(document).on("click", ".btn_download_word_laporan_bil_mohon_lulus", function() {
-                window.open("{{ url('download_laporan_bil_mohon_lulus') }}",'_blank');
+                window.open("{{ url('download_laporan_bil_mohon_lulus') }}", '_blank');
             });
             $(document).on("click", ".btn_download_word_laporan_bil_mohon_ikut_kategori", function() {
-                window.open("{{ url('download_laporan_bil_mohon_ikut_kategori') }}",'_blank');
+                window.open("{{ url('download_laporan_bil_mohon_ikut_kategori') }}", '_blank');
             });
             $(document).on("click", ".btn_download_word_laporan_stat_mohon_ikut_tahun", function() {
-                window.open("{{ url('download_laporan_stat_mohon_ikut_tahun') }}",'_blank');
+                window.open("{{ url('download_laporan_stat_mohon_ikut_tahun') }}", '_blank');
             });
-            
+
             $(document).on("click", ".btnDelete", function() {
                 var user_id = $(this).data('permohonanid');
                 var permohonan_id = $(this).data('permohonanid');

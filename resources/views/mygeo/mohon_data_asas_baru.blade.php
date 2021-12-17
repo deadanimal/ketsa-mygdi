@@ -9,6 +9,21 @@
         }
 
     </style>
+<style>
+    .accordionHeader {
+        background-color:#b3ecff;
+        color:black;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .card,
+    .card-header:first-child {
+        background-color: white;
+        border-radius: 12px;
+    }
+
+</style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -56,6 +71,23 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
+                        <div id="accordion">
+                                <!--========== collapese1 =============================================-->
+                                <div class="card card-primary div_c1" id="div_c1">
+                                    <div class="card-header accordionHeader" data-toggle="collapse"
+                                        href="#collapse1">
+                                        <b class="mb-0 pb-0" style="text-transform: uppercase;">Maklumat Permohonan</b>
+                                    </div>
+                                    <div id="collapse1" class="panel-collapse collapse in"
+                                        data-parent="#div_c1">
+                                        <div class="card-body">
+                                            <div class="acard-body opacity-8">
+                                                BALERR
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>f
                         <div class="card">
                             @csrf
                             <div class="card-header">
@@ -344,7 +376,8 @@
                                                     class="btn btn-sm btn-default">Isi
                                                     Borang</a>
                                             </div>
-                                        @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
+                                        @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir
+                                            Aplikasi']))
                                             @if ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar')
                                                 <div class="col-7 form-inline">
                                                     <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
@@ -354,7 +387,7 @@
                                             @endif
                                         @endif
                                     </div>
-                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
+                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
                                         <div class="row">
                                             <div class="col-4">
                                                 <h4 class="heading text-dark mr-2">Status Permohonan</h4>
@@ -405,16 +438,16 @@
                                     <div class="float-right">
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
 
-                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']) && $permohonan->status != 1)
+                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']) && $permohonan->status != 1)
                                             <button type="button"
                                                 class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
                                                 Hantar
-                                        @elseif(Auth::user()->hasRole(['Pemohon Data']))
-                                            @if ($permohonan->dihantar != 1 || $permohonan->status == 2)
-                                                <button type="button"
-                                                    class="btn btn-outline-success mx-2 btnSimpanDraf">
-                                                    Simpan
-                                            @endif
+                                            @elseif(Auth::user()->hasRole(['Pemohon Data']))
+                                                @if ($permohonan->dihantar != 1 || $permohonan->status == 2)
+                                                    <button type="button"
+                                                        class="btn btn-outline-success mx-2 btnSimpanDraf">
+                                                        Simpan
+                                                @endif
                                         @endif
                                 </form>
                                 @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->dihantar != 1 || $permohonan->status == 2))
@@ -845,6 +878,10 @@
             });
 
             $("#table_metadatas").DataTable({
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,
@@ -864,6 +901,10 @@
                 }
             });
             $("#table_metadatas2").DataTable({
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToMohonDataTable extends Migration
+class AddColumnsToSenaraiData extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnsToMohonDataTable extends Migration
      */
     public function up()
     {
-        Schema::table('mohon_data', function (Blueprint $table) {
-            $table->string('catatan_lain')->nullable();
+        Schema::table('senarai_data', function (Blueprint $table) {
+            $table->string('kod')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnsToMohonDataTable extends Migration
      */
     public function down()
     {
-        Schema::table('mohon_data', function (Blueprint $table) {
-            $table->dropColumn(['catatan_lain']);
+        Schema::table('senarai_data', function (Blueprint $table) {
+            $table->dropColumn('kod');
         });
     }
 }
