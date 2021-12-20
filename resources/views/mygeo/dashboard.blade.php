@@ -33,11 +33,19 @@
             height: 130px;
         }
 
+        .bg-user {
+            background-color: lightpink
+        }
+
+        .bg-admin {
+            background-color: #C8A2C8
+        }
+
     </style>
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header">
+        <section class="header bg-admin">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -62,7 +70,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -77,9 +85,9 @@
                                         </h2>
                                         <span class="text-white text-uppercase mb-0">
                                             <?php
-                                            if(Auth::user()->hasRole('Pemohon Data')){
+                                            if (Auth::user()->hasRole('Pemohon Data')) {
                                                 echo Auth::user()->agensi_organisasi;
-                                            }else{
+                                            } else {
                                                 echo Auth::user()->agensiOrganisasi->name;
                                             }
                                             ?>
@@ -290,7 +298,8 @@
             </div>
         </section>
     </div>
-<?php //dd(json_encode($metadataTerbitByAgencyKeys));?>
+    <?php //dd(json_encode($metadataTerbitByAgencyKeys));
+    ?>
     <script src="assets/js/plugins/chartjs.min.js"></script>
     <script>
         // Bar chart 1
@@ -357,7 +366,7 @@
         new Chart(bar2, {
             type: "bar",
             data: {
-//                labels: ['A', 'B', 'C', 'D', 'E', 'F'],
+                //                labels: ['A', 'B', 'C', 'D', 'E', 'F'],
                 labels: <?php echo json_encode($metadataTerbitByAgencyKeys); ?>,
                 datasets: [{
                     label: "Jumlah Metadata / Bahagian",
@@ -487,8 +496,8 @@
                     backgroundColor: '#35b83e',
                     data: [
                         @foreach ($permohonans as $mohon)
-                        '{{ $mohon->total_permohonan }}'
-                    @endforeach
+                            '{{ $mohon->total_permohonan }}'
+                        @endforeach
                     ],
                     fill: false,
                     maxBarThickness: 20
@@ -540,7 +549,13 @@
         new Chart(pie1, {
             type: "pie",
             data: {
-                labels: ['Administrative and Political Boundaries','Agriculture and Farming','Atmosphere and Climatic','Biology and Ecology','Business and Economic','Cadastral','Cultural, Society and Demography','Elevation and Derived Products','Environment and Conservation','Facilities and Structures','Geological and Geophysical','Human Health and Disease','Imagery and Base Maps','Inland Water Resources','Locations and Geodetic Networks','Military','Oceans and Estuaries','Transportation Networks','Utilities and Communication'
+                labels: ['Administrative and Political Boundaries', 'Agriculture and Farming',
+                    'Atmosphere and Climatic', 'Biology and Ecology', 'Business and Economic', 'Cadastral',
+                    'Cultural, Society and Demography', 'Elevation and Derived Products',
+                    'Environment and Conservation', 'Facilities and Structures', 'Geological and Geophysical',
+                    'Human Health and Disease', 'Imagery and Base Maps', 'Inland Water Resources',
+                    'Locations and Geodetic Networks', 'Military', 'Oceans and Estuaries',
+                    'Transportation Networks', 'Utilities and Communication'
                 ],
                 datasets: [{
                     label: "Projects",
@@ -634,8 +649,8 @@
                     backgroundColor: ['#17c1e8', '#cb0c9f', '#a8b8d8', '#3A415F', '#a8b8d8'],
                     data: [
                         @foreach ($permohonan_kategori as $mohon)
-                        '{{ $mohon->total }}',
-                    @endforeach
+                            '{{ $mohon->total }}',
+                        @endforeach
                     ],
                     fill: false
                 }],

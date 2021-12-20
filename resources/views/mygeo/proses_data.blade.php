@@ -8,12 +8,20 @@
             width: auto;
         }
 
+        .bg-user {
+            background-color: lightpink
+        }
+
+        .bg-admin {
+            background-color: #C8A2C8
+        }
+
     </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header">
+        <section class="header bg-admin">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -38,7 +46,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -118,7 +126,8 @@
                             <form action="{{ url('simpan_proses_data') }}" method="POST">
                                 @csrf
                                 <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
-                                <i class="text-warning float-right" style="font-size: 13px">**Sila kemaskini surat balasan sebelum isi maklumat proses data</i>
+                                <i class="text-warning float-right" style="font-size: 13px">**Sila kemaskini surat balasan
+                                    sebelum isi maklumat proses data</i>
                                 <table id="table_proses_data2" class="table table-bordered table-striped"
                                     style="width:100%;">
                                     <thead>
@@ -171,9 +180,17 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-control-label mr-2">Pautan Data </label>
-                                            <input class="form-control form-control-sm mb-2" name="pautan_data"
-                                                placeholder="Masukkan Pautan Data" type="text"
-                                                value="{{ $permohonan->proses_datas->pautan_data }}">
+                                            <div class="d-flex mb-2">
+                                                <input class="form-control form-control-sm mr-2" name="pautan_data[0]"
+                                                    placeholder="Masukkan Pautan Data" type="text" id="pautan_datas"
+                                                    value="{{ $permohonan->proses_datas->pautan_data }}">
+
+                                                <button type="button" class="btn btn-sm btn-outline-primary"
+                                                    onclick="addPautanData()"><i class='fas fa-plus pb-0 mb-0'></i></button>
+                                            </div>
+
+                                            <div class="form-group dynamicAddPautan" id="dynamicAddPautan">
+                                            </div>
 
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
                                             <input type="text"
@@ -186,6 +203,7 @@
                                             Kemaskini
                                         </a>
                                     </div>
+
                                     <div class="col-xl-6 pt-9 text-right">
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                         <input type="hidden" name="id" value="{{ $permohonan->id }}">
@@ -249,5 +267,25 @@
                 }
             });
         });
+    </script>
+    <script type="text/javascript">
+        var i = 0;
+        function addPautanData() {
+            d = document.getElementById("pautan_datas").value;
+            ++i;
+            $(".dynamicAddPautan").append(
+                `<span class="d-flex mb-2"><input type="text" name="pautan_data[` + i +
+                `]" class="form-control form-control-sm mr-2"><button type="button" class="btn btn-outline-warning btn-sm remove-input-field"><i class="fas fa-trash"></i>
+                    </button></span>`
+            );
+
+            console.log('masuk');
+
+            $(document).on('click', '.remove-input-field', function() {
+                --i;
+                $(this).parents('span').remove();
+            });
+
+        }
     </script>
 @stop

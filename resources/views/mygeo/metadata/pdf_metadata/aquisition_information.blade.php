@@ -196,7 +196,7 @@
                                 <?php
                             }
                             ?>
-                            
+
                             <h6 class="heading-small text-muted mt-2 mb-3">Operation</h6>
                             <?php
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->operationIdentifier->CharacterString != "") {

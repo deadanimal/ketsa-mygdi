@@ -200,7 +200,7 @@
         $(document).on("change", "#pengguna_lama", function() {
             var penggunaLama = $(this).val();
             $("#pengguna_baru option").prop("disabled", false);
-            $("#pengguna_baru option[value=" + penggunaLama + "]").prop("disabled", true);
+            $("#pengguna_baru option[value=" + penggunaLama + "]").prop("hidden", true);
             $("#pengguna_baru").val($("#pengguna_baru option:first").val());
             $("#pengguna_baru option:first").prop('disabled', true);
 
@@ -230,9 +230,9 @@
             var pengguna_baru = $('#pengguna_baru').val();
 
             if (agensi === "" || !agensi || pengguna_lama === "" || !pengguna_lama || pengguna_lama === "Pilih" || pengguna_baru === "" || !pengguna_baru || pengguna_baru === "Pilih") {
-                $(".btnPindahAkaun").prop('disabled', true);
+                $(".btnPindahAkaun").prop('hidden', true);
             } else {
-                $(".btnPindahAkaun").prop('disabled', false);
+                $(".btnPindahAkaun").prop('hidden', false);
             }
         }
 

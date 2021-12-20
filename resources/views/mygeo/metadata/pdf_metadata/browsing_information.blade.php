@@ -118,17 +118,17 @@
         <?php
         if($flag1 == 1){
             ?>
-            $('.browseInfoSubtajuk1').hide();    
+            $('.browseInfoSubtajuk1').hide();
             <?php
         }else{
             ?>
             $('.browseInfoSubtajuk1').show();
             <?php
         }
-        
+
         if($flag2 == 1){
             ?>
-            $('.browseInfoSubtajuk2').hide();    
+            $('.browseInfoSubtajuk2').hide();
             <?php
         }else{
             ?>

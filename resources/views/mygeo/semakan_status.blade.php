@@ -3,13 +3,24 @@
 @section('content')
 
     <style>
+        .badge {
+            color: rgb(44, 44, 44)
+        }
+
+        .bg-user {
+            background-color: lightpink
+        }
+
+        .bg-admin {
+            background-color: #C8A2C8
+        }
 
     </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header">
+        <section class="header bg-user">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -34,7 +45,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+<br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -80,13 +91,13 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('/lihat_permohonan/'.$permohonan->id) }}"
-                                                        class="btn btn-sm btn-success text-center" @if($permohonan->status != 2) disabled @endif><i
-                                                            class="fas fa-edit"></i>
+                                                    <a href="{{ url('/lihat_permohonan/' . $permohonan->id) }}"
+                                                        class="btn btn-sm btn-success text-center"
+                                                        @if ($permohonan->status != 2) disabled @endif><i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $permohonan->id }}"
-                                                        class="btnDelete btn btn-sm btn-danger mr-2" @if($permohonan->status != 2) disabled @endif><i
-                                                            class="fas fa-trash"></i>
+                                                        class="btnDelete btn btn-sm btn-danger mr-2"
+                                                        @if ($permohonan->status != 2) disabled @endif><i class="fas fa-trash"></i>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -107,7 +118,7 @@
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                    "scrollX":true,
+                "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,

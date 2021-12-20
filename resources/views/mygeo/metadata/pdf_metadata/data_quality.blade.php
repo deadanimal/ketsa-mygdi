@@ -1,8 +1,6 @@
 <?php $flag = 1; ?>
 <style>
-    td {
-padding-right: 2rem;
-    }
+
 </style>
 <div class="card card-primary mb-4 div_c15" id="div_c15">
     <div class="card-header">
@@ -82,7 +80,7 @@ padding-right: 2rem;
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -257,7 +255,7 @@ padding-right: 2rem;
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -569,7 +567,7 @@ padding-right: 2rem;
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -811,7 +809,7 @@ padding-right: 2rem;
                                 <div class="form-group row">
                                     <div class="bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -1061,7 +1059,7 @@ padding-right: 2rem;
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>

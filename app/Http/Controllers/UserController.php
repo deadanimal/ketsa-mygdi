@@ -65,7 +65,7 @@ class UserController extends Controller {
         $ids = [ 5, 6, 3, 4, 2];
         $peranans = $peranans->sortBy(function($model) use ($ids) {
             return array_search($model->getKey(), $ids);
-        }); 
+        });
 
         $aos = AgensiOrganisasi::distinct('name')->whereNull('bahagian')->get();
 
@@ -99,42 +99,6 @@ class UserController extends Controller {
     public function get_user_details(){
         $user_id = $_POST['user_id'];
         $user_details = User::where(["id"=>$user_id])->get()->first();
-//        $html_details = '
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Nama Penuh</label>
-//                <div class="col-sm-10">
-//                    :'.$user_details->name.'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Agensi</label>
-//                <div class="col-sm-10">
-//                    :'.($user_details->hasRole('Pemohon Data') ? $user_details->agensi_organisasi:$user_details->agensiOrganisasi->name).'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Bahagian</label>
-//                <div class="col-sm-10">
-//                    :'.$user_details->bahagian.'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Telefon Pejabat</label>
-//                <div class="col-sm-10">
-//                    :'.$user_details->phone_pejabat.'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Emel</label>
-//                <div class="col-sm-10">
-//                    :'.$user_details->email.'
-//                </div>
-//            </div>
-//            <div class="form-group row">
-//                <label for="inputEmail3" class="col-sm-2">Peranan</label>
-//                <div class="col-sm-10">
-//                    :
-//        ';
         $html_details = '
             <div class="row mb-2">
                 <div class="col-3">
@@ -283,7 +247,7 @@ class UserController extends Controller {
         echo $html_details;
         exit;
     }
-    
+
     public function get_user_details_kemaskini(){
         $user_id = $_POST['user_id'];
         $user_details = User::where(["id"=>$user_id])->get()->first();
@@ -336,7 +300,7 @@ class UserController extends Controller {
                     <option value="">Pilih...</option>
                 </select>
 ';
-        
+
         if (Auth::user()->hasRole("Pemohon Data")) {
             $html_details .= '
                         <input class="form-control form-control-sm" id="agensi_organisasi" name="agensi_organisasi"
@@ -531,7 +495,7 @@ class UserController extends Controller {
 //            }
 //        }
 //        exit();
-        
+
 //        $usersToMigrate = Ftesttodel2::get();
 //        foreach($usersToMigrate as $u){
 //            $theUser = User::create([
@@ -546,7 +510,7 @@ class UserController extends Controller {
 //                'status' => ($u->status == "Yes" ? "1":"0"),
 //                'disahkan' => '1',
 //                'assigned_roles' => "Penerbit Metadata",
-//                'mygdix_user_id' => $u->id_user 
+//                'mygdix_user_id' => $u->id_user
 //            ]);
 //            $theUser->assignRole('Penerbit Metadata');
 //        }
@@ -586,7 +550,7 @@ class UserController extends Controller {
         $roles = Role::get();
         return view('mygeo.profile.profil_edit', compact('user','roles','kategori'));
     }
-    
+
     public function edit_admin($id){
         $user = User::where(["id"=>$id])->get()->first();
         if(strpos($user->kategori,"IPTA") !== false){
@@ -607,7 +571,7 @@ class UserController extends Controller {
             "uname" => 'required',
             "nric" => 'required',
             "agensi_organisasi" => 'required',
-            "phone_pejabat" => 'required',          
+            "phone_pejabat" => 'required',
         ];
         $fields["sektor"] = 'required';
         if(Auth::user()->email != $request->email){
@@ -628,9 +592,9 @@ class UserController extends Controller {
             "phone_pejabat.required" => 'Phone Pejabat required',
             "phone_bimbit.required" => 'Phone Bimbit required',
         ];
-        
+
         $this->validate($request, $fields, $customMsg);
-        
+
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
         $user->nric = $request->nric;
@@ -662,7 +626,7 @@ class UserController extends Controller {
 
         return redirect('mygeo_profil')->with('message','Maklumat pengguna berjaya dikemas kini.');
     }
-    
+
     public function update_profile_admin(Request $request){
         //save user's role
         if(!is_null($request->peranan)){
@@ -731,7 +695,7 @@ class UserController extends Controller {
 
         return redirect('mygeo_profil')->with('message','Gambar profil berjaya dikemas kini.');
     }
-    
+
     public function update_gambarprofile_admin(Request $request){
         //save gambar profil
         if(isset($_FILES['gambar_profil']) && (file_exists($_FILES['gambar_profil']['tmp_name']))){
@@ -852,7 +816,7 @@ class UserController extends Controller {
             if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
                 $name = trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
             }
-            
+
             //status
             $status = "";
             if($met->disahkan == '0'){
@@ -929,7 +893,7 @@ class UserController extends Controller {
             $ao = AgensiOrganisasi::where('id',$request->agensi_organisasi)->get()->first();
             $sektor = $ao->sektor;
         }
-        
+
         //if role selected is pengesah, check if there is already a pengesah in the bahagian selected
         if($request->peranan == 'Pengesah Metadata' && $request->bahagian != ""){
             $pengesahs = User::whereHas("roles", function ($q) {
@@ -939,7 +903,7 @@ class UserController extends Controller {
                 return redirect('mygeo_senarai_pengguna_berdaftar')->with(['error'=>'1','message'=>'Anda telah memilih Bahagian yang telah mempunyai Pengesah Metadata yang berdaftar. Hanya satu Pengesah Metadata yang akan didaftarkan dalam satu Agensi dan Bahagian yang sama. Sila hubungi Pentadbir Aplikasi untuk maklumat lanjut.']);
             }
         }
-        
+
         try{
             $nu = new User;
             $nu->name = $request->namaPenuh;

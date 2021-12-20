@@ -9,13 +9,20 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
     <style>
+        .bg-user {
+            background-color: lightpink
+        }
+
+        .bg-admin {
+            background-color: #C8A2C8
+        }
     </style>
 
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header">
+        <section class="header bg-user">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -40,7 +47,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+<br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -97,12 +104,24 @@
                                                             $inTempohUrl = 0;
                                                         }
                                                     }
+                                                    $res = json_decode($permohonan->proses_datas->pautan_data);
                                                     ?>
-                                                    <a @if(!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1) data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $permohonan->proses_datas->pautan_data }}" @endif><span
-                                                            class="fas fa-download mr-2"></span>
-                                                        Muat Turun</a>
+                                                    <?php
+                                                    
+                                                    foreach($res as $url){ ?>
+                                                       <a @if(!empty($url) && $inTempohUrl == 1) data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
+                                                        <span
+                                                            class="fas fa-download mr-2">
+                    
+                                                        </span>
+                                                        {{$url}}</a><br>
+                                                       <?php
+                                                    }
+                                                    ?>
+                                                    
                                                 </td>
                                             </tr>
+                                            
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -147,7 +166,7 @@
             var acceptance = $(this).data('acceptance');
 
             if(acceptance == '1'){
-                window.open("{{ (isset($permohonan->proses_datas) ? $permohonan->proses_datas->pautan_data:'') }}",'_blank');
+                window.open(url,'_blank');
                 window.location.reload();
             }else{
                 swal({

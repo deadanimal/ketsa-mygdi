@@ -203,6 +203,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/akuan_penerimaan/{id}','DataAsasController@akuan_terima');
     Route::post('/api/dokumens','DataAsasController@api_store_generate_nric')->name('janaSalinanIC');
     Route::post('/api/kemaskini_dokumens','DataAsasController@api_update_generate_nric')->name('kemaskiniSalinanIC');
+    Route::post('/api/dokumen/akuan_terima', 'DataAsasController@generate_pdf_akuan_terima');
 
     Route::get('/proses_data','DataAsasController@proses_data');
     Route::post('/simpan_proses_data','DataAsasController@update_proses_data');
@@ -229,7 +230,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/tukar_peranan','UserController@tukar_peranan');
 
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-    
+
     Route::get('/download_laporan_perincian_metadata','LaporanDashboardController@laporan_perincian_metadata');
     Route::get('/download_laporan_bil_metadata_terbit_ikut_agensi','LaporanDashboardController@laporan_bil_metadata_terbit_ikut_agensi');
     Route::get('/download_laporan_bil_mohon_lulus','LaporanDashboardController@laporan_bil_mohon_lulus');
@@ -279,4 +280,13 @@ Route::get('/download_file_contohjenismetadata/{id}', 'MetadataController@downlo
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// =================== Redirect Tooltips =====================
+
+Route::get('lampiran/content_information', function(){return view('tooltips/content_information');});
+Route::get('lampiran/title', function(){return view('tooltips/title');});
+Route::get('lampiran/abstract', function(){return view('tooltips/abstract');});
+Route::get('lampiran/topic_category', function(){return view('tooltips/topic_category');});
+Route::get('lampiran/keyword', function(){return view('tooltips/keyword');});
+Route::get('lampiran/ordering_instruction', function(){return view('tooltips/ordering_instruction');});
 

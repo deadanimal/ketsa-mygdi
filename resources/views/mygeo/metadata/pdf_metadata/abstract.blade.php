@@ -2,7 +2,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Nama Aplikasi<span class="text-warning">*</span>
+                Nama Aplikasi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -16,7 +16,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tujuan<span class="text-warning">*</span>
+                Tujuan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -30,7 +30,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tahun Pembangunan<span class="text-warning">*</span>
+                Tahun Pembangunan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -44,7 +44,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Kemaskini<span class="text-warning">*</span>
+                Kemaskini
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -58,7 +58,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Data Terlibat<span class="text-warning">*</span>
+                Data Terlibat
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -72,7 +72,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Sasaran Pengguna<span class="text-warning">*</span>
+                Sasaran Pengguna
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -86,7 +86,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Versi<span class="text-warning">*</span>
+                Versi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -100,7 +100,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Perisian Yang Digunakan Dalam Pembangunan<span class="text-warning">*</span>
+                Perisian Yang Digunakan Dalam Pembangunan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -119,7 +119,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Nama Dokumen<span class="text-warning">*</span>
+                Nama Dokumen
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -133,7 +133,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tujuan<span class="text-warning">*</span>
+                Tujuan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -147,7 +147,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tahun Terbitan<span class="text-warning">*</span>
+                Tahun Terbitan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -161,7 +161,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Edisi<span class="text-warning">*</span>
+                Edisi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -180,7 +180,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Nama Aktiviti<span class="text-warning">*</span>
+                Nama Aktiviti
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -194,7 +194,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tujuan<span class="text-warning">*</span>
+                Tujuan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -208,7 +208,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Lokasi<span class="text-warning">*</span>
+                Lokasi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -222,7 +222,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tahun<span class="text-warning">*</span>
+                Tahun
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -241,7 +241,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Nama Peta<span class="text-warning">*</span>
+                Nama Peta
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -255,7 +255,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Kawasan<span class="text-warning">*</span>
+                Kawasan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -269,7 +269,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tujuan<span class="text-warning">*</span>
+                Tujuan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -283,7 +283,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tahun Terbitan<span class="text-warning">*</span>
+                Tahun Terbitan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -297,7 +297,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Edisi<span class="text-warning">*</span>
+                Edisi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -311,7 +311,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                No. Siri<span class="text-warning">*</span>
+                No. Siri
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -325,7 +325,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Skala<span class="text-warning">*</span>
+                Skala
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -339,7 +339,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Unit<span class="text-warning">*</span>
+                Unit
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -358,7 +358,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Nama Data<span class="text-warning">*</span>
+                Nama Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -372,7 +372,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Lokasi<span class="text-warning">*</span>
+                Lokasi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -386,7 +386,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Rumusan Tentang Data<span class="text-warning">*</span>
+                Rumusan Tentang Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -400,7 +400,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tujuan Data<span class="text-warning">*</span>
+                Tujuan Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -414,7 +414,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Kaedah Penyediaan Data<span class="text-warning">*</span>
+                Kaedah Penyediaan Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -428,7 +428,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Format<span class="text-warning">*</span>
+                Format
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -442,7 +442,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Unit<span class="text-warning">*</span>
+                Unit
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -456,7 +456,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Skala<span class="text-warning">*</span>
+                Skala
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -470,7 +470,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Status Data<span class="text-warning">*</span>
+                Status Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -484,7 +484,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tahun Perolehan<span class="text-warning">*</span>
+                Tahun Perolehan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -498,7 +498,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Jenis Satelit<span class="text-warning">*</span>
+                Jenis Satelit
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -512,7 +512,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Format<span class="text-warning">*</span>
+                Format
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -526,7 +526,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Resolusi<span class="text-warning">*</span>
+                Resolusi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -540,7 +540,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Kawasan Litupan<span class="text-warning">*</span>
+                Kawasan Litupan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -559,7 +559,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Nama Servis<span class="text-warning">*</span>
+                Nama Servis
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -573,7 +573,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Lokasi<span class="text-warning">*</span>
+                Lokasi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -587,7 +587,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tujuan<span class="text-warning">*</span>
+                Tujuan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -601,7 +601,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Data Yang Terlibat<span class="text-warning">*</span>
+                Data Yang Terlibat
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -615,7 +615,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Polisi<span class="text-warning">*</span>
+                Polisi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -629,7 +629,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Peringkat Capaian<span class="text-warning">*</span>
+                Peringkat Capaian
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -643,7 +643,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Format<span class="text-warning">*</span>
+                Format
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -662,7 +662,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Nama Perisian<span class="text-warning">*</span>
+                Nama Perisian
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -676,7 +676,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Versi<span class="text-warning">*</span>
+                Versi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -690,7 +690,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tujuan<span class="text-warning">*</span>
+                Tujuan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -704,7 +704,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tahun Penggunaan Perisian<span class="text-warning">*</span>
+                Tahun Penggunaan Perisian
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -718,7 +718,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Kaedah Perolehan<span class="text-warning">*</span>
+                Kaedah Perolehan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -732,7 +732,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Format<span class="text-warning">*</span>
+                Format
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -746,7 +746,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Pengeluar<span class="text-warning">*</span>
+                Pengeluar
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -760,7 +760,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Keupayaan<span class="text-warning">*</span>
+                Keupayaan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -774,7 +774,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Data Yang Terlibat<span class="text-warning">*</span>
+                Data Yang Terlibat
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -788,7 +788,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Keperluan Perkakasan<span class="text-warning">*</span>
+                Keperluan Perkakasan
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -807,7 +807,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Nama Data<span class="text-warning">*</span>
+                Nama Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -821,7 +821,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Lokasi<span class="text-warning">*</span>
+                Lokasi
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -835,7 +835,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Rumusan Tentang Data<span class="text-warning">*</span>
+                Rumusan Tentang Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -849,7 +849,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Tujuan Data<span class="text-warning">*</span>
+                Tujuan Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -863,7 +863,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Kaedah Penyediaan Data<span class="text-warning">*</span>
+                Kaedah Penyediaan Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -877,7 +877,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Format<span class="text-warning">*</span>
+                Format
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -891,7 +891,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Unit<span class="text-warning">*</span>
+                Unit
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -905,7 +905,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Skala<span class="text-warning">*</span>
+                Skala
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">
@@ -919,7 +919,7 @@
     <div class="row mb-2">
         <div class="col-3">
             <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                Status Data<span class="text-warning">*</span>
+                Status Data
             </label><label class="float-right">:</label>
         </div>
         <div class="col-7">

@@ -42,6 +42,17 @@
     }
 
 </style>
+<style>
+    .table td{
+        padding: 0.2rem 1rem;
+    }
+
+    td .form-check-label{
+        font-weight: bold;
+        margin-bottom: .7rem;
+        font-size: 15px;
+    }
+</style>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -535,7 +546,7 @@
                 <?php
             }
             ?>
-            
+
             window.location.href = url;
         });
 

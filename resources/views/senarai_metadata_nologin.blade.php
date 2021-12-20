@@ -52,13 +52,13 @@
    .fautocomplete #searchResult li:hover{
     cursor: pointer;
    }
-   
-   
-   
-   
-   
-   
-   
+
+
+
+
+
+
+
 /*   * { box-sizing: border-box; }
 body {
   font: 16px Arial;
@@ -286,9 +286,9 @@ input[type=submit] {
                                                                 <?php
                                                                 $url = "";
                                                                 if(isset($val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString)){
-                                                                    $url = $val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString;   
+                                                                    $url = $val->identificationInfo->SV_ServiceIdentification->serviceUrl->CharacterString;
                                                                 }elseif(isset($val->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString)){
-                                                                    $url = $val->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString;   
+                                                                    $url = $val->identificationInfo->MD_DataIdentification->serviceUrl->CharacterString;
                                                                 }
                                                                 if(trim($url) != ""){
                                                                     ?>
@@ -419,8 +419,8 @@ input[type=submit] {
                     });
                     a.appendChild(b);
                 }
-                
-                
+
+
 //                /*check if the item starts with the same letters as the text field value:*/
 //                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
 //                    /*create a DIV element for each matching element:*/
@@ -502,7 +502,7 @@ input[type=submit] {
     $(document).ready(function() {
         var availableTags = <?php echo json_encode($metadataTitles); ?>;
         autocomplete(document.getElementById("carian"), availableTags);
-        
+
 //        $("#carian").off().bind("keyup",function(event){
 //            event.stopImmediatePropagation();
 //            var carian = $(this).val();

@@ -2,18 +2,21 @@
 
 @section('content')
 
-    <style>
-        .ftest {
-            display: inline;
-            width: auto;
-        }
+<style>
+    .bg-user {
+        background-color: lightpink
+    }
 
-    </style>
+    .bg-admin {
+        background-color: #C8A2C8
+    }
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="header">
+</style>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="header @if (Auth::user()->hasRole(['Pentadbir Data'])) bg-admin @elseif (Auth::user()->hasRole(['Pemohon Data'])) bg-user @endif">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -48,7 +51,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+<br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">

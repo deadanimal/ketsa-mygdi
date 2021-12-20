@@ -13,51 +13,83 @@
             </div>
             <div class="pl-lg-2">
                 <div class="row mb-2">
-                    @if($elemenMetadata['c15_data_quality_info']->status == '1')
-                    <div class="col-xl-1">
-                        <label class="form-control-label" for="input-DQscope" data-toggle="tooltip" title="Pengisian secara Pilihan: Skop DQ">
-                            <?php echo __('lang.dq_scope'); ?>
-                        </label>
-                    </div>
-                    <div class="col-xl-3">
-                        <select name="c15_data_quality_info" id="c15_data_quality_info" class="form-control form-control-sm">
-                            <option value="">Pilih...</option>
-                            <option value="Attribute" {{(old('c15_data_quality_info') == 'Attribute' ? "selected":"")}}>Attribute</option>
-                            <option value="Attribute Type" {{(old('c15_data_quality_info') == 'Attribute Type' ? "selected":"")}}>Attribute Type</option>
-                            <option value="Collection Session" {{(old('c15_data_quality_info') == 'Collection Session' ? "selected":"")}}>Collection Session</option>
-                            <option value="Dataset" {{(old('c15_data_quality_info') == 'Dataset' ? "selected":"")}}>Dataset</option>
-                            <option value="Series" {{(old('c15_data_quality_info') == 'Series' ? "selected":"")}}>Series</option>
-                            <option value="Feature" {{(old('c15_data_quality_info') == 'Feature' ? "selected":"")}}>Feature</option>
-                            <option value="Dimension Group" {{(old('c15_data_quality_info') == 'Dimension Group' ? "selected":"")}}>Dimension Group</option>
-                            <option value="Feature Type" {{(old('c15_data_quality_info') == 'Feature Type' ? "selected":"")}}>Feature Type</option>
-                            <option value="Field Session" {{(old('c15_data_quality_info') == 'Field Session' ? "selected":"")}}>Field Session</option>
-                            <option value="Model" {{(old('c15_data_quality_info') == 'Model' ? "selected":"")}}>Model</option>
-                            <option value="Non Geographic Date Set" {{(old('c15_data_quality_info') == 'Non Geographic Date Set' ? "selected":"")}}>Non Geographic Date Set</option>
-                            <option value="Property Type" {{(old('c15_data_quality_info') == 'Property Type' ? "selected":"")}}>Property Type</option>
-                            <option value="Service" {{(old('c15_data_quality_info') == 'Service' ? "selected":"")}}>Service</option>
-                            <option value="Software" {{(old('c15_data_quality_info') == 'Software' ? "selected":"")}}>Software</option>
-                            <option value="Tile" {{(old('c15_data_quality_info') == 'Tile' ? "selected":"")}}>Tile</option>
-                        </select>
-                    </div>
+                    @if ($elemenMetadata['c15_data_quality_info']->status == '1')
+                        <div class="col-xl-1">
+                            <label class="form-control-label" for="input-DQscope" data-toggle="tooltip"
+                                title="Pengisian secara Pilihan: Skop DQ">
+                                <?php echo __('lang.dq_scope'); ?>
+                            </label>
+                        </div>
+                        <div class="col-xl-3">
+                            <select name="c15_data_quality_info" id="c15_data_quality_info"
+                                class="form-control form-control-sm">
+                                <option value="">Pilih...</option>
+                                <option value="Attribute"
+                                    {{ old('c15_data_quality_info') == 'Attribute' ? 'selected' : '' }}>Attribute
+                                </option>
+                                <option value="Attribute Type"
+                                    {{ old('c15_data_quality_info') == 'Attribute Type' ? 'selected' : '' }}>Attribute
+                                    Type</option>
+                                <option value="Collection Session"
+                                    {{ old('c15_data_quality_info') == 'Collection Session' ? 'selected' : '' }}>
+                                    Collection Session</option>
+                                <option value="Dataset"
+                                    {{ old('c15_data_quality_info') == 'Dataset' ? 'selected' : '' }}>Dataset</option>
+                                <option value="Series"
+                                    {{ old('c15_data_quality_info') == 'Series' ? 'selected' : '' }}>
+                                    Series</option>
+                                <option value="Feature"
+                                    {{ old('c15_data_quality_info') == 'Feature' ? 'selected' : '' }}>Feature</option>
+                                <option value="Dimension Group"
+                                    {{ old('c15_data_quality_info') == 'Dimension Group' ? 'selected' : '' }}>
+                                    Dimension
+                                    Group</option>
+                                <option value="Feature Type"
+                                    {{ old('c15_data_quality_info') == 'Feature Type' ? 'selected' : '' }}>Feature
+                                    Type
+                                </option>
+                                <option value="Field Session"
+                                    {{ old('c15_data_quality_info') == 'Field Session' ? 'selected' : '' }}>Field
+                                    Session</option>
+                                <option value="Model" {{ old('c15_data_quality_info') == 'Model' ? 'selected' : '' }}>
+                                    Model</option>
+                                <option value="Non Geographic Date Set"
+                                    {{ old('c15_data_quality_info') == 'Non Geographic Date Set' ? 'selected' : '' }}>
+                                    Non Geographic Date Set</option>
+                                <option value="Property Type"
+                                    {{ old('c15_data_quality_info') == 'Property Type' ? 'selected' : '' }}>Property
+                                    Type</option>
+                                <option value="Service"
+                                    {{ old('c15_data_quality_info') == 'Service' ? 'selected' : '' }}>Service
+                                </option>
+                                <option value="Software"
+                                    {{ old('c15_data_quality_info') == 'Software' ? 'selected' : '' }}>Software
+                                </option>
+                                <option value="Tile" {{ old('c15_data_quality_info') == 'Tile' ? 'selected' : '' }}>
+                                    Tile</option>
+                            </select>
+                        </div>
                     @endif
-                    @if($elemenMetadata['c15_data_history']->status == '1')
-                    <div class="col-xl-2">
-                        <label class="form-control-label float-right" for="input-datahistory">
-                            <?php echo __('lang.data_history'); ?></label>
-                    </div>
-                    <div class="col-md-2">
-                        <input class="form-control form-control-sm" type="text" name="c15_data_history" id="c15_data_history" placeholder="None" value="{{old('c15_data_history')}}">
-                    </div>
+                    @if ($elemenMetadata['c15_data_history']->status == '1')
+                        <div class="col-xl-2">
+                            <label class="form-control-label float-right" for="input-datahistory">
+                                <?php echo __('lang.data_history'); ?></label>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control form-control-sm" type="text" name="c15_data_history"
+                                id="c15_data_history" placeholder="None" value="{{ old('c15_data_history') }}">
+                        </div>
                     @endif
-                    @if($elemenMetadata['c15_date']->status == '1')
-                    <div class="col-xl-1">
-                        <label class="form-control-label  float-right" for="input-date">
-                            <?php echo __('lang.date_time'); ?>
-                        </label>
-                    </div>
-                    <div class="col-xl-3">
-                        <input class="form-control form-control-sm" type="date" name="c15_date" id="c15_date" value="{{old('c15_date')}}">
-                    </div>
+                    @if ($elemenMetadata['c15_date']->status == '1')
+                        <div class="col-xl-1">
+                            <label class="form-control-label  float-right" for="input-date">
+                                <?php echo __('lang.date_time'); ?>
+                            </label>
+                        </div>
+                        <div class="col-xl-3">
+                            <input class="form-control form-control-sm" type="date" name="c15_date" id="c15_date"
+                                value="{{ old('c15_date') }}">
+                        </div>
                     @endif
                 </div>
             </div>
@@ -68,29 +100,38 @@
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab_completeness" data-toggle="pill" href="#completeness" role="tab" aria-controls="completeness" aria-selected="true"><?php echo __('lang.completeness'); ?></a>
+                                <a class="nav-link active" id="tab_completeness" data-toggle="pill" href="#completeness"
+                                    role="tab" aria-controls="completeness" aria-selected="true"><?php echo __('lang.completeness'); ?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab_consistency" data-toggle="pill" href="#consistency" role="tab" aria-controls="consistency" aria-selected="false"><?php echo __('lang.conceptualConsistency'); ?></a>
+                                <a class="nav-link" id="tab_consistency" data-toggle="pill" href="#consistency"
+                                    role="tab" aria-controls="consistency" aria-selected="false"><?php echo __('lang.conceptualConsistency'); ?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab_position_accuracy" data-toggle="pill" href="#position_accuracy" role="tab" aria-controls="position_accuracy" aria-selected="false"><?php echo __('lang.positionalAccuracy'); ?></a>
+                                <a class="nav-link" id="tab_position_accuracy" data-toggle="pill"
+                                    href="#position_accuracy" role="tab" aria-controls="position_accuracy"
+                                    aria-selected="false"><?php echo __('lang.positionalAccuracy'); ?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab_temp_accuracy" data-toggle="pill" href="#temp_accuracy" role="tab" aria-controls="temp_accuracy" aria-selected="false"><?php echo __('lang.temporalAccuracy'); ?></a>
+                                <a class="nav-link" id="tab_temp_accuracy" data-toggle="pill"
+                                    href="#temp_accuracy" role="tab" aria-controls="temp_accuracy"
+                                    aria-selected="false"><?php echo __('lang.temporalAccuracy'); ?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab_thematic_accuracy" data-toggle="pill" href="#thematic_accuracy" role="tab" aria-controls="thematic_accuracy" aria-selected="false"><?php echo __('lang.thematicAccuracy'); ?></a>
+                                <a class="nav-link" id="tab_thematic_accuracy" data-toggle="pill"
+                                    href="#thematic_accuracy" role="tab" aria-controls="thematic_accuracy"
+                                    aria-selected="false"><?php echo __('lang.thematicAccuracy'); ?></a>
                             </li>
                         </ul>
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-four-tabContent">
-                            <div class="tab-pane fade active show" id="completeness" role="tabpanel" aria-labelledby="tab_completeness">
+                            <div class="tab-pane fade active show" id="completeness" role="tabpanel"
+                                aria-labelledby="tab_completeness">
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -254,11 +295,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="consistency" role="tabpanel" aria-labelledby="tab_consistency">
+                            <div class="tab-pane fade" id="consistency" role="tabpanel"
+                                aria-labelledby="tab_consistency">
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -576,11 +618,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="position_accuracy" role="tabpanel" aria-labelledby="tab_position_accuracy">
+                            <div class="tab-pane fade" id="position_accuracy" role="tabpanel"
+                                aria-labelledby="tab_position_accuracy">
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -821,11 +864,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="temp_accuracy" role="tabpanel" aria-labelledby="tab_temp_accuracy">
+                            <div class="tab-pane fade" id="temp_accuracy" role="tabpanel"
+                                aria-labelledby="tab_temp_accuracy">
                                 <div class="form-group row">
                                     <div class="bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -1066,11 +1110,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="thematic_accuracy" role="tabpanel" aria-labelledby="tab_thematic_accuracy">
+                            <div class="tab-pane fade" id="thematic_accuracy" role="tabpanel"
+                                aria-labelledby="tab_thematic_accuracy">
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table-borderless">
+                                            <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -1320,7 +1365,7 @@
 </div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         //t1
         $('.Completeness_Commission').hide();
         $('.Completeness_Omission').hide();

@@ -19,9 +19,15 @@
                     <div class="col-7">
                         <input class="form-control form-control-sm ml-3" type="text" name="c2_metadataName"
                             id="c2_metadataName" value="{{ old('c2_metadataName') }}" />
+
                         @error('c2_metadataName')
                             <div class="text-error">{{ $message }}</div>
                         @enderror
+                    </div>
+                    <div class="col-1">
+                        <a href="lampiran/title" class="text-yellow" target="_blank">
+                            <i class="fas fa-lightbulb"></i>
+                        </a>
                     </div>
                 </div>
                 @endif
@@ -63,7 +69,7 @@
                 ?>
                 @include('mygeo.metadata.pengisian_metadata.abstract')
                 <br>
-                
+
                 @if($elemenMetadata['c10_file_url']->status == '1')
                 <div class="row mb-2 divIdentificationInformationUrl">
                     <div class="col-3">
@@ -82,7 +88,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 <?php /* //ori unseparated abstract ?>
                 <div class="row mb-2">
                     <div class="col-3">
@@ -99,7 +105,7 @@
                     </div>
                 </div>
                 <?php */ ?>
-                
+
                 @if($elemenMetadata['c2_metadataDate']->status == '1')
                 <div class="row mb-2 divMetadataDate">
                     <div class="col-3">
@@ -116,7 +122,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 @if($elemenMetadata['c2_metadataDateType']->status == '1')
                 <div class="row mb-2 divMetadataDateType">
                     <div class="col-3">
@@ -151,7 +157,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 @if($elemenMetadata['c2_metadataStatus']->status == '1')
                 <div class="row mb-2 divMetadataStatus">
                     <div class="col-3">
@@ -230,7 +236,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 @if($elemenMetadata['c2_typeOfServices']->status == '1')
                 <div class="row mb-2 divTypeOfServices">
                     <div class="col-3">
@@ -293,7 +299,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 @if($elemenMetadata['c2_operationName']->status == '1')
                 <div class="row mb-2 divOperationName">
                     <div class="col-3">
@@ -311,7 +317,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 @if($elemenMetadata['c2_serviceUrl']->status == '1')
                 <div class="row mb-2 divServiceUrl">
                     <div class="col-3">
@@ -330,7 +336,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 @if($elemenMetadata['c2_typeOfCouplingDataset']->status == '1')
                 <div class="row mb-2 divTypeOfCouplingDataset">
                     <div class="col-3">
@@ -373,12 +379,12 @@
                             }
                             ?>
                         </div>
-                        <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3" 
+                        <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3"
                             value="{{ isset($pengesahs->name) ? $pengesahs->name : '' }}">
                     </div>
                 </div>
                 @endif
-                
+
                 @if($elemenMetadata['c2_contact_agensiorganisasi']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
@@ -394,7 +400,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 @if($elemenMetadata['c2_contact_bahagian']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
@@ -410,7 +416,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 @if($elemenMetadata['c2_position_name']->status == '1')
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
@@ -528,7 +534,7 @@
                                             ?>
                                             <option value="<?php echo $country->name; ?>" <?php echo $selected; ?>><?php echo $country->name; ?></option><?php
                                         }
-                                    }                                                                                                                
+                                    }
                                     ?>
                                 </select>
                             </div>

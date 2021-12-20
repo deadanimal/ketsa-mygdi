@@ -1011,6 +1011,11 @@
             <div class="text-error">{{ $message }}</div>
             @enderror
         </div>
+        <div class="col-1">
+            <a href="lampiran/abstract" class="text-yellow" target="_blank">
+                <i class="fas fa-lightbulb"></i>
+            </a>
+        </div>
     </div>
 </div>
 @endif
