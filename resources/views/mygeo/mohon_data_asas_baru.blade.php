@@ -9,21 +9,20 @@
         }
 
     </style>
-<style>
-    .accordionHeader {
-        background-color:#b3ecff;
-        color:black;
-        cursor: pointer;
-        border-radius: 10px;
-    }
+    <style>
+        .accordionHeader:first-child {
+            color: black;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 15px 13px;
+        }
 
-    .card,
-    .card-header:first-child {
-        background-color: white;
-        border-radius: 12px;
-    }
+        .accordionHeader {
+            background-color: #b3d1ff;
+            /* border-radius: 12px; */
+        }
 
-</style>
+    </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -72,396 +71,326 @@
                 <div class="row">
                     <div class="col-12">
                         <div id="accordion">
-                                <!--========== collapese1 =============================================-->
-                                <div class="card card-primary div_c1" id="div_c1">
-                                    <div class="card-header accordionHeader" data-toggle="collapse"
-                                        href="#collapse1">
-                                        <b class="mb-0 pb-0" style="text-transform: uppercase;">Maklumat Permohonan</b>
-                                    </div>
-                                    <div id="collapse1" class="panel-collapse collapse in"
-                                        data-parent="#div_c1">
-                                        <div class="card-body">
-                                            <div class="acard-body opacity-8">
-                                                BALERR
-                                            </div>
+
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <h3 class="mb-0">Permohonan Baru</h3>
+                                        </div>
+
+                                        <div class="col-4 text-right">
+                                            <a href="{{ url()->previous() }}">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-default float-right">Kembali</button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                        </div>f
-                        <div class="card">
-                            @csrf
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h3 class="mb-0">Permohonan Baru</h3>
-                                    </div>
-
-                                    <div class="col-4 text-right">
-                                        <a href="{{ url()->previous() }}">
-                                            <button type="button"
-                                                class="btn btn-sm btn-default float-right">Kembali</button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-11 pl-lg-5">
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4" for="nama_penuh">
-                                                    Nama Penuh
-                                                </label>
-                                            </div>
-                                            <div class="col-8">
-                                                <input class="form-control form-control-sm ml-3" name="nama_penuh"
-                                                    type="text" value="{{ $permohonan->users->name }}" disabled />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4" for="nric">
-                                                    No Kad Pengenalan
-                                                </label>
-                                            </div>
-                                            <div class="col-8">
-                                                <input class="form-control form-control-sm ml-3" name="nric" type="text"
-                                                    value="{{ $permohonan->users->nric }}" disabled />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4" for="agensi_organisasi">
-                                                    Institusi
-                                                </label>
-                                            </div>
-                                            <div class="col-8">
-                                                <?php
-                                                $var = '';
-                                                if ($permohonan->users->hasRole(['Pemohon Data'])) {
-                                                    $var = $permohonan->users->agensi_organisasi;
-                                                } else {
-                                                    $var = isset($permohonan->users->agensiOrganisasi) ? $permohonan->users->agensiOrganisasi->name : '';
-                                                }
-                                                ?>
-                                                <input class="form-control form-control-sm ml-3" name="institusi"
-                                                    type="text" value="{{ $var }}" disabled />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4" for="email">
-                                                    Emel
-                                                </label>
-                                            </div>
-                                            <div class="col-8">
-                                                <input class="form-control form-control-sm ml-3" id="email" type="text"
-                                                    value="{{ $permohonan->users->email }}" disabled />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4" for="tel_pejabat">
-                                                    Telefon Pejabat
-                                                </label>
-                                            </div>
-                                            <div class="col-3">
-                                                <input class="form-control form-control-sm ml-3" name="tel_pejabat"
-                                                    type="text" value="{{ $permohonan->users->phone_pejabat }}"
-                                                    disabled />
-                                            </div>
-                                            <div class="col-2">
-                                                <label class="form-control-label mr-4" for="tel_bimbit">
-                                                    Telefon Bimbit
-                                                </label>
-                                            </div>
-                                            <div class="col-3">
-                                                <input class="form-control form-control-sm ml-3" name="tel_bimbit"
-                                                    type="text" value="{{ $permohonan->users->phone_bimbit }}" disabled />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4" for="peranan">
-                                                    Peranan
-                                                </label>
-                                            </div>
-                                            <div class="col-3">
-                                                <?php
-                                            if (!empty($permohonan->users->getRoleNames())) {
-                                                $count = 1;
-                                                foreach ($permohonan->users->getRoleNames() as $role) {
-                                                    ?><input class="form-control form-control-sm ml-3"
-                                                    name="peranan" type="text" value="<?php echo $role; ?> "
-                                                    disabled /><?php
-                                                                                                                                                                                    if ($count != count($permohonan->users->getRoleNames())) {                                                                    ?>,<?php                                                                                                   }
-                                                                                                                                                                                                                                                                                                                $count++;
-                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                        ?>
-
-                                            </div>
-                                            <div class="col-2">
-                                                <label class="form-control-label mr-4" for="phone_bimbit">
-                                                    Kategori
-                                                </label>
-                                            </div>
-                                            <div class="col-3">
-                                                <input class="form-control form-control-sm ml-3" type="text"
-                                                    value="{{ $permohonan->users->kategori }}" disabled />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr class="my-4">
-                                <div class="row">
-                                    <div class="col-7">
-                                        <h4 class="heading text-muted">Maklumat Permohonan</h4>
-                                    </div>
-                                    <div class="col-5 text-right">
-                                        <!-- <button class="btn btn-sm btn-default" type=><span class="text-white">Tambah</span></button> -->
-                                    </div>
-                                </div>
-                                <form action="{{ url('kemaskini_permohonan') }}" method="POST"
-                                    id="formHantarPermohonanPentadbir">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-10 pl-lg-5">
-                                            <div class="form-group">
-                                                <label for="name" class="form-control-label">Nama Permohonan</label>
-                                                <input type="text" class="form-control" name="name"
-                                                    value="{{ $permohonan->name }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="date" class="form-control-label">Tarikh Permohonan</label>
-                                                <input type="text" class="form-control" name="date"
-                                                    value="{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="tujuan" class="form-control-label">Tujuan Permohonan</label>
-                                                <textarea name="tujuan" cols="30" class="form-control"
-                                                    rows="10">{{ $permohonan->tujuan }}</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <hr class="my-4">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <h4 class="heading text-muted">Senarai Data dan Kawasan Data</h4>
-                                        </div>
-                                        <div class="col-5 text-right">
-                                            @if (Auth::user()->hasRole(['Pemohon Data']))
-                                                <a class="btn btn-sm btn-default" data-toggle="modal"
-                                                    data-target="#modal-senarai-kawasan-data"><span
-                                                        class="text-white">Tambah</span>
-                                                </a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <table id="table_metadatas" class="table table-bordered table-striped"
-                                        style="width:100%;">
-                                        <thead>
-                                            <tr>
-                                                <th>BIL</th>
-                                                <th>LAPISAN DATA</th>
-                                                <th>SUB-KATEGORI</th>
-                                                <th>KATEGORI</th>
-                                                <th>KAWASAN DATA</th>
-                                                @if (Auth::user()->hasRole(['Pemohon Data']))
-                                                    <th>TINDAKAN</th>
-                                                @endif
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($skdatas as $sk)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $sk->lapisan_data }}</td>
-                                                    <td>{{ $sk->subkategori }}</td>
-                                                    <td>{{ $sk->kategori }}</td>
-                                                    <td>{{ $sk->kawasan_data }}</td>
-                                                    @if (Auth::user()->hasRole(['Pemohon Data']))
-                                                        <td>
-                                                            <a data-toggle="modal"
-                                                                data-target="#modal-skd-{{ $sk->id }}">
-                                                                <button type="button" class="btn btn-sm btn-success"><i
-                                                                        class="fas fa-edit"></i></button>
-                                                            </a>
-                                                            <button type="button" data-skid="{{ $sk->id }}"
-                                                                class="btnDeleteSK btn btn-sm btn-danger mx-2"><i
-                                                                    class="fas fa-trash"></i>
-                                                            </button>
-                                                        </td>
-                                                    @endif
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-
-                                    <hr class="my-4">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <h4 class="heading text-muted">Dokumen Berkaitan</h4>
-                                        </div>
-                                        <div class="col-5 text-right">
-                                            @if (Auth::user()->hasRole(['Pemohon Data']))
-                                                <a class="btn btn-sm btn-default" data-toggle="modal"
-                                                    data-target="#modal-pilih-upload"><span
-                                                        class="text-white">Tambah</span>
-                                                </a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <table id="table_metadatas2" class="table table-bordered table-striped"
-                                        style="width:100%;">
-                                        <thead>
-                                            <tr>
-                                                <th>BIL</th>
-                                                <th>TAJUK DOKUMEN</th>
-                                                <th>NAMA FAIL</th>
-                                                <th>TINDAKAN</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($dokumens as $dokumen)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $dokumen->tajuk_dokumen }}</td>
-                                                    <td>{{ $dokumen->nama_fail }}{{ isset($dokumen->nama_fail) ? $dokumen->nama_failt : '-' }}
-                                                    </td>
-                                                    <td>
-                                                        @if (Auth::user()->hasRole(['Pemohon Data']))
-                                                            @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
-                                                                <a data-toggle="modal"
-                                                                    data-target="#modal-pilih-upload-{{ $dokumen->id }}">
-                                                                    <button type="button"
-                                                                        class="btn btn-sm btn-primary mr-2">Muat
-                                                                        Naik</button>
-                                                                </a>
-                                                            @else
-                                                                <a data-toggle="modal"
-                                                                    data-target="#modal-kemaskini-dokumen-{{ $dokumen->id }}">
-                                                                    <button type="button"
-                                                                        class="btn btn-sm btn-primary mr-2">Muat
-                                                                        Naik</button>
-                                                                </a>
-                                                            @endif
-                                                        @endif
-
-                                                        @if (!$dokumen->file_path == null)
-                                                            <a href="{{ url('/') . $dokumen->file_path }}"
-                                                                target="_blank">
-                                                                <button type="button"
-                                                                    class="btn btn-sm btn-success mr-2">Lihat</button>
-                                                            </a>
-                                                        @endif
-                                                        <button type="button" data-dokumenid="{{ $dokumen->id }}"
-                                                            class="btnDeleteDokumen btn btn-sm btn-danger"><i
-                                                                class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-
-                                    <hr class="my-4">
-                                    <div class="row mb-3">
-                                        @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar'))
-                                            <div class="col-7 form-inline">
-                                                <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
-                                                <a href="{{ url('akuan_pelajar/' . $permohonan->id) }}"
-                                                    class="btn btn-sm btn-default">Isi
-                                                    Borang</a>
-                                            </div>
-                                        @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir
-                                            Aplikasi']))
-                                            @if ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar')
-                                                <div class="col-7 form-inline">
-                                                    <h4 class="heading text-dark mr-2">AKUAN PELAJAR</h4>
-                                                    <a href="{{ url('/akuan_pelajar/' . $permohonan->id) }}"
-                                                        class="btn btn-sm btn-default">Papar </a>
-                                                </div>
-                                            @endif
-                                        @endif
-                                    </div>
-                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <h4 class="heading text-dark mr-2">Status Permohonan</h4>
-                                                <select class="form-control form-control-sm mb-4" name="status"
-                                                    onchange="showDiv(this)">
-                                                    <option disabled value="0"
-                                                        {{ $permohonan->status == '0' ? 'selected' : '' }}>Pilih
-                                                    </option>
-                                                    <option value="1" {{ $permohonan->status == '1' ? 'selected' : '' }}>
-                                                        DILULUSKAN</option>
-                                                    <option value="2" {{ $permohonan->status == '2' ? 'selected' : '' }}>
-                                                        DITOLAK</option>
-                                                </select>
-                                                <div id="hidden_div_catatan" @if ($permohonan->status == 0 || $permohonan->status == 1) class="hide" @endif>
-                                                    <h4 class="heading text-dark mr-2">Catatan Permohonan</h4>
-                                                    <select name="catatan" class="form-control form-control-sm mb-4"
-                                                        onchange="checkCatatan(this.value);">
-                                                        <option selected disabled>Pilih</option>
-                                                        <option value="Maklumat tidak lengkap" @if ($permohonan->catatan == 'Maklumat tidak lengkap') selected @endif>
-                                                            Maklumat tidak
-                                                            lengkap</option>
-                                                        <option value="Data yang dipohon tiada dalam simpanan PGN"
-                                                            @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
-                                                            dalam simpanan PGN</option>
-                                                        <option value="Maklumat pemohon tidak sahih"
-                                                            @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat pemohon tidak
-                                                            sahih</option>
-                                                        <option value="others" @if ($permohonan->catatan == 'others') selected @endif>Lain-lain</option>
-                                                    </select>
-                                                    <textarea name="catatan_lain" id="catatan"
-                                                        class="form-control form-control-sm" @if ($permohonan->catatan == 'others') style="display:block;" @else style="display:none;" @endif
-                                                        cols="30" rows="5">{{ $permohonan->catatan_lain }}</textarea>
-                                                </div>
-                                                <div id="hidden_div_pentadbir" @if ($permohonan->status == 0 || $permohonan->status == 2) class="hide" @endif>
-                                                    <h4 class="heading text-dark mr-2">Pentadbir Ditugaskan</h4>
-                                                    <select class="form-control form-control-sm" name="assign_admin">
-                                                        <option selected disabled>Pilih</option>
-                                                        @foreach ($pentadbirdata as $pd)
-                                                            <option value="{{ $pd->name }}" @if ($pd->name == $permohonan->assign_admin) selected @endif>
-                                                                {{ $pd->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <div class="float-right">
-                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-
-                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']) && $permohonan->status != 1)
-                                            <button type="button"
-                                                class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
-                                                Hantar
-                                            @elseif(Auth::user()->hasRole(['Pemohon Data']))
-                                                @if ($permohonan->dihantar != 1 || $permohonan->status == 2)
-                                                    <button type="button"
-                                                        class="btn btn-outline-success mx-2 btnSimpanDraf">
-                                                        Simpan
-                                                @endif
-                                        @endif
-                                </form>
-                                @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->dihantar != 1 || $permohonan->status == 2))
-                                    <form action="{{ url('hantar_permohonan') }}" method="POST"
-                                        id="formHantarPermohonan">
+                                <div class="card-body">
+                                    <form action="{{ url('kemaskini_permohonan') }}" method="POST"
+                                        id="formHantarPermohonanPentadbir">
                                         @csrf
+                                        <!--========== collapese1 =============================================-->
+                                        <div class="acard div_c1 mb-3" id="div_c1">
+                                            <div class="card-header accordionHeader" data-toggle="collapse"
+                                                href="#collapse1">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <h3 class="heading mb-0">Maklumat Permohonan</h3>
+                                                    </div>
+                                                    <div class="col-4 text-right">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="collapse1" class="panel-collapse collapse in show"
+                                                data-parent="#div_c1">
+                                                <div class="card-body">
+                                                    <div class="acard-body opacity-8">
+                                                        <div class="row">
+                                                            <div class="col-10 pl-lg-4">
+                                                                <div class="form-group">
+                                                                    <label for="name" class="form-control-label">Nama
+                                                                        Permohonan</label>
+                                                                    <input type="text" class="form-control" name="name"
+                                                                        value="{{ $permohonan->name }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="date" class="form-control-label">Tarikh
+                                                                        Permohonan</label>
+                                                                    <input type="text" class="form-control" name="date"
+                                                                        value="{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="tujuan" class="form-control-label">Tujuan
+                                                                        Permohonan</label>
+                                                                    <textarea name="tujuan" cols="30" class="form-control"
+                                                                        rows="10">{{ $permohonan->tujuan }}</textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                        <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
+                                        <!--========== collapese2 =============================================-->
+                                        <div class="acard div_c2 mb-3" id="div_c2">
+                                            <div class="card-header accordionHeader" data-toggle="collapse"
+                                                href="#collapse2">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <h3 class="heading mb-0">Senarai Data dan Kawasan Data</h3>
+                                                    </div>
+                                                    <div class="col-4 text-right">
+                                                        @if (Auth::user()->hasRole(['Pemohon Data']))
+                                                            <a id="collapse2" class="btn btn-sm btn-default collapse"
+                                                                data-toggle="modal"
+                                                                data-target="#modal-senarai-kawasan-data"><span
+                                                                    class="text-white">Tambah</span>
+                                                            </a>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="collapse2" class="panel-collapse collapse in" data-parent="#div_c2">
+                                                <div class="card-body">
+                                                    <div class="acard-body opacity-8">
+                                                        <table id="table_metadatas"
+                                                            class="table table-bordered table-striped" style="width:100%;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>BIL</th>
+                                                                    <th>LAPISAN DATA</th>
+                                                                    <th>SUB-KATEGORI</th>
+                                                                    <th>KATEGORI</th>
+                                                                    <th>KAWASAN DATA</th>
+                                                                    @if (Auth::user()->hasRole(['Pemohon Data']))
+                                                                        <th>TINDAKAN</th>
+                                                                    @endif
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($skdatas as $sk)
+                                                                    <tr>
+                                                                        <td>{{ $loop->iteration }}</td>
+                                                                        <td>{{ $sk->lapisan_data }}</td>
+                                                                        <td>{{ $sk->subkategori }}</td>
+                                                                        <td>{{ $sk->kategori }}</td>
+                                                                        <td>{{ $sk->kawasan_data }}</td>
+                                                                        @if (Auth::user()->hasRole(['Pemohon Data']))
+                                                                            <td>
+                                                                                <a data-toggle="modal"
+                                                                                    data-target="#modal-skd-{{ $sk->id }}">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-sm btn-success"><i
+                                                                                            class="fas fa-edit"></i></button>
+                                                                                </a>
+                                                                                <button type="button"
+                                                                                    data-skid="{{ $sk->id }}"
+                                                                                    class="btnDeleteSK btn btn-sm btn-danger mx-2"><i
+                                                                                        class="fas fa-trash"></i>
+                                                                                </button>
+                                                                            </td>
+                                                                        @endif
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--========== collapese3 =============================================-->
+                                        <div class="acard div_c3 mb-3" id="div_c3">
+                                            <div class="card-header accordionHeader" data-toggle="collapse"
+                                                href="#collapse3">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <h3 class="heading mb-0">Dokumen Berkaitan</h3>
+                                                    </div>
+                                                    <div class="col-4 text-right">
+                                                        @if (Auth::user()->hasRole(['Pemohon Data']))
+                                                            <a id="collapse3" class="btn btn-sm btn-default collapse"
+                                                                data-toggle="modal" data-target="#modal-pilih-upload"><span
+                                                                    class="text-white">Tambah</span>
+                                                            </a>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="collapse3" class="panel-collapse collapse in" data-parent="#div_c3">
+                                                <div class="card-body">
+                                                    <div class="acard-body opacity-8">
+                                                        <table id="dokumen_table" class="table table-bordered table-striped"
+                                                            style="width:100%;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>BIL</th>
+                                                                    <th>TAJUK DOKUMEN</th>
+                                                                    <th>NAMA FAIL</th>
+                                                                    <th>TINDAKAN</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($dokumens as $dokumen)
+                                                                    <tr>
+                                                                        <td>{{ $loop->iteration }}</td>
+                                                                        <td>{{ $dokumen->tajuk_dokumen }}</td>
+                                                                        <td>{{ $dokumen->nama_fail }}{{ isset($dokumen->nama_fail) ? $dokumen->nama_failt : '-' }}
+                                                                        </td>
+                                                                        <td>
+                                                                            @if (Auth::user()->hasRole(['Pemohon Data']))
+                                                                                @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
+                                                                                    <a data-toggle="modal"
+                                                                                        data-target="#modal-pilih-upload-{{ $dokumen->id }}">
+                                                                                        <button type="button"
+                                                                                            class="btn btn-sm btn-primary mr-2">Muat
+                                                                                            Naik</button>
+                                                                                    </a>
+                                                                                @else
+                                                                                    <a data-toggle="modal"
+                                                                                        data-target="#modal-kemaskini-dokumen-{{ $dokumen->id }}">
+                                                                                        <button type="button"
+                                                                                            class="btn btn-sm btn-primary mr-2">Muat
+                                                                                            Naik</button>
+                                                                                    </a>
+                                                                                @endif
+                                                                            @endif
+
+                                                                            @if (!$dokumen->file_path == null)
+                                                                                <a href="{{ url('/') . $dokumen->file_path }}"
+                                                                                    target="_blank">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-sm btn-success mr-2">Lihat</button>
+                                                                                </a>
+                                                                            @endif
+                                                                            <button type="button"
+                                                                                data-dokumenid="{{ $dokumen->id }}"
+                                                                                class="btnDeleteDokumen btn btn-sm btn-danger"><i
+                                                                                    class="fas fa-trash"></i>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                                @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar'))
+                                                                    <tr>
+                                                                        <td>*</td>
+                                                                        <td>Borang Akuan Pelajar</td>
+                                                                        <td>-</td>
+                                                                        <td>
+                                                                            <a href="{{ url('akuan_pelajar/' . $permohonan->id) }}"
+                                                                                class="btn btn-sm btn-default">Isi
+                                                                                Borang</a>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super
+                                                                    Admin','Pentadbir
+                                                                    Aplikasi']))
+                                                                    @if ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar')
+                                                                        <tr>
+                                                                            <td>*</td>
+                                                                            <td>Borang Akuan Pelajar</td>
+                                                                            <td>-</td>
+                                                                            <td>
+                                                                                <a href="{{ url('/akuan_pelajar/' . $permohonan->id) }}"
+                                                                                    class="btn btn-sm btn-default">Papar
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endif
+                                                                @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="my-3">
+
+                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <h4 class="heading text-dark mr-2">Status Permohonan</h4>
+                                                    <select class="form-control form-control-sm mb-4" name="status"
+                                                        onchange="showDiv(this)">
+                                                        <option disabled value="0"
+                                                            {{ $permohonan->status == '0' ? 'selected' : '' }}>Pilih
+                                                        </option>
+                                                        <option value="1"
+                                                            {{ $permohonan->status == '1' ? 'selected' : '' }}>
+                                                            DILULUSKAN</option>
+                                                        <option value="2"
+                                                            {{ $permohonan->status == '2' ? 'selected' : '' }}>
+                                                            DITOLAK</option>
+                                                    </select>
+                                                    <div id="hidden_div_catatan" @if ($permohonan->status == 0 || $permohonan->status == 1) class="hide" @endif>
+                                                        <h4 class="heading text-dark mr-2">Catatan Permohonan</h4>
+                                                        <select name="catatan" class="form-control form-control-sm mb-4"
+                                                            onchange="checkCatatan(this.value);">
+                                                            <option selected disabled>Pilih</option>
+                                                            <option value="Maklumat tidak lengkap" @if ($permohonan->catatan == 'Maklumat tidak lengkap') selected @endif>
+                                                                Maklumat tidak
+                                                                lengkap</option>
+                                                            <option value="Data yang dipohon tiada dalam simpanan PGN"
+                                                                @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
+                                                                dalam simpanan PGN</option>
+                                                            <option value="Maklumat pemohon tidak sahih"
+                                                                @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat pemohon tidak
+                                                                sahih</option>
+                                                            <option value="others" @if ($permohonan->catatan == 'others') selected @endif>Lain-lain
+                                                            </option>
+                                                        </select>
+                                                        <textarea name="catatan_lain" id="catatan"
+                                                            class="form-control form-control-sm" @if ($permohonan->catatan == 'others') style="display:block;" @else style="display:none;" @endif
+                                                            cols="30" rows="5">{{ $permohonan->catatan_lain }}</textarea>
+                                                    </div>
+                                                    <div id="hidden_div_pentadbir" @if ($permohonan->status == 0 || $permohonan->status == 2) class="hide" @endif>
+                                                        <h4 class="heading text-dark mr-2">Pentadbir Ditugaskan</h4>
+                                                        <select class="form-control form-control-sm" name="assign_admin">
+                                                            <option selected disabled>Pilih</option>
+                                                            @foreach ($pentadbirdata as $pd)
+                                                                <option value="{{ $pd->name }}"
+                                                                    @if ($pd->name == $permohonan->assign_admin) selected @endif>
+                                                                    {{ $pd->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="float-right">
+                                            <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+
+                                            @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']) && $permohonan->status != 1)
+                                                <button type="button"
+                                                    class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
+                                                    Hantar
+                                                @elseif(Auth::user()->hasRole(['Pemohon Data']))
+                                                    @if ($permohonan->dihantar != 1 || $permohonan->status == 2)
+                                                        <button type="button"
+                                                            class="btn btn-outline-success mx-2 btnSimpanDraf">
+                                                            Simpan
+                                                    @endif
+                                            @endif
                                     </form>
-                                @endif
-                                </button>
-                            </div>
+                                    @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->dihantar != 1 || $permohonan->status == 2))
+                                        <form action="{{ url('hantar_permohonan') }}" method="POST"
+                                            id="formHantarPermohonan">
+                                            @csrf
 
+                                            <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                            <button type="button" class="btn btn-info btnHantarPermohonan">Hantar</button>
+                                        </form>
+                                    @endif
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -881,7 +810,7 @@
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                "scrollX": true,
+                // "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,
@@ -900,11 +829,11 @@
                     }
                 }
             });
-            $("#table_metadatas2").DataTable({
+            $("#dokumen_table").DataTable({
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                "scrollX": true,
+                // "scrollX": true,
                 "ordering": false,
                 "responsive": true,
                 "autoWidth": false,
