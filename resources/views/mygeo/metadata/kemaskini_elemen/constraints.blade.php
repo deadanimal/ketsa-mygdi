@@ -1,0 +1,115 @@
+<div class="card card-primary mb-4 div_c14" id="div_c14">
+                                        <div class="card-header">
+                                            <h4 class="card-title">
+                                                <a data-toggle="collapse" href="#collapse14">
+                                                    <?php echo __('lang.accord_14'); ?>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse14" class="panel-collapse collapse in show" data-parent="#div_c14">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <h6 class="heading-small text muted"><?php echo __('lang.legalConstraints'); ?></h6>
+                                                        <div class="pl-lg-3">
+                                                            <div class="row mb-2 divUseLimitation">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="c14_useLimitation">
+                                                                        <?php echo __('lang.use_limitation'); ?>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-xl-7">
+                                                                    <input type="text" name="c14_useLimitation" id="c14_useLimitation" class="form-control form-control-sm" value="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
+                                                                        <?php echo __('lang.access_constraints'); ?>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-xl-7">
+                                                                    <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm">
+                                                                        <option value="">Pilih</option>
+                                                                        <option value="Copyright">Copyright</option>
+                                                                        <option value="Intellectual Property Rights">Intellectual Property Rights</option>
+                                                                        <option value="License">License</option>
+                                                                        <option value="License End User">License End User</option>
+                                                                        <option value="License Unrestricted">License Unrestricted</option>
+                                                                        <option value="Other Restrictions">Other Restrictions</option>
+                                                                        <option value="Patent">Patent</option>
+                                                                        <option value="Patent Pending">Patent Pending</option>
+                                                                        <option value="Restricted">Restricted</option>
+                                                                        <option value="Trademark">Trademark</option>
+                                                                        <option value="Unrestricted">Unrestricted</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="input-use-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
+                                                                        <?php echo __('lang.use_constraints'); ?>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-xl-7">
+                                                                    <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm">
+                                                                        <option value="">Pilih</option>
+                                                                        <option value="Copyright">Copyright</option>
+                                                                        <option value="Intellectual Property Rights">Intellectual Property Rights</option>
+                                                                        <option value="License">License</option>
+                                                                        <option value="License End User">License End User</option>
+                                                                        <option value="License Unrestricted">License Unrestricted</option>
+                                                                        <option value="Other Restrictions">Other Restrictions</option>
+                                                                        <option value="Patent">Patent</option>
+                                                                        <option value="Patent Pending">Patent Pending</option>
+                                                                        <option value="Restricted">Restricted</option>
+                                                                        <option value="Trademark">Trademark</option>
+                                                                        <option value="Unrestricted">Unrestricted</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <h6 class="heading-small text muted"> <?php echo __('lang.securityConstraints'); ?>
+                                                        </h6>
+                                                        <div class="pl-lg-3">
+                                                            <div class="row mb-2">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
+                                                                        <?php echo __('lang.classification'); ?>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-xl-7">
+                                                                    <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
+                                                                        <option value="">Pilih</option>
+                                                                        <option value="Confidential">Confidential</option>
+                                                                        <option value="For Official Use Only">For Official Use Only</option>
+                                                                        <option value="Limited Distribution">Limited Distribution</option>
+                                                                        <option value="Protected">Protected</option>
+                                                                        <option value="Restricted">Restricted</option>
+                                                                        <option value="Secret">Secret</option>
+                                                                        <option value="Sensitive But Unclassified">Sensitive But Unclassified</option>
+                                                                        <option value="Top Secret">Top Secret</option>
+                                                                        <option value="Unclassified">Unclassified</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-xl-5">
+                                                                    <label class="form-control-label" for="input-reference" data-toggle="tooltip" title="Pengisian polisi/perundangan bagi maklumat geospatial.
+                                                                    Contoh: Pekeliling Arahan Keselamatan Dokumen Geospatial Terperingkat Terhadap">
+                                                                    <?php echo __('lang.classification_system'); ?>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-xl-7">
+                                                                    <input class="form-control form-control-sm" name="c14_reference" id="input-reference" type="text" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
