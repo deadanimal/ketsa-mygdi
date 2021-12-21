@@ -188,12 +188,7 @@ class MetadataController extends Controller {
                 continue;
             }
             
-            $title = "";
-            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                $title =  strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString);
-            }elseif(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                $title =  strval($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString);
-            }
+            $title =  $met->title;
             
             $kategori = "";
             if(isset($xml2->hierarchyLevel->MD_ScopeCode) && $xml2->hierarchyLevel->MD_ScopeCode != ""){
@@ -250,6 +245,36 @@ class MetadataController extends Controller {
     }
 
     public function index_nologin(Request $request) {
+        //extract each metadata title to its own column in db. run once.==========================================================
+        /*
+        $metadatasdbtemp = MetadataGeo::on('pgsql2')->get();
+        foreach ($metadatasdbtemp as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            
+            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $title = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
+            }elseif(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
+                $title = strtolower(strval($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString));
+            }
+            $met->title = $title;
+            $met->save();
+        }
+        */
+        //=========================================================================================================================
+        
         $metadatas = $metadatasdb = [];
         $carian = isset($request->carian) ? $request->carian:"";
         $query = MetadataGeo::on('pgsql2');
@@ -257,7 +282,7 @@ class MetadataController extends Controller {
         $params = [];
         
         if(isset($carian) && trim($carian) != ""){            
-            $query = $query->where('data', 'ilike', '%' . $carian . '%');
+            $query = $query->where('title', 'ilike', '%' . $carian . '%');
         }
 
         if(isset($request->content_type) && $request->content_type != ""){
@@ -288,7 +313,7 @@ class MetadataController extends Controller {
         }
         
         $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
-        $metadatasdbtitle = $query->select('id','data')->get();
+        $metadatasdbtitle = MetadataGeo::on('pgsql2')->select('id','data')->get();
         
         $metadatas = [];
         foreach ($metadatasdb as $met) {
@@ -312,26 +337,7 @@ class MetadataController extends Controller {
         
         $metadataTitles = [];
         foreach ($metadatasdbtitle as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-            
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
-            
-            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                $metadataTitles[] = strtolower(strval($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString));
-            }elseif(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                $metadataTitles[] = strtolower(strval($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString));
-            }
+            $metadataTitles[] = $met->title;
         }
         
         $portal = PortalTetapan::get()->first();
@@ -343,26 +349,7 @@ class MetadataController extends Controller {
         $metadatasdb = MetadataGeo::on('pgsql2')->where('data', 'ilike', '%' . $request->carian . '%')->where('disahkan','yes')->orderBy('id', 'DESC')->get()->all();
         $metadatas = [];
         foreach ($metadatasdb as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-            
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
-            
-            if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                $metadatas[$met->id] = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-            }elseif(isset($xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                $metadatas[$met->id] = $xml2->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-            }
+            $metadatas[$met->id] = $met->title;
         }
         echo json_encode($metadatas);
         exit();
@@ -897,15 +884,9 @@ class MetadataController extends Controller {
         $row += 2;
         $sheet->setCellValue('A'.$row, 'Identification Information');
         
-        $met_name = '';
-        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
-            $met_name = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != '') {
-            $met_name = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-        }
         $row++;
         $sheet->setCellValue('A'.$row, 'Metadata Name');
-        $sheet->setCellValue('B'.$row, $met_name);
+        $sheet->setCellValue('B'.$row, $metadataSearched->title);
         
         $typeofProd = '';
         if (isset($metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->productType->productTypeItem->CharacterString != '') {
@@ -2403,16 +2384,8 @@ class MetadataController extends Controller {
         $writer = new Xlsx($spreadsheet);
 
         // (E2) OR FORCE DOWNLOAD
-        $metadataName = "Metadata";
-        
-        $name = '';
-        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
-            $name = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-            $metadataName = preg_replace("/\s+/","",trim(ucwords($name)));
-        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != '') {
-            $name = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-            $metadataName = preg_replace("/\s+/","",trim(ucwords($name)));
-        }
+        $name = ($metadataSearched->title != "" ? $metadataSearched->title:"Metadata");
+        $metadataName = preg_replace("/\s+/","",trim(ucwords($name)));
         
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="'.$metadataName.'.xlsx"');
@@ -2665,6 +2638,7 @@ class MetadataController extends Controller {
             $mg->uuid = $uuid;
             $mg->disahkan = "0";
             $mg->portal_user_id = auth::user()->id;
+            $mg->title = $request->c2_metadataName;
             
             if(strtolower($request->kategori) != 'services'){
                 $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
@@ -2999,6 +2973,7 @@ class MetadataController extends Controller {
             $mg->timestamps = false;
             $mg->data = $xml;
             $mg->changedate = date("Y-m-d H:i:s");
+            $mg->title = $request->c2_metadataName;
             
             if(strtolower($request->kategori) != 'services'){
                 if (file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
@@ -3120,12 +3095,7 @@ class MetadataController extends Controller {
         //            continue;
                 }
 
-                $metadataName = "";
-                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-                }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                }
+                $metadataName = $metadata->title;
                 
                 $abstract = "";
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
@@ -3200,12 +3170,7 @@ class MetadataController extends Controller {
                     continue;
                 }
                 
-                $metadataName = "";
-                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-                }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                }
+                $metadataName = $metadata->title;
                 
                 $abstract = "";
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
@@ -3255,12 +3220,7 @@ class MetadataController extends Controller {
     //            continue;
             }
 
-            $metadataName = "";
-            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-                }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                }
+            $metadataName = $metadata->title;
             $abstract = "";
             if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
                $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
@@ -3310,27 +3270,7 @@ class MetadataController extends Controller {
                 $metadata->changedate = date("Y-m-d H:i:s");
                 $metadata->update();
 
-                $ftestxml2 = <<<XML
-                $metadata->data
-                XML;
-                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-                $ftestxml2 = str_replace("\r", "", $ftestxml2);
-                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-                $metadataxml = simplexml_load_string($ftestxml2);
-                if (false === $metadataxml) {
-        //            continue;
-                }
-
-                $metadataName = "";
-                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-                }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                   $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                }
+                $metadataName = $metadata->title;
 
                 $user = User::where("id",$metadata->portal_user_id)->get()->first();
                 if(!empty($user)){
@@ -3351,27 +3291,7 @@ class MetadataController extends Controller {
             $metadata->changedate = date("Y-m-d H:i:s");
             $metadata->update();
 
-            $ftestxml2 = <<<XML
-            $metadata->data
-            XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-            $metadataxml = simplexml_load_string($ftestxml2);
-            if (false === $metadataxml) {
-    //            continue;
-            }
-            
-            $metadataName = "";
-            if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-               $metadataName = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-            }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-               $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-            }
+            $metadataName = $metadata->title;
 
             $user = User::where("id",$metadata->portal_user_id)->get()->first();
             if(!empty($user)){

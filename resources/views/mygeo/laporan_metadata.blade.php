@@ -81,13 +81,7 @@
                                             <tr>
                                                 <td>{{ $counter }}</td>
                                                 <td>
-                                                    <?php
-                                                    $title = '';
-                                                    if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
-                                                        $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                    }
-                                                    echo $title;
-                                                    ?>
+                                                    <?php echo $val[1]->title; ?>
                                                 </td>
                                                 <td>
                                                     <?php
@@ -163,13 +157,7 @@
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>
-                                                        <?php
-                                                        $title = '';
-                                                        if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
-                                                            $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                        }
-                                                        echo $title;
-                                                        ?>
+                                                        <?php echo $val[1]->title; ?>
                                                     </td>
                                                     <td>
                                                         <?php
@@ -232,13 +220,7 @@
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>
-                                                        <?php
-                                                        $title = '';
-                                                        if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
-                                                            $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                        }
-                                                        echo $title;
-                                                        ?>
+                                                        <?php echo $val[1]->title; ?>
                                                     </td>
                                                     <td>
                                                         <?php
@@ -309,13 +291,7 @@
                                                 <tr>
                                                     <td>{{ $counter }}</td>
                                                     <td>
-                                                        <?php
-                                                        $title = '';
-                                                        if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
-                                                            $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                        }
-                                                        echo $title;
-                                                        ?>
+                                                        <?php echo $val[1]->title; ?>
                                                     </td>
                                                     <td>
                                                         <?php
@@ -383,13 +359,7 @@
                                                     <tr>
                                                         <td>{{ $counter }}</td>
                                                         <td>
-                                                            <?php
-                                                            $title = '';
-                                                            if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != '') {
-                                                                $title = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                            }
-                                                            echo $title;
-                                                            ?>
+                                                            <?php echo $val[1]->title; ?>
                                                         </td>
                                                         <td>
                                                             <?php

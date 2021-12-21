@@ -44,8 +44,8 @@
           <div class="col-12">
               <h1>
                 <?php
-                if(isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                  echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                if($metadataSearched->title != ""){
+                    echo $metadataSearched->title;
                 }
                 ?>
               </h1>
