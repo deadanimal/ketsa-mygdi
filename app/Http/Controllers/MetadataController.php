@@ -315,7 +315,7 @@ class MetadataController extends Controller {
         }
         
         $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
-        $metadatasdbtitle = MetadataGeo::on('pgsql2')->select('id','data')->get();
+        $metadatasdbtitle = MetadataGeo::on('pgsql2')->select('id','data','title')->where('disahkan', 'yes')->get();
         
         $metadatas = [];
         foreach ($metadatasdb as $met) {

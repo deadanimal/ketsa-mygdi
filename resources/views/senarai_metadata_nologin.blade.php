@@ -400,7 +400,9 @@ input[type=submit] {
             /*append the DIV element as a child of the autocomplete container:*/
             this.parentNode.appendChild(a);
             /*for each item in the array...*/
-            for (i = 0; i < arr.length; i++) {
+//            for (i = 0; i < arr.length; i++) {
+            for (i = 0; i < 8; i++) {
+                
                 if (arr[i].toLowerCase().indexOf(val.toLowerCase()) == -1) {
                     //not found
                 }else{
