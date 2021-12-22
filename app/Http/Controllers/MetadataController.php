@@ -259,6 +259,8 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
             
+            libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+
             $xml2 = simplexml_load_string($ftestxml2);
             if (false === $xml2) {
                 continue;
@@ -326,6 +328,8 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
             $ftestxml2 = str_replace("\r", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+            
+            libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
             
             $sxe = simplexml_load_string($ftestxml2);
             if (false === $sxe) {
