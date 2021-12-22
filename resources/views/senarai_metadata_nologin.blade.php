@@ -389,6 +389,7 @@ input[type=submit] {
         /*execute a function when someone writes in the text field:*/
         inp.addEventListener("input", function(e) {
             var a, b, i, val = this.value;
+            var counter = 1;
             /*close any already open lists of autocompleted values*/
             closeAllLists();
             if (!val) { return false;}
@@ -400,13 +401,14 @@ input[type=submit] {
             /*append the DIV element as a child of the autocomplete container:*/
             this.parentNode.appendChild(a);
             /*for each item in the array...*/
-//            for (i = 0; i < arr.length; i++) {
-            for (i = 0; i < 8; i++) {
-                
+            for (i = 0; i < arr.length; i++) {
                 if (arr[i].toLowerCase().indexOf(val.toLowerCase()) == -1) {
                     //not found
                 }else{
                     //found
+                    if(counter > 8){
+                        return false;
+                    }
                     /*create a DIV element for each matching element:*/
                     b = document.createElement("DIV");
                     /*make the matching letters bold:*/
@@ -423,6 +425,7 @@ input[type=submit] {
                         closeAllLists();
                     });
                     a.appendChild(b);
+                    counter++;
                 }
 
 
