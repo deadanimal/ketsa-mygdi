@@ -323,6 +323,10 @@ input[type=submit] {
                                     ?>
                                 </div>
                                 {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->withQueryString()->appends($params)->links():"") }}
+                                
+                                <?php /* Showing {{--($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0)--}} to {{--($metadatasdb->currentPage()-1)*$metadatasdb->perPage()+count($metadatasdb)--}}  of  {{--$metadatasdb->total()--}}  Results */ ?>
+                                
+                                Paparan {{$metadatasdb->total()}} rekod ({{($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0)}} hingga {{($metadatasdb->currentPage()-1)*$metadatasdb->perPage()+count($metadatasdb)}})
                             </div>
                         </div>
                     </div>
