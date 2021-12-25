@@ -9,6 +9,12 @@
             width: auto;
         }
 
+        .form-control,
+        .form-control:disabled {
+            border-width: 0;
+            background-color: white
+        }
+
     </style>
 
     <!-- Content Wrapper. Contains page content -->
@@ -78,8 +84,9 @@
                                             bertandatangan di bawah ini, sebagai
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
-                                                name="agensi_organisasi" disabled>{{ $permohonan->users->agensi_organisasi }}, {{ $permohonan->users->alamat }}
-                                                                     </textarea>
+                                                name="agensi_organisasi"
+                                                disabled>{{ $permohonan->users->agensi_organisasi }}, {{ $permohonan->users->alamat }}
+                                                                                                                 </textarea>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
                                             seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
@@ -147,10 +154,12 @@
                                     <br><br>
                                     <div class="mx-6 pl-lg-8">
                                         Tandatangan Pelajar:
-                                        <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan" height="120">
+                                        <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan" height="120"
+                                            class="preview-image-before-upload">
                                         @if (Auth::user()->hasRole(['Pemohon Data']))
                                             <input type="file" class="form-control form-control-sm py-0" name="file"
-                                                placeholder="Digital Sign">
+                                                id="signature" placeholder="Digital Sign" accept="image/jpeg, image/png"
+                                                onchange="addSignature()">
                                         @endif
                                         <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
                                         <br>
@@ -207,6 +216,21 @@
                         "sPrevious": "<",
                     }
                 }
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(e) {
+            $('#signature').change(function() {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('.preview-image-before-upload').attr('src', e.target.result);
+
+                    console.log('gambar', e.target.result)
+                }
+                reader.readAsDataURL(this.files[0]);
             });
         });
     </script>
