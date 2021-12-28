@@ -6,9 +6,10 @@
             </a>
         </h4>
     </div>
-    <div id="collapse12" class="panel-collapse collapse in show" data-parent="#div_c12">
+    <div id="collapse12" class="panel-collapse collapse in" data-parent="#div_c12">
         <div class="card-body">
             <div class="acard-body opacity-8">
+                @if($template->template[strtolower($_GET['kategori'])]['accordion12']['c12_dataset_type']['status'] == 'active')
                 <div class="row mb-4">
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-dataset-type" data-toggle="tooltip" title="Jenis maklumat geospatial">
@@ -27,8 +28,10 @@
                         </select>
                     </div>
                 </div>
+                @endif
                 <h6 class="heading-small text-muted mb-2"><?php echo __('lang.dataSetResolution'); ?></h6>
                 <div class="row mb-2">
+                    @if($template->template[strtolower($_GET['kategori'])]['accordion12']['c12_feature_scale']['status'] == 'active')
                     <div class="col-xl-3">
                         <label class="form-control-label" for="input-hardsoftcopy" data-toggle="tooltip" title="Pengisian butiran skala (sekiranya ada). Contoh skala 1:50,000">
                             <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
@@ -36,20 +39,24 @@
                         </label>
                     </div>
                     <div class="col-xl-2">
-                        <input class="form-control form-control-sm" name="c12_feature_scale" id="c12_feature_scale" placeholder="10:50000" type="text" value="">
+                        <input class="form-control form-control-sm" name="c12_feature_scale" id="c12_feature_scale" placeholder="10:50000" type="text" value="{{old('c12_feature_scale')}}">
                     </div>
+                    @endif
+                    @if($template->template[strtolower($_GET['kategori'])]['accordion12']['c12_image_res']['status'] == 'active')
                     <div class="col-xl-2">
                         <label class="form-control-label" for="input-imggsd" data-toggle="tooltip" title="Pengisian butiran resolusi (sekiranya ada). Contoh GSD (Ground Sample Distance) - Resolution = 0.5 meter">
                             <?php echo __('lang.image_resolution'); ?></label>
                     </div>
                     <div class="col-md-2">
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-sm" name="c12_image_res" id="c12_image_res" placeholder="10.5" value="">
+                            <input type="text" class="form-control form-control-sm" name="c12_image_res" id="c12_image_res" placeholder="10.5" value="{{old('c12_image_res')}}">
                             <div class="input-group-append">
                                 <span class="input-group-text input-group-sm py-0">meter</span>
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @if($template->template[strtolower($_GET['kategori'])]['accordion12']['c12_language']['status'] == 'active')
                     <div class="col-xl-1">
                         <label class="form-control-label" for="input-language" data-toggle="tooltip" title="Penggunaan bahasa bagi maklumat geospatial">
                             <?php echo __('lang.data_set_language'); ?>
@@ -58,11 +65,13 @@
                     <div class="col-xl-2">
                         <select class="form-control form-control-sm" name="c12_language" id="c12_language">
                             <option selected disabled>Pilih...</option>
-                            <option value="English">English</option>
-                            <option value="Bahasa Malaysia">Bahasa Malaysia</option>
+                            <option value="English" {{(old('c12_language') == 'English' ? "selected":"")}}>English</option>
+                            <option value="Bahasa Malaysia" {{(old('c12_language') == 'Bahasa Malaysia' ? "selected":"")}}>Bahasa Malaysia</option>
                         </select>
                     </div>
+                    @endif
                 </div>
+                @if($template->template[strtolower($_GET['kategori'])]['accordion12']['c12_maintenanceUpdate']['status'] == 'active')
                 <h6 class="heading-small text-muted mb-2 divMaintenanceInfo"><?php echo __('lang.maintenanceInfomation'); ?></h6>
                 <div class="row mb-2 divMaintenanceInfo">
                     <div class="col-xl-3">
@@ -73,22 +82,23 @@
                     <div class="col-xl-2">
                         <select class="form-control form-control-sm" name="c12_maintenanceUpdate" id="c12_maintenanceUpdate">
                             <option value="">Pilih...</option>
-                            <option value="Continual">Continual</option>
-                            <option value="Daily">Daily</option>
-                            <option value="Weekly">Weekly</option>
-                            <option value="Fortnightly">Fortnightly</option>
-                            <option value="Monthly">Monthly</option>
-                            <option value="Quarterly">Quarterly</option>
-                            <option value="Biannually">Biannually</option>
-                            <option value="Annually">Annually</option>
-                            <option value="As needed">As needed</option>
-                            <option value="Irregular">Irregular</option>
-                            <option value="Not planned">Not planned</option>
-                            <option value="Unknown">Unknown</option>
-                            <option value="None">None</option>
+                            <option value="Continual" {{ (old('c12_maintenanceUpdate') == "Continual" ? "selected":"") }}>Continual</option>
+                            <option value="Daily" {{ (old('c12_maintenanceUpdate') == "Daily" ? "selected":"") }}>Daily</option>
+                            <option value="Weekly" {{ (old('c12_maintenanceUpdate') == "Weekly" ? "selected":"") }}>Weekly</option>
+                            <option value="Fortnightly" {{ (old('c12_maintenanceUpdate') == "Fortnightly" ? "selected":"") }}>Fortnightly</option>
+                            <option value="Monthly" {{ (old('c12_maintenanceUpdate') == "Monthly" ? "selected":"") }}>Monthly</option>
+                            <option value="Quarterly" {{ (old('c12_maintenanceUpdate') == "Quarterly" ? "selected":"") }}>Quarterly</option>
+                            <option value="Biannually" {{ (old('c12_maintenanceUpdate') == "Biannually" ? "selected":"") }}>Biannually</option>
+                            <option value="Annually" {{ (old('c12_maintenanceUpdate') == "Annually" ? "selected":"") }}>Annually</option>
+                            <option value="As needed" {{ (old('c12_maintenanceUpdate') == "As needed" ? "selected":"") }}>As needed</option>
+                            <option value="Irregular" {{ (old('c12_maintenanceUpdate') == "Irregular" ? "selected":"") }}>Irregular</option>
+                            <option value="Not planned" {{ (old('c12_maintenanceUpdate') == "Not planned" ? "selected":"") }}>Not planned</option>
+                            <option value="Unknown" {{ (old('c12_maintenanceUpdate') == "Unknown" ? "selected":"") }}>Unknown</option>
+                            <option value="None" {{ (old('c12_maintenanceUpdate') == "None" ? "selected":"") }}>None</option>
                         </select>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

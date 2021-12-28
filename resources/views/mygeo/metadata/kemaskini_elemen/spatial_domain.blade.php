@@ -25,13 +25,14 @@
                 <div class="col-lg-1"></div>
                 <div class="col col-lg-4">
                     <form id="formSpatialDomain">
+                        @if($template->template[strtolower($_GET['kategori'])]['accordion9']['c9_west_bound_longitude']['status'] == 'active')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">W<span class="text-red">*</span></div>
                                     </div>
-                                    <input type="number" step="any" id="wblg" onchange="updateLayer()" class="form-control" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="West Bound Longitude" value="" name="c9_west_bound_longitude">
+                                    <input type="number" step="any" id="wblg" onchange="updateLayer()" class="form-control" placeholder="<?php echo __('lang.west_bound_longitude'); ?>" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="West Bound Longitude" value="{{ old('c9_west_bound_longitude') }}" name="c9_west_bound_longitude">
                                     <br>
                                 </div>
                             </div>
@@ -39,13 +40,15 @@
                         <div class="row">
                             <p></p>
                         </div>
+                        @endif
+                        @if($template->template[strtolower($_GET['kategori'])]['accordion9']['c9_east_bound_longitude']['status'] == 'active')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">E<span class="text-red">*</span></div>
                                     </div>
-                                    <input type="number" id="eblg" onchange="updateLayer()" step="any" class="form-control" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="East Bound Longitude" value="" name="c9_east_bound_longitude">
+                                    <input type="number" id="eblg" onchange="updateLayer()" step="any" class="form-control" placeholder="<?php echo __('lang.east_bound_longitude'); ?>" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="East Bound Longitude" value="{{ old('c9_east_bound_longitude') }}" name="c9_east_bound_longitude">
                                     <br>
                                 </div>
                             </div>
@@ -53,13 +56,15 @@
                         <div class="row">
                             <p></p>
                         </div>
+                        @endif
+                        @if($template->template[strtolower($_GET['kategori'])]['accordion9']['c9_south_bound_latitude']['status'] == 'active')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">S<span class="text-red">*</span></div>
                                     </div>
-                                    <input type="number" id="sblt" onchange="updateLayer()" step="any" class="form-control" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="South Bound Latitude" value="" name="c9_south_bound_latitude">
+                                    <input type="number" id="sblt" onchange="updateLayer()" step="any" class="form-control" placeholder="<?php echo __('lang.south_bound_latitude'); ?>" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="South Bound Latitude" value="{{ old('c9_south_bound_latitude') }}" name="c9_south_bound_latitude">
                                     <br>
                                 </div>
                             </div>
@@ -67,13 +72,15 @@
                         <div class="row">
                             <p></p>
                         </div>
+                        @endif
+                        @if($template->template[strtolower($_GET['kategori'])]['accordion9']['c9_north_bound_latitude']['status'] == 'active')
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">N<span class="text-red">*</span></div>
                                     </div>
-                                    <input type="number" id="nblt" onchange="updateLayer()" step="any" class="form-control" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="top" title="North Bound Latitude" value="" name="c9_north_bound_latitude">
+                                    <input type="number" id="nblt" onchange="updateLayer()" step="any" class="form-control" placeholder="<?php echo __('lang.north_bound_latitude'); ?>" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="top" title="North Bound Latitude" value="{{ old('c9_north_bound_latitude') }}" name="c9_north_bound_latitude">
                                     <br>
                                 </div>
                             </div>
@@ -81,12 +88,16 @@
                         <div class="row">
                             <p></p>
                         </div>
+                        @endif
                         <div class="row">
                             <div class="col col-lg-12">
                                 <div class="btn-group" role="group" aria-label="Basic example"></div>
                                 <button type="reset" onclick="cleaLayer()" class="btn btn-outline-primary">
                                     <i class="fas fa-retweet"></i> Reset
                                 </button>
+<!--                                <button type="button" onclick="saveData()" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Simpan
+                                </button>-->
                             </div>
                         </div>
                     </form>

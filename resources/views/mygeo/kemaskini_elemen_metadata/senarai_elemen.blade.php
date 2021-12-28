@@ -1,4 +1,4 @@
-@extends('layouts.app_mygeo_ketsa')
+@extends('layouts.app_mygeo_ketsa_kemaskini_elemen_metadata')
 
 @section('content')
 
@@ -8,8 +8,22 @@
         width:auto;
     }
 </style>
+<style>
+    div.sortIt { 
+        clear:both;
+        width: 100%; 
+        float: left; 
+        margin: 4px; 
+        border: thin solid;
+        padding: 4px; 
+    }
+</style>
+
 
 @include('mygeo.kemaskini_elemen_metadata.modals.modal')
+<script src="http://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
 
 <div class="content-wrapper">
     <section class="content-header">
@@ -30,78 +44,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="font-size: 2rem;">Kemas Kini Elemen Metadata</h3>
-                            <!--<button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal1">Tambah</button>-->
-                            <div class="float-right">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    Tambah
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalKategori">Kategori +</a>
-                                    <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalTajuk">Tajuk +</a>-->
-                                    <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalSubTajuk">Sub-Tajuk +</a>-->
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalElemen">Elemen +</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table id="table_elemens" class="table table-bordered table-striped" style="width:100%;">
-                                <thead>
-                                    <tr>
-                                        <th>Bil</th>
-                                        <th>Nama Elemen</th>
-                                        <th>Tajuk</th>
-                                        <th>Kategori</th>
-                                        <th>Tindakan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    if (!empty($elemens) && count($elemens) > 0) {
-                                        $bil = 1;
-                                        foreach ($elemens as $elemen) {
-                                            ?>
-                                            <tr>
-                                                <td>{{ $bil }}</td>
-                                                <td>{{ $elemen->label }}</td>
-                                                <td>{{ $elemen->getTajuk->name }}</td>
-                                                <td>{{ $elemen->getKategori->name }}</td>
-                                                <td>
-                                                    <label class="custom-toggle">
-                                                        <input type="checkbox" class='btnStatusElemen'
-                                                            data-elemenid="{{ $elemen->id }}"
-                                                            {{ $elemen->status == '1' ? 'checked' : '' }}>
-                                                        <span class="custom-toggle-slider custom-toggle-success rounded-circle"
-                                                            data-label-off="Tak Aktif" data-label-on="Aktif"
-                                                            data-width="175"></span>
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                            $bil++;
-                                        }
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-header">
                             <h3 class="card-title" style="font-size: 2rem;">Kemas Kini Elemen Metadata 2</h3>
                             <div class="float-right">
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalCustomInput">Tambah</button>
                             </div>
                         </div>
                         <div class="card-body">
-                            <!--<script src="https://code.jquery.com/jquery-3.3.1.js"></script>-->
-<!--                            <div id="parent-div">
-                                <div id="div-no-1">ftest</div>
-                                <div id="div-no-3">ftest</div>
-                                <div id="div-no-2">ftest</div>
-                                <div id="div-no-4">ftest</div>
-                            </div>-->
                             <div class="clearfix">
                                 <p id="lbl_kategori"><?php echo __('lang.metadata_category'); ?> : &nbsp;&nbsp;&nbsp;</p>
                                 <select name="kategori" id="kategori" class="form-control float-left"
@@ -164,6 +112,10 @@
                                 ?>
                                 @include('mygeo.metadata.kemaskini_elemen.data_quality')
                             </div>
+                            <div class="col-3">
+                                Version: <input type="text" name="version" class="form-control"><br>
+                                <button type="button" class="btn btn-primary">Save Template</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -171,7 +123,6 @@
         </div>
     </section>
 </div>
-
 <script>
     $('.btnStatusElemen').change(function() {
         var userid = $(this).data('elemenid');
@@ -196,13 +147,20 @@
 
     $(document).ready(function () {
         //capture form design=============
-        var parentDiv = [];
-        $("#parent-div > div").each((index, elem) => {
-          parentDiv.push(elem.id);
-        });
-        console.log(parentDiv);
+        $('.sortableContainer1').sortable();
+//        $('<br><br><div id=buttonDiv><button>Get Order of Elements</button></div><button type="button" id="ftest22">ftest</button>').appendTo('body');
+//        $('#buttonDiv button').button().click(function() {
+//            var itemOrder = $('.sortableContainer').sortable("toArray");
+//            for (var i = 0; i < itemOrder.length; i++) {
+//                alert("Position: " + i + " ID: " + itemOrder[i]);
+//            }
+//        });
+//        $(document).on('click','#ftest22',function(){
+//             $('<div class="sortIt">Item ftest</div>').appendTo('#sortableContainer');
+//        });
         //================================
 
+        /*
         $("#table_elemens").DataTable({
             "ordering": false,
             "responsive": true,
@@ -223,7 +181,6 @@
             }
         });
         
-        /*
         $(document).on('click', '.btnSimpan', function () {
             if($(this).parent().parent().attr('id') == "formTambahCustomInput" || $(this).parent().parent().attr('id') == "formKemaskiniCustomInput"){
                 var form = '#' + $(this).parent().parent().attr('id');

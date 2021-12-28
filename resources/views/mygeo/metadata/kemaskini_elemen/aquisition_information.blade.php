@@ -14,6 +14,7 @@
                         <h6 class="heading-small text-muted mb-3"><?php echo __('lang.enviromentRecord'); ?>
                         </h6>
                         <div class="form-group">
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_avg_air_temp']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-8">
                                     <div class="form-control-label" data-toggle="tooltip" title="Purata suhu udara sepanjang penerbangan">
@@ -21,9 +22,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_avg_air_temp" id="c8_avg_air_temp" value="">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Celcius" name="c8_avg_air_temp" id="c8_avg_air_temp" value="{{old('c8_avg_air_temp')}}">
                                 </div>
                             </div>
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_altitude']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-8">
                                     <div class="form-control-label" data-toggle="tooltip" title="">
@@ -31,9 +34,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_altitude" id="c8_altitude" value="">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Feet" name="c8_altitude" id="c8_altitude" value="{{old('c8_altitude')}}">
                                 </div>
                             </div>
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_relative_humid']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-8">
                                     <div class="form-control-label" data-toggle="tooltip" title="Kelembapan relatif maksimum sepanjang penerbangan">
@@ -41,9 +46,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_relative_humid" id="c8_relative_humid" value="">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Humidity" name="c8_relative_humid" id="c8_relative_humid" value="{{old('c8_relative_humid')}}">
                                 </div>
                             </div>
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_meteor_cond']['status'] == 'active')
                             <div class="row mb">
                                 <div class="col-xl-8">
                                     <div class="form-control-label" data-toggle="tooltip" title="Keadaan meteorologi kawasan penerbangan seperti awan dan angin">
@@ -51,15 +58,17 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_meteor_cond" id="c8_meteor_cond" value="">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Condition" name="c8_meteor_cond" id="c8_meteor_cond" value="{{old('c8_meteor_cond')}}">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <h6 class="heading-small text-muted mb-3"><?php echo __('lang.eventIdentification'); ?>
                         </h6>
                         <div class="form-group">
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_identifier']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label" data-toggle="tooltip" title="Nama cerapan atau nombor cerapan">
@@ -67,9 +76,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_identifier" id="c8_identifier" value="">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_identifier" id="c8_identifier" value="{{old('c8_identifier')}}">
                                 </div>
                             </div>
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_trigger']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label" data-toggle="tooltip" title="Permulaan cerapan">
@@ -79,12 +90,14 @@
                                 <div class="col-xl-7">
                                     <select class="form-control form-control-sm" name="c8_trigger" id="c8_trigger">
                                         <option value="">Pilih...</option>
-                                        <option value="Automatic">Automatic</option>
-                                        <option value="Manual">Manual</option>
-                                        <option value="Pre Programmed">Pre Programmed</option>
+                                        <option value="Automatic" {{ (old('c8_trigger') == 'Automatic' ? "selected":"") }}>Automatic</option>
+                                        <option value="Manual" {{ (old('c8_trigger') == 'Manual' ? "selected":"") }}>Manual</option>
+                                        <option value="Pre Programmed" {{ (old('c8_trigger') == 'Pre Programmed' ? "selected":"") }}>Pre Programmed</option>
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_context']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label" data-toggle="tooltip" title="Tujuan cerapan">
@@ -94,12 +107,14 @@
                                 <div class="col-xl-7">
                                     <select class="form-control form-control-sm" name="c8_context" id="c8_context">
                                         <option value="">Pilih...</option>
-                                        <option value="Acquisition">Acquisition</option>
-                                        <option value="Pass">Pass</option>
-                                        <option value="Way Point">Way Point</option>
+                                        <option value="Acquisition" {{ (old('c8_context') == 'Acquisition' ? "selected":"") }}>Acquisition</option>
+                                        <option value="Pass" {{ (old('c8_context') == 'Pass' ? "selected":"") }}>Pass</option>
+                                        <option value="Way Point" {{ (old('c8_context') == 'Way Point' ? "selected":"") }}>Way Point</option>
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_sequence']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label" data-toggle="tooltip" title="Masa relative cerapan dijalankan">
@@ -109,12 +124,14 @@
                                 <div class="col-xl-7">
                                     <select class="form-control form-control-sm" name="c8_sequence" id="c8_sequence">
                                         <option value="">Pilih...</option>
-                                        <option value="Start">Start</option>
-                                        <option value="End">End</option>
-                                        <option value="Instantaneous">Instantaneous</option>
+                                        <option value="Start" {{ (old('c8_sequence') == 'Start' ? "selected":"") }}>Start</option>
+                                        <option value="End" {{ (old('c8_sequence') == 'End' ? "selected":"") }}>End</option>
+                                        <option value="Instantaneous" {{ (old('c8_sequence') == 'Instantaneous' ? "selected":"") }}>Instantaneous</option>
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_time']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label" data-toggle="tooltip" title="Masa cerapan diambil">
@@ -122,14 +139,16 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="time" style="width :120px" name="c8_time" id="c8_time" value="">
+                                    <input class="form-control form-control-sm" type="time" style="width :120px" name="c8_time" id="c8_time" value="{{old('c8_time')}}">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <h6 class="heading-small text-muted mb-3"><?php echo __('lang.instrumentIdentification'); ?></h6>
                         <div class="form-group">
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_type']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label" data-toggle="tooltip" title="Jenis alat yang digunakan">
@@ -137,10 +156,12 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_type" id="c8_type" value="">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Type" name="c8_type" id="c8_type" value="{{old('c8_type')}}">
                                 </div>
                             </div>
+                            @endif
                             <h6 class="heading-small text-muted mt-2 mb-3"><?php echo __('lang.operation'); ?></h6>
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_op_identifier']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label" data-toggle="tooltip" title="Numbor Pengenalan cerapan/ kerja">
@@ -148,9 +169,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_op_identifier" id="c8_op_identifier" value="">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Identifier" name="c8_op_identifier" id="c8_op_identifier" value="{{ old('c8_op_identifier') }}">
                                 </div>
                             </div>
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_op_status']['status'] == 'active')
                             <div class="row mb-2">
                                 <div class="col-xl-5">
                                     <div class="form-control-label" data-toggle="tooltip" title="Status data cerapan">
@@ -158,9 +181,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_op_status" id="c8_op_status" value="">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Status" name="c8_op_status" id="c8_op_status" value="{{old('c8_op_status')}}">
                                 </div>
                             </div>
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_op_type']['status'] == 'active')
                             <div class="row mb">
                                 <div class="col-xl-5">
                                     <div class="form-control-label" data-toggle="tooltip" title="Teknik cerapan diambil">
@@ -168,24 +193,28 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <input class="form-control form-control-sm" type="text" style="width :80px" name="c8_op_type" id="c8_op_type" value="">
+                                    <input class="form-control form-control-sm" type="text" style="width :80px" placeholder="Type" name="c8_op_type" id="c8_op_type" value="{{old('c8_op_type')}}">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-2 px-0">
                         <h6 class="heading-small text-muted mb-3"><?php echo __('lang.requestDataRange'); ?>
                         </h6>
                         <div class="form-group">
-                            
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_rdr_date']['status'] == 'active')
                             <div class="form-control-label mr-3" data-toggle="tooltip" title="Tarikh mula cerapan dijalankan ">
                                 <?php echo __('lang.date'); ?>
                             </div>
-                            <input class="form-control form-control-sm" type="date" style="width :150px" name="c8_rdr_date" id="c8_rdr_date" value="">
+                            <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_rdr_date" id="c8_rdr_date" value="{{old('c8_rdr_date')}}">
+                            @endif
+                            @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_last_accept_date']['status'] == 'active')
                             <div class="form-control-label mt-3 mr-3" data-toggle="tooltip" title="Tarikh cerapan siap dijalankan">
                                 <?php echo __('lang.latest_acceptable_date'); ?>
                             </div>
-                            <input class="form-control form-control-sm" type="date" style="width :150px" name="c8_last_accept_date" id="c8_last_accept_date" value="">
+                            <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" value="{{old('c8_last_accept_date')}}">
+                            @endif
                         </div>
                     </div>
                 </div>
