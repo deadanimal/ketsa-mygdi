@@ -11,7 +11,7 @@
 
         .form-control,
         .form-control:disabled {
-            border-width: 0;
+            /* border-width: 0; */
             background-color: white
         }
 
@@ -181,7 +181,7 @@
                                         <button type="submit" class="btn float-right btn-primary">Simpan</button>
                                     @endif
                                 </form>
-                                @if (isset($akuan->title))
+                                @if (isset($akuan))
                                     <form action="{{ url('api/dokumen/akuan_pelajar') }}" method="POST" target="_blank">
                                         @csrf
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">

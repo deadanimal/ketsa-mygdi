@@ -467,7 +467,16 @@
                                 <input type="text" class="form-control" value="{{ $dokumen->tajuk_dokumen }}"
                                     disabled>
                             </div>
-                            <input type="file" name="file" class="form-control">
+                            @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
+                                <p style="color: orangered; font-size: 11px">**Pastikan dokumen salinan kad pengenalan yang
+                                    dimuatnaik mempunyai palang
+                                    silang
+                                    bertulis "UNTUK KEGUNAAN PGN SAHAJA"</p>
+                            @endif
+
+                            <input type="file" name="file" class="form-control" id="updateFile" onchange="getFileInfo()">
+                            <p id="infofile" style="color:blueviolet; font-size: 12px"></p>
+
                             <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                             <input type="hidden" name="id" value="{{ $permohonan->id }}">
                             <input type="hidden" name="dokumen_id" value="{{ $dokumen->id }}">
@@ -886,6 +895,35 @@
                 document.getElementById('hidden_div_catatan').style.display = "none";
                 document.getElementById('hidden_div_pentadbir').style.display = "block";
             }
+        }
+
+        function getFileInfo() {
+            var fileName = document.getElementById('updateFile').files[0].name;
+            var fileSize = document.getElementById('updateFile').files[0].size;
+            var fileExt = fileName.split('.').pop();
+            var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+                i = 0;
+            while (fileSize > 900) {
+                fileSize /= 1024;
+                i++;
+            }
+            var exactSize = (Math.round(fileSize * 100) / 100) + ' ' + fSExt[i];
+
+            // console.log(fileName, exactSize, fileExt);
+            $(document).ready(function() {
+                $('p#infofile').html('<br>Nama: ' + fileName +
+                    '<br>Jenis Dokumen: <span style="text-transform: uppercase;">' + fileExt +
+                    '</span><br> Saiz: ' +
+                    exactSize
+                );
+                $('.modal').on('hidden.bs.modal', function() {
+                    $('p#infofile').html('');
+                    // console.log('done buang');
+                });
+            });
+
+
+
         }
     </script>
 

@@ -154,6 +154,11 @@
                                             value="{{ $sdata->lapisan_data }}">
                                     </div>
                                     <div class="form-group">
+                                        <label class="form-control-label">Kod (MS1759)</label>
+                                        <input type="text" class="form-control form-control-sm" name="kod"
+                                            value="{{ $sdata->kod }}">
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-control-label">Pengkelasan Lapisan Data</label>
                                         <select class="form-control form-control-sm" name="kelas">
                                             <option selected disabled>Pilih</option>

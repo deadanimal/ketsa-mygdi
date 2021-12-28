@@ -117,13 +117,13 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header bg-primary mb-0">
-                            <h4 class="modal-title text-white">Proses Data</h4>
+                            <h4 class="modal-title text-white">Proses Data {{ $permohonan->id }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ url('simpan_proses_data') }}" method="POST">
+                            <form action="{{ url('simpan_proses_data') }}" method="POST" id="formProsesData">
                                 @csrf
                                 <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
                                 <i class="text-warning float-right" style="font-size: 13px">**Sila kemaskini surat balasan
@@ -180,6 +180,8 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-control-label mr-2">Pautan Data </label>
+
+                                            <i id="error" class="text-warning float-right" style="font-size: 11px"></i>
                                             <div class="d-flex mb-2">
                                                 <input class="form-control form-control-sm mr-2" name="pautan_data[0]"
                                                     placeholder="Masukkan Pautan Data" type="text" id="pautan_datas"
@@ -188,6 +190,7 @@
                                                 <button type="button" class="btn btn-sm btn-outline-primary"
                                                     onclick="addPautanData()"><i class='fas fa-plus pb-0 mb-0'></i></button>
                                             </div>
+
 
                                             <div class="form-group dynamicAddPautan" id="dynamicAddPautan">
                                             </div>
@@ -206,8 +209,9 @@
 
                                     <div class="col-xl-6 pt-9 text-right">
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+
                                         <input type="hidden" name="id" value="{{ $permohonan->id }}">
-                                        <button class="btn btn-success ml-auto" type="submit">
+                                        <button class="btn btn-success ml-auto btnValid{{ $permohonan->id }}" type="button">
                                             Hantar
                                         </button>
                                     </div>
@@ -217,75 +221,98 @@
                     </div>
                 </div>
             </div>
-    </div>
-    @endforeach
+            <script>
+                $(document).ready(function() {
+                    $(document).on('click', '.btnValid'+{{ $permohonan->id }}, function() {
+                        var pautan = $('#pautan_datas').val();
+                        console.log(pautan);
+                        var msg = "";
 
-    </div>
+                        if (pautan.length == 0) {
+                            msg = msg + "Sila isi pautan data\r\n\r\n"
+                        }
+                        if (msg.length > 0) {
+                            // alert(msg);
+                            $('i#error').text(msg);
+                        } else {
+                            $('i#error').text('');
+                            // $('#formProsesData').submit();
+                        }
 
-    <script>
-        $(document).ready(function() {
-            $(document).on('change', '.kiraHarga', function() {
-                var kiraHarga = $('.kiraHarga');
-                var jumlahHarga = 0;
-                var permohonanid = $(this).data('permohonanid');
-                jQuery.each(kiraHarga, function(key, val) {
-                    var size = $(val).val();
-                    var hargadata = $(val).data('hargadata');
-                    jumlahHarga += (size * hargadata);
+                    });
                 });
-                jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
-                $("#jumlah_harga_dokumen_" + permohonanid).val(jumlahHarga);
-            });
+            </script>
 
-            $('.tempohMuatTurun').daterangepicker({
-                locale: {
-                    format: 'DD-MM-YYYY'
-                },
-            });
 
-            $("#table_proses_data").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                "scrollX": true,
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
+        @endforeach
+
+
+
+        <script>
+            $(document).ready(function() {
+                $(document).on('change', '.kiraHarga', function() {
+                    var kiraHarga = $('.kiraHarga');
+                    var jumlahHarga = 0;
+                    var permohonanid = $(this).data('permohonanid');
+                    jQuery.each(kiraHarga, function(key, val) {
+                        var size = $(val).val();
+                        var hargadata = $(val).data('hargadata');
+                        jumlahHarga += (size * hargadata);
+                    });
+                    jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
+                    $("#jumlah_harga_dokumen_" + permohonanid).val(jumlahHarga);
+                });
+
+                $('.tempohMuatTurun').daterangepicker({
+                    locale: {
+                        format: 'DD-MM-YYYY'
+                    },
+                });
+
+                $("#table_proses_data").DataTable({
+                    "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                    "scrollX": true,
+                    "ordering": false,
+                    "responsive": true,
+                    "autoWidth": false,
+                    "oLanguage": {
+                        "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                        "sEmptyTable": "Tiada rekod ditemui",
+                        "sZeroRecords": "Tiada rekod ditemui",
+                        "sLengthMenu": "Papar _MENU_ rekod",
+                        "sLoadingRecords": "Sila tunggu...",
+                        "sSearch": "Carian:",
+                        "oPaginate": {
+                            "sFirst": "Pertama",
+                            "sLast": "Terakhir",
+                            "sNext": ">",
+                            "sPrevious": "<",
+                        }
                     }
-                }
+                });
             });
-        });
-    </script>
-    <script type="text/javascript">
-        var i = 0;
-        function addPautanData() {
-            d = document.getElementById("pautan_datas").value;
-            ++i;
-            $(".dynamicAddPautan").append(
-                `<span class="d-flex mb-2"><input type="text" name="pautan_data[` + i +
-                `]" class="form-control form-control-sm mr-2"><button type="button" class="btn btn-outline-warning btn-sm remove-input-field"><i class="fas fa-trash"></i>
+        </script>
+        <script type="text/javascript">
+            var i = 0;
+
+            function addPautanData() {
+                d = document.getElementById("pautan_datas").value;
+                ++i;
+                $(".dynamicAddPautan").append(
+                    `<span class="d-flex mb-2"><input type="text" name="pautan_data[` + i +
+                    `]" class="form-control form-control-sm mr-2"><button type="button" class="btn btn-outline-warning btn-sm remove-input-field"><i class="fas fa-trash"></i>
                     </button></span>`
-            );
+                );
 
-            console.log('masuk');
+                console.log('masuk');
 
-            $(document).on('click', '.remove-input-field', function() {
-                --i;
-                $(this).parents('span').remove();
-            });
+                $(document).on('click', '.remove-input-field', function() {
+                    --i;
+                    $(this).parents('span').remove();
+                });
 
-        }
-    </script>
-@stop
+            }
+        </script>
+    @stop

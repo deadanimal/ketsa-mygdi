@@ -320,7 +320,7 @@ class DataAsasController extends Controller
     {
         if (!Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
             return redirect('/mygeo_profil');
-        } 
+        }
         $permohonan_list = MohonData::where(['status' => 1,'dihantar' => 1])->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();
@@ -330,12 +330,22 @@ class DataAsasController extends Controller
     public function update_proses_data(Request $request)
     {
         $append = [];
-        foreach ($request->pautan_data as $key => $value) {
-            if($value != null ){
-                $append[] = $value;
+
+        $valid_data = $request->validate([
+            'pautan_data[0]' => 'required',
+        ]);
+
+        dd($valid_data['pautan_data']);
+
+
+        if($valid_data['pautan_data']){
+            foreach ($request->pautan_data as $val) {
+                if($val != ''){
+                    $append[] = $val;
+                }
             }
         }
-        // dd($append);
+
 
         $id = $request->permohonan_id;
         $valid_surat = SuratBalasan::where([
@@ -348,7 +358,7 @@ class DataAsasController extends Controller
 
 
         $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
-        // dd($valid_surat);
+
         if($valid_surat->isEmpty()){
 
             ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
@@ -366,13 +376,13 @@ class DataAsasController extends Controller
         } else {
 
             ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
-                "pautan_data" => $request->pautan_data,
+                "pautan_data" => json_encode($append),
                 "tempoh_url" => $request->tempoh,
                 "total_harga" => $request->total_harga,
             ]);
 
             Mohondata::where(["id" => $request->permohonan_id])->update([
-                "status" => $request->status = 3,
+                // "status" => $request->status = 3,
             ]);
 
             foreach ($skdatas as $sk ) {
@@ -549,10 +559,10 @@ class DataAsasController extends Controller
                 "kategori" => $request->kategori,
                 "subkategori" => $request->subkategori,
                 "lapisan_data" => $request->lapisan_data,
-                // "kategori_permohonan" => $request->kategori_permohonan,
                 "kelas" => $request->kelas,
                 "status" => $request->status,
                 "harga_data" => $request->harga_data,
+                "kod" => $request->kod,
             ]);
         });
 
@@ -611,10 +621,17 @@ class DataAsasController extends Controller
 
     public function surat_balasan($id, Request $request)
     {
+        $append = [];
+        foreach ($request->pautan_data as $val) {
+            if($val != ''){
+                $append[] = $val;
+            }
+        }
+
         $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
 
         ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
-            "pautan_data" => $request->pautan_data,
+            "pautan_data" => json_encode($append),
             "tempoh_url" => $request->tempoh,
             "total_harga" => $request->total_harga,
         ]);
@@ -1345,9 +1362,9 @@ class DataAsasController extends Controller
         }else{
             $agensi_name = $user->agensiOrganisasi->name;
         }
-        // $permohonan = MohonData::where('id', $request->permohonan_id)->first();
+        $skdatas = SenaraiKawasanData::where('permohonan_id', $request->permohonan_id)->get();
         $akuan = AkuanPelajar::where('permohonan_id', $request->permohonan_id)->first();
-        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan','agensi_name'));
+        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan','agensi_name','skdatas'));
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF
