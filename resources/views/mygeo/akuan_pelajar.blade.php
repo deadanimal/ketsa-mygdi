@@ -158,8 +158,7 @@
                                             class="preview-image-before-upload">
                                         @if (Auth::user()->hasRole(['Pemohon Data']))
                                             <input type="file" class="form-control form-control-sm py-0" name="file"
-                                                id="signature" placeholder="Digital Sign" accept="image/jpeg, image/png"
-                                                onchange="addSignature()">
+                                                id="signature" placeholder="Digital Sign" accept="image/jpeg, image/png">
                                         @endif
                                         <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
                                         <br>

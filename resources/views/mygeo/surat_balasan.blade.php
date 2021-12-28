@@ -69,8 +69,8 @@
                                         <div class="col-8"></div>
                                         <div class="col-4">
                                             <div class="form-inline">
-                                                Rujukan : KeTSA 606-4/3/2 Jld.13 (1q)
-                                                <input type="hidden" name="no_rujukan" value="KeTSA 606-4/3/2 Jld.13 (1q)">
+                                                Rujukan :
+                                                <input type="text" class="form-control form-control-sm ml-2 w-100" name="no_rujukan" value="KeTSA 606-4/3/2 Jld.13 (1q)">
                                                 <input type="hidden" name="date_mohon" value="{{$permohonan->date}}">
                                             </div>
                                             <div class="form-inline">

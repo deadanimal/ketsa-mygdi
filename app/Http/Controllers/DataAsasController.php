@@ -184,7 +184,6 @@ class DataAsasController extends Controller
     {
         $request->validate([
             'file' => 'required|mimes:,png,jpeg,jpg|max:2048'
-            // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'
         ]);
 
             if ($request->file()) {
@@ -475,6 +474,37 @@ class DataAsasController extends Controller
         $senarai_data = SenaraiData::orderBy('kod','ASC')->get();
         $kategori_sd = KategoriSenaraiData::orderBy('name','ASC')->get();
         $subkategori_sd = SubKategoriSenaraiData::orderBy('name','ASC')->get();
+
+        $kat_add = SenaraiData::orderBy('kategori','ASC')->distinct('kategori')->get();
+        // dd($kategori_sd);
+        foreach ($kat_add as $kat) {
+            $check_kat = KategoriSenaraiData::where('name',$kat->kategori)->first();
+            if($check_kat){
+
+            } else {
+                $kat_baru = new KategoriSenaraiData();
+                $kat_baru->name = $kat->kategori;
+                $kat_baru->save();
+            }
+        }
+
+        $sub_add = SenaraiData::orderBy('subkategori','ASC')->distinct('subkategori')->get();
+
+        foreach ($sub_add as $sub) {
+            $check_sub = SubKategoriSenaraiData::where('name',$sub->subkategori)->first();
+            if($check_sub){
+
+            } else {
+                $kat_id = KategoriSenaraiData::where('name',$sub->kategori)->first();
+                $sub_baru = new SubKategoriSenaraiData();
+                $sub_baru->name = $sub->subkategori;
+                $sub_baru->kategori_id = $kat_id->id;
+
+                $sub_baru->save();
+            }
+        }
+
+
         return view('mygeo.senarai_data', compact('senarai_data','kategori_sd','subkategori_sd'));
     }
 
@@ -482,20 +512,35 @@ class DataAsasController extends Controller
     {
         $senarai_data = new SenaraiData();
         $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
-        $senarai_data->kategori = $kategori_sd->name;
-        $senarai_data->subkategori = $request->subkategori;
-        $senarai_data->lapisan_data = $request->lapisan_data;
-        $senarai_data->data_id = $request->data_id;
-        $senarai_data->kod = $request->kod;
-        $senarai_data->save();
 
-        $at = new AuditTrail();
-        $at->path = url()->full();
-        $at->user_id = Auth::user()->id;
-        $at->data = 'Create';
-        $at->save();
+        $check_exist = SenaraiData::where([
+            // ['kategori','=',$kategori_sd->name],
+            ['subkategori','=',$request->subkategori],
+            // ['lapisan_data','=',$request->lapisan_data],
+            // ['kod','=',$request->kod]
+        ])->first();
+        dd($check_exist,$request->subkategori);
 
-        return redirect('senarai_data')->with('success', 'Senarai Data Baru telah ditambah');
+        if(!$check_exist){
+            return redirect('senarai_data')->with('warning', 'Senarai Data Telah Pun Wujud');
+        } else {
+            $senarai_data->kategori = $kategori_sd->name;
+            $senarai_data->subkategori = $request->subkategori;
+            $senarai_data->lapisan_data = $request->lapisan_data;
+            $senarai_data->data_id = $request->data_id;
+            $senarai_data->kod = $request->kod;
+            $senarai_data->save();
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Create';
+            $at->save();
+
+            return redirect('senarai_data')->with('success', 'Senarai Data Baru Telah Ditambah');
+
+        }
+
     }
 
     public function store_kategori_senarai_data(Request $request)
@@ -622,19 +667,21 @@ class DataAsasController extends Controller
     public function surat_balasan($id, Request $request)
     {
         $append = [];
-        foreach ($request->pautan_data as $val) {
-            if($val != ''){
-                $append[] = $val;
+        if($request->pautan_data){
+            foreach ($request->pautan_data as $val) {
+                if($val != ''){
+                    $append[] = $val;
+                }
             }
         }
-
-        $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
 
         ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
             "pautan_data" => json_encode($append),
             "tempoh_url" => $request->tempoh,
             "total_harga" => $request->total_harga,
         ]);
+
+        $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
         foreach ($skdatas as $sk ) {
             SenaraiKawasanData::where(["id" => $sk->id])->update([
                 "saiz_data" => $request->input('saiz_data_'.$sk->id),

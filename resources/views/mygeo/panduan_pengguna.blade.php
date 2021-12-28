@@ -44,7 +44,7 @@
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
-                        <div class="col-lg-6 col-7">
+                        <div class="col-lg-9 col-8">
                             <h6 class="h2 text-dark d-inline-block mb-0">Panduan Pengguna</h6>
 
                             <nav aria-label="breadcrumb" class=" d-none d-md-inline-block ml-md-4">
@@ -61,7 +61,7 @@
                                 </ol>
                             </nav>
                         </div>
-                        <div class="col-lg-6 col-5 text-right">
+                        <div class="col-lg-3 col-2 text-right">
                             <a data-toggle="modal" data-target="#modal-kategori">
                                 <button type="button" class="btn btn-sm btn-default float-right"><i
                                         class="fas fa-plus mr-2"></i>Kategori</button>
@@ -129,7 +129,7 @@
                             @foreach ($panduan_pengguna as $panduan)
                                 <div class="card-body hide info-panduan-{{ $panduan->id }}">
                                     <form method="POST" class="form-horizontal"
-                                        action="{{ url('simpan_panduan_pengguna') }}" id="form_faq_{{ $panduan->id }}">
+                                        action="{{ url('simpan_panduan_pengguna') }}" id="form_panduan_{{ $panduan->id }}">
                                         @csrf
                                         <input type="hidden" name="id_panduan_pengguna"
                                             value="{{ !is_null($panduan) ? $panduan->id : '' }}">
@@ -252,7 +252,7 @@
                 $(document).on("click", "#btn_submit_{{ $panduan->id }}", function() {
                     $("#content_panduan_{{ $panduan->id }}").val($(
                         "#content_panduan_input_{{ $panduan->id }} > .ql-editor").html());
-                    $("#form_faq_{{ $panduan->id }}").submit();
+                    $("#form_panduan_{{ $panduan->id }}").submit();
                 });
             });
         </script>

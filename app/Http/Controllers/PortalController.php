@@ -19,6 +19,7 @@ use App\Penafian;
 use App\PenyataanPrivasi;
 use App\Faq;
 use App\Pengumuman;
+use App\TatacaraMohon;
 use Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
@@ -381,7 +382,7 @@ class PortalController extends Controller
             $fileName = $time.'_'.$request->gambar->getClientOriginalName();
             $imageUrl = Storage::putFileAs('/public/', $request->file('gambar'), $fileName);
         }
-        
+
         $pengumuman = Pengumuman::find($request->id_pengumuman);
         $pengumuman->title = $request->title_pengumuman;
         $pengumuman->date = $request->date_pengumuman;
@@ -439,7 +440,7 @@ class PortalController extends Controller
                 exit();
             }
         }
-        
+
         $msg = "Penambahan Agensi / Organisasi / Institusi berjaya.";
         $ao = new AgensiOrganisasi();
         $ao->sektor = $request->sektor;
@@ -484,7 +485,7 @@ class PortalController extends Controller
     public function get_agensi_organisasi_by_sektor(Request $request){
         $aos = AgensiOrganisasi::where('sektor',$request->sektor)->whereNull('bahagian')->distinct('name')->get();
         echo json_encode(["aos"=>$aos]);//test
-        exit(); 
+        exit();
     }
     public function get_agensi_organisasi(Request $request){
         $aos = "";
@@ -561,5 +562,65 @@ class PortalController extends Controller
             "operation_time" => $request->masa_operasi,
         ]);
         return redirect('portal_tetapan')->with('success','Maklumat Portal Telah Disimpan');
+    }
+
+    //=== Tatacara Permohonan Functions ===========================================================
+    public function edit_tatacara()
+    {
+        $tatacara_mohon = TatacaraMohon::orderBy('id','ASC')->get();
+        return view('mygeo.tatacara_mohon', compact('tatacara_mohon'));
+    }
+
+    public function store_tajuk_tatacara(Request $request){
+
+        $tatacara = new TatacaraMohon();
+        $tatacara->title = $request->tajuk_tatacara;
+        $tatacara->save();
+
+        return redirect('/tatacara_edit')->with('success', 'Tatacara Permohonan Disimpan');
+    }
+
+    public function index_tatacara()
+    {
+        $portal = PortalTetapan::get()->first();
+        $tatacara_mohon = TatacaraMohon::orderBy('id','ASC')->get();
+        $portal = PortalTetapan::get()->first();
+        return view('/data_asas_tatacara_mohon',compact('portal','tatacara_mohon'));
+    }
+
+    public function update_tatacara(Request $request)
+    {
+
+        $request->validate([
+            'file' => 'mimes:png,jpeg,jpg|max:2048'
+        ]);
+
+        if ($request->file) {
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('tatacara_icon', $fileName, 'public');
+            $iconPath = '/storage/' . $filePath;
+
+            // dd($iconPath);
+                TatacaraMohon::where(["id" => $request->id_tatacara])->update([
+                    "title" => $request->title_tatacara,
+                    "content" => $request->content_tatacara,
+                    "icon_path" => $iconPath,
+                ]);
+
+        } else {
+            //save tatacara permohonan
+            TatacaraMohon::where(["id" => $request->id_tatacara])->update([
+                "title" => $request->title_tatacara,
+                "content" => $request->content_tatacara,
+            ]);
+        }
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Create';
+        $at->save();
+
+        return redirect('/tatacara_edit')->with('success', 'Tatacara Permohonan Dikemaskini');
     }
 }

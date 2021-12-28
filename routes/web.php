@@ -46,7 +46,7 @@ Route::get('/data_asas_landing', 'DataAsasController@data_asas_landing');
 Route::get('/data_asas_senarai', 'DataAsasController@data_asas_senarai');
 Route::get('/data_asas_senarai/{data1}', 'DataAsasController@data_asas_senarai_show');
 Route::get('/data_asas_senarai/{data1}/{data2}', 'DataAsasController@data_asas_senarai_show_show');
-Route::get('/data_asas_tatacara_mohon', 'DataAsasController@data_asas_tatacara_mohon');
+Route::get('/data_asas_tatacara_mohon', 'PortalController@index_tatacara');
 Route::get('/data_asas_dokumen_berkaitan', 'DataAsasController@data_asas_dokumen_berkaitan');
 Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
 Route::post('/reply_maklum_balas', 'PortalController@reply_maklum_balas');
@@ -107,10 +107,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/delete_maklum_balas', 'PortalController@delete_maklum_balas');
 
-    // Route::get('/panduan_pengguna','PortalController@index_panduan_pengguna');
     Route::get('/panduan_pengguna_edit', 'PortalController@edit_panduan_pengguna');
     Route::post('/simpan_panduan_pengguna', 'PortalController@update_panduan_pengguna');
     Route::post('/simpan_kategori_panduan', 'PortalController@store_kategori_panduan');
+
+    Route::get('/tatacara_edit', 'PortalController@edit_tatacara');
+    Route::post('/simpan_tatacara', 'PortalController@update_tatacara');
+    Route::post('/simpan_tajuk_tatacara', 'PortalController@store_tajuk_tatacara');
 
     Route::get('/pengumuman_edit', 'PortalController@edit_pengumuman2');
 
