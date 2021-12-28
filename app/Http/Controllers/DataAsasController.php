@@ -184,7 +184,6 @@ class DataAsasController extends Controller
     {
         $request->validate([
             'file' => 'required|mimes:,png,jpeg,jpg|max:2048'
-            // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'
         ]);
 
             if ($request->file()) {
@@ -320,7 +319,7 @@ class DataAsasController extends Controller
     {
         if (!Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
             return redirect('/mygeo_profil');
-        } 
+        }
         $permohonan_list = MohonData::where(['status' => 1,'dihantar' => 1])->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();
@@ -330,12 +329,22 @@ class DataAsasController extends Controller
     public function update_proses_data(Request $request)
     {
         $append = [];
-        foreach ($request->pautan_data as $key => $value) {
-            if($value != null ){
-                $append[] = $value;
+
+        $valid_data = $request->validate([
+            'pautan_data[0]' => 'required',
+        ]);
+
+        dd($valid_data['pautan_data']);
+
+
+        if($valid_data['pautan_data']){
+            foreach ($request->pautan_data as $val) {
+                if($val != ''){
+                    $append[] = $val;
+                }
             }
         }
-        // dd($append);
+
 
         $id = $request->permohonan_id;
         $valid_surat = SuratBalasan::where([
@@ -348,7 +357,7 @@ class DataAsasController extends Controller
 
 
         $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
-        // dd($valid_surat);
+
         if($valid_surat->isEmpty()){
 
             ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
@@ -366,13 +375,13 @@ class DataAsasController extends Controller
         } else {
 
             ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
-                "pautan_data" => $request->pautan_data,
+                "pautan_data" => json_encode($append),
                 "tempoh_url" => $request->tempoh,
                 "total_harga" => $request->total_harga,
             ]);
 
             Mohondata::where(["id" => $request->permohonan_id])->update([
-                "status" => $request->status = 3,
+                // "status" => $request->status = 3,
             ]);
 
             foreach ($skdatas as $sk ) {
@@ -465,6 +474,37 @@ class DataAsasController extends Controller
         $senarai_data = SenaraiData::orderBy('kod','ASC')->get();
         $kategori_sd = KategoriSenaraiData::orderBy('name','ASC')->get();
         $subkategori_sd = SubKategoriSenaraiData::orderBy('name','ASC')->get();
+
+        $kat_add = SenaraiData::orderBy('kategori','ASC')->distinct('kategori')->get();
+        // dd($kategori_sd);
+        foreach ($kat_add as $kat) {
+            $check_kat = KategoriSenaraiData::where('name',$kat->kategori)->first();
+            if($check_kat){
+
+            } else {
+                $kat_baru = new KategoriSenaraiData();
+                $kat_baru->name = $kat->kategori;
+                $kat_baru->save();
+            }
+        }
+
+        $sub_add = SenaraiData::orderBy('subkategori','ASC')->distinct('subkategori')->get();
+
+        foreach ($sub_add as $sub) {
+            $check_sub = SubKategoriSenaraiData::where('name',$sub->subkategori)->first();
+            if($check_sub){
+
+            } else {
+                $kat_id = KategoriSenaraiData::where('name',$sub->kategori)->first();
+                $sub_baru = new SubKategoriSenaraiData();
+                $sub_baru->name = $sub->subkategori;
+                $sub_baru->kategori_id = $kat_id->id;
+
+                $sub_baru->save();
+            }
+        }
+
+
         return view('mygeo.senarai_data', compact('senarai_data','kategori_sd','subkategori_sd'));
     }
 
@@ -472,20 +512,35 @@ class DataAsasController extends Controller
     {
         $senarai_data = new SenaraiData();
         $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
-        $senarai_data->kategori = $kategori_sd->name;
-        $senarai_data->subkategori = $request->subkategori;
-        $senarai_data->lapisan_data = $request->lapisan_data;
-        $senarai_data->data_id = $request->data_id;
-        $senarai_data->kod = $request->kod;
-        $senarai_data->save();
 
-        $at = new AuditTrail();
-        $at->path = url()->full();
-        $at->user_id = Auth::user()->id;
-        $at->data = 'Create';
-        $at->save();
+        $check_exist = SenaraiData::where([
+            // ['kategori','=',$kategori_sd->name],
+            ['subkategori','=',$request->subkategori],
+            // ['lapisan_data','=',$request->lapisan_data],
+            // ['kod','=',$request->kod]
+        ])->first();
+        dd($check_exist,$request->subkategori);
 
-        return redirect('senarai_data')->with('success', 'Senarai Data Baru telah ditambah');
+        if(!$check_exist){
+            return redirect('senarai_data')->with('warning', 'Senarai Data Telah Pun Wujud');
+        } else {
+            $senarai_data->kategori = $kategori_sd->name;
+            $senarai_data->subkategori = $request->subkategori;
+            $senarai_data->lapisan_data = $request->lapisan_data;
+            $senarai_data->data_id = $request->data_id;
+            $senarai_data->kod = $request->kod;
+            $senarai_data->save();
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Create';
+            $at->save();
+
+            return redirect('senarai_data')->with('success', 'Senarai Data Baru Telah Ditambah');
+
+        }
+
     }
 
     public function store_kategori_senarai_data(Request $request)
@@ -549,10 +604,10 @@ class DataAsasController extends Controller
                 "kategori" => $request->kategori,
                 "subkategori" => $request->subkategori,
                 "lapisan_data" => $request->lapisan_data,
-                // "kategori_permohonan" => $request->kategori_permohonan,
                 "kelas" => $request->kelas,
                 "status" => $request->status,
                 "harga_data" => $request->harga_data,
+                "kod" => $request->kod,
             ]);
         });
 
@@ -611,13 +666,22 @@ class DataAsasController extends Controller
 
     public function surat_balasan($id, Request $request)
     {
-        $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
+        $append = [];
+        if($request->pautan_data){
+            foreach ($request->pautan_data as $val) {
+                if($val != ''){
+                    $append[] = $val;
+                }
+            }
+        }
 
         ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
-            "pautan_data" => $request->pautan_data,
+            "pautan_data" => json_encode($append),
             "tempoh_url" => $request->tempoh,
             "total_harga" => $request->total_harga,
         ]);
+
+        $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
         foreach ($skdatas as $sk ) {
             SenaraiKawasanData::where(["id" => $sk->id])->update([
                 "saiz_data" => $request->input('saiz_data_'.$sk->id),
@@ -1345,9 +1409,9 @@ class DataAsasController extends Controller
         }else{
             $agensi_name = $user->agensiOrganisasi->name;
         }
-        // $permohonan = MohonData::where('id', $request->permohonan_id)->first();
+        $skdatas = SenaraiKawasanData::where('permohonan_id', $request->permohonan_id)->get();
         $akuan = AkuanPelajar::where('permohonan_id', $request->permohonan_id)->first();
-        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan','agensi_name'));
+        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan','agensi_name','skdatas'));
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF

@@ -64,13 +64,13 @@
         padding-top: 0;
     }
 
-    /* ol {
-        margin: 0;
-        padding: 0;
-    } */
-
     li {
         text-align: justify;
+    }
+
+    u {
+        border-bottom: 2px dotted #000;
+        text-decoration: none;
     }
 
 </style>
@@ -102,23 +102,27 @@
                                         <ol type="i">
                                             <li>Peta Topografi :</li>
                                             <ol type="a">
-                                                <li><u>{{ $akuan->peta_topo_a }}</u></li>
-                                                <li><u>{{ $akuan->peta_topo_b }}</u></li>
-                                                <li><u>{{ $akuan->peta_topo_c }}</u></li>
+                                                <li><u>{{ $akuan->peta_topo_a != null ? $akuan->peta_topo_a : ' ' }}</u>
+                                                </li>
+                                                <li><u>{{ $akuan->peta_topo_b != null ? $akuan->peta_topo_b : ' ' }}</u>
+                                                </li>
+                                                <li><u>{{ $akuan->peta_topo_c != null ? $akuan->peta_topo_c : ' ' }}</u>
+                                                </li>
                                             </ol>
                                             <br>
                                             <li>Foto Udara :</li>
                                             <ol type="a">
-                                                <li><u>{{ $akuan->foto_udara_a }}</u></li>
-                                                <li><u>{{ $akuan->foto_udara_b }}</u></li>
-                                                <li><u>{{ $akuan->foto_udara_c }}</u></li>
+                                                <li><u>{{ $akuan->foto_udara_a != null ? $akuan->foto_udara_a : ' ' }}</u>
+                                                </li>
+                                                <li><u>{{ $akuan->foto_udara_b != null ? $akuan->foto_udara_b : ' ' }}</u></li>
+                                                <li><u>{{ $akuan->foto_udara_c != null ? $akuan->foto_udara_c : ' ' }}</u></li>
                                             </ol>
                                             <br>
                                             <li>Lain-lain :</li>
                                             <ol type="a">
-                                                <li><u>{{ $akuan->lain_a }}</u></li>
-                                                <li><u>{{ $akuan->lain_b }}</u></li>
-                                                <li><u>{{ $akuan->lain_c }}</u></li>
+                                                @foreach ($skdatas as $sk)
+                                                    <li><u>{{ $sk->lapisan_data }}</u></li>
+                                                @endforeach
                                             </ol>
                                         </ol>
                                         <br><br>

@@ -11,7 +11,7 @@
 
         .form-control,
         .form-control:disabled {
-            border-width: 0;
+            /* border-width: 0; */
             background-color: white
         }
 
@@ -158,8 +158,7 @@
                                             class="preview-image-before-upload">
                                         @if (Auth::user()->hasRole(['Pemohon Data']))
                                             <input type="file" class="form-control form-control-sm py-0" name="file"
-                                                id="signature" placeholder="Digital Sign" accept="image/jpeg, image/png"
-                                                onchange="addSignature()">
+                                                id="signature" placeholder="Digital Sign" accept="image/jpeg, image/png">
                                         @endif
                                         <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
                                         <br>
@@ -181,7 +180,7 @@
                                         <button type="submit" class="btn float-right btn-primary">Simpan</button>
                                     @endif
                                 </form>
-                                @if (isset($akuan->title))
+                                @if (isset($akuan))
                                     <form action="{{ url('api/dokumen/akuan_pelajar') }}" method="POST" target="_blank">
                                         @csrf
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
