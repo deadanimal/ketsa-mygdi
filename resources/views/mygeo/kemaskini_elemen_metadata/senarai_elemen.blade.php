@@ -14,8 +14,8 @@
         width: 100%; 
         float: left; 
         margin: 4px; 
-        border: thin solid;
-        padding: 4px; 
+        padding: 8px; 
+        background-color: #e6e6e6;
     }
 </style>
 
@@ -65,57 +65,64 @@
                                 </select>
                             </div>
                             <br>
-                            <div id="accordion" class="accordf">
-                                <?php //=== collapse1 =============================================================
+                            <?php
+                            $bhs = 'bm';
+                            if(isset($_GET['kategori']) && $_GET['kategori'] != ""){
                                 ?>
-                                @include('mygeo.metadata.kemaskini_elemen.general_information')
-                                <?php //=== collapse2 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.identification_information')
-                                <?php //=== collapse3 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.topic_category')
-                                <?php //=== collapse4 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.nominal_resolution')
-                                <?php //=== collapse5 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.process_step_information')
-                                <?php //=== collapse6 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.spatial_representation_information')
-                                <?php //=== collapse7 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.content_information')
-                                <?php //=== collapse8 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.aquisition_information')
-                                <?php //=== collapse9 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.spatial_domain')
-                                <?php //=== collapse10 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.browsing_information')
-                                <?php //=== collapse11 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.distribution_information')
-                                <?php //=== collapse12 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.data_set_identification')
-                                <?php //=== collapse13 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.reference_system_information')
-                                <?php //=== collapse14 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.constraints')
-                                <?php //=== collapse15 =============================================================
-                                ?>
-                                @include('mygeo.metadata.kemaskini_elemen.data_quality')
-                            </div>
-                            <div class="col-3">
-                                Version: <input type="text" name="version" class="form-control"><br>
-                                <button type="button" class="btn btn-primary">Save Template</button>
-                            </div>
+                                <div id="accordion" class="accordf">
+                                    <?php //=== collapse1 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.general_information')
+                                    <?php //=== collapse2 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.identification_information')
+                                    <?php //=== collapse3 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.topic_category')
+                                    <?php //=== collapse4 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.nominal_resolution')
+                                    <?php //=== collapse5 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.process_step_information')
+                                    <?php //=== collapse6 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.spatial_representation_information')
+                                    <?php //=== collapse7 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.content_information')
+                                    <?php //=== collapse8 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.aquisition_information')
+                                    <?php //=== collapse9 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.spatial_domain')
+                                    <?php //=== collapse10 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.browsing_information')
+                                    <?php //=== collapse11 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.distribution_information')
+                                    <?php //=== collapse12 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.data_set_identification')
+                                    <?php //=== collapse13 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.reference_system_information')
+                                    <?php //=== collapse14 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.constraints')
+                                    <?php //=== collapse15 =============================================================
+                                    ?>
+                                    @include('mygeo.metadata.kemaskini_elemen.data_quality')
+                                </div>
+                                <div class="col-3">
+                                    Version: <input type="text" name="version" class="form-control"><br>
+                                    <button type="button" class="btn btn-primary">Save Template</button>
+                                </div>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

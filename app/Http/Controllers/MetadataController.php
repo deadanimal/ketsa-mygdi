@@ -3332,7 +3332,7 @@ class MetadataController extends Controller {
         if (!auth::user()->hasRole(['Pentadbir Metadata'])) {
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
         }
-        $f = [
+        $input = [
             "dataset" => [
                 "accordion1" => [
                     "c1_content_info" => [
@@ -8982,317 +8982,314 @@ class MetadataController extends Controller {
                 ],
             ],
         ];
-        $r = [
+        $position = [ //SMBG SINI - try to combine $position and $input above to be used for both input detail and input position at the same time
             "dataset" => [
-                "collapse1"  => [
+                "collapse1" => [
                     "c1_content_info",
                     "publisher_name",
                     "publisher_agensi_organisasi",
                     "publisher_email",
                     "publisher_phone",
                     "publisher_role",
-                ]]];
-//        echo json_decode('{
-//   "dataset":{
-//      "collapse1":[
-//         "c1_content_info",
-//         "publisher_name",
-//         "publisher_agensi_organisasi",
-//         "publisher_email",
-//         "publisher_phone",
-//         "publisher_role"
-//      ]
-//   }
-//}');exit();
-        /*
-collapse2                        
-    c2_metadataName
-    c2_product_type
-    abstractApplication_namaAplikasi
-    abstractApplication_tujuan
-    abstractApplication_tahunPembangunan
-    abstractApplication_kemaskini
-    abstractApplication_dataTerlibat
-    abstractApplication_sasaranPengguna
-    abstractApplication_versi
-    abstractApplication_perisianDigunaPembangunan
-    abstractDocument_namaDokumen
-    abstractDocument_tujuan
-    abstractDocument_tahunTerbitan
-    abstractDocument_edisi
-    abstractGISActivityProject_namaAktiviti
-    abstractGISActivityProject_tujuan
-    abstractGISActivityProject_lokasi
-    abstractGISActivityProject_tahun
-    abstractMap_namaPeta
-    abstractMap_kawasan
-    abstractMap_tujuan
-    abstractMap_tahunTerbitan
-    abstractMap_edisi
-    abstractMap_noSiri
-    abstractMap_skala
-    abstractMap_unit
-    abstractRasterData_namaData
-    abstractRasterData_lokasi
-    abstractRasterData_rumusanData
-    abstractRasterData_tujuanData
-    abstractRasterData_kaedahPenyediaanData
-    abstractRasterData_format
-    abstractRasterData_unit
-    abstractRasterData_skala
-    abstractRasterData_statusData
-    abstractRasterData_tahunPerolehan
-    abstractRasterData_jenisSatelit
-    abstractRasterData_format
-    abstractRasterData_resolusi
-    abstractRasterData_kawasanLitupan
-    abstractServices_namaServis
-    abstractServices_lokasi
-    abstractServices_tujuan
-    abstractServices_dataTerlibat
-    abstractServices_polisi
-    abstractServices_peringkatCapaian
-    abstractServices_format
-    abstractSoftware_namaPerisian
-    abstractSoftware_versi
-    abstractSoftware_tujuan
-    abstractSoftware_tahunPengunaanPerisian
-    abstractSoftware_kaedahPerolehan
-    abstractSoftware_format
-    abstractSoftware_pengeluar
-    abstractSoftware_keupayaan
-    abstractSoftware_dataTerlibat
-    abstractSoftware_keperluanPerkakas
-    abstractVectorData_namaData
-    abstractVectorData_lokasi
-    abstractVectorData_rumusanData
-    abstractVectorData_tujuanData
-    abstractVectorData_kaedahPenyediaanData
-    abstractVectorData_format
-    abstractVectorData_unit
-    abstractVectorData_skala
-    abstractVectorData_statusData
-    c2_abstract
-    c10_file_url
-    c2_metadataDate
-    c2_metadataDateType
-    c2_metadataStatus
-    c2_typeOfServices
-    c2_operationName
-    c2_serviceUrl
-    c2_typeOfCouplingDataset
-    c2_contact_name
-    c2_contact_agensiorganisasi
-    c2_contact_bahagian
-    c2_position_name
-    c2_contact_address1
-    c2_contact_address2
-    c2_contact_address3
-    c2_contact_address4
-    c2_postal_code
-    c2_contact_city
-    c2_contact_state
-    c2_contact_country
-    c2_contact_email
-    c2_contact_fax
-    c2_contact_phone_office
-    c2_contact_website
-    c2_contact_role
+                ],
+                "collapse2" => [
+                    "c2_metadataName",
+                    "c2_product_type",
+                    "abstractApplication_namaAplikasi",
+                    "abstractApplication_tujuan",
+                    "abstractApplication_tahunPembangunan",
+                    "abstractApplication_kemaskini",
+                    "abstractApplication_dataTerlibat",
+                    "abstractApplication_sasaranPengguna",
+                    "abstractApplication_versi",
+                    "abstractApplication_perisianDigunaPembangunan",
+                    "abstractDocument_namaDokumen",
+                    "abstractDocument_tujuan",
+                    "abstractDocument_tahunTerbitan",
+                    "abstractDocument_edisi",
+                    "abstractGISActivityProject_namaAktiviti",
+                    "abstractGISActivityProject_tujuan",
+                    "abstractGISActivityProject_lokasi",
+                    "abstractGISActivityProject_tahun",
+                    "abstractMap_namaPeta",
+                    "abstractMap_kawasan",
+                    "abstractMap_tujuan",
+                    "abstractMap_tahunTerbitan",
+                    "abstractMap_edisi",
+                    "abstractMap_noSiri",
+                    "abstractMap_skala",
+                    "abstractMap_unit",
+                    "abstractRasterData_namaData",
+                    "abstractRasterData_lokasi",
+                    "abstractRasterData_rumusanData",
+                    "abstractRasterData_tujuanData",
+                    "abstractRasterData_kaedahPenyediaanData",
+                    "abstractRasterData_format",
+                    "abstractRasterData_unit",
+                    "abstractRasterData_skala",
+                    "abstractRasterData_statusData",
+                    "abstractRasterData_tahunPerolehan",
+                    "abstractRasterData_jenisSatelit",
+                    "abstractRasterData_format",
+                    "abstractRasterData_resolusi",
+                    "abstractRasterData_kawasanLitupan",
+                    "abstractServices_namaServis",
+                    "abstractServices_lokasi",
+                    "abstractServices_tujuan",
+                    "abstractServices_dataTerlibat",
+                    "abstractServices_polisi",
+                    "abstractServices_peringkatCapaian",
+                    "abstractServices_format",
+                    "abstractSoftware_namaPerisian",
+                    "abstractSoftware_versi",
+                    "abstractSoftware_tujuan",
+                    "abstractSoftware_tahunPengunaanPerisian",
+                    "abstractSoftware_kaedahPerolehan",
+                    "abstractSoftware_format",
+                    "abstractSoftware_pengeluar",
+                    "abstractSoftware_keupayaan",
+                    "abstractSoftware_dataTerlibat",
+                    "abstractSoftware_keperluanPerkakas",
+                    "abstractVectorData_namaData",
+                    "abstractVectorData_lokasi",
+                    "abstractVectorData_rumusanData",
+                    "abstractVectorData_tujuanData",
+                    "abstractVectorData_kaedahPenyediaanData",
+                    "abstractVectorData_format",
+                    "abstractVectorData_unit",
+                    "abstractVectorData_skala",
+                    "abstractVectorData_statusData",
+                    "c2_abstract",
+                    "c10_file_url",
+                    "c2_metadataDate",
+                    "c2_metadataDateType",
+                    "c2_metadataStatus",
+                    "c2_typeOfServices",
+                    "c2_operationName",
+                    "c2_serviceUrl",
+                    "c2_typeOfCouplingDataset",
+                    "c2_contact_name",
+                    "c2_contact_agensiorganisasi",
+                    "c2_contact_bahagian",
+                    "c2_position_name",
+                    "c2_contact_address1",
+                    "c2_contact_address2",
+                    "c2_contact_address3",
+                    "c2_contact_address4",
+                    "c2_postal_code",
+                    "c2_contact_city",
+                    "c2_contact_state",
+                    "c2_contact_country",
+                    "c2_contact_email",
+                    "c2_contact_fax",
+                    "c2_contact_phone_office",
+                    "c2_contact_website",
+                    "c2_contact_role",
+                ],
+                "collapse3" => [],
+                "collapse4" => [
+                    "c4_scan_res",
+                    "c4_ground_scan",
+                ],
+                "collapse5" => [
+                    "c5_process_lvl",
+                    "c5_resolution",
+                ],
+                "collapse6" => [
+                    "c6_collection_name",
+                    "c6_collection_id",
+                ],
+                "collapse6" => [
+                    "c7_band_boundary",
+                    "c7_trans_fn_type",
+                    "c7_trans_polar",
+                    "c7_nominal_spatial_res",
+                    "c7_detected_polar",
+                ],
+                "collapse7" => [
+                    "c7_band_boundary",
+                    "c7_trans_fn_type",
+                    "c7_trans_polar",
+                    "c7_nominal_spatial_res",
+                    "c7_detected_polar",
+                ],
+                "collapse8" => [
+                    "c8_avg_air_temp",
+                    "c8_altitude",
+                    "c8_relative_humid",
+                    "c8_meteor_cond",
+                    "c8_identifier",
+                    "c8_trigger",
+                    "c8_context",
+                    "c8_sequence",
+                    "c8_time",
+                    "c8_type",
+                    "c8_op_identifier",
+                    "c8_op_status",
+                    "c8_op_type",
+                    "c8_rdr_date",
+                    "c8_last_accept_date",
+                ],
+                "collapse9" => [
+                    "c9_west_bound_longitude",
+                    "c9_east_bound_longitude",
+                    "c9_south_bound_latitude",
+                    "c9_north_bound_latitude",
+                ],
+                "collapse10" => [
+                    "file_contohJenisMetadata",
+                    "c10_file_name",
+                    "c10_file_type",
+                    "c10_file_url",
+                    "c10_keyword",
+                    "c10_additional_keyword[]",
+                ],
+                "collapse11" => [
+                    "c11_dist_format",
+                    "c11_version",
+                    "c11_distributor",
+                    "c11_units_of_dist",
+                    "c11_size",
+                    "c11_link",
+                    "c11_fees",
+                    "c11_order_instructions",
+                    "c11_medium",
+                ],
+                "collapse12" => [
+                    "c12_dataset_type",
+                    "c12_feature_scale",
+                    "c12_image_res",
+                    "c12_language",
+                    "c12_maintenanceUpdate",
+                ],
+                "collapse13" => [
+                    "c13_ref_sys_identify",
+                    "refsys_projection",
+                    "refsys_axis_units",
+                    "refsys_semiMajorAxis",
+                    "refsys_datum",
+                    "refsys_ellipsoid",
+                    "refsys_denomFlatRatio",
+                ],
+                "collapse14" => [
+                    "c14_useLimitation",
+                    "c14_access_constraint",
+                    "c14_use_constraint",
+                    "c14_classification_sys",
+                    "c14_reference",
+                ],
+                "collapse15" => [
+                    "c15_data_quality_info",
+                    "c15_data_history",
+                    "c15_date",
+                    "tab_completeness",
+                    "tab_consistency",
+                    "tab_position_accuracy",
+                    "tab_temp_accuracy",
+                    "tab_thematic_accuracy",
+                    "c15_t1_complete_comm_or_omit",
+                    "c15_t1_complete_comm_or_omit",
+                    "c15_t1_scope",
+                    "c15_t1_comply_level",
+                    "c15_t1_date",
+                    "c15_t1_result",
+                    "c15_t1_conform_result",
+                    "c15_t1_scope_2",
+                    "c15_t1_comply_level_2",
+                    "c15_t1_date_2",
+                    "c15_t1_result_2",
+                    "c15_t1_conform_result_2",
+                    "c15_t2_type",
+                    "c15_t2_type",
+                    "c15_t2_type",
+                    "c15_t2_type",
+                    "c15_t2_scope",
+                    "c15_t2_comply_level",
+                    "c15_t2_date",
+                    "c15_t2_result",
+                    "c15_t2_conform_result",
+                    "c15_t2_scope_2",
+                    "c15_t2_comply_level_2",
+                    "c15_t2_date_2",
+                    "c15_t2_result_2",
+                    "c15_t2_conform_result_2",
+                    "c15_t2_scope_3",
+                    "c15_t2_comply_level_3",
+                    "c15_t2_date_3",
+                    "c15_t2_result_3",
+                    "c15_t2_conform_result_3",
+                    "c15_t2_scope_4",
+                    "c15_t2_comply_level_4",
+                    "c15_t2_date_4",
+                    "c15_t2_result_4",
+                    "c15_t2_conform_result_4",
+                    "c15_t3_type",
+                    "c15_t3_type",
+                    "c15_t3_type",
+                    "c15_t3_scope",
+                    "c15_t3_comply_level",
+                    "c15_t3_date",
+                    "c15_t3_result",
+                    "c15_t3_conform_result",
+                    "c15_t3_scope_2",
+                    "c15_t3_comply_level_2",
+                    "c15_t3_date_2",
+                    "c15_t3_result_2",
+                    "c15_t3_conform_result_2",
+                    "c15_t3_scope_3",
+                    "c15_t3_comply_level_3",
+                    "c15_t3_date_3",
+                    "c15_t3_result_3",
+                    "c15_t3_conform_result_3",
+                    "c15_t4_type",
+                    "c15_t4_type",
+                    "c15_t4_type",
+                    "c15_t4_scope",
+                    "c15_t4_comply_level",
+                    "c15_t4_date",
+                    "c15_t4_result",
+                    "c15_t4_conform_result",
+                    "c15_t4_scope_2",
+                    "c15_t4_comply_level_2",
+                    "c15_t4_date_2",
+                    "c15_t4_result_2",
+                    "c15_t4_conform_result_2",
+                    "c15_t4_scope_3",
+                    "c15_t4_comply_level_3",
+                    "c15_t4_result_3",
+                    "c15_t4_conform_result_3",
+                    "c15_t5_type",
+                    "c15_t5_type",
+                    "c15_t5_type",
+                    "c15_t5_scope",
+                    "c15_t5_comply_level",
+                    "c15_t5_date",
+                    "c15_t5_result",
+                    "c15_t5_conform_result",
+                    "c15_t5_scope_2",
+                    "c15_t5_comply_level_2",
+                    "c15_t5_date_2",
+                    "c15_t5_result_2",
+                    "c15_t5_conform_result_2",
+                    "c15_t5_scope_3",
+                    "c15_t5_comply_level_3",
+                    "c15_t5_date_3",
+                    "c15_t5_result_3",
+                    "c15_t5_conform_result_3",
+                ],
+            ],
+        ];
 
-collapse3
-
-collapse4
-    c4_scan_res
-    c4_ground_scan
-
-collapse5
-    c5_process_lvl
-    c5_resolution
-
-collapse6
-    c6_collection_name
-    c6_collection_id
-
-collapse7
-    c7_band_boundary
-    c7_trans_fn_type
-    c7_trans_polar
-    c7_nominal_spatial_res
-    c7_detected_polar
-
-collapse8
-    c8_avg_air_temp
-    c8_altitude
-    c8_relative_humid
-    c8_meteor_cond
-    c8_identifier
-    c8_trigger
-    c8_context
-    c8_sequence
-    c8_time
-    c8_type
-    c8_op_identifier
-    c8_op_status
-    c8_op_type
-    c8_rdr_date
-    c8_last_accept_date
-
-collapse9
-    c9_west_bound_longitude
-    c9_east_bound_longitude
-    c9_south_bound_latitude
-    c9_north_bound_latitude
-
-collapse10
-    file_contohJenisMetadata
-    c10_file_name
-    c10_file_type
-    c10_file_url
-    c10_keyword
-    c10_additional_keyword[]
-
-collapse11
-    c11_dist_format
-    c11_version
-    c11_distributor
-    c11_units_of_dist
-    c11_size
-    c11_link
-    c11_fees
-    c11_order_instructions
-    c11_medium
-
-collapse12
-    c12_dataset_type
-    c12_feature_scale
-    c12_image_res
-    c12_language
-    c12_maintenanceUpdate
-
-collapse13
-    c13_ref_sys_identify
-    refsys_projection
-    refsys_axis_units
-    refsys_semiMajorAxis
-    refsys_datum
-    refsys_ellipsoid
-    refsys_denomFlatRatio
-
-collapse14
-    c14_useLimitation
-    c14_access_constraint
-    c14_use_constraint
-    c14_classification_sys
-    c14_reference
-
-collapse15
-    c15_data_quality_info
-    c15_data_history
-    c15_date
-    tab_completeness (tab/id)
-    tab_consistency (tab/id)
-    tab_position_accuracy (tab/id)
-    tab_temp_accuracy (tab/id)
-    tab_thematic_accuracy (tab/id)
-    c15_t1_complete_comm_or_omit
-    c15_t1_complete_comm_or_omit
-    c15_t1_scope
-    c15_t1_comply_level
-    c15_t1_date
-    c15_t1_result
-    c15_t1_conform_result
-    c15_t1_scope_2
-    c15_t1_comply_level_2
-    c15_t1_date_2
-    c15_t1_result_2
-    c15_t1_conform_result_2
-    c15_t2_type (radio/id)
-    c15_t2_type (radio/id)
-    c15_t2_type (radio/id)
-    c15_t2_type (radio/id)
-    c15_t2_scope
-    c15_t2_comply_level
-    c15_t2_date
-    c15_t2_result
-    c15_t2_conform_result
-    c15_t2_scope_2
-    c15_t2_comply_level_2
-    c15_t2_date_2
-    c15_t2_result_2
-    c15_t2_conform_result_2
-    c15_t2_scope_3
-    c15_t2_comply_level_3
-    c15_t2_date_3
-    c15_t2_result_3
-    c15_t2_conform_result_3
-    c15_t2_scope_4
-    c15_t2_comply_level_4
-    c15_t2_date_4
-    c15_t2_result_4
-    c15_t2_conform_result_4
-    c15_t3_type (radio/id)
-    c15_t3_type (radio/id)
-    c15_t3_type (radio/id)
-    c15_t3_scope
-    c15_t3_comply_level
-    c15_t3_date
-    c15_t3_result
-    c15_t3_conform_result
-    c15_t3_scope_2
-    c15_t3_comply_level_2
-    c15_t3_date_2
-    c15_t3_result_2
-    c15_t3_conform_result_2
-    c15_t3_scope_3
-    c15_t3_comply_level_3
-    c15_t3_date_3
-    c15_t3_result_3
-    c15_t3_conform_result_3
-    c15_t4_type (radio/id)
-    c15_t4_type (radio/id)
-    c15_t4_type (radio/id)
-    c15_t4_scope
-    c15_t4_comply_level
-    c15_t4_date
-    c15_t4_result
-    c15_t4_conform_result
-    c15_t4_scope_2
-    c15_t4_comply_level_2
-    c15_t4_date_2
-    c15_t4_result_2
-    c15_t4_conform_result_2
-    c15_t4_scope_3
-    c15_t4_comply_level_3
-    c15_t4_comply_level_3
-    c15_t4_result_3
-    c15_t4_conform_result_3
-    c15_t5_type (radio/id)
-    c15_t5_type (radio/id)
-    c15_t5_type (radio/id)
-    c15_t5_scope
-    c15_t5_comply_level
-    c15_t5_date
-    c15_t5_result
-    c15_t5_conform_result
-    c15_t5_scope_2
-    c15_t5_comply_level_2
-    c15_t5_date_2
-    c15_t5_result_2
-    c15_t5_conform_result_2
-    c15_t5_scope_3
-    c15_t5_comply_level_3
-    c15_t5_date_3
-    c15_t5_result_3
-    c15_t5_conform_result_3
-        */
 //        echo json_encode($f);exit();
 //        $elemens = ElemenMetadata::with('getKategori','getTajuk')->orderBy('id', 'ASC')->get();
         $categories = MCategory::get();
 //        $customMetadataInput = CustomMetadataInput::get();
         $template = MetadataTemplate::get()->first();
         $refSys = ReferenceSystemIdentifier::all();
+        $states = States::where(['country' => 1])->get()->all();
+        $countries = Countries::where(['id' => 1])->get()->all();
 
-        return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('categories', 'template','refSys'));
+        return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('categories', 'template','refSys','states','countries'));
     }
 
     public function change_elemen_status(Request $request) {
