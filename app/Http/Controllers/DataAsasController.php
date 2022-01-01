@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\Null_;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
+use App\Daerah;
+use App\Negeri;
 use PDF;
 use \setasign\Fpdi\Fpdi;
 
@@ -73,9 +75,11 @@ class DataAsasController extends Controller
         $kategori_senarai_data  = SenaraiData::where('status','Tersedia')->distinct('kategori')->get();
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->get();
-        //  return $dokumens;
 
-        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan','senarai_data','dokumens','pentadbirdata','kategori_senarai_data','lapisandata'));
+        $negeris =  Negeri::get();
+        $daerahs = Daerah::get();
+
+        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan','senarai_data','dokumens','pentadbirdata','kategori_senarai_data','lapisandata','negeris','daerahs'));
     }
 
     public function data_asas_landing()
@@ -334,7 +338,7 @@ class DataAsasController extends Controller
             'pautan_data[0]' => 'required',
         ]);
 
-        dd($valid_data['pautan_data']);
+        // dd($valid_data['pautan_data']);
 
 
         if($valid_data['pautan_data']){
@@ -509,6 +513,7 @@ class DataAsasController extends Controller
     }
 
     public function store_senarai_data(Request $request)
+
     {
         $senarai_data = new SenaraiData();
         $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
@@ -598,7 +603,12 @@ class DataAsasController extends Controller
 
     public function update_senarai_data(Request $request)
     {
-        DB::transaction(function () use ($request) {
+        $valid = SenaraiData::where([ "kategori" => $request->kategori,
+                                    "subkategori" => $request->subkategori,
+                                    "lapisan_data" => $request->lapisan_data])
+                                    ->first();
+
+        if(empty($valid)){
             //save senarai data
             SenaraiData::where(["id" => $request->id_senarai_data])->update([
                 "kategori" => $request->kategori,
@@ -609,7 +619,7 @@ class DataAsasController extends Controller
                 "harga_data" => $request->harga_data,
                 "kod" => $request->kod,
             ]);
-        });
+        }
 
         $at = new AuditTrail();
         $at->path = url()->full();
@@ -728,7 +738,6 @@ class DataAsasController extends Controller
             ->whereNull('digital_sign')
             ->get();
 
-// dd($valid_file);
          if($valid_file->isEmpty()){
             $request->validate([
                 'file' => 'mimes:png,jpeg,jpg|max:2048'
@@ -845,9 +854,19 @@ class DataAsasController extends Controller
     public function store_senarai_kawasan(Request $request)
     {
 
-        // return $request;
-
         $id = $request->permohonan_id;
+        $negeri = Negeri::where('kod_negeri',$request->negeri)->first()->negeri;
+        $daerah = $request->daerah;
+        $append_kd = $negeri .', (' ;
+        foreach($daerah as $val){
+            if ($val === end($daerah)) {
+                $append_kd .= $val .')';
+            } else {
+                $append_kd .= $val .', ';
+            }
+
+        }
+        // dd($append_kd);
 
         $at = new AuditTrail();
         $at->path = url()->full();
@@ -861,6 +880,11 @@ class DataAsasController extends Controller
             ["subkategori","=", $request->subkategori],
             ["lapisan_data","=", $request->lapisan_data],
         ])->first();
+        $valid_senarai_kaw = SenaraiKawasanData::where([
+            ["kategori","=", $request->kategori],
+            ["subkategori","=", $request->subkategori],
+            ["lapisan_data","=", $request->lapisan_data],
+        ])->first();
 
         if(empty($valid)){
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Padanan Data Senarai dan Kawasan Salah!');
@@ -869,7 +893,7 @@ class DataAsasController extends Controller
             $skdata->lapisan_data = $request->lapisan_data;
             $skdata->kategori = $request->kategori;
             $skdata->subkategori = $request->subkategori;
-            $skdata->kawasan_data = $request->kawasan_data;
+            $skdata->kawasan_data = $append_kd;
             $skdata->kelas = $valid->kelas;
             $skdata->harga_data = $valid->harga_data;
             $skdata->permohonan_id = $id;

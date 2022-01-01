@@ -3,7 +3,7 @@
 @section('content')
 
     <style>
-        li {
+        div.test li {
             list-style-type: square;
         }
 
@@ -27,7 +27,9 @@
                                     <div class="col-8">
                                         <p class="heading text-muted">{{ $loop->iteration }}) {{ $tatacara->title }}
                                         </p>
-                                        {!! $tatacara->content !!}
+                                        <div class="test">
+                                            {!! $tatacara->content !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -160,21 +160,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <ul _ngcontent-lqr-c453="" id="button-animated"
+                            <ul id="button-animated"
                                 class="navbar-nav align-items-center ml-md-auto">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link nav-link-icon" href="{{ url('/panduan_pengguna') }}">
                                         PANDUAN PENGGUNA
                                     </a>
                                 </li>
-                                <li _ngcontent-lqr-c453="" class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link nav-link-icon" href="{{ url('/soalan_lazim') }}">
                                         <!-- <img height="25" src="{{ url('afiqlogin_files/faq-gold.png') }}"> -->
                                         <span class="nav-link-inner--text text-bold"> FAQ </span>
                                     </a>
                                 </li>
                                 @auth
-                                    <li _ngcontent-lqr-c453="" class="nav-item">
+                                    <li class="nav-item">
                                         <a class="nav-link nav-link-icon" href="{{ url('/landing_mygeo') }}">
                                             <!-- <img height="25" src="{{ url('afiqlogin_files/faq-gold.png') }}"> -->
                                             <span class="nav-link-inner--text text-bold"> DASHBOARD </span>

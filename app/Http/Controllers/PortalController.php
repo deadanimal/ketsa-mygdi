@@ -623,4 +623,17 @@ class PortalController extends Controller
 
         return redirect('/tatacara_edit')->with('success', 'Tatacara Permohonan Dikemaskini');
     }
+
+    public function delete_tatacara(Request $request)
+    {
+        TatacaraMohon::where(["id" => $request->tatacara_id])->delete();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
+        $at->save();
+
+        return redirect('/tatacara_edit')->with('success', 'Pengumuman Dibuang');
+    }
 }

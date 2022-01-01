@@ -23,6 +23,48 @@
         }
 
     </style>
+    <style>
+        h1 {
+            color: green;
+        }
+
+
+        .selectBox {
+            position: relative;
+        }
+
+        .selectBox select {
+            width: 100%;
+            /* font-weight: bold; */
+        }
+
+        .overSelect {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        #checkBoxes {
+            display: none;
+            border-radius: 3px;
+            border: 1px #e4e4e4 solid;
+            padding: 5px 0px
+        }
+
+        #checkBoxes label {
+            display: block;
+            font-weight: 100;
+            padding: 0px 15px;
+            margin-bottom: 0px;
+        }
+
+        #checkBoxes label:hover {
+            background-color: #abe4ff;
+        }
+
+    </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -107,7 +149,7 @@
                                             <div id="collapse1" class="panel-collapse collapse in show"
                                                 data-parent="#div_c1">
                                                 <div class="card-body">
-                                                    <div class="acard-body opacity-8">
+                                                    <div class="opacity-8">
                                                         <div class="row">
                                                             <div class="col-10 pl-lg-4">
                                                                 <div class="form-group">
@@ -137,13 +179,12 @@
 
                                         <!--========== collapese2 =============================================-->
                                         <div class="acard div_c2 mb-3" id="div_c2">
-                                            <div class="card-header accordionHeader" data-toggle="collapse"
-                                                href="#collapse2">
+                                            <div class="card-header accordionHeader">
                                                 <div class="row align-items-center">
-                                                    <div class="col-8">
+                                                    <div class="col-10" data-toggle="collapse" href="#collapse2">
                                                         <h3 class="heading mb-0">Senarai Data dan Kawasan Data</h3>
                                                     </div>
-                                                    <div class="col-4 text-right">
+                                                    <div class="col-2 text-right">
                                                         @if (Auth::user()->hasRole(['Pemohon Data']))
                                                             <a id="collapse2" class="btn btn-sm btn-default collapse"
                                                                 data-toggle="modal"
@@ -156,9 +197,9 @@
                                             </div>
                                             <div id="collapse2" class="panel-collapse collapse in" data-parent="#div_c2">
                                                 <div class="card-body">
-                                                    <div class="acard-body opacity-8">
-                                                        <table id="table_metadatas"
-                                                            class="table table-bordered table-striped" style="width:100%;">
+                                                    <div class="opacity-8" style="overflow-x:auto;">
+                                                        <table id="senarai_data_table"
+                                                            class="table table-bordered table-striped" style="width: 100%; overflow-x:auto;">
                                                             <thead>
                                                                 <tr>
                                                                     <th>BIL</th>
@@ -205,13 +246,12 @@
 
                                         <!--========== collapese3 =============================================-->
                                         <div class="acard div_c3 mb-3" id="div_c3">
-                                            <div class="card-header accordionHeader" data-toggle="collapse"
-                                                href="#collapse3">
+                                            <div class="card-header accordionHeader">
                                                 <div class="row align-items-center">
-                                                    <div class="col-8">
+                                                    <div class="col-10" data-toggle="collapse" href="#collapse3">
                                                         <h3 class="heading mb-0">Dokumen Berkaitan</h3>
                                                     </div>
-                                                    <div class="col-4 text-right">
+                                                    <div class="col-2 text-right">
                                                         @if (Auth::user()->hasRole(['Pemohon Data']))
                                                             <a id="collapse3" class="btn btn-sm btn-default collapse"
                                                                 data-toggle="modal" data-target="#modal-pilih-upload"><span
@@ -223,7 +263,7 @@
                                             </div>
                                             <div id="collapse3" class="panel-collapse collapse in" data-parent="#div_c3">
                                                 <div class="card-body">
-                                                    <div class="acard-body opacity-8">
+                                                    <div class="opacity-8">
                                                         <table id="dokumen_table" class="table table-bordered table-striped"
                                                             style="width:100%;">
                                                             <thead>
@@ -433,9 +473,21 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
-                                        <input name="kawasan_data" class="form-control"
-                                            placeholder="Masukkan Kawasan Data" />
+                                        {{-- <input name="kawasan_data" class="form-control"
+                                            placeholder="Masukkan Kawasan Data" /> --}}
+
+                                        <select class="form-control" id="negeri" name="negeri" onchange="selectNegeri()">
+                                            <option selected disabled>Negeri</option>
+                                            @foreach ($negeris as $neg)
+                                                <option value="{{ $neg->kod_negeri }}">{{ $neg->negeri }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
+
+                                    <div class="form-group" id="dynamicDaerah">
+                                    </div>
+
                                     <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                     <input type="hidden" name="id" value="{{ $permohonan->id }}">
                                 </div>
@@ -815,14 +867,15 @@
                 }
             });
 
-            $("#table_metadatas").DataTable({
+            $("#senarai_data_table").DataTable({
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 // "scrollX": true,
+                "orderCellsTop": true,
                 "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
+                "responsive": false,
+                "autoWidth": true,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
                     "sEmptyTable": "Tiada rekod ditemui",
@@ -837,7 +890,8 @@
                         "sPrevious": "<",
                     }
                 }
-            });
+            }).columns.adjust();
+
             $("#dokumen_table").DataTable({
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
@@ -861,27 +915,6 @@
                     }
                 }
             });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $(".div_sub").hide();
-            $(".subKategoriTitle").hide();
-
-            $(document).on("click", ".kategori", function() {
-                var divname = $(this).data('id');
-                $(".div_sub").hide();
-                $("." + divname).show();
-                $(".subKategoriTitle").show();
-            });
-
-            $(document).on("click", ".subkategori", function() {
-                //            var divname = $(this).data('id');
-                //            $(".div_sub").hide();
-                //            $("." + divname).show();
-                //            $(".subKategoriTitle").show();
-            });
-
         });
     </script>
 
@@ -922,8 +955,6 @@
                 });
             });
 
-
-
         }
     </script>
 
@@ -958,7 +989,6 @@
                                                     ` + senarai_append + `
 
                                                  </select>`);
-
         }
 
         function selectSubKategori() {
@@ -982,5 +1012,71 @@
                                                  </select>`);
 
         }
+
+        function selectNegeri() {
+            d = document.getElementById("negeri").value;
+            kategori = d.toString();
+            sdata = {!! $daerahs !!}
+            daerah_append = ''
+            sdata.forEach(element => {
+                if (element['negeri_id'] == d) {
+                    daerah_append += `<label for="` + element['daerah'] + `">
+                                                    <input type="checkbox" name="daerah[]" value="` + element[
+                        'daerah'] + `" />
+                                                    ` + element['daerah'] + `
+                                                </label>`
+                }
+            });
+
+            $("#dynamicDaerah").empty();
+            $("#dynamicDaerah").append(`<div class="form-group multipleSelection">
+                                            <div class="selectBox"
+                                                onclick="showCheckboxes()">
+                                                <select class="form-control">
+                                                    <option id="result">Daerah</option>
+                                                </select>
+                                                <div class="overSelect"></div>
+                                            </div>
+
+                                            <div id="checkBoxes" onchange="displayCheck()">
+                                                ` + daerah_append + `
+                                            </div>
+                                        </div>`);
+
+        }
+
+        function displayCheck() {
+            $(document).ready(function() {
+                var append = '';
+                $("#checkBoxes input[type='checkbox']:checked").each(function(i) {
+                    var len = $("#checkBoxes input[type='checkbox']:checked").length;
+                    // alert(len);
+                    if (i === (len - 1)) {
+                        append += this.value;
+                    } else {
+                        append += this.value + ', ';
+                    }
+
+                });
+                $('#result').html('( ' + append + ' )');
+            });
+        }
     </script>
+    <script>
+        var show = true;
+
+        function showCheckboxes() {
+            var checkboxes =
+                document.getElementById("checkBoxes");
+
+            if (show) {
+                checkboxes.style.display = "block";
+                show = false;
+            } else {
+                checkboxes.style.display = "none";
+                show = true;
+            }
+        }
+    </script>
+
 @stop

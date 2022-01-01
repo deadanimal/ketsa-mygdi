@@ -91,7 +91,8 @@
                                 <select class="form-control" style="overflow: hidden;" size="10">
                                     @foreach ($tatacara_mohon as $tatacara)
                                         <option class="choose-tatacara-{{ $tatacara->id }}" value="{{ $tatacara->id }}"
-                                            data-show=".info-tatacara-{{ $tatacara->id }}">{{$tatacara->id}}. {{ $tatacara->title }}
+                                            data-show=".info-tatacara-{{ $tatacara->id }}">{{ $loop->iteration }})
+                                            {{ $tatacara->title }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -153,6 +154,12 @@
 
                                         <button id="btn_submit_{{ $tatacara->id }}" type="button"
                                             class="btn btn-success mt-4 float-right">Simpan</button>
+                                    </form>
+                                    <form method="POST" action="{{ url('/mygeo_buang_tatacara') }}">
+                                        @csrf
+                                        <button type="submit" class='btn btn-warning mx-2 mt-4 float-right'>Hapus</button>
+
+                                        <input type="hidden" name="tatacara_id" value="{{ $tatacara->id }}">
                                     </form>
                                 </div>
                             @endforeach

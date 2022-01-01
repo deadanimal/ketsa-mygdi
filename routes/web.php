@@ -114,6 +114,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tatacara_edit', 'PortalController@edit_tatacara');
     Route::post('/simpan_tatacara', 'PortalController@update_tatacara');
     Route::post('/simpan_tajuk_tatacara', 'PortalController@store_tajuk_tatacara');
+    Route::post('/mygeo_buang_tatacara', 'PortalController@delete_tatacara');
 
     Route::get('/pengumuman_edit', 'PortalController@edit_pengumuman2');
 
