@@ -47,7 +47,7 @@ Route::get('/data_asas_senarai', 'DataAsasController@data_asas_senarai');
 Route::get('/data_asas_senarai/{data1}', 'DataAsasController@data_asas_senarai_show');
 Route::get('/data_asas_senarai/{data1}/{data2}', 'DataAsasController@data_asas_senarai_show_show');
 Route::get('/data_asas_tatacara_mohon', 'PortalController@index_tatacara');
-Route::get('/data_asas_dokumen_berkaitan', 'DataAsasController@data_asas_dokumen_berkaitan');
+Route::get('/data_asas_dokumen_berkaitan', 'DokumenUtamaController@index');
 Route::post('/simpan_maklum_balas', 'PortalController@store_maklum_balas');
 Route::post('/reply_maklum_balas', 'PortalController@reply_maklum_balas');
 
@@ -115,6 +115,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_tatacara', 'PortalController@update_tatacara');
     Route::post('/simpan_tajuk_tatacara', 'PortalController@store_tajuk_tatacara');
     Route::post('/mygeo_buang_tatacara', 'PortalController@delete_tatacara');
+
+    Route::post('/simpan_tajuk_dokumen', 'DokumenUtamaController@store_tajuk_dokumen');
+    Route::post('/simpan_dokumen', 'DokumenUtamaController@update_dokumen');
+    Route::post('/simpan_dokumen_desc', 'DokumenUtamaController@update_dokumen_desc');
+    Route::get('/dokumen_utama_edit', 'DokumenUtamaController@edit_dokumen');
+    Route::post('/mygeo_buang_dokumen', 'DokumenUtamaController@delete_dokumen');
 
     Route::get('/pengumuman_edit', 'PortalController@edit_pengumuman2');
 

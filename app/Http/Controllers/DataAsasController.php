@@ -607,6 +607,7 @@ class DataAsasController extends Controller
                                     "subkategori" => $request->subkategori,
                                     "lapisan_data" => $request->lapisan_data])
                                     ->first();
+        // dd($valid);
 
         if(empty($valid)){
             //save senarai data
