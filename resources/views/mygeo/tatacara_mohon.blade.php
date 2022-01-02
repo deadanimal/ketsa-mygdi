@@ -114,10 +114,10 @@
                                 <form method="POST" class="form-horizontal" action="{{ url('simpan_tatacara') }}"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" name="id_faq" value="">
-                                    <input type="hidden" name="content_dokumen" id="content_dokumen">
+                                    <input type="hidden" name="id_tatacara" value="">
+                                    <input type="hidden" name="content_tatacara" id="content_tatacara">
                                     <label class="form-control-label">Tajuk Rujukan</label>
-                                    <input type="text" name="doc_name" id="doc_name" class="form-control" value=""
+                                    <input type="text" name="title_tatacara" id="title_tatacara" class="form-control" value=""
                                         disabled>
 
                                     <label class="form-control-label mt-4">Muat Naik Dokumen</label>
@@ -132,10 +132,10 @@
                                         @csrf
                                         <input type="hidden" name="id_tatacara"
                                             value="{{ !is_null($tatacara) ? $tatacara->id : '' }}">
-                                        <input type="hidden" name="content_dokumen"
+                                        <input type="hidden" name="content_tatacara"
                                             id="content_tatacara_{{ $tatacara->id }}">
                                         <label class="form-control-label">Tajuk</label>
-                                        <input type="text" name="doc_name" id="doc_name" class="form-control"
+                                        <input type="text" name="title_tatacara" id="title_tatacara" class="form-control"
                                             value="{{ !is_null($tatacara) ? $tatacara->title : '' }}">
 
                                         <label class="form-control-label mt-4">Gambar Ikon</label>
@@ -267,7 +267,7 @@
         </script>
     @endforeach
     <script>
-        var quill_tatacara = new Quill('#content_dokumen_input', {
+        var quill_tatacara = new Quill('#content_tatacara_input', {
             modules: {
                 toolbar: [
                     ['bold', 'italic', 'underline', 'strike'], // toggled buttons

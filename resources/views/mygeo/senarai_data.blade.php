@@ -4,7 +4,7 @@
 
     <style>
         .bg-user {
-            background-color: lightpink
+            background-color: #96C7C1
         }
 
         .bg-admin {
@@ -170,7 +170,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label">Pengkelasan Lapisan Data</label>
                                         <select class="form-control form-control-sm" name="kelas">
-                                            <option selected disabled>Pilih</option>
+                                            <option value="" selected disabled>Pilih</option>
                                             <option value="Terhad" @if ($sdata->kelas == 'Terhad') selected @endif>Terhad</option>
                                             <option value="Tidak Terhad" @if ($sdata->kelas == 'Tidak Terhad') selected @endif>Tidak Terhad</option>
                                         </select>
