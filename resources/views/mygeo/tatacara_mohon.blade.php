@@ -98,20 +98,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="card">
-                            @csrf
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col-12">
-                                        <h3 class="mb-0">Kandungan</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <label class="form-control-label mt-4">Kandungan</label>
-                                <div id="content_dokumen_input"></div>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-8">
                         <div class="card">
@@ -267,7 +253,7 @@
                                 ['clean'],
                             ],
                         },
-                        placeholder: 'Compose an epic...',
+                        placeholder: 'Kandungan ...',
                         theme: 'snow',
                     });
                 quill_tatacara_{{ $tatacara->id }}.root.innerHTML = '{!! !is_null($tatacara) ? $tatacara->content : '' !!}';

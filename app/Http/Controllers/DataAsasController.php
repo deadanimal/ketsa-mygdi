@@ -1201,18 +1201,19 @@ class DataAsasController extends Controller
 
             $failNama = time() . '_' . $request->file->getClientOriginalName();
             if($request->tajuk_dokumen == 'Salinan Kad Pengenalan' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $request->tajuk_dokumen == 'Salinan Lesen Hak Cipta'){
-                $pdf = new Fpdi();
-                // add a page
-                $pdf->AddPage();
-                // set the source file
-                $pdf->setSourceFile($request->file('file')->path());
-                // import page 1
-                $tplId = $pdf->importPage(1);
-                // use the imported page and place it at point 10,10 with a width of 100 mm
-                $pdf->useTemplate($tplId, 10, 10, 200);
-                //Put the watermark
-                $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
-                $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+                // $pdf = new Fpdi();
+                // // add a page
+                // $pdf->AddPage();
+                // // set the source file
+                // $pdf->setSourceFile($request->file('file')->path());
+                // // import page 1
+                // $tplId = $pdf->importPage(1);
+                // // use the imported page and place it at point 10,10 with a width of 100 mm
+                // $pdf->useTemplate($tplId, 10, 10, 200);
+                // //Put the watermark
+                // $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
+                // $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+                $request->file->storeAs('uploads', $failNama, 'public');
 
             } else {
                 $request->file->storeAs('uploads', $failNama, 'public');
@@ -1250,18 +1251,20 @@ class DataAsasController extends Controller
             $failNama = time() . '_' . $request->file->getClientOriginalName();
 
             if($valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Lesen Hak Cipta'){
-                $pdf = new Fpdi();
-                // add a page
-                $pdf->AddPage();
-                // set the source file
-                $pdf->setSourceFile($request->file('file')->path());
-                // import page 1
-                $tplId = $pdf->importPage(1);
-                // use the imported page and place it at point 10,10 with a width of 100 mm
-                $pdf->useTemplate($tplId, 10, 10, 200);
-                //Put the watermark
-                $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
-                $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+                // $pdf = new Fpdi();
+                // // add a page
+                // $pdf->AddPage();
+                // // set the source file
+                // $pdf->setSourceFile($request->file('file')->path());
+                // // import page 1
+                // $tplId = $pdf->importPage(1);
+                // // use the imported page and place it at point 10,10 with a width of 100 mm
+                // $pdf->useTemplate($tplId, 10, 10, 200);
+                // //Put the watermark
+                // $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
+                // $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+
+                $request->file->storeAs('uploads', $failNama, 'public');
 
             } else {
                 $request->file->storeAs('uploads', $failNama, 'public');
@@ -1373,10 +1376,11 @@ class DataAsasController extends Controller
         $pdf->setPaper('A4', 'potrait');
 
         // Render the HTML as PDF
-        $pdf->stream();
+        return $pdf->stream();
 
         $failModel = new DokumenBerkaitan();
         $content = $pdf->output();
+        // return $content;
 
         $failNama = time() . '_' .'nric_copy.pdf';
         // dd($failNama);
@@ -1405,7 +1409,7 @@ class DataAsasController extends Controller
         $pdf->setPaper('A4', 'potrait');
 
         // Render the HTML as PDF
-        $pdf->stream();
+        return $pdf->stream();
 
         $content = $pdf->output();
 
