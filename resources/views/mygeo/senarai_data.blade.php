@@ -149,11 +149,13 @@
                                             onchange="selectSubKategori()" autofocus>
                                             <option selected disabled>Pilih</option>
                                             @foreach ($subkategori_sd as $sub)
-                                                <option value="" {{ $sub->name == $sdata->subkategori ? 'selected':''}}>{{ $sub->name }}</option>
+                                                @if ($sub->name == $sdata->subkategori)
+                                                    <option value="{{ $sub->name }}"
+                                                        {{ $sub->name == $sdata->subkategori ? 'selected' : '' }}>
+                                                        {{ $sub->name }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
-                                        <input type="text" class="form-control form-control-sm" name="subkategori"
-                                            value="{{ $sdata->subkategori }}">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Lapisan Data</label>
