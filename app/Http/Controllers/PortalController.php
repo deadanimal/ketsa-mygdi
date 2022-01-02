@@ -199,8 +199,8 @@ class PortalController extends Controller
         return view('mygeo.panduan_pengguna', compact('panduan_pengguna'));
     }
 
-    public function store_kategori_panduan(Request $request){
-
+    public function store_kategori_panduan(Request $request)
+    {
         $panduan = new PanduanPengguna();
         $panduan->title = $request->kategori_panduan;
         $panduan->save();
@@ -235,7 +235,6 @@ class PortalController extends Controller
         return redirect('/panduan_pengguna_edit')->with('success', 'Panduan Pengguna Disimpan');
     }
 
-
     //=== Penafian Functions ===========================================================
     public function index_penafian()
     {
@@ -268,7 +267,6 @@ class PortalController extends Controller
 
         return redirect('mygeo_penafian')->with('success', 'Tetapan Penafian Disimpan');
     }
-
 
     //=== Penyataan Privasi Functions ===========================================================
     public function index_penyataan_privasi()
@@ -584,13 +582,11 @@ class PortalController extends Controller
     {
         $portal = PortalTetapan::get()->first();
         $tatacara_mohon = TatacaraMohon::orderBy('id','ASC')->get();
-        $portal = PortalTetapan::get()->first();
         return view('/data_asas_tatacara_mohon',compact('portal','tatacara_mohon'));
     }
 
     public function update_tatacara(Request $request)
     {
-
         $request->validate([
             'file' => 'mimes:png,jpeg,jpg|max:2048'
         ]);
