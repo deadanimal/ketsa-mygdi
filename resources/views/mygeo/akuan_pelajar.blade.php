@@ -11,8 +11,8 @@
 
         .form-control,
         .form-control:disabled {
-            /* border-width: 0; */
-            background-color: white
+            /* border-width: 0;
+                                background-color: white */
         }
 
     </style>
@@ -77,16 +77,15 @@
                                             placeholder="Tajuk" value="{{ $akuan->title }}"><br>
                                     <ol align="justify" class="mx-5 pr-lg-4">
                                         <li>Saya (nyatakan nama) <input type="text" class="form-control form-control-sm"
-                                                name="nama" disabled value="{{ $permohonan->users->name }}">
+                                                name="nama" value="{{ $permohonan->users->name }}">
                                             K.P. No <input type="text" class="form-control form-control-sm" name="nric"
-                                                disabled placeholder="No Kad Pengenalan"
-                                                value="{{ $permohonan->users->nric }}"> yang
+                                                placeholder="No Kad Pengenalan" value="{{ $permohonan->users->nric }}">
+                                            yang
                                             bertandatangan di bawah ini, sebagai
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
-                                                name="agensi_organisasi"
-                                                disabled>{{ $permohonan->users->agensi_organisasi }}, {{ $permohonan->users->alamat }}
-                                                                                                                 </textarea>
+                                                name="agensi_organisasi">{{ $permohonan->users->agensi_organisasi }}, {{ $permohonan->users->alamat }}
+                                                                                                                                     </textarea>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
                                             seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
@@ -123,9 +122,8 @@
                                             <li>Lain-lain :</li>
                                             <ol type="a">
                                                 @foreach ($skdatas as $sk)
-                                                    <li><span class="form-inline"><input type="text"
-                                                                class="form-control form-control-sm" name="lain_a" disabled
-                                                                value="{{ $sk->lapisan_data }}"></span></li>
+                                                    <li><i class="form-inline">{{ $sk->lapisan_data }},
+                                                            {{ $sk->kawasan_data }}</i></li>
                                                 @endforeach
                                             </ol>
                                         </ol>
@@ -166,9 +164,9 @@
                                             placeholder="Auto Pilih Tarikh Semasa" disabled
                                             value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
                                         Nama:<input type="text" class="form-control form-control-sm"
-                                            value="{{ $permohonan->users->name }}" disabled>
-                                        Alamat:<textarea class="form-control form-control-sm" cols="30" rows="6"
-                                            disabled>{{ $permohonan->users->alamat }}</textarea>
+                                            value="{{ $permohonan->users->name }}">
+                                        Alamat:<textarea class="form-control form-control-sm" cols="30"
+                                            rows="6">{{ $permohonan->users->alamat }}</textarea>
                                     </div>
 
                                     <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
@@ -177,16 +175,16 @@
                                     </p>
 
                                     @if (Auth::user()->hasRole(['Pemohon Data']))
-                                        <button type="submit" class="btn float-right btn-primary">Simpan</button>
+                                        <button type="submit" class="btn float-right btn-success">Simpan</button>
                                     @endif
                                 </form>
-                                @if (isset($akuan))
-                                    <form action="{{ url('api/dokumen/akuan_pelajar') }}" method="POST" target="_blank">
-                                        @csrf
-                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                        <button type=submit class="btn btn-sm btn-primary mt-2">Cetak PDF</button>
-                                    </form>
-                                @endif
+
+                                <form action="{{ url('api/dokumen/akuan_pelajar') }}" method="POST" target="_blank">
+                                    @csrf
+                                    <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                    <button type=submit class="btn btn-primary mt-2" @if (!$akuan->digital_sign) disabled
+                                        @endif>Papar PDF</button>
+                                </form>
                             </div>
                         </div>
                     </div>

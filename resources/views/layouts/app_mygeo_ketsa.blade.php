@@ -321,6 +321,18 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
+                                                        <a href="{{ url('dokumen_utama') }}"
+                                                            class="nav-link">
+                                                            <span class="nav-link-text">Dokumen Berkaitan</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('tatacara_edit') }}"
+                                                            class="nav-link">
+                                                            <span class="nav-link-text">Tatacara Permohonan</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
                                                         <a href="{{ url('mygeo_penafian') }}"
                                                             class="nav-link">
                                                             <span class="nav-link-text">Penafian</span>
@@ -557,33 +569,13 @@
                             class="navbar navbar-top navbar-expand navbar-light bg-custom border-bottom">
                             <div class="container-fluid">
                                 <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                                    <div class="media align-items-center">
-                                        <span class="ml-1">
-                                            <img alt="Image placeholder"
-                                                src="{{ url('afiqadminmygeo_files/mygeoexplorer-logo2.png') }}"
-                                                width="50%">
-                                        </span>
+                                    <div style="width:90%;">
+                                        <img alt="Image placeholder"
+                                            src="{{ url('afiqadminmygeo_files/mygeoexplorer-logo2.png') }}"
+                                            width="50%">
                                     </div>
-                                    {{-- <ul class="navbar-nav align-items-center ml-md-auto">
-                                        <li class="nav-item d-xl-none">
-                                            <div data-action="sidenav-pin" data-target="#sidenav-main"
-                                                class="pr-3 sidenav-toggler sidenav-toggler-dark">
-                                                <div class="sidenav-toggler-inner"><i
-                                                        class="sidenav-toggler-line"></i><i
-                                                        class="sidenav-toggler-line"></i><i
-                                                        class="sidenav-toggler-line"></i></div>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item d-sm-none"><a class="nav-link"><i
-                                                    class="ni ni-zoom-split-in"></i></a></li>
-                                        <li dropdown="" placement="bottom-right" class="nav-item dropdown">
-                                            <a role="button" disabled="" class="nav-link dropdown-toggle"></a>
-                                            <!--container-->
-                                        </li>
-                                        <!--container-->
-                                    </ul> --}}
-                                    <ul class="navbar-nav align-items-center ml-auto ml-md-0">
-                                        <li placement="bottom-right" class="nav-item dropdown">
+                                    <ul class="navbar-nav align-items-center ml-md-auto">
+                                        <li placement="bottom-right" class="nav-item">
                                             <!--<a role="button" dropdowntoggle="" class="nav-link pr-0 dropdown-toggle" aria-haspopup="true">-->
                                             <!--<a class="nav-link pr-0 dropdown-toggle" data-toggle="dropdown" href="#">-->
                                             <div class="media align-items-center pointer">
@@ -600,10 +592,11 @@
                                                             foreach (auth::user()->getRoleNames() as $role) {
                                                                 $roles .= $role . ', ';
                                                             }
-                                                        }
-                                                        echo rtrim($roles, ', ') . ' (<a href="#" data-toggle="modal" data-target="#modal_tukar_peranan">Tukar</a>)';
-                                                        ?>
-                                                    </span>
+                                                        } ?> </span>
+                                                    <?php
+                                                    echo rtrim($roles, ', ') . ' (<a href="#" data-toggle="modal" data-target="#modal_tukar_peranan">Tukar</a>)';
+                                                    ?>
+
                                                     </a>
                                                 </div>
                                                 <span class="avatar avatar-md rounded-circle ml-3">

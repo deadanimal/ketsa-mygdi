@@ -168,7 +168,7 @@
                         ['clean'],
                     ],
                 },
-                placeholder: 'Compose an epic...',
+                placeholder: 'Kandungan ...',
                 theme: 'snow',
             });
             quill_penyataan_privasi.root.innerHTML = '{!! !is_null($penyataan_privasi) ? $penyataan_privasi->content : '' !!}';

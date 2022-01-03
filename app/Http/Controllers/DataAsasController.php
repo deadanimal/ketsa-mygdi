@@ -462,8 +462,6 @@ class DataAsasController extends Controller
     {
         $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
         $permohonan = ProsesData::where('id', 8)->get();
-        $m = json_decode($permohonan[0]->pautan_data);
-        // dd($m);
         return view('mygeo.muat_turun_data', compact('permohonan_list'));
     }
 
@@ -519,14 +517,14 @@ class DataAsasController extends Controller
         $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
 
         $check_exist = SenaraiData::where([
-            // ['kategori','=',$kategori_sd->name],
+            ['kategori','=',$kategori_sd->name],
             ['subkategori','=',$request->subkategori],
-            // ['lapisan_data','=',$request->lapisan_data],
-            // ['kod','=',$request->kod]
+            ['lapisan_data','=',$request->lapisan_data],
+            ['kod','=',$request->kod]
         ])->first();
-        dd($check_exist,$request->subkategori);
 
-        if(!$check_exist){
+        if($check_exist){
+            // dd($check_exist);
             return redirect('senarai_data')->with('warning', 'Senarai Data Telah Pun Wujud');
         } else {
             $senarai_data->kategori = $kategori_sd->name;
@@ -541,7 +539,6 @@ class DataAsasController extends Controller
             $at->user_id = Auth::user()->id;
             $at->data = 'Create';
             $at->save();
-
             return redirect('senarai_data')->with('success', 'Senarai Data Baru Telah Ditambah');
 
         }
@@ -603,32 +600,52 @@ class DataAsasController extends Controller
 
     public function update_senarai_data(Request $request)
     {
-        $valid = SenaraiData::where([ "kategori" => $request->kategori,
-                                    "subkategori" => $request->subkategori,
-                                    "lapisan_data" => $request->lapisan_data])
+        $valid_kod = SenaraiData::where(["kod" => "$request->kod"])->first();
+        $valid = SenaraiData::where([ "kategori" => "$request->kategori",
+                                    "subkategori" => "$request->subkategori",
+                                    "lapisan_data" => "$request->lapisan_data",
+                                    "kelas" => "$request->kelas",
+                                    "status" => "$request->status",
+                                    "kod" => "$request->kod"])
                                     ->first();
-        // dd($valid);
 
         if(empty($valid)){
-            //save senarai data
-            SenaraiData::where(["id" => $request->id_senarai_data])->update([
-                "kategori" => $request->kategori,
-                "subkategori" => $request->subkategori,
-                "lapisan_data" => $request->lapisan_data,
-                "kelas" => $request->kelas,
-                "status" => $request->status,
-                "harga_data" => $request->harga_data,
-                "kod" => $request->kod,
-            ]);
-        }
+            if(empty($valid_kod)){
+                SenaraiData::where(["id" => $request->id_senarai_data])->update([
+                    "kategori" => $request->kategori,
+                    "subkategori" => $request->subkategori,
+                    "lapisan_data" => $request->lapisan_data,
+                    "kelas" => $request->kelas,
+                    "status" => $request->status,
+                    "harga_data" => $request->harga_data,
+                    "kod" => $request->kod,
+                ]);
+            } else {
+                SenaraiData::where(["id" => $request->id_senarai_data])->update([
+                    "kategori" => $request->kategori,
+                    "subkategori" => $request->subkategori,
+                    "lapisan_data" => $request->lapisan_data,
+                    "kelas" => $request->kelas,
+                    "status" => $request->status,
+                    "harga_data" => $request->harga_data,
+                ]);
 
-        $at = new AuditTrail();
-        $at->path = url()->full();
-        $at->user_id = Auth::user()->id;
-        $at->data = 'Update';
-        $at->save();
+             return redirect('/senarai_data')->with('warning', 'Kod Senarai Data Telah Wujud');
+            }
+
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Update';
+            $at->save();
 
         return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
+        } else {
+
+        return redirect('/senarai_data')->with('warning', 'Senarai Data Telah Wujud');
+        }
+
     }
 
     public function delete_senarai_data(Request $request)
@@ -1201,18 +1218,19 @@ class DataAsasController extends Controller
 
             $failNama = time() . '_' . $request->file->getClientOriginalName();
             if($request->tajuk_dokumen == 'Salinan Kad Pengenalan' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $request->tajuk_dokumen == 'Salinan Lesen Hak Cipta'){
-                $pdf = new Fpdi();
-                // add a page
-                $pdf->AddPage();
-                // set the source file
-                $pdf->setSourceFile($request->file('file')->path());
-                // import page 1
-                $tplId = $pdf->importPage(1);
-                // use the imported page and place it at point 10,10 with a width of 100 mm
-                $pdf->useTemplate($tplId, 10, 10, 200);
-                //Put the watermark
-                $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
-                $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+                // $pdf = new Fpdi();
+                // // add a page
+                // $pdf->AddPage();
+                // // set the source file
+                // $pdf->setSourceFile($request->file('file')->path());
+                // // import page 1
+                // $tplId = $pdf->importPage(1);
+                // // use the imported page and place it at point 10,10 with a width of 100 mm
+                // $pdf->useTemplate($tplId, 10, 10, 200);
+                // //Put the watermark
+                // $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
+                // $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+                $request->file->storeAs('uploads', $failNama, 'public');
 
             } else {
                 $request->file->storeAs('uploads', $failNama, 'public');
@@ -1250,18 +1268,20 @@ class DataAsasController extends Controller
             $failNama = time() . '_' . $request->file->getClientOriginalName();
 
             if($valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Lesen Hak Cipta'){
-                $pdf = new Fpdi();
-                // add a page
-                $pdf->AddPage();
-                // set the source file
-                $pdf->setSourceFile($request->file('file')->path());
-                // import page 1
-                $tplId = $pdf->importPage(1);
-                // use the imported page and place it at point 10,10 with a width of 100 mm
-                $pdf->useTemplate($tplId, 10, 10, 200);
-                //Put the watermark
-                $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
-                $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+                // $pdf = new Fpdi();
+                // // add a page
+                // $pdf->AddPage();
+                // // set the source file
+                // $pdf->setSourceFile($request->file('file')->path());
+                // // import page 1
+                // $tplId = $pdf->importPage(1);
+                // // use the imported page and place it at point 10,10 with a width of 100 mm
+                // $pdf->useTemplate($tplId, 10, 10, 200);
+                // //Put the watermark
+                // $pdf->Image( public_path('afiqadminmygeo_files/watermark_ketsa.png'), 40, 80, 0, 80, 'png');
+                // $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
+
+                $request->file->storeAs('uploads', $failNama, 'public');
 
             } else {
                 $request->file->storeAs('uploads', $failNama, 'public');
@@ -1373,10 +1393,11 @@ class DataAsasController extends Controller
         $pdf->setPaper('A4', 'potrait');
 
         // Render the HTML as PDF
-        $pdf->stream();
+        return $pdf->stream();
 
         $failModel = new DokumenBerkaitan();
         $content = $pdf->output();
+        // return $content;
 
         $failNama = time() . '_' .'nric_copy.pdf';
         // dd($failNama);
@@ -1405,7 +1426,7 @@ class DataAsasController extends Controller
         $pdf->setPaper('A4', 'potrait');
 
         // Render the HTML as PDF
-        $pdf->stream();
+        return $pdf->stream();
 
         $content = $pdf->output();
 
@@ -1422,6 +1443,8 @@ class DataAsasController extends Controller
     }
 
     public function generate_pdf_akuan_pelajar(Request $request){
+        // $this->update_akuan_pelajar($request);
+
         $permohonan = DB::table('users')
                     ->join('mohon_data','users.id','=','mohon_data.user_id')
                     ->where('mohon_data.id',$request->permohonan_id)

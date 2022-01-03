@@ -6,7 +6,7 @@
 
     <style>
         .bg-user {
-            background-color: lightpink
+            background-color: #96C7C1
         }
 
         .bg-admin {

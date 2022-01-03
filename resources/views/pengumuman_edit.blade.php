@@ -94,7 +94,7 @@ img {
           [{ list: 'ordered' }, { list: 'bullet' }]
         ],
       },
-      placeholder: 'Compose an epic...',
+      placeholder: 'Kandungan ...',
       theme: 'snow',
     });
     quill_pengumuman.root.innerHTML='{!! (!is_null($pengumuman) ? $pengumuman->content:"") !!}';
