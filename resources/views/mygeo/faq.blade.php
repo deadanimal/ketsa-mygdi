@@ -203,7 +203,7 @@
                             ['clean'],
                         ],
                     },
-                    placeholder: 'Compose an epic...',
+                    placeholder: 'Kandungan ...',
                     theme: 'snow',
                 });
                 quill_faq_{{ $faq->id }}.root.innerHTML = '{!! !is_null($faq) ? $faq->content : '' !!}';

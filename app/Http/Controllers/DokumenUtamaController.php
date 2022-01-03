@@ -20,14 +20,18 @@ class DokumenUtamaController extends Controller
     {
         $dokumen_utama = DokumenUtama::where('id','!=','1')->get();
         $dokumen_desc = DokumenUtama::where('id',1)->first();
+        if($dokumen_desc == null){
+            $dokumen = new DokumenUtama();
+            $dokumen->doc_name = 'content';
+            $dokumen->save();
+        }
         return view('mygeo.dokumen_utama',compact('dokumen_utama','dokumen_desc'));
     }
 
     public function store_tajuk_dokumen(Request $request){
 
-
         if($request->tajuk_dokumen != null){
-            dd($request->tajuk_dokumen);
+            // dd($request->tajuk_dokumen);
             $dokumen = new DokumenUtama();
             $dokumen->doc_name = $request->tajuk_dokumen;
             $dokumen->save();

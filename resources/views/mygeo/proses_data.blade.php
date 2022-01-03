@@ -9,7 +9,7 @@
         }
 
         .bg-user {
-            background-color: lightpink
+            background-color: #96C7C1
         }
 
         .bg-admin {
@@ -141,10 +141,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $count = 1; ?>
                                         @foreach ($skdatas as $data)
                                             @if ($data->permohonan_id == $permohonan->id)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $count }}</td>
                                                     <td>{{ $data->lapisan_data }}</td>
                                                     <td>{{ $data->subkategori }}</td>
                                                     <td>{{ $data->kategori }}</td>
@@ -160,6 +161,7 @@
                                                         </label>
                                                     </td>
                                                 </tr>
+                                                <?php $count++; ?>
                                             @endif
                                         @endforeach
                                     </tbody>

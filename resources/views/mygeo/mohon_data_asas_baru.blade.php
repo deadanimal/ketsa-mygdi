@@ -66,10 +66,21 @@
 
     </style>
 
+    <style>
+        .bg-user {
+            background-color: #96C7C1
+        }
+
+        .bg-admin {
+            background-color: #C8A2C8
+        }
+
+    </style>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header">
+        <section class="header @if (Auth::user()->hasRole(['Pentadbir Data'])) bg-admin @elseif (Auth::user()->hasRole(['Pemohon Data'])) bg-user @endif">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -106,6 +117,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+        <br>
 
         <!-- Main content -->
         <section class="content">
@@ -199,7 +211,8 @@
                                                 <div class="card-body">
                                                     <div class="opacity-8" style="overflow-x:auto;">
                                                         <table id="senarai_data_table"
-                                                            class="table table-bordered table-striped" style="width: 100%; overflow-x:auto;">
+                                                            class="table table-bordered table-striped"
+                                                            style="width: 100%; overflow-x:auto;">
                                                             <thead>
                                                                 <tr>
                                                                     <th>BIL</th>
@@ -264,6 +277,9 @@
                                             <div id="collapse3" class="panel-collapse collapse in" data-parent="#div_c3">
                                                 <div class="card-body">
                                                     <div class="opacity-8">
+                                                        <span class="text-warning">**Semua dokumen yang dimuat naik
+                                                            hendaklah dalam format PDF
+                                                            dan saiz setiap fail tidak boleh melebihi 2MB.</span>
                                                         <table id="dokumen_table" class="table table-bordered table-striped"
                                                             style="width:100%;">
                                                             <thead>
@@ -512,7 +528,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('updateDokumen') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('updateDokumen') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="tajuk_dokumen" class="form-control-label">Tajuk Dokumen</label>
@@ -520,8 +536,8 @@
                                     disabled>
                             </div>
                             @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
-                                <p style="color: orangered; font-size: 11px">**Pastikan dokumen salinan kad pengenalan yang
-                                    dimuatnaik mempunyai palang
+                                <p style="color: orangered; font-size: 13px">**Pastikan dokumen salinan kad pengenalan yang
+                                    dimuat naik mempunyai palang
                                     silang
                                     bertulis "UNTUK KEGUNAAN PGN SAHAJA"</p>
                             @endif
@@ -612,9 +628,15 @@
                                 <option value="Salinan Lesen Hak Cipta">Salinan Lesen Hak Cipta (Lot Kadaster)</option>
                             </select>
                         </div>
+
+
                         <input type="file" name="file" class="form-control">
                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                         <input type="hidden" name="id" value="{{ $permohonan->id }}">
+                        <br>
+                        <span class="py-0" style="color: orangered; font-size: 13px">**Pastikan dokumen salinan
+                            kad pengenalan
+                            yang dimuat naik mempunyai palang silang bertulis "UNTUK KEGUNAAN PGN SAHAJA"</span>
 
                         <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">
                             Simpan

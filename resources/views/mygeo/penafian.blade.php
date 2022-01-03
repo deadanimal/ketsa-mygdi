@@ -161,7 +161,7 @@
                             ['clean'],
                 ],
             },
-            placeholder: 'Compose an epic...',
+            placeholder: 'Kandungan ...',
             theme: 'snow',
         });
         quill_penafian.root.innerHTML = '{!! (!is_null($penafian) ? $penafian->content:"") !!}';

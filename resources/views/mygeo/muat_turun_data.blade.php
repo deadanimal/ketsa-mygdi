@@ -4,20 +4,19 @@
 
     <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
 
-     <!-- SweetAlert2 -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
     <style>
         .bg-user {
-            background-color: lightpink
+            background-color: #96C7C1
         }
 
         .bg-admin {
             background-color: #C8A2C8
         }
     </style>
-
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -47,7 +46,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-<br>
+        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -94,34 +93,29 @@
                                                     <?php
                                                     $inTempohUrl = 0;
                                                     $currentDate = date('d-m-Y');
-                                                    $explodedTempohUrl = explode(' - ',$permohonan->proses_datas->tempoh_url);
-                                                    $tempohUrlStart  = (isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0]:"");
-                                                    $tempohUrlEnd  = (isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1]:"");
-                                                    if($tempohUrlStart != "" && $tempohUrlEnd != ""){
-                                                        if (($currentDate >= $tempohUrlStart) && ($currentDate <= $tempohUrlEnd)){
+                                                    $explodedTempohUrl = explode(' - ', $permohonan->proses_datas->tempoh_url);
+                                                    $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+                                                    $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+                                                    if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                                                        if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
                                                             $inTempohUrl = 1;
-                                                        }else{
+                                                        } else {
                                                             $inTempohUrl = 0;
                                                         }
                                                     }
                                                     $res = json_decode($permohonan->proses_datas->pautan_data);
                                                     ?>
-                                                    <?php
-                                                    
-                                                    foreach($res as $url){ ?>
-                                                       <a @if(!empty($url) && $inTempohUrl == 1) data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
-                                                        <span
-                                                            class="fas fa-download mr-2">
-                    
-                                                        </span>
-                                                        {{$url}}</a><br>
-                                                       <?php
-                                                    }
-                                                    ?>
-                                                    
+                                                    @if (is_array($res) && !empty($res))
+                                                        @foreach ($res as $url)
+                                                            <a @if (!empty($url) && $inTempohUrl == 1) data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
+                                                                <span class="fas fa-download mr-2">
+
+                                                                </span>
+                                                                {{ $url }}</a><br>
+                                                        @endforeach
+                                                    @endif
                                                 </td>
                                             </tr>
-                                            
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -165,10 +159,10 @@
             var pemohonid = $(this).data('pemohonid');
             var acceptance = $(this).data('acceptance');
 
-            if(acceptance == '1'){
-                window.open(url,'_blank');
+            if (acceptance == '1') {
+                window.open(url, '_blank');
                 window.location.reload();
-            }else{
+            } else {
                 swal({
                     title: "Akuan Penerimaan Data",
                     type: "warning",
@@ -183,9 +177,9 @@
                         return !result && "Anda perlu sahkan akuan penerimaan data ini!";
                     },
                 }).then(function(result) {
-    //                window.location.href = url;
-                    window.location.href = "{{ url('/akuan_penerimaan/') }}"+"/"+pemohonid;
-    //                window.open(url, '_blank');
+                    //                window.location.href = url;
+                    window.location.href = "{{ url('/akuan_penerimaan/') }}" + "/" + pemohonid;
+                    //                window.open(url, '_blank');
                 });
             }
         });

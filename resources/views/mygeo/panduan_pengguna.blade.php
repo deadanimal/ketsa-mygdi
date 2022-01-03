@@ -244,7 +244,7 @@
                             ['clean'],
                         ],
                     },
-                    placeholder: 'Compose an epic...',
+                    placeholder: 'Kandungan ...',
                     theme: 'snow',
                 });
                 quill_faq_{{ $panduan->id }}.root.innerHTML = '{!! !is_null($panduan) ? $panduan->content : '' !!}';
