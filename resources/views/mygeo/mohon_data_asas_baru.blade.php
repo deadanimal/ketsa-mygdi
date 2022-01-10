@@ -64,15 +64,11 @@
 
     </style>
 
-    <style>
-
-
-    </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header @if (Auth::user()->hasRole(['Pentadbir Data'])) bg-admin @elseif (Auth::user()->hasRole(['Pemohon Data'])) bg-user @endif">
+        <section class="header">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">

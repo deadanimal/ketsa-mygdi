@@ -87,7 +87,7 @@
                                     <p align="justify" class="mx-6">
                                         <textarea class="form-control form-control-sm mt-3" cols="30"
                                             placeholder="Nama dan Alamat" rows="10">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
-                                                                </textarea>
+                                                                            </textarea>
 
 
 
