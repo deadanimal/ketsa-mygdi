@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="my-2">
                 <?php
-                if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
+                if ($metadataSearched->title != "") {
                     ?>
                     <div class="row mb-2">
                         <div class="col-3">
@@ -27,7 +27,7 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-7">
-                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString; ?>
+                            <?php echo $metadataSearched->title; ?>
                         </div>
                     </div>
                     <?php

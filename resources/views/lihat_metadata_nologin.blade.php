@@ -53,11 +53,8 @@
                                 <div class="col-5">
                                     <h1>
                                         <?php
-                                        $metadataName = "";
-                                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
-                                            echo $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                            $metadataName = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                        }
+                                        echo $metadataSearched->title;
+                                        $metadataName = $metadataSearched->title;
                                         ?>
                                     </h1>
                                 </div>

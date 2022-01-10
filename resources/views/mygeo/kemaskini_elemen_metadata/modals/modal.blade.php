@@ -151,12 +151,12 @@
                                         <option value="">Pilih...</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+<!--                                <div class="form-group">
                                     <label for="sub_tajuk">Sub-Tajuk:</label>
                                     <select name="sub_tajuk" class="form-control sub_tajuk">
                                         <option value="">Pilih...</option>
                                     </select>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
                                     <label for="elemen">Elemen:</label>
                                     <input type="text" name="elemen" class="form-control elemen">

@@ -120,25 +120,12 @@ class LaporanDashboardController extends Controller
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
             $counter = 0;
             foreach ($metadatasdb as $met) {
-                $ftestxml2 = <<<XML
-                        $met->data
-                        XML;
-                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-                $xml2 = simplexml_load_string($ftestxml2);
-                
                 $counter++;
                 $table->addRow();
                 //add cell
                 $table->addCell(900)->addText($counter);
                 //add cell
-                $title = "";
-                if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
-                    $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                }
+                $title = $met->title;
                 $table->addCell(5000)->addText(htmlspecialchars($title));
                 //add cell
                 $status = "";
@@ -208,10 +195,7 @@ class LaporanDashboardController extends Controller
                     //add cell
                     $table->addCell(900)->addText($counter);
                     //add cell
-                    $title = "";
-                    if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
-                        $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                    }
+                    $title = $met->title;
                     $table->addCell(3500)->addText(htmlspecialchars($title));
                     //add cell
                     $agency = "";
@@ -285,10 +269,7 @@ class LaporanDashboardController extends Controller
                     //add cell
                     $table->addCell(900)->addText($counter);
                     //add cell
-                    $title = "";
-                    if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
-                        $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                    }
+                    $title = $met->title;
                     $table->addCell(5000)->addText(htmlspecialchars($title));
                     //add cell
                     $agency = "";
@@ -355,10 +336,7 @@ class LaporanDashboardController extends Controller
                 //add cell
                 $table->addCell(900)->addText($counter);
                 //add cell
-                $title = "";
-                if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
-                    $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                }
+                $title = $met->title;
                 $table->addCell(4000)->addText(htmlspecialchars($title));
                 //add cell
                 $agency = "";
@@ -438,10 +416,7 @@ class LaporanDashboardController extends Controller
                     //add cell
                     $table->addCell(900)->addText($counter);
                     //add cell
-                    $title = "";
-                    if(isset($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && trim($xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) != ""){
-                        $title = $xml2->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                    }
+                    $title = $met->title;
                     $table->addCell(4000)->addText(htmlspecialchars($title));
                     //add cell
                     $agency = "";

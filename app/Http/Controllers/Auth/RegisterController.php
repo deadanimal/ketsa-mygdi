@@ -198,7 +198,11 @@ class RegisterController extends Controller
         if($request['peranan'] == "Pemohon Data"){
             $msg = 'Akaun anda telah berjaya didaftarkan. Sila log masuk menggunakan e-mel sebagai ID pengguna dan kata laluan yang telah ditetapkan semasa mengisi borang pendaftaran.';
         }else{
-            $msg = 'Pendaftaran anda dalam proses pengesahan. Anda akan menerima e-mel daripada pentadbir sekiranya pendaftaran berjaya';
+            if($user->disahkan == '0'){
+                $msg = 'Pendaftaran anda dalam proses pengesahan. Anda akan menerima e-mel daripada pentadbir sekiranya pendaftaran berjaya';
+            }else{
+                $msg = 'Pendaftaran berjaya';
+            }
         }
         return $this->registered($request, $user)?: redirect($this->redirectPath())->with('success',$msg);
      }

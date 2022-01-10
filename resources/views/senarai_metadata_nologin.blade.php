@@ -252,8 +252,11 @@ input[type=submit] {
                                                         <div class="card-header cardw">
                                                             <a class="a_title" data-toggle="collapse" href="#divCollapse{{ $bil }}">
                                                                 <?php
-                                                                if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != "") {
-                                                                  echo $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                                                $met_name = '';
+                                                                if (isset($val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
+                                                                    echo $val->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                                                }elseif (isset($val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != '') {
+                                                                    echo $val->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
                                                                 }else{
                                                                     ?>--no title set--<?php
                                                                 }
@@ -320,6 +323,10 @@ input[type=submit] {
                                     ?>
                                 </div>
                                 {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->withQueryString()->appends($params)->links():"") }}
+                                
+                                <?php /* Showing {{--($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0)--}} to {{--($metadatasdb->currentPage()-1)*$metadatasdb->perPage()+count($metadatasdb)--}}  of  {{--$metadatasdb->total()--}}  Results */ ?>
+                                
+                                Paparan {{$metadatasdb->total()}} rekod ({{($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0)}} hingga {{($metadatasdb->currentPage()-1)*$metadatasdb->perPage()+count($metadatasdb)}})
                             </div>
                         </div>
                     </div>
@@ -386,6 +393,7 @@ input[type=submit] {
         /*execute a function when someone writes in the text field:*/
         inp.addEventListener("input", function(e) {
             var a, b, i, val = this.value;
+            var counter = 1;
             /*close any already open lists of autocompleted values*/
             closeAllLists();
             if (!val) { return false;}
@@ -402,6 +410,9 @@ input[type=submit] {
                     //not found
                 }else{
                     //found
+                    if(counter > 8){
+                        return false;
+                    }
                     /*create a DIV element for each matching element:*/
                     b = document.createElement("DIV");
                     /*make the matching letters bold:*/
@@ -418,6 +429,7 @@ input[type=submit] {
                         closeAllLists();
                     });
                     a.appendChild(b);
+                    counter++;
                 }
 
 

@@ -11,20 +11,12 @@
         MyGeo Explorer
     </title>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <link rel="icon" href="{{ asset('assetsangular/img/logo/jata-negara.png/') }}" type="image/png">
-    <!--<link rel="stylesheet" href="{{ asset('afiqadminmygeo_files/css') }}">-->
     <link href="{{ asset('afiqadminmygeo_files/mapbox-gl.css') }}" rel="stylesheet">
     <link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-
-
-    <!-- jQuery -->
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -50,15 +42,8 @@
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- Main Quill library -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript"
-        src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript"
-        src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap4.min.js"></script>
-    <!-- DataTable -->
 
 
     <style>
@@ -90,25 +75,6 @@
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
-        }
-
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-            color: black
-        }
-
-        td,
-        th {
-            font-size: 14px;
-            width: fit-content;
-            padding: 8px 15px;
-            max-width: 550px !important;
-        }
-
-        tr:nth-child(even) {
-            /* background-color: #dddddd; */
         }
 
     </style>
@@ -184,7 +150,7 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('mygeo_senarai_pengguna_berdaftar') }}"
-                                                            class="nav-link active">
+                                                            class="nav-link">
                                                             <span class="nav-link-text">Senarai Pengguna
                                                                 Berdaftar</span>
                                                         </a>
@@ -201,7 +167,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Metadata', 'Super Admin', 'Pentadbir Aplikasi']))
                                             <li class="nav-item has-treeview">
-                                                <a class="nav-link active">
+                                                <a class="nav-link ng-star-inserted" href="#">
                                                     <i class="fa-braille fas text-indigo"></i>
                                                     <span class="nav-link-text">Pengurusan Metadata</span>
                                                     <span class="ml-auto"><i
@@ -232,7 +198,7 @@
 
                                         @if (auth::user()->hasRole(['Super Admin', 'Pentadbir Aplikasi']))
                                             <li class="nav-item has-treeview">
-                                                <a class="nav-link active">
+                                                <a class="nav-link ng-star-inserted" href="#">
                                                     <i class="fa-braille fas text-indigo"></i>
                                                     <span class="nav-link-text">Pengurusan Data Asas</span>
                                                     <span class="ml-auto"><i
@@ -246,7 +212,7 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('permohonan_baru') }}"
-                                                            class="nav-link active">
+                                                            class="nav-link">
                                                             <span class="nav-link-text">Permohonan Baru</span>
                                                         </a>
                                                     </li>
@@ -258,12 +224,12 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('status_permohonan') }}"
-                                                            class="nav-link active">
+                                                            class="nav-link">
                                                             <span class="nav-link-text">Status Permohonan</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('proses_data') }}" class="nav-link active">
+                                                        <a href="{{ url('proses_data') }}" class="nav-link">
                                                             <span class="nav-link-text">Proses Data</span>
                                                         </a>
                                                     </li>
@@ -279,13 +245,13 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('penilaian') }}" class="nav-link active">
+                                                        <a href="{{ url('penilaian') }}" class="nav-link">
                                                             <span class="nav-link-text">Akuan Penerimaan dan Penilaian
                                                                 Data</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item has-treeview">
-                                                        <a class="nav-link active">
+                                                        <a class="nav-link ng-star-inserted" href="#">
                                                             <i class="fas fa-magic text-red"></i>
                                                             <span class="nav-link-text">Kemas Kini Data</span>
                                                             <span class="ml-auto"><i
@@ -314,7 +280,7 @@
 
                                         @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item has-treeview">
-                                                <a class="nav-link active">
+                                                <a class="nav-link ng-star-inserted" href="#">
                                                     <i class="fas fa-cogs text-teal"></i>
                                                     <span class="nav-link-text">Pengurusan Portal</span>
                                                     </span>
@@ -330,43 +296,31 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('pengumuman_edit') }}"
-                                                            class="nav-link active">
+                                                            class="nav-link">
                                                             <span class="nav-link-text">Pengumuman</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('panduan_pengguna_edit') }}"
-                                                            class="nav-link active">
+                                                            class="nav-link">
                                                             <span class="nav-link-text">Panduan Pengguna</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('dokumen_utama_edit') }}"
-                                                            class="nav-link active">
-                                                            <span class="nav-link-text">Dokumen Berkaitan</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="{{ url('tatacara_edit') }}"
-                                                            class="nav-link active">
-                                                            <span class="nav-link-text">Tatacara Permohonan</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
                                                         <a href="{{ url('mygeo_penafian') }}"
-                                                            class="nav-link active">
+                                                            class="nav-link">
                                                             <span class="nav-link-text">Penafian</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('mygeo_penyataan_privasi') }}"
-                                                            class="nav-link active">
+                                                            class="nav-link">
                                                             <span class="nav-link-text">Penyataan Privasi</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('portal_tetapan') }}"
-                                                            class="nav-link active">
+                                                            class="nav-link">
                                                             <span class="nav-link-text">Tetapan Portal</span>
                                                         </a>
                                                     </li>
@@ -377,7 +331,7 @@
                                         @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item">
                                                 <a href="{{ url('senarai_agensi_organisasi') }}"
-                                                    class="nav-link active">
+                                                    class="nav-link">
                                                     <i class="fas fa-list-ul text-indigo"></i>
                                                     <span class="nav-link-text">Kemaskini Agensi / Organisasi /
                                                         Institusi</span>
@@ -387,7 +341,7 @@
 
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item has-treeview">
-                                                <a class="nav-link active">
+                                                <a class="nav-link ng-star-inserted" href="#">
                                                     <i class="fas fa-magic text-red"></i>
                                                     <span class="nav-link-text">Kemas Kini Data</span>
                                                     <span class="ml-auto"><i
@@ -413,7 +367,7 @@
                                         @if (auth::user()->hasRole(['Pentadbir Metadata']))
                                             <li class="nav-item">
                                                 <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}"
-                                                    class="nav-link active">
+                                                    class="nav-link">
                                                     <i class="far fa-id-card text-green"></i>
                                                     <span class="nav-link-text">Kemas Kini Elemen</span>
                                                 </a>
@@ -421,7 +375,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item">
-                                                <a href="{{ url('permohonan_baru') }}" class="nav-link active">
+                                                <a href="{{ url('permohonan_baru') }}" class="nav-link">
                                                     <i class="far fa-id-card text-green"></i>
                                                     <span class="nav-link-text">Permohonan Baru</span>
                                                 </a>
@@ -429,7 +383,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item">
-                                                <a href="{{ url('status_permohonan') }}" class="nav-link active">
+                                                <a href="{{ url('status_permohonan') }}" class="nav-link">
                                                     <i class="fas fa-book text-purple"></i>
                                                     <span class="nav-link-text">Status Permohonan</span>
                                                 </a>
@@ -437,7 +391,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item">
-                                                <a href="{{ url('proses_data') }}" class="nav-link active">
+                                                <a href="{{ url('proses_data') }}" class="nav-link">
                                                     <i class="fas fa-sync-alt text-cyan"></i>
                                                     <span class="nav-link-text">Proses Data</span>
                                                 </a>
@@ -445,7 +399,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item">
-                                                <a href="{{ url('penilaian') }}" class="nav-link active">
+                                                <a href="{{ url('penilaian') }}" class="nav-link">
                                                     <i class="fas fa-file-signature text-primary"></i>
                                                     <span class="nav-link-text">Akuan Penerimaan dan Penilaian
                                                         Data</span>
@@ -553,7 +507,7 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('laporan_data_asas') }}"
-                                                            class="nav-link active">
+                                                            class="nav-link">
                                                             <span class="nav-link-text">Laporan Data Asas</span>
                                                         </a>
                                                     </li>
@@ -589,13 +543,33 @@
                             class="navbar navbar-top navbar-expand navbar-light bg-custom border-bottom">
                             <div class="container-fluid">
                                 <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                                    <div style="width:90%;">
-                                        <img alt="Image placeholder"
-                                            src="{{ url('afiqadminmygeo_files/mygeoexplorer-logo2.png') }}"
-                                            width="50%">
+                                    <div class="media align-items-center">
+                                        <span class="ml-1">
+                                            <img alt="Image placeholder"
+                                                src="{{ url('afiqadminmygeo_files/mygeoexplorer-logo2.png') }}"
+                                                width="50%">
+                                        </span>
                                     </div>
-                                    <ul class="navbar-nav align-items-center ml-md-auto">
-                                        <li placement="bottom-right" class="nav-item">
+                                    {{-- <ul class="navbar-nav align-items-center ml-md-auto">
+                                        <li class="nav-item d-xl-none">
+                                            <div data-action="sidenav-pin" data-target="#sidenav-main"
+                                                class="pr-3 sidenav-toggler sidenav-toggler-dark">
+                                                <div class="sidenav-toggler-inner"><i
+                                                        class="sidenav-toggler-line"></i><i
+                                                        class="sidenav-toggler-line"></i><i
+                                                        class="sidenav-toggler-line"></i></div>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item d-sm-none"><a class="nav-link"><i
+                                                    class="ni ni-zoom-split-in"></i></a></li>
+                                        <li dropdown="" placement="bottom-right" class="nav-item dropdown">
+                                            <a role="button" disabled="" class="nav-link dropdown-toggle"></a>
+                                            <!--container-->
+                                        </li>
+                                        <!--container-->
+                                    </ul> --}}
+                                    <ul class="navbar-nav align-items-center ml-auto ml-md-0">
+                                        <li placement="bottom-right" class="nav-item dropdown">
                                             <!--<a role="button" dropdowntoggle="" class="nav-link pr-0 dropdown-toggle" aria-haspopup="true">-->
                                             <!--<a class="nav-link pr-0 dropdown-toggle" data-toggle="dropdown" href="#">-->
                                             <div class="media align-items-center pointer">
@@ -612,11 +586,10 @@
                                                             foreach (auth::user()->getRoleNames() as $role) {
                                                                 $roles .= $role . ', ';
                                                             }
-                                                        } ?> </span>
-                                                    <?php
-                                                    echo rtrim($roles, ', ') . ' (<a href="#" data-toggle="modal" data-target="#modal_tukar_peranan">Tukar</a>)';
-                                                    ?>
-
+                                                        }
+                                                        echo rtrim($roles, ', ') . ' (<a href="#" data-toggle="modal" data-target="#modal_tukar_peranan">Tukar</a>)';
+                                                        ?>
+                                                    </span>
                                                     </a>
                                                 </div>
                                                 <span class="avatar avatar-md rounded-circle ml-3">
@@ -661,10 +634,9 @@
                                 <div class="container-fluid">
                                     <div class="row align-items-center justify-content-xl-between">
                                         <div class="col-xl-6">
-                                            <div class="copyright text-xl-left text-white">
-                                                Hakcipta Terpelihara ©
-                                                2021. Pusat Geospatial Malaysia.
-                                            </div>
+                                            <div class="copyright text-xl-left text-white"> Hakcipta Terpelihara ©
+                                                2021.
+                                                Pusat Geospatial Malaysia. </div>
                                         </div>
                                         <div class="col-xl-6"></div>
                                     </div>
@@ -740,16 +712,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('/dist/js/adminlte.min.js') }}"></script>
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- daterange picker -->
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
-    <!-- Datatables -->
-    <script src="{{ asset('/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    {{-- <script src="{{ asset('/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script> --}}
-    <!-- <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script> -->
     <!-- Bootstrap 4 -->
     <script src="{{ asset('/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- overlayScrollbars -->
@@ -819,19 +783,6 @@
                 }
             });
         }
-        //check if user has completed download============================================================
-        <?php
-        if(Auth::user()->hasRole(['Pemohon Data'])){
-            ?>
-        setInterval(
-            checkThreeHourNotifySelesaiMuatTurun,
-            //                20000  /* 15000 ms = 20 seconds for farhan testing */
-            10800000 /* 10800000 ms = 3 hrs */ //ori specs
-            //                    60000  /* 60000 ms = m in for testing */
-        );
-        <?php
-        }
-        ?>
         $(document).ready(function() {
             <?php
             //notify user (pemohon data only) to do penilaian after 6 months==================================
