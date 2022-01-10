@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="table_metadatas" class="table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -84,7 +84,7 @@
                                                             <span class="badge badge-pill badge-danger">Ditolak</span>
                                                         @elseif($permohonan->status == '3' &&
                                                             $permohonan->berjayaMuatTurunStatus == 1)
-                                                            <span class="badge badge-pill badge-">Selesai</span>
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
                                                         @elseif($permohonan->status == '3' &&
                                                             $permohonan->berjayaMuatTurunTarikh)
                                                             <span class="badge badge-pill badge-secondary"></span>
@@ -93,8 +93,12 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if ($permohonan->acceptance == '1' && $permohonan->download == '1')
+                                                        @if ($permohonan->acceptance == '1' && $permohonan->berjayaMuatTurunStatus == '1')
                                                             <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @elseif($permohonan->status == '2')
+                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        @else
+                                                            <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif
                                                     </td>
                                                     <td>
