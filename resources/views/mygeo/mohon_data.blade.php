@@ -8,14 +8,6 @@
             width: auto;
         }
 
-        .bg-user {
-            background-color: #96C7C1
-        }
-
-        .bg-admin {
-            background-color: #C8A2C8
-        }
-
     </style>
 
     <!-- Content Wrapper. Contains page content -->
@@ -46,7 +38,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -68,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="table_permohonan" class="table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -97,7 +88,7 @@
                                                             class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $permohonan->id }}"
-                                                        class="btnDelete btn btn-sm btn-danger mr-2"><i
+                                                        class="btnDelete btn btn-sm btn-danger"><i
                                                             class="fas fa-trash"></i>
                                                     </button>
                                                 </td>
@@ -124,6 +115,7 @@
                     <form method="POST" action="{{ url('simpan_permohonan_baru') }}">
                         @csrf
                         <div class="modal-body row">
+
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="name" class="form-control-label">Nama Permohonan</label>
@@ -156,13 +148,13 @@
 
     <script>
         $(document).ready(function() {
-            $("#table_metadatas").DataTable({
+            $("#table_permohonan").DataTable({
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "scrollX": true,
                 "ordering": false,
-                "responsive": true,
+                // "responsive": true,
                 "autoWidth": false,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
@@ -177,7 +169,7 @@
                         "sNext": ">",
                         "sPrevious": "<",
                     }
-                }
+                },
             });
         });
 

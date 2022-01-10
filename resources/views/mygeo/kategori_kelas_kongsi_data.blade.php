@@ -3,13 +3,7 @@
 @section('content')
 
     <style>
-        .bg-user {
-            background-color: #96C7C1
-        }
 
-        .bg-admin {
-            background-color: #C8A2C8
-        }
 
     </style>
 

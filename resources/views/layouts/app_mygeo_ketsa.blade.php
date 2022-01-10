@@ -91,6 +91,25 @@
             background-repeat: no-repeat;
         }
 
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            color: black
+        }
+
+        td,
+        th {
+            font-size: 14px;
+            width: fit-content;
+            padding: 8px 15px;
+            max-width: 550px !important;
+        }
+
+        tr:nth-child(even) {
+            /* background-color: #dddddd; */
+        }
+
     </style>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -164,7 +183,7 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('mygeo_senarai_pengguna_berdaftar') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Senarai Pengguna
                                                                 Berdaftar</span>
                                                         </a>
@@ -181,7 +200,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Metadata', 'Super Admin', 'Pentadbir Aplikasi']))
                                             <li class="nav-item has-treeview">
-                                                <a class="nav-link ng-star-inserted" href="#">
+                                                <a class="nav-link active">
                                                     <i class="fa-braille fas text-indigo"></i>
                                                     <span class="nav-link-text">Pengurusan Metadata</span>
                                                     <span class="ml-auto"><i
@@ -212,7 +231,7 @@
 
                                         @if (auth::user()->hasRole(['Super Admin', 'Pentadbir Aplikasi']))
                                             <li class="nav-item has-treeview">
-                                                <a class="nav-link ng-star-inserted" href="#">
+                                                <a class="nav-link active">
                                                     <i class="fa-braille fas text-indigo"></i>
                                                     <span class="nav-link-text">Pengurusan Data Asas</span>
                                                     <span class="ml-auto"><i
@@ -226,7 +245,7 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('permohonan_baru') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Permohonan Baru</span>
                                                         </a>
                                                     </li>
@@ -238,12 +257,12 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('status_permohonan') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Status Permohonan</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('proses_data') }}" class="nav-link">
+                                                        <a href="{{ url('proses_data') }}" class="nav-link active">
                                                             <span class="nav-link-text">Proses Data</span>
                                                         </a>
                                                     </li>
@@ -259,13 +278,13 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('penilaian') }}" class="nav-link">
+                                                        <a href="{{ url('penilaian') }}" class="nav-link active">
                                                             <span class="nav-link-text">Akuan Penerimaan dan Penilaian
                                                                 Data</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item has-treeview">
-                                                        <a class="nav-link ng-star-inserted" href="#">
+                                                        <a class="nav-link active">
                                                             <i class="fas fa-magic text-red"></i>
                                                             <span class="nav-link-text">Kemas Kini Data</span>
                                                             <span class="ml-auto"><i
@@ -294,7 +313,7 @@
 
                                         @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item has-treeview">
-                                                <a class="nav-link ng-star-inserted" href="#">
+                                                <a class="nav-link active">
                                                     <i class="fas fa-cogs text-teal"></i>
                                                     <span class="nav-link-text">Pengurusan Portal</span>
                                                     </span>
@@ -310,43 +329,43 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('pengumuman_edit') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Pengumuman</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('panduan_pengguna_edit') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Panduan Pengguna</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('dokumen_utama') }}"
-                                                            class="nav-link">
+                                                        <a href="{{ url('dokumen_utama_edit') }}"
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Dokumen Berkaitan</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('tatacara_edit') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Tatacara Permohonan</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('mygeo_penafian') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Penafian</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('mygeo_penyataan_privasi') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Penyataan Privasi</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('portal_tetapan') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Tetapan Portal</span>
                                                         </a>
                                                     </li>
@@ -357,7 +376,7 @@
                                         @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item">
                                                 <a href="{{ url('senarai_agensi_organisasi') }}"
-                                                    class="nav-link">
+                                                    class="nav-link active">
                                                     <i class="fas fa-list-ul text-indigo"></i>
                                                     <span class="nav-link-text">Kemaskini Agensi / Organisasi /
                                                         Institusi</span>
@@ -367,7 +386,7 @@
 
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item has-treeview">
-                                                <a class="nav-link ng-star-inserted" href="#">
+                                                <a class="nav-link active">
                                                     <i class="fas fa-magic text-red"></i>
                                                     <span class="nav-link-text">Kemas Kini Data</span>
                                                     <span class="ml-auto"><i
@@ -393,7 +412,7 @@
                                         @if (auth::user()->hasRole(['Pentadbir Metadata']))
                                             <li class="nav-item">
                                                 <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}"
-                                                    class="nav-link">
+                                                    class="nav-link active">
                                                     <i class="far fa-id-card text-green"></i>
                                                     <span class="nav-link-text">Kemas Kini Elemen</span>
                                                 </a>
@@ -401,7 +420,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item">
-                                                <a href="{{ url('permohonan_baru') }}" class="nav-link">
+                                                <a href="{{ url('permohonan_baru') }}" class="nav-link active">
                                                     <i class="far fa-id-card text-green"></i>
                                                     <span class="nav-link-text">Permohonan Baru</span>
                                                 </a>
@@ -409,7 +428,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item">
-                                                <a href="{{ url('status_permohonan') }}" class="nav-link">
+                                                <a href="{{ url('status_permohonan') }}" class="nav-link active">
                                                     <i class="fas fa-book text-purple"></i>
                                                     <span class="nav-link-text">Status Permohonan</span>
                                                 </a>
@@ -417,7 +436,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item">
-                                                <a href="{{ url('proses_data') }}" class="nav-link">
+                                                <a href="{{ url('proses_data') }}" class="nav-link active">
                                                     <i class="fas fa-sync-alt text-cyan"></i>
                                                     <span class="nav-link-text">Proses Data</span>
                                                 </a>
@@ -425,7 +444,7 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Data', 'Super Admin']))
                                             <li class="nav-item">
-                                                <a href="{{ url('penilaian') }}" class="nav-link">
+                                                <a href="{{ url('penilaian') }}" class="nav-link active">
                                                     <i class="fas fa-file-signature text-primary"></i>
                                                     <span class="nav-link-text">Akuan Penerimaan dan Penilaian
                                                         Data</span>
@@ -533,7 +552,7 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('laporan_data_asas') }}"
-                                                            class="nav-link">
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Laporan Data Asas</span>
                                                         </a>
                                                     </li>
@@ -641,9 +660,10 @@
                                 <div class="container-fluid">
                                     <div class="row align-items-center justify-content-xl-between">
                                         <div class="col-xl-6">
-                                            <div class="copyright text-xl-left text-white"> Hakcipta Terpelihara ©
-                                                2021.
-                                                Pusat Geospatial Malaysia. </div>
+                                            <div class="copyright text-xl-left text-white">
+                                                Hakcipta Terpelihara ©
+                                                2021. Pusat Geospatial Malaysia.
+                                            </div>
                                         </div>
                                         <div class="col-xl-6"></div>
                                     </div>

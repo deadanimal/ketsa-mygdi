@@ -7,15 +7,8 @@
             color: rgb(44, 44, 44)
         }
 
-        .bg-user {
-            background-color: #96C7C1
-        }
-
-        .bg-admin {
-            background-color: #C8A2C8
-        }
-
     </style>
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -45,7 +38,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -92,7 +84,10 @@
                                                             <span class="badge badge-pill badge-danger">Ditolak</span>
                                                         @elseif($permohonan->status == '3' &&
                                                             $permohonan->berjayaMuatTurunStatus == 1)
-                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                            <span class="badge badge-pill badge-">Selesai</span>
+                                                        @elseif($permohonan->status == '3' &&
+                                                            $permohonan->berjayaMuatTurunTarikh)
+                                                            <span class="badge badge-pill badge-secondary"></span>
                                                         @elseif($permohonan->status == '0')
                                                             <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif

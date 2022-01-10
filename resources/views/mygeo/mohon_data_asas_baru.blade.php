@@ -8,8 +8,6 @@
             display: none;
         }
 
-    </style>
-    <style>
         .accordionHeader:first-child {
             color: black;
             cursor: pointer;
@@ -67,13 +65,7 @@
     </style>
 
     <style>
-        .bg-user {
-            background-color: #96C7C1
-        }
 
-        .bg-admin {
-            background-color: #C8A2C8
-        }
 
     </style>
 
@@ -117,7 +109,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <br>
 
         <!-- Main content -->
         <section class="content">

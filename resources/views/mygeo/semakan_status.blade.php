@@ -7,14 +7,6 @@
             color: rgb(44, 44, 44)
         }
 
-        .bg-user {
-            background-color: #96C7C1
-        }
-
-        .bg-admin {
-            background-color: #C8A2C8
-        }
-
     </style>
 
     <!-- Content Wrapper. Contains page content -->
@@ -45,7 +37,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-<br>
+        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -65,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="permohonan_table" class="table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -85,7 +77,10 @@
                                                     @elseif($permohonan->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
                                                     @elseif($permohonan->status == '3')
-                                                        <span class="badge badge-pill badge-success">Data Tersedia</span>
+                                                        <span class="badge badge-pill badge-primary">Data Tersedia</span>
+                                                    @elseif($permohonan->status == '3' &&
+                                                        $permohonan->berjayaMuatTurunStatus == 1)
+                                                        <span class="badge badge-pill badge-success">Selesai</span>
                                                     @elseif($permohonan->status == '0')
                                                         <span class="badge badge-pill badge-info">Baru</span>
                                                     @endif
@@ -114,7 +109,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#table_metadatas").DataTable({
+            $("#permohonan_table").DataTable({
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
