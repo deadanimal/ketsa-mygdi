@@ -129,110 +129,121 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 pl-lg-5">
-                                            <div class="row mb-2">
-                                                <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="nama_penuh">
-                                                        Nama Penuh
-                                                    </label>
+                                    @if (Auth::user()->hasRole(['Pentadbir Data']))
+                                        <div class="row">
+                                            <div class="col-12 pl-lg-5">
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="nama_penuh">
+                                                            Nama Penuh
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <input class="form-control form-control-sm ml-3" name="nama_penuh"
+                                                            type="text" value="{{ $permohonan->users->name }}" disabled />
+                                                    </div>
                                                 </div>
-                                                <div class="col-8">
-                                                    <input class="form-control form-control-sm ml-3" name="nama_penuh"
-                                                        type="text" value="{{ $permohonan->users->name }}" disabled />
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="nric">
+                                                            No Kad Pengenalan
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <input class="form-control form-control-sm ml-3" name="nric"
+                                                            type="text" value="{{ $permohonan->users->nric }}" disabled />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="nric">
-                                                        No Kad Pengenalan
-                                                    </label>
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="agensi_organisasi">
+                                                            Institusi
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <?php
+                                                        $var = '';
+                                                        if ($permohonan->users->hasRole(['Pemohon Data'])) {
+                                                            $var = $permohonan->users->agensi_organisasi;
+                                                        } else {
+                                                            $var = isset($permohonan->users->agensiOrganisasi) ? $permohonan->users->agensiOrganisasi->name : '';
+                                                        }
+                                                        ?>
+                                                        <input class="form-control form-control-sm ml-3" name="institusi"
+                                                            type="text" value="{{ $var }}" disabled />
+                                                    </div>
                                                 </div>
-                                                <div class="col-8">
-                                                    <input class="form-control form-control-sm ml-3" name="nric" type="text"
-                                                        value="{{ $permohonan->users->nric }}" disabled />
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="email">
+                                                            Emel
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <input class="form-control form-control-sm ml-3" id="email"
+                                                            type="text" value="{{ $permohonan->users->email }}"
+                                                            disabled />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="agensi_organisasi">
-                                                        Institusi
-                                                    </label>
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="tel_pejabat">
+                                                            Telefon Pejabat
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input class="form-control form-control-sm ml-3" name="tel_pejabat"
+                                                            type="text" value="{{ $permohonan->users->phone_pejabat }}"
+                                                            disabled />
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <label class="form-control-label mr-4" for="tel_bimbit">
+                                                            Telefon Bimbit
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input class="form-control form-control-sm ml-3" name="tel_bimbit"
+                                                            type="text" value="{{ $permohonan->users->phone_bimbit }}"
+                                                            disabled />
+                                                    </div>
                                                 </div>
-                                                <div class="col-8">
-                                                    <input class="form-control form-control-sm ml-3" name="institusi"
-                                                        type="text" value="{{ $user->agensiOrganisasi->name }}"
-                                                        disabled />
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="email">
-                                                        Emel
-                                                    </label>
-                                                </div>
-                                                <div class="col-8">
-                                                    <input class="form-control form-control-sm ml-3" id="email" type="text"
-                                                        value="{{ $permohonan->users->email }}" disabled />
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="tel_pejabat">
-                                                        Telefon Pejabat
-                                                    </label>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input class="form-control form-control-sm ml-3" name="tel_pejabat"
-                                                        type="text" value="{{ $permohonan->users->phone_pejabat }}"
-                                                        disabled />
-                                                </div>
-                                                <div class="col-2">
-                                                    <label class="form-control-label mr-4" for="tel_bimbit">
-                                                        Telefon Bimbit
-                                                    </label>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input class="form-control form-control-sm ml-3" name="tel_bimbit"
-                                                        type="text" value="{{ $permohonan->users->phone_bimbit }}"
-                                                        disabled />
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-3">
-                                                    <label class="form-control-label mr-4" for="peranan">
-                                                        Peranan
-                                                    </label>
-                                                </div>
-                                                <div class="col-3">
-                                                    <?php
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="peranan">
+                                                            Peranan
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <?php
                                                 if (!empty($permohonan->users->getRoleNames())) {
                                                     $count = 1;
                                                     foreach ($permohonan->users->getRoleNames() as $role) {
                                                         ?><input class="form-control form-control-sm ml-3"
-                                                        name="peranan" type="text" value="<?php echo $role; ?> "
-                                                        disabled /><?php
+                                                            name="peranan" type="text" value="<?php echo $role; ?> "
+                                                            disabled /><?php
                                                                                                                                                                                         if ($count != count($permohonan->users->getRoleNames())) {                                                                    ?>,<?php                                                                                                   }
                                                                                                                                                                                                                                                                                                                     $count++;
                                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                                             }
                                                                                                                                                                                                                                                                                                             ?>
 
-                                                </div>
-                                                <div class="col-2">
-                                                    <label class="form-control-label mr-4" for="phone_bimbit">
-                                                        Kategori
-                                                    </label>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input class="form-control form-control-sm ml-3" name="kategori"
-                                                        type="text" value="{{ $permohonan->users->kategori }}" disabled />
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <label class="form-control-label mr-4" for="phone_bimbit">
+                                                            Kategori
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input class="form-control form-control-sm ml-3" type="text"
+                                                            value="{{ $permohonan->users->kategori }}" disabled />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <hr class="my-4">
+                                        <hr class="my-4">
+                                    @endif
+
 
                                     <form action="{{ url('kemaskini_permohonan') }}" method="POST"
                                         id="formHantarPermohonanPentadbir">
