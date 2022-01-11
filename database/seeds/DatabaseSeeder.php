@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AgensiOrganisasiSeeder::class);
         $this->call(ElemenMetadataSeeder::class);
         $this->call(TajukSeeder::class);
+        $this->call(NegeriSeeder::class);
+        $this->call(DaerahSeeder::class);
     }
 }

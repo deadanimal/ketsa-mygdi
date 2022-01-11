@@ -3,20 +3,24 @@
 @section('content')
 
     <style>
-        .bg-user {
-            background-color: #96C7C1
+        .accordionHeader:first-child {
+            color: black;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 10px 13px;
         }
 
-        .bg-admin {
-            background-color: #C8A2C8
+        .accordionHeader {
+            background-color: #b3d1ff;
         }
 
     </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
         <!-- Content Header (Page header) -->
-        <section class="header bg-admin">
+        <section class="header ">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -53,7 +57,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-8">
                                         <h3 class="mb-0">Senarai Data</h3>
-                                    </div>
+                                        </div>
 
                                     <div class="col-4 text-right">
                                         <div class="btn-group btn-group-sm" role="group">
@@ -74,47 +78,79 @@
                                 </div>
                             </div>
                             <div class="card-body" style="overflow-x:auto;">
-                                <table id="table_senarai_data" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>BIL</th>
-                                            <th>KATEGORI</th>
-                                            <th>SUB-KATEGORI</th>
-                                            <th>LAPISAN DATA</th>
-                                            <th>KOD (MS1759)</th>
-                                            <th>KELAS</th>
-                                            <th>HARGA DATA</th>
-                                            <th>STATUS</th>
-                                            <th>TINDAKAN</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($senarai_data as $sdata)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $sdata->kategori }}</td>
-                                                <td>{{ $sdata->subkategori }}</td>
-                                                <td>{{ $sdata->lapisan_data }}</td>
-                                                <td>{{ $sdata->kod }}</td>
-                                                <td>{{ $sdata->kelas }}</td>
-                                                <td>{{ $sdata->harga_data }}</td>
-                                                <td>{{ $sdata->status }}</td>
-                                                <td>
-                                                    <a data-toggle="modal"
-                                                        data-target="#modal-kemaskinidata-{{ $sdata->id }}">
-                                                        <button type="button" class="btn btn-sm btn-success"><i
-                                                                class="fas fa-edit"></i>
-                                                        </button>
-                                                    </a>
-                                                    <button type="button" data-senaraidataid="{{ $sdata->id }}"
-                                                        class="btnDelete btn btn-sm btn-danger mx-2"><i
-                                                            class="fas fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                @foreach ($kategori_sd as $ksd)
+                                    <!--=============================== {{ $ksd->name }} =============================================-->
+                                    <div class="acard div_c{{ $ksd->id }} mb-3" id="div_c{{ $ksd->id }}">
+                                        <div class="card-header accordionHeader">
+                                            <div class="row align-items-center">
+                                                <div class="col-12" data-toggle="collapse"
+                                                    href="#collapse{{ $ksd->id }}">
+                                                    <h3 class="heading mb-0">{{$loop->iteration}}. {{ $ksd->name }}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="collapse{{ $ksd->id }}" class="panel-collapse collapse"
+                                            data-parent="#div_c{{ $ksd->id }}">
+                                            <div class="card-body">
+                                                <div class="opacity-8" style="overflow-x:auto;">
+
+                                                    <table id="senDataTable{{ $ksd->id }}"
+                                                        class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>BIL</th>
+                                                                {{-- <th>KATEGORI</th> --}}
+                                                                <th>SUB-KATEGORI</th>
+                                                                <th>LAPISAN DATA</th>
+                                                                <th>KOD (MS1759)</th>
+                                                                <th>KELAS</th>
+                                                                <th>HARGA DATA</th>
+                                                                <th>STATUS</th>
+                                                                <th>TINDAKAN</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <?php $count = 1; ?>
+                                                            @foreach ($senarai_data as $sdata)
+                                                                @if ($ksd->name === $sdata->kategori)
+                                                                    <tr>
+                                                                        <td>{{ $count }}</td>
+                                                                        {{-- <td>{{ $sdata->kategori }}</td> --}}
+                                                                        <td>{{ $sdata->subkategori }}</td>
+                                                                        <td>{{ $sdata->lapisan_data }}</td>
+                                                                        <td>{{ $sdata->kod }}</td>
+                                                                        <td>{{ $sdata->kelas }}</td>
+                                                                        <td>{{ $sdata->harga_data }}</td>
+                                                                        <td>{{ $sdata->status }}</td>
+                                                                        <td>
+                                                                            <a data-toggle="modal"
+                                                                                data-target="#modal-kemaskinidata-{{ $sdata->id }}">
+                                                                                <button type="button"
+                                                                                    class="btn btn-sm btn-success"><i
+                                                                                        class="fas fa-edit"></i>
+                                                                                </button>
+                                                                            </a>
+                                                                            <button type="button"
+                                                                                data-senaraidataid="{{ $sdata->id }}"
+                                                                                class="btnDelete btn btn-sm btn-danger mx-2"><i
+                                                                                    class="fas fa-trash"></i>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <?php $count++; ?>
+                                                                @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
                             </div>
                         </div>
                     </div>
@@ -321,33 +357,36 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $("#table_senarai_data").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                "scrollX": true,
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
+    @foreach ($kategori_sd as $ksd)
+        <script>
+            $(document).ready(function() {
+                $("#senDataTable{{ $ksd->id }}").DataTable({
+                    "dom": "<'row'<'col-sm-3'i> <'col-sm-6 text-center' ><'col-sm-3'f >> " +
+                    "<'row'<'col-sm-12'tr>>" +"<'row mt-4'<'col-sm-5'l> <'col-sm-7'p >> ",
+                    // "scrollX": true,
+                    "ordering": false,
+                    "responsive": true,
+                    "autoWidth": false,
+                    "oLanguage": {
+                        "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                        "sEmptyTable": "Tiada rekod ditemui",
+                        "sZeroRecords": "Tiada rekod ditemui",
+                        "sLengthMenu": "Papar _MENU_ rekod",
+                        "sLoadingRecords": "Sila tunggu...",
+                        "sSearch": "Carian:",
+                        "oPaginate": {
+                            "sFirst": "Pertama",
+                            "sLast": "Terakhir",
+                            "sNext": ">",
+                            "sPrevious": "<",
+                        }
                     }
-                }
+                });
             });
-        });
+        </script>
+    @endforeach
 
+    <script>
         $(document).on("click", ".btnDelete", function() {
             var sdata_id = $(this).data('senaraidataid');
             var r = confirm("Adakah anda pasti untuk buang data ini?");

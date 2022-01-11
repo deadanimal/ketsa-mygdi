@@ -9,19 +9,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
     <style>
-        .bg-user {
-            background-color: #96C7C1
-        }
 
-        .bg-admin {
-            background-color: #C8A2C8
-        }
     </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header bg-user">
+        <section class="header">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -46,7 +40,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">

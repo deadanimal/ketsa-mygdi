@@ -8,20 +8,12 @@
             width: auto;
         }
 
-        .bg-user {
-            background-color: #96C7C1
-        }
-
-        .bg-admin {
-            background-color: #C8A2C8
-        }
-
     </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header bg-admin">
+        <section class="header ">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -46,7 +38,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -66,8 +57,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_proses_data" class="table table-bordered table-striped"
-                                    style="width:100%;">
+                                <table id="table_proses_data" class="table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -80,27 +70,31 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $permohonan->name }}</td>
-                                                <td>{{ $permohonan->users->name }}</td>
-                                                <td>{{ $permohonan->users->kategori }}</td>
-                                                <td>{{ $permohonan->assign_admin }}</td>
-                                                <td>
-                                                    <a href="{{ url('/lihat_permohonan/' . $permohonan->id) }}"
-                                                        class="btn btn-sm btn-info text-center"><i
-                                                            class="fas fa-eye"></i>
-                                                    </a>
-                                                    <button type="button" data-permohonanid="{{ $permohonan->id }}"
-                                                        class="btnDelete btn btn-sm btn-danger mr-2"><i
-                                                            class="fas fa-trash"></i>
-                                                    </button>
-                                                    <a class="btn btn-sm btn-default" data-toggle="modal"
-                                                        data-target="#modal-proses-data-{{ $permohonan->id }}"><span
-                                                            class="text-white">Proses</span>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                            <?php $count = 1; ?>
+                                            @if (Auth::user()->name !== $permohonan->assign_admin)
+                                                <tr>
+                                                    <td>{{ $count }}</td>
+                                                    <td>{{ $permohonan->name }}</td>
+                                                    <td>{{ $permohonan->users->name }}</td>
+                                                    <td>{{ $permohonan->users->kategori }}</td>
+                                                    <td>{{ $permohonan->assign_admin }}</td>
+                                                    <td>
+                                                        <a href="{{ url('/lihat_permohonan/' . $permohonan->id) }}"
+                                                            class="btn btn-sm btn-info text-center"><i
+                                                                class="fas fa-eye"></i>
+                                                        </a>
+                                                        <button type="button" data-permohonanid="{{ $permohonan->id }}"
+                                                            class="btnDelete btn btn-sm btn-danger mr-2"><i
+                                                                class="fas fa-trash"></i>
+                                                        </button>
+                                                        <a class="btn btn-sm btn-default" data-toggle="modal"
+                                                            data-target="#modal-proses-data-{{ $permohonan->id }}"><span
+                                                                class="text-white">Proses</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <?php $count++; ?>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -123,13 +117,13 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ url('simpan_proses_data') }}" method="POST" id="formProsesData">
+                            <form action="{{ url('simpan_proses_data') }}" method="POST"
+                                id="formProsesData-{{ $permohonan->id }}">
                                 @csrf
                                 <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
                                 <i class="text-warning float-right" style="font-size: 13px">**Sila kemaskini surat balasan
                                     sebelum isi maklumat proses data</i>
-                                <table id="table_proses_data2" class="table table-bordered table-striped"
-                                    style="width:100%;">
+                                <table id="table_proses_data2" class="table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -213,7 +207,8 @@
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
 
                                         <input type="hidden" name="id" value="{{ $permohonan->id }}">
-                                        <button class="btn btn-success ml-auto btnValid{{ $permohonan->id }}" type="button">
+                                        <button class="btn btn-success ml-auto btnValid{{ $permohonan->id }}"
+                                            type="button">
                                             Hantar
                                         </button>
                                     </div>
@@ -223,11 +218,12 @@
                     </div>
                 </div>
             </div>
+
             <script>
                 $(document).ready(function() {
-                    $(document).on('click', '.btnValid'+{{ $permohonan->id }}, function() {
+                    $(document).on('click', '.btnValid' + {{ $permohonan->id }}, function() {
                         var pautan = $('#pautan_datas').val();
-                        console.log(pautan);
+                        console.log({{ $permohonan->id }}, pautan);
                         var msg = "";
 
                         if (pautan.length == 0) {
@@ -238,17 +234,14 @@
                             $('i#error').text(msg);
                         } else {
                             $('i#error').text('');
-                            // $('#formProsesData').submit();
+                            $('#formProsesData-' + {{ $permohonan->id }}).submit();
                         }
 
                     });
                 });
             </script>
 
-
         @endforeach
-
-
 
         <script>
             $(document).ready(function() {
@@ -262,6 +255,7 @@
                         jumlahHarga += (size * hargadata);
                     });
                     jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
+                    console.log(kiraHarga.length, jumlahHarga);
                     $("#jumlah_harga_dokumen_" + permohonanid).val(jumlahHarga);
                 });
 

@@ -324,7 +324,7 @@ class DataAsasController extends Controller
         if (!Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
             return redirect('/mygeo_profil');
         }
-        $permohonan_list = MohonData::where(['status' => 1,'dihantar' => 1])->get();
+        $permohonan_list = MohonData::where(['status' => 1,'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();
         return view('mygeo.proses_data', compact('permohonan_list','skdatas','proses'));
@@ -334,12 +334,14 @@ class DataAsasController extends Controller
     {
         $append = [];
 
+        // dd($request->pautan_data['0']);
+        if($request->pautan_data['0']){
+
+        }
+
         $valid_data = $request->validate([
-            'pautan_data[0]' => 'required',
+            'pautan_data' => 'required',
         ]);
-
-        // dd($valid_data['pautan_data']);
-
 
         if($valid_data['pautan_data']){
             foreach ($request->pautan_data as $val) {
@@ -348,7 +350,6 @@ class DataAsasController extends Controller
                 }
             }
         }
-
 
         $id = $request->permohonan_id;
         $valid_surat = SuratBalasan::where([
@@ -490,6 +491,8 @@ class DataAsasController extends Controller
             }
         }
 
+        // return response()->json($senarai_data);
+
         $sub_add = SenaraiData::orderBy('subkategori','ASC')->distinct('subkategori')->get();
 
         foreach ($sub_add as $sub) {
@@ -515,6 +518,7 @@ class DataAsasController extends Controller
     {
         $senarai_data = new SenaraiData();
         $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
+        $valid_kod = SenaraiData::where(["kod" => $request->kod])->first();
 
         $check_exist = SenaraiData::where([
             ['kategori','=',$kategori_sd->name],
@@ -600,14 +604,14 @@ class DataAsasController extends Controller
 
     public function update_senarai_data(Request $request)
     {
-        $valid_kod = SenaraiData::where(["kod" => "$request->kod"])->first();
-        $valid = SenaraiData::where([ "kategori" => "$request->kategori",
-                                    "subkategori" => "$request->subkategori",
-                                    "lapisan_data" => "$request->lapisan_data",
-                                    "kelas" => "$request->kelas",
-                                    "status" => "$request->status",
-                                    "kod" => "$request->kod"])
-                                    ->first();
+        $valid_kod = SenaraiData::where(["kod" => $request->kod])->first();
+        $valid = SenaraiData::where(["kategori" => $request->kategori,
+                                    "subkategori" => $request->subkategori,
+                                    "lapisan_data" => $request->lapisan_data,
+                                    "kelas" => $request->kelas,
+                                    "status" => $request->status,
+                                    "kod" => $request->kod,
+                                    ])->first();
 
         if(empty($valid)){
             if(empty($valid_kod)){
@@ -620,30 +624,26 @@ class DataAsasController extends Controller
                     "harga_data" => $request->harga_data,
                     "kod" => $request->kod,
                 ]);
-            } else {
-                SenaraiData::where(["id" => $request->id_senarai_data])->update([
-                    "kategori" => $request->kategori,
-                    "subkategori" => $request->subkategori,
-                    "lapisan_data" => $request->lapisan_data,
-                    "kelas" => $request->kelas,
-                    "status" => $request->status,
-                    "harga_data" => $request->harga_data,
-                ]);
 
-             return redirect('/senarai_data')->with('warning', 'Kod Senarai Data Telah Wujud');
+                $at = new AuditTrail();
+                $at->path = url()->full();
+                $at->user_id = Auth::user()->id;
+                $at->data = 'Update';
+                $at->save();
+
+             return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
+            } else {
+                $checkkod = SenaraiData::where(["id" => $request->id_senarai_data])->first();
+
+                if($checkkod->kod !== $request->kod){
+                    return redirect('/senarai_data')->with('warning', 'Kod Senarai Data Telah Wujud');
+                } else {
+                    return redirect('/senarai_data')->with('info', 'Tiada Data Dikemaskini');
+                }
             }
 
-
-            $at = new AuditTrail();
-            $at->path = url()->full();
-            $at->user_id = Auth::user()->id;
-            $at->data = 'Update';
-            $at->save();
-
-        return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
         } else {
-
-        return redirect('/senarai_data')->with('warning', 'Senarai Data Telah Wujud');
+            return redirect('/senarai_data')->with('info', 'Tiada Data Dikemaskini');
         }
 
     }
@@ -724,12 +724,14 @@ class DataAsasController extends Controller
 
     public function update_surat_balasan(Request $request)
     {
+        // dd($request->content_surat_balasan);
             //save senarai data
             SuratBalasan::where(["permohonan_id" => $request->permohonan_id])->update([
                 "no_rujukan" => $request->no_rujukan,
                 "tajuk_surat" => $request->tajuk_surat,
                 "no_rujukan_mohon" => $request->no_rujukan_mohon,
                 "date_mohon" => $request->date_mohon,
+                "content" => $request->content_surat_balasan
             ]);
 
             $at = new AuditTrail();
@@ -737,7 +739,9 @@ class DataAsasController extends Controller
             $at->user_id = Auth::user()->id;
             $at->data = 'Update';
             $at->save();
-        return redirect('proses_data')->with('success', 'Surat Balasan Disimpan');
+
+        // return redirect('proses_data')->with('success', 'Surat Balasan Disimpan');
+        return redirect()->back();
     }
 
     public function akuan_pelajar($id)
@@ -875,14 +879,17 @@ class DataAsasController extends Controller
         $id = $request->permohonan_id;
         $negeri = Negeri::where('kod_negeri',$request->negeri)->first()->negeri;
         $daerah = $request->daerah;
-        $append_kd = $negeri .', (' ;
-        foreach($daerah as $val){
-            if ($val === end($daerah)) {
-                $append_kd .= $val .')';
-            } else {
-                $append_kd .= $val .', ';
+        if($daerah){
+            $append_kd = $negeri .', (' ;
+            foreach($daerah as $val){
+                if ($val === end($daerah)) {
+                    $append_kd .= $val .')';
+                } else {
+                    $append_kd .= $val .', ';
+                }
             }
-
+        } else {
+            $append_kd = $negeri;
         }
         // dd($append_kd);
 
@@ -998,6 +1005,7 @@ class DataAsasController extends Controller
 
     public function update_senarai_kawasan(Request $request)
     {
+
         $valid = SenaraiData::where([
             ["kategori","=", $request->kategori],
             ["subkategori","=", $request->subkategori],
@@ -1010,17 +1018,28 @@ class DataAsasController extends Controller
             }
             else
             {
-                DB::transaction(function () use ($request, $valid) {
-                    //update senarai kawasan data
-                    SenaraiKawasanData::where(["id" => $request->sk_id])->update([
-                        "kategori" => $request->kategori,
-                        "subkategori" => $request->subkategori,
-                        "lapisan_data" => $request->lapisan_data,
-                        "kawasan_data" => $request->kawasan_data,
-                        "harga_data" => $valid->harga_data,
-                    ]);
-
-                });
+                $negeri = Negeri::where('kod_negeri',$request->negeri)->first()->negeri;
+                $daerah = $request->daerah;
+                if($daerah){
+                    $append_kd = $negeri .', (' ;
+                    foreach($daerah as $val){
+                        if ($val === end($daerah)) {
+                            $append_kd .= $val .')';
+                        } else {
+                            $append_kd .= $val .', ';
+                        }
+                    }
+                } else {
+                    $append_kd = $negeri;
+                }
+                //update senarai kawasan data
+                SenaraiKawasanData::where(["id" => $request->sk_id])->update([
+                    "kategori" => $request->kategori,
+                    "subkategori" => $request->subkategori,
+                    "lapisan_data" => $request->lapisan_data,
+                    "kawasan_data" => $append_kd,
+                    "harga_data" => $valid->harga_data,
+                ]);
 
                 $at = new AuditTrail();
                 $at->path = url()->full();
@@ -1184,7 +1203,8 @@ class DataAsasController extends Controller
         $proses->save();
 
         $surat = new SuratBalasan();
-        $surat->permohonan_id = $request->permohonan_id = $mdata->id;
+        $surat->permohonan_id = $mdata->id;
+        $surat->tajuk_surat = $request->name;
         $surat->save();
 
         if($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar'){
@@ -1282,7 +1302,6 @@ class DataAsasController extends Controller
                 // $pdf->Output('F', public_path('/storage/uploads/'. $failNama ));
 
                 $request->file->storeAs('uploads', $failNama, 'public');
-
             } else {
                 $request->file->storeAs('uploads', $failNama, 'public');
             }
@@ -1393,7 +1412,7 @@ class DataAsasController extends Controller
         $pdf->setPaper('A4', 'potrait');
 
         // Render the HTML as PDF
-        return $pdf->stream();
+        $pdf->stream();
 
         $failModel = new DokumenBerkaitan();
         $content = $pdf->output();
@@ -1426,7 +1445,7 @@ class DataAsasController extends Controller
         $pdf->setPaper('A4', 'potrait');
 
         // Render the HTML as PDF
-        return $pdf->stream();
+        $pdf->stream();
 
         $content = $pdf->output();
 

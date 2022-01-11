@@ -33,19 +33,13 @@
             height: 130px;
         }
 
-        .bg-user {
-            background-color: #96C7C1
-        }
 
-        .bg-admin {
-            background-color: #C8A2C8
-        }
 
     </style>
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header bg-admin">
+        <section class="header ">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -70,7 +64,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">

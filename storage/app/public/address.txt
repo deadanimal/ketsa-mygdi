@@ -7,3 +7,4 @@ ftest3
 ::1 Safari
 127.0.0.1 Chrome
 127.0.0.1 Safari
+127.0.0.1 

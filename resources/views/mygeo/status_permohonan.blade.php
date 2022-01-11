@@ -7,20 +7,13 @@
             color: rgb(44, 44, 44)
         }
 
-        .bg-user {
-            background-color: #96C7C1
-        }
-
-        .bg-admin {
-            background-color: #C8A2C8
-        }
-
     </style>
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header bg-admin">
+        <section class="header ">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -45,7 +38,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -65,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="table_metadatas" class="table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -93,13 +85,20 @@
                                                         @elseif($permohonan->status == '3' &&
                                                             $permohonan->berjayaMuatTurunStatus == 1)
                                                             <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @elseif($permohonan->status == '3' &&
+                                                            $permohonan->berjayaMuatTurunTarikh)
+                                                            <span class="badge badge-pill badge-secondary"></span>
                                                         @elseif($permohonan->status == '0')
                                                             <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if ($permohonan->acceptance == '1' && $permohonan->download == '1')
+                                                        @if ($permohonan->acceptance == '1' && $permohonan->berjayaMuatTurunStatus == '1')
                                                             <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @elseif($permohonan->status == '2')
+                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        @else
+                                                            <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif
                                                     </td>
                                                     <td>

@@ -8,8 +8,6 @@
             display: none;
         }
 
-    </style>
-    <style>
         .accordionHeader:first-child {
             color: black;
             cursor: pointer;
@@ -66,21 +64,11 @@
 
     </style>
 
-    <style>
-        .bg-user {
-            background-color: #96C7C1
-        }
-
-        .bg-admin {
-            background-color: #C8A2C8
-        }
-
-    </style>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="header @if (Auth::user()->hasRole(['Pentadbir Data'])) bg-admin @elseif (Auth::user()->hasRole(['Pemohon Data'])) bg-user @endif">
+        <section class="header">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
@@ -117,7 +105,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <br>
 
         <!-- Main content -->
         <section class="content">
@@ -125,7 +112,6 @@
                 <div class="row">
                     <div class="col-12">
                         <div id="accordion">
-
 
                             <div class="card">
                                 <div class="card-header">
@@ -143,6 +129,122 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    @if (Auth::user()->hasRole(['Pentadbir Data']))
+                                        <div class="row">
+                                            <div class="col-12 pl-lg-5">
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="nama_penuh">
+                                                            Nama Penuh
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <input class="form-control form-control-sm ml-3" name="nama_penuh"
+                                                            type="text" value="{{ $permohonan->users->name }}" disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="nric">
+                                                            No Kad Pengenalan
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <input class="form-control form-control-sm ml-3" name="nric"
+                                                            type="text" value="{{ $permohonan->users->nric }}" disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="agensi_organisasi">
+                                                            Institusi
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <?php
+                                                        $var = '';
+                                                        if ($permohonan->users->hasRole(['Pemohon Data'])) {
+                                                            $var = $permohonan->users->agensi_organisasi;
+                                                        } else {
+                                                            $var = isset($permohonan->users->agensiOrganisasi) ? $permohonan->users->agensiOrganisasi->name : '';
+                                                        }
+                                                        ?>
+                                                        <input class="form-control form-control-sm ml-3" name="institusi"
+                                                            type="text" value="{{ $var }}" disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="email">
+                                                            Emel
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <input class="form-control form-control-sm ml-3" id="email"
+                                                            type="text" value="{{ $permohonan->users->email }}"
+                                                            disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="tel_pejabat">
+                                                            Telefon Pejabat
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input class="form-control form-control-sm ml-3" name="tel_pejabat"
+                                                            type="text" value="{{ $permohonan->users->phone_pejabat }}"
+                                                            disabled />
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <label class="form-control-label mr-4" for="tel_bimbit">
+                                                            Telefon Bimbit
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input class="form-control form-control-sm ml-3" name="tel_bimbit"
+                                                            type="text" value="{{ $permohonan->users->phone_bimbit }}"
+                                                            disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-3">
+                                                        <label class="form-control-label mr-4" for="peranan">
+                                                            Peranan
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <?php
+                                                if (!empty($permohonan->users->getRoleNames())) {
+                                                    $count = 1;
+                                                    foreach ($permohonan->users->getRoleNames() as $role) {
+                                                        ?><input class="form-control form-control-sm ml-3"
+                                                            name="peranan" type="text" value="<?php echo $role; ?> "
+                                                            disabled /><?php
+                                                                                                                                                                                        if ($count != count($permohonan->users->getRoleNames())) {                                                                    ?>,<?php                                                                                                   }
+                                                                                                                                                                                                                                                                                                                    $count++;
+                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                            ?>
+
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <label class="form-control-label mr-4" for="phone_bimbit">
+                                                            Kategori
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input class="form-control form-control-sm ml-3" type="text"
+                                                            value="{{ $permohonan->users->kategori }}" disabled />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="my-4">
+                                    @endif
+
+
                                     <form action="{{ url('kemaskini_permohonan') }}" method="POST"
                                         id="formHantarPermohonanPentadbir">
                                         @csrf
@@ -210,8 +312,7 @@
                                             <div id="collapse2" class="panel-collapse collapse in" data-parent="#div_c2">
                                                 <div class="card-body">
                                                     <div class="opacity-8" style="overflow-x:auto;">
-                                                        <table id="senarai_data_table"
-                                                            class="table table-bordered table-striped"
+                                                        <table id="senarai_data_table" class="table-bordered table-striped"
                                                             style="width: 100%; overflow-x:auto;">
                                                             <thead>
                                                                 <tr>
@@ -277,10 +378,11 @@
                                             <div id="collapse3" class="panel-collapse collapse in" data-parent="#div_c3">
                                                 <div class="card-body">
                                                     <div class="opacity-8">
-                                                        <span class="text-warning">**Semua dokumen yang dimuat naik
+                                                        <span class="text-warning" style="font-size: 13px;">**Semua
+                                                            dokumen yang dimuat naik
                                                             hendaklah dalam format PDF
                                                             dan saiz setiap fail tidak boleh melebihi 2MB.</span>
-                                                        <table id="dokumen_table" class="table table-bordered table-striped"
+                                                        <table id="dokumen_table" class="table-bordered table-striped"
                                                             style="width:100%;">
                                                             <thead>
                                                                 <tr>
@@ -776,6 +878,7 @@
                                         <div class="form-group">
 
                                             <label class="form-control-label" for="kategori">Kategori</label>
+                                            <input type="hidden" name="kategori" value="{{ $sk->kategori }}">
                                             <select class="form-control" name="kategori" disabled>
                                                 <option selected disabled>Pilih</option>
                                                 @foreach ($kategori_senarai_data as $sdata)
@@ -814,10 +917,27 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
-                                            <input name="kawasan_data" class="form-control"
-                                                value="{{ $sk->kawasan_data }}" />
+
                                         </div>
+
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
+                                            <input name="kawasan_data" class="form-control" id="update_kawasan"
+                                                value="{{ $sk->kawasan_data }}" />
+
+                                            <select class="form-control" id="negeris" name="negeri"
+                                                onchange="selectUpdateNegeri()">
+                                                <option selected disabled>Negeri</option>
+                                                @foreach ($negeris as $neg)
+                                                    <option value="{{ $neg->kod_negeri }}">{{ $neg->negeri }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group" id="dynamicDaerahs">
+                                        </div>
+
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
                                         <input type="hidden" name="sk_id" value="{{ $sk->id }}">
                                     </div>
@@ -1067,6 +1187,38 @@
 
         }
 
+        function selectUpdateNegeri() {
+            d = document.getElementById("negeris").value;
+            kategori = d.toString();
+            sdata = {!! $daerahs !!}
+            daerah_append = ''
+            sdata.forEach(element => {
+                if (element['negeri_id'] == d) {
+                    daerah_append += `<label for="` + element['daerah'] + `">
+                                                    <input type="checkbox" name="daerah[]" value="` + element[
+                        'daerah'] + `" />
+                                                    ` + element['daerah'] + `
+                                                </label>`
+                }
+            });
+
+            $("#dynamicDaerahs").empty();
+            $("#dynamicDaerahs").append(`<div class="form-group multipleSelection">
+                                            <div class="selectBox"
+                                                onclick="showCheckboxes()">
+                                                <select class="form-control">
+                                                    <option id="result">Daerah</option>
+                                                </select>
+                                                <div class="overSelect"></div>
+                                            </div>
+
+                                            <div id="checkBoxes" onchange="displayCheck()">
+                                                ` + daerah_append + `
+                                            </div>
+                                        </div>`);
+
+        }
+
         function displayCheck() {
             $(document).ready(function() {
                 var append = '';
@@ -1081,6 +1233,7 @@
 
                 });
                 $('#result').html('( ' + append + ' )');
+                $('#update_kawasan').text('( ' + append + ' )');
             });
         }
     </script>
