@@ -20,7 +20,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select name="c1_content_info" class="form-control form-control-sm ml-3" id="content_info_dropdown">
+                                    <select name="c1_content_info" class="form-control form-control-sm ml-3 sortable" id="content_info_dropdown">
                                         <option value="" selected>Pilih...</option>
                                         <option value="Application" class='optContentInfo_dataset'>Application</option>
                                         <option value="Clearing House" class='optContentInfo_dataset'>Clearing House</option>
@@ -56,7 +56,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control form-control-sm ml-3" type="text" name="publisher_name" value="{{ auth::user()->name }}" />
+                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_name" value="{{ auth::user()->name }}" />
                                 </div>
                             </div>
                             <?php
@@ -68,7 +68,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control form-control-sm ml-3" type="text" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}" />
+                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}" />
                                 <input type="hidden" name="publisher_bahagian" value="{{ auth::user()->bahagian }}" />
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control form-control-sm ml-3" type="text" name="publisher_email" value="{{ auth::user()->email }}" />
+                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_email" value="{{ auth::user()->email }}" />
                                 </div>
                             </div>
                             <?php
@@ -93,7 +93,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control form-control-sm ml-3" type="text" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
+                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
                                 </div>
                             </div>
                             <?php
@@ -105,7 +105,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select name='publisher_role' class='form-control form-control-sm ml-3'>
+                                    <select name='publisher_role' class='form-control form-control-sm ml-3 sortable'>
                                         <option value="">Pilih...</option>
                                         <option value="Author">Author</option>
                                         <option value="Custodian">Custodian</option>

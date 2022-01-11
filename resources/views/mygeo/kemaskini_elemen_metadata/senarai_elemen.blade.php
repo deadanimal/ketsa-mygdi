@@ -117,8 +117,13 @@
                                     @include('mygeo.metadata.kemaskini_elemen.data_quality')
                                 </div>
                                 <div class="col-3">
-                                    Version: <input type="text" name="version" class="form-control"><br>
-                                    <button type="button" class="btn btn-primary">Save Template</button>
+                                    <form id="formMetadataTemplate" name="formMetadataTemplate" method="POST" action="{{ url('simpan_metadata_template') }}">
+                                        @csrf
+                                        Version: <input type="text" name="version" class="form-control"><br>
+                                        <input type="hidden" name="templateKategori" id="templateKategori">
+                                        <input type="hidden" name="activeInputs" id="activeInputs">
+                                        <button type="button" class="btn btn-primary" id="saveTemplate">Save Template</button>
+                                    </form>
                                 </div>
                                 <?php
                             }
@@ -153,18 +158,18 @@
     });
 
     $(document).ready(function () {
-        //capture form design=============
+        //================================
         $('.sortableContainer1').sortable();
-//        $('<br><br><div id=buttonDiv><button>Get Order of Elements</button></div><button type="button" id="ftest22">ftest</button>').appendTo('body');
-//        $('#buttonDiv button').button().click(function() {
-//            var itemOrder = $('.sortableContainer').sortable("toArray");
-//            for (var i = 0; i < itemOrder.length; i++) {
-//                alert("Position: " + i + " ID: " + itemOrder[i]);
-//            }
-//        });
-//        $(document).on('click','#ftest22',function(){
-//             $('<div class="sortIt">Item ftest</div>').appendTo('#sortableContainer');
-//        });
+        $('#saveTemplate').button().click(function() {
+            var itemOrder = $('.sortableContainer1 .sortable:visible').sortable();
+            var jsontxt = "";
+            jQuery.each(itemOrder, function(index, item) {
+//                var f = $('[name="'+item.name+'"]');
+                jsontxt = jsontxt + item.name + "@";
+            });
+            $('#activeInputs').val(jsontxt);
+            $('#formMetadataTemplate').submit();
+        });
         //================================
 
         /*
@@ -378,6 +383,7 @@
         if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
             ?>
             $('#kategori').val("{{ $_GET['kategori'] }}");
+            $('#templateKategori').val("{{ $_GET['kategori'] }}");
             var kategori = "{{ $_GET['kategori'] }}";
             if (kategori.toLowerCase() == "dataset") {
                 $('.lblMetadataName').html('Title<span class="text-warning">*</span>');

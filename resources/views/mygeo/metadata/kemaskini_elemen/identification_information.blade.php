@@ -8,9 +8,9 @@
     </div>
     <div id="collapse2" class="panel-collapse collapse in show" data-parent="#div_c2">
         <div class="card-body">
-            <div class="sortableContainer2">
+            <div class="sortableContainer1">
                 <?php 
-                foreach($template->template[strtolower($_GET['kategori'])]['accordion1'] as $key=>$val){
+                foreach($template->template[strtolower($_GET['kategori'])]['accordion2'] as $key=>$val){
                     if($val['status'] == "active"){
                         if($key == "c2_metadataName"){
                             ?>
@@ -20,7 +20,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control form-control-sm ml-3" type="text" name="c2_metadataName" id="c2_metadataName" value="{{ old('c2_metadataName') }}" />
+                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="c2_metadataName" id="c2_metadataName" value="{{ old('c2_metadataName') }}" />
                                     <a href="lampiran/title" class="text-yellow" target="_blank">
                                         <i class="fas fa-lightbulb"></i>
                                     </a>
@@ -35,7 +35,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3">
+                                    <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable">
                                         <option value="" selected>Pilih...</option>
                                         <option value="Application"
                                             {{ old('c2_product_type') == 'Application' ? 'selected' : '' }}>Application</option>
@@ -65,7 +65,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractApplication_namaAplikasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractApplication_namaAplikasi') }}">
+                                    <input type="text" name="abstractApplication_namaAplikasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_namaAplikasi') }}">
                                 </div>
                             </div>
                             <?php
@@ -77,7 +77,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractApplication_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractApplication_tujuan') }}">
+                                    <input type="text" name="abstractApplication_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_tujuan') }}">
                                 </div>
                             </div>
                             <?php
@@ -89,7 +89,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractApplication_tahunPembangunan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractApplication_tahunPembangunan') }}">
+                                    <input type="text" name="abstractApplication_tahunPembangunan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_tahunPembangunan') }}">
                                 </div>
                             </div>
                             <?php
@@ -101,7 +101,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractApplication_kemaskini" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractApplication_kemaskini') }}">
+                                    <input type="text" name="abstractApplication_kemaskini" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_kemaskini') }}">
                                 </div>
                             </div>
                             <?php
@@ -113,7 +113,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractApplication_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractApplication_dataTerlibat') }}">
+                                    <input type="text" name="abstractApplication_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_dataTerlibat') }}">
                                 </div>
                             </div>
                             <?php
@@ -125,7 +125,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractApplication_sasaranPengguna" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractApplication_sasaranPengguna') }}">
+                                    <input type="text" name="abstractApplication_sasaranPengguna" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_sasaranPengguna') }}">
                                 </div>
                             </div>
                             <?php
@@ -137,7 +137,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractApplication_versi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractApplication_versi') }}">
+                                    <input type="text" name="abstractApplication_versi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_versi') }}">
                                 </div>
                             </div>
                             <?php
@@ -149,7 +149,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractApplication_perisianDigunaPembangunan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractApplication_perisianDigunaPembangunan') }}">
+                                    <input type="text" name="abstractApplication_perisianDigunaPembangunan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_perisianDigunaPembangunan') }}">
                                 </div>
                             </div>
                             <?php
@@ -161,7 +161,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractDocument_namaDokumen" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractDocument_namaDokumen') }}">
+                                    <input type="text" name="abstractDocument_namaDokumen" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractDocument_namaDokumen') }}">
                                 </div>
                             </div>
                             <?php
@@ -173,7 +173,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractDocument_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractDocument_tujuan') }}">
+                                    <input type="text" name="abstractDocument_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractDocument_tujuan') }}">
                                 </div>
                             </div>
                             <?php
@@ -185,7 +185,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractDocument_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractDocument_tahunTerbitan') }}">
+                                    <input type="text" name="abstractDocument_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractDocument_tahunTerbitan') }}">
                                 </div>
                             </div>
                             <?php
@@ -197,7 +197,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractDocument_edisi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractDocument_edisi') }}">
+                                    <input type="text" name="abstractDocument_edisi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractDocument_edisi') }}">
                                 </div>
                             </div>
                             <?php
@@ -209,7 +209,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractGISActivityProject_namaAktiviti" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractGISActivityProject_namaAktiviti') }}">
+                                    <input type="text" name="abstractGISActivityProject_namaAktiviti" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractGISActivityProject_namaAktiviti') }}">
                                 </div>
                             </div>
                             <?php
@@ -221,7 +221,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractGISActivityProject_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractGISActivityProject_tujuan') }}">
+                                    <input type="text" name="abstractGISActivityProject_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractGISActivityProject_tujuan') }}">
                                 </div>
                             </div>
                             <?php
@@ -233,7 +233,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractGISActivityProject_lokasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractGISActivityProject_lokasi') }}">
+                                    <input type="text" name="abstractGISActivityProject_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractGISActivityProject_lokasi') }}">
                                 </div>
                             </div>
                             <?php
@@ -245,7 +245,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractGISActivityProject_tahun" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractGISActivityProject_tahun') }}">
+                                    <input type="text" name="abstractGISActivityProject_tahun" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractGISActivityProject_tahun') }}">
                                 </div>
                             </div>
                             <?php
@@ -257,7 +257,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractMap_namaPeta" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractMap_namaPeta') }}">
+                                    <input type="text" name="abstractMap_namaPeta" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_namaPeta') }}">
                                 </div>
                             </div>
                             <?php
@@ -269,7 +269,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractMap_kawasan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractMap_kawasan') }}">
+                                    <input type="text" name="abstractMap_kawasan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_kawasan') }}">
                                 </div>
                             </div>
                             <?php
@@ -281,7 +281,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractMap_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractMap_tujuan') }}">
+                                    <input type="text" name="abstractMap_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_tujuan') }}">
                                 </div>
                             </div>
                             <?php
@@ -293,7 +293,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractMap_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractMap_tahunTerbitan') }}">
+                                    <input type="text" name="abstractMap_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_tahunTerbitan') }}">
                                 </div>
                             </div>
                             <?php
@@ -305,7 +305,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractMap_edisi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractMap_edisi') }}">
+                                    <input type="text" name="abstractMap_edisi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_edisi') }}">
                                 </div>
                             </div>
                             <?php
@@ -317,7 +317,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractMap_noSiri" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractMap_noSiri') }}">
+                                    <input type="text" name="abstractMap_noSiri" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_noSiri') }}">
                                 </div>
                             </div>
                             <?php
@@ -329,7 +329,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractMap_skala" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractMap_skala') }}">
+                                    <input type="text" name="abstractMap_skala" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_skala') }}">
                                 </div>
                             </div>
                             <?php
@@ -341,7 +341,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractMap_unit" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractMap_unit') }}">
+                                    <input type="text" name="abstractMap_unit" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_unit') }}">
                                 </div>
                             </div>
                             <?php
@@ -353,7 +353,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_namaData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_namaData') }}">
+                                    <input type="text" name="abstractRasterData_namaData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_namaData') }}">
                                 </div>
                             </div>
                             <?php
@@ -365,7 +365,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_lokasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_lokasi') }}">
+                                    <input type="text" name="abstractRasterData_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_lokasi') }}">
                                 </div>
                             </div>
                             <?php
@@ -377,7 +377,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_rumusanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_rumusanData') }}">
+                                    <input type="text" name="abstractRasterData_rumusanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_rumusanData') }}">
                                 </div>
                             </div>
                             <?php
@@ -389,7 +389,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_tujuanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_tujuanData') }}">
+                                    <input type="text" name="abstractRasterData_tujuanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_tujuanData') }}">
                                 </div>
                             </div>
                             <?php
@@ -401,7 +401,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_kaedahPenyediaanData') }}">
+                                    <input type="text" name="abstractRasterData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_kaedahPenyediaanData') }}">
                                 </div>
                             </div>
                             <?php
@@ -413,7 +413,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_format') }}">
+                                    <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_format') }}">
                                 </div>
                             </div>
                             <?php
@@ -425,7 +425,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_unit" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_unit') }}">
+                                    <input type="text" name="abstractRasterData_unit" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_unit') }}">
                                 </div>
                             </div>
                             <?php
@@ -437,7 +437,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_skala" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_skala') }}">
+                                    <input type="text" name="abstractRasterData_skala" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_skala') }}">
                                 </div>
                             </div>
                             <?php
@@ -449,7 +449,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_statusData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_statusData') }}">
+                                    <input type="text" name="abstractRasterData_statusData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_statusData') }}">
                                 </div>
                             </div>
                             <?php
@@ -461,7 +461,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_tahunPerolehan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_tahunPerolehan') }}">
+                                    <input type="text" name="abstractRasterData_tahunPerolehan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_tahunPerolehan') }}">
                                 </div>
                             </div>
                             <?php
@@ -473,7 +473,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_jenisSatelit" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_jenisSatelit') }}">
+                                    <input type="text" name="abstractRasterData_jenisSatelit" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_jenisSatelit') }}">
                                 </div>
                             </div>
                             <?php
@@ -485,7 +485,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_format') }}">
+                                    <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_format') }}">
                                 </div>
                             </div>
                             <?php
@@ -497,7 +497,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_resolusi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_resolusi') }}">
+                                    <input type="text" name="abstractRasterData_resolusi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_resolusi') }}">
                                 </div>
                             </div>
                             <?php
@@ -509,7 +509,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractRasterData_kawasanLitupan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractRasterData_kawasanLitupan') }}">
+                                    <input type="text" name="abstractRasterData_kawasanLitupan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_kawasanLitupan') }}">
                                 </div>
                             </div>
                             <?php
@@ -521,7 +521,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractServices_namaServis" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractServices_namaServis') }}">
+                                    <input type="text" name="abstractServices_namaServis" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_namaServis') }}">
                                 </div>
                             </div>
                             <?php
@@ -533,7 +533,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractServices_lokasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractServices_lokasi') }}">
+                                    <input type="text" name="abstractServices_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_lokasi') }}">
                                 </div>
                             </div>
                             <?php
@@ -545,7 +545,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractServices_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractServices_tujuan') }}">
+                                    <input type="text" name="abstractServices_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_tujuan') }}">
                                 </div>
                             </div>
                             <?php
@@ -557,7 +557,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractServices_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractServices_dataTerlibat') }}">
+                                    <input type="text" name="abstractServices_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_dataTerlibat') }}">
                                 </div>
                             </div>
                             <?php
@@ -569,7 +569,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractServices_polisi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractServices_polisi') }}">
+                                    <input type="text" name="abstractServices_polisi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_polisi') }}">
                                 </div>
                             </div>
                             <?php
@@ -581,7 +581,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractServices_peringkatCapaian" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractServices_peringkatCapaian') }}">
+                                    <input type="text" name="abstractServices_peringkatCapaian" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_peringkatCapaian') }}">
                                 </div>
                             </div>
                             <?php
@@ -593,7 +593,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractServices_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractServices_format') }}">
+                                    <input type="text" name="abstractServices_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_format') }}">
                                 </div>
                             </div>
                             <?php
@@ -605,7 +605,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_namaPerisian" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_namaPerisian') }}">
+                                    <input type="text" name="abstractSoftware_namaPerisian" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_namaPerisian') }}">
                                 </div>
                             </div>
                             <?php
@@ -617,7 +617,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_versi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_versi') }}">
+                                    <input type="text" name="abstractSoftware_versi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_versi') }}">
                                 </div>
                             </div>
                             <?php
@@ -629,7 +629,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_tujuan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_tujuan') }}">
+                                    <input type="text" name="abstractSoftware_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_tujuan') }}">
                                 </div>
                             </div>
                             <?php
@@ -641,7 +641,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_tahunPengunaanPerisian" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_tahunPengunaanPerisian') }}">
+                                    <input type="text" name="abstractSoftware_tahunPengunaanPerisian" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_tahunPengunaanPerisian') }}">
                                 </div>
                             </div>
                             <?php
@@ -653,7 +653,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_kaedahPerolehan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_kaedahPerolehan') }}">
+                                    <input type="text" name="abstractSoftware_kaedahPerolehan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_kaedahPerolehan') }}">
                                 </div>
                             </div>
                             <?php
@@ -665,7 +665,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_format') }}">
+                                    <input type="text" name="abstractSoftware_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_format') }}">
                                 </div>
                             </div>
                             <?php
@@ -677,7 +677,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_pengeluar" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_pengeluar') }}">
+                                    <input type="text" name="abstractSoftware_pengeluar" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_pengeluar') }}">
                                 </div>
                             </div>
                             <?php
@@ -689,7 +689,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_keupayaan" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_keupayaan') }}">
+                                    <input type="text" name="abstractSoftware_keupayaan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_keupayaan') }}">
                                 </div>
                             </div>
                             <?php
@@ -701,7 +701,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_dataTerlibat') }}">
+                                    <input type="text" name="abstractSoftware_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_dataTerlibat') }}">
                                 </div>
                             </div>
                             <?php
@@ -713,7 +713,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractSoftware_keperluanPerkakas" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractSoftware_keperluanPerkakas') }}">
+                                    <input type="text" name="abstractSoftware_keperluanPerkakas" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_keperluanPerkakas') }}">
                                 </div>
                             </div>
                             <?php
@@ -725,7 +725,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractVectorData_namaData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractVectorData_namaData') }}">
+                                    <input type="text" name="abstractVectorData_namaData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_namaData') }}">
                                 </div>
                             </div>
                             <?php
@@ -737,7 +737,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractVectorData_lokasi" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractVectorData_lokasi') }}">
+                                    <input type="text" name="abstractVectorData_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_lokasi') }}">
                                 </div>
                             </div>
                             <?php
@@ -749,7 +749,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractVectorData_rumusanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractVectorData_rumusanData') }}">
+                                    <input type="text" name="abstractVectorData_rumusanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_rumusanData') }}">
                                 </div>
                             </div>
                             <?php
@@ -761,7 +761,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractVectorData_tujuanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractVectorData_tujuanData') }}">
+                                    <input type="text" name="abstractVectorData_tujuanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_tujuanData') }}">
                                 </div>
                             </div>
                             <?php
@@ -773,7 +773,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractVectorData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractVectorData_kaedahPenyediaanData') }}">
+                                    <input type="text" name="abstractVectorData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_kaedahPenyediaanData') }}">
                                 </div>
                             </div>
                             <?php
@@ -785,7 +785,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractVectorData_format" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractVectorData_format') }}">
+                                    <input type="text" name="abstractVectorData_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_format') }}">
                                 </div>
                             </div>
                             <?php
@@ -797,7 +797,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractVectorData_unit" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractVectorData_unit') }}">
+                                    <input type="text" name="abstractVectorData_unit" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_unit') }}">
                                 </div>
                             </div>
                             <?php
@@ -809,7 +809,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractVectorData_skala" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractVectorData_skala') }}">
+                                    <input type="text" name="abstractVectorData_skala" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_skala') }}">
                                 </div>
                             </div>
                             <?php
@@ -821,7 +821,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="abstractVectorData_statusData" class="form-control form-control-sm ml-3 abstractElement" value="{{ old('abstractVectorData_statusData') }}">
+                                    <input type="text" name="abstractVectorData_statusData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_statusData') }}">
                                 </div>
                             </div>
                             <?php
@@ -833,7 +833,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3" >{{ old('c2_abstract') }}</textarea>
+                                    <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3 sortable" >{{ old('c2_abstract') }}</textarea>
                                     <a href="lampiran/abstract" class="text-yellow" target="_blank">
                                         <i class="fas fa-lightbulb"></i>
                                     </a>
@@ -848,7 +848,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest" value="{{old('c10_file_url')}}">
+                                    <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest sortable" value="{{old('c10_file_url')}}">
                                     <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal" data-target="#modal-showweb" data-backdrop="false">Test</button>
                                 </div>
                             </div>
@@ -861,7 +861,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control form-control-sm ml-3" type="date" name="c2_metadataDate" id="c2_metadataDate" value="{{ old('c2_metadataDate') }}">
+                                    <input class="form-control form-control-sm ml-3 sortable" type="date" name="c2_metadataDate" id="c2_metadataDate" value="{{ old('c2_metadataDate') }}">
                                 </div>
                             </div>
                             <?php
@@ -873,7 +873,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select name="c2_metadataDateType" id="c2_metadataDateType" class="form-control form-control-sm ml-3">
+                                    <select name="c2_metadataDateType" id="c2_metadataDateType" class="form-control form-control-sm ml-3 sortable">
                                         <option value="" selected>Pilih...</option>
                                         <option value="Adopted">Adopted</option>
                                         <option value="Creation">Creation</option>
@@ -903,7 +903,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select class="form-control form-control-sm ml-3" name="c2_metadataStatus" id="c2_metadataStatus">
+                                    <select class="form-control form-control-sm ml-3 sortable" name="c2_metadataStatus" id="c2_metadataStatus">
                                         <option value="" selected>Pilih...</option>
                                         <option value="Accepted" {{ old('c2_metadataStatus') == 'Accepted' ? 'selected' : '' }} class="optStatus_dataset">Accepted</option>
                                         <option value="Completed" {{ old('c2_metadataStatus') == 'Completed' ? 'selected' : '' }}class="optStatus_dataset">Completed</option>
@@ -943,7 +943,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select class="form-control form-control-sm ml-3" name="c2_typeOfServices" id="c2_typeOfServices">
+                                    <select class="form-control form-control-sm ml-3 sortable" name="c2_typeOfServices" id="c2_typeOfServices">
                                         <option value="" selected>Pilih...</option>
                                         <option value="ArcIMS Service" {{ old('c2_typeOfServices') == 'ArcIMS Service' ? 'selected' : '' }}>ArcIMS Service</option>
                                         <option value="ArcGIS Services" {{ old('c2_typeOfServices') == 'ArcGIS Services' ? 'selected' : '' }}>ArcGIS Services</option>
@@ -972,7 +972,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control form-control-sm ml-3" name="c2_operationName" id="c2_operationName" value="{{ old('c2_operationName') }}">
+                                    <input type="text" class="form-control form-control-sm ml-3 sortable" name="c2_operationName" id="c2_operationName" value="{{ old('c2_operationName') }}">
                                 </div>
                             </div>
                             <?php
@@ -984,7 +984,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control form-control-sm ml-3" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ old('c2_serviceUrl') }}">
+                                    <input type="text" class="form-control form-control-sm ml-3 sortable" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ old('c2_serviceUrl') }}">
                                     <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
                                 </div>
                             </div>
@@ -997,7 +997,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select class="form-control form-control-sm ml-3" name="c2_typeOfCouplingDataset" id="c2_typeOfCouplingDataset">
+                                    <select class="form-control form-control-sm ml-3 sortable" name="c2_typeOfCouplingDataset" id="c2_typeOfCouplingDataset">
                                         <option value="">Pilih...</option>
                                         <option value="Loose" {{ old('c2_typeOfCouplingDataset') == 'Loose' ? 'selected' : '' }}>
                                             Loose</option>
@@ -1017,7 +1017,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3">
+                                    <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3 sortable">
                                 </div>
                             </div>
                             <?php
@@ -1029,7 +1029,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3" value="">
+                                    <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3 sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1041,7 +1041,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_bahagian" id="c2_contact_bahagian" class="form-control form-control-sm ml-3" value="">
+                                    <input type="text" name="c2_contact_bahagian" id="c2_contact_bahagian" class="form-control form-control-sm ml-3 sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1053,7 +1053,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_position_name" id="c2_position_name" class="form-control form-control-sm ml-3 mb-2" value="{{ null !== old('c2_position_name') ? old('c2_position_name') : '' }}">
+                                    <input type="text" name="c2_position_name" id="c2_position_name" class="form-control form-control-sm ml-3 mb-2 sortable" value="{{ null !== old('c2_position_name') ? old('c2_position_name') : '' }}">
                                 </div>
                             </div>
                             <?php
@@ -1065,7 +1065,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2" value="">
+                                    <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2 sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1077,7 +1077,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2" value="">
+                                    <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2 sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1089,7 +1089,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2" value="">
+                                    <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2 sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1101,7 +1101,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2" value="">
+                                    <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2 sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1113,7 +1113,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_postal_code" id="c2_postal_code" class="form-control form-control-sm mb-2 divPostalCode" value="">
+                                    <input type="text" name="c2_postal_code" id="c2_postal_code" class="form-control form-control-sm mb-2 divPostalCode sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1125,7 +1125,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm mb-2 divCity" value="">
+                                    <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm mb-2 divCity sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1137,7 +1137,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select name="c2_contact_state" id="c2_contact_state"class="form-control form-control-sm">
+                                    <select name="c2_contact_state" id="c2_contact_state"class="form-control form-control-sm sortable">
                                         <option disabled>Pilih...</option>
                                         <?php
                                         if (isset($states) && count($states) > 0) {
@@ -1160,7 +1160,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm">
+                                    <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm sortable">
                                         <option disabled>Pilih...</option>
                                         <?php
                                         if (isset($countries) && count($countries) > 0) {
@@ -1182,7 +1182,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="email" name="c2_contact_email" id="c2_contact_email" class="form-control form-control-sm ml-3" value="">
+                                    <input type="email" name="c2_contact_email" id="c2_contact_email" class="form-control form-control-sm ml-3 sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1194,7 +1194,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_fax" id="c2_contact_fax" class="form-control form-control-sm ml-3" value="{{ old('c2_contact_fax') }}">
+                                    <input type="text" name="c2_contact_fax" id="c2_contact_fax" class="form-control form-control-sm ml-3 sortable" value="{{ old('c2_contact_fax') }}">
                                 </div>
                             </div>
                             <?php
@@ -1206,7 +1206,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office" class="form-control form-control-sm ml-3" value="">
+                                    <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office" class="form-control form-control-sm ml-3 sortable" value="">
                                 </div>
                             </div>
                             <?php
@@ -1218,7 +1218,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3" value="{{ old('c2_contact_website') }}">
+                                    <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3 sortable" value="{{ old('c2_contact_website') }}">
                                 </div>
                             </div>
                             <?php
@@ -1230,7 +1230,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <select name="c2_contact_role" id="c2_contact_role" class="form-control form-control-sm ml-3">
+                                    <select name="c2_contact_role" id="c2_contact_role" class="form-control form-control-sm ml-3 sortable">
                                         <option value="">Pilih...</option>
                                         <option value="Author" {{ old('c2_contact_role') == 'Author' ? 'selected' : '' }}>Author</option>
                                         <option value="Co Author" {{ old('c2_contact_role') == 'Co Author' ? 'selected' : '' }}>Co Author</option>
