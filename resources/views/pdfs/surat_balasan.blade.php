@@ -51,6 +51,10 @@
         padding-top: 0;
     }
 
+    .ql-align-justify {
+        text-align: justify
+    }
+
 </style>
 
 <body>
@@ -78,15 +82,15 @@
                                         62574 PUTRAJAYA
                                     </div>
                                     <div class="column" style="padding-top: 130px;">
-                                        <p  style="font-size: 10px;">
-                                            Tel	: +603-8000 8000 (1MOCC) <br>
-                                            Faks	: +603-8889 4851 <br>
+                                        <p style="font-size: 10px;">
+                                            Tel : +603-8000 8000 (1MOCC) <br>
+                                            Faks : +603-8889 4851 <br>
                                             Portal Rasmi : www.ketsa.gov.my
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body mx-6">
                                 <div class="row" style="border-top: 1px solid black;">
                                     <div class="column">
                                     </div>
@@ -95,13 +99,13 @@
                                         <span>Tarikh : {{ Carbon\Carbon::now()->format('d M Y') }}</span>
                                     </div>
                                 </div> <br>
-                                <p align="justify" class="mx-6">
+                                <p align="justify">
                                     {{ $permohonan->username }},<br>{{ $permohonan->alamat }}
                                     <br><br>
 
                                     Tuan/Puan,<br><br>
                                     <span class="text-custom">{{ $surat->tajuk_surat }}</span><br>
-                                    <span class="form-inline">Dengan segala hormatnya merujuk kepada surat tuan/puan
+                                    {{-- <span class="form-inline">Dengan segala hormatnya merujuk kepada surat tuan/puan
                                         <i class="mx-2"> JPBD.Tr 1/1572/8({{$permohonan->id}}) </i>
                                         bertarikh
                                         <span
@@ -146,9 +150,10 @@
                                     Sekian terima kasih.
                                     <br><br>
                                     <span style="font-weight: bold">"BERKHIDMAT UNTUK NEGARA"</span><br><br>
-                                    <i> **Ini adalah surat cetakan komputer, tidak perlu tandatangan**</i>
+                                    <i> **Ini adalah surat cetakan komputer, tidak perlu tandatangan**</i> --}}
 
                                 </p>
+                                <div>{!! $surat->content !!}</div>
                             </div>
                         </div>
                     </div>
