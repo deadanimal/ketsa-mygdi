@@ -23,8 +23,8 @@
 
     /* Create two equal columns that floats next to each other */
     .column {
-        float: left;
-        width: 50%;
+        float: right;
+        width: 100%;
         padding: 10px;
         height: auto;
         /* Should be removed. Only for demonstration */
@@ -67,7 +67,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="column-auto">
-                                        <img src="{{ public_path('storage/jatanegara.png') }}" alt="PGN" height="80"
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Coat_of_arms_of_Malaysia.svg/250px-Coat_of_arms_of_Malaysia.svg.png" alt="PGN" height="80"
                                             style="">
                                     </div>
                                     <div class="column-auto">
@@ -82,7 +82,7 @@
                                         62574 PUTRAJAYA
                                     </div>
                                     <div class="column" style="padding-top: 130px;">
-                                        <p style="font-size: 10px;">
+                                        <p style="font-size: 10px; float:right;">
                                             Tel : +603-8000 8000 (1MOCC) <br>
                                             Faks : +603-8889 4851 <br>
                                             Portal Rasmi : www.ketsa.gov.my
