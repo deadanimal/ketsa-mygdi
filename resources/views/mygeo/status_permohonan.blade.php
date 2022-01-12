@@ -104,6 +104,8 @@
                                                     <td>
                                                         @if ($permohonan->penilaian == '1')
                                                             <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @else
+                                                            <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif
                                                     </td>
                                                 </tr>
