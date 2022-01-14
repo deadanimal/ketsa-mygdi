@@ -9,7 +9,7 @@
     }
 </style>
 <style>
-    div.sortIt { 
+    div.sortIt,tr.sortIt { 
         clear:both;
         width: 100%; 
         float: left; 
@@ -50,19 +50,37 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="clearfix">
-                                <p id="lbl_kategori"><?php echo __('lang.metadata_category'); ?> : &nbsp;&nbsp;&nbsp;</p>
-                                <select name="kategori" id="kategori" class="form-control float-left"
-                                        style="width:175px;">
-                                    <option selected disabled><?php echo __('lang.dropdown_choose'); ?></option>
-                                    <?php
-                                    if (count($categories) > 0) {
-                                        foreach ($categories as $cat) {
-                                            ?><option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?></option><?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        <label class="form-control-label mr-3" for="versiontop">Version:</label>
+                                        <input type="text" name="versiontop" id="versiontop" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        &nbsp;&nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        <label class="form-control-label mr-3" for="version"><?php echo __('lang.metadata_category'); ?>:</label>
+                                        <select name="kategori" id="kategori" class="form-control" style="width:175px;">
+                                            <option selected disabled><?php echo __('lang.dropdown_choose'); ?></option>
+                                            <?php
+                                            if (count($categories) > 0) {
+                                                foreach ($categories as $cat) {
+                                                    ?><option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?></option><?php
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <br>
                             <?php
@@ -119,7 +137,7 @@
                                 <div class="col-3">
                                     <form id="formMetadataTemplate" name="formMetadataTemplate" method="POST" action="{{ url('simpan_metadata_template') }}">
                                         @csrf
-                                        Version: <input type="text" name="version" class="form-control"><br>
+                                        <input type="hidden" name="version" id="version"><br>
                                         <input type="hidden" name="templateKategori" id="templateKategori">
                                         <input type="hidden" name="activeInputs" id="activeInputs">
                                         <button type="button" class="btn btn-primary" id="saveTemplate">Save Template</button>
@@ -161,13 +179,25 @@
         //================================
         $('.sortableContainer1').sortable();
         $('#saveTemplate').button().click(function() {
-            var itemOrder = $('.sortableContainer1 .sortable:visible').sortable();
+            //get order of all inputs except Data Quality tabs
+            var itemOrder = $('.sortableContainer1 .sortable').sortable();
             var jsontxt = "";
             jQuery.each(itemOrder, function(index, item) {
 //                var f = $('[name="'+item.name+'"]');
                 jsontxt = jsontxt + item.name + "@";
             });
+            
+            //get order of all inputs of Data Quality tabs
+            var itemOrder2 = $('.dqtabstable .sortable').sortable();
+            jQuery.each(itemOrder2, function(index, item) {
+//                var f = $('[name="'+item.name+'"]');
+                jsontxt = jsontxt + item.name + "@";
+            });
+            
             $('#activeInputs').val(jsontxt);
+            
+            $('#version').val($('#versiontop').val());
+            
             $('#formMetadataTemplate').submit();
         });
         //================================

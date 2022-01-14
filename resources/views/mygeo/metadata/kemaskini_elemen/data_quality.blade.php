@@ -15,7 +15,7 @@
                                 <div class="form-inline">
                                     <label class="form-control-label mr-3" for="input-DQscope" data-toggle="tooltip" title="Pengisian secara Pilihan: Skop DQ"><?php echo __('lang.dq_scope'); ?>
                                     </label>
-                                    <select name="c15_data_quality_info" id="c15_data_quality_info" class="form-control form-control-sm">
+                                    <select name="c15_data_quality_info" id="c15_data_quality_info" class="form-control form-control-sm sortable">
                                         <option value="">Pilih...</option>
                                         <option value="Attribute"
                                                 {{ old('c15_data_quality_info') == 'Attribute' ? 'selected' : '' }}>Attribute
@@ -71,7 +71,7 @@
                                 <div class="form-inline">
                                     <label class="form-control-label mr-3" for="input-datahistory">
                                         <?php echo __('lang.data_history'); ?></label>
-                                    <input class="form-control form-control-sm" type="text" name="c15_data_history" id="c15_data_history" placeholder="None" value="{{ old('c15_data_history') }}">
+                                    <input class="form-control form-control-sm sortable" type="text" name="c15_data_history" id="c15_data_history" placeholder="None" value="{{ old('c15_data_history') }}">
                                 </div>
                             </div>
                         </div>
@@ -83,12 +83,12 @@
                                     <label class="form-control-label mr-3" for="input-date">
                                         <?php echo __('lang.date_time'); ?>
                                     </label>
-                                    <input class="form-control form-control-sm" type="date" name="c15_date" id="c15_date" value="{{ old('c15_date') }}">      
+                                    <input class="form-control form-control-sm sortable" type="date" name="c15_date" id="c15_date" value="{{ old('c15_date') }}">      
                                 </div>
                             </div>
                         </div>
                         @endif
-
+            </div>
                 &nbsp;&nbsp;&nbsp;
                 <div class="form-group row col-xl-12 divDataQualityTabs">
                     <div class="card card-primary card-outline card-outline-tabs">
@@ -126,7 +126,7 @@
                                     <div class="form-group row">
                                         <div class="d-flex flex-wrap bd-highlight">
                                             <div class="table-responsive">
-                                                <table class="table table-borderless">
+                                                <table class="table table-borderless dqtabstable">
                                                     <tbody>
                                                         <tr>
                                                             <td>
@@ -142,11 +142,11 @@
                                                         </tr>
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_scope']['status'] == 'active')
-                                                        <tr class="Completeness_Commission">
+                                                        <tr class="Completeness_Commission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c3_1">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t1_scope" id="c15_t1_scope" class="form-control form-control-sm">
+                                                                    <select name="c15_t1_scope" id="c15_t1_scope" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t1_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t1_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -166,33 +166,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_comply_level']['status'] == 'active')
-                                                        <tr class="Completeness_Commission">
+                                                        <tr class="Completeness_Commission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c3_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t1_comply_level" id="c15_t1_comply_level" class="form-control form-control-sm" value="{{old('c15_t1_comply_level')}}">
+                                                                    <input type="text" name="c15_t1_comply_level" id="c15_t1_comply_level" class="form-control form-control-sm sortable" value="{{old('c15_t1_comply_level')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_date']['status'] == 'active')
-                                                        <tr class="Completeness_Commission">
+                                                        <tr class="Completeness_Commission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t1_commission_date">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control form-control-sm" value="{{old('c15_t1_date')}}">
+                                                                        <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control form-control-sm sortable" value="{{old('c15_t1_date')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_result']['status'] == 'active')
-                                                        <tr class="Completeness_Commission">
+                                                        <tr class="Completeness_Commission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c3_2">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t1_result" id="c15_t1_result" class="form-control form-control-sm">
+                                                                    <select name="c15_t1_result" id="c15_t1_result" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t1_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t1_result') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -203,22 +203,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_conform_result']['status'] == 'active')
-                                                        <tr class="Completeness_Commission">
+                                                        <tr class="Completeness_Commission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c3_4">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t1_conform_result" id="c15_t1_conform_result" class="form-control form-control-sm" value="{{old('c15_t1_conform_result')}}">
+                                                                    <input type="text" name="c15_t1_conform_result" id="c15_t1_conform_result" class="form-control form-control-sm sortable" value="{{old('c15_t1_conform_result')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_scope_2']['status'] == 'active')
-                                                        <tr class="Completeness_Omission">
+                                                        <tr class="Completeness_Omission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c3_1">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t1_scope_2" id="c15_t1_scope_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t1_scope_2" id="c15_t1_scope_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t1_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t1_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -238,33 +238,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_comply_level_2']['status'] == 'active')
-                                                        <tr class="Completeness_Omission">
+                                                        <tr class="Completeness_Omission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c3_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t1_comply_level_2" id="c15_t1_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t1_comply_level_2')}}">
+                                                                    <input type="text" name="c15_t1_comply_level_2" id="c15_t1_comply_level_2" class="form-control form-control-sm sortable" value="{{old('c15_t1_comply_level_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_date_2']['status'] == 'active')
-                                                        <tr class="Completeness_Omission">
+                                                        <tr class="Completeness_Omission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t1_commission_date">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t1_date_2" id="c15_t1_date_2" class="form-control form-control-sm" value="{{old('c15_t1_date_2')}}">
+                                                                        <input type="date" name="c15_t1_date_2" id="c15_t1_date_2" class="form-control form-control-sm sortable" value="{{old('c15_t1_date_2')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_result_2']['status'] == 'active')
-                                                        <tr class="Completeness_Omission">
+                                                        <tr class="Completeness_Omission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c3_2">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t1_result_2" id="c15_t1_result_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t1_result_2" id="c15_t1_result_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t1_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t1_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -275,11 +275,11 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t1_conform_result_2']['status'] == 'active')
-                                                        <tr class="Completeness_Omission">
+                                                        <tr class="Completeness_Omission sortIt">
                                                             <td>
                                                                 <label class="form-check-label" for="c3_4">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t1_conform_result_2" id="c15_t1_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t1_conform_result_2')}}">
+                                                                    <input type="text" name="c15_t1_conform_result_2" id="c15_t1_conform_result_2" class="form-control form-control-sm sortable" value="{{old('c15_t1_conform_result_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
@@ -290,12 +290,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="consistency" role="tabpanel"
-                                     aria-labelledby="tab_consistency">
+                                <div class="tab-pane fade" id="consistency" role="tabpanel" aria-labelledby="tab_consistency">
                                     <div class="form-group row">
                                         <div class="d-flex flex-wrap bd-highlight">
                                             <div class="table-responsive">
-                                                <table class="table table-borderless">
+                                                <table class="table table-borderless dqtabstable">
                                                     <tbody>
                                                         <tr>
                                                             <td>
@@ -321,11 +320,11 @@
                                                         </tr>
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_scope']['status'] == 'active')
-                                                        <tr class='Conceptual'>
+                                                        <tr class='Conceptual sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_1">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t2_scope" id="c15_t2_scope" class="form-control form-control-sm">
+                                                                    <select name="c15_t2_scope" id="c15_t2_scope" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t2_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t2_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -345,33 +344,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_comply_level']['status'] == 'active')
-                                                        <tr class='Conceptual'>
+                                                        <tr class='Conceptual sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t2_comply_level" id="c15_t2_comply_level" class="form-control form-control-sm" value="{{old('c15_t2_comply_level')}}">
+                                                                    <input type="text" name="c15_t2_comply_level" id="c15_t2_comply_level" class="form-control form-control-sm sortable" value="{{old('c15_t2_comply_level')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_date']['status'] == 'active')
-                                                        <tr class='Conceptual'>
+                                                        <tr class='Conceptual sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_date">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t2_date" id="c15_t2_date" class="form-control form-control-sm" value="{{old('c15_t2_date')}}">
+                                                                        <input type="date" name="c15_t2_date" id="c15_t2_date" class="form-control form-control-sm sortable" value="{{old('c15_t2_date')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_result']['status'] == 'active')
-                                                        <tr class='Conceptual'>
+                                                        <tr class='Conceptual sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_2">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t2_result" id="c15_t2_result" class="form-control form-control-sm">
+                                                                    <select name="c15_t2_result" id="c15_t2_result" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t2_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t2_result') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -382,22 +381,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_conform_result']['status'] == 'active')
-                                                        <tr class='Conceptual'>
+                                                        <tr class='Conceptual sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_4">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t2_conform_result" id="c15_t2_conform_result" class="form-control form-control-sm" value="{{old('c15_t2_conform_result')}}">
+                                                                    <input type="text" name="c15_t2_conform_result" id="c15_t2_conform_result" class="form-control form-control-sm sortable" value="{{old('c15_t2_conform_result')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_scope_2']['status'] == 'active')
-                                                        <tr class='Domain'>
+                                                        <tr class='Domain sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_1">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t2_scope_2" id="c15_t2_scope_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t2_scope_2" id="c15_t2_scope_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t2_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t2_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -417,33 +416,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_comply_level_2']['status'] == 'active')
-                                                        <tr class='Domain'>
+                                                        <tr class='Domain sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t2_comply_level_2" id="c15_t2_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t2_comply_level_2')}}">
+                                                                    <input type="text" name="c15_t2_comply_level_2" id="c15_t2_comply_level_2" class="form-control form-control-sm sortable" value="{{old('c15_t2_comply_level_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_date_2']['status'] == 'active')
-                                                        <tr class='Domain'>
+                                                        <tr class='Domain sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_date_2">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm" value="{{old('c15_t2_date_2')}}">
+                                                                        <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm sortable" value="{{old('c15_t2_date_2')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_result_2']['status'] == 'active')
-                                                        <tr class='Domain'>
+                                                        <tr class='Domain sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_2">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t2_result_2" id="c15_t2_result_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t2_result_2" id="c15_t2_result_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t2_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t2_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -454,22 +453,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_conform_result_2']['status'] == 'active')
-                                                        <tr class='Domain'>
+                                                        <tr class='Domain sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_conform_result_2">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t2_conform_result_2" id="c15_t2_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t2_conform_result_2')}}">
+                                                                    <input type="text" name="c15_t2_conform_result_2" id="c15_t2_conform_result_2" class="form-control form-control-sm sortable" value="{{old('c15_t2_conform_result_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_scope_3']['status'] == 'active')
-                                                        <tr class='Format'>
+                                                        <tr class='Format sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_1">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t2_scope_3" id="c15_t2_scope_3" class="form-control form-control-sm">
+                                                                    <select name="c15_t2_scope_3" id="c15_t2_scope_3" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t2_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t2_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -489,33 +488,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_comply_level_3']['status'] == 'active')
-                                                        <tr class='Format'>
+                                                        <tr class='Format sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_comply_level_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t2_comply_level_3" id="c15_t2_comply_level_3" class="form-control form-control-sm" value="{{old('c15_t2_comply_level_3')}}">
+                                                                    <input type="text" name="c15_t2_comply_level_3" id="c15_t2_comply_level_3" class="form-control form-control-sm sortable" value="{{old('c15_t2_comply_level_3')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_date_3']['status'] == 'active')
-                                                        <tr class='Format'>
+                                                        <tr class='Format sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_date_3">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t2_date_3" id="c15_t2_date_3" class="form-control form-control-sm" value="{{old('c15_t2_date_3')}}">
+                                                                        <input type="date" name="c15_t2_date_3" id="c15_t2_date_3" class="form-control form-control-sm sortable" value="{{old('c15_t2_date_3')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_result_3']['status'] == 'active')
-                                                        <tr class='Format'>
+                                                        <tr class='Format sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_2">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t2_result_3" id="c15_t2_result_3" class="form-control form-control-sm">
+                                                                    <select name="c15_t2_result_3" id="c15_t2_result_3" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t2_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t2_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -526,22 +525,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_conform_result_3']['status'] == 'active')
-                                                        <tr class='Format'>
+                                                        <tr class='Format sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_4">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t2_conform_result_3" id="c15_t2_conform_result_3" class="form-control form-control-sm" value="{{old('c15_t2_conform_result_3')}}">
+                                                                    <input type="text" name="c15_t2_conform_result_3" id="c15_t2_conform_result_3" class="form-control form-control-sm sortable" value="{{old('c15_t2_conform_result_3')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_scope_4']['status'] == 'active')
-                                                        <tr class='Topological'>
+                                                        <tr class='Topological sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_scope_4">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t2_scope_4" id="c15_t2_scope_4" class="form-control form-control-sm">
+                                                                    <select name="c15_t2_scope_4" id="c15_t2_scope_4" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t2_scope_4') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t2_scope_4') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -561,33 +560,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_comply_level_4']['status'] == 'active')
-                                                        <tr class='Topological'>
+                                                        <tr class='Topological sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_comply_level_4">
                                                                     <b data-toggle="tooltip" title="" ><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t2_comply_level_4" id="c15_t2_comply_level_4" class="form-control form-control-sm" value="{{old('c15_t2_comply_level_4')}}">
+                                                                    <input type="text" name="c15_t2_comply_level_4" id="c15_t2_comply_level_4" class="form-control form-control-sm sortable" value="{{old('c15_t2_comply_level_4')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_date_4']['status'] == 'active')
-                                                        <tr class='Topological'>
+                                                        <tr class='Topological sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_date_4">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t2_date_4" id="c15_t2_date_4" class="form-control form-control-sm" value="{{old('c15_t2_date_4')}}">
+                                                                        <input type="date" name="c15_t2_date_4" id="c15_t2_date_4" class="form-control form-control-sm sortable" value="{{old('c15_t2_date_4')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_result_4']['status'] == 'active')
-                                                        <tr class='Topological'>
+                                                        <tr class='Topological sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_result_4">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t2_result_4" id="c15_t2_result_4" class="form-control form-control-sm">
+                                                                    <select name="c15_t2_result_4" id="c15_t2_result_4" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t2_result_4') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t2_result_4') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -598,11 +597,11 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t2_conform_result_4']['status'] == 'active')
-                                                        <tr class='Topological'>
+                                                        <tr class='Topological sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t2_conform_result_4">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t2_conform_result_4" id="c15_t2_conform_result_4" class="form-control form-control-sm" value="{{old('c15_t2_conform_result_4')}}">
+                                                                    <input type="text" name="c15_t2_conform_result_4" id="c15_t2_conform_result_4" class="form-control form-control-sm sortable" value="{{old('c15_t2_conform_result_4')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
@@ -618,7 +617,7 @@
                                     <div class="form-group row">
                                         <div class="d-flex flex-wrap bd-highlight">
                                             <div class="table-responsive">
-                                                <table class="table table-borderless">
+                                                <table class="table table-borderless dqtabstable">
                                                     <tbody>
                                                         <tr>
                                                             <td>
@@ -639,11 +638,11 @@
                                                         </tr>
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_scope']['status'] == 'active')
-                                                        <tr class='AbsoluteorExternal'>
+                                                        <tr class='AbsoluteorExternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_scope">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t3_scope" id="c15_t3_scope" class="form-control form-control-sm">
+                                                                    <select name="c15_t3_scope" id="c15_t3_scope" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t3_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t3_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -663,33 +662,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_comply_level']['status'] == 'active')
-                                                        <tr class='AbsoluteorExternal'>
+                                                        <tr class='AbsoluteorExternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_comply_level">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t3_comply_level" id="c15_t3_comply_level" class="form-control form-control-sm" value="{{old('c15_t3_comply_level')}}">
+                                                                    <input type="text" name="c15_t3_comply_level" id="c15_t3_comply_level" class="form-control form-control-sm sortable" value="{{old('c15_t3_comply_level')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_date']['status'] == 'active')
-                                                        <tr class='AbsoluteorExternal'>
+                                                        <tr class='AbsoluteorExternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_date">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control form-control-sm" value="{{old('c15_t3_date')}}">
+                                                                        <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control form-control-sm sortable" value="{{old('c15_t3_date')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_result']['status'] == 'active')
-                                                        <tr class='AbsoluteorExternal'>
+                                                        <tr class='AbsoluteorExternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_result">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t3_result" id="c15_t3_result" class="form-control form-control-sm">
+                                                                    <select name="c15_t3_result" id="c15_t3_result" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t3_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t3_result') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -700,22 +699,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_conform_result']['status'] == 'active')
-                                                        <tr class='AbsoluteorExternal'>
+                                                        <tr class='AbsoluteorExternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_conform_result">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t3_conform_result" id="c15_t3_conform_result" class="form-control form-control-sm" value="{{old('c15_t3_conform_result')}}">
+                                                                    <input type="text" name="c15_t3_conform_result" id="c15_t3_conform_result" class="form-control form-control-sm sortable" value="{{old('c15_t3_conform_result')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_scope_2']['status'] == 'active')
-                                                        <tr class='RelativeorInternal'>
+                                                        <tr class='RelativeorInternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_scope_2">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t3_scope_2" id="c15_t3_scope_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t3_scope_2" id="c15_t3_scope_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t3_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t3_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -735,33 +734,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_comply_level_2']['status'] == 'active')
-                                                        <tr class='RelativeorInternal'>
+                                                        <tr class='RelativeorInternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_comply_level_2">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t3_comply_level_2" id="c15_t3_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t3_comply_level_2')}}">
+                                                                    <input type="text" name="c15_t3_comply_level_2" id="c15_t3_comply_level_2" class="form-control form-control-sm sortable" value="{{old('c15_t3_comply_level_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_date_2']['status'] == 'active')
-                                                        <tr class='RelativeorInternal'>
+                                                        <tr class='RelativeorInternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_date_2">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm" value="{{old('c15_t3_date_2')}}">
+                                                                        <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm sortable" value="{{old('c15_t3_date_2')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_result_2']['status'] == 'active')
-                                                        <tr class='RelativeorInternal'>
+                                                        <tr class='RelativeorInternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_result_2">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t3_result_2" id="c15_t3_result_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t3_result_2" id="c15_t3_result_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t3_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t3_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -772,22 +771,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_conform_result_2']['status'] == 'active')
-                                                        <tr class='RelativeorInternal'>
+                                                        <tr class='RelativeorInternal sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_conform_result_2">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t3_conform_result_2" id="c15_t3_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t3_conform_result_2')}}">
+                                                                    <input type="text" name="c15_t3_conform_result_2" id="c15_t3_conform_result_2" class="form-control form-control-sm sortable" value="{{old('c15_t3_conform_result_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_scope_3']['status'] == 'active')
-                                                        <tr class='GriddedData'>
+                                                        <tr class='GriddedData sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_scope_3">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t3_scope_3" id="c15_t3_scope_3" class="form-control form-control-sm">
+                                                                    <select name="c15_t3_scope_3" id="c15_t3_scope_3" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t3_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t3_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -807,33 +806,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_comply_level_3']['status'] == 'active')
-                                                        <tr class='GriddedData'>
+                                                        <tr class='GriddedData sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_comply_level_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t3_comply_level_3" id="c15_t3_comply_level_3" class="form-control form-control-sm" value="{{old('c15_t3_comply_level_3')}}">
+                                                                    <input type="text" name="c15_t3_comply_level_3" id="c15_t3_comply_level_3" class="form-control form-control-sm sortable" value="{{old('c15_t3_comply_level_3')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_date_3']['status'] == 'active')
-                                                        <tr class='GriddedData'>
+                                                        <tr class='GriddedData sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_date_3">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm" value="{{old('c15_t3_date_3')}}">
+                                                                        <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm sortable" value="{{old('c15_t3_date_3')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_result_3']['status'] == 'active')
-                                                        <tr class='GriddedData'>
+                                                        <tr class='GriddedData sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_result_3">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t3_result_3" id="c15_t3_result_3" class="form-control form-control-sm">
+                                                                    <select name="c15_t3_result_3" id="c15_t3_result_3" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t3_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t3_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -844,11 +843,11 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t3_conform_result_3']['status'] == 'active')
-                                                        <tr class='GriddedData'>
+                                                        <tr class='GriddedData sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t3_conform_result_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t3_conform_result_3" id="c15_t3_conform_result_3" class="form-control form-control-sm" value="{{old('c15_t3_conform_result_3')}}">
+                                                                    <input type="text" name="c15_t3_conform_result_3" id="c15_t3_conform_result_3" class="form-control form-control-sm sortable" value="{{old('c15_t3_conform_result_3')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
@@ -864,7 +863,7 @@
                                     <div class="form-group row">
                                         <div class="bd-highlight">
                                             <div class="table-responsive">
-                                                <table class="table table-borderless">
+                                                <table class="table table-borderless dqtabstable">
                                                     <tbody>
                                                         <tr>
                                                             <td>
@@ -885,11 +884,11 @@
                                                         </tr>
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_scope']['status'] == 'active')
-                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                        <tr class='AccuracyorTimeMeasurement sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_scope">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t4_scope" id="c15_t4_scope" class="form-control form-control-sm">
+                                                                    <select name="c15_t4_scope" id="c15_t4_scope" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t4_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t4_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -909,33 +908,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_comply_level']['status'] == 'active')
-                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                        <tr class='AccuracyorTimeMeasurement sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_comply_level">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t4_comply_level" id="c15_t4_comply_level" class="form-control form-control-sm" value="{{old('c15_t4_comply_level')}}">
+                                                                    <input type="text" name="c15_t4_comply_level" id="c15_t4_comply_level" class="form-control form-control-sm sortable" value="{{old('c15_t4_comply_level')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_date']['status'] == 'active')
-                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                        <tr class='AccuracyorTimeMeasurement sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_date">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t4_date" id="c15_t4_date" class="form-control form-control-sm" value="{{old('c15_t4_date')}}">
+                                                                        <input type="date" name="c15_t4_date" id="c15_t4_date" class="form-control form-control-sm sortable" value="{{old('c15_t4_date')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_result']['status'] == 'active')
-                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                        <tr class='AccuracyorTimeMeasurement sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_result">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t4_result" id="c15_t4_result" class="form-control form-control-sm">
+                                                                    <select name="c15_t4_result" id="c15_t4_result" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t4_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t4_result') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -946,22 +945,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_conform_result']['status'] == 'active')
-                                                        <tr class='AccuracyorTimeMeasurement'>
+                                                        <tr class='AccuracyorTimeMeasurement sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_conform_result">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t4_conform_result" id="c15_t4_conform_result" class="form-control form-control-sm" value="{{old('c15_t4_conform_result')}}">
+                                                                    <input type="text" name="c15_t4_conform_result" id="c15_t4_conform_result" class="form-control form-control-sm sortable" value="{{old('c15_t4_conform_result')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_scope_2']['status'] == 'active')
-                                                        <tr class='TemporalConsistency'>
+                                                        <tr class='TemporalConsistency sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_scope_2">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t4_scope_2" id="c15_t4_scope_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t4_scope_2" id="c15_t4_scope_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t4_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t4_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -981,33 +980,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_comply_level_2']['status'] == 'active')
-                                                        <tr class='TemporalConsistency'>
+                                                        <tr class='TemporalConsistency sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_comply_level_2">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t4_comply_level_2" id="c15_t4_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t4_comply_level_2')}}">
+                                                                    <input type="text" name="c15_t4_comply_level_2" id="c15_t4_comply_level_2" class="form-control form-control-sm sortable" value="{{old('c15_t4_comply_level_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_date_2']['status'] == 'active')
-                                                        <tr class='TemporalConsistency'>
+                                                        <tr class='TemporalConsistency sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_date_2">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t4_date_2" id="c15_t4_date_2" class="form-control form-control-sm" value="{{old('c15_t4_date_2')}}">
+                                                                        <input type="date" name="c15_t4_date_2" id="c15_t4_date_2" class="form-control form-control-sm sortable" value="{{old('c15_t4_date_2')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_result_2']['status'] == 'active')
-                                                        <tr class='TemporalConsistency'>
+                                                        <tr class='TemporalConsistency sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_result_2">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t4_result_2" id="c15_t4_result_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t4_result_2" id="c15_t4_result_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t4_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t4_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -1018,22 +1017,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_conform_result_2']['status'] == 'active')
-                                                        <tr class='TemporalConsistency'>
+                                                        <tr class='TemporalConsistency sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_conform_result_2">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t4_conform_result_2" id="c15_t4_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t4_conform_result_2')}}">
+                                                                    <input type="text" name="c15_t4_conform_result_2" id="c15_t4_conform_result_2" class="form-control form-control-sm sortable" value="{{old('c15_t4_conform_result_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_scope_3']['status'] == 'active')
-                                                        <tr class='TemporalValidity'>
+                                                        <tr class='TemporalValidity sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_scope_3">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t4_scope_3" id="c15_t4_scope_3" class="form-control form-control-sm">
+                                                                    <select name="c15_t4_scope_3" id="c15_t4_scope_3" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t4_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t4_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -1053,33 +1052,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_comply_level_3']['status'] == 'active')
-                                                        <tr class='TemporalValidity'>
+                                                        <tr class='TemporalValidity sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_comply_level_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t4_comply_level_3" id="c15_t4_comply_level_3" class="form-control form-control-sm" value="{{old('c15_t4_comply_level_3')}}">
+                                                                    <input type="text" name="c15_t4_comply_level_3" id="c15_t4_comply_level_3" class="form-control form-control-sm sortable" value="{{old('c15_t4_comply_level_3')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_comply_level_3']['status'] == 'active')
-                                                        <tr class='TemporalValidity'>
+                                                        <tr class='TemporalValidity sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_date_3">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t4_comply_level_3" id="c15_t4_date_3" class="form-control form-control-sm" value="{{old('c15_t4_date_3')}}">
+                                                                        <input type="date" name="c15_t4_comply_level_3" id="c15_t4_date_3" class="form-control form-control-sm sortable" value="{{old('c15_t4_date_3')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_result_3']['status'] == 'active')
-                                                        <tr class='TemporalValidity'>
+                                                        <tr class='TemporalValidity sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_result_3">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t4_result_3" id="c15_t4_result_3" class="form-control form-control-sm">
+                                                                    <select name="c15_t4_result_3" id="c15_t4_result_3" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t4_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t4_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -1090,11 +1089,11 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t4_conform_result_3']['status'] == 'active')
-                                                        <tr class='TemporalValidity'>
+                                                        <tr class='TemporalValidity sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t4_conform_result_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t4_conform_result_3" id="c15_t4_conform_result_3" class="form-control form-control-sm" value="{{old('c15_t4_conform_result_3')}}">
+                                                                    <input type="text" name="c15_t4_conform_result_3" id="c15_t4_conform_result_3" class="form-control form-control-sm sortable" value="{{old('c15_t4_conform_result_3')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
@@ -1110,7 +1109,7 @@
                                     <div class="form-group row">
                                         <div class="d-flex flex-wrap bd-highlight">
                                             <div class="table-responsive">
-                                                <table class="table table-borderless">
+                                                <table class="table table-borderless dqtabstable">
                                                     <tbody>
                                                         <tr>
                                                             <td>
@@ -1131,11 +1130,11 @@
                                                         </tr>
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_scope']['status'] == 'active')
-                                                        <tr class='classificationCorrectness'>
+                                                        <tr class='classificationCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_classCorrect_scope">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t5_scope" id="c15_t5_scope" class="form-control form-control-sm">
+                                                                    <select name="c15_t5_scope" id="c15_t5_scope" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t5_scope') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t5_scope') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -1155,33 +1154,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_comply_level']['status'] == 'active')
-                                                        <tr class='classificationCorrectness'>
+                                                        <tr class='classificationCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t5_comply_level" id="c15_t5_comply_level" class="form-control form-control-sm" value="{{old('c15_t5_comply_level')}}">
+                                                                    <input type="text" name="c15_t5_comply_level" id="c15_t5_comply_level" class="form-control form-control-sm sortable" value="{{old('c15_t5_comply_level')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_date']['status'] == 'active')
-                                                        <tr class='classificationCorrectness'>
+                                                        <tr class='classificationCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_classCorrect_date">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t5_classCorrect_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control form-control-sm" value="{{old('c15_t5_date')}}">
+                                                                        <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control form-control-sm sortable" value="{{old('c15_t5_date')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_result']['status'] == 'active')
-                                                        <tr class='classificationCorrectness'>
+                                                        <tr class='classificationCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_2">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t5_result" id="c15_t5_result" class="form-control form-control-sm">
+                                                                    <select name="c15_t5_result" id="c15_t5_result" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t5_result') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t5_result') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -1192,22 +1191,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_conform_result']['status'] == 'active')
-                                                        <tr class='classificationCorrectness'>
+                                                        <tr class='classificationCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_4">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t5_conform_result" id="c15_t5_conform_result" class="form-control form-control-sm" value="{{old('c15_t5_conform_result')}}">
+                                                                    <input type="text" name="c15_t5_conform_result" id="c15_t5_conform_result" class="form-control form-control-sm sortable" value="{{old('c15_t5_conform_result')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_scope_2']['status'] == 'active')
-                                                        <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <tr class='nonQuantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_scope_2">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t5_scope_2" id="c15_t5_scope_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t5_scope_2" id="c15_t5_scope_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t5_scope_2') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t5_scope_2') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -1227,33 +1226,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_comply_level_2']['status'] == 'active')
-                                                        <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <tr class='nonQuantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_comply_level_2">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t5_comply_level_2" id="c15_t5_comply_level_2" class="form-control form-control-sm" value="{{old('c15_t5_comply_level_2')}}">
+                                                                    <input type="text" name="c15_t5_comply_level_2" id="c15_t5_comply_level_2" class="form-control form-control-sm sortable" value="{{old('c15_t5_comply_level_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_date_2']['status'] == 'active')
-                                                        <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <tr class='nonQuantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_classCorrect_2_date">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t5_classCorrect_2_date_div" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t5_date_2" id="c15_t5_date_2" class="form-control form-control-sm" value="{{old('c15_t5_date_2')}}">
+                                                                        <input type="date" name="c15_t5_date_2" id="c15_t5_date_2" class="form-control form-control-sm sortable" value="{{old('c15_t5_date_2')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_result_2']['status'] == 'active')
-                                                        <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <tr class='nonQuantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_result_2">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t5_result_2" id="c15_t5_result_2" class="form-control form-control-sm">
+                                                                    <select name="c15_t5_result_2" id="c15_t5_result_2" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t5_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t5_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -1264,22 +1263,22 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_conform_result_2']['status'] == 'active')
-                                                        <tr class='nonQuantitativeAttributeCorrectness'>
+                                                        <tr class='nonQuantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c3_4">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t5_conform_result_2" id="c15_t5_conform_result_2" class="form-control form-control-sm" value="{{old('c15_t5_conform_result_2')}}">
+                                                                    <input type="text" name="c15_t5_conform_result_2" id="c15_t5_conform_result_2" class="form-control form-control-sm sortable" value="{{old('c15_t5_conform_result_2')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         <?php //================= ?>
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_scope_3']['status'] == 'active')
-                                                        <tr class='quantitativeAttributeCorrectness'>
+                                                        <tr class='quantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_scope_3">
                                                                     <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
-                                                                    <select name="c15_t5_scope_3" id="c15_t5_scope_3" class="form-control form-control-sm">
+                                                                    <select name="c15_t5_scope_3" id="c15_t5_scope_3" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Aeronautical" {{(old('c15_t5_scope_3') == 'Aeronautical' ? "selected":"")}}>Aeronautical</option>
                                                                         <option value="Built Environment" {{(old('c15_t5_scope_3') == 'Built Environment' ? "selected":"")}}>Built Environment</option>
@@ -1299,33 +1298,33 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_comply_level_3']['status'] == 'active')
-                                                        <tr class='quantitativeAttributeCorrectness'>
+                                                        <tr class='quantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_comply_level_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
-                                                                    <input type="text" name="c15_t5_comply_level_3" id="c15_t5_comply_level_3" class="form-control form-control-sm" value="{{old('c15_t5_comply_level_3')}}">
+                                                                    <input type="text" name="c15_t5_comply_level_3" id="c15_t5_comply_level_3" class="form-control form-control-sm sortable" value="{{old('c15_t5_comply_level_3')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_date_3']['status'] == 'active')
-                                                        <tr class='quantitativeAttributeCorrectness'>
+                                                        <tr class='quantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_classCorrect_date_3">
                                                                     <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                     <div class="input-group date" id="c15_t5_classCorrect_date_div_3" data-target-input="nearest">
-                                                                        <input type="date" name="c15_t5_date_3" id="c15_t5_date_3" class="form-control form-control-sm" value="{{old('c15_t5_date_3')}}">
+                                                                        <input type="date" name="c15_t5_date_3" id="c15_t5_date_3" class="form-control form-control-sm sortable" value="{{old('c15_t5_date_3')}}">
                                                                     </div>
                                                                 </label>
                                                             </td>
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_result_3']['status'] == 'active')
-                                                        <tr class='quantitativeAttributeCorrectness'>
+                                                        <tr class='quantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_result_3">
                                                                     <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
-                                                                    <select name="c15_t5_result_3" id="c15_t5_result_3" class="form-control form-control-sm">
+                                                                    <select name="c15_t5_result_3" id="c15_t5_result_3" class="form-control form-control-sm sortable">
                                                                         <option value="">Pilih...</option>
                                                                         <option value="Pass" {{(old('c15_t5_result_3') == 'Pass' ? "selected":"")}}>Pass</option>
                                                                         <option value="Fail" {{(old('c15_t5_result_3') == 'Fail' ? "selected":"")}}>Fail</option>
@@ -1336,11 +1335,11 @@
                                                         </tr>
                                                         @endif
                                                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_t5_conform_result_3']['status'] == 'active')
-                                                        <tr class='quantitativeAttributeCorrectness'>
+                                                        <tr class='quantitativeAttributeCorrectness sortIt'>
                                                             <td>
                                                                 <label class="form-check-label" for="c15_t5_conform_result_3">
                                                                     <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
-                                                                    <input type="text" name="c15_t5_conform_result_3" id="c15_t5_conform_result_3" class="form-control form-control-sm" value="{{old('c15_t5_conform_result_3')}}">
+                                                                    <input type="text" name="c15_t5_conform_result_3" id="c15_t5_conform_result_3" class="form-control form-control-sm sortable" value="{{old('c15_t5_conform_result_3')}}">
                                                                 </label>
                                                             </td>
                                                         </tr>
@@ -1355,13 +1354,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
 
 <script>
     $(document).ready(function () {
+        $(".dqtabstable tbody").sortable({
+            /* helper: fixHelperModified, */
+//            stop: updateIndex
+        }).disableSelection();
+        
         //t1
         $('.Completeness_Commission').hide();
         $('.Completeness_Omission').hide();
