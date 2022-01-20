@@ -19,6 +19,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" name="c11_dist_format" id="c11_dist_format" placeholder="Format Name" value="{{ old('c11_dist_format') }}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion11']['c11_version']['status'] == 'active')
@@ -29,6 +30,7 @@
                                     <input class="form-control form-control-sm sortable" type="text" name="c11_version" id="c11_version" placeholder="Format Version" value="{{ old('c11_version') }}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
 
@@ -41,6 +43,7 @@
                                 <input type="text" name="c11_distributor" id="c11_distributor" class="form-control form-control-sm sortable" placeholder="Organization Name" value="{{ old('c11_distributor') }}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
             
@@ -52,6 +55,7 @@
                                 <input type="text" placeholder="Units" name="c11_units_of_dist" id="c11_units_of_dist" class="form-control form-control-sm sortable" value="{{ old('c11_units_of_dist') }}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion11']['c11_size']['status'] == 'active')
@@ -62,6 +66,7 @@
                                 <input type="text" name="c11_size" id="c11_size" class="form-control form-control-sm sortable" placehorder="Size" value="{{ old('c11_size') }}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
 
@@ -73,6 +78,7 @@
                                 <input class="form-control form-control-sm sortable" name="c11_link" id="c11_link" placeholder="Ordering Website Link" type="text" value="{{ old('c11_link') }}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
             
@@ -84,6 +90,7 @@
                                 <input type="text" name="c11_fees" id="c11_fees" class="form-control form-control-sm sortable" placeholder="RM 0.00" value="{{ old('c11_fees') }}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion11']['c11_order_instructions']['status'] == 'active')
@@ -97,6 +104,7 @@
                                 </a>
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                      </div>
                 @endif
             
@@ -157,6 +165,7 @@
                                 </select>
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
             </div>

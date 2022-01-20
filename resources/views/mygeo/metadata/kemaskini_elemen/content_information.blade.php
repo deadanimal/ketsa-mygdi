@@ -26,6 +26,7 @@
                                     <option value="Half Mazimum" {{ (old('c7_band_boundary') == "Half Mazimum" ? "selected":"") }}>Half Mazimum</option>
                                 </select>
                             </div>
+                            <span class="close btnClose">&times;</span>
                         </div>
                     </div>
                 @endif
@@ -39,6 +40,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :200px" placeholder="Transfer Type" name="c7_trans_fn_type" id="c7_trans_fn_type" value="{{old('c7_trans_fn_type')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion7']['c7_trans_polar']['status'] == 'active')
@@ -51,6 +53,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :180px" placeholder="Transmitted Polarization" name="c7_trans_polar" id="c7_trans_polar" value="{{old('c7_trans_polar')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion7']['c7_nominal_spatial_res']['status'] == 'active')
@@ -66,6 +69,7 @@
                                 </div>
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion7']['c7_detected_polar']['status'] == 'active')
@@ -78,6 +82,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :180px" placeholder="Detected Polarization" name="c7_detected_polar" id="c7_detected_polar" value="{{old('c7_detected_polar')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
             </div>

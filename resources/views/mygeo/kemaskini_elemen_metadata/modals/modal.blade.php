@@ -292,3 +292,25 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalTambahInput">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="formKemaskiniCustomInput" method="POST" action="{{ url('simpan_kemaskini_custom_input') }}" class="theForm">
+                @csrf
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 availableOptionsContainer">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between1">
+                    <button type="button" class="btn btn-primary btnConfirmTambah" data-dismiss="modal">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -43,6 +43,7 @@
                             </select>
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
 
@@ -54,6 +55,7 @@
                             <input class="form-control form-control-sm sortable" type="text" name="refsys_projection" id="refsys_projection" readonly value="{{ old('refsys_projection') }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion13']['refsys_axis_units']['status'] == 'active')
@@ -64,6 +66,7 @@
                             <input class="form-control form-control-sm sortable" type="text" name="refsys_axis_units" id="refsys_axis_units" readonly value="{{ old('refsys_axis_units') }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
 
@@ -76,6 +79,7 @@
                             <input class="form-control form-control-sm sortable" type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" readonly value="{{ old('refsys_semiMajorAxis') }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion13']['refsys_datum']['status'] == 'active')
@@ -86,6 +90,7 @@
                             <input class="form-control form-control-sm sortable" type="text" name="refsys_datum" id="refsys_datum" readonly value="{{ old('refsys_datum') }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
 
@@ -98,6 +103,7 @@
                             <input class="form-control form-control-sm sortable" type="text" name="refsys_ellipsoid" id="refsys_ellipsoid" readonly value="{{ old('refsys_ellipsoid') }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion13']['refsys_denomFlatRatio']['status'] == 'active')
@@ -108,6 +114,7 @@
                             <input class="form-control form-control-sm sortable" type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" readonly value="{{ old('refsys_denomFlatRatio') }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
 

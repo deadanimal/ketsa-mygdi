@@ -20,6 +20,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :80px" placeholder="Celcius" name="c8_avg_air_temp" id="c8_avg_air_temp" value="{{old('c8_avg_air_temp')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_altitude']['status'] == 'active')
@@ -32,6 +33,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :80px" placeholder="Feet" name="c8_altitude" id="c8_altitude" value="{{old('c8_altitude')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_relative_humid']['status'] == 'active')
@@ -44,6 +46,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :80px" placeholder="Humidity" name="c8_relative_humid" id="c8_relative_humid" value="{{old('c8_relative_humid')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_meteor_cond']['status'] == 'active')
@@ -56,6 +59,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :80px" placeholder="Condition" name="c8_meteor_cond" id="c8_meteor_cond" value="{{old('c8_meteor_cond')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 
@@ -69,6 +73,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :80px" placeholder="Identifier" name="c8_identifier" id="c8_identifier" value="{{old('c8_identifier')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_trigger']['status'] == 'active')
@@ -86,6 +91,7 @@
                                 </select>
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_context']['status'] == 'active')
@@ -103,6 +109,7 @@
                                 </select>
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_sequence']['status'] == 'active')
@@ -120,6 +127,7 @@
                                 </select>
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_time']['status'] == 'active')
@@ -132,6 +140,7 @@
                                 <input class="form-control form-control-sm sortable" type="time" style="width :120px" name="c8_time" id="c8_time" value="{{old('c8_time')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 
@@ -145,6 +154,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :80px" placeholder="Type" name="c8_type" id="c8_type" value="{{old('c8_type')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 
@@ -158,6 +168,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :80px" placeholder="Identifier" name="c8_op_identifier" id="c8_op_identifier" value="{{ old('c8_op_identifier') }}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_op_status']['status'] == 'active')
@@ -170,6 +181,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :80px" placeholder="Status" name="c8_op_status" id="c8_op_status" value="{{old('c8_op_status')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_op_type']['status'] == 'active')
@@ -182,6 +194,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :80px" placeholder="Type" name="c8_op_type" id="c8_op_type" value="{{old('c8_op_type')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 
@@ -195,18 +208,20 @@
                                 <input class="form-control form-control-sm sortable" type="date" style="width :150px" placeholder="Select Date" name="c8_rdr_date" id="c8_rdr_date" value="{{old('c8_rdr_date')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion8']['c8_last_accept_date']['status'] == 'active')
                 <div class="row sortIt">
-                        <div class="col-xl-6">
-                            <div class="form-inline">
-                                <div class="form-control-label mr-3" data-toggle="tooltip" title="Tarikh cerapan siap dijalankan">
-                                    <?php echo __('lang.latest_acceptable_date'); ?>
-                                </div>
-                                <input class="form-control form-control-sm sortable" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" value="{{old('c8_last_accept_date')}}">
+                    <div class="col-xl-6">
+                        <div class="form-inline">
+                            <div class="form-control-label mr-3" data-toggle="tooltip" title="Tarikh cerapan siap dijalankan">
+                                <?php echo __('lang.latest_acceptable_date'); ?>
                             </div>
+                            <input class="form-control form-control-sm sortable" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" value="{{old('c8_last_accept_date')}}">
                         </div>
+                    </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
             </div>

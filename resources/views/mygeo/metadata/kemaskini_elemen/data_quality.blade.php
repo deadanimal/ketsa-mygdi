@@ -63,6 +63,7 @@
                                     </select>
                                 </div>
                             </div>
+                            <span class="close btnClose">&times;</span>
                         </div>
                         @endif
                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_data_history']['status'] == 'active')
@@ -74,6 +75,7 @@
                                     <input class="form-control form-control-sm sortable" type="text" name="c15_data_history" id="c15_data_history" placeholder="None" value="{{ old('c15_data_history') }}">
                                 </div>
                             </div>
+                            <span class="close btnClose">&times;</span>
                         </div>
                         @endif
                         @if($template->template[strtolower($_GET['kategori'])]['accordion15']['c15_date']['status'] == 'active')
@@ -86,6 +88,7 @@
                                     <input class="form-control form-control-sm sortable" type="date" name="c15_date" id="c15_date" value="{{ old('c15_date') }}">      
                                 </div>
                             </div>
+                            <span class="close btnClose">&times;</span>
                         </div>
                         @endif
             </div>

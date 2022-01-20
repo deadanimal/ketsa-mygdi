@@ -19,6 +19,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :280px" placeholder="Insert Collection Name" name="c6_collection_name" id="c6_collection_name" value="{{old('c6_collection_name')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion6']['c6_collection_id']['status'] == 'active')
@@ -31,6 +32,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :150px" placeholder="Identification" name="c6_collection_id" id="c6_collection_id" value="{{old('c6_collection_id')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
             </div>

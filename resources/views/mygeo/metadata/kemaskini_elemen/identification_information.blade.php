@@ -25,6 +25,7 @@
                                         <i class="fas fa-lightbulb"></i>
                                     </a>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_product_type"){
@@ -55,6 +56,7 @@
                                             {{ old('c2_product_type') == 'Vector Data' ? 'selected' : '' }}>Vector Data</option>
                                     </select>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractApplication_namaAplikasi"){
@@ -67,6 +69,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractApplication_namaAplikasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_namaAplikasi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractApplication_tujuan"){
@@ -79,6 +82,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractApplication_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_tujuan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractApplication_tahunPembangunan"){
@@ -91,6 +95,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractApplication_tahunPembangunan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_tahunPembangunan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractApplication_kemaskini"){
@@ -103,6 +108,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractApplication_kemaskini" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_kemaskini') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractApplication_dataTerlibat"){
@@ -115,6 +121,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractApplication_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_dataTerlibat') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractApplication_sasaranPengguna"){
@@ -127,6 +134,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractApplication_sasaranPengguna" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_sasaranPengguna') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractApplication_versi"){
@@ -139,6 +147,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractApplication_versi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_versi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractApplication_perisianDigunaPembangunan"){
@@ -151,6 +160,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractApplication_perisianDigunaPembangunan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractApplication_perisianDigunaPembangunan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractDocument_namaDokumen"){
@@ -163,6 +173,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractDocument_namaDokumen" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractDocument_namaDokumen') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractDocument_tujuan"){
@@ -175,6 +186,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractDocument_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractDocument_tujuan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractDocument_tahunTerbitan"){
@@ -187,6 +199,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractDocument_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractDocument_tahunTerbitan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractDocument_edisi"){
@@ -199,6 +212,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractDocument_edisi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractDocument_edisi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractGISActivityProject_namaAktiviti"){
@@ -211,6 +225,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractGISActivityProject_namaAktiviti" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractGISActivityProject_namaAktiviti') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractGISActivityProject_tujuan"){
@@ -223,6 +238,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractGISActivityProject_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractGISActivityProject_tujuan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractGISActivityProject_lokasi"){
@@ -235,6 +251,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractGISActivityProject_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractGISActivityProject_lokasi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractGISActivityProject_tahun"){
@@ -247,6 +264,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractGISActivityProject_tahun" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractGISActivityProject_tahun') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractMap_namaPeta"){
@@ -259,6 +277,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractMap_namaPeta" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_namaPeta') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractMap_kawasan"){
@@ -271,6 +290,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractMap_kawasan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_kawasan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractMap_tujuan"){
@@ -283,6 +303,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractMap_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_tujuan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractMap_tahunTerbitan"){
@@ -295,6 +316,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractMap_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_tahunTerbitan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractMap_edisi"){
@@ -307,6 +329,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractMap_edisi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_edisi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractMap_noSiri"){
@@ -319,6 +342,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractMap_noSiri" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_noSiri') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractMap_skala"){
@@ -331,6 +355,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractMap_skala" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_skala') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractMap_unit"){
@@ -343,6 +368,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractMap_unit" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractMap_unit') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_namaData"){
@@ -355,6 +381,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_namaData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_namaData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_lokasi"){
@@ -367,6 +394,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_lokasi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_rumusanData"){
@@ -379,6 +407,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_rumusanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_rumusanData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_tujuanData"){
@@ -391,6 +420,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_tujuanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_tujuanData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_kaedahPenyediaanData"){
@@ -403,6 +433,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_kaedahPenyediaanData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_format"){
@@ -415,6 +446,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_format') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_unit"){
@@ -427,6 +459,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_unit" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_unit') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_skala"){
@@ -439,6 +472,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_skala" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_skala') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_statusData"){
@@ -451,6 +485,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_statusData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_statusData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_tahunPerolehan"){
@@ -463,6 +498,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_tahunPerolehan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_tahunPerolehan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_jenisSatelit"){
@@ -475,6 +511,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_jenisSatelit" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_jenisSatelit') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_format"){
@@ -487,6 +524,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_format') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_resolusi"){
@@ -499,6 +537,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_resolusi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_resolusi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractRasterData_kawasanLitupan"){
@@ -511,6 +550,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractRasterData_kawasanLitupan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractRasterData_kawasanLitupan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractServices_namaServis"){
@@ -523,6 +563,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractServices_namaServis" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_namaServis') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractServices_lokasi"){
@@ -535,6 +576,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractServices_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_lokasi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractServices_tujuan"){
@@ -547,6 +589,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractServices_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_tujuan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractServices_dataTerlibat"){
@@ -559,6 +602,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractServices_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_dataTerlibat') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractServices_polisi"){
@@ -571,6 +615,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractServices_polisi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_polisi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractServices_peringkatCapaian"){
@@ -583,6 +628,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractServices_peringkatCapaian" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_peringkatCapaian') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractServices_format"){
@@ -595,6 +641,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractServices_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractServices_format') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_namaPerisian"){
@@ -607,6 +654,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_namaPerisian" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_namaPerisian') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_versi"){
@@ -619,6 +667,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_versi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_versi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_tujuan"){
@@ -631,6 +680,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_tujuan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_tahunPengunaanPerisian"){
@@ -643,6 +693,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_tahunPengunaanPerisian" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_tahunPengunaanPerisian') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_kaedahPerolehan"){
@@ -655,6 +706,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_kaedahPerolehan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_kaedahPerolehan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_format"){
@@ -667,6 +719,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_format') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_pengeluar"){
@@ -679,6 +732,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_pengeluar" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_pengeluar') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_keupayaan"){
@@ -691,6 +745,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_keupayaan" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_keupayaan') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_dataTerlibat"){
@@ -703,6 +758,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_dataTerlibat') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractSoftware_keperluanPerkakas"){
@@ -715,6 +771,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractSoftware_keperluanPerkakas" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractSoftware_keperluanPerkakas') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractVectorData_namaData"){
@@ -727,6 +784,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractVectorData_namaData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_namaData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractVectorData_lokasi"){
@@ -739,6 +797,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractVectorData_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_lokasi') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractVectorData_rumusanData"){
@@ -751,6 +810,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractVectorData_rumusanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_rumusanData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractVectorData_tujuanData"){
@@ -763,6 +823,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractVectorData_tujuanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_tujuanData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractVectorData_kaedahPenyediaanData"){
@@ -775,6 +836,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractVectorData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_kaedahPenyediaanData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractVectorData_format"){
@@ -787,6 +849,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractVectorData_format" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_format') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractVectorData_unit"){
@@ -799,6 +862,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractVectorData_unit" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_unit') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractVectorData_skala"){
@@ -811,6 +875,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractVectorData_skala" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_skala') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "abstractVectorData_skala"){
@@ -823,6 +888,7 @@
                                 <div class="col-8">
                                     <input type="text" name="abstractVectorData_statusData" class="form-control form-control-sm ml-3 abstractElement sortable" value="{{ old('abstractVectorData_statusData') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_abstract"){
@@ -838,6 +904,7 @@
                                         <i class="fas fa-lightbulb"></i>
                                     </a>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c10_file_url"){
@@ -851,6 +918,7 @@
                                     <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest sortable" value="{{old('c10_file_url')}}">
                                     <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal" data-target="#modal-showweb" data-backdrop="false">Test</button>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_metadataDate"){
@@ -863,6 +931,7 @@
                                 <div class="col-8">
                                     <input class="form-control form-control-sm ml-3 sortable" type="date" name="c2_metadataDate" id="c2_metadataDate" value="{{ old('c2_metadataDate') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_metadataDateType"){
@@ -893,6 +962,7 @@
                                         <option value="Unavailable">Unavailable</option>
                                     </select>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_metadataStatus"){
@@ -933,6 +1003,7 @@
                                         <option value="Under Development" {{ old('c2_metadataStatus') == 'Under Development' ? 'selected' : '' }} class="optStatus_services">Under Development</option>
                                     </select>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_typeOfServices"){
@@ -962,6 +1033,7 @@
                                         <option value="Generic Service" {{ old('c2_typeOfServices') == 'Generic Service' ? 'selected' : '' }}>Generic Service</option>
                                     </select>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_operationName"){
@@ -974,6 +1046,7 @@
                                 <div class="col-8">
                                     <input type="text" class="form-control form-control-sm ml-3 sortable" name="c2_operationName" id="c2_operationName" value="{{ old('c2_operationName') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_serviceUrl"){
@@ -987,6 +1060,7 @@
                                     <input type="text" class="form-control form-control-sm ml-3 sortable" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ old('c2_serviceUrl') }}">
                                     <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_typeOfCouplingDataset"){
@@ -1007,6 +1081,7 @@
                                             Tight</option>
                                     </select>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_name"){
@@ -1019,6 +1094,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3 sortable">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_agensiorganisasi"){
@@ -1031,6 +1107,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3 sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_bahagian"){
@@ -1043,6 +1120,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_bahagian" id="c2_contact_bahagian" class="form-control form-control-sm ml-3 sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_position_name"){
@@ -1055,6 +1133,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_position_name" id="c2_position_name" class="form-control form-control-sm ml-3 mb-2 sortable" value="{{ null !== old('c2_position_name') ? old('c2_position_name') : '' }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_address1"){
@@ -1067,6 +1146,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2 sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_address2"){
@@ -1079,6 +1159,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2 sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_address3"){
@@ -1091,6 +1172,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2 sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_address4"){
@@ -1103,6 +1185,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2 sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_postal_code"){
@@ -1115,6 +1198,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_postal_code" id="c2_postal_code" class="form-control form-control-sm mb-2 divPostalCode sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_city"){
@@ -1127,6 +1211,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm mb-2 divCity sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_state"){
@@ -1150,6 +1235,7 @@
                                         ?>
                                     </select>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_country"){
@@ -1172,6 +1258,7 @@
                                         ?>
                                     </select>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_email"){
@@ -1184,6 +1271,7 @@
                                 <div class="col-8">
                                     <input type="email" name="c2_contact_email" id="c2_contact_email" class="form-control form-control-sm ml-3 sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_fax"){
@@ -1196,6 +1284,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_fax" id="c2_contact_fax" class="form-control form-control-sm ml-3 sortable" value="{{ old('c2_contact_fax') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_phone_office"){
@@ -1208,6 +1297,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office" class="form-control form-control-sm ml-3 sortable" value="">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_website"){
@@ -1220,6 +1310,7 @@
                                 <div class="col-8">
                                     <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3 sortable" value="{{ old('c2_contact_website') }}">
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "c2_contact_role"){
@@ -1254,6 +1345,7 @@
                                         <option value="User" {{ old('c2_contact_role') == 'User' ? 'selected' : '' }}>User</option>
                                     </select>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }

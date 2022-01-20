@@ -19,6 +19,7 @@
                             <input type="text" name="c14_useLimitation" id="c14_useLimitation" class="form-control form-control-sm sortable" value="{{ old('c14_useLimitation') }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion14']['c14_access_constraint']['status'] == 'active')
@@ -44,6 +45,7 @@
                             </select>
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion14']['c14_use_constraint']['status'] == 'active')
@@ -69,6 +71,7 @@
                             </select>
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
 
@@ -94,6 +97,7 @@
                             </select>
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion14']['c14_reference']['status'] == 'active')
@@ -107,6 +111,7 @@
                             <input class="form-control form-control-sm sortable" name="c14_reference" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal" value="{{old('c14_reference')}}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
             </div>

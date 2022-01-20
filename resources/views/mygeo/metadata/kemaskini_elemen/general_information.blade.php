@@ -5,6 +5,7 @@
                 <?php echo __('lang.accord_1'); ?>
             </a>
         </h4>
+        <button type="button" class="btn btn-default float-right btnTambah" data-toggle="modal" data-target="#modalTambahInput" data-accordion="1">Tambah</button>
     </div>
     <div id="collapse1" class="panel-collapse collapse in show" data-parent="#div_c1">
         <div class="card-body">
@@ -46,6 +47,7 @@
                                     <p class="ml-3 mb-0 lblContentInfo">Live Data and Maps</p>
                                     <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "publisher_name"){
@@ -58,6 +60,7 @@
                                 <div class="col-8">
                                     <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_name" value="{{ auth::user()->name }}" />
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "publisher_agensi_organisasi"){
@@ -71,6 +74,7 @@
                                     <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_agensi_organisasi" value="{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}" />
                                 <input type="hidden" name="publisher_bahagian" value="{{ auth::user()->bahagian }}" />
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "publisher_email"){
@@ -83,6 +87,7 @@
                                 <div class="col-8">
                                     <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_email" value="{{ auth::user()->email }}" />
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "publisher_phone"){
@@ -95,6 +100,7 @@
                                 <div class="col-8">
                                     <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }elseif($key == "publisher_role"){
@@ -120,6 +126,7 @@
                                         <option value="User">User</option>
                                     </select>
                                 </div>
+                                <span class="close btnClose">&times;</span>
                             </div>
                             <?php
                         }

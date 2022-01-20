@@ -18,6 +18,7 @@
                             <input class="form-control ml-3 sortable" id="file_contohJenisMetadata" type="file" name="file_contohJenisMetadata" />
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
             
             
@@ -31,6 +32,7 @@
                             <input type="text" name="c10_file_name" id="c10_file_name" class="form-control form-control-sm ml-3 sortable" value="{{old('c10_file_name')}}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion10']['c10_file_type']['status'] == 'active')
@@ -43,6 +45,7 @@
                             <input type="text" name="c10_file_type" id="c10_file_type" class="form-control form-control-sm ml-3 sortable" value="{{old('c10_file_type')}}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion10']['c10_file_url']['status'] == 'active')
@@ -56,6 +59,7 @@
                             <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal" data-target="#modal-showweb" data-backdrop="false">Test</button>
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
 
@@ -69,6 +73,7 @@
                             <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3 sortable" value="{{ old('c10_keyword') }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion10']['c10_additional_keyword[]']['status'] == 'active')
@@ -81,6 +86,7 @@
                             <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3 sortable" value="{{ (isset(old('c10_additional_keyword')[0]) ? old('c10_additional_keyword')[0]:"") }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion10']['c10_additional_keyword[]']['status'] == 'active')
@@ -93,6 +99,7 @@
                             <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ (isset(old('c10_additional_keyword')[1]) ? old('c10_additional_keyword')[1]:"") }}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
             </div>

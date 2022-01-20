@@ -19,6 +19,7 @@
                                 <input class="form-control form-control-sm sortable" type="text" style="width :120px" placeholder="Insert Process Level" name="c5_process_lvl" id="c5_process_lvl" value="{{old('c5_process_lvl')}}">
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion5']['c5_resolution']['status'] == 'active')
@@ -34,6 +35,7 @@
                                 </div>
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
             </div>

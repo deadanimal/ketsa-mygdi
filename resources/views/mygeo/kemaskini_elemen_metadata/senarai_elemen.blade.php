@@ -17,6 +17,16 @@
         padding: 8px; 
         background-color: #e6e6e6;
     }
+    .close {
+        cursor: pointer;
+        /*position: absolute;*/
+        top: 50%;
+        right: 0%;
+        padding: 12px 16px;
+        /*transform: translate(0%, -50%);*/
+    }
+
+    .close:hover {background: #bbb;}
 </style>
 
 
@@ -46,7 +56,7 @@
                         <div class="card-header">
                             <h3 class="card-title" style="font-size: 2rem;">Kemas Kini Elemen Metadata 2</h3>
                             <div class="float-right">
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalCustomInput">Tambah</button>
+                                <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalCustomInput">Tambah</button>-->
                             </div>
                         </div>
                         <div class="card-body">
@@ -176,6 +186,7 @@
     });
 
     $(document).ready(function () {
+        var templateInactive = <?php echo json_encode($template->template); ?>;
         //================================
         $('.sortableContainer1').sortable();
         $('#saveTemplate').button().click(function() {
@@ -195,10 +206,57 @@
             });
             
             $('#activeInputs').val(jsontxt);
-            
             $('#version').val($('#versiontop').val());
-            
             $('#formMetadataTemplate').submit();
+        });
+        
+        $(document).on("click",".btnClose",function(){
+            $(this).parent().find('.sortable').attr('data-status', 'inactive');
+            $(this).parent().hide();
+        });
+        $(document).on("click",".btnTambah",function(){
+            var category = $('#templateKategori').val().toLowerCase();
+            var accordion = $(this).data('accordion');
+            var availableOptions = {};
+            jQuery.each(templateInactive[category]['accordion'+accordion], function(index, item) {
+                if(item['status'] === "inactive"){
+                    availableOptions[index] = item;
+                }
+            });
+//            console.log(availableOptions);
+//            console.log($.isEmptyObject(availableOptions));
+//            console.log(templateInactive[category]['accordion'+accordion]);
+            if(!$.isEmptyObject(availableOptions)){
+                $('.availableOptionsContainer').empty();
+                var html = '<select name="tambahElemen" data-accordion="'+accordion+'" class="form-control tambahElemen">';
+                jQuery.each(availableOptions, function(index, item) {
+                    html += '<option value="'+index+'">'+item.label_bm+'</option></select>';
+                });
+                html += '</select>';
+                $('.availableOptionsContainer').append(html);
+            }
+        });
+        $(document).on("click",".btnConfirmTambah",function(){
+            var tambahElemen = $('.tambahElemen').val();
+            var category = $('#templateKategori').val().toLowerCase();
+            var accordion = $('.tambahElemen').data('accordion');
+            var availableOptions = {};
+            
+            //SMBG SINI - re-show hidden inputs here
+            
+            /*
+            jQuery.each(templateInactive[category]['accordion'+accordion], function(index, item) {
+                if(index === tambahElemen){
+                    var html = '<select name="tambahElemen" data-accordion="'+accordion+'" class="form-control tambahElemen">';
+                    jQuery.each(availableOptions, function(index, item) {
+                        html += '<option value="'+index+'">'+item.label_bm+'</option></select>';
+                    });
+                    html += '</select>';
+                    $('#collapse'+accordion+' .sortableContainer1').append(html);
+                }
+            });
+                    .removeData( "test1" );
+            */
         });
         //================================
 

@@ -27,6 +27,7 @@
                             </select>
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
 
@@ -42,6 +43,7 @@
                             <input class="form-control form-control-sm sortable" name="c12_feature_scale" id="c12_feature_scale" placeholder="10:50000" type="text" value="{{old('c12_feature_scale')}}">
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion12']['c12_image_res']['status'] == 'active')
@@ -58,6 +60,7 @@
                             </div>
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion12']['c12_language']['status'] == 'active')
@@ -74,6 +77,7 @@
                             </select>
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
 
@@ -103,6 +107,7 @@
                             </select>
                         </div>
                     </div>
+                    <span class="close btnClose">&times;</span>
                 </div>
                 @endif
             </div>

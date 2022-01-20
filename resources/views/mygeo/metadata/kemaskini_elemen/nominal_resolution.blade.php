@@ -22,6 +22,7 @@
                                 </div>
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion4']['c4_ground_scan']['status'] == 'active')
@@ -37,6 +38,7 @@
                                 </div>
                             </div>
                         </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
                 @endif
             </div>
