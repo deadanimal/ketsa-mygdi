@@ -560,7 +560,7 @@
                                         <div class="col-xl-6">
                                             <div class="copyright text-xl-left text-white"> Hakcipta Terpelihara ©
                                                 2021.
-                                                Pusat Geospatial Malaysia. </div>
+                                                Pusat Geospatial Negara. </div>
                                         </div>
                                         <div class="col-xl-6"></div>
                                     </div>

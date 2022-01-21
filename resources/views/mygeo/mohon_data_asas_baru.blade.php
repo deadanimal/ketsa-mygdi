@@ -76,7 +76,7 @@
                             <h6 class="h2 text-dark d-inline-block mb-0">
                                 @if (Auth::user()->hasRole(['Pemohon Data']))
                                     Mohon Data
-                                @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
+                                @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
                                     Permohonan Baru
                                 @endif
 
@@ -396,8 +396,18 @@
                                                                 @foreach ($dokumens as $dokumen)
                                                                     <tr>
                                                                         <td>{{ $loop->iteration }}</td>
-                                                                        <td>{{ $dokumen->tajuk_dokumen }}</td>
-                                                                        <td>{{ $dokumen->nama_fail }}{{ isset($dokumen->nama_fail) ? $dokumen->nama_failt : '-' }}
+                                                                        <td>
+                                                                            @if ($dokumen->tajuk_dokumen == 'Surat Permohonan Rasmi')
+
+                                                                                {{ $dokumen->tajuk_dokumen }} <br>
+                                                                                ({{ $dokumen->no_rujukan }} |
+                                                                                {{ Carbon\Carbon::parse($dokumen->date_surat)->format('d/m/Y') }})
+                                                                            @else
+
+                                                                                {{ $dokumen->tajuk_dokumen }}
+                                                                            @endif
+                                                                        </td>
+                                                                        <td>{{ isset($dokumen->nama_fail) ? $dokumen->nama_fail : '-' }}
                                                                         </td>
                                                                         <td>
                                                                             @if (Auth::user()->hasRole(['Pemohon Data']))
@@ -445,9 +455,13 @@
                                                                         </td>
 
                                                                     </tr>
-                                                                @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super
-                                                                    Admin','Pentadbir
-                                                                    Aplikasi']))
+                                                                @elseif (Auth::user()->hasRole([
+    'Pentadbir Data',
+    'Super
+                                                                    Admin',
+    'Pentadbir
+                                                                    Aplikasi',
+]))
                                                                     @if ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar')
                                                                         <tr>
                                                                             <td>*</td>
@@ -637,6 +651,18 @@
                                 <input type="text" class="form-control" value="{{ $dokumen->tajuk_dokumen }}"
                                     disabled>
                             </div>
+                            @if ($dokumen->tajuk_dokumen == 'Surat Permohonan Rasmi')
+                                <div class="form-group">
+                                    <label for="no_rujukan" class="form-control-label">No Rujukan Surat</label>
+                                    <input type="text" class="form-control" name="no_rujukan"
+                                        value="{{ $dokumen->no_rujukan }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_surat" class="form-control-label">Tarikh Surat</label>
+                                    <input type="date" class="form-control" name="date_surat"
+                                        value="{{ $dokumen->date_surat }}">
+                                </div>
+                            @endif
                             @if ($dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan')
                                 <p style="color: orangered; font-size: 13px">**Pastikan dokumen salinan kad pengenalan yang
                                     dimuat naik mempunyai palang
@@ -645,6 +671,7 @@
                             @endif
 
                             <input type="file" name="file" class="form-control" id="updateFile" onchange="getFileInfo()">
+
                             <p id="infofile" style="color:blueviolet; font-size: 12px"></p>
 
                             <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
@@ -1181,6 +1208,10 @@
                                             </div>
 
                                             <div id="checkBoxes" onchange="displayCheck()">
+                                                <label for="selectall">
+                                                    <input type="checkbox" id="checkAll" onclick="selectAll()">
+                                                    Pilih Semua
+                                                </label>
                                                 ` + daerah_append + `
                                             </div>
                                         </div>`);
@@ -1213,6 +1244,10 @@
                                             </div>
 
                                             <div id="checkBoxes" onchange="displayCheck()">
+                                                <label for="selectall">
+                                                    <input type="checkbox" id="checkAll" onclick="selectAll()">
+                                                    Pilih Semua
+                                                </label>
                                                 ` + daerah_append + `
                                             </div>
                                         </div>`);
@@ -1222,8 +1257,8 @@
         function displayCheck() {
             $(document).ready(function() {
                 var append = '';
-                $("#checkBoxes input[type='checkbox']:checked").each(function(i) {
-                    var len = $("#checkBoxes input[type='checkbox']:checked").length;
+                $("#checkBoxes input[name='daerah[]']:checked").each(function(i) {
+                    var len = $("#checkBoxes input[name='daerah[]']:checked").length;
                     // alert(len);
                     if (i === (len - 1)) {
                         append += this.value;
@@ -1236,8 +1271,13 @@
                 $('#update_kawasan').text('( ' + append + ' )');
             });
         }
-    </script>
-    <script>
+
+        function selectAll() {
+            $("#checkAll").change(function() {
+                $("input[name='daerah[]']").prop('checked', this.checked);
+            });
+        }
+
         var show = true;
 
         function showCheckboxes() {

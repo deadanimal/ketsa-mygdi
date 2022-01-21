@@ -71,7 +71,7 @@
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
                                             <?php $count = 1; ?>
-                                            @if (Auth::user()->name !== $permohonan->assign_admin)
+                                            @if (Auth::user()->name == $permohonan->assign_admin)
                                                 <tr>
                                                     <td>{{ $count }}</td>
                                                     <td>{{ $permohonan->name }}</td>
