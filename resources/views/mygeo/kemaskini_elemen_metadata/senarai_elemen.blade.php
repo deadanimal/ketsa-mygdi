@@ -9,7 +9,7 @@
     }
 </style>
 <style>
-    div.sortIt { 
+    div.sortIt,tr.sortIt { 
         clear:both;
         width: 100%; 
         float: left; 
@@ -17,6 +17,16 @@
         padding: 8px; 
         background-color: #e6e6e6;
     }
+    .close {
+        cursor: pointer;
+        /*position: absolute;*/
+        top: 50%;
+        right: 0%;
+        padding: 12px 16px;
+        /*transform: translate(0%, -50%);*/
+    }
+
+    .close:hover {background: #bbb;}
 </style>
 
 
@@ -46,23 +56,41 @@
                         <div class="card-header">
                             <h3 class="card-title" style="font-size: 2rem;">Kemas Kini Elemen Metadata 2</h3>
                             <div class="float-right">
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalCustomInput">Tambah</button>
+                                <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalCustomInput">Tambah</button>-->
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="clearfix">
-                                <p id="lbl_kategori"><?php echo __('lang.metadata_category'); ?> : &nbsp;&nbsp;&nbsp;</p>
-                                <select name="kategori" id="kategori" class="form-control float-left"
-                                        style="width:175px;">
-                                    <option selected disabled><?php echo __('lang.dropdown_choose'); ?></option>
-                                    <?php
-                                    if (count($categories) > 0) {
-                                        foreach ($categories as $cat) {
-                                            ?><option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?></option><?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        <label class="form-control-label mr-3" for="versiontop">Version:</label>
+                                        <input type="text" name="versiontop" id="versiontop" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        &nbsp;&nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        <label class="form-control-label mr-3" for="version"><?php echo __('lang.metadata_category'); ?>:</label>
+                                        <select name="kategori" id="kategori" class="form-control" style="width:175px;">
+                                            <option selected disabled><?php echo __('lang.dropdown_choose'); ?></option>
+                                            <?php
+                                            if (count($categories) > 0) {
+                                                foreach ($categories as $cat) {
+                                                    ?><option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?></option><?php
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <br>
                             <?php
@@ -117,8 +145,13 @@
                                     @include('mygeo.metadata.kemaskini_elemen.data_quality')
                                 </div>
                                 <div class="col-3">
-                                    Version: <input type="text" name="version" class="form-control"><br>
-                                    <button type="button" class="btn btn-primary">Save Template</button>
+                                    <form id="formMetadataTemplate" name="formMetadataTemplate" method="POST" action="{{ url('simpan_metadata_template') }}">
+                                        @csrf
+                                        <input type="hidden" name="version" id="version"><br>
+                                        <input type="hidden" name="templateKategori" id="templateKategori">
+                                        <input type="hidden" name="activeInputs" id="activeInputs">
+                                        <button type="button" class="btn btn-primary" id="saveTemplate">Save Template</button>
+                                    </form>
                                 </div>
                                 <?php
                             }
@@ -153,18 +186,78 @@
     });
 
     $(document).ready(function () {
-        //capture form design=============
+        var templateInactive = <?php echo json_encode($template->template); ?>;
+        //================================
         $('.sortableContainer1').sortable();
-//        $('<br><br><div id=buttonDiv><button>Get Order of Elements</button></div><button type="button" id="ftest22">ftest</button>').appendTo('body');
-//        $('#buttonDiv button').button().click(function() {
-//            var itemOrder = $('.sortableContainer').sortable("toArray");
-//            for (var i = 0; i < itemOrder.length; i++) {
-//                alert("Position: " + i + " ID: " + itemOrder[i]);
-//            }
-//        });
-//        $(document).on('click','#ftest22',function(){
-//             $('<div class="sortIt">Item ftest</div>').appendTo('#sortableContainer');
-//        });
+        $('#saveTemplate').button().click(function() {
+            //get order of all inputs except Data Quality tabs
+            var itemOrder = $('.sortableContainer1 .sortable').sortable();
+            var jsontxt = "";
+            jQuery.each(itemOrder, function(index, item) {
+//                var f = $('[name="'+item.name+'"]');
+                jsontxt = jsontxt + item.name + "@";
+            });
+            
+            //get order of all inputs of Data Quality tabs
+            var itemOrder2 = $('.dqtabstable .sortable').sortable();
+            jQuery.each(itemOrder2, function(index, item) {
+//                var f = $('[name="'+item.name+'"]');
+                jsontxt = jsontxt + item.name + "@";
+            });
+            
+            $('#activeInputs').val(jsontxt);
+            $('#version').val($('#versiontop').val());
+            $('#formMetadataTemplate').submit();
+        });
+        
+        $(document).on("click",".btnClose",function(){
+            $(this).parent().find('.sortable').attr('data-status', 'inactive');
+            $(this).parent().hide();
+        });
+        $(document).on("click",".btnTambah",function(){
+            var category = $('#templateKategori').val().toLowerCase();
+            var accordion = $(this).data('accordion');
+            var availableOptions = {};
+            jQuery.each(templateInactive[category]['accordion'+accordion], function(index, item) {
+                if(item['status'] === "inactive"){
+                    availableOptions[index] = item;
+                }
+            });
+//            console.log(availableOptions);
+//            console.log($.isEmptyObject(availableOptions));
+//            console.log(templateInactive[category]['accordion'+accordion]);
+            if(!$.isEmptyObject(availableOptions)){
+                $('.availableOptionsContainer').empty();
+                var html = '<select name="tambahElemen" data-accordion="'+accordion+'" class="form-control tambahElemen">';
+                jQuery.each(availableOptions, function(index, item) {
+                    html += '<option value="'+index+'">'+item.label_bm+'</option></select>';
+                });
+                html += '</select>';
+                $('.availableOptionsContainer').append(html);
+            }
+        });
+        $(document).on("click",".btnConfirmTambah",function(){
+            var tambahElemen = $('.tambahElemen').val();
+            var category = $('#templateKategori').val().toLowerCase();
+            var accordion = $('.tambahElemen').data('accordion');
+            var availableOptions = {};
+            
+            //SMBG SINI - re-show hidden inputs here
+            
+            /*
+            jQuery.each(templateInactive[category]['accordion'+accordion], function(index, item) {
+                if(index === tambahElemen){
+                    var html = '<select name="tambahElemen" data-accordion="'+accordion+'" class="form-control tambahElemen">';
+                    jQuery.each(availableOptions, function(index, item) {
+                        html += '<option value="'+index+'">'+item.label_bm+'</option></select>';
+                    });
+                    html += '</select>';
+                    $('#collapse'+accordion+' .sortableContainer1').append(html);
+                }
+            });
+                    .removeData( "test1" );
+            */
+        });
         //================================
 
         /*
@@ -378,6 +471,7 @@
         if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
             ?>
             $('#kategori').val("{{ $_GET['kategori'] }}");
+            $('#templateKategori').val("{{ $_GET['kategori'] }}");
             var kategori = "{{ $_GET['kategori'] }}";
             if (kategori.toLowerCase() == "dataset") {
                 $('.lblMetadataName').html('Title<span class="text-warning">*</span>');

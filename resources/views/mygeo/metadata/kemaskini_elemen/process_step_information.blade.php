@@ -8,29 +8,35 @@
     </div>
     <div id="collapse5" class="panel-collapse collapse in " data-parent="#div_c5">
         <div class="card-body">
-            <div class="row">
+            <div class="sortableContainer1">
                 @if($template->template[strtolower($_GET['kategori'])]['accordion5']['c5_process_lvl']['status'] == 'active')
-                <div class="col-xl-6">
-                    <div class="form-inline ml-3">
-                        <div class="form-control-label mr-3" data-toggle="tooltip" title="Tahap pemprosesan data">
-                            <?php echo __('lang.process_level'); ?>
+                    <div class="row sortIt">
+                        <div class="col-xl-6">
+                            <div class="form-inline ml-3">
+                                <div class="form-control-label mr-3" data-toggle="tooltip" title="Tahap pemprosesan data">
+                                    <?php echo __('lang.process_level'); ?>
+                                </div>
+                                <input class="form-control form-control-sm sortable" type="text" style="width :120px" placeholder="Insert Process Level" name="c5_process_lvl" id="c5_process_lvl" value="{{old('c5_process_lvl')}}">
+                            </div>
                         </div>
-                        <input class="form-control form-control-sm" type="text" style="width :120px" placeholder="Insert Process Level" name="c5_process_lvl" id="c5_process_lvl" value="{{old('c5_process_lvl')}}">
+                        <span class="close btnClose">&times;</span>
                     </div>
-                </div>
                 @endif
                 @if($template->template[strtolower($_GET['kategori'])]['accordion5']['c5_resolution']['status'] == 'active')
-                <div class="col-xl-6">
-                    <div class="form-inline">
-                        <div class="form-control-label mr-3" data-toggle="tooltip" title="Resolusi data">
-                            <?php echo __('lang.resolution'); ?>
+                    <div class="row sortIt">
+                        <div class="col-xl-6">
+                            <div class="form-inline">
+                                <div class="form-control-label mr-3" data-toggle="tooltip" title="Resolusi data">
+                                    <?php echo __('lang.resolution'); ?>
+                                </div>
+                                <input class="form-control form-control-sm sortable" type="text" style="width :100px" placeholder="0.0" name="c5_resolution" id="c5_resolution" value="{{old('c5_resolution')}}">
+                                <div class="form-control-label ml-2">
+                                    meter
+                                </div>
+                            </div>
                         </div>
-                        <input class="form-control form-control-sm" type="text" style="width :100px" placeholder="0.0" name="c5_resolution" id="c5_resolution" value="{{old('c5_resolution')}}">
-                        <div class="form-control-label ml-2">
-                            meter
-                        </div>
+                        <span class="close btnClose">&times;</span>
                     </div>
-                </div>
                 @endif
             </div>
         </div>

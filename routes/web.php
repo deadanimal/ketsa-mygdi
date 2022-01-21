@@ -162,6 +162,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/landing_mygeo','UserController@show');
     Route::get('/mygeo_profil','UserController@show');
+    
+    Route::post('/simpan_metadata_template','MetadataController@simpan_metadata_template');
 
     Route::get('/lihat_permohonan/{id}', 'DataAsasController@tambah')->name('tambah.permohonan');
     Route::get('/mohon_data', 'DataAsasController@mohon_data');

@@ -89,7 +89,7 @@
                                         <textarea class="form-control form-control-sm mt-3" cols="30"
                                             placeholder="Nama dan Alamat"
                                             rows="6">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
-                                                                                                                                                </textarea>
+                                                                                                                                                    </textarea>
                                         <br>
                                         {{-- <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
                                             placeholder="Tajuk Surat Balasan Permohonan"
@@ -197,7 +197,7 @@
                 placeholder: 'Kandungan ...',
                 theme: 'snow',
             });
-            quill_surat_balasan.root.innerHTML = `{!! !is_null($surat) ? $surat_template : '' !!}`;
+            quill_surat_balasan.root.innerHTML = `{!! !is_null($surat->content) ? $surat->content : $surat_template !!}`;
         });
     </script>
 
