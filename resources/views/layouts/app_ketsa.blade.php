@@ -277,7 +277,7 @@
                                     <a class="text-light" href="{{ url('/penafian') }}">PENAFIAN</a>
                                     <br>
                                     <br>
-                                    <br> Hakcipta Terpelihara © 2021. Pusat Geospatial Malaysia.
+                                    <br> Hakcipta Terpelihara © 2021. Pusat Geospatial Negara.
                                     <br>
                                 </div>
                             </div>

@@ -13,6 +13,11 @@
             text-align: justify
         }
 
+        .ql-container,
+        .ql-editor {
+            height: 800px;
+        }
+
     </style>
 
     <!-- Content Wrapper. Contains page content -->
@@ -40,11 +45,7 @@
                             </nav>
                         </div>
                         <div class="col-lg-6 col-5 text-right">
-                            <form action="{{ url('api/dokumen/surat_balasan') }}" method="POST" target="_blank">
-                                @csrf
-                                <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                <button type=submit class="btn btn-sm btn-primary mt-2">Cetak PDF</button>
-                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -76,7 +77,7 @@
                                             <div class="form-inline">
                                                 Rujukan :
                                                 <input type="text" class="form-control form-control-sm ml-2 w-100"
-                                                    name="no_rujukan" value="KeTSA 606-4/3/2 Jld.13 (1q)">
+                                                    name="no_rujukan" value="{{ $surat->no_rujukan }}">
                                                 <input type="hidden" name="date_mohon" value="{{ $permohonan->date }}">
                                             </div>
                                             <div class="form-inline">
@@ -84,93 +85,55 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p align="justify" class="mx-6">
+                                    <div align="justify" class="mx-5">
                                         <textarea class="form-control form-control-sm mt-3" cols="30"
-                                            placeholder="Nama dan Alamat" rows="10">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
-                                                                            </textarea>
-
-
-
-                                        Tuan/Puan,<br>
-                                        <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
+                                            placeholder="Nama dan Alamat"
+                                            rows="6">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
+                                                                                                                                                                </textarea>
+                                        <br>
+                                        {{-- <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
                                             placeholder="Tajuk Surat Balasan Permohonan"
-                                            value="{{ $surat->tajuk_surat }}">
-
+                                            value="{{ $surat->tajuk_surat }}"> --}}
+                                        <label class="form-control-label" for="">Kandungan Surat Balasan</label>
                                         <input type="hidden" name="id_penyataan_privasi"
                                             value="{{ !is_null($surat->content) ? $surat->content : '' }}">
                                         <input type="hidden" name="content_surat_balasan" id="content_surat_balasan">
-                                    <div id="content_surat_balasan_input"></div>
+                                        <div id="content_surat_balasan_input" style="width:100%;"></div>
 
-                                    {{-- <span class="form-inline">Dengan segala hormatnya merujuk kepada surat tuan/puan
-                                        <i class="mx-2"> JPBD.Tr 1/1572/8({{ $permohonan->id }}) </i>
-                                        <input type="hidden" class="form-control form-control-sm col-3 mx-1"
-                                            name="no_rujukan_mohon" value="JPBD.Tr 1/1572/8({{ $permohonan->id }})">
-                                        bertarikh
-                                        <span
-                                            class="mx-2">{{ Carbon\Carbon::parse($permohonan->date)->format('d M Y') }}</span>
-                                        mengenai perkara di atas.</span><br><br>
+                                    </div>
+                                    <br>
+                                    {{-- <div class="mx-7">{!! $surat->content !!}</div> --}}
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                            <input type="hidden" name="id" value="{{ $permohonan->id }}">
 
-                                    2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan
-                                    permohonan data geospatial terperingkat dan tiada halangan atas permohonan tersebut.
-                                    Senarai data yang dibekalkan adalah seperti <span class="text-bold">Lampiran
-                                        1</span>. Walau bagaimanapun, untuk
-                                    permohonan metadata pula, pihak tuan/puan boleh melayari aplikasi MyGDI Explorer
-                                    untuk mendapatkan informasi yang lebih terperinci
-                                    <span class="text-bold">https://www.mygeoportal.gov.my/node/173.</span>
-                                    <br><br>
-
-                                    3. Untuk makluman tuan/puan, penggunaan data ini adalah terikat dengan Pekeliling Am
-                                    Bil 1/2007: Pekeliling Arahan Keselamatan Terhadap Dokumen Geospatial Terperingkat,
-                                    Akta Rahsia Rasmi 1972 dan Surat Pekeliling Am Bil 1 Tahun 1997 : Peraturan
-                                    Pemeliharaan Rekod-Rekod Kerajaan. <br><br>
-
-                                    4. Pihak tuan/puan boleh melayari Aplikasi MyGDI Data Services di
-                                    <span class="text-bold">https://mygos.mygeoportal.gov.my/myservices</span> bagi
-                                    mendapatkan paparan data asas GDC
-                                    yang boleh dikongsi antara agensi kerajaan melalui program MyGDl. Permohonan untuk
-                                    mendapatkan capaian ke aplikasi ini boleh dihantar kepada pihak PGN melalui emel
-                                    <span class="text-bold">pgn.ktotQketsa.gov.mv.</span> <br><br>
-
-                                    5. Sebarang pertanyaan mengenai kesahihan dan ketepatan data perlulah dirujuk kepada
-                                    Agensi Pembekal Data (APD) yang berkenaan. Penggunaan data ini selain daripada
-                                    tujuan asal yang dimohon perlulah mendapat kebenaran daripada pihak APD dan PGN.
-                                    <br><br>
-
-                                    6. Mohon kerjasama pihak tuan/puan untuk melengkapkan Borang Pengesahan Penerimaan
-                                    Data Geospatial seperti di <span class="text-bold">Lampiran 2</span> dan Borang
-                                    Penilaian Perkongsian Data Melalui
-                                    MyGDI seperti di <span class="text-bold">Lampiran 3</span> dan dikembalikan
-                                    semula
-                                    kepada pihak PGN dalam tempoh
-                                    dua minggu dari tarikh surat ini. Sekiranya ada sebarang pertanyaan, sila hubungi
-                                    Puan Normala Binti Mohamed Solehhin di talian 03-8886 1193 (normala@ketsa.gov.my).
-                                    <br><br><br>
+                                            @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
+                                                <button id="btn_submit" type="button"
+                                                    class="btn btn-primary float-right">Simpan</button>
+                                            @endif
 
 
-                                    Sekian terima kasih.
-                                    <br><br><br>
-                                    <i> **Ini adalah surat cetakan komputer, tidak perlu tandatangan**</i> --}}
-
-                                    </p>
-
-                                    <div class="mx-7">{!! $surat->content !!}</div>
-
+                                </form>
+                                <form action="{{ url('api/dokumen/surat_balasan') }}" method="POST" target="_blank">
+                                    @csrf
                                     <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                    <input type="hidden" name="id" value="{{ $permohonan->id }}">
-
-                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
-                                        <button id="btn_submit" type="button"
-                                            class="btn btn-primary float-right">Simpan</button>
-                                    @endif
+                                    <button type=submit class="btn btn-default float-right mx-2">Cetak PDF</button>
                                 </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </div>
+    </section>
 
     </div>
+
+
+
     <script>
         $(document).ready(function() {
             $(document).on("click", "#btn_submit", function() {
@@ -184,7 +147,6 @@
                     toolbar: [
                         ['bold', 'italic', 'underline', 'strike'], // toggled buttons
                         ['blockquote', 'code-block'],
-
                         [{
                             'header': 1
                         }, {
@@ -215,12 +177,13 @@
                         [{
                             'header': [1, 2, 3, 4, 5, 6, false]
                         }],
-
                         [{
-                            'color': []
-                        }, {
-                            'background': []
-                        }], // dropdown with defaults from theme
+                                'color': []
+                            },
+                            {
+                                'background': []
+                            }
+                        ], // dropdown with defaults from theme
                         [{
                             'font': []
                         }],
@@ -234,9 +197,9 @@
                 placeholder: 'Kandungan ...',
                 theme: 'snow',
             });
-            quill_surat_balasan.root.innerHTML = '{!! !is_null($surat->tajuk_surat) ? $surat->content : '' !!}';
-
+            quill_surat_balasan.root.innerHTML = `{!! !is_null($surat->content) ? $surat->content : $surat_template !!}`;
         });
     </script>
+
 
 @stop

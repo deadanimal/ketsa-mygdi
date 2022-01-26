@@ -71,7 +71,7 @@
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
                                             <?php $count = 1; ?>
-                                            @if (Auth::user()->name !== $permohonan->assign_admin)
+                                            @if (Auth::user()->name == $permohonan->assign_admin)
                                                 <tr>
                                                     <td>{{ $count }}</td>
                                                     <td>{{ $permohonan->name }}</td>
@@ -147,8 +147,7 @@
                                                     <td>
                                                         <input class="form-control form-control-sm kiraHarga"
                                                             placeholder="Saiz Data" id="size_{{ $data->id }}"
-                                                            type="number" step="0.01" name="saiz_data_{{ $data->id }}"
-                                                            value="{{ $data->saiz_data }}"
+                                                            type="number" step="0.01" value="{{ $data->saiz_data }}"
                                                             data-permohonanid="{{ $permohonan->id }}"
                                                             data-hargadata="{{ $data->harga_data }}">
                                                         <label class="ml-2">× RM {{ $data->harga_data }}
