@@ -99,20 +99,26 @@
             color: black
         }
 
-        td,
+        /* td,
         th {
             font-size: 14px;
             width: fit-content;
             padding: 8px 15px;
             max-width: 550px !important;
+        } */
+
+        .badge {
+            color: black !important;
         }
 
         tr:nth-child(even) {
             /* background-color: #dddddd; */
         }
-        html{
+
+        html {
             font-size: 110%;
         }
+
     </style>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

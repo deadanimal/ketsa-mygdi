@@ -4,9 +4,9 @@
 
     <style>
         /* .ftest {
-            display: inline;
-            width: auto;
-        } */
+                                display: inline;
+                                width: auto;
+                            } */
 
     </style>
 
@@ -175,10 +175,11 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-control-label mr-2">Pautan Data </label>
-                                            <?php $res = json_decode($permohonan->proses_datas->pautan_data);
-                                            $i = 0;
+                                            <?php
+                                            $res = json_decode($permohonan->proses_datas->pautan_data);
                                             $firstURL = $res ? $res['0'] : '';
-                                            $firstline = true; ?>
+                                            $firstline = true;
+                                            $i = 0; ?>
 
                                             <i id="error" class="text-warning float-right" style="font-size: 11px"></i>
                                             <div class="d-flex mb-2">
@@ -238,6 +239,25 @@
                     </div>
                 </div>
             </div>
+
+            <script type="text/javascript">
+                var i = {{ $i }};
+
+                function addPautanData() {
+                    d = document.getElementById("pautan_datas").value;
+                    $(".dynamicAddPautan").append(
+                        `<span class="d-flex mb-2"><input type="text" name="pautan_data[` + i +
+                        `]" class="form-control form-control-sm mr-2"><button type="button" class="btn btn-outline-warning btn-sm remove-input-field"><i class="fas fa-trash"></i>
+                    </button></span>`
+                    );
+                    ++i;
+
+                }
+                $(document).on('click', '.remove-input-field', function() {
+                    --i;
+                    $(this).parents('span').remove();
+                });
+            </script>
 
             <script>
                 $(document).ready(function() {
@@ -310,24 +330,6 @@
                         }
                     }
                 });
-            });
-        </script>
-        <script type="text/javascript">
-            var i = {{ $i }};
-
-            function addPautanData() {
-                d = document.getElementById("pautan_datas").value;
-                $(".dynamicAddPautan").append(
-                    `<span class="d-flex mb-2"><input type="text" name="pautan_data[` + i +
-                    `]" class="form-control form-control-sm mr-2"><button type="button" class="btn btn-outline-warning btn-sm remove-input-field"><i class="fas fa-trash"></i>
-                    </button></span>`
-                );
-                ++i;
-
-            }
-            $(document).on('click', '.remove-input-field', function() {
-                --i;
-                $(this).parents('span').remove();
             });
         </script>
     @stop

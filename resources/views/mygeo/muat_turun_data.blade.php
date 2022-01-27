@@ -71,33 +71,36 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
+                                            <?php
+                                            $inTempohUrl = 0;
+                                            $currentDate = date('d-m-Y');
+                                            $explodedTempohUrl = explode(' - ', $permohonan->proses_datas->tempoh_url);
+                                            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+                                            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+                                            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                                                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                                                    $inTempohUrl = 1;
+                                                } else {
+                                                    $inTempohUrl = 0;
+                                                }
+                                            }
+                                            $res = json_decode($permohonan->proses_datas->pautan_data);
+                                            ?>
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>
-                                                    @if (!empty($permohonan->proses_datas->pautan_data))
+                                                    @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1)
                                                         <span class="badge badge-pill badge-success">Data Tersedia</span>
+                                                    @elseif(!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0)
+                                                        <span class="badge badge-pill badge-info">Tamat Tempoh</span>
                                                     @else
                                                         <span class="badge badge-pill badge-danger">Dalam Proses</span>
                                                     @endif
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <?php
-                                                    $inTempohUrl = 0;
-                                                    $currentDate = date('d-m-Y');
-                                                    $explodedTempohUrl = explode(' - ', $permohonan->proses_datas->tempoh_url);
-                                                    $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-                                                    $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-                                                    if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                                                        if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                                                            $inTempohUrl = 1;
-                                                        } else {
-                                                            $inTempohUrl = 0;
-                                                        }
-                                                    }
-                                                    $res = json_decode($permohonan->proses_datas->pautan_data);
-                                                    ?>
+
                                                     @if (is_array($res) && !empty($res))
                                                         @foreach ($res as $url)
                                                             <a @if (!empty($url) && $inTempohUrl == 1) data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
@@ -152,10 +155,12 @@
             var pemohonid = $(this).data('pemohonid');
             var acceptance = $(this).data('acceptance');
 
+            console.log(url);
             if (acceptance == '1') {
                 window.open(url, '_blank');
                 window.location.reload();
             } else {
+
                 swal({
                     title: "Akuan Penerimaan Data",
                     type: "warning",
