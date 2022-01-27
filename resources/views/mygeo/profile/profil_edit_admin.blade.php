@@ -156,7 +156,9 @@
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" name="phone_pejabat" type="number" value="{{ $user->phone_pejabat }}" />
                                         </div>
-                                        <div class="col-2">
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
                                             <label class="form-control-label mr-4" for="phone_bimbit">
                                                 Telefon Bimbit
                                             </label><label class="float-right">:</label>
@@ -192,6 +194,13 @@
                                                     <div class="col-10"><input type="checkbox" class="form-check-input mr-4" name="peranan[]" value="<?php echo $p->name; ?>"><?php echo $p->name; ?></div>
                                                     <?php
                                                 }
+                                            }
+                                            if(in_array("Penerbit Metadata",$urs) || in_array("Pengesah Metadata",$urs)){
+                                                
+                                            }else{
+                                                ?>
+                                                <script>$('.divBahagian').hide();</script>    
+                                                <?php
                                             }
                                             ?>
                                         </div>
@@ -285,7 +294,7 @@ $(document).ready(function(){
         if(agensi_organisasi == ""){
             msg = msg + "Sila pilih agensi / organisasi\r\n\r\n";
         }
-        @if(!$user->hasRole('Pemohon Data'))
+        @if($user->hasRole('Pengesah Metadata') || $user->hasRole('Penerbit Metadata'))
         if(bahagian == ""){
             msg = msg + "Sila pilih bahagian\r\n\r\n";
         }
@@ -319,7 +328,8 @@ $(document).ready(function(){
     });
     $('#agensi_organisasi').change(function() {
         var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
-
+        
+        @if($user->hasRole('Pengesah Metadata') || $user->hasRole('Penerbit Metadata'))
         $.ajax({
             method: "POST",
             url: "{{ url('get_bahagian') }}",
@@ -339,6 +349,7 @@ $(document).ready(function(){
                 });
             }
         });
+        @endif
     });
 
     $('#sektor').val('<?php echo $user->sektor; ?>').change();

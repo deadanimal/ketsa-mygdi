@@ -120,7 +120,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="row mb-2 divBahagian">
+                                        <div class="row mb-2 divBahagian" style="display:none;">
                                             <div class="col-12">
                                                 <label class="form-control-label">Bahagian</label>
                                                 <select name="bahagian" id="bahagian" class="form-control form-control-sm">
@@ -535,7 +535,7 @@
         $('#peranan').change(function() {
             var per = $(this).val();
             
-            if(per == "Pemohon Data"){
+            if(per == "Pemohon Data" || per == "Pentadbir Metadata" || per == "Pentadbir Data"){
                 $(".divBahagian").hide();
             }else{
                 $(".divBahagian").show();
