@@ -54,7 +54,7 @@ class DataAsasController extends Controller
 
     public function tambah($id)
     {
-        #return $id;
+        // if(Auth::user()){}
         $user = User::where(["id" => Auth::user()->id])->get()->first();
         $users_all = User::where(['disahkan' => 1])->orderBy('name')->get();
         $pentadbirdata = [];
@@ -69,8 +69,8 @@ class DataAsasController extends Controller
         $senarai_data = SenaraiData::where('status','Tersedia')->distinct('subkategori')->get();
         $lapisandata = DB::table('senarai_data')
                                 ->where('status','Tersedia')
-                                ->select('subkategori','lapisan_data')
-                                ->groupBy('subkategori','lapisan_data')
+                                ->select('subkategori','lapisan_data','kelas')
+                                ->groupBy('subkategori','lapisan_data','kelas')
                                 ->get();
         $kategori_senarai_data  = SenaraiData::where('status','Tersedia')->distinct('kategori')->get();
         $permohonan = MohonData::where('id', $id)->first();
@@ -354,10 +354,8 @@ class DataAsasController extends Controller
         $id = $request->permohonan_id;
         $valid_surat = SuratBalasan::where([
             ["permohonan_id","=", $request->permohonan_id],])
-            ->whereNotNull('tajuk_surat')
             ->whereNotNull('no_rujukan')
-            ->whereNotNull('no_rujukan_mohon')
-            ->whereNotNull('date_mohon')
+            ->whereNotNull('content')
             ->get();
 
 
@@ -513,41 +511,7 @@ class DataAsasController extends Controller
         return view('mygeo.senarai_data', compact('senarai_data','kategori_sd','subkategori_sd'));
     }
 
-    public function store_senarai_data(Request $request)
 
-    {
-        $senarai_data = new SenaraiData();
-        $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
-        $valid_kod = SenaraiData::where(["kod" => $request->kod])->first();
-
-        $check_exist = SenaraiData::where([
-            ['kategori','=',$kategori_sd->name],
-            ['subkategori','=',$request->subkategori],
-            ['lapisan_data','=',$request->lapisan_data],
-            ['kod','=',$request->kod]
-        ])->first();
-
-        if($check_exist){
-            // dd($check_exist);
-            return redirect('senarai_data')->with('warning', 'Senarai Data Telah Pun Wujud');
-        } else {
-            $senarai_data->kategori = $kategori_sd->name;
-            $senarai_data->subkategori = $request->subkategori;
-            $senarai_data->lapisan_data = $request->lapisan_data;
-            $senarai_data->data_id = $request->data_id;
-            $senarai_data->kod = $request->kod;
-            $senarai_data->save();
-
-            $at = new AuditTrail();
-            $at->path = url()->full();
-            $at->user_id = Auth::user()->id;
-            $at->data = 'Create';
-            $at->save();
-            return redirect('senarai_data')->with('success', 'Senarai Data Baru Telah Ditambah');
-
-        }
-
-    }
 
     public function store_kategori_senarai_data(Request $request)
     {
@@ -598,6 +562,68 @@ class DataAsasController extends Controller
         }else {
 
             return redirect('senarai_data')->with('warning', 'Sub-Kategori Senarai Data Telah Wujud !');
+        }
+
+    }
+
+    public function store_senarai_data(Request $request)
+    {
+        $senarai_data = new SenaraiData();
+        $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
+        $valid_kod = SenaraiData::where(["kod" => $request->kod])->first();
+
+        $check_exist = SenaraiData::where([
+            ['kategori','=',$kategori_sd->name],
+            ['subkategori','=',$request->subkategori],
+            ['lapisan_data','=',$request->lapisan_data],
+            ['kod','=',$request->kod]
+        ])->first();
+
+        if($check_exist){
+            return redirect('senarai_data')->with('warning', 'Senarai Data Telah Pun Wujud');
+        } else {
+            if(empty($valid_kod)){
+                $senarai_data->kategori = $kategori_sd->name;
+                $senarai_data->subkategori = $request->subkategori;
+                $senarai_data->lapisan_data = $request->lapisan_data;
+                $senarai_data->data_id = $request->data_id;
+                $senarai_data->kod = $request->kod;
+                $senarai_data->save();
+
+                $at = new AuditTrail();
+                $at->path = url()->full();
+                $at->user_id = Auth::user()->id;
+                $at->data = 'Create';
+                $at->save();
+                return redirect('senarai_data')->with('success', 'Senarai Data Baru Telah Ditambah');
+            } else {
+                return redirect('/senarai_data')->with('warning', 'Kod Senarai Data Telah Wujud');
+            }
+        }
+
+    }
+
+    public function check_senarai_data(Request $request)
+    {
+        $kategori_sd = KategoriSenaraiData::where(['id' => $request->kategori])->first();
+        $valid_kod = SenaraiData::where(["kod" => $request->kod])->first();
+
+        $check_exist = SenaraiData::where([
+            ['kategori','=',$kategori_sd->name],
+            ['subkategori','=',$request->subkategori],
+            ['lapisan_data','=',$request->lapisan_data],
+            ['kod','=',$request->kod]
+        ])->first();
+
+        if($check_exist){
+            return ['message'=> 'Data Wujud'];
+        } else {
+            if(empty($valid_kod)){
+                // return ['message'=> 'Kod Tersedia'];
+            } else {
+                return ['message'=> 'Kod Wujud'];
+            }
+            return ['message'=> 'Data Tersedia'];
         }
 
     }

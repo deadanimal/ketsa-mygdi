@@ -146,7 +146,7 @@
                                                     <td>{{ $data->kawasan_data }}</td>
                                                     <td>
                                                         <input class="form-control form-control-sm kiraHarga"
-                                                            placeholder="Saiz Data" id="size_{{ $data->id }}"
+                                                            placeholder="Saiz Data" name="saiz_data_{{ $data->id }}"
                                                             type="number" step="0.01" value="{{ $data->saiz_data }}"
                                                             data-permohonanid="{{ $permohonan->id }}"
                                                             data-hargadata="{{ $data->harga_data }}">
@@ -175,19 +175,39 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-control-label mr-2">Pautan Data </label>
+                                            <?php $res = json_decode($permohonan->proses_datas->pautan_data);
+                                            $i = 0;
+                                            $firstURL = $res['0'];
+                                            $firstline = true; ?>
 
                                             <i id="error" class="text-warning float-right" style="font-size: 11px"></i>
                                             <div class="d-flex mb-2">
                                                 <input class="form-control form-control-sm mr-2" name="pautan_data[0]"
                                                     placeholder="Masukkan Pautan Data" type="text" id="pautan_datas"
-                                                    value="{{ $permohonan->proses_datas->pautan_data }}">
+                                                    value="{{ $firstURL }}">
 
                                                 <button type="button" class="btn btn-sm btn-outline-primary"
                                                     onclick="addPautanData()"><i class='fas fa-plus pb-0 mb-0'></i></button>
                                             </div>
 
-
                                             <div class="form-group dynamicAddPautan" id="dynamicAddPautan">
+                                                @if (is_array($res) && !empty($res))
+                                                    @foreach ($res as $url)
+                                                        @if (!$firstline)
+                                                            <span class="d-flex mb-2"><input type="text"
+                                                                    name="pautan_data[{{ $i }}]"
+                                                                    value="{{ $url }}"
+                                                                    class="form-control form-control-sm mr-2"><button
+                                                                    type="button"
+                                                                    class="btn btn-outline-warning btn-sm remove-input-field"><i
+                                                                        class="fas fa-trash"></i>
+                                                                </button></span>
+                                                        @endif
+                                                        <?php $i++;
+                                                        $firstline = false; ?>
+                                                    @endforeach
+                                                @endif
+
                                             </div>
 
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
@@ -290,24 +310,21 @@
             });
         </script>
         <script type="text/javascript">
-            var i = 0;
+            var i = {{ $i }};
 
             function addPautanData() {
                 d = document.getElementById("pautan_datas").value;
-                ++i;
                 $(".dynamicAddPautan").append(
                     `<span class="d-flex mb-2"><input type="text" name="pautan_data[` + i +
                     `]" class="form-control form-control-sm mr-2"><button type="button" class="btn btn-outline-warning btn-sm remove-input-field"><i class="fas fa-trash"></i>
                     </button></span>`
                 );
-
-                console.log('masuk');
-
-                $(document).on('click', '.remove-input-field', function() {
-                    --i;
-                    $(this).parents('span').remove();
-                });
+                ++i;
 
             }
+            $(document).on('click', '.remove-input-field', function() {
+                --i;
+                $(this).parents('span').remove();
+            });
         </script>
     @stop

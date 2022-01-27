@@ -76,11 +76,10 @@
                                                         <span class="badge badge-pill badge-warning">Dalam Proses</span>
                                                     @elseif($permohonan->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                    @elseif($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 1)
+                                                        <span class="badge badge-pill badge-success">Selesai</span>
                                                     @elseif($permohonan->status == '3')
                                                         <span class="badge badge-pill badge-primary">Data Tersedia</span>
-                                                    @elseif($permohonan->status == '3' &&
-                                                        $permohonan->berjayaMuatTurunStatus == 1)
-                                                        <span class="badge badge-pill badge-success">Selesai</span>
                                                     @elseif($permohonan->status == '0')
                                                         <span class="badge badge-pill badge-info">Baru</span>
                                                     @endif

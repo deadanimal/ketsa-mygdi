@@ -201,6 +201,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/muat_turun_data','DataAsasController@muat_turun_data');
     Route::get('/senarai_data','DataAsasController@senarai_data');
     Route::post('/simpan_senarai_data', 'DataAsasController@store_senarai_data');
+    Route::post('/check_senarai_data', 'DataAsasController@check_senarai_data');
     Route::post('/kemaskini_senarai_data', 'DataAsasController@update_senarai_data');
     Route::post('/delete_senarai_data', 'DataAsasController@delete_senarai_data');
 

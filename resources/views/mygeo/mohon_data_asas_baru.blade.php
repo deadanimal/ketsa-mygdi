@@ -325,11 +325,13 @@
                                                                         <th>TINDAKAN</th>
                                                                     @endif
                                                                 </tr>
+
                                                             </thead>
                                                             <tbody>
                                                                 @foreach ($skdatas as $sk)
-                                                                    <tr>
-                                                                        <td>{{ $loop->iteration }}</td>
+                                                                    <tr class="">
+                                                                        <td>{{ $loop->iteration }}# {{ $sk->kelas }}
+                                                                        </td>
                                                                         <td>{{ $sk->lapisan_data }}</td>
                                                                         <td>{{ $sk->subkategori }}</td>
                                                                         <td>{{ $sk->kategori }}</td>
@@ -455,13 +457,7 @@
                                                                         </td>
 
                                                                     </tr>
-                                                                @elseif (Auth::user()->hasRole([
-    'Pentadbir Data',
-    'Super
-                                                                    Admin',
-    'Pentadbir
-                                                                    Aplikasi',
-]))
+                                                                @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
                                                                     @if ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar')
                                                                         <tr>
                                                                             <td>*</td>
@@ -942,6 +938,8 @@
                                                     @endif
                                                 @endforeach
                                             </select>
+                                            <br>
+                                            <div class="kelasData"></div>
                                         </div>
 
                                         <div class="form-group">
@@ -1164,13 +1162,13 @@
             sdata.forEach(element => {
                 if (element['subkategori'] == d) {
                     senarai_append += `<option value="` + element['lapisan_data'] + `">` + element['lapisan_data'] +
-                        `</option>`
+                        ` ` + ((element['kelas']) ? `- ` + element['kelas'] : '') + `</option>`
                 }
             });
 
             $("#dynamicAddRemove2").empty();
             $("#dynamicAddRemove2").append(`<label class="form-control-label" for="lapisan_data">Lapisan Data</label>
-                                                <select name="lapisan_data" class="form-control" autofocus><option selected disabled>Pilih</option>'
+                                                <select name="lapisan_data" class="form-control " autofocus><option selected disabled>Pilih</option>'
 
                                                     ` + senarai_append + `
 

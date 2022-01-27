@@ -14,6 +14,7 @@
             background-color: #b3d1ff;
         }
 
+
     </style>
 
     <!-- Content Wrapper. Contains page content -->
@@ -45,7 +46,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <br>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -57,7 +57,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-8">
                                         <h3 class="mb-0">Senarai Data</h3>
-                                        </div>
+                                    </div>
 
                                     <div class="col-4 text-right">
                                         <div class="btn-group btn-group-sm" role="group">
@@ -85,7 +85,8 @@
                                             <div class="row align-items-center">
                                                 <div class="col-12" data-toggle="collapse"
                                                     href="#collapse{{ $ksd->id }}">
-                                                    <h3 class="heading mb-0">{{$loop->iteration}}. {{ $ksd->name }}</h3>
+                                                    <h3 class="heading mb-0">{{ $loop->iteration }}. {{ $ksd->name }}
+                                                    </h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -325,8 +326,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-control-label">Kategori</label>
-                                    <select class="form-control form-control-sm" name="kategori" id="kategori_s"
-                                        onchange="selectKategori()">
+                                    <select class="form-control form-control-sm kategori checkData" name="kategori"
+                                        id="kategori_s" onchange="selectKategori()">
                                         <option selected disabled>Pilih</option>
                                         @foreach ($kategori_sd as $kategori)
                                             <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
@@ -337,13 +338,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Kod (MS1759)</label>
-                                    <input type="text" class="form-control form-control-sm" name="kod" value="">
+                                    <input type="text" class="form-control form-control-sm kod checkData" name="kod"
+                                        value="">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label">Lapisan Data</label>
-                                    <input type="text" class="form-control form-control-sm" name="lapisan_data" value="">
+                                    <input type="text" class="form-control form-control-sm lapisandata checkData"
+                                        name="lapisan_data" value="">
                                 </div>
+                                <div style="font-size: 12px;" class="infoData"></div>
 
                                 <button class="btn btn-success float-right mt-4" type="submit">
                                     <span class="text-white">Tambah</span>
@@ -362,7 +366,7 @@
             $(document).ready(function() {
                 $("#senDataTable{{ $ksd->id }}").DataTable({
                     "dom": "<'row'<'col-sm-3'i> <'col-sm-6 text-center' ><'col-sm-3'f >> " +
-                    "<'row'<'col-sm-12'tr>>" +"<'row mt-4'<'col-sm-5'l> <'col-sm-7'p >> ",
+                        "<'row'<'col-sm-12'tr>>" + "<'row mt-4'<'col-sm-5'l> <'col-sm-7'p >> ",
                     // "scrollX": true,
                     "ordering": false,
                     "responsive": true,
@@ -385,6 +389,49 @@
             });
         </script>
     @endforeach
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', '.checkData', function() {
+                var kod = $('.kod').val();
+                var kategori = $('.kategori').val();
+                var subkategori = $('.subkategori').val();
+                var lapisan_data = $('.lapisandata').val();
+                console.log(kod, kategori, subkategori, lapisan_data);
+
+                if (kod && kategori && subkategori && lapisan_data) {
+
+                    $('.infoData').html('<span></span>');
+                    $.ajax({
+                        method: "POST",
+                        url: "check_senarai_data",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "kategori": kategori,
+                            "subkategori": subkategori,
+                            "lapisan_data": lapisan_data,
+                            "kod": kod
+                        },
+                    }).done(function(res) {
+                        console.log(res['message']);
+                        let x = res['message'];
+                        var msg;
+                        if (x == 'Data Wujud') {
+                            msg =
+                                '<span class="text-danger"><i class="fa fa-exclamation-circle"></i> Senarai Data ini telah pun wujud</span>';
+                        } else if (x == 'Kod Wujud') {
+                            msg =
+                                '<span class="text-danger"><i class="fa fa-exclamation-circle"></i> Kod Senarai Data ini telah pun wujud</span>'
+                        } else if (x == 'Data Tersedia') {
+                            msg =
+                                '<span class="text-success"><i class="fa fa-check-circle"></i> Senarai Data ini tersedia untuk ditambah</span>'
+                        }
+                        $('.infoData').html(msg);
+                    });
+                }
+
+            });
+        });
+    </script>
 
     <script>
         $(document).on("click", ".btnDelete", function() {
@@ -420,7 +467,7 @@
 
             $("#dynamicAddRemove").empty();
             $("#dynamicAddRemove").append(`<label class="form-control-label" for="subkategori">Sub-Kategori</label>
-                                                <select name="subkategori" id="subkategori" class="form-control form-control-sm" onchange="selectSubKategori()" autofocus><option selected disabled>Pilih</option>'
+                                                <select name="subkategori" id="subkategori" class="form-control form-control-sm subkategori checkData" onchange="selectSubKategori()"><option selected disabled>Pilih</option>'
 
                                                     ` + senarai_append + `
 
