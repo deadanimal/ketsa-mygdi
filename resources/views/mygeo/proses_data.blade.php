@@ -3,10 +3,10 @@
 @section('content')
 
     <style>
-        .ftest {
+        /* .ftest {
             display: inline;
             width: auto;
-        }
+        } */
 
     </style>
 
@@ -160,7 +160,7 @@
                                     </tbody>
                                 </table>
 
-                                <div class="row">
+                                <div class="row mt-2">
                                     <div class="col-xl-12">
                                         <div class="form-inline float-right">
                                             <label class="form-control-label mr-2">Jumlah Harga (RM)</label>
@@ -215,22 +215,23 @@
                                                 class="form-control form-control-sm float-right tempohMuatTurun"
                                                 name="tempoh">
                                         </div>
+                                        <div class="row">
+                                            <div class="col-6"></div>
+                                        </div>
                                         <label class="form-control-label mt-4 mr-2">Surat Balasan Permohonan </label>
                                         <a href="{{ url('surat_balasan/' . $permohonan->id) }}"
                                             class="btn btn-sm btn-danger mb-2">
                                             Kemaskini
                                         </a>
                                     </div>
+                                </div>
+                                <div class="row px-3 text-right">
+                                    <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
 
-                                    <div class="col-xl-6 pt-9 text-right">
-                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-
-                                        <input type="hidden" name="id" value="{{ $permohonan->id }}">
-                                        <button class="btn btn-success ml-auto btnValid{{ $permohonan->id }}"
-                                            type="button">
-                                            Hantar
-                                        </button>
-                                    </div>
+                                    <input type="hidden" name="id" value="{{ $permohonan->id }}">
+                                    <button class="btn btn-success ml-auto btnValid{{ $permohonan->id }}" type="button">
+                                        Hantar
+                                    </button>
                                 </div>
                         </div>
                         </form>
@@ -280,8 +281,10 @@
 
                 $('.tempohMuatTurun').daterangepicker({
                     locale: {
-                        format: 'DD-MM-YYYY'
+                        format: 'DD-MM-YYYY',
                     },
+                    opens: 'left',
+                    drops: 'up'
                 });
 
                 $("#table_proses_data").DataTable({
