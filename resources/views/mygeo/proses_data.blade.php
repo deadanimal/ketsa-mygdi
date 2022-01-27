@@ -177,7 +177,7 @@
                                             <label class="form-control-label mr-2">Pautan Data </label>
                                             <?php $res = json_decode($permohonan->proses_datas->pautan_data);
                                             $i = 0;
-                                            $firstURL = $res['0'];
+                                            $firstURL = $res ? $res['0'] : '';
                                             $firstline = true; ?>
 
                                             <i id="error" class="text-warning float-right" style="font-size: 11px"></i>
