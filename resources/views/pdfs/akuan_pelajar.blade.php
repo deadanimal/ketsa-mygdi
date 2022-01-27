@@ -16,7 +16,7 @@
 
     .text-center {
         text-align: center !important;
-        font-size: 18;
+        font-size: 14;
         font-weight: bold;
     }
 
@@ -29,8 +29,8 @@
     }
 
     .mx-6 {
-        margin-left: 30px;
-        margin-right: 30px;
+        margin-left: 50px;
+        margin-right: 50px;
     }
 
     /* Create two equal columns that floats next to each other */

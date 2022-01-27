@@ -64,7 +64,7 @@
                                             <th>NAMA PERMOHONAN</th>
                                             <th>NAMA PEMOHON</th>
                                             <th>KATEGORI</th>
-                                            <th>PENTADBIR DITUGASKAN</th>
+                                            {{-- <th>PENTADBIR DITUGASKAN</th> --}}
                                             <th>TINDAKAN</th>
                                         </tr>
                                     </thead>
@@ -77,7 +77,7 @@
                                                     <td>{{ $permohonan->name }}</td>
                                                     <td>{{ $permohonan->users->name }}</td>
                                                     <td>{{ $permohonan->users->kategori }}</td>
-                                                    <td>{{ $permohonan->assign_admin }}</td>
+                                                    {{-- <td>{{ $permohonan->assign_admin }}</td> --}}
                                                     <td>
                                                         <a href="{{ url('/lihat_permohonan/' . $permohonan->id) }}"
                                                             class="btn btn-sm btn-info text-center"><i

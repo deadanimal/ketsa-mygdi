@@ -728,7 +728,7 @@ class DataAsasController extends Controller
 
         $surat = SuratBalasan::where('permohonan_id', $id)->first();
         $permohonan = MohonData::where('id', $id)->first();
-        $dokumen = DokumenBerkaitan::where(['id'=> $id,'tajuk_dokumen'=>'Surat Permohonan Rasmi'])->first();
+        $dokumen = DokumenBerkaitan::where(['permohonan_id'=> $id,'tajuk_dokumen'=>'Surat Permohonan Rasmi'])->first();
         $dokumen_date = is_null($dokumen)?'[Tarikh Surat]':Carbon::parse($dokumen->date_surat)->format('d M Y');
         $no_ruj = is_null($dokumen)?'[No Rujukan Surat]':$dokumen->no_rujukan;
         $admin = User::where('name',$permohonan->assign_admin)->first();

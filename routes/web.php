@@ -58,6 +58,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/laporan_data_asas', 'LaporanDashboardController@index_laporan_data');
     Route::get('/laporan_metadata', 'LaporanDashboardController@index_laporan_metadata');
+    Route::post('/filter_by_agensi', 'LaporanDashboardController@filter_by_agensi');
+
 
     Route::get('/kemaskini_pengumuman', 'PortalController@edit_pengumuman');
     Route::post('/simpan_pengumuman', 'PortalController@update_pengumuman');
@@ -162,7 +164,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/landing_mygeo','UserController@show');
     Route::get('/mygeo_profil','UserController@show');
-    
+
     Route::post('/simpan_metadata_template','MetadataController@simpan_metadata_template');
 
     Route::get('/lihat_permohonan/{id}', 'DataAsasController@tambah')->name('tambah.permohonan');
@@ -301,4 +303,3 @@ Route::get('lampiran/abstract', function(){return view('tooltips/abstract');});
 Route::get('lampiran/topic_category', function(){return view('tooltips/topic_category');});
 Route::get('lampiran/keyword', function(){return view('tooltips/keyword');});
 Route::get('lampiran/ordering_instruction', function(){return view('tooltips/ordering_instruction');});
-

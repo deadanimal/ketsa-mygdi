@@ -943,15 +943,11 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group">
-
-                                        </div>
 
                                         <div class="form-group">
                                             <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
-                                            <input name="kawasan_data" class="form-control" id="update_kawasan"
+                                            <input name="kawasan_data" class="form-control mb-3" id="update_kawasan"
                                                 value="{{ $sk->kawasan_data }}" />
-
                                             <select class="form-control" id="negeris" name="negeri"
                                                 onchange="selectUpdateNegeri()">
                                                 <option selected disabled>Negeri</option>

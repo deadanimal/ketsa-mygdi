@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AgensiOrganisasi;
 use App\LaporanDashboard;
 use App\MohonData;
 use App\SenaraiKawasanData;
@@ -24,6 +25,7 @@ class LaporanDashboardController extends Controller
     public function index_laporan_data()
     {
         $permohonans = MohonData::get();
+        $agensi =  AgensiOrganisasi::get();
 
         $permohonan_lulus = MohonData::where(['status' => 3])->get();
         $permohonan_kategori = DB::table('users')
@@ -41,7 +43,55 @@ class LaporanDashboardController extends Controller
                                 ->get();
         // dd($permohonan_statistik);
         $permohonan_count = count($permohonans);
-        return view('mygeo.laporan_data_asas', compact('permohonans','permohonan_kategori','permohonan_lulus','permohonan_statistik','permohonan_count'));
+        return view('mygeo.laporan_data_asas', compact('permohonans','permohonan_kategori','permohonan_lulus','permohonan_statistik','permohonan_count','agensi'));
+    }
+
+    public function filter_by_agensi(Request $request){
+      $from = $request->start_date;
+      $to = $request->end_date;
+      if($from != '' && $to != ''){
+        $agensi_mohon = MohonData::whereBetween('created_at', [$from, $to])->get();
+      } else {
+        $agensi_mohon = MohonData::get();
+      }
+
+       if ($agensi_mohon) {
+        $counter = 0;
+        $append_data = [];
+        foreach ($agensi_mohon as $mohon) {
+            if(isset($mohon->users)){
+                if($mohon->users->agensi_organisasi == $request->agensi_id ){
+                    $counter++;
+                    if($mohon->users->hasRole('Pemohon Data')) {
+                        $id = $mohon->users->agensi_organisasi;
+                        $org = AgensiOrganisasi::where('id',$id)->first()->name;
+                    } else {
+                        $org = $mohon->users->agensiOrganisasi->name;
+                    }
+                    $temp = '<tr>
+                    <td>'.$counter.'</td>
+                    <td>'.$mohon->name.'</td>
+                    <td>'.$mohon->users->name.'</td>
+                    <td>'.$org.'</td>
+                    <td>
+                        <a href="lihat_laporan_data/'.$mohon->id.'"
+                            class="btn btn-sm btn-primary">Perincian</a>
+                    </td>
+                </tr>';
+                $append_data[] = $temp;
+                }
+            }
+        }
+        return ['data' => $append_data,
+    'counter' => $counter];
+       }
+
+    }
+
+    public function laporan_data_detail($id)
+    {
+        $permohonan =  MohonData::where('id',$id)->first();
+        return view('mygeo.data_asas_detail', compact('permohonan'));
     }
 
     public function index_laporan_metadata()
@@ -90,20 +140,20 @@ class LaporanDashboardController extends Controller
                                 ->get();
         // dd($permohonan_kategori);
         $permohonan_kategori_count = count($permohonan_kategori);
-        
+
         return view('mygeo.laporan_metadata', compact('metadatas','categories','permohonan_kategori','permohonan_lulus','permohonan_perincian'));
     }
-    
+
     public function laporan_perincian_metadata(){
         //initialize
         $wordTest = new PhpWord();
- 
+
         //add section
         $newSection = $wordTest->addSection();
-        
+
         //add text to section
         $newSection->addText("Laporan Perincian Metadata",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
-        
+
         //set table style
         $tableStyle = array(
             'borderColor' => '006699',
@@ -114,7 +164,7 @@ class LaporanDashboardController extends Controller
         $firstRowStyle = array('bgColor' => '66BBFF');
         //add styles to the document (at this point it is not yet applied. this is similar to linking css)
         $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
-        
+
         //add table to document and apply style created in previous lines
         $table = $newSection->addTable('myTable');
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
@@ -155,13 +205,13 @@ class LaporanDashboardController extends Controller
     public function laporan_bil_metadata_terbit_ikut_agensi(){
         //initialize
         $wordTest = new PhpWord();
- 
+
         //add section
         $newSection = $wordTest->addSection();
-        
+
         //add text to section
         $newSection->addText("Bilangan Keseluruhan Metadata Diterbitkan Mengikut Agensi",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
-        
+
         //set table style
         $tableStyle = array(
             'borderColor' => '006699',
@@ -172,7 +222,7 @@ class LaporanDashboardController extends Controller
         $firstRowStyle = array('bgColor' => '66BBFF');
         //add styles to the document (at this point it is not yet applied. this is similar to linking css)
         $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
-        
+
         //add table to document and apply style created in previous lines
         $table = $newSection->addTable('myTable');
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
@@ -216,7 +266,7 @@ class LaporanDashboardController extends Controller
                     }
                     $table->addCell(1800)->addText(htmlspecialchars($category));
                     //add cell
-                    $table->addCell(1750)->addText(date('d/m/Y',strtotime($met->changedate)));  
+                    $table->addCell(1750)->addText(date('d/m/Y',strtotime($met->changedate)));
                 }
             }
         $objectWriter = \PhpOffice\PhpWord\IOFactory::createWriter($wordTest, 'Word2007');
@@ -230,13 +280,13 @@ class LaporanDashboardController extends Controller
     public function laporan_bil_mohon_lulus(){
         //initialize
         $wordTest = new PhpWord();
- 
+
         //add section
         $newSection = $wordTest->addSection();
-        
+
         //add text to section
         $newSection->addText("Bilangan Metadata Yang Belum Diterbitkan",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
-        
+
         //set table style
         $tableStyle = array(
             'borderColor' => '006699',
@@ -247,7 +297,7 @@ class LaporanDashboardController extends Controller
         $firstRowStyle = array('bgColor' => '66BBFF');
         //add styles to the document (at this point it is not yet applied. this is similar to linking css)
         $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
-        
+
         //add table to document and apply style created in previous lines
         $table = $newSection->addTable('myTable');
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
@@ -298,13 +348,13 @@ class LaporanDashboardController extends Controller
     public function laporan_bil_mohon_ikut_kategori(){
         //initialize
         $wordTest = new PhpWord();
- 
+
         //add section
         $newSection = $wordTest->addSection();
-        
+
         //add text to section
         $newSection->addText("Bilangan Metadata Mengikut Kategori",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
-        
+
         //set table style
         $tableStyle = array(
             'borderColor' => '006699',
@@ -315,7 +365,7 @@ class LaporanDashboardController extends Controller
         $firstRowStyle = array('bgColor' => '66BBFF');
         //add styles to the document (at this point it is not yet applied. this is similar to linking css)
         $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
-        
+
         //add table to document and apply style created in previous lines
         $table = $newSection->addTable('myTable');
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
@@ -330,7 +380,7 @@ class LaporanDashboardController extends Controller
                 $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
 
                 $xml2 = simplexml_load_string($ftestxml2);
-                
+
                 $counter++;
                 $table->addRow();
                 //add cell
@@ -376,13 +426,13 @@ class LaporanDashboardController extends Controller
     public function laporan_stat_mohon_ikut_tahun(){
         //initialize
         $wordTest = new \PhpOffice\PhpWord\PhpWord();
- 
+
         //add section
         $newSection = $wordTest->addSection();
-        
+
         //add text to section
         $newSection->addText("Statistik Penerbitan Metadata Mengikut Tahun/Bulan",array('name'=>'Tahoma','size'=>15,'color'=>'red'));
-        
+
         //set table style
         $tableStyle = array(
             'borderColor' => '006699',
@@ -393,7 +443,7 @@ class LaporanDashboardController extends Controller
         $firstRowStyle = array('bgColor' => '66BBFF');
         //add styles to the document (at this point it is not yet applied. this is similar to linking css)
         $wordTest->addTableStyle('myTable', $tableStyle, $firstRowStyle);
-        
+
         //add table to document and apply style created in previous lines
         $table = $newSection->addTable('myTable');
             $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();

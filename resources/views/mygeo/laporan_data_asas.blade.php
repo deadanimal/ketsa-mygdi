@@ -7,13 +7,45 @@
             display: inline;
             width: auto;
         }
-        th,td{
+
+        th,
+        td {
             width: fit-content;
         }
 
-
-
     </style>
+    <script>
+        $(document).ready(function() {
+            $('.filterBtn').click(function() {
+                var agensi_id = $('.pilihAgensi').val();
+                var start_date = $('.startDate').val();
+                var end_date = $('.endDate').val();
+                console.log(agensi_id, start_date, end_date);
+
+                $.ajax({
+                    method: "POST",
+                    url: "filter_by_agensi",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "agensi_id": agensi_id,
+                        "start_date": start_date,
+                        "end_date": end_date
+                    },
+                }).done(function(res) {
+                    // alert("Status pengguna berjaya diubah.");
+                    console.log(res['data']);
+                    let array = res['data'];
+                    $('#laporan_perincian').DataTable().clear().draw();
+                    if (res['data'].length > 0) {
+                        array.forEach(element => {
+                            $('#laporan_perincian').DataTable().row.add($(element)).draw();
+                        });
+                    }
+                    $('.countRow').html(res['counter']);
+                });
+            });
+        });
+    </script>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -50,7 +82,41 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            @csrf
+                            <div class="card-body">
+                                <div class="row pl-lg-5">
+                                    <div class="col-2">
+                                        <label class="form-control-label" for="">Pilih Agensi</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <select class="form-control form-control-sm pilihAgensi" name="agensi">
+                                            <option selected>Pilih</option>
+                                            @foreach ($agensi as $ag)
+                                                <option value="{{ $ag->id }}">{{ $ag->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row pl-lg-5 my-2">
+                                    <div class="col-2">
+                                        <label class="form-control-label" for="">Pilih Masa Dari</label>
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="date" class="form-control form-control-sm startDate" name="start_date">
+                                    </div>
+                                    <div class="col-1">
+                                        <label class="form-control-label" for="">Ke</label>
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="date" class="form-control form-control-sm endDate" name="end_date">
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-primary filterBtn float-right">Cari</button>
+                                {{-- <div class="tableTest"></div> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col-8">
@@ -60,8 +126,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body" style="overflow-x:auto;">
-                                <table id="laporan_perincian" class="table table-bordered table-striped">
+                            <div class="card-body">
+                                <table id="laporan_perincian" class="table table-bordered table-striped" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -82,9 +148,11 @@
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
                                                         <?php
-                                                        if($mohon->users->hasRole('Pemohon Data')){
-                                                            echo $mohon->users->agensi_organisasi;
-                                                        }else{
+                                                        if ($mohon->users->hasRole('Pemohon Data')) {
+                                                            $id = $mohon->users->agensi_organisasi;
+                                                            $org = App\AgensiOrganisasi::where('id', $id)->first()->name;
+                                                            echo $org;
+                                                        } else {
                                                             echo $mohon->users->agensiOrganisasi->name;
                                                         }
                                                         ?>
@@ -99,7 +167,9 @@
                                     </tbody>
                                     <tfoot>
                                         <th>JUMLAH KESELURUHAN DATA</th>
-                                        <th>{{ $counter }}</th>
+                                        <th>
+                                            <div class="countRow">{{ $counter }}</div>
+                                        </th>
                                     </tfoot>
                                 </table>
                             </div>
@@ -107,7 +177,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-12">
                         <div class="card">
                             @csrf
@@ -147,9 +217,9 @@
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
                                                         <?php
-                                                        if($mohon->users->hasRole('Pemohon Data')){
+                                                        if ($mohon->users->hasRole('Pemohon Data')) {
                                                             echo $mohon->users->agensi_organisasi;
-                                                        }else{
+                                                        } else {
                                                             echo $mohon->users->agensiOrganisasi->name;
                                                         }
                                                         ?>
@@ -207,9 +277,9 @@
                                                     <td>{{ $mohon->users->name }}</td>
                                                     <td>
                                                         <?php
-                                                        if($mohon->users->hasRole('Pemohon Data')){
+                                                        if ($mohon->users->hasRole('Pemohon Data')) {
                                                             echo $mohon->users->agensi_organisasi;
-                                                        }else{
+                                                        } else {
                                                             echo $mohon->users->agensiOrganisasi->name;
                                                         }
                                                         ?>
@@ -290,7 +360,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </section>
     </div>
@@ -355,51 +425,51 @@
             });
         });
 
-        $(document).ready(function() {
-            $("#laporan_kategori").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                "buttons": [{
-                        extend: 'csv',
-                        className: 'btn btn-sm btn-danger',
-                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn btn-sm btn-success',
-                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
-                    },
-                    {
-                        extend: 'print',
-                        text: 'Cetak',
-                        className: 'btn btn-sm btn-primary',
-                        title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
-                    }
-                ],
-                "scrollX": true,
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
-                    }
-                }
-            });
-        });
+        // $(document).ready(function() {
+        //     $("#laporan_kategori").DataTable({
+        //         "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+        //             "<'row'<'col-sm-12'tr>>" +
+        //             "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+        //         "buttons": [{
+        //                 extend: 'csv',
+        //                 className: 'btn btn-sm btn-danger',
+        //                 title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
+        //             },
+        //             {
+        //                 extend: 'excel',
+        //                 className: 'btn btn-sm btn-success',
+        //                 title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
+        //             },
+        //             {
+        //                 extend: 'print',
+        //                 text: 'Cetak',
+        //                 className: 'btn btn-sm btn-primary',
+        //                 title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
+        //             }
+        //         ],
+        //         "scrollX": true,
+        //         "ordering": false,
+        //         "responsive": true,
+        //         "autoWidth": false,
+        //         "oLanguage": {
+        //             "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+        //             "sEmptyTable": "Tiada rekod ditemui",
+        //             "sZeroRecords": "Tiada rekod ditemui",
+        //             "sLengthMenu": "Papar _MENU_ rekod",
+        //             "sLoadingRecords": "Sila tunggu...",
+        //             "sSearch": "Carian:",
+        //             "oPaginate": {
+        //                 "sFirst": "Pertama",
+        //                 "sLast": "Terakhir",
+        //                 "sNext": ">",
+        //                 "sPrevious": "<",
+        //             }
+        //         }
+        //     });
+        // });
     </script>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $("#laporan_statistik").DataTable({
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
@@ -547,7 +617,7 @@
                 });
             }
         });
-    </script>
+    </script> --}}
 
 
 
