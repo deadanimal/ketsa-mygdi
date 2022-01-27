@@ -384,7 +384,7 @@ class DataAsasController extends Controller
             ]);
 
             Mohondata::where(["id" => $request->permohonan_id])->update([
-                // "status" => $request->status = 3,
+                "status" => $request->status = 3,
             ]);
 
             foreach ($skdatas as $sk ) {
