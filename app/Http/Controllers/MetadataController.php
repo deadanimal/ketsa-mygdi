@@ -82,7 +82,7 @@ class MetadataController extends Controller {
             //see all metadatas regardless
         }
 
-        $metadatasdb = $query->paginate(20);
+        $metadatasdb = $query->orderBy('id', 'DESC')->paginate(20);
 //        $metadatasdbtitle = $query->select('id','data')->get();
         $metadatasdbtitle = [];
 
