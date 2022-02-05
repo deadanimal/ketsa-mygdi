@@ -693,7 +693,7 @@ class UserController extends Controller {
 
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
-        $user->nric = $request->nric;
+//        $user->nric = $request->nric; //TEMPORARILY COMMENTED. TO UNCOMMENT AFTER BENGKEL
         $user->email = $request->email;
         $user->agensi_organisasi = $request->agensi_organisasi;
         $user->bahagian = $request->bahagian;
@@ -748,7 +748,7 @@ class UserController extends Controller {
 
         $user = User::where("id",$request->userid)->get()->first();
         $user->name = $request->uname;
-        $user->nric = $request->nric;
+//        $user->nric = $request->nric; //TEMPORARILY COMMENTED. TO UNCOMMENT AFTER BENGKEL
         $user->email = $request->email;
         $user->agensi_organisasi = $request->agensi_organisasi;
         $user->bahagian = $request->bahagian;
