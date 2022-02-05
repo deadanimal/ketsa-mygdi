@@ -82,7 +82,7 @@ class MetadataController extends Controller {
             //see all metadatas regardless
         }
 
-        $metadatasdb = $query->orderBy('id', 'DESC')->get();
+        $metadatasdb = $query->paginate(20);
 //        $metadatasdbtitle = $query->select('id','data')->get();
         $metadatasdbtitle = [];
 
@@ -135,7 +135,7 @@ class MetadataController extends Controller {
           }
          */
 
-        return view('mygeo.metadata.senarai_metadata', compact('metadatas', 'metadataTitles'));
+        return view('mygeo.metadata.senarai_metadata', compact('metadatas', 'metadataTitles','metadatasdb'));
     }
 
     public function getSenaraiMetadata(Request $request) {
@@ -384,7 +384,6 @@ class MetadataController extends Controller {
             $ftestxml2 = str_replace("srv:", "", $ftestxml2);
             $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
             $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = str_replace("\n", "", $ftestxml2);
             $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
 
             $xml2 = simplexml_load_string($ftestxml2);
@@ -574,6 +573,8 @@ class MetadataController extends Controller {
         $ftestxml2 = <<<XML
                 $metadataSearched->data
                 XML;
+                // $ftestxml2 = $metadataSearched->data;
+                
         $ftestxml2 = str_replace("gco:", "", $ftestxml2);
         $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
         $ftestxml2 = str_replace("srv:", "", $ftestxml2);
@@ -2654,13 +2655,15 @@ class MetadataController extends Controller {
                 if ($request->c2_contact_email != "") {
                     //send email to pengesah metadata
                     $user = User::where('email', $request->c2_contact_email)->get()->first();
-                    $to_name = $user->name;
-                    $to_email = $user->email;
-                    $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
-                    Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    });
+					if($user){
+						$to_name = $user->name;
+						$to_email = $user->email;
+						$data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
+						// Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
+							// $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+							// $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+						// });						
+					}
                 }
 
                 $msg = "Metadata berjaya dihantar.";
@@ -2688,6 +2691,13 @@ class MetadataController extends Controller {
             Storage::putFileAs('public', $request->file('file_xml'), $fileName); //don't forget to set permissions at the public folder
             //read stored xml
             $uploaded_xml = Storage::disk('public')->get($fileName);
+
+            // $uploaded_xml = file_get_contents($uploaded_xml2);
+            /*$uploaded_xml = <<<XML
+                    $uploaded_xml
+                    XML;
+                    */
+            $uploaded_xml = htmlspecialchars_decode($uploaded_xml);
             $uploaded_xml = str_replace("gco:", "", $uploaded_xml);
             $uploaded_xml = str_replace("gmd:", "", $uploaded_xml);
             $uploaded_xml = str_replace("srv:", "", $uploaded_xml);
@@ -2695,7 +2705,7 @@ class MetadataController extends Controller {
             $uploaded_xml = str_replace("\r", "", $uploaded_xml);
             $uploaded_xml = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $uploaded_xml);
 
-            $uploaded_xml = simplexml_load_string($uploaded_xml);
+            // $uploaded_xml = simplexml_load_string($uploaded_xml);
             if (false === $uploaded_xml) {
                 //            continue;
             }
@@ -3031,13 +3041,15 @@ class MetadataController extends Controller {
                 if ($request->c2_contact_email != "") {
                     //send email to pengesah metadata
                     $user = User::where('email', $request->c2_contact_email)->get()->first();
-                    $to_name = $user->name;
-                    $to_email = $user->email;
-                    $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
-                    Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    });
+					if($user){
+						$to_name = $user->name;
+						$to_email = $user->email;
+						$data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
+						// Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
+							// $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+							// $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+						// });
+					}
                 }
 
                 $msg = "Metadata berjaya dihantar.";
@@ -3058,13 +3070,15 @@ class MetadataController extends Controller {
                     if ($request->c2_contact_email != "") {
                         //send email to pengesah metadata
                         $user = User::where('email', $request->c2_contact_email)->get()->first();
-                        $to_name = $user->name;
-                        $to_email = $user->email;
-                        $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
-                        Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
-                            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
-                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                        });
+						if($user){
+							$to_name = $user->name;
+							$to_email = $user->email;
+							$data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
+							// Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
+								// $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+								// $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+							// });
+						}
                     }
                 }
             } elseif ($request->submitAction == "draf") {

@@ -197,7 +197,7 @@
             });
         }
     });
-
+/*
             // Setup - add a text input to each footer cell
             $('#table_metadatas thead tr').clone(true).appendTo('#table_metadatas thead');
             $('#table_metadatas thead tr:eq(1) th').each(function(i) {
@@ -209,7 +209,7 @@
                         table.column(i).search(this.value).draw();
                     }
                 });
-            });
+            });*/
 
         $(document).on("click", ".btn_lulus_multi", function() {
             var checkbox_metadatas = [];
@@ -237,7 +237,8 @@
                         location.reload();
                     });
                 }
-            });
+            }
         });
+		});
     </script>
 @stop

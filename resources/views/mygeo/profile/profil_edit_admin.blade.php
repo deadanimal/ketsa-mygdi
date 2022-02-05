@@ -296,7 +296,7 @@ $(document).ready(function(){
         }
         @if($user->hasRole('Pengesah Metadata') || $user->hasRole('Penerbit Metadata'))
         if(bahagian == ""){
-            msg = msg + "Sila pilih bahagian\r\n\r\n";
+            //msg = msg + "Sila pilih bahagian\r\n\r\n";
         }
         @endif
         if(msg.length > 0){

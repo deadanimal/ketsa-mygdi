@@ -329,7 +329,8 @@
                         <input type="text" class="form-control form-control-sm ml-3" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ old('c2_serviceUrl') }}">
                     </div>
                     <div class="col-1">
-                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
+                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test (intecx)</button>
+                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl2" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test (wms)</button>
                         @error('c2_serviceUrl')
                             <div class="text-error">{{ $message }}</div>
                         @enderror

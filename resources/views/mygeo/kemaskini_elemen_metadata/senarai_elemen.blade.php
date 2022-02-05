@@ -186,7 +186,7 @@
     });
 
     $(document).ready(function () {
-        var templateInactive = <?php echo json_encode($template->template); ?>;
+        var templateInactive = <?php echo json_encode($template->template); ?>; //this includes all elements regardless of status active or inactive. i wasn't thinking straight lulz
         //================================
         $('.sortableContainer1').sortable();
         $('#saveTemplate').button().click(function() {
@@ -218,11 +218,16 @@
             var category = $('#templateKategori').val().toLowerCase();
             var accordion = $(this).data('accordion');
             var availableOptions = {};
-            jQuery.each(templateInactive[category]['accordion'+accordion], function(index, item) {
-                if(item['status'] === "inactive"){
-                    availableOptions[index] = item;
+            
+            var hiddenButNotSaved = $("#collapse"+accordion+" .sortable[data-status='inactive']").sortable();
+            
+            jQuery.each(hiddenButNotSaved, function(index, item) {
+                if($(item).data('status') == "inactive"){
+                    var inputdetail = templateInactive[category]['accordion'+accordion][item.name];
+                    availableOptions[item.name] = inputdetail.label_bm;
                 }
             });
+
 //            console.log(availableOptions);
 //            console.log($.isEmptyObject(availableOptions));
 //            console.log(templateInactive[category]['accordion'+accordion]);
@@ -230,7 +235,7 @@
                 $('.availableOptionsContainer').empty();
                 var html = '<select name="tambahElemen" data-accordion="'+accordion+'" class="form-control tambahElemen">';
                 jQuery.each(availableOptions, function(index, item) {
-                    html += '<option value="'+index+'">'+item.label_bm+'</option></select>';
+                    html += '<option value="'+index+'">'+item+'</option>';
                 });
                 html += '</select>';
                 $('.availableOptionsContainer').append(html);
@@ -242,21 +247,10 @@
             var accordion = $('.tambahElemen').data('accordion');
             var availableOptions = {};
             
-            //SMBG SINI - re-show hidden inputs here
-            
-            /*
-            jQuery.each(templateInactive[category]['accordion'+accordion], function(index, item) {
-                if(index === tambahElemen){
-                    var html = '<select name="tambahElemen" data-accordion="'+accordion+'" class="form-control tambahElemen">';
-                    jQuery.each(availableOptions, function(index, item) {
-                        html += '<option value="'+index+'">'+item.label_bm+'</option></select>';
-                    });
-                    html += '</select>';
-                    $('#collapse'+accordion+' .sortableContainer1').append(html);
-                }
-            });
-                    .removeData( "test1" );
-            */
+            console.log('tambahElement: '+tambahElemen);
+            $('[name="'+tambahElemen+'"]').closest('.sortIt').show();
+//            $('[name="'+tambahElemen+'"]').removeAttr('data-status');
+            $('[name="'+tambahElemen+'"]').attr('data-status', 'active');
         });
         //================================
 
@@ -496,9 +490,7 @@
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').hide();
-                $('#content_info_dropdown').prop('disabled',false);
                 $('#content_info_text').prop('disabled',true);
-                $('#content_info_dropdown').show();
                 $('.lblContentInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
                 $('#div_contohJenisMetadata').show();
@@ -518,12 +510,10 @@
                 $('.divDataQualityTabs').hide();
                 $('.divUseLimitation').show();
                 $('.divMaintenanceInfo').hide();
-                $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Live Data and Maps');
                 $('#content_info_text').val('Live Data and Maps');
                 $('.lblContentInfo').show();
-                $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
                 $('#div_contohJenisMetadata').hide();
             } else if (kategori.toLowerCase() == "gridded") {
@@ -542,12 +532,10 @@
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').show();
-                $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Gridded');
                 $('#content_info_text').val('Gridded');
                 $('.lblContentInfo').show();
-                $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
                 $('#div_contohJenisMetadata').show();
             } else if (kategori.toLowerCase() == "imagery") {
@@ -566,12 +554,10 @@
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').show();
-                $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Imagery');
                 $('#content_info_text').val('Imagery');
                 $('.lblContentInfo').show();
-                $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
                 $('#div_contohJenisMetadata').show();
             }

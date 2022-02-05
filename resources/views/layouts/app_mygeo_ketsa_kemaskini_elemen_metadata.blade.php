@@ -76,6 +76,9 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
+        html{
+            font-size: 110%;
+        }
 
     </style>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

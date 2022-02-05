@@ -1270,7 +1270,7 @@
                 $var = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
             }
             ?>
-            <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm " readonly>{{ $var }}</textarea>
+            <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ">{{ $var }}</textarea>
             @error('c2_abstract')
             <div class="text-error">{{ $message }}</div>
             @enderror
