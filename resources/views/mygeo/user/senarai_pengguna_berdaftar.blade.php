@@ -189,7 +189,7 @@
                                             ?>
                                             <tr>
                                                 <td>{{ $bil }}</td>
-                                                <td>{{ $user->name }}</td>
+                                                <td>{{ (trim($user->name) != "" ? $user->name : "username") }}</td>
                                                 <td>
                                                     <?php
                                                     if(!is_numeric($user->agensi_organisasi)) {
