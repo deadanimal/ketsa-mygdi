@@ -58,7 +58,7 @@ class UserController extends Controller {
         $users_all = User::where(['disahkan' => 1])->orderBy('name')->get();
         $users = [];
         foreach($users_all as $user){
-            if($user->hasRole('Super Admin') || trim($user->name) == ""){
+            if($user->hasRole('Super Admin')){
 
             }else{
                 $users[]= $user;
