@@ -79,7 +79,7 @@ class UserController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Metadata','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
-
+        
         $users_all = User::whereHas("roles", function ($q) {
                     $q->where("name", "Pengesah Metadata")->orWhere("name", "Penerbit Metadata");
                 })->orderBy('name')->get();
