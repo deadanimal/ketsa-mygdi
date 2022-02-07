@@ -5,28 +5,27 @@
                 <?php echo __('lang.accord_14'); ?>
             </a>
         </h4>
+        <button type="button" class="btn btn-default float-right btnTambah" data-toggle="modal" data-target="#modalTambahInput" data-accordion="14">Tambah</button>
     </div>
     <div id="collapse14" class="panel-collapse collapse in" data-parent="#div_c14">
         <div class="card-body">
             <div class="sortableContainer1">
                 <?php
                 foreach($template->template[strtolower($_GET['kategori'])]['accordion14'] as $key=>$val){
-                    if($key == "c1_content_info"){
+                    if($val['status'] == "customInput"){
                         ?>
-                        <div class="row sortIt divUseLimitation" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline">
-                                    <label class="form-control-label mr-3" for="c14_useLimitation">
-                                        <?php echo __('lang.use_limitation'); ?>
-                                    </label>
-                                    <input type="text" name="c14_useLimitation" id="c14_useLimitation" class="form-control form-control-sm sortable" value="{{ old('c14_useLimitation') }}" data-status="<?php echo $val['status']; ?>">
-                                </div>
+                        <div class="row mb-2 sortIt">
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
+                            </div>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
                         </div>
                         <?php
-                    }
-                    if($key == "c14_access_constraint"){
+                    }elseif($key == "c14_access_constraint"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-xl-6">

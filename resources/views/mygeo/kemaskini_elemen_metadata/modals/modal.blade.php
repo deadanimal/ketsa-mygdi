@@ -309,6 +309,7 @@
                 </div>
                 <div class="modal-footer justify-content-between1">
                     <button type="button" class="btn btn-primary btnConfirmTambah" data-dismiss="modal">Tambah</button>
+                    <button type="button" class="btn btn-primary btnTambahElemenBaru" data-dismiss="modal">Tambah Elemen Baru</button>
                 </div>
             </form>
         </div>

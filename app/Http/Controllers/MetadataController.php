@@ -3360,7 +3360,8 @@ class MetadataController extends Controller {
     }
     
     public function simpan_metadata_template(Request $request){
-        $activeInputs = explode('@',$request->activeInputs); //new order
+//        dd($request->activeInputs,json_decode($request->activeInputs));
+        $activeInputs = json_decode($request->activeInputs); //new order
         $mt = MetadataTemplate::where('status','active')->get()->first(); //get old order
         $newmt = $mt->template; //temp holder to store new order that will replace db order
         
@@ -3372,14 +3373,21 @@ class MetadataController extends Controller {
             //re-sort by keys of $activeInput
             $var = [];
             foreach($activeInputs as $ai){
-                if(isset($val[$ai])){
-                    $var[$ai] = $val[$ai];
+                if($ai->accordion == $key){
+                    if(isset($val[$ai->name])){
+                        $var[$ai->name] = $val[$ai->name];
+                        $var[$ai->name]['status'] = $ai->status;
+                    }else{
+                        //elements passing thru this else block means are custom input
+                        $name = preg_replace('/\s+/', '', $ai->name);
+                        $var[$name] = ['label_bm'=>$ai->name,'label_en'=>$ai->name,'status'=>$ai->status];
+                    }
                 }
             }
-            
             //the foreach loops thru each accordion so each accordion is stored and has own key in $newmt
             $newmt[strtolower($request->templateKategori)][$key] = $var;
         }
+//        exit();
 //        dd($newmt);
         
         MetadataTemplate::query()->update(['status' => 'inactive']);

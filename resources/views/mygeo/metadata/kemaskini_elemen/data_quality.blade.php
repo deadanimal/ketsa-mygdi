@@ -5,13 +5,27 @@
                 <?php echo __('lang.accord_15'); ?>
             </a>
         </h4>
+        <button type="button" class="btn btn-default float-right btnTambah" data-toggle="modal" data-target="#modalTambahInput" data-accordion="15">Tambah</button>
     </div>
     <div id="collapse15" class="panel-collapse collapse in " data-parent="#div_c15">
         <div class="card-body">
             <div class="sortableContainer1">
                 <?php
                 foreach($template->template[strtolower($_GET['kategori'])]['accordion15'] as $key=>$val){
-                    if($key == "c15_data_quality_info"){
+                    if($val['status'] == "customInput"){
+                        ?>
+                        <div class="row mb-2 sortIt">
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
+                            </div>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <span class="close btnClose">&times;</span>
+                        </div>
+                        <?php
+                    }elseif($key == "c15_data_quality_info"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-xl-6">

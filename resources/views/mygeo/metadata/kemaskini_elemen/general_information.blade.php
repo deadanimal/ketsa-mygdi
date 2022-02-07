@@ -12,7 +12,20 @@
             <div class="sortableContainer1">
                 <?php 
                 foreach($template->template[strtolower($_GET['kategori'])]['accordion1'] as $key=>$val){
-                    if($key == "c1_content_info"){
+                    if($val['status'] == "customInput"){
+                        ?>
+                        <div class="row mb-2 sortIt">
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
+                            </div>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <span class="close btnClose">&times;</span>
+                        </div>
+                        <?php
+                    }elseif($key == "c1_content_info"){
                         ?>
                         <div class="row mb-2 sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">

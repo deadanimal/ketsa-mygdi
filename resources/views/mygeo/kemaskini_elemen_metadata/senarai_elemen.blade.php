@@ -189,19 +189,18 @@
         var templateInactive = <?php echo json_encode($template->template); ?>; //this includes all elements regardless of status active or inactive. i wasn't thinking straight lulz
         //================================
         $('.sortableContainer1').sortable();
+        /*
         $('#saveTemplate').button().click(function() {
             //get order of all inputs except Data Quality tabs
             var itemOrder = $('.sortableContainer1 .sortable').sortable();
             var jsontxt = "";
             jQuery.each(itemOrder, function(index, item) {
-//                var f = $('[name="'+item.name+'"]');
                 jsontxt = jsontxt + item.name + "@";
             });
             
             //get order of all inputs of Data Quality tabs
             var itemOrder2 = $('.dqtabstable .sortable').sortable();
             jQuery.each(itemOrder2, function(index, item) {
-//                var f = $('[name="'+item.name+'"]');
                 jsontxt = jsontxt + item.name + "@";
             });
             
@@ -209,15 +208,52 @@
             $('#version').val($('#versiontop').val());
             $('#formMetadataTemplate').submit();
         });
+        */
+        $('#saveTemplate').button().click(function() {
+            //get order of all inputs except Data Quality tabs
+            var itemOrder = $('.sortableContainer1 .sortable').sortable();
+            var jsontxt = [];
+            jQuery.each(itemOrder, function(index, item) {
+                var accordionId = $(item).closest('.panel-collapse').attr('id');
+                var accordion = accordionId.replace('collapse','');
+                if($(item).hasClass("newInput")){
+                    var newInputName = $(item).parent().parent().find('.customInput_label').val();
+                    jsontxt.push({"name":newInputName,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                }else{
+                    jsontxt.push({"name":item.name,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                }
+            });
+            
+            //get order of all inputs of Data Quality tabs
+            var itemOrder2 = $('.dqtabstable .sortable').sortable();
+            jQuery.each(itemOrder2, function(index, item) {
+                var accordionId = $(item).closest('.panel-collapse').attr('id');
+                var accordion = accordionId.replace('collapse','');
+                if($(item).hasClass("newInput")){
+                    var newInputName = $(item).parent().parent().find('.customInput_label').val();
+                    jsontxt.push({"name":newInputName,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                }else{
+                    jsontxt.push({"name":item.name,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                }
+            });
+            
+            $('#activeInputs').val(JSON.stringify(jsontxt));
+            $('#version').val($('#versiontop').val());
+            $('#formMetadataTemplate').submit();
+        });
         
         $(document).on("click",".btnClose",function(){
-            $(this).parent().find('.sortable').attr('data-status', 'inactive');
+            if($(this).data('status') !== "customInput"){
+                $(this).parent().find('.sortable').attr('data-status', 'inactive');
+            }
             $(this).parent().hide();
         });
         $(document).on("click",".btnTambah",function(){
             var category = $('#templateKategori').val().toLowerCase();
             var accordion = $(this).data('accordion');
             var availableOptions = {};
+            
+            $('.btnTambahElemenBaru').attr('data-accordion',accordion);
             
             var hiddenButNotSaved = $("#collapse"+accordion+" .sortable[data-status='inactive']").sortable();
             
@@ -247,10 +283,12 @@
             var accordion = $('.tambahElemen').data('accordion');
             var availableOptions = {};
             
-            console.log('tambahElement: '+tambahElemen);
             $('[name="'+tambahElemen+'"]').closest('.sortIt').show();
-//            $('[name="'+tambahElemen+'"]').removeAttr('data-status');
             $('[name="'+tambahElemen+'"]').attr('data-status', 'active');
+        });
+        $(document).on("click",".btnTambahElemenBaru",function(){
+            var accordion = $(this).data('accordion');
+            $('#collapse'+accordion+' .sortableContainer1').append('<div class="row mb-2 sortIt"><div class="col-3 pl-5"><label class="form-control-label mr-4" for="uname"><input type="text" name="newInputName" class="customInput_label"></label><label class="float-right">:</label></div><div class="col-8"><input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput"/></div><span class="close btnClose">&times;</span></div>');
         });
         //================================
 
