@@ -79,7 +79,7 @@
                                                     <td>{{ $permohonan->users->kategori }}</td>
                                                     <td>
                                                         @if ($permohonan->status == '1' || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))
-                                                            <span class="badge badge-pill badge-warning">Dalam Proses</span>
+                                                            <span class="badge badge-pill badge-warning">Diproses</span>
                                                         @elseif($permohonan->status == '2')
                                                             <span class="badge badge-pill badge-danger">Ditolak</span>
                                                         @elseif($permohonan->status == '3' &&

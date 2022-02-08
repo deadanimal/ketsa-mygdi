@@ -895,7 +895,7 @@ class DataAsasController extends Controller
 
     public function permohonan_baru()
     {
-        $permohonan_list = MohonData::where(['dihantar' => 1,'status' => 0])->get();
+        $permohonan_list = MohonData::where(['dihantar' => 1,'status' => 0])->orderBy('created_at', 'DESC')->get();
         return view('mygeo.permohonan_baru', compact('permohonan_list'));
     }
 
