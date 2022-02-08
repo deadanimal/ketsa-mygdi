@@ -89,7 +89,7 @@
                                         <textarea class="form-control form-control-sm mt-3" cols="30"
                                             placeholder="Nama dan Alamat"
                                             rows="6">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
-                                                                                                                                                                </textarea>
+                                                                                                                                                                    </textarea>
                                         <br>
                                         {{-- <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
                                             placeholder="Tajuk Surat Balasan Permohonan"
@@ -118,7 +118,9 @@
                                 <form action="{{ url('api/dokumen/surat_balasan') }}" method="POST" target="_blank">
                                     @csrf
                                     <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                    <button type=submit class="btn btn-default float-right mx-2">Cetak PDF</button>
+                                    @if (!is_null($surat->content))
+                                        <button type=submit class="btn btn-default float-right mx-2">Cetak PDF</button>
+                                    @endif
                                 </form>
                             </div>
                         </div>

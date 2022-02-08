@@ -12,11 +12,18 @@
     h3,
     body {
         font-family: Arial, Helvetica, sans-serif;
+        font-size: 90%;
     }
 
     .text-center {
         text-align: center !important;
-        font-size: 14;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .text-right {
+        text-align: right !important;
+        font-size: 14px;
         font-weight: bold;
     }
 
@@ -29,8 +36,8 @@
     }
 
     .mx-6 {
-        margin-left: 50px;
-        margin-right: 50px;
+        margin-left: 70px;
+        margin-right: 70px;
     }
 
     /* Create two equal columns that floats next to each other */
@@ -63,13 +70,73 @@
         padding-top: 0;
     }
 
+    ol.main {
+        padding-left: 15px;
+    }
+
+
+
     li {
         text-align: justify;
     }
 
     u {
-        border-bottom: 2px dotted #000;
+        border-bottom: 1.2px dotted #000;
         text-decoration: none;
+    }
+
+    .title-container {
+        width: 100%;
+    }
+
+    div.title {
+        display: inline;
+        width: 200%;
+        padding: 0;
+    }
+
+    .underline {
+        /* flex-grow: 1; */
+        border-bottom: 1.2px dotted #000;
+    }
+
+</style>
+<style>
+    ol.a {
+        counter-reset: list;
+    }
+
+    ol.a>li {
+        list-style: none;
+    }
+
+    ol.a>li:before {
+        content: " ("counter(list, lower-alpha) ") ";
+        counter-increment: list;
+    }
+
+    ol.roman {
+        counter-reset: list;
+    }
+
+    ol.alpha {
+        counter-reset: alpha;
+    }
+
+    ol.alpha>li,
+    ol.roman>li {
+        list-style: none;
+        position: relative;
+    }
+
+    ol.roman>li:before {
+        counter-increment: list;
+        content: " ("counter(list, lower-roman)") ";
+    }
+
+    ol.alpha>li:before {
+        counter-increment: alpha;
+        content: " ("counter(alpha, lower-alpha)") ";
     }
 
 </style>
@@ -82,25 +149,34 @@
                     <div class=" col">
                         <div class="card">
                             <div class="card-body">
-                                <p class="text-center">AKUAN PELAJAR</p>
-                                <div class="mx-6 pr-lg-5">
-                                    (Sila nyatakan tajuk tesis/projek/kajian
-                                    <u>{{ $akuan->title }}</u>
-                                    <ol>
-                                        <li align="justify">Saya (nyatakan nama) <u>{{ $permohonan->username }}</u>
+                                <div class="mx-6">
+                                    <p class="text-right">LAMPIRAN IV</p>
+                                    <br>
+                                    <p class="text-center">AKUAN PELAJAR</p>
+                                    <div class="title-container">
+                                        <div class="title">
+                                            <div>(Sila nyatakan tajuk tesis/projek/kajian
+                                                <p class="underline">{{ $akuan->title }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ol class="main">
+                                        <li align="justify">Saya (nyatakan nama)
+                                            <u>{{ $permohonan->username }}</u>
                                             K.P. No <u>{{ $permohonan->nric }}</u> yang
                                             bertandatangan di bawah ini, sebagai
                                             seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
                                             <u>{{ $agensi_name }}</u>
                                             dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
                                             sama ada peta topografi / foto udara dan sebagainya)
-                                            seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
+                                            seperti butir-butir di bawah ini dengan mematuhi sepenuhnya
+                                            syarat-syarat
                                             yang disebutkan di bawah.<br>
                                         </li><br>
                                         <li>Senarai Dokumen Geospatial Terperingkat<br></li>
                                         <ol type="i">
                                             <li>Peta Topografi :</li>
-                                            <ol type="a">
+                                            <ol class="a">
                                                 <li><u>{{ $akuan->peta_topo_a != null ? $akuan->peta_topo_a : ' ' }}</u>
                                                 </li>
                                                 <li><u>{{ $akuan->peta_topo_b != null ? $akuan->peta_topo_b : ' ' }}</u>
@@ -113,14 +189,16 @@
                                             <ol type="a">
                                                 <li><u>{{ $akuan->foto_udara_a != null ? $akuan->foto_udara_a : ' ' }}</u>
                                                 </li>
-                                                <li><u>{{ $akuan->foto_udara_b != null ? $akuan->foto_udara_b : ' ' }}</u></li>
-                                                <li><u>{{ $akuan->foto_udara_c != null ? $akuan->foto_udara_c : ' ' }}</u></li>
+                                                <li><u>{{ $akuan->foto_udara_b != null ? $akuan->foto_udara_b : ' ' }}</u>
+                                                </li>
+                                                <li><u>{{ $akuan->foto_udara_c != null ? $akuan->foto_udara_c : ' ' }}</u>
+                                                </li>
                                             </ol>
                                             <br>
                                             <li>Lain-lain :</li>
                                             <ol type="a">
                                                 @foreach ($skdatas as $sk)
-                                                    <li><u>{{ $sk->lapisan_data }}</u></li>
+                                                    <li><u>{{ $sk->lapisan_data }}, {{ $sk->kawasan_data }}</u></li>
                                                 @endforeach
                                             </ol>
                                         </ol>
@@ -136,11 +214,13 @@
                                                 kepada keperluan sendiri sahaja. Penggunaan bahan-bahan berkenaan
                                                 untuk tujuan lain tidak dibenarkan.</li>
                                             <li>Kandungan bahan-bahan ini tidak akan dihebahkan atau disampaikan
-                                                secara langsung atau tidak langsung kepada pihak akhbar atau orang lain
+                                                secara langsung atau tidak langsung kepada pihak akhbar atau orang
+                                                lain
                                                 yang tidak diberi kuasa untuk menerimanya.</li>
                                             <li>Bahan-bahan ini akan dibawa balik ke Malaysia dalam masa 6 bulan.
                                                 Pengarah Pemetaan Negara, Malaysia hendaklah diberitahu mengenai
-                                                tarikh bahan-bahan dibawa keluar dan dikembalikan ke Malaysia.<br><br>
+                                                tarikh bahan-bahan dibawa keluar dan dikembalikan ke
+                                                Malaysia.<br><br>
                                         </ol>
                                     </ol>
                                     <div class="row">

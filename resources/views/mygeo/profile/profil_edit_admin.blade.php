@@ -90,7 +90,7 @@
                                     <div class="row mb-2">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="nric">
-                                                Kad Pengenalan
+                                               No Kad Pengenalan
                                             </label><label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
@@ -196,10 +196,10 @@
                                                 }
                                             }
                                             if(in_array("Penerbit Metadata",$urs) || in_array("Pengesah Metadata",$urs)){
-                                                
+
                                             }else{
                                                 ?>
-                                                <script>$('.divBahagian').hide();</script>    
+                                                <script>$('.divBahagian').hide();</script>
                                                 <?php
                                             }
                                             ?>
@@ -328,7 +328,7 @@ $(document).ready(function(){
     });
     $('#agensi_organisasi').change(function() {
         var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
-        
+
         @if($user->hasRole('Pengesah Metadata') || $user->hasRole('Penerbit Metadata'))
         $.ajax({
             method: "POST",
@@ -359,7 +359,7 @@ $(document).ready(function(){
     setTimeout(function(){
         $('#bahagian').val('<?php echo $user->bahagian; ?>').change();
     }, 3000);
-    
+
 });
 
 function isEmail(email) {

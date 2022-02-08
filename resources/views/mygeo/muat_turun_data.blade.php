@@ -103,7 +103,7 @@
 
                                                     @if (is_array($res) && !empty($res))
                                                         @foreach ($res as $url)
-                                                            <a @if (!empty($url) && $inTempohUrl == 1) data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
+                                                            <a @if (!empty($url) && $inTempohUrl == 1) data-url='{{ $url }}' data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
                                                                 <span class="fas fa-download mr-2">
 
                                                                 </span>
@@ -125,7 +125,7 @@
     <script>
         $(document).ready(function() {
             $("#table_metadatas").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "scrollX": true,
@@ -134,6 +134,7 @@
                 "autoWidth": false,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
                     "sEmptyTable": "Tiada rekod ditemui",
                     "sZeroRecords": "Tiada rekod ditemui",
                     "sLengthMenu": "Papar _MENU_ rekod",
@@ -151,11 +152,10 @@
 
         $('.download').on('click', function(event) {
             event.preventDefault();
-            const url = $(this).attr('href');
+            const url = $(this).data('url');
             var pemohonid = $(this).data('pemohonid');
             var acceptance = $(this).data('acceptance');
 
-            console.log(url);
             if (acceptance == '1') {
                 window.open(url, '_blank');
                 window.location.reload();

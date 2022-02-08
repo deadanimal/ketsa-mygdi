@@ -74,7 +74,7 @@ class DataAsasController extends Controller
                                 ->get();
         $kategori_senarai_data  = SenaraiData::where('status','Tersedia')->distinct('kategori')->get();
         $permohonan = MohonData::where('id', $id)->first();
-        $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->get();
+        $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->orderBy('created_at')->get();
 
         $negeris =  Negeri::get();
         $daerahs = Daerah::get();
@@ -324,7 +324,8 @@ class DataAsasController extends Controller
         if (!Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
             return redirect('/mygeo_profil');
         }
-        $permohonan_list = MohonData::where(['status' => 1,'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
+        $admin = Auth::user()->name;
+        $permohonan_list = MohonData::where(['assign_admin'=> $admin,'status' => 1,'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();
         return view('mygeo.proses_data', compact('permohonan_list','skdatas','proses'));
@@ -755,14 +756,15 @@ class DataAsasController extends Controller
         $surat = SuratBalasan::where('permohonan_id', $id)->first();
         $permohonan = MohonData::where('id', $id)->first();
         $dokumen = DokumenBerkaitan::where(['permohonan_id'=> $id,'tajuk_dokumen'=>'Surat Permohonan Rasmi'])->first();
-        $dokumen_date = is_null($dokumen)?'[Tarikh Surat]':Carbon::parse($dokumen->date_surat)->format('d M Y');
+        Carbon::setlocale(config('app.locale2'));
+        $dokumen_date = is_null($dokumen)?'[Tarikh Surat]':Carbon::parse($dokumen->date_surat)->translatedFormat('d F Y');
         $no_ruj = is_null($dokumen)?'[No Rujukan Surat]':$dokumen->no_rujukan;
         $admin = User::where('name',$permohonan->assign_admin)->first();
         $admin_name = is_null($admin)?'[Nama Pentadbir]':$admin->name;
         $admin_phone = is_null($admin)?'[No Telefon]':$admin->phone_pejabat;
         $admin_email = is_null($admin)?'[Emel]':$admin->email;
 
-        $surat_template = "<p class='ql-align-justify'>Dato'/Datin/Tuan/Puan,</p><p class='ql-align-justify'><strong style='text-transform:uppercase;'>$permohonan->name</strong></p><p class='ql-align-justify'>Dengan segala hormatnya merujuk kepada surat dato'/datin/tuan/puan $no_ruj bertarikh $dokumen_date mengenai perkara di atas.</p><p class='ql-align-justify'>2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan permohonan data geospatial terperingkat dan tiada halangan atas permohonan tersebut. Senarai data yang dibekalkan adalah seperti Lampiran 1. Walau bagaimanapun, untuk permohonan metadata pula, pihak dato'/datin/tuan/puan boleh melayari aplikasi MyGDI Explorer untuk mendapatkan informasi yang lebih terperinci https://www.mygeoportal.gov.my/node/173.</p><p class='ql-align-justify'>3. Untuk makluman dato'/datin/tuan/puan, penggunaan data ini adalah terikat dengan Pekeliling Am Bil 1/2007: Pekeliling Arahan Keselamatan Terhadap Dokumen Geospatial Terperingkat, Akta Rahsia Rasmi 1972 dan Surat Pekeliling Am Bil 1 Tahun 1997 : Peraturan Pemeliharaan Rekod-Rekod Kerajaan.</p><p class='ql-align-justify'>4. Pihak dato'/datin/tuan/puan boleh melayari Aplikasi MyGDI Data Services di https://mygos.mygeoportal.gov.my/myservices bagi mendapatkan paparan data asas GDC yang boleh dikongsi antara agensi kerajaan melalui program MyGDl. Permohonan untuk mendapatkan capaian ke aplikasi ini boleh dihantar kepada pihak PGN melalui emel pgn.kto@ketsa.gov.my.</p><p class='ql-align-justify'>5. Sebarang pertanyaan mengenai kesahihan dan ketepatan data perlulah dirujuk kepada Agensi Pembekal Data (APD) yang berkenaan. Penggunaan data ini selain daripada tujuan asal yang dimohon perlulah mendapat kebenaran daripada pihak APD dan PGN.</p><p class='ql-align-justify'>6. Mohon kerjasama pihak dato'/datin/tuan/puan untuk melengkapkan Borang Pengesahan Penerimaan Data Geospatial seperti di Lampiran 2 dan Borang Penilaian Perkongsian Data Melalui MyGDI seperti di Lampiran 3 dan dikembalikan semula kepada pihak PGN dalam tempoh dua minggu dari tarikh surat ini. Sekiranya ada sebarang pertanyaan, sila hubungi $admin_name di talian $admin_phone ($admin_email).</p><p class='ql-align-justify'><br></p><p class='ql-align-justify'>Sekian terima kasih.</p><p class='ql-align-justify'>**Ini adalah surat cetakan komputer, tidak perlu tandatangan**</p>";
+        $surat_template = "<p class='ql-align-justify'>Dato'/Datin/Tuan/Puan,</p><p class='ql-align-justify'><strong style='text-transform:uppercase;'>$permohonan->name</strong></p><p class='ql-align-justify'>Dengan segala hormatnya merujuk kepada surat Dato'/Datin/tuan/puan $no_ruj bertarikh $dokumen_date mengenai perkara di atas.</p><p class='ql-align-justify'>2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan permohonan data geospatial terperingkat dan tiada halangan atas permohonan tersebut. Senarai data yang dibekalkan adalah seperti Lampiran 1. Walau bagaimanapun, untuk permohonan metadata pula, pihak Dato'/Datin/tuan/puan boleh melayari aplikasi MyGDI Explorer untuk mendapatkan informasi yang lebih terperinci https://www.mygeoportal.gov.my/node/173.</p><p class='ql-align-justify'>3. Untuk makluman Dato'/Datin/tuan/puan, penggunaan data ini adalah terikat dengan Pekeliling Am Bil 1/2007: Pekeliling Arahan Keselamatan Terhadap Dokumen Geospatial Terperingkat, Akta Rahsia Rasmi 1972 dan Surat Pekeliling Am Bil 1 Tahun 1997 : Peraturan Pemeliharaan Rekod-Rekod Kerajaan.</p><p class='ql-align-justify'>4. Pihak Dato'/Datin/tuan/puan boleh melayari Aplikasi MyGDI Data Services di https://mygos.mygeoportal.gov.my/myservices bagi mendapatkan paparan data asas GDC yang boleh dikongsi antara agensi kerajaan melalui program MyGDl. Permohonan untuk mendapatkan capaian ke aplikasi ini boleh dihantar kepada pihak PGN melalui emel pgn.kto@ketsa.gov.my.</p><p class='ql-align-justify'>5. Sebarang pertanyaan mengenai kesahihan dan ketepatan data perlulah dirujuk kepada Agensi Pembekal Data (APD) yang berkenaan. Penggunaan data ini selain daripada tujuan asal yang dimohon perlulah mendapat kebenaran daripada pihak APD dan PGN.</p><p class='ql-align-justify'>6. Mohon kerjasama pihak Dato'/Datin/tuan/puan untuk melengkapkan Borang Pengesahan Penerimaan Data Geospatial seperti di Lampiran 2 dan Borang Penilaian Perkongsian Data Melalui MyGDI seperti di Lampiran 3 dan dikembalikan semula kepada pihak PGN dalam tempoh dua minggu dari tarikh surat ini. Sekiranya ada sebarang pertanyaan, sila hubungi $admin_name di talian $admin_phone ($admin_email).</p><p class='ql-align-justify'><br></p><p class='ql-align-justify'>Sekian terima kasih.</p><p class='ql-align-justify'>**Ini adalah surat cetakan komputer, tidak perlu tandatangan**</p>";
 
             // dd('surat',$surat_template, $surat->content);
         return view('mygeo.surat_balasan', compact('permohonan','surat','admin','surat_template','dokumen'));

@@ -13,6 +13,7 @@
     html,
     body {
         font-family: Arial, Helvetica, sans-serif;
+        font-size: 95%;
     }
 
     .text-custom {
@@ -22,8 +23,8 @@
     }
 
     .mx-6 {
-        margin-left: 50px;
-        margin-right: 50px;
+        margin: 0 45px;
+        padding: 0;
     }
 
     /* Create two equal columns that floats next to each other */
@@ -60,7 +61,15 @@
         text-align: justify
     }
 
+    .alamat {
+        width: 200px;
+        word-wrap: break-word;
+        padding: 0;
+        margin: 0
+    }
+
 </style>
+
 
 <body>
     <div class="content-wrapper" style="width:100%;">
@@ -81,8 +90,8 @@
                                         <i style="font-weight: bold">(Ministry of Energy and Natural Resources) <br></i>
                                         Pusat Geospatial Negara (PGN) <br>
                                         <i>National Geospatial Centre <br></i>
-                                        Aras 7 & 8, Wisma <br>
-                                        Sumber Asli <br>
+                                        Aras 7 & 8,<br>
+                                        Wisma Sumber Asli, <br>
                                         No. 25, Persiaran Perdana, Presint 4 <br>
                                         62574 PUTRAJAYA
                                     </div>
@@ -100,14 +109,16 @@
                                     <div class="column">
                                         <div style="float: right">
                                             <span>Rujukan : KeTSA 606-4/3/2 Jld.13 (1q)</span> <br>
-                                            <span>Tarikh : {{ Carbon\Carbon::now()->format('d M Y') }}</span>
+                                            <?php Carbon\Carbon::setlocale(config('app.locale2')); ?>
+                                            <span>Tarikh :
+                                                {{ Carbon\Carbon::now()->translatedFormat('d F Y') }}</span>
                                         </div>
                                     </div>
                                 </div> <br>
-                                <p align="justify">
-                                    {{ $permohonan->username }},<br>{{ $permohonan->alamat }}
-                                    <br><br>
-                                </p>
+                                <div>
+                                    {{ $permohonan->username }},
+                                </div>
+                                <div class="alamat">{{ $permohonan->alamat }}</div>
                                 <div>{!! $surat->content !!}</div>
                             </div>
                         </div>

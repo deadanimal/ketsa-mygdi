@@ -99,15 +99,16 @@
             color: black
         }
 
-        /* td,
-        th {
+        th,
+        td:not(.available) {
             font-size: 14px;
             width: fit-content;
             padding: 8px 15px;
             max-width: 550px !important;
-        } */
+        }
 
-        .badge {
+        .badge,
+        .form-control {
             color: black !important;
         }
 
@@ -115,8 +116,10 @@
             /* background-color: #dddddd; */
         }
 
-        html {
+        html,
+        body {
             font-size: 110%;
+            color: black !important;
         }
 
     </style>
@@ -597,10 +600,10 @@
                             class="navbar navbar-top navbar-expand navbar-light bg-custom border-bottom">
                             <div class="container-fluid">
                                 <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                                    <div style="width:90%;">
+                                    <div style="width:60%;">
                                         <img alt="Image placeholder"
                                             src="{{ url('afiqadminmygeo_files/mygeoexplorer-logo2.png') }}"
-                                            width="50%">
+                                            width="60%">
                                     </div>
                                     <ul class="navbar-nav align-items-center ml-md-auto">
                                         <li placement="bottom-right" class="nav-item">
@@ -622,7 +625,7 @@
                                                             }
                                                         } ?> </span>
                                                     <?php
-                                                    echo rtrim($roles, ', ') . ' (<a href="#" data-toggle="modal" data-target="#modal_tukar_peranan">Tukar</a>)';
+                                                    echo rtrim($roles, ', ') . '<br><a href="#" data-toggle="modal" data-target="#modal_tukar_peranan"><i class="fas fa-user-cog"></i></a>';
                                                     ?>
 
                                                     </a>
@@ -643,7 +646,7 @@
                                                 </span>
                                             </div>
                                             <!--</a>-->
-                                            <!--                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                            <!--<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                                 <a href="#" class="dropdown-item" data-toggle="modal"
                                                     data-target="#modal_tukar_peranan">
                                                     <i class="fas fa-users mr-2 tukarPeranan"></i> Tukar Peranan

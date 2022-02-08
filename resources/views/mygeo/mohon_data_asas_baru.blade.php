@@ -164,7 +164,8 @@
                                                         <?php
                                                         $var = '';
                                                         if ($permohonan->users->hasRole(['Pemohon Data'])) {
-                                                            $var = $permohonan->users->agensi_organisasi;
+                                                            $id = $permohonan->users->agensi_organisasi;
+                                                            $var = $permohonan->users->agensiOrganisasi->name;
                                                         } else {
                                                             $var = isset($permohonan->users->agensiOrganisasi) ? $permohonan->users->agensiOrganisasi->name : '';
                                                         }
@@ -220,12 +221,8 @@
                                                     foreach ($permohonan->users->getRoleNames() as $role) {
                                                         ?><input class="form-control form-control-sm ml-3"
                                                             name="peranan" type="text" value="<?php echo $role; ?> "
-                                                            disabled /><?php
-                                                                                                                                                                                        if ($count != count($permohonan->users->getRoleNames())) {                                                                    ?>,<?php                                                                                                   }
-                                                                                                                                                                                                                                                                                                                    $count++;
-                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                            ?>
+                                                            disabled />
+                                                        <?php if ($count != count($permohonan->users->getRoleNames())) { ?>,<?php  }$count++; } } ?>
 
                                                     </div>
                                                     <div class="col-2">
@@ -316,11 +313,11 @@
                                                             style="width: 100%; overflow-x:auto;">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>BIL</th>
                                                                     <th>LAPISAN DATA</th>
                                                                     <th>SUB-KATEGORI</th>
                                                                     <th>KATEGORI</th>
                                                                     <th>KAWASAN DATA</th>
+                                                                    <th>KELAS</th>
                                                                     @if (Auth::user()->hasRole(['Pemohon Data']))
                                                                         <th>TINDAKAN</th>
                                                                     @endif
@@ -330,12 +327,11 @@
                                                             <tbody>
                                                                 @foreach ($skdatas as $sk)
                                                                     <tr class="">
-                                                                        <td>{{ $loop->iteration }}# {{ $sk->kelas }}
-                                                                        </td>
                                                                         <td>{{ $sk->lapisan_data }}</td>
                                                                         <td>{{ $sk->subkategori }}</td>
                                                                         <td>{{ $sk->kategori }}</td>
                                                                         <td>{{ $sk->kawasan_data }}</td>
+                                                                        <td>{{ $sk->kelas }} </td>
                                                                         @if (Auth::user()->hasRole(['Pemohon Data']))
                                                                             <td>
                                                                                 <a data-toggle="modal"
@@ -395,15 +391,19 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                <?php $count = 1; ?>
                                                                 @foreach ($dokumens as $dokumen)
                                                                     <tr>
-                                                                        <td>{{ $loop->iteration }}</td>
+                                                                        <td>{{ $count }}</td>
                                                                         <td>
                                                                             @if ($dokumen->tajuk_dokumen == 'Surat Permohonan Rasmi')
 
-                                                                                {{ $dokumen->tajuk_dokumen }} <br>
-                                                                                ({{ $dokumen->no_rujukan }} |
-                                                                                {{ Carbon\Carbon::parse($dokumen->date_surat)->format('d/m/Y') }})
+                                                                                {{ $dokumen->tajuk_dokumen }}
+                                                                                @if ($dokumen->no_rujukan)
+                                                                                    <br>
+                                                                                    ({{ $dokumen->no_rujukan }} |
+                                                                                    {{ Carbon\Carbon::parse($dokumen->date_surat)->format('d/m/Y') }})
+                                                                                @endif
                                                                             @else
 
                                                                                 {{ $dokumen->tajuk_dokumen }}
@@ -444,10 +444,11 @@
                                                                             </button>
                                                                         </td>
                                                                     </tr>
+                                                                    <?php $count++; ?>
                                                                 @endforeach
                                                                 @if (Auth::user()->hasRole(['Pemohon Data']) && ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar'))
                                                                     <tr>
-                                                                        <td>*</td>
+                                                                        <td>{{ $count }}</td>
                                                                         <td>Borang Akuan Pelajar</td>
                                                                         <td>-</td>
                                                                         <td>
@@ -1031,7 +1032,7 @@
             });
 
             $("#senarai_data_table").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                "dom": "<'row'<'col-sm-6'i><'col-sm-3 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 // "scrollX": true,
@@ -1041,6 +1042,7 @@
                 "autoWidth": true,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
                     "sEmptyTable": "Tiada rekod ditemui",
                     "sZeroRecords": "Tiada rekod ditemui",
                     "sLengthMenu": "Papar _MENU_ rekod",
@@ -1056,7 +1058,7 @@
             }).columns.adjust();
 
             $("#dokumen_table").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 // "scrollX": true,
@@ -1065,6 +1067,7 @@
                 "autoWidth": false,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
                     "sEmptyTable": "Tiada rekod ditemui",
                     "sZeroRecords": "Tiada rekod ditemui",
                     "sLengthMenu": "Papar _MENU_ rekod",
@@ -1190,9 +1193,11 @@
                                                 </label>`
                 }
             });
-
-            $("#dynamicDaerah").empty();
-            $("#dynamicDaerah").append(`<div class="form-group multipleSelection">
+            if (daerah_append == '') {
+                $("#dynamicDaerah").empty();
+            } else {
+                $("#dynamicDaerah").empty();
+                $("#dynamicDaerah").append(`<div class="form-group multipleSelection">
                                             <div class="selectBox"
                                                 onclick="showCheckboxes()">
                                                 <select class="form-control">
@@ -1209,7 +1214,7 @@
                                                 ` + daerah_append + `
                                             </div>
                                         </div>`);
-
+            }
         }
 
         function selectUpdateNegeri() {
@@ -1227,8 +1232,11 @@
                 }
             });
 
-            $("#dynamicDaerahs").empty();
-            $("#dynamicDaerahs").append(`<div class="form-group multipleSelection">
+            if (daerah_append == '') {
+                $("#dynamicDaerahs").empty();
+            } else {
+                $("#dynamicDaerahs").empty();
+                $("#dynamicDaerahs").append(`<div class="form-group multipleSelection">
                                             <div class="selectBox"
                                                 onclick="showCheckboxes()">
                                                 <select class="form-control">
@@ -1245,7 +1253,7 @@
                                                 ` + daerah_append + `
                                             </div>
                                         </div>`);
-
+            }
         }
 
         function displayCheck() {

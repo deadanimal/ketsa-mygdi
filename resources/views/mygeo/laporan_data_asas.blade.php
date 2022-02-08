@@ -14,38 +14,6 @@
         }
 
     </style>
-    <script>
-        $(document).ready(function() {
-            $('.filterBtn').click(function() {
-                var agensi_id = $('.pilihAgensi').val();
-                var start_date = $('.startDate').val();
-                var end_date = $('.endDate').val();
-                console.log(agensi_id, start_date, end_date);
-
-                $.ajax({
-                    method: "POST",
-                    url: "filter_by_agensi",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "agensi_id": agensi_id,
-                        "start_date": start_date,
-                        "end_date": end_date
-                    },
-                }).done(function(res) {
-                    // alert("Status pengguna berjaya diubah.");
-                    console.log(res['data']);
-                    let array = res['data'];
-                    $('#laporan_perincian').DataTable().clear().draw();
-                    if (res['data'].length > 0) {
-                        array.forEach(element => {
-                            $('#laporan_perincian').DataTable().row.add($(element)).draw();
-                        });
-                    }
-                    $('.countRow').html(res['counter']);
-                });
-            });
-        });
-    </script>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -119,13 +87,17 @@
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h3 class="mb-0">Laporan Perincian Permohonan Data-data Asas</h3>
+                                        <h3 class="mb-0">Laporan Statistik Permohonan Data-data Asas</h3>
                                     </div>
                                     <div class="col-4 text-right">
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
+                                <div class="chart mb-4">
+                                    <canvas id="bar-chart-horizontal" class="chart-canvas"></canvas>
+                                </div>
+                                {{-- <input type="button" value="Add Data" onclick="addData()"> --}}
                                 <table id="laporan_perincian" class="table table-bordered table-striped" style="width:100%">
                                     <thead>
                                         <tr>
@@ -409,6 +381,7 @@
                 "autoWidth": false,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
                     "sEmptyTable": "Tiada rekod ditemui",
                     "sZeroRecords": "Tiada rekod ditemui",
                     "sLengthMenu": "Papar _MENU_ rekod",
@@ -423,200 +396,138 @@
                 }
             });
         });
-
-        // $(document).ready(function() {
-        //     $("#laporan_kategori").DataTable({
-        //         "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-        //             "<'row'<'col-sm-12'tr>>" +
-        //             "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-        //         "buttons": [{
-        //                 extend: 'csv',
-        //                 className: 'btn btn-sm btn-danger',
-        //                 title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
-        //             },
-        //             {
-        //                 extend: 'excel',
-        //                 className: 'btn btn-sm btn-success',
-        //                 title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
-        //             },
-        //             {
-        //                 extend: 'print',
-        //                 text: 'Cetak',
-        //                 className: 'btn btn-sm btn-primary',
-        //                 title: 'LAPORAN BILANGAN PERMOHONAN DATA MENGIKUT KATEGORI',
-        //             }
-        //         ],
-        //         "scrollX": true,
-        //         "ordering": false,
-        //         "responsive": true,
-        //         "autoWidth": false,
-        //         "oLanguage": {
-        //             "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-        //             "sEmptyTable": "Tiada rekod ditemui",
-        //             "sZeroRecords": "Tiada rekod ditemui",
-        //             "sLengthMenu": "Papar _MENU_ rekod",
-        //             "sLoadingRecords": "Sila tunggu...",
-        //             "sSearch": "Carian:",
-        //             "oPaginate": {
-        //                 "sFirst": "Pertama",
-        //                 "sLast": "Terakhir",
-        //                 "sNext": ">",
-        //                 "sPrevious": "<",
-        //             }
-        //         }
-        //     });
-        // });
     </script>
+    <script src="assets/js/plugins/chartjs.min.js"></script>
+    <script>
+        // Bar chart horizontal
+        var ctx6 = document.getElementById("bar-chart-horizontal").getContext("2d");
 
-    {{-- <script>
-        $(document).ready(function() {
-            $("#laporan_statistik").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                "buttons": [{
-                        extend: 'csv',
-                        className: 'btn btn-sm btn-danger',
-                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn btn-sm btn-success',
-                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
-                    },
-                    {
-                        extend: 'print',
-                        text: 'Cetak',
-                        className: 'btn btn-sm btn-primary',
-                        title: 'LAPORAN STATISTIK PERMOHONAN DATA MENGIKUT TAHUN',
-                    }
+        var chart = new Chart(ctx6, {
+            type: "bar",
+            data: {
+                labels: [
+                    @foreach ($permohonans as $mohon)
+                        '{{ $mohon->agensi }}',
+                    @endforeach
                 ],
-                "scrollX": true,
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
-                    }
-                }
-            });
-        });
-        $(document).ready(function() {
-            $("#laporan_lulus").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                "buttons": [{
-                        extend: 'csv',
-                        className: 'btn btn-sm btn-danger',
-                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
+                datasets: [{
+                    label: " Agensi / Jumlah Permohonan",
+                    weight: 5,
+                    borderWidth: 0,
+                    borderRadius: 4,
+                    backgroundColor: '#0384fc',
+                    data: [
+                        @foreach ($permohonans as $mohon)
+                            '{{ $mohon->total }}',
+                        @endforeach
+                    ],
+                    fill: false,
+                    maxBarThickness: 20
+                }],
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Statistik Jumlah Permohonan Data berdasarkan Agensi",
+                        fontSize: 18,
                     },
-                    {
-                        extend: 'excel',
-                        className: 'btn btn-sm btn-success',
-                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
+                    legend: {
+                        display: false,
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: true,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [3, 3]
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: '#9ca2b7',
+                        }
                     },
-                    {
-                        extend: 'print',
-                        text: 'Cetak',
-                        className: 'btn btn-sm btn-primary',
-                        title: 'LAPORAN BILANGAN PERMOHONAN DATA YANG TELAH DILULUSKAN',
-                    }
-                ],
-                "scrollX": true,
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": false,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
-                    }
-                }
-            });
-        });
-        $(document).ready(function() {
-            $("#laporan_seluruh").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
-                "buttons": [{
-                        extend: 'csv',
-                        className: 'btn btn-sm btn-danger',
-                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
+                    x: {
+                        grid: {
+                            drawBorder: true,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: true,
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#9ca2b7',
+                            padding: 10
+                        }
                     },
-                    {
-                        extend: 'excel',
-                        className: 'btn btn-sm btn-success',
-                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
-                    },
-                    {
-                        extend: 'print',
-                        text: 'Cetak',
-                        className: 'btn btn-sm btn-primary',
-                        title: 'LAPORAN BILANGAN KESELURUHAN PERMOHONAN DATA'
-                    }
-                ],
-                "scrollX": true,
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": true,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
-                    }
-                }
-            });
+                },
+            },
         });
 
+        $(document).ready(function() {
+            $('.filterBtn').click(function() {
+                var agensi_id = $('.pilihAgensi').val();
+                var start_date = $('.startDate').val();
+                var end_date = $('.endDate').val();
+                console.log(agensi_id, start_date, end_date);
 
-        $(document).on("click", ".btnDelete", function() {
-            var user_id = $(this).data('permohonanid');
-            var permohonan_id = $(this).data('permohonanid');
-            var r = confirm("Adakah anda pasti untuk padam permohonan ini?");
-            if (r == true) {
                 $.ajax({
                     method: "POST",
-                    url: "delete_permohonan",
+                    url: "filter_by_agensi",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "user_id": user_id,
-                        "permohonan_id": permohonan_id
+                        "agensi_id": agensi_id,
+                        "start_date": start_date,
+                        "end_date": end_date
                     },
-                }).done(function(response) {
-                    alert("Permohonan berjaya dipadam.");
-                    location.reload();
+                }).done(function(res) {
+                    // alert("Status pengguna berjaya diubah.");
+                    // console.log(res['data']);
+                    let array = res['data'];
+                    $('#laporan_perincian').DataTable().clear().draw();
+                    if (res['data'].length > 0) {
+                        array.forEach(element => {
+                            $('#laporan_perincian').DataTable().row.add($(element)).draw();
+                        });
+                    }
+                    $('.countRow').html(res['counter']);
+
+                    removeData();
+                    chart.data.datasets[0].data = [res['counter']];
+
+                    chart.data.labels = [res['agensi']]
+                    chart.update();
                 });
-            }
+            });
         });
-    </script> --}}
+
+        function getRandomIntInclusive(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function addData() {
+            chart.data.labels.push("NEW")
+            chart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
+            chart.update();
+        }
+
+        function removeData() {
+            chart.data.labels.pop();
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.pop();
+            });
+            chart.update();
+        }
+    </script>
 
 
 

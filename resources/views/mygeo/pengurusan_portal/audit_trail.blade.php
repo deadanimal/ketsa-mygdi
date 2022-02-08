@@ -99,6 +99,7 @@
                 "autoWidth": true,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
                     "sEmptyTable": "Tiada rekod ditemui",
                     "sZeroRecords": "Tiada rekod ditemui",
                     "sLengthMenu": "Papar _MENU_ rekod",

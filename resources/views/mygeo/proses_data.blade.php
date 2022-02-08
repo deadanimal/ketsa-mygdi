@@ -4,9 +4,9 @@
 
     <style>
         /* .ftest {
-                                display: inline;
-                                width: auto;
-                            } */
+                                                display: inline;
+                                                width: auto;
+                                            } */
 
     </style>
 
@@ -71,30 +71,28 @@
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
                                             <?php $count = 1; ?>
-                                            @if (Auth::user()->name == $permohonan->assign_admin)
-                                                <tr>
-                                                    <td>{{ $count }}</td>
-                                                    <td>{{ $permohonan->name }}</td>
-                                                    <td>{{ $permohonan->users->name }}</td>
-                                                    <td>{{ $permohonan->users->kategori }}</td>
-                                                    {{-- <td>{{ $permohonan->assign_admin }}</td> --}}
-                                                    <td>
-                                                        <a href="{{ url('/lihat_permohonan/' . $permohonan->id) }}"
-                                                            class="btn btn-sm btn-info text-center"><i
-                                                                class="fas fa-eye"></i>
-                                                        </a>
-                                                        <button type="button" data-permohonanid="{{ $permohonan->id }}"
-                                                            class="btnDelete btn btn-sm btn-danger mr-2"><i
-                                                                class="fas fa-trash"></i>
-                                                        </button>
-                                                        <a class="btn btn-sm btn-default" data-toggle="modal"
-                                                            data-target="#modal-proses-data-{{ $permohonan->id }}"><span
-                                                                class="text-white">Proses</span>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <?php $count++; ?>
-                                            @endif
+                                            <tr>
+                                                <td>{{ $count }}</td>
+                                                <td>{{ $permohonan->name }}</td>
+                                                <td>{{ $permohonan->users->name }}</td>
+                                                <td>{{ $permohonan->users->kategori }}</td>
+                                                {{-- <td>{{ $permohonan->assign_admin }}</td> --}}
+                                                <td>
+                                                    <a href="{{ url('/lihat_permohonan/' . $permohonan->id) }}"
+                                                        class="btn btn-sm btn-info text-center"><i
+                                                            class="fas fa-eye"></i>
+                                                    </a>
+                                                    <button type="button" data-permohonanid="{{ $permohonan->id }}"
+                                                        class="btnDelete btn btn-sm btn-danger mr-2"><i
+                                                            class="fas fa-trash"></i>
+                                                    </button>
+                                                    <a class="btn btn-sm btn-default" data-toggle="modal"
+                                                        data-target="#modal-proses-data-{{ $permohonan->id }}"><span
+                                                            class="text-white">Proses</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <?php $count++; ?>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -123,7 +121,8 @@
                                 <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
                                 <i class="text-warning float-right" style="font-size: 13px">**Sila kemaskini surat balasan
                                     sebelum isi maklumat proses data</i>
-                                <table id="table_proses_data2" class="table-bordered table-striped" style="width:100%;">
+                                <table id="table_proses_data2" class="table-custom table-bordered table-striped"
+                                    style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -304,11 +303,13 @@
                         format: 'DD-MM-YYYY',
                     },
                     opens: 'left',
-                    drops: 'up'
+                    drops: 'up',
+                    batchMode: 'week-range',
+                    showShortcuts: false
                 });
 
                 $("#table_proses_data").DataTable({
-                    "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'><'col-sm-3'f>>" +
+                    "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
                         "<'row'<'col-sm-12'tr>>" +
                         "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                     "scrollX": true,
@@ -317,6 +318,7 @@
                     "autoWidth": false,
                     "oLanguage": {
                         "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                        "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
                         "sEmptyTable": "Tiada rekod ditemui",
                         "sZeroRecords": "Tiada rekod ditemui",
                         "sLengthMenu": "Papar _MENU_ rekod",

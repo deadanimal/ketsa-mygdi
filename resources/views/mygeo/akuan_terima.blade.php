@@ -101,7 +101,8 @@
                                             <div class="custom-control custom-checkbox m-5">
                                                 <input class="custom-control-input checkAkuanTerima" id="customCheck1"
                                                     type="checkbox" data-permohonanid="{{ $permohonan->id }}"
-                                                    {{ $permohonan->acceptance == '1' ? 'checked disabled' : '' }} {{ Auth::user()->hasRole(['Pemohon Data']) ? '' : 'disabled' }}>
+                                                    {{ $permohonan->acceptance == '1' ? 'checked disabled' : '' }}
+                                                    {{ Auth::user()->hasRole(['Pemohon Data']) ? '' : 'disabled' }}>
                                                 <label class="custom-control-label" for="customCheck1">Saya terima terma dan
                                                     syarat diatas berikut</label>
                                             </div>
@@ -111,8 +112,9 @@
                                 @if (isset($permohonan->acceptance))
                                     <form action="{{ url('api/dokumen/akuan_terima') }}" method="POST" target="_blank">
                                         @csrf
-                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}" >
-                                        <button type="submit" class="btn btn-sm btn-primary mt-2" {{ $permohonan->acceptance != '1' ? 'disabled' : '' }}>Cetak PDF</button>
+                                        <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                        <button type="submit" class="btn btn-sm btn-primary mt-2"
+                                            {{ $permohonan->acceptance != '1' ? 'disabled' : '' }}>Cetak PDF</button>
                                     </form>
                                 @endif
                                 <div class="row mb-0 mt-5">
@@ -131,10 +133,11 @@
     <script>
         $('.checkAkuanTerima').change(function() {
             var permohonan_id = $(this).data('permohonanid');
+            pautan = {!! $permohonan->proses_datas->pautan_data !!};
             var newStatus = '';
             var newStatusText = '';
             if ($(this).prop('checked')) {
-                newStatus = '1';
+                newStatus = '0';
             } else {
                 newStatus = '0';
             }
@@ -148,7 +151,7 @@
                     "acceptance": newStatus
                 },
             }).done(function(response) {
-//                alert("Akuan Penerimaan Data telah direkodkan.");
+                //                alert("Akuan Penerimaan Data telah direkodkan.");
                 // $('#tdUserStatus' + userid).html(newStatusText);
                 swal({
                     title: "Akuan Penerimaan Data",
@@ -156,8 +159,10 @@
                     type: "success",
                     showConfirmButton: false,
                 }).then(function(result) {
-                    window.open("{{ $permohonan->proses_datas->pautan_data }}",'_blank');
-                    window.history.back();
+                    pautan.forEach(element => {
+                        window.open(element, '_blank');
+                    });
+                    window.location.href = "/muat_turun_data";
                 });
             });
         });
@@ -169,6 +174,7 @@
                 "autoWidth": false,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
                     "sEmptyTable": "Tiada rekod ditemui",
                     "sZeroRecords": "Tiada rekod ditemui",
                     "sLengthMenu": "Papar _MENU_ rekod",

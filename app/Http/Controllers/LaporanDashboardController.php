@@ -24,7 +24,22 @@ class LaporanDashboardController extends Controller
      */
     public function index_laporan_data()
     {
-        $permohonans = MohonData::get();
+        $permohonans = DB::table('users')
+        ->join('mohon_data','users.id','=','mohon_data.user_id')
+        ->join('agensi_organisasi',DB::raw('CAST(users.agensi_organisasi AS INT)'),'=','agensi_organisasi.id')
+        ->select(DB::raw('agensi_organisasi.name as agensi'),
+        //  DB::raw('EXTRACT( year from date) as tahun'),
+         DB::raw('count(*) as total'))
+        ->groupBy('agensi')
+        ->get();
+        // dd($permohonans);
+
+        $permohonan_kategori = DB::table('users')
+        ->join('mohon_data','users.id','=','mohon_data.user_id')
+        ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+        ->select('agensi_organisasi.name','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'))
+        ->groupBy('users.name','agensi_organisasi.name','mohon_data.date')
+        ->get();
         $agensi =  AgensiOrganisasi::get();
 
         $permohonan_lulus = MohonData::where(['status' => 3])->get();
@@ -57,6 +72,7 @@ class LaporanDashboardController extends Controller
 
        if ($agensi_mohon) {
         $counter = 0;
+        $org = '';
         $append_data = [];
         foreach ($agensi_mohon as $mohon) {
             if(isset($mohon->users)){
@@ -83,7 +99,8 @@ class LaporanDashboardController extends Controller
             }
         }
         return ['data' => $append_data,
-    'counter' => $counter];
+                'counter' => $counter,
+                'agensi' => $org];
        }
 
     }

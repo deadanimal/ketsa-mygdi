@@ -33,8 +33,6 @@
             height: 130px;
         }
 
-
-
     </style>
 
     <div class="content-wrapper">
