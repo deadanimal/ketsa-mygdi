@@ -115,7 +115,6 @@
         tr:nth-child(even) {
             /* background-color: #dddddd; */
         }
-<<<<<<< HEAD
 
         html,
         body {
@@ -123,11 +122,6 @@
             color: black !important;
         }
 
-=======
-        html{
-            font-size: 110%;
-        }
->>>>>>> 59d1da30b3d7c0b48386d76ddd8bf8f202f50ba9
     </style>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
