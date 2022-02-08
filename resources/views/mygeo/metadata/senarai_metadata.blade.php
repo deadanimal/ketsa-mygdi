@@ -89,7 +89,7 @@
                   </thead>
                   <tbody>
                     <?php
-                    $bil = 1;
+                    $bil = ($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0);
                     if(count($metadatas) > 0){
                       foreach($metadatas as $key=>$val){
                           if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString)){
@@ -333,6 +333,10 @@
                     ?>
                   </tbody>
                 </table>
+
+                {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->withQueryString()->links():"") }}
+                                
+                Paparan {{$metadatasdb->total()}} rekod ({{($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0)}} hingga {{($metadatasdb->currentPage()-1)*$metadatasdb->perPage()+count($metadatasdb)}})
                 
                       <?php /* ?>
                       <table id="table_metadatas2" class="table table-bordered table-striped" style="overflow: auto;">
@@ -358,13 +362,16 @@
 
 <script>
   $(document).ready(function(){
+    
     var table = $("#table_metadatas").DataTable({
+          "paging": false,
+          "bInfo" : false,
         "orderCellsTop": true,
         "ordering": false,
         "responsive": false,
         "autoWidth": true,
         "oLanguage": {
-            "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+            // "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
             "sEmptyTable": "Tiada rekod ditemui",
              "sZeroRecords": "Tiada rekod ditemui",
             "sLengthMenu": "Papar _MENU_ rekod",
@@ -378,6 +385,7 @@
             }
         },
     });
+    
     
     <?php /* ?>
     var table2 = $("#table_metadatas2").DataTable({
@@ -423,14 +431,20 @@
 
     // Setup - add a text input to each footer cell
     $('#table_metadatas thead tr').clone(true).appendTo('#table_metadatas thead');
+    var counter2 = 0;
     $('#table_metadatas thead tr:eq(1) th').each( function (i) {
-        var title = $(this).text();
-        $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
-        $('input',this).on('keyup change', function(){
-            if(table.column(i).search() !== this.value){
-                table.column(i).search(this.value).draw();
-            }
-        });
+        if(counter2 != 1 && counter2 != 2 && counter2 != 3){
+          $(this).html('');
+        }else{
+          var title = $(this).text();
+          $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
+          $('input',this).on('keyup change', function(){
+              if(table.column(i).search() !== this.value){
+                  table.column(i).search(this.value).draw();
+              }
+          });
+        }
+        counter2++;
     });
     
     // Setup - add a text input to each footer cell

@@ -434,7 +434,7 @@ class PortalController extends Controller
         if($request->namaAgensiOrganisasi != "" && !isset($request->namaBahagian)){
             $aoi = AgensiOrganisasi::where('name','ILIKE',$request->namaAgensiOrganisasi)->whereNull('bahagian')->get()->first();
             if(!empty($aoi)){
-                echo json_encode(["error"=>"1","msg"=>"Nama Agensi / Organisasi / Instutisi telah wujud. Sila pilih nama lain."]);
+                echo json_encode(["error"=>"1","msg"=>"Nama Agensi / Organisasi / Institusi telah wujud. Sila pilih nama lain."]);
                 exit();
             }
         }

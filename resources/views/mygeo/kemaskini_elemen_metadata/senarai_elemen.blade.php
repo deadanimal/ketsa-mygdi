@@ -186,22 +186,21 @@
     });
 
     $(document).ready(function () {
-        var templateInactive = <?php echo json_encode($template->template); ?>;
+        var templateInactive = <?php echo json_encode($template->template); ?>; //this includes all elements regardless of status active or inactive. i wasn't thinking straight lulz
         //================================
         $('.sortableContainer1').sortable();
+        /*
         $('#saveTemplate').button().click(function() {
             //get order of all inputs except Data Quality tabs
             var itemOrder = $('.sortableContainer1 .sortable').sortable();
             var jsontxt = "";
             jQuery.each(itemOrder, function(index, item) {
-//                var f = $('[name="'+item.name+'"]');
                 jsontxt = jsontxt + item.name + "@";
             });
             
             //get order of all inputs of Data Quality tabs
             var itemOrder2 = $('.dqtabstable .sortable').sortable();
             jQuery.each(itemOrder2, function(index, item) {
-//                var f = $('[name="'+item.name+'"]');
                 jsontxt = jsontxt + item.name + "@";
             });
             
@@ -209,20 +208,62 @@
             $('#version').val($('#versiontop').val());
             $('#formMetadataTemplate').submit();
         });
+        */
+        $('#saveTemplate').button().click(function() {
+            //get order of all inputs except Data Quality tabs
+            var itemOrder = $('.sortableContainer1 .sortable').sortable();
+            var jsontxt = [];
+            jQuery.each(itemOrder, function(index, item) {
+                var accordionId = $(item).closest('.panel-collapse').attr('id');
+                var accordion = accordionId.replace('collapse','');
+                if($(item).hasClass("newInput")){
+                    var newInputName = $(item).parent().parent().find('.customInput_label').val();
+                    jsontxt.push({"name":newInputName,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                }else{
+                    jsontxt.push({"name":item.name,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                }
+            });
+            
+            //get order of all inputs of Data Quality tabs
+            var itemOrder2 = $('.dqtabstable .sortable').sortable();
+            jQuery.each(itemOrder2, function(index, item) {
+                var accordionId = $(item).closest('.panel-collapse').attr('id');
+                var accordion = accordionId.replace('collapse','');
+                if($(item).hasClass("newInput")){
+                    var newInputName = $(item).parent().parent().find('.customInput_label').val();
+                    jsontxt.push({"name":newInputName,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                }else{
+                    jsontxt.push({"name":item.name,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                }
+            });
+            
+            $('#activeInputs').val(JSON.stringify(jsontxt));
+            $('#version').val($('#versiontop').val());
+            $('#formMetadataTemplate').submit();
+        });
         
         $(document).on("click",".btnClose",function(){
-            $(this).parent().find('.sortable').attr('data-status', 'inactive');
+            if($(this).data('status') !== "customInput"){
+                $(this).parent().find('.sortable').attr('data-status', 'inactive');
+            }
             $(this).parent().hide();
         });
         $(document).on("click",".btnTambah",function(){
             var category = $('#templateKategori').val().toLowerCase();
             var accordion = $(this).data('accordion');
             var availableOptions = {};
-            jQuery.each(templateInactive[category]['accordion'+accordion], function(index, item) {
-                if(item['status'] === "inactive"){
-                    availableOptions[index] = item;
+            
+            $('.btnTambahElemenBaru').attr('data-accordion',accordion);
+            
+            var hiddenButNotSaved = $("#collapse"+accordion+" .sortable[data-status='inactive']").sortable();
+            
+            jQuery.each(hiddenButNotSaved, function(index, item) {
+                if($(item).data('status') == "inactive"){
+                    var inputdetail = templateInactive[category]['accordion'+accordion][item.name];
+                    availableOptions[item.name] = inputdetail.label_bm;
                 }
             });
+
 //            console.log(availableOptions);
 //            console.log($.isEmptyObject(availableOptions));
 //            console.log(templateInactive[category]['accordion'+accordion]);
@@ -230,7 +271,7 @@
                 $('.availableOptionsContainer').empty();
                 var html = '<select name="tambahElemen" data-accordion="'+accordion+'" class="form-control tambahElemen">';
                 jQuery.each(availableOptions, function(index, item) {
-                    html += '<option value="'+index+'">'+item.label_bm+'</option></select>';
+                    html += '<option value="'+index+'">'+item+'</option>';
                 });
                 html += '</select>';
                 $('.availableOptionsContainer').append(html);
@@ -242,21 +283,12 @@
             var accordion = $('.tambahElemen').data('accordion');
             var availableOptions = {};
             
-            //SMBG SINI - re-show hidden inputs here
-            
-            /*
-            jQuery.each(templateInactive[category]['accordion'+accordion], function(index, item) {
-                if(index === tambahElemen){
-                    var html = '<select name="tambahElemen" data-accordion="'+accordion+'" class="form-control tambahElemen">';
-                    jQuery.each(availableOptions, function(index, item) {
-                        html += '<option value="'+index+'">'+item.label_bm+'</option></select>';
-                    });
-                    html += '</select>';
-                    $('#collapse'+accordion+' .sortableContainer1').append(html);
-                }
-            });
-                    .removeData( "test1" );
-            */
+            $('[name="'+tambahElemen+'"]').closest('.sortIt').show();
+            $('[name="'+tambahElemen+'"]').attr('data-status', 'active');
+        });
+        $(document).on("click",".btnTambahElemenBaru",function(){
+            var accordion = $(this).data('accordion');
+            $('#collapse'+accordion+' .sortableContainer1').append('<div class="row mb-2 sortIt"><div class="col-3 pl-5"><label class="form-control-label mr-4" for="uname"><input type="text" name="newInputName" class="customInput_label"></label><label class="float-right">:</label></div><div class="col-8"><input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput"/></div><span class="close btnClose">&times;</span></div>');
         });
         //================================
 
@@ -496,9 +528,7 @@
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').hide();
-                $('#content_info_dropdown').prop('disabled',false);
                 $('#content_info_text').prop('disabled',true);
-                $('#content_info_dropdown').show();
                 $('.lblContentInfo').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
                 $('#div_contohJenisMetadata').show();
@@ -518,12 +548,10 @@
                 $('.divDataQualityTabs').hide();
                 $('.divUseLimitation').show();
                 $('.divMaintenanceInfo').hide();
-                $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Live Data and Maps');
                 $('#content_info_text').val('Live Data and Maps');
                 $('.lblContentInfo').show();
-                $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',true);
                 $('#div_contohJenisMetadata').hide();
             } else if (kategori.toLowerCase() == "gridded") {
@@ -542,12 +570,10 @@
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').show();
-                $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Gridded');
                 $('#content_info_text').val('Gridded');
                 $('.lblContentInfo').show();
-                $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
                 $('#div_contohJenisMetadata').show();
             } else if (kategori.toLowerCase() == "imagery") {
@@ -566,12 +592,10 @@
                 $('.divDataQualityTabs').show();
                 $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').show();
-                $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Imagery');
                 $('#content_info_text').val('Imagery');
                 $('.lblContentInfo').show();
-                $('#content_info_dropdown').hide();
                 $('#c12_maintenanceUpdate').prop('disabled',false);
                 $('#div_contohJenisMetadata').show();
             }

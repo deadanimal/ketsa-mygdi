@@ -264,7 +264,7 @@ $(document).ready(function(){
         var bahagian = $("#bahagian").val();
         var msg = "";
         if(nric.length < 12){
-            msg = msg + "Nombor NRIC tidak lengkap\r\n\r\n";
+//            msg = msg + "Nombor NRIC tidak lengkap\r\n\r\n"; //TEMPORARILY COMMENTED. TO UNCOMMENT AFTER BENGKEL
         }
         if(!isEmail(email)){
             msg = msg + "Emel tidak sah\r\n\r\n";

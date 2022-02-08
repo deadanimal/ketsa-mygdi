@@ -503,17 +503,17 @@
     $(document).on("click", ".btn_login", function() {
         var captcha = $('#g-recaptcha-response').val();
         <?php
-        if($_SERVER['HTTP_HOST'] == "127.0.0.1:8000"){
+        if($_SERVER['HTTP_HOST'] == "localhost:8888"){
             ?>
             $("#formLogin").submit();
             <?php
         }else{
             ?>
-            if (captcha == "") {
-                alert("Sila lengkapkan captcha");
-            } else {
+            //if (captcha == "") {
+               //alert("Sila lengkapkan captcha");
+            //} else {
                 $("#formLogin").submit();
-            }
+            //}
             <?php
         }
         ?>
@@ -626,7 +626,7 @@
                 $('.2_options_g2e_sub').each(function() {
                     $(this).prop('checked', false);
                 });
-                alert('Sekiranya anda memilih peranan Penerbit/Pengesah Metadata dan ingin mendaftar sebagai Pemohon Data juga, kategori yang boleh dipilih hanya G2G sahaja.');
+//                alert('Sekiranya anda memilih peranan Penerbit/Pengesah Metadata dan ingin mendaftar sebagai Pemohon Data juga, kategori yang boleh dipilih hanya G2G sahaja.');
                 $('.divG2e').hide();
             }else{
                 $('.divG2e').show();
@@ -661,7 +661,7 @@
             if(selectedPeranan.replace(/,\s*$/, "").includes('Pemohon') && selectedPeranan.replace(/,\s*$/, "").includes('Metadata')){
                 $('#pengesahMetadata').prop('checked',false);
                 $('#penerbitMetadata').prop('checked',false);
-                alert('Sekiranya anda memilih peranan Penerbit/Pengesah Metadata dan ingin mendaftar sebagai Pemohon Data juga, kategori yang boleh dipilih hanya G2G sahaja.');
+//                alert('Sekiranya anda memilih peranan Penerbit/Pengesah Metadata dan ingin mendaftar sebagai Pemohon Data juga, kategori yang boleh dipilih hanya G2G sahaja.');
             }
         });
 

@@ -189,7 +189,15 @@
                                             ?>
                                             <tr>
                                                 <td>{{ $bil }}</td>
-                                                <td>{{ $user->name }}</td>
+                                                <td>
+                                                    <?php
+                                                    if(trim($user->name) != ""){
+                                                        echo $user->name;        
+                                                    }elseif(trim($user->mygdix_username != "")){
+                                                        echo $user->mygdix_username; 
+                                                    }
+                                                    ?>
+                                                </td>
                                                 <td>
                                                     <?php
                                                     if(!is_numeric($user->agensi_organisasi)) {

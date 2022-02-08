@@ -124,76 +124,78 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_agensi_organisasi" class="table table-bordered table-striped"
-                                    style="width:100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>BIL</th>
-                                            <th>SEKTOR</th>
-                                            <th>AGENSI / ORGANISASI / INSTITUSI</th>
-                                            <th>BAHAGIAN</th>
-                                            <th>TINDAKAN</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $counter = 1;
-                                        foreach ($aos as $ao){
-                                            ?>
-                                        <tr>
-                                            <td>{{ $counter }}</td>
-                                            <td>
-                                                <?php
-                                                if ($ao->sektor == '1') {
-                                                    echo 'Kerajaan';
-                                                } elseif ($ao->sektor == '2') {
-                                                    echo 'Swasta';
-                                                } elseif ($ao->sektor == '3') {
-                                                    echo 'Institusi Awam';
-                                                } elseif ($ao->sektor == '4') {
-                                                    echo 'Institusi Swasta';
-                                                }
+                                <div style="overflow-x:auto;">
+                                    <table id="table_agensi_organisasi" class="table table-bordered table-striped"
+                                        style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>BIL</th>
+                                                <th>SEKTOR</th>
+                                                <th>AGENSI / ORGANISASI / INSTITUSI</th>
+                                                <th>BAHAGIAN</th>
+                                                <th>TINDAKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $counter = 1;
+                                            foreach ($aos as $ao){
                                                 ?>
-                                            </td>
-                                            <td>{{ $ao->name }}</td>
-                                            <td>{{ $ao->bahagian != '' ? $ao->bahagian : $ao->name }}</td>
-                                            <td>
-                                                @if ($ao->bahagian != '')
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-success btnKemaskiniBahagian"
-                                                        data-rowid="{{ $ao->id }}" data-toggle="modal"
-                                                        data-target="#modal_kemaskini_bahagian">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                @else
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-success btnKemaskiniAgensiOrganisasi"
-                                                        data-rowid="{{ $ao->id }}"
-                                                        data-agensiname="{{ $ao->name }}" data-toggle="modal"
-                                                        data-target="#modal_kemaskini_agensi_organisasi">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                @endif
-                                                @if ($ao->bahagian != '')
-                                                    <button type="button" data-rowid="{{ $ao->id }}"
-                                                        data-type="bahagian" class="btnDelete btn btn-sm btn-danger mx-2">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                @else
-                                                    <button type="button" data-rowid="{{ $ao->id }}"
-                                                        data-type="agensi_organisasi"
-                                                        class="btnDelete btn btn-sm btn-danger mx-2">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        <?php
-                                            $counter++;
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td>{{ $counter }}</td>
+                                                <td>
+                                                    <?php
+                                                    if ($ao->sektor == '1') {
+                                                        echo 'Kerajaan';
+                                                    } elseif ($ao->sektor == '2') {
+                                                        echo 'Swasta';
+                                                    } elseif ($ao->sektor == '3') {
+                                                        echo 'Institusi Awam';
+                                                    } elseif ($ao->sektor == '4') {
+                                                        echo 'Institusi Swasta';
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td>{{ $ao->name }}</td>
+                                                <td>{{ $ao->bahagian != '' ? $ao->bahagian : $ao->name }}</td>
+                                                <td>
+                                                    @if ($ao->bahagian != '')
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-success btnKemaskiniBahagian"
+                                                            data-rowid="{{ $ao->id }}" data-toggle="modal"
+                                                            data-target="#modal_kemaskini_bahagian">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                    @else
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-success btnKemaskiniAgensiOrganisasi"
+                                                            data-rowid="{{ $ao->id }}"
+                                                            data-agensiname="{{ $ao->name }}" data-toggle="modal"
+                                                            data-target="#modal_kemaskini_agensi_organisasi">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                    @endif
+                                                    @if ($ao->bahagian != '')
+                                                        <button type="button" data-rowid="{{ $ao->id }}"
+                                                            data-type="bahagian" class="btnDelete btn btn-sm btn-danger mx-2">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    @else
+                                                        <button type="button" data-rowid="{{ $ao->id }}"
+                                                            data-type="agensi_organisasi"
+                                                            class="btnDelete btn btn-sm btn-danger mx-2">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                $counter++;
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

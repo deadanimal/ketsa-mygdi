@@ -286,7 +286,7 @@ $(document).ready(function(){
         var bahagian = $("#bahagian").val();
         var msg = "";
         if(nric.length < 12){
-            msg = msg + "Nombor NRIC tidak lengkap\r\n\r\n";
+//            msg = msg + "Nombor NRIC tidak lengkap\r\n\r\n"; //TEMPORARILY COMMENTED. TO UNCOMMENT AFTER BENGKEL
         }
         if(!isEmail(email)){
             msg = msg + "Emel tidak sah\r\n\r\n";
@@ -296,7 +296,7 @@ $(document).ready(function(){
         }
         @if($user->hasRole('Pengesah Metadata') || $user->hasRole('Penerbit Metadata'))
         if(bahagian == ""){
-            msg = msg + "Sila pilih bahagian\r\n\r\n";
+            //msg = msg + "Sila pilih bahagian\r\n\r\n";
         }
         @endif
         if(msg.length > 0){

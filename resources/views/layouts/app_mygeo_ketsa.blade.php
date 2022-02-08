@@ -115,6 +115,7 @@
         tr:nth-child(even) {
             /* background-color: #dddddd; */
         }
+<<<<<<< HEAD
 
         html,
         body {
@@ -122,6 +123,11 @@
             color: black !important;
         }
 
+=======
+        html{
+            font-size: 110%;
+        }
+>>>>>>> 59d1da30b3d7c0b48386d76ddd8bf8f202f50ba9
     </style>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -219,12 +225,6 @@
                                                             class="right fas fa-angle-left"></i></span>
                                                 </a>
                                                 <ul class="nav nav-sm nav-treeview">
-                                                    <li class="nav-item">
-                                                        <a href="{{ url('mygeo_pengisian_metadata') }}"
-                                                            class="nav-link active">
-                                                            <span class="nav-link-text">Pengisian Metadata</span>
-                                                        </a>
-                                                    </li>
                                                     <li class="nav-item">
                                                         <a href="{{ url('mygeo_pengesahan_metadata') }}"
                                                             class="nav-link active">

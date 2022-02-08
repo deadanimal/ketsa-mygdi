@@ -328,6 +328,10 @@
             var mapurl = $('#c2_serviceUrl').val();
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
         });
+        $(document).on("click", "#btnTestServiceUrl2", function () {
+            var mapurl = $('#c2_serviceUrl').val();
+            $('#mapiframe').attr('src', '<?php echo url("/"); ?>/leafletwms/examples/index.html?url='+mapurl);
+        });
         $(document).on("click", ".btnTestUrl", function () {
             var weburl = $(this).parent().parent().find('.urlToTest').val();
             window.open(weburl, '_blank');

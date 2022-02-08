@@ -329,7 +329,8 @@
                         <input type="text" class="form-control form-control-sm ml-3" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ old('c2_serviceUrl') }}">
                     </div>
                     <div class="col-1">
-                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
+                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test (intecx)</button>
+                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl2" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test (wms)</button>
                         @error('c2_serviceUrl')
                             <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -405,7 +406,7 @@
                 <div class="row mb-2">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_contact_bahagian" data-toggle="tooltip" title="Nama bahagian yang bertanggungjawab terhadap maklumat geospatial">
-                            <?php echo __('lang.bahagian_name'); ?><span class="text-warning">*</span>
+                            <?php echo __('lang.bahagian_name'); ?>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-7">

@@ -20,6 +20,9 @@ use App\Mail\MailNotify;
 use App\AuditTrail;
 use App\Kategori;
 use App\Ftesttodel2;
+use App\MacgdiGptUserAdametadata;
+use App\MacgdiGptResource;
+use App\MacgdiGptResourceData;
 
 class UserController extends Controller {
 
@@ -31,7 +34,7 @@ class UserController extends Controller {
     function __construct() {
         // $this->middleware('auth');
     }
-
+ 
     public function index() {
         if(!auth::user()->hasRole(['Pentadbir Aplikasi','Super Admin','Pentadbir Aplikasi'])){
             exit();
@@ -76,7 +79,7 @@ class UserController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Metadata','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
-
+        
         $users_all = User::whereHas("roles", function ($q) {
                     $q->where("name", "Pengesah Metadata")->orWhere("name", "Penerbit Metadata");
                 })->orderBy('name')->get();
@@ -487,6 +490,41 @@ class UserController extends Controller {
     }
 
     public function show(){
+        /*
+        $f = MacgdiGptUserAdametadata::get()->all();
+        $counter = 1;
+        $emailsTaken = [];
+        foreach($f as $d){
+            $nu = new User;
+            $nu->name = $d['fname']." ".$d["lname"];
+            $nu->email = (($d['mail'] != "" && !in_array($d['mail'],$emailsTaken)) ? $d['mail']:"resetMe".$counter."@gmail.com");
+            $nu->sektor = ($d['category'] == "Government" ? "1":"2");
+            $nu->phone_pejabat = $d['phone'];
+            $nu->disahkan = "1";
+            $nu->status = '1';
+            $nu->alamat = $d['addr'];
+            $nu->gambar_profil = "mrt.jpg";
+            $nu->deleted = 'no';
+            $nu->assigned_roles = "Penerbit Metadata";
+            $nu->mygdix_user_id = $d['userid'];
+            $nu->postcode = $d['pcode'];
+            $nu->city = $d['city'];
+            $nu->country = '1';
+            $pass = $this->generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',20);
+            $nu->password = Hash::make($pass);
+            $nu->save();
+
+            $emailsTaken[] = $d['mail'];
+
+            $counter++;
+
+            $nu->assignRole("Penerbit Metadata");
+        }
+        // dd($f);
+        // dd('done');
+        */
+
+
 //        dd(Auth::user());
 //        Auth::user()->assignRole('Pemohon Data');
 //        if (!empty(Auth::user()->getRoleNames())) {
@@ -495,6 +533,64 @@ class UserController extends Controller {
 //            }
 //        }
 //        exit();
+/*
+        $users = User::get();
+        foreach($users as $user){
+            $resource = MacgdiGptResource::where('owner',$user->mygdix_user_id)->get();
+            if(count($resource) > 0){
+                foreach($resource as $r){
+                    if($r->approvalstatus != "approved" && $r->approvalstatus != "posted"){
+                        continue;
+                    }
+
+                    echo "<br>rowid: ".$r->id_pk.', doccuid: '.$r->docuuid.', id: '.$r->id;
+                    $resourceData = MacgdiGptResourceData::where('docuuid',$r->docuuid)->where('id',$r->id)->get()->first();
+                    if(!$resourceData){
+                        echo ", NORESOURCEDATA";
+                        continue;
+                    }
+                    $maxid = MetadataGeo::on('pgsql2')->max('id');
+
+                    // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
+                    $data = $data ?? random_bytes(16);
+                    assert(strlen($data) == 16);
+
+                    // Set version to 0100
+                    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+                    // Set bits 6-7 to 10
+                    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+                    // Output the 36 character UUID.
+                    $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+
+                    $mg = new MetadataGeo;
+                    $mg->timestamps = false;
+                    $mg->id = $maxid + 1;
+                    $mg->data = $resourceData->xml;
+                    $mg->changedate = date("Y-m-d H:i:s");
+                    $mg->createdate = date("Y-m-d H:i:s");
+                    $mg->popularity = 0;
+                    $mg->rating = 0;
+                    $mg->schemaid = "iso19139";
+                    $mg->istemplate = "n";
+                    $mg->isharvested = "n";
+                    $mg->owner = 1; //unused
+                    $mg->source = "e1be8c47-7b4b-4fb9-862a-16a349e5f586";
+                    $mg->uuid = $resourceData->docuuid;
+                    $mg->disahkan = 1;
+                    $mg->portal_user_id = $user->id;
+                    $mg->title = $r->title;
+                    // $mg->save();
+                }
+            }
+            // echo "<br>User: ".$user->name.", metadatacount: ".count($resource);
+        }
+        echo "fdone";
+        exit();
+
+*/
+
+
 
 //        $usersToMigrate = Ftesttodel2::get();
 //        foreach($usersToMigrate as $u){
@@ -597,7 +693,7 @@ class UserController extends Controller {
 
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
-        $user->nric = $request->nric;
+//        $user->nric = $request->nric; //TEMPORARILY COMMENTED. TO UNCOMMENT AFTER BENGKEL
         $user->email = $request->email;
         $user->agensi_organisasi = $request->agensi_organisasi;
         $user->bahagian = $request->bahagian;
@@ -652,7 +748,7 @@ class UserController extends Controller {
 
         $user = User::where("id",$request->userid)->get()->first();
         $user->name = $request->uname;
-        $user->nric = $request->nric;
+//        $user->nric = $request->nric; //TEMPORARILY COMMENTED. TO UNCOMMENT AFTER BENGKEL
         $user->email = $request->email;
         $user->agensi_organisasi = $request->agensi_organisasi;
         $user->bahagian = $request->bahagian;

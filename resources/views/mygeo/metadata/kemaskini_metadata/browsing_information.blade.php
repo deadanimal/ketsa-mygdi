@@ -16,7 +16,7 @@
             <div class="row mb-2" id="div_contohJenisMetadata">
                 <div class="col-3">
                     <label class="form-control-label mr-4" for="file_contohJenisMetadata">
-                        Muat Naik Fail Contoh Jenis Metadata Yang Dimasukkan
+                        Sampel Data
                     </label>
                 </div>
                 <div class="col-8">
