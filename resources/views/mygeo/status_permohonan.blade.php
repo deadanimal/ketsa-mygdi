@@ -92,25 +92,25 @@
                                                     <td>{{ $permohonan->users->name }}</td>
                                                     <td>{{ $permohonan->users->kategori }}</td>
                                                     <td>
-                                                        @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1 && $permohonan->status == '3')
+                                                        @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
                                                             <span class="badge badge-pill badge-success">Data
                                                                 Tersedia</span>
-                                                        @elseif(!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0 && $permohonan->status == '3')
-                                                            <span class="badge badge-pill badge-warning ">Tamat Tempoh</span>
+                                                        @elseif (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                            <span class="badge badge-pill badge-warning ">Tamat
+                                                                Tempoh</span>
                                                             <a data-toggle="modal" data-target="#modal-kemaskini-tempoh"
                                                                 data-mohon-id="{{ $permohonan->id }}">
-                                                                <button type="button"
-                                                                    class="btn btn-sm btn-primary ml-1"><i
-                                                                        class="fas fa-edit"></i></button>
-                                                            @elseif ($permohonan->status == '1' || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))
-                                                                <span class="badge badge-pill badge-warning">Dalam
-                                                                    Proses</span>
-                                                            @elseif($permohonan->status == '2')
-                                                                <span class="badge badge-pill badge-danger">Ditolak</span>
-                                                            @elseif($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 1)
-                                                                <span class="badge badge-pill badge-success">Selesai</span>
-                                                            @elseif($permohonan->status == '0')
-                                                                <span class="badge badge-pill badge-info">Baru</span>
+                                                                <button type="button" class="btn btn-sm btn-primary ml-1"><i
+                                                                        class="fas fa-edit"></i></button></a>
+                                                        @elseif ($permohonan->status == '1' || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))
+                                                            <span class="badge badge-pill badge-warning">Dalam
+                                                                Proses</span>
+                                                        @elseif($permohonan->status == '2')
+                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        @elseif($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 1)
+                                                            <span class="badge badge-pill badge-success">Selesai</span>
+                                                        @elseif($permohonan->status == '0')
+                                                            <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif
                                                     </td>
                                                     <td>
@@ -158,7 +158,7 @@
                                     <label class="form-control-label mr-2">Tempoh Muat Turun </label>
                                     <input type="text" class="form-control form-control-sm float-right tempohMuatTurun"
                                         name="tempoh">
-                                        <input type="hidden" name="permohonan_id">
+                                    <input type="hidden" name="permohonan_id">
                                 </div>
                                 <br>
                                 <button class="btn btn-primary float-right" type="submit">
