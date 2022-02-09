@@ -92,20 +92,8 @@
             background-repeat: no-repeat;
         }
 
-<<<<<<< HEAD
         .tb th,
         .tb td {
-=======
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-            color: black
-        }
-
-        th,
-        td:not(.available) {
->>>>>>> d3ed7a405906de8210560d5156662dfc631d563a
             font-size: 14px;
             width: fit-content;
             padding: 8px 15px;
