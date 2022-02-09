@@ -75,11 +75,17 @@
                                             </td>
                                             <td>
                                                 <?php
-                                                if (count($user->getRoleNames()) > 0) {
-                                                    foreach ($user->getRoleNames() as $role) {
-                                                        echo $role . '<br>';
+                                                // if (count($user->getRoleNames()) > 0) {
+                                                //     foreach ($user->getRoleNames() as $role) {
+                                                //         echo $role . '<br>';
+                                                //     }
+                                                // }
+                                                if($user->assigned_roles != ""){
+                                                        $roles = explode(',',$user->assigned_roles);
+                                                        foreach($roles as $r){
+                                                            echo $r."<br>";
+                                                        }
                                                     }
-                                                }
                                                 ?>
                                             </td>
                                             <td>
@@ -146,6 +152,7 @@
                 "autoWidth": true,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+                    "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
                     "sEmptyTable": "Tiada rekod ditemui",
                     "sZeroRecords": "Tiada rekod ditemui",
                     "sLengthMenu": "Papar _MENU_ rekod",

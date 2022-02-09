@@ -292,6 +292,10 @@ Route::post('getKelasKongsis','DataAsasController@getKelasKongsis');
 Route::post('/getSenaraiMetadata', 'MetadataController@getSenaraiMetadata');
 Route::get('/download_file_contohjenismetadata/{id}', 'MetadataController@download_file_contohjenismetadata');
 
+Route::post('get_kategori','SenaraiDataController@get_kategori');
+Route::post('get_subkategori','SenaraiDataController@get_subkategori');
+Route::post('get_lapisan_data','SenaraiDataController@get_lapisan_data');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
