@@ -8,3 +8,4 @@ class LapisanSenaraiData extends Model
 {
     //
 }
+ 
