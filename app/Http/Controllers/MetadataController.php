@@ -60,7 +60,7 @@ class MetadataController extends Controller {
     }
 
     public function index() {
-
+        // dd($_GET,$_POST);
         //call geonetwork api to retrieve metadata by uuid. missing other datas. currently not in use
         //$response = Http::withBasicAuth('admin', 'admin')->get('http://localhost:8080/geonetwork/srv/api/records/e4e26aba-8add-4168-ac10-1dc22d0bbf6f/formatters/xml?addSchemaLocation=true&increasePopularity=true&approved=true');
         //dd(
@@ -80,6 +80,21 @@ class MetadataController extends Controller {
             $query = $query->where('data', 'ilike', '%' . auth::user()->agensiOrganisasi->name . '%')->where('data', 'ilike', '%' . auth::user()->bahagian . '%');
         } elseif (auth::user()->hasRole(['Pentadbir Aplikasi', 'Pentadbir Metadata', 'Super Admin'])) {
             //see all metadatas regardless
+        }
+
+        if(isset($_GET['cari_metadata']) && $_GET['cari_metadata'] != ""){
+            $query = $query->where('title','ilike','%'.$_GET['cari_metadata'].'%');
+        }
+        if(isset($_GET['cari_status']) && $_GET['cari_status'] != ""){
+            if($_GET['cari_status'] == "draf"){
+                $query = $query->where('is_draf','yes');
+            }elseif($_GET['cari_status'] == "perlu_pengesahan"){
+                $query = $query->where('is_draf','no')->where('disahkan','0');
+            }elseif($_GET['cari_status'] == "diterbitkan"){
+                $query = $query->where('is_draf','no')->where('disahkan','yes');
+            }elseif($_GET['cari_status'] == "perlu_pembetulan"){
+                $query = $query->where('is_draf','no')->where('disahkan','no');
+            }
         }
 
         $metadatasdb = $query->orderBy('id', 'DESC')->paginate(20);
@@ -106,7 +121,13 @@ class MetadataController extends Controller {
                 continue;
             }
 
-            $metadatas[$met->id] = [$xml2, $met, $penerbit];
+            if(isset($_GET['cari_kategori']) && $_GET['cari_kategori'] != ""){
+                if(isset($xml2->hierarchyLevel->MD_ScopeCode) && $xml2->hierarchyLevel->MD_ScopeCode != "" && strpos(strtolower($xml2->hierarchyLevel->MD_ScopeCode),strtolower($_GET['cari_kategori'])) !== false) {
+                    $metadatas[$met->id] = [$xml2, $met, $penerbit];
+                }
+            }else{
+                $metadatas[$met->id] = [$xml2, $met, $penerbit];
+            }
         }
 
         $metadataTitles = [];

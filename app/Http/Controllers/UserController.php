@@ -79,7 +79,7 @@ class UserController extends Controller {
         if(!auth::user()->hasRole(['Pentadbir Metadata','Super Admin','Pentadbir Aplikasi'])){
             exit();
         }
-        
+
         $users_all = User::whereHas("roles", function ($q) {
                     $q->where("name", "Pengesah Metadata")->orWhere("name", "Penerbit Metadata");
                 })->orderBy('name')->get();
@@ -491,6 +491,16 @@ class UserController extends Controller {
 
     public function show(){
         /*
+        $users = User::whereNotNull('mygdix_user_id')->get();
+        foreach($users as $u){
+            $f = MacgdiGptUserAdametadata::where('userid',$u->mygdix_user_id)->get()->first();
+            $u->mygdix_username = $f->username;
+            $u->save();
+        }
+        exit();
+        */
+
+        /*
         $f = MacgdiGptUserAdametadata::get()->all();
         $counter = 1;
         $emailsTaken = [];
@@ -533,16 +543,12 @@ class UserController extends Controller {
 //            }
 //        }
 //        exit();
-/*
+        /*
         $users = User::get();
         foreach($users as $user){
             $resource = MacgdiGptResource::where('owner',$user->mygdix_user_id)->get();
             if(count($resource) > 0){
                 foreach($resource as $r){
-                    if($r->approvalstatus != "approved" && $r->approvalstatus != "posted"){
-                        continue;
-                    }
-
                     echo "<br>rowid: ".$r->id_pk.', doccuid: '.$r->docuuid.', id: '.$r->id;
                     $resourceData = MacgdiGptResourceData::where('docuuid',$r->docuuid)->where('id',$r->id)->get()->first();
                     if(!$resourceData){
@@ -577,7 +583,14 @@ class UserController extends Controller {
                     $mg->owner = 1; //unused
                     $mg->source = "e1be8c47-7b4b-4fb9-862a-16a349e5f586";
                     $mg->uuid = $resourceData->docuuid;
-                    $mg->disahkan = 1;
+
+                    if($r->approvalstatus == "approved"){
+                        $mg->disahkan = 'yes';
+                        $mg->is_draf = 'no';
+                    }else{
+                        $mg->disahkan = 0;
+                        $mg->is_draf = 'yes';
+                    }
                     $mg->portal_user_id = $user->id;
                     $mg->title = $r->title;
                     // $mg->save();
@@ -587,8 +600,9 @@ class UserController extends Controller {
         }
         echo "fdone";
         exit();
+        */
 
-*/
+
 
 
 

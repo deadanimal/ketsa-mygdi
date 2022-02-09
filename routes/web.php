@@ -298,6 +298,10 @@ Route::post('get_subkategori','SenaraiDataController@get_subkategori');
 Route::post('get_lapisan_data','SenaraiDataController@get_lapisan_data');
 
 
+Route::post('get_kategori','SenaraiDataController@get_kategori');
+Route::post('get_subkategori','SenaraiDataController@get_subkategori');
+Route::post('get_lapisan_data','SenaraiDataController@get_lapisan_data');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

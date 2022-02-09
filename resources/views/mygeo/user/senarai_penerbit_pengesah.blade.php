@@ -83,12 +83,18 @@
                                                 <td>{{ $user->bahagian }}</td>
                                                 <td>
                                                     <?php
-                                                        if (count($user->getRoleNames()) > 0) {
-                                                            foreach ($user->getRoleNames() as $role) {
-                                                                echo $role . "<br>";
-                                                            }
+                                                    // if (count($user->getRoleNames()) > 0) {
+                                                    //     foreach ($user->getRoleNames() as $role) {
+                                                    //         echo $role . "<br>";
+                                                    //     }
+                                                    // }
+                                                    if($user->assigned_roles != ""){
+                                                        $roles = explode(',',$user->assigned_roles);
+                                                        foreach($roles as $r){
+                                                            echo $r."<br>";
                                                         }
-                                                        ?>
+                                                    }
+                                                    ?>
                                                 </td>
                                             </tr>
                                         <?php

@@ -589,9 +589,8 @@
         $(document).on("click", ".btnSimpanKemaskiniAgensiOrganisasi", function() {
             var rowid = $('#formKemaskiniAgensiOrganisasi .rowid').val();
             var sektor = $('#formKemaskiniAgensiOrganisasi .sektor').val();
-            var namaAgensiOrganisasi = $('#formKemaskiniAgensiOrganisasi .namaAgensiOrganisasi').val();
+            var namaAgensiOrganisasi = $('#formKemaskiniAgensiOrganisasi #namaAgensiOrganisasi3').val();
             var msg = "";
-
             if (sektor == "") {
                 msg = msg + "Sila pilih sektor.\r\n"
             }
@@ -604,7 +603,7 @@
                     method: "POST",
                     url: "{{ url('simpan_kemaskini_agensi_organisasi') }}",
                     data: {
-                        "_token": "{{ csrf_token() }}",
+                        "_token": "{{ csrf_token() }}", 
                         "rowid": rowid,
                         "sektor": sektor,
                         "namaAgensiOrganisasi": namaAgensiOrganisasi,

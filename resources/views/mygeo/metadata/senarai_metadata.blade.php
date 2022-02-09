@@ -50,6 +50,49 @@
                     </div>
                 </div>
               <div class="card-body">
+
+
+                <form id="form_search" method="GET" action="{{ url('mygeo_senarai_metadata') }}">
+                  @csrf
+                  <table>
+                    <tr>
+                      <td>Nama Metadata</td>
+                      <td>:</td>
+                      <td><input type="text" name="cari_metadata"></td>
+                    </tr>
+                    <tr>
+                      <td>Kategori</td>
+                      <td>:</td>
+                      <td>
+                        <select name="cari_kategori">
+                          <option value="">Pilih...</option>
+                          <option value="dataset" {{ (isset($_GET['cari_kategori']) && $_GET['cari_kategori'] == "dataset" ? "selected":"")  }}>Dataset</option>
+                          <option value="services" {{ (isset($_GET['cari_kategori']) && $_GET['cari_kategori'] == "services" ? "selected":"")  }}>Services</option>
+                          <option value="imagery" {{ (isset($_GET['cari_kategori']) && $_GET['cari_kategori'] == "imagery" ? "selected":"")  }}>Imagery</option>
+                          <option value="gridded" {{ (isset($_GET['cari_kategori']) && $_GET['cari_kategori'] == "gridded" ? "selected":"")  }}>Gridded</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Status</td>
+                      <td>:</td>
+                      <td>
+                        <select name="cari_status">
+                          <option value="">Pilih...</option>
+                          <option value="draf" {{ (isset($_GET['cari_status']) && $_GET['cari_status'] == "draf" ? "selected":"")  }}>Draf</option>
+                          <option value="perlu_pengesahan" {{ (isset($_GET['cari_status']) && $_GET['cari_status'] == "perlu_pengesahan" ? "selected":"")  }}>Perlu Pengesahan</option>
+                          <option value="diterbitkan" {{ (isset($_GET['cari_status']) && $_GET['cari_status'] == "diterbitkan" ? "selected":"")  }}>Diterbitkan</option>
+                          <option value="perlu_pembetulan" {{ (isset($_GET['cari_status']) && $_GET['cari_status'] == "perlu_pembetulan" ? "selected":"")  }}>Perlu Pembetulan</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="3"><button type="button" id="btnResetCarian">Reset Carian</button><button type="submit">Cari</button></td>
+                    </tr>
+                  </table>
+                </form>
+
+
                   <div style="overflow-x:auto;">
                 <table id="table_metadatas" class="table table-bordered table-striped" style="overflow: auto;">
                   <thead>
@@ -99,11 +142,7 @@
                           <td>{{ $bil }}</td>
                           <td>
                               <?php
-                                if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != ""){
-                                   echo $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                               }elseif(isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != ""){
-                                   echo $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-                               }
+                                echo $val[1]->title;
                                ?>
                           </td>
                           @if(Auth::user()->hasRole(['Pengesah Metadata']))
@@ -338,19 +377,6 @@
                                 
                 Paparan {{$metadatasdb->total()}} rekod ({{($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0)}} hingga {{($metadatasdb->currentPage()-1)*$metadatasdb->perPage()+count($metadatasdb)}})
                 
-                      <?php /* ?>
-                      <table id="table_metadatas2" class="table table-bordered table-striped" style="overflow: auto;">
-                  <thead>
-                    <tr>
-                        <th>Bil</th>
-                        <th>Metadata</th>
-                        <th>Kategori</th>
-                        <th>Status</th>
-                        <th>Tindakan</th>
-                    </tr>
-                  </thead>
-                </table>
-                     <?php */ ?>
               </div>
               </div>
             </div>
@@ -370,6 +396,7 @@
         "ordering": false,
         "responsive": false,
         "autoWidth": true,
+        "bFilter": false,
         "oLanguage": {
             // "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
             "sEmptyTable": "Tiada rekod ditemui",
@@ -385,78 +412,9 @@
             }
         },
     });
-    
-    
-    <?php /* ?>
-    var table2 = $("#table_metadatas2").DataTable({
-        "processing": true,
-        "pageLength": 5,
-        "serverSide": true,
-        "ajax": {
-            "url": "<?php //echo url('getSenaraiMetadata'); ?>",
-            "type": "POST",
-            "data": {
-                "_token": "{{ csrf_token() }}",
-            },
-        },
-        "columns": [
-            { "data": "bil" },
-            { "data": "title" },
-            { "data": "kategori" },
-            { "data": "status" },
-            { "data": "tindakan" },
-        ],
-        "orderCellsTop": true,
-        "ordering": false,
-        "responsive": false,
-        "autoWidth": true,
-        "oLanguage": {
-            "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-            "sEmptyTable": "Tiada rekod ditemui",
-             "sZeroRecords": "Tiada rekod ditemui",
-            "sLengthMenu": "Papar _MENU_ rekod",
-            "sLoadingRecords": "Sila tunggu...",
-            "sSearch": "Carian:",
-            "oPaginate": {
-               "sFirst": "Pertama",
-               "sLast": "Terakhir",
-               "sNext": ">",
-               "sPrevious": "<",
-            }
-        },
-    });
-    <?php */ ?>
-    
-    
 
-    // Setup - add a text input to each footer cell
-    $('#table_metadatas thead tr').clone(true).appendTo('#table_metadatas thead');
-    var counter2 = 0;
-    $('#table_metadatas thead tr:eq(1) th').each( function (i) {
-        if(counter2 != 1 && counter2 != 2 && counter2 != 3){
-          $(this).html('');
-        }else{
-          var title = $(this).text();
-          $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
-          $('input',this).on('keyup change', function(){
-              if(table.column(i).search() !== this.value){
-                  table.column(i).search(this.value).draw();
-              }
-          });
-        }
-        counter2++;
-    });
-    
-    // Setup - add a text input to each footer cell
-    $('#table_metadatas2 thead tr').clone(true).appendTo('#table_metadatas2 thead');
-    $('#table_metadatas2 thead tr:eq(1) th').each( function (i) {
-        var title = $(this).text();
-        $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
-        $('input',this).on('keyup change', function(){
-            if(table2.column(i).search() !== this.value){
-                table2.column(i).search(this.value).draw();
-            }
-        });
+    $(document).on("click","#btnResetCarian",function(){
+      window.location.href = "{{ url('mygeo_senarai_metadata') }}";
     });
 
     $('#tarikh_mula_div,#tarikh_tamat_div').datetimepicker({

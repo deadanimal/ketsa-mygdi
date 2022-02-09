@@ -92,8 +92,20 @@
             background-repeat: no-repeat;
         }
 
+<<<<<<< HEAD
         .tb th,
         .tb td {
+=======
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            color: black
+        }
+
+        th,
+        td:not(.available) {
+>>>>>>> d3ed7a405906de8210560d5156662dfc631d563a
             font-size: 14px;
             width: fit-content;
             padding: 8px 15px;
@@ -823,8 +835,8 @@
             ?>
         setInterval(
             checkThreeHourNotifySelesaiMuatTurun,
-            //                20000  /* 15000 ms = 20 seconds for farhan testing */
-            10800000 /* 10800000 ms = 3 hrs */ //ori specs
+                           300000  /* 300000 ms = 5 min for farhan testing */
+            // 10800000 /* 10800000 ms = 3 hrs */ //ori specs
             //                    60000  /* 60000 ms = m in for testing */
         );
         <?php
