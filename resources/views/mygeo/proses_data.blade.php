@@ -4,9 +4,9 @@
 
     <style>
         /* .ftest {
-                                                display: inline;
-                                                width: auto;
-                                            } */
+                                                                    display: inline;
+                                                                    width: auto;
+                                                                } */
 
     </style>
 
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_proses_data" class="table-bordered table-striped" style="width:100%;">
+                                <table id="table_proses_data" class="tb table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -121,7 +121,7 @@
                                 <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
                                 <i class="text-warning float-right" style="font-size: 13px">**Sila kemaskini surat balasan
                                     sebelum isi maklumat proses data</i>
-                                <table id="table_proses_data2" class="table-custom table-bordered table-striped"
+                                <table id="table_proses_data2" class="tb table-custom table-bordered table-striped"
                                     style="width:100%;">
                                     <thead>
                                         <tr>
@@ -178,7 +178,7 @@
                                             $res = json_decode($permohonan->proses_datas->pautan_data);
                                             $firstURL = $res ? $res['0'] : '';
                                             $firstline = true;
-                                            $i = 0; ?>
+                                            $i = 1; ?>
 
                                             <i id="error" class="text-warning float-right" style="font-size: 11px"></i>
                                             <div class="d-flex mb-2">
@@ -194,15 +194,17 @@
                                                 @if (is_array($res) && !empty($res))
                                                     @foreach ($res as $url)
                                                         @if (!$firstline)
-                                                            <span class="d-flex mb-2"><input type="text"
-                                                                    name="pautan_data[{{ $i }}]"
+                                                            <span class="d-flex mb-2">
+                                                                <input type="text" name="pautan_data[{{ $i }}]"
                                                                     value="{{ $url }}"
                                                                     class="form-control form-control-sm mr-2"><button
                                                                     type="button"
                                                                     class="btn btn-outline-warning btn-sm remove-input-field"><i
                                                                         class="fas fa-trash"></i>
-                                                                </button></span>
+                                                                </button>
+                                                            </span>
                                                         @endif
+
                                                         <?php $i++;
                                                         $firstline = false; ?>
                                                     @endforeach

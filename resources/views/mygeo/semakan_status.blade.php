@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="permohonan_table" class="table-bordered table-striped" style="width:100%;">
+                                <table id="permohonan_table" class="tb table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>

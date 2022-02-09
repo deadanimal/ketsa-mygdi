@@ -309,7 +309,7 @@
                                             <div id="collapse2" class="panel-collapse collapse in" data-parent="#div_c2">
                                                 <div class="card-body">
                                                     <div class="opacity-8" style="overflow-x:auto;">
-                                                        <table id="senarai_data_table" class="table-bordered table-striped"
+                                                        <table id="senarai_data_table" class="tb table-bordered table-striped"
                                                             style="width: 100%; overflow-x:auto;">
                                                             <thead>
                                                                 <tr>
@@ -380,7 +380,7 @@
                                                             dokumen yang dimuat naik
                                                             hendaklah dalam format PDF
                                                             dan saiz setiap fail tidak boleh melebihi 2MB.</span>
-                                                        <table id="dokumen_table" class="table-bordered table-striped"
+                                                        <table id="dokumen_table" class="tb table-bordered table-striped"
                                                             style="width:100%;">
                                                             <thead>
                                                                 <tr>
@@ -417,15 +417,13 @@
                                                                                     <a data-toggle="modal"
                                                                                         data-target="#modal-pilih-upload-{{ $dokumen->id }}">
                                                                                         <button type="button"
-                                                                                            class="btn btn-sm btn-primary mr-2">Muat
-                                                                                            Naik</button>
+                                                                                            class="btn btn-sm btn-primary mr-1"><i class="fa fa-upload"></i></button>
                                                                                     </a>
                                                                                 @else
                                                                                     <a data-toggle="modal"
                                                                                         data-target="#modal-kemaskini-dokumen-{{ $dokumen->id }}">
                                                                                         <button type="button"
-                                                                                            class="btn btn-sm btn-primary mr-2">Muat
-                                                                                            Naik</button>
+                                                                                            class="btn btn-sm btn-primary mr-1"><i class="fa fa-upload"></i></button>
                                                                                     </a>
                                                                                 @endif
                                                                             @endif
@@ -434,7 +432,7 @@
                                                                                 <a href="{{ url('/') . $dokumen->file_path }}"
                                                                                     target="_blank">
                                                                                     <button type="button"
-                                                                                        class="btn btn-sm btn-success mr-2">Lihat</button>
+                                                                                        class="btn btn-sm btn-success mr-1"><i class="fa fa-eye"></i></button>
                                                                                 </a>
                                                                             @endif
                                                                             <button type="button"
@@ -461,7 +459,7 @@
                                                                 @elseif (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
                                                                     @if ($permohonan->users->kategori == 'IPTA - Pelajar' || $permohonan->users->kategori == 'IPTS - Pelajar')
                                                                         <tr>
-                                                                            <td>*</td>
+                                                                            <td>{{ $count }}</td>
                                                                             <td>Borang Akuan Pelajar</td>
                                                                             <td>-</td>
                                                                             <td>

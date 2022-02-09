@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_metadatas" class="table-bordered table-striped" style="width:100%;">
+                                <table id="table_status_mohon" class="tb table-bordered table-striped" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -72,24 +72,45 @@
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
                                             @if ($permohonan->users)
+                                                <?php
+                                                $inTempohUrl = 0;
+                                                $currentDate = date('d-m-Y');
+                                                $explodedTempohUrl = explode(' - ', $permohonan->proses_datas->tempoh_url);
+                                                $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+                                                $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+                                                if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                                                    if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                                                        $inTempohUrl = 1;
+                                                    } else {
+                                                        $inTempohUrl = 0;
+                                                    }
+                                                }
+                                                ?>
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $permohonan->name }}</td>
                                                     <td>{{ $permohonan->users->name }}</td>
                                                     <td>{{ $permohonan->users->kategori }}</td>
                                                     <td>
-                                                        @if ($permohonan->status == '1' || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))
-                                                            <span class="badge badge-pill badge-warning">Diproses</span>
-                                                        @elseif($permohonan->status == '2')
-                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
-                                                        @elseif($permohonan->status == '3' &&
-                                                            $permohonan->berjayaMuatTurunStatus == 1)
-                                                            <span class="badge badge-pill badge-success">Selesai</span>
-                                                        @elseif($permohonan->status == '3' &&
-                                                            $permohonan->berjayaMuatTurunTarikh)
-                                                            <span class="badge badge-pill badge-secondary"></span>
-                                                        @elseif($permohonan->status == '0')
-                                                            <span class="badge badge-pill badge-info">Baru</span>
+                                                        @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1 && $permohonan->status == '3')
+                                                            <span class="badge badge-pill badge-success">Data
+                                                                Tersedia</span>
+                                                        @elseif(!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0 && $permohonan->status == '3')
+                                                            <span class="badge badge-pill badge-warning ">Tamat Tempoh</span>
+                                                            <a data-toggle="modal" data-target="#modal-kemaskini-tempoh"
+                                                                data-mohon-id="{{ $permohonan->id }}">
+                                                                <button type="button"
+                                                                    class="btn btn-sm btn-primary ml-1"><i
+                                                                        class="fas fa-edit"></i></button>
+                                                            @elseif ($permohonan->status == '1' || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))
+                                                                <span class="badge badge-pill badge-warning">Dalam
+                                                                    Proses</span>
+                                                            @elseif($permohonan->status == '2')
+                                                                <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                            @elseif($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 1)
+                                                                <span class="badge badge-pill badge-success">Selesai</span>
+                                                            @elseif($permohonan->status == '0')
+                                                                <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif
                                                     </td>
                                                     <td>
@@ -119,11 +140,42 @@
                 </div>
             </div>
         </section>
+        <!-- Modal Tambah Permohonan -->
+        <div class="modal fade" id="modal-kemaskini-tempoh">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary mb-0">
+                        <h4 class="text-white">Kemaskini Tempoh Muat Turun</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="{{ url('kemaskini_tempoh_url') }}">
+                        @csrf
+                        <div class="modal-body row">
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <label class="form-control-label mr-2">Tempoh Muat Turun </label>
+                                    <input type="text" class="form-control form-control-sm float-right tempohMuatTurun"
+                                        name="tempoh">
+                                        <input type="hidden" name="permohonan_id">
+                                </div>
+                                <br>
+                                <button class="btn btn-primary float-right" type="submit">
+                                    <span class="text-white">Simpan</span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
         $(document).ready(function() {
-            $("#table_metadatas").DataTable({
+            $("#table_status_mohon").DataTable({
                 "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
@@ -147,6 +199,20 @@
                     }
                 }
             });
+            $('.tempohMuatTurun').daterangepicker({
+                locale: {
+                    format: 'DD-MM-YYYY',
+                },
+                // opens: 'left',
+                // drops: 'up',
+                // batchMode: 'week-range',
+                // showShortcuts: false
+            });
+            $('#modal-kemaskini-tempoh').on('show.bs.modal', function(e) {
+                var mohon_id = $(e.relatedTarget).data('mohon-id');
+                $(e.currentTarget).find('input[name="permohonan_id"]').val(mohon_id);
+            });
+
         });
     </script>
 @stop

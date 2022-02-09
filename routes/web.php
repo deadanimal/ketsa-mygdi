@@ -291,10 +291,12 @@ Route::post('findMetadataByName','MetadataController@findMetadataByName');
 Route::post('getKelasKongsis','DataAsasController@getKelasKongsis');
 Route::post('/getSenaraiMetadata', 'MetadataController@getSenaraiMetadata');
 Route::get('/download_file_contohjenismetadata/{id}', 'MetadataController@download_file_contohjenismetadata');
+Route::post('kemaskini_tempoh_url','DataAsasController@kemaskini_tempoh_url');
 
 Route::post('get_kategori','SenaraiDataController@get_kategori');
 Route::post('get_subkategori','SenaraiDataController@get_subkategori');
 Route::post('get_lapisan_data','SenaraiDataController@get_lapisan_data');
+
 
 Auth::routes();
 

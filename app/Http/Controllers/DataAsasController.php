@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Ajaxray\PHPWatermark\Watermark;
+use App\AgensiOrganisasi;
 use Carbon\Carbon;
 use App\AkuanPelajar;
 use App\DokumenBerkaitan;
@@ -335,11 +336,7 @@ class DataAsasController extends Controller
     {
         $append = [];
 
-        // dd($request->pautan_data['0']);
-        if($request->pautan_data['0']){
-
-        }
-
+        // dd($request->pautan_data);
         $valid_data = $request->validate([
             'pautan_data' => 'required',
         ]);
@@ -1153,7 +1150,11 @@ class DataAsasController extends Controller
                 $at->data = 'Update';
                 $at->save();
             });
-            return redirect('permohonan_baru')->with('success', 'Permohonan Berjaya Dihantar');
+            if($request->status == '1'){ //lulus
+                return redirect('permohonan_baru')->with('success', 'Permohonan Berjaya Dihantar');
+            }elseif($request->status == '2'){ //tolak
+                return redirect('permohonan_baru')->with('success', 'Penolakan permohonan telah berjaya dihantar kepada pemohon');
+            }
         }
         elseif(Auth::user()->hasRole(['Pemohon Data']))
         {
@@ -1204,6 +1205,8 @@ class DataAsasController extends Controller
             ]);
 
             $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
+            $agensi_pemohon =
+            is_numeric($pemohon->agensi_organisasi) && isset($pemohon->agensiOrganisasi) ? $pemohon->agensiOrganisasi->name : $pemohon->agensi_organisasi;
 
             //get pentadbir data
             $pentadbir = User::where('assigned_roles','LIKE','%Pentadbir Data%')->get();
@@ -1212,7 +1215,7 @@ class DataAsasController extends Controller
                     //send email to pentadbir data
                     $to_name = $p->name;
                     $to_email = $p->email;
-                    $data = array('nama_pemohon'=>$pemohon->users->name);
+                    $data = array('nama_pemohon'=> $pemohon->users->name, 'agensi' => $agensi_pemohon);
                     Mail::send('mails.exmpl12', $data, function($message) use ($to_name, $to_email, $pemohon) {
                         $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  ('.$pemohon->name.')');
                         $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
@@ -1594,5 +1597,12 @@ class DataAsasController extends Controller
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF
         return $pdf->stream();
+    }
+
+    public function kemaskini_tempoh_url(Request $request){
+        ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
+            "tempoh_url" => $request->tempoh,
+        ]);
+        return redirect('status_permohonan')->with('success', 'Tempoh Muat Turun URL Berjaya Dikemaskini');
     }
 }

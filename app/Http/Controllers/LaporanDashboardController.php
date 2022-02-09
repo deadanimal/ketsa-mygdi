@@ -78,12 +78,9 @@ class LaporanDashboardController extends Controller
             if(isset($mohon->users)){
                 if($mohon->users->agensi_organisasi == $request->agensi_id ){
                     $counter++;
-                    if($mohon->users->hasRole('Pemohon Data')) {
-                        $id = $mohon->users->agensi_organisasi;
-                        $org = AgensiOrganisasi::where('id',$id)->first()->name;
-                    } else {
-                        $org = $mohon->users->agensiOrganisasi->name;
-                    }
+                    $org =
+                    is_numeric($mohon->users->agensi_organisasi) && isset($mohon->users->agensiOrganisasi) ? $mohon->users->agensiOrganisasi->name : $mohon->users->agensi_organisasi;
+
                     $temp = '<tr>
                     <td>'.$counter.'</td>
                     <td>'.$mohon->name.'</td>
