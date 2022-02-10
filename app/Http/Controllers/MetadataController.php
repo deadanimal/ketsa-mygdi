@@ -638,7 +638,7 @@ class MetadataController extends Controller {
             if (is_numeric($countryId)) {
                 $countrySelected = Countries::where(['id' => $countryId])->get()->first();
             } else {
-                $countrySelected = Countries::where('name', 'LIKE', '%' . $countryId . 'asdsadss%')->get()->first();
+                $countrySelected = Countries::where('name', 'LIKE', '%' . $countryId . '%')->get()->first();
 //                $countrySelected = Countries::where('id',$countryId)->get()->first();
                 if (!$countrySelected) {
                     $countrySelected = Countries::where(['id' => 1])->get()->first();
@@ -682,8 +682,10 @@ class MetadataController extends Controller {
                 $customMetadataInput = CustomMetadataInput::get()->all();
             }
         }
+        
+        $template = MetadataTemplate::where('status','active')->get()->first();
 
-        return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected', 'metadataxml', 'metadataSearched', 'pengesahs', 'customMetadataInput', 'elemenMetadata'));
+        return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected', 'metadataxml', 'metadataSearched', 'pengesahs', 'customMetadataInput', 'elemenMetadata','template'));
     }
 
     public function show_nologin(Request $request) {
