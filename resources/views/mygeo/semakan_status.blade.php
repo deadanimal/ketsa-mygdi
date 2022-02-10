@@ -68,18 +68,37 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
+                                            <?php
+                                            $inTempohUrl = 0;
+                                            $currentDate = date('d-m-Y');
+                                            $explodedTempohUrl = explode(' - ', $permohonan->proses_datas->tempoh_url);
+                                            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+                                            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+                                            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                                                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                                                    $inTempohUrl = 1;
+                                                } else {
+                                                    $inTempohUrl = 0;
+                                                }
+                                            }
+                                            ?>
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>
-                                                    @if ($permohonan->status == '1')
-                                                        <span class="badge badge-pill badge-warning">Dalam Proses</span>
+                                                    @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                        <span class="badge badge-pill badge-success">Data
+                                                            Tersedia</span>
+                                                    @elseif (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                        <span class="badge badge-pill badge-warning ">Tamat
+                                                            Tempoh</span>
+                                                    @elseif ($permohonan->status == '1' || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))
+                                                        <span class="badge badge-pill badge-warning">Dalam
+                                                            Proses</span>
                                                     @elseif($permohonan->status == '2')
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
                                                     @elseif($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 1)
                                                         <span class="badge badge-pill badge-success">Selesai</span>
-                                                    @elseif($permohonan->status == '3')
-                                                        <span class="badge badge-pill badge-primary">Data Tersedia</span>
                                                     @elseif($permohonan->status == '0')
                                                         <span class="badge badge-pill badge-info">Baru</span>
                                                     @endif
