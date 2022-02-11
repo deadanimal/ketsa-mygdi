@@ -171,6 +171,9 @@
                                         if (count($categories) > 0) {
                                             if (isset($metadataxml->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $metadataxml->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != "") {
                                                 $catSelected = strtolower(trim($metadataxml->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue));
+                                            }                               
+                                            if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
+                                                $catSelected = $_GET['kategori'];
                                             }
                                             foreach ($categories as $cat) {
                                                 if (strtolower(trim($cat->name)) == $catSelected) {

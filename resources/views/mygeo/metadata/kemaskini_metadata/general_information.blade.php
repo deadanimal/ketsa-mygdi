@@ -14,13 +14,7 @@
     <div id="collapse1" class="panel-collapse collapse in show" data-parent="#div_c1">
         <div class="card-body">
             <?php 
-            $cat = "";
-            if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
-                $cat = $_GET['kategori'];
-            }else{
-                $cat = $catSelected;
-            }
-            foreach($template->template[strtolower($cat)]['accordion1'] as $key=>$val){
+            foreach($template->template[strtolower($catSelected)]['accordion1'] as $key=>$val){
                 if($val['status'] == "customInput"){
                     ?>
                     <div class="row mb-2 sortIt">
