@@ -42,17 +42,17 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row align-items-center">
-                                    <div class="col-5">
+                                    <div class="col-6">
                                         <h3 class="mb-0">Pengesahan Penerbit dan Pengesah Metadata</h3>
                                     </div>
-                                    <div class="col-7 text-right">
+                                    <div class="col-6 text-right">
                                         {{-- <button type="button" class="btn btn-sm btn-primary float-right"><span
                                                 class="mx-2">Lulus</span></button> --}}
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_newUsers" class="table table-bordered table-striped">
+                                <table id="table_newUsers" class="table table-bordered table-striped" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>Bil</th>
@@ -149,7 +149,7 @@
                 "orderCellsTop": true,
                 "ordering": false,
                 "responsive": false,
-                "autoWidth": true,
+                "autoWidth": false,
                 "oLanguage": {
                     "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
                     "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",

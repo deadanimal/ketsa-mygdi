@@ -169,8 +169,11 @@
                                         <?php
                                         $catSelected = "";
                                         if (count($categories) > 0) {
-                                            if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != "") {
-                                                $catSelected = strtolower(trim($metadataxml->hierarchyLevel->MD_ScopeCode));
+                                            if (isset($metadataxml->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $metadataxml->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != "") {
+                                                $catSelected = strtolower(trim($metadataxml->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue));
+                                            }                               
+                                            if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
+                                                $catSelected = $_GET['kategori'];
                                             }
                                             foreach ($categories as $cat) {
                                                 if (strtolower(trim($cat->name)) == $catSelected) {
@@ -249,9 +252,6 @@
                                     @include('mygeo.metadata.kemaskini_metadata.data_quality')
                                     <?php //=== collapse16 =============================================================
                                     ?>
-                                    @if(count($customMetadataInput) > 0)
-                                        @include('mygeo.metadata.kemaskini_metadata.custom_input')
-                                    @endif
                                 </div>
                                 <div id="div_action_buttons">
                                     @if(auth::user()->hasRole(['Penerbit Metadata']))

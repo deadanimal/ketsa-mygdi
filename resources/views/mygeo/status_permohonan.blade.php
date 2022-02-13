@@ -58,6 +58,9 @@
                             </div>
                             <div class="card-body">
                                 <table id="table_status_mohon" class="tb table-bordered table-striped" style="width:100%;">
+                                    <colgroup>
+                                        <col width="40px;">
+                                    </colgroup>
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -176,9 +179,9 @@
     <script>
         $(document).ready(function() {
             $("#table_status_mohon").DataTable({
-                "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
+                "dom": "<'row'<'col-sm-6'l><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                    "<'row mt-4'<'col-sm-5'i><'col-sm-7'p>>",
                 "scrollX": true,
                 "ordering": false,
                 "responsive": true,

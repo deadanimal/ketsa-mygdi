@@ -58,6 +58,9 @@
                             </div>
                             <div class="card-body">
                                 <table id="table_proses_data" class="tb table-bordered table-striped" style="width:100%;">
+                                    <colgroup>
+                                        <col width="40px;">
+                                    </colgroup>
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -119,10 +122,13 @@
                                 id="formProsesData-{{ $permohonan->id }}">
                                 @csrf
                                 <h6 class="heading text-dark">Senarai Data Yang Dipohon</h6>
-                                <i class="text-warning float-right" style="font-size: 13px">**Sila kemaskini surat balasan
+                                <i class="text-warning float-right" style="font-size: 16px">**Sila kemaskini surat balasan
                                     sebelum isi maklumat proses data</i>
                                 <table id="table_proses_data2" class="tb table-custom table-bordered table-striped"
                                     style="width:100%;">
+                                    <colgroup>
+                                        <col width="40px;">
+                                    </colgroup>
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -311,9 +317,9 @@
                 });
 
                 $("#table_proses_data").DataTable({
-                    "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
+                    "dom": "<'row'<'col-sm-6'l><'col-sm-0 text-center'><'col-sm-6'f>>" +
                         "<'row'<'col-sm-12'tr>>" +
-                        "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                        "<'row mt-4'<'col-sm-5'i><'col-sm-7'p>>",
                     "scrollX": true,
                     "ordering": false,
                     "responsive": true,

@@ -1,6 +1,6 @@
 <div class="card card-primary mb-4 div_c10" id="div_c10">
-    <div class="card-header">
-        <h4 class="card-title">
+    <div class="card-header" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
+        <h4 class="card-title" style="font-weight: 600 !important;">
             <a data-toggle="collapse" href="#collapse10">
                 <?php echo __('lang.accord_10'); ?>
             </a>
@@ -64,11 +64,11 @@
                 </div>
                 @endif
             </div>
-            <h2 class="heading-small text-muted"><?php echo __('lang.keywords'); ?></h2>
+            <h2 class="heading-small text-muted" style="padding-top:25px;padding-bottom:10px;font-size:18px;"><?php echo __('lang.keywords'); ?></h2>
             <div class="my-2">
                 @if($elemenMetadata['c10_keyword']->status == '1')
                 <div class="row mb-2">
-                    <div class="col-3 pl-5">
+                    <div class="col-4 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_name" data-toggle="tooltip" title="Kata Kunci (Carian)/ Keyword bagimaklumat geospatial berkenaan. Keyword perlu dimasukkan berdasarkankepada tajuk maklumat geospatial dengan bahasa bilingual (Bahasa Malaysia dan English). ">
                             <?php echo __('lang.keywords'); ?><span class="text-warning">*</span>
                         </label><label class="float-right">:</label>
@@ -88,7 +88,7 @@
                 @endif
                 @if($elemenMetadata['c10_additional_keyword[]']->status == '1')
                 <div class="row mb-2">
-                    <div class="col-3 pl-5">
+                    <div class="col-4 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_type" data-toggle="tooltip" title="">
                             <?php echo __('lang.additional_keywords'); ?>
                         </label><label class="float-right">:</label>
@@ -100,10 +100,10 @@
                 @endif
                 @if($elemenMetadata['c10_additional_keyword[]']->status == '1')
                 <div class="row mb-2">
-                    <div class="col-3 pl-5">
+                    <div class="col-4 pl-5">
                         <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="">
                             <?php echo __('lang.additional_keywords'); ?>
-                        </label><label class="float-right">:</label>
+                        </label><label class="float-right" >:</label>
                     </div>
                     <div class="col-6">
                         <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ (isset(old('c10_additional_keyword')[1]) ? old('c10_additional_keyword')[1]:"") }}">

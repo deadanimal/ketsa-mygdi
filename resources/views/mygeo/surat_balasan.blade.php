@@ -72,16 +72,23 @@
                                 <form action="{{ url('simpan_surat_balasan') }}" method="POST" id="form_surat_balasan">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-8"></div>
-                                        <div class="col-4">
-                                            <div class="form-inline">
-                                                Rujukan :
-                                                <input type="text" class="form-control form-control-sm ml-2 w-100"
-                                                    name="no_rujukan" value="{{ $surat->no_rujukan }}">
-                                                <input type="hidden" name="date_mohon" value="{{ $permohonan->date }}">
-                                            </div>
-                                            <div class="form-inline">
-                                                Tarikh : {{ Carbon\Carbon::now()->format('d M Y') }}
+                                        <div class="col-7"></div>
+                                        <div class="col-5">
+                                            <div class="form-inline" style="padding-right: 55px !important;">
+                                                <table style="width: 100%;">
+                                                    <tr>
+                                                        <td>Rujukan</td>
+                                                        <td style="padding:0px 10px;">:</td>
+                                                        <td><input type="text" class="form-control form-control-sm ml-2"
+                                                            name="no_rujukan" value="{{ $surat->no_rujukan }}" style="width:100% !important;">
+                                                        <input type="hidden" name="date_mohon" value="{{ $permohonan->date }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tarikh</td>
+                                                        <td style="padding:0px 10px;">:</td>
+                                                        <td style="padding-left: 10px;">{{ Carbon\Carbon::now()->format('d M Y') }}</td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>

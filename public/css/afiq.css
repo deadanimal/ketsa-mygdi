@@ -25025,6 +25025,7 @@ h6 > a {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  color:black !important;
 }
 .heading-title {
   letter-spacing: 0.025em;

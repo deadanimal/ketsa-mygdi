@@ -59,6 +59,9 @@
                             </div>
                             <div class="card-body">
                                 <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                    <colgroup>
+                                        <col style="width:40px;">
+                                    </colgroup>
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -96,8 +99,8 @@
                                                                 class="fas fa-reply mr-2"></i>Balas</button>
                                                     </a>
                                                     <button type="button" data-maklumbalasid="{{ $mb->id }}"
-                                                        class="btnDelete btn btn-sm btn-danger mx-2"><i
-                                                            class="fas fa-trash mr-2"></i>Padam</button>
+                                                        class="btnDelete btn btn-sm btn-danger mx-2" style="text-align: center;"><i
+                                                            class="fas fa-trash mr-2" style="margin-right: 0rem !important;"></i></button>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -163,9 +166,9 @@
     <script>
         $(document).ready(function() {
             $("#table_metadatas").DataTable({
-                "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
+                "dom": "<'row'<'col-sm-6'l><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                    "<'row mt-4'<'col-sm-5'i><'col-sm-7'p>>",
                 "scrollX": true,
                 "ordering": false,
                 "responsive": true,

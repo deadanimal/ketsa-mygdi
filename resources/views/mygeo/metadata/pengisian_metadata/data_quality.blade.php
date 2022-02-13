@@ -1,6 +1,6 @@
 <div class="card card-primary mb-4 div_c15" id="div_c15">
-    <div class="card-header">
-        <h4 class="card-title">
+    <div class="card-header" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
+        <h4 class="card-title" style="font-weight: 600 !important;">
             <a data-toggle="collapse" href="#collapse15">
                 <?php echo __('lang.accord_15'); ?>
             </a>
@@ -95,38 +95,43 @@
             </div>
 
             &nbsp;&nbsp;&nbsp;
-            <div class="form-group row col-xl-12 divDataQualityTabs">
-                <div class="card card-primary card-outline card-outline-tabs">
+            <div class="form-group row col-xl-12 divDataQualityTabs" style="padding-right: 0px; text-align:center; align:center; ">
+                <div class="card card-primary card-outline card-outline-tabs" style="margin: auto;">
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                            <li class="nav-item">
+                            <style>
+                                .nav-link {
+                                    width: 192px;
+                                }
+                            </style>
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
                                 <a class="nav-link active" id="tab_completeness" data-toggle="pill" href="#completeness"
-                                    role="tab" aria-controls="completeness" aria-selected="true"><?php echo __('lang.completeness'); ?></a>
+                                    role="tab" aria-controls="completeness" aria-selected="true" style="color: black;"><?php echo __('lang.completeness'); ?></a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
                                 <a class="nav-link" id="tab_consistency" data-toggle="pill" href="#consistency"
-                                    role="tab" aria-controls="consistency" aria-selected="false"><?php echo __('lang.conceptualConsistency'); ?></a>
+                                    role="tab" aria-controls="consistency" aria-selected="false" style="color: black;"><?php echo __('lang.logicalConsistency'); ?></a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
                                 <a class="nav-link" id="tab_position_accuracy" data-toggle="pill"
                                     href="#position_accuracy" role="tab" aria-controls="position_accuracy"
-                                    aria-selected="false"><?php echo __('lang.positionalAccuracy'); ?></a>
+                                    aria-selected="false" style="color: black;"><?php echo __('lang.positionalAccuracy'); ?></a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
                                 <a class="nav-link" id="tab_temp_accuracy" data-toggle="pill"
                                     href="#temp_accuracy" role="tab" aria-controls="temp_accuracy"
-                                    aria-selected="false"><?php echo __('lang.temporalAccuracy'); ?></a>
+                                    aria-selected="false" style="color: black;"><?php echo __('lang.temporalAccuracy'); ?></a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
                                 <a class="nav-link" id="tab_thematic_accuracy" data-toggle="pill"
                                     href="#thematic_accuracy" role="tab" aria-controls="thematic_accuracy"
-                                    aria-selected="false"><?php echo __('lang.thematicAccuracy'); ?></a>
+                                    aria-selected="false" style="color: black;"><?php echo __('lang.thematicAccuracy'); ?></a>
                             </li>
                         </ul>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="border: 1px solid black;">
                         <div class="tab-content" id="custom-tabs-four-tabContent">
-                            <div class="tab-pane fade active show" id="completeness" role="tabpanel"
+                            <div class="tab-pane fade active show"  id="completeness" role="tabpanel"
                                 aria-labelledby="tab_completeness">
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
@@ -300,26 +305,26 @@
                                 <div class="form-group row">
                                     <div class="d-flex flex-wrap bd-highlight">
                                         <div class="table-responsive">
-                                            <table class="table table-borderless">
+                                            <table class="table table-borderless" >
                                                 <tbody>
                                                     <tr>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:10px;">
                                                                 <input type="radio" name="c15_t2_type" id='conceptual' value="Conceptual" {{(old('c15_t2_type') == 'Conceptual' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.conceptual_consistency'); ?>
                                                             </label>
                                                         </td>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:10px;">
                                                                 <input type="radio" name="c15_t2_type" value="Domain" {{(old('c15_t2_type') == 'Domain' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.domainConsistency'); ?>
                                                             </label>
                                                         </td>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:10px;">
                                                                 <input type="radio" name="c15_t2_type" value="Format" {{(old('c15_t2_type') == 'Format' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.formatConsistency'); ?>
                                                             </label>
                                                         </td>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:10px;">
                                                                 <input type="radio" name="c15_t2_type" value="Topological" {{(old('c15_t2_type') == 'Topological' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.topologicalConsistency'); ?>
                                                             </label>
                                                         </td>
@@ -626,18 +631,18 @@
                                             <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:30px;">
                                                                 <input type="radio" name="c15_t3_type" id='AbsoluteOrExternal' value="Absolute or External" {{(old('c15_t3_type') == 'Absolute or External' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.absoluteOrExternalAccuracy'); ?>
                                                             </label>
                                                         </td>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:30px;">
                                                                 <input type="radio" name="c15_t3_type" value="Relative or Internal" {{(old('c15_t3_type') == 'Relative or Internal' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.relativeOrInternalAccuracy'); ?>
                                                             </label>
                                                         </td>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:30px;">
                                                                 <input type="radio" name="c15_t3_type" value="Gridded Data" {{(old('c15_t3_type') == 'Gridded Data' ? 'checked="checked"':'')}}>&nbsp;<?php echo __('lang.griddedDataPositionalAccuracy'); ?>
                                                             </label>
                                                         </td>
@@ -1118,18 +1123,18 @@
                                             <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:20px;">
                                                                 <input type="radio" name="c15_t5_type" id="ClassificationCorrectness" value="Classification Correctness" checked>&nbsp;<?php echo __('lang.classificationCorrectness'); ?>
                                                             </label>
                                                         </td>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:20px;">
                                                                 <input type="radio" name="c15_t5_type" value="Non Quantitative Attribute Correctness">&nbsp;<?php echo __('lang.nonQuantitativeAttributeCorrectness'); ?>
                                                             </label>
                                                         </td>
-                                                        <td>
-                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:50px;">
+                                                        <td style="padding-right: 0px; padding-left: 1rem">
+                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:20px;">
                                                                 <input type="radio" name="c15_t5_type" value="Quantitative Attribute Accuracy">&nbsp;<?php echo __('lang.quantitativeAttributeCorrectness'); ?>
                                                             </label>
                                                         </td>

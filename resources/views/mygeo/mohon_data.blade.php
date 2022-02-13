@@ -60,10 +60,13 @@
                             </div>
                             <div class="card-body">
                                 <table id="table_permohonan" class="tb table-bordered table-striped" style="width:100%;">
+                                    <colgroup>
+                                        <col width="50px;">
+                                    </colgroup>
                                     <thead>
                                         <tr>
-                                            <th>BIL</th>
-                                            <th>NAMA PERMOHONAN</th>
+                                            <th >BIL</th>
+                                            <th>TAJUK PERMOHONAN</th>
                                             <th>STATUS</th>
                                             <th>TARIKH</th>
                                             <th>TINDAKAN</th>
@@ -118,7 +121,7 @@
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="name" class="form-control-label">Nama Permohonan</label>
+                                    <label for="name" class="form-control-label">Tajuk Permohonan</label>
                                     <input type="text" class="form-control form-control-sm" name="name" value="">
                                 </div>
                                 <div class="form-group">
@@ -149,9 +152,9 @@
     <script>
         $(document).ready(function() {
             $("#table_permohonan").DataTable({
-                "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
+                "dom": "<'row'<'col-sm-6'l><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                    "<'row mt-4'<'col-sm-5'i><'col-sm-7'p>>",
                 "scrollX": true,
                 "ordering": false,
                 // "responsive": true,

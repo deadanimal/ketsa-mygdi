@@ -326,6 +326,7 @@ class DataAsasController extends Controller
             return redirect('/mygeo_profil');
         }
         $admin = Auth::user()->name;
+        // dd($admin);
         $permohonan_list = MohonData::where(['assign_admin'=> $admin,'status' => 1,'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();

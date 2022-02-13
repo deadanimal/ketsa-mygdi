@@ -1,3 +1,7 @@
+.breadcrumb-item.active {
+  color:#57585a !important;
+}
+
 .ql-container {
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
@@ -6054,12 +6058,16 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
+.ql-editor{
+  color:black !important;
+}
 .row {
   display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+  /* padding-top:10px; */
 }
 .no-gutters {
   margin-right: 0;
@@ -7102,6 +7110,12 @@ pre code {
   vertical-align: bottom;
   border-bottom: 2px solid #e9ecef;
 }
+.col-sm-6{
+  font-size:15px !important;
+}
+.col-sm-5{
+  font-size:15px !important;
+}
 .table tbody + tbody {
   border-top: 2px solid #e9ecef;
 }
@@ -7115,6 +7129,16 @@ pre code {
 .table-bordered th,
 .table-bordered td {
   border: 1px solid #e9ecef;
+}
+.table-bordered th {
+  font-size: 18px !important;
+}
+.table-bordered td {
+  font-size: 17px !important;
+}
+.badge{
+  /* font-weight: bold; */
+  font-size: 15px !important;
 }
 .table-bordered thead th,
 .table-bordered thead td {
@@ -21594,15 +21618,18 @@ a.btn-icon-only {
   width: 100%;
 }
 .form-control-label {
-  color: #525f7f;
-  font-size: 0.875rem;
+  color: black;
+  font-size: 1rem;
   font-weight: 600;
 }
 .form-control {
-  font-size: 0.875rem;
+  font-size: 1rem;
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   height: calc( 1.5em + 1.25rem + 5px );
+}
+.dataTables_wrapper {
+  padding-top:10px !important;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -24981,12 +25008,17 @@ h6 > a {
   text-transform: uppercase;
   font-weight: 600;
 }
+.mb-0 {
+  color:black !important;
+  font-size: 1.2rem;
+}
 .heading-small {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-  font-size: 0.75rem;
+  font-size: 0.90rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  color:black !important;
 }
 .heading-title {
   letter-spacing: 0.025em;

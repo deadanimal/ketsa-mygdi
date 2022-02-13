@@ -491,6 +491,37 @@ class UserController extends Controller {
 
     public function show(){
         /*
+        //create test users accounts=============================================
+        $us = ['aryani@ketsa.gov.my'];
+        foreach($us as $u){
+            $user = User::create([
+                'name' => $u,
+                'nric' => '880808088888',
+                'email' => $u,
+                'agensi_organisasi' => '1',
+                'bahagian' => 'Bahagian Angkasawan',
+                'sektor' => '1',
+                'phone_pejabat' => '0389234567',
+                'phone_bimbit' => '0182453622',
+                'password' => Hash::make($u),
+                'alamat' => "15, Jalan Melor, Taman Telur Masin, 71400, Alor Setar, Kedah Darul Takzim",
+                'postcode' => '71400',
+                'city' => 'Alor Setar',
+                'state' => '2',
+                'country' => '1',
+                'kategori' => 'Agensi Persekutuan/Agensi Negeri',
+                'status' => "1",
+                'disahkan' => "1",
+                'assigned_roles' => 'Pemohon Data,Pentadbir Data,Penerbit Metadata,Pengesah Metadata,Pentadbir Metadata,Pentadbir Aplikasi',
+            ]);
+            $em = ['Pemohon Data','Pentadbir Data','Penerbit Metadata','Pengesah Metadata','Pentadbir Metadata','Pentadbir Aplikasi'];
+            $user->assignRole($em);
+        }
+        dd('done2');exit();
+        */
+        
+        
+        /*
         $users = User::whereNotNull('mygdix_user_id')->get();
         foreach($users as $u){
             $f = MacgdiGptUserAdametadata::where('userid',$u->mygdix_user_id)->get()->first();
@@ -650,9 +681,9 @@ class UserController extends Controller {
     public function edit(){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         if(strpos($user->kategori,"IPTA") !== false){
-            $kategori = Kategori::where('name','ilike','%IPTA%')->get();
+            $kategori = Kategori::where('name','like','%IPTA%')->get();
         }elseif(strpos($user->kategori,"IPTS") !== false){
-            $kategori = Kategori::where('name','ilike','%IPTS%')->get();
+            $kategori = Kategori::where('name','like','%IPTS%')->get();
         }else{
             $kategori = Kategori::get();
         }
@@ -664,9 +695,9 @@ class UserController extends Controller {
     public function edit_admin($id){
         $user = User::where(["id"=>$id])->get()->first();
         if(strpos($user->kategori,"IPTA") !== false){
-            $kategori = Kategori::where('name','ilike','%IPTA%')->get();
+            $kategori = Kategori::where('name','like','%IPTA%')->get();
         }elseif(strpos($user->kategori,"IPTS") !== false){
-            $kategori = Kategori::where('name','ilike','%IPTS%')->get();
+            $kategori = Kategori::where('name','like','%IPTS%')->get();
         }else{
             $kategori = Kategori::get();
         }

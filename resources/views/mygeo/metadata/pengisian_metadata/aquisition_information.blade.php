@@ -1,6 +1,6 @@
 <div class="card card-primary mb-4 div_c8" id="div_c8">
-    <div class="card-header">
-        <h4 class="card-title">
+    <div class="card-header" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
+        <h4 class="card-title" style="font-weight: 600 !important;">
             <a data-toggle="collapse" href="#collapse8">
                 <?php echo __('lang.accord_8'); ?>
             </a>

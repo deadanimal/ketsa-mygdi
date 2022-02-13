@@ -66,8 +66,9 @@
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="uname">
                                                 Nama Penuh
-                                            </label><label class="float-right">:</label>
+                                            </label>
                                         </div>
+                                        <label class="float-right">:</label>
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" id="uname" type="text"
                                                 value="{{ $user->name }}" disabled />
@@ -77,8 +78,9 @@
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="nric">
                                                 No Kad Pengenalan
-                                            </label><label class="float-right">:</label>
+                                            </label>
                                         </div>
+                                        <label class="float-right">:</label>
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" id="input-nric" type="text"
                                                 value="{{ $user->nric }}" disabled />
@@ -88,8 +90,9 @@
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="sektor">
                                                 Sektor
-                                            </label><label class="float-right">:</label>
+                                            </label>
                                         </div>
+                                        <label class="float-right">:</label>
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" id="sektor" type="text"
                                                 value="{{ $user->sektor == '1' ? 'Kerajaan' : 'Swasta' }}" disabled />
@@ -98,9 +101,9 @@
                                     <div class="row mb-2">
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="agensi_organisasi">
-                                                Agensi / Organisasi / Institusi
-                                            </label><label class="float-right">:</label>
+                                                Agensi / Organisasi / Institusi</label>
                                         </div>
+                                    <label class="float-right">:</label>
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" id="agensi_organisasi"
                                                 type="text"
@@ -113,8 +116,9 @@
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4" for="bahagian">
                                                     Bahagian
-                                                </label><label class="float-right">:</label>
+                                                </label>
                                             </div>
+                                            <label class="float-right">:</label>
                                             <div class="col-8">
                                                 <input class="form-control form-control-sm ml-3" id="bahagian" type="text"
                                                     value="{{ $user->bahagian }}" disabled />
@@ -125,8 +129,9 @@
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="email">
                                                 Emel
-                                            </label><label class="float-right">:</label>
+                                            </label>
                                         </div>
+                                        <label class="float-right">:</label>
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" id="email" type="text"
                                                 value="{{ $user->email }}" disabled />
@@ -136,8 +141,9 @@
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="phone_pejabat">
                                                 Telefon Pejabat
-                                            </label><label class="float-right">:</label>
+                                            </label>
                                         </div>
+                                        <label class="float-right">:</label>
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" id="phone_pejabat" type="text"
                                                 value="{{ $user->phone_pejabat }}" disabled />
@@ -148,8 +154,9 @@
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4" for="phone_bimbit">
                                                     Telefon Bimbit
-                                                </label><label class="float-right">:</label>
+                                                </label>
                                             </div>
+                                            <label class="float-right">:</label>
                                             <div class="col-8">
                                                 <input class="form-control form-control-sm ml-3" id="phone_bimbit"
                                                     type="text" value="{{ $user->phone_bimbit }}" disabled />
@@ -160,8 +167,9 @@
                                         <div class="col-3">
                                             <label class="form-control-label mr-4" for="peranan">
                                                 Peranan
-                                            </label><label class="float-right">:</label>
+                                            </label>
                                         </div>
+                                        <label class="float-right">:</label>
                                         <div class="col-8">
                                             <input class="form-control form-control-sm ml-3" id="peranan" type="text"
                                                 value="<?php echo $user->assigned_roles; ?>" disabled />
@@ -172,8 +180,9 @@
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4" for="email">
                                                     Kategori
-                                                </label><label class="float-right">:</label>
+                                                </label>
                                             </div>
+                                            <label class="float-right">:</label>
                                             <div class="col-8">
                                                 <input class="form-control form-control-sm ml-3" type="text"
                                                     value="{{ $user->kategori }}" disabled />
@@ -195,15 +204,15 @@
                                 @csrf
                                 <div class="card-header">
                                     <div class="row align-items-center">
-                                        <div class="col-8">
+                                        <div class="col-10">
                                             <h3 class="mb-0">Tukar Kata Laluan</h3>
-                                            <i class="text-warning" style="font-size:11px;">* Kata laluan mestilah
+                                            <i class="text-warning" style="font-size:14px;">* Kata laluan mestilah
                                                 mempunyai
                                                 sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf
                                                 kecil,
                                                 nombor dan simbol.</i>
                                         </div>
-                                        <div class="col-4 text-right">
+                                        <div class="col-2 text-right">
                                             <button type="button"
                                                 class="btn btn-warning btn-sm text-white btn-icon btn-3 btnTukar">
                                                 <span class="btn-inner--icon"><i class="fas fa-wrench"></i></span>
@@ -219,8 +228,9 @@
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4" for="input-username">
                                                     Kata Laluan Lama
-                                                </label><label class="float-right">:</label>
+                                                </label>
                                             </div>
+                                            <label class="float-right">:</label>
                                             <div class="col-sm-7">
                                                 <div class="input-group">
                                                     <input class="form-control" placeholder="Masukkan Kata Laluan Lama"
@@ -237,8 +247,9 @@
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4" for="input-username">
                                                     Kata Laluan Baru
-                                                </label><label class="float-right">:</label>
+                                                </label>
                                             </div>
+                                            <label class="float-right">:</label>
                                             <div class="col-sm-7">
                                                 <div class="input-group">
                                                     <input class="form-control" placeholder="Masukkan Kata Laluan Baru"
@@ -255,8 +266,9 @@
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4" for="input-username">
                                                     Sahkan Kata Laluan Baru
-                                                </label><label class="float-right">:</label>
+                                                </label>
                                             </div>
+                                            <label class="float-right">:</label>
                                             <div class="col-sm-7">
                                                 <div class="input-group">
                                                     <input class="form-control" placeholder="Sahkan Kata Laluan Baru"

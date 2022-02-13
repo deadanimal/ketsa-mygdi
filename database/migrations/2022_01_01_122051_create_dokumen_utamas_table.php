@@ -16,7 +16,7 @@ class CreateDokumenUtamasTable extends Migration
         Schema::create('dokumen_utamas', function (Blueprint $table) {
             $table->id();
 
-            $table->text('content')->default('-')->nullable();
+            $table->text('content')->nullable();
             $table->string('doc_path')->nullable();
             $table->string('doc_name')->nullable();
             $table->string('doc_type')->nullable();

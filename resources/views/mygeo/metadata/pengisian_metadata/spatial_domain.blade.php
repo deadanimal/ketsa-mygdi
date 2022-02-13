@@ -9,9 +9,9 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('intecxmap/css/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css') }}">
 
 <div class="card card-primary mb-4 div_c9" id="div_c9">
-    <div class="card-header ftest">
+    <div class="card-header ftest" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
         <a data-toggle="collapse" href="#collapse9" class="fixMap">
-            <h4 class="card-title">
+            <h4 class="card-title" style="font-weight: 600 !important;color: black;">
                 <?php echo __('lang.accord_9'); ?>
             </h4>
         </a>
@@ -30,7 +30,7 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">W<span class="text-red">*</span></div>
+                                        <div class="input-group-text" style="width: 50px;color:black;" id="btnGroupAddon">W<span class="text-red">*</span></div>
                                     </div>
                                     <input type="number" step="any" id="wblg" onchange="updateLayer()" class="form-control" placeholder="<?php echo __('lang.west_bound_longitude'); ?>" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="West Bound Longitude" value="{{ old('c9_west_bound_longitude') }}" name="c9_west_bound_longitude">
                                     <br>
@@ -50,7 +50,7 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">E<span class="text-red">*</span></div>
+                                        <div class="input-group-text" style="width: 50px;color:black;" id="btnGroupAddon">E<span class="text-red">*</span></div>
                                     </div>
                                     <input type="number" id="eblg" onchange="updateLayer()" step="any" class="form-control" placeholder="<?php echo __('lang.east_bound_longitude'); ?>" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="East Bound Longitude" value="{{ old('c9_east_bound_longitude') }}" name="c9_east_bound_longitude">
                                     <br>
@@ -70,7 +70,7 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">S<span class="text-red">*</span></div>
+                                        <div class="input-group-text" style="width: 50px;color:black;" id="btnGroupAddon">S<span class="text-red">*</span></div>
                                     </div>
                                     <input type="number" id="sblt" onchange="updateLayer()" step="any" class="form-control" placeholder="<?php echo __('lang.south_bound_latitude'); ?>" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="right" title="South Bound Latitude" value="{{ old('c9_south_bound_latitude') }}" name="c9_south_bound_latitude">
                                     <br>
@@ -90,7 +90,7 @@
                             <div class="col col-lg-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text" style="width: 50px;" id="btnGroupAddon">N<span class="text-red">*</span></div>
+                                        <div class="input-group-text" style="width: 50px;color:black;" id="btnGroupAddon">N<span class="text-red">*</span></div>
                                     </div>
                                     <input type="number" id="nblt" onchange="updateLayer()" step="any" class="form-control" placeholder="<?php echo __('lang.north_bound_latitude'); ?>" aria-label="Recipient's username with two button addons" data-bs-toggle="tooltip" data-bs-placement="top" title="North Bound Latitude" value="{{ old('c9_north_bound_latitude') }}" name="c9_north_bound_latitude">
                                     <br>

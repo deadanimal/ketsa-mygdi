@@ -51,13 +51,13 @@
                         <div class="card">
                             <div class="card-header bg-default">
                                 <div class="row align-items-center">
-                                    <div class="col-8">
+                                    <div class="col-10">
                                         <h3 class="text-white text-center mb-0">BORANG PENGESAHAN PENERIMAAN MAKLUMAT
                                             GEOSPATIAL MELALUI
                                             MYGDI</h3>
                                     </div>
 
-                                    <div class="col-4 text-right">
+                                    <div class="col-2 text-right">
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                                     type="checkbox" data-permohonanid="{{ $permohonan->id }}"
                                                     {{ $permohonan->acceptance == '1' ? 'checked disabled' : '' }}
                                                     {{ Auth::user()->hasRole(['Pemohon Data']) ? '' : 'disabled' }}>
-                                                <label class="custom-control-label" for="customCheck1">Saya terima terma dan
+                                                <label class="custom-control-label" for="customCheck1" style="font-size: 17px;">Saya terima terma dan
                                                     syarat diatas berikut</label>
                                             </div>
                                         </dl>

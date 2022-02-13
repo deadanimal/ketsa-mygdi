@@ -1,6 +1,6 @@
 <div class="card card-primary mb-4 div_c14" id="div_c14">
-                                        <div class="card-header">
-                                            <h4 class="card-title">
+    <div class="card-header" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
+        <h4 class="card-title" style="font-weight: 600 !important;">
                                                 <a data-toggle="collapse" href="#collapse14">
                                                     <?php echo __('lang.accord_14'); ?>
                                                 </a>
@@ -18,6 +18,7 @@
                                                                     <label class="form-control-label" for="c14_useLimitation">
                                                                         <?php echo __('lang.use_limitation'); ?>
                                                                     </label>
+                                                                    <span style="float: right;">: </span>
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <input type="text" name="c14_useLimitation" id="c14_useLimitation" class="form-control form-control-sm" value="{{ old('c14_useLimitation') }}">
@@ -30,6 +31,7 @@
                                                                     <label class="form-control-label" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
                                                                         <?php echo __('lang.access_constraints'); ?>
                                                                     </label>
+                                                                    <span style="float: right;">: </span>
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm">
@@ -55,6 +57,7 @@
                                                                     <label class="form-control-label" for="input-use-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
                                                                         <?php echo __('lang.use_constraints'); ?>
                                                                     </label>
+                                                                    <span style="float: right;">: </span>
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm">
@@ -86,6 +89,7 @@
                                                                     <label class="form-control-label" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
                                                                         <?php echo __('lang.classification'); ?>
                                                                     </label>
+                                                                    <span style="float: right;">: </span>
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">
@@ -110,6 +114,7 @@
                                                                     Contoh: Pekeliling Arahan Keselamatan Dokumen Geospatial Terperingkat Terhadap">
                                                                     <?php echo __('lang.classification_system'); ?>
                                                                     </label>
+                                                                    <span style="float: right;position: absolute;">: </span>
                                                                 </div>
                                                                 <div class="col-xl-7">
                                                                     <input class="form-control form-control-sm" name="c14_reference" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal" value="{{old('c14_reference')}}">
