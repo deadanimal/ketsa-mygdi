@@ -197,8 +197,8 @@
                                                             type="text" value="{{ $permohonan->users->phone_pejabat }}"
                                                             disabled />
                                                     </div>
-                                                    <div class="col-2">
-                                                        <label class="form-control-label mr-4" for="tel_bimbit">
+                                                    <div class="col-2" style="padding-right: none !important;">
+                                                        <label class="form-control-label mr-4" for="tel_bimbit" style="padding-right: none !important;margin-right:0 !important;">
                                                             Telefon Bimbit
                                                         </label>
                                                     </div>
@@ -311,6 +311,14 @@
                                                     <div class="opacity-8" style="overflow-x:auto;">
                                                         <table id="senarai_data_table" class="tb table-bordered table-striped"
                                                             style="width: 100%; overflow-x:auto;">
+                                                            <colgroup>
+                                                                <col width="150px;">
+                                                                <col width="150px;">
+                                                                <col>
+                                                                <col width="150px;">
+                                                                <col>
+                                                                <col>
+                                                            </colgroup>
                                                             <thead>
                                                                 <tr>
                                                                     <th>LAPISAN DATA</th>
@@ -374,14 +382,17 @@
                                                 </div>
                                             </div>
                                             <div id="collapse3" class="panel-collapse collapse in" data-parent="#div_c3">
-                                                <div class="card-body">
+                                                <div class="card-body" style="padding-top:1rem !important;">
                                                     <div class="opacity-8">
-                                                        <span class="text-warning" style="font-size: 13px;">**Semua
+                                                        <span class="text-warning" style="font-size: 14px;">**Semua
                                                             dokumen yang dimuat naik
                                                             hendaklah dalam format PDF
                                                             dan saiz setiap fail tidak boleh melebihi 2MB.</span>
                                                         <table id="dokumen_table" class="tb table-bordered table-striped"
                                                             style="width:100%;">
+                                                            <colgroup>
+                                                                <col width="50px;">
+                                                            </colgroup>
                                                             <thead>
                                                                 <tr>
                                                                     <th>BIL</th>
@@ -1030,9 +1041,9 @@
             });
 
             $("#senarai_data_table").DataTable({
-                "dom": "<'row'<'col-sm-6'i><'col-sm-3 text-center'><'col-sm-3'f>>" +
+                "dom": "<'row'<'col-sm-6'l><'col-sm-3 text-center'><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                    "<'row mt-4'<'col-sm-5'i><'col-sm-7'p>>",
                 // "scrollX": true,
                 "orderCellsTop": true,
                 "ordering": false,
@@ -1056,9 +1067,9 @@
             }).columns.adjust();
 
             $("#dokumen_table").DataTable({
-                "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
+                "dom": "<'row'<'col-sm-6'l><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+                    "<'row mt-4'<'col-sm-5'i><'col-sm-7'p>>",
                 // "scrollX": true,
                 "ordering": false,
                 "responsive": true,

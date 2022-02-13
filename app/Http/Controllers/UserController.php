@@ -681,9 +681,9 @@ class UserController extends Controller {
     public function edit(){
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         if(strpos($user->kategori,"IPTA") !== false){
-            $kategori = Kategori::where('name','ilike','%IPTA%')->get();
+            $kategori = Kategori::where('name','like','%IPTA%')->get();
         }elseif(strpos($user->kategori,"IPTS") !== false){
-            $kategori = Kategori::where('name','ilike','%IPTS%')->get();
+            $kategori = Kategori::where('name','like','%IPTS%')->get();
         }else{
             $kategori = Kategori::get();
         }
@@ -695,9 +695,9 @@ class UserController extends Controller {
     public function edit_admin($id){
         $user = User::where(["id"=>$id])->get()->first();
         if(strpos($user->kategori,"IPTA") !== false){
-            $kategori = Kategori::where('name','ilike','%IPTA%')->get();
+            $kategori = Kategori::where('name','like','%IPTA%')->get();
         }elseif(strpos($user->kategori,"IPTS") !== false){
-            $kategori = Kategori::where('name','ilike','%IPTS%')->get();
+            $kategori = Kategori::where('name','like','%IPTS%')->get();
         }else{
             $kategori = Kategori::get();
         }

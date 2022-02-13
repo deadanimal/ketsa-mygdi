@@ -179,9 +179,9 @@
                             <div class="card-body">
                                 <!-- <div class="form-group row"> -->
                                 <div class="clearfix">
-                                    <p id="lbl_kategori"><?php echo __('lang.metadata_category'); ?> : &nbsp;&nbsp;&nbsp;</p>
-                                    <select name="kategori" id="kategori" class="form-control float-left"
-                                            style="width:175px;">
+                                    <p id="lbl_kategori" class="pl-lg-3 form-control-label" style="display: inline-block;"><?php echo __('lang.metadata_category'); ?> : &nbsp;&nbsp;&nbsp;</p>
+                                    <select name="kategori" id="kategori" class="form-control form-control-sm ml-3"
+                                            style="width:175px;display: inline-block;height:35px;">
                                         <option selected disabled><?php echo __('lang.dropdown_choose'); ?></option>
                                         <?php
                                         if (count($categories) > 0) {

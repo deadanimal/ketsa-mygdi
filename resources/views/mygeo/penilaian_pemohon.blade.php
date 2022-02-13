@@ -341,7 +341,7 @@
                                             <img style="max-height: 500px; max-width: 900px" class="p-2" alt="..."
                                                 src="{{ $penilaian->bhg_c_4_file_path }}">
                                         </div>
-                                        <div class="small py-4">Pihak kami mengalu-alukan sekiranya terdapat komen atau
+                                        <div class="small py-4" style="font-size: 17px;">Pihak kami mengalu-alukan sekiranya terdapat komen atau
                                             cadangan
                                             bagi meningkatkan
                                             pengurusan perkongsian data melalui MyGeo Explorer. Terima Kasih.

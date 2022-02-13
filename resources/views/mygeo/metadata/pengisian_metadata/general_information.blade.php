@@ -1,6 +1,6 @@
 <div class="card card-primary mb-4 div_c1" id="div_c1">
-    <div class="card-header">
-        <h4 class="card-title">
+    <div class="card-header" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
+        <h4 class="card-title" style="font-weight: 600 !important;">
             <a data-toggle="collapse" href="#collapse1">
                 <?php echo __('lang.accord_1'); ?>
             </a>
@@ -23,18 +23,16 @@
                         <option value="Static Map Images" class='optContentInfo_dataset'>Static Map Images</option>
                         <option value="Other Documents" class='optContentInfo_dataset'>Other Documents</option>
 
-                        <option value="Live Data and Maps" class='optContentInfo_services'>Live Data and Maps</option>
+                        <option value="Live Data and Maps" class='optContentInfo_services' style="font-size: 0.7rem;font-weight: 400 !important;">Live Data and Maps</option>
 
                         <option value="Gridded" class='optContentInfo_gridded'>Gridded</option>
 
                         <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                     </select>
+                    <p class="ml-3 mb-0 lblContentInfo" style="font-size: 1rem;font-weight: 400 !important;">Live Data and Maps</p>
                     <a href="lampiran/content_information" class="text-yellow" target="_blank">
                         <i class="fas fa-lightbulb mx-2"></i>
                     </a>
-
-
-                    <p class="ml-3 mb-0 lblContentInfo">Live Data and Maps</p>
                     <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled>
 
                     @error('c1_content_info')
@@ -62,7 +60,7 @@
                 <div class="row mb-2 py-0">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="publisher_agensi_organisasi"><?php echo __('lang.organisation_name'); ?>
-                        </label><label class="float-right">:</label>
+                        </label><label class="float-right" style="position: absolute;">:</label>
                     </div>
                     <div class="col-8">
                         <!--<p class="ml-3 mb-0">{{ (isset(auth::user()->agensiOrganisasi->name) ?  auth::user()->agensiOrganisasi->name: "") }}</p>-->

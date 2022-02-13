@@ -1,7 +1,7 @@
 <div class="card card-primary mb-4 div_c3" id="div_c3">
-    <div class="card-header">
+    <div class="card-header" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
         <a data-toggle="collapse" href="#collapse3">
-            <h4 class="card-title">
+            <h4 class="card-title" style="font-weight: 600 !important;color: black;">
                 <?php echo __('lang.accord_3'); ?>
                 <?php
                 if(isset($metadataxml->categoryTitle->categoryItem->CharacterString) && $metadataxml->categoryTitle->categoryItem->CharacterString != ""){

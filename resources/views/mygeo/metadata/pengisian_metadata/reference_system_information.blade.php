@@ -1,6 +1,6 @@
 <div class="card card-primary mb-4 div_c13" id="div_c13">
-    <div class="card-header">
-        <h4 class="card-title">
+    <div class="card-header" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
+        <h4 class="card-title" style="font-weight: 600 !important;">
             <a data-toggle="collapse" href="#collapse13">
                 <?php echo __('lang.accord_13'); ?>
             </a>
@@ -10,13 +10,14 @@
         <div class="card-body">
             @if($elemenMetadata['c13_ref_sys_identify']->status == '1')
             <div class="row mb-5">
-                <div class="col-xl-3">
+                <div class="col-xl-4">
                     <b for="input-system-identifier" data-toggle="tooltip"
                         title="Sistem rujukan bagi maklumat geospatial">
                         <?php echo __('lang.reference_system_identifier'); ?>
                     </b>
+                    <span style="float: right;">: </span>
                 </div>
-                <div class="col-xl-3">
+                <div class="col-xl-4">
                     <select class="form-control form-control-sm" name="c13_ref_sys_identify" id="c13_ref_sys_identify">
                         <option selected disabled>Pilih...</option>
                         <?php
@@ -48,15 +49,15 @@
             @if($elemenMetadata['refsys_projection']->status == '1' || $elemenMetadata['refsys_axis_units']->status == '1')
             <div class="row mb-2">
                 @if($elemenMetadata['refsys_projection']->status == '1')
-                <div class="col-2"><b><?php echo __('lang.projection'); ?> :</b></div>
+                <div class="col-2"><b><?php echo __('lang.projection'); ?></b></div>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" name="refsys_projection"
+                    : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_projection"
                         id="refsys_projection" readonly value="{{ old('refsys_projection') }}">
                 </div>
                 @endif
                 @if($elemenMetadata['refsys_axis_units']->status == '1')
-                <div class="col-2"><b><?php echo __('lang.axis_units'); ?> :</b></div>
-                <div class="col-4"><input class="form-control form-control-sm" type="text" name="refsys_axis_units"
+                <div class="col-2"><b><?php echo __('lang.axis_units'); ?></b></div>
+                <div class="col-4">: &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_axis_units"
                         id="refsys_axis_units" readonly value="{{ old('refsys_axis_units') }}"></div>
                 @endif
             </div>
@@ -64,16 +65,16 @@
             @if($elemenMetadata['refsys_semiMajorAxis']->status == '1' || $elemenMetadata['refsys_datum']->status == '1')
             <div class="row mb-2">
                 @if($elemenMetadata['refsys_semiMajorAxis']->status == '1')
-                <div class="col-2"><b><?php echo __('lang.semi_major_axis'); ?> :</b></div>
+                <div class="col-2"><b><?php echo __('lang.semi_major_axis'); ?></b></div>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" name="refsys_semiMajorAxis"
+                    : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_semiMajorAxis"
                         id="refsys_semiMajorAxis" readonly value="{{ old('refsys_semiMajorAxis') }}">
                 </div>
                 @endif
                 @if($elemenMetadata['refsys_datum']->status == '1')
-                <div class="col-2"><b><?php echo __('lang.datum'); ?> :</b></div>
+                <div class="col-2"><b><?php echo __('lang.datum'); ?></b></div>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" name="refsys_datum" id="refsys_datum"
+                    : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_datum" id="refsys_datum"
                         readonly value="{{ old('refsys_datum') }}">
                 </div>
                 @endif
@@ -82,16 +83,16 @@
             @if($elemenMetadata['refsys_ellipsoid']->status == '1' || $elemenMetadata['refsys_denomFlatRatio']->status == '1')
             <div class="row mb-2">
                 @if($elemenMetadata['refsys_ellipsoid']->status == '1')
-                <div class="col-2"><b><?php echo __('lang.ellipsoid'); ?> :</b></div>
+                <div class="col-2"><b><?php echo __('lang.ellipsoid'); ?></b></div>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" name="refsys_ellipsoid"
+                    : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_ellipsoid"
                         id="refsys_ellipsoid" readonly value="{{ old('refsys_ellipsoid') }}">
                 </div>
                 @endif
                 @if($elemenMetadata['refsys_denomFlatRatio']->status == '1')
-                <div class="col-2"><b><?php echo __('lang.denominator_of_flattening_ratio'); ?> :</b></div>
+                <div class="col-2"><b><?php echo __('lang.denominator_of_flattening_ratio'); ?></b></div>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" name="refsys_denomFlatRatio"
+                    : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_denomFlatRatio"
                         id="refsys_denomFlatRatio" readonly value="{{ old('refsys_denomFlatRatio') }}">
                 </div>
                 @endif

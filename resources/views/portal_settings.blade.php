@@ -147,6 +147,9 @@ img {
                 </div>
                 <div class="card-body">
                   <table id="table_pengumuman" class="table table-bordered table-striped">
+                    <colgroup>
+                      <col width="50px;">
+                  </colgroup>
                     <thead>
                       <tr>
                         <th>Bil</th>

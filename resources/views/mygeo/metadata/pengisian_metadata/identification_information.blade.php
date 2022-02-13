@@ -1,6 +1,6 @@
 <div class="card card-primary mb-4 div_c2" id="div_c2">
-    <div class="card-header">
-        <h4 class="card-title">
+    <div class="card-header" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
+        <h4 class="card-title" style="font-weight: 600 !important;">
             <a data-toggle="collapse" href="#collapse2">
                 <?php echo __('lang.accord_2'); ?>
             </a>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 @endif
-                <h2 class="heading-small text-muted"><?php echo __('lang.abstract'); ?></h2>
+                <h2 class="heading-small text-muted" style="padding-top:25px;padding-bottom:10px;font-size:18px;font-weight:600;"><?php echo __('lang.abstract'); ?></h2>
                 <?php //=== abstract= =============================================================
                 ?>
                 @include('mygeo.metadata.pengisian_metadata.abstract')
@@ -328,9 +328,9 @@
                     <div class="col-6">
                         <input type="text" class="form-control form-control-sm ml-3" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ old('c2_serviceUrl') }}">
                     </div>
-                    <div class="col-1">
-                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test (intecx)</button>
-                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl2" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test (wms)</button>
+                    <div class="col-3">
+                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false" style="display: inline-block;">Test (intecx)</button>
+                        <button class="btn btn-sm btn-success" id="btnTestServiceUrl2" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false" style="display: inline-block;">Test (wms)</button>
                         @error('c2_serviceUrl')
                             <div class="text-error">{{ $message }}</div>
                         @enderror
@@ -343,7 +343,7 @@
                     <div class="col-3">
                         <label class="form-control-label mr-4" for="c2_typeOfCouplingDataset" data-toggle="tooltip" title="Pilihan jenis gandingan bagi Dataset">
                             <?php echo __('lang.type_of_coupling_with_dataset'); ?>
-                        </label><label class="float-right">:</label>
+                        </label><label class="float-right" style="position: absolute;">:</label>
                     </div>
                     <div class="col-7">
                         <select class="form-control form-control-sm ml-3" name="c2_typeOfCouplingDataset"
@@ -363,7 +363,7 @@
                 </div>
                 @endif
             </div>
-            <h2 class="heading-small text-muted"><?php echo __('lang.responsibleParty'); ?></h2>
+            <h2 class="heading-small text-muted" style="padding-top:25px;padding-bottom:10px;font-size:18px;font-weight:600;"><?php echo __('lang.responsibleParty'); ?></h2>
             <div class="my-2">
                 @if($elemenMetadata['c2_contact_name']->status == '1')
                 <div class="row mb-2">
@@ -580,7 +580,7 @@
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nombor telefon organisasi">
                             <?php echo __('lang.telephone_office'); ?><span class="text-warning">*</span>
-                        </label><label class="float-right">:</label>
+                        </label><label class="float-right" style="position: absolute;">:</label>
                     </div>
                     <div class="col-6">
                         <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office"
