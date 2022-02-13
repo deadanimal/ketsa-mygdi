@@ -7,6 +7,10 @@
             color: rgb(44, 44, 44)
         }
 
+        .badge-secondary{
+            background: lightgray
+        }
+
     </style>
 
     <!-- Content Wrapper. Contains page content -->
@@ -99,8 +103,10 @@
                                                         <span class="badge badge-pill badge-danger">Ditolak</span>
                                                     @elseif($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 1)
                                                         <span class="badge badge-pill badge-success">Selesai</span>
-                                                    @elseif($permohonan->status == '0')
+                                                    @elseif($permohonan->status == '0' && $permohonan->dihantar == 1)
                                                         <span class="badge badge-pill badge-info">Baru</span>
+                                                        @elseif($permohonan->status == '0')
+                                                        <span class="badge badge-pill badge-secondary">Draf</span>
                                                     @endif
                                                 </td>
                                                 <td>

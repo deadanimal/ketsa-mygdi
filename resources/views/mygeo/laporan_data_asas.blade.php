@@ -50,11 +50,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row pl-lg-5">
+                                <div class="row pl-lg-5 my-2">
                                     <div class="col-2">
-                                        <label class="form-control-label" for="">Pilih Agensi</label>
+                                        <label class="form-control-label" for="">Agensi</label>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-7">
                                         <select class="form-control form-control-sm pilihAgensi" name="agensi">
                                             <option selected>Pilih</option>
                                             @foreach ($agensi as $ag)
@@ -65,16 +65,27 @@
                                 </div>
                                 <div class="row pl-lg-5 my-2">
                                     <div class="col-2">
-                                        <label class="form-control-label" for="">Pilih Masa Dari</label>
+                                        <label class="form-control-label" for="">Tahun</label>
+                                    </div>
+                                    <div class="col-5">
+                                        <input type="text" class="form-control form-control-sm pilihTahun" name="tahun"
+                                            id="tahun">
+                                    </div>
+                                </div>
+                                <div class="row pl-lg-5 my-2">
+                                    <div class="col-2">
+                                        <label class="form-control-label" for="">Bulan dari</label>
                                     </div>
                                     <div class="col-2">
-                                        <input type="date" class="form-control form-control-sm startDate" name="start_date">
+                                        <input type="text" class="form-control form-control-sm startMonth" id="startmonth"
+                                            name="month">
                                     </div>
                                     <div class="col-1">
-                                        <label class="form-control-label" for="">Ke</label>
+                                        <label class="form-control-label" for="">ke</label>
                                     </div>
                                     <div class="col-2">
-                                        <input type="date" class="form-control form-control-sm endDate" name="end_date">
+                                        <input type="text" class="form-control form-control-sm endMonth" name="month"
+                                            id="endmonth">
                                     </div>
                                 </div>
                                 <button class="btn btn-sm btn-primary filterBtn float-right">Cari</button>
@@ -351,6 +362,8 @@
         src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js"></script>
     <script type="text/javascript" language="javascript"
         src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -395,6 +408,7 @@
                     }
                 }
             });
+
         });
     </script>
     <script src="assets/js/plugins/chartjs.min.js"></script>
@@ -472,61 +486,133 @@
         });
 
         $(document).ready(function() {
+            $.fn.datepicker.dates['en'] = {
+                days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                months: ["January", "February", "March", "April", "May", "June", "July", "August",
+                    "September", "October", "November", "December"
+                ],
+                monthsShort: ["Jan", "Feb", "Mac", "Apr", "Mei", "Jun", "Jul", "Ogos", "Sep", "Okt", "Nov",
+                    "Dis"
+                ],
+                today: "Today",
+                clear: "Clear",
+                format: "mm/dd/yyyy",
+                titleFormat: "MM yyyy",
+                /* Leverages same syntax as 'format' */
+                weekStart: 0
+            };
+
+            from = $("#startmonth").datepicker({
+                format: "mm",
+                startView: "months",
+                minViewMode: "months",
+                minViewMode: "months",
+                updateViewDate: true,
+                changeYear: true,
+                autoClose: true,
+            })
+            to = $("#endmonth").datepicker({
+                format: "mm",
+                startView: "months",
+                minViewMode: "months",
+                updateViewDate: true,
+                changeYear: true,
+                autoClose: true
+            });
+
+            year = $("#tahun").datepicker({
+                format: "yyyy",
+                startView: "years",
+                minViewMode: "years",
+                autoClose: true
+
+            }).on("change", function() {
+                // console.log(year.val());
+                from.datepicker('update', new Date(year.val()));
+                to.datepicker('update', new Date(year.val()));
+            });
+
             $('.filterBtn').click(function() {
+                var year = $('.pilihTahun').val();
                 var agensi_id = $('.pilihAgensi').val();
-                var start_date = $('.startDate').val();
-                var end_date = $('.endDate').val();
+                var start_month = $('.startMonth').val();
+                var end_month = $('.endMonth').val();
+                var sd = new Date(year, parseInt(start_month) - 1, 1);
+                var ed = new Date(year, parseInt(end_month), 1);
+                ed.setDate(ed.getDate() - 1);
+                var start_date = sd.getFullYear() + "-" + (sd.getMonth() + 1) + "-" + sd.getDate() +
+                    " 00:00:00";;
+                var end_date = ed.getFullYear() + "-" + (ed.getMonth() + 1) + "-" + ed.getDate() +
+                    " 00:00:00";
                 console.log(agensi_id, start_date, end_date);
 
-                $.ajax({
-                    method: "POST",
-                    url: "filter_by_agensi",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "agensi_id": agensi_id,
-                        "start_date": start_date,
-                        "end_date": end_date
-                    },
-                }).done(function(res) {
-                    // alert("Status pengguna berjaya diubah.");
-                    // console.log(res['data']);
-                    let array = res['data'];
-                    $('#laporan_perincian').DataTable().clear().draw();
-                    if (res['data'].length > 0) {
-                        array.forEach(element => {
-                            $('#laporan_perincian').DataTable().row.add($(element)).draw();
+                if (year != '') {
+                    $.ajax({
+                        method: "POST",
+                        url: "filter_by_agensi",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "agensi_id": agensi_id,
+                            "start_date": start_date,
+                            "end_date": end_date
+                        },
+                    }).done(function(res) {
+                        // alert("Status pengguna berjaya diubah.");
+                        console.log(res['data']);
+                        let array = res['data'];
+                        $('#laporan_perincian').DataTable().clear().draw();
+                        if (res['data'].length > 0) {
+                            array.forEach(element => {
+                                $('#laporan_perincian').DataTable().row.add($(element))
+                                    .draw();
+                            });
+                        }
+                        $('.countRow').html(res['counter']);
+
+                        removeData();
+                        let bln = res['month'];
+                        console.log('hmmmm', bln);
+                        let result = [];
+                        result = Object.entries(bln);
+                        console.log('res', result, chart.data.labels.length);
+                        result.forEach(e => {
+                            // console.log(e);
+                            chart.data.labels.push(e[0]);
+                            chart.data.datasets[0].data.push(e[1].length);
                         });
-                    }
-                    $('.countRow').html(res['counter']);
+                        chart.update();
 
-                    removeData();
-                    chart.data.datasets[0].data = [res['counter']];
-
-                    chart.data.labels = [res['agensi']]
-                    chart.update();
-                });
+                    });
+                }
             });
+
+            function getRandomIntInclusive(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            function addData() {
+                chart.data.labels.push("NEW")
+                chart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
+                chart.update();
+            }
+
+            function removeData() {
+                let total = chart.data.labels.length;
+
+                while (total >= 0) {
+                    chart.data.labels.pop();
+                    chart.data.datasets[0].data.pop();
+                    total--;
+                }
+
+                chart.update();
+                console.log('remove', total);
+            }
         });
-
-        function getRandomIntInclusive(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        function addData() {
-            chart.data.labels.push("NEW")
-            chart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
-            chart.update();
-        }
-
-        function removeData() {
-            chart.data.labels.pop();
-            chart.data.datasets.forEach((dataset) => {
-                dataset.data.pop();
-            });
-            chart.update();
-        }
     </script>
 
 

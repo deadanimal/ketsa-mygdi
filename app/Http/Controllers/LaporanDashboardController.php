@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AgensiOrganisasi;
+use Carbon\Carbon;
 use App\LaporanDashboard;
 use App\MohonData;
 use App\SenaraiKawasanData;
@@ -62,8 +63,16 @@ class LaporanDashboardController extends Controller
     }
 
     public function filter_by_agensi(Request $request){
+
+
       $from = $request->start_date;
       $to = $request->end_date;
+    //   return $to;
+    Carbon::setlocale(config('app.locale2'));
+       $by_month = MohonData::whereBetween('created_at', [$from, $to])->get()
+       ->groupBy(function($val) {
+       return Carbon::parse($val->created_at)->translatedFormat('M');
+    });
       if($from != '' && $to != ''){
         $agensi_mohon = MohonData::whereBetween('created_at', [$from, $to])->get();
       } else {
@@ -96,6 +105,7 @@ class LaporanDashboardController extends Controller
             }
         }
         return ['data' => $append_data,
+                'month' => $by_month,
                 'counter' => $counter,
                 'agensi' => $org];
        }
@@ -654,71 +664,5 @@ class LaporanDashboardController extends Controller
 
         // Render the HTML as PDF
         return $pdf->stream();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\LaporanDashboard  $laporanDashboard
-     * @return \Illuminate\Http\Response
-     */
-    public function show(LaporanDashboard $laporanDashboard)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\LaporanDashboard  $laporanDashboard
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(LaporanDashboard $laporanDashboard)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\LaporanDashboard  $laporanDashboard
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, LaporanDashboard $laporanDashboard)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\LaporanDashboard  $laporanDashboard
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(LaporanDashboard $laporanDashboard)
-    {
-        //
     }
 }

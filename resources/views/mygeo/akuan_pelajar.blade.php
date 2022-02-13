@@ -12,7 +12,30 @@
         .form-control,
         .form-control:disabled {
             /* border-width: 0;
-                                background-color: white */
+                                                background-color: white */
+        }
+
+        ol.roman {
+            counter-reset: roman;
+        }
+
+        ol.alpha {
+            counter-reset: alpha
+        }
+
+        ol li {
+            list-style: none;
+            /* position: relative; */
+        }
+
+        ol.roman>li:before {
+            counter-increment: roman;
+            content: "("counter(roman, lower-roman)") "
+        }
+
+        ol.alpha>li:before {
+            counter-increment: alpha;
+            content: "("counter(alpha, lower-alpha)") "
         }
 
     </style>
@@ -58,7 +81,7 @@
                             <div class="card-header bg-default">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h3 class="text-white mb-0">Borang Akuan Pelajar</h3>
+                                        <h3 class="text-white mb-0">Maklumat Borang Akuan Pelajar</h3>
                                     </div>
 
                                     <div class="col-4 text-right">
@@ -69,110 +92,122 @@
                                 <form action="{{ url('simpan_akuan_pelajar') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
-
                                     <h3 class="text-center">AKUAN PELAJAR</h3>
-                                    <p class="mx-6 pr-lg-4">
-                                        (Sila nyatakan tajuk tesis/projek/kajian
+
+                                    <div class="form-group mx-6">
+                                        <label for="tajuk_kajian" class="form-control-label mb-0">Tajuk
+                                            Tesis/Projek/Kajian</label>
                                         <input type="text" class="form-control form-control-sm" name="title"
-                                            placeholder="Tajuk" value="{{ $akuan->title }}"><br>
-                                    <ol align="justify" class="mx-5 pr-lg-4">
-                                        <li>Saya (nyatakan nama) <input type="text" class="form-control form-control-sm"
-                                                name="nama" value="{{ $permohonan->users->name }}">
-                                            K.P. No <input type="text" class="form-control form-control-sm" name="nric"
-                                                placeholder="No Kad Pengenalan" value="{{ $permohonan->users->nric }}">
-                                            yang
-                                            bertandatangan di bawah ini, sebagai
-                                            seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
-                                            <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
-                                                name="agensi_organisasi">{{ $permohonan->users->agensi_organisasi }}, {{ $permohonan->users->alamat }}
-                                                                                                                                     </textarea>
-                                            dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
-                                            sama ada peta topografi / foto udara dan sebagainya)
-                                            seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
-                                            yang disebutkan di bawah.<br>
-                                        </li><br><br>
-                                        <li>Senarai Dokumen Geospatial Terperingkat<br></li>
-                                        <ol type="i">
-                                            <li>Peta Topografi :</li>
-                                            <ol type="a">
-                                                <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="peta_topo_a" disabled
-                                                            value="{{ $akuan->peta_topo_a }}"></span></li>
-                                                <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="peta_topo_b" disabled
-                                                            value="{{ $akuan->peta_topo_b }}"></span></li>
-                                                <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="peta_topo_c" disabled
-                                                            value="{{ $akuan->peta_topo_c }}"></span></li>
-                                            </ol>
-                                            <br><br>
-                                            <li>Foto Udara :</li>
-                                            <ol type="a">
-                                                <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="foto_udara_a"
-                                                            disabled value="{{ $akuan->foto_udara_a }}"></span></li>
-                                                <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="foto_udara_b"
-                                                            disabled value="{{ $akuan->foto_udara_b }}"></span></li>
-                                                <li><span class="form-inline"><input type="text"
-                                                            class="form-control form-control-sm" name="foto_udara_c"
-                                                            disabled value="{{ $akuan->foto_udara_c }}"></span></li>
-                                            </ol>
-                                            <br><br>
-                                            <li>Lain-lain :</li>
-                                            <ol type="a">
-                                                @foreach ($skdatas as $sk)
-                                                    <li><i class="form-inline">{{ $sk->lapisan_data }},
-                                                            {{ $sk->kawasan_data }}</i></li>
-                                                @endforeach
-                                            </ol>
-                                        </ol>
-                                        <br><br>
-                                        <li>Syarat-syarat</li>
+                                            placeholder="Tajuk" value="{{ $akuan->title }}">
                                         <br>
-                                        <ol type="i">
-                                            <li>Di samping syarat-syarat yang dinyatakan di dalam Borang
-                                                PPNM – 1 (Pind. 1/2008) PERMOHONAN MEMBELI DOKUMEN GEOSPATIAL
-                                                TERPERINGKAT, maklumat-maklumat berkenaan akan digunakan
-                                                mengikut prinsip PERLU MENGETAHUI.</li>
-                                            <li>Penggunaan bahan-bahan dengan Hak Cipta Kerajaan akan dibataskan
-                                                kepada keperluan sendiri sahaja. Penggunaan bahan-bahan berkenaan
-                                                untuk tujuan lain tidak dibenarkan.</li>
-                                            <li>Kandungan bahan-bahan ini tidak akan dihebahkan atau disampaikan
-                                                secara langsung atau tidak langsung kepada pihak akhbar atau orang lain
-                                                yang tidak diberi kuasa untuk menerimanya.</li>
-                                            <li>Bahan-bahan ini akan dibawa balik ke Malaysia dalam masa 6 bulan.
-                                                Pengarah Pemetaan Negara, Malaysia hendaklah diberitahu mengenai
-                                                tarikh bahan-bahan dibawa keluar dan dikembalikan ke Malaysia.<br><br>
-                                                Tandatangan</li>
-                                        </ol>
-                                    </ol>
 
 
-                                    <br><br>
-                                    <div class="mx-6 pl-lg-8">
-                                        Tandatangan Pelajar:
-                                        <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan" height="120"
-                                            class="preview-image-before-upload">
-                                        @if (Auth::user()->hasRole(['Pemohon Data']))
-                                            <input type="file" class="form-control form-control-sm py-0" name="file"
-                                                id="signature" placeholder="Digital Sign" accept="image/jpeg, image/png">
-                                        @endif
-                                        <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
-                                        <br>
-                                        Tarikh:<input type="text" class="form-control form-control-sm"
-                                            placeholder="Auto Pilih Tarikh Semasa" disabled
-                                            value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
-                                        Nama:<input type="text" class="form-control form-control-sm"
-                                            value="{{ $permohonan->users->name }}">
-                                        Alamat:<textarea class="form-control form-control-sm" cols="30"
-                                            rows="6">{{ $permohonan->users->alamat }}</textarea>
+                                        <div class="">
+                                            {{-- (Sila nyatakan tajuk tesis/projek/kajian
+                                        <input type="text" class="form-control form-control-sm" name="title"
+                                            placeholder="Tajuk" value="{{ $akuan->title }}"><br> --}}
+                                            <ol align="justify" class="mx-5 pr-lg-4">
+                                            <li>Saya (nyatakan nama) <input type="text" class="form-control form-control-sm"
+                                                    name="nama" value="{{ $permohonan->users->name }}">
+                                                K.P. No <input type="text" class="form-control form-control-sm" name="nric"
+                                                    placeholder="No Kad Pengenalan"
+                                                    value="{{ $permohonan->users->nric }}">
+                                                yang
+                                                bertandatangan di bawah ini, sebagai
+                                                seorang pelajar di (nyatakan nama Universiti/Institusi dan alamat penuh)
+                                                <textarea name="agensi_organisasi" rows="4"
+                                                    class="form-control form-control-sm"
+                                                    name="agensi_organisasi">{{ $permohonan->users->agensi_organisasi }}, {{ $permohonan->users->alamat }}
+                                                                                                                                         </textarea>
+                                                dengan ini memberi jaminan bahawa saya akan menggunakan (nyatakan
+                                                sama ada peta topografi / foto udara dan sebagainya)
+                                                seperti butir-butir di bawah ini dengan mematuhi sepenuhnya syarat-syarat
+                                                yang disebutkan di bawah.<br>
+                                            </li><br><br>
+                                            <li>Senarai Dokumen Geospatial Terperingkat<br></li>
+                                            <ol class="roman">
+                                                <li>Peta Topografi :</li>
+                                                <ol class="alpha">
+                                                    <li><span class="form-inline"><input type="text"
+                                                                class="form-control form-control-sm" name="peta_topo_a"
+                                                                disabled value="{{ $akuan->peta_topo_a }}"></span></li>
+                                                    <li><span class="form-inline"><input type="text"
+                                                                class="form-control form-control-sm" name="peta_topo_b"
+                                                                disabled value="{{ $akuan->peta_topo_b }}"></span></li>
+                                                    <li><span class="form-inline"><input type="text"
+                                                                class="form-control form-control-sm" name="peta_topo_c"
+                                                                disabled value="{{ $akuan->peta_topo_c }}"></span></li>
+                                                </ol>
+                                                <br><br>
+                                                <li>Foto Udara :</li>
+                                                <ol class="alpha">
+                                                    <li><span class="form-inline"><input type="text"
+                                                                class="form-control form-control-sm" name="foto_udara_a"
+                                                                disabled value="{{ $akuan->foto_udara_a }}"></span></li>
+                                                    <li><span class="form-inline"><input type="text"
+                                                                class="form-control form-control-sm" name="foto_udara_b"
+                                                                disabled value="{{ $akuan->foto_udara_b }}"></span></li>
+                                                    <li><span class="form-inline"><input type="text"
+                                                                class="form-control form-control-sm" name="foto_udara_c"
+                                                                disabled value="{{ $akuan->foto_udara_c }}"></span></li>
+                                                </ol>
+                                                <br><br>
+                                                <li>Lain-lain :</li>
+                                                <ol class="alpha">
+                                                    @foreach ($skdatas as $sk)
+                                                        <li><i >{{ $sk->lapisan_data }},
+                                                                {{ $sk->kawasan_data }}</i></li>
+                                                    @endforeach
+                                                </ol>
+                                            </ol>
+                                            {{-- <br><br>
+                                            <li>Syarat-syarat</li>
+                                            <br>
+                                            <ol type="i">
+                                                <li>Di samping syarat-syarat yang dinyatakan di dalam Borang
+                                                    PPNM – 1 (Pind. 1/2008) PERMOHONAN MEMBELI DOKUMEN GEOSPATIAL
+                                                    TERPERINGKAT, maklumat-maklumat berkenaan akan digunakan
+                                                    mengikut prinsip PERLU MENGETAHUI.</li>
+                                                <li>Penggunaan bahan-bahan dengan Hak Cipta Kerajaan akan dibataskan
+                                                    kepada keperluan sendiri sahaja. Penggunaan bahan-bahan berkenaan
+                                                    untuk tujuan lain tidak dibenarkan.</li>
+                                                <li>Kandungan bahan-bahan ini tidak akan dihebahkan atau disampaikan
+                                                    secara langsung atau tidak langsung kepada pihak akhbar atau orang lain
+                                                    yang tidak diberi kuasa untuk menerimanya.</li>
+                                                <li>Bahan-bahan ini akan dibawa balik ke Malaysia dalam masa 6 bulan.
+                                                    Pengarah Pemetaan Negara, Malaysia hendaklah diberitahu mengenai
+                                                    tarikh bahan-bahan dibawa keluar dan dikembalikan ke Malaysia.<br><br>
+                                                    Tandatangan</li>
+                                            </ol> --}}
+                                        </ol>
+
+
+                                            <br><br>
+                                            <div class="">
+                                                Tandatangan Pelajar:
+                                                <img src="{{ $akuan->digital_sign }}" alt="Gambar Tandatangan"
+                                                    height="120" class="preview-image-before-upload">
+                                                @if (Auth::user()->hasRole(['Pemohon Data']))
+                                                    <input type="file" class="form-control form-control-sm py-0" name="file"
+                                                        id="signature" placeholder="Digital Sign"
+                                                        accept="image/jpeg, image/png">
+                                                @endif
+                                                <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
+                                                <br>
+                                                Tarikh:<input type="text" class="form-control form-control-sm"
+                                                    placeholder="Auto Pilih Tarikh Semasa" disabled
+                                                    value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
+                                                Nama:<input type="text" class="form-control form-control-sm"
+                                                    value="{{ $permohonan->users->name }}">
+                                                Alamat:<textarea class="form-control form-control-sm" cols="30"
+                                                    rows="6">{{ $permohonan->users->alamat }}</textarea>
+                                            </div>
+
+                                            <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
+                                            <input type="hidden" name="id" value="{{ $permohonan->id }}">
+
+                                        </div>
                                     </div>
-
-                                    <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                    <input type="hidden" name="id" value="{{ $permohonan->id }}">
-
-                                    </p>
 
                                     @if (Auth::user()->hasRole(['Pemohon Data']))
                                         <button type="submit" class="btn float-right btn-success">Simpan</button>

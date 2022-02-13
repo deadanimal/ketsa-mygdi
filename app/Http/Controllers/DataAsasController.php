@@ -99,7 +99,7 @@ class DataAsasController extends Controller
             ['subkategori','=','LOL'],
             ['status','=','Tersedia']
         ])->get();
-        $senarai_data = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
+        $senarai_data = SenaraiData::where('status','Tersedia')->whereNotNull('subkategori')->orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
         return view('/data_asas_senarai',[
             'senarai_data' => $senarai_data,
@@ -1543,6 +1543,14 @@ class DataAsasController extends Controller
 
     public function generate_pdf_akuan_pelajar(Request $request){
         // $this->update_akuan_pelajar($request);
+        $path1 = public_path('/afiqadminmygeo_files/Lampiran IV_Akuan Pelajar.png');
+        $img1 = file_get_contents($path1);
+        $path2 = public_path('/afiqadminmygeo_files/Lampiran IV_Akuan Pelajar 2.png');
+        $img2 = file_get_contents($path2);
+        $borang1 = 'data:image/png;base64,' . base64_encode($img1);
+        $borang2 = 'data:image/png;base64,' . base64_encode($img2);
+        // dd($borang1);
+        // dd($img);
 
         $permohonan = DB::table('users')
                     ->join('mohon_data','users.id','=','mohon_data.user_id')
@@ -1558,7 +1566,7 @@ class DataAsasController extends Controller
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $request->permohonan_id)->get();
         $akuan = AkuanPelajar::where('permohonan_id', $request->permohonan_id)->first();
-        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan','agensi_name','skdatas'));
+        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan','agensi_name','skdatas','borang1','borang2'));
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF

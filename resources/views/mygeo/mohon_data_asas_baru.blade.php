@@ -309,10 +309,12 @@
                                             <div id="collapse2" class="panel-collapse collapse in" data-parent="#div_c2">
                                                 <div class="card-body">
                                                     <div class="opacity-8" style="overflow-x:auto;">
-                                                        <table id="senarai_data_table" class="tb table-bordered table-striped"
+                                                        <table id="senarai_data_table"
+                                                            class="tb table-bordered table-striped"
                                                             style="width: 100%; overflow-x:auto;">
                                                             <thead>
                                                                 <tr>
+                                                                    <th>BIL</th>
                                                                     <th>LAPISAN DATA</th>
                                                                     <th>SUB-KATEGORI</th>
                                                                     <th>KATEGORI</th>
@@ -327,6 +329,7 @@
                                                             <tbody>
                                                                 @foreach ($skdatas as $sk)
                                                                     <tr class="">
+                                                                        <td>{{ $loop->iteration }}</td>
                                                                         <td>{{ $sk->lapisan_data }}</td>
                                                                         <td>{{ $sk->subkategori }}</td>
                                                                         <td>{{ $sk->kategori }}</td>
@@ -417,13 +420,15 @@
                                                                                     <a data-toggle="modal"
                                                                                         data-target="#modal-pilih-upload-{{ $dokumen->id }}">
                                                                                         <button type="button"
-                                                                                            class="btn btn-sm btn-primary mr-1"><i class="fa fa-upload"></i></button>
+                                                                                            class="btn btn-sm btn-primary mr-1"><i
+                                                                                                class="fa fa-upload"></i></button>
                                                                                     </a>
                                                                                 @else
                                                                                     <a data-toggle="modal"
                                                                                         data-target="#modal-kemaskini-dokumen-{{ $dokumen->id }}">
                                                                                         <button type="button"
-                                                                                            class="btn btn-sm btn-primary mr-1"><i class="fa fa-upload"></i></button>
+                                                                                            class="btn btn-sm btn-primary mr-1"><i
+                                                                                                class="fa fa-upload"></i></button>
                                                                                     </a>
                                                                                 @endif
                                                                             @endif
@@ -432,7 +437,8 @@
                                                                                 <a href="{{ url('/') . $dokumen->file_path }}"
                                                                                     target="_blank">
                                                                                     <button type="button"
-                                                                                        class="btn btn-sm btn-success mr-1"><i class="fa fa-eye"></i></button>
+                                                                                        class="btn btn-sm btn-success mr-1"><i
+                                                                                            class="fa fa-eye"></i></button>
                                                                                 </a>
                                                                             @endif
                                                                             <button type="button"

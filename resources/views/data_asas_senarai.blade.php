@@ -36,12 +36,13 @@
                             @foreach ($senarai_data as $data)
                                 <tr>
                                     <td>
+                                        <?php $url = "/data_asas_senarai/$data->id/";
+                                        $cur_url = Request::url() . '/'; ?>
+                                        <a href="{{ $url }}"
+                                            {!! strpos($cur_url, $url) !== false ? ' class="active"' : '' !!}>{{ $loop->iteration }}.&nbsp;
+                                            {{ $data->kategori }}</a><br>
                                         @if (!empty($data->subkategori))
-                                            <?php $url = "/data_asas_senarai/$data->id/";
-                                            $cur_url = Request::url() . '/'; ?>
-                                            <a href="{{ $url }}"
-                                                {!! strpos($cur_url, $url) !== false ? ' class="active"' : '' !!}>{{ $loop->iteration }}.&nbsp;
-                                                {{ $data->kategori }}</a><br>
+
 
                                         @endif
                                     </td>

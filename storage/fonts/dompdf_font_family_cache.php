@@ -1,4 +1,5 @@
-<?php return array (
+<?php return function ($fontDir, $rootDir) {
+return array (
   'sans-serif' => array(
     'normal' => $rootDir . '/lib/fonts/Helvetica',
     'bold' => $rootDir . '/lib/fonts/Helvetica-Bold',
@@ -93,4 +94,5 @@
   'elegance' => array(
     'normal' => $fontDir . '/elegance_normal_6f19c9e3a03bf4bfd9187749fb698cbe',
   ),
-) ?>
+);
+}; ?>
