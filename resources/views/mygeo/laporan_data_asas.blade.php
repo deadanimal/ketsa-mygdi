@@ -493,7 +493,7 @@
                 months: ["January", "February", "March", "April", "May", "June", "July", "August",
                     "September", "October", "November", "December"
                 ],
-                monthsShort: ["Jan", "Feb", "Mac", "Apr", "Mei", "Jun", "Jul", "Ogos", "Sep", "Okt", "Nov",
+                monthsShort: ["Jan", "Feb", "Mac", "Apr", "Mei", "Jun", "Jul", "Ogs", "Sep", "Okt", "Nov",
                     "Dis"
                 ],
                 today: "Today",
@@ -511,7 +511,7 @@
                 minViewMode: "months",
                 updateViewDate: true,
                 changeYear: true,
-                autoClose: true,
+                autoclose: true,
             })
             to = $("#endmonth").datepicker({
                 format: "mm",
@@ -519,14 +519,14 @@
                 minViewMode: "months",
                 updateViewDate: true,
                 changeYear: true,
-                autoClose: true
+                autoclose: true,
             });
 
             year = $("#tahun").datepicker({
                 format: "yyyy",
                 startView: "years",
                 minViewMode: "years",
-                autoClose: true
+                autoclose: true,
 
             }).on("change", function() {
                 // console.log(year.val());
@@ -582,6 +582,7 @@
                             chart.data.labels.push(e[0]);
                             chart.data.datasets[0].data.push(e[1].length);
                         });
+                        chart.options.plugins.title.text = res['agensi'];
                         chart.update();
 
                     });
@@ -608,9 +609,7 @@
                     chart.data.datasets[0].data.pop();
                     total--;
                 }
-
                 chart.update();
-                console.log('remove', total);
             }
         });
     </script>

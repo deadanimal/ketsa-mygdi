@@ -29,11 +29,9 @@ class LaporanDashboardController extends Controller
         ->join('mohon_data','users.id','=','mohon_data.user_id')
         ->join('agensi_organisasi',DB::raw('CAST(users.agensi_organisasi AS INT)'),'=','agensi_organisasi.id')
         ->select(DB::raw('agensi_organisasi.name as agensi'),
-        //  DB::raw('EXTRACT( year from date) as tahun'),
          DB::raw('count(*) as total'))
         ->groupBy('agensi')
         ->get();
-        // dd($permohonans);
 
         $permohonan_kategori = DB::table('users')
         ->join('mohon_data','users.id','=','mohon_data.user_id')
@@ -63,16 +61,15 @@ class LaporanDashboardController extends Controller
     }
 
     public function filter_by_agensi(Request $request){
-
+      Carbon::setlocale(config('app.locale2'));
 
       $from = $request->start_date;
       $to = $request->end_date;
-    //   return $to;
-    Carbon::setlocale(config('app.locale2'));
+
        $by_month = MohonData::whereBetween('created_at', [$from, $to])->get()
        ->groupBy(function($val) {
-       return Carbon::parse($val->created_at)->translatedFormat('M');
-    });
+       return Carbon::parse($val->created_at)->translatedFormat('M'); });
+
       if($from != '' && $to != ''){
         $agensi_mohon = MohonData::whereBetween('created_at', [$from, $to])->get();
       } else {
