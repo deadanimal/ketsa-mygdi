@@ -510,10 +510,6 @@
             ?>
         });
 
-        window.onbeforeunload = function() {
-            return 'Anda sedang meninggal. page ini. Sila simpan metadata terlebih dahulu.' ;
-        }
-
         $('input:radio[name="flanguage"]').change(function () {
             window.onbeforeunload = null;
 
