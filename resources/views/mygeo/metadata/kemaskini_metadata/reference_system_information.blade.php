@@ -13,118 +13,133 @@
     </div>
     <div id="collapse13" class="panel-collapse collapse in show" data-parent="#div_c13">
         <div class="card-body">
-            @if($elemenMetadata['c13_ref_sys_identify']->status == '1')
-            <div class="row mb-2">
-                <div class="col-xl-3">
-                    <label class="form-control-label" for="input-system-identifier">
-                        Reference System Identifier
-                    </label>
-                </div>
-                <div class="col-xl-3">
-                    <?php
-                    /*
-                    var_dump($refSysSelected->id);
-                    if(count($refSys) > 0){
-                        foreach($refSys as $ids) {
-                            echo "<pre>";
-                            var_dump($ids->id);
-                            echo "</pre>";
-
-                            if(isset($refSysSelected->id) && $ids->id == $refSysSelected->id) {
-                                echo "<br>Yes";
-                            }else{
-                                echo "<br>No";
-                            }
-                            
-                        }
-                    }
-                    */
+            <?php
+            foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
+                if($val['status'] == "customInput"){
                     ?>
-                    <select class="form-control form-control-sm" name="c13_ref_sys_identify" id="c13_ref_sys_identify" readonly>
-                        <option selected disabled>Pilih...</option>
-                        <?php
-                        if (count($refSys) > 0) {
-                            foreach ($refSys as $ids) {
-                                $class = "";
-                                if($ids->name == "UTM ZON 47" ||
-                                        $ids->name == "UTM ZON 48" ||
-                                        $ids->name == "UTM ZON 49" ||
-                                        $ids->name == "UTM ZON 50" ||
-                                        $ids->name == "ESPG" ||
-                                        $ids->name == "SR-ORG" ||
-                                        $ids->name == "ESRI" ||
-                                        $ids->name == "Unknown / Not Geo Reference"
-                                ){
-                                    $class = "refSys_Services";
+                    <div class="row mb-2 sortIt">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
+                            <label class="float-right">:</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                        </div>
+                    </div>
+                    <?php
+                }
+                if($key == "c13_ref_sys_identify"){
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-xl-3">
+                            <label class="form-control-label" for="input-system-identifier">
+                                Reference System Identifier
+                            </label>
+                        </div>
+                        <div class="col-xl-3">
+                            <select class="form-control form-control-sm" name="c13_ref_sys_identify" id="c13_ref_sys_identify" readonly>
+                                <option selected disabled>Pilih...</option>
+                                <?php
+                                if (count($refSys) > 0) {
+                                    foreach ($refSys as $ids) {
+                                        $class = "";
+                                        if($ids->name == "UTM ZON 47" ||
+                                                $ids->name == "UTM ZON 48" ||
+                                                $ids->name == "UTM ZON 49" ||
+                                                $ids->name == "UTM ZON 50" ||
+                                                $ids->name == "ESPG" ||
+                                                $ids->name == "SR-ORG" ||
+                                                $ids->name == "ESRI" ||
+                                                $ids->name == "Unknown / Not Geo Reference"
+                                        ){
+                                            $class = "refSys_Services";
+                                        }
+
+                                        if (isset($refSysSelected->id) && $ids->id == $refSysSelected->id) {
+                                            ?><option value="<?php echo $ids->name; ?>"  class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
+                                        } else {
+                                            ?><option value="<?php echo $ids->name; ?>" class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
+                                        }
+                                    }
                                 }
-                                
-                                if (isset($refSysSelected->id) && $ids->id == $refSysSelected->id) {
-                                    ?><option value="<?php echo $ids->name; ?>"  class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
-                                } else {
-                                    ?><option value="<?php echo $ids->name; ?>" class="<?php echo $class; ?>"><?php echo $ids->name; ?></option><?php
-                                }
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            @endif
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
             <div class="form-group row">
                 <div class="col-xl-12">
                     <table>
-                        <tr>
-                            <td>
-                                @if($elemenMetadata['refsys_projection']->status == '1')
+                        <?php
+                        $counter = 1;
+                        foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
+                            if($key == "c13_ref_sys_identify"){
+                                continue;
+                            }
+                            if($counter == 1 || $counter == 4){
+                                ?><tr><td><?php
+                            }else{
+                                ?><td><?php
+                            }
+                            if($key == "refsys_projection"){
+                                ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Projection:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_projection" id="refsys_projection" class="form-control form-control-sm" readonly value="{{old('refsys_projection')}}">
                                 </label>
-                                @endif
-                            </td>
-                            <td>
-                                @if($elemenMetadata['refsys_semiMajorAxis']->status == '1')
+                                <?php
+                            }
+                            if($key == "refsys_semiMajorAxis"){
+                                ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Semi Major Axis:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" class="form-control form-control-sm" readonly value="{{old('refsys_semiMajorAxis')}}">
                                 </label>
-                                @endif
-                            </td>
-                            <td>
-                                @if($elemenMetadata['refsys_ellipsoid']->status == '1')
+                                <?php
+                            }
+                            if($key == "refsys_ellipsoid"){
+                                ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Ellipsoid:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_ellipsoid" id="refsys_ellipsoid" class="form-control form-control-sm" readonly value="{{old('refsys_ellipsoid')}}">
                                 </label>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @if($elemenMetadata['refsys_axis_units']->status == '1')
+                                <?php
+                            }
+                            if($key == "refsys_axis_units"){
+                                ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Axis Units:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_axis_units" id="refsys_axis_units" class="form-control form-control-sm" readonly value="{{old('refsys_axis_units')}}">
                                 </label>
-                                @endif
-                            </td>
-                            <td>
-                                @if($elemenMetadata['refsys_datum']->status == '1')
+                                <?php
+                            }
+                            if($key == "refsys_datum"){
+                                ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Datum:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_datum" id="refsys_datum" class="form-control form-control-sm" readonly value="{{old('refsys_datum')}}">
                                 </label>
-                                @endif
-                            </td>
-                            <td>
-                                @if($elemenMetadata['refsys_denomFlatRatio']->status == '1')
+                                <?php
+                            }
+                            if($key == "refsys_denomFlatRatio"){
+                                ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Denominator of Flattening Ratio:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" class="form-control form-control-sm" readonly value="{{old('refsys_denomFlatRatio')}}">
                                 </label>
-                                @endif
-                            </td>
-                        </tr>
+                                <?php
+                            }
+                            if($counter == 3 || $counter == 6){
+                                ?></td></tr><?php
+                            }else{
+                                ?></td><?php
+                            }
+                            $counter++;
+                        }
+                        ?>
                     </table>
                 </div>
             </div>

@@ -68,7 +68,7 @@
             
             <div class="my-1">
             <?php
-            foreach($template->template[strtolower($cat)]['accordion1'] as $key=>$val){
+            foreach($template->template[strtolower($catSelected)]['accordion1'] as $key=>$val){
                 if($key == "publisher_name"){
                     ?>
                     <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
