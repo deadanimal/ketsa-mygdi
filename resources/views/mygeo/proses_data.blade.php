@@ -3,10 +3,6 @@
 @section('content')
 
     <style>
-        /* .ftest {
-                                                                    display: inline;
-                                                                    width: auto;
-                                                                } */
 
     </style>
 
@@ -210,7 +206,6 @@
                                                                 </button>
                                                             </span>
                                                         @endif
-
                                                         <?php $i++;
                                                         $firstline = false; ?>
                                                     @endforeach
@@ -221,7 +216,7 @@
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
                                             <input type="text"
                                                 class="form-control form-control-sm float-right tempohMuatTurun"
-                                                name="tempoh">
+                                                name="tempoh" autocomplete="off">
                                         </div>
                                         <div class="row">
                                             <div class="col-6"></div>
@@ -312,8 +307,14 @@
                     },
                     opens: 'left',
                     drops: 'up',
-                    batchMode: 'week-range',
-                    showShortcuts: false
+                    singleDatePicker: true,
+                    autoApply: true,
+                });
+                $('.tempohMuatTurun').on('apply.daterangepicker', function(ev, picker) {
+                    var start = picker.startDate;
+                    var end = picker.endDate.add(14, 'days');
+                    $(this).val(start.format('DD-MM-YYYY') + ' - ' + end.format(
+                        'DD-MM-YYYY'));
                 });
 
                 $("#table_proses_data").DataTable({

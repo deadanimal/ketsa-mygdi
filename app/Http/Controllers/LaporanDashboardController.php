@@ -29,11 +29,9 @@ class LaporanDashboardController extends Controller
         ->join('mohon_data','users.id','=','mohon_data.user_id')
         ->join('agensi_organisasi',DB::raw('CAST(users.agensi_organisasi AS INT)'),'=','agensi_organisasi.id')
         ->select(DB::raw('agensi_organisasi.name as agensi'),
-        //  DB::raw('EXTRACT( year from date) as tahun'),
          DB::raw('count(*) as total'))
         ->groupBy('agensi')
         ->get();
-        // dd($permohonans);
 
         $permohonan_kategori = DB::table('users')
         ->join('mohon_data','users.id','=','mohon_data.user_id')
@@ -63,22 +61,34 @@ class LaporanDashboardController extends Controller
     }
 
     public function filter_by_agensi(Request $request){
-
+      Carbon::setlocale(config('app.locale2'));
 
       $from = $request->start_date;
       $to = $request->end_date;
-    //   return $to;
-    Carbon::setlocale(config('app.locale2'));
-       $by_month = MohonData::whereBetween('created_at', [$from, $to])->get()
+
+       $by_month2 = MohonData::whereBetween('created_at', [$from, $to])->get()
        ->groupBy(function($val) {
-       return Carbon::parse($val->created_at)->translatedFormat('M');
-    });
+       return Carbon::parse($val->created_at)->translatedFormat('M'); });
+
+       $by_month = DB::table('users')
+       ->join('mohon_data','users.id','=','mohon_data.user_id')
+       ->join('agensi_organisasi',DB::raw('CAST(users.agensi_organisasi AS INT)'),'=','agensi_organisasi.id')
+       ->whereBetween('mohon_data.created_at', [$from, $to])
+       ->where('users.agensi_organisasi',$request->agensi_id)->get()
+       ->groupBy(function($val) {
+        return Carbon::parse($val->date)->translatedFormat('M'); });
+
       if($from != '' && $to != ''){
+          $agensi_mohon = DB::table('users')
+          ->join('mohon_data','users.id','=','mohon_data.user_id')
+          ->join('agensi_organisasi',DB::raw('CAST(users.agensi_organisasi AS INT)'),'=','agensi_organisasi.id')
+          ->select(DB::raw('agensi_organisasi.name as agensi'), DB::raw('count(*) as total'))
+          ->groupBy('agensi')
+          ->get();
         $agensi_mohon = MohonData::whereBetween('created_at', [$from, $to])->get();
       } else {
         $agensi_mohon = MohonData::get();
       }
-
        if ($agensi_mohon) {
         $counter = 0;
         $org = '';

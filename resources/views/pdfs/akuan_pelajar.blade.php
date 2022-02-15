@@ -123,7 +123,8 @@
     .others {
         margin-top: 78.5%;
         position: relative;
-        left: 8.3%;
+        margin-left: 8.3%;
+        margin-right: 3%;
     }
 
     .sign {
@@ -133,7 +134,7 @@
     }
 
     .tarikh {
-        margin-top: 115px;
+        margin-top: 15px;
         position: relative;
         text-indent: 55%;
     }
@@ -145,7 +146,7 @@
     }
 
     .alamat {
-        margin-top: 24ch;
+        margin-top: 27px;
         position: relative;
         margin-left: 45%;
     }
