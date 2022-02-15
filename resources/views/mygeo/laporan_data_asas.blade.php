@@ -478,7 +478,8 @@
                         ticks: {
                             display: true,
                             color: '#9ca2b7',
-                            padding: 10
+                            padding: 10,
+                            precision: 0
                         }
                     },
                 },
