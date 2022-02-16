@@ -310,11 +310,12 @@
                     singleDatePicker: true,
                     autoApply: true,
                 });
-                $('.tempohMuatTurun').on('apply.daterangepicker', function(ev, picker) {
+                $('.tempohMuatTurun').on('hide.daterangepicker', function(ev, picker) {
                     var start = picker.startDate;
                     var end = picker.endDate.add(14, 'days');
                     $(this).val(start.format('DD-MM-YYYY') + ' - ' + end.format(
                         'DD-MM-YYYY'));
+                    picker.endDate.subtract(14, 'days');
                 });
 
                 $("#table_proses_data").DataTable({

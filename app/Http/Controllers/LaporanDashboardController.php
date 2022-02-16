@@ -82,10 +82,10 @@ class LaporanDashboardController extends Controller
           $agensi_mohon = DB::table('users')
           ->join('mohon_data','users.id','=','mohon_data.user_id')
           ->join('agensi_organisasi',DB::raw('CAST(users.agensi_organisasi AS INT)'),'=','agensi_organisasi.id')
-          ->select(DB::raw('agensi_organisasi.name as agensi'), DB::raw('count(*) as total'))
-          ->groupBy('agensi')
-          ->get();
-        $agensi_mohon = MohonData::whereBetween('created_at', [$from, $to])->get();
+          ->whereBetween('mohon_data.created_at', [$from, $to])
+          ->where('users.agensi_organisasi',$request->agensi_id)->get();
+        //   dd($agensi_mohon);
+        // $agensi_mohon = MohonData::whereBetween('created_at', [$from, $to])->get();
       } else {
         $agensi_mohon = MohonData::get();
       }
@@ -94,8 +94,8 @@ class LaporanDashboardController extends Controller
         $org = '';
         $append_data = [];
         foreach ($agensi_mohon as $mohon) {
-            if(isset($mohon->users)){
-                if($mohon->users->agensi_organisasi == $request->agensi_id ){
+            // if(isset($mohon->users)){
+                // if($mohon->users->agensi_organisasi == $request->agensi_id ){
                     $counter++;
                     $org =
                     is_numeric($mohon->users->agensi_organisasi) && isset($mohon->users->agensiOrganisasi) ? $mohon->users->agensiOrganisasi->name : $mohon->users->agensi_organisasi;
@@ -111,8 +111,8 @@ class LaporanDashboardController extends Controller
                     </td>
                 </tr>';
                 $append_data[] = $temp;
-                }
-            }
+                // }
+            // }
         }
         return ['data' => $append_data,
                 'month' => $by_month,
