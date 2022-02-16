@@ -61,7 +61,7 @@
                                 }
                                 ?>
                                 <input type="text" name="c2_metadataName" id="c2_metadataName"
-                                    class="form-control form-control-sm " value="{{ $met_name }}">
+                                    class="form-control form-control-sm " value="{{ strtoupper($met_name) }}">
                                 <input type="hidden" name="c2_saveAsNew" id="c2_saveAsNew" value="no">
                                 @error('c2_metadataName')
                                     <div class="text-error">{{ $message }}</div>
@@ -913,5 +913,9 @@
 <script>
     $(document).ready(function() {
         $('#c2_metadataDateType').val("{{ $metDateType }}").trigger('change');
+        
+        $("#c2_metadataName").keyup(function () {  
+            $(this).val($(this).val().toUpperCase());  
+        }); 
     });
 </script>

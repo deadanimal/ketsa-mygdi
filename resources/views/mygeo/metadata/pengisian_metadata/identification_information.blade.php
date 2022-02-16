@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-7">
                         <input class="form-control form-control-sm ml-3" type="text" name="c2_metadataName"
-                            id="c2_metadataName" value="{{ old('c2_metadataName') }}" />
+                            id="c2_metadataName" value="{{ strtoupper(old('c2_metadataName')) }}" />
 
                         @error('c2_metadataName')
                             <div class="text-error">{{ $message }}</div>
@@ -681,5 +681,8 @@
 //        $('#c2_contact_state').val("{{ old('c2_contact_state') }}").trigger('change');
 //        $('#c2_contact_country').val("{{ old('c2_contact_country') }}").trigger('change');
         $('#c2_metadataDateType').val("{{ old('c2_metadataDateType') }}").trigger('change');
+        $("#c2_metadataName").keyup(function () {  
+            $(this).val($(this).val().toUpperCase());  
+        }); 
     });
 </script>
