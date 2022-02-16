@@ -717,7 +717,7 @@
                                             <?php echo __('lang.country'); ?> :</label>
                                     </div>
                                     <div class="col-3 px-0">
-                                        <input type="text" name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm" readonly value="Malaysia">
+                                        <input type="text" name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm" readonly value="Malaysia">
                                         <?php /* 
                                         <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm ml-4">
                                             <option selected disabled>Pilih...</option>

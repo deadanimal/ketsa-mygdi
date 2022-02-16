@@ -524,6 +524,8 @@
                                     <?php echo __('lang.country'); ?> :</label>
                             </div>
                             <div class="col-3 px-0">
+                                <input type="text" name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm" readonly value="Malaysia">
+                                <?php /*
                                 <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm">
                                     <option disabled>Pilih...</option>
                                     <?php
@@ -541,6 +543,7 @@
                                     }
                                     ?>
                                 </select>
+                                */ ?>
                             </div>
                             @endif
                         </div>
