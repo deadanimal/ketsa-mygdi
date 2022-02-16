@@ -14,104 +14,143 @@
     <div id="collapse7" class="panel-collapse collapse in show" data-parent="#div_c7">
         <div class="card-body">
             <div class="acard-body opacity-8">
+                <?php
+                foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
+                    if($val['status'] == "customInput"){
+                        ?>
+                        <div class="row mb-2 sortIt">
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
+                                <label class="float-right">:</label>
+                            </div>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
                 <h6 class="heading-small text-muted mb-2">Wavelength Band
                     Information</h6>
                 <div class="pl-lg-3">
-                    @if($elemenMetadata['c7_band_boundary']->status == '1')
+                    <?php
+                    foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
+                        if($key == "c7_band_boundary"){
+                            ?>
+                            <div class="row mb-2">
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        <div class="form-control-label mr-3">
+                                            Band Boundry
+                                        </div>
+                                        <?php
+                                        $bandBound = "";
+                                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString != "") {
+                                            $bandBound = $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString;
+                                        }
+                                        ?>
+                                        <select name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm">
+                                            <option value="">Pilih...</option>
+                                            <option value="Equivalent Width" {{ ($bandBound == "Equivalent Width" ? "selected":"") }}>Equivalent Width</option>
+                                            <option value="Fifty Percent" {{ ($bandBound == "Fifty Percent" ? "selected":"") }}>Fifty Percent</option>
+                                            <option value="One Over E" {{ ($bandBound == "One Over E" ? "selected":"") }}>One Over E</option>
+                                            <option value="3d B" {{ ($bandBound == "3d B" ? "selected":"") }}>3d B</option>
+                                            <option value="Half Mazimum" {{ ($bandBound == "Half Mazimum" ? "selected":"") }}>Half Mazimum</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    ?>
                     <div class="row mb-2">
-                        <div class="col-xl-6">
-                            <div class="form-inline">
-                                <div class="form-control-label mr-3">
-                                    Band Boundry
+                        <?php
+                        foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
+                            if($key == "c7_trans_fn_type"){
+                                ?>
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        <div class="form-control-label mr-4">
+                                            Transfer Function Type
+                                        </div>
+                                        <?php
+                                        $transFnType = "";
+                                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString != "") {
+                                            $transFnType = $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString;
+                                        }
+                                        ?>
+                                        <input class="form-control form-control-sm" type="text" style="width :200px" name="c7_trans_fn_type" id="c7_trans_fn_type" value="{{ $transFnType }}">
+                                    </div>
                                 </div>
                                 <?php
-                                $bandBound = "";
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString != "") {
-                                    $bandBound = $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString;
-                                }
+                            }
+                            if($key == "c7_trans_polar"){
                                 ?>
-                                <select name="c7_band_boundary" id="c7_band_boundary" class="form-control form-control-sm">
-                                    <option value="">Pilih...</option>
-                                    <option value="Equivalent Width" {{ ($bandBound == "Equivalent Width" ? "selected":"") }}>Equivalent Width</option>
-                                    <option value="Fifty Percent" {{ ($bandBound == "Fifty Percent" ? "selected":"") }}>Fifty Percent</option>
-                                    <option value="One Over E" {{ ($bandBound == "One Over E" ? "selected":"") }}>One Over E</option>
-                                    <option value="3d B" {{ ($bandBound == "3d B" ? "selected":"") }}>3d B</option>
-                                    <option value="Half Mazimum" {{ ($bandBound == "Half Mazimum" ? "selected":"") }}>Half Mazimum</option>
-                                </select>
-                            </div>
-                        </div>
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        <div class="form-control-label mr-3">
+                                            Transmitted Polarization
+                                        </div>
+                                        <?php
+                                        $transmitPolar = "";
+                                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString != "") {
+                                            $transmitPolar = $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString;
+                                        }
+                                        ?>
+                                        <input class="form-control form-control-sm" type="text" style="width :180px" name="c7_trans_polar" id="c7_trans_polar" value="{{ $transmitPolar }}">
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
                     </div>
-                    @endif
                     <div class="row mb-2">
-                        @if($elemenMetadata['c7_trans_fn_type']->status == '1')
-                        <div class="col-xl-6">
-                            <div class="form-inline">
-                                <div class="form-control-label mr-4">
-                                    Transfer Function Type
+                        <?php
+                        foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
+                            if($key == "c7_nominal_spatial_res"){
+                                ?>
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        <div class="form-control-label mr-4">
+                                            Nominal Spatial Resolution
+                                        </div>
+                                        <?php
+                                        $nomSpatRes = "";
+                                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString != "") {
+                                            $nomSpatRes = $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString;
+                                        }
+                                        ?>
+                                        <input class="form-control form-control-sm" type="text" style="width :100px" placeholder="0.0" name="c7_nominal_spatial_res" id="c7_nominal_spatial_res" value="{{ $nomSpatRes }}">
+                                        <div class="form-control-label ml-2">
+                                            meter
+                                        </div>
+                                    </div>
                                 </div>
                                 <?php
-                                $transFnType = "";
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString != "") {
-                                    $transFnType = $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString;
-                                }
+                            }
+                            if($key == "c7_detected_polar"){
                                 ?>
-                                <input class="form-control form-control-sm" type="text" style="width :200px" name="c7_trans_fn_type" id="c7_trans_fn_type" value="{{ $transFnType }}">
-                            </div>
-                        </div>
-                        @endif
-                        @if($elemenMetadata['c7_trans_polar']->status == '1')
-                        <div class="col-xl-6">
-                            <div class="form-inline">
-                                <div class="form-control-label mr-3">
-                                    Transmitted Polarization
+                                <div class="col-xl-6">
+                                    <div class="form-inline">
+                                        <div class="form-control-label mr-3">
+                                            Detected Polarization
+                                        </div>
+                                        <?php
+                                        $detectPolar = "";
+                                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString != "") {
+                                            $detectPolar = $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString;
+                                        }
+                                        ?>
+                                        <input class="form-control form-control-sm" type="text" style="width :180px" placeholder="Detected Polarization" name="c7_detected_polar" id="c7_detected_polar" value="{{ $detectPolar }}">
+                                    </div>
                                 </div>
                                 <?php
-                                $transmitPolar = "";
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString != "") {
-                                    $transmitPolar = $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString;
-                                }
-                                ?>
-                                <input class="form-control form-control-sm" type="text" style="width :180px" name="c7_trans_polar" id="c7_trans_polar" value="{{ $transmitPolar }}">
-                            </div>
-                        </div>
-                        @endif
-                    </div>
-                    <div class="row mb-2">
-                        @if($elemenMetadata['c7_nominal_spatial_res']->status == '1')
-                        <div class="col-xl-6">
-                            <div class="form-inline">
-                                <div class="form-control-label mr-4">
-                                    Nominal Spatial Resolution
-                                </div>
-                                <?php
-                                $nomSpatRes = "";
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString != "") {
-                                    $nomSpatRes = $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString;
-                                }
-                                ?>
-                                <input class="form-control form-control-sm" type="text" style="width :100px" placeholder="0.0" name="c7_nominal_spatial_res" id="c7_nominal_spatial_res" value="{{ $nomSpatRes }}">
-                                <div class="form-control-label ml-2">
-                                    meter
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                        @if($elemenMetadata['c7_detected_polar']->status == '1')
-                        <div class="col-xl-6">
-                            <div class="form-inline">
-                                <div class="form-control-label mr-3">
-                                    Detected Polarization
-                                </div>
-                                <?php
-                                $detectPolar = "";
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString != "") {
-                                    $detectPolar = $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString;
-                                }
-                                ?>
-                                <input class="form-control form-control-sm" type="text" style="width :180px" placeholder="Detected Polarization" name="c7_detected_polar" id="c7_detected_polar" value="{{ $detectPolar }}">
-                            </div>
-                        </div>
-                        @endif
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

@@ -13,21 +13,21 @@
                     <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                     <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;" id="content_info_dropdown">
                         <option value="" selected>Pilih...</option>
-                        <option value="Application" class='optContentInfo_dataset'>Application</option>
-                        <option value="Clearing House" class='optContentInfo_dataset'>Clearing House</option>
-                        <option value="Downloadable Data" class='optContentInfo_dataset'>Downloadable Data</option>
-                        <option value="Geographic Activities" class='optContentInfo_dataset'>Geographic Activities</option>
-                        <option value="Geographic Services" class='optContentInfo_dataset'>Geographic Services</option>
-                        <option value="Map File" class='optContentInfo_dataset'>Map File</option>
-                        <option value="Offline Data" class='optContentInfo_dataset'>Offline Data</option>
-                        <option value="Static Map Images" class='optContentInfo_dataset'>Static Map Images</option>
-                        <option value="Other Documents" class='optContentInfo_dataset'>Other Documents</option>
+		        <option value="application" class='optContentInfo_dataset'>Application</option>
+		        <option value="clearinghouse" class='optContentInfo_dataset'>Clearing House</option>
+		        <option value="downloadableData" class='optContentInfo_dataset'>Downloadable Data</option>
+		        <option value="geographicActivities" class='optContentInfo_dataset'>Geographic Activities</option>
+		        <option value="geographicService" class='optContentInfo_dataset'>Geographic Services</option>
+		        <option value="mapFiles" class='optContentInfo_dataset'>Map File</option>
+		        <option value="offlineData" class='optContentInfo_dataset'>Offline Data</option>
+		        <option value="staticMapImage" class='optContentInfo_dataset'>Static Map Images</option>
+		        <option value="other" class='optContentInfo_dataset'>Other Documents</option>
 
-                        <option value="Live Data and Maps" class='optContentInfo_services' style="font-size: 0.7rem;font-weight: 400 !important;">Live Data and Maps</option>
+		        <option value="liveData" class='optContentInfo_services'>Live Data and Maps</option>
 
-                        <option value="Gridded" class='optContentInfo_gridded'>Gridded</option>
+		        <option value="Gridded" class='optContentInfo_gridded'>Gridded</option>
 
-                        <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
+		        <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                     </select>
                     <p class="ml-3 mb-0 lblContentInfo" style="font-size: 1rem;font-weight: 400 !important;">Live Data and Maps</p>
                     <a href="lampiran/content_information" class="text-yellow" target="_blank">

@@ -10,11 +10,52 @@
     <div id="collapse1" class="panel-collapse collapse in show" data-parent="#div_c1">
         <div class="card-body">
             <?php
-            if (isset($metadataxml->contact->CI_ResponsibleParty->contentInfo->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contentInfo->CharacterString != "") {
+            if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
                 ?>
                 <div class="form-group row">
                     <p class="pl-lg-3 form-control-label">Content Information<span class="mx-3">:</span></p>
-                    <?php echo $metadataxml->contact->CI_ResponsibleParty->contentInfo->CharacterString; ?>
+                    <?php 
+                    $f = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString; 
+                    if($f == "application"){
+                        echo "Application";
+                    }
+                    if($f == "clearinghouse"){
+                        echo "Clearing House";
+                    }
+                    if($f == "downloadableData"){
+                        echo "Downloadable Data";
+                    }
+                    if($f == "geographicActivities"){
+                        echo "Geographic Activities";
+                    }
+                    if($f == "geographicService"){
+                        echo "Geographic Services";
+                    }
+                    if($f == "mapFiles"){
+                        echo "Map File";
+                    }
+                    if($f == "offlineData"){
+                        echo "Offline Data";
+                    }
+                    if($f == "staticMapImage"){
+                        echo "Static Map Images";
+                    }
+                    if($f == "other"){
+                        echo "Other Documents";
+                    }
+
+                    if($f == "liveData"){
+                        echo "Live Data and Maps";
+                    }
+
+                    if($f == "Gridded"){
+                        echo "Gridded";
+                    }
+
+                    if($f == "Imagery"){
+                        echo "Imagery";
+                    }
+                    ?>
                 </div>
                 <?php
             }

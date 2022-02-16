@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-7">
                         <input class="form-control form-control-sm ml-3" type="text" name="c2_metadataName"
-                            id="c2_metadataName" value="{{ old('c2_metadataName') }}" />
+                            id="c2_metadataName" value="{{ strtoupper(old('c2_metadataName')) }}" />
 
                         @error('c2_metadataName')
                             <div class="text-error">{{ $message }}</div>
@@ -467,7 +467,7 @@
                             <div class="col-3 px-0">
                                 <input type="text" name="c2_postal_code" id="c2_postal_code"
                                     class="form-control form-control-sm mb-2 divPostalCode"
-                                    value="{{ (null !== old('c2_postal_code') ? old('c2_postal_code'):$pengesahs->postcode) }}">
+                                    value="{{ (null !== old('c2_postal_code') ? old('c2_postal_code'):$pengesahs->postcode) }}" maxlength="5">
                             </div>
                             @endif
                             @if($elemenMetadata['c2_contact_city']->status == '1')
@@ -493,6 +493,8 @@
                                         class="text-warning">*</span> :</label>
                             </div>
                             <div class="col-3 px-0">
+                                <input type="text" name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm" readonly value="Malaysia">
+                                <?php /* ?>
                                 <select name="c2_contact_state" id="c2_contact_state"class="form-control form-control-sm">
                                     <option disabled>Pilih...</option>
                                     <?php
@@ -513,6 +515,7 @@
                                 @error('c2_contact_state')
                                     <div class="text-error">{{ $message }}</div>
                                 @enderror
+                                <?php */ ?>
                             </div>
                             @endif
                             @if($elemenMetadata['c2_contact_country']->status == '1')
@@ -521,6 +524,8 @@
                                     <?php echo __('lang.country'); ?> :</label>
                             </div>
                             <div class="col-3 px-0">
+                                <input type="text" name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm" readonly value="Malaysia">
+                                <?php /*
                                 <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm">
                                     <option disabled>Pilih...</option>
                                     <?php
@@ -538,6 +543,7 @@
                                     }
                                     ?>
                                 </select>
+                                */ ?>
                             </div>
                             @endif
                         </div>
@@ -675,5 +681,14 @@
 //        $('#c2_contact_state').val("{{ old('c2_contact_state') }}").trigger('change');
 //        $('#c2_contact_country').val("{{ old('c2_contact_country') }}").trigger('change');
         $('#c2_metadataDateType').val("{{ old('c2_metadataDateType') }}").trigger('change');
+        $("#c2_metadataName").keyup(function () {  
+            $(this).val($(this).val().toUpperCase());  
+        }); 
+        $('#c2_postal_code,#c2_contact_phone_office,#c2_contact_fax').keypress(function (e) {    
+            var charCode = (e.which) ? e.which : event.keyCode    
+            if (String.fromCharCode(charCode).match(/[^0-9]/g)){
+                return false;                        
+            }
+        });  
     });
 </script>

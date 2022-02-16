@@ -30,7 +30,7 @@ class XmlController extends Controller {
                         <MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part3">8859part3</MD_CharacterSetCode>
                     </characterSet>
                     <hierarchyLevel>
-                        <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset">$request->kategori</MD_ScopeCode>
+                        <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="$request->kategori">$request->kategori</MD_ScopeCode>
                     </hierarchyLevel>
                     <contact>
                         <CI_ResponsibleParty>
@@ -690,7 +690,7 @@ class XmlController extends Controller {
                                                 <URL>$request->c11_link</URL>
                                             </linkage>
                                             <description>
-                                                <gco:CharacterString>mapFiles</gco:CharacterString>
+                                                <gco:CharacterString>$request->c1_content_info</gco:CharacterString>
                                             </description>
                                             <function>
                                                 <CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue=""/>

@@ -176,7 +176,7 @@
                                                 $catSelected = $_GET['kategori'];
                                             }
                                             foreach ($categories as $cat) {
-                                                if (strtolower(trim($cat->name)) == $catSelected) {
+                                                if (strtolower(trim($cat->name)) == strtolower($catSelected)) {
                                                     ?><option value="<?php echo $cat->name; ?>" selected><?php echo $cat->name; ?></option><?php
                                                 } else {
                                                     ?><option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?></option><?php
@@ -191,6 +191,13 @@
                                         $langSelected = "";
                                         if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != "") {
                                             $langSelected = strtolower(trim($metadataxml->language->CharacterString));
+                                            if($langSelected == "english"){
+                                                $langSelected = "en";
+                                            }elseif($langSelected == "bahasaMelayu"){
+                                                $langSelected = "bm";
+                                            }else{
+                                                $langSelected = "en";
+                                            }
                                         }
                                         ?>
                                         <label class="btn btn-secondary active">
@@ -509,10 +516,6 @@
             }
             ?>
         });
-
-        window.onbeforeunload = function() {
-            return 'Anda sedang meninggal. page ini. Sila simpan metadata terlebih dahulu.' ;
-        }
 
         $('input:radio[name="flanguage"]').change(function () {
             window.onbeforeunload = null;

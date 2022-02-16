@@ -156,286 +156,234 @@
                           if(isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString)){
                           }
                         ?>
-                                        <tr>
-                                            <td>{{ $bil }}</td>
-                                            <td>
-                                                <?php
-                                                echo $val[1]->title;
-                                                ?>
-                                            </td>
-                                            @if (Auth::user()->hasRole(['Pengesah Metadata']))
-                                                <?php //##################################
-                                                ?>
-                                                <td>
-                                                    {{ isset($val[2]->name) ? $val[2]->name : '' }}
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != '') {
-                                                        echo $val[0]->hierarchyLevel->MD_ScopeCode;
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <?php
-                                                $status = $style = '';
-                                                if ($val[1]->is_draf == 'yes') {
-                                                    $status = 'Draf';
-                                                } else {
-                                                    if ($val[1]->disahkan == '0') {
-                                                        //                                        $style = 'style="background-color:#FFD1D1;"';
-                                                        $status = '<span style="color:red;"><strong>Perlu Pengesahan</strong></span>';
-                                                    } elseif ($val[1]->disahkan == 'yes') {
-                                                        $status = 'Diterbitkan';
-                                                    } elseif ($val[1]->disahkan == 'no') {
-                                                        //                                        $style = 'style="background-color:#FFD1D1;"';
-                                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
-                                                    } elseif ($val[1]->disahkan == 'delete') {
-                                                        $status = 'Dipadam';
-                                                    }
-                                                }
-                                                ?>
-                                                <td <?php echo $style; ?>>
-                                                    <?php echo $status; ?>
-                                                </td>
-                                                <td>
-                                                    {{ date('d/m/Y', strtotime($val[1]->createdate)) }}
-                                                </td>
-                                                <td class="pr-1">
-                                                    <div class="form-inline">
-                                                        <?php //lihat(view only)================================
-                                                        ?>
-                                                        <form method="post" action="{{ url('/lihat_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id"
-                                                                value="{{ $val[1]->id }}">
-                                                            <button type="submit" class="btn btn-sm btn-primary mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-eye"></i></button>
-                                                        </form>
-                                                        <?php //kemaskini=======================================
-                                                        ?>
-                                                        <a href="{{ url('/kemaskini_metadata/' . $val[1]->id) }}">
-                                                            <button type="button" class="btn btn-sm btn-success mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-edit"></i></button>
-                                                        </a>
-                                                        <?php //delete==========================================
-                                                        ?>
-                                                        <form method="post" action="{{ url('/delete_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id"
-                                                                value="{{ $val[1]->id }}">
-                                                            <button type="button"
-                                                                class="btn btn-sm btn-danger btnDelete mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            @elseif(auth::user()->hasRole(['Pentadbir Metadata']))
-                                                <?php //##################################
-                                                ?>
-                                                <td>
-                                                    {{ isset($val[2]->name) ? $val[2]->name : '' }}
-                                                </td>
-                                                <td>
-                                                    {{ isset($val[2]->agensiOrganisasi->name) ? $val[2]->agensiOrganisasi->name : '' }}
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != '') {
-                                                        echo $val[0]->hierarchyLevel->MD_ScopeCode;
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <?php
-                                                $status = $style = '';
-                                                if ($val[1]->is_draf == 'yes') {
-                                                    $status = 'Draf';
-                                                } else {
-                                                    if ($val[1]->disahkan == '0') {
-                                                        //                                        $style = 'style="background-color:#FFD1D1;"';
-                                                        $status = '<span style="color:red;"><strong>Perlu Pengesahan</strong></span>';
-                                                    } elseif ($val[1]->disahkan == 'yes') {
-                                                        $status = 'Diterbitkan';
-                                                    } elseif ($val[1]->disahkan == 'no') {
-                                                        //                                        $style = 'style="background-color:#FFD1D1;"';
-                                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
-                                                    } elseif ($val[1]->disahkan == 'delete') {
-                                                        $status = 'Dipadam';
-                                                    }
-                                                }
-                                                ?>
-                                                <td <?php echo $style; ?>>
-                                                    <?php echo $status; ?>
-                                                </td>
-                                                <td>
-                                                    {{ date('d/m/Y', strtotime($val[1]->createdate)) }}
-                                                </td>
-                                                <td class="pr-1">
-                                                    <div class="form-inline">
-                                                        <?php //lihat(view only)================================
-                                                        ?>
-                                                        <form method="post" action="{{ url('/lihat_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id"
-                                                                value="{{ $val[1]->id }}">
-                                                            <button type="submit" class="btn btn-sm btn-primary mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-eye"></i></button>
-                                                        </form>
-                                                        <?php //kemaskini=======================================
-                                                        ?>
-                                                        <a href="{{ url('/kemaskini_metadata/' . $val[1]->id) }}">
-                                                            <button type="button" class="btn btn-sm btn-success mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-edit"></i></button>
-                                                        </a>
-                                                        <?php //delete==========================================
-                                                        ?>
-                                                        <form method="post" action="{{ url('/delete_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id"
-                                                                value="{{ $val[1]->id }}">
-                                                            <button type="button"
-                                                                class="btn btn-sm btn-danger btnDelete mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            @elseif(auth::user()->hasRole(['Penerbit Metadata', 'Pentadbir Aplikasi']))
-                                                <?php //##################################
-                                                ?>
-                                                <td>
-                                                    <?php
-                                                    if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != '') {
-                                                        echo $val[0]->hierarchyLevel->MD_ScopeCode;
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <?php
-                                                $status = $style = '';
-                                                if ($val[1]->is_draf == 'yes') {
-                                                    $status = 'Draf';
-                                                } else {
-                                                    if ($val[1]->disahkan == '0') {
-                                                        //                                        $style = 'style="background-color:#FFD1D1;"';
-                                                        $status = '<span style="color:red;"><strong>Perlu Pengesahan</strong></span>';
-                                                    } elseif ($val[1]->disahkan == 'yes') {
-                                                        $status = 'Diterbitkan';
-                                                    } elseif ($val[1]->disahkan == 'no') {
-                                                        //                                        $style = 'style="background-color:#FFD1D1;"';
-                                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
-                                                    } elseif ($val[1]->disahkan == 'delete') {
-                                                        $status = 'Dipadam';
-                                                    }
-                                                }
-                                                ?>
-                                                <td <?php echo $style; ?>>
-                                                    <?php echo $status; ?>
-                                                </td>
-                                                <td>
-                                                    {{ date('d/m/Y', strtotime($val[1]->createdate)) }}
-                                                </td>
-                                                <td class="pr-1">
-                                                    <div class="form-inline">
-                                                        <?php //lihat(view only)================================
-                                                        ?>
-                                                        <form method="post" action="{{ url('/lihat_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id"
-                                                                value="{{ $val[1]->id }}">
-                                                            <button type="submit" class="btn btn-sm btn-primary mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-eye"></i></button>
-                                                        </form>
-                                                        <?php //kemaskini=======================================
-                                                        ?>
-                                                        <a href="{{ url('/kemaskini_metadata/' . $val[1]->id) }}">
-                                                            <button type="button" class="btn btn-sm btn-success mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-edit"></i></button>
-                                                        </a>
-                                                        <?php //delete==========================================
-                                                        ?>
-                                                        <form method="post" action="{{ url('/delete_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id"
-                                                                value="{{ $val[1]->id }}">
-                                                            <button type="button"
-                                                                class="btn btn-sm btn-danger btnDelete mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            @else
-                                                <?php //##################################
-                                                ?>
-                                                <td>
-                                                    <?php
-                                                    if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != '') {
-                                                        echo $val[0]->hierarchyLevel->MD_ScopeCode;
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <?php
-                                                $status = $style = '';
-                                                if ($val[1]->is_draf == 'yes') {
-                                                    $status = 'Draf';
-                                                } else {
-                                                    if ($val[1]->disahkan == '0') {
-                                                        //                                        $style = 'style="background-color:#FFD1D1;"';
-                                                        $status = '<span style="color:red;"><strong>Perlu Pengesahan</strong></span>';
-                                                    } elseif ($val[1]->disahkan == 'yes') {
-                                                        $status = 'Diterbitkan';
-                                                    } elseif ($val[1]->disahkan == 'no') {
-                                                        //                                        $style = 'style="background-color:#FFD1D1;"';
-                                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
-                                                    } elseif ($val[1]->disahkan == 'delete') {
-                                                        $status = 'Dipadam';
-                                                    }
-                                                }
-                                                ?>
-                                                <td <?php echo $style; ?>>
-                                                    fart<?php echo $status; ?>
-                                                </td>
-                                                <td class="pr-1">
-                                                    <div class="form-inline">
-                                                        <?php //lihat(view only)================================
-                                                        ?>
-                                                        <form method="post" action="{{ url('/lihat_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id"
-                                                                value="{{ $val[1]->id }}">
-                                                            <button type="submit" class="btn btn-sm btn-primary mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-eye"></i></button>
-                                                        </form>
-                                                        <?php //kemaskini=======================================
-                                                        ?>
-                                                        <a href="{{ url('/kemaskini_metadata/' . $val[1]->id) }}">
-                                                            <button type="button" class="btn btn-sm btn-success mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-edit"></i></button>
-                                                        </a>
-                                                        <?php //delete==========================================
-                                                        ?>
-                                                        <form method="post" action="{{ url('/delete_metadata') }}">
-                                                            @csrf
-                                                            <input type="hidden" name="metadata_id"
-                                                                value="{{ $val[1]->id }}">
-                                                            <button type="button"
-                                                                class="btn btn-sm btn-danger btnDelete mr-2"
-                                                                style="margin-bottom:3px;"><i
-                                                                    class="fas fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            @endif
-                                        </tr>
-                                        <?php
+                        <tr>
+                          <td>{{ $bil }}</td>
+                          <td>
+                              <?php
+                                echo $val[1]->title;
+                               ?>
+                          </td>
+                          @if(Auth::user()->hasRole(['Pengesah Metadata']))
+                              <?php //################################## ?>
+                          <td>
+                            {{ (isset($val[2]->name) ? $val[2]->name:"") }}
+                          </td>
+                            <td>
+                                <?php
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
+                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
+                                  }
+                                  ?>
+                             </td>
+                                <?php
+                                $status = $style = "";
+                                if($val[1]->is_draf == 'yes'){
+                                  $status = "Draf";
+                                }else{
+                                    if($val[1]->disahkan == '0'){
+//                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pengesahan</strong></span>';
+                                    }elseif($val[1]->disahkan == 'yes'){
+                                        $status = "Diterbitkan";
+                                    }elseif($val[1]->disahkan == 'no'){
+//                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
+                                    }elseif($val[1]->disahkan == 'delete'){
+                                        $status = "Dipadam";
+                                    }
+                                }
+                                ?>
+                            <td <?php echo $style; ?>>
+                                <?php echo $status; ?>
+                            </td>
+                          <td>
+                              {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
+                          </td>
+                          <td class="pr-1">
+                            <div class="form-inline">
+                                <?php //lihat(view only)================================ ?>
+                                <form method="post" action="{{ url('/lihat_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                </form>
+                                <?php //kemaskini======================================= ?>
+                                <a href="{{ url('/kemaskini_metadata/'.$val[1]->id) }}">
+                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                </a>
+                                <?php //delete========================================== ?>
+                                <form method="post" action="{{ url('/delete_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                </form>
+                              </div>
+                          </td>
+                         @elseif(auth::user()->hasRole(['Pentadbir Metadata']))
+                             <?php //################################## ?>
+                         <td>
+                              {{ (isset($val[2]->name) ? $val[2]->name:"") }}
+                          </td>
+                         <td>
+                              {{ (isset($val[2]->agensiOrganisasi->name) ? $val[2]->agensiOrganisasi->name:"") }}
+                          </td>
+                            <td>
+                                <?php
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
+                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
+                                  }
+                                  ?>
+                             </td>
+                             <?php
+                                $status = $style = "";
+                                if($val[1]->is_draf == 'yes'){
+                                  $status = "Draf";
+                                }else{
+                                    if($val[1]->disahkan == '0'){
+//                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pengesahan</strong></span>';
+                                    }elseif($val[1]->disahkan == 'yes'){
+                                        $status = "Diterbitkan";
+                                    }elseif($val[1]->disahkan == 'no'){
+//                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
+                                    }elseif($val[1]->disahkan == 'delete'){
+                                        $status = "Dipadam";
+                                    }
+                                }
+                                ?>
+                            <td <?php echo $style; ?>>
+                                <?php echo $status; ?>
+                            </td>
+                          <td>
+                              {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
+                          </td>
+                          <td class="pr-1">
+                            <div class="form-inline">
+                                <?php //lihat(view only)================================ ?>
+                                <form method="post" action="{{ url('/lihat_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                </form>
+                                <?php //kemaskini======================================= ?>
+                                <a href="{{ url('/kemaskini_metadata/'.$val[1]->id) }}">
+                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                </a>
+                                <?php //delete========================================== ?>
+                                <form method="post" action="{{ url('/delete_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                </form>
+                              </div>
+                          </td>
+                         @elseif(auth::user()->hasRole(['Penerbit Metadata','Pentadbir Aplikasi']))
+                             <?php //################################## ?>
+                            <td>
+                                <?php
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
+                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
+                                  }
+                                  ?>
+                             </td>
+                             <?php
+                                $status = $style = "";
+                                if($val[1]->is_draf == 'yes'){
+                                  $status = "Draf";
+                                }else{
+                                    if($val[1]->disahkan == '0'){
+//                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pengesahan</strong></span>';
+                                    }elseif($val[1]->disahkan == 'yes'){
+                                        $status = "Diterbitkan";
+                                    }elseif($val[1]->disahkan == 'no'){
+//                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
+                                    }elseif($val[1]->disahkan == 'delete'){
+                                        $status = "Dipadam";
+                                    }
+                                }
+                                ?>
+                             <td <?php echo $style; ?>>
+                                <?php echo $status; ?>
+                          </td>
+                          <td>
+                              {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
+                          </td>
+                          <td class="pr-1">
+                            <div class="form-inline">
+                                <?php //lihat(view only)================================ ?>
+                                <form method="post" action="{{ url('/lihat_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                </form>
+                                <?php //kemaskini======================================= ?>
+                                <a href="{{ url('/kemaskini_metadata/'.$val[1]->id) }}">
+                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                </a>
+                                <?php //delete========================================== ?>
+                                <form method="post" action="{{ url('/delete_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                </form>
+                              </div>
+                          </td>
+                         @else
+                             <?php //################################## ?>
+                            <td>
+                                <?php
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
+                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
+                                  }
+                                  ?>
+                             </td>
+                             <?php
+                                $status = $style = "";
+                                if($val[1]->is_draf == 'yes'){
+                                  $status = "Draf";
+                                }else{
+                                    if($val[1]->disahkan == '0'){
+//                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pengesahan</strong></span>';
+                                    }elseif($val[1]->disahkan == 'yes'){
+                                        $status = "Diterbitkan";
+                                    }elseif($val[1]->disahkan == 'no'){
+//                                        $style = 'style="background-color:#FFD1D1;"';
+                                        $status = '<span style="color:red;"><strong>Perlu Pembetulan</strong></span>';
+                                    }elseif($val[1]->disahkan == 'delete'){
+                                        $status = "Dipadam";
+                                    }
+                                }
+                                ?>
+                             <td <?php echo $style; ?>>
+                                fart<?php echo $status; ?>
+                          </td>
+                          <td class="pr-1">
+                            <div class="form-inline">
+                                <?php //lihat(view only)================================ ?>
+                                <form method="post" action="{{ url('/lihat_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                </form>
+                                <?php //kemaskini======================================= ?>
+                                <a href="{{ url('/kemaskini_metadata/'.$val[1]->id) }}">
+                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                </a>
+                                <?php //delete========================================== ?>
+                                <form method="post" action="{{ url('/delete_metadata') }}">
+                                    @csrf
+                                    <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
+                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                </form>
+                              </div>
+                          </td>
+                         @endif
+                        </tr>
+                        <?php
                         $bil++;
                       }
                     }
