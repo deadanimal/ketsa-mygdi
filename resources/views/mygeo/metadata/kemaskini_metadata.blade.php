@@ -191,6 +191,13 @@
                                         $langSelected = "";
                                         if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != "") {
                                             $langSelected = strtolower(trim($metadataxml->language->CharacterString));
+                                            if($langSelected == "english"){
+                                                $langSelected = "en";
+                                            }elseif($langSelected == "bahasaMelayu"){
+                                                $langSelected = "bm";
+                                            }else{
+                                                $langSelected = "en";
+                                            }
                                         }
                                         ?>
                                         <label class="btn btn-secondary active">
