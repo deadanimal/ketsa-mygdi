@@ -176,7 +176,7 @@
                                                 $catSelected = $_GET['kategori'];
                                             }
                                             foreach ($categories as $cat) {
-                                                if (strtolower(trim($cat->name)) == $catSelected) {
+                                                if (strtolower(trim($cat->name)) == strtolower($catSelected)) {
                                                     ?><option value="<?php echo $cat->name; ?>" selected><?php echo $cat->name; ?></option><?php
                                                 } else {
                                                     ?><option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?></option><?php

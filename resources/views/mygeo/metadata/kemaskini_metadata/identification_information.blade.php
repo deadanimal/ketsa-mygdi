@@ -645,7 +645,7 @@
                                     <div class="col-3 px-0">
                                         <input type="text" name="c2_postal_code" id="c2_postal_code"
                                             class="form-control form-control-sm mb-2 divPostalCode"
-                                            value="{{ $postalCode }}">
+                                            value="{{ $postalCode }}" maxlength="5">
                                     </div>
                                     <?php
                                 }
@@ -917,5 +917,11 @@
         $("#c2_metadataName").keyup(function () {  
             $(this).val($(this).val().toUpperCase());  
         }); 
+        $('#c2_postal_code,#c2_contact_phone_office,#c2_contact_fax').keypress(function (e) {    
+            var charCode = (e.which) ? e.which : event.keyCode    
+            if (String.fromCharCode(charCode).match(/[^0-9]/g)){
+                return false;                        
+            }
+        });  
     });
 </script>

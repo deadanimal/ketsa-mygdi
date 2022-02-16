@@ -152,8 +152,8 @@
                           </td>
                             <td>
                                 <?php
-                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
-                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
+                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
                                   }
                                   ?>
                              </td>
@@ -211,8 +211,8 @@
                           </td>
                             <td>
                                 <?php
-                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
-                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
+                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
                                   }
                                   ?>
                              </td>
@@ -264,8 +264,8 @@
                              <?php //################################## ?>
                             <td>
                                 <?php
-                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
-                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
+                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
                                   }
                                   ?>
                              </td>
@@ -317,8 +317,8 @@
                              <?php //################################## ?>
                             <td>
                                 <?php
-                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
-                                      echo $val[0]->hierarchyLevel->MD_ScopeCode;
+                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
+                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
                                   }
                                   ?>
                              </td>
