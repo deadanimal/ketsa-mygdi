@@ -213,7 +213,7 @@
                                     <option value="Revision">Revision</option>
                                     <option value="Superseded">Superseded</option>
                                     <option value="Validity Begins">Validity Begins</option>
-                                <option value="Validity Expires">Validity Expires</option>
+                                    <option value="Validity Expires">Validity Expires</option>
                                     <option value="Unavailable">Unavailable</option>
                                 </select>
                                 @error('c2_metadataDateType')
