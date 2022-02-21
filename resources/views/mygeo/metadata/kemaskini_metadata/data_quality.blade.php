@@ -52,7 +52,22 @@
                                 <?php
                                 $dqScope = "";
                                 if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode) && $metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode != "") {
-                                    $dqScope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode);
+                                    $dqScope = ucwords(trim($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode));
+                                }
+                                if($dqScope == "AttributeType"){
+                                    $dqScope = "Attribute Type";
+                                }elseif($dqScope == "CollectionSession"){
+                                    $dqScope = "Collection Session";
+                                }elseif($dqScope == "NonGeographicDataset"){
+                                    $dqScope = "Non Geographic Data Set";
+                                }elseif($dqScope == "DimensionGroup"){
+                                    $dqScope = "Dimension Group";
+                                }elseif($dqScope == "FeatureType"){
+                                    $dqScope = "Feature Type";
+                                }elseif($dqScope == "PropertyType"){
+                                    $dqScope = "Property Type";
+                                }elseif($dqScope == "FieldSession"){
+                                    $dqScope = "Field Session";
                                 }
                                 ?>
                                 <select name="c15_data_quality_info" id="c15_data_quality_info" style="max-width: 100%;" class="form-control form-control-sm">
@@ -243,7 +258,12 @@
                                                                         <?php
                                                                         $t1Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean != "") {
-                                                                            $t1Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean);
+                                                                            $t1Res = ucwords(trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean));
+                                                                        }
+                                                                        if($t1Res == "Passed"){
+                                                                            $t1Res = "Pass";
+                                                                        }elseif($t1Res == "NotRelevant"){
+                                                                            $t1Res = "Not Relevant";
                                                                         }
                                                                         ?>
                                                                         <b>Result:</b>

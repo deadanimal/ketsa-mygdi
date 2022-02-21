@@ -191,9 +191,9 @@
                             <div class="col-7">
                                 <?php
                                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode != '') {
-                                    $metDateType = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode;
+                                    $metDateType = ucwords($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode);
                                 }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode != '') {
-                                    $metDateType = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode;
+                                    $metDateType = ucwords($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->dateType->CI_DateTypeCode);
                                 }
                                 ?>
                                 <select name="c2_metadataDateType" id="c2_metadataDateType"
@@ -235,9 +235,16 @@
                                 <?php
                                 $metStatus = '';
                                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString != '') {
-                                    $metStatus = $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString;
+                                    $metStatus = ucwords($metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString);
                                 }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode != '') {
-                                    $metStatus = $metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode;
+                                    $metStatus = ucwords($metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode);
+                                }
+                                if($metStatus == "HistoricalArchive"){
+                                    $metStatus = "Historical Archive";
+                                }elseif($metStatus == "OnGoing"){
+                                    $metStatus = "On Going";
+                                }elseif($metStatus == "UnderDevelopment"){
+                                    $metStatus = "Under Development";
                                 }
                                 ?>
                                 <select class="form-control form-control-sm" name="c2_metadataStatus"
@@ -324,6 +331,33 @@
                                 }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->serviceType->LocalName) && $metadataxml->identificationInfo->SV_ServiceIdentification->serviceType->LocalName != '') {
                                     $typeOfServices = $metadataxml->identificationInfo->SV_ServiceIdentification->serviceType->LocalName;
                                 }
+                                if($typeOfServices == "urn:x-esri:specification:ServiceType:ArcIMS"){
+                                    $typeOfServices = "ArcIMS Service";
+                                }elseif($typeOfServices == "urn:ogc:dataFormat:GML:2.0" || $typeOfServices == "urn:ogc:dataFormat:GML:2.1.1" || $typeOfServices == "urn:ogc:dataFormat:GML:2.1.2" || $typeOfServices == "urn:ogc:dataFormat:GML:3.0" || $typeOfServices == "urn:ogc:dataFormat:GML:3.1.1"){
+                                    $typeOfServices = "OGC Geography Markup Language";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:CoordinateTransformationService:1.0" || $typeOfServices == "urn:ogc:serviceType:CoordinateTransformationService:1.0:COM" || $typeOfServices == "urn:ogc:serviceType:CoordinateTransformationService:1.0:CORBA" || $typeOfServices == "urn:ogc:serviceType:CoordinateTransformationService:1.0:Java"){
+                                    $typeOfServices = "OGC Coordinate Transformation Service";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:GridCoverage:1.0:COM" || $typeOfServices == "urn:ogc:serviceType:GridCoverage:1.0:CORBA"){
+                                    $typeOfServices = "OGC Grid Coverage Service";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:OpenLSCoreServices:1.0" || $typeOfServices == "urn:ogc:serviceType:OpenLSCoreServices:1.0:SOAP" || $typeOfServices == "urn:ogc:serviceType:OpenLSCoreServices:1.1"){
+                                    $typeOfServices = "OGC Location Service";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:KML:2.2"){
+                                    $typeOfServices = "OGC KML 2.2";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:SimpleFeatureAccess:1.0:CORBA" || $typeOfServices == "urn:ogc:serviceType:SimpleFeatureAccess:1.1:OLE/COM" || $typeOfServices == "urn:ogc:serviceType:SimpleFeatureAccess:1.1:SQL" || $typeOfServices == "urn:ogc:serviceType:SimpleFeatureAccess:1.2:SQL"){
+                                    $typeOfServices = "OGC Simple Feature Access";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:SensorObservationService:1.0"){
+                                    $typeOfServices = "OGC Sensor Observation Service";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:WebCoverageService:1.0" || $typeOfServices == "urn:ogc:serviceType:WebCoverageService:1.1.0"){
+                                    $typeOfServices = "OGC Web Coverage Service";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:WebFeatureService:1.0" || $typeOfServices == "urn:ogc:serviceType:WebFeatureService:1.1"){
+                                    $typeOfServices = "OGC Web Feature Service";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:WebMapService:1.0" || $typeOfServices == "urn:ogc:serviceType:WebMapService:1.1" || $typeOfServices == "urn:ogc:serviceType:WebMapService:1.1.1" || $typeOfServices == "urn:ogc:serviceType:WebMapService:1.3.0" || $typeOfServices == "urn:ogc:serviceType:WebMapService:Post:0.0.3"){
+                                    $typeOfServices = "OGC Web Map Service";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:WebProcessingService:0.4"){
+                                    $typeOfServices = "OGC Web Processing Service";
+                                }elseif($typeOfServices == "urn:ogc:serviceType:GenericService"){
+                                    $typeOfServices = "Generic Service";
+                                }
                                 ?>
                                 <select class="form-control form-control-sm" name="c2_typeOfServices"
                                     id="c2_typeOfServices">
@@ -373,7 +407,7 @@
                                         {{ $typeOfServices == 'Generic Service' ? 'selected' : '' }}>Generic Service
                                     </option>
                                 </select>
-                                @error('c2_metadataStatus')
+                                @error('c2_typeOfServices')
                                     <div class="text-error">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -449,7 +483,9 @@
                                 <?php
                                 $typeCouplingDataset = '';
                                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType) && trim($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType) != '') {
-                                    $typeCouplingDataset = $metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType;
+                                    $typeCouplingDataset = ucwords($metadataxml->identificationInfo->MD_DataIdentification->couplingType->SV_CouplingType);
+                                }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->SV_CouplingType) && trim($metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->SV_CouplingType) != '') {
+                                    $typeCouplingDataset = ucwords($metadataxml->identificationInfo->SV_ServiceIdentification->couplingType->SV_CouplingType);
                                 }
                                 ?>
                                 <select class="form-control form-control-sm" name="c2_typeOfCouplingDataset"
@@ -686,15 +722,26 @@
                                             <?php
                                             $respState = '';
                                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != '') {
-                                                $respState = strtolower(trim($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
+                                                $respState = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
                                             }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != '') {
-                                                $respState = strtolower(trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
+                                                $respState = ucwords(trim($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString));
+                                            }
+                                            if($respState == "NegeriSembilan"){
+                                                $respState = "Negeri Sembilan";
+                                            }elseif($respState == "PulauPinang"){
+                                                $respState = "Pulau Pinang";
+                                            }elseif($respState == "WpKualaLumpur"){
+                                                $respState = "WP Kuala Lumpur";
+                                            }elseif($respState == "WpLabuan"){
+                                                $respState = "WP Labuan";
+                                            }elseif($respState == "WpPutrajaya"){
+                                                $respState = "WP Putrajaya";
                                             }
                                             ?>
                                             <?php
                                             if (count($states) > 0) {
                                                 foreach ($states as $st) {
-                                                    if (strtolower($st->name) == $respState) {
+                                                    if ($st->name == $respState) {
                                                         ?>
                                                         <option value="<?php echo $st->name; ?>" selected><?php echo $st->name; ?></option><?php
                                                     } else {
@@ -854,9 +901,16 @@
                                     <?php
                                     $role = '';
                                     if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode != '') {
-                                        $role = $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode;
+                                        $role = ucwords($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode);
                                     }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode != '') {
-                                        $role = $metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode;
+                                        $role = ucwords($metadataxml->identificationInfo->SV_ServiceIdentification->pointOfContact->CI_ResponsibleParty->role->CI_RoleCode);
+                                    }
+                                    if($role == "ResourceProvider"){
+                                        $role = "Resource Provider";
+                                    }elseif($role == "PointOfContact"){
+                                        $role = "Point Of Contact";
+                                    }elseif($role == "PrincipalInvestigator"){
+                                        $role = "Principal Investigator";
                                     }
                                     ?>
                                     <select name="c2_contact_role" id="c2_contact_role"

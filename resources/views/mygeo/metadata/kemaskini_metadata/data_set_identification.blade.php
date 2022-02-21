@@ -17,9 +17,14 @@
                 <?php
                 $dataSetType = "";
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) && $metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode != "") {
-                    $dataSetType = trim($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode);
+                    $dataSetType = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode));
                 }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode != "") {
-                    $dataSetType = trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode);
+                    $dataSetType = ucwords(trim($metadataxml->identificationInfo->SV_ServiceIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode));
+                }
+                if($dataSetType == "TextTable"){
+                    $dataSetType = "Text Table";
+                }elseif($dataSetType == "StereoModel"){
+                    $dataSetType = "Stereo Model";
                 }
                 foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
                     if($val['status'] == "customInput"){
@@ -115,9 +120,14 @@
                                 <?php
                                 $lang = "";
                                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString != "") {
-                                    $lang = trim($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString);
+                                    $lang = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString));
                                 }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->language->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->language->CharacterString != "") {
-                                    $lang = trim($metadataxml->identificationInfo->SV_ServiceIdentification->language->CharacterString);
+                                    $lang = ucwords(trim($metadataxml->identificationInfo->SV_ServiceIdentification->language->CharacterString));
+                                }
+                                if($lang == "english" || $lang == "enms"){
+                                    $lang = "English";
+                                }elseif($lang == "bahasaMelayu"){
+                                    $lang = "Bahasa Malaysia";
                                 }
                                 ?>
                                 <select name="c12_language" id="c12_language" class="form-control form-control-sm">

@@ -71,9 +71,16 @@
                                         <?php
                                         $accessConst = "";
                                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
-                                            $accessConst = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode);
+                                            $accessConst = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode));
                                         }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
-                                            $accessConst = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode);
+                                            $accessConst = ucwords(trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode));
+                                        }
+                                        if($accessConst == "PatentPending"){
+                                            $accessConst = "Patent Pending";
+                                        }elseif($accessConst == "IntellectualpropertyRights"){
+                                            $accessConst = "Intellectual Property Rights";
+                                        }elseif($accessConst == "OtherRestrictions"){
+                                            $accessConst = "Other Restrictions";
                                         }
                                         ?>
                                         <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm">
@@ -106,9 +113,16 @@
                                         <?php
                                         $useConst = "";
                                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
-                                            $useConst = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode);
+                                            $useConst = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode));
                                         }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
-                                            $useConst = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode);
+                                            $useConst = ucwords(trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode));
+                                        }
+                                        if($useConst == "PatentPending"){
+                                            $useConst = "Patent Pending";
+                                        }elseif($useConst == "IntellectualpropertyRights"){
+                                            $useConst = "Intellectual Property Rights";
+                                        }elseif($useConst == "OtherRestrictions"){
+                                            $useConst = "Other Restrictions";
                                         }
                                         ?>
                                         <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm">
@@ -151,9 +165,12 @@
                                         <?php
                                         $classSys = "";
                                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
-                                            $classSys = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode);
+                                            $classSys = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode));
                                         }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
-                                            $classSys = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode);
+                                            $classSys = ucwords(trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode));
+                                        }
+                                        if($classSys == "TopSecret"){
+                                            $classSys = "Top Secret";
                                         }
                                         ?>
                                         <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm">

@@ -174,7 +174,7 @@
                             ?>
                             <select name="c11_medium" id="c11_medium" class="form-control form-control-sm">
                                 <option value="">Pilih...</option>
-                                <option value="cdROM" {{ ($medium=='cdROM' ? 'selected':'') }}>cdROM</option>
+                                <option value="cdRom" {{ ($medium=='cdRom' ? 'selected':'') }}>cdROM</option>
                                 <option value="dvd" {{ ($medium=='dvd' ? 'selected':'') }}>dvd</option>
                                 <option value="dvdRom" {{ ($medium=='dvdRom' ? 'selected':'') }}>dvdRom</option>
                                 <option value="3halfInchFloppy" {{ ($medium=='3halfInchFloppy' ? 'selected':'') }}>3halfInchFloppy</option>
@@ -186,7 +186,7 @@
                                 <option value="3580Cartridge" {{ ($medium=='3580Cartridge' ? 'selected':'') }}>3580Cartridge</option>
                                 <option value="4mmCartridgeTape" {{ ($medium=='4mmCartridgeTape' ? 'selected':'') }}>4mmCartridgeTape</option>
                                 <option value="8mmCartridgeTape" {{ ($medium=='8mmCartridgeTape' ? 'selected':'') }}>8mmCartridgeTape</option>
-                                <option value="1quaterInchCartridgeTape" {{ ($medium=='1quaterInchCartridgeTape' ? 'selected':'') }}>1quaterInchCartridgeTape</option>
+                                <option value="1quarterInchCartridgeTape" {{ ($medium=='1quarterInchCartridgeTape' ? 'selected':'') }}>1quarterInchCartridgeTape</option>
                                 <option value="digitalLinearTape" {{ ($medium=='digitalLinearTape' ? 'selected':'') }}>digitalLinearTape</option>
                                 <option value="onLine" {{ ($medium=='onLine' ? 'selected':'') }}>onLine</option>
                                 <option value="satellite" {{ ($medium=='satellite' ? 'selected':'') }}>satellite</option>

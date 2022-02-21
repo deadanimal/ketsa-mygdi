@@ -41,6 +41,49 @@
                         }
                     }
                 }
+                if(count($tc) > 0){
+                    foreach($tc as $key=>$val){
+                        if($val == "boundaries"){
+                            $tc[$key] = "Administrative and Political Boundaries";
+                        }elseif($val == "farming"){
+                            $tc[$key] = "Agriculture and Farming";
+                        }elseif($val == "climatologyMeteorologyAtmosphere"){
+                            $tc[$key] = "Atmosphere and Climatic";
+                        }elseif($val == "biota"){
+                            $tc[$key] = "Biology and Ecology";
+                        }elseif($val == "economy"){
+                            $tc[$key] = "Business and Economic";
+                        }elseif($val == "planningCadastre"){
+                            $tc[$key] = "Cadastral";
+                        }elseif($val == "society"){
+                            $tc[$key] = "Cultural, Society and Demography";
+                        }elseif($val == "elevation"){
+                            $tc[$key] = "Elevation and Derived Products";
+                        }elseif($val == "environment"){
+                            $tc[$key] = "Environment and Conservation";
+                        }elseif($val == "structure"){
+                            $tc[$key] = "Facilities and Structures";
+                        }elseif($val == "geoscientificInformation"){
+                            $tc[$key] = "Geological and Geophysical";
+                        }elseif($val == "health"){
+                            $tc[$key] = "Human Health and Disease";
+                        }elseif($val == "imageryBaseMapsEarthCover"){
+                            $tc[$key] = "Imagery and Base Maps";
+                        }elseif($val == "inlandWaters"){
+                            $tc[$key] = "Inland Water Resources";
+                        }elseif($val == "location"){
+                            $tc[$key] = "Locations and Geodetic Networks";
+                        }elseif($val == "intelligenceMilitary"){
+                            $tc[$key] = "Military";
+                        }elseif($val == "oceans"){
+                            $tc[$key] = "Oceans and Estuaries";
+                        }elseif($val == "transportation"){
+                            $tc[$key] = "Transportation Networks";
+                        }elseif($val == "utilitiesCommunication"){
+                            $tc[$key] = "Utilities and Communication";
+                        }
+                    }
+                }
                 ?>
                 <div class="form-group col-4">
                     @if($elemenMetadata['Administrative and Political Boundaries']->status == '1')
