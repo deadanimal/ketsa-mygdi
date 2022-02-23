@@ -234,8 +234,8 @@
                             <div class="col-7">
                                 <?php
                                 $metStatus = '';
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString != '') {
-                                    $metStatus = ucwords($metadataxml->identificationInfo->MD_DataIdentification->metadataStatus->CharacterString);
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->status->MD_ProgressCode) && $metadataxml->identificationInfo->MD_DataIdentification->status->MD_ProgressCode != '') {
+                                    $metStatus = ucwords($metadataxml->identificationInfo->MD_DataIdentification->status->MD_ProgressCode);
                                 }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode != '') {
                                     $metStatus = ucwords($metadataxml->identificationInfo->SV_ServiceIdentification->status->MD_ProgressCode);
                                 }

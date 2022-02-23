@@ -152,7 +152,7 @@ class XmlController extends Controller {
                             </featureCatalogueCitation>
                         </MD_FeatureCatalogueDescription>
                     </contentInfo>
-                    <identificationInfo>
+                    <identificationInfo> 
                         <MD_DataIdentification>
                             <citation>
                                 <CI_Citation>
@@ -390,7 +390,7 @@ class XmlController extends Controller {
                                 <gco:CharacterString/>
                             </credit>
                             <status>
-                                <MD_ProgressCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode" codeListValue="completed">completed</MD_ProgressCode>
+                                <MD_ProgressCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode" codeListValue="completed">$request->c2_metadataStatus</MD_ProgressCode>
                             </status>
                             <pointOfContact>
                                 <CI_ResponsibleParty>
