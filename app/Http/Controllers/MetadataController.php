@@ -578,11 +578,108 @@ class MetadataController extends Controller {
         } else {
             $refSys = [];
         }
-
+        
+        $refSysId = "";
+        if (isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != "") {
+            $refSysId = strtolower($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString);
+        } elseif (isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString != "") {
+            $refSysId = strtolower($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString);
+        } else {
+            $refSysSelected = [];
+        }
+        
+        if($refSysId == "Cassini Soldner Johor MRT48"){
+            $refSysId = 1;
+        }elseif($refSysId == "Cassini Soldner Negeri Sembilan/Melaka MRT48"){
+            $refSysId = 2;
+        }elseif($refSysId == "Cassini Soldner Selangor MRT48"){
+            $refSysId = 3;
+        }elseif($refSysId == "Cassini Soldner Perak MRT48"){
+            $refSysId = 4;
+        }elseif($refSysId == "Cassini Soldner Pulau Pinang MRT48"){
+            $refSysId = 5;
+        }elseif($refSysId == "Cassini Soldner Kedah/Perlis MRT48"){
+            $refSysId = 6;
+        }elseif($refSysId == "Cassini Soldner Kelantan MRT48"){
+            $refSysId = 7;
+        }elseif($refSysId == "Cassini Soldner Terengganu MRT48"){
+            $refSysId = 8;
+        }elseif($refSysId == "Cassini Soldner Pahang MRT48"){
+            $refSysId = 9;
+        }elseif($refSysId == "GDM 2000 Cassini Johor"){
+            $refSysId = 10;
+        }elseif($refSysId == "GDM 2000 Cassini Negeri Sembilan/Melaka"){
+            $refSysId = 11;
+        }elseif($refSysId == "GDM 2000 Cassini Selangor"){
+            $refSysId = 12;
+        }elseif($refSysId == "GDM 2000 Cassini Perak"){
+            $refSysId = 13;
+        }elseif($refSysId == "GDM 2000 Cassini Pulau Pinang"){
+            $refSysId = 14;
+        }elseif($refSysId == "GDM 2000 Cassini Kedah/Perlis"){
+            $refSysId = 15;
+        }elseif($refSysId == "GDM 2000 Cassini Kelantan"){
+            $refSysId = 16;
+        }elseif($refSysId == "GDM 2000 Cassini Terengganu"){
+            $refSysId = 17;
+        }elseif($refSysId == "GDM 2000 Cassini Pahang"){
+            $refSysId = 18;
+        }elseif($refSysId == "GDM 2000"){
+            $refSysId = 19;
+        }elseif($refSysId == "WGS 84"){
+            $refSysId = 20;
+        }elseif($refSysId == "MRSO (GDM2000)"){
+            $refSysId = 21;
+        }elseif($refSysId == "MRSO (MRT48)"){
+            $refSysId = 22;
+        }elseif($refSysId == "BRSO (GDM2000)"){
+            $refSysId = 23;
+        }elseif($refSysId == "BRSO (BT68)"){
+            $refSysId = 24;
+        }elseif($refSysId == "UTM ZON 47"){
+            $refSysId = 25;
+        }elseif($refSysId == "UTM ZON 48"){
+            $refSysId = 26;
+        }elseif($refSysId == "UTM ZON 49"){
+            $refSysId = 27;
+        }elseif($refSysId == "UTM ZON 50"){
+            $refSysId = 28;
+        }
+        
+        if ($refSysId != "" && is_numeric($refSysId)) {
+            $refSysSelected = ReferenceSystemIdentifier::where('id', $refSysId)->get()->first();
+        } elseif ($refSysId != "" && !is_numeric($refSysId)) {
+            $refSysSelected = ReferenceSystemIdentifier::where('name', $refSysId)->get()->first();
+        }
         $portal = PortalTetapan::get()->first();
         $customMetadataInput = CustomMetadataInput::all();
+        $catSelected = "";
+        $arr = (array)$metadataxml->hierarchyLevel->MD_ScopeCode;
+        foreach($arr as $ar){
+            if(is_array($ar)){
+                $catSelected = $ar['codeListValue'];
+            }
+        }         
+        if ($catSelected != "") {
+            $kategori = MCategory::where('name', ucwords($catSelected))->get()->first();
+            $elemenMetadata = ElemenMetadata::where('kategori', $kategori->id)->get()->keyBy('input_name');
+        } else {
+            if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != "") {
+                $catSelected = trim($metadataxml->hierarchyLevel->MD_ScopeCode);
+                $kategori = MCategory::where('name', $catSelected)->get()->first();
+                if ($kategori) {
+                    $elemenMetadata = ElemenMetadata::where('kategori', $kategori->id)->get()->keyBy('input_name');
+                } else {
+                    $elemenMetadata = ElemenMetadata::where('kategori', '4')->get()->keyBy('input_name');
+                }
+            } else {
+                $elemenMetadata = ElemenMetadata::where('kategori', '4')->get()->keyBy('input_name');
+            }
+        }
+        
+        $template = MetadataTemplate::where('status','active')->get()->first();
 
-        return view('mygeo.metadata.lihat_metadata', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput'));
+        return view('mygeo.metadata.lihat_metadata', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput','refSysSelected','template','elemenMetadata'));
     }
 
     public function edit($id) {
@@ -791,8 +888,33 @@ class MetadataController extends Controller {
 
         $portal = PortalTetapan::get()->first();
         $customMetadataInput = CustomMetadataInput::all();
+        $catSelected = "";
+        $arr = (array)$metadataxml->hierarchyLevel->MD_ScopeCode;
+        foreach($arr as $ar){
+            if(is_array($ar)){
+                $catSelected = $ar['codeListValue'];
+            }
+        }         
+        if ($catSelected != "") {
+            $kategori = MCategory::where('name', ucwords($catSelected))->get()->first();
+            $elemenMetadata = ElemenMetadata::where('kategori', $kategori->id)->get()->keyBy('input_name');
+        } else {
+            if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != "") {
+                $catSelected = trim($metadataxml->hierarchyLevel->MD_ScopeCode);
+                $kategori = MCategory::where('name', $catSelected)->get()->first();
+                if ($kategori) {
+                    $elemenMetadata = ElemenMetadata::where('kategori', $kategori->id)->get()->keyBy('input_name');
+                } else {
+                    $elemenMetadata = ElemenMetadata::where('kategori', '4')->get()->keyBy('input_name');
+                }
+            } else {
+                $elemenMetadata = ElemenMetadata::where('kategori', '4')->get()->keyBy('input_name');
+            }
+        }
+        
+        $template = MetadataTemplate::where('status','active')->get()->first();
 
-        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput'));
+        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput','template','elemenMetadata'));
     }
 
     public function downloadMetadataPdf($id) {
@@ -2794,7 +2916,17 @@ class MetadataController extends Controller {
                 //            continue;
             }
 
-//            $xmlObject = simplexml_load_string($uploaded_xml);
+            $xmlObject = simplexml_load_string($uploaded_xml);
+            $arr = (array)$xmlObject->hierarchyLevel->MD_ScopeCode;
+            $catSelected = "";
+            foreach($arr as $ar){
+                if(is_array($ar)){
+                    $catSelected = $ar['codeListValue'];
+                }
+            }   
+            if($catSelected == ""){
+                return redirect('mygeo_pengisian_metadata')->with('message', 'No category info in uploaded xml');
+            }
 //            $json = json_encode($xmlObject);
 //            $xml_array = json_decode($json, true);
             //save in geonetwork

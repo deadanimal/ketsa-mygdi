@@ -27,24 +27,60 @@
                     <table>
                         <tr>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_1"><b>Projection:</b>{{(isset($refSys->projection) ? $refSys->projection:"")}}</label>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_1"><b>Projection:</b>{{ $var }}</label>
                             </td>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_2"><b>Semi Major Axis:</b>{{(isset($refSys->semi_major_axis) ? $refSys->semi_major_axis:"")}}</label>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_2"><b>Semi Major Axis:</b>{{ $var }}</label>
                             </td>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_3"><b>Ellipsoid:</b>{{(isset($refSys->ellipsoid) ? $refSys->ellipsoid:"")}}</label>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_3"><b>Ellipsoid:</b>{{ $var }}</label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_4"><b>Axis Units:</b>{{(isset($refSys->axis_units) ? $refSys->axis_units:"")}}</label>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength;
+                                }
+                                ?>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_4"><b>Axis Units:</b>{{ $var }}</label>
                             </td>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_5"><b>Datum:</b>{{(isset($refSys->datum) ? $refSys->datum:"")}}</label>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_5"><b>Datum:</b>{{ $var }}</label>
                             </td>
                             <td>
-                                <label class="form-check-label" style="margin-left:20px;" for="c3_6"><b>Denominator of Flattening Ratio:</b>{{(isset($refSys->denominator_flattening_ratio) ? $refSys->denominator_flattening_ratio:"")}}</label>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label" style="margin-left:20px;" for="c3_6"><b>Denominator of Flattening Ratio:</b>{{ $var }}</label>
                             </td>
                         </tr>
                     </table>

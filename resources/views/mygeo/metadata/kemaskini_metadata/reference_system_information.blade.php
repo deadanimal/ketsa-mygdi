@@ -85,50 +85,74 @@
                                 ?><td><?php
                             }
                             if($key == "refsys_projection"){
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString;
+                                }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Projection:</b>&nbsp;&nbsp;&nbsp;
-                                    <input type="text" name="refsys_projection" id="refsys_projection" class="form-control form-control-sm" readonly value="{{old('refsys_projection')}}">
+                                    <input type="text" name="refsys_projection" id="refsys_projection" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
                             }
                             if($key == "refsys_semiMajorAxis"){
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString;
+                                }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Semi Major Axis:</b>&nbsp;&nbsp;&nbsp;
-                                    <input type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" class="form-control form-control-sm" readonly value="{{old('refsys_semiMajorAxis')}}">
+                                    <input type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
                             }
                             if($key == "refsys_ellipsoid"){
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString;
+                                }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Ellipsoid:</b>&nbsp;&nbsp;&nbsp;
-                                    <input type="text" name="refsys_ellipsoid" id="refsys_ellipsoid" class="form-control form-control-sm" readonly value="{{old('refsys_ellipsoid')}}">
+                                    <input type="text" name="refsys_ellipsoid" id="refsys_ellipsoid" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
                             }
                             if($key == "refsys_axis_units"){
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength;
+                                }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Axis Units:</b>&nbsp;&nbsp;&nbsp;
-                                    <input type="text" name="refsys_axis_units" id="refsys_axis_units" class="form-control form-control-sm" readonly value="{{old('refsys_axis_units')}}">
+                                    <input type="text" name="refsys_axis_units" id="refsys_axis_units" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
                             }
                             if($key == "refsys_datum"){
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString;
+                                }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Datum:</b>&nbsp;&nbsp;&nbsp;
-                                    <input type="text" name="refsys_datum" id="refsys_datum" class="form-control form-control-sm" readonly value="{{old('refsys_datum')}}">
+                                    <input type="text" name="refsys_datum" id="refsys_datum" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
                             }
                             if($key == "refsys_denomFlatRatio"){
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString;
+                                }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;">
                                     <b>Denominator of Flattening Ratio:</b>&nbsp;&nbsp;&nbsp;
-                                    <input type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" class="form-control form-control-sm" readonly value="{{old('refsys_denomFlatRatio')}}">
+                                    <input type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
                             }

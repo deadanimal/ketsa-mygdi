@@ -65,13 +65,23 @@
             <?php
             if (isset($metadataxml->language->CharacterString) && $metadataxml->language->CharacterString != "") {
                 $flag *= 0;
+                
+                $langSelected = "";
+                $langSelected = strtolower(trim($metadataxml->language->CharacterString));
+                if($langSelected == "english"){
+                    $langSelected = "en";
+                }elseif($langSelected == "bahasaMelayu"){
+                    $langSelected = "bm";
+                }else{
+                    $langSelected = "en";
+                }
                 ?>
                 <div class="form-group row">
                     <p class="pl-lg-3 form-control-label">Metadata Language<span class="mx-3">:</span></p>    
                     <?php
-                    if($metadataxml->language->CharacterString == 'en'){
+                    if($langSelected == 'en'){
                         echo "English";
-                    }elseif($metadataxml->language->CharacterString == 'bm'){
+                    }elseif($langSelected == 'bm'){
                         echo "Bahasa Malaysia";
                     }
                     ?>
@@ -82,10 +92,17 @@
             <?php
             if($metadataSearched->createdate != ""){
                 $flag *= 0;
+                
+                $metDate = '';
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date != '') {
+                    $metDate = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date;
+                }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->date->Date != '') {
+                    $metDate = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->date->Date;
+                }
                 ?>
                 <div class="form-group row">
                     <p class="pl-lg-3 form-control-label">Metadata Create Date<span class="mx-3">:</span></p>
-                    <?php echo  date('d/m/Y',strtotime($metadataSearched->createdate)); ?>
+                    <?php echo date('d/m/Y',strtotime($metDate)); ?>
                 </div>
                 <?php
             }
@@ -202,7 +219,7 @@
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-8">
-                        Version 1.0 2021
+                        {{ strtoupper($template->version) }}
                     </div>
                 </div>
             </div>

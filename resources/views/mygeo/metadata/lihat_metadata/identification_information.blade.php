@@ -289,6 +289,18 @@
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString != "") {
+                    $respState = ucwords($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString);
+                    if($respState == "NegeriSembilan"){
+                        $respState = "Negeri Sembilan";
+                    }elseif($respState == "PulauPinang"){
+                        $respState = "Pulau Pinang";
+                    }elseif($respState == "WpKualaLumpur"){
+                        $respState = "WP Kuala Lumpur";
+                    }elseif($respState == "WpLabuan"){
+                        $respState = "WP Labuan";
+                    }elseif($respState == "WpPutrajaya"){
+                        $respState = "WP Putrajaya";
+                    }
                     ?>
                     <div class="row mb-2 divCity">
                         <div class="col-3 pl-5">
@@ -297,14 +309,14 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString; ?>
+                            <?php echo $respState ?>
                         </div>
                     </div>
                     <?php
                 }
                 ?>
                 <?php
-                if(isset($countries->name) && $countries->name != ""){
+//                if(isset($countries->name) && $countries->name != ""){
                     ?>
                     <div class="row mb-2 divCity">
                         <div class="col-3 pl-5">
@@ -313,11 +325,11 @@
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-6">
-                            <?php echo $countries->name; ?>
+                            Malaysia
                         </div>
                     </div>
                     <?php
-                }
+//                }
                 ?>
                 <?php
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
