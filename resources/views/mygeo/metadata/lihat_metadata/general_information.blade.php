@@ -66,7 +66,7 @@
                 $langSelected = strtolower(trim($metadataxml->language->CharacterString));
                 if($langSelected == "english"){
                     $langSelected = "en";
-                }elseif($langSelected == "bahasaMelayu"){
+                }elseif($langSelected == "bahasamelayu"){
                     $langSelected = "bm";
                 }else{
                     $langSelected = "en";

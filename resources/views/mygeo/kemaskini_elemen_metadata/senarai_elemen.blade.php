@@ -218,12 +218,12 @@
                 var accordion = accordionId.replace('collapse','');
                 if($(item).hasClass("newInput")){
                     var newInputName = $(item).parent().parent().find('.customInput_label').val();
-                    jsontxt.push({"name":newInputName,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                    jsontxt.push({"name":newInputName,"status":$(item).attr('data-status'),"accordion":"accordion"+accordion});
                 }else{
-                    jsontxt.push({"name":item.name,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                    jsontxt.push({"name":item.name,"status":$(item).attr('data-status'),"accordion":"accordion"+accordion});
                 }
             });
-            
+            console.log(jsontxt);
             //get order of all inputs of Data Quality tabs
             var itemOrder2 = $('.dqtabstable .sortable').sortable();
             jQuery.each(itemOrder2, function(index, item) {
