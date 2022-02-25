@@ -493,8 +493,6 @@
                                         class="text-warning">*</span> :</label>
                             </div>
                             <div class="col-3 px-0">
-                                <input type="text" name="c2_contact_state" id="c2_contact_state" class="form-control form-control-sm" readonly value="Malaysia">
-                                <?php /* ?>
                                 <select name="c2_contact_state" id="c2_contact_state"class="form-control form-control-sm">
                                     <option disabled>Pilih...</option>
                                     <?php
@@ -503,7 +501,7 @@
                                             $selected = "";
                                             if(null !== old('c2_contact_state') && !empty(old('c2_contact_state')) && $st->name == old('c2_contact_state')){
                                                 $selected = "selected";
-                                            }elseif($st->name == $pengesahs->state){
+                                            }elseif($st->id == $pengesahs->state){
                                                 $selected = "selected";
                                             }
                                             ?>
@@ -515,7 +513,7 @@
                                 @error('c2_contact_state')
                                     <div class="text-error">{{ $message }}</div>
                                 @enderror
-                                <?php */ ?>
+                                <?php  ?>
                             </div>
                             @endif
                             @if($elemenMetadata['c2_contact_country']->status == '1')
