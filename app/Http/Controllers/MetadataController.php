@@ -659,7 +659,10 @@ class MetadataController extends Controller {
             if(is_array($ar)){
                 $catSelected = $ar['codeListValue'];
             }
-        }         
+        }
+        if($catSelected == "service"){
+            $catSelected = "services";
+        }
         if ($catSelected != "") {
             $kategori = MCategory::where('name', ucwords($catSelected))->get()->first();
             $elemenMetadata = ElemenMetadata::where('kategori', $kategori->id)->get()->keyBy('input_name');

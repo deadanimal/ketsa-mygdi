@@ -146,13 +146,13 @@
                             </div>
                             <div class="col-6">
                                 <?php
-                                $counter = 0;
+                                $counter = 0; //dd(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords));
                                 if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
                                     foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                                        if(trim($keyword->CharacterString) != ""){
+                                        if(trim((string)$keyword->CharacterString) != ""){
                                             if($counter == 0){
                                                 ?>
-                                                <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
+                                                <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
                                                 @error('c10_keyword')
                                                 <div class="text-error">{{ $message }}</div>
                                                 @enderror
@@ -163,10 +163,10 @@
                                     }
                                 }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
                                    foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                                        if(trim($keyword->CharacterStrin3g) != ""){
+                                        if(trim((string)$keyword->CharacterString) != ""){
                                             if($counter == 0){ //first keyword is for input Keyword. others are Additional Keywords
                                                 ?>
-                                                <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
+                                                <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
                                                 @error('c10_keyword')
                                                 <div class="text-error">{{ $message }}</div>
                                                 @enderror
@@ -181,11 +181,11 @@
                         </div>
                         <?php
                     }
-                    if($key == "c10_additional_keyword[]"){
+                    if($key == "c10_additional_keyword[]"){ //============================
                         $counter = 0;
                         if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
                             foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                                if(trim($keyword->CharacterString) != ""){
+                                if(trim((string)$keyword->CharacterString) != ""){
                                     if($counter > 0){
                                         ?>
                                         <div class="row mb-2">
@@ -195,7 +195,7 @@
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
+                                                <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
                                             </div>
                                         </div>
                                         <?php
@@ -205,7 +205,7 @@
                             }
                         }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
                             foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                                if(trim($keyword->CharacterString) != ""){
+                                if(trim((string)$keyword->CharacterString) != ""){
                                     if($counter > 0){
                                         ?>
                                         <div class="row mb-2">
@@ -215,7 +215,7 @@
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
+                                                <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
                                             </div>
                                         </div>
                                         <?php

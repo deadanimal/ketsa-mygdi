@@ -72,22 +72,37 @@
                     <div class="pl-lg-3">
                         <?php
                         $flag2 = 1;
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
+                        $classSys = $arr = "";
+                        if(isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
+                            $arr = (array)$metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
+                        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
+                            $arr = (array)$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
+
+                        }
+                        foreach($arr as $ar){
+                            if(is_array($ar)){
+                                $classSys = $ar['codeListValue'];
+                            }
+                        }
+                        $classSys = ucwords($classSys);
+
+                        if($classSys == "TopSecret"){
+                            $classSys = "Top Secret";
+                        }
+                        if($classSys != ""){
                             $flag2 *= 0;
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-xl-5">
-                                    <label class="form-control-label" for="input-access-cons">
-                                        Classification
-                                    </label>
-                                </div>
-                                <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode . "</p>"; ?>
-                                </div>
-                            </div>
-                            <?php
                         }
                         ?>
+                        <div class="row mb-2">
+                            <div class="col-xl-5">
+                                <label class="form-control-label" for="input-access-cons">
+                                    Classification
+                                </label>
+                            </div>
+                            <div class="col-xl-7">
+                                <?php echo "&nbsp;&nbsp;<p>".$classSys."</p>"; ?>
+                            </div>
+                        </div>
                         <?php
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
                             $flag2 *= 0;

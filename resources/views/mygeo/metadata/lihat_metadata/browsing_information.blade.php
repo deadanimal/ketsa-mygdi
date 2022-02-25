@@ -70,7 +70,7 @@
                 $counter = 0;
                 if(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
                     foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                        if(trim($keyword->CharacterString) != ""){
+                        if(trim((string)$keyword->CharacterString) != ""){
                             if($counter == 0){
                                 ?>
                                 <div class="row mb-2">
@@ -80,7 +80,7 @@
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-6">
-                                        <?php echo "&nbsp;&nbsp;" . $keyword->CharacterString; ?>
+                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
                                     </div>
                                 </div>
                                 <?php
@@ -93,7 +93,7 @@
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-6">
-                                        <?php echo "&nbsp;&nbsp;" . $keyword->CharacterString; ?>
+                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
                                     </div>
                                 </div>
                                 <?php
@@ -103,7 +103,7 @@
                     }
                 }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
                     foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                        if(trim($keyword->CharacterString) != ""){
+                        if(trim((string)$keyword->CharacterString) != ""){
                             if($counter == 0){
                                 ?>
                                 <div class="row mb-2">
@@ -113,7 +113,7 @@
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-6">
-                                        <?php echo "&nbsp;&nbsp;" . ucwords($keyword->CharacterString); ?>
+                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
                                     </div>
                                 </div>
                                 <?php
@@ -126,7 +126,7 @@
                                         </label><label class="float-right">:</label>
                                     </div>
                                     <div class="col-6">
-                                        <?php echo "&nbsp;&nbsp;" . ucwords($keyword->CharacterString); ?>
+                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
                                     </div>
                                 </div>
                                 <?php

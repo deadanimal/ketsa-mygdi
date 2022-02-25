@@ -163,12 +163,20 @@
                                     </div>
                                     <div class="col-xl-7">
                                         <?php
-                                        $classSys = "";
-                                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
-                                            $classSys = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode));
-                                        }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode != "") {
-                                            $classSys = ucwords(trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode));
+                                        $classSys = $arr = "";
+                                        if(isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
+                                            $arr = (array)$metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
+                                        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
+                                            $arr = (array)$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
+                                            
                                         }
+                                        foreach($arr as $ar){
+                                            if(is_array($ar)){
+                                                $classSys = $ar['codeListValue'];
+                                            }
+                                        }
+                                        $classSys = ucwords($classSys);
+                                        
                                         if($classSys == "TopSecret"){
                                             $classSys = "Top Secret";
                                         }

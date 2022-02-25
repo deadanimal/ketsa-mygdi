@@ -711,7 +711,7 @@
                 $('.divUseLimitation').show();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
-                $('.lblContentInfo').html('Live Data and Maps');
+                $('.lblContentInfo').html();
                 $('#content_info_text').val('Live Data and Maps');
                 $('.lblContentInfo').show();
                 $('#c1_content_info').hide();

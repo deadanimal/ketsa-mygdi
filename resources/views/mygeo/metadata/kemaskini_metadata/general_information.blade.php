@@ -33,9 +33,28 @@
                     <div class="form-group row" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <p class="pl-lg-3 form-control-label">Content Information<span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                         <?php
-                        $f = "";
+                        $contentInfo = $ci = "";
                         if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
-                            $f = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString;
+                            $ci = ucwords($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString);
+                        }
+                        if($ci != ""){
+                            if($ci == "Clearinghouse"){
+                                $contentInfo = "Clearing House";
+                            }elseif($ci == "DownloadableData"){
+                                $contentInfo = "Downloadable Data";
+                            }elseif($ci == "GeographicActivities"){
+                                $contentInfo = "Geographic Activities";
+                            }elseif($ci == "GeographicService"){
+                                $contentInfo = "Geographic Service";
+                            }elseif($ci == "MapFiles"){
+                                $contentInfo = "Map Files";
+                            }elseif($ci == "OfflineData"){
+                                $contentInfo = "Offline Data";
+                            }elseif($ci == "StaticMapImage"){
+                                $contentInfo = "Static Map Image";
+                            }elseif($ci == "LiveData"){
+                                $contentInfo = "Live Data";
+                            }
                         }
                         ?>
                         <select name="c1_content_info" id="c1_content_info" class="form-control" style="width:175px;">
@@ -57,7 +76,7 @@
                             <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                         </select>
 
-                        <p class="ml-3 mb-0 lblContentInfo"></p>
+                        <p class="ml-3 mb-0 lblContentInfo">{{ $contentInfo }}</p>
                         <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled value="">
 
                         @error('c1_content_info')
@@ -212,12 +231,11 @@
         $var = "";
         if(old('c1_content_info') != ""){
             $var = old('c1_content_info');
-        }elseif(isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
-            $var = trim($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString);
+        }else{
+            $var = $contentInfo;
         }
         ?>
         $('#c1_content_info').val("{{ $var }}").trigger('change');
         $('#content_info_text').val("{{ $var }}");
-        console.log("{{$var}}");
     });
 </script>
