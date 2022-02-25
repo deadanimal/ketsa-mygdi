@@ -163,8 +163,8 @@
                                     }
                                 }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
                                    foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                                        if(trim($keyword->CharacterString) != ""){
-                                            if($counter == 0){
+                                        if(trim($keyword->CharacterStrin3g) != ""){
+                                            if($counter == 0){ //first keyword is for input Keyword. others are Additional Keywords
                                                 ?>
                                                 <input type="text" name="c10_keyword" id="c10_keyword" class="form-control form-control-sm ml-3" value="{{ $keyword->CharacterString }}">
                                                 @error('c10_keyword')
@@ -186,7 +186,7 @@
                         if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
                             foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
                                 if(trim($keyword->CharacterString) != ""){
-                                    if($counter == 0){
+                                    if($counter > 0){
                                         ?>
                                         <div class="row mb-2">
                                             <div class="col-3 pl-5">
@@ -206,7 +206,7 @@
                         }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
                             foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
                                 if(trim($keyword->CharacterString) != ""){
-                                    if($counter == 0){
+                                    if($counter > 0){
                                         ?>
                                         <div class="row mb-2">
                                             <div class="col-3 pl-5">

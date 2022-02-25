@@ -101,6 +101,39 @@
                             $counter++;
                         }
                     }
+                }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
+                    foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                        if(trim($keyword->CharacterString) != ""){
+                            if($counter == 0){
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_name">
+                                            Keywords<span class="text-warning">*</span>
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <?php echo "&nbsp;&nbsp;" . ucwords($keyword->CharacterString); ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }else{
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_type">
+                                            Additional Keywords
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <?php echo "&nbsp;&nbsp;" . ucwords($keyword->CharacterString); ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            $counter++;
+                        }
+                    }
                 }
                 ?>
             </div>

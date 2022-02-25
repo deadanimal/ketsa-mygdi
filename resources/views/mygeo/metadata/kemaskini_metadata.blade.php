@@ -272,7 +272,7 @@
                                     <?php /* 
                                     <input type="button" data-name="save" value="Simpan" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
                                     <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
-                                    */ //SMBG SINI - the 2 buttons below randomly disappear apparently triggered by scrolling toward the top of the page ?>
+                                    */ ?>
                                     <input type="button" data-name="save" value="Tolak" class="btn btn-danger btnSubmit btn_hantar" style="display:none;">
                                     <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
                                     @endif

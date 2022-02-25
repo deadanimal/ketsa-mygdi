@@ -2925,12 +2925,24 @@ class MetadataController extends Controller {
                 }
             }   
             if($catSelected == ""){
-                return redirect('mygeo_pengisian_metadata')->with('message', 'No category info in uploaded xml');
+                return redirect('mygeo_pengisian_metadata')->with('message', 'No category info found in uploaded xml');
             }
+            
+            $met_title = '';
+            if (isset($xmlObject->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $xmlObject->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
+                $met_title = $xmlObject->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+            }elseif (isset($xmlObject->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $xmlObject->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != '') {
+                $met_title = $xmlObject->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+            }
+            $met_title = (string)$met_title;
+            if($met_title == ""){
+                return redirect('mygeo_pengisian_metadata')->with('message', 'No metadata title found in uploaded xml');
+            }
+            
 //            $json = json_encode($xmlObject);
 //            $xml_array = json_decode($json, true);
             //save in geonetwork
-            DB::connection('pgsql2')->transaction(function () use ($request, $uploaded_xml, &$newMetadataId) {
+            DB::connection('pgsql2')->transaction(function () use ($request,$uploaded_xml,&$newMetadataId,$met_title) {
                 $maxid = MetadataGeo::on('pgsql2')->max('id');
 
                 // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
@@ -2956,6 +2968,7 @@ class MetadataController extends Controller {
                 $mg->schemaid = "iso19139";
                 $mg->istemplate = "n";
                 $mg->isharvested = "n";
+                $mg->title = $met_title;
                 $mg->owner = 1;
                 $mg->source = "e1be8c47-7b4b-4fb9-862a-16a349e5f586";
                 $mg->uuid = $uuid;
