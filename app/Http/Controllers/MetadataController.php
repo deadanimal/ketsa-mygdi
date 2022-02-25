@@ -60,14 +60,6 @@ class MetadataController extends Controller {
     }
 
     public function index() {
-        // dd($_GET,$_POST);
-        //call geonetwork api to retrieve metadata by uuid. missing other datas. currently not in use
-        //$response = Http::withBasicAuth('admin', 'admin')->get('http://localhost:8080/geonetwork/srv/api/records/e4e26aba-8add-4168-ac10-1dc22d0bbf6f/formatters/xml?addSchemaLocation=true&increasePopularity=true&approved=true');
-        //dd(
-        //$response,$response->body(),$response->json(),$response->status(),$response->ok(),$response->successful(),$response->failed(),$response->serverError(),$response->clientError(),$response->headers()
-        //);
-
-
         $metadatas = $metadatasdb = [];
         $carian = isset($request->carian) ? $request->carian : "";
         $query = MetadataGeo::on('pgsql2');
@@ -122,7 +114,13 @@ class MetadataController extends Controller {
             }
 
             if(isset($_GET['cari_kategori']) && $_GET['cari_kategori'] != ""){
-                if(isset($xml2->hierarchyLevel->MD_ScopeCode) && $xml2->hierarchyLevel->MD_ScopeCode != "" && strpos(strtolower($xml2->hierarchyLevel->MD_ScopeCode),strtolower($_GET['cari_kategori'])) !== false) {
+                $searchCat = "";
+                if($_GET['cari_kategori'] == "services"){
+                    $searchCat = "service";
+                }else{
+                    $searchCat = $_GET['cari_kategori'];
+                }
+                if(isset($xml2->hierarchyLevel->MD_ScopeCode) && $xml2->hierarchyLevel->MD_ScopeCode != "" && strpos(strtolower($xml2->hierarchyLevel->MD_ScopeCode),strtolower($searchCat)) !== false) {
                     $metadatas[$met->id] = [$xml2, $met, $penerbit];
                 }
             }else{

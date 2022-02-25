@@ -170,10 +170,15 @@
                           </td>
                             <td>
                                 <?php
-                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
-                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
-                                  }
-                                  ?>
+                                $r = "";
+                                $arr = (array)$val[0]->hierarchyLevel->MD_ScopeCode;
+                                foreach($arr as $ar){
+                                    if(is_array($ar)){
+                                        $r = $ar['codeListValue'];
+                                    }
+                                }
+                                echo ucfirst($r);
+                                ?>
                              </td>
                                 <?php
                                 $status = $style = "";
@@ -288,10 +293,15 @@
                              <?php //################################## ?>
                             <td>
                                 <?php
-                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
-                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
-                                  }
-                                  ?>
+                                $r = "";
+                                $arr = (array)$val[0]->hierarchyLevel->MD_ScopeCode;
+                                foreach($arr as $ar){
+                                    if(is_array($ar)){
+                                        $r = $ar['codeListValue'];
+                                    }
+                                }
+                                echo ucfirst($r);
+                                ?>
                              </td>
                              <?php
                                 $status = $style = "";
@@ -341,10 +351,15 @@
                              <?php //################################## ?>
                             <td>
                                 <?php
-                                   if(isset($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue) && $val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue != ""){
-                                      echo ucfirst($val[0]->hierarchyLevel->MD_ScopeCode->attributes()->codeListValue);
-                                  }
-                                  ?>
+                                $r = "";
+                                $arr = (array)$val[0]->hierarchyLevel->MD_ScopeCode;
+                                foreach($arr as $ar){
+                                    if(is_array($ar)){
+                                        $r = $ar['codeListValue'];
+                                    }
+                                }
+                                echo ucfirst($r);
+                                ?>
                              </td>
                              <?php
                                 $status = $style = "";
