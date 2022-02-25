@@ -174,7 +174,10 @@
                                                 if(is_array($ar)){
                                                     $catSelected = $ar['codeListValue'];
                                                 }
-                                            }                               
+                                            }
+                                            if($catSelected != "" && strtolower($catSelected) == "service"){
+                                                $catSelected = "services";
+                                            }
                                             if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
                                                 $catSelected = $_GET['kategori'];
                                             }
