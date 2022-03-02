@@ -83,9 +83,11 @@
                             $arr = (array)$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
 
                         }
-                        foreach($arr as $ar){
-                            if(is_array($ar)){
-                                $classSys = $ar['codeListValue'];
+                        if($arr != ""){
+                            foreach($arr as $ar){
+                                if(is_array($ar)){
+                                    $classSys = $ar['codeListValue'];
+                                }
                             }
                         }
                         $classSys = ucwords($classSys);

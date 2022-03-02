@@ -2775,7 +2775,7 @@ class MetadataController extends Controller {
         $this->validate($request, $fields, $customMsg);
 
         $keywords = "";
-        if (count($request->c10_additional_keyword) > 0) {
+        if (isset($request->c10_additional_keyword) && count($request->c10_additional_keyword) > 0) {
             foreach ($request->c10_additional_keyword as $var) {
                 $keywords .= '
                     <keyword>
@@ -3172,7 +3172,7 @@ class MetadataController extends Controller {
 //            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
 //        }
         $keywords = "";
-        if (count($request->c10_additional_keyword) > 0) {
+        if (isset($request->c10_additional_keyword) && count($request->c10_additional_keyword) > 0) {
             foreach ($request->c10_additional_keyword as $var) {
                 $keywords .= '
                     <keyword>
