@@ -3204,6 +3204,10 @@ class MetadataController extends Controller {
             ';
         }
 
+        //SMBG SINI - save custom inputs from senarai elemen=============
+        dd($request);
+        //===============================================================
+        
         $xmlcon = new XmlController;
         $xml = $xmlcon->createXml($request, $fileUrl, $keywords, $topicCategories, trim($custom_inputs));
 
@@ -3607,8 +3611,8 @@ class MetadataController extends Controller {
                         $var[$ai->name]['status'] = $ai->status;
                     }else{
                         //elements passing thru this else block means are custom input
-                        $name = preg_replace('/\s+/', '', $ai->name);
-                        $var[$name] = ['label_bm'=>$ai->name,'label_en'=>$ai->name,'status'=>$ai->status];
+                        $name = preg_replace('/\s+/', '', $ai->name); //remove spaces and underscores
+                        $var[$name] = ['label_bm'=>$ai->name,'label_en'=>$ai->name,'status'=>$ai->status]; //suggestion: save with class like "classCustom"
                     }
                 }
             }

@@ -10,31 +10,56 @@
         <div class="card-body">
             <div class="row">
                 <?php
-                if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
-                    ?>
-                    <div class="col-xl-7">
-                        <div class="form-inline ml-3">
-                            <div class="form-control-label mr-3">
-                                Collection Name<span class="text-warning">*</span>
+                foreach($template->template[strtolower($catSelected)]['accordion6'] as $key=>$val){
+                    if($val['status'] == "customInput"){
+                        ?>
+                        <div class="row mb-2 sortIt">
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString . "</p>"; ?>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
-                <?php
-                if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {
-                    ?>
-                    <div class="col-xl-5">
-                        <div class="form-inline">
-                            <div class="form-control-label mr-3">
-                                Collection Identification<span class="text-warning">*</span>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString . "</p>"; ?>
                         </div>
-                    </div>
-                    <?php
+                        <?php
+                    }
+                    if($key == "c6_collection_name"){
+                        $colName = "";
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
+                            $colName = $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString;
+                        }
+                        if($colName != ""){
+                            ?>
+                            <div class="col-xl-7">
+                                <div class="form-inline ml-3">
+                                    <div class="form-control-label mr-3">
+                                        Collection Name<span class="text-warning">*</span>
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString . "</p>"; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    if($key == "c6_collection_id"){
+                        $collId = "";
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {
+                            $collId = $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString;
+                        }
+                        if($collId != ""){
+                            ?>
+                            <div class="col-xl-5">
+                                <div class="form-inline">
+                                    <div class="form-control-label mr-3">
+                                        Collection Identification<span class="text-warning">*</span>
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString . "</p>"; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
                 }
                 ?>
             </div>

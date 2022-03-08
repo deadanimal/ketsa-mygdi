@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="my-2">
                 <?php
-                foreach($template->template[strtolower($catSelected)]['accordion1'] as $key=>$val){
+                foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                     if($val['status'] == "customInput"){
                         ?>
                         <div class="row mb-2 sortIt">
