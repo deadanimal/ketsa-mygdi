@@ -523,8 +523,10 @@ class MetadataController extends Controller {
             $elemenMetadata = ElemenMetadata::where('kategori', '4')->get()->keyBy('input_name');
             $customMetadataInput = CustomMetadataInput::all();
         }
+        
+        $template = MetadataTemplate::where('status','active')->get()->first();
 
-        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs', 'customMetadataInput', 'elemenMetadata'));
+        return view('mygeo.metadata.pengisian_metadata', compact('categories', 'states', 'countries', 'refSys', 'pengesahs', 'customMetadataInput', 'elemenMetadata','template'));
     }
 
     public function show(Request $request) {

@@ -1,6 +1,6 @@
 <div class="abstractApplication">
     <?php
-    if($key == "c2_metadataName"){
+    if($key == "abstractApplication_namaAplikasi"){
         ?>
         <div class="row mb-2">
             <div class="col-3">
