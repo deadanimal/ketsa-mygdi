@@ -24,7 +24,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" value="{{ $metadataxml->customInputs->accordion7->$key }}"/>
                             </div>
                         </div>
                         <?php
@@ -38,7 +38,7 @@
                     foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
                         if($key == "c7_band_boundary"){
                             ?>
-                            <div class="row mb-2">
+                            <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="col-xl-6">
                                     <div class="form-inline">
                                         <div class="form-control-label mr-3">
@@ -70,7 +70,7 @@
                         foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
                             if($key == "c7_trans_fn_type"){
                                 ?>
-                                <div class="col-xl-6">
+                                <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="form-inline">
                                         <div class="form-control-label mr-4">
                                             Transfer Function Type
@@ -88,7 +88,7 @@
                             }
                             if($key == "c7_trans_polar"){
                                 ?>
-                                <div class="col-xl-6">
+                                <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="form-inline">
                                         <div class="form-control-label mr-3">
                                             Transmitted Polarization
@@ -112,7 +112,7 @@
                         foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
                             if($key == "c7_nominal_spatial_res"){
                                 ?>
-                                <div class="col-xl-6">
+                                <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="form-inline">
                                         <div class="form-control-label mr-4">
                                             Nominal Spatial Resolution
@@ -133,7 +133,7 @@
                             }
                             if($key == "c7_detected_polar"){
                                 ?>
-                                <div class="col-xl-6">
+                                <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="form-inline">
                                         <div class="form-control-label mr-3">
                                             Detected Polarization

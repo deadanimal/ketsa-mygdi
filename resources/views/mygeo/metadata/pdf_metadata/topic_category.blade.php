@@ -196,15 +196,3 @@
         </div>
     </div>
 </div>
-
-<?php
-if($flag == 1){
-    ?>
-    <script>
-        $(document).ready(function(){
-            $('#div_c3').hide();
-        });
-    </script>
-        <?php
-}
-?>

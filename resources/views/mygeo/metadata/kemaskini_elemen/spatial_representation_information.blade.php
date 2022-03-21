@@ -20,6 +20,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+                                Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -33,6 +34,7 @@
                                     <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan nama kumpulan GCP yang diambil/ dicerap">
                                         <?php echo __('lang.collection_name'); ?><span class="text-warning">*</span>
                                     </div>
+                                    Textbox
                                     <input class="form-control form-control-sm sortable" type="text" style="width :280px" placeholder="Insert Collection Name" name="c6_collection_name" id="c6_collection_name" data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -48,6 +50,7 @@
                                     <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan bilangan titik GCP ">
                                         <?php echo __('lang.collection_identification'); ?><span class="text-warning">*</span>
                                     </div>
+                                    Textbox
                                     <input class="form-control form-control-sm sortable" type="text" style="width :150px" placeholder="Identification" name="c6_collection_id" id="c6_collection_id" data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>

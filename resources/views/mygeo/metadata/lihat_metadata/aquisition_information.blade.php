@@ -24,7 +24,7 @@
                                             <label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                            {{ $metadataxml->customInputs->accordion8->$key }}
                                         </div>
                                     </div>
                                     <?php
@@ -36,7 +36,7 @@
                                     }
                                     if($avgAirTemp != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-8">
                                                 <div class="form-control-label">
                                                     Average Air Temperature
@@ -56,7 +56,7 @@
                                     }
                                     if($alt != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-8">
                                                 <div class="form-control-label">
                                                     Altitude
@@ -76,7 +76,7 @@
                                     }
                                     if($relHumid != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-8">
                                                 <div class="form-control-label">
                                                     Relative Humidity
@@ -96,7 +96,7 @@
                                     }
                                     if($metCond != ""){
                                         ?>
-                                        <div class="row mb">
+                                        <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-8">
                                                 <div class="form-control-label">
                                                     Meteorological Condition
@@ -126,7 +126,7 @@
                                     }
                                     if($eventId != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Identifier<span class="text-warning">*</span>
@@ -146,7 +146,7 @@
                                     }
                                     if($trigger != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Trigger
@@ -166,7 +166,7 @@
                                     }
                                     if($context != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Context
@@ -186,7 +186,7 @@
                                     }
                                     if($sequence != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Sequence
@@ -206,7 +206,7 @@
                                     }
                                     if($time != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Time
@@ -235,7 +235,7 @@
                                     }
                                     if($instruIdType != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Type<span class="text-warning">*</span>
@@ -261,7 +261,7 @@
                                     }
                                     if($opId != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Identifier<span class="text-warning">*</span>
@@ -281,7 +281,7 @@
                                     }
                                     if($opStatus != ""){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Status
@@ -301,7 +301,7 @@
                                     }
                                     if($opType != ""){
                                         ?>
-                                        <div class="row mb">
+                                        <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Type
@@ -331,10 +331,12 @@
                                     }
                                     if($rdrDate != ""){
                                         ?>
-                                        <div class="form-control-label mr-3">
-                                            Date
+                                        <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                            <div class="form-control-label mr-3">
+                                                Date
+                                            </div>
+                                            <?php echo "&nbsp;&nbsp;<p>" . date('d/m/Y',strtotime(trim($rdrDate))) . "</p>"; ?>
                                         </div>
-                                        <?php echo "&nbsp;&nbsp;<p>" . date('d/m/Y',strtotime(trim($rdrDate))) . "</p>"; ?>
                                         <?php
                                     }
                                 }
@@ -345,10 +347,12 @@
                                     }
                                     if($lad != ""){
                                         ?>
-                                        <div class="form-control-label mt-3 mr-3">
-                                            Last Acceptable Date
+                                        <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                            <div class="form-control-label mt-3 mr-3">
+                                                Last Acceptable Date
+                                            </div>
+                                            <?php echo "&nbsp;&nbsp;<p>" . date('d/m/Y',strtotime(trim($lad))) . "</p>"; ?>
                                         </div>
-                                        <?php echo "&nbsp;&nbsp;<p>" . date('d/m/Y',strtotime(trim($lad))) . "</p>"; ?>
                                         <?php
                                     }
                                 }

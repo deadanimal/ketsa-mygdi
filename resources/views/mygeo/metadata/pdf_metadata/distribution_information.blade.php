@@ -11,62 +11,99 @@
         <div class="card-body">
             <div class="row mb-2">
                 <?php
-                if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="col-xl-2">
-                        <label class="form-control-label" for="input-distribution-format">
-                            Format Name :</label>
-                    </div>
-                    <div class="col-xl-3">
-                        <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString . "</p>"; ?>
-                    </div>
-                    <?php
-                }
-                ?>
-                <?php
-                if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="col-xl-1">
-                        <label class="form-control-label" for="input-version">
-                            Version :</label>
-                    </div>
-                    <div class="col-xl-2">
-                        <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString . "</p>"; ?>
-                     </div>
-                    <?php
-                }
-                ?>
-                <?php
-                if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="col-xl-1">
-                        <label class="form-control-label" for="input-medium">
-                            Medium :</label>
-                    </div>
-                    <div class="col-xl-3">
-                        <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode . "</p>"; ?>
-                    </div>
-                    <?php
+                foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
+                    if($val['status'] == "customInput"){
+                        ?>
+                        <div class="row mb-2 sortIt">
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
+                                <label class="float-right">:</label>
+                            </div>
+                            <div class="col-8">
+                                {{ $metadataxml->customInputs->accordion11->$key }}
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    if($key == "c11_dist_format"){
+                        $distFormat = "";
+                        if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString != "") {
+                            $distFormat = $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString;
+                        }
+                        if($distFormat != ""){
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <label class="form-control-label" for="input-distribution-format">
+                                    Format Name :</label>
+                            </div>
+                            <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <?php echo "<p>" . $distFormat . "</p>"; ?>
+                            </div>
+                            <?php
+                        }
+                    }
+                    if($key == "c11_version"){
+                        $version = "";
+                        if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString != "") {
+                            $version = $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString;
+                        }
+                        if($version != ""){
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <label class="form-control-label" for="input-version">
+                                    Version :</label>
+                            </div>
+                            <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <?php echo "<p>" . $version . "</p>"; ?>
+                             </div>
+                            <?php
+                        }
+                    }
+                    if($key == "c11_medium"){
+                        $medium = "";
+                        if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode != "") {
+                            $medium = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode;
+                        }
+                        if($medium != ""){
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <label class="form-control-label" for="input-medium">
+                                    Medium :</label>
+                            </div>
+                            <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <?php echo "<p>" . $medium . "</p>"; ?>
+                            </div>
+                            <?php
+                        }
+                    }
                 }
                 ?>
             </div>
             <?php
-            if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString) != "") {
-                $flag *= 0;
-                ?>
-                <div class="row mb-2">
-                    <div class="col-xl-2">
-                        <label class="form-control-label" for="input-distributor">
-                            Organisation Name :</label>
-                    </div>
-                    <div class="col-xl-6">
-                        <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString . "</p>"; ?>
-                    </div>
-                </div>
-                <?php
+            foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
+                if($key == "c11_distributor"){
+                    $dist = "";
+                    if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString != "") {
+                        $dist = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributorContact->CI_ResponsibleParty->organisationName->CharacterString;
+                    }
+                    if($dist != ""){
+                        $flag *= 0;
+                        ?>
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div class="col-xl-2">
+                                <label class="form-control-label" for="input-distributor">
+                                    Organisation Name :</label>
+                            </div>
+                            <div class="col-xl-6">
+                                <?php echo "<p>" . $dist . "</p>"; ?>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
             }
             ?>
             <h6 class="heading-small text-muted mt-4 distInfoSubtajuk1">Distribution Order Process
@@ -75,80 +112,111 @@
                 <div class="row mb-2">
                     <?php
                     $flag1 = 1;
-                    if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString) != "") {
-                        $flag1 *= 0;
-                        $flag *= 0;
-                        ?>
-                        <div class="col-xl-2">
-                            <label class="form-control-label" for="input-unit-distribution">
-                                Units of Distribution :</label>
-                        </div>
-                        <div class="col-xl-3">
-                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString . "</p>"; ?>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                    <?php
-                    if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real) && trim($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real) != "") {
-                        $flag1 *= 0;
-                        $flag *= 0;
-                        ?>
-                        <div class="col-xl-2">
-                            <label class="form-control-label" for="input-sizemb">
-                                Size (Megabytes) </label>
-                        </div>
-                        <div class="col-xl-2">
-                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real . "</p>"; ?>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                    <?php
-                    if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString) != "") {
-                        $flag1 *= 0;
-                        $flag *= 0;
-                        ?>
-                        <div class="col-xl-1">
-                            <label class="form-control-label" for="input-fees">
-                                Fees :</label>
-                        </div>
-                        <div class="col-xl-2">
-                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString . "</p>"; ?>
-                        </div>
-                        <?php
+                    
+                    foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
+                        if($key == "c11_units_of_dist"){
+                            $unitDist = "";
+                            if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString != "") {
+                                $unitDist = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString;
+                            }
+                            if($unitDist != ""){
+                                $flag1 *= 0;
+                                $flag *= 0;
+                                ?>
+                                <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <label class="form-control-label" for="input-unit-distribution">
+                                        Units of Distribution :</label>
+                                </div>
+                                <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <?php echo "<p>" . $unitDist . "</p>"; ?>
+                                </div>
+                                <?php
+                            }
+                        }
+                        if($key == "c11_size"){
+                            $size = "";
+                            if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real != "") {
+                                $size = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real;
+                            }
+                            if($size != ""){
+                                $flag1 *= 0;
+                                $flag *= 0;
+                                ?>
+                                <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <label class="form-control-label" for="input-sizemb">
+                                        Size (Megabytes) </label>
+                                </div>
+                                <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <?php echo "<p>" . $size . "</p>"; ?>
+                                </div>
+                                <?php
+                            }
+                        }
+                        if($key == "c11_fees"){
+                            $fees = "";
+                            if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString != "") {
+                                $fees = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString;
+                            }
+                            if($fees != ""){
+                                $flag1 *= 0;
+                                $flag *= 0;
+                                ?>
+                                <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <label class="form-control-label" for="input-fees">
+                                        Fees :</label>
+                                </div>
+                                <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <?php echo "<p>" . $fees . "</p>"; ?>
+                                </div>
+                                <?php
+                            }
+                        }
                     }
                     ?>
                 </div>
                 <div class="row mb-2">
                     <?php
-                    if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL) && trim($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL) != "") {
-                        $flag1 *= 0;
-                        $flag *= 0;
-                        ?>
-                        <div class="col-xl-1">
-                            <label class="form-control-label" for="input-distributor">
-                                Link :</label>
-                        </div>
-                        <div class="col-xl-4">
-                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL . "</p>"; ?>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                    <?php
-                    if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString != "") {
-                        $flag1 *= 0;
-                        $flag *= 0;
-                        ?>
-                        <div class="col-xl-2">
-                            <label class="form-control-label" for="input-instructionorder">
-                                Ordering Instruction :</label>
-                        </div>
-                        <div class="col-xl-5">
-                            <?php echo "<p>" . $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString . "</p>"; ?>
-                        </div>
-                        <?php
+                    foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
+                        if($key == "c11_link"){
+                            $link = "";
+                            if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL != "") {
+                                $link = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL;
+                            }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->connectPoint->CI_OnlineResource->linkage->URL) && $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->connectPoint->CI_OnlineResource->linkage->URL != "") {
+                                $link = $metadataxml->identificationInfo->SV_ServiceIdentification->containsOperations->SV_OperationMetadata->connectPoint->CI_OnlineResource->linkage->URL;
+                            }
+                            if($link != ""){
+                                $flag1 *= 0;
+                                $flag *= 0;
+                                ?>
+                                <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <label class="form-control-label" for="input-distributor">
+                                        Link :</label>
+                                </div>
+                                <div class="col-xl-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <?php echo "<p>" . $link . "</p>"; ?>
+                                </div>
+                                <?php
+                            }
+                        }
+                        if($key == "c11_order_instructions"){
+                            $orderInstruct = "";
+                            if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) != "") {
+                                $orderInstruct = $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString;
+                            }
+                            if($orderInstruct != ""){
+                                $flag1 *= 0;
+                                $flag *= 0;
+                                ?>
+                                <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <label class="form-control-label" for="input-instructionorder">
+                                        Ordering Instruction :</label>
+                                </div>
+                                <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <?php echo "<p>" . $orderInstruct . "</p>"; ?>
+                                </div>
+                                <?php
+                            }
+                        }
                     }
                     ?>
                 </div>

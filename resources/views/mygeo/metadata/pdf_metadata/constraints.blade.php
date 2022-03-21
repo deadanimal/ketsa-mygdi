@@ -15,57 +15,104 @@
                     <div class="pl-lg-3">
                         <?php
                         $flag1 = 1;
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
-                            $flag1 *= 0;
-                            $flag *= 0;
-                            ?>
-                            <div class="row mb-2 divUseLimitation">
-                                <div class="col-xl-5">
-                                    <label class="form-control-label" for="input-access-cons">
-                                        Use Limitation
-                                    </label>
+                        foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
+                            if($val['status'] == "customInput"){
+                                ?>
+                                <div class="col-3 pl-5">
+                                    <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
+                                    <label class="float-right">:</label>
                                 </div>
-                                <div class="col-xl-7">
-                                    <?php trim($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString); ?>
+                                <div class="col-8">
+                                    {{ $metadataxml->customInputs->accordion14->$key }}
                                 </div>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                        <?php
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
-                            $flag1 *= 0;
-                            $flag *= 0;
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-xl-5">
-                                    <label class="form-control-label" for="input-access-cons">
-                                        Access Constraints
-                                    </label>
-                                </div>
-                                <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode . "</p>"; ?>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                        <?php
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
-                            $flag1 *= 0;
-                            $flag *= 0;
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-xl-5">
-                                    <label class="form-control-label" for="input-use-cons">
-                                        Use Constraints
-                                    </label>
-                                </div>
-                                <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode . "</p>"; ?>
-                                </div>
-                            </div>
-                            <?php
+                                <?php
+                            }
+                            if($key == "c14_useLimitation"){
+                                $useLimitation = "";
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+                                    $useLimitation = trim($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString);
+                                }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
+                                    $useLimitation = trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString);
+                                }
+                                if($useLimitation != ""){
+                                    $flag1 *= 0;
+                                    $flag *= 0;
+                                    ?>
+                                    <div class="row mb-2 divUseLimitation" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <div class="col-xl-5">
+                                            <label class="form-control-label" for="input-access-cons">
+                                                Use Limitation
+                                            </label>
+                                        </div>
+                                        <div class="col-xl-7">
+                                            <?php trim($useLimitation); ?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            if($key == "c14_access_constraint"){
+                                $accessConst = "";
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
+                                    $accessConst = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode));
+                                }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
+                                    $accessConst = ucwords(trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode));
+                                }
+                                if($accessConst == "PatentPending"){
+                                    $accessConst = "Patent Pending";
+                                }elseif($accessConst == "IntellectualpropertyRights"){
+                                    $accessConst = "Intellectual Property Rights";
+                                }elseif($accessConst == "OtherRestrictions"){
+                                    $accessConst = "Other Restrictions";
+                                }
+                                if($accessConst != ""){
+                                    $flag1 *= 0;
+                                    $flag *= 0;
+                                    ?>
+                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <div class="col-xl-5">
+                                            <label class="form-control-label" for="input-access-cons">
+                                                Access Constraints
+                                            </label>
+                                        </div>
+                                        <div class="col-xl-7">
+                                            <?php echo "&nbsp;&nbsp;<p>" . $accessConst . "</p>"; ?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            if($key == "c14_use_constraint"){
+                                $useConst = "";
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
+                                    $useConst = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode));
+                                }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
+                                    $useConst = ucwords(trim($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode));
+                                }
+                                if($useConst == "PatentPending"){
+                                    $useConst = "Patent Pending";
+                                }elseif($useConst == "IntellectualpropertyRights"){
+                                    $useConst = "Intellectual Property Rights";
+                                }elseif($useConst == "OtherRestrictions"){
+                                    $useConst = "Other Restrictions";
+                                }
+                                if($useConst != ""){
+                                    $flag1 *= 0;
+                                    $flag *= 0;
+                                    ?>
+                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <div class="col-xl-5">
+                                            <label class="form-control-label" for="input-use-cons">
+                                                Use Constraints
+                                            </label>
+                                        </div>
+                                        <div class="col-xl-7">
+                                            <?php echo "&nbsp;&nbsp;<p>" . $useConst . "</p>"; ?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            }
                         }
                         ?>
                     </div>
@@ -77,55 +124,71 @@
                         <?php
                         $flag2 = 1;
                         $classSys = $arr = "";
-                        if(isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
-                            $arr = (array)$metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
-                        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
-                            $arr = (array)$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
+                        foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
+                            if($key == "c14_classification_sys"){
+                                $classSys = $arr = "";
+                                if(isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
+                                    $arr = (array)$metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
+                                }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
+                                    $arr = (array)$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
 
-                        }
-                        if($arr != ""){
-                            foreach($arr as $ar){
-                                if(is_array($ar)){
-                                    $classSys = $ar['codeListValue'];
+                                }
+                                if($arr != ""){
+                                    foreach($arr as $ar){
+                                        if(is_array($ar)){
+                                            $classSys = $ar['codeListValue'];
+                                        }
+                                    }
+                                }
+                                $classSys = ucwords($classSys);
+
+                                if($classSys == "TopSecret"){
+                                    $classSys = "Top Secret";
+                                }
+                                if($classSys != ""){
+                                    $flag2 *= 0;
+                                }
+                                if($classSys != ""){
+                                    $flag2 *= 0;
+                                    $flag *= 0;
+                                    ?>
+                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <div class="col-xl-5">
+                                            <label class="form-control-label" for="input-reference">
+                                                Reference
+                                            </label>
+                                        </div>
+                                        <div class="col-xl-7">
+                                            <?php echo "&nbsp;&nbsp;<p>" . $classSys . "</p>"; ?>
+                                        </div>
+                                    </div>
+                                    <?php
                                 }
                             }
-                        }
-                        $classSys = ucwords($classSys);
-
-                        if($classSys == "TopSecret"){
-                            $classSys = "Top Secret";
-                        }
-                        if($classSys != ""){
-                            $flag2 *= 0;
-                            $flag *= 0;
-                        }
-                        ?>
-                        <div class="row mb-2">
-                            <div class="col-xl-5">
-                                <label class="form-control-label" for="input-access-cons">
-                                    Classification
-                                </label>
-                            </div>
-                            <div class="col-xl-7">
-                                <?php echo "&nbsp;&nbsp;<p>".$classSys."</p>"; ?>
-                            </div>
-                        </div>
-                        <?php
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
-                            $flag2 *= 0;
-                            $flag *= 0;
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-xl-5">
-                                    <label class="form-control-label" for="input-reference">
-                                        Reference
-                                    </label>
-                                </div>
-                                <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference . "</p>"; ?>
-                                </div>
-                            </div>
-                            <?php
+                            if($key == "c14_reference"){
+                                $ref = "";
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
+                                    $ref = $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference;
+                                }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
+                                    $ref = $metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference;
+                                }
+                                if($ref != ""){
+                                    $flag2 *= 0;
+                                    $flag *= 0;
+                                    ?>
+                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <div class="col-xl-5">
+                                            <label class="form-control-label" for="input-reference">
+                                                Reference
+                                            </label>
+                                        </div>
+                                        <div class="col-xl-7">
+                                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference . "</p>"; ?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            }
                         }
                         ?>
                     </div>

@@ -25,7 +25,7 @@
                 }
                 if($key == "c1_content_info"){
                     ?>
-                    <div class="form-group row">
+                    <div class="form-group row" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                         <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;" id="content_info_dropdown">
                             <option value="" selected>Pilih...</option>
@@ -66,7 +66,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion1'] as $key=>$val){
                     if($key == "publisher_name"){
                         ?>
-                        <div class="row mb-2 py-0">
+                        <div class="row mb-2 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="uname">
                                     <?php echo __('lang.name'); ?>
@@ -81,7 +81,7 @@
                     }
                     if($key == "publisher_agensi_organisasi"){
                         ?>
-                        <div class="row mb-2 py-0">
+                        <div class="row mb-2 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="publisher_agensi_organisasi"><?php echo __('lang.organisation_name'); ?>
                                 </label><label class="float-right" style="position: absolute;">:</label>
@@ -96,7 +96,7 @@
                     }
                     if($key == "publisher_email"){
                         ?>
-                        <div class="row mb-2 py-0">
+                        <div class="row mb-2 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="publisher_email">
                                     <?php echo __('lang.email'); ?>
@@ -111,7 +111,7 @@
                     }
                     if($key == "publisher_phone"){
                         ?>
-                        <div class="row mb-2 py-0">
+                        <div class="row mb-2 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="publisher_phone">
                                     <?php echo __('lang.telephone_office'); ?>
@@ -126,7 +126,7 @@
                     }
                     if($key == "publisher_role"){
                         ?>
-                        <div class="row mb-2 py-0 divPublisherRole">
+                        <div class="row mb-2 py-0 divPublisherRole" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="publisher_role">
                                     <?php echo __('lang.role'); ?>

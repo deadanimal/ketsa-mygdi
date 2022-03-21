@@ -2,7 +2,7 @@
     <?php
     if($key == "abstractApplication_namaAplikasi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Nama Aplikasi
@@ -25,7 +25,7 @@
     }
     if($key == "abstractApplication_tujuan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tujuan
@@ -48,7 +48,7 @@
     }
     if($key == "abstractApplication_tahunPembangunan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tahun Pembangunan
@@ -71,7 +71,7 @@
     }
     if($key == "abstractApplication_kemaskini"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Kemaskini
@@ -94,7 +94,7 @@
     }
     if($key == "abstractApplication_dataTerlibat"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Data Terlibat
@@ -117,7 +117,7 @@
     }
     if($key == "abstractApplication_sasaranPengguna"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Sasaran Pengguna
@@ -140,7 +140,7 @@
     }
     if($key == "abstractApplication_versi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Versi
@@ -163,7 +163,7 @@
     }
     if($key == "abstractApplication_perisianDigunaPembangunan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Perisian Yang Digunakan Dalam Pembangunan
@@ -193,7 +193,7 @@
     <?php
     if($key == "abstractDocument_namaDokumen"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Nama Dokumen
@@ -216,7 +216,7 @@
     }
     if($key == "abstractDocument_tujuan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tujuan
@@ -239,7 +239,7 @@
     }
     if($key == "abstractDocument_tahunTerbitan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tahun Terbitan
@@ -262,7 +262,7 @@
     }
     if($key == "abstractDocument_edisi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Edisi
@@ -292,7 +292,7 @@
     <?php
     if($key == "abstractGISActivityProject_namaAktiviti"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Nama Aktiviti
@@ -315,7 +315,7 @@
     }
     if($key == "abstractGISActivityProject_tujuan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tujuan
@@ -338,7 +338,7 @@
     }
     if($key == "abstractGISActivityProject_lokasi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Lokasi
@@ -361,7 +361,7 @@
     }
     if($key == "abstractGISActivityProject_tahun"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tahun
@@ -391,7 +391,7 @@
     <?php
     if($key == "abstractMap_namaPeta"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Nama Peta
@@ -414,7 +414,7 @@
     }
     if($key == "abstractMap_kawasan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Kawasan
@@ -437,7 +437,7 @@
     }
     if($key == "abstractMap_tujuan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tujuan
@@ -460,7 +460,7 @@
     }
     if($key == "abstractMap_tahunTerbitan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tahun Terbitan
@@ -483,7 +483,7 @@
     }
     if($key == "abstractMap_edisi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Edisi
@@ -506,7 +506,7 @@
     }
     if($key == "abstractMap_noSiri"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     No. Siri
@@ -529,7 +529,7 @@
     }
     if($key == "abstractMap_skala"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Skala
@@ -552,7 +552,7 @@
     }
     if($key == "abstractMap_unit"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Unit
@@ -582,7 +582,7 @@
     <?php
     if($key == "abstractRasterData_namaData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Nama Data
@@ -605,7 +605,7 @@
     }
     if($key == "abstractRasterData_lokasi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Lokasi
@@ -628,7 +628,7 @@
     }
     if($key == "abstractRasterData_rumusanData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Rumusan Tentang Data
@@ -651,7 +651,7 @@
     }
     if($key == "abstractRasterData_tujuanData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tujuan Data
@@ -674,7 +674,7 @@
     }
     if($key == "abstractRasterData_kaedahPenyediaanData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Kaedah Penyediaan Data
@@ -697,7 +697,7 @@
     }
     if($key == "abstractRasterData_format"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Format
@@ -720,7 +720,7 @@
     }
     if($key == "abstractRasterData_unit"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Unit
@@ -743,7 +743,7 @@
     }
     if($key == "abstractRasterData_skala"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Skala
@@ -766,7 +766,7 @@
     }
     if($key == "abstractRasterData_statusData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Status Data
@@ -789,7 +789,7 @@
     }
     if($key == "abstractRasterData_tahunPerolehan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tahun Perolehan
@@ -812,7 +812,7 @@
     }
     if($key == "abstractRasterData_jenisSatelit"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Jenis Satelit
@@ -835,7 +835,7 @@
     }
     if($key == "abstractRasterData_format"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Format
@@ -858,7 +858,7 @@
     }
     if($key == "abstractRasterData_resolusi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Resolusi
@@ -881,7 +881,7 @@
     }
     if($key == "abstractRasterData_kawasanLitupan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Kawasan Litupan
@@ -911,7 +911,7 @@
     <?php
     if($key == "abstractServices_namaServis"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Nama Servis
@@ -934,7 +934,7 @@
     }
     if($key == "abstractServices_lokasi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Lokasi
@@ -957,7 +957,7 @@
     }
     if($key == "abstractServices_tujuan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tujuan
@@ -980,7 +980,7 @@
     }
     if($key == "abstractServices_dataTerlibat"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Data Yang Terlibat
@@ -1003,7 +1003,7 @@
     }
     if($key == "abstractServices_polisi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Polisi
@@ -1026,7 +1026,7 @@
     }
     if($key == "abstractServices_peringkatCapaian"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Peringkat Capaian
@@ -1049,7 +1049,7 @@
     }
     if($key == "abstractServices_format"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Format
@@ -1079,7 +1079,7 @@
     <?php
     if($key == "abstractSoftware_namaPerisian"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Nama Perisian
@@ -1102,7 +1102,7 @@
     }
     if($key == "abstractSoftware_versi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Versi
@@ -1125,7 +1125,7 @@
     }
     if($key == "abstractSoftware_tujuan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tujuan
@@ -1148,7 +1148,7 @@
     }
     if($key == "abstractSoftware_tahunPengunaanPerisian"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tahun Penggunaan Perisian
@@ -1171,7 +1171,7 @@
     }
     if($key == "abstractSoftware_kaedahPerolehan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Kaedah Perolehan
@@ -1194,7 +1194,7 @@
     }
     if($key == "abstractSoftware_format"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Format
@@ -1217,7 +1217,7 @@
     }
     if($key == "abstractSoftware_pengeluar"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Pengeluar
@@ -1240,7 +1240,7 @@
     }
     if($key == "abstractSoftware_keupayaan"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Keupayaan
@@ -1263,7 +1263,7 @@
     }
     if($key == "abstractSoftware_dataTerlibat"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Data Yang Terlibat
@@ -1286,7 +1286,7 @@
     }
     if($key == "abstractSoftware_keperluanPerkakas"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Keperluan Perkakasan
@@ -1316,7 +1316,7 @@
     <?php
     if($key == "abstractVectorData_namaData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Nama Data
@@ -1339,7 +1339,7 @@
     }
     if($key == "abstractVectorData_lokasi"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Lokasi
@@ -1362,7 +1362,7 @@
     }
     if($key == "abstractVectorData_rumusanData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Rumusan Tentang Data
@@ -1385,7 +1385,7 @@
     }
     if($key == "abstractVectorData_tujuanData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Tujuan Data
@@ -1408,7 +1408,7 @@
     }
     if($key == "abstractVectorData_kaedahPenyediaanData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Kaedah Penyediaan Data
@@ -1431,7 +1431,7 @@
     }
     if($key == "abstractVectorData_format"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Format
@@ -1454,7 +1454,7 @@
     }
     if($key == "abstractVectorData_unit"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Unit
@@ -1477,7 +1477,7 @@
     }
     if($key == "abstractVectorData_skala"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Skala
@@ -1500,7 +1500,7 @@
     }
     if($key == "abstractVectorData_statusData"){
         ?>
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Status Data
@@ -1529,7 +1529,7 @@
 if($key == "c2_abstract"){
     ?>
     <div class="">
-        <div class="row mb-2">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
                     Abstract<span class="text-warning">*</span>

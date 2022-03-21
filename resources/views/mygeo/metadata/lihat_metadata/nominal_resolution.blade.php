@@ -19,7 +19,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                {{ $metadataxml->customInputs->accordion4->$key }}
                             </div>
                         </div>
                         <?php
@@ -31,7 +31,7 @@
                         }
                         if($scanRes != ""){
                             ?>
-                            <div class="col-xl-6">
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="form-inline ml-3">
                                     <div class="form-control-label mr-3">
                                         Scanning Resolution<span class="text-warning">*</span> :
@@ -49,7 +49,7 @@
                         }
                         if($groundScan != ""){  
                             ?>
-                            <div class="col-xl-6">
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="form-inline">
                                     <div class="form-control-label mr-3">
                                         Ground Scanning<span class="text-warning">*</span> :

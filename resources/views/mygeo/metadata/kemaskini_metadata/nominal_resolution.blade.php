@@ -24,7 +24,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" value="{{ $metadataxml->customInputs->accordion4->$key }}"/>
                             </div>
                         </div>
                         <?php
@@ -37,7 +37,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion4'] as $key=>$val){
                     if($key == "c4_scan_res"){
                         ?>
-                        <div class="col-xl-6">
+                        <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline ml-3">
                                 <div class="form-control-label mr-3">
                                     Scanning Resolution<span class="text-warning">*</span> :
@@ -61,7 +61,7 @@
                     }
                     if($key == "c4_ground_scan"){
                         ?>
-                        <div class="col-xl-6">
+                        <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
                                     Ground Scanning<span class="text-warning">*</span> :

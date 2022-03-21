@@ -32,7 +32,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion5'] as $key=>$val){
                     if($key == "c5_process_lvl"){
                         ?>
-                        <div class="col-xl-6">
+                        <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline ml-3">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Tahap pemprosesan data">
                                     <?php echo __('lang.process_level'); ?>
@@ -44,7 +44,7 @@
                     }
                     if($key == "c5_resolution"){
                         ?>
-                        <div class="col-xl-6">
+                        <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Resolusi data">
                                     <?php echo __('lang.resolution'); ?>

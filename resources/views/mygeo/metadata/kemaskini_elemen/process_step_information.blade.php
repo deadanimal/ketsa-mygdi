@@ -20,6 +20,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+                                Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -33,6 +34,7 @@
                                     <div class="form-control-label mr-3" data-toggle="tooltip" title="Tahap pemprosesan data">
                                         <?php echo __('lang.process_level'); ?>
                                     </div>
+                                    Textbox
                                     <input class="form-control form-control-sm sortable" type="text" style="width :120px" placeholder="Insert Process Level" name="c5_process_lvl" id="c5_process_lvl" data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -48,6 +50,7 @@
                                     <div class="form-control-label mr-3" data-toggle="tooltip" title="Resolusi data">
                                         <?php echo __('lang.resolution'); ?>
                                     </div>
+                                    Textbox
                                     <input class="form-control form-control-sm sortable" type="text" style="width :100px" placeholder="0.0" name="c5_resolution" id="c5_resolution" data-status="<?php echo $val['status']; ?>">
                                     <div class="form-control-label ml-2">
                                         meter

@@ -23,14 +23,14 @@
                             <label class="float-right">:</label>
                         </div>
                         <div class="col-8">
-                            <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" value="{{ $metadataxml->customInputs->accordion10->$key }}"/>
                         </div>
                     </div>
                     <?php
                 }
                 if($key == "file_contohJenisMetadata"){
                     ?>
-                    <div class="row mb-2" id="div_contohJenisMetadata">
+                    <div class="row mb-2" id="div_contohJenisMetadata" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3">
                             <label class="form-control-label mr-4" for="file_contohJenisMetadata">
                                 Sampel Data
@@ -65,7 +65,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion10'] as $key=>$val){
                     if($key == "c10_file_name"){
                         ?>
-                        <div class="row mb-2">
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_name">
                                     File Name
@@ -85,7 +85,7 @@
                     }
                     if($key == "c10_file_type"){
                         ?>
-                        <div class="row mb-2">
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_type">
                                     File Type
@@ -105,7 +105,7 @@
                     }
                     if($key == "c10_file_url"){
                         ?>
-                        <div class="row mb-2 divBrowsingInformationUrl">
+                        <div class="row mb-2 divBrowsingInformationUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
                                     <?php echo __('lang.URL'); ?>
@@ -138,7 +138,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion10'] as $key=>$val){
                     if($key == "c10_keyword"){
                         ?>
-                        <div class="row mb-2">
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_name">
                                     Keywords<span class="text-warning">*</span>
@@ -188,7 +188,7 @@
                                 if(trim((string)$keyword->CharacterString) != ""){
                                     if($counter > 0){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-3 pl-5">
                                                 <label class="form-control-label mr-4" for="c10_file_type">
                                                     Additional Keywords
@@ -208,7 +208,7 @@
                                 if(trim((string)$keyword->CharacterString) != ""){
                                     if($counter > 0){
                                         ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-3 pl-5">
                                                 <label class="form-control-label mr-4" for="c10_file_type">
                                                     Additional Keywords

@@ -243,8 +243,10 @@
         });
         
         $(document).on("click",".btnClose",function(){
-            if($(this).data('status') !== "customInput"){
+            if($(this).parent().find('.sortable').attr('data-status') !== "customInput"){
                 $(this).parent().find('.sortable').attr('data-status', 'inactive');
+            }else{
+                $(this).parent().find('.sortable').attr('data-status', 'deleteCustomInput');
             }
             $(this).parent().hide();
         });
@@ -288,7 +290,7 @@
         });
         $(document).on("click",".btnTambahElemenBaru",function(){
             var accordion = $(this).data('accordion');
-            $('#collapse'+accordion+' .sortableContainer1').append('<div class="row mb-2 sortIt"><div class="col-3 pl-5"><label class="form-control-label mr-4" for="uname"><input type="text" name="newInputName" class="customInput_label"></label><label class="float-right">:</label></div><div class="col-8"><input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput"/></div><span class="close btnClose">&times;</span></div>');
+            $('#collapse'+accordion+' .sortableContainer1').append('<div class="row mb-2 sortIt"><div class="col-3 pl-5"><label class="form-control-label mr-4" for="uname"><input type="text" name="newInputName" class="customInput_label"></label><label class="float-right">:</label></div><div class="col-8"><input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput" style="display:none;"/></div><span class="close btnClose">&times;</span></div>');
         });
         //================================
 
@@ -423,6 +425,7 @@
 </script>
 <script>
     $(document).ready(function() {
+        $('.sortable').hide();
         $('.divIdentificationInformationUrl').hide();
         $('.inputIdentificationInformationUrl').prop('disabled',true);
         $('#kategori').show();

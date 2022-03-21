@@ -12,7 +12,7 @@
             foreach($template->template[strtolower($catSelected)]['accordion10'] as $key=>$val){
                 if($key == "file_contohJenisMetadata"){
                     ?>
-                    <div class="row mb-2" id="div_contohJenisMetadata">
+                    <div class="row mb-2" id="div_contohJenisMetadata" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3">
                             <label class="form-control-label mr-4" for="file_contohJenisMetadata">
                                 Sampel Data
@@ -47,7 +47,7 @@
                     }
                     if($key == "c10_file_name"){
                         ?>
-                        <div class="row mb-2">
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_name" data-toggle="tooltip" title="Pengisian nama fail mengambarkan maklumat geospatial secara grafik (sekiranya ada)">
                                     <?php echo __('lang.file_name'); ?>
@@ -61,7 +61,7 @@
                     }
                     if($key == "c10_file_type"){
                         ?>
-                        <div class="row mb-2">
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_type" data-toggle="tooltip" title="Jenis format grafikberkenaan (JPEG, GIF, TIFF, XWD, EPS, CGM, PBM)">
                                     <?php echo __('lang.file_type'); ?>
@@ -75,7 +75,7 @@
                     }
                     if($key == "c10_file_url"){
                         ?>
-                        <div class="row mb-2 divBrowsingInformationUrl">
+                        <div class="row mb-2 divBrowsingInformationUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
                                     <?php echo __('lang.URL'); ?>
@@ -102,7 +102,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion10'] as $key=>$val){
                     if($key == "c10_keyword"){
                         ?>
-                        <div class="row mb-2">
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-4 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_name" data-toggle="tooltip" title="Kata Kunci (Carian)/ Keyword bagimaklumat geospatial berkenaan. Keyword perlu dimasukkan berdasarkankepada tajuk maklumat geospatial dengan bahasa bilingual (Bahasa Malaysia dan English). ">
                                     <?php echo __('lang.keywords'); ?><span class="text-warning">*</span>
@@ -124,7 +124,7 @@
                     }
                     if($key == "c10_additional_keyword[]"){
                         ?>
-                        <div class="row mb-2">
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-4 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_type" data-toggle="tooltip" title="">
                                     <?php echo __('lang.additional_keywords'); ?>
@@ -134,7 +134,7 @@
                                 <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ (isset(old('c10_additional_keyword')[0]) ? old('c10_additional_keyword')[0]:"") }}">
                             </div>
                         </div>
-                        <div class="row mb-2">
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-4 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="">
                                     <?php echo __('lang.additional_keywords'); ?>

@@ -32,7 +32,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion4'] as $key=>$val){
                     if($key == "c4_scan_res"){
                         ?>
-                        <div class="col-xl-6">
+                        <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline ml-3">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan jarak larian pesawat (kiri, kanan dan bahagian tengah)">
                                     <?php echo __('lang.scanning_resolution'); ?><span class="text-warning">*</span> :
@@ -50,7 +50,7 @@
                     }
                     if($key == "c4_ground_scan"){
                         ?>
-                        <div class="col-xl-6">
+                        <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan jarak larian pesawat (kiri, kanan dan bahagian tengah)">
                                     <?php echo __('lang.ground_scanning'); ?><span class="text-warning">*</span> :

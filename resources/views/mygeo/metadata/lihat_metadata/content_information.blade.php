@@ -22,7 +22,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                    {{ $metadataxml->customInputs->accordion7->$key }}
                                 </div>
                             </div>
                             <?php
@@ -34,7 +34,7 @@
                             }
                             if($bandBound != ""){
                                 ?>
-                                <div class="row mb-2">
+                                <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-6">
                                         <div class="form-inline">
                                             <div class="form-control-label mr-3">
@@ -60,7 +60,7 @@
                                 }
                                 if($transFnType != ""){
                                     ?>
-                                    <div class="col-xl-6">
+                                    <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="form-inline">
                                             <div class="form-control-label mr-4">
                                                 Transfer Function Type:
@@ -78,7 +78,7 @@
                                 }
                                 if($transmitPolar != ""){
                                     ?>
-                                    <div class="col-xl-6">
+                                    <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="form-inline">
                                             <div class="form-control-label mr-3">
                                                 Transmitted Polarization:
@@ -95,14 +95,14 @@
                     <div class="row mb-2">
                         <?php
                         foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
-                            if($key == "c7_trans_fn_type"){
+                            if($key == "c7_nominal_spatial_res"){
                                 $nomSpatRes = "";
                                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString != "") {
                                     $nomSpatRes = $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString;
                                 }
                                 if($nomSpatRes != ""){
                                     ?>
-                                    <div class="col-xl-6">
+                                    <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="form-inline">
                                             <div class="form-control-label mr-4">
                                                 Nominal Spatial Resolution:
@@ -123,7 +123,7 @@
                                 }
                                 if($detectPolar != ""){
                                     ?>
-                                    <div class="col-xl-6">
+                                    <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="form-inline">
                                             <div class="form-control-label mr-3">
                                                 Detected Polarization:

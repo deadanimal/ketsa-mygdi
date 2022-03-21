@@ -33,7 +33,7 @@
                                                             foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
                                                                 if($key == "c14_useLimitation"){
                                                                     ?>
-                                                                    <div class="row mb-2 divUseLimitation">
+                                                                    <div class="row mb-2 divUseLimitation" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <div class="col-xl-5">
                                                                             <label class="form-control-label" for="c14_useLimitation">
                                                                                 <?php echo __('lang.use_limitation'); ?>
@@ -48,7 +48,7 @@
                                                                 }
                                                                 if($key == "c14_access_constraint"){
                                                                     ?>
-                                                                    <div class="row mb-2">
+                                                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <div class="col-xl-5">
                                                                             <label class="form-control-label" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
                                                                                 <?php echo __('lang.access_constraints'); ?>
@@ -76,7 +76,7 @@
                                                                 }
                                                                 if($key == "c14_use_constraint"){
                                                                     ?>
-                                                                    <div class="row mb-2">
+                                                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <div class="col-xl-5">
                                                                             <label class="form-control-label" for="input-use-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
                                                                                 <?php echo __('lang.use_constraints'); ?>
@@ -114,7 +114,7 @@
                                                             foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
                                                                 if($key == "c14_classification_sys"){
                                                                     ?>
-                                                                    <div class="row mb-2">
+                                                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <div class="col-xl-5">
                                                                             <label class="form-control-label" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
                                                                                 <?php echo __('lang.classification'); ?>
@@ -140,7 +140,7 @@
                                                                 }
                                                                 if($key == "c14_reference"){
                                                                     ?>
-                                                                    <div class="row mb-2">
+                                                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <div class="col-xl-5">
                                                                             <label class="form-control-label" for="input-reference" data-toggle="tooltip" title="Pengisian polisi/perundangan bagi maklumat geospatial.
                                                                             Contoh: Pekeliling Arahan Keselamatan Dokumen Geospatial Terperingkat Terhadap">

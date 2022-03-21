@@ -11,33 +11,58 @@
         <div class="card-body">
             <div class="row">
                 <?php
-                if (isset($metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="col-xl-6">
-                        <div class="form-inline ml-3">
-                            <div class="form-control-label mr-3">
-                                Process Level
+                foreach($template->template[strtolower($catSelected)]['accordion5'] as $key=>$val){
+                    if($val['status'] == "customInput"){
+                        ?>
+                        <div class="row mb-2 sortIt">
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString . "</p>"; ?>
+                            <div class="col-8">
+                                {{ $metadataxml->customInputs->accordion5->$key }}
+                            </div>
                         </div>
-                    </div>
-                    <?php
-                }
-                ?>
-                <?php
-                if (isset($metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="col-xl-6">
-                        <div class="form-inline">
-                            <div class="form-control-label mr-3">
-                                Resolution
-                            </div>                
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal . " meter</p>"; ?>
-                        </div>
-                    </div>
-                    <?php
+                        <?php
+                    }
+                    if($key == "c5_process_lvl"){
+                        $processLevel = "";
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString != "") {
+                            $processLevel = $metadataxml->identificationInfo->MD_DataIdentification->processLevel->CharacterString;
+                        }
+                        if($processLevel != ""){
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline ml-3">
+                                    <div class="form-control-label mr-3">
+                                        Process Level
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $processLevel . "</p>"; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    if($key == "c5_resolution"){
+                        $res = "";
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal != "") {
+                            $res = $metadataxml->identificationInfo->MD_DataIdentification->processResolution->Decimal;
+                        }
+                        if($res != ""){
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline">
+                                    <div class="form-control-label mr-3">
+                                        Resolution
+                                    </div>                
+                                    <?php echo "&nbsp;&nbsp;<p>" . $res . " meter</p>"; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
                 }
                 ?>
             </div>

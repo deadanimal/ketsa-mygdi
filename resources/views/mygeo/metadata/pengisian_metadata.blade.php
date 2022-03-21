@@ -139,7 +139,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true" id="closeServiceUrlMap">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -331,16 +331,39 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
 
         $(document).on("click", "#btnTestServiceUrl", function () {
-            var mapurl = $('#c2_serviceUrl').val();
+            var mapurl = $.trim($('#c2_serviceUrl').val());
+            checkServiceUrl(mapurl);
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
         });
         $(document).on("click", "#btnTestServiceUrl2", function () {
-            var mapurl = $('#c2_serviceUrl').val();
+            var mapurl = $.trim($('#c2_serviceUrl').val());
+            checkServiceUrl(mapurl);
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/leafletwms/examples/index.html?url='+mapurl);
+        });
+        $(document).on("click", "#btnTestServiceUrl3", function () {
+            var mapurl = $.trim($('#c2_serviceUrl').val());
+            if(checkServiceUrl(mapurl)){
+                $('#mapiframe').attr('src', '<?php echo url("/"); ?>/azrunmap/esri.php?url='+mapurl);
+                $('#modal-showmap').modal('show');
+            }else{
+                alert("Service URL is empty!");
+            }
         });
         $(document).on("click", ".btnTestUrl", function () {
             var weburl = $(this).parent().parent().find('.urlToTest').val();
             window.open(weburl, '_blank');
+        });
+        
+        function checkServiceUrl(url){
+            if(url === ""){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        
+        $(document).on('click','#closeServiceUrlMap',function(){
+            $('#modal-showmap').modal('hide');
         });
 
         $(document).on('click', '.btnSubmit', function() {

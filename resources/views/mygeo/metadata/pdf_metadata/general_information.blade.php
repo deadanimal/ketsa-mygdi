@@ -11,56 +11,64 @@
     <div id="collapse1" class="panel-collapse collapse in show" data-parent="#div_c1">
         <div class="card-body">
             <?php
-            if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
-                $flag *= 0;
-                ?>
-                <div class="form-group row">
-                    <p class="pl-lg-3 form-control-label">Content Information<span class="mx-3">:</span></p>
-                    <?php 
-                    $f = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString; 
-                    if($f == "application"){
-                        echo "Application";
-                    }
-                    if($f == "clearinghouse"){
-                        echo "Clearing House";
-                    }
-                    if($f == "downloadableData"){
-                        echo "Downloadable Data";
-                    }
-                    if($f == "geographicActivities"){
-                        echo "Geographic Activities";
-                    }
-                    if($f == "geographicService"){
-                        echo "Geographic Services";
-                    }
-                    if($f == "mapFiles"){
-                        echo "Map File";
-                    }
-                    if($f == "offlineData"){
-                        echo "Offline Data";
-                    }
-                    if($f == "staticMapImage"){
-                        echo "Static Map Images";
-                    }
-                    if($f == "other"){
-                        echo "Other Documents";
-                    }
-
-                    if($f == "liveData"){
-                        echo "Live Data and Maps";
-                    }
-
-                    if($f == "Gridded"){
-                        echo "Gridded";
-                    }
-
-                    if($f == "Imagery"){
-                        echo "Imagery";
-                    }
+            foreach($template->template[strtolower($catSelected)]['accordion1'] as $key=>$val){
+                if($val['status'] == "customInput"){
                     ?>
-                </div>
-                <?php
+                    <div class="row mb-2 sortIt">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
+                            <label class="float-right">:</label>
+                        </div>
+                        <div class="col-8">
+                            {{ $metadataxml->customInputs->accordion1->$key }}
+                        </div>
+                    </div>
+                    <?php
+                }
+                if($key == "c1_content_info"){
+                    if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
+                        $flag *= 0;
+                        ?>
+                        <div class="form-group row" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <p class="pl-lg-3 form-control-label">Content Information<span class="mx-3">:</span></p>
+                            <?php 
+                            $f = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString;
+                            if($f == "clearinghouse"){
+                                $f = "Clearing House";
+                            }
+                            if($f == "downloadableData"){
+                                $f = "Downloadable Data";
+                            }
+                            if($f == "geographicActivities"){
+                                $f = "Geographic Activities";
+                            }
+                            if($f == "geographicService"){
+                                $f = "Geographic Services";
+                            }
+                            if($f == "mapFiles"){
+                                $f = "Map File";
+                            }
+                            if($f == "offlineData"){
+                                $f = "Offline Data";
+                            }
+                            if($f == "staticMapImage"){
+                                $f = "Static Map Images";
+                            }
+                            if($f == "other"){
+                                $f = "Other Documents";
+                            }
+                            if($f == "liveData"){
+                                $f = "Live Data and Maps";
+                            }
+                            
+                            echo $f;
+                            ?>
+                        </div>
+                        <?php
+                    }
+                }
             }
+            
             ?>
             <?php
             if (isset($metadataxml->language->CharacterString) && $metadataxml->language->CharacterString != "") {
@@ -110,90 +118,95 @@
             <h2 class="heading-small text-muted">Metadata Publisher</h2>
             <div class="">
                 <?php
-                if (isset($metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="row my-0 py-0">
-                        <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="uname">
-                                Name
-                            </label><label class="float-right">:</label>
-                        </div>
-                        <div class="col-8">    
-                            <?php echo $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString; ?>
-                        </div>
-                    </div>
-                    <?php
+                foreach($template->template[strtolower($catSelected)]['accordion1'] as $key=>$val){
+                    if($key == "publisher_name"){
+                        if (isset($metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
+                            $flag *= 0;
+                            ?>
+                            <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="col-3 pl-5">
+                                    <label class="form-control-label mr-4" for="uname">
+                                        Name
+                                    </label><label class="float-right">:</label>
+                                </div>
+                                <div class="col-8">    
+                                    <?php echo $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    if($key == "publisher_agensi_organisasi"){
+                        if (isset($metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
+                            $flag *= 0;
+                            ?>
+                            <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="col-3 pl-5">
+                                    <label class="form-control-label mr-4" for="publisher_agensi_organisasi">
+                                        Agency/Organization
+                                    </label><label class="float-right">:</label>
+                                </div>
+                                <div class="col-8">    
+                                <?php echo $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    if($key == "publisher_email"){
+                        if (isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
+                            $flag *= 0;
+                            ?>
+                            <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="col-3 pl-5">
+                                    <label class="form-control-label mr-4" for="publisher_email">
+                                        Email
+                                    </label><label class="float-right">:</label>
+                                </div>
+                                <div class="col-8">
+                                    <?php echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    if($key == "publisher_phone"){
+                        if (isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != "") {
+                            $flag *= 0;
+                            ?>
+                            <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="col-3 pl-5">
+                                    <label class="form-control-label mr-4" for="publisher_phone">
+                                        Telephone
+                                    </label><label class="float-right">:</label>
+                                </div>
+                                <div class="col-8">
+                                    <?php echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    if($key == "publisher_role"){
+                        if(isset($metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode != ""){
+                            $flag *= 0;
+                            ?>
+                            <div class="row my-0 py-0 divPublisherRole" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="col-3 pl-5">
+                                    <label class="form-control-label mr-4" for="publisher_role">
+                                        Role
+                                    </label><label class="float-right">:</label>
+                                </div>
+                                <div class="col-8">
+                                    <?php echo $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
                 }
                 ?>
-                <?php
-                if (isset($metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="row my-0 py-0">
-                        <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="publisher_agensi_organisasi">
-                                Agency/Organization
-                            </label><label class="float-right">:</label>
-                        </div>
-                        <div class="col-8">    
-                        <?php echo $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString; ?>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
-                <?php
-                if (isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="row my-0 py-0">
-                        <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="publisher_email">
-                                Email
-                            </label><label class="float-right">:</label>
-                        </div>
-                        <div class="col-8">
-                            <?php echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString; ?>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
-                <?php
-                if (isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="row my-0 py-0">
-                        <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="publisher_phone">
-                                Telephone
-                            </label><label class="float-right">:</label>
-                        </div>
-                        <div class="col-8">
-                            <?php echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString; ?>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
-                <?php
-                if(isset($metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode != ""){
-                    $flag *= 0;
-                    ?>
-                    <div class="row my-0 py-0 divPublisherRole">
-                        <div class="col-3 pl-5">
-                            <label class="form-control-label mr-4" for="publisher_role">
-                                Role
-                            </label><label class="float-right">:</label>
-                        </div>
-                        <div class="col-8">
-                            <?php echo $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode; ?>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
+                
                 <?php
                 if(isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != ""){
                     $flag *= 0;
