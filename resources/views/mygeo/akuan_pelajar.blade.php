@@ -164,11 +164,7 @@
                                             @endif
                                             <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
                                             <br>
-<<<<<<< HEAD
                                             <label class="mb-0"> Tarikh:</label>
-=======
-                                           <label class="mb-0"> Tarikh:</label>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <input type="text" class="form-control form-control-sm mb-2"
                                                 placeholder="Auto Pilih Tarikh Semasa" disabled
                                                 value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
@@ -184,7 +180,6 @@
 
                                     </div>
                             </div>
-<<<<<<< HEAD
                             <div class="row p-4">
                                 <div class="col">
                                     @if (Auth::user()->hasRole(['Pemohon Data']))
@@ -201,20 +196,6 @@
                             </div>
 
 
-=======
-
-                            @if (Auth::user()->hasRole(['Pemohon Data']))
-                                <button type="submit" class="btn float-right btn-success">Simpan</button>
-                            @endif
-                            </form>
-
-                            <form action="{{ url('api/dokumen/akuan_pelajar') }}" method="POST" target="_blank">
-                                @csrf
-                                <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                <button type=submit class="btn btn-primary mt-2"
-                                    @if (!$akuan->digital_sign) disabled @endif>Papar PDF</button>
-                            </form>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         </div>
                     </div>
                 </div>
