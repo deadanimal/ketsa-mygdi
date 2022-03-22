@@ -22,7 +22,11 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
+<<<<<<< HEAD
                                     <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+=======
+                                    {{ $metadataxml->customInputs->accordion14->$key }}
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 </div>
                                 <?php
                             }
@@ -36,7 +40,11 @@
                                 }
                                 if($useLimitation != ""){
                                     ?>
+<<<<<<< HEAD
                                     <div class="row mb-2 divUseLimitation">
+=======
+                                    <div class="row mb-2 divUseLimitation" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <label class="form-control-label" for="input-access-cons">
                                                 Use Limitation
@@ -66,7 +74,11 @@
                                 }
                                 if($accessConst != ""){
                                     ?>
+<<<<<<< HEAD
                                     <div class="row mb-2">
+=======
+                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <label class="form-control-label" for="input-access-cons">
                                                 Access Constraints
@@ -96,7 +108,11 @@
                                 }
                                 if($useConst != ""){
                                     ?>
+<<<<<<< HEAD
                                     <div class="row mb-2">
+=======
+                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <label class="form-control-label" for="input-use-cons">
                                                 Use Constraints
@@ -146,7 +162,11 @@
                                 }
                                 if($classSys != ""){
                                     ?>
+<<<<<<< HEAD
                                     <div class="row mb-2">
+=======
+                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <label class="form-control-label" for="input-access-cons">
                                                 Classification
@@ -169,7 +189,11 @@
                                 if($ref != ""){
                                     $flag2 *= 0;
                                     ?>
+<<<<<<< HEAD
                                     <div class="row mb-2">
+=======
+                                    <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <label class="form-control-label" for="input-reference">
                                                 Reference

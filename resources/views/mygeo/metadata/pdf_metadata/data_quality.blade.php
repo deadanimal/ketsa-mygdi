@@ -18,6 +18,7 @@
             <div class="pl-lg-2">
                 <div class="row mb-2">
                     <?php
+<<<<<<< HEAD
                     if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode) && $metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode != "") {
                         $flag *= 0;
                         ?>
@@ -59,6 +60,101 @@
                             <?php echo date('d/m/Y',strtotime(trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date))); ?>
                         </div>
                         <?php
+=======
+                    foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                        if($val['status'] == "customInput"){
+                            ?>
+                            <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="col-xl-2">
+                                    <label class="form-control-label float-right" for="input-datahistory">
+                                        {{ $val['label_'.$langSelected] }}</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <?php echo $dataHist; ?>
+                                </div>  
+
+                                <div class="row mb-2 sortIt">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
+                                        <label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        {{ $metadataxml->customInputs->accordion15->$key }}
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        if($key == "c15_data_quality_info"){
+                            $dqScope = "";
+                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode) && $metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode != "") {
+                                $dqScope = ucwords(trim($metadataxml->dataQualityInfo->DQ_DataQuality->scope->DQ_Scope->level->MD_ScopeCode));
+                            }
+                            if($dqScope == "AttributeType"){
+                                $dqScope = "Attribute Type";
+                            }elseif($dqScope == "CollectionSession"){
+                                $dqScope = "Collection Session";
+                            }elseif($dqScope == "NonGeographicDataset"){
+                                $dqScope = "Non Geographic Data Set";
+                            }elseif($dqScope == "DimensionGroup"){
+                                $dqScope = "Dimension Group";
+                            }elseif($dqScope == "FeatureType"){
+                                $dqScope = "Feature Type";
+                            }elseif($dqScope == "PropertyType"){
+                                $dqScope = "Property Type";
+                            }elseif($dqScope == "FieldSession"){
+                                $dqScope = "Field Session";
+                            }
+                            if($dqScope != ""){
+                                $flag *= 0;
+                                ?>
+                                <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <label class="form-control-label" for="input-DQscope">
+                                        DQ Scope
+                                    </label>
+                                </div>
+                                <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <?php echo trim($dqScope); ?>
+                                </div>
+                                <?php
+                            }
+                        }
+                        if($key == "c15_data_history"){
+                            $dataHist = "";
+                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement->CharacterString != "") {
+                                $dataHist = $metadataxml->dataQualityInfo->DQ_DataQuality->lineage->LI_Lineage->statement->CharacterString;
+                            }
+                            if($dataHist != ""){
+                                ?>
+                                <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <label class="form-control-label float-right" for="input-datahistory">
+                                        Data History</label>
+                                </div>
+                                <div class="col-md-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <?php echo $dataHist; ?>
+                                </div>
+                                <?php
+                            }
+                        }
+                        if($key == "c15_date"){
+                            $dqDate = "";
+                            if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date != "") {
+                                $dqDate = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date);
+                            }
+                            if($dqDate != ""){
+                                ?>
+                                <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <label class="form-control-label  float-right" for="input-date">
+                                        Date :
+                                    </label>
+                                </div>
+                                <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                    <?php echo date('d/m/Y',strtotime(trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_Element->dateTime->Date))); ?>
+                                </div>    
+                                <?php
+                            }
+                        }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                     }
                     ?>
                 </div>
@@ -95,6 +191,7 @@
                                                         <td>
                                                             <?php //================= ?>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -157,12 +254,106 @@
                                                                         </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t1_scope"){
+                                                                    $t1Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString != "") {
+                                                                        $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString);
+                                                                    }
+                                                                    if($t1Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_1">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t1Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t1_comply_level"){
+                                                                    $compLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel->CharacterString != "") {
+                                                                        $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel->CharacterString;
+                                                                    }
+                                                                    if($compLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $compLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t1_date"){
+                                                                    $t1Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date != "") {
+                                                                        $t1Date = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date);
+                                                                    }
+                                                                    if($t1Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t1_commission_date">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t1Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t1_result"){
+                                                                    $t1Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t1Res = ucwords(trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean));
+                                                                    }
+                                                                    if($t1Res == "Passed"){
+                                                                        $t1Res = "Pass";
+                                                                    }elseif($t1Res == "NotRelevant"){
+                                                                        $t1Res = "Not Relevant";
+                                                                    }
+                                                                    if($t1Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_2">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t1_conform_result"){
+                                                                    $conformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $conformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($conformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t1_conform_result">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php //================= ?>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -225,6 +416,94 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t1_scope_2"){
+                                                                    $t1Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString != "") {
+                                                                        $t1Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString);
+                                                                    }
+                                                                    if($t1Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_1">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t1Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t1_comply_level_2"){
+                                                                    $compLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel->CharacterString != "") {
+                                                                        $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel->CharacterString;
+                                                                    }
+                                                                    if($compLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $compLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t1_date_2"){
+                                                                    $t1Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date != "") {
+                                                                        $t1Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date;
+                                                                    }
+                                                                    if($t1Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t1_commission_date">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t1Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t1_result_2"){
+                                                                    $t1Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t1Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t1Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_2">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($t1Res); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t1_conform_result_2"){
+                                                                    $conformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $conformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($conformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_4">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
@@ -274,6 +553,7 @@
                                                     <tr>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -336,11 +616,100 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
+                                                                if($key == "c15_t2_scope"){
+                                                                    $t2Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString != "") {
+                                                                        $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString);
+                                                                    }
+                                                                    if($t2Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t2_scope">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t2Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_comply_level"){
+                                                                    $compLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel->CharacterString != "") {
+                                                                        $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel->CharacterString;
+                                                                    }
+                                                                    if($compLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t2_comply_level">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $compLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_date"){
+                                                                    $t2Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date != "") {
+                                                                        $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date;
+                                                                    }
+                                                                    if($t2Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t2_date">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t2Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_result"){
+                                                                    $t2Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t2Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t2_result">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($t2Res); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_conform_result"){
+                                                                    $t2Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t2Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t2_conform_result">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $t2Res; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -403,11 +772,100 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
+                                                                if($key == "c15_t2_scope_2"){
+                                                                    $t2Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString != "") {
+                                                                        $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString);
+                                                                    }
+                                                                    if($t2Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_1">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t2Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_comply_level_2"){
+                                                                    $compLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel->CharacterString != "") {
+                                                                        $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel->CharacterString;
+                                                                    }
+                                                                    if($compLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $compLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_date_2"){
+                                                                    $t2Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date != "") {
+                                                                        $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date;
+                                                                    }
+                                                                    if($t2Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t2Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_result_2"){
+                                                                    $t2Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t2Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_2">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($t2Res); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_conform_result_2"){
+                                                                    $t2ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t2ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_4">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $t2ConformRes; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -470,11 +928,100 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
+                                                                if($key == "c15_t2_scope_3"){
+                                                                    $t2Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString != "") {
+                                                                        $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString);
+                                                                    }
+                                                                    if($t2Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_1">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t2Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_comply_level_3"){
+                                                                    $compLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString != "") {
+                                                                        $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString;
+                                                                    }
+                                                                    if($compLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $compLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_date_3"){
+                                                                    $t2Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date != "") {
+                                                                        $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date;
+                                                                    }
+                                                                    if($t2Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t2Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_result_3"){
+                                                                    $t2Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t2Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_2">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($t2Res); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_conform_result_3"){
+                                                                    $t2ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t2ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_4">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $t2ConformRes; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -537,6 +1084,94 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
+                                                                if($key == "c15_t2_scope_4"){
+                                                                    $t2Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString != "") {
+                                                                        $t2Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString);
+                                                                    }
+                                                                    if($t2Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_1">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t2Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_comply_level_4"){
+                                                                    $compLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString != "") {
+                                                                        $compLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString;
+                                                                    }
+                                                                    if($compLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $compLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_date_4"){
+                                                                    $t2Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date != "") {
+                                                                        $t2Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date;
+                                                                    }
+                                                                    if($t2Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t2Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_result_4"){
+                                                                    $t2Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t2Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t2Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_2">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($t2Res); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t2_conform_result_4"){
+                                                                    $t2ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t2ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t2ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_4">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $t2ConformRes; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
@@ -583,6 +1218,7 @@
                                                     <tr>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -645,11 +1281,100 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t3_scope"){
+                                                                    $t3Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString != "") {
+                                                                        $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString);
+                                                                    }
+                                                                    if($t3Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_scope">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t3Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_comply_level"){
+                                                                    $t3CompLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel->CharacterString != "") {
+                                                                        $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel->CharacterString;
+                                                                    }
+                                                                    if($t3CompLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_comply_level">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $t3CompLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_date"){
+                                                                    $t3Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date != "") {
+                                                                        $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date;
+                                                                    }
+                                                                    if($t3Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_date">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t3Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_result"){
+                                                                    $t3Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t3Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_result">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($t3Res); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_conform_result"){
+                                                                    $t3ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t3ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_conform_result">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $t3ConformRes; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -712,11 +1437,100 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t3_scope_2"){
+                                                                    $t3Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString != "") {
+                                                                        $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString);
+                                                                    }
+                                                                    if($t3Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_scope_2">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t3Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_comply_level_2"){
+                                                                    $t3CompLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel->CharacterString != "") {
+                                                                        $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel->CharacterString;
+                                                                    }
+                                                                    if($t3CompLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_comply_level_2">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $t3CompLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_date_2"){
+                                                                    $t3Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date != "") {
+                                                                        $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date;
+                                                                    }
+                                                                    if($t3Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_date_2">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t3Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_result_2"){
+                                                                    $t3Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t3Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_result_2">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_conform_result_2"){
+                                                                    $t3ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t3ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_conform_result_2">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -779,6 +1593,94 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t3_scope_3"){
+                                                                    $t3Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString != "") {
+                                                                        $t3Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString);
+                                                                    }
+                                                                    if($t3Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_scope_3">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t3Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_comply_level_3"){
+                                                                    $t3CompLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString != "") {
+                                                                        $t3CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString;
+                                                                    }
+                                                                    if($t3CompLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_comply_level_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $t3CompLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_date_3"){
+                                                                    $t3Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date != "") {
+                                                                        $t3Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date;
+                                                                    }
+                                                                    if($t3Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_date_3">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t3Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_result_3"){
+                                                                    $t3Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t3Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t3Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_result_3">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($t3Res); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t3_conform_result_3"){
+                                                                    $t3ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t3ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t3ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t3_conform_result_3">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $t3ConformRes; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
@@ -825,6 +1727,7 @@
                                                     <tr>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -887,11 +1790,100 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t4_scope"){
+                                                                    $t4Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString != "") {
+                                                                        $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString);
+                                                                    }
+                                                                    if($t4Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_comply_level"){
+                                                                    $t4CompLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel->CharacterString != "") {
+                                                                        $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel->CharacterString;
+                                                                    }
+                                                                    if($t4CompLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $t4CompLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_date"){
+                                                                    $t4Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date != "") {
+                                                                        $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date;
+                                                                    }
+                                                                    if($t4Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_date">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t4Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_result"){
+                                                                    $t4Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t4Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_2">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($t4Res); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_conform_result"){
+                                                                    $t4ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t4ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_4">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $t4ConformRes; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -954,11 +1946,100 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t4_scope_2"){
+                                                                    $t4Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString != "") {
+                                                                        $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString);
+                                                                    }
+                                                                    if($t4Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_scope_2">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t4Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_comply_level_2"){
+                                                                    $t4CompLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString != "") {
+                                                                        $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString;
+                                                                    }
+                                                                    if($t4CompLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_comply_level_2">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php echo $t4CompLvl; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_date_2"){
+                                                                    $t4Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date != "") {
+                                                                        $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date;
+                                                                    }
+                                                                    if($t4Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_date_2">
+                                                                                <b>Date:</b>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t4Date))); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_result_2"){
+                                                                    $t4Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t4Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
+                                                                                <b>Result:</b>
+                                                                                <?php echo trim($t4Res); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_conform_result_2"){
+                                                                    $t4ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t4ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php echo $t4ConformRes; ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -1029,6 +2110,102 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t4_scope_3"){
+                                                                    $t4Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString != "") {
+                                                                        $t4Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString);
+                                                                    }
+                                                                    if($t4Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
+                                                                                <b>Scope:</b>
+                                                                                <?php echo trim($t4Scope); ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_comply_level_3"){
+                                                                    $t4CompLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString != "") {
+                                                                        $t4CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString;
+                                                                    }
+                                                                    if($t4CompLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_comply_level_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php
+                                                                                echo $t4CompLvl;
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_date_3"){
+                                                                    $t4Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date != "") {
+                                                                        $t4Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date;
+                                                                    }
+                                                                    if($t4Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_date_3">
+                                                                                <b>Date:</b>
+                                                                                <?php
+                                                                                echo date('d/m/Y',strtotime(trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date)));
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_result_3"){
+                                                                    $t4Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t4Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t4Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_result_3">
+                                                                                <b>Result:</b>
+                                                                                <?php
+                                                                                echo trim($t4Res);
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t4_conform_result_3"){
+                                                                    $t4ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t4ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t4ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t4_conform_result_3">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php
+                                                                                echo $t4ConformRes;
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
@@ -1075,6 +2252,7 @@
                                                     <tr>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -1147,11 +2325,110 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t5_scope"){
+                                                                    $t5Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString != "") {
+                                                                        $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString);
+                                                                    }
+                                                                    if($t5Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t5_classCorrect_scope">
+                                                                                <b>Scope:</b>
+                                                                                <?php
+                                                                                echo trim($t5Scope);
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_comply_level"){
+                                                                    $t5CompLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel->CharacterString != "") {
+                                                                        $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel->CharacterString;
+                                                                    }
+                                                                    if($t5CompLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php
+                                                                                echo $t5CompLvl;
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_date"){
+                                                                    $t5Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date != "") {
+                                                                        $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date;
+                                                                    }
+                                                                    if($t5Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t5_classCorrect_date">
+                                                                                <b>Date:</b>
+                                                                                <?php
+                                                                                echo date('d/m/Y',strtotime(trim($t5Date)));
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_result"){
+                                                                    $t5Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t5Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_2">
+                                                                                <b>Result:</b>
+                                                                                <?php
+                                                                                echo trim($t5Res);
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_conform_result"){
+                                                                    $t5ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t5ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_4">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php
+                                                                                echo $t5ConformRes;
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -1224,11 +2501,111 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t5_scope_2"){
+                                                                    $t5Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString != "") {
+                                                                        $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString);
+                                                                        echo $t5Scope;
+                                                                    }
+                                                                    if($t5Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t5_classCorrect_scope">
+                                                                                <b>Scope:</b>
+                                                                                <?php
+                                                                                echo trim($t5Scope);
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_comply_level_2"){
+                                                                    $t5CompLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyLevel->CharacterString != "") {
+                                                                        $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyLevel->CharacterString;
+                                                                    }
+                                                                    if($t5CompLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php
+                                                                                echo $t5CompLvl;
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_date_2"){
+                                                                    $t5Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->dateTime->Date != "") {
+                                                                        $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->dateTime->Date;
+                                                                    }
+                                                                    if($t5Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t5_classCorrect_date">
+                                                                                <b>Date:</b>
+                                                                                <?php
+                                                                                echo date('d/m/Y',strtotime(trim($t5Date)));
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_result_2"){
+                                                                    $t5Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t5Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_2">
+                                                                                <b>Result:</b>
+                                                                                <?php
+                                                                                echo trim($t5Res);
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_conform_result_2"){
+                                                                    $t5ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t5ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_4">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php
+                                                                                echo $t5ConformRes;
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <?php
+<<<<<<< HEAD
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString != "") {
                                                                 $flag *= 0;
                                                                 ?>
@@ -1301,6 +2678,105 @@
                                                                     </label>
                                                                 </div>
                                                                 <?php
+=======
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
+                                                                if($key == "c15_t5_scope_3"){
+                                                                    $t5Scope = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString != "") {
+                                                                        $t5Scope = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString);
+                                                                        echo $t5Scope;
+                                                                    }
+                                                                    if($t5Scope != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t5_classCorrect_scope">
+                                                                                <b>Scope:</b>
+                                                                                <?php
+                                                                                echo trim($t5Scope);
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_comply_level_3"){
+                                                                    $t5CompLvl = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyLevel->CharacterString != "") {
+                                                                        $t5CompLvl = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyLevel->CharacterString;
+                                                                    }
+                                                                    if($t5CompLvl != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_3">
+                                                                                <b>Compliance Level:</b>
+                                                                                <?php
+                                                                                echo $t5CompLvl;
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_date_3"){
+                                                                    $t5Date = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->dateTime->Date != "") {
+                                                                        $t5Date = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->dateTime->Date;
+                                                                    }
+                                                                    if($t5Date != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c15_t5_classCorrect_date">
+                                                                                <b>Date:</b>
+                                                                                <?php
+                                                                                echo date('d/m/Y',strtotime(trim($t5Date)));
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_result_3"){
+                                                                    $t5Res = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
+                                                                        $t5Res = trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean);
+                                                                    }
+                                                                    if($t5Res != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_2">
+                                                                                <b>Result:</b>
+                                                                                <?php
+                                                                                echo trim($t5Res);
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                if($key == "c15_t5_conform_result_3"){
+                                                                    $t5ConformRes = "";
+                                                                    if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
+                                                                        $t5ConformRes = $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->explanation->CharacterString;
+                                                                    }
+                                                                    if($t5ConformRes != ""){
+                                                                        $flag *= 0;
+                                                                        ?>
+                                                                        <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                            <label class="form-check-label" for="c3_4">
+                                                                                <b>Conformance Result:</b>
+                                                                                <?php
+                                                                                echo $t5ConformRes;
+                                                                                ?>
+                                                                            </label>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                             }
                                                             ?>
                                                         </td>

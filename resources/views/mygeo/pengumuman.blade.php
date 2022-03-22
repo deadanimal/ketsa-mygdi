@@ -136,7 +136,10 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+<<<<<<< HEAD
                                 <button type="button" id="btn_submit" class="btn btn-success float-right">Submit</button>
+=======
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </form>
                         </div>
                     </div>
@@ -200,6 +203,7 @@
 
 <script>
     $(document).ready(function() {
+<<<<<<< HEAD
         $(document).on("click", "#btn_submit", function() {
             $("#content_panduan_pengguna").val($("#content_panduan_pengguna_input > .ql-editor").html());
             $("#content_hubungi_kami").val($("#content_hubungi_kami_input > .ql-editor").html());
@@ -209,6 +213,8 @@
             $("#form_portal_settings").submit();
         });
 
+=======
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
         $("#table_pengumuman").DataTable({
             "responsive": true,
             "autoWidth": false,

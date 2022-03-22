@@ -13,7 +13,11 @@
                 foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                     if($val['status'] == "customInput"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 sortIt">
+=======
+                        <div class="row mb-2 sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
                                 <label class="float-right">:</label>
@@ -26,7 +30,11 @@
                     }
                     if($key == "c2_metadataName"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4 lblMetadataNameBekap" for="c2_metadataName" data-toggle="tooltip" title="Nama metadata">
                                     <?php echo __('lang.title'); ?><span style="color:red;">*</span>
@@ -50,7 +58,11 @@
                     }
                     if($key == "c2_product_type"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Pemilihan jenis abstrak">
                                     <?php echo __('lang.type_of_product'); ?><span class="text-warning">*</span>
@@ -95,7 +107,11 @@
                     <?php
                     if($key == "c10_file_url"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 divIdentificationInformationUrl">
+=======
+                        <div class="row mb-2 divIdentificationInformationUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
                                     <?php echo __('lang.URL'); ?><span class="text-warning">*</span>
@@ -115,7 +131,11 @@
                     }
                     if($key == "c2_metadataDate"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 divMetadataDate">
+=======
+                        <div class="row mb-2 divMetadataDate" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_metadataDate" data-toggle="tooltip" title="Tarikh berkaitan  bagi maklumat geospatial.">
                                     <?php echo __('lang.date'); ?>
@@ -133,7 +153,11 @@
                     }
                     if($key == "c2_metadataDateType"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 divMetadataDateType">
+=======
+                        <div class="row mb-2 divMetadataDateType" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_metadataDateType" data-toggle="tooltip" title="Pengisian secara pilihan mengenai peringkat maklumat geospatial">
                                     <?php echo __('lang.date_type'); ?>
@@ -169,7 +193,11 @@
                     }
                     if($key == "c2_metadataStatus"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 divMetadataStatus">
+=======
+                        <div class="row mb-2 divMetadataStatus" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_metadataStatus" data-toggle="tooltip" title="Status bagi maklumat geospatial merujuk dokumen MGMS (LAMPIRAN D)">
                                     <?php echo __('lang.status'); ?>
@@ -249,7 +277,11 @@
                     }
                     if($key == "c2_typeOfServices"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 divTypeOfServices">
+=======
+                        <div class="row mb-2 divTypeOfServices" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_typeOfServices" data-toggle="tooltip" title="Pengisian secara pilihan, jenis service bagi maklumat geospatial">
                                     <?php echo __('lang.type_of_services'); ?>
@@ -313,7 +345,11 @@
                     }
                     if($key == "c2_operationName"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 divOperationName">
+=======
+                        <div class="row mb-2 divOperationName" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_operationName" data-toggle="tooltip" title="Pengisian bagi Nama Operasi yang ditawarkan oleh webservis ini
                                 Contoh: Export Map, Identify, Find dan GenerateKML">
@@ -332,7 +368,11 @@
                     }
                     if($key == "c2_serviceUrl"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 divServiceUrl">
+=======
+                        <div class="row mb-2 divServiceUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_serviceUrl" data-toggle="tooltip" title="URL bagi service berkenaan. Klik ‘Test’ bagi percubaan URL berkenaan.">
                                     <?php echo __('lang.service_URL'); ?><span class="text-warning">*</span>
@@ -342,8 +382,14 @@
                                 <input type="text" class="form-control form-control-sm ml-3" name="c2_serviceUrl" id="c2_serviceUrl" value="{{ old('c2_serviceUrl') }}">
                             </div>
                             <div class="col-3">
+<<<<<<< HEAD
                                 <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false" style="display: inline-block;">Test (intecx)</button>
                                 <button class="btn btn-sm btn-success" id="btnTestServiceUrl2" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false" style="display: inline-block;">Test (wms)</button>
+=======
+<!--                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false" style="display: inline-block;">Test (intecx)</button>
+                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl2" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false" style="display: inline-block;">Test (wms)</button>-->
+                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl3" type="button" style="display: inline-block;">Test</button>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 @error('c2_serviceUrl')
                                     <div class="text-error">{{ $message }}</div>
                                 @enderror
@@ -353,7 +399,11 @@
                     }
                     if($key == "c2_typeOfCouplingDataset"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 divTypeOfCouplingDataset">
+=======
+                        <div class="row mb-2 divTypeOfCouplingDataset" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_typeOfCouplingDataset" data-toggle="tooltip" title="Pilihan jenis gandingan bagi Dataset">
                                     <?php echo __('lang.type_of_coupling_with_dataset'); ?>
@@ -386,7 +436,11 @@
                 foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                     if($key == "c2_contact_name"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nama individu yang mewakili organisasi bagi maklumat geospatial">
                                     <?php echo __('lang.name'); ?><span class="text-warning">*</span>
@@ -408,7 +462,11 @@
                     }
                     if($key == "c2_contact_agensiorganisasi"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nama organisasi yang bertanggungjawab terhadap maklumat geospatial">
                                     <?php echo __('lang.organisation_name'); ?><span class="text-warning">*</span>
@@ -425,7 +483,11 @@
                     }
                     if($key == "c2_contact_bahagian"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_contact_bahagian" data-toggle="tooltip" title="Nama bahagian yang bertanggungjawab terhadap maklumat geospatial">
                                     <?php echo __('lang.bahagian_name'); ?>
@@ -442,7 +504,11 @@
                     }
                     if($key == "c2_position_name"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Jawatan individu yang mewakili organisasi bagi maklumat geospatial">
                                     <?php echo __('lang.position_name'); ?>
@@ -472,25 +538,41 @@
                                 ?>
                                 <input type="text" name="c2_contact_address1" id="c2_contact_address1"
                             class="form-control form-control-sm ml-3 mb-2"
+<<<<<<< HEAD
                             value="{{ isset($pengesahs->alamat) ? $pengesahs->alamat : '' }}">
+=======
+                            value="{{ isset($pengesahs->alamat) ? $pengesahs->alamat : '' }}" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                             }
                             if($key == "c2_contact_address2"){
                                 ?>
                                 <input type="text" name="c2_contact_address2" id="c2_contact_address2"
+<<<<<<< HEAD
                             class="form-control form-control-sm ml-3 mb-2" value="">
+=======
+                            class="form-control form-control-sm ml-3 mb-2" value="" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                             }
                             if($key == "c2_contact_address3"){
                                 ?>
                                 <input type="text" name="c2_contact_address3" id="c2_contact_address3"
+<<<<<<< HEAD
                             class="form-control form-control-sm ml-3 mb-2" value="">
+=======
+                            class="form-control form-control-sm ml-3 mb-2" value="" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                             }
                             if($key == "c2_contact_address4"){
                                 ?>
                                 <input type="text" name="c2_contact_address4" id="c2_contact_address4"
+<<<<<<< HEAD
                             class="form-control form-control-sm ml-3 mb-2" value="">
+=======
+                            class="form-control form-control-sm ml-3 mb-2" value="" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                             }
                         }
@@ -501,11 +583,19 @@
                             foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                                 if($key == "c2_postal_code"){
                                     ?>
+<<<<<<< HEAD
                                     <div class="col-3 px-0">
                                         <label class="form-control-label divPostalCode" for="c2_postal_code" data-toggle="tooltip" title="Poskod"><?php echo __('lang.postal_code'); ?>
                                             :</label>
                                     </div>
                                     <div class="col-3 px-0">
+=======
+                                    <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <label class="form-control-label divPostalCode" for="c2_postal_code" data-toggle="tooltip" title="Poskod"><?php echo __('lang.postal_code'); ?>
+                                            :</label>
+                                    </div>
+                                    <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <input type="text" name="c2_postal_code" id="c2_postal_code"
                                             class="form-control form-control-sm mb-2 divPostalCode"
                                             value="{{ (null !== old('c2_postal_code') ? old('c2_postal_code'):$pengesahs->postcode) }}" maxlength="5">
@@ -514,11 +604,19 @@
                                 }
                                 if($key == "c2_contact_city"){
                                     ?>
+<<<<<<< HEAD
                                     <div class="col-3 px-0">
                                         <label class="form-control-label ml-3 divCity" for="c2_contact_city" data-toggle="tooltip" title="Bandar">
                                             <?php echo __('lang.city'); ?> :</label>
                                     </div>
                                     <div class="col-3 px-0">
+=======
+                                    <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <label class="form-control-label ml-3 divCity" for="c2_contact_city" data-toggle="tooltip" title="Bandar">
+                                            <?php echo __('lang.city'); ?> :</label>
+                                    </div>
+                                    <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <input type="text" name="c2_contact_city" id="c2_contact_city"
                                             class="form-control form-control-sm mb-2 divCity"
                                             value="{{ (null !== old('c2_contact_city') ? old('c2_contact_city'):$pengesahs->city) }}">
@@ -536,12 +634,20 @@
                             foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                                 if($key == "c2_contact_state"){
                                     ?>
+<<<<<<< HEAD
                                     <div class="col-3 px-0">
+=======
+                                    <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <label class="form-control-label" for="c2_contact_state" data-toggle="tooltip" title="Negeri / Wilayah Persekutuan">
                                             <?php echo __('lang.state'); ?><span
                                                 class="text-warning">*</span> :</label>
                                     </div>
+<<<<<<< HEAD
                                     <div class="col-3 px-0">
+=======
+                                    <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <select name="c2_contact_state" id="c2_contact_state"class="form-control form-control-sm">
                                             <option disabled>Pilih...</option>
                                             <?php
@@ -567,11 +673,19 @@
                                 }
                                 if($key == "c2_contact_country"){
                                     ?>
+<<<<<<< HEAD
                                     <div class="col-3 px-0">
                                         <label class="form-control-label mx-3" for="c2_contact_country" data-toggle="tooltip" title="Negara">
                                             <?php echo __('lang.country'); ?> :</label>
                                     </div>
                                     <div class="col-3 px-0">
+=======
+                                    <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <label class="form-control-label mx-3" for="c2_contact_country" data-toggle="tooltip" title="Negara">
+                                            <?php echo __('lang.country'); ?> :</label>
+                                    </div>
+                                    <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <input type="text" name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm" readonly value="Malaysia">
                                     </div>
                                     </div>
@@ -586,7 +700,11 @@
                 foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                     if($key == "c2_contact_email"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Alamat emel rasmi">
                                     <?php echo __('lang.email'); ?><span class="text-warning">*</span>
@@ -605,7 +723,11 @@
                     }
                     if($key == "c2_contact_fax"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nombor faksimili organisasi">
                                     <?php echo __('lang.fax_no'); ?>
@@ -620,7 +742,11 @@
                     }
                     if($key == "c2_contact_phone_office"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Nombor telefon organisasi">
                                     <?php echo __('lang.telephone_office'); ?><span class="text-warning">*</span>
@@ -639,7 +765,11 @@
                     }
                     if($key == "c2_contact_website"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2">
+=======
+                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Alamat laman web organisasi">
                                     <?php echo __('lang.contact_website'); ?>
@@ -654,7 +784,11 @@
                     }
                     if($key == "c2_contact_role"){
                         ?>
+<<<<<<< HEAD
                         <div class="row mb-2 divResponsiblePartyRole">
+=======
+                        <div class="row mb-2 divResponsiblePartyRole" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_contact_role" data-toggle="tooltip" title="Peranan yang dijalankan oleh organisasi berkenaan Metadata ">
                                     <?php echo __('lang.role'); ?>

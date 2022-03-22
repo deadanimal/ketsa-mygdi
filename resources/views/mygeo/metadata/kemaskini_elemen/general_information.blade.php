@@ -20,6 +20,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
+                                Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -33,6 +37,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
                                 <select name="c1_content_info" class="form-control form-control-sm ml-3 sortable" id="content_info_dropdown" data-status="<?php echo $val['status']; ?>">
                                     <option value="" selected>Pilih...</option>
                                     <option value="Application" class='optContentInfo_dataset'>Application</option>
@@ -54,6 +59,12 @@
                                 <a href="lampiran/content_information" class="text-yellow" target="_blank">
                                     <i class="fas fa-lightbulb mx-2"></i>
                                 </a>
+=======
+                                Dropdown
+                                <select name="c1_content_info" class="form-control form-control-sm ml-3 sortable" id="content_info_dropdown" data-status="<?php echo $val['status']; ?>">
+                                    <option value="" selected>Pilih...</option>
+                                </select>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                             <span class="close btnClose">&times;</span>
                         </div>
@@ -66,6 +77,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
+                                Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_name" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -79,6 +94,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
+                                Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_agensi_organisasi" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -92,6 +111,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
+                                Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_email" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -105,6 +128,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
+                                Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_phone" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -118,6 +145,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
                                 <select name='publisher_role' class='form-control form-control-sm ml-3 sortable' data-status="<?php echo $val['status']; ?>">
                                     <option value="">Pilih...</option>
                                     <option value="Author">Author</option>
@@ -131,6 +159,11 @@
                                     <option value="Publisher" selected>Publisher</option>
                                     <option value="Resource Provider">Resource Provider</option>
                                     <option value="User">User</option>
+=======
+                                Dropdown
+                                <select name='publisher_role' class='form-control form-control-sm ml-3 sortable' data-status="<?php echo $val['status']; ?>">
+                                    <option value="">Pilih...</option>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 </select>
                             </div>
                             <span class="close btnClose">&times;</span>

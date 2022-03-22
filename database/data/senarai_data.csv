@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 KATEGORI,SUB-KATEGORI,DATA ASAS,KELAS,STATUS,HARGA,MS1759
 Aeronautical,Ruang Udara (Air Space - AA ),Navigation Aid,,Tersedia,,AA0030
 Aeronautical,Lapangan Terbang (Aerodrome- AB),Lapangan Terbang (Aerodrome),,Tersedia,,AB0010
@@ -275,3 +276,282 @@ General,Label Nama Geografi (Label of Geography Name - ZB),Label Petempatan (Lab
 General,Label Nama Geografi (Label of Geography Name - ZB),Label Fitur (Label of Feature),,Tersedia,,ZB0020
 General,Kawalan Alam Sekitar (Environmental Control - ZC),Kawasan Kajian Penaksiran Kesan Persekitaran (EIA Study Area),,Tiada,,ZC0010
 General,Kawalan Alam Sekitar (Environmental Control - ZC),Aduan Alam Sekitar (Environmental Complaint),,Tiada,,ZC0020
+=======
+KATEGORI,SUB-KATEGORI,DATA ASAS,KELAS,STATUS,HARGA,MS1759
+Aeronautical,Ruang Udara (Air Space - AA ),Navigation Aid,,Tersedia,,AA0030
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Lapangan Terbang (Aerodrome),,Tersedia,,AB0010
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Padang Terbang (Airfield),,Tersedia,,AB0020
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Aerodrome Control Tower,,Tersedia,,AB0030
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Runway,,Tersedia,,AB0050
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Runway Strip,,Tersedia,,AB0060
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Stopway,,Tiada,,AB0070
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Clearway,,Tiada,,AB0080
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Approach Surface,,Tersedia,,AB0090
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Take-off Climb Surface,,Tiada,,AB0100
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Transitional Surface,,Tiada,,AB0110
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Inner Horizontal Surface,,Tiada,,AB0120
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Conical Surface,,Tiada,,AB0130
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Outer Horizontal Surface,,Tiada,,AB0140
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Obstacle Free Zone (OFZ),,Tiada,,AB0150
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Threshold,,Tersedia,,AB0160
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Holding Point,,Tiada,,AB0170
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Taxiway,,Tersedia,,AB0180
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Aircraft Parking Stand,,Tersedia,,AB0190
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Apron,,Tersedia,,AB0200
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Localiser,,Tersedia,,AB0210
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Glideslope,,Tersedia,,AB0220
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Wind Direction Indicator,,Tersedia,,AB0250
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Obstacle,,Tersedia,,AB0260
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Aeronautical Ground Lighting,,Tersedia,,AB0290
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Heli Port,,Tiada,,
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Final Approach and Take-off Area,,Tiada,,AB0310
+Aeronautical,Lapangan Terbang (Aerodrome- AB),Touchdown and Lift Off Area,,Tiada,,AB0320
+Built Environment,Kediaman (Residential - BA),Bangunan Kediaman (Resident Building),,Tersedia,,BA0010
+Built Environment,Komersial (Commercial - BB),Bangunan Komersial (Commercial Building),,Tersedia,,BB0010
+Built Environment,Komersial (Commercial - BB),Pejabat (Office),,Tersedia,,BB0030
+Built Environment,Komersial (Commercial - BB),Rumah Kedai (Shop Office/Shop House),,Tersedia,,BB0031
+Built Environment,Komersial (Commercial - BB),Pejabat Pos (Post Office),,Tersedia,,BB0040
+Built Environment,Komersial (Commercial - BB),Bank,,Tersedia,,BB0050
+Built Environment,Komersial (Commercial - BB),Hotel,,Tersedia,,BB0060
+Built Environment,Komersial (Commercial - BB),Apartel,,Tersedia,,BB0061
+Built Environment,Komersial (Commercial - BB),Pasar (Market),,Tersedia,,BB0070
+Built Environment,Komersial (Commercial - BB),Pusat Beli-belah (Shopping Arcade/Complex),,Tiada,,BB0080
+Built Environment,Komersial (Commercial - BB),Pasar Raya Besar (Hypermarket/Supermarket),,Tersedia,,BB0081
+Built Environment,Komersial (Commercial - BB),Kedai Runcit (Retail),,Tiada,,BB0082
+Built Environment,Komersial (Commercial - BB),Pusat Hiburan (Entertainment Centre),,Tersedia,,BB0090
+Built Environment,Komersial (Commercial - BB),Restoran (Restaurant),,Tersedia,,BB0100
+Built Environment,Industri (Industrial - BC),Bangunan Industri (Industrial Building),,Tersedia,,BC0010
+Built Environment,,Hospital,,Tersedia,,BD0020
+Built Environment,,Klinik (Clinic),,Tersedia,,BD0021
+Built Environment,,Balai Bomba dan Penyelamat (Fire and Rescue Station),,Tersedia,,BD0030
+Built Environment,,Balai Polis (Police Station),,Tersedia,,BD0040
+Built Environment,,Pusat Latihan Polis (Police Traning Centre),,Tiada,,BD0041
+Built Environment,,Pondok Bit Polis (Police Beat),,Tersedia,,BD0042
+Built Environment,,Pusat Penahanan (Detention Centre),,Tiada,,BD0043
+Built Environment,,Pusat Pemulihaan (Rehabilitation Centre),,Tersedia,,BD0044
+Built Environment,,Penjara (Prison),,Tersedia,,BD0045
+Built Environment,,Pejabat Kerajaan (Government Office),,Tersedia,,BD0060
+Built Environment,,Dewan Bandaraya (Town Hall),,Tiada,,BD0072
+Built Environment,,Mahkamah (Court),,Tersedia,,BD0080
+Built Environment,,Muzium (Museum),,Tersedia,,BD0090
+Built Environment,,Pusat Sains (Science Centre),,Tersedia,,BD0100
+Built Environment,,Teater Seni (Art Theatre),,Tiada,,BD0110
+Built Environment,,Perpustakaan (Library),,Tersedia,,BD0120
+Built Environment,,Bangunan Memorial (Memorial),,Tiada,,BD0130
+Built Environment,,Multi Purpose House,,Tersedia,,BD0150
+Built Environment,,Balai Raya (Community Hall),,Tersedia,,BD0151
+Built Environment,,Asrama (Hostel),,Tersedia,,BD0152
+Built Environment,,Asrama Belia (Youth Hostel),,Tiada,,BD0153
+Built Environment,,Kelab Belia(Youth Club),,Tiada,,BD0154
+Built Environment,,Rumah Persatuan (Club House),,Tiada,,BD0155
+Built Environment,,Rumah Kebajikan (Welfare Home),,Tersedia,,BD0160
+Built Environment,,Rumah Penjagaan Orang Tua (Old Folk Home),,Tiada,,BD0161
+Built Environment,,Rumah Kanak-kanak Cacat (Handicapped Home),,Tersedia,,BD0162
+Built Environment,,Rumah Anak Yatim (Orphanage),,Tersedia,,BD0163
+Built Environment,,Stesen Pertanian (Agricultural Station),,Tiada,,BD0170
+Built Environment,Pendidikan (Educational - BE),Bangunan Pendidikan (Educational Building),,Tersedia,,BE0010
+Built Environment,Keagamaan (Religious – BF),Bangunan Keagamaan (Building of Worship),,Tersedia,,BF0010
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Stadium,,Tersedia,,BG0010
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Kompleks Sukan (Sport Complex),,Tersedia,,BG0020
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Kompleks Renang (Swimming Complex),,Tersedia,,BG0030
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Kolam Renang (Swimming Pool),,Tersedia,,BG0040
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Arena Basikal (Velodrome),,Tiada,,
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Taman Permainan (Play Groud),,Tersedia,,BG0060
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Padang Golf (Golf Course),,Tersedia,,BG0070
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Padang Polo (Polo Field),,Tiada,,BG0080
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Taman (Park),,Tersedia,,BG0090
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Taman Tema (Theme Park),,Tersedia,,BG0100
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Litar Perlumbaan (Racing Circuit),,Tiada,,BG0110
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Padang Lumba Kuda (Race Course),,Tiada,,BG0120
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Lapangan Sasar Golf (Golf Driving Range),,Tiada,,BG0130
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Zoo,,Tersedia,,BG0140
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Pusat Ekuestrian (Equestrian Centre),,Tiada,,BG0160
+Built Environment,Kemudahan Rekreasi (Recreational - BG),Pusat Futsal (Futsal Centre),,Tersedia,,BG0170
+Built Environment,Perkuburan (Cemetery - BH),Tapak Perkuburan (Cemetery),,Tersedia,,BH0010
+Built Environment,Perkuburan (Cemetery - BH),Bangunan Pembakaran Mayat (Crematorium),,Tiada,,BH0020
+Built Environment,Perkuburan (Cemetery - BH),Taman Perkuburan Memorial (Memorial Park Cemetery),,Tiada,,BH0030
+Built Environment,Perkuburan (Cemetery - BH),Simpanan Abu Mayat (Columbarium),,Tiada,,BH0040
+Built Environment,Struktur Kekal (Built-Up - BJ),Terminal Teksi (Taxi Terminal/Taxi Stand),,Tiada,,BJ0010
+Built Environment,Struktur Kekal (Built-Up - BJ),Terminal Bas (BusTerminal/Taxi Stand),,Tersedia,,BJ0020
+Built Environment,Struktur Kekal (Built-Up - BJ),Perhentian Bas (Bus Stop),,Tersedia,,BJ0021
+Built Environment,Struktur Kekal (Built-Up - BJ),Terminal Kereta Api (Rail Terminal),,Tersedia,,BJ0030
+Built Environment,Struktur Kekal (Built-Up - BJ),Terminal Pengangkutan Bersepadu (Integrated Transportation Terminal),,Tiada,,BJ0040
+Built Environment,Struktur Kekal (Built-Up - BJ),Terminal Jeti (Jetty Terminal),,Tersedia,,BJ0080
+Built Environment,Struktur Kekal (Built-Up - BJ),Stesen Minyak (Petrol Station),,Tersedia,,BJ0310
+Built Environment,Struktur Kekal (Built-Up - BJ),Kompleks Kediaman (Residential Complex),,Tiada,,BJ0340
+Built Environment,Struktur Kekal (Built-Up - BJ),Kompleks Industri (Industrial Complex),,Tiada,,BJ0350
+Built Environment,Struktur Kekal (Built-Up - BJ),Kompleks Komersial (Commercial Complex),,Tiada,,BJ0360
+Built Environment,Struktur Kekal (Built-Up - BJ),Kawasan Parkir (Parking Area),,Tersedia,,BJ0370
+Built Environment,Struktur Kekal (Built-Up - BJ),Kompleks Letak Kereta (Parking Camplex),,Tersedia,,BJ0371
+Built Environment,Struktur Kekal (Built-Up - BJ),Kawasan Bersejarah (Historical Site),,Tersedia,,BJ0380
+Built Environment,Struktur Kekal (Built-Up - BJ),Terminal Kapal Terbang (Airport Terminal),,Tersedia,,BJ0440
+Built Environment,Struktur Kekal (Built-Up - BJ),Tandas Awam (Public Toilet),,Tersedia,,BJ0460
+Built Environment,Struktur Kekal (Built-Up - BJ),Akuakultur (Aquaculture),,Tiada,,BJ0470
+Built Environment,Struktur Kekal (Built-Up - BJ),Kawasan Ternakan (Livestock),,Tersedia,,BJ0480
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Sempadan Antarabangsa (International or Country Boundary),,Tiada,,DA0010
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Negara (Country Coverage),,Tersedia,,DA0020
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Negeri (State Coverage),,Tersedia,,DA0040
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Daerah atau Jajahan untuk Pentadbiran (District or Jajahan Coverage Administrative),,Tersedia,,DA0080
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Daerah atau Jajahan untuk Pengurusan Tanah (District or Jajahan Coverage Land),,Tersedia,,DA0080
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Mukim untuk Pentadbiran (Mukim Coverage Administrative),,Tersedia,,DA0100
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Mukim untuk Pengurusan Tanah (Mukim Coverage Land),,Tersedia,,DA0105
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Bandar untuk Pentadbiran (Town Coverage Administrative),,Tersedia,,DA0120
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Bandar untuk Pengurusan Tanah (Town Coverage Land),,Tersedia,,DA0125
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Pekan untuk Pentadbiran (Pekan Coverage Administrative),,Tersedia,,DA0140
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Pekan untuk Pengurusan Tanah (Pekan Coverage Land),,Tersedia,,DA0145
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Kampung untuk Pentadbiran (Kampung Coverage Administrative),,Tersedia,,DA0160
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Kampung untuk Pengurusan Tanah (Kampung Coverage Land),,Tersedia,,DA0165
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Seksyen untuk Pentadbiran (Section Coverage Administrative),,Tersedia,,DA0180
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Seksyen untuk Pengurusan Tanah (Section Coverage Land),,Tersedia,,DA0185
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Litupan Presint (Precint Coverage),,Tersedia,,DA0200
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Kawasan Pihak Berkuasa Tempatan (Local Authority Area),,Tersedia,,DA0220
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Blok Perangkaan Banci (Census Enumeration Block),,Tersedia,,DA0260
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Kawasan Pilihan Raya Parlimen (Parliamentary Electoral Area),,Tersedia,,DA0280
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Kawasan Pilihan Raya Negeri (State Electoral Area),,Tersedia,,DA0300
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Kawasan Rizab Taman Laut (Park Reserve Area),,Tersedia,,DA0540
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Kawasan Hutan Simpanan Kekal (Forest Reserve Area),,Tersedia,,DA0580
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Rizab Hidupan Liar (Wildlife Reserve Area),,Tersedia,,DA0620
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Kawasan Rizab Melayu (Malay Reserve Area),,Tersedia,,DA0720
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Kawasan Rizab Orang Asli (Aborigine Reserve Area),,Tersedia,,DA0880
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Lembangan Sungai (River Basin Management Unit),,Tiada,,DA1190
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Sub Lembangan Sungai (Sub Basin Management Unit),,Tiada,,DA1200
+Demarcation,(Topographic - [Boundaries /Limits /Zones] - DA),Zon Pantai (Coastal Zone Management Unit),,Tiada,,DA1210
+Demarcation,Maritim (Maritime - DB),Sempadan Pelantar Benua (Continental Shelf Boundary),,Tiada,,DB0020
+Demarcation,Maritim (Maritime - DB),Sempadan Laut Wilayah (Territorial Water Boundary),,Tersedia,,DB0080
+Demarcation,Maritim (Maritime - DB),Sempadan Maritim Negeri (State Territorial Water Boundary),,Tiada,,DB0100
+Demarcation,Kadaster (Cadastral - DC),Tanah Negeri (State Land),,Tiada,,DC0020
+Demarcation,Kadaster (Cadastral - DC),Lot Tanah (Land Parcel or Lot),,Tersedia,,DC0040
+Demarcation,Guna Tanah Perancangan (Planning Land Use - DD),Guna Tanah Semasa (Existing Land Use),,Tersedia,,DD1000
+Demarcation,Guna Tanah Perancangan (Planning Land Use - DD),Guna Tanah Komited (Committed Land Use),,Tiada,,DD2000
+Demarcation,Guna Tanah Perancangan (Planning Land Use - DD),Guna Tanah Zoning (Zoning Land Use),,Tersedia,,DD3000
+Geology,Jenis Batuan (Geolithology - GA),"Enapan Permukaan (Surficial
+Deposit)",,Tersedia,,GA1000
+Geology,Jenis Batuan (Geolithology - GA),Batuan Endapan (Sedimentary Rock),,Tersedia,,GA2000
+Geology,Jenis Batuan (Geolithology - GA),Batuan Igneus (Igneous Rocks),,Tersedia,,GA3000
+Geology,Jenis Batuan (Geolithology - GA),Batuan Metamorf (Metamorphic Rocks),,Tersedia,,GA4000
+Geology,Mineral (Minerals - GB),Mineral (Minerals),,Tersedia,,GB1000
+Geology,Perlombongan (Mining - GD),Lombong (Mines),,Tersedia,,GD2000
+Geology,Perlombongan (Mining - GD),Kawasan Kuari (Quarry Site),,Tersedia,,GD3000
+Geology,Penjelajahan (Exploration - GE),Kawasan Pemetaan Geologi (Geological Mapping Area),,Tersedia,,GE1100
+Geology,Penjelajahan (Exploration - GE),Kawasan Survei Geokimia (Geochemical Survey Area),,Tiada,,GE1200
+Geology,Penjelajahan (Exploration - GE),Kawasan Survei Geofizik (Geophysical Survey Area),,Tiada,,GE1300
+Geology,Fitur Geologi (Geological Features - GF),Unit Litostratigrafi Geologi (Geological Lithostratigraphic Unit),,Tersedia,,GF5000
+Geology,Fitur Geologi (Geological Features - GF),Sesar (Faulting),,Tiada,,GF1100
+Geology,Fitur Geologi (Geological Features - GF),Unit Litodemik Geologi (Geological Lithodemic Unit),,Tersedia,,GF6000
+Geology,Geosains (Geoscience - GG),Kawasan Survei Hidrogeologi (Hydrogeological Survey Area),,Tersedia,,GG1000
+Geology,Geosains (Geoscience - GG),Telaga Air Tanah (Groundwater Well),,Tersedia,,GG1300
+Geology,Geosains (Geoscience - GG),Kawasan Survei Geologi Kejuruteraan (Engineering Geology Survey Area),,Tersedia,,GG2000
+Geology,Geosains (Geoscience - GG),Kawasan Potensi Air Tanah (Groundwater Potential Area),,Tersedia,,GG1100
+Geology,Geosains (Geoscience - GG),Kawasan Survey Geology Marin (Marine Geology Survey Area),,Tersedia,,GG3000
+Hydrography,Hidrografi Pinggir Laut (Coastal Hydrography – HA),Garis Pesisir (Shore Line),,Tersedia,,HA0010
+Hydrography,Hidrografi Pinggir Laut (Coastal Hydrography – HA),Pinggir Laut (Coast),,Tersedia,,HA0020
+Hydrography,Hidrografi Pinggir Laut (Coastal Hydrography – HA),Aras Laut Min (Mean Sea Level),,Tersedia,,HA0160
+Hydrography,Struktur Garis Pesisir Pelabuhan (Shoreline Structure - HB),Pemecah Ombak (Breakwater),,Tiada,,HB0010
+Hydrography,Struktur Garis Pesisir Pelabuhan (Shoreline Structure - HB),Benting Hakisan (Groyne),,Tiada,,HB0020
+Hydrography,Struktur Garis Pesisir Pelabuhan (Shoreline Structure - HB),Tanah Tebus Guna (Reclaimed Land),,Tiada,,HB0030
+Hydrography,Struktur Garis Pesisir Pelabuhan (Shoreline Structure - HB),Revetment,,Tiada,,HB0040
+Hydrography,Struktur Garis Pesisir Pelabuhan (Shoreline Structure - HB),Tembok Laut (Sea Wall),,Tiada,,HB0050
+Hydrography,Pelabuhan (Ports and Harbours - HD),Pelabuhan (Port),,Tersedia,,HD0020
+Hydrography,Pelabuhan (Ports and Harbours - HD),Jeti (Jetty/Pier),,Tiada,,HD0040
+Hydrography,Pelabuhan (Ports and Harbours - HD),Dermaga/Bagan (Wharf/Quay),,Tiada,,HD0045
+Hydrography,Bantuan Navigasi (Navigation Aids - HE),Berup (Beacon),,Tersedia,,HE0010
+Hydrography,Bantuan Navigasi (Navigation Aids - HE),Rumah Api (Light House),,Tersedia,,HE0020
+Hydrography,Bantuan Navigasi (Navigation Aids - HE),Boya (Buoy),,Tersedia,,HE0050
+Hydrography,Bantuan Navigasi (Navigation Aids - HE),Kawasan Terhad (Restricted Area),,Tersedia,,HE0130
+Hydrography,Bantuan Navigasi (Navigation Aids - HE),Kawasan Latihan Tentera (Military Practice Area),,Tiada,,HE0140
+Hydrography,Maklumat Kedalaman (Depth Information - HG),Kedalaman Peruman (Sounding Depth),,Tersedia,,HG0050
+Hydrography,Maklumat Kedalaman (Depth Information - HG),Kontur Kedalaman (Surveyed Depth Contour),,Tersedia,,HG0060
+Hydrography,Air Daratan (Inland Water - HH),Water Body,,Tersedia,,HH0000
+Hydrography,Air Daratan (Inland Water - HH),Empangan (Dam),,Tersedia,,HH0010
+Hydrography,Air Daratan (Inland Water - HH),Tasik (Lake),,Tersedia,,HH0020
+Hydrography,Air Daratan (Inland Water - HH),Takungan (Reservoir),,Tersedia,,HH0030
+Hydrography,Air Daratan (Inland Water - HH),Sungai (River),,Tersedia,,HH0040
+Hydrography,Air Daratan (Inland Water - HH),Tebing Sungai (River Bank),,Tersedia,,HH0041
+Hydrography,Air Daratan (Inland Water - HH),Air Terjun (Waterfall),,Tersedia,,HH0110
+Hydrography,Air Daratan (Inland Water - HH),Jeram (Rapids),,Tiada,,HH0120
+Hydrography,Air Daratan (Inland Water - HH),Natural Spring,,Tiada,,HH0130
+Hydrography,Air Daratan (Inland Water - HH),Tali Air (Irrigation Canal),,Tersedia,,HH0190
+Hydrography,Air Daratan (Inland Water - HH),Parit Buang (Agricultural Drainage Drain),,Tiada,,HH0200
+Hydrography,Pulau (Island - HL),Pulau Daratan (Inland Island),,Tersedia,,HL0010
+Hydrography,Pulau (Island - HL),Pulau Pinggir Laut (Coastal Island),,Tersedia,,HL0020
+Hypsography,Gambaran Relief (Relief Portrayal - RA),Garis Kontur (Contour Line),,Tersedia,,RA0010
+Hypsography,Gambaran Relief (Relief Portrayal - RA),Cenuram Tegak (Cliff Precipitous),,Tiada,,RA0060
+Hypsography,Gambaran Relief (Relief Portrayal - RA),Pemotongan (Cutting),,Tiada,,RA0070
+Hypsography,Gambaran Relief (Relief Portrayal - RA),Benteng (Embankment),,Tiada,,RA0080
+Hypsography,Gambaran Relief (Relief Portrayal - RA),Titik Ketinggian (Spot Height),,Tiada,,RA0100
+Soil,(Soil Classification),Histosols,,Tersedia,,SA0000
+Soil,(Soil Classification),Spodosols,,Tersedia,,SB0000
+Soil,(Soil Classification),Andisols,,Tersedia,,SC0000
+Soil,(Soil Classification),Oxisols,,Tersedia,,SD0000
+Soil,(Soil Classification),Vertisols,,Tersedia,,SE0000
+Soil,(Soil Classification),Ultisols,,Tersedia,,SF0000
+Soil,(Soil Classification),Inceptisols,,Tersedia,,SJ0000
+Soil,(Soil Classification),Entisols,,Tersedia,,SK0000
+Soil,(Soil Classification),Miscellaneous Soil Unit (SM),,Tersedia,,SM0000
+Transportation,(Land Transportation - TA),Jalan (Road),,Tersedia,,TA0060
+Transportation,(Land Transportation - TA),Road Edge,,Tersedia,,TA0061
+Transportation,(Land Transportation - TA),Laluan Motosikal (Motorcycle Lane),,Tiada,,TA0066
+Transportation,(Land Transportation - TA),Trek (Track),,Tiada,,TA0110
+Transportation,(Land Transportation - TA),Plaza Tol (Toll Plaza),,Tersedia,,TA0150
+Transportation,(Land Transportation - TA),Kawasan Rehat dan Rawat (Rest and Service Area),,Tersedia,,TA0155
+Transportation,(Land Transportation - TA),Penanda Kilometer (Kilometer Post),,Tersedia,,TA0180
+Transportation,(Land Transportation - TA),Terowong (Tunnel),,Tersedia,,TA0230
+Transportation,(Land Transportation - TA),Jambatan (Bridge),,Tersedia,,TA0240
+Transportation,(Land Transportation - TA),Tambak (Causeway),,Tersedia,,TA0260
+Transportation,(Land Transportation - TA),Landasan Kereta Api (Rail Line),,Tersedia,,TA0010
+Transportation,(Land Transportation - TA),Stesen Kereta Api (Rail Station),,Tersedia,,TA0020
+Utility,Elektrik (Electricity - UA),Talian Kuasa (Power Line),,Tiada,,UA0010
+Utility,Elektrik (Electricity - UA),Lampu Jalan (Street Light),,Tiada,,UA0020
+Utility,Bekalan Air (Water Supply - UC),Paip Air (Water Pipeline),,Tersedia,,UC0010
+Utility,Pembetungan (Sewerage - UF),Loji Rawatan Kumbahan / Pembetungan (Sewage Treatment Plant),,Tersedia,,UF0010
+Utility,Pembetungan (Sewerage - UF),Paip Pembetungan (Sewerage Pipeline),,Tersedia,,UF0040
+Utility,Pengurusan Sisa Pepejal (Waste Management – UG),Stesen Pemindahan (Transfer Station),,Tersedia,,UG0030
+Utility,Pengurusan Sisa Pepejal (Waste Management – UG),Loji Rawatan Termal (Incineration Plant),,Tersedia,,UG0040
+Utility,Pengurusan Sisa Pepejal (Waste Management – UG),Tapak Pelupusan (Secured Landfil),,Tersedia,,UG0050
+Vegetation,Pertanian (Agriculture - VA),Tanaman Kekal (Perennials Crops),,Tersedia,,VA1000
+Vegetation,Pertanian (Agriculture - VA),Koko (Cocoa),,Tersedia,,VA1020
+Vegetation,Pertanian (Agriculture - VA),Kelapa (Coconut),,Tersedia,,VA1030
+Vegetation,Pertanian (Agriculture - VA),Getah (Rubber),,Tersedia,,VA1040
+Vegetation,Pertanian (Agriculture - VA),Kopi (Coffee),,Tiada,,VA1050
+Vegetation,Pertanian (Agriculture - VA),Kelapa Sawit (Oil Palm),,Tersedia,,VA1060
+Vegetation,Pertanian (Agriculture - VA),Teh (Tea),,Tersedia,,VA1070
+Vegetation,Pertanian (Agriculture - VA),Rumbia (Rumbia),,Tersedia,,VA1290
+Vegetation,Pertanian (Agriculture - VA),Tanaman Singkat Masa (Annual Crops),,Tersedia,,VA2000
+Vegetation,Pertanian (Agriculture - VA),Padi (Paddy),,Tersedia,,VA2060
+Vegetation,Pertanian (Agriculture - VA),Nenas (Pineapple),,Tersedia,,VA2050
+Vegetation,Perhutanan (Forest - VB),Hutan (Forest),,Tersedia,,VB0000
+Vegetation,Perhutanan (Forest - VB),Hutan Darat (Dryland Forest),,Tersedia,,VB1000
+Vegetation,Perhutanan (Forest - VB),Hutan Paya (Wetland Forest),,Tersedia,,VB2000
+Vegetation,Perhutanan (Forest - VB),Hutan Paya Laut/Bakau (Mangrove Forest),,Tersedia,,VB2010
+Vegetation,Perhutanan (Forest - VB),Hutan Paya Gambut (Peat Swamp Forest),,Tersedia,,VB2020
+Vegetation,Perhutanan (Forest - VB),Ladang Hutan (Planted Forest),,Tersedia,,VB3000
+Vegetation,Pelbagai (Miscellaneous - VC),Grass,,Tersedia,,VC1120
+Vegetation,Pelbagai (Miscellaneous - VC),Kawasan Hutan Terosot/Kawasan Diterangkan (Cleared Land),,Tersedia,,VC1130
+Special Use,Analisis Muka Bumi (Terrain Analysis Dataset - XA),Digital Surface Model (DSM),,Tiada,,XA0030
+Special Use,Analisis Muka Bumi (Terrain Analysis Dataset - XA),Digital Terrain Model (DTM),,Tiada,,XA0040
+Special Use,Meteorologi (Meteorological Dataset - XB),Suhu (Isotherm),,Tersedia,,XB0010
+Special Use,Meteorologi (Meteorological Dataset - XB),Kelajuan Angin (Isotach),,Tersedia,,XB0020
+Special Use,Meteorologi (Meteorological Dataset - XB),Kelembapan (Isohume),,Tiada,,XB0030
+Special Use,Meteorologi (Meteorological Dataset - XB),Taburan Hujan (Isohyet),,Tersedia,,XB0050
+Special Use,Meteorologi (Meteorological Dataset - XB),Sejatan (Isoline of Evaporation),,Tersedia,,XB0040
+Special Use,Meteorologi (Meteorological Dataset - XB),Tekanan Atmosfera (Isobar),,Tiada,,XB0060
+Special Use,Meteorologi (Meteorological Dataset - XB),Radiasi Solar (Isoline of Total Global Solar Radiation),,Tersedia,,XB0070
+Special Use,Data Bergrid dan Imej (Imagery & Gridded Dataset – XC),Imej Satelit (Orthorectified Satellite Image Coverage),,Tiada,,XC0030
+Special Use,Data Bergrid dan Imej (Imagery & Gridded Dataset – XC),Imej RADAR (Orthorectified RADAR image Coverage),,Tiada,,XC0040
+Special Use,Data Bergrid dan Imej (Imagery & Gridded Dataset – XC),Foto Udara (Aerial Photograph Coverage),,Tiada,,XC0050
+Special Use,Data Bergrid dan Imej (Imagery & Gridded Dataset – XC),Mozek (Mosaic Coverage),,Tiada,,XC0010
+Special Use,Data Bergrid dan Imej (Imagery & Gridded Dataset – XC),Ortofoto (Orthophoto Coverage),,Tersedia,,XC0020
+General,Titik Kawal (Control Point - ZA),Stesen Sistem Penentududukan Sejagat (Global Positioning System (GPS) Station),,Tiada,,ZA0010
+General,Titik Kawal (Control Point - ZA),Stesen Trabas (Survey Point),,Tiada,,ZA0020
+General,Titik Kawal (Control Point - ZA),Stesen Cerapan Astronomi (Laplace Station),,Tiada,,ZA0030
+General,Titik Kawal (Control Point - ZA),Stesen Trigonometri (Trigonometry Station),,Tiada,,ZA0040
+General,Titik Kawal (Control Point - ZA),Aras Ketinggian (Height Point),,Tiada,,ZA0050
+General,Titik Kawal (Control Point - ZA),Pusat Rujukan Graviti (Gravity Reference Point),,Tiada,,ZA0060
+General,Titik Kawal (Control Point - ZA),Titik Pangkal (Base Point),,Tiada,,ZA0070
+General,Titik Kawal (Control Point - ZA),Tanda Sempadan Antarabangsa (International Boundary Marker),,Tiada,,ZA0080
+General,Titik Kawal (Control Point - ZA),Tanda Sempadan Negeri (State Boundary Marker),,Tiada,,ZA0090
+General,Label Nama Geografi (Label of Geography Name - ZB),Label Petempatan (Label of Settlement),,Tersedia,,ZB0010
+General,Label Nama Geografi (Label of Geography Name - ZB),Label Fitur (Label of Feature),,Tersedia,,ZB0020
+General,Kawalan Alam Sekitar (Environmental Control - ZC),Kawasan Kajian Penaksiran Kesan Persekitaran (EIA Study Area),,Tiada,,ZC0010
+General,Kawalan Alam Sekitar (Environmental Control - ZC),Aduan Alam Sekitar (Environmental Complaint),,Tiada,,ZC0020
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6

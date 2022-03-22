@@ -152,9 +152,15 @@
     <script>
         $(document).ready(function() {
             $("#table_permohonan").DataTable({
+<<<<<<< HEAD
                 "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+=======
+                "dom": "<'row'<'col-sm-6'l><'col-sm-0 text-center'><'col-sm-6'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'i><'col-sm-7'p>>",
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                 "scrollX": true,
                 "ordering": false,
                 // "responsive": true,

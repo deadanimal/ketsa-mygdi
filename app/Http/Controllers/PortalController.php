@@ -329,7 +329,7 @@ class PortalController extends Controller
     public function show_pengumuman2(Request $request)
     {
         $pengumuman = Pengumuman::where(["id" => $request->umum_id])->get()->first();
-        return view('mygeo.pengumuman_show', compact('pengumuman','portal'));
+        return view('mygeo.pengumuman_show', compact('pengumuman'));
     }
 
     public function edit_pengumuman(Request $request)

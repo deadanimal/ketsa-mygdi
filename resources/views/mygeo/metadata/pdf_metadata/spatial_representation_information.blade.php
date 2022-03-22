@@ -11,6 +11,7 @@
         <div class="card-body">
             <div class="row">
                 <?php
+<<<<<<< HEAD
                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
                     $flag *= 0;
                     ?>
@@ -38,6 +39,60 @@
                         </div>
                     </div>
                     <?php
+=======
+                foreach($template->template[strtolower($catSelected)]['accordion6'] as $key=>$val){
+                    if($val['status'] == "customInput"){
+                        ?>
+                        <div class="row mb-2 sortIt">
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
+                                <label class="float-right">:</label>
+                            </div>
+                            <div class="col-8">
+                                {{ $metadataxml->customInputs->accordion6->$key }}
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    if($key == "c6_collection_name"){
+                        $colName = "";
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
+                            $colName = $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString;
+                        }
+                        if($colName != ""){
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-7" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline ml-3">
+                                    <div class="form-control-label mr-3">
+                                        Collection Name
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $colName . "</p>"; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    if($key == "c6_collection_id"){
+                        $collId = "";
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {
+                            $collId = $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString;
+                        }
+                        if($collId != ""){
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline">
+                                    <div class="form-control-label mr-3">
+                                        Collection Identification
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $collId . "</p>"; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                 }
                 ?>
             </div>

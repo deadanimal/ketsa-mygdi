@@ -22,7 +22,11 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <img height="150" class="img-center"
+<<<<<<< HEAD
                                             src="{{ !is_null($tatacara) ? $tatacara->icon_path : '' }}" alt="">
+=======
+                                            src="{{ !is_null($tatacara) ? url($tatacara->icon_path) : '' }}" alt="">
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     </div>
                                     <div class="col-8">
                                         <p class="heading text-muted">{{ $loop->iteration }}) {{ $tatacara->title }}

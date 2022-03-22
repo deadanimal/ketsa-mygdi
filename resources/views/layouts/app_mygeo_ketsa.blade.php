@@ -91,11 +91,14 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
+<<<<<<< HEAD
         
         .tb table{
             table-layout: auto;
   width: 180px; 
         }
+=======
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
 
         .tb th,
         .tb td {

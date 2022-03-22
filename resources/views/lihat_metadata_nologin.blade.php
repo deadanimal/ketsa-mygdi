@@ -89,10 +89,37 @@
                                         Category :
                                         <span class="text-capitalize">
                                             <?php
+<<<<<<< HEAD
                                             $category = '';
                                             if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != '') {
                                                 echo $metadataxml->hierarchyLevel->MD_ScopeCode;
                                                 $category = $metadataxml->hierarchyLevel->MD_ScopeCode;
+=======
+                                            $category = $catSelected = "";
+                                            if (count($categories) > 0) {
+                                                $arr = (array)$metadataxml->hierarchyLevel->MD_ScopeCode;
+                                                foreach($arr as $ar){
+                                                    if(is_array($ar)){
+                                                        $catSelected = $ar['codeListValue'];
+                                                    }
+                                                }
+                                                if($catSelected != "" && strtolower($catSelected) == "service"){
+                                                    $catSelected = "services";
+                                                }
+                                            }
+                                            echo $catSelected;
+                                            
+                                            $langSelected = "";
+                                            if (isset($metadataxml->language->CharacterString) && trim($metadataxml->language->CharacterString) != "") {
+                                                $langSelected = strtolower(trim($metadataxml->language->CharacterString));
+                                                if($langSelected == "english"){
+                                                    $langSelected = "en";
+                                                }elseif($langSelected == "bahasaMelayu"){
+                                                    $langSelected = "bm";
+                                                }else{
+                                                    $langSelected = "en";
+                                                }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             }
                                             ?>
                                         </span>

@@ -2773,6 +2773,26 @@ class MetadataController extends Controller {
                 }
             }
         }
+        //=============
+        $mt = MetadataTemplate::where('status','active')->get()->first();
+        $custom_inputs = "";
+        $custom_inputs .= "<customInputs>";
+        foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
+            if($key == "accordion3" || $key == "accordion9"){
+                continue;
+            }
+            
+            $custom_inputs .= "<".$key.">";
+            foreach($request->all() as $rKey=>$rVal){
+                if(isset($val[$rKey]) && $val[$rKey]['status'] == "customInput"){
+                    $custom_inputs .= "<".$rKey.">".$rVal."</".$rKey.">";
+                }
+            }
+            $custom_inputs .= "</".$key.">";
+        }
+        $custom_inputs .= "</customInputs>";
+//        dd($request->all(),$mt,$var);
+        //=============
 
         $this->validate($request, $fields, $customMsg);
 
@@ -3206,9 +3226,23 @@ class MetadataController extends Controller {
             ';
         }
 
-        //SMBG SINI - save custom inputs from senarai elemen=============
-        dd($request);
-        //===============================================================
+        $mt = MetadataTemplate::where('status','active')->get()->first();
+        $custom_inputs = "";
+        $custom_inputs .= "<customInputs>";
+        foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
+            if($key == "accordion3" || $key == "accordion9"){
+                continue;
+            }
+            
+            $custom_inputs .= "<".$key.">";
+            foreach($request->all() as $rKey=>$rVal){
+                if(isset($val[$rKey]) && $val[$rKey]['status'] == "customInput"){
+                    $custom_inputs .= "<".$rKey.">".$rVal."</".$rKey.">";
+                }
+            }
+            $custom_inputs .= "</".$key.">";
+        }
+        $custom_inputs .= "</customInputs>";
         
         $xmlcon = new XmlController;
         $xml = $xmlcon->createXml($request, $fileUrl, $keywords, $topicCategories, trim($custom_inputs));
@@ -3598,7 +3632,7 @@ class MetadataController extends Controller {
         $activeInputs = json_decode($request->activeInputs); //new order
         $mt = MetadataTemplate::where('status','active')->get()->first(); //get old order
         $newmt = $mt->template; //temp holder to store new order that will replace db order
-        
+//        dd($activeInputs);
         foreach($mt->template[strtolower($request->templateKategori)] as $key=>$val){
             if($key == "accordion3" || $key == "accordion9"){
                 continue;
@@ -3609,20 +3643,23 @@ class MetadataController extends Controller {
             foreach($activeInputs as $ai){
                 if($ai->accordion == $key){
                     if(isset($val[$ai->name])){
-                        $var[$ai->name] = $val[$ai->name];
-                        $var[$ai->name]['status'] = $ai->status;
+                        if($ai->status != "deleteCustomInput"){
+                            $var[$ai->name] = $val[$ai->name];
+                            $var[$ai->name]['status'] = $ai->status;
+                        }
                     }else{
-                        //elements passing thru this else block means are custom input
-                        $name = preg_replace('/\s+/', '', $ai->name); //remove spaces and underscores
-                        $var[$name] = ['label_bm'=>$ai->name,'label_en'=>$ai->name,'status'=>$ai->status]; //suggestion: save with class like "classCustom"
+                        if($ai->status == "customInput"){ //new custom input
+                            //elements passing thru this else block means are custom input
+                            $name = preg_replace('/\s+/', '', $ai->name); //remove spaces and underscores
+                            $var[$name] = ['label_bm'=>$ai->name,'label_en'=>$ai->name,'status'=>$ai->status];
+                        }
                     }
                 }
             }
+            
             //the foreach loops thru each accordion so each accordion is stored and has own key in $newmt
             $newmt[strtolower($request->templateKategori)][$key] = $var;
         }
-//        exit();
-//        dd($newmt);
         
         MetadataTemplate::query()->update(['status' => 'inactive']);
         
