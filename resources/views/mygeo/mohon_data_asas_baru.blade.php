@@ -327,10 +327,7 @@
                                                                     <th>SUB-KATEGORI</th>
                                                                     <th>KATEGORI</th>
                                                                     <th>KAWASAN DATA</th>
-<<<<<<< HEAD
                                                                     <th>JENIS DATA</th>
-=======
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                     <th>KELAS</th>
                                                                     @if (Auth::user()->hasRole(['Pemohon Data']))
                                                                         <th>TINDAKAN</th>
@@ -346,10 +343,7 @@
                                                                         <td>{{ $sk->subkategori }}</td>
                                                                         <td>{{ $sk->kategori }}</td>
                                                                         <td>{{ $sk->kawasan_data }}</td>
-<<<<<<< HEAD
                                                                         <td>{{ $sk->jenis_data }}</td>
-=======
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                         <td>{{ $sk->kelas }} </td>
                                                                         @if (Auth::user()->hasRole(['Pemohon Data']))
                                                                             <td>
@@ -618,7 +612,6 @@
 
                                     </div>
                                     <div class="form-group" id="dynamicAddRemove">
-<<<<<<< HEAD
                                     </div>
                                     <div class="form-group" id="dynamicAddRemove2">
                                     </div>
@@ -633,13 +626,6 @@
                                         </select>
                                     </div>
 
-=======
-
-                                    </div>
-                                    <div class="form-group" id="dynamicAddRemove2">
-
-                                    </div>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <div class="form-group">
                                         <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
                                         {{-- <input name="kawasan_data" class="form-control"
@@ -979,36 +965,25 @@
                                                     @endif
                                                 @endforeach
                                             </select>
-<<<<<<< HEAD
                                         </div>
 
                                         <div class="form-group">
                                             <label class="form-control-label" for="kawasan_data">Jenis Data</label>
                                             <select class="form-control" name="jenis_data">
                                                 <option selected disabled>Pilih</option>
-                                                   <option value="fizikal" {{$sk->jenis_data == 'fizikal'? 'selected' : ''}}>Fizikal</option>
-                                                   <option value="map_service" {{$sk->jenis_data == 'map_service'? 'selected' : ''}}>Map Service</option>
+                                                <option value="fizikal"  {{$sk->jenis_data == 'fizikal'? 'selected' : ''}}>Fizikal</option>
+                                               <option value="map_servis"  {{$sk->jenis_data == 'map_servis'? 'selected' : ''}}>Map Servis</option>
+                                               <option value="fizikal, map_servis"  {{$sk->jenis_data == 'fizikal, map_servis'? 'selected' : ''}}>Fizikal dan Map Servis</option>
                                             </select>
-=======
-                                            <br>
-                                            <div class="kelasData"></div>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         </div>
 
                                         <div class="form-group">
                                             <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
                                             <input name="kawasan_data" class="form-control mb-3" id="update_kawasan"
-<<<<<<< HEAD
                                                 value="{{ $sk->kawasan_data }}" type="hidden" />
                                             <select class="form-control" id="negeris" name="negeri"
                                                 onchange="selectUpdateNegeri()">
                                                 <option selected disabled>{{ $sk->kawasan_data }}</option>
-=======
-                                                value="{{ $sk->kawasan_data }}" />
-                                            <select class="form-control" id="negeris" name="negeri"
-                                                onchange="selectUpdateNegeri()">
-                                                <option selected disabled>Negeri</option>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                 @foreach ($negeris as $neg)
                                                     <option value="{{ $neg->kod_negeri }}">{{ $neg->negeri }}
                                                     </option>
