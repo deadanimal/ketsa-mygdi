@@ -108,7 +108,7 @@
                                                         <span class="badge badge-pill badge-success">Selesai</span>
                                                     @elseif($permohonan->status == '0' && $permohonan->dihantar == 1)
                                                         <span class="badge badge-pill badge-info">Baru</span>
-                                                        @elseif($permohonan->status == '0')
+                                                    @elseif($permohonan->status == '0')
                                                         <span class="badge badge-pill badge-secondary">Draf</span>
                                                     @endif
                                                 </td>
@@ -137,9 +137,9 @@
     <script>
         $(document).ready(function() {
             $("#permohonan_table").DataTable({
-                "dom": "<'row'<'col-sm-6'l><'col-sm-0 text-center'><'col-sm-6'f>>" +
+                "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'i><'col-sm-7'p>>",
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
                 "scrollX": true,
                 "ordering": false,
                 "responsive": true,

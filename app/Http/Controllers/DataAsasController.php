@@ -1146,7 +1146,7 @@ class DataAsasController extends Controller
                     $to_name = $pemohon->users->name;
                     $to_email = $pemohon->users->email;
                     if($request->catatan == 'others'){
-                        $data = array('catatan_lain'=>$request->catatan_lain);
+                        $data = array('catatan'=>$request->catatan_lain);
                     } else {
                         $data = array('catatan'=>$request->catatan);
                     }
