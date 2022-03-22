@@ -621,7 +621,8 @@
                                         <select class="form-control" name="jenis_data">
                                             <option selected disabled>Pilih</option>
                                                <option value="fizikal">Fizikal</option>
-                                               <option value="map_service">Map Service</option>
+                                               <option value="map_servis">Map Servis</option>
+                                               <option value="fizikal, map_servis">Fizikal dan Map Servis</option>
                                         </select>
                                     </div>
 
