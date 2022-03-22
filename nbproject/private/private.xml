@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/kemaskini_elemen_metadata/senarai_elemen.blade.php</file>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/metadata/kemaskini_elemen/general_information.blade.php</file>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/app/Http/Controllers/MetadataController.php</file>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/metadata/pengisian_metadata.blade.php</file>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/layouts/app_mygeo_ketsa.blade.php</file>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/.env</file>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/routes/web.php</file>
+        </group>
+    </open-files>
+</project-private>
