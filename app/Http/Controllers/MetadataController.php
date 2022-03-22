@@ -3226,9 +3226,23 @@ class MetadataController extends Controller {
             ';
         }
 
-        //SMBG SINI - save custom inputs from senarai elemen=============
-        dd($request);
-        //===============================================================
+        $mt = MetadataTemplate::where('status','active')->get()->first();
+        $custom_inputs = "";
+        $custom_inputs .= "<customInputs>";
+        foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
+            if($key == "accordion3" || $key == "accordion9"){
+                continue;
+            }
+            
+            $custom_inputs .= "<".$key.">";
+            foreach($request->all() as $rKey=>$rVal){
+                if(isset($val[$rKey]) && $val[$rKey]['status'] == "customInput"){
+                    $custom_inputs .= "<".$rKey.">".$rVal."</".$rKey.">";
+                }
+            }
+            $custom_inputs .= "</".$key.">";
+        }
+        $custom_inputs .= "</customInputs>";
         
         $xmlcon = new XmlController;
         $xml = $xmlcon->createXml($request, $fileUrl, $keywords, $topicCategories, trim($custom_inputs));

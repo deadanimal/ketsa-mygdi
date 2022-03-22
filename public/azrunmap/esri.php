@@ -58,6 +58,46 @@
             earthquakes.bindPopup(function (layer) {
                 return L.Util.template('<p>FCD: {FCD}</p>', layer.feature.properties);
             });
+            
+            /*
+            // create wms layer
+            var farmerMarkets = L.tileLayer.wms('https://service.mygeomap.gov.my/arcgis/services/Commercial/1MM_Template_Pusat_Komersial/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=2', {
+                layers: '2',
+                format: 'image/png',
+                transparent: true
+            });
+            farmerMarkets.addTo(map);
+            */
+            
+            
+            /*
+            var wmsLayer = L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+                layers: 'TOPO-OSM-WMS'
+            }).addTo(map);
+            
+            var basemaps = {
+                Topography: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+                    layers: 'TOPO-WMS'
+                }),
+
+                Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+                    layers: 'OSM-Overlay-WMS'
+                }),
+
+                'Topography, then places': L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+                    layers: 'TOPO-WMS,OSM-Overlay-WMS'
+                }),
+
+                'Places, then topography': L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+                    layers: 'OSM-Overlay-WMS,TOPO-WMS'
+                })
+            };
+
+            L.control.layers(basemaps).addTo(map);
+
+            basemaps.Topography.addTo(map);
+
+            */
         </script>
 
     </body>

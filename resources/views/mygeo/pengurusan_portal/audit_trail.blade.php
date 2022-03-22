@@ -49,39 +49,41 @@
                                     </div>
                                 </form>
                                 <br><br>
-                                <table id="table_audit_trail" class="table table-bordered table-striped" style="width:100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>BIL</th>
-                                            <th>PATH</th>
-                                            <th>USER</th>
-                                            <th>ACTION</th>
-                                            <th>DATE ACCESSED</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $counter = 1;
-                                        foreach ($audit_trails as $at){
-                                            if(!isset($at->getUser->name)){
-//                                                break;
+                                <div style="overflow-x:auto;">
+                                    <table id="table_audit_trail" class="table table-bordered table-striped" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>BIL</th>
+                                                <th>PAUTAN</th>
+                                                <th>PERANAN</th>
+                                                <th>TINDAKAN</th>
+                                                <th>TARIKH AKSES</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $counter = 1;
+                                            foreach ($audit_trails as $at){
+                                                if(!isset($at->getUser->name)){
+    //                                                break;
+                                                }
+                                                ?>
+                                                <tr>
+                                                    <td>{{ $counter }}</td>
+                                                    <td>{{ $at->path }}</td>
+                                                    <td>{{ (isset($at->getUser->name) ? $at->getUser->name:"") }}</td>
+                                                    <td>
+                                                        <small class="badge badge-success">{{ $at->data }}</small>
+                                                    </td>
+                                                    <td>{{ date('d/m/Y H:m:s',strtotime($at->created_at)) }}</td>
+                                                </tr>
+                                                <?php
+                                                $counter++;
                                             }
                                             ?>
-                                            <tr>
-                                                <td>{{ $counter }}</td>
-                                                <td>{{ $at->path }}</td>
-                                                <td>{{ (isset($at->getUser->name) ? $at->getUser->name:"") }}</td>
-                                                <td>
-                                                    <small class="badge badge-success">{{ $at->data }}</small>
-                                                </td>
-                                                <td>{{ date('d/m/Y H:m:s',strtotime($at->created_at)) }}</td>
-                                            </tr>
-                                            <?php
-                                            $counter++;
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

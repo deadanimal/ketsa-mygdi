@@ -114,7 +114,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <button type="submit" id="btn_submit" class="btn btn-success float-right mt-4">Submit</button>
+                                <button type="submit" id="btn_submit" class="btn btn-success float-right mt-4">Simpan</button>
                             </form>
                         </div>
                     </div>
