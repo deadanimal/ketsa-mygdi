@@ -1,17 +1,6 @@
 @extends('layouts.app_ketsa')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    Tukar Kata Laluan
-                    <br>
-                    <i class="text-warning" style="font-size:11px;">* Kata laluan mestilah mempunyai
-                                            sekurang-kurangnya 12 aksara terdiri daripada gabungan huruf besar, huruf kecil,
-                                            nombor dan simbol.</i>
-                </div>
 
     <style>
         .logo-box .logo {
@@ -122,7 +111,7 @@
 @stop
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         $(document).on('click', '.btnSubmit', function() {
