@@ -22,6 +22,8 @@
                     <div class="col-xl-3">
                         <?php
                         echo "<p>" . $refSys->name . "</p>";
+<<<<<<< HEAD
+=======
                         foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
                             if($val['status'] == "customInput"){
                                 ?>
@@ -37,12 +39,73 @@
                                 <?php
                             }
                         }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         ?>
                     </div>
                 </div>
                 <div class="form-group row my-4">
                     <div class="col-xl-12">
                         <table>
+<<<<<<< HEAD
+                            <tr>
+                            <td>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label ml-4" style="margin-left:20px;" for="c3_1"><b>Projection:</b>{{ $var }}</label>
+                            </td>
+                            <td>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label ml-4" style="margin-left:20px;" for="c3_2"><b>Semi Major Axis:</b>{{ $var }}</label>
+                            </td>
+                            <td>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label ml-4" style="margin-left:20px;" for="c3_3"><b>Ellipsoid:</b>{{ $var }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength;
+                                }
+                                ?>
+                                <label class="form-check-label ml-4" style="margin-left:20px;" for="c3_4"><b>Axis Units:</b>{{ $var }}</label>
+                            </td>
+                            <td>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label ml-4" style="margin-left:20px;" for="c3_5"><b>Datum:</b>{{ $var }}</label>
+                            </td>
+                            <td>
+                                <?php
+                                $var = "";
+                                if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString != '') {
+                                    $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString;
+                                }
+                                ?>
+                                <label class="form-check-label ml-4" style="margin-left:20px;" for="c3_6"><b>Denominator of Flattening Ratio:</b>{{ $var }}</label>
+                            </td>
+                        </tr>
+=======
                             <?php
                             $counter = 1;
                             foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
@@ -134,6 +197,7 @@
                                 $counter++;
                             }
                                 ?>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         </table>
                     </div>
                 </div>

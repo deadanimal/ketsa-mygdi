@@ -13,6 +13,59 @@
             <div class="my-2">
                 <?php
                 $flag1 = 1;
+<<<<<<< HEAD
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString != "") {
+                    $flag1 *= 0;
+                    $flag *= 0;
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c10_file_name">
+                                File Name
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-7">
+                            <?php echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString; ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                <?php
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString != "") {
+                    $flag1 *= 0;
+                    $flag *= 0;
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c10_file_type">
+                                File Type
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-7">
+                            <?php echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString; ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                <?php
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != "") {
+                    $flag1 *= 0;
+                    $flag *= 0;
+                    ?>
+                    <div class="row mb-4">
+                        <div class="col-3 pl-5">
+                            <label class="form-control-label mr-4" for="c10_file_url">
+                                URL
+                            </label><label class="float-right">:</label>
+                        </div>
+                        <div class="col-7">
+                            <?php echo "&nbsp;&nbsp;" . $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString; ?>
+                        </div>
+                    </div>
+                    <?php
+=======
                 foreach($template->template[strtolower($catSelected)]['accordion10'] as $key=>$val){
                     if($val['status'] == "customInput"){
                         ?>
@@ -93,6 +146,7 @@
                             <?php
                         }
                     }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                 }
                 ?>
             </div>
@@ -101,6 +155,74 @@
                 <?php
                 $flag2 = 1;
                 $counter = 0;
+<<<<<<< HEAD
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
+                    foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                        if(trim((string)$keyword->CharacterString) != ""){
+                            $flag *= 0;
+                            if($counter == 0){
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_name">
+                                            Keywords
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }else{
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_type">
+                                            Additional Keywords
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            $counter++;
+                        }
+                    }
+                }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
+                    foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                        if(trim((string)$keyword->CharacterString) != ""){
+                            $flag *= 0;
+                            if($counter == 0){
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_name">
+                                            Keywords
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }else{
+                                ?>
+                                <div class="row mb-2">
+                                    <div class="col-3 pl-5">
+                                        <label class="form-control-label mr-4" for="c10_file_type">
+                                            Additional Keywords
+                                        </label><label class="float-right">:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            $counter++;
+=======
                 
                 foreach($template->template[strtolower($catSelected)]['accordion10'] as $key=>$val){
                     if($key == "c10_keyword"){
@@ -206,6 +328,7 @@
                                     $counter++;
                                 }
                             }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         }
                     }
                 }

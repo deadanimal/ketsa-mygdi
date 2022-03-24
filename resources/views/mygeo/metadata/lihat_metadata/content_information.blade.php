@@ -22,7 +22,11 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
+<<<<<<< HEAD
+                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+=======
                                     {{ $metadataxml->customInputs->accordion7->$key }}
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 </div>
                             </div>
                             <?php
@@ -34,7 +38,11 @@
                             }
                             if($bandBound != ""){
                                 ?>
+<<<<<<< HEAD
+                                <div class="row mb-2">
+=======
                                 <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <div class="col-xl-6">
                                         <div class="form-inline">
                                             <div class="form-control-label mr-3">
@@ -60,7 +68,11 @@
                                 }
                                 if($transFnType != ""){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="col-xl-6">
+=======
                                     <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="form-inline">
                                             <div class="form-control-label mr-4">
                                                 Transfer Function Type:
@@ -78,7 +90,11 @@
                                 }
                                 if($transmitPolar != ""){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="col-xl-6">
+=======
                                     <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="form-inline">
                                             <div class="form-control-label mr-3">
                                                 Transmitted Polarization:
@@ -95,14 +111,22 @@
                     <div class="row mb-2">
                         <?php
                         foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
+<<<<<<< HEAD
+                            if($key == "c7_trans_fn_type"){
+=======
                             if($key == "c7_nominal_spatial_res"){
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 $nomSpatRes = "";
                                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString != "") {
                                     $nomSpatRes = $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString;
                                 }
                                 if($nomSpatRes != ""){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="col-xl-6">
+=======
                                     <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="form-inline">
                                             <div class="form-control-label mr-4">
                                                 Nominal Spatial Resolution:
@@ -123,7 +147,11 @@
                                 }
                                 if($detectPolar != ""){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="col-xl-6">
+=======
                                     <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="form-inline">
                                             <div class="form-control-label mr-3">
                                                 Detected Polarization:

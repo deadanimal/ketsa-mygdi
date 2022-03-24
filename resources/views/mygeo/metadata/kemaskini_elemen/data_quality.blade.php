@@ -20,7 +20,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -33,7 +36,10 @@
                                 <div class="form-inline">
                                     <label class="form-control-label mr-3" for="input-DQscope" data-toggle="tooltip" title="Pengisian secara Pilihan: Skop DQ"><?php echo __('lang.dq_scope'); ?>
                                     </label>
+<<<<<<< HEAD
+=======
                                     Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <select name="c15_data_quality_info" id="c15_data_quality_info" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                         <option value="">Pilih...</option>
                                     </select>
@@ -50,7 +56,10 @@
                                 <div class="form-inline">
                                     <label class="form-control-label mr-3" for="input-datahistory">
                                         <?php echo __('lang.data_history'); ?></label>
+<<<<<<< HEAD
+=======
                                     Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="text" name="c15_data_history" id="c15_data_history" placeholder="None" data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -66,7 +75,10 @@
                                     <label class="form-control-label mr-3" for="input-date">
                                         <?php echo __('lang.date_time'); ?>
                                     </label>
+<<<<<<< HEAD
+=======
                                     Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="date" name="c15_date" id="c15_date" data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -136,7 +148,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_1">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t1_scope" id="c15_t1_scope" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -151,7 +166,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t1_comply_level" id="c15_t1_comply_level" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -165,7 +183,10 @@
                                                                         <label class="form-check-label" for="c15_t1_commission_date">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t1_date" id="c15_t1_date" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -179,7 +200,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_2">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t1_result" id="c15_t1_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -194,7 +218,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_4">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t1_conform_result" id="c15_t1_conform_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -207,7 +234,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_1">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t1_scope_2" id="c15_t1_scope_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -222,7 +252,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t1_comply_level_2" id="c15_t1_comply_level_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -236,7 +269,10 @@
                                                                         <label class="form-check-label" for="c15_t1_commission_date">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t1_commission_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t1_date_2" id="c15_t1_date_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -250,7 +286,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_2">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t1_result_2" id="c15_t1_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -265,7 +304,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_4">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t1_conform_result_2" id="c15_t1_conform_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -316,7 +358,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_1">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t2_scope" id="c15_t2_scope" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -331,7 +376,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t2_comply_level" id="c15_t2_comply_level" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -345,7 +393,10 @@
                                                                         <label class="form-check-label" for="c15_t2_date">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t2_date" id="c15_t2_date" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -359,7 +410,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_2">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t2_result" id="c15_t2_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -374,7 +428,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_4">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t2_conform_result" id="c15_t2_conform_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -387,7 +444,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_1">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t2_scope_2" id="c15_t2_scope_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -402,7 +462,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t2_comply_level_2" id="c15_t2_comply_level_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -416,7 +479,10 @@
                                                                         <label class="form-check-label" for="c15_t2_date_2">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t2_date_2" id="c15_t2_date_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -430,7 +496,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_2">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t2_result_2" id="c15_t2_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -445,7 +514,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t2_conform_result_2">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t2_conform_result_2" id="c15_t2_conform_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -458,7 +530,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_1">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t2_scope_3" id="c15_t2_scope_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -473,7 +548,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t2_comply_level_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t2_comply_level_3" id="c15_t2_comply_level_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -487,7 +565,10 @@
                                                                         <label class="form-check-label" for="c15_t2_date_3">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t2_date_3" id="c15_t2_date_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -501,7 +582,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_2">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t2_result_3" id="c15_t2_result_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -516,7 +600,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_4">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t2_conform_result_3" id="c15_t2_conform_result_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -529,7 +616,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t2_scope_4">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t2_scope_4" id="c15_t2_scope_4" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -544,7 +634,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t2_comply_level_4">
                                                                             <b data-toggle="tooltip" title="" ><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t2_comply_level_4" id="c15_t2_comply_level_4" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -558,7 +651,10 @@
                                                                         <label class="form-check-label" for="c15_t2_date_4">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t2_conceptual_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t2_date_4" id="c15_t2_date_4" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -572,7 +668,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t2_result_4">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t2_result_4" id="c15_t2_result_4" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -587,7 +686,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t2_conform_result_4">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t2_conform_result_4" id="c15_t2_conform_result_4" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -634,7 +736,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_scope">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t3_scope" id="c15_t3_scope" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -649,7 +754,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_comply_level">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t3_comply_level" id="c15_t3_comply_level" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -662,7 +770,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_date">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
                                                                                 <input type="date" name="c15_t3_date" id="c15_t3_date" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
@@ -677,7 +788,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_result">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t3_result" id="c15_t3_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -692,7 +806,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_conform_result">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t3_conform_result" id="c15_t3_conform_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -705,7 +822,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_scope_2">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t3_scope_2" id="c15_t3_scope_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -720,7 +840,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_comply_level_2">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t3_comply_level_2" id="c15_t3_comply_level_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -733,7 +856,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_date_2">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
                                                                                 <input type="date" name="c15_t3_date_2" id="c15_t3_date_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
@@ -748,7 +874,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_result_2">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t3_result_2" id="c15_t3_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -763,7 +892,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_conform_result_2">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t3_conform_result_2" id="c15_t3_conform_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -776,7 +908,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_scope_3">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t3_scope_3" id="c15_t3_scope_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -791,7 +926,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_comply_level_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t3_comply_level_3" id="c15_t3_comply_level_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -804,7 +942,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_date_3">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <div class="input-group date" id="c15_t3_absExt_date_div" data-target-input="nearest">
                                                                                 <input type="date" name="c15_t3_date_3" id="c15_t3_date_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
@@ -819,7 +960,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_result_3">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t3_result_3" id="c15_t3_result_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -834,7 +978,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t3_conform_result_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t3_conform_result_3" id="c15_t3_conform_result_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -881,7 +1028,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_scope">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t4_scope" id="c15_t4_scope" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -896,7 +1046,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_comply_level">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t4_comply_level" id="c15_t4_comply_level" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -910,7 +1063,10 @@
                                                                         <label class="form-check-label" for="c15_t4_date">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t4_date" id="c15_t4_date" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -924,7 +1080,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_result">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t4_result" id="c15_t4_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -939,7 +1098,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_conform_result">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t4_conform_result" id="c15_t4_conform_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -952,7 +1114,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_scope_2">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t4_scope_2" id="c15_t4_scope_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -967,7 +1132,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_comply_level_2">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t4_comply_level_2" id="c15_t4_comply_level_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -980,7 +1148,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_date_2">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
                                                                                 <input type="date" name="c15_t4_date_2" id="c15_t4_date_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
@@ -995,7 +1166,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_result_2">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t4_result_2" id="c15_t4_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -1010,7 +1184,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_conform_result_2">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t4_conform_result_2" id="c15_t4_conform_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -1023,7 +1200,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_scope_3">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t4_scope_3" id="c15_t4_scope_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -1038,7 +1218,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_comply_level_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t4_comply_level_3" id="c15_t4_comply_level_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -1052,7 +1235,10 @@
                                                                         <label class="form-check-label" for="c15_t4_date_3">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t4_comply_level_3" id="c15_t4_date_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -1066,7 +1252,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_result_3">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t4_result_3" id="c15_t4_result_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -1081,7 +1270,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t4_conform_result_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t4_conform_result_3" id="c15_t4_conform_result_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -1128,7 +1320,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t5_classCorrect_scope">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t5_scope" id="c15_t5_scope" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -1143,7 +1338,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t5_comply_level" id="c15_t5_comply_level" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -1157,7 +1355,10 @@
                                                                         <label class="form-check-label" for="c15_t5_classCorrect_date">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t5_classCorrect_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t5_date" id="c15_t5_date" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -1171,7 +1372,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_2">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t5_result" id="c15_t5_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -1186,7 +1390,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_4">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t5_conform_result" id="c15_t5_conform_result" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -1198,8 +1405,12 @@
                                                                 <tr class='nonQuantitativeAttributeCorrectness sortIt' <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t5_scope_2">
+<<<<<<< HEAD
+                                                                            <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+=======
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b> 
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t5_scope_2" id="c15_t5_scope_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -1214,7 +1425,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t5_comply_level_2">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t5_comply_level_2" id="c15_t5_comply_level_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -1228,7 +1442,10 @@
                                                                         <label class="form-check-label" for="c15_t5_classCorrect_2_date">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t5_classCorrect_2_date_div" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t5_date_2" id="c15_t5_date_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -1242,7 +1459,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t5_result_2">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t5_result_2" id="c15_t5_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -1257,7 +1477,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c3_4">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t5_conform_result_2" id="c15_t5_conform_result_2" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -1270,7 +1493,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t5_scope_3">
                                                                             <b data-toggle="tooltip" title="Pilihan meliputi 12 kategori"><?php echo __('lang.scope'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t5_scope_3" id="c15_t5_scope_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -1285,7 +1511,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t5_comply_level_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.compliance_level'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t5_comply_level_3" id="c15_t5_comply_level_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>
@@ -1299,7 +1528,10 @@
                                                                         <label class="form-check-label" for="c15_t5_classCorrect_date_3">
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t5_classCorrect_date_div_3" data-target-input="nearest">
+<<<<<<< HEAD
+=======
                                                                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                                 <input type="date" name="c15_t5_date_3" id="c15_t5_date_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                             </div>
                                                                         </label>
@@ -1313,7 +1545,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t5_result_3">
                                                                             <b data-toggle="tooltip" title="Pengisian berdasarkan keputusan penilaian kualiti"><?php echo __('lang.result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <select name="c15_t5_result_3" id="c15_t5_result_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                                 <option value="">Pilih...</option>
                                                                             </select>
@@ -1328,7 +1563,10 @@
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t5_conform_result_3">
                                                                             <b data-toggle="tooltip" title="Pengisian ketekalan konsep berdasarkan tahap pematuhan."><?php echo __('lang.conformance_result'); ?> :</b>
+<<<<<<< HEAD
+=======
                                                                             Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                                                             <input type="text" name="c15_t5_conform_result_3" id="c15_t5_conform_result_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                                                         </label>
                                                                     </td>

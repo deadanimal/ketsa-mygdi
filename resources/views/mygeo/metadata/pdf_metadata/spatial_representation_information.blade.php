@@ -11,6 +11,35 @@
         <div class="card-body">
             <div class="row">
                 <?php
+<<<<<<< HEAD
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString != "") {
+                    $flag *= 0;
+                    ?>
+                    <div class="col-xl-7">
+                        <div class="form-inline ml-3">
+                            <div class="form-control-label mr-3">
+                                Collection Name
+                            </div>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->collectionName->CharacterString . "</p>"; ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                <?php
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {
+                    $flag *= 0;
+                    ?>
+                    <div class="col-xl-5">
+                        <div class="form-inline">
+                            <div class="form-control-label mr-3">
+                                Collection Identification
+                            </div>
+                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString . "</p>"; ?>
+                        </div>
+                    </div>
+                    <?php
+=======
                 foreach($template->template[strtolower($catSelected)]['accordion6'] as $key=>$val){
                     if($val['status'] == "customInput"){
                         ?>
@@ -63,6 +92,7 @@
                             <?php
                         }
                     }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                 }
                 ?>
             </div>

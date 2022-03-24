@@ -13,20 +13,32 @@
                 foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                     if($val['status'] == "customInput"){
                         ?>
+<<<<<<< HEAD
+                        <div class="row mb-2 sortIt">
+=======
                         <div class="row mb-2 sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4 customInput_label" for="uname">{{ $val['label_'.$langSelected] }}</label>
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+=======
                                 {{ $metadataxml->customInputs->accordion2->$key }}
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                         </div>
                         <?php
                     }
                     if($key == "c2_metadataName"){
                         ?>
+<<<<<<< HEAD
+                        <div class="row mb-2">
+=======
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_metadataName">
                                     <?php
@@ -53,7 +65,11 @@
                         }
                         if($typeofProd != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2">
+=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Type of Product
@@ -75,7 +91,11 @@
                         }
                         if($var != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="">
+=======
                             <div class="" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="row mb-2">
                                     <div class="col-3">
                                         <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
@@ -97,7 +117,11 @@
                         }
                         if($url != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-4 divIdentificationInformationUrl">
+=======
                             <div class="row mb-4 divIdentificationInformationUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3">
                                     <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
                                         <?php echo __('lang.URL'); ?><span class="text-warning">*</span>
@@ -119,7 +143,11 @@
                         }
                         if($metDate != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divMetadataDate">
+=======
                             <div class="row mb-2 divMetadataDate" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Date
@@ -141,7 +169,11 @@
                         }
                         if($metDateType != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divMetadataDateType">
+=======
                             <div class="row mb-2 divMetadataDateType" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Date Type
@@ -170,7 +202,11 @@
                         }
                         if($metStatus != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divMetadataStatus">
+=======
                             <div class="row mb-2 divMetadataStatus" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Status
@@ -192,7 +228,11 @@
                         }
                         if($typeOfServices != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divTypeOfServices">
+=======
                             <div class="row mb-2 divTypeOfServices" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Type of Services
@@ -214,7 +254,11 @@
                         }
                         if($operationName != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divOperationName">
+=======
                             <div class="row mb-2 divOperationName" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Operation Name
@@ -234,7 +278,11 @@
                         }
                         if($serviceUrl != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divServiceUrl">
+=======
                             <div class="row mb-2 divServiceUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Service URL
@@ -256,7 +304,11 @@
                         }
                         if($typeCouplingDataset != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divTypeOfCouplingDataset">
+=======
                             <div class="row mb-2 divTypeOfCouplingDataset" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Type of Coupling with Dataset
@@ -285,7 +337,11 @@
                         }
                         if($respName != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2">
+=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Name
@@ -307,7 +363,11 @@
                         }
                         if($respAgencyOrg != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2">
+=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Agency/Organization
@@ -329,7 +389,11 @@
                         }
                         if($respAgencyBhgn != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2">
+=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Bahagian
@@ -349,7 +413,11 @@
                         }
                         if($positionName != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2">
+=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Position Name
@@ -371,7 +439,11 @@
                         }
                         if($respAddress != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2">
+=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Address
@@ -393,7 +465,11 @@
                         }
                         if($postalCode != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divPostalCode">
+=======
                             <div class="row mb-2 divPostalCode" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Postal Code:
@@ -415,7 +491,11 @@
                         }
                         if($city != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divCity">
+=======
                             <div class="row mb-2 divCity" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         City
@@ -448,7 +528,11 @@
                         }
                         if($respState != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2 divCity">
+=======
                             <div class="row mb-2 divCity" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         State
@@ -463,7 +547,11 @@
                     }
                     if($key == "c2_contact_country"){
                         ?>
+<<<<<<< HEAD
+                        <div class="row mb-2 divCity">
+=======
                         <div class="row mb-2 divCity" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName">
                                     Country
@@ -484,7 +572,11 @@
                         }
                         if($respEmail != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2">
+=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <div class="col-3 pl-5">
                                         <label class="form-control-label mr-4" for="c2_metadataName">
                                             Email
@@ -506,7 +598,11 @@
                         }
                         if($fax != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2">
+=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Fax No
@@ -528,7 +624,11 @@
                         }
                         if($respPhone != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-2">
+=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Telephone (Office)
@@ -550,7 +650,11 @@
                         }
                         if($respWebsite != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-4">
+=======
                             <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Contact Website
@@ -579,7 +683,11 @@
                         }
                         if($role != ""){
                             ?>
+<<<<<<< HEAD
+                            <div class="row mb-4">
+=======
                             <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c2_metadataName">
                                         Role

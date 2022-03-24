@@ -11,6 +11,22 @@
         <div class="card-body">
             <div class="acard-body opacity-8">
                 <?php
+<<<<<<< HEAD
+                if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) && trim($metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode) != "") {
+                    $flag *= 0;
+                    ?>
+                    <div class="row mb-2">
+                        <div class="col-xl-2">
+                            <label class="form-control-label" for="input-dataset-type">
+                                Spatial Data Set Type :
+                            </label>
+                        </div>
+                        <div class="col-xl-3">
+                            <?php echo "<p>" . $metadataxml->identificationInfo->MD_DataIdentification->spatialRepresentationType->MD_SpatialRepresentationTypeCode . "</p>"; ?>
+                        </div>
+                    </div>
+                    <?php
+=======
                 foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
                     if($val['status'] == "customInput"){
                         ?>
@@ -53,11 +69,57 @@
                             <?php
                         }
                     }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                 }
                 ?>
 
                 <div class="row mb-2">
                     <?php
+<<<<<<< HEAD
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) && trim($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) != "") {
+                        $flag *= 0;
+                        ?>
+                        <div class="col-xl-3">
+                            <label class="form-control-label" for="input-hardsoftcopy">
+                                Scale in Hardcopy/Softcopy
+                                <span style="font-size: smaller;">(feature scale)</span>
+                                 :
+                            </label>
+                        </div>
+                        <div class="col-xl-2">
+                            <?php echo "<p>" . $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer . "</p>"; ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance) && trim($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance) != "") {
+                        $flag *= 0;
+                        ?>
+                        <div class="col-xl-2">
+                            <label class="form-control-label" for="input-imggsd">
+                                Image Resolution (GSD) :</label>
+                        </div>
+                        <div class="col-md-2">
+                            <?php echo "<p>" . $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->distance->Distance . " meter</p>"; ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) && trim($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) != "") {
+                        $flag *= 0;
+                        ?>
+                        <div class="col-xl-1">
+                            <label class="form-control-label" for="input-language">
+                                Language :
+                            </label>
+                        </div>
+                        <div class="col-xl-2">
+                            <?php echo "<p>" . $metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString . "</p>"; ?>
+                        </div>
+                        <?php
+=======
                     foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
                         if($key == "c12_feature_scale"){
                             $scale = "";
@@ -124,11 +186,27 @@
                                 <?php
                             }
                         }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                     }
                     ?>
 
                     <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
                     <?php
+<<<<<<< HEAD
+                    if (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) != "") {
+                        $flag *= 0;
+                        ?>
+                        <div class="col-xl-1">
+                            <label class="form-control-label" for="input-language">
+                                Maintenance and Update :
+                            </label>
+                        </div>
+                        <div class="col-xl-2">
+                            <?php echo trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode); ?>
+                        </div>
+                        <?php
+                    }
+=======
                     foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
                         if($key == "c12_maintenanceUpdate"){
                             $maintenanceUpdate = "";
@@ -153,6 +231,7 @@
                         }
                     }
                     
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                     ?>
                 </div>
             </div>

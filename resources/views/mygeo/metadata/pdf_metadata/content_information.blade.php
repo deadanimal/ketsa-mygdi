@@ -14,6 +14,24 @@
                     Information</h6>
                 <div class="pl-lg-3">
                     <?php
+<<<<<<< HEAD
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString != "") {
+                        $flag *= 0;
+                        ?>
+                        <div class="row mb-2">
+                            <div class="col-xl-6">
+                                <div class="form-inline">
+                                    <div class="form-control-label mr-3">
+                                        Band Boundry:
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->bandBoundry->CharacterString . "</p>"; ?>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString . "</p>"; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+=======
                     foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
                         if($val['status'] == "customInput"){
                             ?>
@@ -52,10 +70,41 @@
                     }
                     
                     
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                     ?>
                     
                     <div class="row mb-2">
                         <?php
+<<<<<<< HEAD
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString != "") {
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-6">
+                                <div class="form-inline">
+                                    <div class="form-control-label mr-4">
+                                        Transfer Function Type:
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->transferFunctionType->CharacterString . "</p>"; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString != "") {
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-6">
+                                <div class="form-inline">
+                                    <div class="form-control-label mr-3">
+                                        Transmitted Polarization:
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->transmittedPolarization->CharacterString . "</p>"; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+=======
                         foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
                             if($key == "c7_trans_fn_type"){
                                 $transFnType = "";
@@ -101,10 +150,43 @@
                         ?>
                         <?php
                         
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         ?>
                     </div>
                     <div class="row mb-2">
                         <?php
+<<<<<<< HEAD
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString != "") {
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-6">
+                                <div class="form-inline">
+                                    <div class="form-control-label mr-4">
+                                        Nominal Spatial Resolution:
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->nominalSpatialResolution->CharacterString . "</p>"; ?>
+                                    <div class="form-control-label ml-2">
+                                        meter
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString != "") {
+                            $flag *= 0;
+                            ?>
+                            <div class="col-xl-6">
+                                <div class="form-inline">
+                                    <div class="form-control-label mr-3">
+                                        Detected Polarization:
+                                    </div>
+                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->detectedPolarisation->CharacterString . "</p>"; ?>
+                                </div>
+                            </div>
+                            <?php
+=======
                         foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
                             if($key == "c7_nominal_spatial_res"){
                                 $nomSpatRes = "";
@@ -147,6 +229,7 @@
                                     <?php
                                 }
                             }
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         }
                         ?>
                     </div>

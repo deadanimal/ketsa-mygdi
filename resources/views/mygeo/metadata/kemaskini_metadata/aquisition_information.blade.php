@@ -25,7 +25,11 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
+<<<<<<< HEAD
+                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+=======
                                     <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" value="{{ $metadataxml->customInputs->accordion8->$key }}"/>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 </div>
                             </div>
                             <?php
@@ -42,7 +46,11 @@
                             foreach($template->template[strtolower($catSelected)]['accordion8'] as $key=>$val){
                                 if($key == "c8_avg_air_temp"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-8">
                                             <div class="form-control-label">
                                                 Average Air Temperature
@@ -62,7 +70,11 @@
                                 }
                                 if($key == "c8_altitude"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-8">
                                             <div class="form-control-label">
                                                 Altitude
@@ -82,7 +94,11 @@
                                 }
                                 if($key == "c8_relative_humid"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-8">
                                             <div class="form-control-label">
                                                 Relative Humidity
@@ -102,7 +118,11 @@
                                 }
                                 if($key == "c8_meteor_cond"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb">
+=======
                                     <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-8">
                                             <div class="form-control-label">
                                                 Meteorological Condition
@@ -132,7 +152,11 @@
                             foreach($template->template[strtolower($catSelected)]['accordion8'] as $key=>$val){
                                 if($key == "c8_identifier"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
                                                 Identifier<span class="text-warning">*</span>
@@ -155,7 +179,11 @@
                                 }
                                 if($key == "c8_trigger"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
                                                 Trigger
@@ -180,7 +208,11 @@
                                 }
                                 if($key == "c8_context"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
                                                 Context
@@ -205,7 +237,11 @@
                                 }
                                 if($key == "c8_sequence"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
                                                 Sequence
@@ -230,7 +266,11 @@
                                 }
                                 if($key == "c8_time"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
                                                 Time
@@ -259,7 +299,11 @@
                             foreach($template->template[strtolower($catSelected)]['accordion8'] as $key=>$val){
                                 if($key == "c8_type"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
                                                 Type<span class="text-warning">*</span>
@@ -287,7 +331,11 @@
                             foreach($template->template[strtolower($catSelected)]['accordion8'] as $key=>$val){
                                 if($key == "c8_op_identifier"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
                                                 Identifier<span class="text-warning">*</span>
@@ -307,7 +355,11 @@
                                 }
                                 if($key == "c8_op_status"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb-2">
+=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
                                                 Status
@@ -327,7 +379,11 @@
                                 }
                                 if($key == "c8_op_type"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="row mb">
+=======
                                     <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
                                                 Type
@@ -357,6 +413,33 @@
                             foreach($template->template[strtolower($catSelected)]['accordion8'] as $key=>$val){
                                 if($key == "c8_rdr_date"){
                                     ?>
+<<<<<<< HEAD
+                                    <div class="form-control-label mr-3">
+                                        Date
+                                    </div>
+                                    <?php
+                                    $rdrDate = "";
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date) && $metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date != "") {
+                                        $rdrDate = $metadataxml->identificationInfo->MD_DataIdentification->operationDate->Date;
+                                    }
+                                    ?>
+                                    <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_rdr_date" id="c8_rdr_date" value="{{ $rdrDate }}">
+                                    <?php
+                                }
+                                if($key == "c8_last_accept_date"){
+                                    ?>
+                                    <div class="form-control-label mt-3 mr-3">
+                                        Last Acceptable Date
+                                    </div>
+                                    <?php
+                                    $lad = "";
+                                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date) && $metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date != "") {
+                                        $lad = $metadataxml->identificationInfo->MD_DataIdentification->lastAcceptableDate->Date;
+                                    }
+                                    ?>
+                                    <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" class="form-control col-lg-4" value="{{ $lad }}">
+                                    <?php
+=======
                                     <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="form-control-label mr-3">
                                             Date
@@ -386,6 +469,7 @@
                                         <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" class="form-control col-lg-4" value="{{ $lad }}">
                                     </div>
                                     <?php
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 }
                             }
                             ?>

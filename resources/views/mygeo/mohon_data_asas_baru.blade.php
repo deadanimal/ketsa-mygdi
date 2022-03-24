@@ -327,6 +327,7 @@
                                                                     <th>SUB-KATEGORI</th>
                                                                     <th>KATEGORI</th>
                                                                     <th>KAWASAN DATA</th>
+                                                                    <th>JENIS DATA</th>
                                                                     <th>KELAS</th>
                                                                     @if (Auth::user()->hasRole(['Pemohon Data']))
                                                                         <th>TINDAKAN</th>
@@ -342,6 +343,7 @@
                                                                         <td>{{ $sk->subkategori }}</td>
                                                                         <td>{{ $sk->kategori }}</td>
                                                                         <td>{{ $sk->kawasan_data }}</td>
+                                                                        <td>{{ $sk->jenis_data }}</td>
                                                                         <td>{{ $sk->kelas }} </td>
                                                                         @if (Auth::user()->hasRole(['Pemohon Data']))
                                                                             <td>
@@ -610,11 +612,20 @@
 
                                     </div>
                                     <div class="form-group" id="dynamicAddRemove">
-
                                     </div>
                                     <div class="form-group" id="dynamicAddRemove2">
-
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="jenis_data">Jenis Data</label>
+                                        <select class="form-control" name="jenis_data">
+                                            <option selected disabled>Pilih</option>
+                                               <option value="fizikal">Fizikal</option>
+                                               <option value="map_servis">Map Servis</option>
+                                               <option value="fizikal, map_servis">Fizikal dan Map Servis</option>
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                         <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
                                         {{-- <input name="kawasan_data" class="form-control"
@@ -954,17 +965,25 @@
                                                     @endif
                                                 @endforeach
                                             </select>
-                                            <br>
-                                            <div class="kelasData"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="kawasan_data">Jenis Data</label>
+                                            <select class="form-control" name="jenis_data">
+                                                <option selected disabled>Pilih</option>
+                                                <option value="fizikal"  {{$sk->jenis_data == 'fizikal'? 'selected' : ''}}>Fizikal</option>
+                                               <option value="map_servis"  {{$sk->jenis_data == 'map_servis'? 'selected' : ''}}>Map Servis</option>
+                                               <option value="fizikal, map_servis"  {{$sk->jenis_data == 'fizikal, map_servis'? 'selected' : ''}}>Fizikal dan Map Servis</option>
+                                            </select>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
                                             <input name="kawasan_data" class="form-control mb-3" id="update_kawasan"
-                                                value="{{ $sk->kawasan_data }}" />
+                                                value="{{ $sk->kawasan_data }}" type="hidden" />
                                             <select class="form-control" id="negeris" name="negeri"
                                                 onchange="selectUpdateNegeri()">
-                                                <option selected disabled>Negeri</option>
+                                                <option selected disabled>{{ $sk->kawasan_data }}</option>
                                                 @foreach ($negeris as $neg)
                                                     <option value="{{ $neg->kod_negeri }}">{{ $neg->negeri }}
                                                     </option>

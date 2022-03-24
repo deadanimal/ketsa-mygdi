@@ -32,7 +32,11 @@
                 foreach($template->template[strtolower($catSelected)]['accordion6'] as $key=>$val){
                     if($key == "c6_collection_name"){
                         ?>
+<<<<<<< HEAD
+                        <div class="col-xl-7">
+=======
                         <div class="col-xl-7" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="form-inline ml-3">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan nama kumpulan GCP yang diambil/ dicerap">
                                     <?php echo __('lang.collection_name'); ?><span class="text-warning">*</span>
@@ -47,7 +51,11 @@
                     }
                     if($key == "c6_collection_id"){
                         ?>
+<<<<<<< HEAD
+                        <div class="col-xl-5">
+=======
                         <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="form-inline">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan bilangan titik GCP ">
                                     <?php echo __('lang.collection_identification'); ?><span class="text-warning">*</span>

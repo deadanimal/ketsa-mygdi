@@ -24,7 +24,11 @@
                                             <label class="float-right">:</label>
                                         </div>
                                         <div class="col-8">
+<<<<<<< HEAD
+                                            <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+=======
                                             {{ $metadataxml->customInputs->accordion8->$key }}
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         </div>
                                     </div>
                                     <?php
@@ -36,7 +40,11 @@
                                     }
                                     if($avgAirTemp != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-8">
                                                 <div class="form-control-label">
                                                     Average Air Temperature
@@ -56,7 +64,11 @@
                                     }
                                     if($alt != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-8">
                                                 <div class="form-control-label">
                                                     Altitude
@@ -76,7 +88,11 @@
                                     }
                                     if($relHumid != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-8">
                                                 <div class="form-control-label">
                                                     Relative Humidity
@@ -96,7 +112,11 @@
                                     }
                                     if($metCond != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb">
+=======
                                         <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-8">
                                                 <div class="form-control-label">
                                                     Meteorological Condition
@@ -126,7 +146,11 @@
                                     }
                                     if($eventId != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Identifier<span class="text-warning">*</span>
@@ -146,7 +170,11 @@
                                     }
                                     if($trigger != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Trigger
@@ -166,7 +194,11 @@
                                     }
                                     if($context != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Context
@@ -186,7 +218,11 @@
                                     }
                                     if($sequence != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Sequence
@@ -206,7 +242,11 @@
                                     }
                                     if($time != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Time
@@ -235,7 +275,11 @@
                                     }
                                     if($instruIdType != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Type<span class="text-warning">*</span>
@@ -261,7 +305,11 @@
                                     }
                                     if($opId != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Identifier<span class="text-warning">*</span>
@@ -281,7 +329,11 @@
                                     }
                                     if($opStatus != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb-2">
+=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Status
@@ -301,7 +353,11 @@
                                     }
                                     if($opType != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="row mb">
+=======
                                         <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-xl-5">
                                                 <div class="form-control-label">
                                                     Type
@@ -331,12 +387,19 @@
                                     }
                                     if($rdrDate != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="form-control-label mr-3">
+                                            Date
+                                        </div>
+                                        <?php echo "&nbsp;&nbsp;<p>" . date('d/m/Y',strtotime(trim($rdrDate))) . "</p>"; ?>
+=======
                                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="form-control-label mr-3">
                                                 Date
                                             </div>
                                             <?php echo "&nbsp;&nbsp;<p>" . date('d/m/Y',strtotime(trim($rdrDate))) . "</p>"; ?>
                                         </div>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <?php
                                     }
                                 }
@@ -347,12 +410,19 @@
                                     }
                                     if($lad != ""){
                                         ?>
+<<<<<<< HEAD
+                                        <div class="form-control-label mt-3 mr-3">
+                                            Last Acceptable Date
+                                        </div>
+                                        <?php echo "&nbsp;&nbsp;<p>" . date('d/m/Y',strtotime(trim($lad))) . "</p>"; ?>
+=======
                                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="form-control-label mt-3 mr-3">
                                                 Last Acceptable Date
                                             </div>
                                             <?php echo "&nbsp;&nbsp;<p>" . date('d/m/Y',strtotime(trim($lad))) . "</p>"; ?>
                                         </div>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <?php
                                     }
                                 }

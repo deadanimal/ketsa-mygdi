@@ -20,7 +20,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -34,8 +37,15 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="c2_metadataName" id="c2_metadataName" data-status="<?php echo $val['status']; ?>"/>
+                                <a href="lampiran/title" class="text-yellow" target="_blank">
+                                    <i class="fas fa-lightbulb"></i>
+                                </a>
+=======
                                 Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="c2_metadataName" id="c2_metadataName" data-status="<?php echo $val['status']; ?>"/>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                             <span class="close btnClose">&times;</span>
                         </div>
@@ -48,7 +58,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
@@ -64,7 +77,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractApplication_namaAplikasi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -78,7 +94,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractApplication_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -92,7 +111,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractApplication_tahunPembangunan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -106,7 +128,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractApplication_kemaskini" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -120,7 +145,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractApplication_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -134,7 +162,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractApplication_sasaranPengguna" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -148,7 +179,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractApplication_versi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -162,7 +196,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractApplication_perisianDigunaPembangunan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -176,7 +213,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractDocument_namaDokumen" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -190,7 +230,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractDocument_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -204,7 +247,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractDocument_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -218,7 +264,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractDocument_edisi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -232,7 +281,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractGISActivityProject_namaAktiviti" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -246,7 +298,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractGISActivityProject_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -260,7 +315,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractGISActivityProject_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -274,7 +332,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractGISActivityProject_tahun" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -288,7 +349,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractMap_namaPeta" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -302,7 +366,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractMap_kawasan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -316,7 +383,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractMap_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -330,7 +400,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractMap_tahunTerbitan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -344,7 +417,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractMap_edisi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -358,7 +434,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractMap_noSiri" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -372,7 +451,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractMap_skala" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -386,7 +468,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractMap_unit" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -400,7 +485,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_namaData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -414,7 +502,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -428,7 +519,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_rumusanData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -442,7 +536,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_tujuanData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -456,7 +553,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -470,7 +570,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -484,7 +587,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_unit" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -498,7 +604,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_skala" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -512,7 +621,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_statusData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -526,7 +638,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_tahunPerolehan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -540,7 +655,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_jenisSatelit" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -554,7 +672,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_format" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -568,7 +689,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_resolusi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -582,7 +706,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractRasterData_kawasanLitupan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -596,7 +723,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractServices_namaServis" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -610,7 +740,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractServices_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -624,7 +757,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractServices_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -638,7 +774,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractServices_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -652,7 +791,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractServices_polisi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -666,7 +808,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractServices_peringkatCapaian" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -680,7 +825,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractServices_format" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -694,7 +842,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_namaPerisian" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -708,7 +859,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_versi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -722,7 +876,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_tujuan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -736,7 +893,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_tahunPengunaanPerisian" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -750,7 +910,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_kaedahPerolehan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -764,7 +927,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_format" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -778,7 +944,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_pengeluar" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -792,7 +961,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_keupayaan" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -806,7 +978,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_dataTerlibat" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -820,7 +995,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractSoftware_keperluanPerkakas" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -834,7 +1012,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractVectorData_namaData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -848,7 +1029,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractVectorData_lokasi" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -862,7 +1046,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractVectorData_rumusanData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -876,7 +1063,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractVectorData_tujuanData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -890,7 +1080,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractVectorData_kaedahPenyediaanData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -904,7 +1097,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractVectorData_format" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -918,7 +1114,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractVectorData_unit" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -932,7 +1131,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractVectorData_skala" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -946,7 +1148,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="abstractVectorData_statusData" class="form-control form-control-sm ml-3 abstractElement sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -960,8 +1165,15 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+                                <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>"></textarea>
+                                <a href="lampiran/abstract" class="text-yellow" target="_blank">
+                                    <i class="fas fa-lightbulb"></i>
+                                </a>
+=======
                                 Textbox
                                 <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>"></textarea>
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                             <span class="close btnClose">&times;</span>
                         </div>
@@ -974,8 +1186,13 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+                                <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest sortable" data-status="<?php echo $val['status']; ?>">
+                                <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal" data-target="#modal-showweb" data-backdrop="false">Test</button>
+=======
                                 Textbox
                                 <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest sortable" data-status="<?php echo $val['status']; ?>">
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                             <span class="close btnClose">&times;</span>
                         </div>
@@ -988,7 +1205,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="date" name="c2_metadataDate" id="c2_metadataDate" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1002,7 +1222,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <select name="c2_metadataDateType" id="c2_metadataDateType" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
@@ -1018,7 +1241,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <select class="form-control form-control-sm ml-3 sortable" name="c2_metadataStatus" id="c2_metadataStatus" data-status="<?php echo $val['status']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
@@ -1034,7 +1260,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <select class="form-control form-control-sm ml-3 sortable" name="c2_typeOfServices" id="c2_typeOfServices" data-status="<?php echo $val['status']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
@@ -1050,7 +1279,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" class="form-control form-control-sm ml-3 sortable" name="c2_operationName" id="c2_operationName" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1064,8 +1296,13 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+                                <input type="text" class="form-control form-control-sm ml-3 sortable" name="c2_serviceUrl" id="c2_serviceUrl" data-status="<?php echo $val['status']; ?>">
+                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false">Test</button>
+=======
                                 Textbox
                                 <input type="text" class="form-control form-control-sm ml-3 sortable" name="c2_serviceUrl" id="c2_serviceUrl" data-status="<?php echo $val['status']; ?>">
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                             <span class="close btnClose">&times;</span>
                         </div>
@@ -1078,7 +1315,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <select class="form-control form-control-sm ml-3 sortable" name="c2_typeOfCouplingDataset" id="c2_typeOfCouplingDataset" data-status="<?php echo $val['status']; ?>">
                                     <option value="">Pilih...</option>
                                 </select>
@@ -1094,7 +1334,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1108,7 +1351,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1122,7 +1368,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_bahagian" id="c2_contact_bahagian" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1136,7 +1385,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_position_name" id="c2_position_name" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1150,7 +1402,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1164,7 +1419,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1178,7 +1436,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1192,7 +1453,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1206,7 +1470,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_postal_code" id="c2_postal_code" class="form-control form-control-sm mb-2 divPostalCode sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1220,7 +1487,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm mb-2 divCity sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1234,7 +1504,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <select name="c2_contact_state" id="c2_contact_state"class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                     <option disabled>Pilih...</option>
                                 </select>
@@ -1250,7 +1523,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <select name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                     <option disabled>Pilih...</option>
                                 </select>
@@ -1266,7 +1542,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="email" name="c2_contact_email" id="c2_contact_email" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1280,7 +1559,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_fax" id="c2_contact_fax" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1294,7 +1576,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1308,7 +1593,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Textbox
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -1322,7 +1610,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
+<<<<<<< HEAD
+=======
                                 Dropdown
+>>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <select name="c2_contact_role" id="c2_contact_role" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
                                     <option value="">Pilih...</option>
                                 </select>

@@ -923,7 +923,8 @@ class DataAsasController extends Controller
     {
 
         $id = $request->permohonan_id;
-        $negeri = Negeri::where('kod_negeri',$request->negeri)->first()->negeri;
+        if($request->negeri != null){
+            $negeri = Negeri::where('kod_negeri',$request->negeri)->first()->negeri;
         $daerah = $request->daerah;
         if($daerah){
             $append_kd = $negeri .', (' ;
@@ -936,6 +937,9 @@ class DataAsasController extends Controller
             }
         } else {
             $append_kd = $negeri;
+        }
+        } else {
+            $append_kd = $request->kawasan_data;
         }
         // dd($append_kd);
 
@@ -965,6 +969,7 @@ class DataAsasController extends Controller
             $skdata->kategori = $request->kategori;
             $skdata->subkategori = $request->subkategori;
             $skdata->kawasan_data = $append_kd;
+            $skdata->jenis_data = $request->jenis_data;
             $skdata->kelas = $valid->kelas;
             $skdata->harga_data = $valid->harga_data;
             $skdata->permohonan_id = $id;
@@ -1064,7 +1069,9 @@ class DataAsasController extends Controller
             }
             else
             {
-                $negeri = Negeri::where('kod_negeri',$request->negeri)->first()->negeri;
+                // dd($request->negeri);
+                if($request->negeri != null){
+                    $negeri = Negeri::where('kod_negeri',$request->negeri)->first()->negeri;
                 $daerah = $request->daerah;
                 if($daerah){
                     $append_kd = $negeri .', (' ;
@@ -1078,11 +1085,15 @@ class DataAsasController extends Controller
                 } else {
                     $append_kd = $negeri;
                 }
+                } else {
+                    $append_kd = $request->kawasan_data;
+                }
                 //update senarai kawasan data
                 SenaraiKawasanData::where(["id" => $request->sk_id])->update([
                     "kategori" => $request->kategori,
                     "subkategori" => $request->subkategori,
                     "lapisan_data" => $request->lapisan_data,
+                    "jenis_data" => $request->jenis_data,
                     "kawasan_data" => $append_kd,
                     "harga_data" => $valid->harga_data,
                 ]);
@@ -1135,7 +1146,7 @@ class DataAsasController extends Controller
                     $to_name = $pemohon->users->name;
                     $to_email = $pemohon->users->email;
                     if($request->catatan == 'others'){
-                        $data = array('catatan_lain'=>$request->catatan_lain);
+                        $data = array('catatan'=>$request->catatan_lain);
                     } else {
                         $data = array('catatan'=>$request->catatan);
                     }

@@ -91,6 +91,11 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
+        
+        .tb table{
+            table-layout: auto;
+  width: 180px; 
+        }
 
         .tb th,
         .tb td {
