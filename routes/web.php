@@ -204,6 +204,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/check_senarai_data', 'DataAsasController@check_senarai_data');
     Route::post('/kemaskini_senarai_data', 'DataAsasController@update_senarai_data');
     Route::post('/delete_senarai_data', 'DataAsasController@delete_senarai_data');
+    Route::get('/senarai_data_hapus', 'DataAsasController@senarai_data_hapus');
+    Route::post('/senarai_data_hapus_delete', 'DataAsasController@senarai_data_hapus_delete');
 
     Route::post('/simpan_kategori_senarai_data', 'DataAsasController@store_kategori_senarai_data');
     Route::post('/simpan_subkategori_senarai_data', 'DataAsasController@store_subkategori_senarai_data');

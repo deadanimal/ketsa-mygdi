@@ -509,6 +509,47 @@ class DataAsasController extends Controller
 
         return view('mygeo.senarai_data', compact('senarai_data','kategori_sd','subkategori_sd'));
     }
+    
+    public function senarai_data_hapus()
+    {
+        $senarai_data = SenaraiData::orderBy('kod','ASC')->get();
+        $kategori_sd = KategoriSenaraiData::orderBy('name','ASC')->get();
+        $subkategori_sd = SubKategoriSenaraiData::orderBy('name','ASC')->get();
+
+        $kat_add = SenaraiData::orderBy('kategori','ASC')->distinct('kategori')->get();
+        // dd($kategori_sd);
+        foreach ($kat_add as $kat) {
+            $check_kat = KategoriSenaraiData::where('name',$kat->kategori)->first();
+            if($check_kat){
+
+            } else {
+                $kat_baru = new KategoriSenaraiData();
+                $kat_baru->name = $kat->kategori;
+                $kat_baru->save();
+            }
+        }
+
+        // return response()->json($senarai_data);
+
+        $sub_add = SenaraiData::orderBy('subkategori','ASC')->distinct('subkategori')->get();
+
+        foreach ($sub_add as $sub) {
+            $check_sub = SubKategoriSenaraiData::where('name',$sub->subkategori)->first();
+            if($check_sub){
+
+            } else {
+                $kat_id = KategoriSenaraiData::where('name',$sub->kategori)->first();
+                $sub_baru = new SubKategoriSenaraiData();
+                $sub_baru->name = $sub->subkategori;
+                $sub_baru->kategori_id = $kat_id->id;
+
+                $sub_baru->save();
+            }
+        }
+
+
+        return view('mygeo.senarai_data_hapus', compact('senarai_data','kategori_sd','subkategori_sd'));
+    }
 
 
 
@@ -630,15 +671,15 @@ class DataAsasController extends Controller
     public function update_senarai_data(Request $request)
     {
         $valid_kod = SenaraiData::where(["kod" => $request->kod])->first();
-        $valid = SenaraiData::where(["kategori" => $request->kategori,
-                                    "subkategori" => $request->subkategori,
-                                    "lapisan_data" => $request->lapisan_data,
-                                    "kelas" => $request->kelas,
-                                    "status" => $request->status,
-                                    "kod" => $request->kod,
-                                    ])->first();
-
-        if(empty($valid)){
+//        $valid = SenaraiData::where(["kategori" => $request->kategori,
+//                                    "subkategori" => $request->subkategori,
+//                                    "lapisan_data" => $request->lapisan_data,
+//                                    "kelas" => $request->kelas,
+//                                    "status" => $request->status,
+//                                    "kod" => $request->kod,
+//                                    ])->first();
+//        dd($valid_kod,$valid, $request);
+//        if(!empty($valid)){
             if(empty($valid_kod)){
                 SenaraiData::where(["id" => $request->id_senarai_data])->update([
                     "kategori" => $request->kategori,
@@ -647,6 +688,7 @@ class DataAsasController extends Controller
                     "kelas" => $request->kelas,
                     "status" => $request->status,
                     "harga_data" => $request->harga_data,
+                    "harga_data_services" => $request->harga_data_services,
                     "kod" => $request->kod,
                 ]);
 
@@ -670,14 +712,15 @@ class DataAsasController extends Controller
                         "kelas" => $request->kelas,
                         "status" => $request->status,
                         "harga_data" => $request->harga_data,
+                        "harga_data_services" => $request->harga_data_services,
                     ]);
                     return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
                 }
             }
 
-        } else {
-            return redirect('/senarai_data')->with('info', 'Tiada Data Dikemaskini!');
-        }
+//        } else {
+//            return redirect('/senarai_data')->with('info', 'Tiada Data Dikemaskini!');
+//        }
 
     }
 
@@ -692,6 +735,20 @@ class DataAsasController extends Controller
         $at->save();
 
         return redirect('senarai_data')->with('success', 'Data tersebut telah dibuang');
+    }
+    
+    public function senarai_data_hapus_delete(Request $request)
+    {
+        SenaraiData::where(["kategori" => $request->kategori])->delete();
+        KategoriSenaraiData::where(["name" => $request->kategori])->delete();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
+        $at->save();
+
+        return redirect('senarai_data_hapus')->with('success', 'Data telah dibuang');
     }
 
     public function semakan_status()

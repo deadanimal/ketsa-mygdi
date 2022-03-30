@@ -117,32 +117,11 @@
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h3 class="mb-0">Senarai Data</h3>
+                                        <h3 class="mb-0">Senarai Data Hapus</h3>
                                     </div>
 
                                     <div class="col-4 text-right">
-                                        <div class="btn-group btn-group-sm" role="group">
-                                            <button id="btnGroupDrop1" type="button" class="btn btn-default dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Tambah
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                                <a class="dropdown-item" data-toggle="modal" id="addKategori"
-                                                    data-target="#modal-kategori">Kategori</a>
-                                                <a class="dropdown-item" data-toggle="modal"
-                                                    data-target="#modal-subkategori">Sub-Kategori</a>
-                                                <a class="dropdown-item" data-toggle="modal"
-                                                    data-target="#modal-lapisan-data">Lapisan Data</a>
-                                            </div>
-                                        </div>
-                                    
-                                        <a href="{{ url('senarai_data_hapus') }}">
-                                            <div class="btn-group btn-group-sm" role="group">
-                                                <button id="btnGroupDrop12" type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false">
-                                                    Hapus
-                                                </button>
-                                            </div>
-                                        </a>
+
                                     </div>
                                 </div>
                             </div>
@@ -152,10 +131,13 @@
                                     <div class="acard div_c{{ $ksd->id }} mb-3" id="div_c{{ $ksd->id }}">
                                         <div class="card-header accordionHeader">
                                             <div class="row align-items-center">
-                                                <div class="col-12" data-toggle="collapse"
+                                                <div class="col-10" data-toggle="collapse"
                                                     href="#collapse{{ $ksd->id }}">
                                                     <h3 class="heading mb-0">{{ $loop->iteration }}. {{ $ksd->name }}
                                                     </h3>
+                                                </div>
+                                                <div class="col-2 hapusKategori" style="text-align:right;" data-kategori="{{ $ksd->name }}">
+                                                    <p class="mb-0">Hapus</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,14 +151,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>BIL</th>
-                                                                {{-- <th>KATEGORI</th> --}}
                                                                 <th>SUB-KATEGORI</th>
-                                                                <th>LAPISAN DATA</th>
-                                                                <th>KOD (MS1759)</th>
-                                                                <th>KELAS</th>
-                                                                <th>HARGA (FIZIKAL)</th>
-                                                                <th>HARGA (SERVICES)</th>
-                                                                <th>STATUS</th>
                                                                 <th>TINDAKAN</th>
                                                             </tr>
                                                         </thead>
@@ -187,22 +162,8 @@
                                                                 @if ($ksd->name === $sdata->kategori)
                                                                     <tr>
                                                                         <td>{{ $count }}</td>
-                                                                        {{-- <td>{{ $sdata->kategori }}</td> --}}
                                                                         <td>{{ $sdata->subkategori }}</td>
-                                                                        <td>{{ $sdata->lapisan_data }}</td>
-                                                                        <td>{{ $sdata->kod }}</td>
-                                                                        <td>{{ $sdata->kelas }}</td>
-                                                                        <td>{{ $sdata->harga_data }}</td>
-                                                                        <td>{{ $sdata->harga_data_services }}</td>
-                                                                        <td>{{ $sdata->status }}</td>
                                                                         <td>
-                                                                            <a data-toggle="modal"
-                                                                                data-target="#modal-kemaskinidata-{{ $sdata->id }}">
-                                                                                <button type="button"
-                                                                                    class="btn btn-sm btn-success"><i
-                                                                                        class="fas fa-edit"></i>
-                                                                                </button>
-                                                                            </a>
                                                                             <button type="button"
                                                                                 data-senaraidataid="{{ $sdata->id }}"
                                                                                 class="btnDelete btn btn-sm btn-danger mx-2"><i
@@ -230,216 +191,6 @@
             </div>
         </section>
 
-        <!-- Modal Kemaskini Data-->
-        @foreach ($senarai_data as $sdata)
-            <div class="modal fade" id="modal-kemaskinidata-{{ $sdata->id }}">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header bg-primary mb-0">
-                            <h4 class="text-white">Kemaskini Senarai Data</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form method="POST" action="{{ url('kemaskini_senarai_data') }}">
-                            @csrf
-                            <div class="modal-body row">
-                                <div class="col-12">
-                                    <input type="hidden" name="id_senarai_data" value="{{ $sdata->id }}">
-                                    <div class="form-group">
-                                        <label class="form-control-label">Kategori</label>
-                                        <input type="text" class="form-control form-control-sm" name="kategori"
-                                            value="{{ $sdata->kategori }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Sub-Kategori</label>
-                                        <select name="subkategori" class="form-control form-control-sm"
-                                            onchange="selectSubKategori()" autofocus>
-                                            <option selected disabled>Pilih</option>
-                                            @foreach ($subkategori_sd as $sub)
-                                                @if ($sub->name == $sdata->subkategori)
-                                                    <option value="{{ $sub->name }}"
-                                                        {{ $sub->name == $sdata->subkategori ? 'selected' : '' }}>
-                                                        {{ $sub->name }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Lapisan Data</label>
-                                        <input type="text" class="form-control form-control-sm" name="lapisan_data"
-                                            value="{{ $sdata->lapisan_data }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Kod (MS1759)</label>
-                                        <input type="text" class="form-control form-control-sm" name="kod"
-                                            value="{{ $sdata->kod }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Pengkelasan Lapisan Data</label>
-                                        <select class="form-control form-control-sm" name="kelas">
-                                            <option value="" selected disabled>Pilih</option>
-                                            <option value="Terhad" @if ($sdata->kelas == 'Terhad') selected @endif>Terhad</option>
-                                            <option value="Tidak Terhad" @if ($sdata->kelas == 'Tidak Terhad') selected @endif>Tidak Terhad</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Harga (Fizikal)</label>
-                                        <input type="text" class="form-control form-control-sm" name="harga_data_services"
-                                            value="{{ $sdata->harga_data }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Harga (Services)</label>
-                                        <input type="text" class="form-control form-control-sm" name="harga_data"
-                                            value="{{ $sdata->harga_data_services }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Status Data</label>
-                                        <select class="form-control form-control-sm" name="status">
-                                            <option selected disabled>Pilih</option>
-                                            <option value="Tersedia" @if ($sdata->status == 'Tersedia') selected @endif>Tersedia</option>
-                                            <option value="Tiada" @if ($sdata->status == 'Tiada') selected @endif>Tiada</option>
-                                        </select>
-                                    </div>
-
-                                    <button class="btn btn-success float-right" type="submit">
-                                        <span class="text-white">Simpan</span>
-                                    </button>
-
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-
-        <!-- Modal Kategori -->
-        <div class="modal fade" id="modal-kategori">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary mb-0">
-                        <h4 class="text-white">Tambah Kategori</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="POST" action="{{ url('simpan_kategori_senarai_data') }}">
-                        @csrf
-                        <div class="modal-body row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="form-control-label">Kategori</label>
-                                    <div class="autocomplete" style="width:100%;">
-                                        <input type="text" class="form-control form-control-sm" name="kategori"
-                                            id="namaKategori" autocomplete="off">
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-success float-right mt-4" type="submit">
-                                    <span class="text-white">Tambah</span>
-                                </button>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Sub-Kategori -->
-        <div class="modal fade" id="modal-subkategori">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary mb-0">
-                        <h4 class="text-white">Tambah Sub-Kategori</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="POST" action="{{ url('simpan_subkategori_senarai_data') }}">
-                        @csrf
-                        <div class="modal-body row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="form-control-label">Kategori</label>
-                                    <select class="form-control form-control-sm" name="kategori_id" id="addSubKategori"
-                                        onchange="selectKategori()">
-                                        <option selected disabled>Pilih</option>
-                                        @foreach ($kategori_sd as $kategori)
-                                            <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label">Sub-Kategori</label>
-                                    <div class="autocomplete" style="width:100%;">
-                                        <input type="text" class="form-control form-control-sm" name="subkategori"
-                                            id="namaSubKategori" autocomplete="off">
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-success float-right mt-4" type="submit">
-                                    <span class="text-white">Tambah</span>
-                                </button>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Tambah Data Asas -->
-        <div class="modal fade" id="modal-lapisan-data">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary mb-0">
-                        <h4 class="text-white">Tambah Lapisan Data</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="POST" action="{{ url('simpan_senarai_data') }}">
-                        @csrf
-                        <div class="modal-body row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="form-control-label">Kategori</label>
-                                    <select class="form-control form-control-sm kategori checkData" name="kategori"
-                                        id="kategori_s" onchange="selectKategori()">
-                                        <option selected disabled>Pilih</option>
-                                        @foreach ($kategori_sd as $kategori)
-                                            <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group" id="dynamicAddRemove">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label">Kod (MS1759)</label>
-                                    <input type="text" class="form-control form-control-sm kod checkData" name="kod">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-control-label">Lapisan Data</label>
-                                    <div class="autocomplete" style="width:100%;">
-                                        <input type="text" class="form-control form-control-sm lapisandata checkData"
-                                            name="lapisan_data" id="namaLapisanData" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div style="font-size: 12px;" class="infoData"></div>
-
-                                <button class="btn btn-success float-right mt-4" type="submit">
-                                    <span class="text-white">Tambah</span>
-                                </button>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -704,6 +455,23 @@
                     },
                 }).done(function(response) {
                     alert("Data telah dibuang.");
+                    location.reload();
+                });
+            }
+        });
+        $(document).on("click", ".hapusKategori", function() {
+            var kategori = $(this).data('kategori');
+            var r = confirm("Adakah anda pasti untuk buang kategori ini?");
+            if (r == true) {
+                $.ajax({
+                    method: "POST",
+                    url: "senarai_data_hapus_delete", //SMBG SINI - function created in controller. continue there
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "kategori": kategori
+                    },
+                }).done(function(response) {
+                    alert("Kategori telah dibuang.");
                     location.reload();
                 });
             }
