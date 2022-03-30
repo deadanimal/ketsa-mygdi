@@ -20,10 +20,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-=======
                                 Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -37,10 +34,7 @@
                                     <label class="form-control-label mr-3" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
                                         <?php echo __('lang.access_constraints'); ?>
                                     </label>
-<<<<<<< HEAD
-=======
                                     Dropdown
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                         <option value="">Pilih</option>
                                     </select>
@@ -58,10 +52,7 @@
                                     <label class="form-control-label mr-3" for="input-use-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
                                         <?php echo __('lang.use_constraints'); ?>
                                     </label>
-<<<<<<< HEAD
-=======
                                     Dropdown
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                         <option value="">Pilih</option>
                                     </select>
@@ -79,10 +70,7 @@
                                     <label class="form-control-label mr-3" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
                                         <?php echo __('lang.classification'); ?>
                                     </label>
-<<<<<<< HEAD
-=======
                                     Dropdown
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
                                         <option value="">Pilih</option>
                                     </select>
@@ -101,10 +89,7 @@
                                            Contoh: Pekeliling Arahan Keselamatan Dokumen Geospatial Terperingkat Terhadap">
                                                <?php echo __('lang.classification_system'); ?>
                                     </label>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" name="c14_reference" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal" value="{{old('c14_reference')}}" data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>

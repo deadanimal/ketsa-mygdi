@@ -23,11 +23,7 @@
                             <label class="float-right">:</label>
                         </div>
                         <div class="col-8">
-<<<<<<< HEAD
-                            <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
-=======
                             <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" value="{{ $metadataxml->customInputs->accordion11->$key }}"/>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         </div>
                     </div>
                     <?php
@@ -40,19 +36,11 @@
                 foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
                     if($key == "c11_dist_format"){
                         ?>
-<<<<<<< HEAD
-                        <div class="col-xl-2">
-                            <label class="form-control-label" for="input-distribution-format">
-                                Format Name</label>
-                        </div>
-                        <div class="col-xl-3">
-=======
                         <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <label class="form-control-label" for="input-distribution-format">
                                 Format Name</label>
                         </div>
                         <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <?php
                             $distFormat = "";
                             if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->name->CharacterString != "") {
@@ -65,19 +53,11 @@
                     }
                     if($key == "c11_version"){
                         ?>
-<<<<<<< HEAD
-                        <div class="col-xl-1">
-                            <label class="form-control-label" for="input-version">
-                                Format Version </label>
-                        </div>
-                        <div class="col-xl-2">
-=======
                         <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <label class="form-control-label" for="input-version">
                                 Format Version </label>
                         </div>
                         <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <?php
                             $version = "";
                             if (isset($metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributionFormat->MD_Format->version->CharacterString != "") {
@@ -96,11 +76,7 @@
             foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
                 if($key == "c11_distributor"){
                     ?>
-<<<<<<< HEAD
-                    <div class="row mb-2">
-=======
                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-distributor">
                                 Organisation Name </label>
@@ -125,19 +101,11 @@
                     foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
                         if($key == "c11_units_of_dist"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-2">
-                                <label class="form-control-label" for="input-unit-distribution">
-                                    Units of Distribution </label>
-                            </div>
-                            <div class="col-xl-3">
-=======
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-unit-distribution">
                                     Units of Distribution </label>
                             </div>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                                 $unitDist = "";
                                 if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->unitsOfDistribution->CharacterString != "") {
@@ -150,19 +118,11 @@
                         }
                         if($key == "c11_size"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-2">
-                                <label class="form-control-label" for="input-sizemb">
-                                    Size (Megabytes) </label>
-                            </div>
-                            <div class="col-xl-2">
-=======
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-sizemb">
                                     Size (Megabytes) </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                                 $size = "";
                                 if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->transferSize->Real != "") {
@@ -175,19 +135,11 @@
                         }
                         if($key == "c11_link"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-1">
-                                <label class="form-control-label" for="input-distributor">
-                                    Link </label>
-                            </div>
-                            <div class="col-xl-4">
-=======
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-distributor">
                                     Link </label>
                             </div>
                             <div class="col-xl-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                                 $link = "";
                                 if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->linkage->URL != "") {
@@ -209,19 +161,11 @@
                 foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
                     if($key == "c11_medium"){
                         ?>
-<<<<<<< HEAD
-                        <div class="col-xl-1">
-                            <label class="form-control-label" for="input-medium">
-                                Medium Name</label>
-                        </div>
-                        <div class="col-xl-3">
-=======
                         <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <label class="form-control-label" for="input-medium">
                                 Medium Name</label>
                         </div>
                         <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <?php
                             $medium = "";
                             if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->offLine->MD_Medium->name->MD_MediumNameCode != "") {
@@ -260,19 +204,11 @@
                     foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
                         if($key == "c11_fees"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-1">
-                                <label class="form-control-label" for="input-fees">
-                                    Fees </label>
-                            </div>
-                            <div class="col-xl-2">
-=======
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-fees">
                                     Fees </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                                 $fees = "";
                                 if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->fees->CharacterString != "") {
@@ -285,19 +221,11 @@
                         }
                         if($key == "c11_order_instructions"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-2">
-                                <label class="form-control-label" for="input-instructionorder">
-                                    Ordering Instructions </label>
-                            </div>
-                            <div class="col-xl-5">
-=======
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-instructionorder">
                                     Ordering Instructions </label>
                             </div>
                             <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                                 $orderInstruct = "";
                                 if (isset($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) && trim($metadataxml->distributionInfo->MD_Distribution->distributor->MD_Distributor->distributionOrderProcess->MD_StandardOrderProcess->orderingInstructions->CharacterString) != "") {

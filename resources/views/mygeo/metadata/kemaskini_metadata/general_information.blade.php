@@ -23,11 +23,7 @@
                             <label class="float-right">:</label>
                         </div>
                         <div class="col-8">
-<<<<<<< HEAD
-                            <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
-=======
                             <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" value="{{ $metadataxml->customInputs->accordion1->$key }}"/>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         </div>
                     </div>
                     <?php
@@ -37,16 +33,10 @@
                     <div class="form-group row" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <p class="pl-lg-3 form-control-label">Content Information<span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                         <?php
-<<<<<<< HEAD
-                        $contentInfo = $ci = "";
-                        if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
-                            $ci = ucwords($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString);
-=======
                         $contentInfo = $ci = $tod = "";
                         if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
                             $ci = ucwords($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString);
                             $tod = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString;
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         }
                         if($ci != ""){
                             if($ci == "Clearinghouse"){
@@ -246,11 +236,7 @@
             $var = $contentInfo;
         }
         ?>
-<<<<<<< HEAD
-        $('#c1_content_info').val("{{ $var }}").trigger('change');
-=======
         $('#c1_content_info').val("{{ $tod }}").trigger('change');
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
         $('#content_info_text').val("{{ $var }}");
     });
 </script>

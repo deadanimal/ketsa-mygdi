@@ -12,11 +12,7 @@
         .form-control,
         .form-control:disabled {
             /* border-width: 0;
-<<<<<<< HEAD
-                                                                                                    background-color: white */
-=======
-                                                                                                background-color: white */
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
+            background-color: white */
         }
 
         ol.roman {
@@ -115,11 +111,7 @@
                                         <label class="mb-0">Nama Institusi dan Alamat</label>
                                         <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
                                             name="agensi_organisasi">{{ $permohonan->users->agensiOrganisasi->name }}, {{ $permohonan->users->alamat }}
-<<<<<<< HEAD
-                                                                                                                                                                                 </textarea>
-=======
-                                                                                                                                                                             </textarea>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
+                                        </textarea>
                                         <br>
                                         <h3 class="heading">Senarai Dokumen Geospatial Terperingkat</h3>
                                         <label>(i) Peta Topografi</label>

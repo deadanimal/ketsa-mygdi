@@ -105,11 +105,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<<<<<<< HEAD
-                        <span aria-hidden="true">&times;</span>
-=======
                         <span aria-hidden="true" id="closeServiceUrlMap">&times;</span>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                     </button>
                 </div>
                 <div class="modal-body">
@@ -459,8 +455,6 @@
             var weburl = $(this).parent().parent().find('.urlToTest').val();
             window.open(weburl, '_blank');
         });
-<<<<<<< HEAD
-=======
         
         $(document).on("click", "#btnTestServiceUrl3", function () {
             var mapurl = $.trim($('#c2_serviceUrl').val());
@@ -483,7 +477,6 @@
         $(document).on('click','#closeServiceUrlMap',function(){
             $('#modal-showmap').modal('hide');
         });
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
 
         var oriMetadataName = $('#c2_metadataName').val();
 

@@ -22,11 +22,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
-=======
                                 {{ $metadataxml->customInputs->accordion10->$key }}
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                         </div>
                         <?php
@@ -39,11 +35,7 @@
                         if($fileName != ""){
                             $flag1 *= 0;
                             ?>
-<<<<<<< HEAD
-                            <div class="row mb-2">
-=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c10_file_name">
                                         File Name
@@ -64,11 +56,7 @@
                         if($fileType != ""){
                             $flag1 *= 0;
                             ?>
-<<<<<<< HEAD
-                            <div class="row mb-2">
-=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c10_file_type">
                                         File Type
@@ -89,11 +77,7 @@
                         if($url != ""){
                             $flag1 *= 0;
                             ?>
-<<<<<<< HEAD
-                            <div class="row mb-4">
-=======
                             <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="c10_file_url">
                                         URL
@@ -118,11 +102,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion10'] as $key=>$val){
                     if($key == "c10_keyword"){
                         ?>
-<<<<<<< HEAD
-                        <div class="row mb-2">
-=======
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_name">
                                     Keywords
@@ -184,11 +164,7 @@
                                 if(trim((string)$keyword->CharacterString) != ""){
                                     if($counter > 0){
                                         ?>
-<<<<<<< HEAD
-                                        <div class="row mb-2">
-=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-3 pl-5">
                                                 <label class="form-control-label mr-4" for="c10_file_type">
                                                     Additional Keywords
@@ -208,11 +184,7 @@
                                 if(trim((string)$keyword->CharacterString) != ""){
                                     if($counter > 0){
                                         ?>
-<<<<<<< HEAD
-                                        <div class="row mb-2">
-=======
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             <div class="col-3 pl-5">
                                                 <label class="form-control-label mr-4" for="c10_file_type">
                                                     Additional Keywords

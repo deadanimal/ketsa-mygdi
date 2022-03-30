@@ -35,22 +35,14 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
-=======
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" value="{{ $metadataxml->customInputs->accordion12->$key }}"/>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                         </div>
                         <?php
                     }
                     if($key == "c12_dataset_type"){
                         ?>
-<<<<<<< HEAD
-                        <div class="row mb-4">
-=======
                         <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-xl-2">
                                 <label class="form-control-label" for="input-dataset-type">
                                     Spatial Data Set Type
@@ -78,21 +70,13 @@
                     foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
                         if($key == "c12_feature_scale"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-3">
-=======
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <label class="form-control-label" for="input-hardsoftcopy">
                                     Scale in Hardcopy/Softcopy
                                     <span style="font-size: smaller;">(feature scale)</span>
                                 </label>
                             </div>
-<<<<<<< HEAD
-                            <div class="col-xl-2">
-=======
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                                 $scale = "";
                                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) && $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer != "") {
@@ -105,19 +89,11 @@
                         }
                         if($key == "c12_image_res"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-2">
-                                <label class="form-control-label" for="input-imggsd">
-                                    Image Resolution (GSD)</label>
-                            </div>
-                            <div class="col-md-2">
-=======
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-imggsd">
                                     Image Resolution (GSD)</label>
                             </div>
                             <div class="col-md-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="input-group">
                                     <?php
                                     $imgRes = "";
@@ -135,20 +111,12 @@
                         }
                         if($key == "c12_language"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-1">
-=======
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <label class="form-control-label" for="input-language">
                                     Language
                                 </label>
                             </div>
-<<<<<<< HEAD
-                            <div class="col-xl-2">
-=======
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php
                                 $lang = "";
                                 if (isset($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString != "") {
@@ -177,40 +145,6 @@
                 foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
                     if($key == "c12_maintenanceUpdate"){
                         ?>
-<<<<<<< HEAD
-                        <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
-                        <div class="row mb-2 divMaintenanceInfo">
-                            <div class="col-xl-3">
-                                <label class="form-control-label" for="input-hardsoftcopy">
-                                    Maintenance and Update
-                                </label>
-                            </div>
-                            <div class="col-xl-2">
-                                <?php
-                                $maintenanceUpdate = "";
-                                if (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && $metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode != "") {
-                                    $maintenanceUpdate = trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode);
-                                }elseif (isset($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode) && $metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode != "") {
-                                    $maintenanceUpdate = trim($metadataxml->metadataMaintenance->MD_MaintenanceInformation->maintenanceAndUpdateFrequency->MD_MaintenanceFrequencyCode);
-                                }
-                                ?>
-                                <select class="form-control form-control-sm" name="c12_maintenanceUpdate" id="c12_maintenanceUpdate">
-                                    <option value="">Pilih...</option>
-                                    <option value="Continual" {{ ($maintenanceUpdate == "Continual" ? "selected":"") }}>Continual</option>
-                                    <option value="Daily" {{ ($maintenanceUpdate == "Daily" ? "selected":"") }}>Daily</option>
-                                    <option value="Weekly" {{ ($maintenanceUpdate == "Weekly" ? "selected":"") }}>Weekly</option>
-                                    <option value="Fortnightly" {{ ($maintenanceUpdate == "Fortnightly" ? "selected":"") }}>Fortnightly</option>
-                                    <option value="Monthly" {{ ($maintenanceUpdate == "Monthly" ? "selected":"") }}>Monthly</option>
-                                    <option value="Quarterly" {{ ($maintenanceUpdate == "Quarterly" ? "selected":"") }}>Quarterly</option>
-                                    <option value="Biannually" {{ ($maintenanceUpdate == "Biannually" ? "selected":"") }}>Biannually</option>
-                                    <option value="Annually" {{ ($maintenanceUpdate == "Annually" ? "selected":"") }}>Annually</option>
-                                    <option value="As needed" {{ ($maintenanceUpdate == "As needed" ? "selected":"") }}>As needed</option>
-                                    <option value="Irregular" {{ ($maintenanceUpdate == "Irregular" ? "selected":"") }}>Irregular</option>
-                                    <option value="Not planned" {{ ($maintenanceUpdate == "Not planned" ? "selected":"") }}>Not planned</option>
-                                    <option value="Unknown" {{ ($maintenanceUpdate == "Unknown" ? "selected":"") }}>Unknown</option>
-                                    <option value="None" {{ ($maintenanceUpdate == "None" ? "selected":"") }}>None</option>
-                                </select>
-=======
                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <h6 class="heading-small text-muted mb-2 divMaintenanceInfo">MAINTENANCE INFORMATION</h6>
                             <div class="row mb-2 divMaintenanceInfo">
@@ -245,7 +179,6 @@
                                         <option value="None" {{ ($maintenanceUpdate == "None" ? "selected":"") }}>None</option>
                                     </select>
                                 </div>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                         </div>
                         <?php

@@ -20,10 +20,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-=======
                                 Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -37,34 +34,10 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-                                <select name="c1_content_info" class="form-control form-control-sm ml-3 sortable" id="content_info_dropdown" data-status="<?php echo $val['status']; ?>">
-                                    <option value="" selected>Pilih...</option>
-                                    <option value="Application" class='optContentInfo_dataset'>Application</option>
-                                    <option value="Clearing House" class='optContentInfo_dataset'>Clearing House</option>
-                                    <option value="Downloadable Data" class='optContentInfo_dataset'>Downloadable Data</option>
-                                    <option value="Geographic Activities" class='optContentInfo_dataset'>Geographic Activities</option>
-                                    <option value="Geographic Services" class='optContentInfo_dataset'>Geographic Services</option>
-                                    <option value="Map File" class='optContentInfo_dataset'>Map File</option>
-                                    <option value="Offline Data" class='optContentInfo_dataset'>Offline Data</option>
-                                    <option value="Static Map Images" class='optContentInfo_dataset'>Static Map Images</option>
-                                    <option value="Other Documents" class='optContentInfo_dataset'>Other Documents</option>
-
-                                    <option value="Live Data and Maps" class='optContentInfo_services'>Live Data and Maps</option>
-
-                                    <option value="Gridded" class='optContentInfo_gridded'>Gridded</option>
-
-                                    <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
-                                </select>
-                                <a href="lampiran/content_information" class="text-yellow" target="_blank">
-                                    <i class="fas fa-lightbulb mx-2"></i>
-                                </a>
-=======
                                 Dropdown
                                 <select name="c1_content_info" class="form-control form-control-sm ml-3 sortable" id="content_info_dropdown" data-status="<?php echo $val['status']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                             <span class="close btnClose">&times;</span>
                         </div>
@@ -77,10 +50,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-=======
                                 Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_name" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -94,10 +64,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-=======
                                 Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_agensi_organisasi" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -111,10 +78,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-=======
                                 Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_email" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -128,10 +92,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-=======
                                 Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_phone" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -145,25 +106,9 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-                                <select name='publisher_role' class='form-control form-control-sm ml-3 sortable' data-status="<?php echo $val['status']; ?>">
-                                    <option value="">Pilih...</option>
-                                    <option value="Author">Author</option>
-                                    <option value="Custodian">Custodian</option>
-                                    <option value="Distributor">Distributor</option>
-                                    <option value="Originator">Originator</option>
-                                    <option value="Owner">Owner</option>
-                                    <option value="Point of Contact">Point of Contact</option>
-                                    <option value="Principal Investigator">Principal Investigator</option>
-                                    <option value="Processor">Processor</option>
-                                    <option value="Publisher" selected>Publisher</option>
-                                    <option value="Resource Provider">Resource Provider</option>
-                                    <option value="User">User</option>
-=======
                                 Dropdown
                                 <select name='publisher_role' class='form-control form-control-sm ml-3 sortable' data-status="<?php echo $val['status']; ?>">
                                     <option value="">Pilih...</option>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 </select>
                             </div>
                             <span class="close btnClose">&times;</span>

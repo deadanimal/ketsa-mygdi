@@ -19,11 +19,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
-=======
                                 {{ $metadataxml->customInputs->accordion11->$key }}
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                         </div>
                         <?php
@@ -35,19 +31,11 @@
                         }
                         if($distFormat != ""){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-2">
-                                <label class="form-control-label" for="input-distribution-format">
-                                    Format Name </label>
-                            </div>
-                            <div class="col-xl-3">
-=======
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-distribution-format">
                                     Format Name </label>
                             </div>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php echo "&nbsp;&nbsp;<p>" . $distFormat."</p>"; ?>
                             </div>
                             <?php
@@ -60,19 +48,11 @@
                         }
                         if($version != ""){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-1">
-                                <label class="form-control-label" for="input-version">
-                                    Version </label>
-                            </div>
-                            <div class="col-xl-2">
-=======
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-version">
                                     Version </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php echo "&nbsp;&nbsp;<p>" . $version."</p>"; ?>
                              </div>
                             <?php
@@ -85,19 +65,11 @@
                         }
                         if($medium != ""){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-1">
-                                <label class="form-control-label" for="input-medium">
-                                    Medium </label>
-                            </div>
-                            <div class="col-xl-3">
-=======
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-medium">
                                     Medium </label>
                             </div>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <?php echo "&nbsp;&nbsp;<p>" . $medium."</p>"; ?>
                             </div>
                             <?php
@@ -115,11 +87,7 @@
                     }
                     if($dist != ""){
                         ?>
-<<<<<<< HEAD
-                        <div class="row mb-2">
-=======
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-xl-2">
                                 <label class="form-control-label" for="input-distributor">
                                     Organisation Name </label>
@@ -147,19 +115,11 @@
                             }
                             if($unitDist != ""){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-2">
-                                    <label class="form-control-label" for="input-unit-distribution">
-                                        Units of Distribution </label>
-                                </div>
-                                <div class="col-xl-3">
-=======
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <label class="form-control-label" for="input-unit-distribution">
                                         Units of Distribution </label>
                                 </div>
                                 <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php echo "&nbsp;&nbsp;<p>" . $unitDist."</p>"; ?>
                                 </div>
                                 <?php
@@ -172,19 +132,11 @@
                             }
                             if($size != ""){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-2">
-                                    <label class="form-control-label" for="input-sizemb">
-                                        Size (Megabytes) </label>
-                                </div>
-                                <div class="col-xl-2">
-=======
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <label class="form-control-label" for="input-sizemb">
                                         Size (Megabytes) </label>
                                 </div>
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php echo "&nbsp;&nbsp;<p>" .$size."</p>"; ?>
                                 </div>
                                 <?php
@@ -198,19 +150,11 @@
                             if($fees != ""){
                                 $flag1 *= 0;
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-1">
-                                    <label class="form-control-label" for="input-fees">
-                                        Fees </label>
-                                </div>
-                                <div class="col-xl-2">
-=======
                                 <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <label class="form-control-label" for="input-fees">
                                         Fees </label>
                                 </div>
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php echo "&nbsp;&nbsp;<p>" . $fees."</p>"; ?>
                                 </div>
                                 <?php
@@ -232,19 +176,11 @@
                             if($link != ""){
                                 $flag1 *= 0;
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-1">
-                                    <label class="form-control-label" for="input-distributor">
-                                        Link </label>
-                                </div>
-                                <div class="col-xl-4">
-=======
                                 <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <label class="form-control-label" for="input-distributor">
                                         Link </label>
                                 </div>
                                 <div class="col-xl-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php echo "&nbsp;&nbsp;<p>" . $link . "</p>"; ?>
                                 </div>
                                 <?php
@@ -258,19 +194,11 @@
                             if($orderInstruct != ""){
                                 $flag1 *= 0;
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-2">
-                                    <label class="form-control-label" for="input-instructionorder">
-                                        Ordering Instruction </label>
-                                </div>
-                                <div class="col-xl-5">
-=======
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <label class="form-control-label" for="input-instructionorder">
                                         Ordering Instruction </label>
                                 </div>
                                 <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php echo "&nbsp;&nbsp;<p>" . $orderInstruct . "</p>"; ?>
                                 </div>
                                 <?php

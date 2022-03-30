@@ -20,10 +20,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-=======
                                 Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -37,10 +34,7 @@
                                     <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan jarak larian pesawat (kiri, kanan dan bahagian tengah)">
                                         <?php echo __('lang.scanning_resolution'); ?><span class="text-warning">*</span> :
                                     </div>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="number" style="width :100px" placeholder="0.0" name="c4_scan_res" id="c4_scan_res" data-status="<?php echo $val['status']; ?>">
                                     <div class="form-control-label ml-2">
                                         meter
@@ -59,10 +53,7 @@
                                     <div class="form-control-label mr-3" data-toggle="tooltip" title="Maklumat berkaitan jarak larian pesawat (kiri, kanan dan bahagian tengah)">
                                         <?php echo __('lang.ground_scanning'); ?><span class="text-warning">*</span> :
                                     </div>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="number" style="width :100px" placeholder="0.0" name="c4_ground_scan" id="c4_ground_scan" data-status="<?php echo $val['status']; ?>">
                                     <div class="form-control-label ml-2">
                                         meter

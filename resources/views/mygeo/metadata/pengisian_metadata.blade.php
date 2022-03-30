@@ -139,11 +139,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<<<<<<< HEAD
-                        <span aria-hidden="true">&times;</span>
-=======
                         <span aria-hidden="true" id="closeServiceUrlMap">&times;</span>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                     </button>
                 </div>
                 <div class="modal-body">
@@ -335,15 +331,6 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
 
         $(document).on("click", "#btnTestServiceUrl", function () {
-<<<<<<< HEAD
-            var mapurl = $('#c2_serviceUrl').val();
-            $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
-        });
-        $(document).on("click", "#btnTestServiceUrl2", function () {
-            var mapurl = $('#c2_serviceUrl').val();
-            $('#mapiframe').attr('src', '<?php echo url("/"); ?>/leafletwms/examples/index.html?url='+mapurl);
-        });
-=======
             var mapurl = $.trim($('#c2_serviceUrl').val());
             checkServiceUrl(mapurl);
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
@@ -371,13 +358,10 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 alert("Service URL is empty!");
             }
         });
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
         $(document).on("click", ".btnTestUrl", function () {
             var weburl = $(this).parent().parent().find('.urlToTest').val();
             window.open(weburl, '_blank');
         });
-<<<<<<< HEAD
-=======
         
         function checkServiceUrl(url){
             if(url === ""){
@@ -390,7 +374,6 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         $(document).on('click','#closeServiceUrlMap',function(){
             $('#modal-showmap').modal('hide');
         });
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
 
         $(document).on('click', '.btnSubmit', function() {
             var btnSubmit = $(this);

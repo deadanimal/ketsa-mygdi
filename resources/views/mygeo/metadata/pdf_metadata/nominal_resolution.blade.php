@@ -11,35 +11,6 @@
         <div class="card-body">
             <div class="row">
                 <?php
-<<<<<<< HEAD
-                if (isset($metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="col-xl-6">
-                        <div class="form-inline ml-3">
-                            <div class="form-control-label mr-3">
-                                Scanning Resolution :
-                            </div>
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->scanningResolution->CharacterString . "</p>"; ?>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
-                <?php
-                if (isset($metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal) && $metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal != "") {
-                    $flag *= 0;
-                    ?>
-                    <div class="col-xl-6">
-                        <div class="form-inline">
-                            <div class="form-control-label mr-3">
-                                Ground Scanning :
-                            </div>
-                            <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->groundScanning->Decimal . " meter</p>"; ?>
-                        </div>
-                    </div>
-                    <?php
-=======
                 foreach($template->template[strtolower($catSelected)]['accordion4'] as $key=>$val){
                     if($val['status'] == "customInput"){
                         ?>
@@ -92,7 +63,6 @@
                             <?php
                         }
                     }
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                 }
                 ?>
             </div>

@@ -243,15 +243,10 @@
         });
         
         $(document).on("click",".btnClose",function(){
-<<<<<<< HEAD
-            if($(this).data('status') !== "customInput"){
-                $(this).parent().find('.sortable').attr('data-status', 'inactive');
-=======
             if($(this).parent().find('.sortable').attr('data-status') !== "customInput"){
                 $(this).parent().find('.sortable').attr('data-status', 'inactive');
             }else{
                 $(this).parent().find('.sortable').attr('data-status', 'deleteCustomInput');
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
             }
             $(this).parent().hide();
         });
@@ -295,11 +290,7 @@
         });
         $(document).on("click",".btnTambahElemenBaru",function(){
             var accordion = $(this).data('accordion');
-<<<<<<< HEAD
-            $('#collapse'+accordion+' .sortableContainer1').append('<div class="row mb-2 sortIt"><div class="col-3 pl-5"><label class="form-control-label mr-4" for="uname"><input type="text" name="newInputName" class="customInput_label"></label><label class="float-right">:</label></div><div class="col-8"><input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput"/></div><span class="close btnClose">&times;</span></div>');
-=======
             $('#collapse'+accordion+' .sortableContainer1').append('<div class="row mb-2 sortIt"><div class="col-3 pl-5"><label class="form-control-label mr-4" for="uname"><input type="text" name="newInputName" class="customInput_label"></label><label class="float-right">:</label></div><div class="col-8"><input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput" style="display:none;"/></div><span class="close btnClose">&times;</span></div>');
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
         });
         //================================
 
@@ -434,10 +425,7 @@
 </script>
 <script>
     $(document).ready(function() {
-<<<<<<< HEAD
-=======
         $('.sortable').hide();
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
         $('.divIdentificationInformationUrl').hide();
         $('.inputIdentificationInformationUrl').prop('disabled',true);
         $('#kategori').show();

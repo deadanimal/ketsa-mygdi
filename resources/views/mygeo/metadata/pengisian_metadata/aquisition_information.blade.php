@@ -31,11 +31,7 @@
                                 }
                                 if($key == "c8_avg_air_temp"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-8">
                                             <div class="form-control-label" data-toggle="tooltip" title="Purata suhu udara sepanjang penerbangan">
                                                 <?php echo __('lang.average_air_temperature'); ?>
@@ -49,11 +45,7 @@
                                 }
                                 if($key == "c8_altitude"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-8">
                                             <div class="form-control-label" data-toggle="tooltip" title="">
                                                 <?php echo __('lang.altitude'); ?>
@@ -67,11 +59,7 @@
                                 }
                                 if($key == "c8_relative_humid"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-8">
                                             <div class="form-control-label" data-toggle="tooltip" title="Kelembapan relatif maksimum sepanjang penerbangan">
                                                 <?php echo __('lang.relative_humidity'); ?>
@@ -85,11 +73,7 @@
                                 }
                                 if($key == "c8_meteor_cond"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb">
-=======
                                     <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-8">
                                             <div class="form-control-label" data-toggle="tooltip" title="Keadaan meteorologi kawasan penerbangan seperti awan dan angin">
                                                 <?php echo __('lang.meteorological_conditions'); ?>
@@ -113,11 +97,7 @@
                             foreach($template->template[strtolower($catSelected)]['accordion8'] as $key=>$val){
                                 if($key == "c8_identifier"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Nama cerapan atau nombor cerapan">
                                                 <?php echo __('lang.identifier'); ?><span class="text-warning">*</span>
@@ -134,11 +114,7 @@
                                 }
                                 if($key == "c8_trigger"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Permulaan cerapan">
                                                 <?php echo __('lang.trigger'); ?>
@@ -157,11 +133,7 @@
                                 }
                                 if($key == "c8_context"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Tujuan cerapan">
                                                 <?php echo __('lang.context'); ?>
@@ -180,11 +152,7 @@
                                 }
                                 if($key == "c8_sequence"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Masa relative cerapan dijalankan">
                                                 <?php echo __('lang.sequence'); ?>
@@ -203,11 +171,7 @@
                                 }
                                 if($key == "c8_time"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Masa cerapan diambil">
                                                 <?php echo __('lang.time'); ?>
@@ -230,11 +194,7 @@
                             foreach($template->template[strtolower($catSelected)]['accordion8'] as $key=>$val){
                                 if($key == "c8_type"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Jenis alat yang digunakan">
                                                 <?php echo __('lang.type'); ?><span class="text-warning">*</span>
@@ -256,11 +216,7 @@
                             foreach($template->template[strtolower($catSelected)]['accordion8'] as $key=>$val){
                                 if($key == "c8_op_identifier"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Numbor Pengenalan cerapan/ kerja">
                                                 <?php echo __('lang.identifier'); ?><span class="text-warning">*</span>
@@ -277,11 +233,7 @@
                                 }
                                 if($key == "c8_op_status"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb-2">
-=======
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Status data cerapan">
                                                 <?php echo __('lang.status'); ?>
@@ -295,11 +247,7 @@
                                 }
                                 if($key == "c8_op_type"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="row mb">
-=======
                                     <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Teknik cerapan diambil">
                                                 <?php echo __('lang.type'); ?>
@@ -323,32 +271,18 @@
                             foreach($template->template[strtolower($catSelected)]['accordion8'] as $key=>$val){
                                 if($key == "c8_rdr_date"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="form-control-label mr-3" data-toggle="tooltip" title="Tarikh mula cerapan dijalankan ">
-                                        <?php echo __('lang.date'); ?>
-                                    </div>
-                                    <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_rdr_date" id="c8_rdr_date" value="{{old('c8_rdr_date')}}">
-=======
                                     <div class="form-control-label mr-3" data-toggle="tooltip" title="Tarikh mula cerapan dijalankan " <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <?php echo __('lang.date'); ?>
                                     </div>
                                     <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_rdr_date" id="c8_rdr_date" value="{{old('c8_rdr_date')}}" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php
                                 }
                                 if($key == "c8_last_accept_date"){
                                     ?>
-<<<<<<< HEAD
-                                    <div class="form-control-label mt-3 mr-3" data-toggle="tooltip" title="Tarikh cerapan siap dijalankan">
-                                        <?php echo __('lang.latest_acceptable_date'); ?>
-                                    </div>
-                                    <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" value="{{old('c8_last_accept_date')}}">
-=======
                                     <div class="form-control-label mt-3 mr-3" data-toggle="tooltip" title="Tarikh cerapan siap dijalankan" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <?php echo __('lang.latest_acceptable_date'); ?>
                                     </div>
                                     <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" value="{{old('c8_last_accept_date')}}" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php
                                 }
                             }

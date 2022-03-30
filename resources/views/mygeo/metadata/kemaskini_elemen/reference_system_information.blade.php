@@ -20,10 +20,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-=======
                                 Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -37,10 +34,7 @@
                                     <b for="input-system-identifier" data-toggle="tooltip" title="Sistem rujukan bagi maklumat geospatial">
                                         <?php echo __('lang.reference_system_identifier'); ?>
                                     </b>
-<<<<<<< HEAD
-=======
                                     Dropdown
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <select class="form-control form-control-sm sortable" name="c13_ref_sys_identify" id="c13_ref_sys_identify" data-status="<?php echo $val['status']; ?>">
                                         <option selected disabled>Pilih...</option>
                                     </select>
@@ -56,10 +50,7 @@
                             <div class="col-xl-6">
                                 <div class="form-inline">
                                     <b><?php echo __('lang.projection'); ?> :</b>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="text" name="refsys_projection" id="refsys_projection" readonly data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -73,10 +64,7 @@
                             <div class="col-xl-6">
                                 <div class="form-inline">
                                     <b><?php echo __('lang.axis_units'); ?> :</b>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="text" name="refsys_axis_units" id="refsys_axis_units" readonly data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -90,10 +78,7 @@
                             <div class="col-xl-6">
                                 <div class="form-inline">
                                     <b><?php echo __('lang.semi_major_axis'); ?> :</b>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" readonly data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -107,10 +92,7 @@
                             <div class="col-xl-6">
                                 <div class="form-inline">
                                     <b><?php echo __('lang.datum'); ?> :</b>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="text" name="refsys_datum" id="refsys_datum" readonly data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -124,10 +106,7 @@
                             <div class="col-xl-6">
                                 <div class="form-inline">
                                     <b><?php echo __('lang.ellipsoid'); ?> :</b>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="text" name="refsys_ellipsoid" id="refsys_ellipsoid" readonly data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -141,10 +120,7 @@
                             <div class="col-xl-6">
                                 <div class="form-inline">
                                     <b><?php echo __('lang.denominator_of_flattening_ratio'); ?> :</b>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" readonly data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>

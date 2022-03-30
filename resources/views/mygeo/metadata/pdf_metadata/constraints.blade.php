@@ -15,59 +15,6 @@
                     <div class="pl-lg-3">
                         <?php
                         $flag1 = 1;
-<<<<<<< HEAD
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString != "") {
-                            $flag1 *= 0;
-                            $flag *= 0;
-                            ?>
-                            <div class="row mb-2 divUseLimitation">
-                                <div class="col-xl-5">
-                                    <label class="form-control-label" for="input-access-cons">
-                                        Use Limitation
-                                    </label>
-                                </div>
-                                <div class="col-xl-7">
-                                    <?php trim($metadataxml->identificationInfo->MD_DataIdentification->resourceSpecificUsage->MD_Usage->userDeterminedLimitations->CharacterString); ?>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                        <?php
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode != "") {
-                            $flag1 *= 0;
-                            $flag *= 0;
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-xl-5">
-                                    <label class="form-control-label" for="input-access-cons">
-                                        Access Constraints
-                                    </label>
-                                </div>
-                                <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->accessConstraints->MD_RestrictionCode . "</p>"; ?>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                        <?php
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode != "") {
-                            $flag1 *= 0;
-                            $flag *= 0;
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-xl-5">
-                                    <label class="form-control-label" for="input-use-cons">
-                                        Use Constraints
-                                    </label>
-                                </div>
-                                <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_LegalConstraints->useConstraints->MD_RestrictionCode . "</p>"; ?>
-                                </div>
-                            </div>
-                            <?php
-=======
                         foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
                             if($val['status'] == "customInput"){
                                 ?>
@@ -166,7 +113,6 @@
                                     <?php
                                 }
                             }
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         }
                         ?>
                     </div>
@@ -178,57 +124,6 @@
                         <?php
                         $flag2 = 1;
                         $classSys = $arr = "";
-<<<<<<< HEAD
-                        if(isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
-                            $arr = (array)$metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
-                        }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode)){
-                            $arr = (array)$metadataxml->identificationInfo->SV_ServiceIdentification->resourceConstraints->MD_SecurityConstraints->classification->MD_ClassificationCode;
-
-                        }
-                        if($arr != ""){
-                            foreach($arr as $ar){
-                                if(is_array($ar)){
-                                    $classSys = $ar['codeListValue'];
-                                }
-                            }
-                        }
-                        $classSys = ucwords($classSys);
-
-                        if($classSys == "TopSecret"){
-                            $classSys = "Top Secret";
-                        }
-                        if($classSys != ""){
-                            $flag2 *= 0;
-                            $flag *= 0;
-                        }
-                        ?>
-                        <div class="row mb-2">
-                            <div class="col-xl-5">
-                                <label class="form-control-label" for="input-access-cons">
-                                    Classification
-                                </label>
-                            </div>
-                            <div class="col-xl-7">
-                                <?php echo "&nbsp;&nbsp;<p>".$classSys."</p>"; ?>
-                            </div>
-                        </div>
-                        <?php
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference) && $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference != "") {
-                            $flag2 *= 0;
-                            $flag *= 0;
-                            ?>
-                            <div class="row mb-2">
-                                <div class="col-xl-5">
-                                    <label class="form-control-label" for="input-reference">
-                                        Reference
-                                    </label>
-                                </div>
-                                <div class="col-xl-7">
-                                    <?php echo "&nbsp;&nbsp;<p>" . $metadataxml->identificationInfo->MD_DataIdentification->resourceConstraints->MD_SecurityConstraints->constraintsReference . "</p>"; ?>
-                                </div>
-                            </div>
-                            <?php
-=======
                         foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
                             if($key == "c14_classification_sys"){
                                 $classSys = $arr = "";
@@ -294,7 +189,6 @@
                                     <?php
                                 }
                             }
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         }
                         ?>
                     </div>

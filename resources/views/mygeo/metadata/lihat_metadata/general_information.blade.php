@@ -19,11 +19,7 @@
                             <label class="float-right">:</label>
                         </div>
                         <div class="col-8">
-<<<<<<< HEAD
-                            <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
-=======
                             {{ $metadataxml->customInputs->accordion1->$key }}
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                         </div>
                     </div>
                     <?php
@@ -31,11 +27,7 @@
                 if($key == "c1_content_info"){
                     if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
                         ?>
-<<<<<<< HEAD
-                        <div class="form-group row">
-=======
                         <div class="form-group row" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <p class="pl-lg-3 form-control-label">Content Information<span class="mx-3">:</span></p>
                             <?php 
                             $f = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString; 
@@ -123,11 +115,7 @@
                         if (isset($metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString != "") {
                             $pub_name = ucwords($metadataxml->contact->CI_ResponsibleParty->individualName->CharacterString);
                             ?>
-<<<<<<< HEAD
-                            <div class="row my-0 py-0">
-=======
                             <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="uname">
                                         Name
@@ -145,11 +133,7 @@
                         if (isset($metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString != "") {
                             $pub = ucwords($metadataxml->contact->CI_ResponsibleParty->organisationName->CharacterString);
                             ?>
-<<<<<<< HEAD
-                            <div class="row my-0 py-0">
-=======
                             <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="publisher_agensi_organisasi">
                                         Agency/Organization
@@ -167,11 +151,7 @@
                         if (isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString != "") {
                             $pub = ucwords($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->electronicMailAddress->CharacterString);
                             ?>
-<<<<<<< HEAD
-                            <div class="row my-0 py-0">
-=======
                             <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="publisher_email">
                                         Email
@@ -189,11 +169,7 @@
                         if(isset($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString) && $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString != ""){
                             $pub = ucwords($metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString);
                             ?>
-<<<<<<< HEAD
-                            <div class="row my-0 py-0">
-=======
                             <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="publisher_phone">
                                         Telephone
@@ -211,11 +187,7 @@
                         if(isset($metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode) && $metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode != ""){
                             $pub = ucwords($metadataxml->contact->CI_ResponsibleParty->role->CI_RoleCode);
                             ?>
-<<<<<<< HEAD
-                            <div class="row my-0 py-0 divPublisherRole">
-=======
                             <div class="row my-0 py-0 divPublisherRole" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-3 pl-5">
                                     <label class="form-control-label mr-4" for="publisher_role">
                                         Role

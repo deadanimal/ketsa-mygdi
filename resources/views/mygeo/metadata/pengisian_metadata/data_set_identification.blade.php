@@ -26,11 +26,7 @@
                     }
                     if($key == "c12_dataset_type"){
                         ?>
-<<<<<<< HEAD
-                        <div class="row mb-4">
-=======
                         <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             <div class="col-xl-3">
                                 <label class="form-control-label" for="input-dataset-type" data-toggle="tooltip" title="Jenis maklumat geospatial">
                                     <?php echo __('lang.spatial_data_set_type'); ?>
@@ -62,11 +58,7 @@
                     foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
                         if($key == "c12_feature_scale"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-5">
-=======
                             <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <label class="form-control-label" for="input-hardsoftcopy" data-toggle="tooltip" title="Pengisian butiran skala (sekiranya ada). Contoh skala 1:50,000">
                                     <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
                                     <span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span>
@@ -78,11 +70,7 @@
                         }
                         if($key == "c12_image_res"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-4">
-=======
                             <div class="col-xl-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <label class="form-control-label" for="input-imggsd" data-toggle="tooltip" title="Pengisian butiran resolusi (sekiranya ada). Contoh GSD (Ground Sample Distance) - Resolution = 0.5 meter">
                                     <?php echo __('lang.image_resolution'); ?>
                                     <span>: </span></label>
@@ -97,11 +85,7 @@
                         }
                         if($key == "c12_language"){
                             ?>
-<<<<<<< HEAD
-                            <div class="col-xl-3">
-=======
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <label class="form-control-label" for="input-language" data-toggle="tooltip" title="Penggunaan bahasa bagi maklumat geospatial">
                                     <?php echo __('lang.data_set_language'); ?>
                                     <span>: </span>
@@ -122,33 +106,6 @@
                 foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
                     if($key == "c12_maintenanceUpdate"){
                         ?>
-<<<<<<< HEAD
-                        <h6 class="heading-small text-muted mb-2 divMaintenanceInfo"><?php echo __('lang.maintenanceInfomation'); ?></h6>
-                        <div class="row mb-2 divMaintenanceInfo">
-                            <div class="col-xl-3">
-                                <label class="form-control-label" for="input-hardsoftcopy">
-                                    <?php echo __('lang.maintenance_and_update'); ?>
-                                    <span>: </span>
-                                </label>
-                            </div>
-                            <div class="col-xl-2">
-                                <select class="form-control form-control-sm" name="c12_maintenanceUpdate" id="c12_maintenanceUpdate">
-                                    <option value="">Pilih...</option>
-                                    <option value="Continual" {{ (old('c12_maintenanceUpdate') == "Continual" ? "selected":"") }}>Continual</option>
-                                    <option value="Daily" {{ (old('c12_maintenanceUpdate') == "Daily" ? "selected":"") }}>Daily</option>
-                                    <option value="Weekly" {{ (old('c12_maintenanceUpdate') == "Weekly" ? "selected":"") }}>Weekly</option>
-                                    <option value="Fortnightly" {{ (old('c12_maintenanceUpdate') == "Fortnightly" ? "selected":"") }}>Fortnightly</option>
-                                    <option value="Monthly" {{ (old('c12_maintenanceUpdate') == "Monthly" ? "selected":"") }}>Monthly</option>
-                                    <option value="Quarterly" {{ (old('c12_maintenanceUpdate') == "Quarterly" ? "selected":"") }}>Quarterly</option>
-                                    <option value="Biannually" {{ (old('c12_maintenanceUpdate') == "Biannually" ? "selected":"") }}>Biannually</option>
-                                    <option value="Annually" {{ (old('c12_maintenanceUpdate') == "Annually" ? "selected":"") }}>Annually</option>
-                                    <option value="As needed" {{ (old('c12_maintenanceUpdate') == "As needed" ? "selected":"") }}>As needed</option>
-                                    <option value="Irregular" {{ (old('c12_maintenanceUpdate') == "Irregular" ? "selected":"") }}>Irregular</option>
-                                    <option value="Not planned" {{ (old('c12_maintenanceUpdate') == "Not planned" ? "selected":"") }}>Not planned</option>
-                                    <option value="Unknown" {{ (old('c12_maintenanceUpdate') == "Unknown" ? "selected":"") }}>Unknown</option>
-                                    <option value="None" {{ (old('c12_maintenanceUpdate') == "None" ? "selected":"") }}>None</option>
-                                </select>
-=======
                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <h6 class="heading-small text-muted mb-2 divMaintenanceInfo"><?php echo __('lang.maintenanceInfomation'); ?></h6>
                             <div class="row mb-2 divMaintenanceInfo">
@@ -176,7 +133,6 @@
                                         <option value="None" {{ (old('c12_maintenanceUpdate') == "None" ? "selected":"") }}>None</option>
                                     </select>
                                 </div>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                         </div>
                         <?php

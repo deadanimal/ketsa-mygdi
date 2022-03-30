@@ -28,11 +28,7 @@
                         }
                         if($key == "c7_band_boundary"){
                             ?>
-<<<<<<< HEAD
-                            <div class="row mb-2">
-=======
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-xl-6">
                                     <div class="form-inline">
                                         <div class="form-control-label mr-3" data-toggle="tooltip" title="">
@@ -59,11 +55,7 @@
                         foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
                             if($key == "c7_trans_fn_type"){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-6">
-=======
                                 <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <div class="form-inline">
                                         <div class="form-control-label mr-4" data-toggle="tooltip" title="Jenis fungsi pemindahan yang digunakan dalam menentukan skala">
                                             <?php echo __('lang.transfer_function_type'); ?>
@@ -75,11 +67,7 @@
                             }
                             if($key == "c7_trans_polar"){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-6">
-=======
                                 <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <div class="form-inline">
                                         <div class="form-control-label mr-3" data-toggle="tooltip" title="Polar radar yag dihantar">
                                             <?php echo __('lang.transmitted_polarization'); ?>
@@ -97,11 +85,7 @@
                         foreach($template->template[strtolower($catSelected)]['accordion7'] as $key=>$val){
                             if($key == "c7_nominal_spatial_res"){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-6">
-=======
                                 <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <div class="form-inline">
                                         <div class="form-control-label mr-4" data-toggle="tooltip" title="Jarak terkecil antara titik">
                                             <?php echo __('lang.nominal_spatial_resolution'); ?>
@@ -116,11 +100,7 @@
                             }
                             if($key == "c7_detected_polar"){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-6">
-=======
                                 <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <div class="form-inline">
                                         <div class="form-control-label mr-3" data-toggle="tooltip" title="Polar radar yang dikesan">
                                             <?php echo __('lang.detected_polarization'); ?>

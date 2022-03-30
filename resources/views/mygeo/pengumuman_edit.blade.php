@@ -114,11 +114,7 @@
                                         </div>
                                     </div>
                                 </form>
-<<<<<<< HEAD
-                                <button type="submit" id="btn_submit" class="btn btn-success float-right mt-4">Submit</button>
-=======
                                 <button type="submit" id="btn_submit" class="btn btn-success float-right mt-4">Simpan</button>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </form>
                         </div>
                     </div>

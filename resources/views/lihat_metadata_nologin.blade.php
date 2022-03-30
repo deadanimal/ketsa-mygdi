@@ -89,12 +89,6 @@
                                         Category :
                                         <span class="text-capitalize">
                                             <?php
-<<<<<<< HEAD
-                                            $category = '';
-                                            if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != '') {
-                                                echo $metadataxml->hierarchyLevel->MD_ScopeCode;
-                                                $category = $metadataxml->hierarchyLevel->MD_ScopeCode;
-=======
                                             $category = $catSelected = "";
                                             if (count($categories) > 0) {
                                                 $arr = (array)$metadataxml->hierarchyLevel->MD_ScopeCode;
@@ -119,7 +113,6 @@
                                                 }else{
                                                     $langSelected = "en";
                                                 }
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                             }
                                             ?>
                                         </span>

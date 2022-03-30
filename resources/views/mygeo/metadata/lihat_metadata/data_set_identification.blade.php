@@ -19,11 +19,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
-=======
                                 {{ $metadataxml->customInputs->accordion12->$key }}
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             </div>
                         </div>
                         <?php
@@ -42,11 +38,7 @@
                         }
                         if($dataSetType != ""){
                             ?>
-<<<<<<< HEAD
-                            <div class="row mb-4">
-=======
                             <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <div class="col-xl-2">
                                     <label class="form-control-label" for="input-dataset-type">
                                         Spatial Data Set Type
@@ -65,32 +57,20 @@
                 <div class="row mb-2">
                     <?php
                     foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
-<<<<<<< HEAD
-                        if($key == "c12_dataset_type"){
-=======
                         if($key == "c12_feature_scale"){
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             $scale = "";
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer) && $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer != "") {
                                 $scale = $metadataxml->identificationInfo->MD_DataIdentification->spatialResolution->MD_Resolution->equivalentScale->MD_RepresentativeFraction->denominator->Integer;
                             }
                             if($scale != ""){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-3">
-=======
                                 <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <label class="form-control-label" for="input-hardsoftcopy">
                                         Scale in Hardcopy/Softcopy
                                         <span style="font-size: smaller;">(feature scale)</span>
                                     </label>
                                 </div>
-<<<<<<< HEAD
-                                <div class="col-xl-2">
-=======
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php echo "&nbsp;&nbsp;<p>" . $scale . "</p>"; ?>
                                 </div>
                                 <?php
@@ -103,29 +83,17 @@
                             }
                             if($imgRes != ""){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-2">
-                                    <label class="form-control-label" for="input-imggsd">
-                                        Image Resolution (GSD)</label>
-                                </div>
-                                <div class="col-md-2">
-=======
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <label class="form-control-label" for="input-imggsd">
                                         Image Resolution (GSD)</label>
                                 </div>
                                 <div class="col-md-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php echo "&nbsp;&nbsp;<p>" . $imgRes . " meter</p>"; ?>
                                 </div>
                                 <?php
                             }
                         }
-<<<<<<< HEAD
-                        if($key == "ftest"){
-=======
                         if($key == "c12_language"){
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                             $lang = "";
                             if (isset($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString != "") {
                                 $lang = ucwords(trim($metadataxml->identificationInfo->MD_DataIdentification->language->CharacterString));
@@ -139,20 +107,12 @@
                             }
                             if($lang != ""){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-1">
-=======
                                 <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <label class="form-control-label" for="input-language">
                                         Language
                                     </label>
                                 </div>
-<<<<<<< HEAD
-                                <div class="col-xl-2">
-=======
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php echo "&nbsp;&nbsp;<p>" . $lang . "</p>"; ?>
                                 </div>
                                 <?php
@@ -173,20 +133,12 @@
                             }
                             if($maintenanceUpdate != ""){
                                 ?>
-<<<<<<< HEAD
-                                <div class="col-xl-1">
-=======
                                 <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <label class="form-control-label" for="input-language">
                                         Maintenance and Update
                                     </label>
                                 </div>
-<<<<<<< HEAD
-                                <div class="col-xl-2">
-=======
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <?php echo trim($maintenanceUpdate); ?>
                                 </div>
                                 <?php

@@ -20,10 +20,7 @@
                                 <label class="float-right">:</label>
                             </div>
                             <div class="col-8">
-<<<<<<< HEAD
-=======
                                 Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
                             <span class="close btnClose">&times;</span>
@@ -38,10 +35,7 @@
                                 </label>
                             </div>
                             <div class="col-xl-3">
-<<<<<<< HEAD
-=======
                                 Dropdown
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                 <select name="c12_dataset_type" id="c12_dataset_type" class="form-control form-control-sm" data-status="<?php echo $val['status']; ?>">
                                     <option value="">Pilih...</option>
                                 </select>
@@ -57,10 +51,7 @@
                                         <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
                                         <span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span>
                                     </label>
-<<<<<<< HEAD
-=======
                                     Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <input class="form-control form-control-sm sortable" name="c12_feature_scale" id="c12_feature_scale" placeholder="10:50000" type="text" data-status="<?php echo $val['status']; ?>">
                                 </div>
                             </div>
@@ -76,10 +67,7 @@
                                     <label class="form-control-label mr-3" for="input-imggsd" data-toggle="tooltip" title="Pengisian butiran resolusi (sekiranya ada). Contoh GSD (Ground Sample Distance) - Resolution = 0.5 meter">
                                         <?php echo __('lang.image_resolution'); ?></label>
                                     <div class="input-group">
-<<<<<<< HEAD
-=======
                                         Textbox
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                         <input type="text" class="form-control form-control-sm sortable" name="c12_image_res" id="c12_image_res" placeholder="10.5" data-status="<?php echo $val['status']; ?>">
                                         <div class="input-group-append">
                                             <span class="input-group-text input-group-sm py-0">meter</span>
@@ -99,10 +87,7 @@
                                     <label class="form-control-label mr-3" for="input-language" data-toggle="tooltip" title="Penggunaan bahasa bagi maklumat geospatial">
                                         <?php echo __('lang.data_set_language'); ?>
                                     </label>
-<<<<<<< HEAD
-=======
                                     Dropdown
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <select class="form-control form-control-sm sortable" name="c12_language" id="c12_language" data-status="<?php echo $val['status']; ?>">
                                         <option selected disabled>Pilih...</option>
                                     </select>
@@ -120,10 +105,7 @@
                                     <label class="form-control-label mr-3" for="input-hardsoftcopy">
                                         <?php echo __('lang.maintenance_and_update'); ?>
                                     </label>
-<<<<<<< HEAD
-=======
                                     Dropdown
->>>>>>> 62c86d455ffba8b54e2c114732403a5178fed0e6
                                     <select class="form-control form-control-sm sortable" name="c12_maintenanceUpdate" id="c12_maintenanceUpdate" data-status="<?php echo $val['status']; ?>">
                                         <option value="">Pilih...</option>
                                     </select>
