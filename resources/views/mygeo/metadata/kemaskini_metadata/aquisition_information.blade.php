@@ -25,7 +25,7 @@
                                     <label class="float-right">:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" value="{{ $metadataxml->customInputs->accordion8->$key }}"/>
+                                    <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" value="{{ (isset($metadataxml->customInputs->accordion8->$key) ? $metadataxml->customInputs->accordion8->$key:"") }}"/>
                                 </div>
                             </div>
                             <?php

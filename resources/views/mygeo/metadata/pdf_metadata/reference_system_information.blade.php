@@ -31,7 +31,7 @@
                                         <label class="float-right">:</label>
                                     </div>
                                     <div class="col-8">
-                                        {{ $metadataxml->customInputs->accordion13->$key }}
+                                        {{ (isset($metadataxml->customInputs->accordion13->$key) ? $metadataxml->customInputs->accordion13->$key:"") }}
                                     </div>
                                 </div>
                                 <?php
