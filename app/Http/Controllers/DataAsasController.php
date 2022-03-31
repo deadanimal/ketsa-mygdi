@@ -515,6 +515,7 @@ class DataAsasController extends Controller
         $senarai_data = SenaraiData::orderBy('kod','ASC')->get();
         $kategori_sd = KategoriSenaraiData::orderBy('name','ASC')->get();
         $subkategori_sd = SubKategoriSenaraiData::orderBy('name','ASC')->get();
+//        dd($subkategori_sd);
 
         $kat_add = SenaraiData::orderBy('kategori','ASC')->distinct('kategori')->get();
         // dd($kategori_sd);
@@ -749,6 +750,20 @@ class DataAsasController extends Controller
         $at->save();
 
         return redirect('senarai_data_hapus')->with('success', 'Data telah dibuang');
+    }
+    
+    public function delete_subkategori_data(Request $request)
+    {
+        SubKategoriSenaraiData::where(["id" => $request->id])->delete();
+        SenaraiData::where(["subkategori" => $request->name])->delete();
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Delete';
+        $at->save();
+
+        return redirect('senarai_data_hapus')->with('success', 'Data tersebut telah dibuang');
     }
 
     public function semakan_status()

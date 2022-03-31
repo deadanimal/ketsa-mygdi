@@ -116,13 +116,13 @@
                             @csrf
                             <div class="card-header">
                                 <div class="row align-items-center">
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{{ url('senarai_data') }}"><button class="btn btn-danger">Kembali</button></a>
+                                    </div>
                                     <div class="col-8">
-                                        <h3 class="mb-0">Senarai Data Hapus</h3>
+                                        <h3 class="mb-0">Senarai Kategori Data dan Sub-Kategori Data</h3>
                                     </div>
 
-                                    <div class="col-4 text-right">
-
-                                    </div>
                                 </div>
                             </div>
                             <div class="card-body" style="overflow-x:auto;">
@@ -158,14 +158,15 @@
                                                         <tbody>
 
                                                             <?php $count = 1; ?>
-                                                            @foreach ($senarai_data as $sdata)
-                                                                @if ($ksd->name === $sdata->kategori)
+                                                            @foreach ($subkategori_sd as $subkat)
+                                                                @if ($ksd->id === $subkat->kategori_id)
                                                                     <tr>
                                                                         <td>{{ $count }}</td>
-                                                                        <td>{{ $sdata->subkategori }}</td>
+                                                                        <td>{{ $subkat->name }}</td>
                                                                         <td>
                                                                             <button type="button"
-                                                                                data-senaraidataid="{{ $sdata->id }}"
+                                                                                data-subkatid="{{ $subkat->id }}"
+                                                                                data-subkatname="{{ $subkat->name }}"
                                                                                 class="btnDelete btn btn-sm btn-danger mx-2"><i
                                                                                     class="fas fa-trash"></i>
                                                                             </button>
@@ -443,15 +444,17 @@
 
     <script>
         $(document).on("click", ".btnDelete", function() {
-            var sdata_id = $(this).data('senaraidataid');
+            var sdata_id = $(this).data('subkatid');
+            var sdata_name = $(this).data('subkatname');
             var r = confirm("Adakah anda pasti untuk buang data ini?");
             if (r == true) {
                 $.ajax({
                     method: "POST",
-                    url: "delete_senarai_data",
+                    url: "delete_subkategori_data",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "id": sdata_id
+                        "id": sdata_id,
+                        "name": sdata_name
                     },
                 }).done(function(response) {
                     alert("Data telah dibuang.");
