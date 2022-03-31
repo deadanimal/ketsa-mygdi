@@ -352,8 +352,9 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         $(document).on("click", "#btnTestServiceUrl3_wms", function () {
             var mapurl = $.trim($('#c2_serviceUrl').val());
             if(checkServiceUrl(mapurl)){
-                $('#mapiframe').attr('src', '<?php echo url("/"); ?>/azrunmap/esri.php?url='+mapurl);
-                $('#modal-showmap').modal('show');
+                var mapurl = $.trim($('#c2_serviceUrl').val());
+                checkServiceUrl(mapurl);
+                $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
             }else{
                 alert("Service URL is empty!");
             }

@@ -31,8 +31,8 @@
 
 
 @include('mygeo.kemaskini_elemen_metadata.modals.modal')
-<script src="http://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 
 <div class="content-wrapper">
@@ -64,7 +64,7 @@
                                 <div class="col-xl-6">
                                     <div class="form-inline">
                                         <label class="form-control-label mr-3" for="versiontop">Version:</label>
-                                        <input type="text" name="versiontop" id="versiontop" class="form-control">
+                                        <input type="text" name="versiontop" id="versiontop" class="form-control" value="{{ $template->version }}">
                                     </div>
                                 </div>
                             </div>

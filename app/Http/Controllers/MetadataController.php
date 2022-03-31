@@ -3623,8 +3623,10 @@ class MetadataController extends Controller {
         $refSys = ReferenceSystemIdentifier::all();
         $states = States::where(['country' => 1])->get()->all();
         $countries = Countries::where(['id' => 1])->get()->all();
+        
+        $template = MetadataTemplate::where('status','active')->get()->first();
 
-        return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('categories', 'template','refSys','states','countries','templateInactive'));
+        return view('mygeo.kemaskini_elemen_metadata.senarai_elemen', compact('categories', 'template','refSys','states','countries','templateInactive','template'));
     }
     
     public function simpan_metadata_template(Request $request){

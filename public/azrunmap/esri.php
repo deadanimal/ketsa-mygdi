@@ -38,6 +38,7 @@
         }
         ?>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             var map = L.map('map').setView([4.083085983228963, 108.03290032005208], 6);
 
@@ -56,7 +57,12 @@
             }).addTo(map);
 
             earthquakes.bindPopup(function (layer) {
-                return L.Util.template('<p>FCD: {FCD}</p>', layer.feature.properties);
+                var output = "";
+                $.each(layer.feature.properties,function(key,value){
+                    output += "<p>" + key + ": " + value + "</p>";
+                });
+//                return L.Util.template('<p>FCD: {FCD}</p>', layer.feature.properties);
+                return L.Util.template(output, layer.feature.properties);
             });
             
             /*
