@@ -295,7 +295,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
     $(document).ready(function() {
         $(document).on('change','#content_info_dropdown',function(){
             var cat = $('#kategori').val();
-            if(cat == "Dataset" && $(this).val() == "Application"){
+            if(cat == "Dataset" && $(this).val() == "application"){
                 $('.divIdentificationInformationUrl').show();
                 $('.inputIdentificationInformationUrl').prop('disabled',false);
                 $('.divBrowsingInformationUrl').hide();

@@ -88,31 +88,29 @@
                 <h2 class="heading-small text-muted" style="padding-top:25px;padding-bottom:10px;font-size:18px;font-weight:600;"><?php echo __('lang.abstract'); ?></h2>
                 <?php //=== abstract= =============================================================
                 ?>
+                
+                <div class="row mb-2 divIdentificationInformationUrl">
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
+                            <?php echo __('lang.URL'); ?><span class="text-warning">*</span>
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest" value="{{old('c10_file_url')}}">
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal" data-target="#modal-showweb" data-backdrop="false">Test</button>
+                        @error('c10_file_url')
+                            <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
                 <?php
                 foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                     ?>
                     @include('mygeo.metadata.pengisian_metadata.abstract')
                     <?php
-                    if($key == "c10_file_url"){
-                        ?>
-                        <div class="row mb-2 divIdentificationInformationUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-3">
-                                <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
-                                    <?php echo __('lang.URL'); ?><span class="text-warning">*</span>
-                                </label><label class="float-right">:</label>
-                            </div>
-                            <div class="col-6">
-                                <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest" value="{{old('c10_file_url')}}">
-                            </div>
-                            <div class="col-1">
-                                <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal" data-target="#modal-showweb" data-backdrop="false">Test</button>
-                                @error('c10_file_url')
-                                    <div class="text-error">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <?php
-                    }
                     if($key == "c2_metadataDate"){
                         ?>
                         <div class="row mb-2 divMetadataDate" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>

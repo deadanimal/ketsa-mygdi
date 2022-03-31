@@ -28,19 +28,17 @@
                     }
                     ?>
                 </div>
-                <div class="row mb-3">
+                <div class="row">
                     <?php
                     foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
                         if($key == "c11_dist_format"){
                             ?>
-                            <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                <div class="col-xl-2">
-                                    <label class="form-control-label" for="input-distribution-format" data-toggle="tooltip"
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline ml-3">
+                                    <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Pengisian bagi format data yang disediakan untuk penyebaran. Contoh: tab, dwg, shp dan lain-lain">
-                                        <?php echo __('lang.format_name'); ?></label>
-                                </div>
-                                <span style="display: inline-block;">: </span>
-                                <div class="col-xl-4">
+                                        <?php echo __('lang.format_name'); ?> :
+                                    </div>
                                     <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_dist_format"
                                         id="c11_dist_format" placeholder="Format Name" value="{{ old('c11_dist_format') }}">
                                 </div>
@@ -49,16 +47,14 @@
                         }
                         if($key == "c11_version"){
                             ?>
-                            <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                <div class="col-xl-2">
-                                    <label class="form-control-label" for="input-version" data-toggle="tooltip"
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline ml-3">
+                                    <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Pengisianbagiversi format data yang disediakan untukpenyebaran. Contoh: MapInfo 7.8, Arcview 3.2,  AutoCad 2005 dan lain-lain">
-                                        <?php echo __('lang.format_version'); ?></label>
-                                </div>
-                                <span style="display: inline-block;">: </span>
-                                <div class="col-xl-3">
-                                        <input style="display: inline-block;" class="form-control form-control-sm" type="text" name="c11_version" id="c11_version"
-                                        placeholder="Format Version" value="{{ old('c11_version') }}">
+                                        <?php echo __('lang.format_version'); ?> :
+                                    </div>
+                                    <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_version"
+                                        id="c11_version" placeholder="Format Version" value="{{ old('c11_version') }}">
                                 </div>
                             </div>
                             <?php
@@ -98,32 +94,28 @@
                     foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
                         if($key == "c11_units_of_dist"){
                             ?>
-                            <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                <div class="col-xl-3">
-                                    <label class="form-control-label" for="input-unit-distribution" data-toggle="tooltip"
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline ml-3">
+                                    <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Pengisian bagi unit penyebaran maklumat geospatial yang telah disediakan untuk distribution. Samaada mengikut data, tiles, layer atau kawasan geografi.">
-                                        <?php echo __('lang.units_of_distribution'); ?></label>
-                                </div>
-                                <span>: </span>
-                                <div class="col-xl-3">
-                                    <input type="text" placeholder="Units" name="c11_units_of_dist" id="c11_units_of_dist"
-                                        class="form-control form-control-sm" value="{{ old('c11_units_of_dist') }}">
+                                        <?php echo __('lang.units_of_distribution'); ?> :
+                                    </div>
+                                    <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_units_of_dist"
+                                        id="c11_units_of_dist" placeholder="Units" value="{{ old('c11_units_of_dist') }}">
                                 </div>
                             </div>
                             <?php
                         }
                         if($key == "c11_size"){
                             ?>
-                            <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                <div class="col-xl-2">
-                                    <label class="form-control-label" for="input-sizemb" data-toggle="tooltip"
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline ml-3">
+                                    <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Saiz maklumat geospatial (megabytes)">
-                                        <?php echo __('lang.size'); ?></label>
-                                </div>
-                                <span>: </span>
-                                <div class="col-xl-3">
-                                    <input type="text" name="c11_size" id="c11_size" class="form-control form-control-sm"
-                                        placehorder="Size" value="{{ old('c11_size') }}">
+                                        <?php echo __('lang.size'); ?> :
+                                    </div>
+                                    <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_size"
+                                        id="c11_size" placeholder="Size" value="{{ old('c11_size') }}">
                                 </div>
                             </div>
                             <?php
@@ -158,35 +150,32 @@
                     foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
                         if($key == "c11_fees"){
                             ?>
-                            <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                <div class="col-xl-1">
-                                    <label class="form-control-label" for="input-fees" data-toggle="tooltip"
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline ml-3">
+                                    <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Harga maklumat geospatial (Ringgit Malaysia)">
-                                        <?php echo __('lang.fees'); ?></label>
-                                </div>
-                                <span>: </span>
-                                <div class="col-xl-2">
-                                    <input type="text" name="c11_fees" id="c11_fees" class="form-control form-control-sm placeholder="RM 0.00" value="{{ old('c11_fees') }}">
+                                        <?php echo __('lang.fees'); ?> :
+                                    </div>
+                                    <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_fees"
+                                        id="c11_fees" placeholder="RM 0.00" value="{{ old('c11_fees') }}">
                                 </div>
                             </div>
                             <?php
                         }
                         if($key == "c11_order_instructions"){
                             ?>
-                            <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                <div class="col-xl-3">
-                                    <label class="form-control-label" for="input-instructionorder" data-toggle="tooltip"
+                            <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="form-inline ml-3">
+                                    <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Pengisian bagi Panduan/ Standard Order Proses (SOP) dalam memperolehi syarat-syarat atau arahan secara umum untuk mendapatkan/memperolehi maklumat geospatial">
-                                        <?php echo __('lang.ordering_instructions'); ?></label>
+                                        <?php echo __('lang.ordering_instructions'); ?> :
+                                    </div>
+                                    <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_order_instructions"
+                                        id="c11_order_instructions" placeholder="RM 0.00" value="{{ old('c11_order_instructions') }}">
+                                    <a style="display: inline-block;" href="lampiran/ordering_instruction" class="text-yellow mx-3" target="_blank">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </a>
                                 </div>
-                                <span>: </span>
-                                <div class="col-xl-5">
-                                    <input type="text" name="c11_order_instructions" id="c11_order_instructions"
-                                        class="form-control form-control-sm" value="{{ old('c11_order_instructions') }}">
-                                </div>
-                                <a style="display: inline-block;" href="lampiran/ordering_instruction" class="text-yellow mx-3" target="_blank">
-                                    <i class="fas fa-lightbulb"></i>
-                                </a>
                             </div>
                             <?php
                         }

@@ -719,10 +719,6 @@ class MetadataController extends Controller {
             }
         }
 
-        //SMBG SINI - set assigned pengesah of owner of uploaded xml. code below sets based on logged in user and not the owner of uploaded xml.
-//        $pengesahs = User::whereHas("roles", function ($q) {
-//                    $q->where("name", "Pengesah Metadata");
-//                })->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
         $pengesahs = User::where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
         if (empty($pengesahs)) {
             $pengesahs = User::where(['id' => '9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
@@ -2879,22 +2875,28 @@ class MetadataController extends Controller {
                 $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
             }
 
+            //            $pengesahs = User::where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+            $pengesahs = User::where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->get()->first();
+            if (empty($pengesahs)) {
+                $pengesahs = User::where(['id' => '9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
+            }
+            
             $msg = "";
             if (isset($request->btn_save) || (isset($request->submitAction) && $request->submitAction == "save")) {
                 $mg->is_draf = "no";
-                if ($request->c2_contact_email != "") {
+//                if ($request->c2_contact_email != "") {
                     //send email to pengesah metadata
-                    $user = User::where('email', $request->c2_contact_email)->get()->first();
-                    if($user){
-                        $to_name = $user->name;
-                        $to_email = $user->email;
+//                    $user = User::where('email', $request->c2_contact_email)->get()->first();
+//                    if($user){
+                        $to_name = $pengesahs->name;
+                        $to_email = $pengesahs->email;
                         $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
                         // Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
                                 // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
                                 // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                         // });						
-                    }
-                }
+//                    }
+//                }
                 $msg = "Metadata berjaya dihantar.";
             } elseif (isset($request->btn_draf) || (isset($request->submitAction) && $request->submitAction == "draf")) {
                 $mg->is_draf = "yes";
@@ -3303,24 +3305,29 @@ class MetadataController extends Controller {
                 $mg->disahkan = $request->newStatus;
             }
 
+//            $pengesahs = User::where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+            $pengesahs = User::where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->get()->first();
+            if (empty($pengesahs)) {
+                $pengesahs = User::where(['id' => '9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
+            }
 
 
             if (isset($request->btn_save) || (isset($request->submitAction) && $request->submitAction == "save")) {
                 $mg->is_draf = "no";
 
-                if ($request->c2_contact_email != "") {
+//                if ($request->c2_contact_email != "") {
                     //send email to pengesah metadata
-                    $user = User::where('email', $request->c2_contact_email)->get()->first();
-					if($user){
-						$to_name = $user->name;
-						$to_email = $user->email;
-						$data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
-						// Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
-							// $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
-							// $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-						// });
-					}
-                }
+//                    $user = User::where('email', $request->c2_contact_email)->get()->first();
+//                    if($user){
+                        $to_name = $pengesahs->name;
+                        $to_email = $pengesahs->email;
+                        $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
+                        // Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
+                            // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        // });
+//                    }
+//                }
 
                 $msg = "Metadata berjaya dihantar.";
             }
@@ -3337,19 +3344,19 @@ class MetadataController extends Controller {
                     $mg->disahkan = '0';
                     $msg = "Metadata berjaya dihantar.";
 
-                    if ($request->c2_contact_email != "") {
+//                    if ($request->c2_contact_email != "") {
                         //send email to pengesah metadata
-                        $user = User::where('email', $request->c2_contact_email)->get()->first();
-						if($user){
-							$to_name = $user->name;
-							$to_email = $user->email;
-							$data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
-							// Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
-								// $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
-								// $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-							// });
-						}
-                    }
+//                        $user = User::where('email', $request->c2_contact_email)->get()->first();
+//                        if($user){
+                            $to_name = $pengesahs->name;
+                            $to_email = $pengesahs->email;
+                            $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
+                            // Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
+                                // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+                                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            // });
+//                        }
+//                    }
                 }
             } elseif ($request->submitAction == "draf") {
                 $mg->is_draf = "yes";

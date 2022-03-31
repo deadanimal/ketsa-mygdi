@@ -55,6 +55,8 @@
                                 $contentInfo = "Static Map Image";
                             }elseif($ci == "LiveData"){
                                 $contentInfo = "Live Data";
+                            }else{
+                                $contentInfo = $ci;
                             }
                         }
                         ?>
@@ -236,6 +238,7 @@
             $var = $contentInfo;
         }
         ?>
+                console.log("tod/ci: {{$tod}}/{{$ci}}");
         $('#c1_content_info').val("{{ $tod }}").trigger('change');
         $('#content_info_text').val("{{ $var }}");
     });

@@ -303,7 +303,7 @@
         
         $(document).on('change','#c1_content_info',function(){
             var cat = $('#kategori').val();
-            if(cat == "Dataset" && $(this).val() == "Application"){
+            if(cat == "Dataset" && $(this).val() == "application"){
                 $('.divIdentificationInformationUrl').show();
                 $('.inputIdentificationInformationUrl').prop('disabled',false);
                 $('.divBrowsingInformationUrl').hide();
@@ -791,11 +791,11 @@
             }
 
             <?php
-            if ($catSelected == "dataset" || $catSelected == "services") {
+            if (strtolower($catSelected) == "dataset" || strtolower($catSelected) == "services") {
                 ?>
                         $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
                 <?php
-            } elseif ($catSelected == "imagery" || $catSelected == "gridded") {
+            } elseif (strtolower($catSelected) == "imagery" || strtolower($catSelected) == "gridded") {
                 ?>
                         $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
                 <?php
