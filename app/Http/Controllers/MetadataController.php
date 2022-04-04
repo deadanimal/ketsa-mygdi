@@ -304,16 +304,16 @@ class MetadataController extends Controller {
         $params = [];
 
         if (isset($carian) && trim($carian) != "") {
-            $query = $query->where('title', 'ilike', '%' . $carian . '%');
+            $query = $query->orWhere('title', 'ilike', '%' . $carian . '%');
         }
 
         if (isset($request->content_type) && $request->content_type != "") {
             $params['content_type'] = $request->content_type;
-            $query = $query->where('data', 'ilike', '%>' . $request->content_type . '<%');
+            $query = $query->orWhere('data', 'ilike', '%>' . $request->content_type . '<%');
         }
         $params['topic_category'] = [];
         if (isset($request->topic_category)) {
-            $query = $query->where(function ($query) use ($request, &$params) {
+            $query = $query->orWhere(function ($query) use ($request, &$params) {
                 foreach ($request->topic_category as $tc) {
                     $query->orWhere('data', 'ilike', '%<MD_TopicCategoryCode>' . $tc . '</MD_TopicCategoryCode>%');
                     $params['topic_category'][] = $tc;
@@ -322,15 +322,15 @@ class MetadataController extends Controller {
         }
 
         if (isset($request->tarikh_mula) && $request->tarikh_mula != "" && isset($request->tarikh_tamat) && $request->tarikh_tamat != "" && ($request->tarikh_mula == $request->tarikh_tamat)) {
-            $query = $query->whereBetween('createdate', [$request->tarikh_mula . ' 00:00:01', $request->tarikh_tamat . ' 59:59:59']);
+            $query = $query->orWhereBetween('createdate', [$request->tarikh_mula . ' 00:00:01', $request->tarikh_tamat . ' 59:59:59']);
         } else {
             if (isset($request->tarikh_mula) && $request->tarikh_mula != "") {
                 $params['tarikh_mula'] = $request->tarikh_mula;
-                $query = $query->where('createdate', '>=', date('Y-m-d H:i:s', strtotime($request->tarikh_mula . ' 00:00:01')));
+                $query = $query->orWhere('createdate', '>=', date('Y-m-d H:i:s', strtotime($request->tarikh_mula . ' 00:00:01')));
             }
             if (isset($request->tarikh_tamat) && $request->tarikh_tamat != "") {
                 $params['tarikh_tamat'] = $request->tarikh_tamat;
-                $query = $query->where('createdate', '<=', date('Y-m-d H:i:s', strtotime($request->tarikh_tamat . ' 23:59:59')));
+                $query = $query->orWhere('createdate', '<=', date('Y-m-d H:i:s', strtotime($request->tarikh_tamat . ' 23:59:59')));
             }
         }
 
@@ -3340,6 +3340,19 @@ class MetadataController extends Controller {
                 if (auth::user()->hasRole(['Pengesah Metadata'])) {
                     $mg->disahkan = "no";
                     $msg = "Catatan berjaya disimpan.";
+                    
+                    //send email to penerbit
+                    $metadataName = $request->c2_metadataName;
+                    $user = User::where("email", $request->publisher_email)->get()->first();
+                    if (!empty($user)) {
+                        $to_name = $user->name;
+                        $to_email = $user->email;
+                        $data = array('title' => $metadataName);
+                        // Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                            // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
+                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        // });
+                    }
                 } elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin', 'Pentadbir Aplikasi'])) {
                     $mg->disahkan = '0';
                     $msg = "Metadata berjaya dihantar.";

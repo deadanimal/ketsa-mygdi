@@ -67,6 +67,7 @@
                                             <th>NAMA PERMOHONAN</th>
                                             <th>NAMA PEMOHON</th>
                                             <th>KATEGORI</th>
+                                            <th>PEMPROSES</th>
                                             <th>STATUS</th>
                                             <th>MUAT TURUN</th>
                                             <th>PENILAIAN</th>
@@ -115,6 +116,9 @@
                                                         @elseif($permohonan->status == '0')
                                                             <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif
+                                                    </td>
+                                                    <td>
+                                                        {{ $permohonan->assign_admin }}
                                                     </td>
                                                     <td>
                                                         @if ($permohonan->acceptance == '1' && $permohonan->berjayaMuatTurunStatus == '1')

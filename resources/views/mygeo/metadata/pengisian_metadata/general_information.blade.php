@@ -119,7 +119,7 @@
                             </div>
                             <div class="col-8">
                                 <!--<p class="ml-3 mb-0">{{ auth::user()->phone_pejabat }}</p>-->
-                                <input class="form-control form-control-sm ml-3" type="text" name="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
+                                <input class="form-control form-control-sm ml-3" type="text" name="publisher_phone" id="publisher_phone" value="{{ auth::user()->phone_pejabat }}" />
                             </div>
                         </div>
                         <?php
@@ -161,5 +161,12 @@
 <script>
     $(document).ready(function() {
         $('#content_info_dropdown').val("{{old('c1_content_info')}}").trigger('change');
+        
+        $('#publisher_phone').keypress(function (e) {    
+            var charCode = (e.which) ? e.which : event.keyCode    
+            if (String.fromCharCode(charCode).match(/[^0-9]/g)){
+                return false;                        
+            }
+        });
     });
 </script>

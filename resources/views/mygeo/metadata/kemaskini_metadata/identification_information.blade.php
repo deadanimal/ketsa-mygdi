@@ -457,8 +457,9 @@
                                     <div class="text-error">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-1">
-                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl3" type="button" style="display: inline-block;">Test</button>
+                            <div class="col-3">
+                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl3_esri" type="button" style="display: inline-block;">Test (Esri)</button>
+                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl3_wms" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false" style="display: inline-block;">Test (WMS)</button>
                                 @error('c2_serviceUrl')
                                     <div class="text-error">{{ $message }}</div>
                                 @enderror

@@ -183,7 +183,7 @@
     //                        echo $metadataxml->contact->CI_ResponsibleParty->contactInfo->CI_Contact->phone->CI_Telephone->voice->CharacterString;
                             }
                             ?>
-                            <input class="form-control form-control-sm ml-3" type="text" name="publisher_phone" value="{{ $pub_phone }}">
+                            <input class="form-control form-control-sm ml-3" type="text" name="publisher_phone" id="publisher_phone" value="{{ $pub_phone }}">
                         </div>
                     </div>
                     <?php
@@ -241,5 +241,12 @@
                 console.log("tod/ci: {{$tod}}/{{$ci}}");
         $('#c1_content_info').val("{{ $tod }}").trigger('change');
         $('#content_info_text').val("{{ $var }}");
+        
+        $('#publisher_phone').keypress(function (e) {    
+            var charCode = (e.which) ? e.which : event.keyCode    
+            if (String.fromCharCode(charCode).match(/[^0-9]/g)){
+                return false;                        
+            }
+        });
     });
 </script>

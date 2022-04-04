@@ -116,11 +116,11 @@
                             @csrf
                             <div class="card-header">
                                 <div class="row align-items-center">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ url('senarai_data') }}"><button class="btn btn-danger">Kembali</button></a>
-                                    </div>
                                     <div class="col-8">
                                         <h3 class="mb-0">Senarai Kategori Data dan Sub-Kategori Data</h3>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a href="{{ url('senarai_data') }}"><button class="btn btn-danger">Kembali</button></a>
                                     </div>
 
                                 </div>
@@ -136,7 +136,7 @@
                                                     <h3 class="heading mb-0">{{ $loop->iteration }}. {{ $ksd->name }}
                                                     </h3>
                                                 </div>
-                                                <div class="col-2 hapusKategori" style="text-align:right;" data-kategori="{{ $ksd->name }}">
+                                                <div class="col-2 hapusKategori" style="text-align:right;" data-kategori="{{ $ksd->name }}" data-kategoriid="{{ $ksd->id }}">
                                                     <p class="mb-0">Hapus</p>
                                                 </div>
                                             </div>
@@ -464,14 +464,16 @@
         });
         $(document).on("click", ".hapusKategori", function() {
             var kategori = $(this).data('kategori');
+            var kategoriid = $(this).data('kategoriid');
             var r = confirm("Adakah anda pasti untuk buang kategori ini?");
             if (r == true) {
                 $.ajax({
                     method: "POST",
-                    url: "senarai_data_hapus_delete", //SMBG SINI - function created in controller. continue there
+                    url: "delete_kategori_data",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "kategori": kategori
+                        "kategori": kategori,
+                        "kategoriid": kategoriid
                     },
                 }).done(function(response) {
                     alert("Kategori telah dibuang.");

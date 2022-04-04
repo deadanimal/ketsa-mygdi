@@ -161,7 +161,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between1">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>-->
                 </div>
             </div>
         </div>
