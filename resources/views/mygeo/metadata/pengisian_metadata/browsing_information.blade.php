@@ -15,7 +15,7 @@
                     <div class="row mb-2" id="div_contohJenisMetadata" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3">
                             <label class="form-control-label mr-4" for="file_contohJenisMetadata">
-                                Sampel Data
+                                <?php echo __('lang.sampleData'); ?>
                             </label>
                         </div>
                         <div class="col-8">

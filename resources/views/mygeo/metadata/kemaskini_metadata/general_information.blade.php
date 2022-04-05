@@ -31,7 +31,7 @@
                 if($key == "c1_content_info"){
                     ?>
                     <div class="form-group row" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                        <p class="pl-lg-3 form-control-label">Content Information<span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
+                        <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
                         <?php
                         $contentInfo = $ci = $tod = "";
                         if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
@@ -92,7 +92,7 @@
             }
             ?>
 
-            <h2 class="heading-small text-muted">Metadata Publisher</h2>
+            <h2 class="heading-small text-muted"><?php echo __('lang.metadataPublisher'); ?></h2>
             
             <div class="my-1">
             <?php
@@ -102,7 +102,7 @@
                     <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="uname">
-                                Name
+                                <?php echo __('lang.name'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">
@@ -123,7 +123,7 @@
                     <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="publisher_agensi_organisasi">
-                                Agency/Organization
+                                <?php echo __('lang.organisation_name'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">
@@ -151,7 +151,7 @@
                     <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="publisher_email">
-                                Email
+                                <?php echo __('lang.email'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">
@@ -172,7 +172,7 @@
                     <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="publisher_phone">
-                                Telephone {{ $val['status'] }}
+                                <?php echo __('lang.telephone_office'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">
@@ -193,7 +193,7 @@
                     <div class="row my-0 py-0 divPublisherRole" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="publisher_role">
-                                Role
+                                <?php echo __('lang.role'); ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">

@@ -125,7 +125,7 @@
                 </div>
                 <?php
                 foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
-                    if($key == "c11_distributor"){
+                    if($key == "c11_link"){
                         ?>
                         <div class="row" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-xl-3">

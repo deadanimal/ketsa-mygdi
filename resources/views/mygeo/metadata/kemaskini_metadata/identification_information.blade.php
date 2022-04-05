@@ -42,7 +42,17 @@
                                         if (strtolower($metadataxml->hierarchyLevel->MD_ScopeCode) == 'dataset') {
                                             echo strtoupper(__('lang.title'));
                                         } else {
-                                            echo 'Metadata Name';
+                                            if(isset($_GET['bhs'])){
+                                                if($_GET['bhs'] == "en"){
+                                                    echo 'Metadata Name';
+                                                }else{
+                                                    echo 'Tajuk Metadata';
+                                                }
+                                            }elseif($langSelected == "en"){
+                                                echo 'Metadata Name';
+                                            }elseif($langSelected == "bm"){
+                                                echo 'Tajuk Metadata';
+                                            }
                                         }
                                     }else{
                                         echo strtoupper(__('lang.title'));
@@ -415,7 +425,7 @@
                         <div class="row mb-2 divOperationName" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_operationName">
-                                    Operation Name
+                                    <?php echo __('lang.operation_name'); ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -505,7 +515,7 @@
                 ?>
             </div>
             
-            <h2 class="heading-small text-muted">Responsible Party</h2>
+            <h2 class="heading-small text-muted"><?php echo __('lang.responsibleParty'); ?></h2>
             <div class="my-2">
                 <?php
                 foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){

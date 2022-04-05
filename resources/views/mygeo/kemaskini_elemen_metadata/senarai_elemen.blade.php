@@ -633,6 +633,8 @@
             
             window.location.href = url;
         });
+//        $('.btnTambah').hide(); //ketsa changed their mind and didnt want this after all
+//        $('.btnClose').hide(); //ketsa changed their mind and didnt want this after all
     });
 </script>
 
