@@ -845,6 +845,8 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
             tileSize: 512,
             zoomOffset: - 1
         }).addTo(map);
+        
+        $("#nblt,#wblg,#sblt,#eblg").val("");
     }
 
     function saveData() {

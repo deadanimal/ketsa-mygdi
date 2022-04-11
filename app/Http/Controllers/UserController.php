@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\ModelHasRoles;
+use App\States;
+use App\Countries;
 use App\MohonData;
 use Illuminate\Support\Facades\Log;
 use Auth;
@@ -659,14 +661,17 @@ class UserController extends Controller {
 
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
-
+        
+        $states = States::where('id',Auth::user()->state)->get()->first();
+        $countries = Countries::where('id',Auth::user()->country)->get()->first();
+        
         // dd($pemohonan_yang_tidak_dinilais);
         if($pemohonan_yang_tidak_dinilais) {
-            return view('mygeo.profile.profil', compact('user'));
+            return view('mygeo.profile.profil', compact('user','states','countries'));
         } else {
             if(Auth::user()->hasRole(['Pemohon Data'])){
                 \Session::flash('warning','Anda perlu membuat penilaian kepada permohonan terbaru');
-                return view('mygeo.profile.profil', compact('user'));
+                return view('mygeo.profile.profil', compact('user','states','countries'));
             }
         }
     }
@@ -687,9 +692,15 @@ class UserController extends Controller {
         }else{
             $kategori = Kategori::get();
         }
+        
+        $oriState = States::where('id',Auth::user()->state)->get()->first();
+        $oriCountry = Countries::where('id',Auth::user()->country)->get()->first();
+        
+        $states = States::all();
+        $countries = Countries::all();
 
         $roles = Role::get();
-        return view('mygeo.profile.profil_edit', compact('user','roles','kategori'));
+        return view('mygeo.profile.profil_edit', compact('user','roles','kategori','states','countries','oriState','oriCountry'));
     }
 
     public function edit_admin($id){
@@ -701,10 +712,16 @@ class UserController extends Controller {
         }else{
             $kategori = Kategori::get();
         }
+        
+        $oriState = States::where('id',Auth::user()->state)->get()->first();
+        $oriCountry = Countries::where('id',Auth::user()->country)->get()->first();
+        
+        $states = States::all();
+        $countries = Countries::all();
 
         $roles = Role::get();
-//        dd('ftester');
-        return view('mygeo.profile.profil_edit_admin', compact('user','roles','kategori'));
+
+        return view('mygeo.profile.profil_edit_admin', compact('user','roles','kategori','states','countries','oriState','oriCountry'));
     }
 
     public function update_profile(Request $request){
@@ -738,13 +755,18 @@ class UserController extends Controller {
 
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $user->name = $request->uname;
-//        $user->nric = $request->nric; //TEMPORARILY COMMENTED. TO UNCOMMENT AFTER BENGKEL
+        $user->nric = $request->nric;
         $user->email = $request->email;
         $user->agensi_organisasi = $request->agensi_organisasi;
         $user->bahagian = $request->bahagian;
         $user->sektor = $request->sektor;
         $user->phone_pejabat = $request->phone_pejabat;
         $user->phone_bimbit = $request->phone_bimbit;
+        $user->alamat = $request->alamat;
+        $user->postcode = $request->postcode;
+        $user->city = $request->city;
+        $user->state = $request->state;
+        $user->country = $request->country;
         $user->kategori = $request->kategori;
         if($user->editable == "1"){
             $user->editable = "0";
@@ -793,13 +815,18 @@ class UserController extends Controller {
 
         $user = User::where("id",$request->userid)->get()->first();
         $user->name = $request->uname;
-//        $user->nric = $request->nric; //TEMPORARILY COMMENTED. TO UNCOMMENT AFTER BENGKEL
+        $user->nric = $request->nric;
         $user->email = $request->email;
         $user->agensi_organisasi = $request->agensi_organisasi;
         $user->bahagian = $request->bahagian;
         $user->sektor = $request->sektor;
         $user->phone_pejabat = $request->phone_pejabat;
         $user->phone_bimbit = $request->phone_bimbit;
+        $user->alamat = $request->alamat;
+        $user->postcode = $request->postcode;
+        $user->city = $request->city;
+        $user->state = $request->state;
+        $user->country = $request->country;
         $user->kategori = $request->kategori;
         $user->save();
 

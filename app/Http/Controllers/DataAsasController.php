@@ -67,13 +67,13 @@ class DataAsasController extends Controller
             }
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
-        $senarai_data = SenaraiData::where('status','Tersedia')->distinct('subkategori')->get();
+        $senarai_data = SenaraiData::where('status','Ada')->distinct('subkategori')->get();
         $lapisandata = DB::table('senarai_data')
-                                ->where('status','Tersedia')
+                                ->where('status','Ada')
                                 ->select('subkategori','lapisan_data','kelas')
                                 ->groupBy('subkategori','lapisan_data','kelas')
                                 ->get();
-        $kategori_senarai_data  = SenaraiData::where('status','Tersedia')->distinct('kategori')->get();
+        $kategori_senarai_data  = SenaraiData::where('status','Ada')->distinct('kategori')->get();
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->orderBy('created_at')->get();
 
@@ -93,13 +93,13 @@ class DataAsasController extends Controller
     {
         $subs = SenaraiData::where([
             ['kategori','=','LOL'],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->get();
-        $senarai_data = SenaraiData::where('status','Tersedia')->whereNotNull('subkategori')->orderBy('kategori')->distinct('kategori')->get();
+        $senarai_data = SenaraiData::where('status','Ada')->whereNotNull('subkategori')->orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
         return view('/data_asas_senarai',[
             'senarai_data' => $senarai_data,
@@ -114,11 +114,11 @@ class DataAsasController extends Controller
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
             ['kategori','=',$kategori->kategori],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->get();
         $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
@@ -138,11 +138,11 @@ class DataAsasController extends Controller
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
             ['kategori','=',$kategori->kategori],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=',$subkategori->subkategori],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->get();
         $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();

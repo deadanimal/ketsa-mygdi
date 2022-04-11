@@ -3637,6 +3637,12 @@ class MetadataController extends Controller {
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
         }
         
+        if (isset($_GET['bhs']) && $_GET['bhs'] == 'bm') {
+            App::setLocale('bm');
+        } elseif (isset($_GET['bhs']) && $_GET['bhs'] == 'en') {
+            App::setLocale('en');
+        }
+        
         $categories = MCategory::get();
         $template = MetadataTemplate::where('status','active')->get()->first();
         $templateInactive = MetadataTemplate::where('status','inactive')->get()->first();

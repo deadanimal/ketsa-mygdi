@@ -165,6 +165,66 @@
                                     @endif
                                     <div class="row mb-2">
                                         <div class="col-3">
+                                            <label class="form-control-label mr-4" for="alamat">
+                                                Alamat
+                                            </label>
+                                        </div>
+                                        <label class="float-right">:</label>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" id="phone_pejabat" type="text"
+                                                value="{{ $user->alamat }}" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="postcode">
+                                                Poskod
+                                            </label>
+                                        </div>
+                                        <label class="float-right">:</label>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" id="postcode" type="text"
+                                                value="{{ $user->postcode }}" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="city">
+                                                Bandar
+                                            </label>
+                                        </div>
+                                        <label class="float-right">:</label>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" id="city" type="text"
+                                                value="{{ $user->city }}" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="state">
+                                                Negeri
+                                            </label>
+                                        </div>
+                                        <label class="float-right">:</label>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" id="state" type="text"
+                                                value="{{ (isset($states->name) ? $states->name:"") }}" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="country">
+                                                Negara
+                                            </label>
+                                        </div>
+                                        <label class="float-right">:</label>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" id="country" type="text"
+                                                value="{{ (isset($countries->name) ? $countries->name:"") }}" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
                                             <label class="form-control-label mr-4" for="peranan">
                                                 Peranan
                                             </label>

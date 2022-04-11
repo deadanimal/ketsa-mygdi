@@ -1105,6 +1105,8 @@ if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Ext
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);
+        
+        $("#nblt,#wblg,#sblt,#eblg").val("");
     }
 
     function saveData() {

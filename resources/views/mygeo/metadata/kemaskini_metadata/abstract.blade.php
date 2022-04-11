@@ -1,3 +1,35 @@
+<?php
+if($key == "c2_abstract"){
+    ?>
+    <div class="">
+        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+            <div class="col-3">
+                <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
+                    <?php echo __('lang.abstract'); ?><span class="text-warning">*</span>
+                </label><label class="float-right">:</label>
+            </div>
+            <div class="col-7">
+                <?php
+                $var = "";
+                if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
+                    $var = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
+                }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != ""){
+                    $var = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
+                }
+                ?>
+                <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ">{{ $var }}</textarea>
+                @error('c2_abstract')
+                <div class="text-error">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <?php
+}
+?>
+
+<?php //###################################################################### ?>
+
 <div class="abstractApplication">
     <?php
     if($key == "abstractApplication_namaAplikasi"){
@@ -1523,34 +1555,3 @@
     }
     ?>
 </div>
-
-<?php //###################################################################### ?>
-<?php
-if($key == "c2_abstract"){
-    ?>
-    <div class="">
-        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-            <div class="col-3">
-                <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                    <?php echo __('lang.abstract'); ?><span class="text-warning">*</span>
-                </label><label class="float-right">:</label>
-            </div>
-            <div class="col-7">
-                <?php
-                $var = "";
-                if(isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != ""){
-                    $var = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
-                }elseif(isset($metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString != ""){
-                    $var = $metadataxml->identificationInfo->SV_ServiceIdentification->abstract->CharacterString;
-                }
-                ?>
-                <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ">{{ $var }}</textarea>
-                @error('c2_abstract')
-                <div class="text-error">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-    </div>
-    <?php
-}
-?>

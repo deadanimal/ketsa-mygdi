@@ -108,7 +108,7 @@
                         <div class="row">
                             <div class="col col-lg-12">
                                 <div class="btn-group" role="group" aria-label="Basic example"></div>
-                                <button type="reset" onclick="cleaLayer()" class="btn btn-outline-primary">
+                                <button type="button" onclick="cleaLayer()" class="btn btn-outline-primary">
                                     <i class="fas fa-retweet"></i> Reset
                                 </button>
 <!--                                <button type="button" onclick="saveData()" class="btn btn-primary">

@@ -35,6 +35,14 @@
 <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 
+<?php
+$langSelected = "bm";
+if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
+    $langSelected = $_GET['bhs'];
+}
+$bhs = $langSelected;
+?>
+
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -92,9 +100,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="clearfix">
+                                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                                        <label class="btn btn-secondary active">
+                                            <img src="{{ url('/img/flagMalaysia.jpeg') }}" alt="User Avatar">
+                                            <input type="radio" name="flanguage" value="bm"
+                                                   {{ $langSelected == 'bm' ? 'checked' : '' }}>BM
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <img src="{{ url('/img/flagUnitedKingdom.jpeg') }}" alt="User Avatar">
+                                            <input type="radio" name="flanguage" value="en"
+                                                   {{ $langSelected == 'en' ? 'checked' : '' }}>ENG
+                                        </label>
+                                    </div>
+                                </div>
                             <br>
                             <?php
-                            $bhs = 'bm';
                             if(isset($_GET['kategori']) && $_GET['kategori'] != ""){
                                 ?>
                                 <div id="accordion" class="accordf">
@@ -186,6 +207,31 @@
     });
 
     $(document).ready(function () {
+        $('input:radio[name="flanguage"]').change(function() {
+            window.onbeforeunload = null;
+            if ($(this).val() == 'bm') {
+                var url = '{{ url("/mygeo_kemaskini_elemen_metadata") }}';
+                <?php
+                if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
+                    ?>
+                    url += '?kategori={{$_GET['kategori']}}&bhs=bm';
+                    <?php
+                }
+                ?>
+                window.location.href = url;
+            } else if ($(this).val() == 'en') {
+                var url = '{{ url("/mygeo_kemaskini_elemen_metadata") }}';
+                <?php
+                if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
+                    ?>
+                    url += '?kategori={{$_GET['kategori']}}&bhs=en';
+                    <?php
+                }
+                ?>
+                window.location.href = url;
+            }
+        });
+        
         var templateInactive = <?php echo json_encode($template->template); ?>; //this includes all elements regardless of status active or inactive. i wasn't thinking straight lulz
         //================================
         $('.sortableContainer1').sortable();
