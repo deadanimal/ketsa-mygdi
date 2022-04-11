@@ -662,7 +662,11 @@ class UserController extends Controller {
         $user = User::where(["id"=>Auth::user()->id])->get()->first();
         $pemohonan_yang_tidak_dinilais = MohonData::where(['penilaian' => 0])->get();
         
-        $states = States::where('id',Auth::user()->state)->get()->first();
+        if(is_numeric(Auth::user()->state)){
+            $states = States::where('id',Auth::user()->state)->get()->first();        
+        }else{
+            $states = States::where('name',Auth::user()->state)->get()->first();        
+        }
         $countries = Countries::where('id',Auth::user()->country)->get()->first();
         
         // dd($pemohonan_yang_tidak_dinilais);
