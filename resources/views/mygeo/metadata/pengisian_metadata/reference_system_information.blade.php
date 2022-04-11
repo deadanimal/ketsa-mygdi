@@ -72,8 +72,8 @@
                     if($key == "refsys_projection"){
                         ?>
                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-2"><b><?php echo __('lang.projection'); ?></b></div>
-                            <div class="col-4">
+                            <div class="col-6"><b><?php echo __('lang.projection'); ?></b></div>
+                            <div class="col-6">
                                 : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_projection"
                                     id="refsys_projection" readonly value="{{ old('refsys_projection') }}">
                             </div>
@@ -83,8 +83,8 @@
                     if($key == "refsys_axis_units"){
                         ?>
                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-2"><b><?php echo __('lang.axis_units'); ?></b></div>
-                            <div class="col-4">: &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_axis_units"
+                            <div class="col-6"><b><?php echo __('lang.axis_units'); ?></b></div>
+                            <div class="col-6">: &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_axis_units"
                                     id="refsys_axis_units" readonly value="{{ old('refsys_axis_units') }}"></div>
                         </div>
                         <?php
@@ -100,8 +100,8 @@
                     if($key == "refsys_semiMajorAxis"){
                         ?>
                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-2"><b><?php echo __('lang.semi_major_axis'); ?></b></div>
-                            <div class="col-4">
+                            <div class="col-6"><b><?php echo __('lang.semi_major_axis'); ?></b></div>
+                            <div class="col-6">
                                 : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_semiMajorAxis"
                                     id="refsys_semiMajorAxis" readonly value="{{ old('refsys_semiMajorAxis') }}">
                             </div>
@@ -111,8 +111,8 @@
                     if($key == "refsys_axis_units"){
                         ?>
                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-2"><b><?php echo __('lang.datum'); ?></b></div>
-                            <div class="col-4">
+                            <div class="col-6"><b><?php echo __('lang.datum'); ?></b></div>
+                            <div class="col-6">
                                 : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_datum" id="refsys_datum"
                                     readonly value="{{ old('refsys_datum') }}">
                             </div>
@@ -130,8 +130,8 @@
                     if($key == "refsys_ellipsoid"){
                         ?>
                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-2"><b><?php echo __('lang.ellipsoid'); ?></b></div>
-                            <div class="col-4">
+                            <div class="col-6"><b><?php echo __('lang.ellipsoid'); ?></b></div>
+                            <div class="col-6">
                                 : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_ellipsoid"
                                     id="refsys_ellipsoid" readonly value="{{ old('refsys_ellipsoid') }}">
                             </div>
@@ -141,8 +141,8 @@
                     if($key == "refsys_denomFlatRatio"){
                         ?>
                         <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-2"><b><?php echo __('lang.denominator_of_flattening_ratio'); ?></b></div>
-                            <div class="col-4">
+                            <div class="col-6"><b><?php echo __('lang.denominator_of_flattening_ratio'); ?></b></div>
+                            <div class="col-6">
                                 : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_denomFlatRatio"
                                     id="refsys_denomFlatRatio" readonly value="{{ old('refsys_denomFlatRatio') }}">
                             </div>

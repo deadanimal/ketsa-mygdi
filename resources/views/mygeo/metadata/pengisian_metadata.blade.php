@@ -161,7 +161,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between1">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>-->
                 </div>
             </div>
         </div>
@@ -295,7 +295,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
     $(document).ready(function() {
         $(document).on('change','#content_info_dropdown',function(){
             var cat = $('#kategori').val();
-            if(cat == "Dataset" && $(this).val() == "Application"){
+            if(cat == "Dataset" && $(this).val() == "application"){
                 $('.divIdentificationInformationUrl').show();
                 $('.inputIdentificationInformationUrl').prop('disabled',false);
                 $('.divBrowsingInformationUrl').hide();
@@ -845,6 +845,8 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
             tileSize: 512,
             zoomOffset: - 1
         }).addTo(map);
+        
+        $("#nblt,#wblg,#sblt,#eblg").val("");
     }
 
     function saveData() {

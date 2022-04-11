@@ -33,7 +33,7 @@
             <br>
             <div class="row">
                 <div class="col-xl-6">
-                    <h6 class="heading-small text muted">Legal Constraints</h6>
+                    <h6 class="heading-small text muted"><?php echo __('lang.legalConstraints'); ?></h6>
                     <div class="pl-lg-3">
                         <?php
                         foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
@@ -42,7 +42,7 @@
                                 <div class="row mb-2 divUseLimitation" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-access-cons">
-                                            Use Limitation
+                                            <?php echo __('lang.use_limitation'); ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">
@@ -64,7 +64,7 @@
                                 <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-access-cons">
-                                            Access Constraints
+                                            <?php echo __('lang.access_constraints'); ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">
@@ -106,7 +106,7 @@
                                 <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-use-cons">
-                                            Use Constraints
+                                            <?php echo __('lang.use_constraints'); ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">
@@ -148,8 +148,7 @@
                     </div>
                 </div>
                 <div class="col-xl-6">
-                    <h6 class="heading-small text muted">Security Constraints
-                    </h6>
+                    <h6 class="heading-small text muted"><?php echo __('lang.securityConstraints'); ?></h6>
                     <div class="pl-lg-3">
                         <?php
                         foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
@@ -158,7 +157,7 @@
                                 <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-access-cons">
-                                            Classification
+                                            <?php echo __('lang.classification'); ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">
@@ -204,7 +203,7 @@
                                 <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-reference">
-                                            Reference
+                                            <?php echo __('lang.classification_system'); ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">

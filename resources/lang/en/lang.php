@@ -118,6 +118,7 @@
     'south_bound_latitude'=>'Bound Bound Latitude',
 
     'accord_10'=> 'BROWSING INFORMATION',
+    'sampleData'=>'Sample Data',
     'browsingGraphic'=>'BROWSING GRAPHIC',
     'file_name'=>'File Name',
     'file_type'=>'File Type',

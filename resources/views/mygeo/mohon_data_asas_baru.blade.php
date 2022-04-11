@@ -264,9 +264,9 @@
                                                         <div class="row">
                                                             <div class="col-10 pl-lg-4">
                                                                 <div class="form-group">
-                                                                    <label for="name" class="form-control-label">Nama
+                                                                    <label for="name" class="form-control-label">Tajuk
                                                                         Permohonan</label>
-                                                                    <input type="text" class="form-control" name="name"
+                                                                    <input type="text" class="form-control" name="name" id="tajukPermohonan"
                                                                         value="{{ $permohonan->name }}">
                                                                 </div>
                                                                 <div class="form-group">
@@ -1049,6 +1049,10 @@
         });
 
         $(document).ready(function() {
+            $("#tajukPermohonan").keyup(function () {  
+                $(this).val($(this).val().toUpperCase());  
+            }); 
+            
             $(document).on('click', '.btnHantarPermohonanPentadbir', function() {
                 if (confirm('Anda pasti untuk menghantar permohonan?')) {
                     $('#formHantarPermohonanPentadbir').submit();

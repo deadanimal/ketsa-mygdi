@@ -54,75 +54,77 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="table_metadatas" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th><input type="checkbox" name="selectAll" id="selectAll"></th>
-                                        <th>Bil</th>
-                                        <th>Nama Metadata</th>
-                                        <th>Penerbit</th>
-                                        <th>Kategori</th>
-                                        <th>Tarikh</th>
-                                        <th>Tindakan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $bil = 1;
-                                    if (count($metadatas) > 0) {
-                                        foreach ($metadatas as $key => $val) {
-                                            ?>
-                                            <tr>
-                                                <td>
-                                                    <?php
-                                                    $met_name = '';
-                                                    if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
-                                                        $met_name = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
-                                                    }elseif (isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != '') {
-                                                        $met_name = $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
-                                                    }
-                                                    ?>
-                                                    <input type="checkbox" class="checkbox_metadatas" name="checkbox_metadatas" data-metadataid="{{ $key }}" data-title="{{ $met_name }}" value="{{ $key }}"></td>
-                                                <td>{{ $bil }}</td>
-                                                <td>
-                                                    <?php echo $met_name; ?>
-                                                </td>
-                                                <td>
-                                                    {{ (isset($val[2]->name) ? $val[2]->name:"") }}
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                       if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
-                                                          echo $val[0]->hierarchyLevel->MD_ScopeCode;
-                                                      }
-                                                      ?>
-                                                 </td>
-                                                 <td>
-                                                    {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
-                                                </td>
-                                                <td>
-                                                    <?php //sahkan(kemaskini)======================================= ?>
-                                                    <a href="{{ url('/kemaskini_metadata/'.$key) }}">
-                                                        <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:3px;">Semak</button>
-                                                    </a>
-                                                    <button type="button" class="btn btn-danger btn_tolak btn-sm" data-metadataid="{{ $key }}">Tolak</button>
-                                                    <button type="button" class="btn btn-success btn_sahkan btn-sm" data-metadataid="{{ $key }}">Sahkan</button>
-                                                </td>
-                                            </tr>
-                                    <?php
-                                            $bil++;
+                            <div style="overflow-x:auto;">
+                                <table id="table_metadatas" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" name="selectAll" id="selectAll"></th>
+                                            <th>Bil</th>
+                                            <th>Nama Metadata</th>
+                                            <th>Penerbit</th>
+                                            <th>Kategori</th>
+                                            <th>Tarikh</th>
+                                            <th>Tindakan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $bil = 1;
+                                        if (count($metadatas) > 0) {
+                                            foreach ($metadatas as $key => $val) {
+                                                ?>
+                                                <tr>
+                                                    <td>
+                                                        <?php
+                                                        $met_name = '';
+                                                        if (isset($val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString != '') {
+                                                            $met_name = $val[0]->identificationInfo->MD_DataIdentification->citation->CI_Citation->title->CharacterString;
+                                                        }elseif (isset($val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString) && $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString != '') {
+                                                            $met_name = $val[0]->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->title->CharacterString;
+                                                        }
+                                                        ?>
+                                                        <input type="checkbox" class="checkbox_metadatas" name="checkbox_metadatas" data-metadataid="{{ $key }}" data-title="{{ $met_name }}" value="{{ $key }}"></td>
+                                                    <td>{{ $bil }}</td>
+                                                    <td>
+                                                        <?php echo $met_name; ?>
+                                                    </td>
+                                                    <td>
+                                                        {{ (isset($val[2]->name) ? $val[2]->name:"") }}
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                           if(isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != ""){
+                                                              echo $val[0]->hierarchyLevel->MD_ScopeCode;
+                                                          }
+                                                          ?>
+                                                     </td>
+                                                     <td>
+                                                        {{ date('d/m/Y',strtotime($val[1]->createdate)) }}
+                                                    </td>
+                                                    <td>
+                                                        <?php //sahkan(kemaskini)======================================= ?>
+                                                        <a href="{{ url('/kemaskini_metadata/'.$key) }}">
+                                                            <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:3px;">Semak</button>
+                                                        </a>
+    <!--                                                    <button type="button" class="btn btn-danger btn_tolak btn-sm" data-metadataid="{{ $key }}">Tolak</button>
+                                                        <button type="button" class="btn btn-success btn_sahkan btn-sm" data-metadataid="{{ $key }}">Sahkan</button>-->
+                                                    </td>
+                                                </tr>
+                                        <?php
+                                                $bil++;
+                                            }
                                         }
-                                    }
-                                    ?>
-                                    </tbody>
-                                    <!-- <tfoot>
-                                    <tr>
-                                      <th>Bil</th>
-                                      <th>Nama Metadata</th>
-                                      <th>Actions</th>
-                                    </tr>
-                                  </tfoot> -->
-                                </table>
+                                        ?>
+                                        </tbody>
+                                        <!-- <tfoot>
+                                        <tr>
+                                          <th>Bil</th>
+                                          <th>Nama Metadata</th>
+                                          <th>Actions</th>
+                                        </tr>
+                                      </tfoot> -->
+                                    </table>
+                            </div>
                             </div>
                         </div>
                     </div>

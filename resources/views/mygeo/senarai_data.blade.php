@@ -194,7 +194,7 @@
                                                                         <td>{{ $sdata->kelas }}</td>
                                                                         <td>{{ $sdata->harga_data }}</td>
                                                                         <td>{{ $sdata->harga_data_services }}</td>
-                                                                        <td>{{ $sdata->status }}</td>
+                                                                        <td>{{ ($sdata->status == "Ada" ? "Tersedia":"Tiada") }}</td>
                                                                         <td>
                                                                             <a data-toggle="modal"
                                                                                 data-target="#modal-kemaskinidata-{{ $sdata->id }}">

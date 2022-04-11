@@ -130,7 +130,7 @@
                         <div class="row">
                             <div class="col col-lg-10">
                                 <div class="btn-group" role="group" aria-label="Basic example"></div>
-                                <button type="reset" onclick="cleaLayer()" class="btn btn-outline-secondary">
+                                <button type="button" onclick="cleaLayer()" class="btn btn-outline-secondary">
                                     <i class="fas fa-retweet"></i> Set Semula
                                 </button>
 <!--                                <button type="button" onclick="saveData()" class="btn btn-primary">

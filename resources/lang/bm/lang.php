@@ -117,6 +117,7 @@
     'south_bound_latitude'=>'Latitud Pengikat Utara',
 
     'accord_10'=> 'INFORMASI CARIAN',
+    'sampleData'=>'Sample Data',
     'browsingGraphic'=>'LAYAR GRAFIK',
     'file_name'=>'Nama Fail',
     'file_type'=>'Jenis Fail',

@@ -33,7 +33,7 @@
                     <div class="row mb-2" id="div_contohJenisMetadata" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3">
                             <label class="form-control-label mr-4" for="file_contohJenisMetadata">
-                                Sampel Data
+                                <?php echo __('lang.sampleData'); ?>
                             </label>
                         </div>
                         <div class="col-8">
@@ -58,7 +58,7 @@
             }
             ?>
             
-            <h2 class="heading-small text-muted">Browsing Graphic</h2>
+            <h2 class="heading-small text-muted"><?php echo __('lang.browsingGraphic'); ?></h2>
             
             <div class="my-2">
                 <?php
@@ -68,7 +68,7 @@
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_name">
-                                    File Name
+                                    <?php echo __('lang.file_name'); ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -88,7 +88,7 @@
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_type">
-                                    File Type
+                                    <?php echo __('lang.file_type'); ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -132,7 +132,7 @@
                 }
                 ?>
             </div>
-            <h2 class="heading-small text-muted">Keywords</h2>
+            <h2 class="heading-small text-muted"><?php echo __('lang.keywords'); ?></h2>
             <div class="my-2">
                 <?php
                 foreach($template->template[strtolower($catSelected)]['accordion10'] as $key=>$val){
@@ -141,7 +141,7 @@
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_name">
-                                    Keywords<span class="text-warning">*</span>
+                                    <?php echo __('lang.keywords'); ?><span class="text-warning">*</span>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-6">
@@ -191,7 +191,7 @@
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-3 pl-5">
                                                 <label class="form-control-label mr-4" for="c10_file_type">
-                                                    Additional Keywords
+                                                    <?php echo __('lang.additional_keywords'); ?>
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-6">
@@ -211,7 +211,7 @@
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-3 pl-5">
                                                 <label class="form-control-label mr-4" for="c10_file_type">
-                                                    Additional Keywords
+                                                    <?php echo __('lang.additional_keywords'); ?>
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-6">

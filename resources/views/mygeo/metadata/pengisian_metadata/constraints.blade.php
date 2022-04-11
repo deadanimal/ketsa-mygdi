@@ -107,8 +107,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6">
-                                                        <h6 class="heading-small text muted"> <?php echo __('lang.securityConstraints'); ?>
-                                                        </h6>
+                                                        <h6 class="heading-small text muted"> <?php echo __('lang.securityConstraints'); ?></h6>
                                                         <div class="pl-lg-3">
                                                             <?php
                                                             foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){

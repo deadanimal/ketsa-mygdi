@@ -14,7 +14,7 @@
     <div id="collapse15" class="panel-collapse collapse in show" data-parent="#div_c15">
         <div class="card-body">
             <div class="form-group row col-xl-6">
-                <b>Data Quality Information</b>
+                <b><?php echo __('lang.DQInformation'); ?></b>
             </div>
             <div class="pl-lg-2">
                 <div class="row mb-2">
@@ -45,7 +45,7 @@
                             ?>
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-DQscope">
-                                    DQ Scope
+                                    <?php echo __('lang.dq_scope'); ?>
                                 </label>
                             </div>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
@@ -95,7 +95,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label float-right" for="input-datahistory">
-                                    Data History</label>
+                                    <?php echo __('lang.data_history'); ?></label>
                             </div>
                             <div class="col-md-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php
@@ -112,7 +112,7 @@
                             ?>
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label  float-right" for="input-date">
-                                    Date
+                                    <?php echo __('lang.date_time'); ?>
                                 </label>
                             </div>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>

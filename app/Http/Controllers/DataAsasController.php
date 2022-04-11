@@ -67,13 +67,13 @@ class DataAsasController extends Controller
             }
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
-        $senarai_data = SenaraiData::where('status','Tersedia')->distinct('subkategori')->get();
+        $senarai_data = SenaraiData::where('status','Ada')->distinct('subkategori')->get();
         $lapisandata = DB::table('senarai_data')
-                                ->where('status','Tersedia')
+                                ->where('status','Ada')
                                 ->select('subkategori','lapisan_data','kelas')
                                 ->groupBy('subkategori','lapisan_data','kelas')
                                 ->get();
-        $kategori_senarai_data  = SenaraiData::where('status','Tersedia')->distinct('kategori')->get();
+        $kategori_senarai_data  = SenaraiData::where('status','Ada')->distinct('kategori')->get();
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->orderBy('created_at')->get();
 
@@ -93,13 +93,13 @@ class DataAsasController extends Controller
     {
         $subs = SenaraiData::where([
             ['kategori','=','LOL'],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->get();
-        $senarai_data = SenaraiData::where('status','Tersedia')->whereNotNull('subkategori')->orderBy('kategori')->distinct('kategori')->get();
+        $senarai_data = SenaraiData::where('status','Ada')->whereNotNull('subkategori')->orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
         return view('/data_asas_senarai',[
             'senarai_data' => $senarai_data,
@@ -114,11 +114,11 @@ class DataAsasController extends Controller
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
             ['kategori','=',$kategori->kategori],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=','LOL'],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->get();
         $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
@@ -138,11 +138,11 @@ class DataAsasController extends Controller
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
             ['kategori','=',$kategori->kategori],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
             ['subkategori','=',$subkategori->subkategori],
-            ['status','=','Tersedia']
+            ['status','=','Ada']
         ])->get();
         $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
@@ -312,10 +312,10 @@ class DataAsasController extends Controller
             $to_name = Auth::user()->name;
             $to_email = Auth::user()->email;
             $data = array('m'=>$m2);
-            Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-                $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-            });
+            //Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
+                //$message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+                //$message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+            //});
         }
         exit();
     }
@@ -421,11 +421,11 @@ class DataAsasController extends Controller
             $to_email = $pemohon->users->email;
 //            $to_email = 'farhan15959@gmail.com';
             $data = array('cat'=>'cat');
-            Mail::send("mails.exmpl15", $data, function($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
-                $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+            //Mail::send("mails.exmpl15", $data, function($message) use ($to_name, $to_email) {
+                //$message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
+                //$message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
 //                $message->attach($file);
-            });
+            //});
 
             $at = new AuditTrail();
             $at->path = url()->full();
@@ -472,8 +472,8 @@ class DataAsasController extends Controller
     public function senarai_data()
     {
         $senarai_data = SenaraiData::orderBy('kod','ASC')->get();
-        $kategori_sd = KategoriSenaraiData::orderBy('name','ASC')->get();
-        $subkategori_sd = SubKategoriSenaraiData::orderBy('name','ASC')->get();
+        $kategori_sd = KategoriSenaraiData::where('status','active')->orderBy('name','ASC')->get();
+        $subkategori_sd = SubKategoriSenaraiData::where('status','active')->orderBy('name','ASC')->get();
 
         $kat_add = SenaraiData::orderBy('kategori','ASC')->distinct('kategori')->get();
         // dd($kategori_sd);
@@ -513,8 +513,8 @@ class DataAsasController extends Controller
     public function senarai_data_hapus()
     {
         $senarai_data = SenaraiData::orderBy('kod','ASC')->get();
-        $kategori_sd = KategoriSenaraiData::orderBy('name','ASC')->get();
-        $subkategori_sd = SubKategoriSenaraiData::orderBy('name','ASC')->get();
+        $kategori_sd = KategoriSenaraiData::where('status','active')->orderBy('name','ASC')->get();
+        $subkategori_sd = SubKategoriSenaraiData::where('status','active')->orderBy('name','ASC')->get();
 //        dd($subkategori_sd);
 
         $kat_add = SenaraiData::orderBy('kategori','ASC')->distinct('kategori')->get();
@@ -738,10 +738,15 @@ class DataAsasController extends Controller
         return redirect('senarai_data')->with('success', 'Data tersebut telah dibuang');
     }
     
-    public function senarai_data_hapus_delete(Request $request)
-    {
-        SenaraiData::where(["kategori" => $request->kategori])->delete();
-        KategoriSenaraiData::where(["name" => $request->kategori])->delete();
+    public function delete_kategori_data(Request $request)
+    { 
+        KategoriSenaraiData::where(["name" => $request->kategori])->update([
+            "status" => "inactive",
+        ]);
+        
+        SubKategoriSenaraiData::where(["kategori_id" => $request->kategoriid])->update([
+            "status" => "inactive",
+        ]);
 
         $at = new AuditTrail();
         $at->path = url()->full();
@@ -754,8 +759,9 @@ class DataAsasController extends Controller
     
     public function delete_subkategori_data(Request $request)
     {
-        SubKategoriSenaraiData::where(["id" => $request->id])->delete();
-        SenaraiData::where(["subkategori" => $request->name])->delete();
+        SubKategoriSenaraiData::where(["id" => $request->id])->update([
+            "status" => "inactive",
+        ]);
 
         $at = new AuditTrail();
         $at->path = url()->full();
@@ -1222,10 +1228,10 @@ class DataAsasController extends Controller
                     } else {
                         $data = array('catatan'=>$request->catatan);
                     }
-                    Mail::send($mail, $data, function($message) use ($to_name, $to_email, $subject) {
-                        $message->to($to_email, $to_name)->subject($subject);
-                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-                    });
+                    //Mail::send($mail, $data, function($message) use ($to_name, $to_email, $subject) {
+                        //$message->to($to_email, $to_name)->subject($subject);
+                        //$message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                    //});
                 }
 
                 $at = new AuditTrail();
@@ -1300,10 +1306,10 @@ class DataAsasController extends Controller
                     $to_name = $p->name;
                     $to_email = $p->email;
                     $data = array('nama_pemohon'=> $pemohon->users->name, 'agensi' => $agensi_pemohon);
-                    Mail::send('mails.exmpl12', $data, function($message) use ($to_name, $to_email, $pemohon) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  ('.$pemohon->name.')');
-                        $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-                    });
+                    //Mail::send('mails.exmpl12', $data, function($message) use ($to_name, $to_email, $pemohon) {
+                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  ('.$pemohon->name.')');
+                        //$message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
+                    //});
                 }
             }
 

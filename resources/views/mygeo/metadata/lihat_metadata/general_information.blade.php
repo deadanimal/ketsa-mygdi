@@ -33,39 +33,30 @@
                             $f = $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString; 
                             if($f == "application"){
                                 echo "Application";
-                            }
-                            if($f == "clearinghouse"){
+                            }elseif($f == "clearinghouse"){
                                 echo "Clearing House";
-                            }
-                            if($f == "downloadableData"){
+                            }elseif($f == "downloadableData"){
                                 echo "Downloadable Data";
-                            }
-                            if($f == "geographicActivities"){
+                            }elseif($f == "geographicActivities"){
                                 echo "Geographic Activities";
-                            }
-                            if($f == "geographicService"){
+                            }elseif($f == "geographicService"){
                                 echo "Geographic Services";
-                            }
-                            if($f == "mapFiles"){
+                            }elseif($f == "mapFiles"){
                                 echo "Map File";
-                            }
-                            if($f == "offlineData"){
+                            }elseif($f == "offlineData"){
                                 echo "Offline Data";
-                            }
-                            if($f == "staticMapImage"){
+                            }elseif($f == "staticMapImage"){
                                 echo "Static Map Images";
-                            }
-                            if($f == "other"){
+                            }elseif($f == "other"){
                                 echo "Other Documents";
-                            }
-                            if($f == "liveData"){
+                            }elseif($f == "liveData"){
                                 echo "Live Data and Maps";
-                            }
-                            if($f == "Gridded"){
+                            }elseif($f == "Gridded"){
                                 echo "Gridded";
-                            }
-                            if($f == "Imagery"){
+                            }elseif($f == "Imagery"){
                                 echo "Imagery";
+                            }else{
+                                echo $f;
                             }
                             ?>
                         </div>

@@ -169,6 +169,78 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-3">
+                                            <label class="form-control-label mr-4" for="phone_pejabat">
+                                                Alamat
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" name="alamat" type="text" value="{{ $user->alamat }}" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="postcode">
+                                                Poskod
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" name="postcode" type="text" value="{{ $user->postcode }}" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="city">
+                                                Bandar
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input class="form-control form-control-sm ml-3" name="city" type="text" value="{{ $user->city }}" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="phone_pejabat">
+                                                Negeri
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <select name="state" class="form-control form-control-sm ml-3">
+                                                <option selected disabled>Pilih...</option>
+                                                <?php
+                                                if (count($states) > 0) {
+                                                    foreach ($states as $st) {
+                                                        ?><option value="<?php echo $st->id; ?>"
+                                                        {{ $user->state == $st->id ? 'selected' : '' }}>
+                                                        <?php echo $st->name; ?>
+                                                        </option><?php
+                                                    }
+                                                }                                                                                                                                                                   ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <label class="form-control-label mr-4" for="phone_pejabat">
+                                                Negara
+                                            </label><label class="float-right">:</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <select name="country" class="form-control form-control-sm ml-3">
+                                                <option selected disabled>Pilih...</option>
+                                                <?php
+                                                if (count($countries) > 0) {
+                                                    foreach ($countries as $country) {
+                                                        ?><option value="<?php echo $country->id; ?>" selected
+                                                        {{ $user->country == $country->id ? 'selected' : '' }}>
+                                                        <?php echo $country->name; ?></option><?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
                                             <label class="form-control-label mr-4" for="peranan">
                                                 Peranan
                                             </label><label class="float-right">:</label>

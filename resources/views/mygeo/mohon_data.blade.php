@@ -122,7 +122,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="name" class="form-control-label">Tajuk Permohonan</label>
-                                    <input type="text" class="form-control form-control-sm" name="name" value="">
+                                    <input type="text" class="form-control form-control-sm" id="tajukPermohonan" name="name" value="">
                                 </div>
                                 <div class="form-group">
                                     <label for="date" class="form-control-label">Tarikh Permohonan</label>
@@ -151,6 +151,10 @@
 
     <script>
         $(document).ready(function() {
+            $("#tajukPermohonan").keyup(function () {  
+                $(this).val($(this).val().toUpperCase());  
+            }); 
+            
             $("#table_permohonan").DataTable({
                 "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +

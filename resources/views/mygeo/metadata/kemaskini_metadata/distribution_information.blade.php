@@ -30,7 +30,7 @@
                 }
             }
             ?>
-            <h6 class="heading-small text-muted mt-4">Distribution Format</h6>
+            <h6 class="heading-small text-muted mt-4"><?php echo __('lang.distributionFormat'); ?></h6>
             <div class="row mb-2">
                 <?php
                 foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
@@ -38,7 +38,7 @@
                         ?>
                         <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <label class="form-control-label" for="input-distribution-format">
-                                Format Name</label>
+                                <?php echo __('lang.format_name'); ?></label>
                         </div>
                         <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <?php
@@ -55,7 +55,7 @@
                         ?>
                         <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <label class="form-control-label" for="input-version">
-                                Format Version </label>
+                                <?php echo __('lang.format_version'); ?> </label>
                         </div>
                         <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <?php
@@ -71,7 +71,7 @@
                 }
                 ?>
             </div>
-            <h6 class="heading-small text-muted mt-4">Distributor</h6>
+            <h6 class="heading-small text-muted mt-4"><?php echo __('lang.distributor'); ?></h6>
             <?php
             foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
                 if($key == "c11_distributor"){
@@ -79,7 +79,7 @@
                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-distributor">
-                                Organisation Name </label>
+                                <?php echo __('lang.organisation_name'); ?> </label>
                         </div>
                         <div class="col-xl-6">
                             <?php
@@ -95,7 +95,7 @@
                 }
             }
             ?>
-            <h6 class="heading-small text-muted mt-4">Ordering Transfer Options</h6>
+            <h6 class="heading-small text-muted mt-4"><?php echo __('lang.distributionTransferOptions'); ?></h6>
                 <div class="row mb-2">
                     <?php
                     foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
@@ -103,7 +103,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-unit-distribution">
-                                    Units of Distribution </label>
+                                    <?php echo __('lang.units_of_distribution'); ?> </label>
                             </div>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php
@@ -120,7 +120,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-sizemb">
-                                    Size (Megabytes) </label>
+                                    <?php echo __('lang.size'); ?> </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php
@@ -137,7 +137,7 @@
                             ?>
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-distributor">
-                                    Link </label>
+                                    <?php echo __('lang.link'); ?> </label>
                             </div>
                             <div class="col-xl-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php
@@ -163,7 +163,7 @@
                         ?>
                         <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <label class="form-control-label" for="input-medium">
-                                Medium Name</label>
+                                <?php echo __('lang.medium_name'); ?></label>
                         </div>
                         <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <?php
@@ -198,7 +198,7 @@
                     }
                 }
                 ?>
-                <h6 class="heading-small text-muted mt-4">Distribution Order Process</h6>
+                <h6 class="heading-small text-muted mt-4"><?php echo __('lang.distributionOrderProcess'); ?></h6>
                 <div class="row mb-2">
                     <?php
                     foreach($template->template[strtolower($catSelected)]['accordion11'] as $key=>$val){
@@ -206,7 +206,7 @@
                             ?>
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-fees">
-                                    Fees </label>
+                                    <?php echo __('lang.fees'); ?> </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php
@@ -223,7 +223,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-instructionorder">
-                                    Ordering Instructions </label>
+                                    <?php echo __('lang.ordering_instructions'); ?> </label>
                             </div>
                             <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php

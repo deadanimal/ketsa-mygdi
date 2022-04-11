@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between1">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>-->
                 </div>
             </div>
         </div>
@@ -303,7 +303,7 @@
         
         $(document).on('change','#c1_content_info',function(){
             var cat = $('#kategori').val();
-            if(cat == "Dataset" && $(this).val() == "Application"){
+            if(cat == "Dataset" && $(this).val() == "application"){
                 $('.divIdentificationInformationUrl').show();
                 $('.inputIdentificationInformationUrl').prop('disabled',false);
                 $('.divBrowsingInformationUrl').hide();
@@ -447,20 +447,30 @@
         ?>
 
         $(document).on("click", "#btnTestServiceUrl", function () {
-            var mapurl = $('#c2_serviceUrl').val();
+            var mapurl = $.trim($('#c2_serviceUrl').val());
+            checkServiceUrl(mapurl);
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
-//            $('#modal-showmap').modal('show');
         });
-        $(document).on("click", ".btnTestUrl", function () {
-            var weburl = $(this).parent().parent().find('.urlToTest').val();
-            window.open(weburl, '_blank');
+        $(document).on("click", "#btnTestServiceUrl2", function () {
+            var mapurl = $.trim($('#c2_serviceUrl').val());
+            checkServiceUrl(mapurl);
+            $('#mapiframe').attr('src', '<?php echo url("/"); ?>/leafletwms/examples/index.html?url='+mapurl);
         });
-        
-        $(document).on("click", "#btnTestServiceUrl3", function () {
+        $(document).on("click", "#btnTestServiceUrl3_esri", function () {
             var mapurl = $.trim($('#c2_serviceUrl').val());
             if(checkServiceUrl(mapurl)){
                 $('#mapiframe').attr('src', '<?php echo url("/"); ?>/azrunmap/esri.php?url='+mapurl);
                 $('#modal-showmap').modal('show');
+            }else{
+                alert("Service URL is empty!");
+            }
+        });
+        $(document).on("click", "#btnTestServiceUrl3_wms", function () {
+            var mapurl = $.trim($('#c2_serviceUrl').val());
+            if(checkServiceUrl(mapurl)){
+                var mapurl = $.trim($('#c2_serviceUrl').val());
+                checkServiceUrl(mapurl);
+                $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
             }else{
                 alert("Service URL is empty!");
             }
@@ -791,11 +801,11 @@
             }
 
             <?php
-            if ($catSelected == "dataset" || $catSelected == "services") {
+            if (strtolower($catSelected) == "dataset" || strtolower($catSelected) == "services") {
                 ?>
                         $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
                 <?php
-            } elseif ($catSelected == "imagery" || $catSelected == "gridded") {
+            } elseif (strtolower($catSelected) == "imagery" || strtolower($catSelected) == "gridded") {
                 ?>
                         $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
                 <?php
@@ -1095,6 +1105,8 @@ if(isset($metadataxml->identificationInfo->MD_DataIdentification->extent->EX_Ext
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);
+        
+        $("#nblt,#wblg,#sblt,#eblg").val("");
     }
 
     function saveData() {

@@ -45,7 +45,7 @@
                         <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-xl-2">
                                 <label class="form-control-label" for="input-dataset-type">
-                                    Spatial Data Set Type
+                                    <?php echo __('lang.spatial_data_set_type'); ?>
                                 </label>
                             </div>
                             <div class="col-xl-3">
@@ -64,7 +64,7 @@
                     }
                 }
                 ?>
-                <h6 class="heading-small text-muted mb-2">DATA SET RESOLUTION</h6>
+                <h6 class="heading-small text-muted mb-2"><?php echo __('lang.dataSetResolution'); ?></h6>
                 <div class="row mb-2">
                     <?php
                     foreach($template->template[strtolower($catSelected)]['accordion12'] as $key=>$val){
@@ -72,8 +72,8 @@
                             ?>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-hardsoftcopy">
-                                    Scale in Hardcopy/Softcopy
-                                    <span style="font-size: smaller;">(feature scale)</span>
+                                    <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
+                                    <span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span>
                                 </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
@@ -91,7 +91,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-imggsd">
-                                    Image Resolution (GSD)</label>
+                                    <?php echo __('lang.image_resolution'); ?></label>
                             </div>
                             <div class="col-md-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="input-group">
@@ -113,7 +113,7 @@
                             ?>
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-language">
-                                    Language
+                                    <?php echo __('lang.data_set_language'); ?>
                                 </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
@@ -150,7 +150,7 @@
                             <div class="row mb-2 divMaintenanceInfo">
                                 <div class="col-xl-3">
                                     <label class="form-control-label" for="input-hardsoftcopy">
-                                        Maintenance and Update
+                                        <?php echo __('lang.maintenance_and_update'); ?>
                                     </label>
                                 </div>
                                 <div class="col-xl-2">

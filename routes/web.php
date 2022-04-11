@@ -168,7 +168,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_metadata_template','MetadataController@simpan_metadata_template');
 
     Route::get('/lihat_permohonan/{id}', 'DataAsasController@tambah')->name('tambah.permohonan');
-    Route::get('/mohon_data', 'DataAsasController@mohon_data');
+//    Route::get('/mohon_data', 'DataAsasController@mohon_data');
     Route::post('/simpan_permohonan_baru', 'DataAsasController@store_permohonan_baru');
     Route::post('/simpan_senarai_kawasan', 'DataAsasController@store_senarai_kawasan');
     Route::post('/delete_senarai_kawasan', 'DataAsasController@delete_senarai_kawasan');
@@ -209,6 +209,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/simpan_kategori_senarai_data', 'DataAsasController@store_kategori_senarai_data');
     Route::post('/simpan_subkategori_senarai_data', 'DataAsasController@store_subkategori_senarai_data');
+    Route::post('/delete_kategori_data', 'DataAsasController@delete_kategori_data');
     Route::post('/delete_subkategori_data', 'DataAsasController@delete_subkategori_data');
 
     Route::get('/kategori_kelas_kongsi_data','DataAsasController@kategori_kelas_kongsi_data');

@@ -42,7 +42,17 @@
                                         if (strtolower($metadataxml->hierarchyLevel->MD_ScopeCode) == 'dataset') {
                                             echo strtoupper(__('lang.title'));
                                         } else {
-                                            echo 'Metadata Name';
+                                            if(isset($_GET['bhs'])){
+                                                if($_GET['bhs'] == "en"){
+                                                    echo 'Metadata Name';
+                                                }else{
+                                                    echo 'Tajuk Metadata';
+                                                }
+                                            }elseif($langSelected == "en"){
+                                                echo 'Metadata Name';
+                                            }elseif($langSelected == "bm"){
+                                                echo 'Tajuk Metadata';
+                                            }
                                         }
                                     }else{
                                         echo strtoupper(__('lang.title'));
@@ -119,41 +129,37 @@
                 <h2 class="heading-small text-muted"><?php echo __('lang.abstract'); ?></h2>
                 
                 <?php //=== abstract============================================================== ?>
+                <div class="row mb-4 divIdentificationInformationUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                    <div class="col-3">
+                        <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip"
+                            title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
+                            <?php echo __('lang.URL'); ?><span class="text-warning">*</span>
+                        </label><label class="float-right">:</label>
+                    </div>
+                    <div class="col-6">
+                        <?php
+                        $url = '';
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != '') {
+                            $url = $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString;
+                        }
+                        ?>
+                        <input type="text" name="c10_file_url"
+                            class="form-control form-control-sm  inputIdentificationInformationUrl urlToTest"
+                            value="{{ $url }}">
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal"
+                            data-target="#modal-showweb" data-backdrop="false">Test</button>
+                        @error('c2_serviceUrl')
+                            <div class="text-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
                 <?php 
                 foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                     ?>
                     @include('mygeo.metadata.kemaskini_metadata.abstract')
                     <?php
-                    if($key == "c10_file_url"){
-                        ?>
-                        <div class="row mb-4 divIdentificationInformationUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-3">
-                                <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip"
-                                    title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
-                                    <?php echo __('lang.URL'); ?><span class="text-warning">*</span>
-                                </label><label class="float-right">:</label>
-                            </div>
-                            <div class="col-6">
-                                <?php
-                                $url = '';
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != '') {
-                                    $url = $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString;
-                                }
-                                ?>
-                                <input type="text" name="c10_file_url"
-                                    class="form-control form-control-sm  inputIdentificationInformationUrl urlToTest"
-                                    value="{{ $url }}">
-                            </div>
-                            <div class="col-1">
-                                <button class="btn btn-sm btn-success btnTestUrl" type="button" data-toggle="modal"
-                                    data-target="#modal-showweb" data-backdrop="false">Test</button>
-                                @error('c2_serviceUrl')
-                                    <div class="text-error">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <?php
-                    }
                     if($key == "c2_metadataDate"){
                         ?>
                         <div class="row mb-2 divMetadataDate" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
@@ -419,7 +425,7 @@
                         <div class="row mb-2 divOperationName" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_operationName">
-                                    Operation Name
+                                    <?php echo __('lang.operation_name'); ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -461,8 +467,9 @@
                                     <div class="text-error">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-1">
-                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl3" type="button" style="display: inline-block;">Test</button>
+                            <div class="col-3">
+                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl3_esri" type="button" style="display: inline-block;">Test (Esri)</button>
+                                <button class="btn btn-sm btn-success" id="btnTestServiceUrl3_wms" type="button" data-toggle="modal" data-target="#modal-showmap" data-backdrop="false" style="display: inline-block;">Test (WMS)</button>
                                 @error('c2_serviceUrl')
                                     <div class="text-error">{{ $message }}</div>
                                 @enderror
@@ -508,7 +515,7 @@
                 ?>
             </div>
             
-            <h2 class="heading-small text-muted">Responsible Party</h2>
+            <h2 class="heading-small text-muted"><?php echo __('lang.responsibleParty'); ?></h2>
             <div class="my-2">
                 <?php
                 foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
