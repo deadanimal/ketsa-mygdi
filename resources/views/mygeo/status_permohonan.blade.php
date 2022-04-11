@@ -96,6 +96,9 @@
                                                     <td>{{ $permohonan->users->name }}</td>
                                                     <td>{{ $permohonan->users->kategori }}</td>
                                                     <td>
+                                                        {{ $permohonan->assign_admin }}
+                                                    </td>
+                                                    <td>
                                                         @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
                                                             <span class="badge badge-pill badge-success">Data
                                                                 Tersedia</span>
@@ -116,9 +119,6 @@
                                                         @elseif($permohonan->status == '0')
                                                             <span class="badge badge-pill badge-info">Baru</span>
                                                         @endif
-                                                    </td>
-                                                    <td>
-                                                        {{ $permohonan->assign_admin }}
                                                     </td>
                                                     <td>
                                                         @if ($permohonan->acceptance == '1' && $permohonan->berjayaMuatTurunStatus == '1')
