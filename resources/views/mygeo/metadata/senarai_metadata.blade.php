@@ -56,7 +56,7 @@
                                     class="pl-lg-4">
                                     @csrf
                                     <div class="row mb-2">
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             <label for="">Nama Metadata</label>
                                         </div>
                                         <div class="col-7">
@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="row mb-2">
-                                        <div class="col-2"><label for="">Kategori</label></div>
+                                        <div class="col-3"><label for="">Kategori</label></div>
                                         <div class="col-5">
                                             <select name="cari_kategori" class="form-control form-control-sm">
                                                 <option value="">Pilih...</option>
@@ -84,8 +84,26 @@
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <div class="col-2"><label for="">Status</label></div>
-                                        <div class="col-5"> <select name="cari_status"
+                                        <div class="col-3"><label for="">Nama / ID Penerbit</label></div>
+                                        <div class="col-5"> 
+                                            <select name="nama_id_penerbit" class="form-control form-control-sm">
+                                                <option value="">Pilih...</option>
+                                                <?php
+                                                if(isset($penerbits) && count($penerbits) > 0){
+                                                    foreach($penerbits as $key=>$val){
+                                                        ?>
+                                                        <option value="{{ $key }}" {{ isset($_GET['nama_id_penerbit']) && $_GET['nama_id_penerbit'] == $key ? 'selected' : '' }}>{{ ucfirst($val) }}</option>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-3"><label for="">Status</label></div>
+                                        <div class="col-5"> 
+                                            <select name="cari_status"
                                                 class="form-control form-control-sm">
                                                 <option value="">Pilih...</option>
                                                 <option value="draf"
@@ -100,13 +118,14 @@
                                                 <option value="perlu_pembetulan"
                                                     {{ isset($_GET['cari_status']) && $_GET['cari_status'] == 'perlu_pembetulan' ? 'selected' : '' }}>
                                                     Perlu Pembetulan</option>
-                                            </select></div>
-                                            <div class="col-3 px-0">
-                                                <button type="button" id="btnResetCarian" class="btn btn-primary btn-sm mr-1">Set
-                                                    Semula</button>
-                                                <button type="submit" class="btn btn-sm btn-primary">Cari</button>
+                                            </select>
+                                        </div>
+                                        <div class="col-3 px-0">
+                                            <button type="button" id="btnResetCarian" class="btn btn-primary btn-sm mr-1">Set
+                                                Semula</button>
+                                            <button type="submit" class="btn btn-sm btn-primary">Cari</button>
+                                        </div>
                                     </div>
-                            </div>
                             </form>
 
 

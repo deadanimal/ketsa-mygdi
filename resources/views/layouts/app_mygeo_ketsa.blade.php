@@ -413,7 +413,7 @@
                                                 </ul>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Metadata']))
+                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('mygeo_kemaskini_elemen_metadata') }}"
                                                     class="nav-link active">

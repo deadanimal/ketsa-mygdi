@@ -88,6 +88,9 @@ class MetadataController extends Controller {
                 $query = $query->where('is_draf','no')->where('disahkan','no');
             }
         }
+        if(isset($_GET['nama_id_penerbit']) && $_GET['nama_id_penerbit'] != ""){
+            $query = $query->where('portal_user_id','=',$_GET['nama_id_penerbit']);
+        }
 
         $metadatasdb = $query->orderBy('id', 'DESC')->paginate(20);
 //        $metadatasdbtitle = $query->select('id','data')->get();
@@ -153,8 +156,19 @@ class MetadataController extends Controller {
           }
           }
          */
+        
+        $penerbits = [];
+        $mu =  MetadataGeo::on('pgsql2')->select('portal_user_id')->whereNotNull('portal_user_id')->distinct('portal_user_id')->get();
+        if(isset($mu) && count($mu) > 0){
+            foreach($mu as $m){
+                $u = User::where('id',$m->portal_user_id)->get()->first();
+                if(!is_null($u)){
+                    $penerbits[$u->id] = $u->name;
+                }
+            }
+        }
 
-        return view('mygeo.metadata.senarai_metadata', compact('metadatas', 'metadataTitles','metadatasdb'));
+        return view('mygeo.metadata.senarai_metadata', compact('metadatas', 'metadataTitles','metadatasdb','penerbits'));
     }
 
     public function getSenaraiMetadata(Request $request) {
