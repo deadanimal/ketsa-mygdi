@@ -343,7 +343,17 @@
                                                                         <td>{{ $sk->subkategori }}</td>
                                                                         <td>{{ $sk->kategori }}</td>
                                                                         <td>{{ $sk->kawasan_data }}</td>
-                                                                        <td>{{ $sk->jenis_data }}</td>
+                                                                        <td>
+                                                                            <?php
+                                                                            if(strpos($sk->jenis_data,'fizikal') !== false && strpos($sk->jenis_data,'map_servis') !== false){
+                                                                                echo "Fizikal dan Map Servis";
+                                                                            }elseif($sk->jenis_data == "fizikal"){
+                                                                                echo "Fizikal";
+                                                                            }elseif($sk->jenis_data == "map_servis"){
+                                                                                echo "Map Servis";
+                                                                            }
+                                                                            ?>
+                                                                        </td>
                                                                         <td>{{ $sk->kelas }} </td>
                                                                         @if (Auth::user()->hasRole(['Pemohon Data']))
                                                                             <td>
