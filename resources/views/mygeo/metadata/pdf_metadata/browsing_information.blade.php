@@ -27,6 +27,28 @@
                         </div>
                         <?php
                     }
+                    if($key == "file_contohJenisMetadata"){
+                        ?>
+                        <div class="row mb-2 sortIt">
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4" for="uname"><?php echo __('lang.sampleData'); ?></label>
+                                <label class="float-right">:</label>
+                            </div>
+                            <div class="col-8">
+                                <?php
+                                if($metadataSearched->file_contohjenismetadata != ""){
+                                    ?>
+                                    <div class="row">
+                                        <button type="button" class="btn btn-sm btn-default btn_file_contohjenismetadata" data-href='{{ url('download_file_contohjenismetadata').'/'.$metadataSearched->id }}'>Muat Turun</button>
+                                    </div>
+                                    <br>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <?php
+                    }
                     if($key == "c10_file_name"){
                         $fileName = "";
                         if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString != "") {
@@ -202,6 +224,10 @@
 
 <script>
     $(document).ready(function(){
+        $(document).on('click','.btn_file_contohjenismetadata',function(){
+            window.open($(this).data('href'), '_blank');
+        });
+        
         <?php
         if($flag1 == 1){
             ?>
