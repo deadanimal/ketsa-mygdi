@@ -116,7 +116,6 @@
                 ?>
             </div>
             <h2 class="heading-small text-muted browseInfoSubtajuk2">Keywords</h2>
-            <!--<div class="my-2">-->
                 <?php
                 $flag2 = 1;
                 $counter = 0;
@@ -212,7 +211,6 @@
                     }
                 }
                 ?>
-            <!--</div>-->
         </div>
     </div>
 </div>

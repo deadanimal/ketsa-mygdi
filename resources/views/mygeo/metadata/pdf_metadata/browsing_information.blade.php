@@ -97,70 +97,56 @@
                 ?>
             </div>
             <h2 class="heading-small text-muted browseInfoSubtajuk2">Keywords</h2>
-            <div class="my-2">
                 <?php
                 $flag2 = 1;
                 $counter = 0;
                 
                 foreach($template->template[strtolower($catSelected)]['accordion10'] as $key=>$val){
                     if($key == "c10_keyword"){
-                        ?>
-                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-3 pl-5">
-                                <label class="form-control-label mr-4" for="c10_file_name">
-                                    Keywords
-                                </label><label class="float-right">:</label>
-                            </div>
-                            <div class="col-6">
-                                <?php
-                                $counter = 0; //dd(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords));
-                                if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
-                                    foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                                        if(trim((string)$keyword->CharacterString) != ""){
-                                            if($counter == 0){
-                                                $flag *= 0;
-                                                ?>
-                                                <div class="row mb-2">
-                                                    <div class="col-3 pl-5">
-                                                        <label class="form-control-label mr-4" for="c10_file_name">
-                                                            Keywords<span class="text-warning">*</span>
-                                                        </label><label class="float-right">:</label>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            }
-                                            $counter++;
-                                        }
+                        $counter = 0; //dd(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords));
+                        if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
+                            foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                                if(trim((string)$keyword->CharacterString) != ""){
+                                    if($counter == 0){
+                                        $flag *= 0;
+                                        ?>
+                                        <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                            <div class="col-3 pl-5">
+                                                <label class="form-control-label mr-4" for="c10_file_url">
+                                                    Keyword
+                                                </label><label class="float-right">:</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
+                                            </div>
+                                        </div>
+                                        <?php
                                     }
-                                }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
-                                   foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
-                                        if(trim((string)$keyword->CharacterString) != ""){
-                                            if($counter == 0){ //first keyword is for input Keyword. others are Additional Keywords
-                                                $flag *= 0;
-                                                ?>
-                                                <div class="row mb-2">
-                                                    <div class="col-3 pl-5">
-                                                        <label class="form-control-label mr-4" for="c10_file_name">
-                                                            Keywords<span class="text-warning">*</span>
-                                                        </label><label class="float-right">:</label>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            }
-                                            $counter++;
-                                        }
-                                    } 
+                                    $counter++;
                                 }
-                                ?>
-                            </div>
-                        </div>
-                        <?php
+                            }
+                        }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
+                           foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                                if(trim((string)$keyword->CharacterString) != ""){
+                                    if($counter == 0){ //first keyword is for input Keyword. others are Additional Keywords
+                                        $flag *= 0;
+                                        ?>
+                                        <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                            <div class="col-3 pl-5">
+                                                <label class="form-control-label mr-4" for="c10_file_url">
+                                                    Keyword
+                                                </label><label class="float-right">:</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <?php echo "&nbsp;&nbsp;" . ucwords((string)$keyword->CharacterString); ?>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    $counter++;
+                                }
+                            } 
+                        }
                     }
                     if($key == "c10_additional_keyword[]"){ //============================
                         $counter = 0;
@@ -170,7 +156,7 @@
                                     if($counter > 0){
                                         $flag *= 0;
                                         ?>
-                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-3 pl-5">
                                                 <label class="form-control-label mr-4" for="c10_file_type">
                                                     Additional Keywords
@@ -191,7 +177,7 @@
                                     if($counter > 0){
                                         $flag *= 0;
                                         ?>
-                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                        <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-3 pl-5">
                                                 <label class="form-control-label mr-4" for="c10_file_type">
                                                     Additional Keywords
@@ -210,7 +196,6 @@
                     }
                 }
                 ?>
-            </div>
         </div>
     </div>
 </div>

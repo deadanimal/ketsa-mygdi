@@ -3473,10 +3473,10 @@ class MetadataController extends Controller {
                     $to_name = $user->name;
                     $to_email = $user->email;
                     $data = array('title' => $metadataName);
-                    Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    });
+                    //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                        //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    //});
                 }
 
                 //create new pengumuman about the new metadata
@@ -3486,6 +3486,7 @@ class MetadataController extends Controller {
                 $pengumuman->kategori = 'Metadata Baharu';
                 $pengumuman->content = 'Abstract: ' . $abstract;
                 $pengumuman->gambar = "banner2.jpeg";
+                $pengumuman->metadata_id = $mg->id;
                 $pengumuman->save();
 
                 $msg = "Metadata berjaya diterbitkan.";
@@ -3551,6 +3552,7 @@ class MetadataController extends Controller {
                 $pengumuman->kategori = 'Metadata Baharu';
                 $pengumuman->content = 'Abstract: ' . $abstract;
                 $pengumuman->gambar = "banner2.jpeg";
+                $pengumuman->metadata_id = $mid;
                 $pengumuman->save();
 
                 $user = User::where("id", $metadata->portal_user_id)->get()->first();
@@ -3559,10 +3561,10 @@ class MetadataController extends Controller {
                     $to_name = $user->name;
                     $to_email = $user->email;
                     $data = array('title' => $metadataName);
-                    Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    });
+                    //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                        //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    //});
                 }
             }
         } else {
@@ -3599,10 +3601,10 @@ class MetadataController extends Controller {
                 $to_name = $user->name;
                 $to_email = $user->email;
                 $data = array('title' => $metadataName);
-                Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                    $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                });
+                //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                    //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                    //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                //});
             }
 
             //create new pengumuman about the new metadata
@@ -3612,6 +3614,7 @@ class MetadataController extends Controller {
             $pengumuman->kategori = 'Metadata Baharu';
             $pengumuman->content = 'Abstract: ' . $abstract;
             $pengumuman->gambar = "banner2.jpeg";
+            $pengumuman->metadata_id = $_POST['metadata_id'];
             $pengumuman->save();
         }
 
@@ -3645,10 +3648,10 @@ class MetadataController extends Controller {
                     $to_name = $user->name;
                     $to_email = $user->email;
                     $data = array('title' => $metadataName);
-                    Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    });
+                    //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                        //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    //});
                 }
             }
         } else {
@@ -3666,10 +3669,10 @@ class MetadataController extends Controller {
                 $to_name = $user->name;
                 $to_email = $user->email;
                 $data = array('title' => $metadataName);
-                Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
-                    $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                });
+                //Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                    //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
+                    //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                //});
             }
         }
 
