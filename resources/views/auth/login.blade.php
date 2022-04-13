@@ -110,7 +110,8 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id='formRegisterUser'>
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data"
+                        id='formRegisterUser'>
                         @csrf
                         <div class="modal-body">
                             <div class="container-fluid">
@@ -118,57 +119,72 @@
                                     <div class="col-md-12">
                                         <div id="div_pilihan_peranan">
                                             <div class=" custom-control custom-radio mb-3">
-                                                <input class="custom-control-input perananCheckbox kategoriCheck" id="penerbitMetadata"
-                                                    name="perananSelect" type="checkbox" value="4" />
+                                                <input class="custom-control-input perananCheckbox kategoriCheck"
+                                                    id="penerbitMetadata" name="perananSelect" type="checkbox" value="4" />
                                                 <label class="custom-control-label" for="penerbitMetadata">
                                                     Penerbit Metadata
                                                 </label>
                                             </div>
                                             <div class=" custom-control custom-radio mb-3">
-                                                <input class="custom-control-input perananCheckbox kategoriCheck" id="pengesahMetadata"
-                                                    name="perananSelect" type="checkbox" value="3" />
+                                                <input class="custom-control-input perananCheckbox kategoriCheck"
+                                                    id="pengesahMetadata" name="perananSelect" type="checkbox" value="3" />
                                                 <label class="custom-control-label" for="pengesahMetadata">
                                                     Pengesah Metadata
                                                 </label>
                                             </div>
                                             <div class="custom-control custom-radio mb-2">
-                                                <input class="custom-control-input perananCheckbox" id="perananSelectbogey" name="perananSelectbogey" type="checkbox" value="2" />
+                                                <input class="custom-control-input perananCheckbox" id="perananSelectbogey"
+                                                    name="perananSelectbogey" type="checkbox" value="2" />
                                                 <label class="custom-control-label" for="perananSelectbogey">
                                                     Pemohon Data
                                                 </label>
 
                                                 <div id="divsecond" class="divsecond">
-                                                    <div class="custom-control custom-radio mb-3">
-                                                        <input class="custom-control-input" id="2_options_g2c" name="2_options" type="radio" value="2_g2c" disabled>
+                                                    <div class="custom-control custom-radio mb-3" id="g2c_div">
+                                                        <input class="custom-control-input" id="2_options_g2c"
+                                                            name="2_options" type="radio" value="2_g2c">
                                                         <label class="custom-control-label" for="2_options_g2c">
                                                             G2C
                                                         </label>
-                                                        <span class="ml-3" tooltip="Awam"tooltipPlacement="right"><i class="far fa-question-circle"></i></span>
+                                                        <span class="ml-3" tooltip="Awam"
+                                                            tooltipPlacement="right"><i
+                                                                class="far fa-question-circle"></i></span>
                                                     </div>
 
-                                                    <div class="custom-control custom-radio mb-3">
-                                                        <input class="custom-control-input" id="2_options_g2g" name="2_options" type="radio" value="2_g2g" />
+                                                    <div
+                                                        class="custom-control custom-radio mb-3 {{ $g2g_div == '0' ? 'd-none' : '' }}">
+                                                        <input class="custom-control-input" id="2_options_g2g"
+                                                            name="2_options" type="radio" value="2_g2g" />
                                                         <label class="custom-control-label" for="2_options_g2g">
                                                             G2G
                                                         </label>
-                                                        <span class="ml-3" tooltip="Agensi, Badan Berkanun, GLC" tooltipPlacement="right"><i class="far fa-question-circle"></i></span>
+                                                        <span class="ml-3" tooltip="Agensi, Badan Berkanun, GLC"
+                                                            tooltipPlacement="right"><i
+                                                                class="far fa-question-circle"></i></span>
                                                         <div class="ml-3 mt-2 2_g2g_options">
-                                                            <div class="custom-control custom-radio mb-3">
-                                                                <input class="custom-control-input 2_options_g2g_sub kategoriCheck" id="agensiPersNeg" name="perananSelect" type="radio"
+                                                            <div class="custom-control custom-radio mb-3" id="g2g_a">
+                                                                <input
+                                                                    class="custom-control-input 2_options_g2g_sub kategoriCheck"
+                                                                    id="agensiPersNeg" name="perananSelect" type="radio"
                                                                     value="Agensi Persekutuan/Agensi Negeri" />
                                                                 <label class="custom-control-label" for="agensiPersNeg">
                                                                     Agensi Persekutuan/Agensi Negeri
                                                                 </label>
                                                             </div>
-                                                            <div class="custom-control custom-radio mb-3">
-                                                                <input class="custom-control-input 2_options_g2g_sub kategoriCheck" id="badanBerkanun" name="perananSelect" type="radio"
+                                                            <div class="custom-control custom-radio mb-3" id="g2g_b">
+                                                                <input
+                                                                    class="custom-control-input 2_options_g2g_sub kategoriCheck"
+                                                                    id="badanBerkanun" name="perananSelect" type="radio"
                                                                     value="Badan Berkanun" />
                                                                 <label class="custom-control-label" for="badanBerkanun">
                                                                     Badan Berkanun
                                                                 </label>
                                                             </div>
-                                                            <div class=" custom-control custom-radio mb-3">
-                                                                <input class="custom-control-input 2_options_g2g_sub kategoriCheck" id="glc" name="perananSelect" type="radio" value="GLC" />
+                                                            <div class=" custom-control custom-radio mb-3" id="g2g_c">
+                                                                <input
+                                                                    class="custom-control-input 2_options_g2g_sub kategoriCheck"
+                                                                    id="glc" name="perananSelect" type="radio"
+                                                                    value="GLC" />
                                                                 <label class="custom-control-label" for="glc">
                                                                     GLC
                                                                 </label>
@@ -176,42 +192,54 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class=" custom-control custom-radio mb-3 divG2e">
-                                                        <input class="custom-control-input" id="2_options_g2e" name="2_options" type="radio" value="2_g2e" />
+                                                    <div
+                                                        class=" custom-control custom-radio mb-3 divG2e {{ $g2c_div == '0' ? 'd-none' : '' }}">
+                                                        <input class="custom-control-input" id="2_options_g2e"
+                                                            name="2_options" type="radio" value="2_g2e" />
                                                         <label class="custom-control-label" for="2_options_g2e">
                                                             G2E
                                                         </label>
-                                                        <span class="ml-3" tooltip="IPTA/IPTS" tooltipPlacement="right">
+                                                        <span class="ml-3" tooltip="IPTA/IPTS"
+                                                            tooltipPlacement="right">
                                                             <i class="far fa-question-circle"></i>
                                                         </span>
                                                         <div class="ml-3 mt-2 2_g2e_options">
-                                                            <div class=" custom-control custom-radio mb-3 2_g2e_iptaSyarahSelidik">
-                                                                <input class="custom-control-input 2_options_g2e_sub kategoriCheck" id="iptaSyarahSelidik"
-                                                                    name="perananSelect" type="radio"
+                                                            <div class=" custom-control custom-radio mb-3 2_g2e_iptaSyarahSelidik"
+                                                                id="g2e_a">
+                                                                <input
+                                                                    class="custom-control-input 2_options_g2e_sub kategoriCheck"
+                                                                    id="iptaSyarahSelidik" name="perananSelect" type="radio"
                                                                     value="IPTA - Pensyarah/Penyelidik" />
                                                                 <label class="custom-control-label" for="iptaSyarahSelidik">
                                                                     IPTA - Pensyarah/Penyelidik
                                                                 </label>
                                                             </div>
-                                                            <div class="custom-control custom-radio mb-3 2_g2e_iptaPelajar">
-                                                                <input class="custom-control-input 2_options_g2e_sub kategoriCheck" id="iptaPelajar"
-                                                                    name="perananSelect" type="radio" value="IPTA - Pelajar" />
+                                                            <div class="custom-control custom-radio mb-3 2_g2e_iptaPelajar"
+                                                                id="g2e_b">
+                                                                <input
+                                                                    class="custom-control-input 2_options_g2e_sub kategoriCheck"
+                                                                    id="iptaPelajar" name="perananSelect" type="radio"
+                                                                    value="IPTA - Pelajar" />
                                                                 <label class="custom-control-label" for="iptaPelajar">
                                                                     IPTA - Pelajar
                                                                 </label>
                                                             </div>
-                                                            <div
-                                                                class=" custom-control custom-radio mb-3 2_g2e_iptsSyarahSelidik">
-                                                                <input class="custom-control-input 2_options_g2e_sub kategoriCheck" id="iptsSyarahSelidik"
-                                                                    name="perananSelect" type="radio"
+                                                            <div class=" custom-control custom-radio mb-3 2_g2e_iptsSyarahSelidik"
+                                                                id="g2e_c">
+                                                                <input
+                                                                    class="custom-control-input 2_options_g2e_sub kategoriCheck"
+                                                                    id="iptsSyarahSelidik" name="perananSelect" type="radio"
                                                                     value="IPTS - Pensyarah/Penyelidik" />
                                                                 <label class="custom-control-label" for="iptsSyarahSelidik">
                                                                     IPTS - Pensyarah/Penyelidik
                                                                 </label>
                                                             </div>
-                                                            <div class=" custom-control custom-radio mb-3 2_g2e_iptsPelajar">
-                                                                <input class="custom-control-input 2_options_g2e_sub kategoriCheck" id="iptsPelajar"
-                                                                    name="perananSelect" type="radio" value="IPTS - Pelajar" />
+                                                            <div class=" custom-control custom-radio mb-3 2_g2e_iptsPelajar"
+                                                                id="g2e_d">
+                                                                <input
+                                                                    class="custom-control-input 2_options_g2e_sub kategoriCheck"
+                                                                    id="iptsPelajar" name="perananSelect" type="radio"
+                                                                    value="IPTS - Pelajar" />
                                                                 <label class="custom-control-label" for="iptsPelajar">
                                                                     IPTS - Pelajar
                                                                 </label>
@@ -330,8 +358,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-8">
-                                                <textarea class="form-control form-control-sm ml-3" id="input-address"
-                                                    row="4" placeholder="Alamat" type="text"
+                                                <textarea class="form-control form-control-sm ml-3" id="input-address" row="4" placeholder="Alamat" type="text"
                                                     name="alamat"></textarea>
                                                 <p class="error-message"><span></span></p>
                                             </div>
@@ -341,8 +368,8 @@
                                                 </label>
                                             </div>
                                             <div class="col-8">
-                                                <textarea class="form-control form-control-sm ml-3" id="input-city"
-                                                    row="2" placeholder="Bandar" name="city"></textarea>
+                                                <textarea class="form-control form-control-sm ml-3" id="input-city" row="2" placeholder="Bandar"
+                                                    name="city"></textarea>
                                                 <p class="error-message"><span></span></p>
                                             </div>
                                             <div class="col-3">
@@ -351,8 +378,8 @@
                                                 </label>
                                             </div>
                                             <div class="col-8">
-                                                <input type="text" class="form-control form-control-sm ml-3" id="input-postcode"
-                                                    placeholder="Poskod"name="postcode">
+                                                <input type="text" class="form-control form-control-sm ml-3"
+                                                    id="input-postcode" placeholder="Poskod" name="postcode">
                                                 <p class="error-message"><span></span></p>
                                             </div>
                                             <div class="col-3">
@@ -382,14 +409,15 @@
                                             </div>
                                             <div class="col-8">
                                                 <input type="hidden" id="country" name="country" value="1">
-                                                <select name="countryBogey" class="form-control form-control-sm ml-3" disabled>
+                                                <select name="countryBogey" class="form-control form-control-sm ml-3"
+                                                    disabled>
                                                     <option selected disabled>Pilih...</option>
                                                     <?php
                                                     if (count($countries) > 0) {
                                                         foreach ($countries as $country) {
                                                             ?><option value="<?php echo $country->id; ?>" selected
-                                                            {{ $country->id == old('c2_contact_country') ? 'selected' : '' }}>
-                                                            <?php echo $country->name; ?></option><?php
+                                                        {{ $country->id == old('c2_contact_country') ? 'selected' : '' }}>
+                                                        <?php echo $country->name; ?></option><?php
                                                         }
                                                     }
                                                     ?>
@@ -416,19 +444,20 @@
                                             </div>
                                             <div class="col-8">
                                                 <input type="hidden" name="kategori" id="hiddenKategori">
-                                                <input type="text" id="kategoriPemohonData" name="kategoriPemohonData" class="form-control form-control-sm ml-3">
-<!--                                                <select name="kategoriPemohonData" id="kategoriPemohonData">
-                                                    <option value="Agensi Persekutuan/Agensi Negeri">G2G - Agensi
-                                                        Persekutuan/Agensi Negeri</option>
-                                                    <option value="Badan Berkanun">G2G - Badan Berkanun</option>
-                                                    <option value="GLC">G2G - GLC</option>
-                                                    <option value="IPTA - Pensyarah/Penyelidik">G2E - IPTA -
-                                                        Pensyarah/Penyelidik</option>
-                                                    <option value="IPTA - Pelajar">G2E - Pelajar</option>
-                                                    <option value="IPTS - Pensyarah/Penyelidik">G2E - Pensyarah/Penyelidik
-                                                    </option>
-                                                    <option value="IPTS - Pelajar">G2E - Pelajar</option>
-                                                </select>-->
+                                                <input type="text" id="kategoriPemohonData" name="kategoriPemohonData"
+                                                    class="form-control form-control-sm ml-3">
+                                                <!--                                                <select name="kategoriPemohonData" id="kategoriPemohonData">
+                                                                                                                                                                                                    <option value="Agensi Persekutuan/Agensi Negeri">G2G - Agensi
+                                                                                                                                                                                                        Persekutuan/Agensi Negeri</option>
+                                                                                                                                                                                                    <option value="Badan Berkanun">G2G - Badan Berkanun</option>
+                                                                                                                                                                                                    <option value="GLC">G2G - GLC</option>
+                                                                                                                                                                                                    <option value="IPTA - Pensyarah/Penyelidik">G2E - IPTA -
+                                                                                                                                                                                                        Pensyarah/Penyelidik</option>
+                                                                                                                                                                                                    <option value="IPTA - Pelajar">G2E - Pelajar</option>
+                                                                                                                                                                                                    <option value="IPTS - Pensyarah/Penyelidik">G2E - Pensyarah/Penyelidik
+                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                    <option value="IPTS - Pelajar">G2E - Pelajar</option>
+                                                                                                                                                                                                </select>-->
                                             </div>
                                         </div>
                                         <hr class="my-4" />
@@ -498,11 +527,11 @@
     </div>
 
 
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script>
-    $(document).on("click", ".btn_login", function() {
-        var captcha = $('#g-recaptcha-response').val();
-        <?php
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        $(document).on("click", ".btn_login", function() {
+            var captcha = $('#g-recaptcha-response').val();
+            <?php
         if($_SERVER['HTTP_HOST'] == "127.0.0.1:8000"){
             ?>
             $("#formLogin").submit();
@@ -510,9 +539,9 @@
         }else{
             ?>
             //if (captcha == "") {
-               //alert("Sila lengkapkan captcha");
+            //alert("Sila lengkapkan captcha");
             //} else {
-                $("#formLogin").submit();
+            $("#formLogin").submit();
             //}
             <?php
         }
@@ -557,7 +586,7 @@
         });
         $('#agensi_organisasi').change(function() {
             var sel = $('input[name="perananSelect"]:checked').val();
-            if(sel == "3" || sel == "4"){
+            if (sel == "3" || sel == "4") {
                 var agensi_organisasi_name = $(this).find(':selected').attr('data-name');
 
                 $.ajax({
@@ -583,66 +612,67 @@
             }
         });
 
-        $(document).on('click','.perananCheckbox',function(){
+        $(document).on('click', '.perananCheckbox', function() {
             var clickedElement = $(this);
 
             //show options when selecting Pemohon Data role
-            if($(this).prop('checked') == true && $(this).val() == "2"){
+            if ($(this).prop('checked') == true && $(this).val() == "2") {
                 $(".divsecond").show();
-            }else if($(this).prop('checked') == false && $(this).val() == "2"){
+            } else if ($(this).prop('checked') == false && $(this).val() == "2") {
                 $(".divsecond").hide();
             }
 
             //check if at least one peranan is selected before showing the Isi Borang button
             var hasChecked = 1;
             $('.perananCheckbox').each(function(i, obj) {
-                if($(this).prop('checked') == true){
+                if ($(this).prop('checked') == true) {
                     hasChecked *= 0;
                 }
             });
-            if(hasChecked == 0){
+            if (hasChecked == 0) {
                 $('.btn_isi_borang').show();
-            }else{
+            } else {
                 $('.btn_isi_borang').hide();
             }
 
             //pre-set form peranan input based on role selected
             var selectedPeranan = "";
-            if(clickedElement.prop('checked') == true){
+            if (clickedElement.prop('checked') == true) {
                 $('.perananCheckbox').each(function() {
                     if ($(this).prop('checked') == true && $(this).val() == "3") {
                         selectedPeranan = selectedPeranan + 'Pengesah Metadata,';
                     } else if ($(this).prop('checked') == true && $(this).val() == "4") {
                         selectedPeranan = selectedPeranan + 'Penerbit Metadata,';
-                    } else if($(this).prop('checked') == true){
+                    } else if ($(this).prop('checked') == true) {
                         selectedPeranan = selectedPeranan + 'Pemohon Data,';
                     }
                 });
             }
 
             //select G2G if Pemohon Data and Penerbit/Pengesah Metadata are selected together
-            if(selectedPeranan.replace(/,\s*$/, "").includes('Pemohon') && selectedPeranan.replace(/,\s*$/, "").includes('Metadata')){
+            if (selectedPeranan.replace(/,\s*$/, "").includes('Pemohon') && selectedPeranan.replace(/,\s*$/, "")
+                .includes('Metadata')) {
                 $('#2_options_g2g').attr('checked', true).trigger('click');
                 $('.2_options_g2e_sub').each(function() {
                     $(this).prop('checked', false);
                 });
-//                alert('Sekiranya anda memilih peranan Penerbit/Pengesah Metadata dan ingin mendaftar sebagai Pemohon Data juga, kategori yang boleh dipilih hanya G2G sahaja.');
+                //                alert('Sekiranya anda memilih peranan Penerbit/Pengesah Metadata dan ingin mendaftar sebagai Pemohon Data juga, kategori yang boleh dipilih hanya G2G sahaja.');
                 $('.divG2e').hide();
-            }else{
+            } else {
                 $('.divG2e').show();
             }
         });
 
-        $(document).on('click','.2_options_g2g_sub',function(){
-            $("#2_options_g2g").prop('checked',true);
+        $(document).on('click', '.2_options_g2g_sub', function() {
+            $("#2_options_g2g").prop('checked', true);
             $('.2_options_g2e_sub').each(function() {
-                $(this).prop('checked',false);
+                $(this).prop('checked', false);
             });
         });
-        $(document).on('click','.2_options_g2e_sub',function(){
-            $("#2_options_g2e").prop('checked',true);
+        $(document).on('click', '.2_options_g2e_sub', function() {
+            $("#2_options_g2e").prop('checked', true);
             $(".2_options_g2g_sub").each(function() {
-                $(this).prop('checked',false);
+                $(this).prop('checked', false);
             });
 
             //pre-set form peranan input based on role selected
@@ -652,27 +682,28 @@
                     selectedPeranan = selectedPeranan + 'Pengesah Metadata,';
                 } else if ($(this).prop('checked') == true && $(this).val() == "4") {
                     selectedPeranan = selectedPeranan + 'Penerbit Metadata,';
-                } else if($(this).prop('checked') == true){
+                } else if ($(this).prop('checked') == true) {
                     selectedPeranan = selectedPeranan + 'Pemohon Data,';
                 }
             });
 
             //deselect Penerbit/Pengesah Metadata if G2E and Penerbit/Pengesah Metadata are selected together
-            if(selectedPeranan.replace(/,\s*$/, "").includes('Pemohon') && selectedPeranan.replace(/,\s*$/, "").includes('Metadata')){
-                $('#pengesahMetadata').prop('checked',false);
-                $('#penerbitMetadata').prop('checked',false);
-//                alert('Sekiranya anda memilih peranan Penerbit/Pengesah Metadata dan ingin mendaftar sebagai Pemohon Data juga, kategori yang boleh dipilih hanya G2G sahaja.');
+            if (selectedPeranan.replace(/,\s*$/, "").includes('Pemohon') && selectedPeranan.replace(/,\s*$/, "")
+                .includes('Metadata')) {
+                $('#pengesahMetadata').prop('checked', false);
+                $('#penerbitMetadata').prop('checked', false);
+                //                alert('Sekiranya anda memilih peranan Penerbit/Pengesah Metadata dan ingin mendaftar sebagai Pemohon Data juga, kategori yang boleh dipilih hanya G2G sahaja.');
             }
         });
 
-        $(document).on('click','#2_options_g2g',function(){
+        $(document).on('click', '#2_options_g2g', function() {
             $(".2_options_g2e_sub").each(function() {
-                $(this).prop('checked',false);
+                $(this).prop('checked', false);
             });
         });
-        $(document).on('click','#2_options_g2e',function(){
+        $(document).on('click', '#2_options_g2e', function() {
             $(".2_options_g2g_sub").each(function() {
-                $(this).prop('checked',false);
+                $(this).prop('checked', false);
             });
         });
 
@@ -681,26 +712,28 @@
             var hasPemohonData = 1;
             var hasPenerbitPengesah = 1;
             $('.kategoriCheck').each(function(i, obj) {
-                if(($(this).prop('checked') == true && $(this).val() == "3") || ($(this).prop('checked') == true && $(this).val() == "4")){
+                if (($(this).prop('checked') == true && $(this).val() == "3") || ($(this).prop('checked') ==
+                        true && $(this).val() == "4")) {
                     hasPenerbitPengesah *= 0;
-                }else if(($(this).prop('checked') == true && $(this).val() != "3") || ($(this).prop('checked') == true && $(this).val() != "4")){
+                } else if (($(this).prop('checked') == true && $(this).val() != "3") || ($(this).prop(
+                        'checked') == true && $(this).val() != "4")) {
                     hasPemohonData *= 0;
                     $("#hiddenKategori").val($(this).val());
                     $("#kategoriPemohonData").val($(this).val()).attr('disabled', true).show();
                 }
             });
-            if(hasPemohonData == 0){
+            if (hasPemohonData == 0) {
                 $(".divKategori").show();
                 hasPemohonData = 1;
-            }else{
+            } else {
                 $(".divKategori").hide();
                 $("#hiddenKategori").val('');
                 $("#kategoriPemohonData").val('').attr('disabled', true).hide();
             }
-            if(hasPenerbitPengesah == 0){
+            if (hasPenerbitPengesah == 0) {
                 $(".divBahagian").show();
                 hasPenerbitPengesah = 1;
-            }else{
+            } else {
                 $(".divBahagian").hide();
                 $('#bahagian').html('');
                 $('#bahagian').append('<option value="">Pilih...</option>');
@@ -715,21 +748,21 @@
                     selectedPeranan = selectedPeranan + 'Pengesah Metadata,';
                 } else if ($(this).prop('checked') == true && $(this).val() == "4") {
                     selectedPeranan = selectedPeranan + 'Penerbit Metadata,';
-                } else if($(this).prop('checked') == true){
+                } else if ($(this).prop('checked') == true) {
                     selectedPeranan = selectedPeranan + 'Pemohon Data,';
                 }
             });
             $("#peranan").val(selectedPeranan.replace(/,\s*$/, ""));
 
             //show or hide role-specific inputs
-            if(selectedPeranan.replace(/,\s*$/, "").includes('Metadata')){
+            if (selectedPeranan.replace(/,\s*$/, "").includes('Metadata')) {
                 $('.divBahagian').show();
-            }else{
+            } else {
                 $('.divBahagian').hide();
             }
-            if(selectedPeranan.replace(/,\s*$/, "").includes('Pemohon')){
+            if (selectedPeranan.replace(/,\s*$/, "").includes('Pemohon')) {
                 $('.divPhoneBimbit').show();
-            }else{
+            } else {
                 $('.divPhoneBimbit').hide();
             }
 
@@ -745,7 +778,7 @@
             $('#btn_daftar').hide();
             $('#btn_batal').hide();
             $('#formRegisterUser').trigger("reset");
-            $('#2_options_g2g').prop('checked',false);
+            $('#2_options_g2g').prop('checked', false);
             $('#divsecond').hide();
             $(".divKategori").hide();
             $("#hiddenKategori").val('');
@@ -801,60 +834,61 @@
                 var data = jQuery.parseJSON(response);
                 jQuery.each(data, function(key, val) {
                     if (val.category == "G2C" && val.subcategory == "Awam" && val.status == "1") {
-                        $('#2_g2c').prop('disabled', false);
+                        $('#g2c_div').removeClass('d-none');
+
                     } else if (val.category == "G2C" && val.subcategory == "Awam" && val.status ==
                         "0") {
-                        $('#2_g2c').prop('disabled', true);
+                        $('#g2c_div').addClass('d-none');
                     }
 
                     if (val.category == "G2G" && val.subcategory == "Badan Berkanun" && val
                         .status == "1") {
-                        $('#badanBerkanun').prop('disabled', false);
+                        $('#g2g_b').removeClass('d-none');
                     } else if (val.category == "G2G" && val.subcategory == "Badan Berkanun" && val
                         .status == "0") {
-                        $('#badanBerkanun').prop('disabled', true);
+                        $('#g2g_b').addClass('d-none');
                     }
                     if (val.category == "G2G" && val.subcategory ==
                         "Agensi Persekutuan/Agensi Negeri" && val.status == "1") {
-                        $('#agensiPersNeg').prop('disabled', false);
+                        $('#g2g_a').removeClass('d-none');
                     } else if (val.category == "G2G" && val.subcategory ==
                         "Agensi Persekutuan/Agensi Negeri" && val.status == "0") {
-                        $('#agensiPersNeg').prop('disabled', true);
+                        $('#g2g_a').addClass('d-none');
                     }
                     if (val.category == "G2G" && val.subcategory == "GLC" && val.status == "1") {
-                        $('#glc').prop('disabled', false);
+                        $('#g2g_c').removeClass('d-none');
                     } else if (val.category == "G2G" && val.subcategory == "GLC" && val.status ==
                         "0") {
-                        $('#glc').prop('disabled', true);
+                        $('#g2g_c').addClass('d-none');
                     }
 
                     if (val.category == "G2E" && val.subcategory == "IPTA - Pensyarah/Penyelidik" &&
                         val.status == "1") {
-                        $('#iptaSyarahSelidik').prop('disabled', false);
+                        $('#g2e_a').removeClass('d-none');
                     } else if (val.category == "G2E" && val.subcategory ==
                         "IPTA - Pensyarah/Penyelidik" && val.status == "0") {
-                        $('#iptaSyarahSelidik').prop('disabled', true);
+                        $('#g2e_a').addClass('d-none');
                     }
                     if (val.category == "G2E" && val.subcategory == "IPTA - Pelajar" && val
                         .status == "1") {
-                        $('#iptaPelajar').prop('disabled', false);
+                        $('#g2e_b').removeClass('d-none');
                     } else if (val.category == "G2E" && val.subcategory == "IPTA - Pelajar" && val
                         .status == "0") {
-                        $('#iptaPelajar').prop('disabled', true);
+                        $('#g2e_b').addClass('d-none');
                     }
                     if (val.category == "G2E" && val.subcategory == "IPTS - Pensyarah/Penyelidik" &&
                         val.status == "1") {
-                        $('#iptsSyarahSelidik').prop('disabled', false);
+                        $('#g2e_c').removeClass('d-none');
                     } else if (val.category == "G2E" && val.subcategory ==
                         "IPTS - Pensyarah/Penyelidik" && val.status == "0") {
-                        $('#iptsSyarahSelidik').prop('disabled', true);
+                        $('#g2e_c').addClass('d-none');
                     }
                     if (val.category == "G2E" && val.subcategory == "IPTS - Pelajar" && val
                         .status == "1") {
-                        $('#iptsPelajar').prop('disabled', false);
+                        $('#g2e_d').removeClass('d-none');
                     } else if (val.category == "G2E" && val.subcategory == "IPTS - Pelajar" && val
                         .status == "0") {
-                        $('#iptsPelajar').prop('disabled', true);
+                        $('#g2e_d').addClass('d-none');
                     }
                 });
             });
@@ -863,14 +897,17 @@
             <?php
             if($errors->any()){
                 foreach($errors->all() as $error){
-                    ?>msg = msg + "{{ $error }}\n\n";<?php
+                    ?>msg = msg + "{{ $error }}\n\n";
+            <?php
                 }
-                ?>alert(msg);<?php
+                ?>alert(msg);
+            <?php
             }
             ?>
             <?php
             if(Session::has('message')){
-                ?>alert("{{ Session::get('message') }}");<?php
+                ?>alert("{{ Session::get('message') }}");
+            <?php
             }
             ?>
             $("#input-nric,#input-tpejabat,#input-tbimbit").inputFilter(function(value) {
@@ -891,7 +928,7 @@
             <?php
             if (null !== Session::get('msg') && !is_null(Session::get('msg')) && 'NULL' != Session::get('msg')) {
                 ?>alert("<?php echo Session::get('msg'); ?>");
-                <?php
+            <?php
             }
             ?>
         });

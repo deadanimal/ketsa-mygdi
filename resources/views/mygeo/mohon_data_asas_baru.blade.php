@@ -198,7 +198,8 @@
                                                             disabled />
                                                     </div>
                                                     <div class="col-2" style="padding-right: none !important;">
-                                                        <label class="form-control-label mr-4" for="tel_bimbit" style="padding-right: none !important;margin-right:0 !important;">
+                                                        <label class="form-control-label mr-4" for="tel_bimbit"
+                                                            style="padding-right: none !important;margin-right:0 !important;">
                                                             Telefon Bimbit
                                                         </label>
                                                     </div>
@@ -266,7 +267,8 @@
                                                                 <div class="form-group">
                                                                     <label for="name" class="form-control-label">Tajuk
                                                                         Permohonan</label>
-                                                                    <input type="text" class="form-control" name="name" id="tajukPermohonan"
+                                                                    <input type="text" class="form-control" name="name"
+                                                                        id="tajukPermohonan"
                                                                         value="{{ $permohonan->name }}">
                                                                 </div>
                                                                 <div class="form-group">
@@ -278,8 +280,7 @@
                                                                 <div class="form-group">
                                                                     <label for="tujuan" class="form-control-label">Tujuan
                                                                         Permohonan</label>
-                                                                    <textarea name="tujuan" cols="30" class="form-control"
-                                                                        rows="10">{{ $permohonan->tujuan }}</textarea>
+                                                                    <textarea name="tujuan" cols="30" class="form-control" rows="10">{{ $permohonan->tujuan }}</textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -345,12 +346,12 @@
                                                                         <td>{{ $sk->kawasan_data }}</td>
                                                                         <td>
                                                                             <?php
-                                                                            if(strpos($sk->jenis_data,'fizikal') !== false && strpos($sk->jenis_data,'map_servis') !== false){
-                                                                                echo "Fizikal dan Map Servis";
-                                                                            }elseif($sk->jenis_data == "fizikal"){
-                                                                                echo "Fizikal";
-                                                                            }elseif($sk->jenis_data == "map_servis"){
-                                                                                echo "Map Servis";
+                                                                            if (strpos($sk->jenis_data, 'fizikal') !== false && strpos($sk->jenis_data, 'map_servis') !== false) {
+                                                                                echo 'Fizikal dan Map Servis';
+                                                                            } elseif ($sk->jenis_data == 'fizikal') {
+                                                                                echo 'Fizikal';
+                                                                            } elseif ($sk->jenis_data == 'map_servis') {
+                                                                                echo 'Map Servis';
                                                                             }
                                                                             ?>
                                                                         </td>
@@ -423,7 +424,6 @@
                                                                         <td>{{ $count }}</td>
                                                                         <td>
                                                                             @if ($dokumen->tajuk_dokumen == 'Surat Permohonan Rasmi')
-
                                                                                 {{ $dokumen->tajuk_dokumen }}
                                                                                 @if ($dokumen->no_rujukan)
                                                                                     <br>
@@ -431,7 +431,6 @@
                                                                                     {{ Carbon\Carbon::parse($dokumen->date_surat)->format('d/m/Y') }})
                                                                                 @endif
                                                                             @else
-
                                                                                 {{ $dokumen->tajuk_dokumen }}
                                                                             @endif
                                                                         </td>
@@ -524,28 +523,33 @@
                                                             {{ $permohonan->status == '2' ? 'selected' : '' }}>
                                                             DITOLAK</option>
                                                     </select>
-                                                    <div id="hidden_div_catatan" @if ($permohonan->status == 0 || $permohonan->status == 1) class="hide" @endif>
+                                                    <div id="hidden_div_catatan"
+                                                        @if ($permohonan->status == 0) class="hide" @endif>
                                                         <h4 class="heading text-dark mr-2">Catatan Permohonan</h4>
                                                         <select name="catatan" class="form-control form-control-sm mb-4"
                                                             onchange="checkCatatan(this.value);">
-                                                            <option selected disabled>Pilih</option>
-                                                            <option value="Maklumat tidak lengkap" @if ($permohonan->catatan == 'Maklumat tidak lengkap') selected @endif>
+                                                            <option selected disabled hidden>Pilih</option>
+                                                            <option value="Maklumat tidak lengkap"
+                                                                @if ($permohonan->catatan == 'Maklumat tidak lengkap') selected @endif>
                                                                 Maklumat tidak
                                                                 lengkap</option>
                                                             <option value="Data yang dipohon tiada dalam simpanan PGN"
-                                                                @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang dipohon tiada
+                                                                @if ($permohonan->catatan == 'Data yang dipohon tiada dalam simpanan PGN') selected @endif>Data yang
+                                                                dipohon tiada
                                                                 dalam simpanan PGN</option>
                                                             <option value="Maklumat pemohon tidak sahih"
-                                                                @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat pemohon tidak
+                                                                @if ($permohonan->catatan == 'Maklumat pemohon tidak sahih') selected @endif>Maklumat
+                                                                pemohon tidak
                                                                 sahih</option>
-                                                            <option value="others" @if ($permohonan->catatan == 'others') selected @endif>Lain-lain
+                                                            <option value="others"
+                                                                @if ($permohonan->catatan == 'others') selected @endif>Lain-lain
                                                             </option>
                                                         </select>
-                                                        <textarea name="catatan_lain" id="catatan"
-                                                            class="form-control form-control-sm" @if ($permohonan->catatan == 'others') style="display:block;" @else style="display:none;" @endif
-                                                            cols="30" rows="5">{{ $permohonan->catatan_lain }}</textarea>
+                                                        <textarea name="catatan_lain" class="form-control form-control-sm" style="display:block;" cols="30"
+                                                            rows="5">{{ $permohonan->catatan_lain }}</textarea>
                                                     </div>
-                                                    <div id="hidden_div_pentadbir" @if ($permohonan->status == 0 || $permohonan->status == 2) class="hide" @endif>
+                                                    <div id="hidden_div_pentadbir"
+                                                        @if ($permohonan->status == 0 || $permohonan->status == 2) class="hide" @endif>
                                                         <h4 class="heading text-dark mr-2">Pentadbir Ditugaskan</h4>
                                                         <select class="form-control form-control-sm" name="assign_admin">
                                                             <option selected disabled>Pilih</option>
@@ -613,7 +617,7 @@
                                         <label class="form-control-label" for="kategori">Kategori</label>
                                         <select class="form-control" id="kategori" name="kategori"
                                             onchange="selectKategori()">
-                                            <option selected disabled>Pilih</option>
+                                            <option selected disabled hidden>Pilih</option>
                                             @foreach ($kategori_senarai_data as $kategori)
                                                 <option value="{{ $kategori->kategori }}">{{ $kategori->kategori }}
                                                 </option>
@@ -629,10 +633,10 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="jenis_data">Jenis Data</label>
                                         <select class="form-control" name="jenis_data">
-                                            <option selected disabled>Pilih</option>
-                                               <option value="fizikal">Fizikal</option>
-                                               <option value="map_servis">Map Servis</option>
-                                               <option value="fizikal, map_servis">Fizikal dan Map Servis</option>
+                                            <option selected disabled hidden>Pilih</option>
+                                            <option value="fizikal">Fizikal</option>
+                                            <option value="map_servis">Map Servis</option>
+                                            <option value="fizikal, map_servis">Fizikal dan Map Servis</option>
                                         </select>
                                     </div>
 
@@ -642,7 +646,7 @@
                                             placeholder="Masukkan Kawasan Data" /> --}}
 
                                         <select class="form-control" id="negeri" name="negeri" onchange="selectNegeri()">
-                                            <option selected disabled>Negeri</option>
+                                            <option selected disabled hidden>Negeri</option>
                                             @foreach ($negeris as $neg)
                                                 <option value="{{ $neg->kod_negeri }}">{{ $neg->negeri }}
                                                 </option>
@@ -942,7 +946,8 @@
                                             <select class="form-control" name="kategori" disabled>
                                                 <option selected disabled>Pilih</option>
                                                 @foreach ($kategori_senarai_data as $sdata)
-                                                    <option value="{{ $sdata->kategori }}" @if ($sk->kategori == $sdata->kategori) selected @endif>
+                                                    <option value="{{ $sdata->kategori }}"
+                                                        @if ($sk->kategori == $sdata->kategori) selected @endif>
                                                         {{ $sdata->kategori }}
                                                     </option>
                                                 @endforeach
@@ -981,9 +986,15 @@
                                             <label class="form-control-label" for="kawasan_data">Jenis Data</label>
                                             <select class="form-control" name="jenis_data">
                                                 <option selected disabled>Pilih</option>
-                                                <option value="fizikal"  {{$sk->jenis_data == 'fizikal'? 'selected' : ''}}>Fizikal</option>
-                                               <option value="map_servis"  {{$sk->jenis_data == 'map_servis'? 'selected' : ''}}>Map Servis</option>
-                                               <option value="fizikal, map_servis"  {{$sk->jenis_data == 'fizikal, map_servis'? 'selected' : ''}}>Fizikal dan Map Servis</option>
+                                                <option value="fizikal"
+                                                    {{ $sk->jenis_data == 'fizikal' ? 'selected' : '' }}>Fizikal</option>
+                                                <option value="map_servis"
+                                                    {{ $sk->jenis_data == 'map_servis' ? 'selected' : '' }}>Map Servis
+                                                </option>
+                                                <option value="fizikal, map_servis"
+                                                    {{ $sk->jenis_data == 'fizikal, map_servis' ? 'selected' : '' }}>
+                                                    Fizikal
+                                                    dan Map Servis</option>
                                             </select>
                                         </div>
 
@@ -1059,10 +1070,10 @@
         });
 
         $(document).ready(function() {
-            $("#tajukPermohonan").keyup(function () {  
-                $(this).val($(this).val().toUpperCase());  
-            }); 
-            
+            $("#tajukPermohonan").keyup(function() {
+                $(this).val($(this).val().toUpperCase());
+            });
+
             $(document).on('click', '.btnHantarPermohonanPentadbir', function() {
                 if (confirm('Anda pasti untuk menghantar permohonan?')) {
                     $('#formHantarPermohonanPentadbir').submit();

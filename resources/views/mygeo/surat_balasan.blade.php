@@ -80,24 +80,35 @@
                                                         <td>Rujukan</td>
                                                         <td style="padding:0px 10px;">:</td>
                                                         <td><input type="text" class="form-control form-control-sm ml-2"
-                                                            name="no_rujukan" value="{{ $surat->no_rujukan }}" style="width:100% !important;">
-                                                        <input type="hidden" name="date_mohon" value="{{ $permohonan->date }}"></td>
+                                                                name="no_rujukan" value="{{ $surat->no_rujukan }}"
+                                                                style="width:100% !important;">
+                                                            <input type="hidden" name="date_mohon"
+                                                                value="{{ $permohonan->date }}">
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Tarikh</td>
                                                         <td style="padding:0px 10px;">:</td>
-                                                        <td style="padding-left: 10px;">{{ Carbon\Carbon::now()->format('d M Y') }}</td>
+                                                        <td style="padding-left: 10px;">
+                                                            {{ Carbon\Carbon::now()->format('d M Y') }}</td>
                                                     </tr>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
                                     <div align="justify" class="mx-5">
-                                        <textarea class="form-control form-control-sm mt-3" cols="30"
-                                            placeholder="Nama dan Alamat"
-                                            rows="6">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
-                                                                                                                                                                    </textarea>
-                                        <br>
+                                        @if ($surat->nama_alamat == null)
+                                            <textarea class="form-control form-control-sm mt-3" cols="30" placeholder="Nama dan Alamat" rows="6"
+                                                name="nama_alamat">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
+                                                                                                                                                                      </textarea>
+                                            <br>
+                                        @else
+                                            <textarea class="form-control form-control-sm mt-3" cols="30" placeholder="Nama dan Alamat" rows="6"
+                                                name="nama_alamat">{{ $surat->nama_alamat }}
+                                                                                                                                                                      </textarea>
+                                            <br>
+                                        @endif
+
                                         {{-- <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
                                             placeholder="Tajuk Surat Balasan Permohonan"
                                             value="{{ $surat->tajuk_surat }}"> --}}
