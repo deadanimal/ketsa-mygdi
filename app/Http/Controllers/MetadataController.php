@@ -89,6 +89,16 @@ class MetadataController extends Controller {
                 $query = $query->where('is_draf','no')->where('disahkan','no');
             }
         }
+        if(isset($_GET['organisasi']) && $_GET['organisasi'] != ""){
+            $users = User::where('agensi_organisasi',$_GET['organisasi'])->get();
+            $aos = [];
+            if(!$users->isEmpty()){
+                foreach($users as $u){
+                    $aos[] = $u->id;
+                }
+            }
+            $query = $query->whereIn('portal_user_id',$aos);
+        }
         if(isset($_GET['nama_id_penerbit']) && $_GET['nama_id_penerbit'] != ""){
             $query = $query->where('portal_user_id','=',$_GET['nama_id_penerbit']);
         }
@@ -168,8 +178,10 @@ class MetadataController extends Controller {
                 }
             }
         }
+        
+        $aos = AgensiOrganisasi::distinct('name')->whereNull('bahagian')->get();
 
-        return view('mygeo.metadata.senarai_metadata', compact('metadatas', 'metadataTitles','metadatasdb','penerbits'));
+        return view('mygeo.metadata.senarai_metadata', compact('metadatas', 'metadataTitles','metadatasdb','penerbits','aos'));
     }
 
     public function getSenaraiMetadata(Request $request) {
