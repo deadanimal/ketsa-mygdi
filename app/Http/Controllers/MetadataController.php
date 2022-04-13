@@ -2926,6 +2926,11 @@ class MetadataController extends Controller {
                 $mg->is_draf = "yes";
                 $msg = "Metadata disimpan sebagai draf.";
             }
+            
+            if(isset($request->autosave) && isset($request->page) && $request->page == "pengisian"){
+                $mg->is_draf = "yes";
+            }
+            
             $mg->save();
         });
 
@@ -3411,6 +3416,11 @@ class MetadataController extends Controller {
                 $mg->is_draf = "yes";
                 $msg = "Metadata disimpan sebagai draf.";
             }
+            
+            if(isset($request->autosave) && isset($request->page) && $request->page == "pengisian"){
+                $mg->is_draf = "yes";
+            }
+            
             $mg->update();
 
             if ($request->submitAction == "terbit" && auth::user()->hasRole(['Pengesah Metadata'])) {

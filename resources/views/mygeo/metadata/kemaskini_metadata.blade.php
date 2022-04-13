@@ -927,7 +927,7 @@ if (!is_null(old('kategori'))) {
             $.ajax({
                 type: "POST", 
                 url: '{{url("simpan_kemaskini_metadata")}}',
-                data: $("#form_metadata").serialize()+'&autosave=true',
+                data: $("#form_metadata").serialize()+'&autosave=true&page=kemaskini',
                 success: function(){}
             });
         }
