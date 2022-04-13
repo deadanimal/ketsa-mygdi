@@ -925,7 +925,7 @@ if (!is_null(old('kategori'))) {
         );
         function autosave_metadata(){
             $.ajax({
-                type: "POST",
+                type: "POST", 
                 url: '{{url("simpan_kemaskini_metadata")}}',
                 data: $("#form_metadata").serialize()+'&autosave=true',
                 success: function(){}
