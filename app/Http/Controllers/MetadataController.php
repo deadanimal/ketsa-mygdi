@@ -3273,7 +3273,7 @@ class MetadataController extends Controller {
             $mg->title = $request->c2_metadataName;
 
             if (strtolower($request->kategori) != 'services') {
-                if (file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
+                if (isset($_FILES['file_contohJenisMetadata']['tmp_name']) && file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
                     Storage::disk('public')->delete($mg->file_contohjenismetadata);
                     $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
                 }
@@ -3458,7 +3458,9 @@ class MetadataController extends Controller {
         $at->data = 'Update';
         $at->save();
 
-        return redirect($redirect)->with('success', $msg);
+        if(!isset($request->autosave)){ //autosave doesn't need redirect
+            return redirect($redirect)->with('success', $msg);
+        }
     }
 
     public function metadata_sahkan() {
