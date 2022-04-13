@@ -2675,7 +2675,7 @@ class MetadataController extends Controller {
     public function download_file_contohjenismetadata($id) {
         $metadata = MetadataGeo::where('id', $id)->get()->first();
         if ($metadata->file_contohjenismetadata != "") {
-            return Storage::download('public/' . $metadata->file_contohjenismetadata);
+            return response()->file(storage_path('app/public/'.$metadata->file_contohjenismetadata));
         }
     }
 
@@ -2698,7 +2698,7 @@ class MetadataController extends Controller {
             "c9_south_bound_latitude" => 'required',
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
-//            "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
+            "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
         ];
 
         if (strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application') {
@@ -2762,6 +2762,7 @@ class MetadataController extends Controller {
             "c10_file_name.required" => 'File Name required',
             "c10_file_type.required" => 'File Type required',
             "c2_serviceUrl.required" => 'Service URL required',
+            "file_contohJenisMetadata" => 'Sample Data must be in PDF format and max 10MB'
         ];
 
         $elemenMetadatacol = [];
@@ -2783,7 +2784,7 @@ class MetadataController extends Controller {
             foreach ($customMetadataInput as $cmi) {
                 if ($cmi->mandatory == "Yes") {
                     $fields[$cmi->input_name] = 'required';
-                    $customMsg[$cmi->input_name . '.required'] = $cmi->name . " required";
+//                    $customMsg[$cmi->input_name . '.required'] = $cmi->name . " required";
                 }
                 if (isset($request->{$cmi->input_name})) { //dont remove white space below
                     $custom_inputs .= '
@@ -3131,6 +3132,7 @@ class MetadataController extends Controller {
             "c9_south_bound_latitude" => 'required',
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
+            "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
         ];
 
         if (strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application') {

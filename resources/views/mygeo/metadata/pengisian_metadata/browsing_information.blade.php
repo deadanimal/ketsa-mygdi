@@ -20,6 +20,7 @@
                         </div>
                         <div class="col-8">
                             <input class="form-control ml-3" id="file_contohJenisMetadata" type="file" name="file_contohJenisMetadata" />
+                            <span style="font-size: smaller;color:#ffc107;">* Upload Format: PDF, Max 10MB</span>
                             <p class="error-message"><span></span></p>
                         </div>
                     </div>
