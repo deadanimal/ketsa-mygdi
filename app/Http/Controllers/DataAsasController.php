@@ -326,8 +326,6 @@ class DataAsasController extends Controller
 
     public function update_proses_data(Request $request)
     {
-        dd($request->all());
-
         $append = [];
 
         // dd($request->pautan_data);
