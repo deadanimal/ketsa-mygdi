@@ -47,6 +47,7 @@ use App\AgensiOrganisasi;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\MetadataTemplate;
+use Illuminate\Support\Facades\Validator;
 
 class MetadataController extends Controller {
 
@@ -2685,7 +2686,7 @@ class MetadataController extends Controller {
             "c9_south_bound_latitude" => 'required',
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
-            "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
+//            "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
         ];
 
         if (strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application') {
@@ -2803,8 +2804,15 @@ class MetadataController extends Controller {
         $custom_inputs .= "</customInputs>";
 //        dd($request->all(),$mt,$var);
         //=============
-
-        $this->validate($request, $fields, $customMsg);
+        
+        if(isset($request->autosave)){
+            $validator = Validator::make($request->all(), $fields);
+            if($validator->fails()){
+                var_dump($validator->errors());exit();
+            }
+        }else{
+            $this->validate($request, $fields, $customMsg);
+        }
 
         $keywords = "";
         if (isset($request->c10_additional_keyword) && count($request->c10_additional_keyword) > 0) {
@@ -2851,8 +2859,9 @@ class MetadataController extends Controller {
         $xml = $xmlcon->createXml($request, $fileUrl, $keywords, $topicCategories, trim($custom_inputs));
 
         $msg = "";
+        $newMetadataId = "";
 
-        DB::connection('pgsql2')->transaction(function () use ($request, $xml, &$msg) {
+        DB::connection('pgsql2')->transaction(function () use ($request, $xml, &$msg, &$newMetadataId) {
             $maxid = MetadataGeo::on('pgsql2')->max('id');
 
             // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
@@ -2870,6 +2879,7 @@ class MetadataController extends Controller {
             $mg = new MetadataGeo;
             $mg->timestamps = false;
             $mg->id = $maxid + 1;
+            $newMetadataId = $maxid + 1;
             $mg->data = $xml;
             $mg->changedate = date("Y-m-d H:i:s");
             $mg->createdate = date("Y-m-d H:i:s");
@@ -2885,7 +2895,7 @@ class MetadataController extends Controller {
             $mg->portal_user_id = auth::user()->id;
             $mg->title = $request->c2_metadataName;
 
-            if (strtolower($request->kategori) != 'services') {
+            if (strtolower($request->kategori) != 'services' && isset($request->file_contohJenisMetadata)) {
                 $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
             }
 
@@ -2924,8 +2934,13 @@ class MetadataController extends Controller {
         $at->user_id = Auth::user()->id;
         $at->data = 'Create';
         $at->save();
-
-        return redirect('mygeo_senarai_metadata')->with('message', $msg);
+        
+        if(isset($request->autosave)){
+            echo json_encode(['metadata_id'=>$newMetadataId]);
+            exit();
+        }else{
+            return redirect('mygeo_senarai_metadata')->with('message', $msg);
+        }
     }
 
     public function store_xml(Request $request) {
@@ -3197,8 +3212,15 @@ class MetadataController extends Controller {
                 }
             }
         }
-
-        $this->validate($request, $fields, $customMsg);
+        
+        if(isset($request->autosave)){
+            $validator = Validator::make($request->all(), $fields);
+            if($validator->fails()){
+                exit();
+            }
+        }else{
+            $this->validate($request, $fields, $customMsg);
+        }
 
         $fileUrl = "";
         $fileUrl = $request->c11_order_instructions;
