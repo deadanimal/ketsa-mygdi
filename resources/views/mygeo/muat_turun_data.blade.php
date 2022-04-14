@@ -83,6 +83,8 @@
                                             if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
                                                 if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
                                                     $inTempohUrl = 1;
+                                                } elseif ($currentDate <= $tempohUrlStart) {
+                                                    $inTempohUrl = 2;
                                                 } else {
                                                     $inTempohUrl = 0;
                                                 }
@@ -97,20 +99,24 @@
                                                         <span class="badge badge-pill badge-success">Data Tersedia</span>
                                                     @elseif(!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0)
                                                         <span class="badge badge-pill badge-info">Tamat Tempoh</span>
+                                                    @elseif(!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 2)
+                                                        <span class="badge badge-pill badge-info">Belum Mula</span>
                                                     @else
                                                         <span class="badge badge-pill badge-danger">Dalam Proses</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
+                                                {{-- <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td> --}}
+                                                <td>{{ $permohonan->proses_datas->tempoh_url }}</td>
                                                 <td>
-
                                                     @if (is_array($res) && !empty($res))
-                                                        @foreach ($res as $url)
-                                                            <a @if (!empty($url) && $inTempohUrl == 1) data-url='{{ $url }}' data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
+                                                        {{-- {{ dd($res) }} --}}
+                                                        @foreach ($res as $key => $url)
+                                                            <a
+                                                                @if (!empty($url) && $inTempohUrl == 1) data-url='{{ $url }}' data-urlid='{{ $key }}' data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
                                                                 <span class="fas fa-download mr-2">
-
+                                                                    {{ $url }}
                                                                 </span>
-                                                                {{ $url }}</a><br>
+                                                            </a><br><br>
                                                         @endforeach
                                                     @endif
                                                 </td>
@@ -156,6 +162,7 @@
         $('.download').on('click', function(event) {
             event.preventDefault();
             const url = $(this).data('url');
+            const urlid = $(this).data('urlid');
             var pemohonid = $(this).data('pemohonid');
             var acceptance = $(this).data('acceptance');
 
@@ -179,7 +186,8 @@
                     },
                 }).then(function(result) {
                     //                window.location.href = url;
-                    window.location.href = "{{ url('/akuan_penerimaan/') }}" + "/" + pemohonid;
+                    window.location.href = "{{ url('/akuan_penerimaan') }}" + "/" + pemohonid + "/" +
+                        urlid;
                     //                window.open(url, '_blank');
                 });
             }

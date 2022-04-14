@@ -133,8 +133,8 @@
                                                 </label>
                                             </div>
                                             <div class="custom-control custom-radio mb-2">
-                                                <input class="custom-control-input perananCheckbox" id="perananSelectbogey"
-                                                    name="perananSelectbogey" type="checkbox" value="2" />
+                                                <input class="custom-control-input perananCheckbox" type="checkbox"
+                                                    id="perananSelectbogey" value="2" />
                                                 <label class="custom-control-label" for="perananSelectbogey">
                                                     Pemohon Data
                                                 </label>
@@ -153,8 +153,9 @@
 
                                                     <div
                                                         class="custom-control custom-radio mb-3 {{ $g2g_div == '0' ? 'd-none' : '' }}">
-                                                        <input class="custom-control-input" id="2_options_g2g"
-                                                            name="2_options" type="radio" value="2_g2g" />
+                                                        <input class="custom-control-input" onclick="main_g2g_g2e(this)"
+                                                            id="2_options_g2g" name="2_options" type="radio"
+                                                            value="2_g2g" />
                                                         <label class="custom-control-label" for="2_options_g2g">
                                                             G2G
                                                         </label>
@@ -193,9 +194,10 @@
                                                     </div>
 
                                                     <div
-                                                        class=" custom-control custom-radio mb-3 divG2e {{ $g2c_div == '0' ? 'd-none' : '' }}">
-                                                        <input class="custom-control-input" id="2_options_g2e"
-                                                            name="2_options" type="radio" value="2_g2e" />
+                                                        class=" custom-control custom-radio mb-3 divG2e {{ $g2e_div == '0' ? 'd-none' : '' }}">
+                                                        <input class="custom-control-input" onclick="main_g2g_g2e(this)"
+                                                            id="2_options_g2e" name="2_options" type="radio"
+                                                            value="2_g2e" />
                                                         <label class="custom-control-label" for="2_options_g2e">
                                                             G2E
                                                         </label>
@@ -285,7 +287,7 @@
                                             <div class="col-8">
                                                 <select class=" form-control form-control-sm ml-3" id="sektor"
                                                     name="sektor">
-                                                    <option value="" selected>Pilih...</option>
+                                                    <option value="" selected hidden>Pilih...</option>
                                                     <option value="1">Kerajaan</option>
                                                     <option value="2">Swasta</option>
                                                     <option value="3">Institusi Awam</option>
@@ -447,17 +449,17 @@
                                                 <input type="text" id="kategoriPemohonData" name="kategoriPemohonData"
                                                     class="form-control form-control-sm ml-3">
                                                 <!--                                                <select name="kategoriPemohonData" id="kategoriPemohonData">
-                                                                                                                                                                                                    <option value="Agensi Persekutuan/Agensi Negeri">G2G - Agensi
-                                                                                                                                                                                                        Persekutuan/Agensi Negeri</option>
-                                                                                                                                                                                                    <option value="Badan Berkanun">G2G - Badan Berkanun</option>
-                                                                                                                                                                                                    <option value="GLC">G2G - GLC</option>
-                                                                                                                                                                                                    <option value="IPTA - Pensyarah/Penyelidik">G2E - IPTA -
-                                                                                                                                                                                                        Pensyarah/Penyelidik</option>
-                                                                                                                                                                                                    <option value="IPTA - Pelajar">G2E - Pelajar</option>
-                                                                                                                                                                                                    <option value="IPTS - Pensyarah/Penyelidik">G2E - Pensyarah/Penyelidik
-                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                    <option value="IPTS - Pelajar">G2E - Pelajar</option>
-                                                                                                                                                                                                </select>-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                <option value="Agensi Persekutuan/Agensi Negeri">G2G - Agensi
+                                                                                                                                                                                                                                                                                                                                                                                                                                    Persekutuan/Agensi Negeri</option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                <option value="Badan Berkanun">G2G - Badan Berkanun</option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                <option value="GLC">G2G - GLC</option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                <option value="IPTA - Pensyarah/Penyelidik">G2E - IPTA -
+                                                                                                                                                                                                                                                                                                                                                                                                                                    Pensyarah/Penyelidik</option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                <option value="IPTA - Pelajar">G2E - Pelajar</option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                <option value="IPTS - Pensyarah/Penyelidik">G2E - Pensyarah/Penyelidik
+                                                                                                                                                                                                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                <option value="IPTS - Pelajar">G2E - Pelajar</option>
+                                                                                                                                                                                                                                                                                                                                                                                                                            </select>-->
                                             </div>
                                         </div>
                                         <hr class="my-4" />
@@ -612,6 +614,36 @@
             }
         });
 
+        $("#2_options_g2c").click(function() {
+            if ($(this).prop('checked')) {
+                $('.btn_isi_borang').show();
+            } else {
+                $('.btn_isi_borang').hide();
+            }
+
+        });
+
+        function main_g2g_g2e(e) {
+            if ($(e).prop('checked') == true) {
+                $('.btn_isi_borang').hide();
+            }
+        }
+
+        $(".2_options_g2g_sub").click(function() {
+            if ($(this).prop('checked')) {
+                $('.btn_isi_borang').show();
+            } else {
+                $('.btn_isi_borang').hide();
+            }
+        });
+        $(".2_options_g2e_sub").click(function() {
+            if ($(this).prop('checked')) {
+                $('.btn_isi_borang').show();
+            } else {
+                $('.btn_isi_borang').hide();
+            }
+        });
+
         $(document).on('click', '.perananCheckbox', function() {
             var clickedElement = $(this);
 
@@ -632,6 +664,10 @@
             if (hasChecked == 0) {
                 $('.btn_isi_borang').show();
             } else {
+                $('.btn_isi_borang').hide();
+            }
+
+            if ($("#perananSelectbogey").prop('checked')) {
                 $('.btn_isi_borang').hide();
             }
 
@@ -662,6 +698,8 @@
                 $('.divG2e').show();
             }
         });
+
+
 
         $(document).on('click', '.2_options_g2g_sub', function() {
             $("#2_options_g2g").prop('checked', true);

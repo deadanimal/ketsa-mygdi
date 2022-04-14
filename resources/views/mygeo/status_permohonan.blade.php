@@ -85,6 +85,8 @@
                                                 if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
                                                     if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
                                                         $inTempohUrl = 1;
+                                                    } elseif ($currentDate <= $tempohUrlStart) {
+                                                        $inTempohUrl = 2;
                                                     } else {
                                                         $inTempohUrl = 0;
                                                     }
@@ -102,6 +104,8 @@
                                                         @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
                                                             <span class="badge badge-pill badge-success">Data
                                                                 Tersedia</span>
+                                                        @elseif (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 2 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                            <span class="badge badge-pill badge-warning">Belum Mula</span>
                                                         @elseif (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
                                                             <span class="badge badge-pill badge-warning ">Tamat
                                                                 Tempoh</span>

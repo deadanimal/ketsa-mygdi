@@ -12,7 +12,7 @@
         .form-control,
         .form-control:disabled {
             /* border-width: 0;
-                                                                background-color: white */
+                                                                                                                                                                    background-color: white */
         }
 
         ol.roman {
@@ -94,13 +94,18 @@
                                 <form action="{{ url('simpan_akuan_pelajar') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    <h3 class="text-center">AKUAN PELAJAR</h3>
-
+                                    <div class="col-12 text-center">
+                                        <h3 class=" d-inline">AKUAN PELAJAR</h3>
+                                    </div>
+                                    <div class="col-12 text-right">
+                                        <a class="btn btn-default btn-sm "
+                                            href="/lihat_permohonan/{{ $permohonan->id }}">Kembali</a>
+                                    </div>
                                     <div class="form-group mx-6">
                                         <label for="tajuk_kajian" class="mb-0">Tajuk
                                             Tesis/Projek/Kajian</label>
                                         <input type="text" class="form-control form-control-sm" name="title"
-                                            placeholder="Tajuk" value="{{ $akuan->title }}">
+                                            placeholder="Tajuk" value="{{ $akuan->title ?? $permohonan->name }}">
                                         <br>
                                         <label class="mb-0">Nama Pemohon</label>
                                         <input type="text" class="form-control form-control-sm mb-2" name="nama[]"
