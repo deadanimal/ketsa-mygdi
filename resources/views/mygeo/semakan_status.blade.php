@@ -75,32 +75,16 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
-                                            <?php
-                                            $inTempohUrl = 0;
-                                            $currentDate = date('d-m-Y');
-                                            $explodedTempohUrl = explode(' - ', $permohonan->proses_datas->tempoh_url);
-                                            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-                                            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-                                            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                                                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                                                    $inTempohUrl = 1;
-                                                } elseif ($currentDate <= $tempohUrlStart) {
-                                                    $inTempohUrl = 2;
-                                                } else {
-                                                    $inTempohUrl = 0;
-                                                }
-                                            }
-                                            ?>
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>
-                                                    @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                    @if (!empty($permohonan->proses_datas->pautan_data) && $permohonan->inTempohUrl == 1 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
                                                         <span class="badge badge-pill badge-success">Data
                                                             Tersedia</span>
-                                                    @elseif (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 2 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                    @elseif (!empty($permohonan->proses_datas->pautan_data) && $permohonan->inTempohUrl == 2 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
                                                         <span class="badge badge-pill badge-warning ">Belum Mula</span>
-                                                    @elseif (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                    @elseif (!empty($permohonan->proses_datas->pautan_data) && $permohonan->inTempohUrl == 0 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
                                                         <span class="badge badge-pill badge-warning ">Tamat
                                                             Tempoh</span>
                                                     @elseif ($permohonan->status == '1' || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))

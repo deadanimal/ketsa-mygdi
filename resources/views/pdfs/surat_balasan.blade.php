@@ -90,7 +90,7 @@
                                         <i style="font-weight: bold">(Ministry of Energy and Natural Resources) <br></i>
                                         Pusat Geospatial Negara (PGN) <br>
                                         <i>National Geospatial Centre <br></i>
-                                        Aras 7 & 8,<br>
+                                        Aras 7 & 8,
                                         Wisma Sumber Asli, <br>
                                         No. 25, Persiaran Perdana, Presint 4 <br>
                                         62574 PUTRAJAYA
@@ -116,7 +116,7 @@
                                     </div>
                                 </div> <br>
                                 <div>
-                                    {{ $permohonan->username }},
+                                    {{ $surat->nama_alamat ?? $permohonan->username }},
                                 </div>
                                 <div class="alamat">{{ $permohonan->alamat }}</div>
                                 <div>{!! $surat->content !!}</div>

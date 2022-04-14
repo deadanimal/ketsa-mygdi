@@ -24,6 +24,7 @@ use Carbon\Carbon;
 use DB;
 use function GuzzleHttp\json_encode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 
@@ -312,10 +313,10 @@ class DataAsasController extends Controller
             $to_name = Auth::user()->name;
             $to_email = Auth::user()->email;
             $data = array('m' => $m2);
-            // Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
-            // $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-            // $message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-            // });
+            Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+            });
         }
         exit();
     }
@@ -418,11 +419,11 @@ class DataAsasController extends Controller
             $to_email = $pemohon->users->email;
 //            $to_email = 'farhan15959@gmail.com';
             $data = array('cat' => 'cat');
-            //Mail::send("mails.exmpl15", $data, function($message) use ($to_name, $to_email) {
-            //$message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
-            //$message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-//                $message->attach($file);
-            //});
+            Mail::send("mails.exmpl15", $data, function ($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
+                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                // $message->attach($file);
+            });
 
             $at = new AuditTrail();
             $at->path = url()->full();
@@ -479,12 +480,53 @@ class DataAsasController extends Controller
     {
         $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
         $permohonan = ProsesData::where('id', 8)->get();
+
+        foreach ($permohonan_list as $pl) {
+
+            $inTempohUrl = 0;
+            $currentDate = date('d-m-Y');
+            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                    $pl['inTempohUrl'] = 1;
+                } elseif ($currentDate <= $tempohUrlStart) {
+                    $pl['inTempohUrl'] = 2;
+                } else {
+                    $pl['inTempohUrl'] = 0;
+                }
+            }
+            $res = json_decode($pl->proses_datas->pautan_data);
+            $pl['res'] = $res;
+        }
+
         return view('mygeo.muat_turun_data', compact('permohonan_list'));
     }
 
     public function status_permohonan()
     {
         $permohonan_list = MohonData::where(['dihantar' => 1])->get();
+        foreach ($permohonan_list as $pl) {
+
+            $inTempohUrl = 0;
+            $currentDate = date('d-m-Y');
+            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                    $pl['inTempohUrl'] = 1;
+                } elseif ($currentDate <= $tempohUrlStart) {
+                    $pl['inTempohUrl'] = 2;
+                } else {
+                    $pl['inTempohUrl'] = 0;
+                }
+            }
+            $res = json_decode($pl->proses_datas->pautan_data);
+            $pl['res'] = $res;
+        }
+
         return view('mygeo.status_permohonan', compact('permohonan_list'));
     }
 
@@ -788,6 +830,26 @@ class DataAsasController extends Controller
     public function semakan_status()
     {
         $permohonan_list = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        foreach ($permohonan_list as $pl) {
+
+            $inTempohUrl = 0;
+            $currentDate = date('d-m-Y');
+            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                    $pl['inTempohUrl'] = 1;
+                } elseif ($currentDate <= $tempohUrlStart) {
+                    $pl['inTempohUrl'] = 2;
+                } else {
+                    $pl['inTempohUrl'] = 0;
+                }
+            }
+            $res = json_decode($pl->proses_datas->pautan_data);
+            $pl['res'] = $res;
+        }
+
         return view('mygeo.semakan_status', compact('permohonan_list'));
     }
 
@@ -1252,10 +1314,17 @@ class DataAsasController extends Controller
                         'catatan' => $request->catatan,
                         'catatan_lain' => $request->catatan_lain,
                     ];
-                    // Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
-                    //     $message->to($to_email, $to_name)->subject($subject);
-                    //     $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    // });
+                    if ($request->catatan == "others") {
+                        Mail::send("mails.exmpl14-1", $data, function ($message) use ($to_name, $to_email, $subject) {
+                            $message->to($to_email, $to_name)->subject($subject);
+                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        });
+                    } else {
+                        Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
+                            $message->to($to_email, $to_name)->subject($subject);
+                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        });
+                    }
                 }
 
                 $at = new AuditTrail();
@@ -1327,10 +1396,10 @@ class DataAsasController extends Controller
                     $to_name = $p->name;
                     $to_email = $p->email;
                     $data = ['nama_pemohon' => $pemohon->users->name, 'agensi' => $agensi_pemohon];
-                    // Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
-                    //     $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
-                    //     $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    // });
+                    Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
+                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    });
                 }
             }
 

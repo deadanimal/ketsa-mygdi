@@ -105,10 +105,10 @@ class AuthController extends Controller
                     $to_name = Auth::user()->name;
                     $to_email = Auth::user()->email;
                     $data = array('m' => $m2);
-                    // Mail::send("mails.exmpl18", $data, function ($message) use ($to_name, $to_email) {
-                    //     $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-                    //     $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    // });
+                    Mail::send("mails.exmpl18", $data, function ($message) use ($to_name, $to_email) {
+                        $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    });
                 }
 
             }
