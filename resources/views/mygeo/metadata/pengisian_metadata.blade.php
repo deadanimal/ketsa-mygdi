@@ -186,7 +186,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                     <div class="card">
                         <form method="post" class="form-horizontal" id="form_metadata"
                               action="{{ url('store_metadata') }}" enctype="multipart/form-data">
-                            <input type="text" name="metadata_id" id="metadata_id">
+                            <input type="hidden" name="metadata_id" id="metadata_id">
                             @csrf
                             <div class="card-body">
                                 <!-- <div class="form-group row"> -->
