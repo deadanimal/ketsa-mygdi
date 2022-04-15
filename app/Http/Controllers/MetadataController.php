@@ -3698,7 +3698,7 @@ class MetadataController extends Controller {
     }
 
     public function kemaskini_elemen_metadata() {
-        if (!auth::user()->hasRole(['Pentadbir Metadata'])) {
+        if (!auth::user()->hasRole(['Pentadbir Aplikasi'])) {
             abort(403, 'Access denied'); //USE THIS TO DOUBLE CHECK USER ACCESS
         }
         
