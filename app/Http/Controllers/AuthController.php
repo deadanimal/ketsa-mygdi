@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
-use App\Role;
-use App\ModelHasRoles;
-use Illuminate\Support\Facades\Log;
-use Auth;
-use Hash;
-use UxWeb\SweetAlert\SweetAlert;
 use App\AuditTrail;
 use App\MohonData;
+use App\User;
+use Auth;
+use Hash;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -21,7 +17,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
+    public function __construct()
     {
         // $this->middleware('auth');
     }
@@ -36,18 +32,18 @@ class AuthController extends Controller
             }
         }
 
-        $user = User::where(['email'=>$request->emailf])->get()->first();
-        if(is_null($user)){
-            return redirect('/login')->with( ['msg' => 'ID pengguna atau kata laluan tidak sah.'] );
+        $user = User::where(['email' => $request->emailf])->get()->first();
+        if (is_null($user)) {
+            return redirect('/login')->with(['msg' => 'ID pengguna atau kata laluan tidak sah.']);
         }
-        if($user->status == '0'){
-            return redirect('/login')->with( ['msg' => 'Akaun anda tidak diaktifkan.'] );
+        if ($user->status == '0') {
+            return redirect('/login')->with(['msg' => 'Akaun anda tidak diaktifkan.']);
         }
-        if($user->disahkan == '0'){
-            return redirect('/login')->with( ['msg' => 'Akaun anda belum disahkan. Sila tunggu notifikasi e-mel pengesahan pendaftaran daripada Pentadbir Aplikasi untuk log masuk.'] );
+        if ($user->disahkan == '0') {
+            return redirect('/login')->with(['msg' => 'Akaun anda belum disahkan. Sila tunggu notifikasi e-mel pengesahan pendaftaran daripada Pentadbir Aplikasi untuk log masuk.']);
         }
 
-        if(Auth::attempt(['email'=>$request->emailf,'password'=>$request->password])) {
+        if (Auth::attempt(['email' => $request->emailf, 'password' => $request->password])) {
 
             $at = new AuditTrail();
             $at->path = url()->full();
@@ -57,13 +53,13 @@ class AuthController extends Controller
 
             //check for completed penilaians for pemohon datas==================
             $msgPenilaian = "";
-            if(Auth::user()->hasRole(['Pemohon Data'])){
+            if (Auth::user()->hasRole(['Pemohon Data'])) {
                 $msgPenilaian = $this->checkAfterSixMonthsPenilaian();
             }
 
-            return redirect()->intended('/landing_mygeo')->with(['msgPenilaian'=>$msgPenilaian]);
-        }else{
-            return redirect('/login')->with(['msg'=>'ID pengguna atau kata laluan tidak sah.']);
+            return redirect()->intended('/landing_mygeo')->with(['msgPenilaian' => $msgPenilaian]);
+        } else {
+            return redirect('/login')->with(['msg' => 'ID pengguna atau kata laluan tidak sah.']);
         }
     }
 
@@ -94,17 +90,27 @@ class AuthController extends Controller
         $msg = "";
         $mohonsAfterSixMonthsPenilaian = [];
         //get mohon_data where berjayaMuatTurunTarikh is over 6 months and penilaian is 0 (penilaian not done)
-        $afterSixMonthsPenilaian = MohonData::whereNotNull('berjayaMuatTurunTarikh')->where('penilaian','0')->where('user_id',Auth::user()->id)->get();
-        if(count($afterSixMonthsPenilaian) > 0){
+        $afterSixMonthsPenilaian = MohonData::whereNotNull('berjayaMuatTurunTarikh')->where('penilaian', '0')->where('user_id', Auth::user()->id)->get();
+        if (count($afterSixMonthsPenilaian) > 0) {
             $counter = '1';
             $msg = "Data-data berikut telah dimuat turun tetapi belum dibuat penilaian:<br>";
-            foreach($afterSixMonthsPenilaian as $a){
+            foreach ($afterSixMonthsPenilaian as $a) {
                 $interval = date_create('now')->diff(date_create($a->berjayaMuatTurunTarikh));
-                if($interval->m > 6){ //ori specs
-//                if($interval->i >= 5){
-                    $msg .= $counter.') '.$a->name.'<br>';
+                if ($interval->m > 6) {
+                    //ori specs
+                    //if($interval->i >= 5){
+                    $msg .= $counter . ') ' . $a->name . '<br>';
                     $counter++;
+                    $m2 = $a;
+                    $to_name = Auth::user()->name;
+                    $to_email = Auth::user()->email;
+                    $data = array('m' => $m2);
+                    Mail::send("mails.exmpl18", $data, function ($message) use ($to_name, $to_email) {
+                        $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    });
                 }
+
             }
         }
         return $msg;

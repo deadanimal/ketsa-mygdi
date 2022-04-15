@@ -233,6 +233,10 @@
         $('#accordion').show();
         $('#div_action_buttons').show();
     }
+    
+    $(document).on('click','.btn_file_contohjenismetadata',function(){
+        window.open($(this).data('href'), '_blank');
+    });
   });
 </script>
 

@@ -84,6 +84,23 @@
                                         </div>
                                     </div>
                                     <div class="row mb-4">
+                                        <div class="col-3"><label for="">Organisasi</label></div>
+                                        <div class="col-5"> 
+                                            <select name="organisasi" class="form-control form-control-sm">
+                                                <option value="">Pilih...</option>
+                                                <?php
+                                                if(isset($aos) && count($aos) > 0){
+                                                    foreach($aos as $a){
+                                                        ?>
+                                                <option value="{{ $a->id }}" {{ isset($_GET['organisasi']) && $_GET['organisasi'] == $a->id ? 'selected' : '' }}>{{ ucfirst($a->name) }}</option>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
                                         <div class="col-3"><label for="">Nama / ID Penerbit</label></div>
                                         <div class="col-5"> 
                                             <select name="nama_id_penerbit" class="form-control form-control-sm">

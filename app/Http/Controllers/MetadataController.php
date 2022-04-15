@@ -47,6 +47,7 @@ use App\AgensiOrganisasi;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\MetadataTemplate;
+use Illuminate\Support\Facades\Validator;
 
 class MetadataController extends Controller {
 
@@ -87,6 +88,16 @@ class MetadataController extends Controller {
             }elseif($_GET['cari_status'] == "perlu_pembetulan"){
                 $query = $query->where('is_draf','no')->where('disahkan','no');
             }
+        }
+        if(isset($_GET['organisasi']) && $_GET['organisasi'] != ""){
+            $users = User::where('agensi_organisasi',$_GET['organisasi'])->get();
+            $aos = [];
+            if(!$users->isEmpty()){
+                foreach($users as $u){
+                    $aos[] = $u->id;
+                }
+            }
+            $query = $query->whereIn('portal_user_id',$aos);
         }
         if(isset($_GET['nama_id_penerbit']) && $_GET['nama_id_penerbit'] != ""){
             $query = $query->where('portal_user_id','=',$_GET['nama_id_penerbit']);
@@ -167,8 +178,10 @@ class MetadataController extends Controller {
                 }
             }
         }
+        
+        $aos = AgensiOrganisasi::distinct('name')->whereNull('bahagian')->get();
 
-        return view('mygeo.metadata.senarai_metadata', compact('metadatas', 'metadataTitles','metadatasdb','penerbits'));
+        return view('mygeo.metadata.senarai_metadata', compact('metadatas', 'metadataTitles','metadatasdb','penerbits','aos'));
     }
 
     public function getSenaraiMetadata(Request $request) {
@@ -2662,7 +2675,7 @@ class MetadataController extends Controller {
     public function download_file_contohjenismetadata($id) {
         $metadata = MetadataGeo::where('id', $id)->get()->first();
         if ($metadata->file_contohjenismetadata != "") {
-            return Storage::download('public/' . $metadata->file_contohjenismetadata);
+            return response()->file(storage_path('app/public/'.$metadata->file_contohjenismetadata));
         }
     }
 
@@ -2749,6 +2762,7 @@ class MetadataController extends Controller {
             "c10_file_name.required" => 'File Name required',
             "c10_file_type.required" => 'File Type required',
             "c2_serviceUrl.required" => 'Service URL required',
+            "file_contohJenisMetadata" => 'Sample Data must be in PDF format and max 10MB'
         ];
 
         $elemenMetadatacol = [];
@@ -2770,7 +2784,7 @@ class MetadataController extends Controller {
             foreach ($customMetadataInput as $cmi) {
                 if ($cmi->mandatory == "Yes") {
                     $fields[$cmi->input_name] = 'required';
-                    $customMsg[$cmi->input_name . '.required'] = $cmi->name . " required";
+//                    $customMsg[$cmi->input_name . '.required'] = $cmi->name . " required";
                 }
                 if (isset($request->{$cmi->input_name})) { //dont remove white space below
                     $custom_inputs .= '
@@ -2803,8 +2817,15 @@ class MetadataController extends Controller {
         $custom_inputs .= "</customInputs>";
 //        dd($request->all(),$mt,$var);
         //=============
-
-        $this->validate($request, $fields, $customMsg);
+        
+        if(isset($request->autosave)){
+            $validator = Validator::make($request->all(), $fields);
+            if($validator->fails()){
+                var_dump($validator->errors());exit();
+            }
+        }else{
+            $this->validate($request, $fields, $customMsg);
+        }
 
         $keywords = "";
         if (isset($request->c10_additional_keyword) && count($request->c10_additional_keyword) > 0) {
@@ -2851,8 +2872,9 @@ class MetadataController extends Controller {
         $xml = $xmlcon->createXml($request, $fileUrl, $keywords, $topicCategories, trim($custom_inputs));
 
         $msg = "";
+        $newMetadataId = "";
 
-        DB::connection('pgsql2')->transaction(function () use ($request, $xml, &$msg) {
+        DB::connection('pgsql2')->transaction(function () use ($request, $xml, &$msg, &$newMetadataId) {
             $maxid = MetadataGeo::on('pgsql2')->max('id');
 
             // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
@@ -2870,6 +2892,7 @@ class MetadataController extends Controller {
             $mg = new MetadataGeo;
             $mg->timestamps = false;
             $mg->id = $maxid + 1;
+            $newMetadataId = $maxid + 1;
             $mg->data = $xml;
             $mg->changedate = date("Y-m-d H:i:s");
             $mg->createdate = date("Y-m-d H:i:s");
@@ -2885,7 +2908,7 @@ class MetadataController extends Controller {
             $mg->portal_user_id = auth::user()->id;
             $mg->title = $request->c2_metadataName;
 
-            if (strtolower($request->kategori) != 'services') {
+            if (strtolower($request->kategori) != 'services' && isset($request->file_contohJenisMetadata)) {
                 $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
             }
 
@@ -2916,6 +2939,11 @@ class MetadataController extends Controller {
                 $mg->is_draf = "yes";
                 $msg = "Metadata disimpan sebagai draf.";
             }
+            
+            if(isset($request->autosave) && isset($request->page) && $request->page == "pengisian"){
+                $mg->is_draf = "yes";
+            }
+            
             $mg->save();
         });
 
@@ -2924,8 +2952,13 @@ class MetadataController extends Controller {
         $at->user_id = Auth::user()->id;
         $at->data = 'Create';
         $at->save();
-
-        return redirect('mygeo_senarai_metadata')->with('message', $msg);
+        
+        if(isset($request->autosave)){
+            echo json_encode(['metadata_id'=>$newMetadataId]);
+            exit();
+        }else{
+            return redirect('mygeo_senarai_metadata')->with('message', $msg);
+        }
     }
 
     public function store_xml(Request $request) {
@@ -3099,6 +3132,7 @@ class MetadataController extends Controller {
             "c9_south_bound_latitude" => 'required',
             "c9_north_bound_latitude" => 'required',
             "c10_keyword" => 'required',
+            "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
         ];
 
         if (strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application') {
@@ -3197,8 +3231,15 @@ class MetadataController extends Controller {
                 }
             }
         }
-
-        $this->validate($request, $fields, $customMsg);
+        
+        if(isset($request->autosave)){
+            $validator = Validator::make($request->all(), $fields);
+            if($validator->fails()){
+                exit();
+            }
+        }else{
+            $this->validate($request, $fields, $customMsg);
+        }
 
         $fileUrl = "";
         $fileUrl = $request->c11_order_instructions;
@@ -3273,7 +3314,7 @@ class MetadataController extends Controller {
             $mg->title = $request->c2_metadataName;
 
             if (strtolower($request->kategori) != 'services') {
-                if (file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
+                if (isset($_FILES['file_contohJenisMetadata']['tmp_name']) && file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
                     Storage::disk('public')->delete($mg->file_contohjenismetadata);
                     $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
                 }
@@ -3389,6 +3430,11 @@ class MetadataController extends Controller {
                 $mg->is_draf = "yes";
                 $msg = "Metadata disimpan sebagai draf.";
             }
+            
+            if(isset($request->autosave) && isset($request->page) && $request->page == "pengisian"){
+                $mg->is_draf = "yes";
+            }
+            
             $mg->update();
 
             if ($request->submitAction == "terbit" && auth::user()->hasRole(['Pengesah Metadata'])) {
@@ -3427,10 +3473,10 @@ class MetadataController extends Controller {
                     $to_name = $user->name;
                     $to_email = $user->email;
                     $data = array('title' => $metadataName);
-                    Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    });
+                    //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                        //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    //});
                 }
 
                 //create new pengumuman about the new metadata
@@ -3440,6 +3486,7 @@ class MetadataController extends Controller {
                 $pengumuman->kategori = 'Metadata Baharu';
                 $pengumuman->content = 'Abstract: ' . $abstract;
                 $pengumuman->gambar = "banner2.jpeg";
+                $pengumuman->metadata_id = $mg->id;
                 $pengumuman->save();
 
                 $msg = "Metadata berjaya diterbitkan.";
@@ -3458,7 +3505,9 @@ class MetadataController extends Controller {
         $at->data = 'Update';
         $at->save();
 
-        return redirect($redirect)->with('success', $msg);
+        if(!isset($request->autosave)){ //autosave doesn't need redirect
+            return redirect($redirect)->with('success', $msg);
+        }
     }
 
     public function metadata_sahkan() {
@@ -3503,6 +3552,7 @@ class MetadataController extends Controller {
                 $pengumuman->kategori = 'Metadata Baharu';
                 $pengumuman->content = 'Abstract: ' . $abstract;
                 $pengumuman->gambar = "banner2.jpeg";
+                $pengumuman->metadata_id = $mid;
                 $pengumuman->save();
 
                 $user = User::where("id", $metadata->portal_user_id)->get()->first();
@@ -3511,10 +3561,10 @@ class MetadataController extends Controller {
                     $to_name = $user->name;
                     $to_email = $user->email;
                     $data = array('title' => $metadataName);
-                    Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    });
+                    //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                        //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    //});
                 }
             }
         } else {
@@ -3551,10 +3601,10 @@ class MetadataController extends Controller {
                 $to_name = $user->name;
                 $to_email = $user->email;
                 $data = array('title' => $metadataName);
-                Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                    $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                });
+                //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                    //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                    //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                //});
             }
 
             //create new pengumuman about the new metadata
@@ -3564,6 +3614,7 @@ class MetadataController extends Controller {
             $pengumuman->kategori = 'Metadata Baharu';
             $pengumuman->content = 'Abstract: ' . $abstract;
             $pengumuman->gambar = "banner2.jpeg";
+            $pengumuman->metadata_id = $_POST['metadata_id'];
             $pengumuman->save();
         }
 
@@ -3597,10 +3648,10 @@ class MetadataController extends Controller {
                     $to_name = $user->name;
                     $to_email = $user->email;
                     $data = array('title' => $metadataName);
-                    Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    });
+                    //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                        //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    //});
                 }
             }
         } else {
@@ -3618,10 +3669,10 @@ class MetadataController extends Controller {
                 $to_name = $user->name;
                 $to_email = $user->email;
                 $data = array('title' => $metadataName);
-                Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
-                    $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                });
+                //Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                    //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
+                    //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                //});
             }
         }
 

@@ -12,7 +12,7 @@
         .form-control,
         .form-control:disabled {
             /* border-width: 0;
-            background-color: white */
+                                                                                                                                                                    background-color: white */
         }
 
         ol.roman {
@@ -94,23 +94,28 @@
                                 <form action="{{ url('simpan_akuan_pelajar') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    <h3 class="text-center">AKUAN PELAJAR</h3>
-
+                                    <div class="col-12 text-center">
+                                        <h3 class=" d-inline">AKUAN PELAJAR</h3>
+                                    </div>
+                                    <div class="col-12 text-right">
+                                        <a class="btn btn-default btn-sm "
+                                            href="/lihat_permohonan/{{ $permohonan->id }}">Kembali</a>
+                                    </div>
                                     <div class="form-group mx-6">
                                         <label for="tajuk_kajian" class="mb-0">Tajuk
                                             Tesis/Projek/Kajian</label>
                                         <input type="text" class="form-control form-control-sm" name="title"
-                                            placeholder="Tajuk" value="{{ $akuan->title }}">
+                                            placeholder="Tajuk" value="{{ $akuan->title ?? $permohonan->name }}">
                                         <br>
                                         <label class="mb-0">Nama Pemohon</label>
-                                        <input type="text" class="form-control form-control-sm mb-2" name="nama"
-                                            value="{{ $permohonan->users->name }}">
+                                        <input type="text" class="form-control form-control-sm mb-2" name="nama[]"
+                                            value="{{ $akuan->nama1 ?? $permohonan->users->name }}">
                                         <label class="mb-0">No Kad Pengenalan</label>
                                         <input type="text" class="form-control form-control-sm mb-2" name="nric"
-                                            placeholder="No Kad Pengenalan" value="{{ $permohonan->users->nric }}">
+                                            placeholder="No Kad Pengenalan"
+                                            value="{{ $akuan->nric ?? $permohonan->users->nric }}">
                                         <label class="mb-0">Nama Institusi dan Alamat</label>
-                                        <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm"
-                                            name="agensi_organisasi">{{ $permohonan->users->agensiOrganisasi->name }}, {{ $permohonan->users->alamat }}
+                                        <textarea name="agensi_organisasi" rows="4" class="form-control form-control-sm" name="agensi_organisasi">{{ $akuan->agensi_organisasi ?? $permohonan->users->agensiOrganisasi->name . ',' . $permohonan->users->alamat }}  
                                         </textarea>
                                         <br>
                                         <h3 class="heading">Senarai Dokumen Geospatial Terperingkat</h3>
@@ -154,7 +159,8 @@
                                                     id="signature" placeholder="Digital Sign"
                                                     accept="image/jpeg, image/png">
                                             @endif
-                                            <input type="hidden" name="date_sign" value="{{ Carbon\Carbon::now() }}">
+                                            <input type="hidden" name="date_sign"
+                                                value="{{ $akuan->tarikh ?? Carbon\Carbon::now() }}">
                                             <br>
                                             <label class="mb-0"> Tarikh:</label>
                                             <input type="text" class="form-control form-control-sm mb-2"
@@ -162,9 +168,10 @@
                                                 value="{{ Carbon\Carbon::parse($akuan->date_mohon)->format('d M Y') }}">
                                             <label class="mb-0">Nama:</label>
                                             <input type="text" class="form-control form-control-sm"
-                                                value="{{ $permohonan->users->name }}">
-                                            Alamat:<textarea class="form-control form-control-sm" cols="30"
-                                                rows="6">{{ $permohonan->users->alamat }}</textarea>
+                                                value="{{ $akuan->nama2 ?? $permohonan->users->name }}" name="nama[]">
+                                            Alamat:
+                                            <textarea class="form-control form-control-sm" cols="30" rows="6"
+                                                name="alamat">{{ $akuan->alamat ?? $permohonan->users->alamat }}</textarea>
                                         </div>
 
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">

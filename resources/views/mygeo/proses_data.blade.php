@@ -212,11 +212,11 @@
                                                 @endif
 
                                             </div>
-
+                                            <i id="error_two" class="text-warning float-right" style="font-size: 11px"></i>
                                             <label class="form-control-label mr-2">Tempoh Muat Turun </label>
                                             <input type="text"
                                                 class="form-control form-control-sm float-right tempohMuatTurun"
-                                                name="tempoh" autocomplete="off">
+                                                name="tempoh" autocomplete="off" id="tempohval">
                                         </div>
                                         <div class="row">
                                             <div class="col-6"></div>
@@ -236,8 +236,8 @@
                                         Hantar
                                     </button>
                                 </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -265,24 +265,30 @@
                 $(document).ready(function() {
                     $(document).on('click', '.btnValid' + {{ $permohonan->id }}, function() {
                         var pautan = $('#pautan_datas').val();
-                        console.log({{ $permohonan->id }}, pautan);
+                        var tempoh = $('#tempohval').val();
+                        console.log({{ $permohonan->id }}, tempoh.length);
                         var msg = "";
+                        var msg2 = "";
+
 
                         if (pautan.length == 0) {
                             msg = msg + "Sila isi pautan data\r\n\r\n"
                         }
-                        if (msg.length > 0) {
-                            // alert(msg);
+                        if (tempoh.length <= 10) {
+                            msg2 = msg2 + "Sila pilih tarikh\r\n\r\n"
+                        }
+                        if (pautan.length == 0 || tempoh.length <= 10) {
                             $('i#error').text(msg);
+                            $('i#error_two').text(msg2);
                         } else {
                             $('i#error').text('');
+                            $('i#error_two').text('');
                             $('#formProsesData-' + {{ $permohonan->id }}).submit();
                         }
 
                     });
                 });
             </script>
-
         @endforeach
 
         <script>

@@ -2,38 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Ajaxray\PHPWatermark\Watermark;
 use App\AgensiOrganisasi;
-use Carbon\Carbon;
 use App\AkuanPelajar;
+use App\AuditTrail;
+use App\Daerah;
 use App\DokumenBerkaitan;
-use App\SenaraiKawasanData;
-use App\MohonData;
-use App\ProsesData;
-use App\PortalTetapan;
-use App\Penilaian;
-use App\SenaraiData;
 use App\KategoriSenaraiData;
-use App\SubKategoriSenaraiData;
 use App\KelasKongsi;
+use App\MohonData;
+use App\Negeri;
+use App\Penilaian;
+use App\PortalTetapan;
+use App\ProsesData;
+use App\SenaraiData;
+use App\SenaraiKawasanData;
+use App\SubKategoriSenaraiData;
 use App\SuratBalasan;
-use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Carbon\Carbon;
 use DB;
-use App\AuditTrail;
-use Dompdf\Dompdf;
-use Illuminate\Support\Facades\Storage;
-use phpDocumentor\Reflection\Types\Null_;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\MailNotify;
-use App\Daerah;
-use App\Negeri;
-use PDF;
-use \setasign\Fpdi\Fpdi;
-
-use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class DataAsasController extends Controller
 {
@@ -59,28 +52,29 @@ class DataAsasController extends Controller
         $user = User::where(["id" => Auth::user()->id])->get()->first();
         $users_all = User::where(['disahkan' => 1])->orderBy('name')->get();
         $pentadbirdata = [];
-        foreach($users_all as $user){
-            if($user->hasRole('Pentadbir Data')){
-                $pentadbirdata[]= $user;
-            }else{
+        foreach ($users_all as $user) {
+            if ($user->hasRole('Pentadbir Data')) {
+                $pentadbirdata[] = $user;
+            } else {
 
             }
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
-        $senarai_data = SenaraiData::where('status','Ada')->distinct('subkategori')->get();
+        $senarai_data = SenaraiData::where('status', 'Ada')->distinct('subkategori')->get();
         $lapisandata = DB::table('senarai_data')
-                                ->where('status','Ada')
-                                ->select('subkategori','lapisan_data','kelas')
-                                ->groupBy('subkategori','lapisan_data','kelas')
-                                ->get();
-        $kategori_senarai_data  = SenaraiData::where('status','Ada')->distinct('kategori')->get();
+            ->where('status', 'Ada')
+            ->select('subkategori', 'lapisan_data', 'kelas')
+            ->groupBy('subkategori', 'lapisan_data', 'kelas')
+            ->get();
+        $kategori_senarai_data = SenaraiData::where('status', 'Ada')->distinct('kategori')->get();
+
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->orderBy('created_at')->get();
 
-        $negeris =  Negeri::get();
+        $negeris = Negeri::get();
         $daerahs = Daerah::get();
 
-        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan','senarai_data','dokumens','pentadbirdata','kategori_senarai_data','lapisandata','negeris','daerahs'));
+        return view('mygeo.mohon_data_asas_baru', compact('user', 'skdatas', 'permohonan', 'senarai_data', 'dokumens', 'pentadbirdata', 'kategori_senarai_data', 'lapisandata', 'negeris', 'daerahs'));
     }
 
     public function data_asas_landing()
@@ -92,20 +86,20 @@ class DataAsasController extends Controller
     public function data_asas_senarai()
     {
         $subs = SenaraiData::where([
-            ['kategori','=','LOL'],
-            ['status','=','Ada']
+            ['kategori', '=', 'LOL'],
+            ['status', '=', 'Ada'],
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
-            ['subkategori','=','LOL'],
-            ['status','=','Ada']
+            ['subkategori', '=', 'LOL'],
+            ['status', '=', 'Ada'],
         ])->get();
-        $senarai_data = SenaraiData::where('status','Ada')->whereNotNull('subkategori')->orderBy('kategori')->distinct('kategori')->get();
+        $senarai_data = SenaraiData::where('status', 'Ada')->whereNotNull('subkategori')->orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
-        return view('/data_asas_senarai',[
+        return view('/data_asas_senarai', [
             'senarai_data' => $senarai_data,
-            'subs'=> $subs,
-            'lapisan'=> $lapisan,
-            'portal'=> $portal
+            'subs' => $subs,
+            'lapisan' => $lapisan,
+            'portal' => $portal,
         ]);
     }
 
@@ -113,67 +107,66 @@ class DataAsasController extends Controller
     {
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
-            ['kategori','=',$kategori->kategori],
-            ['status','=','Ada']
+            ['kategori', '=', $kategori->kategori],
+            ['status', '=', 'Ada'],
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
-            ['subkategori','=','LOL'],
-            ['status','=','Ada']
+            ['subkategori', '=', 'LOL'],
+            ['status', '=', 'Ada'],
         ])->get();
         $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
 
-        return view('/data_asas_senarai',[
+        return view('/data_asas_senarai', [
             'senarai_data' => $senarai_dataa,
-            'subs'=> $subs,
-            'lapisan'=> $lapisan,
-            'portal'=> $portal
+            'subs' => $subs,
+            'lapisan' => $lapisan,
+            'portal' => $portal,
         ]);
     }
-
 
     public function data_asas_senarai_show_show($senarai_data, $senarai_dataa)
     {
         $subkategori = SenaraiData::find($senarai_dataa);
         $kategori = SenaraiData::find($senarai_data);
         $subs = SenaraiData::where([
-            ['kategori','=',$kategori->kategori],
-            ['status','=','Ada']
+            ['kategori', '=', $kategori->kategori],
+            ['status', '=', 'Ada'],
         ])->distinct('subkategori')->get();
         $lapisan = SenaraiData::where([
-            ['subkategori','=',$subkategori->subkategori],
-            ['status','=','Ada']
+            ['subkategori', '=', $subkategori->subkategori],
+            ['status', '=', 'Ada'],
         ])->get();
         $senarai_dataa = SenaraiData::orderBy('kategori')->distinct('kategori')->get();
         $portal = PortalTetapan::get()->first();
-        return view('/data_asas_senarai',[
+        return view('/data_asas_senarai', [
             'senarai_data' => $senarai_dataa,
-            'subs'=> $subs,
-            'lapisan'=> $lapisan,
-            'portal'=> $portal
+            'subs' => $subs,
+            'lapisan' => $lapisan,
+            'portal' => $portal,
         ]);
     }
 
     public function data_asas_tatacara_mohon()
     {
         $portal = PortalTetapan::get()->first();
-        return view('/data_asas_tatacara_mohon',compact('portal'));
+        return view('/data_asas_tatacara_mohon', compact('portal'));
     }
 
     public function data_asas_dokumen_berkaitan()
     {
         $portal = PortalTetapan::get()->first();
-        return view('/data_asas_dokumen_berkaitan',compact('portal'));
+        return view('/data_asas_dokumen_berkaitan', compact('portal'));
     }
 
     public function penilaian()
     {
-        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
+        if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi'])) {
             $permohonan_list = MohonData::where(['dihantar' => 1])->orderBy('created_at', 'DESC')->get();
         } else {
             $permohonan_list = MohonData::with('users')
-            ->where(['dihantar' => 1, 'status' => 3])
-            ->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+                ->where(['dihantar' => 1, 'status' => 3])
+                ->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         }
         return view('mygeo.penilaian', compact('permohonan_list'));
     }
@@ -182,81 +175,89 @@ class DataAsasController extends Controller
     {
         $penilaian = Penilaian::where('permohonan_id', $id)->first();
         $permohonan = MohonData::where('id', $id)->first();
-        return view('mygeo.penilaian_pemohon',compact('permohonan','penilaian'));
+        return view('mygeo.penilaian_pemohon', compact('permohonan', 'penilaian'));
     }
 
     public function store_penilaian(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:,png,jpeg,jpg|max:2048'
+            'file' => 'required|mimes:,png,jpeg,jpg|max:2048',
         ]);
 
-            if ($request->file()) {
-                $fileName = time() . '_' . $request->file->getClientOriginalName();
-                $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
 
-                //save senarai data
-                Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
-                    "kategori" => $request->kategori,
-                    "info_data" => $request->info_data,
+            //save senarai data
+            Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
+                "kategori" => $request->kategori,
+                "info_data" => $request->info_data,
 
-                    "bhg_b_a" => $request->bhg_b_a,
-                    "bhg_b_b" => $request->bhg_b_b,
-                    "bhg_b_c" => $request->bhg_b_c,
-                    "bhg_b_d" => $request->bhg_b_d,
-                    "bhg_b_e" => $request->bhg_b_e,
-                    "bhg_b_f" => $request->bhg_b_f,
-                    "bhg_b_g" => $request->bhg_b_g,
+                "bhg_b_a" => $request->bhg_b_a,
+                "bhg_b_b" => $request->bhg_b_b,
+                "bhg_b_c" => $request->bhg_b_c,
+                "bhg_b_d" => $request->bhg_b_d,
+                "bhg_b_e" => $request->bhg_b_e,
+                "bhg_b_f" => $request->bhg_b_f,
+                "bhg_b_g" => $request->bhg_b_g,
 
-                    "bhg_c_1" => $request->bhg_c_1,
-                    "bhg_c_2" => $request->bhg_c_2,
-                    "bhg_c_3" => $request->bhg_c_3,
+                "bhg_c_1" => $request->bhg_c_1,
+                "bhg_c_2" => $request->bhg_c_2,
+                "bhg_c_3" => $request->bhg_c_3,
 
-                    "bhg_c_4_file_path" => $request->bhg_c_4_file_path = '/storage/' . $filePath,
-                    "komen_cadangan" => $request->komen_cadangan,
+                "bhg_c_4_file_path" => $request->bhg_c_4_file_path = '/storage/' . $filePath,
+                "komen_cadangan" => $request->komen_cadangan,
 
-                ]);
-            } else {
-                //save senarai data
-                Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
-                    "kategori" => $request->kategori,
-                    "info_data" => $request->info_data,
-
-                    "bhg_b_a" => $request->bhg_b_a,
-                    "bhg_b_b" => $request->bhg_b_b,
-                    "bhg_b_c" => $request->bhg_b_c,
-                    "bhg_b_d" => $request->bhg_b_d,
-                    "bhg_b_e" => $request->bhg_b_e,
-                    "bhg_b_f" => $request->bhg_b_f,
-                    "bhg_b_g" => $request->bhg_b_g,
-
-                    "bhg_c_1" => $request->bhg_c_1,
-                    "bhg_c_2" => $request->bhg_c_2,
-                    "bhg_c_3" => $request->bhg_c_3,
-
-                    "komen_cadangan" => $request->komen_cadangan,
-
-                ]);
-            }
-            MohonData::where(["id" => $request->permohonan_id])->update([
-                "penilaian" => $request->penilaian = 1,
             ]);
+        } else {
+            //save senarai data
+            Penilaian::where(["permohonan_id" => $request->permohonan_id])->update([
+                "kategori" => $request->kategori,
+                "info_data" => $request->info_data,
 
-            $at = new AuditTrail();
-            $at->path = url()->full();
-            $at->user_id = Auth::user()->id;
-            $at->data = 'Update';
-            $at->save();
+                "bhg_b_a" => $request->bhg_b_a,
+                "bhg_b_b" => $request->bhg_b_b,
+                "bhg_b_c" => $request->bhg_b_c,
+                "bhg_b_d" => $request->bhg_b_d,
+                "bhg_b_e" => $request->bhg_b_e,
+                "bhg_b_f" => $request->bhg_b_f,
+                "bhg_b_g" => $request->bhg_b_g,
 
+                "bhg_c_1" => $request->bhg_c_1,
+                "bhg_c_2" => $request->bhg_c_2,
+                "bhg_c_3" => $request->bhg_c_3,
 
+                "komen_cadangan" => $request->komen_cadangan,
+
+            ]);
+        }
+        MohonData::where(["id" => $request->permohonan_id])->update([
+            "penilaian" => $request->penilaian = 1,
+        ]);
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
+        $at->save();
 
         return redirect('penilaian')->with('success', 'Penilaian disimpan!');
     }
 
-    public function akuan_terima($id)
+    public function akuan_terima($id, $urlid)
     {
         $permohonan = MohonData::where('id', $id)->first();
-        return view('mygeo.akuan_terima',compact('permohonan'));
+
+        $url = null;
+
+        foreach (json_decode($permohonan->proses_datas->pautan_data, true) as $key => $value) {
+            if ($key == $urlid) {
+                $url = $value;
+            }
+        }
+
+        return view('mygeo.akuan_terima', compact('permohonan', 'url'));
+
     }
 
     public function change_akuan_terima(Request $request)
@@ -264,8 +265,8 @@ class DataAsasController extends Controller
         DB::transaction(function () use ($request) {
             //save acceptance data
             $vals = [];
-            if($request->acceptance == '1'){
-                $vals["threeHourNotifyStart"] = date('Y-m-d H:i:s',time());
+            if ($request->acceptance == '1') {
+                $vals["threeHourNotifyStart"] = date('Y-m-d H:i:s', time());
             }
             $vals["acceptance"] = $request->acceptance;
             MohonData::where(["id" => $request->permohonan_id])->update($vals);
@@ -278,16 +279,16 @@ class DataAsasController extends Controller
     {
         $permohonanMoreThan3Hours = [];
         //get mohon_data where threeHourNotifyStart is not null
-        $mohonData_3hourNotify = MohonData::where('berjayaMuatTurunStatus','0')->where('user_id',Auth::user()->id)->get();
-        if(count($mohonData_3hourNotify) > 0){
-            foreach($mohonData_3hourNotify as $m){
-                $interval = date_create(date('Y-m-d H:i:s',time()))->diff(date_create($m->threeHourNotifyStart));
+        $mohonData_3hourNotify = MohonData::where('berjayaMuatTurunStatus', '0')->where('user_id', Auth::user()->id)->get();
+        if (count($mohonData_3hourNotify) > 0) {
+            foreach ($mohonData_3hourNotify as $m) {
+                $interval = date_create(date('Y-m-d H:i:s', time()))->diff(date_create($m->threeHourNotifyStart));
 //                if($interval->h > 3){ //ori specs
 //                $permohonanMoreThan3Hours[$m->id] = $m->id.'___'.$interval->s;
-                if($interval->s > 0){
+                if ($interval->s > 0) {
                     $permohonanMoreThan3Hours[$m->id] = $m->name;
                     $vals = [];
-                    $vals["threeHourNotifyStart"] = date('Y-m-d H:i:s',time());
+                    $vals["threeHourNotifyStart"] = date('Y-m-d H:i:s', time());
                     MohonData::where(["id" => $m->id])->update($vals);
                 }
             }
@@ -298,53 +299,52 @@ class DataAsasController extends Controller
 
     public function berjayaMuatTurun(Request $request)
     {
-        $mohons = explode(',',substr($request->mohons, 0, -1));
-        foreach($mohons as $m){
+        $mohons = explode(',', substr($request->mohons, 0, -1));
+        foreach ($mohons as $m) {
             $vals = [];
             $vals["berjayaMuatTurunStatus"] = '1';
             $vals["download"] = '1';
-            $vals["berjayaMuatTurunTarikh"] = date('Y-m-d H:i:s',time());
-            $vals["emailPenilaianStart"] = date('Y-m-d H:i:s',time());
+            $vals["berjayaMuatTurunTarikh"] = date('Y-m-d H:i:s', time());
+            $vals["emailPenilaianStart"] = date('Y-m-d H:i:s', time());
             MohonData::where(["id" => $m])->update($vals);
 
             //send email to pemohon data to do penilaian
-            $m2 = MohonData::where('id',$m)->get()->first();
+            $m2 = MohonData::where('id', $m)->get()->first();
             $to_name = Auth::user()->name;
             $to_email = Auth::user()->email;
-            $data = array('m'=>$m2);
-            //Mail::send("mails.exmpl17", $data, function($message) use ($to_name, $to_email) {
-                //$message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-                //$message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-            //});
+            $data = array('m' => $m2);
+            Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+            });
         }
         exit();
     }
 
     public function proses_data()
     {
-        if (!Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
+        if (!Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi'])) {
             return redirect('/mygeo_profil');
         }
         $admin = Auth::user()->name;
         // dd($admin);
-        $permohonan_list = MohonData::where(['assign_admin'=> $admin,'status' => 1,'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
+        $permohonan_list = MohonData::where(['assign_admin' => $admin, 'status' => 1, 'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();
-        return view('mygeo.proses_data', compact('permohonan_list','skdatas','proses'));
+        return view('mygeo.proses_data', compact('permohonan_list', 'skdatas', 'proses'));
     }
 
     public function update_proses_data(Request $request)
     {
         $append = [];
 
-        // dd($request->pautan_data);
         $valid_data = $request->validate([
             'pautan_data' => 'required',
         ]);
 
-        if($valid_data['pautan_data']){
+        if ($valid_data['pautan_data']) {
             foreach ($request->pautan_data as $val) {
-                if($val != ''){
+                if ($val != '') {
                     $append[] = $val;
                 }
             }
@@ -352,24 +352,22 @@ class DataAsasController extends Controller
 
         $id = $request->permohonan_id;
         $valid_surat = SuratBalasan::where([
-            ["permohonan_id","=", $request->permohonan_id],])
+            ["permohonan_id", "=", $request->permohonan_id]])
             ->whereNotNull('no_rujukan')
             ->whereNotNull('content')
             ->get();
 
-
         $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
 
-        if($valid_surat->isEmpty()){
-
+        if ($valid_surat->isEmpty()) {
             ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
                 "pautan_data" => json_encode($append),
                 "tempoh_url" => $request->tempoh,
                 "total_harga" => $request->total_harga,
             ]);
-            foreach ($skdatas as $sk ) {
+            foreach ($skdatas as $sk) {
                 SenaraiKawasanData::where(["id" => $sk->id])->update([
-                    "saiz_data" => $request->input('saiz_data_'.$sk->id),
+                    "saiz_data" => $request->input('saiz_data_' . $sk->id),
                 ]);
 
             }
@@ -386,9 +384,9 @@ class DataAsasController extends Controller
                 "status" => $request->status = 3,
             ]);
 
-            foreach ($skdatas as $sk ) {
+            foreach ($skdatas as $sk) {
                 SenaraiKawasanData::where(["id" => $sk->id])->update([
-                    "saiz_data" => $request->input('saiz_data_'.$sk->id),
+                    "saiz_data" => $request->input('saiz_data_' . $sk->id),
                 ]);
 
             }
@@ -414,18 +412,18 @@ class DataAsasController extends Controller
 //            exit();
             //==================================================================
 
-            $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
+            $pemohon = MohonData::with('users')->where('id', $request->permohonan_id)->get()->first();
 
             //send email to pemohon data
             $to_name = $pemohon->users->name;
             $to_email = $pemohon->users->email;
 //            $to_email = 'farhan15959@gmail.com';
-            $data = array('cat'=>'cat');
-            //Mail::send("mails.exmpl15", $data, function($message) use ($to_name, $to_email) {
-                //$message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
-                //$message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-//                $message->attach($file);
-            //});
+            $data = array('cat' => 'cat');
+            Mail::send("mails.exmpl15", $data, function ($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
+                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                // $message->attach($file);
+            });
 
             $at = new AuditTrail();
             $at->path = url()->full();
@@ -439,16 +437,38 @@ class DataAsasController extends Controller
 
     public function mohon_data()
     {
+
         $user = User::where(["id" => Auth::user()->id])->get()->first();
-        if (Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi'])) {
+
+        //kira mohon data
+        $bil_mohon_data = MohonData::where('user_id', auth()->id())
+            ->where('dihantar', '1')
+            ->where('status', '3')
+            ->where('acceptance', '1')
+            ->count();
+
+        $bil_penilaian = MohonData::where('user_id', auth()->id())
+            ->where('dihantar', '1')
+            ->where('status', '3')
+            ->where('acceptance', '1')
+            ->where('penilaian', '1')
+            ->count();
+
+        if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi'])) {
             $permohonan_list = MohonData::orderBy('created_at', 'DESC')->get();
+            $bil_mohon_data = 0;
         } else {
             $permohonan_list = MohonData::with('users')
                 ->where(['dihantar' => 0])
                 ->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')
                 ->get();
         }
-        return view('mygeo.mohon_data', compact('permohonan_list', 'user'));
+        $lengkapkan_penilaian = false;
+        if ($bil_penilaian < $bil_mohon_data) {
+            $lengkapkan_penilaian = true;
+        }
+
+        return view('mygeo.mohon_data', compact('permohonan_list', 'user', 'lengkapkan_penilaian'));
     }
 
     public function mohon_data_asas()
@@ -458,28 +478,72 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
-        $permohonan = ProsesData::where('id', 8)->get();
+        $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])
+            ->where('status', '!=', 2)
+            ->orderByDesc('created_at')
+            ->get();
+        // $permohonan = ProsesData::where('id', 8)->get();
+
+        foreach ($permohonan_list as $pl) {
+
+            $inTempohUrl = 0;
+            $currentDate = date('d-m-Y');
+            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                    $pl['inTempohUrl'] = 1;
+                } elseif ($currentDate <= $tempohUrlStart) {
+                    $pl['inTempohUrl'] = 2;
+                } else {
+                    $pl['inTempohUrl'] = 0;
+                }
+            }
+            $res = json_decode($pl->proses_datas->pautan_data);
+            $pl['res'] = $res;
+        }
+
         return view('mygeo.muat_turun_data', compact('permohonan_list'));
     }
 
     public function status_permohonan()
     {
         $permohonan_list = MohonData::where(['dihantar' => 1])->get();
+        foreach ($permohonan_list as $pl) {
+
+            $inTempohUrl = 0;
+            $currentDate = date('d-m-Y');
+            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                    $pl['inTempohUrl'] = 1;
+                } elseif ($currentDate <= $tempohUrlStart) {
+                    $pl['inTempohUrl'] = 2;
+                } else {
+                    $pl['inTempohUrl'] = 0;
+                }
+            }
+            $res = json_decode($pl->proses_datas->pautan_data);
+            $pl['res'] = $res;
+        }
+
         return view('mygeo.status_permohonan', compact('permohonan_list'));
     }
 
     public function senarai_data()
     {
-        $senarai_data = SenaraiData::orderBy('kod','ASC')->get();
-        $kategori_sd = KategoriSenaraiData::where('status','active')->orderBy('name','ASC')->get();
-        $subkategori_sd = SubKategoriSenaraiData::where('status','active')->orderBy('name','ASC')->get();
+        $senarai_data = SenaraiData::orderBy('kod', 'ASC')->get();
+        $kategori_sd = KategoriSenaraiData::where('status', 'active')->orderBy('name', 'ASC')->get();
+        $subkategori_sd = SubKategoriSenaraiData::where('status', 'active')->orderBy('name', 'ASC')->get();
 
-        $kat_add = SenaraiData::orderBy('kategori','ASC')->distinct('kategori')->get();
+        $kat_add = SenaraiData::orderBy('kategori', 'ASC')->distinct('kategori')->get();
         // dd($kategori_sd);
         foreach ($kat_add as $kat) {
-            $check_kat = KategoriSenaraiData::where('name',$kat->kategori)->first();
-            if($check_kat){
+            $check_kat = KategoriSenaraiData::where('name', $kat->kategori)->first();
+            if ($check_kat) {
 
             } else {
                 $kat_baru = new KategoriSenaraiData();
@@ -490,14 +554,14 @@ class DataAsasController extends Controller
 
         // return response()->json($senarai_data);
 
-        $sub_add = SenaraiData::orderBy('subkategori','ASC')->distinct('subkategori')->get();
+        $sub_add = SenaraiData::orderBy('subkategori', 'ASC')->distinct('subkategori')->get();
 
         foreach ($sub_add as $sub) {
-            $check_sub = SubKategoriSenaraiData::where('name',$sub->subkategori)->first();
-            if($check_sub){
+            $check_sub = SubKategoriSenaraiData::where('name', $sub->subkategori)->first();
+            if ($check_sub) {
 
             } else {
-                $kat_id = KategoriSenaraiData::where('name',$sub->kategori)->first();
+                $kat_id = KategoriSenaraiData::where('name', $sub->kategori)->first();
                 $sub_baru = new SubKategoriSenaraiData();
                 $sub_baru->name = $sub->subkategori;
                 $sub_baru->kategori_id = $kat_id->id;
@@ -506,22 +570,21 @@ class DataAsasController extends Controller
             }
         }
 
-
-        return view('mygeo.senarai_data', compact('senarai_data','kategori_sd','subkategori_sd'));
+        return view('mygeo.senarai_data', compact('senarai_data', 'kategori_sd', 'subkategori_sd'));
     }
-    
+
     public function senarai_data_hapus()
     {
-        $senarai_data = SenaraiData::orderBy('kod','ASC')->get();
-        $kategori_sd = KategoriSenaraiData::where('status','active')->orderBy('name','ASC')->get();
-        $subkategori_sd = SubKategoriSenaraiData::where('status','active')->orderBy('name','ASC')->get();
+        $senarai_data = SenaraiData::orderBy('kod', 'ASC')->get();
+        $kategori_sd = KategoriSenaraiData::where('status', 'active')->orderBy('name', 'ASC')->get();
+        $subkategori_sd = SubKategoriSenaraiData::where('status', 'active')->orderBy('name', 'ASC')->get();
 //        dd($subkategori_sd);
 
-        $kat_add = SenaraiData::orderBy('kategori','ASC')->distinct('kategori')->get();
+        $kat_add = SenaraiData::orderBy('kategori', 'ASC')->distinct('kategori')->get();
         // dd($kategori_sd);
         foreach ($kat_add as $kat) {
-            $check_kat = KategoriSenaraiData::where('name',$kat->kategori)->first();
-            if($check_kat){
+            $check_kat = KategoriSenaraiData::where('name', $kat->kategori)->first();
+            if ($check_kat) {
 
             } else {
                 $kat_baru = new KategoriSenaraiData();
@@ -532,14 +595,14 @@ class DataAsasController extends Controller
 
         // return response()->json($senarai_data);
 
-        $sub_add = SenaraiData::orderBy('subkategori','ASC')->distinct('subkategori')->get();
+        $sub_add = SenaraiData::orderBy('subkategori', 'ASC')->distinct('subkategori')->get();
 
         foreach ($sub_add as $sub) {
-            $check_sub = SubKategoriSenaraiData::where('name',$sub->subkategori)->first();
-            if($check_sub){
+            $check_sub = SubKategoriSenaraiData::where('name', $sub->subkategori)->first();
+            if ($check_sub) {
 
             } else {
-                $kat_id = KategoriSenaraiData::where('name',$sub->kategori)->first();
+                $kat_id = KategoriSenaraiData::where('name', $sub->kategori)->first();
                 $sub_baru = new SubKategoriSenaraiData();
                 $sub_baru->name = $sub->subkategori;
                 $sub_baru->kategori_id = $kat_id->id;
@@ -548,36 +611,31 @@ class DataAsasController extends Controller
             }
         }
 
-
-        return view('mygeo.senarai_data_hapus', compact('senarai_data','kategori_sd','subkategori_sd'));
+        return view('mygeo.senarai_data_hapus', compact('senarai_data', 'kategori_sd', 'subkategori_sd'));
     }
-
-
 
     public function store_kategori_senarai_data(Request $request)
     {
         $duplicate_valid_cat = KategoriSenaraiData::where(['name' => $request->kategori])->get();
 
-        if($duplicate_valid_cat->isEmpty()){
+        if ($duplicate_valid_cat->isEmpty()) {
 
-        $kategori = new KategoriSenaraiData();
-        $kategori->name = $request->kategori;
-        $kategori->save();
+            $kategori = new KategoriSenaraiData();
+            $kategori->name = $request->kategori;
+            $kategori->save();
 
-        $at = new AuditTrail();
-        $at->path = url()->full();
-        $at->user_id = Auth::user()->id;
-        $at->data = 'Create';
-        $at->save();
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Create';
+            $at->save();
 
-
-        return redirect('senarai_data')->with('success', 'Kategori Senarai Data Ditambah !');
+            return redirect('senarai_data')->with('success', 'Kategori Senarai Data Ditambah !');
 
         } else {
 
             return redirect('senarai_data')->with('warning', 'Kategori Senarai Data Telah Wujud !');
         }
-
 
     }
 
@@ -586,7 +644,7 @@ class DataAsasController extends Controller
 
         $duplicate_valid_sub = SubKategoriSenaraiData::where(['name' => $request->subkategori])->get();
 
-        if($duplicate_valid_sub->isEmpty()){
+        if ($duplicate_valid_sub->isEmpty()) {
 
             $subkategori = new SubKategoriSenaraiData();
             $subkategori->name = $request->subkategori;
@@ -600,7 +658,7 @@ class DataAsasController extends Controller
             $at->save();
 
             return redirect('senarai_data')->with('success', 'Sub-Kategori Senarai Data Ditambah !');
-        }else {
+        } else {
 
             return redirect('senarai_data')->with('warning', 'Sub-Kategori Senarai Data Telah Wujud !');
         }
@@ -614,16 +672,16 @@ class DataAsasController extends Controller
         $valid_kod = SenaraiData::where(["kod" => $request->kod])->first();
 
         $check_exist = SenaraiData::where([
-            ['kategori','=',$kategori_sd->name],
-            ['subkategori','=',$request->subkategori],
-            ['lapisan_data','=',$request->lapisan_data],
-            ['kod','=',$request->kod]
+            ['kategori', '=', $kategori_sd->name],
+            ['subkategori', '=', $request->subkategori],
+            ['lapisan_data', '=', $request->lapisan_data],
+            ['kod', '=', $request->kod],
         ])->first();
 
-        if($check_exist){
+        if ($check_exist) {
             return redirect('senarai_data')->with('warning', 'Senarai Data Telah Pun Wujud');
         } else {
-            if(empty($valid_kod)){
+            if (empty($valid_kod)) {
                 $senarai_data->kategori = $kategori_sd->name;
                 $senarai_data->subkategori = $request->subkategori;
                 $senarai_data->lapisan_data = $request->lapisan_data;
@@ -650,21 +708,21 @@ class DataAsasController extends Controller
         $valid_kod = SenaraiData::where(["kod" => $request->kod])->first();
 
         $check_exist = SenaraiData::where([
-            ['kategori','=',$kategori_sd->name],
-            ['subkategori','=',$request->subkategori],
-            ['lapisan_data','=',$request->lapisan_data],
-            ['kod','=',$request->kod]
+            ['kategori', '=', $kategori_sd->name],
+            ['subkategori', '=', $request->subkategori],
+            ['lapisan_data', '=', $request->lapisan_data],
+            ['kod', '=', $request->kod],
         ])->first();
 
-        if($check_exist){
-            return ['message'=> 'Data Wujud'];
+        if ($check_exist) {
+            return ['message' => 'Data Wujud'];
         } else {
-            if(empty($valid_kod)){
+            if (empty($valid_kod)) {
                 // return ['message'=> 'Kod Tersedia'];
             } else {
-                return ['message'=> 'Kod Wujud'];
+                return ['message' => 'Kod Wujud'];
             }
-            return ['message'=> 'Data Tersedia'];
+            return ['message' => 'Data Tersedia'];
         }
 
     }
@@ -681,7 +739,31 @@ class DataAsasController extends Controller
 //                                    ])->first();
 //        dd($valid_kod,$valid, $request);
 //        if(!empty($valid)){
-            if(empty($valid_kod)){
+        if (empty($valid_kod)) {
+            SenaraiData::where(["id" => $request->id_senarai_data])->update([
+                "kategori" => $request->kategori,
+                "subkategori" => $request->subkategori,
+                "lapisan_data" => $request->lapisan_data,
+                "kelas" => $request->kelas,
+                "status" => $request->status,
+                "harga_data" => $request->harga_data,
+                "harga_data_services" => $request->harga_data_services,
+                "kod" => $request->kod,
+            ]);
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Update';
+            $at->save();
+
+            return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
+        } else {
+            $checkkod = SenaraiData::where(["id" => $request->id_senarai_data])->first();
+
+            if ($checkkod->kod !== $request->kod) {
+                return redirect('/senarai_data')->with('warning', 'Kod Senarai Data Telah Wujud');
+            } else {
                 SenaraiData::where(["id" => $request->id_senarai_data])->update([
                     "kategori" => $request->kategori,
                     "subkategori" => $request->subkategori,
@@ -690,34 +772,10 @@ class DataAsasController extends Controller
                     "status" => $request->status,
                     "harga_data" => $request->harga_data,
                     "harga_data_services" => $request->harga_data_services,
-                    "kod" => $request->kod,
                 ]);
-
-                $at = new AuditTrail();
-                $at->path = url()->full();
-                $at->user_id = Auth::user()->id;
-                $at->data = 'Update';
-                $at->save();
-
-             return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
-            } else {
-                $checkkod = SenaraiData::where(["id" => $request->id_senarai_data])->first();
-
-                if($checkkod->kod !== $request->kod){
-                    return redirect('/senarai_data')->with('warning', 'Kod Senarai Data Telah Wujud');
-                } else {
-                    SenaraiData::where(["id" => $request->id_senarai_data])->update([
-                        "kategori" => $request->kategori,
-                        "subkategori" => $request->subkategori,
-                        "lapisan_data" => $request->lapisan_data,
-                        "kelas" => $request->kelas,
-                        "status" => $request->status,
-                        "harga_data" => $request->harga_data,
-                        "harga_data_services" => $request->harga_data_services,
-                    ]);
-                    return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
-                }
+                return redirect('/senarai_data')->with('success', 'Senarai Data Berjaya Dikemaskini');
             }
+        }
 
 //        } else {
 //            return redirect('/senarai_data')->with('info', 'Tiada Data Dikemaskini!');
@@ -737,13 +795,13 @@ class DataAsasController extends Controller
 
         return redirect('senarai_data')->with('success', 'Data tersebut telah dibuang');
     }
-    
+
     public function delete_kategori_data(Request $request)
-    { 
+    {
         KategoriSenaraiData::where(["name" => $request->kategori])->update([
             "status" => "inactive",
         ]);
-        
+
         SubKategoriSenaraiData::where(["kategori_id" => $request->kategoriid])->update([
             "status" => "inactive",
         ]);
@@ -756,7 +814,7 @@ class DataAsasController extends Controller
 
         return redirect('senarai_data_hapus')->with('success', 'Data telah dibuang');
     }
-    
+
     public function delete_subkategori_data(Request $request)
     {
         SubKategoriSenaraiData::where(["id" => $request->id])->update([
@@ -775,13 +833,33 @@ class DataAsasController extends Controller
     public function semakan_status()
     {
         $permohonan_list = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        foreach ($permohonan_list as $pl) {
+
+            $inTempohUrl = 0;
+            $currentDate = date('d-m-Y');
+            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                    $pl['inTempohUrl'] = 1;
+                } elseif ($currentDate <= $tempohUrlStart) {
+                    $pl['inTempohUrl'] = 2;
+                } else {
+                    $pl['inTempohUrl'] = 0;
+                }
+            }
+            $res = json_decode($pl->proses_datas->pautan_data);
+            $pl['res'] = $res;
+        }
+
         return view('mygeo.semakan_status', compact('permohonan_list'));
     }
 
     public function kategori_kelas_kongsi_data()
     {
         $kategori = KelasKongsi::orderby('subcategory')->get();
-        return view('mygeo.kategori_kelas_kongsi_data',compact('kategori'));
+        return view('mygeo.kategori_kelas_kongsi_data', compact('kategori'));
     }
 
     public function update_kelas_kongsi(Request $request)
@@ -798,7 +876,8 @@ class DataAsasController extends Controller
         return redirect('/kategori_kelas_kongsi_data')->with('success', 'Data Berjaya Dikemaskini');
     }
 
-    public function getKelasKongsis(){
+    public function getKelasKongsis()
+    {
         $kategori = KelasKongsi::get();
         echo json_encode($kategori);
     }
@@ -806,14 +885,13 @@ class DataAsasController extends Controller
     public function surat_balasan($id, Request $request)
     {
         $append = [];
-        if($request->pautan_data){
+        if ($request->pautan_data) {
             foreach ($request->pautan_data as $val) {
-                if($val != ''){
+                if ($val != '') {
                     $append[] = $val;
                 }
             }
         }
-
 
         ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
             "pautan_data" => json_encode($append),
@@ -822,47 +900,51 @@ class DataAsasController extends Controller
         ]);
 
         $skdatas = SenaraiKawasanData::where(["permohonan_id" => $request->permohonan_id])->get();
-        foreach ($skdatas as $sk ) {
+        foreach ($skdatas as $sk) {
             SenaraiKawasanData::where(["id" => $sk->id])->update([
-                "saiz_data" => $request->input('saiz_data_'.$sk->id),
+                "saiz_data" => $request->input('saiz_data_' . $sk->id),
             ]);
 
         }
 
         $surat = SuratBalasan::where('permohonan_id', $id)->first();
         $permohonan = MohonData::where('id', $id)->first();
-        $dokumen = DokumenBerkaitan::where(['permohonan_id'=> $id,'tajuk_dokumen'=>'Surat Permohonan Rasmi'])->first();
+        $dokumen = DokumenBerkaitan::where(['permohonan_id' => $id, 'tajuk_dokumen' => 'Surat Permohonan Rasmi'])->first();
         Carbon::setlocale(config('app.locale2'));
-        $dokumen_date = is_null($dokumen)?'[Tarikh Surat]':Carbon::parse($dokumen->date_surat)->translatedFormat('d F Y');
-        $no_ruj = is_null($dokumen)?'[No Rujukan Surat]':$dokumen->no_rujukan;
-        $admin = User::where('name',$permohonan->assign_admin)->first();
-        $admin_name = is_null($admin)?'[Nama Pentadbir]':$admin->name;
-        $admin_phone = is_null($admin)?'[No Telefon]':$admin->phone_pejabat;
-        $admin_email = is_null($admin)?'[Emel]':$admin->email;
+        $dokumen_date = is_null($dokumen) ? '[Tarikh Surat]' : Carbon::parse($dokumen->date_surat)->translatedFormat('d F Y');
+        $no_ruj = is_null($dokumen) ? '[No Rujukan Surat]' : $dokumen->no_rujukan;
+        $admin = User::where('name', $permohonan->assign_admin)->first();
+        $admin_name = is_null($admin) ? '[Nama Pentadbir]' : $admin->name;
+        $admin_phone = is_null($admin) ? '[No Telefon]' : $admin->phone_pejabat;
+        $admin_email = is_null($admin) ? '[Emel]' : $admin->email;
 
         $surat_template = "<p class='ql-align-justify'>Dato'/Datin/Tuan/Puan,</p><p class='ql-align-justify'><strong style='text-transform:uppercase;'>$permohonan->name</strong></p><p class='ql-align-justify'>Dengan segala hormatnya merujuk kepada surat Dato'/Datin/tuan/puan $no_ruj bertarikh $dokumen_date mengenai perkara di atas.</p><p class='ql-align-justify'>2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan permohonan data geospatial terperingkat dan tiada halangan atas permohonan tersebut. Senarai data yang dibekalkan adalah seperti Lampiran 1. Walau bagaimanapun, untuk permohonan metadata pula, pihak Dato'/Datin/tuan/puan boleh melayari aplikasi MyGDI Explorer untuk mendapatkan informasi yang lebih terperinci https://www.mygeoportal.gov.my/node/173.</p><p class='ql-align-justify'>3. Untuk makluman Dato'/Datin/tuan/puan, penggunaan data ini adalah terikat dengan Pekeliling Am Bil 1/2007: Pekeliling Arahan Keselamatan Terhadap Dokumen Geospatial Terperingkat, Akta Rahsia Rasmi 1972 dan Surat Pekeliling Am Bil 1 Tahun 1997 : Peraturan Pemeliharaan Rekod-Rekod Kerajaan.</p><p class='ql-align-justify'>4. Pihak Dato'/Datin/tuan/puan boleh melayari Aplikasi MyGDI Data Services di https://mygos.mygeoportal.gov.my/myservices bagi mendapatkan paparan data asas GDC yang boleh dikongsi antara agensi kerajaan melalui program MyGDl. Permohonan untuk mendapatkan capaian ke aplikasi ini boleh dihantar kepada pihak PGN melalui emel pgn.kto@ketsa.gov.my.</p><p class='ql-align-justify'>5. Sebarang pertanyaan mengenai kesahihan dan ketepatan data perlulah dirujuk kepada Agensi Pembekal Data (APD) yang berkenaan. Penggunaan data ini selain daripada tujuan asal yang dimohon perlulah mendapat kebenaran daripada pihak APD dan PGN.</p><p class='ql-align-justify'>6. Mohon kerjasama pihak Dato'/Datin/tuan/puan untuk melengkapkan Borang Pengesahan Penerimaan Data Geospatial seperti di Lampiran 2 dan Borang Penilaian Perkongsian Data Melalui MyGDI seperti di Lampiran 3 dan dikembalikan semula kepada pihak PGN dalam tempoh dua minggu dari tarikh surat ini. Sekiranya ada sebarang pertanyaan, sila hubungi $admin_name di talian $admin_phone ($admin_email).</p><p class='ql-align-justify'><br></p><p class='ql-align-justify'>Sekian terima kasih.</p><p class='ql-align-justify'>**Ini adalah surat cetakan komputer, tidak perlu tandatangan**</p>";
 
-            // dd('surat',$surat_template, $surat->content);
-        return view('mygeo.surat_balasan', compact('permohonan','surat','admin','surat_template','dokumen'));
+        // dd('surat',$surat_template, $surat->content);
+        return view('mygeo.surat_balasan', compact('permohonan', 'surat', 'admin', 'surat_template', 'dokumen'));
     }
 
     public function update_surat_balasan(Request $request)
     {
-            // dd($request->content_surat_balasan);
-            //save senarai data
-            SuratBalasan::where(["permohonan_id" => $request->permohonan_id])->update([
-                "no_rujukan" => $request->no_rujukan,
-                "tajuk_surat" => $request->tajuk_surat,
-                "no_rujukan_mohon" => $request->no_rujukan_mohon,
-                "date_mohon" => $request->date_mohon,
-                "content" => $request->content_surat_balasan
-            ]);
 
-            $at = new AuditTrail();
-            $at->path = url()->full();
-            $at->user_id = Auth::user()->id;
-            $at->data = 'Update';
-            $at->save();
+        // dd($request->content_surat_balasan);
+        //save senarai data
+        // dd($request->all());
+
+        SuratBalasan::where(["permohonan_id" => $request->permohonan_id])->update([
+            "no_rujukan" => $request->no_rujukan,
+            "tajuk_surat" => $request->tajuk_surat,
+            "no_rujukan_mohon" => $request->no_rujukan_mohon,
+            "date_mohon" => $request->date_mohon,
+            "content" => $request->content_surat_balasan,
+            "nama_alamat" => $request->nama_alamat,
+        ]);
+
+        $at = new AuditTrail();
+        $at->path = url()->full();
+        $at->user_id = Auth::user()->id;
+        $at->data = 'Update';
+        $at->save();
 
         return redirect('proses_data')->with('success', 'Surat Balasan Disimpan');
         // return redirect()->back();
@@ -873,20 +955,19 @@ class DataAsasController extends Controller
         $akuan = AkuanPelajar::where('permohonan_id', $id)->first();
         $permohonan = MohonData::where('id', $id)->first();
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
-        return view('mygeo.akuan_pelajar', compact('permohonan','akuan', 'skdatas'));
+        return view('mygeo.akuan_pelajar', compact('permohonan', 'akuan', 'skdatas'));
     }
 
     public function update_akuan_pelajar(Request $request)
     {
-
         $valid_file = AkuanPelajar::where([
-            ["permohonan_id","=", $request->permohonan_id],])
+            ["permohonan_id", "=", $request->permohonan_id]])
             ->whereNull('digital_sign')
             ->get();
 
-         if($valid_file->isEmpty()){
+        if ($valid_file->isEmpty()) {
             $request->validate([
-                'file' => 'mimes:png,jpeg,jpg|max:2048'
+                'file' => 'mimes:png,jpeg,jpg|max:2048',
                 // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'
             ]);
         }
@@ -907,7 +988,13 @@ class DataAsasController extends Controller
                 "lain_b" => $request->lain_b,
                 "lain_c" => $request->lain_c,
                 "digital_sign" => $request->digital_sign = '/storage/' . $filePath,
-
+                "lain_c" => $request->lain_c,
+                "nama1" => $request->nama[0],
+                "nama2" => $request->nama[1],
+                "nric" => $request->nric,
+                "agensi_organisasi" => $request->agensi_organisasi,
+                'tarikh' => $request->date_sign,
+                'alamat' => $request->alamat,
             ]);
 
             $at = new AuditTrail();
@@ -917,9 +1004,10 @@ class DataAsasController extends Controller
             $at->save();
 
             $id = $request->permohonan_id;
-            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
+            // return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
+            return redirect()->action('DataAsasController@akuan_pelajar', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
 
-        } elseif($valid_file->isEmpty()) {
+        } elseif ($valid_file->isEmpty()) {
 
             //save senarai data
             AkuanPelajar::where(["permohonan_id" => $request->permohonan_id])->update([
@@ -933,6 +1021,12 @@ class DataAsasController extends Controller
                 "lain_a" => $request->lain_a,
                 "lain_b" => $request->lain_b,
                 "lain_c" => $request->lain_c,
+                "nama1" => $request->nama[0],
+                "nama2" => $request->nama[1],
+                "nric" => $request->nric,
+                "agensi_organisasi" => $request->agensi_organisasi,
+                'tarikh' => $request->date_sign,
+                'alamat' => $request->alamat,
 
             ]);
 
@@ -943,7 +1037,7 @@ class DataAsasController extends Controller
             $at->save();
 
             $id = $request->permohonan_id;
-            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
+            return redirect()->action('DataAsasController@akuan_pelajar', ['id' => $id])->with('success', 'Akuan Pelajar Disimpan');
 
         } else {
 
@@ -958,6 +1052,12 @@ class DataAsasController extends Controller
                 "lain_a" => $request->lain_a,
                 "lain_b" => $request->lain_b,
                 "lain_c" => $request->lain_c,
+                "nama1" => $request->nama[0],
+                "nama2" => $request->nama[1],
+                "nric" => $request->nric,
+                "agensi_organisasi" => $request->agensi_organisasi,
+                'tarikh' => $request->date_sign,
+                'alamat' => $request->alamat,
 
             ]);
 
@@ -965,16 +1065,13 @@ class DataAsasController extends Controller
             return redirect()->action('DataAsasController@akuan_pelajar', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang ini Berserta Tandatangan');
         }
 
-
-
     }
 
     public function permohonan_baru()
     {
-        $permohonan_list = MohonData::where(['dihantar' => 1,'status' => 0])->orderBy('created_at', 'DESC')->get();
+        $permohonan_list = MohonData::where(['dihantar' => 1, 'status' => 0])->orderBy('created_at', 'DESC')->get();
         return view('mygeo.permohonan_baru', compact('permohonan_list'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -999,25 +1096,27 @@ class DataAsasController extends Controller
 
     public function store_senarai_kawasan(Request $request)
     {
-
         $id = $request->permohonan_id;
-        if($request->negeri != null){
-            $negeri = Negeri::where('kod_negeri',$request->negeri)->first()->negeri;
-        $daerah = $request->daerah;
-        if($daerah){
-            $append_kd = $negeri .', (' ;
-            foreach($daerah as $val){
-                if ($val === end($daerah)) {
-                    $append_kd .= $val .')';
-                } else {
-                    $append_kd .= $val .', ';
+        if ($request->negeri != null) {
+
+            $negeri = Negeri::where('kod_negeri', $request->negeri)->first()->negeri;
+            $daerah = $request->daerah;
+            if ($daerah) {
+                $append_kd = $negeri . ', (';
+                foreach ($daerah as $val) {
+                    if ($val === end($daerah)) {
+                        $append_kd .= $val . ')';
+                    } else {
+                        $append_kd .= $val . ', ';
+                    }
                 }
+            } else {
+                return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Pilih Daerah');
+                // $append_kd = $negeri;
             }
         } else {
-            $append_kd = $negeri;
-        }
-        } else {
-            $append_kd = $request->kawasan_data;
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Pilih Negeri');
+            // $append_kd = $request->kawasan_data;
         }
         // dd($append_kd);
 
@@ -1027,19 +1126,18 @@ class DataAsasController extends Controller
         $at->data = 'Create';
         $at->save();
 
-
         $valid = SenaraiData::where([
-            ["kategori","=", $request->kategori],
-            ["subkategori","=", $request->subkategori],
-            ["lapisan_data","=", $request->lapisan_data],
+            ["kategori", "=", $request->kategori],
+            ["subkategori", "=", $request->subkategori],
+            ["lapisan_data", "=", $request->lapisan_data],
         ])->first();
         $valid_senarai_kaw = SenaraiKawasanData::where([
-            ["kategori","=", $request->kategori],
-            ["subkategori","=", $request->subkategori],
-            ["lapisan_data","=", $request->lapisan_data],
+            ["kategori", "=", $request->kategori],
+            ["subkategori", "=", $request->subkategori],
+            ["lapisan_data", "=", $request->lapisan_data],
         ])->first();
 
-        if(empty($valid)){
+        if (empty($valid)) {
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Padanan Data Senarai dan Kawasan Salah!');
         } else {
             $skdata = new SenaraiKawasanData();
@@ -1053,20 +1151,20 @@ class DataAsasController extends Controller
             $skdata->permohonan_id = $id;
             $skdata->save();
 
-            $valid_surat_rasmi = DokumenBerkaitan::where(['tajuk_dokumen' => 'Surat Permohonan Rasmi','permohonan_id' => $id ])->get();
+            $valid_surat_rasmi = DokumenBerkaitan::where(['tajuk_dokumen' => 'Surat Permohonan Rasmi', 'permohonan_id' => $id])->get();
             $valid_user = User::where(["id" => Auth::user()->id])->get()->first();
-            $valid_terhad = SenaraiKawasanData::where(['kelas' => 'Terhad','permohonan_id' => $id ])->get();
-            $valid_lot_kadaster = SenaraiKawasanData::where(['lapisan_data' => 'Lot Kadaster','permohonan_id' => $id ])->get();
+            $valid_terhad = SenaraiKawasanData::where(['kelas' => 'Terhad', 'permohonan_id' => $id])->get();
+            $valid_lot_kadaster = SenaraiKawasanData::where(['lapisan_data' => 'Lot Kadaster', 'permohonan_id' => $id])->get();
 
-            $valid_nric = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan','permohonan_id' => $id ])->get();
-            $valid_undertaking = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang Undertaking (optional)','permohonan_id' => $id ])->get();
-            $valid_nric_pel = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Pelajar','permohonan_id' => $id ])->get();
-            $valid_nric_dekan = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Dekan/Pustakawan','permohonan_id' => $id ])->get();
-            $valid_ppnm = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang PPNM','permohonan_id' => $id ])->get();
-            $valid_borang_lot = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Lesen Hak Cipta','permohonan_id' => $id ])->get();
+            $valid_nric = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan', 'permohonan_id' => $id])->get();
+            $valid_undertaking = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang Undertaking (optional)', 'permohonan_id' => $id])->get();
+            $valid_nric_pel = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Pelajar', 'permohonan_id' => $id])->get();
+            $valid_nric_dekan = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Kad Pengenalan Dekan/Pustakawan', 'permohonan_id' => $id])->get();
+            $valid_ppnm = DokumenBerkaitan::where(['tajuk_dokumen' => 'Borang PPNM', 'permohonan_id' => $id])->get();
+            $valid_borang_lot = DokumenBerkaitan::where(['tajuk_dokumen' => 'Salinan Lesen Hak Cipta', 'permohonan_id' => $id])->get();
 
             // dd($valid_surat_rasmi);
-            if($valid_surat_rasmi->isEmpty()){
+            if ($valid_surat_rasmi->isEmpty()) {
 
                 $dokumen = new DokumenBerkaitan();
                 $dokumen->tajuk_dokumen = 'Surat Permohonan Rasmi';
@@ -1074,8 +1172,8 @@ class DataAsasController extends Controller
                 $dokumen->save();
             }
 
-            if($valid_lot_kadaster->isNotEmpty()){
-                if($valid_borang_lot->isEmpty()){
+            if ($valid_lot_kadaster->isNotEmpty()) {
+                if ($valid_borang_lot->isEmpty()) {
                     $dokumen4 = new DokumenBerkaitan();
                     $dokumen4->tajuk_dokumen = 'Salinan Lesen Hak Cipta';
                     $dokumen4->permohonan_id = $request->permohonan_id;
@@ -1083,25 +1181,25 @@ class DataAsasController extends Controller
                 }
             }
 
-            if($valid_terhad->isNotEmpty()){
+            if ($valid_terhad->isNotEmpty()) {
 
-                if($valid_ppnm->isEmpty()){
+                if ($valid_ppnm->isEmpty()) {
                     $dokumen3 = new DokumenBerkaitan();
                     $dokumen3->tajuk_dokumen = 'Borang PPNM';
                     $dokumen3->permohonan_id = $request->permohonan_id;
                     $dokumen3->save();
                 }
 
-                if($valid_user->kategori == 'IPTA - Pelajar' || $valid_user->kategori == 'IPTS - Pelajar' ) {
+                if ($valid_user->kategori == 'IPTA - Pelajar' || $valid_user->kategori == 'IPTS - Pelajar') {
 
-                    if($valid_nric_pel->isEmpty()){
+                    if ($valid_nric_pel->isEmpty()) {
                         $dokumen1 = new DokumenBerkaitan();
                         $dokumen1->tajuk_dokumen = 'Salinan Kad Pengenalan Pelajar';
                         $dokumen1->permohonan_id = $request->permohonan_id;
                         $dokumen1->save();
                     }
 
-                    if($valid_nric_dekan->isEmpty()){
+                    if ($valid_nric_dekan->isEmpty()) {
                         $dokumen2 = new DokumenBerkaitan();
                         $dokumen2->tajuk_dokumen = 'Salinan Kad Pengenalan Dekan/Pustakawan';
                         $dokumen2->permohonan_id = $request->permohonan_id;
@@ -1109,14 +1207,14 @@ class DataAsasController extends Controller
                     }
                 } else {
 
-                    if($valid_nric->isEmpty()){
+                    if ($valid_nric->isEmpty()) {
                         $dokumen1 = new DokumenBerkaitan();
                         $dokumen1->tajuk_dokumen = 'Salinan Kad Pengenalan';
                         $dokumen1->permohonan_id = $request->permohonan_id;
                         $dokumen1->save();
                     }
 
-                    if($valid_undertaking->isEmpty()){
+                    if ($valid_undertaking->isEmpty()) {
                         $dokumen2 = new DokumenBerkaitan();
                         $dokumen2->tajuk_dokumen = 'Borang Undertaking (optional)';
                         $dokumen2->permohonan_id = $request->permohonan_id;
@@ -1136,57 +1234,53 @@ class DataAsasController extends Controller
     {
 
         $valid = SenaraiData::where([
-            ["kategori","=", $request->kategori],
-            ["subkategori","=", $request->subkategori],
-            ["lapisan_data","=", $request->lapisan_data],
+            ["kategori", "=", $request->kategori],
+            ["subkategori", "=", $request->subkategori],
+            ["lapisan_data", "=", $request->lapisan_data],
         ])->first();
 
-        if(empty($valid))
-            {
-                return redirect()->back()->with('warning', 'Sila pilih padanan lapisan data yang betul');
-            }
-            else
-            {
-                // dd($request->negeri);
-                if($request->negeri != null){
-                    $negeri = Negeri::where('kod_negeri',$request->negeri)->first()->negeri;
+        if (empty($valid)) {
+            return redirect()->back()->with('warning', 'Sila pilih padanan lapisan data yang betul');
+        } else {
+            // dd($request->negeri);
+            if ($request->negeri != null) {
+                $negeri = Negeri::where('kod_negeri', $request->negeri)->first()->negeri;
                 $daerah = $request->daerah;
-                if($daerah){
-                    $append_kd = $negeri .', (' ;
-                    foreach($daerah as $val){
+                if ($daerah) {
+                    $append_kd = $negeri . ', (';
+                    foreach ($daerah as $val) {
                         if ($val === end($daerah)) {
-                            $append_kd .= $val .')';
+                            $append_kd .= $val . ')';
                         } else {
-                            $append_kd .= $val .', ';
+                            $append_kd .= $val . ', ';
                         }
                     }
                 } else {
                     $append_kd = $negeri;
                 }
-                } else {
-                    $append_kd = $request->kawasan_data;
-                }
-                //update senarai kawasan data
-                SenaraiKawasanData::where(["id" => $request->sk_id])->update([
-                    "kategori" => $request->kategori,
-                    "subkategori" => $request->subkategori,
-                    "lapisan_data" => $request->lapisan_data,
-                    "jenis_data" => $request->jenis_data,
-                    "kawasan_data" => $append_kd,
-                    "harga_data" => $valid->harga_data,
-                ]);
-
-                $at = new AuditTrail();
-                $at->path = url()->full();
-                $at->user_id = Auth::user()->id;
-                $at->data = 'Update';
-                $at->save();
-
-                $id = $request->permohonan_id;
-                return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan Telah Dikemaskini.');
-
+            } else {
+                $append_kd = $request->kawasan_data;
             }
+            //update senarai kawasan data
+            SenaraiKawasanData::where(["id" => $request->sk_id])->update([
+                "kategori" => $request->kategori,
+                "subkategori" => $request->subkategori,
+                "lapisan_data" => $request->lapisan_data,
+                "jenis_data" => $request->jenis_data,
+                "kawasan_data" => $append_kd,
+                "harga_data" => $valid->harga_data,
+            ]);
 
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Update';
+            $at->save();
+
+            $id = $request->permohonan_id;
+            return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Data Senarai dan Kawasan Telah Dikemaskini.');
+
+        }
 
     }
 
@@ -1198,40 +1292,45 @@ class DataAsasController extends Controller
 
     public function kemaskini_permohonan(Request $request)
     {
-        if(Auth::user()->hasRole(['Pentadbir Data','Super Admin','Pentadbir Aplikasi']))
-        {
+        if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi'])) {
             DB::transaction(function () use ($request) {
                 //simpan status permohonan ini
                 MohonData::where(["id" => $request->permohonan_id])->update([
                     "status" => $request->status,
                     "catatan" => $request->catatan,
-                   "catatan_lain" => $request->catatan_lain, //missing migration from afiq
+                    "catatan_lain" => $request->catatan_lain, //missing migration from afiq
                     "assign_admin" => $request->assign_admin,
                 ]);
 
-                $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
+                $pemohon = MohonData::with('users')->where('id', $request->permohonan_id)->get()->first();
 
-                if($request->status == '1'){ //lulus
+                if ($request->status == '1') { //lulus
                     $mail = "mails.exmpl13";
                     $subject = "MyGeo Explorer - Permohonan Diluluskan";
-                }elseif($request->status == '2'){ //tolak
+                } elseif ($request->status == '2') { //tolak
                     $mail = "mails.exmpl14";
                     $subject = "MyGeo Explorer - Permohonan Ditolak";
                 }
 
-                if($request->status != '0'){
+                if ($request->status != '0') {
                     //send email to pemohon data
                     $to_name = $pemohon->users->name;
                     $to_email = $pemohon->users->email;
-                    if($request->catatan == 'others'){
-                        $data = array('catatan'=>$request->catatan_lain);
+                    $data = [
+                        'catatan' => $request->catatan,
+                        'catatan_lain' => $request->catatan_lain,
+                    ];
+                    if ($request->catatan == "others") {
+                        Mail::send("mails.exmpl14-1", $data, function ($message) use ($to_name, $to_email, $subject) {
+                            $message->to($to_email, $to_name)->subject($subject);
+                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        });
                     } else {
-                        $data = array('catatan'=>$request->catatan);
+                        Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
+                            $message->to($to_email, $to_name)->subject($subject);
+                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        });
                     }
-                    //Mail::send($mail, $data, function($message) use ($to_name, $to_email, $subject) {
-                        //$message->to($to_email, $to_name)->subject($subject);
-                        //$message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-                    //});
                 }
 
                 $at = new AuditTrail();
@@ -1240,14 +1339,12 @@ class DataAsasController extends Controller
                 $at->data = 'Update';
                 $at->save();
             });
-            if($request->status == '1'){ //lulus
+            if ($request->status == '1') { //lulus
                 return redirect('permohonan_baru')->with('success', 'Permohonan Berjaya Dihantar');
-            }elseif($request->status == '2'){ //tolak
+            } elseif ($request->status == '2') { //tolak
                 return redirect('permohonan_baru')->with('success', 'Penolakan permohonan telah berjaya dihantar kepada pemohon');
             }
-        }
-        elseif(Auth::user()->hasRole(['Pemohon Data']))
-        {
+        } elseif (Auth::user()->hasRole(['Pemohon Data'])) {
             DB::transaction(function () use ($request) {
                 //simpan status permohonan ini
                 MohonData::where(["id" => $request->permohonan_id])->update([
@@ -1271,45 +1368,44 @@ class DataAsasController extends Controller
     {
 
         $valid_akuan_pelajar = AkuanPelajar::where([
-            ["permohonan_id","=", $request->permohonan_id],])
+            ["permohonan_id", "=", $request->permohonan_id]])
             ->whereNotNull('title')
             ->whereNotNull('digital_sign')
             ->get();
 
         $valid = SenaraiKawasanData::where([
-            ["permohonan_id","=", $request->permohonan_id],
+            ["permohonan_id", "=", $request->permohonan_id],
         ])->get();
         $validfile = DokumenBerkaitan::where([
-            ["permohonan_id","=", $request->permohonan_id],
+            ["permohonan_id", "=", $request->permohonan_id],
         ])->get();
-
 
         $id = $request->permohonan_id;
         // dd($valid,$validfile);
-        if((Auth::user()->kategori == 'IPTA - Pelajar' || Auth::user()->kategori == 'IPTS - Pelajar') && $valid_akuan_pelajar->isEmpty()){
+        if ((Auth::user()->kategori == 'IPTA - Pelajar' || Auth::user()->kategori == 'IPTS - Pelajar') && $valid_akuan_pelajar->isEmpty()) {
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Lengkapkan Borang Akuan Pelajar');
-        }elseif($valid->isNotEmpty() && $validfile->isNotEmpty()){
+        } elseif ($valid->isNotEmpty() && $validfile->isNotEmpty()) {
             MohonData::where(["id" => $request->permohonan_id])->update([
                 "dihantar" => 1,
                 "status" => 0,
             ]);
 
-            $pemohon = MohonData::with('users')->where('id',$request->permohonan_id)->get()->first();
+            $pemohon = MohonData::with('users')->where('id', $request->permohonan_id)->get()->first();
             $agensi_pemohon =
             is_numeric($pemohon->agensi_organisasi) && isset($pemohon->agensiOrganisasi) ? $pemohon->agensiOrganisasi->name : $pemohon->agensi_organisasi;
 
             //get pentadbir data
-            $pentadbir = User::where('assigned_roles','LIKE','%Pentadbir Data%')->get();
-            if(isset($pentadbir) && count($pentadbir) > 0){
-                foreach($pentadbir as $p){
+            $pentadbir = User::where('assigned_roles', 'LIKE', '%Pentadbir Data%')->get();
+            if (isset($pentadbir) && count($pentadbir) > 0) {
+                foreach ($pentadbir as $p) {
                     //send email to pentadbir data
                     $to_name = $p->name;
                     $to_email = $p->email;
-                    $data = array('nama_pemohon'=> $pemohon->users->name, 'agensi' => $agensi_pemohon);
-                    //Mail::send('mails.exmpl12', $data, function($message) use ($to_name, $to_email, $pemohon) {
-                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  ('.$pemohon->name.')');
-                        //$message->from('mail@mygeo-explorer.gov.my','mail@mygeo-explorer.gov.my');
-                    //});
+                    $data = ['nama_pemohon' => $pemohon->users->name, 'agensi' => $agensi_pemohon];
+                    Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
+                        // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    });
                 }
             }
 
@@ -1348,7 +1444,7 @@ class DataAsasController extends Controller
         $surat->tajuk_surat = $request->name;
         $surat->save();
 
-        if($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar'){
+        if ($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar') {
             $akuan_pelajar = new AkuanPelajar();
             $akuan_pelajar->permohonan_id = $request->permohonan_id = $mdata->id;
             $akuan_pelajar->save();
@@ -1365,11 +1461,10 @@ class DataAsasController extends Controller
         return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Permohonan baru telah ditambah. Sila lengkapkan maklumat permohonan.');
     }
 
-
     public function store_dokumen_berkaitan(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:pdf|max:2048'
+            'file' => 'required|mimes:pdf|max:2048',
             // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpeg,jpg|max:2048'
         ]);
 
@@ -1378,7 +1473,7 @@ class DataAsasController extends Controller
         if ($request->file()) {
 
             $failNama = time() . '_' . $request->file->getClientOriginalName();
-            if($request->tajuk_dokumen == 'Salinan Kad Pengenalan' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $request->tajuk_dokumen == 'Salinan Lesen Hak Cipta'){
+            if ($request->tajuk_dokumen == 'Salinan Kad Pengenalan' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $request->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $request->tajuk_dokumen == 'Salinan Lesen Hak Cipta') {
                 // $pdf = new Fpdi();
                 // // add a page
                 // $pdf->AddPage();
@@ -1428,7 +1523,7 @@ class DataAsasController extends Controller
 
             $failNama = time() . '_' . $request->file->getClientOriginalName();
 
-            if($valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Lesen Hak Cipta'){
+            if ($valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Pelajar' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Kad Pengenalan Dekan/Pustakawan' || $valid_tajuk_dokumen->tajuk_dokumen == 'Salinan Lesen Hak Cipta') {
                 // $pdf = new Fpdi();
                 // // add a page
                 // $pdf->AddPage();
@@ -1447,22 +1542,21 @@ class DataAsasController extends Controller
                 $request->file->storeAs('uploads', $failNama, 'public');
             }
 
-            if($request->tajuk_dokumen = 'Salinan Permohonan Rasmi'){
+            if ($request->tajuk_dokumen = 'Salinan Permohonan Rasmi') {
 
-            DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
-                "nama_fail" => $failNama,
-                "file_path" => '/storage/uploads/' . $failNama,
-                "no_rujukan" => $request->no_rujukan,
-                "date_surat" => $request->date_surat,
-            ]);
+                DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
+                    "nama_fail" => $failNama,
+                    "file_path" => '/storage/uploads/' . $failNama,
+                    "no_rujukan" => $request->no_rujukan,
+                    "date_surat" => $request->date_surat,
+                ]);
 
-            }else{
+            } else {
                 DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
                     "nama_fail" => $failNama,
                     "file_path" => '/storage/uploads/' . $failNama,
                 ]);
             }
-
 
             $at = new AuditTrail();
             $at->path = url()->full();
@@ -1475,7 +1569,7 @@ class DataAsasController extends Controller
                 ->with('file', $failNama);
         } else {
 
-            if($request->tajuk_dokumen = 'Salinan Permohonan Rasmi'){
+            if ($request->tajuk_dokumen = 'Salinan Permohonan Rasmi') {
 
                 DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
                     "no_rujukan" => $request->no_rujukan,
@@ -1487,16 +1581,16 @@ class DataAsasController extends Controller
                 $at->user_id = Auth::user()->id;
                 $at->data = 'Create';
                 $at->save();
-                }
+            }
             return back()
-            ->with('success', 'Maklumat dokumen telah berjaya dimuat naik.');
+                ->with('success', 'Maklumat dokumen telah berjaya dimuat naik.');
         }
     }
 
     public function delete_dokumen_berkaitan(Request $request)
     {
         $dokumen = DokumenBerkaitan::where(["id" => $request->dokumen_id])->first();
-        Storage::delete('public/uploads/'. $dokumen->nama_fail);
+        Storage::delete('public/uploads/' . $dokumen->nama_fail);
         $dokumen->delete();
         return redirect()->back()->with('success', 'Dokumen Berkaitan Telah Dibuang!');
     }
@@ -1508,7 +1602,7 @@ class DataAsasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    { }
+    {}
 
     /**
      * Show the form for editing the specified resource.
@@ -1556,7 +1650,7 @@ class DataAsasController extends Controller
         SuratBalasan::where(["id" => $request->permohonan_id])->delete();
         ProsesData::where(["id" => $request->permohonan_id])->delete();
 
-        if($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar'){
+        if ($user->kategori == 'IPTA - Pelajar' || $user->kategori == 'IPTS - Pelajar') {
             AkuanPelajar::where(["id" => $request->permohonan_id])->delete();
         }
 
@@ -1569,14 +1663,15 @@ class DataAsasController extends Controller
         return redirect('mohon_data')->with('success', 'Permohonan Data dibuang!');
     }
 
-    public function api_store_generate_nric(Request $request) {
+    public function api_store_generate_nric(Request $request)
+    {
         //instatiate and use the dompdf class
         $img_f = file_get_contents($request->ic_front);
         $base64_front = 'data:image/png;base64,' . base64_encode($img_f);
         $img_b = file_get_contents($request->ic_back);
         $base64_back = 'data:image/png;base64,' . base64_encode($img_b);
 
-        $pdf = PDF::loadView('pdfs.nric', compact('base64_front','base64_back'));
+        $pdf = PDF::loadView('pdfs.nric', compact('base64_front', 'base64_back'));
 
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
@@ -1588,9 +1683,9 @@ class DataAsasController extends Controller
         $content = $pdf->output();
         // return $content;
 
-        $failNama = time() . '_' .'nric_copy.pdf';
+        $failNama = time() . '_' . 'nric_copy.pdf';
         // dd($failNama);
-        Storage::put('public/uploads/'. $failNama, $content);
+        Storage::put('public/uploads/' . $failNama, $content);
         $failModel->tajuk_dokumen = "Salinan Kad Pengenalan";
         $failModel->nama_fail = $failNama;
         $failModel->file_path = '/storage/uploads/' . $failNama;
@@ -1601,7 +1696,8 @@ class DataAsasController extends Controller
         return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Salinan Kad Pengenalan Berjaya Dijana dan Ditambah');
     }
 
-    public function api_update_generate_nric(Request $request) {
+    public function api_update_generate_nric(Request $request)
+    {
         //instatiate and use the dompdf class
         // dd($request->gambar);
         $img_f = file_get_contents($request->ic_front);
@@ -1609,7 +1705,7 @@ class DataAsasController extends Controller
         $img_b = file_get_contents($request->ic_back);
         $base64_back = 'data:image/png;base64,' . base64_encode($img_b);
 
-        $pdf = PDF::loadView('pdfs.nric', compact('base64_front','base64_back'));
+        $pdf = PDF::loadView('pdfs.nric', compact('base64_front', 'base64_back'));
 
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
@@ -1619,19 +1715,20 @@ class DataAsasController extends Controller
 
         $content = $pdf->output();
 
-        $failNama = time() . '_' .'nric_copy.pdf';
+        $failNama = time() . '_' . 'nric_copy.pdf';
         // dd($failNama);
         DokumenBerkaitan::where(["id" => $request->dokumen_id])->update([
             "nama_fail" => $failNama,
             "file_path" => '/storage/uploads/' . $failNama,
         ]);
-        Storage::put('public/uploads/'. $failNama, $content);
+        Storage::put('public/uploads/' . $failNama, $content);
 
         $id = $request->permohonan_id;
         return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('success', 'Salinan Kad Pengenalan Berjaya Dijana dan Ditambah');
     }
 
-    public function generate_pdf_akuan_pelajar(Request $request){
+    public function generate_pdf_akuan_pelajar(Request $request)
+    {
         // $this->update_akuan_pelajar($request);
         $path1 = public_path('/afiqadminmygeo_files/Lampiran IV_Akuan Pelajar.png');
         $img1 = file_get_contents($path1);
@@ -1643,50 +1740,52 @@ class DataAsasController extends Controller
         // dd($img);
 
         $permohonan = DB::table('users')
-                    ->join('mohon_data','users.id','=','mohon_data.user_id')
-                    ->where('mohon_data.id',$request->permohonan_id)
-                    ->select('users.nric','users.alamat','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'))
-                    ->groupBy('users.nric','users.name','users.alamat','mohon_data.date')
-                    ->first();
-        $user = User::where('nric',$permohonan->nric)->get()->first();
-        if($user->hasRole('Pemohon Data')){
+            ->join('mohon_data', 'users.id', '=', 'mohon_data.user_id')
+            ->where('mohon_data.id', $request->permohonan_id)
+            ->select('users.nric', 'users.alamat', 'mohon_data.date', DB::raw('count(*) as total'), DB::raw('users.name as username'))
+            ->groupBy('users.nric', 'users.name', 'users.alamat', 'mohon_data.date')
+            ->first();
+        $user = User::where('nric', $permohonan->nric)->get()->first();
+        if ($user->hasRole('Pemohon Data')) {
             $agensi_name = $user->agensi_organisasi;
-        }else{
+        } else {
             $agensi_name = $user->agensiOrganisasi->name;
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $request->permohonan_id)->get();
         $akuan = AkuanPelajar::where('permohonan_id', $request->permohonan_id)->first();
-        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan','permohonan','agensi_name','skdatas','borang1','borang2'));
+        $pdf = PDF::loadView('pdfs.akuan_pelajar', compact('akuan', 'permohonan', 'agensi_name', 'skdatas', 'borang1', 'borang2'));
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF
         return $pdf->stream();
     }
 
-    public function generate_pdf_surat_balasan(Request $request){
+    public function generate_pdf_surat_balasan(Request $request)
+    {
 
         $permohonan = DB::table('users')
-                    ->join('mohon_data','users.id','=','mohon_data.user_id')
+            ->join('mohon_data', 'users.id', '=', 'mohon_data.user_id')
 //                    ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
-                    ->where('mohon_data.id',$request->permohonan_id)
-                    ->select('users.nric','users.alamat','mohon_data.date','mohon_data.id',DB::raw('count(*) as total'),DB::raw('users.name as username'))
-                    ->groupBy('users.nric','users.name','users.alamat','mohon_data.date','mohon_data.id')
-                    ->first();
-        $user = User::where('nric',$permohonan->nric)->get()->first();
-        if($user->hasRole('Pemohon Data')){
+            ->where('mohon_data.id', $request->permohonan_id)
+            ->select('users.nric', 'users.alamat', 'mohon_data.date', 'mohon_data.id', DB::raw('count(*) as total'), DB::raw('users.name as username'))
+            ->groupBy('users.nric', 'users.name', 'users.alamat', 'mohon_data.date', 'mohon_data.id')
+            ->first();
+        $user = User::where('nric', $permohonan->nric)->get()->first();
+        if ($user->hasRole('Pemohon Data')) {
             $agensi_name = $user->agensi_organisasi;
-        }else{
+        } else {
             $agensi_name = $user->agensiOrganisasi->name;
         }
         $surat = SuratBalasan::where('permohonan_id', $request->permohonan_id)->first();
-        $pdf = PDF::loadView('pdfs.surat_balasan', compact('surat','permohonan','agensi_name'));
+        $pdf = PDF::loadView('pdfs.surat_balasan', compact('surat', 'permohonan', 'agensi_name'));
         // (Optional) Setup the paper size and orientation
         $pdf->setPaper('A4', 'potrait');
         // Render the HTML as PDF
         return $pdf->stream();
     }
 
-    public function generate_pdf_akuan_terima(Request $request){
+    public function generate_pdf_akuan_terima(Request $request)
+    {
 
         $permohonan = MohonData::where('id', $request->permohonan_id)->first();
 
@@ -1697,7 +1796,8 @@ class DataAsasController extends Controller
         return $pdf->stream();
     }
 
-    public function kemaskini_tempoh_url(Request $request){
+    public function kemaskini_tempoh_url(Request $request)
+    {
         ProsesData::where(["permohonan_id" => $request->permohonan_id])->update([
             "tempoh_url" => $request->tempoh,
         ]);

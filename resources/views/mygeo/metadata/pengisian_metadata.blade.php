@@ -186,6 +186,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                     <div class="card">
                         <form method="post" class="form-horizontal" id="form_metadata"
                               action="{{ url('store_metadata') }}" enctype="multipart/form-data">
+                            <input type="hidden" name="metadata_id" id="metadata_id">
                             @csrf
                             <div class="card-body">
                                 <!-- <div class="form-group row"> -->
@@ -714,6 +715,31 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
             <?php
         }
         ?>
+                
+        setInterval(
+            autosave_metadata,
+            30000  //this value is in miliseconds. currently set at 30 seconds
+        );
+        function autosave_metadata(){
+            if($('#metadata_id').val() != ""){ //update
+                $.ajax({
+                    type: "POST", 
+                    url: '{{url("simpan_kemaskini_metadata")}}',
+                    data: $("#form_metadata").serialize()+'&autosave=true&page=pengisian',
+                    success: function(){}
+                });
+            }else{ //create
+                $.ajax({
+                    type: "POST", 
+                    url: '{{url("store_metadata")}}',
+                    data: $("#form_metadata").serialize()+'&autosave=true&page=pengisian',
+                    success: function(response){
+                        var res = JSON.parse(response);
+                        $('#metadata_id').val(res.metadata_id);
+                    }
+                });
+            }
+        }
     });
 </script>
 

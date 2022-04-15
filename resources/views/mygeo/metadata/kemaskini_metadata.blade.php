@@ -293,6 +293,7 @@
 
 <div id='fimages'></div>
 
+
 <script>
     var pengesahs = [];
 
@@ -917,7 +918,21 @@ if (!is_null(old('kategori'))) {
 //                });
             }
         });
+        
+        setInterval(
+            autosave_metadata,
+            30000  //this value is in miliseconds. currently set at 30 seconds
+        );
+        function autosave_metadata(){
+            $.ajax({
+                type: "POST", 
+                url: '{{url("simpan_kemaskini_metadata")}}',
+                data: $("#form_metadata").serialize()+'&autosave=true&page=kemaskini',
+                success: function(){}
+            });
+        }
     });
+    
 </script>
 
 <?php

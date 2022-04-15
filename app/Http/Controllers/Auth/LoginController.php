@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\AuditTrail;
-use App\PortalTetapan;
-use Auth;
-use App\Visitors;
-use App\States;
 use App\Countries;
+use App\Http\Controllers\Controller;
+use App\KelasKongsi;
+use App\PortalTetapan;
+use App\Providers\RouteServiceProvider;
+use App\States;
+use Auth;
+use function PHPUnit\Framework\isEmpty;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -23,7 +24,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -52,10 +53,31 @@ class LoginController extends Controller
 //        $address = $_SERVER['REMOTE_ADDR'];
 //          Visitors::firstOrCreate(['address'=>$address]);
 //          $total_visitors = Visitors::get();
-        return view('auth.login', compact('portal','states','countries'));
+        $kelas_g2g = KelasKongsi::where('category', 'G2G')
+            ->where('status', '1')->get();
+        $kelas_g2c = KelasKongsi::where('category', 'G2C')
+            ->where('status', '1')->get();
+        $kelas_g2e = KelasKongsi::where('category', 'G2E')
+            ->where('status', '1')->get();
+
+        $g2g_div = 1;
+        if ($kelas_g2g->isEmpty()) {
+            $g2g_div = 0;
+        }
+        $g2c_div = 1;
+        if ($kelas_g2c->isEmpty()) {
+            $g2c_div = 0;
+        }
+        $g2e_div = 1;
+        if ($kelas_g2e->isEmpty()) {
+            $g2c_div = 0;
+        }
+
+        return view('auth.login', compact('portal', 'states', 'countries', 'g2g_div', 'g2c_div', 'g2e_div'));
     }
 
-    public function logout(){
+    public function logout()
+    {
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;

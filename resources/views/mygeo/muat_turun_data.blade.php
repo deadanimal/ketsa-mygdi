@@ -69,48 +69,38 @@
                                             <th>TAJUK PERMOHONAN</th>
                                             <th>STATUS</th>
                                             <th>TARIKH</th>
+                                            <th>TARIKH AKTIF</th>
                                             <th>TINDAKAN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
-                                            <?php
-                                            $inTempohUrl = 0;
-                                            $currentDate = date('d-m-Y');
-                                            $explodedTempohUrl = explode(' - ', $permohonan->proses_datas->tempoh_url);
-                                            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-                                            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-                                            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                                                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                                                    $inTempohUrl = 1;
-                                                } else {
-                                                    $inTempohUrl = 0;
-                                                }
-                                            }
-                                            $res = json_decode($permohonan->proses_datas->pautan_data);
-                                            ?>
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>
-                                                    @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1)
+                                                    @if (!empty($permohonan->proses_datas->pautan_data) && $permohonan->inTempohUrl == 1)
                                                         <span class="badge badge-pill badge-success">Data Tersedia</span>
-                                                    @elseif(!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0)
+                                                    @elseif(!empty($permohonan->proses_datas->pautan_data) && $permohonan->inTempohUrl == 0)
                                                         <span class="badge badge-pill badge-info">Tamat Tempoh</span>
+                                                    @elseif(!empty($permohonan->proses_datas->pautan_data) && $permohonan->inTempohUrl == 2)
+                                                        <span class="badge badge-pill badge-info">Belum Mula</span>
                                                     @else
                                                         <span class="badge badge-pill badge-danger">Dalam Proses</span>
                                                     @endif
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
+                                                <td>{{ $permohonan->proses_datas->tempoh_url }}</td>
                                                 <td>
-
-                                                    @if (is_array($res) && !empty($res))
-                                                        @foreach ($res as $url)
-                                                            <a @if (!empty($url) && $inTempohUrl == 1) data-url='{{ $url }}' data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
+                                                    @if (is_array($permohonan->res) && !empty($permohonan->res))
+                                                        {{-- {{ dd($res) }} --}}
+                                                        @foreach ($permohonan->res as $key => $url)
+                                                            <a
+                                                                @if (!empty($url) && $permohonan->inTempohUrl == 1) data-url='{{ $url }}' data-urlid='{{ $key }}' data-pemohonid='{{ $permohonan->id }}' data-acceptance='{{ $permohonan->acceptance }}' class="text-success download" disabled href="{{ $url }}" @endif>
                                                                 <span class="fas fa-download mr-2">
-
+                                                                    {{ $url }}
                                                                 </span>
-                                                                {{ $url }}</a><br>
+                                                            </a><br><br>
                                                         @endforeach
                                                     @endif
                                                 </td>
@@ -156,6 +146,7 @@
         $('.download').on('click', function(event) {
             event.preventDefault();
             const url = $(this).data('url');
+            const urlid = $(this).data('urlid');
             var pemohonid = $(this).data('pemohonid');
             var acceptance = $(this).data('acceptance');
 
@@ -178,9 +169,12 @@
                         return !result && "Anda perlu sahkan akuan penerimaan data ini!";
                     },
                 }).then(function(result) {
-                    //                window.location.href = url;
-                    window.location.href = "{{ url('/akuan_penerimaan/') }}" + "/" + pemohonid;
-                    //                window.open(url, '_blank');
+                    // window.location.href = url;
+                    // window.location.href = "{{ url('/akuan_penerimaan') }}" + "/" + pemohonid + "/" +
+                    //     urlid;
+                    var newwindow = "{{ url('/akuan_penerimaan') }}" + "/" + pemohonid + "/" +
+                        urlid;
+                    window.open(newwindow, '_blank');
                 });
             }
         });
