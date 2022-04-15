@@ -103,7 +103,8 @@
                                                     type="checkbox" data-permohonanid="{{ $permohonan->id }}"
                                                     {{ $permohonan->acceptance == '1' ? 'checked disabled' : '' }}
                                                     {{ Auth::user()->hasRole(['Pemohon Data']) ? '' : 'disabled' }}>
-                                                <label class="custom-control-label" for="customCheck1" style="font-size: 17px;">Saya terima terma dan
+                                                <label class="custom-control-label" for="customCheck1"
+                                                    style="font-size: 17px;">Saya terima terma dan
                                                     syarat diatas berikut</label>
                                             </div>
                                         </dl>
@@ -113,7 +114,7 @@
                                     <form action="{{ url('api/dokumen/akuan_terima') }}" method="POST" target="_blank">
                                         @csrf
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
-                                        <button type="submit" class="btn btn-sm btn-primary mt-2"
+                                        <button type="submit" class="btn btn-sm btn-primary mt-2" id="cetakpdf"
                                             {{ $permohonan->acceptance != '1' ? 'disabled' : '' }}>Cetak PDF</button>
                                     </form>
                                 @endif
@@ -133,11 +134,12 @@
     <script>
         $('.checkAkuanTerima').change(function() {
             var permohonan_id = $(this).data('permohonanid');
-            pautan = {!! $permohonan->proses_datas->pautan_data !!};
+            var pautan = @json($url);
             var newStatus = '';
             var newStatusText = '';
             if ($(this).prop('checked')) {
-                newStatus = '0';
+                newStatus = '1';
+
             } else {
                 newStatus = '0';
             }
@@ -151,20 +153,19 @@
                     "acceptance": newStatus
                 },
             }).done(function(response) {
-                //                alert("Akuan Penerimaan Data telah direkodkan.");
-                // $('#tdUserStatus' + userid).html(newStatusText);
+
                 swal({
                     title: "Akuan Penerimaan Data",
                     text: "Berjaya disahkan!",
                     type: "success",
                     showConfirmButton: false,
                 }).then(function(result) {
-                    pautan.forEach(element => {
-                        window.open(element, '_blank');
-                    });
-                    window.location.href = "/muat_turun_data";
+                    window.open(pautan, '_blank');
+                    location.reload();
+                    // window.location.href = "/muat_turun_data";
                 });
             });
+
         });
 
         $(document).ready(function() {

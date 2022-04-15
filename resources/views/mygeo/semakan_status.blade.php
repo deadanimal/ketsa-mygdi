@@ -7,7 +7,7 @@
             color: rgb(44, 44, 44)
         }
 
-        .badge-secondary{
+        .badge-secondary {
             background: lightgray
         }
 
@@ -75,28 +75,16 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
-                                            <?php
-                                            $inTempohUrl = 0;
-                                            $currentDate = date('d-m-Y');
-                                            $explodedTempohUrl = explode(' - ', $permohonan->proses_datas->tempoh_url);
-                                            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-                                            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-                                            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                                                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                                                    $inTempohUrl = 1;
-                                                } else {
-                                                    $inTempohUrl = 0;
-                                                }
-                                            }
-                                            ?>
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>
-                                                    @if (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 1 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                    @if (!empty($permohonan->proses_datas->pautan_data) && $permohonan->inTempohUrl == 1 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
                                                         <span class="badge badge-pill badge-success">Data
                                                             Tersedia</span>
-                                                    @elseif (!empty($permohonan->proses_datas->pautan_data) && $inTempohUrl == 0 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                    @elseif (!empty($permohonan->proses_datas->pautan_data) && $permohonan->inTempohUrl == 2 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
+                                                        <span class="badge badge-pill badge-warning ">Belum Mula</span>
+                                                    @elseif (!empty($permohonan->proses_datas->pautan_data) && $permohonan->inTempohUrl == 0 && $permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0)
                                                         <span class="badge badge-pill badge-warning ">Tamat
                                                             Tempoh</span>
                                                     @elseif ($permohonan->status == '1' || ($permohonan->status == '3' && $permohonan->berjayaMuatTurunStatus == 0))
@@ -108,18 +96,20 @@
                                                         <span class="badge badge-pill badge-success">Selesai</span>
                                                     @elseif($permohonan->status == '0' && $permohonan->dihantar == 1)
                                                         <span class="badge badge-pill badge-info">Baru</span>
-                                                        @elseif($permohonan->status == '0')
+                                                    @elseif($permohonan->status == '0')
                                                         <span class="badge badge-pill badge-secondary">Draf</span>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <a href="{{ url('/lihat_permohonan/' . $permohonan->id) }}"
                                                         class="btn btn-sm btn-success text-center"
-                                                        @if ($permohonan->status != 2) disabled @endif><i class="fas fa-edit"></i>
+                                                        @if ($permohonan->status != 2) disabled @endif><i
+                                                            class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" data-permohonanid="{{ $permohonan->id }}"
                                                         class="btnDelete btn btn-sm btn-danger mr-2"
-                                                        @if ($permohonan->status != 2) disabled @endif><i class="fas fa-trash"></i>
+                                                        @if ($permohonan->status != 2) disabled @endif><i
+                                                            class="fas fa-trash"></i>
                                                     </button>
                                                 </td>
                                             </tr>

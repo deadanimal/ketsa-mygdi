@@ -507,7 +507,8 @@
 
                                         <hr class="my-3">
 
-                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
+                                        @if (Auth::user()->hasRole(['Super Admin', 'Pentadbir Aplikasi']) || auth()->user()->name == 'Admin Pentadbir')
+
                                             <div class="row">
                                                 <div class="col-4">
                                                     <h4 class="heading text-dark mr-2">Status Permohonan</h4>
@@ -554,10 +555,12 @@
                                                         <select class="form-control form-control-sm" name="assign_admin">
                                                             <option selected disabled>Pilih</option>
                                                             @foreach ($pentadbirdata as $pd)
-                                                                <option value="{{ $pd->name }}"
-                                                                    @if ($pd->name == $permohonan->assign_admin) selected @endif>
-                                                                    {{ $pd->name }}
-                                                                </option>
+                                                                @if ($pd->name != 'Admin Pentadbir')
+                                                                    <option value="{{ $pd->name }}"
+                                                                        @if ($pd->name == $permohonan->assign_admin) selected @endif>
+                                                                        {{ $pd->name }}
+                                                                    </option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>

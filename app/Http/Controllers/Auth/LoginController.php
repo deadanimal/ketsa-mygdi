@@ -57,6 +57,8 @@ class LoginController extends Controller
             ->where('status', '1')->get();
         $kelas_g2c = KelasKongsi::where('category', 'G2C')
             ->where('status', '1')->get();
+        $kelas_g2e = KelasKongsi::where('category', 'G2E')
+            ->where('status', '1')->get();
 
         $g2g_div = 1;
         if ($kelas_g2g->isEmpty()) {
@@ -66,8 +68,12 @@ class LoginController extends Controller
         if ($kelas_g2c->isEmpty()) {
             $g2c_div = 0;
         }
+        $g2e_div = 1;
+        if ($kelas_g2e->isEmpty()) {
+            $g2c_div = 0;
+        }
 
-        return view('auth.login', compact('portal', 'states', 'countries', 'g2g_div', 'g2c_div'));
+        return view('auth.login', compact('portal', 'states', 'countries', 'g2g_div', 'g2c_div', 'g2e_div'));
     }
 
     public function logout()

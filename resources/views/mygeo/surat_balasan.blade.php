@@ -96,7 +96,10 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div align="justify" class="mx-5">
+
+
                                         @if ($surat->nama_alamat == null)
                                             <textarea class="form-control form-control-sm mt-3" cols="30" placeholder="Nama dan Alamat" rows="6"
                                                 name="nama_alamat">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
@@ -108,10 +111,10 @@
                                                                                                                                                                       </textarea>
                                             <br>
                                         @endif
-
-                                        {{-- <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
-                                            placeholder="Tajuk Surat Balasan Permohonan"
-                                            value="{{ $surat->tajuk_surat }}"> --}}
+                                        <br>
+                                        <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
+                                            placeholder="Tajuk Surat Balasan Permohonan" value="{{ $surat->tajuk_surat }}"
+                                            required><br>
                                         <label class="form-control-label" for="">Kandungan Surat Balasan</label>
                                         <input type="hidden" name="id_penyataan_privasi"
                                             value="{{ !is_null($surat->content) ? $surat->content : '' }}">
@@ -155,12 +158,19 @@
 
 
     <script>
+        function namaalamat(e) {
+            var val = e.value;
+            $("#content_nama_alamat").val(val);
+        }
+
         $(document).ready(function() {
             $(document).on("click", "#btn_submit", function() {
                 $("#content_surat_balasan").val($("#content_surat_balasan_input > .ql-editor")
                     .html());
                 $("#form_surat_balasan").submit();
             });
+
+
 
             var quill_surat_balasan = new Quill('#content_surat_balasan_input', {
                 modules: {
@@ -218,6 +228,9 @@
                 theme: 'snow',
             });
             quill_surat_balasan.root.innerHTML = `{!! !is_null($surat->content) ? $surat->content : $surat_template !!}`;
+
+
+
         });
     </script>
 

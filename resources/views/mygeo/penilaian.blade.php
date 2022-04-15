@@ -2,19 +2,19 @@
 
 @section('content')
 
-<style>
+    <style>
 
-</style>
+    </style>
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="header">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="header">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center p-3 py-4">
                         <div class="col-lg-12 col-7">
-                            @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
+                            @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
                                 <h6 class="h2 text-dark d-inline-block mb-0">Akuan Penerimaan dan Penilaian Data</h6>
                             @elseif(Auth::user()->hasRole(['Pemohon Data']))
                                 <h6 class="h2 text-dark d-inline-block mb-0">Penilaian Data</h6>
@@ -25,7 +25,7 @@
                                     <li class=" breadcrumb-item">
                                         <a href="javascript:void(0)"> <i class="fas fa-home text-dark"> </i> </a>
                                     </li>
-                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
+                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
                                         <li aria-current="page" class="breadcrumb-item active">
                                             Akuan Penerimaan dan Penilaian Data
                                         </li>
@@ -54,7 +54,7 @@
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
+                                        @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
                                             <h3 class="mb-0">Senarai Akuan Penerimaan dan Penilaian Data</h3>
                                         @elseif(Auth::user()->hasRole(['Pemohon Data']))
                                             <h3 class="mb-0">Senarai Penilaian Data</h3>
@@ -74,8 +74,8 @@
                                             <th>BIL</th>
                                             <th>NAMA PERMOHONAN</th>
                                             <th>TARIKH</th>
-                                            @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
-                                            <th>AKUAN PENERIMAAN</th>
+                                            @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
+                                                <th>AKUAN PENERIMAAN</th>
                                             @endif
                                             <th>PENILAIAN</th>
                                         </tr>
@@ -87,9 +87,9 @@
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
 
-                                                @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
+                                                @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
                                                     <td>
-                                                        <a href="/akuan_penerimaan/{{ $permohonan->id }}"
+                                                        <a href="/akuan_penerimaan/{{ $permohonan->id }}/adsa"
                                                             class="btn btn-sm btn-primary text-center">
                                                             Lihat
                                                         </a>
@@ -97,7 +97,7 @@
                                                 @endif
 
                                                 <td>
-                                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin','Pentadbir Aplikasi']))
+                                                    @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']))
                                                         <a href="/penilaian_pemohon/{{ $permohonan->id }}"
                                                             class="btn btn-sm btn-info text-center">
                                                             Lihat

@@ -51,10 +51,16 @@
                                         <h3 class="mb-0">Permohonan Baru</h3>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <a data-toggle="modal" data-target="#modal-permohonan-baru">
-                                            <button type="button" class="btn btn-sm btn-default float-right"><i
+                                        <a data-toggle="modal"
+                                            data-target="#modal-permohonan-baru {{ $lengkapkan_penilaian ? '#' : '' }}">
+                                            <button type="button"
+                                                class="btn btn-sm btn-default float-right {{ $lengkapkan_penilaian ? 'disabled' : '' }}"><i
                                                     class="fas fa-plus mr-2"></i>Permohonan Baru</button>
-                                        </a>
+                                        </a><br><br>
+                                        @if ($lengkapkan_penilaian)
+                                            <small class="text-danger">*Sila Lengkapkan Penilaian Sebelum Mula Untuk
+                                                Membuat Permohonan Yang Baru</small>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +71,7 @@
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th >BIL</th>
+                                            <th>BIL</th>
                                             <th>TAJUK PERMOHONAN</th>
                                             <th>STATUS</th>
                                             <th>TARIKH</th>
@@ -122,7 +128,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="name" class="form-control-label">Tajuk Permohonan</label>
-                                    <input type="text" class="form-control form-control-sm" id="tajukPermohonan" name="name" value="">
+                                    <input type="text" class="form-control form-control-sm" id="tajukPermohonan" name="name"
+                                        value="">
                                 </div>
                                 <div class="form-group">
                                     <label for="date" class="form-control-label">Tarikh Permohonan</label>
@@ -131,8 +138,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tujuan" class="form-control-label">Tujuan Permohonan</label>
-                                    <textarea name="tujuan" class="form-control form-control-sm" cols="30"
-                                        rows="10"></textarea>
+                                    <textarea name="tujuan" class="form-control form-control-sm" cols="30" rows="10"></textarea>
                                 </div>
                                 <input type="hidden" name="id" value="{{ $user->id }}">
                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -151,10 +157,10 @@
 
     <script>
         $(document).ready(function() {
-            $("#tajukPermohonan").keyup(function () {  
-                $(this).val($(this).val().toUpperCase());  
-            }); 
-            
+            $("#tajukPermohonan").keyup(function() {
+                $(this).val($(this).val().toUpperCase());
+            });
+
             $("#table_permohonan").DataTable({
                 "dom": "<'row'<'col-sm-6'i><'col-sm-0 text-center'><'col-sm-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
