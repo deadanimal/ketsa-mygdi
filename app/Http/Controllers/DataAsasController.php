@@ -315,7 +315,7 @@ class DataAsasController extends Controller
             $data = array('m' => $m2);
             Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
             });
         }
         exit();
@@ -421,7 +421,7 @@ class DataAsasController extends Controller
             $data = array('cat' => 'cat');
             Mail::send("mails.exmpl15", $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
-                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                 // $message->attach($file);
             });
 
@@ -478,8 +478,11 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])->get();
-        $permohonan = ProsesData::where('id', 8)->get();
+        $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])
+            ->where('status', '!=', 2)
+            ->orderByDesc('created_at')
+            ->get();
+        // $permohonan = ProsesData::where('id', 8)->get();
 
         foreach ($permohonan_list as $pl) {
 
@@ -923,8 +926,11 @@ class DataAsasController extends Controller
 
     public function update_surat_balasan(Request $request)
     {
+
         // dd($request->content_surat_balasan);
         //save senarai data
+        // dd($request->all());
+
         SuratBalasan::where(["permohonan_id" => $request->permohonan_id])->update([
             "no_rujukan" => $request->no_rujukan,
             "tajuk_surat" => $request->tajuk_surat,
@@ -1317,12 +1323,12 @@ class DataAsasController extends Controller
                     if ($request->catatan == "others") {
                         Mail::send("mails.exmpl14-1", $data, function ($message) use ($to_name, $to_email, $subject) {
                             $message->to($to_email, $to_name)->subject($subject);
-                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                         });
                     } else {
                         Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
                             $message->to($to_email, $to_name)->subject($subject);
-                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                         });
                     }
                 }
@@ -1398,7 +1404,7 @@ class DataAsasController extends Controller
                     $data = ['nama_pemohon' => $pemohon->users->name, 'agensi' => $agensi_pemohon];
                     Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
                         $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                     });
                 }
             }

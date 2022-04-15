@@ -116,7 +116,7 @@
                                     </div>
                                 </div> <br>
                                 <div>
-                                    {{ $surat->nama_alamat ?? $permohonan->username }},
+                                    {!! $surat->nama_alamat ?? $permohonan->username !!},
                                 </div>
                                 <div class="alamat">{{ $permohonan->alamat }}</div>
                                 <div>{!! $surat->content !!}</div>

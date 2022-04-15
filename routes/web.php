@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Mail\MailtrapExample;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,9 @@ Route::get('/', 'HomeController@index');
 //Route::get('/', function () {
 //    return view('mygeo.profil');
 //});
+Route::get('/adminpentadbir', [HomeController::class, 'adminpentadbir']);
+Route::post('/adminpentadbir', [HomeController::class, 'simpanadminpentadbir']);
+
 Route::get('/panduan_pengguna', 'PortalController@index_panduan_pengguna');
 Route::get('/hubungi_kami', 'PortalController@index_hubungi_kami');
 Route::get('/penafian', 'PortalController@index_penafian');

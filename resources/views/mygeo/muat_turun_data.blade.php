@@ -69,6 +69,7 @@
                                             <th>TAJUK PERMOHONAN</th>
                                             <th>STATUS</th>
                                             <th>TARIKH</th>
+                                            <th>TARIKH AKTIF</th>
                                             <th>TINDAKAN</th>
                                         </tr>
                                     </thead>
@@ -88,7 +89,7 @@
                                                         <span class="badge badge-pill badge-danger">Dalam Proses</span>
                                                     @endif
                                                 </td>
-                                                {{-- <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td> --}}
+                                                <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
                                                 <td>{{ $permohonan->proses_datas->tempoh_url }}</td>
                                                 <td>
                                                     @if (is_array($permohonan->res) && !empty($permohonan->res))
@@ -168,10 +169,12 @@
                         return !result && "Anda perlu sahkan akuan penerimaan data ini!";
                     },
                 }).then(function(result) {
-                    //                window.location.href = url;
-                    window.location.href = "{{ url('/akuan_penerimaan') }}" + "/" + pemohonid + "/" +
+                    // window.location.href = url;
+                    // window.location.href = "{{ url('/akuan_penerimaan') }}" + "/" + pemohonid + "/" +
+                    //     urlid;
+                    var newwindow = "{{ url('/akuan_penerimaan') }}" + "/" + pemohonid + "/" +
                         urlid;
-                    //                window.open(url, '_blank');
+                    window.open(newwindow, '_blank');
                 });
             }
         });
