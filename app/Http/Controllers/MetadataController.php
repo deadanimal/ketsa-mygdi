@@ -2778,6 +2778,9 @@ class MetadataController extends Controller {
             }
         }
         $cat = MCategory::where('name', $request->kategori)->get()->first();
+        if(!isset($cat->id)){
+           exit(); 
+        }
         $customMetadataInput = CustomMetadataInput::where('kategori', $cat->id)->get();
         $custom_inputs = "";
         if (count($customMetadataInput) > 0) {
