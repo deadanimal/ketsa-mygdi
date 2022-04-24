@@ -9,16 +9,16 @@
 Using [FPDF](http://www.fpdf.org/) made easy with Laravel. See [FPDF homepage](http://www.fpdf.org/) for more information about the usage.
 
 ## Installation using [Composer](https://getcomposer.org/)
+
 ```sh
-$ composer require codedge/laravel-fpdf
+composer require codedge/laravel-fpdf
 ```
 
 ## Configuration
 
-Run   
+Run  
 `php artisan vendor:publish --provider="Codedge\Fpdf\FpdfServiceProvider" --tag=config`  
-to publish the configuration file to `config/fpdf.php`.  
-
+to publish the configuration file to `config/fpdf.php`.
 
 ## Usage
 
@@ -31,6 +31,7 @@ Route::get('/', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
     $fpdf->SetFont('Courier', 'B', 18);
     $fpdf->Cell(50, 25, 'Hello World!');
     $fpdf->Output();
+    exit;
 
 });
 ```

@@ -75,6 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/mygeo_buang_pengumuman', 'PortalController@delete_pengumuman');
 
     Route::get('/mygeo_dashboard', 'LaporanDashboardController@index_mygeo_dashboard');
+    Route::get('/mygeo_dashboard_metadata', 'LaporanDashboardController@mygeo_dashboard_metadata');
+    Route::get('/mygeo_dashboard_data_asas', 'LaporanDashboardController@mygeo_dashboard_data_asas');
     Route::get('/lihat_laporan_data/{id}', 'LaporanDashboardController@laporan_data_detail');
     Route::post('/api/laporan_perincian_data', 'LaporanDashboardController@generate_pdf_laporan_perincian_data');
 
@@ -169,7 +171,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/simpan_metadata_template', 'MetadataController@simpan_metadata_template');
 
     Route::get('/lihat_permohonan/{id}', 'DataAsasController@tambah')->name('tambah.permohonan');
-//    Route::get('/mohon_data', 'DataAsasController@mohon_data');
+    //    Route::get('/mohon_data', 'DataAsasController@mohon_data');
     Route::post('/simpan_permohonan_baru', 'DataAsasController@store_permohonan_baru');
     Route::post('/simpan_senarai_kawasan', 'DataAsasController@store_senarai_kawasan');
     Route::post('/delete_senarai_kawasan', 'DataAsasController@delete_senarai_kawasan');
@@ -312,9 +314,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // =================== Redirect Tooltips =====================
 
-Route::get('lampiran/content_information', function () {return view('tooltips/content_information');});
-Route::get('lampiran/title', function () {return view('tooltips/title');});
-Route::get('lampiran/abstract', function () {return view('tooltips/abstract');});
-Route::get('lampiran/topic_category', function () {return view('tooltips/topic_category');});
-Route::get('lampiran/keyword', function () {return view('tooltips/keyword');});
-Route::get('lampiran/ordering_instruction', function () {return view('tooltips/ordering_instruction');});
+Route::get('lampiran/content_information', function () {
+    return view('tooltips/content_information');
+});
+Route::get('lampiran/title', function () {
+    return view('tooltips/title');
+});
+Route::get('lampiran/abstract', function () {
+    return view('tooltips/abstract');
+});
+Route::get('lampiran/topic_category', function () {
+    return view('tooltips/topic_category');
+});
+Route::get('lampiran/keyword', function () {
+    return view('tooltips/keyword');
+});
+Route::get('lampiran/ordering_instruction', function () {
+    return view('tooltips/ordering_instruction');
+});
