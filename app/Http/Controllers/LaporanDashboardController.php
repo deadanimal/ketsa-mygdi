@@ -675,4 +675,32 @@ class LaporanDashboardController extends Controller
         // Render the HTML as PDF
         return $pdf->stream();
     }
+
+    public function mygeo_dashboard_metadata(Request $request) {
+
+        //request range tarikh
+        $tarikh_mula = $request->tarikh_mula;
+
+        $tarikh_mula = $request->tarikh_mula;
+
+        $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
+
+        $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
+
+        return view('mygeo.dashboard_metadata');
+    }
+
+    public function mygeo_dashboard_data_asas(Request $request) {
+
+        //request range tarikh
+        $tarikh_mula = $request->tarikh_mula;
+
+        $tarikh_mula = $request->tarikh_mula;
+
+        $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
+
+        $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
+
+        return view('mygeo.dashboard_data_asas');
+    }
 }

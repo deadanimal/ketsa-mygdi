@@ -91,10 +91,10 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
-        
-        .tb table{
+
+        .tb table {
             table-layout: auto;
-  width: 180px; 
+            width: 180px;
         }
 
         .tb th,
@@ -168,9 +168,25 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Aplikasi', 'Pentadbir Metadata', 'Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin', 'Pentadbir Data']))
                                             <li class="nav-item ng-star-inserted">
                                                 <a class="nav-link active" href="{{ url('mygeo_dashboard') }}">
+                                                    <i class="fa-desktop fas text-orange"></i>
+                                                    <span class="nav-link-text">Dashboard</span>
+                                                </a>
+                                            </li>
+                                        @elseif (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Metadata', 'Penerbit Metadata']))
+                                            <li class="nav-item ng-star-inserted">
+                                                <a class="nav-link active"
+                                                    href="{{ url('mygeo_dashboard_metadata') }}">
+                                                    <i class="fa-desktop fas text-orange"></i>
+                                                    <span class="nav-link-text">Dashboard</span>
+                                                </a>
+                                            </li>
+                                        @elseif(auth::user()->hasRole(['Pentadbir Data', 'Pemohon Data']))
+                                            <li class="nav-item ng-star-inserted">
+                                                <a class="nav-link active"
+                                                    href="{{ url('mygeo_dashboard_data_asas') }}">
                                                     <i class="fa-desktop fas text-orange"></i>
                                                     <span class="nav-link-text">Dashboard</span>
                                                 </a>
@@ -828,7 +844,7 @@
             ?>
         setInterval(
             checkThreeHourNotifySelesaiMuatTurun,
-                           300000  /* 300000 ms = 5 min for farhan testing */
+            300000 /* 300000 ms = 5 min for farhan testing */
             // 10800000 /* 10800000 ms = 3 hrs */ //ori specs
             //                    60000  /* 60000 ms = m in for testing */
         );

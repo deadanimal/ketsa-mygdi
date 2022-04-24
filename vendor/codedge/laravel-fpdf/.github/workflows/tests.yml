@@ -5,23 +5,29 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.3', '7.4', '8.0']
-        laravel: [6.*, 7.*, 8.*]
+        php: ['7.4', '8.0', '8.1']
+        laravel: [7.*, 8.*, 9.*]
         dependency-version: [prefer-stable]
         include:
+          - laravel: 9.*
+            testbench: 7.*
           - laravel: 8.*
             testbench: 6.*
           - laravel: 7.*
             testbench: 5.*
-          - laravel: 6.*
-            testbench: 4.*
+        exclude:
+          - laravel: 9.*
+            php: 7.4
+          - laravel: 7.*
+            php: 8.1
+
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.14.0
+        uses: shivammathur/setup-php@2.17.0
         with:
           php-version: ${{ matrix.php }}
           coverage: xdebug
@@ -31,7 +37,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache dependencies
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ~/.composer/cache/files
           key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
@@ -48,7 +54,7 @@ jobs:
         env:
           APP_ENV: testing
 
-      - uses: codecov/codecov-action@v2.0.3
+      - uses: codecov/codecov-action@v2.1.0
         name: Push coverage to codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
