@@ -681,7 +681,7 @@ class LaporanDashboardController extends Controller
         //request range tarikh
         $tarikh_mula = $request->tarikh_mula;
 
-        $tarikh_mula = $request->tarikh_mula;
+        $tarikh_akhir = $request->tarikh_akhir;
 
         $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
 
@@ -695,7 +695,7 @@ class LaporanDashboardController extends Controller
         //request range tarikh
         $tarikh_mula = $request->tarikh_mula;
 
-        $tarikh_mula = $request->tarikh_mula;
+        $tarikh_akhir = $request->tarikh_akhir;
 
         $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
 

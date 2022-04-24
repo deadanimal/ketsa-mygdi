@@ -168,7 +168,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin', 'Pentadbir Data']))
+                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item ng-star-inserted">
                                                 <a class="nav-link active" href="{{ url('mygeo_dashboard') }}">
                                                     <i class="fa-desktop fas text-orange"></i>

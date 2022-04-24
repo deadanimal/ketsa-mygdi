@@ -55,37 +55,6 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body p-3">
-                                <div class="row p-3 pl-0 mb-0">
-                                    <form style="width: 100%;" (ngSubmit)="filterCharts()">
-
-                                        <div class="row">
-
-                                            <div class="col-6">
-                                                <label>Tarikh Mula</label>
-                                                <input class="form-control" type="date" name="tarikh_mula"
-                                                    autocomplete="off" />
-                                            </div>
-                                            <div class="col-6">
-                                                <label>Tarikh Akhir</label>
-                                                <input class="form-control" type="date" name="tarikh_akhir" id="tahun"
-                                                    autocomplete="off" />
-                                            </div>
-                                            <div class="col d-flex justify-content-end align-items-end mt-3">
-
-                                                <button class="btn btn-primary btn-sm mr-1" type="submit"><i
-                                                        class="fas fa-search"></i> CARI</button>
-                                                <a href="/mygeo_dashboard_metadata" class="btn btn-sm btn-danger"
-                                                    (click)="reset()">SET SEMULA</a>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-xl-12 col-md-6">
                         <div class="card card-stats bg-gradient-info">
                             <div class="card-body">
@@ -114,6 +83,37 @@
                                     <span class="h2 text-white mr-2">100
                                     </span>
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body p-3">
+                                <div class="row p-3 pl-0 mb-0">
+                                    <form style="width: 100%;" (ngSubmit)="filterCharts()">
+
+                                        <div class="row">
+
+                                            <div class="col-6">
+                                                <label>Tarikh Mula</label>
+                                                <input class="form-control" type="date" name="tarikh_mula"
+                                                    autocomplete="off" />
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Tarikh Akhir</label>
+                                                <input class="form-control" type="date" name="tarikh_akhir" id="tahun"
+                                                    autocomplete="off" />
+                                            </div>
+                                            <div class="col d-flex justify-content-end align-items-end mt-3">
+
+                                                <button class="btn btn-primary btn-sm mr-1" type="submit"><i
+                                                        class="fas fa-search"></i> CARI</button>
+                                                <a href="/mygeo_dashboard_metadata" class="btn btn-sm btn-danger"
+                                                    (click)="reset()">SET SEMULA</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class=" card-header bg-secondary">
-                                <h6 class="surtitle">Bar Chart</h6>
+                                <h6 class="surtitle">Pie Chart</h6>
                                 <h5 class=" h2 mb-0">Jumlah Metadata Mengikut Content Type</h5>
                             </div>
                             <div class="card-body">
@@ -173,7 +173,6 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h6 class="surtitle">Pie Chart</h6>
-
                                         <h5 class="h2 mb-0">Jumlah Metadata Mengikut Negeri</h5>
                                     </div>
                                 </div>
@@ -243,21 +242,21 @@
             }
 
             chart.data = [{
-                    category: 'January',
+                    category: 'Januari',
                     first: 40,
                     second: 55,
                     third: 60,
                     forth: 43
                 },
                 {
-                    category: 'February',
+                    category: 'Februari',
                     first: 30,
                     second: 78,
                     third: 69,
                     forth: 43
                 },
                 {
-                    category: 'March',
+                    category: 'Mac',
                     first: 27,
                     second: 40,
                     third: 45,
@@ -271,28 +270,28 @@
                     forth: 43
                 },
                 {
-                    category: 'May',
+                    category: 'Mei',
                     first: 40,
                     second: 55,
                     third: 60,
                     forth: 43
                 },
                 {
-                    category: 'June',
+                    category: 'Jun',
                     first: 30,
                     second: 78,
                     third: 69,
                     forth: 43
                 },
                 {
-                    category: 'July',
+                    category: 'Julai',
                     first: 27,
                     second: 40,
                     third: 45,
                     forth: 43
                 },
                 {
-                    category: 'August',
+                    category: 'Ogos',
                     first: 50,
                     second: 33,
                     third: 22,
@@ -306,7 +305,7 @@
                     forth: 43
                 },
                 {
-                    category: 'October',
+                    category: 'Oktober',
                     first: 30,
                     second: 78,
                     third: 69,
@@ -320,7 +319,7 @@
                     forth: 43
                 },
                 {
-                    category: 'December',
+                    category: 'Disember',
                     first: 50,
                     second: 33,
                     third: 22,
@@ -521,6 +520,7 @@
 
             pieSeries.alignLabels = false;
             pieSeries.labels.template.bent = true;
+            pieSeries.labels.template.text = "{value.percent.formatNumber('#.0')}%";
             pieSeries.labels.template.radius = 3;
             pieSeries.labels.template.padding(0, 0, 0, 0);
 
