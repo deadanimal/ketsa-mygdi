@@ -77,7 +77,7 @@
                                                     <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}
                                                     </td>
                                                     <td>
-                                                        @if (auth()->user()->name == 'Admin Pentadbir')
+                                                        @if (auth()->user()->email == 'pentadbirdata1@gmail.com')
                                                             <a href="{{ url('lihat_permohonan/' . $permohonan->id) }}"
                                                                 class="btn btn-sm btn-success text-center">Semak</a>
                                                             <button type="button"

@@ -39,22 +39,22 @@ class HomeController extends Controller
     {
         $agensi = AgensiOrganisasi::all();
 
-        $user = User::where('name', 'Admin Pentadbir')->where('assigned_roles', 'Pentadbir Data')->first();
+        $user = User::where('email', 'pentadbirdata1@pipeline.com')->where('assigned_roles', 'Pentadbir Data')->first();
         return view('adminpentadbirsetup', compact('agensi', 'user'));
     }
 
     public function simpanadminpentadbir(Request $request)
     {
-        $haveuser = User::where('name', 'Admin Pentadbir')->where('assigned_roles', 'Pentadbir Data')->count();
+        $haveuser = User::where('email', 'pentadbirdata1@gmail.com')->where('assigned_roles', 'Pentadbir Data')->count();
 
         if ($haveuser == "0") {
             $request['password'] = Hash::make($request->password1);
-            $request['name'] = 'Admin Pentadbir';
+            $request['email'] = 'pentadbirdata1@gmail.com';
             $user = User::create($request->all());
             $user->assignRole($request->assigned_roles);
         } else {
-            dd('belum buat update');
-            // User::where('name', 'Admin Pentadbir')->update($request->all());
+            // dd('belum buat update');
+            User::where(['email', 'pentadbirdata1@gmail.com'])->first()->update($request->all());
         }
 
         return back();
