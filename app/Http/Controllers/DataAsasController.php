@@ -486,22 +486,27 @@ class DataAsasController extends Controller
 
         foreach ($permohonan_list as $pl) {
 
-            $inTempohUrl = 0;
-            $currentDate = date('d-m-Y');
-            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
-            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                    $pl['inTempohUrl'] = 1;
-                } elseif ($currentDate <= $tempohUrlStart) {
-                    $pl['inTempohUrl'] = 2;
-                } else {
-                    $pl['inTempohUrl'] = 0;
+            if ($pl->proses_datas != null) {
+                $inTempohUrl = 0;
+                $currentDate = date('d-m-Y');
+                $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+                $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+                $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+                if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                    if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                        $pl['inTempohUrl'] = 1;
+                    } elseif ($currentDate <= $tempohUrlStart) {
+                        $pl['inTempohUrl'] = 2;
+                    } else {
+                        $pl['inTempohUrl'] = 0;
+                    }
                 }
+                $res = json_decode($pl->proses_datas->pautan_data);
+                $pl['res'] = $res;
+            } else {
+                $pl['inTempohUrl'] = 0;
+                $pl['res'] = 'none';
             }
-            $res = json_decode($pl->proses_datas->pautan_data);
-            $pl['res'] = $res;
         }
 
         return view('mygeo.muat_turun_data', compact('permohonan_list'));
