@@ -507,7 +507,7 @@
 
                                         <hr class="my-3">
 
-                                        @if (Auth::user()->hasRole(['Super Admin', 'Pentadbir Aplikasi']) || auth()->user()->name == 'Admin Pentadbir')
+                                        @if (Auth::user()->hasRole(['Super Admin', 'Pentadbir Aplikasi']) || auth()->user()->email == 'pentadbirdata1@gmail.com')
 
                                             <div class="row">
                                                 <div class="col-4">
@@ -555,7 +555,7 @@
                                                         <select class="form-control form-control-sm" name="assign_admin">
                                                             <option selected disabled>Pilih</option>
                                                             @foreach ($pentadbirdata as $pd)
-                                                                @if ($pd->name != 'Admin Pentadbir')
+                                                                @if ($pd->email != 'pentadbirdata1@gmail.com')
                                                                     <option value="{{ $pd->name }}"
                                                                         @if ($pd->name == $permohonan->assign_admin) selected @endif>
                                                                         {{ $pd->name }}
