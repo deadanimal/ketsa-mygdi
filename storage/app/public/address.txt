@@ -332,3 +332,5 @@ ftest3
 2001:d08:1b90:108c:804d:e45:ff83:9c9f Chrome
 20.92.88.161 Chrome
 2001:f40:904:74c8:c96:8002:f50b:86f5 Chrome
+2001:d08:139d:85ab:dc68:b80d:90a7:69e6 Chrome
+20.196.213.52 Chrome

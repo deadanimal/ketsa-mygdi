@@ -9,7 +9,7 @@ class XmlController extends Controller {
 
     function __construct() {}
 
-    public function createXml($request,$fileUrl="",$keywords="",$topicCategories="",$custom_inputs="") {
+    public function createXml($request,$fileUrl="",$keywords="",$topicCategories="",$custom_inputs="",$refsysname="") {
         $c2_metadataName = strtoupper($request->c2_metadataName);
         $c2_abstract = trim(preg_replace('/\s+/',' ',$request->c2_abstract));
         $xml = <<<XML
@@ -90,7 +90,7 @@ class XmlController extends Controller {
                             <referenceSystemIdentifier>
                                 <RS_Identifier>
                                     <codeSpace>
-                                        <gco:CharacterString>$request->c13_ref_sys_identify</gco:CharacterString>
+                                        <gco:CharacterString>$refsysname</gco:CharacterString>
                                     </codeSpace>
                                 </RS_Identifier>
                             </referenceSystemIdentifier>

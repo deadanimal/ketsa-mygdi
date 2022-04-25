@@ -925,7 +925,7 @@ if (!is_null(old('kategori'))) {
         
         setInterval(
             autosave_metadata,
-            30000  //this value is in miliseconds. currently set at 30 seconds
+            180000  //this value is in miliseconds. currently set at 3 minutes
         );
         function autosave_metadata(){
             $.ajax({

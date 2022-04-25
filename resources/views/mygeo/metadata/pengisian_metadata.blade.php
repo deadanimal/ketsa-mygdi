@@ -720,7 +720,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 
         setInterval(
             autosave_metadata,
-            30000  //this value is in miliseconds. currently set at 30 seconds
+            180000  //this value is in miliseconds. currently set at 3 minutes
         );
         function autosave_metadata(){
             if($('#metadata_id').val() != ""){ //update

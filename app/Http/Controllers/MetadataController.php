@@ -841,7 +841,7 @@ class MetadataController extends Controller {
         }elseif($refSysId == "UTM ZON 50"){
             $refSysId = 28;
         }
-//        dd($refSysId); //SMBG SINI
+
         if ($refSysId != "" && is_numeric($refSysId)) {
             $refSysSelected = ReferenceSystemIdentifier::where('id', $refSysId)->get()->first();
         } elseif ($refSysId != "" && !is_numeric($refSysId)) {
@@ -2822,6 +2822,12 @@ class MetadataController extends Controller {
 //        dd($request->all(),$mt,$var);
         //=============
         
+        $refsysname = "";
+        if(isset($request->c13_ref_sys_identify) && !empty($request->c13_ref_sys_identify)){
+            $refSysSelected = ReferenceSystemIdentifier::where('id', $request->c13_ref_sys_identify)->get()->first();
+            $refsysname = $refSysSelected->name;
+        }
+        
         if(isset($request->autosave)){
             $validator = Validator::make($request->all(), $fields);
             if($validator->fails()){
@@ -2877,7 +2883,7 @@ class MetadataController extends Controller {
 //            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
 //        }
         $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request, $fileUrl, $keywords, $topicCategories, trim($custom_inputs));
+        $xml = $xmlcon->createXml($request, $fileUrl, $keywords, $topicCategories, trim($custom_inputs), $refsysname);
 
         $msg = "";
         $newMetadataId = "";
