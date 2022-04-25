@@ -172,15 +172,17 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 my-2">
+                    <?php /* ?>
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li>ftest_{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
                     @endif
+                    <?php */ ?>
                 </div>
                 <div class="col-12">
                     <div class="card">
