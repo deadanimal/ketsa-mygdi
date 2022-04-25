@@ -3393,7 +3393,13 @@ class MetadataController extends Controller {
 
 
             $msg = "";
-            if ($request->submitAction == "save") {
+            if ($request->submitAction == "kiv") {
+                $mg->is_draf = "no";
+                $mg->is_kiv = "yes";
+                if (auth::user()->hasRole(['Pengesah Metadata'])) {
+                    $msg = "Catatan berjaya disimpan.";
+                }
+            }elseif ($request->submitAction == "save") {
                 $mg->is_draf = "no";
                 if (auth::user()->hasRole(['Pengesah Metadata'])) {
                     $mg->disahkan = "no";
