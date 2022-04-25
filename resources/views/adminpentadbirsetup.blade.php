@@ -12,7 +12,7 @@
                             @csrf
                             @if ($user == null)
                                 <label for="">Nama</label>
-                                <input class="form-control" type="text" name="name" value="Admin Pentadbir" disabled>
+                                <input class="form-control" type="text" name="name" value="" disabled>
                                 <label for="">Email</label>
                                 <input class="form-control" type="text" name="email" value="">
                                 <label for="">Password</label>
