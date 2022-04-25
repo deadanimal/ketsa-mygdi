@@ -2827,7 +2827,8 @@ class MetadataController extends Controller {
                 var_dump($validator->errors());exit();
             }
         }else{
-            $this->validate($request, $fields, $customMsg);
+//            $this->validate($request, $fields, $customMsg);
+            return Redirect::back()->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan (*).']);
         }
 
         $keywords = "";
@@ -3241,7 +3242,8 @@ class MetadataController extends Controller {
                 exit();
             }
         }else{
-            $this->validate($request, $fields, $customMsg);
+//            $this->validate($request, $fields, $customMsg);
+            return Redirect::back()->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan (*).']);
         }
 
         $fileUrl = "";

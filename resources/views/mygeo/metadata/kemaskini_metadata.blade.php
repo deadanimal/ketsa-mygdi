@@ -138,6 +138,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="card-body">
+                    <?php /* ?>
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -147,7 +148,7 @@
                         </ul>
                     </div>
                     @endif
-
+                    <?php */ ?>
                 </div>
                 <div class="col-12">
                     <div class="card">
@@ -922,10 +923,10 @@ if (!is_null(old('kategori'))) {
             }
         });
         
-//        setInterval(
-//            autosave_metadata,
-//            30000  //this value is in miliseconds. currently set at 30 seconds
-//        );
+        setInterval(
+            autosave_metadata,
+            30000  //this value is in miliseconds. currently set at 30 seconds
+        );
         function autosave_metadata(){
             $.ajax({
                 type: "POST", 
