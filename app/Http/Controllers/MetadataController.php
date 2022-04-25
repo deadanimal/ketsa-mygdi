@@ -608,9 +608,9 @@ class MetadataController extends Controller {
         
         $refSysId = "";
         if (isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != "") {
-            $refSysId = strtolower($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString);
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
         } elseif (isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString != "") {
-            $refSysId = strtolower($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString);
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString;
         } else {
             $refSysSelected = [];
         }
@@ -678,6 +678,7 @@ class MetadataController extends Controller {
         } elseif ($refSysId != "" && !is_numeric($refSysId)) {
             $refSysSelected = ReferenceSystemIdentifier::where('name', $refSysId)->get()->first();
         }
+        
         $portal = PortalTetapan::get()->first();
         $customMetadataInput = CustomMetadataInput::all();
         $catSelected = "";
@@ -776,9 +777,9 @@ class MetadataController extends Controller {
         $refSys = ReferenceSystemIdentifier::all();
         $refSysId = "";
         if (isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString != "") {
-            $refSysId = strtolower($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString);
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->codeSpace->CharacterString;
         } elseif (isset($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString) && $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString != "") {
-            $refSysId = strtolower($metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString);
+            $refSysId = $metadataxml->referenceSystemInfo->MD_ReferenceSystem->referenceSystemIdentifier->RS_Identifier->code->CharacterString;
         } else {
             $refSysSelected = [];
         }
@@ -840,7 +841,7 @@ class MetadataController extends Controller {
         }elseif($refSysId == "UTM ZON 50"){
             $refSysId = 28;
         }
-        
+//        dd($refSysId); //SMBG SINI
         if ($refSysId != "" && is_numeric($refSysId)) {
             $refSysSelected = ReferenceSystemIdentifier::where('id', $refSysId)->get()->first();
         } elseif ($refSysId != "" && !is_numeric($refSysId)) {

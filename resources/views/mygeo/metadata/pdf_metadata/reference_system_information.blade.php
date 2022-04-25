@@ -59,6 +59,7 @@
                                     if (isset($metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString != '') {
                                         $var = $metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString;
                                     }
+                                    $var = $refSysSelected->projection;
                                     ?>
                                     <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <b>Projection:</b>&nbsp;&nbsp;&nbsp;
@@ -71,6 +72,7 @@
                                     if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString != '') {
                                         $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString;
                                     }
+                                    $var = $refSysSelected->semi_major_axis
                                     ?>
                                     <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <b>Semi Major Axis:</b>&nbsp;&nbsp;&nbsp;
@@ -83,6 +85,7 @@
                                     if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString != '') {
                                         $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString;
                                     }
+                                    $var = $refSysSelected->ellipsoid;
                                     ?>
                                     <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <b>Ellipsoid:</b>&nbsp;&nbsp;&nbsp;
@@ -95,6 +98,7 @@
                                     if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength != '') {
                                         $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength;
                                     }
+                                    $var = $refSysSelected->axis_units;
                                     ?>
                                     <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <b>Axis Units:</b>&nbsp;&nbsp;&nbsp;
@@ -107,6 +111,7 @@
                                     if (isset($metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString != '') {
                                         $var = $metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString;
                                     }
+                                    $var = $refSysSelected->datum;
                                     ?>
                                     <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <b>Datum:</b>&nbsp;&nbsp;&nbsp;
@@ -119,6 +124,7 @@
                                     if (isset($metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString) && $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString != '') {
                                         $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString;
                                     }
+                                    $var = $refSysSelected->denominator_flattening_ratio;
                                     ?>
                                     <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <b>Denominator of Flattening Ratio:</b>&nbsp;&nbsp;&nbsp;
