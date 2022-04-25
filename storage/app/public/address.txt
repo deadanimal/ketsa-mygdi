@@ -328,3 +328,5 @@ ftest3
 35.187.232.113 Chrome
 58.26.55.146 Chrome
 2401:b00:11:31:9485:d21a:efb3:245d Chrome
+103.8.147.241 Chrome
+2001:d08:1b90:108c:804d:e45:ff83:9c9f Chrome
