@@ -347,3 +347,4 @@ ftest3
 2001:f40:906:885:a9fe:7670:2e69:68ae Chrome
 110.159.229.206 Microsoft Edge
 116.50.57.140 Chrome
+2001:d08:1b9b:c86a:b053:db12:d4aa:c977 Chrome

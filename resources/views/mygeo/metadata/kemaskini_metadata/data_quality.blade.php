@@ -1117,9 +1117,9 @@
                                                                         <b>Result:</b>
                                                                         <select name="c15_t3_result_2" id="c15_t3_result_2" class="form-control form-control-sm">
                                                                             <option value="">Pilih...</option>
-                                                                            <option value="Pass" {{(old('c15_t3_result_2') == 'Pass' ? "selected":"")}}>Pass</option>
-                                                                            <option value="Fail" {{(old('c15_t3_result_2') == 'Fail' ? "selected":"")}}>Fail</option>
-                                                                            <option value="Not Relevant" {{(old('c15_t3_result_2') == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
+                                                                            <option value="Pass" {{($t3Res == 'Pass' ? "selected":"")}}>Pass</option>
+                                                                            <option value="Fail" {{($t3Res == 'Fail' ? "selected":"")}}>Fail</option>
+                                                                            <option value="Not Relevant" {{($t3Res == 'Not Relevant' ? "selected":"")}}>Not Relevant</option>
                                                                         </select>
                                                                     </label>
                                                                 </td>
