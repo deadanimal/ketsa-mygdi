@@ -12,7 +12,7 @@
         .form-control,
         .form-control:disabled {
             /* border-width: 0;
-                                                                                                                                                                    background-color: white */
+                                                                                                                                                                                            background-color: white */
         }
 
         ol.roman {
@@ -98,6 +98,7 @@
                                         <h3 class=" d-inline">AKUAN PELAJAR</h3>
                                     </div>
                                     <div class="col-12 text-right">
+                                        {{-- <a class="btn btn-default btn-sm " href="/mohon_data">Kembali</a> --}}
                                         <a class="btn btn-default btn-sm "
                                             href="/lihat_permohonan/{{ $permohonan->id }}">Kembali</a>
                                     </div>

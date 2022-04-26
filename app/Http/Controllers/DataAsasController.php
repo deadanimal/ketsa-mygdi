@@ -444,13 +444,11 @@ class DataAsasController extends Controller
         $bil_mohon_data = MohonData::where('user_id', auth()->id())
             ->where('dihantar', '1')
             ->where('status', '3')
-            ->where('acceptance', '1')
             ->count();
 
         $bil_penilaian = MohonData::where('user_id', auth()->id())
             ->where('dihantar', '1')
             ->where('status', '3')
-            ->where('acceptance', '1')
             ->where('penilaian', '1')
             ->count();
 
@@ -1403,7 +1401,9 @@ class DataAsasController extends Controller
             ]);
 
             $pemohon = MohonData::with('users')->where('id', $request->permohonan_id)->get()->first();
-            $agensi_pemohon = is_numeric($pemohon->agensi_organisasi) && isset($pemohon->agensiOrganisasi) ? $pemohon->agensiOrganisasi->name : $pemohon->agensi_organisasi;
+            $agensi_pemohon = $pemohon->users->agensiOrganisasi->name;
+
+            // is_numeric($pemohon->agensi_organisasi) && isset($pemohon->agensiOrganisasi) ? $pemohon->agensiOrganisasi->name : $pemohon->agensi_organisasi;
 
             //get pentadbir data
             $pentadbir = User::where('assigned_roles', 'LIKE', '%Pentadbir Data%')->get();
