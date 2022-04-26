@@ -384,7 +384,7 @@
                                                     </tr>
                                                     <?php //================= ?>
                                                     <?php
-                                                    foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
+                                                    foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
                                                         if($key == "c15_t2_scope"){
                                                             $t2Scope = "";
                                                             if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString != "") {
@@ -395,7 +395,7 @@
                                                                 <tr class='Conceptual'>
                                                                     <td>
                                                                         <label class="form-check-label" for="c15_t2_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <b>Scope:</b>
+                                                                            <b>Scopeas:</b>
                                                                             <?php echo trim($t2Scope); ?>
                                                                         </label>
                                                                     </td>
@@ -1723,6 +1723,7 @@
             }
         });
         $('input:radio[name="c15_t2_type"]').change(function () {
+            console.log('val: '+$(this).val());
             if ($(this).val() == 'Conceptual') {
                 $('.Conceptual').show();
                 $('.Domain').hide();
