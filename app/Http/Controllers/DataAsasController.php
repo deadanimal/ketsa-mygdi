@@ -315,7 +315,7 @@ class DataAsasController extends Controller
             $data = array('m' => $m2);
             Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
             });
         }
         exit();
@@ -421,7 +421,7 @@ class DataAsasController extends Controller
             $data = array('cat' => 'cat');
             Mail::send("mails.exmpl15", $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
-                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                 // $message->attach($file);
             });
 
@@ -444,13 +444,11 @@ class DataAsasController extends Controller
         $bil_mohon_data = MohonData::where('user_id', auth()->id())
             ->where('dihantar', '1')
             ->where('status', '3')
-            ->where('acceptance', '1')
             ->count();
 
         $bil_penilaian = MohonData::where('user_id', auth()->id())
             ->where('dihantar', '1')
             ->where('status', '3')
-            ->where('acceptance', '1')
             ->where('penilaian', '1')
             ->count();
 
@@ -1328,12 +1326,12 @@ class DataAsasController extends Controller
                     if ($request->catatan == "others") {
                         Mail::send("mails.exmpl14-1", $data, function ($message) use ($to_name, $to_email, $subject) {
                             $message->to($to_email, $to_name)->subject($subject);
-                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                         });
                     } else {
                         Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
                             $message->to($to_email, $to_name)->subject($subject);
-                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                         });
                     }
                 }
@@ -1396,8 +1394,9 @@ class DataAsasController extends Controller
             ]);
 
             $pemohon = MohonData::with('users')->where('id', $request->permohonan_id)->get()->first();
-            $agensi_pemohon =
-            is_numeric($pemohon->agensi_organisasi) && isset($pemohon->agensiOrganisasi) ? $pemohon->agensiOrganisasi->name : $pemohon->agensi_organisasi;
+            $agensi_pemohon = $pemohon->users->agensiOrganisasi->name;
+
+            // is_numeric($pemohon->agensi_organisasi) && isset($pemohon->agensiOrganisasi) ? $pemohon->agensiOrganisasi->name : $pemohon->agensi_organisasi;
 
             //get pentadbir data
             $pentadbir = User::where('assigned_roles', 'LIKE', '%Pentadbir Data%')->get();
@@ -1409,7 +1408,7 @@ class DataAsasController extends Controller
                     $data = ['nama_pemohon' => $pemohon->users->name, 'agensi' => $agensi_pemohon];
                     Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
                         $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
-                        // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                     });
                 }
             }
