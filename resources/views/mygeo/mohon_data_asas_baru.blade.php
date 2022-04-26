@@ -121,7 +121,7 @@
                                         </div>
 
                                         <div class="col-4 text-right">
-                                            <a href="{{ url()->previous() }}">
+                                            <a href="/mohon_data">
                                                 <button type="button"
                                                     class="btn btn-sm btn-default float-right">Kembali</button>
                                             </a>
