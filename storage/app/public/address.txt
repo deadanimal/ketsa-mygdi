@@ -343,3 +343,7 @@ ftest3
 2001:f40:906:3f4:40bd:bfe3:47d2:a1af Chrome
 198.235.24.24 
 74.208.212.83 Safari
+2001:d08:1b9b:c86a:b83b:d410:8593:15b1 Chrome
+2001:f40:906:885:a9fe:7670:2e69:68ae Chrome
+110.159.229.206 Microsoft Edge
+116.50.57.140 Chrome
