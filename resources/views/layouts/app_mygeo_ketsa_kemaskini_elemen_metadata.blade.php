@@ -76,7 +76,8 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
-        html{
+
+        html {
             font-size: 110%;
         }
 
@@ -751,7 +752,7 @@
                         mohons = mohons + key + ",";
                     });
                     swal({
-                        title: "Adakah anda berjaya memuat turun data?",
+                        title: "Adakah ",
                         html: msg,
                         type: "warning",
                         input: "checkbox",

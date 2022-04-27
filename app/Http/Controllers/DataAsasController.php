@@ -297,10 +297,18 @@ class DataAsasController extends Controller
         exit();
     }
 
+    public function notificationMuatTurun(Request $request)
+    {
+        $data = $request->name;
+        $mohons = $request->data;
+
+        return view('confirm_muat_turun', compact('data', 'mohons'));
+    }
+
     public function berjayaMuatTurun(Request $request)
     {
-        $mohons = explode(',', substr($request->mohons, 0, -1));
-        foreach ($mohons as $m) {
+        // $mohons = explode(',', substr($request->mohons, 0, -1));
+        foreach ($request->mohons as $m) {
             $vals = [];
             $vals["berjayaMuatTurunStatus"] = '1';
             $vals["download"] = '1';
@@ -313,11 +321,16 @@ class DataAsasController extends Controller
             $to_name = Auth::user()->name;
             $to_email = Auth::user()->email;
             $data = array('m' => $m2);
-            Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-            });
+            // Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
+            //     $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+            //     $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+            // });
+
         }
+
+        echo "<script>alert('Disimpan');</script>";
+
+        echo "<script>window.close();</script>";
         exit();
     }
 
