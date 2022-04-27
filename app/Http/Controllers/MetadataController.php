@@ -2925,7 +2925,7 @@ class MetadataController extends Controller {
         }else{
             $validator = Validator::make($request->all(), $fields);
             if($validator->fails()){
-                return Redirect::back()->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan (*).']);
+                return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan (*).']);
             }
 //            $this->validate($request, $fields, $customMsg);
         }
@@ -3349,7 +3349,7 @@ class MetadataController extends Controller {
         }else{
             $validator = Validator::make($request->all(), $fields);
             if($validator->fails()){
-                return Redirect::back()->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan (*).']);
+                return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan (*).']);
             }
 //            $this->validate($request, $fields, $customMsg);
         }
