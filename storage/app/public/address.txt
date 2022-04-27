@@ -349,3 +349,14 @@ ftest3
 116.50.57.140 Chrome
 2001:d08:1b9b:c86a:b053:db12:d4aa:c977 Chrome
 2001:d08:1b9b:c86a:a4f6:8597:da42:67fc Chrome
+198.12.158.38 Firefox
+2001:f40:906:885:91e3:5e5c:a145:494a Chrome
+185.180.143.73 Chrome
+45.10.166.16 Internet Explorer
+23.90.160.130 Chrome
+23.251.102.82 Chrome
+31.210.39.137 Firefox
+31.210.39.137 Internet Explorer
+2001:f40:906:885:6026:3853:d80d:7044 Chrome
+2001:f40:906:3f4:bd72:a829:6cf:fbc Chrome
+109.171.124.235 Microsoft Edge
