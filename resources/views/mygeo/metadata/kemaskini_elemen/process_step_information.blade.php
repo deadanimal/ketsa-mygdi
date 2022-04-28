@@ -23,41 +23,42 @@
                                 Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }elseif($key == "c5_process_lvl"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline ml-3">
-                                    <div class="form-control-label mr-3" data-toggle="tooltip" title="Tahap pemprosesan data">
-                                        <?php echo __('lang.process_level'); ?>
-                                    </div>
-                                    Textbox
-                                    <input class="form-control form-control-sm sortable" type="text" style="width :120px" placeholder="Insert Process Level" name="c5_process_lvl" id="c5_process_lvl" data-status="<?php echo $val['status']; ?>">
-                                </div>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Tahap pemprosesan data">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-8">
+                                Textbox
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }
                     if($key == "c5_resolution"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline">
-                                    <div class="form-control-label mr-3" data-toggle="tooltip" title="Resolusi data">
-                                        <?php echo __('lang.resolution'); ?>
-                                    </div>
-                                    Textbox
-                                    <input class="form-control form-control-sm sortable" type="text" style="width :100px" placeholder="0.0" name="c5_resolution" id="c5_resolution" data-status="<?php echo $val['status']; ?>">
-                                    <div class="form-control-label ml-2">
-                                        meter
-                                    </div>
-                                </div>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Resolusi data">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-8">
+                                Textbox
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }

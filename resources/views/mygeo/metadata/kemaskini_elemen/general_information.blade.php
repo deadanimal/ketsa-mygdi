@@ -23,7 +23,9 @@
                                 Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }elseif($key == "c1_content_info"){
@@ -39,7 +41,9 @@
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }elseif($key == "publisher_name"){
@@ -53,7 +57,9 @@
                                 Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_name" data-status="<?php echo $val['status']; ?>"/>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }elseif($key == "publisher_agensi_organisasi"){
@@ -67,7 +73,9 @@
                                 Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_agensi_organisasi" data-status="<?php echo $val['status']; ?>"/>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }elseif($key == "publisher_email"){
@@ -81,7 +89,9 @@
                                 Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_email" data-status="<?php echo $val['status']; ?>"/>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }elseif($key == "publisher_phone"){
@@ -95,7 +105,9 @@
                                 Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="publisher_phone" data-status="<?php echo $val['status']; ?>"/>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }elseif($key == "publisher_role"){
@@ -111,7 +123,9 @@
                                     <option value="">Pilih...</option>
                                 </select>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }

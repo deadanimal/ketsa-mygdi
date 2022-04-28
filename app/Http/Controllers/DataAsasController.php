@@ -297,10 +297,18 @@ class DataAsasController extends Controller
         exit();
     }
 
+    public function notificationMuatTurun(Request $request)
+    {
+        $data = $request->name;
+        $mohons = $request->data;
+
+        return view('confirm_muat_turun', compact('data', 'mohons'));
+    }
+
     public function berjayaMuatTurun(Request $request)
     {
-        $mohons = explode(',', substr($request->mohons, 0, -1));
-        foreach ($mohons as $m) {
+        // $mohons = explode(',', substr($request->mohons, 0, -1));
+        foreach ($request->mohons as $m) {
             $vals = [];
             $vals["berjayaMuatTurunStatus"] = '1';
             $vals["download"] = '1';
@@ -313,11 +321,16 @@ class DataAsasController extends Controller
             $to_name = Auth::user()->name;
             $to_email = Auth::user()->email;
             $data = array('m' => $m2);
-            Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-            });
+            // Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
+            //     $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+            //     $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+            // });
+
         }
+
+        echo "<script>alert('Disimpan');</script>";
+
+        echo "<script>window.close();</script>";
         exit();
     }
 
@@ -930,16 +943,17 @@ class DataAsasController extends Controller
 
         $surat_template = "<p class='ql-align-justify'>Dato'/Datin/Tuan/Puan,</p><p class='ql-align-justify'><strong style='text-transform:uppercase;'>$permohonan->name</strong></p><p class='ql-align-justify'>Dengan segala hormatnya merujuk kepada surat Dato'/Datin/tuan/puan $no_ruj bertarikh $dokumen_date mengenai perkara di atas.</p><p class='ql-align-justify'>2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan permohonan data geospatial terperingkat dan tiada halangan atas permohonan tersebut. Senarai data yang dibekalkan adalah seperti Lampiran 1. Walau bagaimanapun, untuk permohonan metadata pula, pihak Dato'/Datin/tuan/puan boleh melayari aplikasi MyGDI Explorer untuk mendapatkan informasi yang lebih terperinci https://www.mygeoportal.gov.my/node/173.</p><p class='ql-align-justify'>3. Untuk makluman Dato'/Datin/tuan/puan, penggunaan data ini adalah terikat dengan Pekeliling Am Bil 1/2007: Pekeliling Arahan Keselamatan Terhadap Dokumen Geospatial Terperingkat, Akta Rahsia Rasmi 1972 dan Surat Pekeliling Am Bil 1 Tahun 1997 : Peraturan Pemeliharaan Rekod-Rekod Kerajaan.</p><p class='ql-align-justify'>4. Pihak Dato'/Datin/tuan/puan boleh melayari Aplikasi MyGDI Data Services di https://mygos.mygeoportal.gov.my/myservices bagi mendapatkan paparan data asas GDC yang boleh dikongsi antara agensi kerajaan melalui program MyGDl. Permohonan untuk mendapatkan capaian ke aplikasi ini boleh dihantar kepada pihak PGN melalui emel pgn.kto@ketsa.gov.my.</p><p class='ql-align-justify'>5. Sebarang pertanyaan mengenai kesahihan dan ketepatan data perlulah dirujuk kepada Agensi Pembekal Data (APD) yang berkenaan. Penggunaan data ini selain daripada tujuan asal yang dimohon perlulah mendapat kebenaran daripada pihak APD dan PGN.</p><p class='ql-align-justify'>6. Mohon kerjasama pihak Dato'/Datin/tuan/puan untuk melengkapkan Borang Pengesahan Penerimaan Data Geospatial seperti di Lampiran 2 dan Borang Penilaian Perkongsian Data Melalui MyGDI seperti di Lampiran 3 dan dikembalikan semula kepada pihak PGN dalam tempoh dua minggu dari tarikh surat ini. Sekiranya ada sebarang pertanyaan, sila hubungi $admin_name di talian $admin_phone ($admin_email).</p><p class='ql-align-justify'><br></p><p class='ql-align-justify'>Sekian terima kasih.</p><p class='ql-align-justify'>**Ini adalah surat cetakan komputer, tidak perlu tandatangan**</p>";
 
+        if ($surat->nama != null) {
+            $surat['nama_alamat'] = $surat->nama . `&#13;&#10;` . $surat->alamat;
+        }
         // dd('surat',$surat_template, $surat->content);
         return view('mygeo.surat_balasan', compact('permohonan', 'surat', 'admin', 'surat_template', 'dokumen'));
     }
 
     public function update_surat_balasan(Request $request)
     {
-
-        // dd($request->content_surat_balasan);
-        //save senarai data
-        // dd($request->all());
+        $namaAlamat = $request->nama_alamat;
+        $pieces = explode("\n", $namaAlamat);
 
         SuratBalasan::where(["permohonan_id" => $request->permohonan_id])->update([
             "no_rujukan" => $request->no_rujukan,
@@ -947,7 +961,8 @@ class DataAsasController extends Controller
             "no_rujukan_mohon" => $request->no_rujukan_mohon,
             "date_mohon" => $request->date_mohon,
             "content" => $request->content_surat_balasan,
-            "nama_alamat" => $request->nama_alamat,
+            "nama" => $pieces[0],
+            "alamat" => $pieces[1],
         ]);
 
         $at = new AuditTrail();
@@ -956,7 +971,7 @@ class DataAsasController extends Controller
         $at->data = 'Update';
         $at->save();
 
-        return redirect('proses_data')->with('success', 'Surat Balasan Disimpan');
+        return redirect('/proses_data')->with('success', 'Surat Balasan Disimpan');
         // return redirect()->back();
     }
 

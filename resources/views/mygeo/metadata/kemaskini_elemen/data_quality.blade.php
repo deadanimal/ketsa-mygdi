@@ -23,54 +23,59 @@
                                 Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }elseif($key == "c15_data_quality_info"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline">
-                                    <label class="form-control-label mr-3" for="input-DQscope" data-toggle="tooltip" title="Pengisian secara Pilihan: Skop DQ"><?php echo __('lang.dq_scope'); ?>
-                                    </label>
-                                    Dropdown
-                                    <select name="c15_data_quality_info" id="c15_data_quality_info" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
-                                        <option value="">Pilih...</option>
-                                    </select>
-                                </div>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Pengisian secara Pilihan: Skop DQ">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-8">
+                                Dropdown
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }
                     if($key == "c15_data_history"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline">
-                                    <label class="form-control-label mr-3" for="input-datahistory">
-                                        <?php echo __('lang.data_history'); ?></label>
-                                    Textbox
-                                    <input class="form-control form-control-sm sortable" type="text" name="c15_data_history" id="c15_data_history" placeholder="None" data-status="<?php echo $val['status']; ?>">
-                                </div>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Pengisian secara Pilihan: Skop DQ">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-8">
+                                Textbox
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }
                     if($key == "c15_date"){
                         ?>
                         <div class="row sortIt"  <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline">
-                                    <label class="form-control-label mr-3" for="input-date">
-                                        <?php echo __('lang.date_time'); ?>
-                                    </label>
-                                    Textbox
-                                    <input class="form-control form-control-sm sortable" type="date" name="c15_date" id="c15_date" data-status="<?php echo $val['status']; ?>">
-                                </div>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Pengisian secara Pilihan: Skop DQ">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-8">
+                                Textbox
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }

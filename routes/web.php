@@ -194,6 +194,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/checkThreeHourNotifySelesaiMuatTurun', 'DataAsasController@checkThreeHourNotifySelesaiMuatTurun');
     Route::post('/berjayaMuatTurun', 'DataAsasController@berjayaMuatTurun');
     Route::post('/api/dokumen/akuan_pelajar', 'DataAsasController@generate_pdf_akuan_pelajar');
+    Route::post('/notificationMuatTurun', 'DataAsasController@notificationMuatTurun');
 
     Route::get('/surat_balasan/{id}', 'DataAsasController@surat_balasan');
     Route::post('/simpan_surat_balasan', 'DataAsasController@update_surat_balasan');
