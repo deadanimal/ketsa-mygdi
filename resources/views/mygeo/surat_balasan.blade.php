@@ -100,7 +100,7 @@
                                     <div align="justify" class="mx-5">
 
 
-                                        @if ($surat->nama_alamat == null)
+                                        @if ($surat->nama == null)
                                             <textarea class="form-control form-control-sm mt-3" cols="30" placeholder="Nama dan Alamat" rows="6"
                                                 name="nama_alamat">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
                                                                                                                                                                       </textarea>

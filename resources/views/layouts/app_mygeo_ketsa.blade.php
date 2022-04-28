@@ -754,6 +754,12 @@
         <div id="toast-container" class="toast-top-right toast-container"></div>
     </div>
 
+    <form action="/notificationMuatTurun" id="formTigaJam" method="post" target="TheWindow">
+        @csrf
+        <div id="inputTigaJam">
+        </div>
+    </form>
+
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
@@ -792,49 +798,55 @@
             }).done(function(response) {
                 var res = JSON.parse(response);
                 console.log(res);
-                console.log(jQuery.isEmptyObject(res));
+                // console.log(jQuery.isEmptyObject(res));
                 if (!jQuery.isEmptyObject(res)) {
+                    // window.open("https://www.w3schools.com");
                     var msg = "Data-data berikut telah diakui terima dan dimuat turun:<br>";
                     var mohons = "";
                     var counter = 1;
+                    $("#inputTigaJam").html('');
                     jQuery.each(res, function(key, val) {
-                        msg = msg + counter + ") " + val + "<br>";
-                        counter++;
-                        mohons = mohons + key + ",";
+                        $("#inputTigaJam").append(`
+                            <input type="hidden" name="name[]" value="` + val + `">
+                            <input type="hidden" name="data[]" value="` + key + `">
+                        `);
                     });
-                    swal({
-                        title: "Adakah anda berjaya memuat turun data?",
-                        html: msg,
-                        type: "warning",
-                        input: "checkbox",
-                        inputPlaceholder: " Saya berjaya memuat turun data",
-                        buttonsStyling: false,
-                        allowOutsideClick: true,
-                        showCancelButton: true,
-                        cancelButtonClass: "btn btn-warning",
-                        confirmButtonClass: "btn btn-success",
-                        cancelButtonText: "Belum Selesai Muat Turun",
-                        confirmButtonText: 'Selesai Muat Turun&nbsp;<i class="fa fa-arrow-right"></i>',
-                    }).then(function(result) {
-                        if (result.dismiss == "cancel") { //clicked belum selesai (cancel)
 
-                        } else if (result.dismiss == "overlay") { //clicked outside alert box
+                    window.open('', 'TheWindow');
+                    document.getElementById('formTigaJam').submit();
+                    // swal({
+                    //     title: "Adakah anda berjaya memuat turun data?",
+                    //     html: msg,
+                    //     type: "warning",
+                    //     input: "checkbox",
+                    //     inputPlaceholder: " Saya berjaya memuat turun data",
+                    //     buttonsStyling: false,
+                    //     allowOutsideClick: true,
+                    //     showCancelButton: true,
+                    //     cancelButtonClass: "btn btn-warning",
+                    //     confirmButtonClass: "btn btn-success",
+                    //     cancelButtonText: "Belum Selesai Muat Turun",
+                    //     confirmButtonText: 'Selesai Muat Turun&nbsp;<i class="fa fa-arrow-right"></i>',
+                    // }).then(function(result) {
+                    //     if (result.dismiss == "cancel") { //clicked belum selesai (cancel)
 
-                        } else { //clicked selesai
-                            if ($("#swal2-checkbox:checked").length > 0) {
-                                $.ajax({
-                                    method: "POST",
-                                    url: "{{ url('berjayaMuatTurun') }}",
-                                    data: {
-                                        "_token": "{{ csrf_token() }}",
-                                        "mohons": mohons
-                                    },
-                                }).done(function(response) {
+                    //     } else if (result.dismiss == "overlay") { //clicked outside alert box
 
-                                });
-                            }
-                        }
-                    });
+                    //     } else { //clicked selesai
+                    //         if ($("#swal2-checkbox:checked").length > 0) {
+                    //             $.ajax({
+                    //                 method: "POST",
+                    //                 url: "{{ url('berjayaMuatTurun') }}",
+                    //                 data: {
+                    //                     "_token": "{{ csrf_token() }}",
+                    //                     "mohons": mohons
+                    //                 },
+                    //             }).done(function(response) {
+
+                    //             });
+                    //         }
+                    //     }
+                    // });
                 }
             });
         }
@@ -844,9 +856,8 @@
             ?>
         setInterval(
             checkThreeHourNotifySelesaiMuatTurun,
-            300000 /* 300000 ms = 5 min for farhan testing */
+            300000 /* 300000 ms = 5 min for testing */
             // 10800000 /* 10800000 ms = 3 hrs */ //ori specs
-            //                    60000  /* 60000 ms = m in for testing */
         );
         <?php
         }
