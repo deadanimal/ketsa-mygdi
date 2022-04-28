@@ -47,27 +47,21 @@
                             @csrf
                             <div class="card-header">
                                 <div class="row align-items-center">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <h3 class="mb-0">Permohonan Baru</h3>
                                     </div>
-                                    <div class="col-6 text-right">
-                                        <div class="row">
-                                            <div class="col-8 text-left">
-                                                @if ($lengkapkan_penilaian)
-                                                    <small class="text-danger">*Sila lengkapkan penilaian data untuk
-                                                        membuat
-                                                        permohonan baru.</small>
-                                                @endif
-                                            </div>
-                                            <div class="col-4">
-                                                <a data-toggle="modal" class="px-0"
-                                                    data-target="#modal-permohonan-baru {{ $lengkapkan_penilaian ? '#' : '' }}">
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default float-right {{ $lengkapkan_penilaian ? 'disabled' : '' }}"><i
-                                                            class="fas fa-plus mr-3"></i>Permohonan Baru</button>
-                                                </a>
-                                            </div>
-                                        </div>
+                                    <div class="col-8 text-right">
+
+                                        <a data-toggle="modal" class="px-0"
+                                            data-target="#modal-permohonan-baru {{ $lengkapkan_penilaian ? '#' : '' }}">
+                                            <button type="button"
+                                                class="btn btn-sm btn-default float-right {{ $lengkapkan_penilaian ? 'disabled' : '' }}"><i
+                                                    class="fas fa-plus mr-3"></i>Permohonan Baru</button>
+                                        </a><br><br>
+                                        @if ($lengkapkan_penilaian)
+                                            <small class="text-danger">*Sila lengkapkan penilaian data untuk membuat
+                                                permohonan baru.</small>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

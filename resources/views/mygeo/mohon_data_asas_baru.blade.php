@@ -570,7 +570,7 @@
                                         <div class="float-right">
                                             <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
 
-                                            @if (Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi']) && $permohonan->status != 1)
+                                            @if ((Auth::user()->hasRole(['Super Admin', 'Pentadbir Aplikasi']) && $permohonan->status != 1) || auth()->user()->email == 'pentadbirdata1@gmail.com')
                                                 <button type="button"
                                                     class="btn btn-success mx-2 btnHantarPermohonanPentadbir">
                                                     Hantar
