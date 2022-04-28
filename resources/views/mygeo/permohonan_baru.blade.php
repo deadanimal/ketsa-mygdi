@@ -86,7 +86,13 @@
                                                                     class="fas fa-trash"></i></button>
                                                         @else
                                                             <a href="{{ url('lihat_permohonan/' . $permohonan->id) }}"
-                                                                class="btn btn-sm btn-success text-center">Semak</a>
+                                                                class="btn btn-sm btn-success text-center">
+                                                                @if (auth()->user()->email == 'pentadbirdata1@gmail.com')
+                                                                    Semak
+                                                                @else
+                                                                    Lihat
+                                                                @endif
+                                                            </a>
                                                         @endif
                                                     </td>
                                                 </tr>
