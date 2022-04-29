@@ -270,7 +270,6 @@
                           </td>
                             <td>
                                 <?php
-                                //SMBG SINI - best way yet to get category from xml
                                 $r = "";
                                 $arr = (array)$val[0]->hierarchyLevel->MD_ScopeCode;
                                 foreach($arr as $ar){

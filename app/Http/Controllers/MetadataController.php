@@ -3858,12 +3858,14 @@ class MetadataController extends Controller {
                         if($ai->status != "deleteCustomInput"){
                             $var[$ai->name] = $val[$ai->name];
                             $var[$ai->name]['status'] = $ai->status;
+                            //$var[$ai->name]['mandatory'] = $ai->mandatory; //SMBG SINI
                         }
                     }else{
                         if($ai->status == "customInput"){ //new custom input
                             //elements passing thru this else block means are custom input
                             $name = preg_replace('/\s+/', '', $ai->name); //remove spaces and underscores
                             $var[$name] = ['label_bm'=>$ai->name,'label_en'=>$ai->name,'status'=>$ai->status];
+                            //$var[$ai->name]['mandatory'] = $ai->mandatory; //SMBG SINI
                         }
                     }
                 }
