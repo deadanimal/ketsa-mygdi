@@ -493,16 +493,18 @@ class DataAsasController extends Controller
             ->where('status', '!=', 2)
             ->orderByDesc('created_at')
             ->get();
-        // $permohonan = ProsesData::where('id', 8)->get();
-
         foreach ($permohonan_list as $pl) {
-
             if ($pl->proses_datas != null) {
                 $inTempohUrl = 0;
                 $currentDate = date('d-m-Y');
                 $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
                 $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
                 $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+
+                $currentDate = date("Y-m-d", strtotime($currentDate));
+                $tempohUrlStart = date("Y-m-d", strtotime($tempohUrlStart));
+                $tempohUrlEnd = date("Y-m-d", strtotime($tempohUrlEnd));
+
                 if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
                     if ($currentDate < $tempohUrlStart) {
                         $pl['inTempohUrl'] = 2;

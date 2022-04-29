@@ -89,7 +89,7 @@ return array (
     'normal' => $fontDir . '/boxicons_normal_1d9f4332ad398c01d69b5263c6e17950',
   ),
   'glyphicons halflings' => array(
-    'normal' => $fontDir . '/glyphicons_halflings_normal_91a063d0f3772b152f606edc0383c99d',
+    'normal' => $fontDir . '/glyphicons_halflings_normal_4bf4c90600ef2617211b8a7969a7b830',
   ),
   'elegance' => array(
     'normal' => $fontDir . '/elegance_normal_6f19c9e3a03bf4bfd9187749fb698cbe',
