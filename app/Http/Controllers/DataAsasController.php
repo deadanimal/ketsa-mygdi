@@ -976,6 +976,7 @@ class DataAsasController extends Controller
 
     public function update_akuan_pelajar(Request $request)
     {
+        // dd($request->all());
         $valid_file = AkuanPelajar::where([
             ["permohonan_id", "=", $request->permohonan_id]])
             ->whereNull('digital_sign')
@@ -1008,7 +1009,7 @@ class DataAsasController extends Controller
                 "nama1" => $request->nama[0],
                 "nama2" => $request->nama[1],
                 "nric" => $request->nric,
-                "agensi_organisasi" => $request->agensi_organisasi,
+                "agensi_organisasi" => nl2br($request->agensi_organisasi),
                 'tarikh' => $request->date_sign,
                 'alamat' => $request->alamat,
             ]);
