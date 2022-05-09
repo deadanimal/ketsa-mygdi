@@ -23,77 +23,76 @@
                                 Textbox
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }elseif($key == "c14_access_constraint"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline">
-                                    <label class="form-control-label mr-3" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
-                                        <?php echo __('lang.access_constraints'); ?>
-                                    </label>
-                                    Dropdown
-                                    <select name="c14_access_constraint" id="c14_access_constraint" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
-                                        <option value="">Pilih</option>
-                                    </select>
-                                </div>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-8">
+                                Dropdown
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }
                     if($key == "c14_use_constraint"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline">
-                                    <label class="form-control-label mr-3" for="input-use-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
-                                        <?php echo __('lang.use_constraints'); ?>
-                                    </label>
-                                    Dropdown
-                                    <select name="c14_use_constraint" id="c14_use_constraint" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
-                                        <option value="">Pilih</option>
-                                    </select>
-                                </div>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-8">
+                                Dropdown
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }
                     if($key == "c14_classification_sys"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline">
-                                    <label class="form-control-label mr-3" for="input-access-cons" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
-                                        <?php echo __('lang.classification'); ?>
-                                    </label>
-                                    Dropdown
-                                    <select name="c14_classification_sys" id="c14_classification_sys" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>">
-                                        <option value="">Pilih</option>
-                                    </select>
-                                </div>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Pengisian berkaitan sekatan capaian maklumat Geospatial">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-8">
+                                Dropdown
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }
                     if($key == "c14_reference"){
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-xl-6">
-                                <div class="form-inline">
-                                    <label class="form-control-label mr-3" for="input-reference" data-toggle="tooltip" title="Pengisian polisi/perundangan bagi maklumat geospatial.
-                                           Contoh: Pekeliling Arahan Keselamatan Dokumen Geospatial Terperingkat Terhadap">
-                                               <?php echo __('lang.classification_system'); ?>
-                                    </label>
-                                    Textbox
-                                    <input class="form-control form-control-sm sortable" name="c14_reference" id="input-reference" type="text" placeholder="Standard/Policy/Act/Circular/Legal" value="{{old('c14_reference')}}" data-status="<?php echo $val['status']; ?>">
-                                </div>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Pengisian polisi/perundangan bagi maklumat geospatial">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
                             </div>
-                            <span class="close btnClose">&times;</span>
+                            <div class="col-8">
+                                Textbox
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
                         </div>
                         <?php
                     }

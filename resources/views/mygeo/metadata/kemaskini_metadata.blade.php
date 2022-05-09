@@ -138,6 +138,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="card-body">
+                    <?php /* ?>
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -147,7 +148,7 @@
                         </ul>
                     </div>
                     @endif
-
+                    <?php */ ?>
                 </div>
                 <div class="col-12">
                     <div class="card">
@@ -276,6 +277,7 @@
                                     <input type="button" data-name="save" value="Simpan" class="btn btn-success btnSubmit btn_hantar" style="display:none;">
                                     <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
                                     */ ?>
+                                    <input type="button" data-name="kiv" value="KIV" class="btn btn-danger btnSubmit btn_kiv" style="display:none;">
                                     <input type="button" data-name="save" value="Tolak" class="btn btn-danger btnSubmit btn_hantar" style="display:none;">
                                     <button type="button" class="btn btn-success btn_terbit" data-metadataid="{{ $metadataSearched->id }}">Terbit</button>
                                     @endif
@@ -408,6 +410,7 @@
             ?>
             $(document).on('focusout','.catatan',function(){
                 if($(this).val().trim() != ""){
+                    $('.btn_kiv').show();
                     $('.btn_hantar').show();
                     $('.btn_terbit').hide();
                     var btn = $(this).data('parentmodal');
@@ -420,6 +423,7 @@
                        }
                     });
                     if(flag == 1){
+                        $('.btn_kiv').hide();
                         $('.btn_hantar').hide();
                         $('.btn_terbit').show();
                     }
@@ -921,13 +925,13 @@ if (!is_null(old('kategori'))) {
         
         setInterval(
             autosave_metadata,
-            30000  //this value is in miliseconds. currently set at 30 seconds
+            180000  //this value is in miliseconds. currently set at 3 minutes
         );
         function autosave_metadata(){
             $.ajax({
                 type: "POST", 
                 url: '{{url("simpan_kemaskini_metadata")}}',
-                data: $("#form_metadata").serialize()+'&autosave=true',
+                data: $("#form_metadata").serialize()+'&autosave=true&page=kemaskini',
                 success: function(){}
             });
         }

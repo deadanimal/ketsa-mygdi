@@ -5,9 +5,10 @@
         <group>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/app/Http/Controllers/DataAsasController.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/app/Http/Controllers/MetadataController.php</file>
-            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/metadata/senarai_metadata.blade.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/layouts/app_mygeo_ketsa.blade.php</file>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/layouts/app_mygeo_ketsa_kemaskini_elemen_metadata.blade.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/routes/web.php</file>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/mohon_data_asas_baru.blade.php</file>
         </group>
     </open-files>
 </project-private>

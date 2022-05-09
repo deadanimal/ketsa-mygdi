@@ -289,12 +289,12 @@ $bhs = $langSelected;
         });
         
         $(document).on("click",".btnClose",function(){
-            if($(this).parent().find('.sortable').attr('data-status') !== "customInput"){
-                $(this).parent().find('.sortable').attr('data-status', 'inactive');
+            if($(this).parent().parent().find('.sortable').attr('data-status') !== "customInput"){
+                $(this).parent().parent().find('.sortable').attr('data-status', 'inactive');
             }else{
-                $(this).parent().find('.sortable').attr('data-status', 'deleteCustomInput');
+                $(this).parent().parent().find('.sortable').attr('data-status', 'deleteCustomInput');
             }
-            $(this).parent().hide();
+            $(this).parent().parent().hide();
         });
         $(document).on("click",".btnTambah",function(){
             var category = $('#templateKategori').val().toLowerCase();

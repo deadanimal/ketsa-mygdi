@@ -25,9 +25,7 @@
             <div class="card-body scroll mt-2">
                 <h4>{!! (!is_null($pengumuman) ? date("j M Y",strtotime($pengumuman->date)):"") !!}</h4>
                 <p>{!! (!is_null($pengumuman) ? $pengumuman->content:"") !!}</p>
-            </div>
-            <div class="pl-lg-4">
-                <div class="row mb-2">
+                <div class="row">
                     <div class="col-3">
                         <?php
                         if($pengumuman->gambar != ""){
@@ -42,8 +40,27 @@
                         ?>
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                    <form method="post" action="{{ url('/lihat_metadata_nologin') }}" id="formViewMetadata" target="_blank">
+                        @csrf
+                        <input type="hidden" name="metadata_id" value="{{ $pengumuman->metadata_id }}">
+                    </form>
+                    <a href="#" class="aViewMetadata" onClick="return false;" data-metid="{{$pengumuman->metadata_id}}">Perincian Metadata</a>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(function(){
+        $(document).on("click", ".aViewMetadata", function() {
+            var metid = $(this).data('metid');
+            $("#formViewMetadata").submit();
+        });
+    });
+</script>
+
 @stop
+

@@ -494,7 +494,9 @@ class DataAsasController extends Controller
             ->orderByDesc('created_at')
             ->get();
         foreach ($permohonan_list as $pl) {
+
             if ($pl->proses_datas != null) {
+
                 $inTempohUrl = 0;
                 $currentDate = date('d-m-Y');
                 $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
@@ -516,9 +518,9 @@ class DataAsasController extends Controller
                 }
                 $res = json_decode($pl->proses_datas->pautan_data);
                 $pl['res'] = $res;
-            } else {
+            }else{
                 $pl['inTempohUrl'] = 0;
-                $pl['res'] = 'none';
+                $pl['res'] = "takde link";
             }
         }
 
@@ -529,23 +531,27 @@ class DataAsasController extends Controller
     {
         $permohonan_list = MohonData::where(['dihantar' => 1])->get();
         foreach ($permohonan_list as $pl) {
-
-            $inTempohUrl = 0;
-            $currentDate = date('d-m-Y');
-            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
-            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                    $pl['inTempohUrl'] = 1;
-                } elseif ($currentDate <= $tempohUrlStart) {
-                    $pl['inTempohUrl'] = 2;
-                } else {
-                    $pl['inTempohUrl'] = 0;
+            if($pl->process_datas != null){
+                $inTempohUrl = 0;
+                $currentDate = date('d-m-Y');
+                $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+                $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+                $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+                if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                    if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                        $pl['inTempohUrl'] = 1;
+                    } elseif ($currentDate <= $tempohUrlStart) {
+                        $pl['inTempohUrl'] = 2;
+                    } else {
+                        $pl['inTempohUrl'] = 0;
+                    }
                 }
+                $res = json_decode($pl->proses_datas->pautan_data);
+                $pl['res'] = $res;
+            }else{
+                $pl['inTempohUrl'] = 0;
+                $pl['res'] = "takde link";
             }
-            $res = json_decode($pl->proses_datas->pautan_data);
-            $pl['res'] = $res;
         }
 
         return view('mygeo.status_permohonan', compact('permohonan_list'));
@@ -852,23 +858,27 @@ class DataAsasController extends Controller
     {
         $permohonan_list = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         foreach ($permohonan_list as $pl) {
-
-            $inTempohUrl = 0;
-            $currentDate = date('d-m-Y');
-            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
-            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                    $pl['inTempohUrl'] = 1;
-                } elseif ($currentDate <= $tempohUrlStart) {
-                    $pl['inTempohUrl'] = 2;
-                } else {
-                    $pl['inTempohUrl'] = 0;
+            if($pl->process_datas != null){
+                $inTempohUrl = 0;
+                $currentDate = date('d-m-Y');
+                $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+                $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+                $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+                if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                    if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                        $pl['inTempohUrl'] = 1;
+                    } elseif ($currentDate <= $tempohUrlStart) {
+                        $pl['inTempohUrl'] = 2;
+                    } else {
+                        $pl['inTempohUrl'] = 0;
+                    }
                 }
+                $res = json_decode($pl->proses_datas->pautan_data);
+                $pl['res'] = $res;
+            }else{
+                $pl['inTempohUrl'] = 0;
+                $pl['res'] = "takde link";
             }
-            $res = json_decode($pl->proses_datas->pautan_data);
-            $pl['res'] = $res;
         }
 
         return view('mygeo.semakan_status', compact('permohonan_list'));
