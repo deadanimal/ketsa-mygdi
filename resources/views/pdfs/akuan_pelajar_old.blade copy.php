@@ -6,7 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
     <link rel="stylesheet" href="/assets/bootstrap3.min.css" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
@@ -111,7 +113,7 @@
     }
 
     .nric {
-        top: 15%;
+        top: 16.5%;
         left: 23%;
         position: absolute;
         text-indent: 18%;
@@ -125,7 +127,7 @@
 
     .others {
         margin-top: 78.5%;
-        position: absolute;
+        position: relative;
         margin-left: 8.3%;
         margin-right: 3%;
     }

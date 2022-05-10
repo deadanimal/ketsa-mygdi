@@ -489,37 +489,34 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])
+        $permohonan_list = MohonData::with(['proses_datas', 'users'])
+            ->has('proses_datas')
+            ->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])
             ->where('status', '!=', 2)
             ->orderByDesc('created_at')
             ->get();
         foreach ($permohonan_list as $pl) {
-            if ($pl->proses_datas != null) {
-                $inTempohUrl = 0;
-                $currentDate = date('d-m-Y');
-                $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
-                $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-                $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+            $inTempohUrl = 0;
+            $currentDate = date('d-m-Y');
+            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
 
-                $currentDate = date("Y-m-d", strtotime($currentDate));
-                $tempohUrlStart = date("Y-m-d", strtotime($tempohUrlStart));
-                $tempohUrlEnd = date("Y-m-d", strtotime($tempohUrlEnd));
+            $currentDate = date("Y-m-d", strtotime($currentDate));
+            $tempohUrlStart = date("Y-m-d", strtotime($tempohUrlStart));
+            $tempohUrlEnd = date("Y-m-d", strtotime($tempohUrlEnd));
 
-                if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                    if ($currentDate < $tempohUrlStart) {
-                        $pl['inTempohUrl'] = 2;
-                    } else if ($currentDate > $tempohUrlEnd) {
-                        $pl['inTempohUrl'] = 0;
-                    } else {
-                        $pl['inTempohUrl'] = 1;
-                    }
+            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                if ($currentDate < $tempohUrlStart) {
+                    $pl['inTempohUrl'] = 2;
+                } else if ($currentDate > $tempohUrlEnd) {
+                    $pl['inTempohUrl'] = 0;
+                } else {
+                    $pl['inTempohUrl'] = 1;
                 }
-                $res = json_decode($pl->proses_datas->pautan_data);
-                $pl['res'] = $res;
-            } else {
-                $pl['inTempohUrl'] = 0;
-                $pl['res'] = 'none';
             }
+            $res = json_decode($pl->proses_datas->pautan_data);
+            $pl['res'] = $res;
         }
 
         return view('mygeo.muat_turun_data', compact('permohonan_list'));
