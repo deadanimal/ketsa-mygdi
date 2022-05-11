@@ -207,6 +207,13 @@ $bhs = $langSelected;
     });
 
     $(document).ready(function () {
+        $('.mandatory').change(function() {
+            if(this.checked) {
+                $(this).parent().parent().find('.sortable').attr('data-mandatory','yes');
+            }else{
+                $(this).parent().parent().find('.sortable').attr('data-mandatory','no');
+            }
+        });
         $('input:radio[name="flanguage"]').change(function() {
             window.onbeforeunload = null;
             if ($(this).val() == 'bm') {
@@ -264,9 +271,9 @@ $bhs = $langSelected;
                 var accordion = accordionId.replace('collapse','');
                 if($(item).hasClass("newInput")){
                     var newInputName = $(item).parent().parent().find('.customInput_label').val();
-                    jsontxt.push({"name":newInputName,"status":$(item).attr('data-status'),"accordion":"accordion"+accordion});
+                    jsontxt.push({"name":newInputName,"status":$(item).attr('data-status'),"mandatory":$(item).attr('data-mandatory'),"accordion":"accordion"+accordion});
                 }else{
-                    jsontxt.push({"name":item.name,"status":$(item).attr('data-status'),"accordion":"accordion"+accordion});
+                    jsontxt.push({"name":item.name,"status":$(item).attr('data-status'),"mandatory":$(item).attr('data-mandatory'),"accordion":"accordion"+accordion});
                 }
             });
             console.log(jsontxt);
@@ -277,9 +284,9 @@ $bhs = $langSelected;
                 var accordion = accordionId.replace('collapse','');
                 if($(item).hasClass("newInput")){
                     var newInputName = $(item).parent().parent().find('.customInput_label').val();
-                    jsontxt.push({"name":newInputName,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                    jsontxt.push({"name":newInputName,"status":$(item).data('status'),"mandatory":$(item).attr('data-mandatory'),"accordion":"accordion"+accordion});
                 }else{
-                    jsontxt.push({"name":item.name,"status":$(item).data('status'),"accordion":"accordion"+accordion});
+                    jsontxt.push({"name":item.name,"status":$(item).data('status'),"mandatory":$(item).attr('data-mandatory'),"accordion":"accordion"+accordion});
                 }
             });
             
@@ -336,6 +343,7 @@ $bhs = $langSelected;
         });
         $(document).on("click",".btnTambahElemenBaru",function(){
             var accordion = $(this).data('accordion');
+            //SMBG SINI - change to activate/disable button and add mandatory check box to appended item below
             $('#collapse'+accordion+' .sortableContainer1').append('<div class="row mb-2 sortIt"><div class="col-3 pl-5"><label class="form-control-label mr-4" for="uname"><input type="text" name="newInputName" class="customInput_label"></label><label class="float-right">:</label></div><div class="col-8"><input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput" style="display:none;"/></div><span class="close btnClose">&times;</span></div>');
         });
         //================================

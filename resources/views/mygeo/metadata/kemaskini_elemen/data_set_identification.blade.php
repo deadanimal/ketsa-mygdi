@@ -21,7 +21,7 @@
                             </div>
                             <div class="col-8">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -35,9 +35,12 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Dropdown
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -51,9 +54,12 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Pengisian butiran skala (sekiranya ada). Contoh skala 1:50,000">{{ $val['label_'.$bhs] }}<span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span></label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Dropdown
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -68,9 +74,12 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Pengisian butiran resolusi (sekiranya ada). Contoh GSD (Ground Sample Distance) - Resolution = 0.5 meter">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -85,9 +94,12 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Penggunaan bahasa bagi maklumat geospatial">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Dropdown
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -102,9 +114,12 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Dropdown
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>

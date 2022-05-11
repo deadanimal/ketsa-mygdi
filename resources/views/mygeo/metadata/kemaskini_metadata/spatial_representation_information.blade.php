@@ -40,7 +40,7 @@
                         <div class="col-xl-7" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline ml-3">
                                 <div class="form-control-label mr-3">
-                                    Collection Name<span class="text-warning">*</span>
+                                    Collection Name<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </div>
                                 <?php
                                 $colName = "";
@@ -61,7 +61,7 @@
                         <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
-                                    Collection Identification<span class="text-warning">*</span>
+                                    Collection Identification<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     <?php
                                     $collId = "";
                                     if (isset($metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->collectionIdentification->CharacterString != "") {

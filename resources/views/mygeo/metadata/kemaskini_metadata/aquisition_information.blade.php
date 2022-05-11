@@ -45,7 +45,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-8">
                                             <div class="form-control-label">
-                                                Average Air Temperature
+                                                Average Air Temperature<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
@@ -65,7 +65,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-8">
                                             <div class="form-control-label">
-                                                Altitude
+                                                Altitude<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
@@ -85,7 +85,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-8">
                                             <div class="form-control-label">
-                                                Relative Humidity
+                                                Relative Humidity<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
@@ -105,7 +105,7 @@
                                     <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-8">
                                             <div class="form-control-label">
-                                                Meteorological Condition
+                                                Meteorological Condition<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
@@ -135,7 +135,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
-                                                Identifier<span class="text-warning">*</span>
+                                                Identifier<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -158,7 +158,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
-                                                Trigger
+                                                Trigger<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -183,7 +183,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
-                                                Context
+                                                Context<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -208,7 +208,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
-                                                Sequence
+                                                Sequence<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -233,7 +233,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
-                                                Time
+                                                Time<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -262,7 +262,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
-                                                Type<span class="text-warning">*</span>
+                                                Type<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -290,7 +290,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
-                                                Identifier<span class="text-warning">*</span>
+                                                Identifier<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -310,7 +310,7 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
-                                                Status
+                                                Status<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -330,7 +330,7 @@
                                     <div class="row mb" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label">
-                                                Type
+                                                Type<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -359,7 +359,7 @@
                                     ?>
                                     <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="form-control-label mr-3">
-                                            Date
+                                            Date<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </div>
                                         <?php
                                         $rdrDate = "";
@@ -375,7 +375,7 @@
                                     ?>
                                     <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="form-control-label mt-3 mr-3">
-                                            Last Acceptable Date
+                                            Last Acceptable Date<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </div>
                                         <?php
                                         $lad = "";

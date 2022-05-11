@@ -33,7 +33,7 @@
                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-xl-3">
                             <label class="form-control-label" for="input-system-identifier">
-                                <?php echo __('lang.reference_system_identifier'); ?>
+                                <?php echo __('lang.reference_system_identifier'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                             </label>
                         </div>
                         <div class="col-xl-3">
@@ -91,7 +91,7 @@
                                 }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                    <b>Projection:</b>&nbsp;&nbsp;&nbsp;
+                                    <b>Projection<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_projection" id="refsys_projection" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
@@ -103,7 +103,7 @@
                                 }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                    <b>Semi Major Axis:</b>&nbsp;&nbsp;&nbsp;
+                                    <b>Semi Major Axis<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
@@ -127,7 +127,7 @@
                                 }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                    <b>Axis Units:</b>&nbsp;&nbsp;&nbsp;
+                                    <b>Axis Units<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_axis_units" id="refsys_axis_units" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
@@ -139,7 +139,7 @@
                                 }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                    <b>Datum:</b>&nbsp;&nbsp;&nbsp;
+                                    <b>Datum<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_datum" id="refsys_datum" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php
@@ -151,7 +151,7 @@
                                 }
                                 ?>
                                 <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                    <b>Denominator of Flattening Ratio:</b>&nbsp;&nbsp;&nbsp;
+                                    <b>Denominator of Flattening Ratio<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
                                 <?php

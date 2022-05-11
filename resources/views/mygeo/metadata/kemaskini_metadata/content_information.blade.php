@@ -42,7 +42,7 @@
                                 <div class="col-xl-6">
                                     <div class="form-inline">
                                         <div class="form-control-label mr-3">
-                                            Band Boundry
+                                            Band Boundry<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </div>
                                         <?php
                                         $bandBound = "";
@@ -73,7 +73,7 @@
                                 <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="form-inline">
                                         <div class="form-control-label mr-4">
-                                            Transfer Function Type
+                                            Transfer Function Type<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </div>
                                         <?php
                                         $transFnType = "";
@@ -91,7 +91,7 @@
                                 <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="form-inline">
                                         <div class="form-control-label mr-3">
-                                            Transmitted Polarization
+                                            Transmitted Polarization<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </div>
                                         <?php
                                         $transmitPolar = "";
@@ -115,7 +115,7 @@
                                 <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="form-inline">
                                         <div class="form-control-label mr-4">
-                                            Nominal Spatial Resolution
+                                            Nominal Spatial Resolution<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </div>
                                         <?php
                                         $nomSpatRes = "";
@@ -136,7 +136,7 @@
                                 <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="form-inline">
                                         <div class="form-control-label mr-3">
-                                            Detected Polarization
+                                            Detected Polarization<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </div>
                                         <?php
                                         $detectPolar = "";

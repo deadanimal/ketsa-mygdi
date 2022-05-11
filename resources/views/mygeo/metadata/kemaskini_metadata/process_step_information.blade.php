@@ -40,7 +40,7 @@
                         <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline ml-3">
                                 <div class="form-control-label mr-3">
-                                    Process Level
+                                    Process Level<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </div>
                                 <?php
                                 $processLevel = "";
@@ -58,7 +58,7 @@
                         <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
-                                    Resolution
+                                    Resolution<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </div>
                                 <?php
                                 $res = "";
