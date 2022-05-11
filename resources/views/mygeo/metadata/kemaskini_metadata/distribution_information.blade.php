@@ -38,7 +38,7 @@
                         ?>
                         <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <label class="form-control-label" for="input-distribution-format">
-                                <?php echo __('lang.format_name'); ?></label>
+                                <?php echo __('lang.format_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                         </div>
                         <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <?php
@@ -55,7 +55,7 @@
                         ?>
                         <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <label class="form-control-label" for="input-version">
-                                <?php echo __('lang.format_version'); ?> </label>
+                                <?php echo __('lang.format_version'); ?> <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                         </div>
                         <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <?php
@@ -79,7 +79,7 @@
                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-xl-2">
                             <label class="form-control-label" for="input-distributor">
-                                <?php echo __('lang.organisation_name'); ?> </label>
+                                <?php echo __('lang.organisation_name'); ?> <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                         </div>
                         <div class="col-xl-6">
                             <?php
@@ -103,7 +103,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-unit-distribution">
-                                    <?php echo __('lang.units_of_distribution'); ?> </label>
+                                    <?php echo __('lang.units_of_distribution'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> </label>
                             </div>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php
@@ -120,7 +120,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-sizemb">
-                                    <?php echo __('lang.size'); ?> </label>
+                                    <?php echo __('lang.size'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php
@@ -137,7 +137,7 @@
                             ?>
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-distributor">
-                                    <?php echo __('lang.link'); ?> </label>
+                                    <?php echo __('lang.link'); ?> <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                             </div>
                             <div class="col-xl-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php
@@ -163,7 +163,7 @@
                         ?>
                         <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <label class="form-control-label" for="input-medium">
-                                <?php echo __('lang.medium_name'); ?></label>
+                                <?php echo __('lang.medium_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                         </div>
                         <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <?php
@@ -206,7 +206,7 @@
                             ?>
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-fees">
-                                    <?php echo __('lang.fees'); ?> </label>
+                                    <?php echo __('lang.fees'); ?> <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php
@@ -223,7 +223,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-instructionorder">
-                                    <?php echo __('lang.ordering_instructions'); ?> </label>
+                                    <?php echo __('lang.ordering_instructions'); ?> <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                             </div>
                             <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <?php

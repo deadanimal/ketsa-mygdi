@@ -31,7 +31,7 @@
                 if($key == "c1_content_info"){
                     ?>
                     <div class="form-group row" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                        <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
+                        <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> : &nbsp;&nbsp;&nbsp;</p>
                         <?php
                         $contentInfo = $ci = $tod = "";
                         if (isset($metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && $metadataxml->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString != "") {
@@ -102,7 +102,7 @@
                     <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="uname">
-                                <?php echo __('lang.name'); ?>
+                                <?php echo __('lang.name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">
@@ -123,7 +123,7 @@
                     <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="publisher_agensi_organisasi">
-                                <?php echo __('lang.organisation_name'); ?>
+                                <?php echo __('lang.organisation_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">
@@ -151,7 +151,7 @@
                     <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="publisher_email">
-                                <?php echo __('lang.email'); ?>
+                                <?php echo __('lang.email'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">
@@ -172,7 +172,7 @@
                     <div class="row my-0 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="publisher_phone">
-                                <?php echo __('lang.telephone_office'); ?>
+                                <?php echo __('lang.telephone_office'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">
@@ -193,7 +193,7 @@
                     <div class="row my-0 py-0 divPublisherRole" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="publisher_role">
-                                <?php echo __('lang.role'); ?>
+                                <?php echo __('lang.role'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                             </label><label class="float-right">:</label>
                         </div>
                         <div class="col-8">

@@ -39,7 +39,7 @@
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-DQscope" data-toggle="tooltip"
                                     title="Pengisian secara Pilihan: Skop DQ">
-                                    <?php echo __('lang.dq_scope'); ?>
+                                    <?php echo __('lang.dq_scope'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label>
                             </div>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
@@ -97,7 +97,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label float-right" for="input-datahistory">
-                                    <?php echo __('lang.data_history'); ?></label>
+                                    <?php echo __('lang.data_history'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                             </div>
                             <div class="col-md-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <input class="form-control form-control-sm" type="text" name="c15_data_history"
@@ -109,7 +109,7 @@
                             ?>
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label  float-right" for="input-date">
-                                    <?php echo __('lang.date_time'); ?>
+                                    <?php echo __('lang.date_time'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label>
                             </div>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>

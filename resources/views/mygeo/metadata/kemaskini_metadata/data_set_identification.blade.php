@@ -45,7 +45,7 @@
                         <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-xl-2">
                                 <label class="form-control-label" for="input-dataset-type">
-                                    <?php echo __('lang.spatial_data_set_type'); ?>
+                                    <?php echo __('lang.spatial_data_set_type'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label>
                             </div>
                             <div class="col-xl-3">
@@ -73,7 +73,7 @@
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-hardsoftcopy">
                                     <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
-                                    <span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span>
+                                    <span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
@@ -91,7 +91,7 @@
                             ?>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-imggsd">
-                                    <?php echo __('lang.image_resolution'); ?></label>
+                                    <?php echo __('lang.image_resolution'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                             </div>
                             <div class="col-md-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="input-group">
@@ -113,7 +113,7 @@
                             ?>
                             <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-language">
-                                    <?php echo __('lang.data_set_language'); ?>
+                                    <?php echo __('lang.data_set_language'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label>
                             </div>
                             <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
@@ -150,7 +150,7 @@
                             <div class="row mb-2 divMaintenanceInfo">
                                 <div class="col-xl-3">
                                     <label class="form-control-label" for="input-hardsoftcopy">
-                                        <?php echo __('lang.maintenance_and_update'); ?>
+                                        <?php echo __('lang.maintenance_and_update'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     </label>
                                 </div>
                                 <div class="col-xl-2">

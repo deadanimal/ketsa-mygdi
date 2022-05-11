@@ -5,7 +5,7 @@ if($key == "c2_abstract"){
         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
             <div class="col-3">
                 <label class="form-control-label mr-4" for="c2_abstract" data-toggle="tooltip" title="Tooltip">
-                    <?php echo __('lang.abstract'); ?><span class="text-warning">*</span>
+                    <?php echo __('lang.abstract'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                 </label><label class="float-right">:</label>
             </div>
             <div class="col-7">

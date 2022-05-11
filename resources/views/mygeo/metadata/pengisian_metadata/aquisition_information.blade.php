@@ -35,6 +35,7 @@
                                         <div class="col-xl-8">
                                             <div class="form-control-label" data-toggle="tooltip" title="Purata suhu udara sepanjang penerbangan">
                                                 <?php echo __('lang.average_air_temperature'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
@@ -49,6 +50,7 @@
                                         <div class="col-xl-8">
                                             <div class="form-control-label" data-toggle="tooltip" title="">
                                                 <?php echo __('lang.altitude'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
@@ -63,6 +65,7 @@
                                         <div class="col-xl-8">
                                             <div class="form-control-label" data-toggle="tooltip" title="Kelembapan relatif maksimum sepanjang penerbangan">
                                                 <?php echo __('lang.relative_humidity'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
@@ -77,6 +80,7 @@
                                         <div class="col-xl-8">
                                             <div class="form-control-label" data-toggle="tooltip" title="Keadaan meteorologi kawasan penerbangan seperti awan dan angin">
                                                 <?php echo __('lang.meteorological_conditions'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
@@ -100,7 +104,8 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Nama cerapan atau nombor cerapan">
-                                                <?php echo __('lang.identifier'); ?><span class="text-warning">*</span>
+                                                <?php echo __('lang.identifier'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -118,6 +123,7 @@
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Permulaan cerapan">
                                                 <?php echo __('lang.trigger'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -137,6 +143,7 @@
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Tujuan cerapan">
                                                 <?php echo __('lang.context'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -156,6 +163,7 @@
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Masa relative cerapan dijalankan">
                                                 <?php echo __('lang.sequence'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -175,6 +183,7 @@
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Masa cerapan diambil">
                                                 <?php echo __('lang.time'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -197,7 +206,8 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Jenis alat yang digunakan">
-                                                <?php echo __('lang.type'); ?><span class="text-warning">*</span>
+                                                <?php echo __('lang.type'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -219,7 +229,8 @@
                                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Numbor Pengenalan cerapan/ kerja">
-                                                <?php echo __('lang.identifier'); ?><span class="text-warning">*</span>
+                                                <?php echo __('lang.identifier'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -237,6 +248,7 @@
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Status data cerapan">
                                                 <?php echo __('lang.status'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -251,6 +263,7 @@
                                         <div class="col-xl-5">
                                             <div class="form-control-label" data-toggle="tooltip" title="Teknik cerapan diambil">
                                                 <?php echo __('lang.type'); ?>
+                                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-xl-7">
@@ -273,6 +286,7 @@
                                     ?>
                                     <div class="form-control-label mr-3" data-toggle="tooltip" title="Tarikh mula cerapan dijalankan " <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <?php echo __('lang.date'); ?>
+                                        <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     </div>
                                     <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_rdr_date" id="c8_rdr_date" value="{{old('c8_rdr_date')}}" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <?php
@@ -281,6 +295,7 @@
                                     ?>
                                     <div class="form-control-label mt-3 mr-3" data-toggle="tooltip" title="Tarikh cerapan siap dijalankan" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <?php echo __('lang.latest_acceptable_date'); ?>
+                                        <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     </div>
                                     <input class="form-control form-control-sm" type="date" style="width :150px" placeholder="Select Date" name="c8_last_accept_date" id="c8_last_accept_date" value="{{old('c8_last_accept_date')}}" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <?php

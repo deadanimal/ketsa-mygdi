@@ -16,6 +16,7 @@
                         <div class="col-3">
                             <label class="form-control-label mr-4" for="file_contohJenisMetadata">
                                 <?php echo __('lang.sampleData'); ?>
+                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                             </label>
                         </div>
                         <div class="col-8">
@@ -52,6 +53,7 @@
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_name" data-toggle="tooltip" title="Pengisian nama fail mengambarkan maklumat geospatial secara grafik (sekiranya ada)">
                                     <?php echo __('lang.file_name'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -66,6 +68,7 @@
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_type" data-toggle="tooltip" title="Jenis format grafikberkenaan (JPEG, GIF, TIFF, XWD, EPS, CGM, PBM)">
                                     <?php echo __('lang.file_type'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -80,6 +83,7 @@
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="Pengisian pautan imej berkenaan (saiz ideal adalah 200 pixels lebar dan 133 pixels tinggi)">
                                     <?php echo __('lang.URL'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-6">
@@ -106,7 +110,8 @@
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-4 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_name" data-toggle="tooltip" title="Kata Kunci (Carian)/ Keyword bagimaklumat geospatial berkenaan. Keyword perlu dimasukkan berdasarkankepada tajuk maklumat geospatial dengan bahasa bilingual (Bahasa Malaysia dan English). ">
-                                    <?php echo __('lang.keywords'); ?><span class="text-warning">*</span>
+                                    <?php echo __('lang.keywords'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-6">
@@ -129,6 +134,7 @@
                             <div class="col-4 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_type" data-toggle="tooltip" title="">
                                     <?php echo __('lang.additional_keywords'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-6">
@@ -139,6 +145,7 @@
                             <div class="col-4 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="">
                                     <?php echo __('lang.additional_keywords'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right" >:</label>
                             </div>
                             <div class="col-6">

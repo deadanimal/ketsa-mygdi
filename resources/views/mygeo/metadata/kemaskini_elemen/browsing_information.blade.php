@@ -21,7 +21,7 @@
                             </div>
                             <div class="col-8">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -35,9 +35,12 @@
                                 <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 File Upload
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -52,9 +55,12 @@
                                 <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -69,9 +75,12 @@
                                 <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -86,9 +95,12 @@
                                 <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -103,9 +115,12 @@
                                 <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -120,9 +135,12 @@
                                 <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -133,9 +151,12 @@
                                 <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>

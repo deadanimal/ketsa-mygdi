@@ -35,7 +35,7 @@
                         <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline ml-3">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Tahap pemprosesan data">
-                                    <?php echo __('lang.process_level'); ?>
+                                    <?php echo __('lang.process_level'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </div>
                                 <input class="form-control form-control-sm" type="text" style="width :120px" placeholder="Insert Process Level" name="c5_process_lvl" id="c5_process_lvl" value="{{old('c5_process_lvl')}}">
                             </div>
@@ -47,7 +47,7 @@
                         <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline">
                                 <div class="form-control-label mr-3" data-toggle="tooltip" title="Resolusi data">
-                                    <?php echo __('lang.resolution'); ?>
+                                    <?php echo __('lang.resolution'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </div>
                                 <input class="form-control form-control-sm" type="text" style="width :100px" placeholder="0.0" name="c5_resolution" id="c5_resolution" value="{{old('c5_resolution')}}">
                                 <div class="form-control-label ml-2">

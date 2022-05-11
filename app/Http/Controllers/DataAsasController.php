@@ -444,7 +444,7 @@ class DataAsasController extends Controller
             $data = array('cat' => 'cat');
             Mail::send("mails.exmpl15", $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
-                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                 // $message->attach($file);
             });
 
@@ -505,30 +505,28 @@ class DataAsasController extends Controller
             ->where('status', '!=', 2)
             ->orderByDesc('created_at')
             ->get();
-
         foreach ($permohonan_list as $pl) {
-            // if($pl->process_datas){
-                $inTempohUrl = 0;
-                $currentDate = date('d-m-Y');
-                $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
-                $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-                $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-                if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                    if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                        $pl['inTempohUrl'] = 1;
-                    } elseif ($currentDate <= $tempohUrlStart) {
-                        $pl['inTempohUrl'] = 2;
-                    } else {
-                        $pl['inTempohUrl'] = 0;
-                    }
+            $inTempohUrl = 0;
+            $currentDate = date('d-m-Y');
+            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+
+            $currentDate = date("Y-m-d", strtotime($currentDate));
+            $tempohUrlStart = date("Y-m-d", strtotime($tempohUrlStart));
+            $tempohUrlEnd = date("Y-m-d", strtotime($tempohUrlEnd));
+
+            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                if ($currentDate < $tempohUrlStart) {
+                    $pl['inTempohUrl'] = 2;
+                } else if ($currentDate > $tempohUrlEnd) {
+                    $pl['inTempohUrl'] = 0;
+                } else {
+                    $pl['inTempohUrl'] = 1;
                 }
-                $res = json_decode($pl->proses_datas->pautan_data);
-                $pl['res'] = $res;
-            // }
-            // else{
-            //     $pl['inTempohUrl'] = 0;
-            //     $pl['res'] = "takde link";
-            // }
+            }
+            $res = json_decode($pl->proses_datas->pautan_data);
+            $pl['res'] = $res;
         }
 
         return view('mygeo.muat_turun_data', compact('permohonan_list'));
@@ -955,9 +953,6 @@ class DataAsasController extends Controller
 
         $surat_template = "<p class='ql-align-justify'>Dato'/Datin/Tuan/Puan,</p><p class='ql-align-justify'><strong style='text-transform:uppercase;'>$permohonan->name</strong></p><p class='ql-align-justify'>Dengan segala hormatnya merujuk kepada surat Dato'/Datin/tuan/puan $no_ruj bertarikh $dokumen_date mengenai perkara di atas.</p><p class='ql-align-justify'>2. Sukacita dimaklumkan bahawa Pusat Geospatial Negara (PGN) ambil maklum dengan permohonan data geospatial terperingkat dan tiada halangan atas permohonan tersebut. Senarai data yang dibekalkan adalah seperti Lampiran 1. Walau bagaimanapun, untuk permohonan metadata pula, pihak Dato'/Datin/tuan/puan boleh melayari aplikasi MyGDI Explorer untuk mendapatkan informasi yang lebih terperinci https://www.mygeoportal.gov.my/node/173.</p><p class='ql-align-justify'>3. Untuk makluman Dato'/Datin/tuan/puan, penggunaan data ini adalah terikat dengan Pekeliling Am Bil 1/2007: Pekeliling Arahan Keselamatan Terhadap Dokumen Geospatial Terperingkat, Akta Rahsia Rasmi 1972 dan Surat Pekeliling Am Bil 1 Tahun 1997 : Peraturan Pemeliharaan Rekod-Rekod Kerajaan.</p><p class='ql-align-justify'>4. Pihak Dato'/Datin/tuan/puan boleh melayari Aplikasi MyGDI Data Services di https://mygos.mygeoportal.gov.my/myservices bagi mendapatkan paparan data asas GDC yang boleh dikongsi antara agensi kerajaan melalui program MyGDl. Permohonan untuk mendapatkan capaian ke aplikasi ini boleh dihantar kepada pihak PGN melalui emel pgn.kto@ketsa.gov.my.</p><p class='ql-align-justify'>5. Sebarang pertanyaan mengenai kesahihan dan ketepatan data perlulah dirujuk kepada Agensi Pembekal Data (APD) yang berkenaan. Penggunaan data ini selain daripada tujuan asal yang dimohon perlulah mendapat kebenaran daripada pihak APD dan PGN.</p><p class='ql-align-justify'>6. Mohon kerjasama pihak Dato'/Datin/tuan/puan untuk melengkapkan Borang Pengesahan Penerimaan Data Geospatial seperti di Lampiran 2 dan Borang Penilaian Perkongsian Data Melalui MyGDI seperti di Lampiran 3 dan dikembalikan semula kepada pihak PGN dalam tempoh dua minggu dari tarikh surat ini. Sekiranya ada sebarang pertanyaan, sila hubungi $admin_name di talian $admin_phone ($admin_email).</p><p class='ql-align-justify'><br></p><p class='ql-align-justify'>Sekian terima kasih.</p><p class='ql-align-justify'>**Ini adalah surat cetakan komputer, tidak perlu tandatangan**</p>";
 
-        if ($surat->nama != null) {
-            $surat['nama_alamat'] = $surat->nama . `&#13;&#10;` . $surat->alamat;
-        }
         // dd('surat',$surat_template, $surat->content);
         return view('mygeo.surat_balasan', compact('permohonan', 'surat', 'admin', 'surat_template', 'dokumen'));
     }
@@ -965,25 +960,24 @@ class DataAsasController extends Controller
     public function update_surat_balasan(Request $request)
     {
         $namaAlamat = $request->nama_alamat;
-        $pieces = explode("\n", $namaAlamat);
+        // $pieces = explode("\n", $namaAlamat);
 
-        SuratBalasan::where(["permohonan_id" => $request->permohonan_id])->update([
+        $surat_balasan = SuratBalasan::where(["permohonan_id" => $request->permohonan_id])->update([
             "no_rujukan" => $request->no_rujukan,
             "tajuk_surat" => $request->tajuk_surat,
             "no_rujukan_mohon" => $request->no_rujukan_mohon,
             "date_mohon" => $request->date_mohon,
             "content" => $request->content_surat_balasan,
-            "nama" => $pieces[0],
-            "alamat" => $pieces[1],
+            "nama" => $request->nama,
+            "alamat" => $request->alamat,
         ]);
-
         $at = new AuditTrail();
         $at->path = url()->full();
         $at->user_id = Auth::user()->id;
         $at->data = 'Update';
         $at->save();
-
-        return redirect('/proses_data')->with('success', 'Surat Balasan Disimpan');
+        return back()->with('success', 'Surat Balasan Disimpan');
+        return redirect('/surat_balasan/'+$surat_balasan->id)->with('success', 'Surat Balasan Disimpan');
         // return redirect()->back();
     }
 
@@ -997,6 +991,7 @@ class DataAsasController extends Controller
 
     public function update_akuan_pelajar(Request $request)
     {
+        // dd($request->all());
         $valid_file = AkuanPelajar::where([
             ["permohonan_id", "=", $request->permohonan_id]])
             ->whereNull('digital_sign')
@@ -1029,7 +1024,7 @@ class DataAsasController extends Controller
                 "nama1" => $request->nama[0],
                 "nama2" => $request->nama[1],
                 "nric" => $request->nric,
-                "agensi_organisasi" => $request->agensi_organisasi,
+                "agensi_organisasi" => nl2br($request->agensi_organisasi),
                 'tarikh' => $request->date_sign,
                 'alamat' => $request->alamat,
             ]);
@@ -1360,12 +1355,12 @@ class DataAsasController extends Controller
                     if ($request->catatan == "others") {
                         Mail::send("mails.exmpl14-1", $data, function ($message) use ($to_name, $to_email, $subject) {
                             $message->to($to_email, $to_name)->subject($subject);
-                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                         });
                     } else {
                         Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
                             $message->to($to_email, $to_name)->subject($subject);
-                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                         });
                     }
                 }
@@ -1442,7 +1437,7 @@ class DataAsasController extends Controller
                     $data = ['nama_pemohon' => $pemohon->users->name, 'agensi' => $agensi_pemohon];
                     Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
                         $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
-                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                     });
                 }
             }

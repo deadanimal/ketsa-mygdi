@@ -26,7 +26,8 @@
                 if($key == "c1_content_info"){
                     ?>
                     <div class="form-group row" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                        <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?><span class="text-warning">*</span> : &nbsp;&nbsp;&nbsp;</p>
+                        <p class="pl-lg-3 form-control-label"><?php echo __('lang.content_information'); ?>
+                            <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> : &nbsp;&nbsp;&nbsp;</p>
                         <select name="c1_content_info" class="form-control form-control-sm" style="width:175px;" id="content_info_dropdown">
                             <option value="" selected>Pilih...</option>
                             <option value="application" class='optContentInfo_dataset'>Application</option>
@@ -70,6 +71,7 @@
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="uname">
                                     <?php echo __('lang.name'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-8">
@@ -84,6 +86,7 @@
                         <div class="row mb-2 py-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="publisher_agensi_organisasi"><?php echo __('lang.organisation_name'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right" style="position: absolute;">:</label>
                             </div>
                             <div class="col-8">
@@ -100,6 +103,7 @@
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="publisher_email">
                                     <?php echo __('lang.email'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-8">
@@ -115,6 +119,7 @@
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="publisher_phone">
                                     <?php echo __('lang.telephone_office'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-8">
@@ -130,6 +135,7 @@
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="publisher_role">
                                     <?php echo __('lang.role'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">

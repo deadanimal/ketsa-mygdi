@@ -29,7 +29,7 @@
                         <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-xl-3">
                                 <label class="form-control-label" for="input-dataset-type" data-toggle="tooltip" title="Jenis maklumat geospatial">
-                                    <?php echo __('lang.spatial_data_set_type'); ?>
+                                    <?php echo __('lang.spatial_data_set_type'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label>
                             </div>
                             <div class="col-xl-4">
@@ -61,7 +61,7 @@
                             <div class="col-xl-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-hardsoftcopy" data-toggle="tooltip" title="Pengisian butiran skala (sekiranya ada). Contoh skala 1:50,000">
                                     <?php echo __('lang.scale_in_hardcopy_softcopy'); ?>
-                                    <span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span>
+                                    <span style="font-size: smaller;"><?php echo __('lang.features_scale'); ?></span><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     <span>: </span>
                                 </label>
                                 <input class="form-control form-control-sm" name="c12_feature_scale" id="c12_feature_scale" placeholder="10:50000" type="text" value="{{old('c12_feature_scale')}}">
@@ -72,7 +72,7 @@
                             ?>
                             <div class="col-xl-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-imggsd" data-toggle="tooltip" title="Pengisian butiran resolusi (sekiranya ada). Contoh GSD (Ground Sample Distance) - Resolution = 0.5 meter">
-                                    <?php echo __('lang.image_resolution'); ?>
+                                    <?php echo __('lang.image_resolution'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     <span>: </span></label>
                                     <div class="input-group">
                                         <input type="text" class="form-control form-control-sm" name="c12_image_res" id="c12_image_res" placeholder="10.5" value="{{old('c12_image_res')}}">
@@ -87,7 +87,7 @@
                             ?>
                             <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <label class="form-control-label" for="input-language" data-toggle="tooltip" title="Penggunaan bahasa bagi maklumat geospatial">
-                                    <?php echo __('lang.data_set_language'); ?>
+                                    <?php echo __('lang.data_set_language'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     <span>: </span>
                                 </label>
                                 <select class="form-control form-control-sm" name="c12_language" id="c12_language">
@@ -111,7 +111,7 @@
                             <div class="row mb-2 divMaintenanceInfo">
                                 <div class="col-xl-3">
                                     <label class="form-control-label" for="input-hardsoftcopy">
-                                        <?php echo __('lang.maintenance_and_update'); ?>
+                                        <?php echo __('lang.maintenance_and_update'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         <span>: </span>
                                     </label>
                                 </div>

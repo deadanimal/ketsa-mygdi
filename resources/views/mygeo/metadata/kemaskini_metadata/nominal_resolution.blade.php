@@ -40,7 +40,7 @@
                         <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline ml-3">
                                 <div class="form-control-label mr-3">
-                                    Scanning Resolution<span class="text-warning">*</span> :
+                                    Scanning Resolution<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :
                                 </div>
                                 <?php
                                 $scanRes = "";
@@ -64,7 +64,7 @@
                         <div class="col-xl-6" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="form-inline">
                                 <div class="form-control-label mr-3">
-                                    Ground Scanning<span class="text-warning">*</span> :
+                                    Ground Scanning<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :
                                 </div>
                                 <?php
                                 $groundScan = "";

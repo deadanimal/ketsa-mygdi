@@ -100,17 +100,11 @@
                                     <div align="justify" class="mx-5">
 
 
-                                        @if ($surat->nama == null)
-                                            <textarea class="form-control form-control-sm mt-3" cols="30" placeholder="Nama dan Alamat" rows="6"
-                                                name="nama_alamat">{{ $permohonan->users->name }},&#13;&#10;{{ $permohonan->users->alamat }}
-                                                                                                                                                                      </textarea>
-                                            <br>
-                                        @else
-                                            <textarea class="form-control form-control-sm mt-3" cols="30" placeholder="Nama dan Alamat" rows="6"
-                                                name="nama_alamat">{{ $surat->nama_alamat }}
-                                                                                                                                                                      </textarea>
-                                            <br>
-                                        @endif
+                                        <input type="text" class="form-control mt-3"
+                                            value="{{ $surat->nama ?? $permohonan->users->name }}" name="nama">
+
+                                        <textarea class="form-control form-control-sm mt-3" cols="30" placeholder="Alamat" rows="6"
+                                            name="alamat">{{ $surat->alamat ?? $permohonan->users->alamat }}</textarea>
                                         <br>
                                         <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
                                             placeholder="Tajuk Surat Balasan Permohonan" value="{{ $surat->tajuk_surat }}"

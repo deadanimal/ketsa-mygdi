@@ -2770,6 +2770,30 @@ class MetadataController extends Controller {
     }
 
     public function store(Request $request) {
+        $mt = MetadataTemplate::where('status','active')->get()->first();
+//        dd($mt,strtolower($request->kategori),$mt->template[strtolower($request->kategori)]);
+        $mandatory_fields = [];
+        foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
+            if($key == "accordion3" || $key == "accordion9"){
+                continue;
+            }
+            
+            foreach($val as $vKey=>$vVal){
+                if(isset($vVal['mandatory']) && $vVal['mandatory'] == "yes"){
+                    if($vKey == "file_contohJenisMetadata"){
+                        $mandatory_fields[$vKey] = "mimetypes:application/pdf|max:10000";
+                    }else{
+                        $mandatory_fields[$vKey] = "required";
+                    }
+                }
+            }            
+        }
+//        dd($mandatory_fields);
+//        exit();
+        
+        $fields = $mandatory_fields;
+        
+        /*
         $fields = [
             "c1_content_info" => 'required',
             "publisher_name" => 'required',
@@ -2854,6 +2878,7 @@ class MetadataController extends Controller {
             "c2_serviceUrl.required" => 'Service URL required',
             "file_contohJenisMetadata" => 'Sample Data must be in PDF format and max 10MB'
         ];
+        */
 
         $elemenMetadatacol = [];
         $elemenMetadata = ElemenMetadata::where('status', '0')->get(); //get disabled inputs and remove their validation
@@ -2871,27 +2896,8 @@ class MetadataController extends Controller {
         if(!isset($cat->id)){
            exit(); 
         }
-        $customMetadataInput = CustomMetadataInput::where('kategori', $cat->id)->get();
-        $custom_inputs = "";
-        if (count($customMetadataInput) > 0) {
-            foreach ($customMetadataInput as $cmi) {
-                if ($cmi->mandatory == "Yes") {
-                    $fields[$cmi->input_name] = 'required';
-//                    $customMsg[$cmi->input_name . '.required'] = $cmi->name . " required";
-                }
-                if (isset($request->{$cmi->input_name})) { //dont remove white space below
-                    $custom_inputs .= '
-            <customInput>        
-                <' . $cmi->input_name . '>
-
-                    <CharacterString>' . $request->{$cmi->input_name} . '</CharacterString>
-                </' . $cmi->input_name . '>
-            </customInput>';
-                }
-            }
-        }
+        
         //=============
-        $mt = MetadataTemplate::where('status','active')->get()->first();
         $custom_inputs = "";
         $custom_inputs .= "<customInputs>";
         foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
@@ -2925,7 +2931,7 @@ class MetadataController extends Controller {
         }else{
             $validator = Validator::make($request->all(), $fields);
             if($validator->fails()){
-                return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan (*).']);
+                return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melibihi 10MB']);
             }
 //            $this->validate($request, $fields, $customMsg);
         }
@@ -3217,6 +3223,31 @@ class MetadataController extends Controller {
             $this->store($request);
             return redirect('mygeo_senarai_metadata')->with('success', 'ftest');
         }
+        
+        $mt = MetadataTemplate::where('status','active')->get()->first();
+//        dd($mt,strtolower($request->kategori),$mt->template[strtolower($request->kategori)]);
+        $mandatory_fields = [];
+        foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
+            if($key == "accordion3" || $key == "accordion9"){
+                continue;
+            }
+            
+            foreach($val as $vKey=>$vVal){
+                if(isset($vVal['mandatory']) && $vVal['mandatory'] == "yes"){
+                    if($vKey == "file_contohJenisMetadata"){
+                        $mandatory_fields[$vKey] = "mimetypes:application/pdf|max:10000";
+                    }else{
+                        $mandatory_fields[$vKey] = "required";
+                    }
+                }
+            }            
+        }
+//        dd($mandatory_fields);
+//        exit();
+        
+        $fields = $mandatory_fields;
+        
+        /*
         $fields = [
             "c1_content_info" => 'required',
             "publisher_name" => 'required',
@@ -3313,27 +3344,7 @@ class MetadataController extends Controller {
                 }
             }
         }
-
-        $cat = MCategory::where('name', $request->kategori)->get()->first();
-        $customMetadataInput = CustomMetadataInput::where('kategori', $cat->id)->get();
-        $custom_inputs = "";
-        if (count($customMetadataInput) > 0) {
-            foreach ($customMetadataInput as $cmi) {
-                if ($cmi->mandatory == "Yes") {
-                    $fields[$cmi->input_name] = 'required';
-                    $customMsg[$cmi->input_name . '.required'] = $cmi->name . " required";
-                }
-                if (isset($request->{$cmi->input_name})) { //dont remove white space below
-                    $custom_inputs .= '
-            <customInput>        
-                <' . $cmi->input_name . '>
-
-                    <CharacterString>' . $request->{$cmi->input_name} . '</CharacterString>
-                </' . $cmi->input_name . '>
-            </customInput>';
-                }
-            }
-        }
+        */
         
         $refsysname = "";
         if(isset($request->c13_ref_sys_identify) && !empty($request->c13_ref_sys_identify)){
@@ -3349,7 +3360,7 @@ class MetadataController extends Controller {
         }else{
             $validator = Validator::make($request->all(), $fields);
             if($validator->fails()){
-                return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan (*).']);
+                return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melibihi 10MB']);
             }
 //            $this->validate($request, $fields, $customMsg);
         }
@@ -3858,12 +3869,14 @@ class MetadataController extends Controller {
                         if($ai->status != "deleteCustomInput"){
                             $var[$ai->name] = $val[$ai->name];
                             $var[$ai->name]['status'] = $ai->status;
+                            $var[$ai->name]['mandatory'] = $ai->mandatory;
                         }
                     }else{
                         if($ai->status == "customInput"){ //new custom input
                             //elements passing thru this else block means are custom input
                             $name = preg_replace('/\s+/', '', $ai->name); //remove spaces and underscores
                             $var[$name] = ['label_bm'=>$ai->name,'label_en'=>$ai->name,'status'=>$ai->status];
+//                            $var[$ai->name]['mandatory'] = $ai->mandatory;
                         }
                     }
                 }

@@ -42,7 +42,7 @@
                                 <div class="row mb-2 divUseLimitation" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-access-cons">
-                                            <?php echo __('lang.use_limitation'); ?>
+                                            <?php echo __('lang.use_limitation'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">
@@ -64,7 +64,7 @@
                                 <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-access-cons">
-                                            <?php echo __('lang.access_constraints'); ?>
+                                            <?php echo __('lang.access_constraints'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">
@@ -106,7 +106,7 @@
                                 <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-use-cons">
-                                            <?php echo __('lang.use_constraints'); ?>
+                                            <?php echo __('lang.use_constraints'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">
@@ -157,7 +157,7 @@
                                 <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-access-cons">
-                                            <?php echo __('lang.classification'); ?>
+                                            <?php echo __('lang.classification'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">
@@ -203,7 +203,7 @@
                                 <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <div class="col-xl-5">
                                         <label class="form-control-label" for="input-reference">
-                                            <?php echo __('lang.classification_system'); ?>
+                                            <?php echo __('lang.classification_system'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                         </label>
                                     </div>
                                     <div class="col-xl-7">

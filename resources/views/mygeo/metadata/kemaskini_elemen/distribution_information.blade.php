@@ -21,7 +21,7 @@
                             </div>
                             <div class="col-8">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>"/>
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -35,11 +35,14 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Pengisian bagi format data yang disediakan untuk penyebaran. Contoh: tab, dwg, shp dan lain-lain">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
+                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -54,11 +57,14 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Pengisianbagiversi format data yang disediakan untukpenyebaran. Contoh: MapInfo 7.8, Arcview 3.2,  AutoCad 2005 dan lain-lain">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
+                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -73,11 +79,14 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Organisasi yang bertanggungjawab dalam penyebaran maklumat geospatial tersebut">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
+                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -92,11 +101,14 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Pengisian bagi unit penyebaran maklumat geospatial yang telah disediakan untuk distribution. Samaada mengikut data, tiles, layer atau kawasan geografi">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
+                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -111,11 +123,14 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Saiz maklumat geospatial (megabytes)">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
+                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -130,11 +145,14 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Pautan capaian maklumat geospatial (untuk muat turun)">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
+                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -149,11 +167,14 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Harga maklumat geospatial (Ringgit Malaysia)">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
+                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -168,11 +189,14 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Pengisian bagi Panduan/ Standard Order Proses (SOP) dalam memperolehi syarat-syarat atau arahan secara umum untuk mendapatkan/memperolehi maklumat geospatial">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
+                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -187,11 +211,14 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Medium penyebaran maklumat geospatial">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>">
+                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>

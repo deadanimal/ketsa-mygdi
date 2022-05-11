@@ -37,7 +37,7 @@
                                 <div class="form-inline ml-3">
                                     <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Pengisian bagi format data yang disediakan untuk penyebaran. Contoh: tab, dwg, shp dan lain-lain">
-                                        <?php echo __('lang.format_name'); ?> :
+                                        <?php echo __('lang.format_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :
                                     </div>
                                     <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_dist_format"
                                         id="c11_dist_format" placeholder="Format Name" value="{{ old('c11_dist_format') }}">
@@ -51,7 +51,7 @@
                                 <div class="form-inline ml-3">
                                     <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Pengisianbagiversi format data yang disediakan untukpenyebaran. Contoh: MapInfo 7.8, Arcview 3.2,  AutoCad 2005 dan lain-lain">
-                                        <?php echo __('lang.format_version'); ?> :
+                                        <?php echo __('lang.format_version'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :
                                     </div>
                                     <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_version"
                                         id="c11_version" placeholder="Format Version" value="{{ old('c11_version') }}">
@@ -72,7 +72,7 @@
                                 <div class="col-xl-3">
                                     <label class="form-control-label" for="input-distributor" data-toggle="tooltip"
                                         title="Organisasi yang bertanggungjawab dalam penyebaran maklumat geospatial tersebut">
-                                        <?php echo __('lang.organisation_name'); ?></label>
+                                        <?php echo __('lang.organisation_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                                 </div>
                                 <span>: </span>
                                 <div class="col-xl-8">
@@ -98,7 +98,7 @@
                                 <div class="form-inline ml-3">
                                     <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Pengisian bagi unit penyebaran maklumat geospatial yang telah disediakan untuk distribution. Samaada mengikut data, tiles, layer atau kawasan geografi.">
-                                        <?php echo __('lang.units_of_distribution'); ?> :
+                                        <?php echo __('lang.units_of_distribution'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :
                                     </div>
                                     <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_units_of_dist"
                                         id="c11_units_of_dist" placeholder="Units" value="{{ old('c11_units_of_dist') }}">
@@ -112,7 +112,7 @@
                                 <div class="form-inline ml-3">
                                     <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Saiz maklumat geospatial (megabytes)">
-                                        <?php echo __('lang.size'); ?> :
+                                        <?php echo __('lang.size'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :
                                     </div>
                                     <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_size"
                                         id="c11_size" placeholder="Size" value="{{ old('c11_size') }}">
@@ -131,7 +131,7 @@
                             <div class="col-xl-3">
                                 <label class="form-control-label" for="input-distributor" data-toggle="tooltip"
                                     title="Pautan capaian maklumat geospatial (untuk muat turun)">
-                                    <?php echo __('lang.link'); ?></label>
+                                    <?php echo __('lang.link'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                             </div>
                             <span>: </span>
                             <div class="col-xl-8">
@@ -154,7 +154,7 @@
                                 <div class="form-inline ml-3">
                                     <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Harga maklumat geospatial (Ringgit Malaysia)">
-                                        <?php echo __('lang.fees'); ?> :
+                                        <?php echo __('lang.fees'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :
                                     </div>
                                     <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_fees"
                                         id="c11_fees" placeholder="RM 0.00" value="{{ old('c11_fees') }}">
@@ -168,7 +168,7 @@
                                 <div class="form-inline ml-3">
                                     <div class="form-control-label mr-3" data-toggle="tooltip"
                                         title="Pengisian bagi Panduan/ Standard Order Proses (SOP) dalam memperolehi syarat-syarat atau arahan secara umum untuk mendapatkan/memperolehi maklumat geospatial">
-                                        <?php echo __('lang.ordering_instructions'); ?> :
+                                        <?php echo __('lang.ordering_instructions'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :
                                     </div>
                                     <input style="display: inline-block;" class="form-control form-control-sm " type="text" name="c11_order_instructions"
                                         id="c11_order_instructions" placeholder="RM 0.00" value="{{ old('c11_order_instructions') }}">
@@ -193,7 +193,7 @@
                                 <div class="col-xl-2">
                                     <label class="form-control-label" for="input-medium" data-toggle="tooltip"
                                         title="Medium penyebaran maklumat geospatial">
-                                        <?php echo __('lang.medium_name'); ?></label>
+                                        <?php echo __('lang.medium_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></label>
                                 </div>
                                 <span>: </span>
                                 <div class="col-xl-3">

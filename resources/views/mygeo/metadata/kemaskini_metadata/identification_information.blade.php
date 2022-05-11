@@ -58,7 +58,7 @@
                                         echo strtoupper(__('lang.title'));
                                     }
                                     ?>
-                                    <span class="text-warning">*</span>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -85,7 +85,7 @@
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                             <label class="form-control-label mr-4" for="c2_metadataNam3" data-toggle="tooltip" title="Pemilihan jenis abstrak">
-                                <?php echo __('lang.type_of_product'); ?><span class="text-warning">*</span>
+                                <?php echo __('lang.type_of_product'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -165,7 +165,7 @@
                         <div class="row mb-2 divMetadataDate" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                             <label class="form-control-label mr-4" for="c2_metadataDate" data-toggle="tooltip" title="Tarikh berkaitan  bagi maklumat geospatial.">
-                                <?php echo __('lang.date'); ?>
+                                <?php echo __('lang.date'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -191,7 +191,7 @@
                         <div class="row mb-2 divMetadataDateType" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                             <label class="form-control-label mr-4" for="c2_metadataDateType" data-toggle="tooltip" title="Pengisian secara pilihan mengenai peringkat maklumat geospatial">
-                                <?php echo __('lang.date_type'); ?>
+                                <?php echo __('lang.date_type'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -234,7 +234,7 @@
                         <div class="row mb-2 divMetadataStatus" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                             <label class="form-control-label mr-4" for="c2_metadataStatus" data-toggle="tooltip" title="Status bagi maklumat geospatial merujuk dokumen MGMS (LAMPIRAN D)">
-                                <?php echo __('lang.status'); ?>
+                                <?php echo __('lang.status'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -326,7 +326,7 @@
                         <div class="row mb-2 divTypeOfServices" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                             <label class="form-control-label mr-4" for="c2_typeOfServices" data-toggle="tooltip" title="Pengisian secara pilihan, jenis service bagi maklumat geospatial">
-                                <?php echo __('lang.type_of_services'); ?>
+                                <?php echo __('lang.type_of_services'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -425,7 +425,7 @@
                         <div class="row mb-2 divOperationName" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                                 <label class="form-control-label mr-4" for="c2_operationName">
-                                    <?php echo __('lang.operation_name'); ?>
+                                    <?php echo __('lang.operation_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -451,7 +451,7 @@
                         <div class="row mb-2 divServiceUrl" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                             <label class="form-control-label mr-4" for="c2_serviceUrl" data-toggle="tooltip" title="URL bagi service berkenaan. Klik ‘Test’ bagi percubaan URL berkenaan.">
-                                <?php echo __('lang.service_URL'); ?><span class="text-warning">*</span>
+                                <?php echo __('lang.service_URL'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-6">
@@ -482,7 +482,7 @@
                         <div class="row mb-2 divTypeOfCouplingDataset" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3">
                             <label class="form-control-label mr-4" for="c2_typeOfCouplingDataset" data-toggle="tooltip" title="Pilihan jenis gandingan bagi Dataset">
-                                <?php echo __('lang.type_of_coupling_with_dataset'); ?>
+                                <?php echo __('lang.type_of_coupling_with_dataset'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -524,7 +524,7 @@
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="c2_metadataNam2e" data-toggle="tooltip" title="Nama individu yang mewakili organisasi bagi maklumat geospatial">
-                                <?php echo __('lang.name'); ?><span class="text-warning">*</span>
+                                <?php echo __('lang.name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -550,7 +550,7 @@
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Nama organisasi yang bertanggungjawab terhadap maklumat geospatial">
-                                <?php echo __('lang.organisation_name'); ?><span class="text-warning">*</span>
+                                <?php echo __('lang.organisation_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -576,7 +576,7 @@
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_contact_bahagian" data-toggle="tooltip" title="Nama bahagian yang bertanggungjawab terhadap maklumat geospatial">
-                                    <?php echo __('lang.bahagian_name'); ?>
+                                    <?php echo __('lang.bahagian_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -601,7 +601,7 @@
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5">
                             <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Jawatan individu yang mewakili organisasi bagi maklumat geospatial">
-                                <?php echo __('lang.position_name'); ?>
+                                <?php echo __('lang.position_name'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-7">
@@ -682,7 +682,7 @@
                                     <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <label class="form-control-label mr-4 divPostalCode"
                                             for="c2_contact_city">Postal
-                                            Code :</label>
+                                            Code<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :</label>
                                     </div>
                                     <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <input type="text" name="c2_postal_code" id="c2_postal_code"
@@ -706,7 +706,7 @@
                                     ?>
                                     <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <label class="form-control-label mx-3 divCity" for="c2_contact_city" data-toggle="tooltip" title="Bandar">
-                                            <?php echo __('lang.city'); ?> :</label>
+                                            <?php echo __('lang.city'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :</label>
                                     </div>
                                     <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <input type="text" name="c2_contact_city" id="c2_contact_city"
@@ -718,8 +718,7 @@
                                 if($key == "c2_contact_state"){
                                     ?>
                                     <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                        <label class="form-control-label mr-4" for="c2_contact_state">State<span
-                                                class="text-warning">*</span> :</label>
+                                        <label class="form-control-label mr-4" for="c2_contact_state">State<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :</label>
                                     </div>
                                     <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <select name="c2_contact_state" id="c2_contact_state"
@@ -767,7 +766,7 @@
                                     ?>
                                     <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <label class="form-control-label mx-3" for="c2_contact_country" data-toggle="tooltip" title="Negara">
-                                            <?php echo __('lang.country'); ?> :</label>
+                                            <?php echo __('lang.country'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?> :</label>
                                     </div>
                                     <div class="col-3 px-0" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                         <input type="text" name="c2_contact_country" id="c2_contact_country" class="form-control form-control-sm" readonly value="Malaysia">
@@ -802,7 +801,7 @@
                             <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Alamat emel rasmi">
-                                    <?php echo __('lang.email'); ?><span class="text-warning">*</span>
+                                    <?php echo __('lang.email'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     </label><label class="float-right">:</label>
                                 </div>
                                 <div class="col-6">
@@ -828,7 +827,7 @@
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Nombor faksimili organisasi">
-                                    <?php echo __('lang.fax_no'); ?>
+                                    <?php echo __('lang.fax_no'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     </label><label class="float-right">:</label>
                                 </div>
                                 <div class="col-6">
@@ -851,7 +850,7 @@
                             <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Nombor telefon organisasi">
-                                    <?php echo __('lang.telephone_office'); ?><span class="text-warning">*</span>
+                                    <?php echo __('lang.telephone_office'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     </label><label class="float-right">:</label>
                                 </div>
                                 <div class="col-6">
@@ -877,7 +876,7 @@
                             <div class="row mb-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Alamat laman web organisasi">
-                                    <?php echo __('lang.contact_website'); ?>
+                                    <?php echo __('lang.contact_website'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     </label><label class="float-right">:</label>
                                 </div>
                                 <div class="col-6">
@@ -900,7 +899,7 @@
                             <div class="row mb-4 divResponsiblePartyRole" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                 <div class="col-3 pl-5">
                                 <label class="form-control-label mr-4" for="c2_contact_role" data-toggle="tooltip" title="Peranan yang dijalankan oleh organisasi berkenaan Metadata ">
-                                    <?php echo __('lang.role'); ?>
+                                    <?php echo __('lang.role'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                                     </label><label class="float-right">:</label>
                                 </div>
                                 <div class="col-6">
