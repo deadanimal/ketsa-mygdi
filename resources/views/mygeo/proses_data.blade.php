@@ -168,7 +168,7 @@
                                             <input class="form-control form-control-sm" placeholder="0.00"
                                                 style="width: 90px;" type="text" name="total_harga"
                                                 id="jumlah_harga_dokumen_{{ $permohonan->id }}" step="0.01"
-                                                value="{{ $permohonan->proses_datas->total_harga }}">
+                                                value="{{ $permohonan->proses_datas->total_harga ?? '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -177,10 +177,13 @@
                                         <div class="form-group">
                                             <label class="form-control-label mr-2">Pautan Data </label>
                                             <?php
-                                            $res = json_decode($permohonan->proses_datas->pautan_data);
-                                            $firstURL = $res ? $res['0'] : '';
-                                            $firstline = true;
-                                            $i = 1; ?>
+                                            if ($permohonan->proses_datas != null) {
+                                                $res = json_decode($permohonan->proses_datas->pautan_data);
+                                                $firstURL = $res ? $res['0'] : '';
+                                                $firstline = true;
+                                                $i = 1;
+                                            } 
+                                            ?>
 
                                             <i id="error" class="text-warning float-right" style="font-size: 11px"></i>
                                             <div class="d-flex mb-2">

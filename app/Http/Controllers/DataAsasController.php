@@ -60,13 +60,20 @@ class DataAsasController extends Controller
             }
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
-        $senarai_data = SenaraiData::where('status', 'Ada')->distinct('subkategori')->get();
+        // $senarai_data = SenaraiData::where('status', 'Ada')->distinct('subkategori')->get();
+        // $lapisandata = DB::table('senarai_data')
+        //     ->where('status', 'Ada')
+        //     ->select('subkategori', 'lapisan_data', 'kelas')
+        //     ->groupBy('subkategori', 'lapisan_data', 'kelas')
+        //     ->get();
+        // $kategori_senarai_data = SenaraiData::where('status', 'Ada')->distinct('kategori')->get();
+
+        $senarai_data = SenaraiData::distinct('subkategori')->get();
         $lapisandata = DB::table('senarai_data')
-            ->where('status', 'Ada')
             ->select('subkategori', 'lapisan_data', 'kelas')
             ->groupBy('subkategori', 'lapisan_data', 'kelas')
             ->get();
-        $kategori_senarai_data = SenaraiData::where('status', 'Ada')->distinct('kategori')->get();
+        $kategori_senarai_data = SenaraiData::distinct('kategori')->get();
 
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->orderBy('created_at')->get();
@@ -340,11 +347,14 @@ class DataAsasController extends Controller
             return redirect('/mygeo_profil');
         }
         $admin = Auth::user()->name;
-        // dd($admin);
-        $permohonan_list = MohonData::where(['assign_admin' => $admin, 'status' => 1, 'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
+        $permohonan_list = MohonData::with('proses_datas')->where(['assign_admin' => $admin, 'status' => 1, 'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();
+        // dd(MohonData::where('name','9MAY')->first());
+        // dd(ProsesData::where('permohonan_id','144')->first());
         return view('mygeo.proses_data', compact('permohonan_list', 'skdatas', 'proses'));
+
+
     }
 
     public function update_proses_data(Request $request)
@@ -489,14 +499,15 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        $permohonan_list = MohonData::with('users')->with('proses_datas')->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])
+        $permohonan_list = MohonData::with(['proses_datas','users'])
+            ->has('proses_datas')
+            ->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])
             ->where('status', '!=', 2)
             ->orderByDesc('created_at')
             ->get();
-        // $permohonan = ProsesData::where('id', 8)->get();
 
         foreach ($permohonan_list as $pl) {
-            if($pl->process_datas != null){
+            // if($pl->process_datas){
                 $inTempohUrl = 0;
                 $currentDate = date('d-m-Y');
                 $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
@@ -513,10 +524,11 @@ class DataAsasController extends Controller
                 }
                 $res = json_decode($pl->proses_datas->pautan_data);
                 $pl['res'] = $res;
-            }else{
-                $pl['inTempohUrl'] = 0;
-                $pl['res'] = "takde link";
-            }
+            // }
+            // else{
+            //     $pl['inTempohUrl'] = 0;
+            //     $pl['res'] = "takde link";
+            // }
         }
 
         return view('mygeo.muat_turun_data', compact('permohonan_list'));

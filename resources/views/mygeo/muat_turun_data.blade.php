@@ -90,7 +90,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($permohonan->date)->format('d/m/Y') }}</td>
-                                                <td>{{ $permohonan->proses_datas->tempoh_url }}</td>
+                                                <td>{{ $permohonan->proses_datas->tempoh_url ?? '' }}</td>
                                                 <td>
                                                     @if (is_array($permohonan->res) && !empty($permohonan->res))
                                                         {{-- {{ dd($res) }} --}}
