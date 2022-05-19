@@ -338,7 +338,7 @@
         var E = "<?php echo $eastBoundLongitude; ?>";
 
         var map = L.map('map').setView([5.3105, 107.3854408], 5);
-
+        L.control.scale().addTo(map);
         L.tileLayer(
             'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                 maxZoom: 18,
