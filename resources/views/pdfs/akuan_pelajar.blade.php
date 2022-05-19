@@ -193,7 +193,7 @@
                 <img src="{{ $borang2 }}" alt="borang" style="width: 100%;">
             </div>
             <div class="sign">
-                <img src="{{ public_path($akuan->digital_sign) }}" alt="Gambar Tandatangan" height="70">
+                <img src="{{ url($akuan->digital_sign) }}" alt="Gambar Tandatangan" height="70">
             </div>
             <div class="tarikh">
                 {{ Carbon\Carbon::parse($akuan->date_mohon)->format('d/m/Y') }}
