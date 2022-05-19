@@ -174,7 +174,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/lihat_permohonan/{id}', 'DataAsasController@tambah')->name('tambah.permohonan');
     //    Route::get('/mohon_data', 'DataAsasController@mohon_data');
     Route::post('/simpan_permohonan_baru', 'DataAsasController@store_permohonan_baru');
-    Route::post('/simpan_senarai_kawasan', 'DataAsasController@store_senarai_kawasan');
+    Route::post('/simpan_senarai_kawasan', [DataAsasController::class, 'store_senarai_kawasan']);
     Route::post('/delete_senarai_kawasan', 'DataAsasController@delete_senarai_kawasan');
     Route::post('/kemaskini_senarai_kawasan', 'DataAsasController@update_senarai_kawasan');
 
@@ -231,6 +231,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/proses_data', 'DataAsasController@proses_data');
     Route::post('/simpan_proses_data', 'DataAsasController@update_proses_data');
+    Route::post('/select_jenis_data', [DataAsasController::class, 'select_jenis_data']);
 
     Route::get('/kemaskini_profil', 'UserController@edit');
     Route::get('/kemaskini_profil_admin/{id}', 'UserController@edit_admin');
