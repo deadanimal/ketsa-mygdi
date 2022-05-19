@@ -8,6 +8,12 @@
 <script src="{{ asset('intecxmap/js/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ asset('intecxmap/css/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css') }}">
 
+<!--<style> <?php /* uncomment this style block for ketsa env */ ?>
+    .leaflet-draw-toolbar .leaflet-draw-draw-rectangle {
+        background-position: unset !important;
+    }
+</style>-->
+
 <div class="card card-primary mb-4 div_c9" id="div_c9">
     <div class="card-header ftest" style="background-color: #b3d1ff;color: black;cursor: pointer;border-radius: 10px;padding: 15px 13px;font-size: 1.2rem;">
         <a data-toggle="collapse" href="#collapse9" class="fixMap">
