@@ -528,7 +528,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin', 'Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('mygeo_pengisian_metadata') }}"
                                                     class="nav-link active">

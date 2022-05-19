@@ -40,7 +40,7 @@
                                 <input class="form-control form-control-sm ml-3 sortable" type="text" name="c2_metadataName" id="c2_metadataName" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -61,7 +61,7 @@
                                 </select>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1104,7 +1104,7 @@
                                 <textarea name="c2_abstract" id="c2_abstract" rows="5" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"></textarea>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1123,7 +1123,7 @@
                                 <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputIdentificationInformationUrl urlToTest sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1142,7 +1142,7 @@
                                 <input class="form-control form-control-sm ml-3 sortable" type="date" name="c2_metadataDate" id="c2_metadataDate" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1163,7 +1163,7 @@
                                 </select>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1184,7 +1184,7 @@
                                 </select>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1205,7 +1205,7 @@
                                 </select>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1224,7 +1224,7 @@
                                 <input type="text" class="form-control form-control-sm ml-3 sortable" name="c2_operationName" id="c2_operationName" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1243,7 +1243,7 @@
                                 <input type="text" class="form-control form-control-sm ml-3 sortable" name="c2_serviceUrl" id="c2_serviceUrl" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1264,7 +1264,7 @@
                                 </select>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1283,7 +1283,7 @@
                                 <input type="text" name="c2_contact_name" id="c2_contact_name" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1302,7 +1302,7 @@
                                 <input type="text" name="c2_contact_agensiorganisasi" id="c2_contact_agensiorganisasi" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1321,7 +1321,7 @@
                                 <input type="text" name="c2_contact_bahagian" id="c2_contact_bahagian" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1340,7 +1340,7 @@
                                 <input type="text" name="c2_position_name" id="c2_position_name" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1354,12 +1354,12 @@
                                 <label class="form-control-label mr-4" for="uname" data-toggle="tooltip" title="Jawatan individu yang mewakili organisasi bagi maklumat geospatial">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-3">
                                 Textbox
                                 <input type="text" name="c2_contact_address1" id="c2_contact_address1" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
-                            <div class="col-3">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1378,7 +1378,7 @@
                                 <input type="text" name="c2_contact_address2" id="c2_contact_address2" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1397,7 +1397,7 @@
                                 <input type="text" name="c2_contact_address3" id="c2_contact_address3" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1416,7 +1416,7 @@
                                 <input type="text" name="c2_contact_address4" id="c2_contact_address4" class="form-control form-control-sm ml-3 mb-2 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1435,7 +1435,7 @@
                                 <input type="text" name="c2_postal_code" id="c2_postal_code" class="form-control form-control-sm mb-2 divPostalCode sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1454,7 +1454,7 @@
                                 <input type="text" name="c2_contact_city" id="c2_contact_city" class="form-control form-control-sm mb-2 divCity sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1475,7 +1475,7 @@
                                 </select>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1496,7 +1496,7 @@
                                 </select>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1515,7 +1515,7 @@
                                 <input type="email" name="c2_contact_email" id="c2_contact_email" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1534,7 +1534,7 @@
                                 <input type="text" name="c2_contact_fax" id="c2_contact_fax" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1553,7 +1553,7 @@
                                 <input type="text" name="c2_contact_phone_office" id="c2_contact_phone_office" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1572,7 +1572,7 @@
                                 <input type="text" name="c2_contact_website" id="c2_contact_website" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -1593,7 +1593,7 @@
                                 </select>
                             </div>
                             <div class="col-5">
-                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Is Mandatory
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mantadori
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>

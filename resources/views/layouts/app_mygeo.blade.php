@@ -118,7 +118,7 @@
               <p>Profil</p>
             </a>
           </li>
-          @if(auth::user()->hasRole(['Penerbit Metadata','Super Admin']))
+          @if(auth::user()->hasRole(['Penerbit Metadata','Super Admin','Pentadbir Aplikasi']))
           <li class="nav-item has-treeview">
             <?php
             if(Request::segment(1) == 'pengisian_metadata'){
