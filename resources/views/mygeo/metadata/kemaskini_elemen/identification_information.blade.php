@@ -1366,6 +1366,7 @@
                             </div>
                         </div>
                         <?php
+                    /*
                     }elseif($key == "c2_contact_address2"){
                         ?>
                         <div class="row mb-2 sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
@@ -1423,6 +1424,7 @@
                             </div>
                         </div>
                         <?php
+                    */
                     }elseif($key == "c2_postal_code"){
                         ?>
                         <div class="row mb-2 sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>

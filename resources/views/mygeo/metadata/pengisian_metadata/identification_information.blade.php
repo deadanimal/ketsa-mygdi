@@ -468,13 +468,28 @@
                 <div class="row mb-4">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName" data-toggle="tooltip" title="Alamat organisasi yang bertanggungjawab terhadap maklumat geospatial">
-                            <?php echo __('lang.address'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
+                            <?php echo __('lang.address'); ?><span id='addressLabel'></span>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
                         <?php
                         foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                             if($key == "c2_contact_address1"){
+                                if($val['mandatory'] == "yes"){ 
+                                    ?>
+                                    <script>
+                                        $('#addressLabel').addClass("text-warning");
+                                        $('#addressLabel').text("*");
+                                    </script>
+                                    <?php
+                                }else{
+                                    ?>
+                                    <script>
+                                        $('#addressLabel').removeClass("text-warning");
+                                        $('#addressLabel').text("");
+                                    </script>
+                                    <?php
+                                }
                                 ?>
                                 <input type="text" name="c2_contact_address1" id="c2_contact_address1"
                             class="form-control form-control-sm ml-3 mb-2"
