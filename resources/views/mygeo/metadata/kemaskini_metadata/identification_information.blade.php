@@ -16,7 +16,7 @@
     <div id="collapse2" class="panel-collapse collapse in show" data-parent="#div_c2">
         <div class="card-body">
             <div class="my-2">
-                <?php 
+                <?php
                 $metDateType = '';
                 foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                     if($val['status'] == "customInput"){
@@ -626,7 +626,7 @@
                 <div class="row mb-4">
                     <div class="col-3 pl-5">
                         <label class="form-control-label mr-4" for="c2_metadataName2" data-toggle="tooltip" title="Alamat organisasi yang bertanggungjawab terhadap maklumat geospatial">
-                            <?php echo __('lang.address'); ?>
+                            <?php echo __('lang.address'); ?><span id='addressLabel'></span>
                         </label><label class="float-right">:</label>
                     </div>
                     <div class="col-6">
@@ -641,6 +641,21 @@
                         <?php
                         foreach($template->template[strtolower($catSelected)]['accordion2'] as $key=>$val){
                             if($key == "c2_contact_address1"){
+                                if($val['mandatory'] == "yes"){ 
+                                    ?>
+                                    <script>
+                                        $('#addressLabel').addClass("text-warning");
+                                        $('#addressLabel').text("*");
+                                    </script>
+                                    <?php
+                                }else{
+                                    ?>
+                                    <script>
+                                        $('#addressLabel').removeClass("text-warning");
+                                        $('#addressLabel').text("");
+                                    </script>
+                                    <?php
+                                }
                                 ?>
                                 <input type="text" name="c2_contact_address1" id="c2_contact_address1"
                                     class="form-control form-control-sm  mb-2" value="{{ $respAddress }}" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
