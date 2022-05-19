@@ -132,6 +132,7 @@
                                             <th>SUB-KATEGORI</th>
                                             <th>KATEGORI</th>
                                             <th>KAWASAN DATA</th>
+                                            <th>JENIS DATA</th>
                                             <th>SAIZ(MB) × HARGA</th>
                                         </tr>
                                     </thead>
@@ -144,15 +145,38 @@
                                                     <td>{{ $data->lapisan_data }}</td>
                                                     <td>{{ $data->subkategori }}</td>
                                                     <td>{{ $data->kategori }}</td>
-                                                    <td>{{ $data->kawasan_data }}</td>
                                                     <td>
-                                                        <input class="form-control form-control-sm kiraHarga"
-                                                            placeholder="Saiz Data" name="saiz_data_{{ $data->id }}"
-                                                            type="number" step="0.01" value="{{ $data->saiz_data }}"
-                                                            data-permohonanid="{{ $permohonan->id }}"
-                                                            data-hargadata="{{ $data->harga_data }}">
-                                                        <label class="ml-2">× RM {{ $data->harga_data }}
-                                                        </label>
+                                                        <select class="form-control" id="jenis_data_{{ $data->id }}"
+                                                            onchange="jenisData(this,{{ $data->id }},{{ $permohonan->id }})">
+                                                            <option
+                                                                {{ $data->jenis_data == 'fizikal' ? 'selected' : '' }}
+                                                                value="fizikal">Fizikal</option>
+                                                            <option
+                                                                {{ $data->jenis_data == 'map_servis' ? 'selected' : '' }}
+                                                                value="map_servis">Map Servis</option>
+                                                            <option
+                                                                {{ $data->jenis_data == 'fizikal, map_servis' ? 'selected' : '' }}
+                                                                value="fizikal, map_servis">Fizikal dan Map Servis
+                                                            </option>
+                                                        </select>
+                                                    </td>
+                                                    <td>{{ $data->kawasan_data }}</td>
+                                                    <td id="td_{{ $data->id }}">
+                                                        @foreach (explode(',', $data->harga_data) as $harga)
+                                                            <input class="form-control form-control-sm kiraHarga"
+                                                                id="kira_harga_{{ $data->id . $loop->iteration }}"
+                                                                placeholder="Saiz Data"
+                                                                name="saiz_data_{{ $data->id . $loop->iteration }}"
+                                                                type="number" step="0.01" value="{{ $data->saiz_data }}"
+                                                                data-permohonanid="{{ $permohonan->id }}"
+                                                                data-hargadata="{{ $harga }}">
+                                                            <label
+                                                                id="kira_harga_label_{{ $data->id . $loop->iteration }}"
+                                                                class="ml-2">× RM {{ $harga }}
+                                                            </label>
+                                                        @endforeach
+
+
                                                     </td>
                                                 </tr>
                                                 <?php $count++; ?>
@@ -234,6 +258,7 @@
                                 <div class="row px-3 text-right">
                                     <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">
 
+
                                     <input type="hidden" name="id" value="{{ $permohonan->id }}">
                                     <button class="btn btn-success ml-auto btnValid{{ $permohonan->id }}" type="button">
                                         Hantar
@@ -295,8 +320,105 @@
         @endforeach
 
         <script>
+            function jenisData(element, id, pid) {
+
+                if (element.value == "fizikal, map_servis") {
+                    $.ajax({
+                        method: "POST",
+                        url: "/select_jenis_data",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "id": id,
+                            "pid": pid,
+                            "jenis_data": element.value,
+                            "saiz_new": $("#kira_harga_" + id).val(),
+                        },
+                    }).done(function(response) {
+                        $("#td_" + id).html('');
+                        $("#td_" + id).append(`
+                    <div class="row mx-2">
+                        <input class="form-control form-control-sm kiraHarga"
+                            id="kira_harga_` + response.id + `1" placeholder="Saiz Data"
+                            name="saiz_data_` + response.id + `1" type="number" step="0.01"
+                            value="` + response.saiz_new + `" data-permohonanid="` + response.pid + `"
+                            data-hargadata=" ` + response.harga1 + ` ">
+                        <label id="kira_harga_label_` + response.id + `1" class="ml-2">× RM ` +
+                            response.harga1 + `</label>
+                    </div>
+                     <div class="row mx-2">
+                        <input class="form-control form-control-sm kiraHarga"
+                            id="kira_harga_` + response.id + `2" placeholder="Saiz Data"
+                            name="saiz_data_` + response.id + `2" type="number" step="0.01"
+                            value="` + response.saiz_new + `" data-permohonanid="` + response.pid + `"
+                            data-hargadata=" ` + response.harga2 + `">
+                        <label id="kira_harga_label_` + response.id + `1" class="ml-2">× RM ` +
+                            response.harga2 + `</label>
+                    </div>
+
+                    `);
+
+                        var kiraHarga = $('.kiraHarga');
+                        var jumlahHarga = 0;
+                        var permohonanid = response.pid;
+                        jQuery.each(kiraHarga, function(key, val) {
+                            var size = $(val).val();
+                            var hargadata = $(val).data('hargadata');
+                            if (key.id == "kira_harga_" + response.id) {
+                                hargadata = response.harga;
+                            }
+                            jumlahHarga += (size * hargadata);
+
+                        });
+                        jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
+                        $("#jumlah_harga_dokumen_" + permohonanid).val(jumlahHarga);
+                    });
+
+                } else {
+                    $.ajax({
+                        method: "POST",
+                        url: "/select_jenis_data",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "id": id,
+                            "pid": pid,
+                            "jenis_data": element.value,
+                            "saiz_new": $("#kira_harga_" + id).val(),
+                        },
+                    }).done(function(response) {
+                        $("#td_" + response.id).html('');
+                        $("#td_" + response.id).append(`
+                    <input class="form-control form-control-sm kiraHarga"
+                    id="kira_harga_` + response.id + `" placeholder="Saiz Data"
+                    name="saiz_data_` + response.id + `" type="number" step="0.01"
+                    value="` + response.saiz_new + `"
+                    data-permohonanid="` + response.pid + `"
+                    data-hargadata=" ` + response.harga + ` ">
+                    <label id="kira_harga_label_` + response.id + `"
+                     class="ml-2">× RM ` + response.harga + `
+                    </label>
+                    `);
+
+                        var kiraHarga = $('.kiraHarga');
+                        var jumlahHarga = 0;
+                        var permohonanid = response.pid;
+                        jQuery.each(kiraHarga, function(key, val) {
+                            var size = $(val).val();
+                            var hargadata = $(val).data('hargadata');
+                            if (key.id == "kira_harga_" + response.id) {
+                                hargadata = response.harga;
+                            }
+                            jumlahHarga += (size * hargadata);
+
+                        });
+                        jumlahHarga = parseFloat(jumlahHarga).toFixed(2);
+                        $("#jumlah_harga_dokumen_" + permohonanid).val(jumlahHarga);
+                    });
+                }
+
+            }
+
             $(document).ready(function() {
-                $(document).on('change', '.kiraHarga', function() {
+                $(document).on('keyup', '.kiraHarga', function() {
                     var kiraHarga = $('.kiraHarga');
                     var jumlahHarga = 0;
                     var permohonanid = $(this).data('permohonanid');

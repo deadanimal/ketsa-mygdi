@@ -169,11 +169,27 @@
                                             </li>
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
-                                            <li class="nav-item ng-star-inserted">
-                                                <a class="nav-link active" href="{{ url('mygeo_dashboard') }}">
+                                            <li class="nav-item has-treeview">
+                                                <a class="nav-link active" href="#">
                                                     <i class="fa-desktop fas text-orange"></i>
                                                     <span class="nav-link-text">Dashboard</span>
+                                                    <span class="ml-auto"><i
+                                                            class="right fas fa-angle-left"></i></span>
                                                 </a>
+                                                <ul class="nav nav-sm nav-treeview">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active"
+                                                            href="{{ url('mygeo_dashboard_metadata') }}">
+                                                            <span class="nav-link-text">Dashboard Metadata</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active"
+                                                            href="{{ url('mygeo_dashboard_data_asas') }}">
+                                                            <span class="nav-link-text">Dashboard Data Asas</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </li>
                                         @elseif (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Metadata', 'Penerbit Metadata']))
                                             <li class="nav-item ng-star-inserted">
@@ -528,7 +544,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin', 'Pentadbir Aplikasi']))
                                             <li class="nav-item">
                                                 <a href="{{ url('mygeo_pengisian_metadata') }}"
                                                     class="nav-link active">

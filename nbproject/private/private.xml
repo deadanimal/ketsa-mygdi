@@ -5,6 +5,7 @@
         <group>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/kemaskini_elemen_metadata/senarai_elemen.blade.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/app/Http/Controllers/MetadataController.php</file>
+            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/mygeo/metadata/kemaskini_metadata.blade.php</file>
             <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/routes/web.php</file>
         </group>
     </open-files>

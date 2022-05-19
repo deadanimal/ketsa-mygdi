@@ -24,7 +24,6 @@ use Carbon\Carbon;
 use DB;
 use function GuzzleHttp\json_encode;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 
@@ -343,15 +342,26 @@ class DataAsasController extends Controller
 
     public function proses_data()
     {
+
         if (!Auth::user()->hasRole(['Pentadbir Data', 'Super Admin', 'Pentadbir Aplikasi'])) {
             return redirect('/mygeo_profil');
         }
         $admin = Auth::user()->name;
+<<<<<<< HEAD
         $permohonan_list = MohonData::with('proses_datas')->where(['assign_admin' => $admin, 'status' => 1, 'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
         $skdatas = SenaraiKawasanData::get();
         $proses = ProsesData::get();
         // dd(MohonData::where('name','9MAY')->first());
         // dd(ProsesData::where('permohonan_id','144')->first());
+=======
+        // dd($admin);
+        $permohonan_list = MohonData::with('mohonSenaraiKawasan')
+            ->where(['assign_admin' => $admin, 'status' => 1, 'dihantar' => 1])
+            ->orderBy('created_at', ('desc'))->get();
+        $skdatas = SenaraiKawasanData::all();
+        $proses = ProsesData::get();
+
+>>>>>>> f27201b47e056148d5332cf006c74ac86eef270b
         return view('mygeo.proses_data', compact('permohonan_list', 'skdatas', 'proses'));
 
 
@@ -442,11 +452,11 @@ class DataAsasController extends Controller
             $to_email = $pemohon->users->email;
 //            $to_email = 'farhan15959@gmail.com';
             $data = array('cat' => 'cat');
-            Mail::send("mails.exmpl15", $data, function ($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
-                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                // $message->attach($file);
-            });
+            // Mail::send("mails.exmpl15", $data, function ($message) use ($to_name, $to_email) {
+            //     $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
+            //     // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+            //     // $message->attach($file);
+            // });
 
             $at = new AuditTrail();
             $at->path = url()->full();
@@ -1353,15 +1363,15 @@ class DataAsasController extends Controller
                         'catatan_lain' => $request->catatan_lain,
                     ];
                     if ($request->catatan == "others") {
-                        Mail::send("mails.exmpl14-1", $data, function ($message) use ($to_name, $to_email, $subject) {
-                            $message->to($to_email, $to_name)->subject($subject);
-                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                        });
+                        // Mail::send("mails.exmpl14-1", $data, function ($message) use ($to_name, $to_email, $subject) {
+                        //     $message->to($to_email, $to_name)->subject($subject);
+                        //     // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        // });
                     } else {
-                        Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
-                            $message->to($to_email, $to_name)->subject($subject);
-                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                        });
+                        // Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
+                        //     $message->to($to_email, $to_name)->subject($subject);
+                        //     // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        // });
                     }
                 }
 
@@ -1435,10 +1445,10 @@ class DataAsasController extends Controller
                     $to_name = $p->name;
                     $to_email = $p->email;
                     $data = ['nama_pemohon' => $pemohon->users->name, 'agensi' => $agensi_pemohon];
-                    Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
-                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
-                        // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    });
+                    // Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
+                    //     $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
+                    //     // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    // });
                 }
             }
 
@@ -1835,5 +1845,55 @@ class DataAsasController extends Controller
             "tempoh_url" => $request->tempoh,
         ]);
         return redirect('status_permohonan')->with('success', 'Tempoh Muat Turun URL Berjaya Dikemaskini');
+    }
+
+    public function select_jenis_data(Request $request)
+    {
+        $kawasanData = SenaraiKawasanData::find($request->id);
+        $senaraiData = SenaraiData::where([
+            ['kategori', $kawasanData->kategori],
+            ['subkategori', $kawasanData->subkategori],
+            // ['kawasan_data', $kawasanData->kawasan_data],
+        ])->first();
+
+        $kawasanData->update([
+            'jenis_data' => $request->jenis_data,
+            'saiz_data' => $request->saiz_new,
+        ]);
+
+        switch ($request->jenis_data) {
+            case 'fizikal':
+                $kawasanData->update([
+                    'harga_data' => $senaraiData->harga_data,
+                ]);
+                $harga = $senaraiData->harga_data;
+                break;
+            case 'map_servis':
+                $kawasanData->update([
+                    'harga_data' => $senaraiData->harga_data_services,
+                ]);
+                $harga = $senaraiData->harga_data_services;
+                break;
+            case 'fizikal, map_servis':
+                $kawasanData->update([
+                    'harga_data' => $senaraiData->harga_data . "," . $senaraiData->harga_data_services,
+                ]);
+                $harga1 = $senaraiData->harga_data;
+                $harga2 = $senaraiData->harga_data_services;
+                return [
+                    'harga1' => $harga1,
+                    'harga2' => $harga2,
+                    'id' => $request->id,
+                    'pid' => $request->pid,
+                    'saiz_new' => $request->saiz_new,
+                ];
+                break;
+        }
+        return [
+            'harga' => $harga,
+            'id' => $request->id,
+            'pid' => $request->pid,
+            'saiz_new' => $request->saiz_new,
+        ];
     }
 }
