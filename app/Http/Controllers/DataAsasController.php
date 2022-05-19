@@ -347,13 +347,6 @@ class DataAsasController extends Controller
             return redirect('/mygeo_profil');
         }
         $admin = Auth::user()->name;
-<<<<<<< HEAD
-        $permohonan_list = MohonData::with('proses_datas')->where(['assign_admin' => $admin, 'status' => 1, 'dihantar' => 1])->orderBy('created_at', ('desc'))->get();
-        $skdatas = SenaraiKawasanData::get();
-        $proses = ProsesData::get();
-        // dd(MohonData::where('name','9MAY')->first());
-        // dd(ProsesData::where('permohonan_id','144')->first());
-=======
         // dd($admin);
         $permohonan_list = MohonData::with('mohonSenaraiKawasan')
             ->where(['assign_admin' => $admin, 'status' => 1, 'dihantar' => 1])
@@ -361,7 +354,6 @@ class DataAsasController extends Controller
         $skdatas = SenaraiKawasanData::all();
         $proses = ProsesData::get();
 
->>>>>>> f27201b47e056148d5332cf006c74ac86eef270b
         return view('mygeo.proses_data', compact('permohonan_list', 'skdatas', 'proses'));
 
 
