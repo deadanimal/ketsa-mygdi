@@ -177,8 +177,8 @@
                 </div>
             </div>
             <div class="row col-12">
-                <a href="lampiran/content_information" class="text-yellow float-right" target="_blank">
-                    <i class="fas fa-lightbulb"></i>
+                <a href="#" class="text-yellow" data-toggle="modal" data-target="#topic_category">
+                    <i class="fas fa-lightbulb mx-2"></i>
                 </a>
             </div>
         </div>

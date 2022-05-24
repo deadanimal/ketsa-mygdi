@@ -65,6 +65,8 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
 }
 ?>
 
+@include('mygeo.metadata.modal_metadata.modal_tooltips')
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <section class="header">

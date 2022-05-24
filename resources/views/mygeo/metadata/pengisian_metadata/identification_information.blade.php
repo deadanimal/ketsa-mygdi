@@ -41,8 +41,8 @@
                                 @enderror
                             </div>
                             <div class="col-1">
-                                <a href="lampiran/title" class="text-yellow" target="_blank">
-                                    <i class="fas fa-lightbulb"></i>
+                                <a href="#" class="text-yellow" data-toggle="modal" data-target="#title">
+                                    <i class="fas fa-lightbulb mx-2"></i>
                                 </a>
                             </div>
                         </div>

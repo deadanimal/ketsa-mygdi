@@ -47,9 +47,10 @@
                             <option value="Imagery" class='optContentInfo_imagery'>Imagery</option>
                         </select>
                         <p class="ml-3 mb-0 lblContentInfo" style="font-size: 1rem;font-weight: 400 !important;">Live Data and Maps</p>
-                        <a href="lampiran/content_information" class="text-yellow" target="_blank">
+                        <a href="#" class="text-yellow" data-toggle="modal" data-target="#content_information">
                             <i class="fas fa-lightbulb mx-2"></i>
                         </a>
+                       
                         <input type="hidden" name="c1_content_info" class="form-control form-control-sm" id="content_info_text" style="width:175px;display:none;" disabled>
 
                         @error('c1_content_info')
