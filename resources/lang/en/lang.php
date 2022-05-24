@@ -176,7 +176,7 @@
     'DQInformation'=>'Data Quality Information',
     'dq_scope'=>'DQ Scope',
     'data_history'=>'Data History',
-    'date_time'=>'Data Time',
+    'date_time'=>'Date Time',
 
     'completeness'=>'COMPLETENESS',
     'completenessCommission'=>'Completeness Commission',
