@@ -2792,7 +2792,6 @@ class MetadataController extends Controller {
 //        exit();
         
         $fields = $mandatory_fields;
-        
         /*
         $fields = [
             "c1_content_info" => 'required',
@@ -2931,12 +2930,28 @@ class MetadataController extends Controller {
         }else{
             $validator = Validator::make($request->all(), $fields);
             if($validator->fails()){
+//                dd($validator->errors()->first());
                 return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melibihi 10MB']);
             }
 //            $this->validate($request, $fields, $customMsg);
         }
 
         $keywords = "";
+        if (isset($request->c10_additional_keyword1)){
+            $keywords .= '
+                <keyword>
+                    <gco:CharacterString>' . $request->c10_additional_keyword1 . '</gco:CharacterString>
+                </keyword>
+            ';
+        }
+        if (isset($request->c10_additional_keyword2)){
+            $keywords .= '
+                <keyword>
+                    <gco:CharacterString>' . $request->c10_additional_keyword2 . '</gco:CharacterString>
+                </keyword>
+            ';
+        }
+        /*
         if (isset($request->c10_additional_keyword) && count($request->c10_additional_keyword) > 0) {
             foreach ($request->c10_additional_keyword as $var) {
                 $keywords .= '
@@ -2952,6 +2967,9 @@ class MetadataController extends Controller {
                 </keyword>
             ';
         }
+        */
+        
+        
         $topicCategories = "";
         if (isset($request->topic_category) && count($request->topic_category) > 0) {
             foreach ($request->topic_category as $var) {
@@ -3360,6 +3378,7 @@ class MetadataController extends Controller {
         }else{
             $validator = Validator::make($request->all(), $fields);
             if($validator->fails()){
+//                dd($validator->errors()->first());
                 return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melibihi 10MB']);
             }
 //            $this->validate($request, $fields, $customMsg);

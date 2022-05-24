@@ -182,12 +182,12 @@
                         </div>
                         <?php
                     }
-                    if($key == "c10_additional_keyword[]"){ //============================
+                    if($key == "c10_additional_keyword1"){ //============================
                         $counter = 0;
                         if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
                             foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
                                 if(trim((string)$keyword->CharacterString) != ""){
-                                    if($counter > 0){
+                                    if($counter == 1){
                                         ?>
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-3 pl-5">
@@ -196,7 +196,7 @@
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
+                                                <input type="text" name="c10_additional_keyword1" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
                                             </div>
                                         </div>
                                         <?php
@@ -207,7 +207,7 @@
                         }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
                             foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
                                 if(trim((string)$keyword->CharacterString) != ""){
-                                    if($counter > 0){
+                                    if($counter == 1){
                                         ?>
                                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                             <div class="col-3 pl-5">
@@ -216,7 +216,51 @@
                                                 </label><label class="float-right">:</label>
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
+                                                <input type="text" name="c10_additional_keyword1" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    $counter++;
+                                }
+                            }
+                        }
+                    }
+                    if($key == "c10_additional_keyword2"){ //============================
+                        $counter = 0;
+                        if(isset($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords)){
+                            foreach($metadataxml->identificationInfo->SV_ServiceIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                                if(trim((string)$keyword->CharacterString) != ""){
+                                    if($counter == 2){
+                                        ?>
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                            <div class="col-3 pl-5">
+                                                <label class="form-control-label mr-4" for="c10_file_type">
+                                                    <?php echo __('lang.additional_keywords'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
+                                                </label><label class="float-right">:</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" name="c10_additional_keyword2" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    $counter++;
+                                }
+                            }
+                        }elseif(isset($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords)){
+                            foreach($metadataxml->identificationInfo->MD_DataIdentification->descriptiveKeywords->MD_Keywords->keyword as $keyword){
+                                if(trim((string)$keyword->CharacterString) != ""){
+                                    if($counter == 2){
+                                        ?>
+                                        <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                            <div class="col-3 pl-5">
+                                                <label class="form-control-label mr-4" for="c10_file_type">
+                                                    <?php echo __('lang.additional_keywords'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
+                                                </label><label class="float-right">:</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" name="c10_additional_keyword2" class="form-control form-control-sm ml-3" value="{{ ucwords((string)$keyword->CharacterString) }}">
                                             </div>
                                         </div>
                                         <?php

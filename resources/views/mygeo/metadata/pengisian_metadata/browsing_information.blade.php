@@ -128,7 +128,7 @@
                         </div>
                         <?php
                     }
-                    if($key == "c10_additional_keyword[]"){
+                    if($key == "c10_additional_keyword1"){
                         ?>
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-4 pl-5">
@@ -138,9 +138,13 @@
                                 </label><label class="float-right">:</label>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ (isset(old('c10_additional_keyword')[0]) ? old('c10_additional_keyword')[0]:"") }}">
+                                <input type="text" name="c10_additional_keyword1" class="form-control form-control-sm ml-3" value="{{ (null !== old('c10_additional_keyword1') ? old('c10_additional_keyword1'):"") }}">
                             </div>
                         </div>
+                        <?php
+                    }
+                    if($key == "c10_additional_keyword2"){
+                        ?>
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-4 pl-5">
                                 <label class="form-control-label mr-4" for="c10_file_url" data-toggle="tooltip" title="">
@@ -149,7 +153,7 @@
                                 </label><label class="float-right" >:</label>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="c10_additional_keyword[]" class="form-control form-control-sm ml-3" value="{{ (isset(old('c10_additional_keyword')[1]) ? old('c10_additional_keyword')[1]:"") }}">
+                                <input type="text" name="c10_additional_keyword2" class="form-control form-control-sm ml-3" value="{{ (null !== old('c10_additional_keyword2') ? old('c10_additional_keyword2'):"") }}">
                             </div>
                         </div>
                         <?php

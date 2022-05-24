@@ -136,20 +136,33 @@
                 <div class="card card-primary card-outline card-outline-tabs">
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="tab_completeness" data-toggle="pill" href="#completeness" role="tab" aria-controls="completeness" aria-selected="true">Completeness</a>
+                            <style>
+                                .nav-link {
+                                    width: 192px;
+                                }
+                            </style>
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
+                                <a class="nav-link active" id="tab_completeness" data-toggle="pill" href="#completeness"
+                                   role="tab" aria-controls="completeness" aria-selected="true" style="color: black;"><b><?php echo __('lang.completeness'); ?></b></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab_consistency" data-toggle="pill" href="#consistency" role="tab" aria-controls="consistency" aria-selected="false">Consistency</a>
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
+                                <a class="nav-link" id="tab_consistency" data-toggle="pill" href="#consistency"
+                                    role="tab" aria-controls="consistency" aria-selected="false" style="color: black;"><b><?php echo __('lang.logicalConsistency'); ?></b></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab_position_accuracy" data-toggle="pill" href="#position_accuracy" role="tab" aria-controls="position_accuracy" aria-selected="false">Positional Accuracy</a>
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
+                                <a class="nav-link" id="tab_position_accuracy" data-toggle="pill"
+                                    href="#position_accuracy" role="tab" aria-controls="position_accuracy"
+                                    aria-selected="false" style="color: black;"><b><?php echo __('lang.positionalAccuracy'); ?></b></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab_temp_accuracy" data-toggle="pill" href="#temp_accuracy" role="tab" aria-controls="temp_accuracy" aria-selected="false">Temporal Accuracy</a>
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
+                                <a class="nav-link" id="tab_temp_accuracy" data-toggle="pill"
+                                    href="#temp_accuracy" role="tab" aria-controls="temp_accuracy"
+                                    aria-selected="false" style="color: black;"><b><?php echo __('lang.temporalAccuracy'); ?></b></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab_thematic_accuracy" data-toggle="pill" href="#thematic_accuracy" role="tab" aria-controls="thematic_accuracy" aria-selected="false">Thematic Accuracy</a>
+                            <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
+                                <a class="nav-link" id="tab_thematic_accuracy" data-toggle="pill"
+                                    href="#thematic_accuracy" role="tab" aria-controls="thematic_accuracy"
+                                    aria-selected="false" style="color: black;"><b><?php echo __('lang.thematicAccuracy'); ?></b></a>
                             </li>
                         </ul>
                     </div>
@@ -169,12 +182,12 @@
                                                         }
                                                         ?>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t1_complete_comm_or_omit" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t1_complete_comm_or_omit" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t1_complete_comm_or_omit" id='completeness_comission' value='Completeness Commission' {{($radio1 == 'Completeness Commission' ? 'checked="checked"':'')}}>&nbsp;Completeness Commission
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t1_complete_comm_or_omit" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t1_complete_comm_or_omit" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t1_complete_comm_or_omit" value='Completeness Omission' {{($radio1 == 'Completeness Omission' ? 'checked="checked"':'')}}>&nbsp;Completeness Omission
                                                             </label>
                                                         </td>
@@ -186,7 +199,7 @@
                                                             ?>
                                                             <tr class="Completeness_Commission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t1Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissScope->compCommissScopeItem->CharacterString != "") {
@@ -218,7 +231,7 @@
                                                             ?>
                                                             <tr class="Completeness_Commission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $compLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->compCommissComplLevel->CharacterString != "") {
@@ -236,7 +249,7 @@
                                                             ?>
                                                             <tr class="Completeness_Commission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t1_commission_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t1_commission_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t1Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->dateTime->Date != "") {
@@ -254,7 +267,7 @@
                                                             ?>
                                                             <tr class="Completeness_Commission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t1Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -282,7 +295,7 @@
                                                             ?>
                                                             <tr class="Completeness_Commission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t1_conform_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t1_conform_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $conformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -300,7 +313,7 @@
                                                             ?>
                                                             <tr class="Completeness_Omission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t1Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissScope->compOmissScopeItem->CharacterString != "") {
@@ -332,7 +345,7 @@
                                                             ?>
                                                             <tr class="Completeness_Omission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $compLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->compOmissComplLevel->CharacterString != "") {
@@ -350,7 +363,7 @@
                                                             ?>
                                                             <tr class="Completeness_Omission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t1_commission_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t1_commission_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t1Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->dateTime->Date != "") {
@@ -368,7 +381,7 @@
                                                             ?>
                                                             <tr class="Completeness_Omission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t1Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -391,7 +404,7 @@
                                                             ?>
                                                             <tr class="Completeness_Omission">
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $conformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -427,22 +440,22 @@
                                                         }
                                                         ?>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t2_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t2_type" id='conceptual' value="Conceptual" {{($radio2 == 'Conceptual' ? 'checked="checked"':'')}}>&nbsp;Conceptual
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t2_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t2_type" value="Domain" {{($radio2 == 'Domain' ? 'checked="checked"':'')}}>&nbsp;Domain
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t2_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t2_type" value="Format" {{($radio2 == 'Format' ? 'checked="checked"':'')}}>&nbsp;Format
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t2_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t2_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t2_type" value="Topological" {{($radio2 == 'Topological' ? 'checked="checked"':'')}}>&nbsp;Topological
                                                             </label>
                                                         </td>
@@ -454,7 +467,7 @@
                                                             ?>
                                                             <tr class='Conceptual'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString != "") {
@@ -486,7 +499,7 @@
                                                             ?>
                                                             <tr class='Conceptual'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_comply_level" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_comply_level" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $compLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->compOmissLevel->CharacterString != "") {
@@ -504,7 +517,7 @@
                                                             ?>
                                                             <tr class='Conceptual'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->dateTime->Date != "") {
@@ -522,7 +535,7 @@
                                                             ?>
                                                             <tr class='Conceptual'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -545,7 +558,7 @@
                                                             ?>
                                                             <tr class='Conceptual'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_conform_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_conform_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -563,7 +576,7 @@
                                                             ?>
                                                             <tr class='Domain'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->consistDomainScope->consistConceptScopeItem->CharacterString != "") {
@@ -595,7 +608,7 @@
                                                             ?>
                                                             <tr class='Domain'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $compLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->compDomainLevel->CharacterString != "") {
@@ -613,7 +626,7 @@
                                                             ?>
                                                             <tr class='Domain'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_conceptual_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_conceptual_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->dateTime->Date != "") {
@@ -631,7 +644,7 @@
                                                             ?>
                                                             <tr class='Domain'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -654,7 +667,7 @@
                                                             ?>
                                                             <tr class='Domain'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_DomainConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -672,7 +685,7 @@
                                                             ?>
                                                             <tr class='Format'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_scope_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_scope_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->consistFormatScope->consistFormatScopeItem->CharacterString != "") {
@@ -704,7 +717,7 @@
                                                             ?>
                                                             <tr class='Format'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $compLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->compFormatLevel->CharacterString != "") {
@@ -722,7 +735,7 @@
                                                             ?>
                                                             <tr class='Format'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_conceptual_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_conceptual_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->dateTime->Date != "") {
@@ -740,7 +753,7 @@
                                                             ?>
                                                             <tr class='Format'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -763,7 +776,7 @@
                                                             ?>
                                                             <tr class='Format'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_FormatConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -781,7 +794,7 @@
                                                             ?>
                                                             <tr class='Topological'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_scope_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_scope_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->consistTopoScope->consistTopoScopeItem->CharacterString != "") {
@@ -813,7 +826,7 @@
                                                             ?>
                                                             <tr class='Topological'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $compLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->compTopoLevel->CharacterString != "") {
@@ -831,7 +844,7 @@
                                                             ?>
                                                             <tr class='Topological'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t2_conceptual_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t2_conceptual_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->dateTime->Date != "") {
@@ -849,7 +862,7 @@
                                                             ?>
                                                             <tr class='Topological'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -872,7 +885,7 @@
                                                             ?>
                                                             <tr class='Topological'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t2ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TopologicalConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -908,17 +921,17 @@
                                                         }
                                                         ?>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t3_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t3_type" id='AbsoluteOrExternal' value="Absolute or External" {{($radio3 == 'Absolute or External' ? 'checked="checked"':'')}}>&nbsp;Absolute or External
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t3_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t3_type" value="Relative or Internal" {{($radio3 == 'Relative or Internal' ? 'checked="checked"':'')}}>&nbsp;Relative or Internal
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t3_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t3_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t3_type" value="Gridded Data" {{($radio3 == 'Gridded Data' ? 'checked="checked"':'')}}>&nbsp;Gridded Data
                                                             </label>
                                                         </td>
@@ -930,7 +943,7 @@
                                                             ?>
                                                             <tr class='AbsoluteorExternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->posAccAbsoluteScope->posAccAbsoluteScopeItem->CharacterString != "") {
@@ -962,7 +975,7 @@
                                                             ?>
                                                             <tr class='AbsoluteorExternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_comply_level" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_comply_level" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3CompLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->compPosAccAbsoluteLevel->CharacterString != "") {
@@ -980,7 +993,7 @@
                                                             ?>
                                                             <tr class='AbsoluteorExternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->dateTime->Date != "") {
@@ -998,7 +1011,7 @@
                                                             ?>
                                                             <tr class='AbsoluteorExternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -1021,7 +1034,7 @@
                                                             ?>
                                                             <tr class='AbsoluteorExternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_conform_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_conform_result" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AbsoluteExternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -1039,7 +1052,7 @@
                                                             ?>
                                                             <tr class='RelativeorInternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_scope_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_scope_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeScope->posAccRelativeScopeItem->CharacterString != "") {
@@ -1071,7 +1084,7 @@
                                                             ?>
                                                             <tr class='RelativeorInternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_comply_level_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_comply_level_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3CompLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->posAccRelativeLevel->CharacterString != "") {
@@ -1089,7 +1102,7 @@
                                                             ?>
                                                             <tr class='RelativeorInternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_date_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_date_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->dateTime->Date != "") {
@@ -1107,7 +1120,7 @@
                                                             ?>
                                                             <tr class='RelativeorInternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -1130,7 +1143,7 @@
                                                             ?>
                                                             <tr class='RelativeorInternal'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_conform_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_conform_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -1148,7 +1161,7 @@
                                                             ?>
                                                             <tr class='GriddedData'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_scope_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_scope_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridScope->posAccGridScopeItem->CharacterString != "") {
@@ -1180,7 +1193,7 @@
                                                             ?>
                                                             <tr class='GriddedData'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_comply_level_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_comply_level_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3CompLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->posAccGridLevel->CharacterString != "") {
@@ -1198,7 +1211,7 @@
                                                             ?>
                                                             <tr class='GriddedData'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_date_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_date_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->dateTime->Date != "") {
@@ -1216,7 +1229,7 @@
                                                             ?>
                                                             <tr class='GriddedData'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t3Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -1239,7 +1252,7 @@
                                                             ?>
                                                             <tr class='GriddedData'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t3_conform_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t3_conform_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php   
                                                                         $t3ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_GriddedDataPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -1275,17 +1288,17 @@
                                                         }
                                                         ?>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t4_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t4_type" id='AccuracyorTimeMeasurement' value="Accuracy or Time Measurement" {{($radio4 == 'Accuracy or Time Measurement' ? 'checked="checked"':'')}}>&nbsp;Accuracy or Time Measurement
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t4_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t4_type" value="Temporal Consistency" {{($radio4 == 'Temporal Consistency' ? 'checked="checked"':'')}}>&nbsp;Temporal Consistency
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t4_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t4_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t4_type" value="Temporal Validity" {{($radio4 == 'Temporal Validity' ? 'checked="checked"':'')}}>&nbsp;Temporal Validity
                                                             </label>
                                                         </td>
@@ -1297,7 +1310,7 @@
                                                             ?>
                                                             <tr class='AccuracyorTimeMeasurement'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_accuTimeMeasure_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString != "") {
@@ -1329,7 +1342,7 @@
                                                             ?>
                                                             <tr class='AccuracyorTimeMeasurement'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4CompLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementLevel->CharacterString != "") {
@@ -1347,7 +1360,7 @@
                                                             ?>
                                                             <tr class='AccuracyorTimeMeasurement'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_accuTimeMeasure_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_accuTimeMeasure_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->dateTime->Date != "") {
@@ -1365,7 +1378,7 @@
                                                             ?>
                                                             <tr class='AccuracyorTimeMeasurement'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -1388,7 +1401,7 @@
                                                             ?>
                                                             <tr class='AccuracyorTimeMeasurement'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -1406,7 +1419,7 @@
                                                             ?>
                                                             <tr class='TemporalConsistency'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_scope_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_scope_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyScope->TemporalConsistencyItem->CharacterString != "") {
@@ -1438,7 +1451,7 @@
                                                             ?>
                                                             <tr class='TemporalConsistency'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_comply_level_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_comply_level_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4CompLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->TemporalConsistencyLevel->CharacterString != "") {
@@ -1456,7 +1469,7 @@
                                                             ?>
                                                             <tr class='TemporalConsistency'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_date_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_date_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->dateTime->Date != "") {
@@ -1474,7 +1487,7 @@
                                                             ?>
                                                             <tr class='TemporalConsistency'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -1497,7 +1510,7 @@
                                                             ?>
                                                             <tr class='TemporalConsistency'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_conform_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_conform_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalConsistency->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -1515,7 +1528,7 @@
                                                             ?>
                                                             <tr class='TemporalValidity'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_accuTimeMeasure_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityScope->TemporalValidityItem->CharacterString != "") {
@@ -1547,7 +1560,7 @@
                                                             ?>
                                                             <tr class='TemporalValidity'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_comply_level_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_comply_level_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4CompLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->TemporalValidityLevel->CharacterString != "") {
@@ -1565,7 +1578,7 @@
                                                             ?>
                                                             <tr class='TemporalValidity'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_date_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_date_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date != "") {
@@ -1583,7 +1596,7 @@
                                                             ?>
                                                             <tr class='TemporalValidity'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -1606,7 +1619,7 @@
                                                             ?>
                                                             <tr class='TemporalValidity'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t4_conform_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t4_conform_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t4ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -1642,17 +1655,17 @@
                                                         }
                                                         ?>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t5_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t5_type" value="Classification Correctness" checked>&nbsp;Classification Correctness
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t5_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t5_type" value="Non Quantitative Attribute Correctness">&nbsp;<?php echo __('lang.nonQuantitativeAttributeCorrectness'); ?>
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-check-label" for="c15_t5_type" style="margin-right:50px;">
+                                                            <label class="form-control-label mr-4" for="c15_t5_type" style="margin-right:50px;">
                                                                 <input type="radio" name="c15_t5_type" value="Quantitative Attribute Accuracy">&nbsp;<?php echo __('lang.quantitativeAttributeCorrectness'); ?>
                                                             </label>
                                                         </td>
@@ -1664,7 +1677,7 @@
                                                             ?>
                                                             <tr class='classificationCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_classCorrect_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_classCorrect_scope" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessScope->ThematicClassificationCorrectnessItem->CharacterString != "") {
@@ -1696,7 +1709,7 @@
                                                             ?>
                                                             <tr class='classificationCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5CompLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->ThematicClassificationCorrectnessLevel->CharacterString != "") {
@@ -1714,7 +1727,7 @@
                                                             ?>
                                                             <tr class='classificationCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_classCorrect_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_classCorrect_date" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->dateTime->Date != "") {
@@ -1732,7 +1745,7 @@
                                                             ?>
                                                             <tr class='classificationCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -1755,7 +1768,7 @@
                                                             ?>
                                                             <tr class='classificationCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c3_4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -1773,7 +1786,7 @@
                                                             ?>
                                                             <tr class='nonQuantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_scope_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_scope_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyScope->NonQuantitativeAttributeAccuracyScopeItem->CharacterString != "") {
@@ -1806,7 +1819,7 @@
                                                             ?>
                                                             <tr class='nonQuantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_comply_level_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_comply_level_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5CompLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->NonQuantitativeAttributeAccuracyLevel->CharacterString != "") {
@@ -1824,7 +1837,7 @@
                                                             ?>
                                                             <tr class='nonQuantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_date_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_date_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->dateTime->Date != "") {
@@ -1842,7 +1855,7 @@
                                                             ?>
                                                             <tr class='nonQuantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_NonQuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -1865,7 +1878,7 @@
                                                             ?>
                                                             <tr class='nonQuantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_conform_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_conform_result_2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ThematicClassificationCorrectness->result->DQ_ConformanceResult->explanation->CharacterString != "") {
@@ -1883,7 +1896,7 @@
                                                             ?>
                                                             <tr class='quantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_scope_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_scope_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5Scope = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyScope->QuantitativeAttributeAccuracyItem->CharacterString != "") {
@@ -1916,7 +1929,7 @@
                                                             ?>
                                                             <tr class='quantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_comply_level_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_comply_level_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5CompLvl = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyLevel->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->QuantitativeAttributeAccuracyLevel->CharacterString != "") {
@@ -1934,7 +1947,7 @@
                                                             ?>
                                                             <tr class='quantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_date_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_date_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5Date = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->dateTime->Date) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->dateTime->Date != "") {
@@ -1952,7 +1965,7 @@
                                                             ?>
                                                             <tr class='quantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5Res = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->pass->Boolean != "") {
@@ -1975,7 +1988,7 @@
                                                             ?>
                                                             <tr class='quantitativeAttributeCorrectness'>
                                                                 <td>
-                                                                    <label class="form-check-label" for="c15_t5_conform_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                                                    <label class="form-control-label mr-4" for="c15_t5_conform_result_3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                         <?php
                                                                         $t5ConformRes = "";
                                                                         if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->explanation->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_QuantitativeAttributeAccuracy->result->DQ_ConformanceResult->explanation->CharacterString != "") {

@@ -38,6 +38,10 @@
             background-color: white;
             border-radius: 10px;
         }
+        .nav-item a{
+            color:black !important;
+            font-weight: bolder;
+        }
 
     </style>
 

@@ -13,7 +13,7 @@
     <div id="collapse15" class="panel-collapse collapse in show" data-parent="#div_c15">
         <div class="card-body">
             <div class="form-group row col-xl-6">
-                <b>Data Quality Information</b>
+                <label class="form-control-label float-right" for="input-datahistory"><b>Data Quality Information</b></label>
             </div>
             <div class="pl-lg-2">
                 <div class="row mb-2">
@@ -67,7 +67,7 @@
                                 ?>
                                 <div class="col-xl-1" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <label class="form-control-label" for="input-DQscope">
-                                        DQ Scope
+                                        DQ Scope:
                                     </label>
                                 </div>
                                 <div class="col-xl-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
@@ -85,7 +85,7 @@
                                 ?>
                                 <div class="col-xl-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <label class="form-control-label float-right" for="input-datahistory">
-                                        Data History</label>
+                                        Data History:</label>
                                 </div>
                                 <div class="col-md-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <?php echo $dataHist; ?>
@@ -136,11 +136,10 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <h4>Completeness Commission</h4>
-
+                                                            <label class="form-control-label"><b>Completeness Commission</b></label>
                                                         </td>
                                                         <td>
-                                                            <h4>Completeness Omission</h4>
+                                                            <label class="form-control-label"><b>Completeness Omission</b></label>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -157,10 +156,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_1">
-                                                                                <b>Scope:</b>
-                                                                                <?php echo trim($t1Scope); ?>
-                                                                            </label>
+                                                                                <p>
+                                                                                    <label class="form-control-label">Scope:</label>
+                                                                                    <?php echo trim($t1Scope); ?>
+                                                                                </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -174,10 +173,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_3">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Compliance Level:</label>
                                                                                 <?php echo $compLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -191,10 +190,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t1_commission_date">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Date:</label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t1Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -213,10 +212,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_2">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Result:</label>
                                                                                 <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->pass->Boolean); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -230,10 +229,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t1_conform_result">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Conformance Result:</label>
                                                                                 <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessCommission->result->DQ_ConformanceResult->explanation->CharacterString; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -254,10 +253,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_1">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Scope:</label>
                                                                                 <?php echo trim($t1Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -271,10 +270,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_3">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Compliance Level:</label>
                                                                                 <?php echo $compLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -288,10 +287,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t1_commission_date">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Date:</label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t1Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -305,10 +304,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_2">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Result:</label>
                                                                                 <?php echo trim($t1Res); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -322,10 +321,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_4">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Conformance Result:</label>
                                                                                 <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_CompletenessOmission->result->DQ_ConformanceResult->explanation->CharacterString; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -364,22 +363,22 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <h4>Conceptual Consistency</h4>
+                                                            <label class="form-control-label"><b>Conceptual Consistency</b></label>
                                                         </td>
                                                         <td>
-                                                            <h4>Domain Consistency</h4>
+                                                            <label class="form-control-label"><b>Domain Consistency</b></label>
                                                         </td>
                                                         <td>
-                                                            <h4>Format Consistency</h4>
+                                                            <label class="form-control-label"><b>Format Consistency</b></label>
                                                         </td>
                                                         <td>
-                                                            <h4>Topological Consistency</h4>
+                                                            <label class="form-control-label"><b>Topological Consistency</b></label>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             <?php
-                                                            foreach($template->template[strtolower($catSelected)]['accordion14'] as $key=>$val){
+                                                            foreach($template->template[strtolower($catSelected)]['accordion15'] as $key=>$val){
                                                                 if($key == "c15_t2_scope"){
                                                                     $t2Scope = "";
                                                                     if (isset($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString) && $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_ConceptualConsistency->consistConceptScope->consistConceptScopeItem->CharacterString != "") {
@@ -389,10 +388,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t2_scope">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Scope:</label>
                                                                                 <?php echo trim($t2Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -406,10 +405,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t2_comply_level">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Compliance Level:</label>
                                                                                 <?php echo $compLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -423,10 +422,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t2_date">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Date:</label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t2Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -440,10 +439,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t2_result">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Result:</label>
                                                                                 <?php echo trim($t2Res); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -457,10 +456,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t2_conform_result">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Conformance Result:</label>
                                                                                 <?php echo $t2Res; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -480,10 +479,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_1">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Scope:</label>
                                                                                 <?php echo trim($t2Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -497,10 +496,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_3">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Compliance Level:</label>
                                                                                 <?php echo $compLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -514,10 +513,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Date:</label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t2Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -531,10 +530,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_2">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Result:</label>
                                                                                 <?php echo trim($t2Res); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -548,10 +547,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_4">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Conformance Result:</label>
                                                                                 <?php echo $t2ConformRes; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -571,10 +570,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_1">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label">Scope:</label>
                                                                                 <?php echo trim($t2Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -588,10 +587,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_3">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
                                                                                 <?php echo $compLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -605,10 +604,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t2Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -622,10 +621,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_2">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
                                                                                 <?php echo trim($t2Res); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -639,10 +638,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_4">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
                                                                                 <?php echo $t2ConformRes; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -662,10 +661,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_1">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
                                                                                 <?php echo trim($t2Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -679,10 +678,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_3">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
                                                                                 <?php echo $compLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -696,10 +695,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t2_conceptual_date">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t2Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -713,10 +712,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_2">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
                                                                                 <?php echo trim($t2Res); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -730,10 +729,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_4">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
                                                                                 <?php echo $t2ConformRes; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -772,13 +771,13 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <h4>Absolute or External Accuracy</h4>
+                                                            <label class="form-control-label"><b>Absolute or External Accuracy</b></label>
                                                         </td>
                                                         <td>
-                                                            <h4>Relative or Internal Accuracy</h4>
+                                                            <label class="form-control-label"><b>Relative or Internal Accuracy</b></label>
                                                         </td>
                                                         <td>
-                                                            <h4>Gridded Data Accuracy</h4>
+                                                            <label class="form-control-label"><b>Gridded Data Accuracy</b></label>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -794,10 +793,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_scope">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
                                                                                 <?php echo trim($t3Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -811,10 +810,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_comply_level">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
                                                                                 <?php echo $t3CompLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -828,10 +827,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_date">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t3Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -845,10 +844,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_result">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
                                                                                 <?php echo trim($t3Res); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -862,10 +861,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_conform_result">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
                                                                                 <?php echo $t3ConformRes; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -885,10 +884,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_scope_2">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
                                                                                 <?php echo trim($t3Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -902,10 +901,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_comply_level_2">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
                                                                                 <?php echo $t3CompLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -919,10 +918,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_date_2">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t3Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -936,10 +935,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_result_2">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
                                                                                 <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->pass->Boolean); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -953,10 +952,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_conform_result_2">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
                                                                                 <?php echo $metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_RelativeInternalPositionalAccuracy->result->DQ_ConformanceResult->explanation->CharacterString; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -976,10 +975,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_scope_3">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
                                                                                 <?php echo trim($t3Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -993,10 +992,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_comply_level_3">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
                                                                                 <?php echo $t3CompLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1010,10 +1009,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_date_3">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t3Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1027,10 +1026,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_result_3">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
                                                                                 <?php echo trim($t3Res); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1044,10 +1043,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t3_conform_result_3">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
                                                                                 <?php echo $t3ConformRes; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1086,13 +1085,13 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <h4>Accuracy or Time Measurement</h4>
+                                                            <label class="form-control-label"><b>Accuracy or Time Measurement</b></label>
                                                         </td>
                                                         <td>
-                                                            <h4>Temporal Consistency</h4>
+                                                            <label class="form-control-label"><b>Temporal Consistency</b></label>
                                                         </td>
                                                         <td>
-                                                            <h4>Temporal Validity</h4>
+                                                            <label class="form-control-label"><b>Temporal Validity</b></label>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1108,10 +1107,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
                                                                                 <?php echo trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_AccuracyOfATimeMeasurement->AccuracyOfATimeMeasurementScope->AccuracyOfATimeMeasurementItem->CharacterString); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1125,10 +1124,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_3">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
                                                                                 <?php echo $t4CompLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1142,10 +1141,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_date">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t4Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1159,10 +1158,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_2">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
                                                                                 <?php echo trim($t4Res); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1176,10 +1175,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_4">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
                                                                                 <?php echo $t4ConformRes; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1199,10 +1198,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_scope_2">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
                                                                                 <?php echo trim($t4Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1216,10 +1215,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_comply_level_2">
-                                                                                <b>Compliance Level:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
                                                                                 <?php echo $t4CompLvl; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1233,10 +1232,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_date_2">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
                                                                                 <?php echo date('d/m/Y',strtotime(trim($t4Date))); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1250,10 +1249,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
-                                                                                <b>Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
                                                                                 <?php echo trim($t4Res); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1267,10 +1266,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_conform_result_2">
-                                                                                <b>Conformance Result:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
                                                                                 <?php echo $t4ConformRes; ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1290,10 +1289,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_accuTimeMeasure_scope">
-                                                                                <b>Scope:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
                                                                                 <?php echo trim($t4Scope); ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1307,12 +1306,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_comply_level_3">
-                                                                                <b>Compliance Level:</b>
-                                                                                <?php
-                                                                                echo $t4CompLvl;
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
+                                                                                <?php echo $t4CompLvl; ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1326,12 +1323,12 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_date_3">
-                                                                                <b>Date:</b>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
                                                                                 <?php
                                                                                 echo date('d/m/Y',strtotime(trim($metadataxml->dataQualityInfo->DQ_DataQuality->report->DQ_TemporalValidity->dateTime->Date)));
                                                                                 ?>
-                                                                            </label>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1345,12 +1342,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_result_3">
-                                                                                <b>Result:</b>
-                                                                                <?php
-                                                                                echo trim($t4Res);
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
+                                                                                <?php echo trim($t4Res); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1364,12 +1359,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t4_conform_result_3">
-                                                                                <b>Conformance Result:</b>
-                                                                                <?php
-                                                                                echo $t4ConformRes;
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
+                                                                                <?php echo $t4ConformRes; ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1408,13 +1401,13 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <h4><?php echo __('lang.classificationCorrectness'); ?></h4>
+                                                            <label class="form-control-label"><b><?php echo __('lang.classificationCorrectness'); ?></b></label>
                                                         </td>
                                                         <td>
-                                                            <h4><?php echo __('lang.nonQuantitativeAttributeCorrectness'); ?></h4>
+                                                            <label class="form-control-label"><b><?php echo __('lang.nonQuantitativeAttributeCorrectness'); ?></b></label>
                                                         </td>
                                                         <td>
-                                                            <h4><?php echo __('lang.quantitativeAttributeCorrectness'); ?></h4>
+                                                            <label class="form-control-label"><b><?php echo __('lang.quantitativeAttributeCorrectness'); ?></b></label>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1430,12 +1423,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t5_classCorrect_scope">
-                                                                                <b>Scope:</b>
-                                                                                <?php
-                                                                                echo trim($t5Scope);
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
+                                                                                <?php echo trim($t5Scope); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1449,12 +1440,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_3">
-                                                                                <b>Compliance Level:</b>
-                                                                                <?php
-                                                                                echo $t5CompLvl;
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
+                                                                                <?php echo $t5CompLvl; ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1468,12 +1457,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t5_classCorrect_date">
-                                                                                <b>Date:</b>
-                                                                                <?php
-                                                                                echo date('d/m/Y',strtotime(trim($t5Date)));
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t5Date))); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1487,12 +1474,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_2">
-                                                                                <b>Result:</b>
-                                                                                <?php
-                                                                                echo trim($t5Res);
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
+                                                                                <?php echo trim($t5Res); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1506,12 +1491,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_4">
-                                                                                <b>Conformance Result:</b>
-                                                                                <?php
-                                                                                echo $t5ConformRes;
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
+                                                                                <?php echo $t5ConformRes; ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1532,12 +1515,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t5_classCorrect_scope">
-                                                                                <b>Scope:</b>
-                                                                                <?php
-                                                                                echo trim($t5Scope);
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
+                                                                                <?php echo trim($t5Scope); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1551,12 +1532,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_3">
-                                                                                <b>Compliance Level:</b>
-                                                                                <?php
-                                                                                echo $t5CompLvl;
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
+                                                                                <?php echo $t5CompLvl; ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1570,12 +1549,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t5_classCorrect_date">
-                                                                                <b>Date:</b>
-                                                                                <?php
-                                                                                echo date('d/m/Y',strtotime(trim($t5Date)));
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t5Date))); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1589,12 +1566,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_2">
-                                                                                <b>Result:</b>
-                                                                                <?php
-                                                                                echo trim($t5Res);
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
+                                                                                <?php echo trim($t5Res); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1608,12 +1583,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_4">
-                                                                                <b>Conformance Result:</b>
-                                                                                <?php
-                                                                                echo $t5ConformRes;
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
+                                                                                <?php echo $t5ConformRes; ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1634,12 +1607,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t5_classCorrect_scope">
-                                                                                <b>Scope:</b>
-                                                                                <?php
-                                                                                echo trim($t5Scope);
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Scope:</b></label>
+                                                                                <?php echo trim($t5Scope); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1653,12 +1624,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_3">
-                                                                                <b>Compliance Level:</b>
-                                                                                <?php
-                                                                                echo $t5CompLvl;
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Compliance Level:</b></label>
+                                                                                <?php echo $t5CompLvl; ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1672,12 +1641,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c15_t5_classCorrect_date">
-                                                                                <b>Date:</b>
-                                                                                <?php
-                                                                                echo date('d/m/Y',strtotime(trim($t5Date)));
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Date:</b></label>
+                                                                                <?php echo date('d/m/Y',strtotime(trim($t5Date))); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1691,12 +1658,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_2">
-                                                                                <b>Result:</b>
-                                                                                <?php
-                                                                                echo trim($t5Res);
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Result:</b></label>
+                                                                                <?php echo trim($t5Res); ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
@@ -1710,12 +1675,10 @@
                                                                         $flag *= 0;
                                                                         ?>
                                                                         <div class="form-group" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                                                                            <label class="form-check-label" for="c3_4">
-                                                                                <b>Conformance Result:</b>
-                                                                                <?php
-                                                                                echo $t5ConformRes;
-                                                                                ?>
-                                                                            </label>
+                                                                            <p>
+                                                                                <label class="form-control-label"><b>Conformance Result:</b></label>
+                                                                                <?php echo $t5ConformRes; ?>
+                                                                            </p>
                                                                         </div>
                                                                         <?php
                                                                     }
