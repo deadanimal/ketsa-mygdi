@@ -121,7 +121,7 @@
                                         </div>
 
                                         <div class="col-4 text-right">
-                                            <a href="/mohon_data">
+                                            <a href="/permohonan_baru">
                                                 <button type="button"
                                                     class="btn btn-sm btn-default float-right">Kembali</button>
                                             </a>
