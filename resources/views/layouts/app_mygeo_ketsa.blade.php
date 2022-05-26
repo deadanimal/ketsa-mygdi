@@ -649,7 +649,7 @@
                                                             }
                                                         } ?> </span>
                                                     <?php
-                                                    echo rtrim($roles, ', ') . '<br><a href="#" data-toggle="modal" data-target="#modal_tukar_peranan"><i class="fas fa-user-cog"></i></a>';
+                                                    echo rtrim($roles, ', ') . '<br><a href="#" data-toggle="modal" data-target="#modal_tukar_peranan"><i class="fas fa-user-cog"  id="link_tukarPeranan" data-toggle="popover"></i></a>';
                                                     ?>
 
                                                     </a>
@@ -879,6 +879,13 @@
         }
         ?>
         $(document).ready(function() {
+            $("#link_tukarPeranan").popover({
+                placement: 'bottom',
+                sanitize: false,
+                html: true,
+                content : '<span>Tukar Peranan Di Sini</span><button type="button" class="close addGap" onclick="$(&quot;#link_tukarPeranan&quot;).popover(&quot;hide&quot;);">X</button>'
+            });
+            $('[data-toggle="popover"]').popover('show');
             <?php
             //notify user (pemohon data only) to do penilaian after 6 months==================================
             if(Auth::user()->hasRole(['Pemohon Data']) && Session::has('msgPenilaian') && Session::get('msgPenilaian') !== ""){

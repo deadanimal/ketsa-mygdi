@@ -26,6 +26,8 @@ use function GuzzleHttp\json_encode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
 
 class DataAsasController extends Controller
 {
@@ -453,7 +455,18 @@ class DataAsasController extends Controller
 
     public function mohon_data()
     {
-
+		//TEST EMAIL. WHY IS IT NOT WORKINGGGGGGG============
+		/*
+		$to_name = 'ftest';
+		$to_email = 'farhan15959@gmail.com';
+		$data = array('cat' => 'cat');
+		Mail::send("mails.exmpl", $data, function ($message) use ($to_name, $to_email) {
+			$message->to($to_email, $to_name)->subject("MyGeo Explorer - ftest rrrrrrrrrrrr22");
+			$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+		});
+		*/
+		//===================================================
+		
         $user = User::where(["id" => Auth::user()->id])->get()->first();
 
         //kira mohon data

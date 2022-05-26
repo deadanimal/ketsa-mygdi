@@ -114,7 +114,11 @@
             left: 0;
             right: 0;
         }
-
+        
+        .addGap{
+            margin-left:10px;
+        }
+       
     </style>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
@@ -188,7 +192,7 @@
                                         </a>
                                     @endauth
                                     @guest
-                                        <a class="nav-link nav-link-icon" href="{{ url('/login') }}">
+                                        <a class="nav-link nav-link-icon" href="{{ url('/login') }}" id="link_login" data-toggle="popover" >
                                             DAFTAR | LOG MASUK
                                         </a>
                                     @endguest
@@ -395,6 +399,19 @@
     <script>
         // Restricts input for the set of matched elements to the given inputFilter function.
         (function($) {
+            $("#link_login").popover({
+                placement: 'bottom',
+                sanitize: false,
+                html: true,
+                content : '<span>Login Di Sini</span><button type="button" class="close addGap" onclick="$(&quot;#link_login&quot;).popover(&quot;hide&quot;);">X</button>'
+            });
+            $(".sideMenu").popover({
+                placement: 'left',
+                sanitize: false,
+                html: true,
+                content : '<span>Pilihan Side Menu</span><button type="button" class="close addGap" onclick="$(&quot;.sideMenu&quot;).popover(&quot;hide&quot;);">X</button>'
+            });
+            $('[data-toggle="popover"]').popover('show');
             $.fn.inputFilter = function(inputFilter) {
                 return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
                     if (inputFilter(this.value)) {

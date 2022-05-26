@@ -159,7 +159,7 @@
 
     </style>
     <!-- ======= Header ======= -->
-    <header id="header" class="d-flex flex-column justify-content-center">
+    <header id="header" class="d-flex flex-column justify-content-center sideMenu" data-toggle="popover">
 
         <nav class="nav-menu">
             <ul>

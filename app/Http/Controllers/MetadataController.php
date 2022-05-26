@@ -323,7 +323,7 @@ class MetadataController extends Controller {
           }
          */
         //=========================================================================================================================
-
+		// dd(date('d-m-y H:i:s',time()));
         $metadatas = $metadatasdb = [];
         $carian = isset($request->carian) ? $request->carian : "";
         $query = MetadataGeo::on('pgsql2');
@@ -348,7 +348,7 @@ class MetadataController extends Controller {
             });
         }
 
-        if (isset($request->tarikh_mula) && $request->tarikh_mula != "" && isset($request->tarikh_tamat) && $request->tarikh_tamat != "" && ($request->tarikh_mula == $request->tarikh_tamat)) {
+        if (isset($request->tarikh_mula) && $request->tarikh_mula != "" && isset($request->tarikh_tamat) && $request->tarikh_tamat != "") {
             $query = $query->orWhereBetween('createdate', [$request->tarikh_mula . ' 00:00:01', $request->tarikh_tamat . ' 59:59:59']);
         } else {
             if (isset($request->tarikh_mula) && $request->tarikh_mula != "") {
