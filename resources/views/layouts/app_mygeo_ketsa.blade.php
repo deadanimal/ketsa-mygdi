@@ -737,7 +737,6 @@
     <div class="overlay-container">
         <div id="toast-container" class="toast-top-right toast-container"></div>
     </div>
-
     <form action="/notificationMuatTurun" id="formTigaJam" method="post" target="TheWindow">
         @csrf
         <div id="inputTigaJam">
@@ -796,7 +795,7 @@
                         `);
                     });
 
-                    window.open('', 'TheWindow');
+                    window.open('', 'TheWindow', 'width:800px;height:800px;');
                     document.getElementById('formTigaJam').submit();
                     // swal({
                     //     title: "Adakah anda berjaya memuat turun data?",
@@ -840,7 +839,7 @@
             ?>
         setInterval(
             checkThreeHourNotifySelesaiMuatTurun,
-            180000 /* 300000 ms = 5 min for farhan testing */
+            18000 /* 300000 ms = 5 min for farhan testing */
             // 10800000 /* 10800000 ms = 3 hrs */ //ori specs
             //                    60000  /* 60000 ms = m in for testing */
         );

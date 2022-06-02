@@ -26,6 +26,7 @@
         <section class="header">
             <div class=" container-fluid">
                 <div class="header-body">
+
                     <div class="row align-items-center p-3 py-4">
                         <div class="col-lg-6 col-7">
                             <h6 class="h2 text-dark d-inline-block mb-0">Surat Balasan</h6>
@@ -71,8 +72,15 @@
                             <div class="card-body p-4">
                                 <form action="{{ url('simpan_surat_balasan') }}" method="POST" id="form_surat_balasan">
                                     @csrf
+                                    <div class="row mb-3">
+                                        <div class="col text-right">
+                                            <a class="btn btn-default btn-sm " href="/proses_data">Kembali</a>
+                                        </div>
+                                    </div>
                                     <div class="row">
-                                        <div class="col-7"></div>
+                                        <div class="col-7">
+
+                                        </div>
                                         <div class="col-5">
                                             <div class="form-inline" style="padding-right: 55px !important;">
                                                 <table style="width: 100%;">
