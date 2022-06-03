@@ -336,7 +336,7 @@ class MetadataController extends Controller {
 
         if (isset($request->content_type) && $request->content_type != "") {
             $params['content_type'] = $request->content_type;
-            $query = $query->orWhere('data', 'ilike', '%>' . $request->content_type . '<%');
+            $query = $query->orWhere('data', 'ilike', '"c1_content_info"%>' . $request->content_type . '<%');
         }
         $params['topic_category'] = [];
         if (isset($request->topic_category)) {
@@ -2918,8 +2918,12 @@ class MetadataController extends Controller {
         
         $refsysname = "";
         if(isset($request->c13_ref_sys_identify) && !empty($request->c13_ref_sys_identify)){
-            $refSysSelected = ReferenceSystemIdentifier::where('id', $request->c13_ref_sys_identify)->get()->first();
-            $refsysname = $refSysSelected->name;
+            if (isset($request->c2_saveAsNew) && $request->c2_saveAsNew == 'yes') {
+                $refsysname = $request->c13_ref_sys_identify;
+            }else{
+                $refSysSelected = ReferenceSystemIdentifier::where('id', $request->c13_ref_sys_identify)->get()->first();
+                $refsysname = $refSysSelected->name;
+            }
         }
         
         if(isset($request->autosave)){
@@ -3239,332 +3243,286 @@ class MetadataController extends Controller {
     public function update(Request $request) {
         if ($request->c2_saveAsNew == 'yes') {
             $this->store($request);
-            return redirect('mygeo_senarai_metadata')->with('success', 'ftest');
-        }
-        
-        $mt = MetadataTemplate::where('status','active')->get()->first();
-//        dd($mt,strtolower($request->kategori),$mt->template[strtolower($request->kategori)]);
-        $mandatory_fields = [];
-        foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
-            if($key == "accordion3" || $key == "accordion9"){
-                continue;
-            }
+            return redirect('mygeo_senarai_metadata')->with('message', 'Metadata Berjaya Dihantar');
+        }else{
             
-            foreach($val as $vKey=>$vVal){
-                if(isset($vVal['mandatory']) && $vVal['mandatory'] == "yes"){
-                    if($vKey == "file_contohJenisMetadata"){
-                        $mandatory_fields[$vKey] = "mimetypes:application/pdf|max:10000";
-                    }else{
-                        $mandatory_fields[$vKey] = "required";
+
+
+            $mt = MetadataTemplate::where('status','active')->get()->first();
+    //        dd($mt,strtolower($request->kategori),$mt->template[strtolower($request->kategori)]);
+            $mandatory_fields = [];
+            foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
+                if($key == "accordion3" || $key == "accordion9"){
+                    continue;
+                }
+
+                foreach($val as $vKey=>$vVal){
+                    if(isset($vVal['mandatory']) && $vVal['mandatory'] == "yes"){
+                        if($vKey == "file_contohJenisMetadata"){
+                            $mandatory_fields[$vKey] = "mimetypes:application/pdf|max:10000";
+                        }else{
+                            $mandatory_fields[$vKey] = "required";
+                        }
+                    }
+                }            
+            }
+    //        dd($mandatory_fields);
+    //        exit();
+
+            $fields = $mandatory_fields;
+
+            /*
+            $fields = [
+                "c1_content_info" => 'required',
+                "publisher_name" => 'required',
+                "publisher_agensi_organisasi" => 'required',
+                "publisher_email" => 'required',
+                "publisher_phone" => 'required',
+                "c2_metadataName" => 'required',
+                "c2_product_type" => 'required',
+                "c2_abstract" => 'required',
+                "c2_contact_agensiorganisasi" => 'required',
+                "c2_contact_state" => 'required',
+                "c2_contact_email" => 'required',
+                "c2_contact_phone_office" => 'required',
+                "c9_west_bound_longitude" => 'required',
+                "c9_east_bound_longitude" => 'required',
+                "c9_south_bound_latitude" => 'required',
+                "c9_north_bound_latitude" => 'required',
+                "c10_keyword" => 'required',
+                "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
+            ];
+
+            if (strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application') {
+                $fields["c10_file_url"] = 'required';
+            }
+            if (trim($request->c10_file_url) != '') {
+                $fields["c10_file_name"] = 'required';
+                $fields["c10_file_type"] = 'required';
+            }
+            if (trim($request->c10_file_name) != '') {
+                $fields["c10_file_url"] = 'required';
+                $fields["c10_file_type"] = 'required';
+            }
+            if (trim($request->c10_file_type) != '') {
+                $fields["c10_file_url"] = 'required';
+                $fields["c10_file_name"] = 'required';
+            }
+            if (strtolower($request->kategori) == 'services') {
+                $fields["c2_serviceUrl"] = 'required';
+            }
+            if (strtolower($request->kategori) == 'dataset') {
+                $fields["topic_category"] = 'required';
+            }
+            if (strtolower($request->kategori) == 'imagery' || strtolower($request->kategori) == 'gridded') {
+                $fields["c4_scan_res"] = 'required';
+                $fields["c4_ground_scan"] = 'required';
+                $fields["c6_collection_name"] = 'required';
+                $fields["c6_collection_id"] = 'required';
+                $fields["c8_identifier"] = 'required';
+                $fields["c8_type"] = 'required';
+                $fields["c8_op_identifier"] = 'required';
+            }
+
+            $customMsg = [
+                "c1_content_info.required" => 'Content Information required',
+                "publisher_name.required" => 'Publisher Name required',
+                "publisher_agensi_organisasi.required" => 'Publisher Agency or Organisation required',
+                "publisher_email.required" => 'Publisher Email required',
+                "publisher_phone.required" => 'Publisher Phone required',
+                "c2_metadataName.required" => 'Metadata Name required',
+                "c2_product_type.required" => 'Type of Product required',
+                "c2_abstract.required" => 'Metadata Abstract required',
+                "c2_contact_agensiorganisasi.required" => 'Responsible Party Agency or Organisation required',
+                "c2_contact_state.required" => 'State required',
+                "c2_contact_email.required" => 'Responsible Party Email required',
+                "c2_contact_phone_office.required" => 'Responsible Party Phone Number required',
+                "c4_scan_res.required" => 'Scanning Resolution required',
+                "c4_ground_scan.required" => 'Ground Scanning required',
+                "c6_collection_name.required" => 'Collection Name required',
+                "c6_collection_id.required" => 'Collection Identification required',
+                "c8_identifier.required" => 'Event Identifier required',
+                "c8_type.required" => 'Instrument Identification Type required',
+                "c8_op_identifier.required" => 'Operation Identifier required',
+                "c9_west_bound_longitude.required" => 'West Bound Longitude required',
+                "c9_east_bound_longitude.required" => 'East Bound Longitude required',
+                "c9_south_bound_latitude.required" => 'South Bound Latitude required',
+                "c9_north_bound_latitude.required" => 'North Bound Latitude required',
+                "c10_keyword.required" => 'Browsing Information Keyword required',
+                "topic_category.required" => 'Topic Category required',
+                "c10_file_url.required" => 'URL required',
+                "c10_file_name.required" => 'File Name required',
+                "c10_file_type.required" => 'File Type required',
+                "c2_serviceUrl.required" => 'Service URL required',
+            ];
+
+            $elemenMetadatacol = [];
+            $elemenMetadata = ElemenMetadata::where('status', '0')->get(); //get disabled inputs and remove their validation
+            if (count($elemenMetadata) > 0) {
+                foreach ($elemenMetadata as $em) {
+                    $elemenMetadatacol[] = $em->input_name;
+                }
+                foreach ($fields as $key => $val) {
+                    if (in_array($key, $elemenMetadatacol)) {
+                        unset($fields[$key]); //remove them validations
                     }
                 }
-            }            
-        }
-//        dd($mandatory_fields);
-//        exit();
-        
-        $fields = $mandatory_fields;
-        
-        /*
-        $fields = [
-            "c1_content_info" => 'required',
-            "publisher_name" => 'required',
-            "publisher_agensi_organisasi" => 'required',
-            "publisher_email" => 'required',
-            "publisher_phone" => 'required',
-            "c2_metadataName" => 'required',
-            "c2_product_type" => 'required',
-            "c2_abstract" => 'required',
-            "c2_contact_agensiorganisasi" => 'required',
-            "c2_contact_state" => 'required',
-            "c2_contact_email" => 'required',
-            "c2_contact_phone_office" => 'required',
-            "c9_west_bound_longitude" => 'required',
-            "c9_east_bound_longitude" => 'required',
-            "c9_south_bound_latitude" => 'required',
-            "c9_north_bound_latitude" => 'required',
-            "c10_keyword" => 'required',
-            "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
-        ];
-
-        if (strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application') {
-            $fields["c10_file_url"] = 'required';
-        }
-        if (trim($request->c10_file_url) != '') {
-            $fields["c10_file_name"] = 'required';
-            $fields["c10_file_type"] = 'required';
-        }
-        if (trim($request->c10_file_name) != '') {
-            $fields["c10_file_url"] = 'required';
-            $fields["c10_file_type"] = 'required';
-        }
-        if (trim($request->c10_file_type) != '') {
-            $fields["c10_file_url"] = 'required';
-            $fields["c10_file_name"] = 'required';
-        }
-        if (strtolower($request->kategori) == 'services') {
-            $fields["c2_serviceUrl"] = 'required';
-        }
-        if (strtolower($request->kategori) == 'dataset') {
-            $fields["topic_category"] = 'required';
-        }
-        if (strtolower($request->kategori) == 'imagery' || strtolower($request->kategori) == 'gridded') {
-            $fields["c4_scan_res"] = 'required';
-            $fields["c4_ground_scan"] = 'required';
-            $fields["c6_collection_name"] = 'required';
-            $fields["c6_collection_id"] = 'required';
-            $fields["c8_identifier"] = 'required';
-            $fields["c8_type"] = 'required';
-            $fields["c8_op_identifier"] = 'required';
-        }
-
-        $customMsg = [
-            "c1_content_info.required" => 'Content Information required',
-            "publisher_name.required" => 'Publisher Name required',
-            "publisher_agensi_organisasi.required" => 'Publisher Agency or Organisation required',
-            "publisher_email.required" => 'Publisher Email required',
-            "publisher_phone.required" => 'Publisher Phone required',
-            "c2_metadataName.required" => 'Metadata Name required',
-            "c2_product_type.required" => 'Type of Product required',
-            "c2_abstract.required" => 'Metadata Abstract required',
-            "c2_contact_agensiorganisasi.required" => 'Responsible Party Agency or Organisation required',
-            "c2_contact_state.required" => 'State required',
-            "c2_contact_email.required" => 'Responsible Party Email required',
-            "c2_contact_phone_office.required" => 'Responsible Party Phone Number required',
-            "c4_scan_res.required" => 'Scanning Resolution required',
-            "c4_ground_scan.required" => 'Ground Scanning required',
-            "c6_collection_name.required" => 'Collection Name required',
-            "c6_collection_id.required" => 'Collection Identification required',
-            "c8_identifier.required" => 'Event Identifier required',
-            "c8_type.required" => 'Instrument Identification Type required',
-            "c8_op_identifier.required" => 'Operation Identifier required',
-            "c9_west_bound_longitude.required" => 'West Bound Longitude required',
-            "c9_east_bound_longitude.required" => 'East Bound Longitude required',
-            "c9_south_bound_latitude.required" => 'South Bound Latitude required',
-            "c9_north_bound_latitude.required" => 'North Bound Latitude required',
-            "c10_keyword.required" => 'Browsing Information Keyword required',
-            "topic_category.required" => 'Topic Category required',
-            "c10_file_url.required" => 'URL required',
-            "c10_file_name.required" => 'File Name required',
-            "c10_file_type.required" => 'File Type required',
-            "c2_serviceUrl.required" => 'Service URL required',
-        ];
-
-        $elemenMetadatacol = [];
-        $elemenMetadata = ElemenMetadata::where('status', '0')->get(); //get disabled inputs and remove their validation
-        if (count($elemenMetadata) > 0) {
-            foreach ($elemenMetadata as $em) {
-                $elemenMetadatacol[] = $em->input_name;
             }
-            foreach ($fields as $key => $val) {
-                if (in_array($key, $elemenMetadatacol)) {
-                    unset($fields[$key]); //remove them validations
+            */
+
+            $refsysname = "";
+            if(isset($request->c13_ref_sys_identify) && !empty($request->c13_ref_sys_identify)){
+                $refSysSelected = ReferenceSystemIdentifier::where('name', $request->c13_ref_sys_identify)->get()->first();
+                $refsysname = $refSysSelected->name;
+            }
+
+            if(isset($request->autosave)){
+                $validator = Validator::make($request->all(), $fields);
+                if($validator->fails()){
+                    exit();
                 }
+            }else{
+                $validator = Validator::make($request->all(), $fields);
+                if($validator->fails()){
+    //                dd($validator->errors()->first());
+                    return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melibihi 10MB']);
+                }
+    //            $this->validate($request, $fields, $customMsg);
             }
-        }
-        */
-        
-        $refsysname = "";
-        if(isset($request->c13_ref_sys_identify) && !empty($request->c13_ref_sys_identify)){
-            $refSysSelected = ReferenceSystemIdentifier::where('name', $request->c13_ref_sys_identify)->get()->first();
-            $refsysname = $refSysSelected->name;
-        }
-        
-        if(isset($request->autosave)){
-            $validator = Validator::make($request->all(), $fields);
-            if($validator->fails()){
-                exit();
-            }
-        }else{
-            $validator = Validator::make($request->all(), $fields);
-            if($validator->fails()){
-//                dd($validator->errors()->first());
-                return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melibihi 10MB']);
-            }
-//            $this->validate($request, $fields, $customMsg);
-        }
 
-        $fileUrl = "";
-        $fileUrl = $request->c11_order_instructions;
-//        if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
-//            $this->validate($request,['c11_order_instructions' => 'required|mimes:pdf,doc,docx,xls,xlsx']);
-//            $exists = Storage::exists($request->c11_order_instructions->getClientOriginalName());
-//            $time = date('Y-m-d'.'_'.'H_i_s');
-//            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
-//            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
-//        }
-        $keywords = "";
-        if (isset($request->c10_additional_keyword) && count($request->c10_additional_keyword) > 0) {
-            foreach ($request->c10_additional_keyword as $var) {
+            $fileUrl = "";
+            $fileUrl = $request->c11_order_instructions;
+    //        if(isset($_FILES['c11_order_instructions']) && (file_exists($_FILES['c11_order_instructions']['tmp_name']))){
+    //            $this->validate($request,['c11_order_instructions' => 'required|mimes:pdf,doc,docx,xls,xlsx']);
+    //            $exists = Storage::exists($request->c11_order_instructions->getClientOriginalName());
+    //            $time = date('Y-m-d'.'_'.'H_i_s');
+    //            $fileName = $time.'_'.$request->c11_order_instructions->getClientOriginalName();
+    //            $fileUrl = Storage::putFileAs('/public/', $request->file('c11_order_instructions'), $fileName);
+    //        }
+            $keywords = "";
+            if (isset($request->c10_additional_keyword) && count($request->c10_additional_keyword) > 0) {
+                foreach ($request->c10_additional_keyword as $var) {
+                    $keywords .= '
+                        <keyword>
+                            <gco:CharacterString>' . $var . '</gco:CharacterString>
+                        </keyword>
+                    ';
+                }
+            } else {
                 $keywords .= '
                     <keyword>
-                        <gco:CharacterString>' . $var . '</gco:CharacterString>
+                        <gco:CharacterString></gco:CharacterString>
                     </keyword>
                 ';
             }
-        } else {
-            $keywords .= '
-                <keyword>
-                    <gco:CharacterString></gco:CharacterString>
-                </keyword>
-            ';
-        }
-        $topicCategories = "";
-        if (isset($request->topic_category) && count($request->topic_category) > 0) {
-            foreach ($request->topic_category as $var) {
+            $topicCategories = "";
+            if (isset($request->topic_category) && count($request->topic_category) > 0) {
+                foreach ($request->topic_category as $var) {
+                    $topicCategories .= '
+                        <topicCategory>
+                            <MD_TopicCategoryCode>' . $var . '</MD_TopicCategoryCode>
+                        </topicCategory>
+                    ';
+                }
+            } else {
                 $topicCategories .= '
                     <topicCategory>
-                        <MD_TopicCategoryCode>' . $var . '</MD_TopicCategoryCode>
+                        <MD_TopicCategoryCode></MD_TopicCategoryCode>
                     </topicCategory>
                 ';
             }
-        } else {
-            $topicCategories .= '
-                <topicCategory>
-                    <MD_TopicCategoryCode></MD_TopicCategoryCode>
-                </topicCategory>
-            ';
-        }
 
-        $mt = MetadataTemplate::where('status','active')->get()->first();
-        $custom_inputs = "";
-        $custom_inputs .= "<customInputs>";
-        foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
-            if($key == "accordion3" || $key == "accordion9"){
-                continue;
-            }
-            
-            $custom_inputs .= "<".$key.">";
-            foreach($request->all() as $rKey=>$rVal){
-                if(isset($val[$rKey]) && $val[$rKey]['status'] == "customInput"){
-                    $custom_inputs .= "<".$rKey.">".$rVal."</".$rKey.">";
+            $mt = MetadataTemplate::where('status','active')->get()->first();
+            $custom_inputs = "";
+            $custom_inputs .= "<customInputs>";
+            foreach($mt->template[strtolower($request->kategori)] as $key=>$val){
+                if($key == "accordion3" || $key == "accordion9"){
+                    continue;
                 }
-            }
-            $custom_inputs .= "</".$key.">";
-        }
-        $custom_inputs .= "</customInputs>";
-        
-        $xmlcon = new XmlController;
-        $xml = $xmlcon->createXml($request, $fileUrl, $keywords, $topicCategories, trim($custom_inputs), $refsysname);
 
-        $msg = $redirect = "";
-
-        DB::connection('pgsql2')->transaction(function () use ($request, $xml, &$msg) {
-            $mg = MetadataGeo::on('pgsql2')->where('id', $request->metadata_id)->get()->first();
-            $mg->timestamps = false;
-            $mg->data = $xml;
-            $mg->changedate = date("Y-m-d H:i:s");
-            $mg->title = $request->c2_metadataName;
-
-            if (strtolower($request->kategori) != 'services') {
-                if (isset($_FILES['file_contohJenisMetadata']['tmp_name']) && file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
-                    Storage::disk('public')->delete($mg->file_contohjenismetadata);
-                    $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
-                }
-            }
-
-            if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin', 'Pentadbir Aplikasi'])) {
-//                $mg->disahkan = "no";
-                $mg->catatan1 = $request->catatan1;
-                $mg->catatan2 = $request->catatan2;
-                $mg->catatan3 = $request->catatan3;
-                $mg->catatan4 = $request->catatan4;
-                $mg->catatan5 = $request->catatan5;
-                $mg->catatan6 = $request->catatan6;
-                $mg->catatan7 = $request->catatan7;
-                $mg->catatan8 = $request->catatan8;
-                $mg->catatan9 = $request->catatan9;
-                $mg->catatan10 = $request->catatan10;
-                $mg->catatan11 = $request->catatan11;
-                $mg->catatan12 = $request->catatan12;
-                $mg->catatan13 = $request->catatan13;
-                $mg->catatan14 = $request->catatan14;
-                $mg->catatan15 = $request->catatan15;
-            } elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
-//                $mg->catatan1 = "";
-//                $mg->catatan2 = "";
-//                $mg->catatan3 = "";
-//                $mg->catatan4 = "";
-//                $mg->catatan5 = "";
-//                $mg->catatan6 = "";
-//                $mg->catatan7 = "";
-//                $mg->catatan8 = "";
-//                $mg->catatan9 = "";
-//                $mg->catatan10 = "";
-//                $mg->catatan11 = "";
-//                $mg->catatan12 = "";
-//                $mg->catatan13 = "";
-//                $mg->catatan14 = "";
-//                $mg->catatan15 = "";
-//                $mg->disahkan = "0";
-            }
-
-            if (isset($request->newStatus)) {
-                $mg->disahkan = $request->newStatus;
-            }
-
-//            $pengesahs = User::where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
-            $pengesahs = User::where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->get()->first();
-            if (empty($pengesahs)) {
-                $pengesahs = User::where(['id' => '9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
-            }
-
-
-            if (isset($request->btn_save) || (isset($request->submitAction) && $request->submitAction == "save")) {
-                $mg->is_draf = "no";
-
-//                if ($request->c2_contact_email != "") {
-                    //send email to pengesah metadata
-//                    $user = User::where('email', $request->c2_contact_email)->get()->first();
-//                    if($user){
-                        $to_name = $pengesahs->name;
-                        $to_email = $pengesahs->email;
-                        $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
-                        // Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
-                            // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
-                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                        // });
-//                    }
-//                }
-
-                $msg = "Metadata berjaya dihantar.";
-            }
-
-
-
-            $msg = "";
-            if ($request->submitAction == "kiv") {
-                $mg->is_draf = "no";
-                $mg->is_kiv = "yes";
-                if (auth::user()->hasRole(['Pengesah Metadata'])) {
-                    $msg = "Catatan berjaya disimpan.";
-                }
-            }elseif ($request->submitAction == "save") {
-                $mg->is_draf = "no";
-                if (auth::user()->hasRole(['Pengesah Metadata'])) {
-                    $mg->disahkan = "no";
-                    $msg = "Catatan berjaya disimpan.";
-                    
-                    //send email to penerbit
-                    $metadataName = $request->c2_metadataName;
-                    $user = User::where("email", $request->publisher_email)->get()->first();
-                    if (!empty($user)) {
-                        $to_name = $user->name;
-                        $to_email = $user->email;
-                        $data = array('title' => $metadataName);
-                        // Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                            // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
-                            // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                        // });
+                $custom_inputs .= "<".$key.">";
+                foreach($request->all() as $rKey=>$rVal){
+                    if(isset($val[$rKey]) && $val[$rKey]['status'] == "customInput"){
+                        $custom_inputs .= "<".$rKey.">".$rVal."</".$rKey.">";
                     }
-                } elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin', 'Pentadbir Aplikasi'])) {
-                    $mg->disahkan = '0';
-                    $msg = "Metadata berjaya dihantar.";
+                }
+                $custom_inputs .= "</".$key.">";
+            }
+            $custom_inputs .= "</customInputs>";
 
-//                    if ($request->c2_contact_email != "") {
+            $xmlcon = new XmlController;
+            $xml = $xmlcon->createXml($request, $fileUrl, $keywords, $topicCategories, trim($custom_inputs), $refsysname);
+
+            $msg = $redirect = "";
+
+            DB::connection('pgsql2')->transaction(function () use ($request, $xml, &$msg) {
+                $mg = MetadataGeo::on('pgsql2')->where('id', $request->metadata_id)->get()->first();
+                $mg->timestamps = false;
+                $mg->data = $xml;
+                $mg->changedate = date("Y-m-d H:i:s");
+                $mg->title = $request->c2_metadataName;
+
+                if (strtolower($request->kategori) != 'services') {
+                    if (isset($_FILES['file_contohJenisMetadata']['tmp_name']) && file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
+                        Storage::disk('public')->delete($mg->file_contohjenismetadata);
+                        $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
+                    }
+                }
+
+                if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin', 'Pentadbir Aplikasi'])) {
+    //                $mg->disahkan = "no";
+                    $mg->catatan1 = $request->catatan1;
+                    $mg->catatan2 = $request->catatan2;
+                    $mg->catatan3 = $request->catatan3;
+                    $mg->catatan4 = $request->catatan4;
+                    $mg->catatan5 = $request->catatan5;
+                    $mg->catatan6 = $request->catatan6;
+                    $mg->catatan7 = $request->catatan7;
+                    $mg->catatan8 = $request->catatan8;
+                    $mg->catatan9 = $request->catatan9;
+                    $mg->catatan10 = $request->catatan10;
+                    $mg->catatan11 = $request->catatan11;
+                    $mg->catatan12 = $request->catatan12;
+                    $mg->catatan13 = $request->catatan13;
+                    $mg->catatan14 = $request->catatan14;
+                    $mg->catatan15 = $request->catatan15;
+                } elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+    //                $mg->catatan1 = "";
+    //                $mg->catatan2 = "";
+    //                $mg->catatan3 = "";
+    //                $mg->catatan4 = "";
+    //                $mg->catatan5 = "";
+    //                $mg->catatan6 = "";
+    //                $mg->catatan7 = "";
+    //                $mg->catatan8 = "";
+    //                $mg->catatan9 = "";
+    //                $mg->catatan10 = "";
+    //                $mg->catatan11 = "";
+    //                $mg->catatan12 = "";
+    //                $mg->catatan13 = "";
+    //                $mg->catatan14 = "";
+    //                $mg->catatan15 = "";
+    //                $mg->disahkan = "0";
+                }
+
+                if (isset($request->newStatus)) {
+                    $mg->disahkan = $request->newStatus;
+                }
+
+    //            $pengesahs = User::where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->where('bahagian', auth::user()->bahagian)->get()->first();
+                $pengesahs = User::where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->where('agensi_organisasi', auth::user()->agensi_organisasi)->get()->first();
+                if (empty($pengesahs)) {
+                    $pengesahs = User::where(['id' => '9'])->get()->first(); //make Pentadbir Metadata the pengesah if no pengesahs with same agency or organisation is found
+                }
+
+
+                if (isset($request->btn_save) || (isset($request->submitAction) && $request->submitAction == "save")) {
+                    $mg->is_draf = "no";
+
+    //                if ($request->c2_contact_email != "") {
                         //send email to pengesah metadata
-//                        $user = User::where('email', $request->c2_contact_email)->get()->first();
-//                        if($user){
+    //                    $user = User::where('email', $request->c2_contact_email)->get()->first();
+    //                    if($user){
                             $to_name = $pengesahs->name;
                             $to_email = $pengesahs->email;
                             $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
@@ -3572,90 +3530,139 @@ class MetadataController extends Controller {
                                 // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
                                 // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
                             // });
-//                        }
-//                    }
+    //                    }
+    //                }
+
+                    $msg = "Metadata berjaya dihantar.";
                 }
-            } elseif ($request->submitAction == "draf") {
-                $mg->is_draf = "yes";
-                $msg = "Metadata disimpan sebagai draf.";
+
+
+
+                $msg = "";
+                if ($request->submitAction == "kiv") {
+                    $mg->is_draf = "no";
+                    $mg->is_kiv = "yes";
+                    if (auth::user()->hasRole(['Pengesah Metadata'])) {
+                        $msg = "Catatan berjaya disimpan.";
+                    }
+                }elseif ($request->submitAction == "save") {
+                    $mg->is_draf = "no";
+                    if (auth::user()->hasRole(['Pengesah Metadata'])) {
+                        $mg->disahkan = "no";
+                        $msg = "Catatan berjaya disimpan.";
+
+                        //send email to penerbit
+                        $metadataName = $request->c2_metadataName;
+                        $user = User::where("email", $request->publisher_email)->get()->first();
+                        if (!empty($user)) {
+                            $to_name = $user->name;
+                            $to_email = $user->email;
+                            $data = array('title' => $metadataName);
+                            // Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                                // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
+                                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            // });
+                        }
+                    } elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin', 'Pentadbir Aplikasi'])) {
+                        $mg->disahkan = '0';
+                        $msg = "Metadata berjaya dihantar.";
+
+    //                    if ($request->c2_contact_email != "") {
+                            //send email to pengesah metadata
+    //                        $user = User::where('email', $request->c2_contact_email)->get()->first();
+    //                        if($user){
+                                $to_name = $pengesahs->name;
+                                $to_email = $pengesahs->email;
+                                $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
+                                // Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
+                                    // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+                                    // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                                // });
+    //                        }
+    //                    }
+                    }
+                } elseif ($request->submitAction == "draf") {
+                    $mg->is_draf = "yes";
+                    $msg = "Metadata disimpan sebagai draf.";
+                }
+
+                if(isset($request->autosave) && isset($request->page) && $request->page == "pengisian"){
+                    $mg->is_draf = "yes";
+                }
+
+                $mg->update();
+
+                if ($request->submitAction == "terbit" && auth::user()->hasRole(['Pengesah Metadata'])) {
+                    //sahkan
+                    $metadata = MetadataGeo::on('pgsql2')->find($mg->id);
+                    $metadata->timestamps = false;
+                    $metadata->disahkan = 'yes';
+                    $metadata->changedate = date("Y-m-d H:i:s");
+                    $metadata->update();
+
+                    $ftestxml2 = <<<XML
+                            $metadata->data
+                        XML;
+                    $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                    $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                    $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                    $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+                    $ftestxml2 = str_replace("\r", "", $ftestxml2);
+                    $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+                    $metadataxml = simplexml_load_string($ftestxml2);
+                    if (false === $metadataxml) {
+                        //            continue;
+                    }
+
+                    $metadataName = $metadata->title;
+
+                    $abstract = "";
+                    if (isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != "") {
+                        $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
+                    }
+
+                    $user = User::where("id", $metadata->portal_user_id)->get()->first();
+                    if (!empty($user)) {
+                        //send email to penerbit
+                        $to_name = $user->name;
+                        $to_email = $user->email;
+                        $data = array('title' => $metadataName);
+                        //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                            //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                            //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        //});
+                    }
+
+                    //create new pengumuman about the new metadata
+                    $pengumuman = new Pengumuman();
+                    $pengumuman->title = $metadataName;
+                    $pengumuman->date = date('Y-m-d H:i:s', time());
+                    $pengumuman->kategori = 'Metadata Baharu';
+                    $pengumuman->content = 'Abstract: ' . $abstract;
+                    $pengumuman->gambar = "banner2.jpeg";
+                    $pengumuman->metadata_id = $mg->id;
+                    $pengumuman->save();
+
+                    $msg = "Metadata berjaya diterbitkan.";
+                }
+            });
+
+            if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin', 'Pentadbir Aplikasi'])) {
+                $redirect = "mygeo_pengesahan_metadata";
+            } elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
+                $redirect = "mygeo_senarai_metadata";
             }
-            
-            if(isset($request->autosave) && isset($request->page) && $request->page == "pengisian"){
-                $mg->is_draf = "yes";
+
+            $at = new AuditTrail();
+            $at->path = url()->full();
+            $at->user_id = Auth::user()->id;
+            $at->data = 'Update';
+            $at->save();
+
+            if(!isset($request->autosave)){ //autosave doesn't need redirect
+                return redirect($redirect)->with('success', $msg);
             }
-            
-            $mg->update();
-
-            if ($request->submitAction == "terbit" && auth::user()->hasRole(['Pengesah Metadata'])) {
-                //sahkan
-                $metadata = MetadataGeo::on('pgsql2')->find($mg->id);
-                $metadata->timestamps = false;
-                $metadata->disahkan = 'yes';
-                $metadata->changedate = date("Y-m-d H:i:s");
-                $metadata->update();
-
-                $ftestxml2 = <<<XML
-                        $metadata->data
-                    XML;
-                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-                $ftestxml2 = str_replace("\r", "", $ftestxml2);
-                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-                $metadataxml = simplexml_load_string($ftestxml2);
-                if (false === $metadataxml) {
-                    //            continue;
-                }
-
-                $metadataName = $metadata->title;
-
-                $abstract = "";
-                if (isset($metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString != "") {
-                    $abstract = $metadataxml->identificationInfo->MD_DataIdentification->abstract->CharacterString;
-                }
-
-                $user = User::where("id", $metadata->portal_user_id)->get()->first();
-                if (!empty($user)) {
-                    //send email to penerbit
-                    $to_name = $user->name;
-                    $to_email = $user->email;
-                    $data = array('title' => $metadataName);
-                    //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                        //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    //});
-                }
-
-                //create new pengumuman about the new metadata
-                $pengumuman = new Pengumuman();
-                $pengumuman->title = $metadataName;
-                $pengumuman->date = date('Y-m-d H:i:s', time());
-                $pengumuman->kategori = 'Metadata Baharu';
-                $pengumuman->content = 'Abstract: ' . $abstract;
-                $pengumuman->gambar = "banner2.jpeg";
-                $pengumuman->metadata_id = $mg->id;
-                $pengumuman->save();
-
-                $msg = "Metadata berjaya diterbitkan.";
-            }
-        });
-
-        if (auth::user()->hasRole(['Pengesah Metadata', 'Super Admin', 'Pentadbir Aplikasi'])) {
-            $redirect = "mygeo_pengesahan_metadata";
-        } elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin'])) {
-            $redirect = "mygeo_senarai_metadata";
-        }
-
-        $at = new AuditTrail();
-        $at->path = url()->full();
-        $at->user_id = Auth::user()->id;
-        $at->data = 'Update';
-        $at->save();
-
-        if(!isset($request->autosave)){ //autosave doesn't need redirect
-            return redirect($redirect)->with('success', $msg);
         }
     }
 

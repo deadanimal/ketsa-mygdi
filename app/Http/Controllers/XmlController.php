@@ -690,7 +690,7 @@ class XmlController extends Controller {
                                                 <URL>$request->c11_link</URL>
                                             </linkage>
                                             <description>
-                                                <gco:CharacterString>$request->c1_content_info</gco:CharacterString>
+                                                <gco:CharacterString inputName="c1_content_info">$request->c1_content_info</gco:CharacterString>
                                             </description>
                                             <function>
                                                 <CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue=""/>
