@@ -828,7 +828,7 @@
                         `);
                     });
 
-                    window.open('', 'TheWindow');
+                    window.open('', 'TheWindow', 'width:800px;height:800px;');
                     document.getElementById('formTigaJam').submit();
                     // swal({
                     //     title: "Adakah anda berjaya memuat turun data?",
@@ -872,7 +872,7 @@
             ?>
         setInterval(
             checkThreeHourNotifySelesaiMuatTurun,
-            300000 /* 300000 ms = 5 min for testing */
+            18000 /* 300000 ms = 5 min for testing */
             // 10800000 /* 10800000 ms = 3 hrs */ //ori specs
         );
         <?php

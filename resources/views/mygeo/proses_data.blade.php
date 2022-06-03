@@ -69,9 +69,8 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($permohonan_list as $permohonan)
-                                            <?php $count = 1; ?>
                                             <tr>
-                                                <td>{{ $count }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $permohonan->name }}</td>
                                                 <td>{{ $permohonan->users->name }}</td>
                                                 <td>{{ $permohonan->users->kategori }}</td>
@@ -87,11 +86,10 @@
                                                     </button>
                                                     <a class="btn btn-sm btn-default" data-toggle="modal"
                                                         data-target="#modal-proses-data-{{ $permohonan->id }}"><span
-                                                            class="text-white">Proses</span>
+                                                            class="text-white modal_btn">Proses</span>
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <?php $count++; ?>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -137,16 +135,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $count = 1; ?>
                                         @foreach ($skdatas as $data)
                                             @if ($data->permohonan_id == $permohonan->id)
                                                 <tr>
-                                                    <td>{{ $count }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $data->lapisan_data }}</td>
                                                     <td>{{ $data->subkategori }}</td>
                                                     <td>{{ $data->kategori }}</td>
+                                                    <td>{{ $data->kawasan_data }}</td>
                                                     <td>
-                                                        <select class="form-control" id="jenis_data_{{ $data->id }}"
+                                                        <select class="form-control select_jenis_data"
+                                                            id="jenis_data_{{ $data->id }}"
                                                             onchange="jenisData(this,{{ $data->id }},{{ $permohonan->id }})">
                                                             <option
                                                                 {{ $data->jenis_data == 'fizikal' ? 'selected' : '' }}
@@ -160,7 +159,6 @@
                                                             </option>
                                                         </select>
                                                     </td>
-                                                    <td>{{ $data->kawasan_data }}</td>
                                                     <td id="td_{{ $data->id }}">
                                                         @foreach (explode(',', $data->harga_data) as $harga)
                                                             <input class="form-control form-control-sm kiraHarga"
@@ -179,7 +177,6 @@
 
                                                     </td>
                                                 </tr>
-                                                <?php $count++; ?>
                                             @endif
                                         @endforeach
                                     </tbody>
@@ -317,6 +314,10 @@
         @endforeach
 
         <script>
+            $(".modal_btn").click(function() {
+                $(".select_jenis_data").trigger("change");
+            });
+
             function jenisData(element, id, pid) {
 
                 if (element.value == "fizikal, map_servis") {
