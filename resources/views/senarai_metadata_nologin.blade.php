@@ -165,16 +165,16 @@ input[type=submit] {
                                             <label for="exampleInputEmail1">Jenis Maklumat Kandungan (Content Type)</label>
                                             <select name="content_type" id="content_type" class="form-control form-control-sm" autofocus>
                                                 <option value="" selected disabled>Select Content</option>
-                                                <option value="Application" {{ (isset($params['content_type']) && $params['content_type'] == 'Application' ? 'selected':'') }}>Application</option>
-                                                <option value="Clearing House" {{ (isset($params['content_type']) && $params['content_type'] == 'Clearing House' ? 'selected':'') }}>Clearing House</option>
-                                                <option value="Downloadable Data" {{ (isset($params['content_type']) && $params['content_type'] == 'Downloadable Data' ? 'selected':'') }}>Downloadable Data</option>
-                                                <option value="Geographic Activities" {{ (isset($params['content_type']) && $params['content_type'] == 'Geographic Activities' ? 'selected':'') }}>Geographic Activities</option>
-                                                <option value="Geographic Services" {{ (isset($params['content_type']) && $params['content_type'] == 'Geographic Services' ? 'selected':'') }}>Geographic Services</option>
-                                                <option value="Map File" {{ (isset($params['content_type']) && $params['content_type'] == 'Map File' ? 'selected':'') }}>Map File</option>
-                                                <option value="Offline Data" {{ (isset($params['content_type']) && $params['content_type'] == 'Offline Data' ? 'selected':'') }}>Offline Data</option>
-                                                <option value="Static Map Images" {{ (isset($params['content_type']) && $params['content_type'] == 'Static Map Images' ? 'selected':'') }}>Static Map Images</option>
-                                                <option value="Other Documents" {{ (isset($params['content_type']) && $params['content_type'] == 'Other Documents' ? 'selected':'') }}>Other Documents</option>
-                                                <option value="Live Data and Maps" {{ (isset($params['content_type']) && $params['content_type'] == 'Live Data and Maps' ? 'selected':'') }}>Live Data and Maps</option>
+                                                <option value="application" {{ (isset($params['content_type']) && $params['content_type'] == 'application' ? 'selected':'') }}>Application</option>
+                                                <option value="clearinghouse" {{ (isset($params['content_type']) && $params['content_type'] == 'clearinghouse' ? 'selected':'') }}>Clearing House</option>
+                                                <option value="downloadableData" {{ (isset($params['content_type']) && $params['content_type'] == 'downloadableData' ? 'selected':'') }}>Downloadable Data</option>
+                                                <option value="geographicActivities" {{ (isset($params['content_type']) && $params['content_type'] == 'geographicActivities' ? 'selected':'') }}>Geographic Activities</option>
+                                                <option value="geographicService" {{ (isset($params['content_type']) && $params['content_type'] == 'geographicService' ? 'selected':'') }}>Geographic Services</option>
+                                                <option value="mapFiles" {{ (isset($params['content_type']) && $params['content_type'] == 'mapFiles' ? 'selected':'') }}>Map File</option>
+                                                <option value="offlineData" {{ (isset($params['content_type']) && $params['content_type'] == 'offlineData' ? 'selected':'') }}>Offline Data</option>
+                                                <option value="staticMapImage" {{ (isset($params['content_type']) && $params['content_type'] == 'staticMapImage' ? 'selected':'') }}>Static Map Images</option>
+                                                <option value="other" {{ (isset($params['content_type']) && $params['content_type'] == 'other' ? 'selected':'') }}>Other Documents</option>
+                                                <option value="liveData" {{ (isset($params['content_type']) && $params['content_type'] == 'liveData' ? 'selected':'') }}>Live Data and Maps</option>
 
                                                 <option value="Gridded" {{ (isset($params['content_type']) && $params['content_type'] == 'Gridded' ? 'selected':'') }}>Gridded</option>
 

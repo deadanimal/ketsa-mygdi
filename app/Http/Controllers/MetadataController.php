@@ -333,16 +333,15 @@ class MetadataController extends Controller {
         if (isset($carian) && trim($carian) != "") {
             $query = $query->orWhere('title', 'ilike', '%' . $carian . '%');
         }
-
         if (isset($request->content_type) && $request->content_type != "") {
             $params['content_type'] = $request->content_type;
-            $query = $query->orWhere('data', 'ilike', '"c1_content_info"%>' . $request->content_type . '<%');
+            $query = $query->orWhere('data', 'like', '%"c1_content_info">'.$request->content_type.'%');
         }
         $params['topic_category'] = [];
         if (isset($request->topic_category)) {
             $query = $query->orWhere(function ($query) use ($request, &$params) {
                 foreach ($request->topic_category as $tc) {
-                    $query->orWhere('data', 'ilike', '%<MD_TopicCategoryCode>' . $tc . '</MD_TopicCategoryCode>%');
+                    $query->orWhere('data', 'like', '%<MD_TopicCategoryCode>' . $tc . '</MD_TopicCategoryCode>%');
                     $params['topic_category'][] = $tc;
                 }
             });
@@ -360,7 +359,7 @@ class MetadataController extends Controller {
                 $query = $query->orWhere('createdate', '<=', date('Y-m-d H:i:s', strtotime($request->tarikh_tamat . ' 23:59:59')));
             }
         }
-
+        
         $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
         $metadatasdbtitle = MetadataGeo::on('pgsql2')->select('id', 'data', 'title')->where('disahkan', 'yes')->get();
 
