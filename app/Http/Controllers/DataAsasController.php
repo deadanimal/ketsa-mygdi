@@ -538,7 +538,7 @@ class DataAsasController extends Controller
     {
         $permohonan_list = MohonData::where(['dihantar' => 1])->get();
         foreach ($permohonan_list as $pl) {
-            if($pl->process_datas != null){
+            if ($pl->proses_datas !== null) {
                 $inTempohUrl = 0;
                 $currentDate = date('d-m-Y');
                 $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
@@ -555,9 +555,6 @@ class DataAsasController extends Controller
                 }
                 $res = json_decode($pl->proses_datas->pautan_data);
                 $pl['res'] = $res;
-            }else{
-                $pl['inTempohUrl'] = 0;
-                $pl['res'] = "takde link";
             }
         }
 
@@ -865,7 +862,7 @@ class DataAsasController extends Controller
     {
         $permohonan_list = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         foreach ($permohonan_list as $pl) {
-            if($pl->process_datas != null){
+            if ($pl->proses_datas !== null) {
                 $inTempohUrl = 0;
                 $currentDate = date('d-m-Y');
                 $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
@@ -882,9 +879,6 @@ class DataAsasController extends Controller
                 }
                 $res = json_decode($pl->proses_datas->pautan_data);
                 $pl['res'] = $res;
-            }else{
-                $pl['inTempohUrl'] = 0;
-                $pl['res'] = "takde link";
             }
         }
 

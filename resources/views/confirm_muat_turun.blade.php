@@ -33,7 +33,8 @@
                     @foreach ($data as $d)
                         <div class="form-check mt-2">
                             <input class="form-check-input" name="mohons[]" type="checkbox"
-                                value="{{ $mohons[$loop->index] }}" id="flexCheckDefault{{ $loop->index }}">
+                                value="{{ $mohons[$loop->index] }}" id="flexCheckDefault{{ $loop->index }}"
+                                required>
                             <label class="form-check-label" for="flexCheckDefault{{ $loop->index }}">
                                 {{ $loop->iteration }}) {{ $d }}
                             </label>
