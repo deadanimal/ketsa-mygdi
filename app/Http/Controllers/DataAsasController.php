@@ -1125,8 +1125,8 @@ class DataAsasController extends Controller
     public function store_senarai_kawasan(Request $request)
     {
         $id = $request->permohonan_id;
-        if ($request->negeri != null) {
 
+        if ($request->negeri !== null) {
             $negeri = Negeri::where('kod_negeri', $request->negeri)->first()->negeri;
             $daerah = $request->daerah;
             if ($daerah) {
@@ -1139,10 +1139,14 @@ class DataAsasController extends Controller
                     }
                 }
             } else {
-                return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Pilih Daerah');
-                // $append_kd = $negeri;
+                if ($request->negeri == 17 || $request->negeri == 18) {
+                    $append_kd = $negeri;
+                }else{
+                    return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Pilih Daerah');
+                }
             }
         } else {
+            
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Pilih Negeri');
             // $append_kd = $request->kawasan_data;
         }

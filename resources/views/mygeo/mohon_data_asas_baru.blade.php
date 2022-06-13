@@ -605,7 +605,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary mb-0">
-                    <h4 class="text-white">Tambah Senarai Data dan Kawasan Data</h4>
+                    <h4 class="text-white"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
