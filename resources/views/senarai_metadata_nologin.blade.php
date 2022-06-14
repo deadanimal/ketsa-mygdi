@@ -215,6 +215,7 @@ input[type=submit] {
                                 </div>
                             </div>
                             <div class="text-center mt-5">
+                                <button type="button" class="btn btn-primary" onclick="clearCarianTambahan()">Set Semula</button>
                                 <button type="submit" class="btn btn-primary">Selesai</button>
                             </div>
                         </form>
@@ -380,6 +381,10 @@ input[type=submit] {
 </section>
 
 <script>
+    function clearCarianTambahan() {
+        window.location.replace("{{ url('senarai_metadata_nologin') }}");
+    }
+    
     function setText(element){
         var value = $(element).text();
         $("#carian").val(value);
@@ -577,7 +582,7 @@ input[type=submit] {
 
     $(document).on("click", ".aViewMetadata, .a_metadata_details", function() {
         var metid = $(this).data('metid');
-        $("#formViewMetadata" + metid).submit();
+        window.open("{{ url('/lihat_metadata_nologin') }}/"+metid, '_blank');
     });
     $(document).on("click", ".aViewXml, .a_metadata_xml", function() {
         var metid = $(this).data('metid');

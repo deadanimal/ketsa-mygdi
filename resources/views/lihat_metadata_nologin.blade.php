@@ -42,7 +42,6 @@
             color:black !important;
             font-weight: bolder;
         }
-
     </style>
 
     <!-- Content Wrapper. Contains page content -->
@@ -184,11 +183,21 @@
 
     <script>
         $(document).ready(function() {
+            <?php
+            if(isset($_GET['print']) && $_GET['print'] == '1'){
+                ?>
+                $('.actionButtons').hide();
+                document.title = '{{ $metadataName }}';
+                window.print();
+                <?php
+            }else{
+                ?>
+                <?php
+            }
+            ?>
             $(document).on('click', '.actionButtons', function() {
                 if ($(this).data('action') == 'pdf') {
-                    $('.actionButtons').hide();
-                    document.title = '{{ $metadataName }}';
-                    window.print();
+                    window.location.href = "{{ url('lihat_metadata_nologin/').'/'.$id }}?print=1";
                 } else if ($(this).data('action') == 'xml') {
                     window.open($(this).data('href'), '_blank');
                 } else if ($(this).data('action') == 'excel') {
@@ -196,9 +205,9 @@
                 }
             });
 
-            window.onafterprint = function() {
-                $('.actionButtons').show();
-            }
+            window.addEventListener("focus", function(event){
+                window.location.href = "{{ url('lihat_metadata_nologin/').'/'.$id }}";
+            }, false);
 
             <?php
     if(count($categories) > 0){

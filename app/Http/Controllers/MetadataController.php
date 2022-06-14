@@ -872,8 +872,8 @@ class MetadataController extends Controller {
         return view('mygeo.metadata.kemaskini_metadata', compact('categories', 'contacts', 'countries', 'countrySelected', 'states', 'refSys', 'refSysSelected', 'metadataxml', 'metadataSearched', 'pengesahs', 'customMetadataInput', 'elemenMetadata','template'));
     }
 
-    public function show_nologin(Request $request) {        
-        $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $request->metadata_id)->get()->first();
+    public function show_nologin($id) {
+        $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();
 
         $ftestxml2 = <<<XML
                 $metadataSearched->data
@@ -1028,7 +1028,7 @@ class MetadataController extends Controller {
         
         $template = MetadataTemplate::where('status','active')->get()->first();
 
-        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput','refSysSelected','template','elemenMetadata'));
+        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput','refSysSelected','template','elemenMetadata','id'));
 //        return view('mygeo.metadata.lihat_metadata', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput','refSysSelected','template','elemenMetadata'));
         
 //        return view('mygeo.metadata.lihat_metadata');

@@ -109,7 +109,13 @@
     </style>
 </head>
 
-<body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0" style="height: auto;width:1400px;">
+<?php
+if(isset($_GET['print']) && $_GET['print'] == '1'){
+    ?><body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0" style="height: auto;width:1400px;"><?php
+}else{
+    ?><body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0" style="height: auto;width:100%;"><?php
+}
+?>
     <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark"
         style="background-color: #0563bb;">
         <div class="container-fluid">
