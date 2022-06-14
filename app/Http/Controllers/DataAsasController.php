@@ -536,7 +536,15 @@ class DataAsasController extends Controller
 
     public function status_permohonan()
     {
-        $permohonan_list = MohonData::where(['dihantar' => 1])->get();
+        $permohonan_list = MohonData::with('users')->where(['dihantar' => 1])->get();
+
+        //  if ($currentDate < $tempohUrlStart) {
+        //                  $pl['inTempohUrl'] = 2;
+        //             }else if ($currentDate > $tempohUrlEnd) {
+        //                  $pl['inTempohUrl'] = 0;
+        //             }else {
+        //                  $pl['inTempohUrl'] = 1;
+        //             }
         foreach ($permohonan_list as $pl) {
             if ($pl->proses_datas !== null) {
                 $inTempohUrl = 0;

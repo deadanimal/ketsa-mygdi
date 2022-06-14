@@ -299,7 +299,7 @@
 
                         var msg = "";
                         var msg2 = "";
-                        console.log(pautan);
+                        console.log(pautan,tempoh.length);
 
                         if (pautan.length == 0) {
                             msg = msg + "Sila isi pautan data\r\n\r\n";
@@ -308,14 +308,14 @@
                             $('i#error').text('');
                         }
 
-                        if (tempoh <= 10 ){
+                        if (tempoh.length <= 10 ){
                             msg2 = msg2 + "Sila pilih tarikh\r\n\r\n";
                             $('i#error_two').text(msg2);
                         }else {
                             $('i#error_two').text('');
                         }
 
-                        if (pautan.length != 0 && tempoh > 10) {
+                        if (pautan.length != 0 && tempoh.length > 10) {
                             $('#formProsesData-' + {{ $permohonan->id }}).submit();
                         }
                     });
@@ -325,7 +325,7 @@
 
         <script>
             $(".modal_btn").click(function() {
-                // $(".select_jenis_data").trigger("change");
+                $(".select_jenis_data").trigger("change");
             });
 
             function jenisData(element, id, pid) {
