@@ -80,7 +80,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 text-white mr-2">100
+                                    <span class="h2 text-white mr-2">{{ $bil_keseluruhan_metadata }}
                                     </span>
                                 </p>
                             </div>
@@ -214,7 +214,7 @@
             chart.legend.labels.template.maxWidth = 95
 
             var xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
-            xAxis.dataFields.category = 'category'
+            xAxis.dataFields.category = 'month'
             xAxis.renderer.cellStartLocation = 0.1
             xAxis.renderer.cellEndLocation = 0.9
             xAxis.renderer.grid.template.location = 0;
@@ -225,7 +225,7 @@
             function createSeries(value, name) {
                 var series = chart.series.push(new am4charts.ColumnSeries());
                 series.dataFields.valueY = value;
-                series.dataFields.categoryX = 'category';
+                series.dataFields.categoryX = 'month';
                 series.name = name;
                 series.tooltipText = "[bold]{valueY}[/]";
 
@@ -241,91 +241,7 @@
                 return series;
             }
 
-            chart.data = [{
-                    category: 'Januari',
-                    first: 40,
-                    second: 55,
-                    third: 60,
-                    forth: 43
-                },
-                {
-                    category: 'Februari',
-                    first: 30,
-                    second: 78,
-                    third: 69,
-                    forth: 43
-                },
-                {
-                    category: 'Mac',
-                    first: 27,
-                    second: 40,
-                    third: 45,
-                    forth: 43
-                },
-                {
-                    category: 'April',
-                    first: 50,
-                    second: 33,
-                    third: 22,
-                    forth: 43
-                },
-                {
-                    category: 'Mei',
-                    first: 40,
-                    second: 55,
-                    third: 60,
-                    forth: 43
-                },
-                {
-                    category: 'Jun',
-                    first: 30,
-                    second: 78,
-                    third: 69,
-                    forth: 43
-                },
-                {
-                    category: 'Julai',
-                    first: 27,
-                    second: 40,
-                    third: 45,
-                    forth: 43
-                },
-                {
-                    category: 'Ogos',
-                    first: 50,
-                    second: 33,
-                    third: 22,
-                    forth: 43
-                },
-                {
-                    category: 'September',
-                    first: 40,
-                    second: 55,
-                    third: 60,
-                    forth: 43
-                },
-                {
-                    category: 'Oktober',
-                    first: 30,
-                    second: 78,
-                    third: 69,
-                    forth: 43
-                },
-                {
-                    category: 'November',
-                    first: 27,
-                    second: 40,
-                    third: 45,
-                    forth: 43
-                },
-                {
-                    category: 'Disember',
-                    first: 50,
-                    second: 33,
-                    third: 22,
-                    forth: 43
-                },
-            ]
+            chart.data = {!! json_encode($chartkategori) !!}
 
             createSeries('first', 'DATASET');
             createSeries('second', 'SERVICES');
@@ -389,64 +305,7 @@
             chart.scrollbarX = new am4core.Scrollbar();
 
             // Add data
-            chart.data = [{
-                "country": "Agriculture and Farming",
-                "visits": 3025
-            }, {
-                "country": "Biology and Ecology",
-                "visits": 1882
-            }, {
-                "country": "Administrative and Political Boundaries",
-                "visits": 1809
-            }, {
-                "country": "Atmosphere and Climatic",
-                "visits": 1322
-            }, {
-                "country": "Business and Economic",
-                "visits": 1122
-            }, {
-                "country": "A64	Elevation and Derived Products",
-                "visits": 1114
-            }, {
-                "country": "A65	Environment and Conservation",
-                "visits": 984
-            }, {
-                "country": "Geological and Geophysical",
-                "visits": 711
-            }, {
-                "country": "Human Health and Disease",
-                "visits": 665
-            }, {
-                "country": "Imagery and Base Maps",
-                "visits": 580
-            }, {
-                "country": "Military",
-                "visits": 443
-            }, {
-                "country": "Inland Water Resources",
-                "visits": 441
-            }, {
-                "country": "Locations and Geodetic Networks",
-                "visits": 441
-            }, {
-                "country": "Oceans and Estuaries",
-                "visits": 441
-            }, {
-                "country": "Cadastral",
-                "visits": 441
-            }, {
-                "country": "Cultural, Society and Demography",
-                "visits": 441
-            }, {
-                "country": "Facilities and Structures",
-                "visits": 441
-            }, {
-                "country": "Transportation Networks",
-                "visits": 441
-            }, {
-                "country": "Utilities and Communication",
-                "visits": 441
-            }];
+            chart.data = {!! json_encode($chartkategoritopik) !!}
 
             // Create axes
             var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -542,43 +401,7 @@
             // Add a legend
             chart.legend = new am4charts.Legend();
 
-            chart.data = [{
-                "country": "Downloadable Data",
-                "litres": 501.9
-            }, {
-                "country": "Offline Data",
-                "litres": 165.8
-            }, {
-                "country": "Static Map Images",
-                "litres": 139.9
-            }, {
-                "country": "Other Documents",
-                "litres": 128.3
-            }, {
-                "country": "Application",
-                "litres": 99
-            }, {
-                "country": "Geographic Services",
-                "litres": 60
-            }, {
-                "country": "Clearing House",
-                "litres": 501.9
-            }, {
-                "country": "Map File",
-                "litres": 165.8
-            }, {
-                "country": "Geographic Activities",
-                "litres": 139.9
-            }, {
-                "country": "Live Map Services",
-                "litres": 128.3
-            }, {
-                "country": "Imagery",
-                "litres": 99
-            }, {
-                "country": "Gridded",
-                "litres": 60
-            }, ];
+            chart.data = {!! json_encode($chartcontenttype) !!}
 
         });
 
@@ -593,67 +416,7 @@
 
             chart.legend = new am4charts.Legend();
 
-            chart.data = [{
-                    country: "JOHOR",
-                    litres: 501.9
-                },
-                {
-                    country: "KEDAH",
-                    litres: 301.9
-                },
-                {
-                    country: "KELANTAN",
-                    litres: 201.1
-                },
-                {
-                    country: "MELAKA",
-                    litres: 165.8
-                },
-                {
-                    country: "NEGERI SEMBILAN",
-                    litres: 139.9
-                },
-                {
-                    country: "PAHANG",
-                    litres: 128.3
-                },
-                {
-                    country: "PULAU PINANG",
-                    litres: 99
-                },
-                {
-                    country: "PERAK",
-                    litres: 60
-                },
-                {
-                    country: "PERLIS",
-                    litres: 50
-                },
-                {
-                    country: "SELANGOR",
-                    litres: 50
-                },
-                {
-                    country: "TERENGGANU",
-                    litres: 50
-                },
-                {
-                    country: "SARAWAK",
-                    litres: 50
-                },
-                {
-                    country: "WILAYAH PERSEKUTUAN KUALA LUMPUR",
-                    litres: 50
-                },
-                {
-                    country: "WILAYAH PERSEKUTUAN LABUAN",
-                    litres: 50
-                },
-                {
-                    country: "WILAYAH PERSEKUTUAN PUTRAJAYA",
-                    litres: 50
-                },
-            ];
+            chart.data = {!! json_encode($chartnegeri) !!}
 
             var series = chart.series.push(new am4charts.PieSeries3D());
             series.dataFields.value = "litres";
