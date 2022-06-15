@@ -21,7 +21,7 @@
                     @if ($elemenMetadata['Administrative and Political Boundaries']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_2" name="topic_category[]"
-                                value="Administrative and Political Boundaries"
+                                value="boundaries"
                                 {{ null !== old('topic_category') && in_array('Administrative and Political Boundaries', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_2">Administrative and Political Boundaries</label>
                         </div>
@@ -29,7 +29,7 @@
                     @if ($elemenMetadata['Agriculture and Farming']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_8" name="topic_category[]"
-                                value="Agriculture and Farming"
+                                value="farming"
                                 {{ null !== old('topic_category') && in_array('Agriculture and Farming', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_8">Agriculture and Farming</label>
                         </div>
@@ -37,7 +37,7 @@
                     @if ($elemenMetadata['Atmosphere and Climatic']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_3" name="topic_category[]"
-                                value="Atmosphere and Climatic"
+                                value="climatologyMeteorologyAtmosphere"
                                 {{ null !== old('topic_category') && in_array('Atmosphere and Climatic', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_3">Atmosphere and Climatic</label>
                         </div>
@@ -45,7 +45,7 @@
                     @if ($elemenMetadata['Biology and Ecology']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_3" name="topic_category[]"
-                                value="Biology and Ecology"
+                                value="biota"
                                 {{ null !== old('topic_category') && in_array('Biology and Ecology', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_3">Biology and Ecology</label>
                         </div>
@@ -53,7 +53,7 @@
                     @if ($elemenMetadata['Business and Economic']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_3" name="topic_category[]"
-                                value="Business and Economic"
+                                value="economy"
                                 {{ null !== old('topic_category') && in_array('Business and Economic', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_3">Business and Economic</label>
                         </div>
@@ -61,7 +61,7 @@
                     @if ($elemenMetadata['Cadastral']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Cadastral"
+                                value="planningCadastre"
                                 {{ null !== old('topic_category') && in_array('Cadastral', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Cadastral</label>
                         </div>
@@ -69,7 +69,7 @@
                     @if ($elemenMetadata['Cultural, Society and Demography']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Cultural, Society and Demography"
+                                value="society"
                                 {{ null !== old('topic_category') && in_array('Cultural, Society and Demography', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Cultural, Society and Demography</label>
                         </div>
@@ -77,7 +77,7 @@
                     @if ($elemenMetadata['Elevation and Derived Products']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Elevation and Derived Products"
+                                value="elevation"
                                 {{ null !== old('topic_category') && in_array('Elevation and Derived Products', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Elevation and Derived Products</label>
                         </div>
@@ -87,7 +87,7 @@
                     @if ($elemenMetadata['Environment and Conservation']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Environment and Conservation"
+                                value="environment"
                                 {{ null !== old('topic_category') && in_array('Environment and Conservation', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Environment and Conservation</label>
                         </div>
@@ -95,7 +95,7 @@
                     @if ($elemenMetadata['Facilities and Structures']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Facilities and Structures"
+                                value="structure"
                                 {{ null !== old('topic_category') && in_array('Facilities and Structures', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Facilities and Structures</label>
                         </div>
@@ -103,7 +103,7 @@
                     @if ($elemenMetadata['Geological and Geophysical']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Geological and Geophysical"
+                                value="geoscientificInformation"
                                 {{ null !== old('topic_category') && in_array('Geological and Geophysical', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Geological and Geophysical</label>
                         </div>
@@ -111,7 +111,7 @@
                     @if ($elemenMetadata['Human Health and Disease']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Human Health and Disease"
+                                value="health"
                                 {{ null !== old('topic_category') && in_array('Human Health and Disease', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Human Health and Disease</label>
                         </div>
@@ -119,7 +119,7 @@
                     @if ($elemenMetadata['Imagery and Base Maps']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Imagery and Base Maps"
+                                value="imageryBaseMapsEarthCover"
                                 {{ null !== old('topic_category') && in_array('Imagery and Base Maps', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Imagery and Base Maps</label>
                         </div>
@@ -127,7 +127,7 @@
                     @if ($elemenMetadata['Inland Water Resources']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Inland Water Resources"
+                                value="inlandWaters"
                                 {{ null !== old('topic_category') && in_array('Inland Water Resources', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Inland Water Resources</label>
                         </div>
@@ -137,7 +137,7 @@
                     @if ($elemenMetadata['Locations and Geodetic Networks']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Locations and Geodetic Networks"
+                                value="location"
                                 {{ null !== old('topic_category') && in_array('Locations and Geodetic Networks', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Locations and Geodetic Networks</label>
                         </div>
@@ -145,7 +145,7 @@
                     @if ($elemenMetadata['Military']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Military"
+                                value="intelligenceMilitary"
                                 {{ null !== old('topic_category') && in_array('Military', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Military</label>
                         </div>
@@ -153,7 +153,7 @@
                     @if ($elemenMetadata['Oceans and Estuaries']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Oceans and Estuaries"
+                                value="oceans"
                                 {{ null !== old('topic_category') && in_array('Oceans and Estuaries', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Oceans and Estuaries</label>
                         </div>
@@ -161,7 +161,7 @@
                     @if ($elemenMetadata['Transportation Networks']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Transportation Networks"
+                                value="transportation"
                                 {{ null !== old('topic_category') && in_array('Transportation Networks', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Transportation Networks</label>
                         </div>
@@ -169,7 +169,7 @@
                     @if ($elemenMetadata['Utilities and Communication']->status == '1')
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="c3_1" name="topic_category[]"
-                                value="Utilities and Communication"
+                                value="utilitiesCommunication"
                                 {{ null !== old('topic_category') && in_array('Utilities and Communication', old('topic_category')) ? 'checked' : '' }}>
                             <label class="form-check-label" for="c3_1">Utilities and Communication</label>
                         </div>
