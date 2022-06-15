@@ -29,6 +29,7 @@ class XmlController extends Controller {
                     <characterSet>
                         <MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part3">8859part3</MD_CharacterSetCode>
                     </characterSet>
+                    <!-- kategori -->
                     <hierarchyLevel>
                         <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="$request->kategori">$request->kategori</MD_ScopeCode>
                     </hierarchyLevel>

@@ -136,9 +136,41 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Aplikasi', 'Pentadbir Metadata', 'Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
+                                            <li class="nav-item has-treeview">
+                                                <a class="nav-link active" href="#">
+                                                    <i class="fa-desktop fas text-orange"></i>
+                                                    <span class="nav-link-text">Dashboard</span>
+                                                    <span class="ml-auto"><i
+                                                            class="right fas fa-angle-left"></i></span>
+                                                </a>
+                                                <ul class="nav nav-sm nav-treeview">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active"
+                                                            href="{{ url('mygeo_dashboard_metadata') }}">
+                                                            <span class="nav-link-text">Dashboard Metadata</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active"
+                                                            href="{{ url('mygeo_dashboard_data_asas') }}">
+                                                            <span class="nav-link-text">Dashboard Data Asas</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        @elseif (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Metadata', 'Penerbit Metadata']))
                                             <li class="nav-item ng-star-inserted">
-                                                <a class="nav-link active" href="{{ url('mygeo_dashboard') }}">
+                                                <a class="nav-link active"
+                                                    href="{{ url('mygeo_dashboard_metadata') }}">
+                                                    <i class="fa-desktop fas text-orange"></i>
+                                                    <span class="nav-link-text">Dashboard</span>
+                                                </a>
+                                            </li>
+                                        @elseif(auth::user()->hasRole(['Pentadbir Data', 'Pemohon Data']))
+                                            <li class="nav-item ng-star-inserted">
+                                                <a class="nav-link active"
+                                                    href="{{ url('mygeo_dashboard_data_asas') }}">
                                                     <i class="fa-desktop fas text-orange"></i>
                                                     <span class="nav-link-text">Dashboard</span>
                                                 </a>
