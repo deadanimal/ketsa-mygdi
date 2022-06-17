@@ -26,8 +26,6 @@ use function GuzzleHttp\json_encode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\MailNotify;
 
 class DataAsasController extends Controller
 {
@@ -61,13 +59,20 @@ class DataAsasController extends Controller
             }
         }
         $skdatas = SenaraiKawasanData::where('permohonan_id', $id)->get();
-        $senarai_data = SenaraiData::where('status', 'Ada')->distinct('subkategori')->get();
+        // $senarai_data = SenaraiData::where('status', 'Ada')->distinct('subkategori')->get();
+        // $lapisandata = DB::table('senarai_data')
+        //     ->where('status', 'Ada')
+        //     ->select('subkategori', 'lapisan_data', 'kelas')
+        //     ->groupBy('subkategori', 'lapisan_data', 'kelas')
+        //     ->get();
+        // $kategori_senarai_data = SenaraiData::where('status', 'Ada')->distinct('kategori')->get();
+
+        $senarai_data = SenaraiData::distinct('subkategori')->get();
         $lapisandata = DB::table('senarai_data')
-            ->where('status', 'Ada')
             ->select('subkategori', 'lapisan_data', 'kelas')
             ->groupBy('subkategori', 'lapisan_data', 'kelas')
             ->get();
-        $kategori_senarai_data = SenaraiData::where('status', 'Ada')->distinct('kategori')->get();
+        $kategori_senarai_data = SenaraiData::distinct('kategori')->get();
 
         $permohonan = MohonData::where('id', $id)->first();
         $dokumens = DokumenBerkaitan::where('permohonan_id', $id)->orderBy('created_at')->get();
@@ -350,6 +355,8 @@ class DataAsasController extends Controller
         $proses = ProsesData::get();
 
         return view('mygeo.proses_data', compact('permohonan_list', 'skdatas', 'proses'));
+
+
     }
 
     public function update_proses_data(Request $request)
@@ -505,7 +512,7 @@ class DataAsasController extends Controller
 
     public function muat_turun_data()
     {
-        $permohonan_list = MohonData::with(['proses_datas', 'users'])
+        $permohonan_list = MohonData::with(['proses_datas','users'])
             ->has('proses_datas')
             ->where('user_id', '=', Auth::user()->id)->where(['dihantar' => 1])
             ->where('status', '!=', 2)
@@ -540,25 +547,34 @@ class DataAsasController extends Controller
 
     public function status_permohonan()
     {
-        $permohonan_list = MohonData::where(['dihantar' => 1])->get();
-        foreach ($permohonan_list as $pl) {
+        $permohonan_list = MohonData::with('users')->where(['dihantar' => 1])->get();
 
-            $inTempohUrl = 0;
-            $currentDate = date('d-m-Y');
-            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
-            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                    $pl['inTempohUrl'] = 1;
-                } elseif ($currentDate <= $tempohUrlStart) {
-                    $pl['inTempohUrl'] = 2;
-                } else {
-                    $pl['inTempohUrl'] = 0;
+        //  if ($currentDate < $tempohUrlStart) {
+        //                  $pl['inTempohUrl'] = 2;
+        //             }else if ($currentDate > $tempohUrlEnd) {
+        //                  $pl['inTempohUrl'] = 0;
+        //             }else {
+        //                  $pl['inTempohUrl'] = 1;
+        //             }
+        foreach ($permohonan_list as $pl) {
+            if ($pl->proses_datas !== null) {
+                $inTempohUrl = 0;
+                $currentDate = date('d-m-Y');
+                $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+                $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+                $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+                if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                    if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                        $pl['inTempohUrl'] = 1;
+                    } elseif ($currentDate <= $tempohUrlStart) {
+                        $pl['inTempohUrl'] = 2;
+                    } else {
+                        $pl['inTempohUrl'] = 0;
+                    }
                 }
+                $res = json_decode($pl->proses_datas->pautan_data);
+                $pl['res'] = $res;
             }
-            $res = json_decode($pl->proses_datas->pautan_data);
-            $pl['res'] = $res;
         }
 
         return view('mygeo.status_permohonan', compact('permohonan_list'));
@@ -865,23 +881,24 @@ class DataAsasController extends Controller
     {
         $permohonan_list = MohonData::with('users')->where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         foreach ($permohonan_list as $pl) {
-
-            $inTempohUrl = 0;
-            $currentDate = date('d-m-Y');
-            $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
-            $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
-            $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
-            if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
-                if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
-                    $pl['inTempohUrl'] = 1;
-                } elseif ($currentDate <= $tempohUrlStart) {
-                    $pl['inTempohUrl'] = 2;
-                } else {
-                    $pl['inTempohUrl'] = 0;
+            if ($pl->proses_datas !== null) {
+                $inTempohUrl = 0;
+                $currentDate = date('d-m-Y');
+                $explodedTempohUrl = explode(' - ', $pl->proses_datas->tempoh_url);
+                $tempohUrlStart = isset($explodedTempohUrl[0]) ? $explodedTempohUrl[0] : '';
+                $tempohUrlEnd = isset($explodedTempohUrl[1]) ? $explodedTempohUrl[1] : '';
+                if ($tempohUrlStart != '' && $tempohUrlEnd != '') {
+                    if ($currentDate >= $tempohUrlStart && $currentDate <= $tempohUrlEnd) {
+                        $pl['inTempohUrl'] = 1;
+                    } elseif ($currentDate <= $tempohUrlStart) {
+                        $pl['inTempohUrl'] = 2;
+                    } else {
+                        $pl['inTempohUrl'] = 0;
+                    }
                 }
+                $res = json_decode($pl->proses_datas->pautan_data);
+                $pl['res'] = $res;
             }
-            $res = json_decode($pl->proses_datas->pautan_data);
-            $pl['res'] = $res;
         }
 
         return view('mygeo.semakan_status', compact('permohonan_list'));
@@ -1127,8 +1144,8 @@ class DataAsasController extends Controller
     public function store_senarai_kawasan(Request $request)
     {
         $id = $request->permohonan_id;
-        if ($request->negeri != null) {
 
+        if ($request->negeri !== null) {
             $negeri = Negeri::where('kod_negeri', $request->negeri)->first()->negeri;
             $daerah = $request->daerah;
             if ($daerah) {
@@ -1141,10 +1158,14 @@ class DataAsasController extends Controller
                     }
                 }
             } else {
-                return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Pilih Daerah');
-                // $append_kd = $negeri;
+                if ($request->negeri == 17 || $request->negeri == 18) {
+                    $append_kd = $negeri;
+                }else{
+                    return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Pilih Daerah');
+                }
             }
         } else {
+            
             return redirect()->action('DataAsasController@tambah', ['id' => $id])->with('warning', 'Sila Pilih Negeri');
             // $append_kd = $request->kawasan_data;
         }

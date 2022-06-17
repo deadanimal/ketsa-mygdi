@@ -121,7 +121,7 @@
                                         </div>
 
                                         <div class="col-4 text-right">
-                                            <a href="/mohon_data">
+                                            <a href="/permohonan_baru">
                                                 <button type="button"
                                                     class="btn btn-sm btn-default float-right">Kembali</button>
                                             </a>
@@ -605,7 +605,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary mb-0">
-                    <h4 class="text-white">Tambah Senarai Data dan Kawasan Data</h4>
+                    <h4 class="text-white"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -647,13 +647,22 @@
                                         <label class="form-control-label" for="kawasan_data">Kawasan Data</label>
                                         {{-- <input name="kawasan_data" class="form-control"
                                             placeholder="Masukkan Kawasan Data" /> --}}
-
                                         <select class="form-control" id="negeri" name="negeri" onchange="selectNegeri()">
                                             <option selected disabled hidden>Negeri</option>
-                                            @foreach ($negeris as $neg)
-                                                <option value="{{ $neg->kod_negeri }}">{{ $neg->negeri }}
-                                                </option>
-                                            @endforeach
+                                            @if(auth()->user()->kategori == "IPTA - Pelajar")
+                                                @foreach ($negeris as $neg)
+                                                    @if($neg->kod_negeri != 17 && $neg->kod_negeri != 18)
+                                                        <option value="{{ $neg->kod_negeri }}">{{ $neg->negeri }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                             @foreach ($negeris as $neg)
+                                                    <option value="{{ $neg->kod_negeri }}">{{ $neg->negeri }}
+                                                        </option>
+                                             @endforeach
+                                            @endif
+                                               
                                         </select>
                                     </div>
 

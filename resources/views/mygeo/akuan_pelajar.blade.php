@@ -97,9 +97,9 @@
                                     <div class="col-12 text-center">
                                         <h3 class=" d-inline">AKUAN PELAJAR</h3>
                                     </div>
-                                    <div class="col-12 text-right">
+                                    <div class="text-right mr-5">
                                         {{-- <a class="btn btn-default btn-sm " href="/mohon_data">Kembali</a> --}}
-                                        <a class="btn btn-default btn-sm "
+                                        <a class="btn btn-default btn-sm mr-4"
                                             href="/lihat_permohonan/{{ $permohonan->id }}">Kembali</a>
                                     </div>
                                     <div class="form-group mx-6">
@@ -171,8 +171,7 @@
                                             <input type="text" class="form-control form-control-sm"
                                                 value="{{ $akuan->nama2 ?? $permohonan->users->name }}" name="nama[]">
                                             Alamat:
-                                            <textarea class="form-control form-control-sm" cols="30" rows="6"
-                                                name="alamat">{{ $akuan->alamat ?? $permohonan->users->alamat }}</textarea>
+                                            <textarea class="form-control form-control-sm" cols="30" rows="6" name="alamat">{{ $akuan->alamat ?? $permohonan->users->alamat }}</textarea>
                                         </div>
 
                                         <input type="hidden" name="permohonan_id" value="{{ $permohonan->id }}">

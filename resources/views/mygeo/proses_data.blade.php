@@ -189,7 +189,7 @@
                                             <input class="form-control form-control-sm" placeholder="0.00"
                                                 style="width: 90px;" type="text" name="total_harga"
                                                 id="jumlah_harga_dokumen_{{ $permohonan->id }}" step="0.01"
-                                                value="{{ $permohonan->proses_datas->total_harga }}">
+                                                value="{{ $permohonan->proses_datas->total_harga ?? '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -198,17 +198,17 @@
                                         <div class="form-group">
                                             <label class="form-control-label mr-2">Pautan Data </label>
                                             <?php
-                                            $res = json_decode($permohonan->proses_datas->pautan_data);
-                                            $firstURL = $res ? $res['0'] : '';
-                                            $firstline = true;
-                                            $i = 1; ?>
+                                            if ($permohonan->proses_datas !== null) {
+                                                $res = json_decode($permohonan->proses_datas->pautan_data);
+                                                $firstURL = $res ? $res['0'] : '';
+                                                $firstline = true;
+                                                $i = 1;
+                                            } 
+                                            ?>
 
                                             <i id="error" class="text-warning float-right" style="font-size: 11px"></i>
                                             <div class="d-flex mb-2">
-                                                <input class="form-control form-control-sm mr-2" name="pautan_data[0]"
-                                                    placeholder="Masukkan Pautan Data" type="text" id="pautan_datas"
-                                                    value="{{ $firstURL }}">
-
+                                                <input class="form-control form-control-sm mr-2" id="pautan" name="pautan_data[0]" type="text" placeholder="Masukkan Pautan Data" onchange="pautanCheck(this)" value="{{ $firstURL }}">
                                                 <button type="button" class="btn btn-sm btn-outline-primary"
                                                     onclick="addPautanData()"><i class='fas fa-plus pb-0 mb-0'></i></button>
                                             </div>
@@ -263,51 +263,61 @@
                     </div>
                 </div>
             </div>
-
+            <input type="hidden" id="tempohCheck">
+            <input type="hidden" id="pautanCheck" >
             <script type="text/javascript">
-                var i = {{ $i }};
+                // var i = {{ $i }};
+                
+               function pautanCheck(el){
+                $("#pautanCheck").val(el.value);
+               }
+              
 
                 function addPautanData() {
-                    d = document.getElementById("pautan_datas").value;
+                    // d = document.getElementById("pautan_datas").value;
                     $(".dynamicAddPautan").append(
-                        `<span class="d-flex mb-2"><input type="text" name="pautan_data[` + i +
-                        `]" class="form-control form-control-sm mr-2"><button type="button" class="btn btn-outline-warning btn-sm remove-input-field"><i class="fas fa-trash"></i>
+                        `<span class="d-flex mb-2"><input type="text" name="pautan_data[]" class="form-control form-control-sm mr-2"><button type="button" class="btn btn-outline-warning btn-sm remove-input-field"><i class="fas fa-trash"></i>
                     </button></span>`
                     );
-                    ++i;
+                    // ++i;
 
                 }
                 $(document).on('click', '.remove-input-field', function() {
-                    --i;
                     $(this).parents('span').remove();
                 });
             </script>
 
             <script>
+               
                 $(document).ready(function() {
+                    $("#clickTempoh").val('0');
+                    $("#pautanCheck").val($("#pautan").val());
+
                     $(document).on('click', '.btnValid' + {{ $permohonan->id }}, function() {
-                        var pautan = $('#pautan_datas').val();
-                        var tempoh = $('#tempohval').val();
-                        console.log({{ $permohonan->id }}, tempoh.length);
+                        var pautan =  $("#pautanCheck").val();
+                        var tempoh =  $("#tempohCheck").val();
+
                         var msg = "";
                         var msg2 = "";
-
+                        console.log(pautan,tempoh.length);
 
                         if (pautan.length == 0) {
-                            msg = msg + "Sila isi pautan data\r\n\r\n"
-                        }
-                        if (tempoh.length <= 10) {
-                            msg2 = msg2 + "Sila pilih tarikh\r\n\r\n"
-                        }
-                        if (pautan.length == 0 || tempoh.length <= 10) {
+                            msg = msg + "Sila isi pautan data\r\n\r\n";
                             $('i#error').text(msg);
-                            $('i#error_two').text(msg2);
-                        } else {
+                        }else{
                             $('i#error').text('');
-                            $('i#error_two').text('');
-                            $('#formProsesData-' + {{ $permohonan->id }}).submit();
                         }
 
+                        if (tempoh.length <= 10 ){
+                            msg2 = msg2 + "Sila pilih tarikh\r\n\r\n";
+                            $('i#error_two').text(msg2);
+                        }else {
+                            $('i#error_two').text('');
+                        }
+
+                        if (pautan.length != 0 && tempoh.length > 10) {
+                            $('#formProsesData-' + {{ $permohonan->id }}).submit();
+                        }
                     });
                 });
             </script>
@@ -445,6 +455,8 @@
                     $(this).val(start.format('DD-MM-YYYY') + ' - ' + end.format(
                         'DD-MM-YYYY'));
                     picker.endDate.subtract(14, 'days');
+                    
+                    $("#tempohCheck").val(this.value);
                 });
 
                 $("#table_proses_data").DataTable({

@@ -17,7 +17,6 @@
         .ql-editor {
             height: 800px;
         }
-
     </style>
 
     <!-- Content Wrapper. Contains page content -->
@@ -72,7 +71,7 @@
                             <div class="card-body p-4">
                                 <form action="{{ url('simpan_surat_balasan') }}" method="POST" id="form_surat_balasan">
                                     @csrf
-                                    <div class="row mb-3">
+                                    <div class="row mb-3 mr-4">
                                         <div class="col text-right">
                                             <a class="btn btn-default btn-sm " href="/proses_data">Kembali</a>
                                         </div>
@@ -111,8 +110,7 @@
                                         <input type="text" class="form-control mt-3"
                                             value="{{ $surat->nama ?? $permohonan->users->name }}" name="nama">
 
-                                        <textarea class="form-control form-control-sm mt-3" cols="30" placeholder="Alamat" rows="6"
-                                            name="alamat">{{ $surat->alamat ?? $permohonan->users->alamat }}</textarea>
+                                        <textarea class="form-control form-control-sm mt-3" cols="30" placeholder="Alamat" rows="6" name="alamat">{{ $surat->alamat ?? $permohonan->users->alamat }}</textarea>
                                         <br>
                                         <input type="text" class="form-control form-control-sm heading" name="tajuk_surat"
                                             placeholder="Tajuk Surat Balasan Permohonan" value="{{ $surat->tajuk_surat }}"

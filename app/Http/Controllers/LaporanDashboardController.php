@@ -43,18 +43,18 @@ class LaporanDashboardController extends Controller
 
         $permohonan_lulus = MohonData::where(['status' => 3])->get();
         $permohonan_kategori = DB::table('users')
-            ->join('mohon_data', 'users.id', '=', 'mohon_data.user_id')
-            ->join('agensi_organisasi', 'users.id', '=', 'agensi_organisasi.id')
-            ->join('senarai_kawasan_data', 'mohon_data.id', '=', 'senarai_kawasan_data.permohonan_id')
-            ->select('agensi_organisasi.name', 'senarai_kawasan_data.kategori', DB::raw('count(*) as total'), DB::raw('users.name as username'))
-            ->groupBy('users.name', 'agensi_organisasi.name', 'senarai_kawasan_data.kategori')
-            ->get();
+                                ->join('mohon_data','users.id','=','mohon_data.user_id')
+                                ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+                                ->join('senarai_kawasan_data','mohon_data.id','=','senarai_kawasan_data.permohonan_id')
+                                ->select('agensi_organisasi.name','senarai_kawasan_data.kategori',DB::raw('count(*) as total'),DB::raw('users.name as username'))
+                                ->groupBy('users.name','agensi_organisasi.name','senarai_kawasan_data.kategori')
+                                ->get();
         $permohonan_statistik = DB::table('users')
-            ->join('mohon_data', 'users.id', '=', 'mohon_data.user_id')
-            ->join('agensi_organisasi', 'users.id', '=', 'agensi_organisasi.id')
-            ->select(DB::raw('EXTRACT( year from mohon_data.date) as tahun'), DB::raw('agensi_organisasi.name as agensi_name'), DB::raw('count(*) as total_permohonan'))
-            ->groupBy('agensi_organisasi.name', 'tahun')
-            ->get();
+                                ->join('mohon_data','users.id','=','mohon_data.user_id')
+                                ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+                                ->select(DB::raw('EXTRACT( year from mohon_data.date) as tahun'),DB::raw('agensi_organisasi.name as agensi_name'),DB::raw('count(*) as total_permohonan'))
+                                ->groupBy('agensi_organisasi.name','tahun')
+                                ->get();
         // dd($permohonan_statistik);
         $permohonan_count = count($permohonans);
         return view('mygeo.laporan_data_asas', compact('permohonans','permohonan_kategori','permohonan_lulus','permohonan_statistik','permohonan_count','agensi'));
@@ -149,29 +149,29 @@ class LaporanDashboardController extends Controller
         $categories = MCategory::get();
 
         //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
-        //        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
-        //        $metadatas = [];
-        //        foreach ($metadatasdb as $met) {
-        //            $ftestxml2 = <<<XML
-        //                    $met->data
-        //                    XML;
-        //            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-        //            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-        //            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-        //            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-        //
-        //            $xml2 = simplexml_load_string($ftestxml2);
-        //            $metadatas[$met->id] = [$xml2, $met];
-        //        }
+//        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+//        $metadatas = [];
+//        foreach ($metadatasdb as $met) {
+//            $ftestxml2 = <<<XML
+//                    $met->data
+//                    XML;
+//            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+//            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+//            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+//            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+//
+//            $xml2 = simplexml_load_string($ftestxml2);
+//            $metadatas[$met->id] = [$xml2, $met];
+//        }
 
         $permohonan_perincian = MohonData::get();
         $permohonan_lulus = MohonData::where(['status' => 3])->get();
         $permohonan_kategori = DB::table('users')
-            ->join('mohon_data', 'users.id', '=', 'mohon_data.user_id')
-            ->join('agensi_organisasi', 'users.id', '=', 'agensi_organisasi.id')
-            ->select('agensi_organisasi.name', 'mohon_data.date', DB::raw('count(*) as total'), DB::raw('users.name as username'))
-            ->groupBy('users.name', 'agensi_organisasi.name', 'mohon_data.date')
-            ->get();
+                                ->join('mohon_data','users.id','=','mohon_data.user_id')
+                                ->join('agensi_organisasi','users.id','=','agensi_organisasi.id')
+                                ->select('agensi_organisasi.name','mohon_data.date',DB::raw('count(*) as total'),DB::raw('users.name as username'))
+                                ->groupBy('users.name','agensi_organisasi.name','mohon_data.date')
+                                ->get();
         // dd($permohonan_kategori);
         $permohonan_kategori_count = count($permohonan_kategori);
 
@@ -201,33 +201,33 @@ class LaporanDashboardController extends Controller
 
         //add table to document and apply style created in previous lines
         $table = $newSection->addTable('myTable');
-        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
-        $counter = 0;
-        foreach ($metadatasdb as $met) {
-            $counter++;
-            $table->addRow();
-            //add cell
-            $table->addCell(900)->addText($counter);
-            //add cell
-            $title = $met->title;
-            $table->addCell(5000)->addText(htmlspecialchars($title));
-            //add cell
-            $status = "";
-            if ($met->is_draf == "yes") {
-                $status = "Draf";
-            } else {
-                if ($met->disahkan == "0") {
-                    $status = "Perlu Pengesahan";
-                } elseif ($met->disahkan == "yes") {
-                    $status = "Diterbitkan";
-                } elseif ($met->disahkan == "yes") {
-                    $status = "Perlu Pembetulan";
+            $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+            $counter = 0;
+            foreach ($metadatasdb as $met) {
+                $counter++;
+                $table->addRow();
+                //add cell
+                $table->addCell(900)->addText($counter);
+                //add cell
+                $title = $met->title;
+                $table->addCell(5000)->addText(htmlspecialchars($title));
+                //add cell
+                $status = "";
+                if($met->is_draf == "yes"){
+                    $status = "Draf";
+                }else{
+                    if($met->disahkan == "0"){
+                        $status = "Perlu Pengesahan";
+                    }elseif($met->disahkan == "yes"){
+                        $status = "Diterbitkan";
+                    }elseif($met->disahkan == "yes"){
+                        $status = "Perlu Pembetulan";
+                    }
                 }
+                $table->addCell(2500)->addText($status);
+                //add cell
+                $table->addCell(1750)->addText(date('d/m/Y',strtotime($met->changedate)));
             }
-            $table->addCell(2500)->addText($status);
-            //add cell
-            $table->addCell(1750)->addText(date('d/m/Y', strtotime($met->changedate)));
-        }
         $objectWriter = \PhpOffice\PhpWord\IOFactory::createWriter($wordTest, 'Word2007');
         try {
             $objectWriter->save(storage_path('Laporan_Perincian_Metadata.docx'));
@@ -537,7 +537,7 @@ class LaporanDashboardController extends Controller
         // dd($permohonan_kategori);
 
         //JUMLAH METADATA YANG TELAH DITERBITKAN
-        if (Auth::user()->hasRole('Pemohon Data')) {
+        if(Auth::user()->hasRole('Pemohon Data')){
             $agencyName = Auth::user()->agensi_organisasi;
         }else{
             $agencyName = Auth::user()->agensiOrganisasi->name;
@@ -545,29 +545,29 @@ class LaporanDashboardController extends Controller
         $metadataTerbit = count(MetadataGeo::on('pgsql2')->where('data','LIKE','%>'.$agencyName.'<%')->get());
 
         //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
-        //        $metadataTerbitByAgency = [];
-        //        $metadataTerbitByAgencyKeys = [];
-        //        $metadataTerbitByAgencyVals = [];
-        //        $agencies = User::all();
-        //        $agencyIds = $agencies->groupBy('agensi_organisasi');
-        //        foreach($agencyIds as $key=>$val){
-        //            $count = 0;
-        //            $idsToSearch = [];
-        //            $agencyName = "";
-        //            foreach($val as $user){
-        //                $userRoles = explode(',',$user->assigned_roles);
-        //                if(!in_array('Pemohon Data',$userRoles)){
-        //                    $agencyName = $user->agensiOrganisasi->name;
-        //                }else{
-        //                    break 2;
-        //                }
-        //                $idsToSearch[] = $user->id;
-        //            }
-        //            $count = count(MetadataGeo::on('pgsql2')->whereIn('portal_user_id',$idsToSearch)->get());
-        //            $metadataTerbitByAgency[$agencyName] = $count;
-        //            $metadataTerbitByAgencyKeys[] = $agencyName;
-        //            $metadataTerbitByAgencyVals[] = $count;
-        //        }
+//        $metadataTerbitByAgency = [];
+//        $metadataTerbitByAgencyKeys = [];
+//        $metadataTerbitByAgencyVals = [];
+//        $agencies = User::all();
+//        $agencyIds = $agencies->groupBy('agensi_organisasi');
+//        foreach($agencyIds as $key=>$val){
+//            $count = 0;
+//            $idsToSearch = [];
+//            $agencyName = "";
+//            foreach($val as $user){
+//                $userRoles = explode(',',$user->assigned_roles);
+//                if(!in_array('Pemohon Data',$userRoles)){
+//                    $agencyName = $user->agensiOrganisasi->name;
+//                }else{
+//                    break 2;
+//                }
+//                $idsToSearch[] = $user->id;
+//            }
+//            $count = count(MetadataGeo::on('pgsql2')->whereIn('portal_user_id',$idsToSearch)->get());
+//            $metadataTerbitByAgency[$agencyName] = $count;
+//            $metadataTerbitByAgencyKeys[] = $agencyName;
+//            $metadataTerbitByAgencyVals[] = $count;
+//        }
 
         //Jumlah Metadata Diterbitkan Mengikut Agensi di Malaysia
         $metadataTerbitByAgency = [];
@@ -685,197 +685,21 @@ class LaporanDashboardController extends Controller
 
         $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
 
-        if (!empty($tarikh_mula)) {
-            $bil_metadata_kategori = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->orderBy('createdate', 'asc')->get();
-            $bil_metadata_kategori_topik = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->get();
-            $bil_metadata_content_type = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->get();
-            $jumlah_metadata_mengikut_negeri = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->get();
-        } elseif (!empty($tarikh_akhir)) {
-            $bil_metadata_kategori = MetadataGeo::on('pgsql2')->where('createdate', '<=', $tarikh_akhir)->orderBy('createdate', 'asc')->get();
-            $bil_metadata_kategori_topik = MetadataGeo::on('pgsql2')->where('createdate', '<=', $tarikh_akhir)->get();
-            $bil_metadata_content_type = MetadataGeo::on('pgsql2')->where('createdate', '<=', $tarikh_akhir)->get();
-            $jumlah_metadata_mengikut_negeri = MetadataGeo::on('pgsql2')->where('createdate', '<=', $tarikh_akhir)->get();
-        } elseif (!empty($tarikh_mula) && !empty($tarikh_akhir)) {
-            $bil_metadata_kategori = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->where('createdate', '<=', $tarikh_akhir)->orderBy('createdate', 'asc')->get();
-            $bil_metadata_kategori_topik = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->where('createdate', '<=', $tarikh_akhir)->get();
-            $bil_metadata_content_type = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->where('createdate', '<=', $tarikh_akhir)->get();
-            $jumlah_metadata_mengikut_negeri = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->where('createdate', '<=', $tarikh_akhir)->get();
-        } else {
-            $bil_metadata_kategori = MetadataGeo::on('pgsql2')->orderBy('createdate', 'asc')->get();
-            $bil_metadata_kategori_topik = MetadataGeo::on('pgsql2')->get();
-            $bil_metadata_content_type = MetadataGeo::on('pgsql2')->get();
-            $jumlah_metadata_mengikut_negeri = MetadataGeo::on('pgsql2')->get();
-        }
+        $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
 
-        //Jumlah Metadata Mengikut Kategori
-        $metadata_kategori = [];
-        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
-        foreach ($bil_metadata_kategori as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
-            $month = date('M-Y', strtotime($met->createdate));
-            $kategori = (string)(isset($xml2->hierarchyLevel->MD_ScopeCode) ? $xml2->hierarchyLevel->MD_ScopeCode : "");
-
-            if (strtolower($kategori) != null) {
-                $metadata_kategori[$month][ucfirst($kategori)][] = 'test';
-            }
-        }
-        // dd($metadata_kategori);
-        $chartkategori = [];
-        foreach ($metadata_kategori as $k => $v) {
-            $dataset = $imagery = $gridded = $services = 0;
-            if (isset($v['Dataset'])) {
-                $dataset = count($v['Dataset']);
-            }
-            if (isset($v['Services'])) {
-                $services = count($v['Services']);
-            }
-            if (isset($v['Imagery'])) {
-                $imagery = count($v['Imagery']);
-            }
-            if (isset($v['Gridded'])) {
-                $gridded = count($v['Gridded']);
-            }
-            $chartkategori[] = ["month" => $k, "first" => $dataset, "second" => $services, "third" => $imagery, "forth" => $gridded];
-        }
-
-        // dd($chartkategori);
-
-        //Jumlah Metadata Mengikut Kategori Topik
-        $metadata_kategori_topik = [];
-        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
-        foreach ($bil_metadata_kategori_topik as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
-
-            if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
-                if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
-                    foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
-                        if (trim($tcd->MD_TopicCategoryCode) != "") {
-                            $tc = trim($tcd->MD_TopicCategoryCode);
-                            $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
-                        }
-                    }
-                }
-            } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
-                if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
-                    foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
-                        if (trim($tcd->MD_TopicCategoryCode) != "") {
-                            $tc = trim($tcd->MD_TopicCategoryCode);
-                            $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
-                        }
-                    }
-                }
-            }
-        }
-        $chartkategoritopik = [];
-        foreach ($metadata_kategori_topik['kategoritopik'] as $k => $v) {
-            $chartkategoritopik[] = ["country" => $k, 'visits' => count($v)];
-        }
-
-        //Jumlah Metadata Mengikut Content Type
-        $metadata_content_type = [];
-        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
-        foreach ($bil_metadata_content_type as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
-
-            $content_type = (string)(isset($xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) ? $xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString : "");
-            if (strtolower($content_type) != null) {
-                $metadata_content_type['content'][ucfirst($content_type)][] = 'test';
-            }
-        }
-        $chartcontenttype = [];
-        foreach ($metadata_content_type['content'] as $k => $v) {
-            $chartcontenttype[] = ["country" => $k, 'litres' => count($v)];
-        }
-
-        //Jumlah Metadata Mengikut Negeri
-        $metadatas = [];
-        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
-        foreach ($jumlah_metadata_mengikut_negeri as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
-            // $penerbit = $this->getUser($met->portal_user_id);
-
-            $agensi = (string)(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString : "");
-            if (strtolower($agensi) != null) {
-                if ($agensi == 'wpPutrajaya') {
-                    $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
-                } else {
-                    $metadatas['negeri'][ucfirst($agensi)][] = 'test';
-                }
-                //count($metadatas['negeri']['selangor']);
-                // $metadatas[$met->id] = [$xml2, $met];
-            }
-        }
-        $chartnegeri = [];
-        foreach ($metadatas['negeri'] as $k => $v) {
-            $chartnegeri[] = ["country" => $k, 'litres' => count($v)];
-        }
-
-        return view('mygeo.dashboard_metadata', compact('bil_keseluruhan_metadata', 'chartkategori', 'chartnegeri', 'chartkategoritopik', 'chartcontenttype'));
+        return view('mygeo.dashboard_metadata');
     }
 
-    public function mygeo_dashboard_data_asas(Request $request)
-    {
+    public function mygeo_dashboard_data_asas(Request $request) {
 
         //request range tarikh
         $tarikh_mula = $request->tarikh_mula;
 
         $tarikh_akhir = $request->tarikh_akhir;
 
-        // $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
+        $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
 
-        // $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
+        $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
 
         return view('mygeo.dashboard_data_asas');
     }
