@@ -368,7 +368,7 @@ class MetadataController extends Controller {
         //===========
         if (isset($request->content_type) && $request->content_type != "") {
             $idstopull = [];
-            $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
+            $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get();
             foreach ($metadatasdb as $met) {
                 $ftestxml2 = <<<XML
                         $met->data
