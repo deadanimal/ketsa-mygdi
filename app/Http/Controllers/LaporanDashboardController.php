@@ -685,21 +685,188 @@ class LaporanDashboardController extends Controller
 
         $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
 
-        $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
+        if (!empty($tarikh_mula)) {
+            $var = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->orderBy('createdate', 'asc')->get();
+            $bil_metadata_kategori = $bil_metadata_kategori_topik = $bil_metadata_content_type = $jumlah_metadata_mengikut_negeri = $var;
+        } elseif (!empty($tarikh_akhir)) {
+            $var = MetadataGeo::on('pgsql2')->where('createdate', '<=', $tarikh_akhir)->orderBy('createdate', 'asc')->get();
+            $bil_metadata_kategori = $bil_metadata_kategori_topik = $bil_metadata_content_type = $jumlah_metadata_mengikut_negeri = $var;
+        } elseif (!empty($tarikh_mula) && !empty($tarikh_akhir)) {
+            $var = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->where('createdate', '<=', $tarikh_akhir)->orderBy('createdate', 'asc')->get();
+            $bil_metadata_kategori = $bil_metadata_kategori_topik = $bil_metadata_content_type = $jumlah_metadata_mengikut_negeri = $var;
+        } else {
+            $var = MetadataGeo::on('pgsql2')->orderBy('createdate', 'asc')->get();
+            $bil_metadata_kategori = $bil_metadata_kategori_topik = $bil_metadata_content_type = $jumlah_metadata_mengikut_negeri = $var;
+        }
 
-        return view('mygeo.dashboard_metadata',compact('tarikh_mula','tarikh_akhir','bil_keseluruhan_metadata','bil_metadata_kategori'));
+        //Jumlah Metadata Mengikut Kategori
+        $metadata_kategori = [];
+        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        foreach ($bil_metadata_kategori as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            $month = date('M-Y', strtotime($met->createdate));
+            $kategori = (string)(isset($xml2->hierarchyLevel->MD_ScopeCode) ? $xml2->hierarchyLevel->MD_ScopeCode : "");
+
+            if (strtolower($kategori) != null) {
+                $metadata_kategori[$month][ucfirst($kategori)][] = 'test';
+            }
+        }
+        // dd($metadata_kategori);
+        $chartkategori = [];
+        foreach ($metadata_kategori as $k => $v) {
+            $dataset = $imagery = $gridded = $services = 0;
+            if (isset($v['Dataset'])) {
+                $dataset = count($v['Dataset']);
+            }
+            if (isset($v['Services'])) {
+                $services = count($v['Services']);
+            }
+            if (isset($v['Imagery'])) {
+                $imagery = count($v['Imagery']);
+            }
+            if (isset($v['Gridded'])) {
+                $gridded = count($v['Gridded']);
+            }
+            $chartkategori[] = ["month" => $k, "first" => $dataset, "second" => $services, "third" => $imagery, "forth" => $gridded];
+        }
+
+        // dd($chartkategori);
+
+        //Jumlah Metadata Mengikut Kategori Topik
+        $metadata_kategori_topik = [];
+        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        foreach ($bil_metadata_kategori_topik as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+
+            if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
+                if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
+                    foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
+                        if (trim($tcd->MD_TopicCategoryCode) != "") {
+                            $tc = trim($tcd->MD_TopicCategoryCode);
+                            $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
+                        }
+                    }
+                }
+            } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
+                if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
+                    foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
+                        if (trim($tcd->MD_TopicCategoryCode) != "") {
+                            $tc = trim($tcd->MD_TopicCategoryCode);
+                            $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
+                        }
+                    }
+                }
+            }
+        }
+        $chartkategoritopik = [];
+        foreach ($metadata_kategori_topik['kategoritopik'] as $k => $v) {
+            $chartkategoritopik[] = ["country" => $k, 'visits' => count($v)];
+        }
+
+        //Jumlah Metadata Mengikut Content Type
+        $metadata_content_type = [];
+        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        foreach ($bil_metadata_content_type as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+
+            $content_type = (string)(isset($xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) ? $xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString : "");
+            if (strtolower($content_type) != null) {
+                $metadata_content_type['content'][ucfirst($content_type)][] = 'test';
+            }
+        }
+        $chartcontenttype = [];
+        foreach ($metadata_content_type['content'] as $k => $v) {
+            $chartcontenttype[] = ["country" => $k, 'litres' => count($v)];
+        }
+
+        //Jumlah Metadata Mengikut Negeri
+        $metadatas = [];
+        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        foreach ($jumlah_metadata_mengikut_negeri as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+            // $penerbit = $this->getUser($met->portal_user_id);
+
+            $agensi = (string)(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString : "");
+            if (strtolower($agensi) != null) {
+                if ($agensi == 'wpPutrajaya') {
+                    $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
+                } else {
+                    $metadatas['negeri'][ucfirst($agensi)][] = 'test';
+                }
+                //count($metadatas['negeri']['selangor']);
+                // $metadatas[$met->id] = [$xml2, $met];
+            }
+        }
+        $chartnegeri = [];
+        foreach ($metadatas['negeri'] as $k => $v) {
+            $chartnegeri[] = ["country" => $k, 'litres' => count($v)];
+        }
+        return view('mygeo.dashboard_metadata', compact('bil_keseluruhan_metadata', 'chartkategori', 'chartnegeri', 'chartkategoritopik', 'chartcontenttype'));
     }
 
-    public function mygeo_dashboard_data_asas(Request $request) {
+    public function mygeo_dashboard_data_asas(Request $request)
+    {
 
         //request range tarikh
         $tarikh_mula = $request->tarikh_mula;
 
         $tarikh_akhir = $request->tarikh_akhir;
 
-        $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
+        // $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
 
-        $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
+        // $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
 
         return view('mygeo.dashboard_data_asas');
     }
