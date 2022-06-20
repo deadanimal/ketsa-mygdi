@@ -292,6 +292,36 @@ class MetadataController extends Controller {
     }
 
     public function index_nologin(Request $request) {
+        //extract each metadata content type to its own column in db. run once.==========================================================
+        /*
+        $metadatasdb = MetadataGeo::on('pgsql2')->get();
+        foreach ($metadatasdb as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+
+            $sxe = simplexml_load_string($ftestxml2);
+            if (false === $sxe) {
+                continue;
+            }
+
+            if(isset($sxe->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && trim($sxe->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) != ""){
+                $mg = MetadataGeo::on('pgsql2')->where('id', $met->id)->get()->first();
+                $mg->content_type = $sxe->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString;
+                $mg->update();
+            }
+            
+        }
+        */
+        //========================================================================================================================
         //extract each metadata title to its own column in db. run once.==========================================================
         /*
           $metadatasdbtemp = MetadataGeo::on('pgsql2')->get();
@@ -333,12 +363,10 @@ class MetadataController extends Controller {
         if (isset($carian) && trim($carian) != "") {
             $query = $query->orWhere('title', 'ilike', '%' . $carian . '%');
         }
-        /*
         if (isset($request->content_type) && $request->content_type != "") {
             $params['content_type'] = $request->content_type;
-            $query = $query->orWhere('data', 'like', '%"c1_content_info">'.$request->content_type.'%');
+            $query = $query->orWhere('content_type', $request->content_type);
         }
-        */
         $params['topic_category'] = [];
         if (isset($request->topic_category)) {
             $query = $query->orWhere(function ($query) use ($request, &$params) {
@@ -363,9 +391,10 @@ class MetadataController extends Controller {
         }
         
         // $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
-        $metadatasdbtitle = MetadataGeo::on('pgsql2')->select('id', 'data', 'title')->where('disahkan', 'yes')->get();
+        $metadatasdbtitle = MetadataGeo::on('pgsql2')->select('title')->where('disahkan', 'yes')->get();
 
         //===========
+        /*
         if (isset($request->content_type) && $request->content_type != "") {
             $idstopull = [];
             $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->get();
@@ -387,6 +416,8 @@ class MetadataController extends Controller {
                     continue;
                 }
                 
+                //SMBG SINI - create new content_type column at pipe env metadata table to replace the condition below and see if its faster more efficient
+                
                 if (isset($request->content_type) && $request->content_type != "") {
                     if(isset($sxe->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && trim($sxe->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) != ""){
                         if($request->content_type != $sxe->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString){
@@ -400,8 +431,13 @@ class MetadataController extends Controller {
             
             $metadatasdb = MetadataGeo::on('pgsql2')->whereIn('id',$idstopull)->paginate(12);
         }else{
+         * 
+         */
             $metadatasdb = $query->where('disahkan', 'yes')->orderBy('id', 'DESC')->paginate(12);
+            /*
         }
+             * *
+             */
         //===========
 
         
