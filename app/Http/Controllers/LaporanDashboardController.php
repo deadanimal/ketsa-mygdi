@@ -687,7 +687,7 @@ class LaporanDashboardController extends Controller
 
         $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
 
-        return view('mygeo.dashboard_metadata');
+        return view('mygeo.dashboard_metadata',compact('tarikh_mula','tarikh_akhir','bil_keseluruhan_metadata','bil_metadata_kategori'));
     }
 
     public function mygeo_dashboard_data_asas(Request $request) {

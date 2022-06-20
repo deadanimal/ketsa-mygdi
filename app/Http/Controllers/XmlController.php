@@ -12,6 +12,7 @@ class XmlController extends Controller {
     public function createXml($request,$fileUrl="",$keywords="",$topicCategories="",$custom_inputs="",$refsysname="") {
         $c2_metadataName = strtoupper($request->c2_metadataName);
         $c2_abstract = trim(preg_replace('/\s+/',' ',$request->c2_abstract));
+        $curDate = date('Y-m-d H:i:s',time());
         $xml = <<<XML
                 <MD_Metadata
                     xmlns:gmd="http://www.isotc211.org/2005/gmd"
@@ -70,7 +71,7 @@ class XmlController extends Controller {
                         </CI_ResponsibleParty>
                     </contact>
                     <dateStamp>
-                        <gco:Date>2013-03-05</gco:Date>
+                        <gco:Date>$curDate</gco:Date>
                     </dateStamp>
                     <metadataStandardName>
                         <gco:CharacterString>MyGDI Metadata Standard (Dataset)</gco:CharacterString>

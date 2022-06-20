@@ -415,9 +415,6 @@ class MetadataController extends Controller {
                 if (false === $sxe) {
                     continue;
                 }
-                
-                //SMBG SINI - create new content_type column at pipe env metadata table to replace the condition below and see if its faster more efficient
-                
                 if (isset($request->content_type) && $request->content_type != "") {
                     if(isset($sxe->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) && trim($sxe->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) != ""){
                         if($request->content_type != $sxe->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString){
@@ -440,8 +437,6 @@ class MetadataController extends Controller {
              */
         //===========
 
-        
-
         $metadatas = [];
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
@@ -463,14 +458,14 @@ class MetadataController extends Controller {
             
             $metadatas[$met->id] = $sxe;
         }
-
+		
         $metadataTitles = [];
         foreach ($metadatasdbtitle as $met) {
             $metadataTitles[] = $met->title;
         }
 
         $portal = PortalTetapan::get()->first();
-
+		
         return view('senarai_metadata_nologin', compact('metadatas', 'metadatasdb', 'carian', 'params', 'portal', 'metadataTitles'));
     }
 
@@ -925,6 +920,7 @@ class MetadataController extends Controller {
         } elseif ($refSysId != "" && !is_numeric($refSysId)) {
             $refSysSelected = ReferenceSystemIdentifier::where('name', $refSysId)->get()->first();
         }
+        
         $customMetadataInput = CustomMetadataInput::all();
         if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
             $kategori = MCategory::where('name', $_GET['kategori'])->get()->first();

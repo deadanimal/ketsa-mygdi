@@ -98,14 +98,12 @@
             }
             ?>
             <?php
-            if($metadataSearched->createdate != ""){
+            if($metadataxml->dateStamp->Date != ""){
                 $flag *= 0;
                 
                 $metDate = '';
-                if (isset($metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date != '') {
-                    $metDate = $metadataxml->identificationInfo->MD_DataIdentification->citation->CI_Citation->date->CI_Date->date->Date;
-                }elseif (isset($metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->date->Date) && $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->date->Date != '') {
-                    $metDate = $metadataxml->identificationInfo->SV_ServiceIdentification->citation->CI_Citation->date->CI_Date->date->Date;
+                if (isset($metadataxml->dateStamp->Date) && $metadataxml->dateStamp->Date != '') {
+                    $metDate = $metadataxml->dateStamp->Date;
                 }
                 ?>
                 <div class="form-group row">
