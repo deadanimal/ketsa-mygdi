@@ -323,7 +323,7 @@ input[type=submit] {
                                     }
                                     ?>
                                 </div>
-                                {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->withQueryString()->appends($params)->links():"") }}
+                                {{ ((isset($metadatasdb) && !empty($metadatasdb)) ? $metadatasdb->withQueryString()->appends(request()->except('page'))->links():"") }}
                                 
                                 <?php /* Showing {{--($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0)--}} to {{--($metadatasdb->currentPage()-1)*$metadatasdb->perPage()+count($metadatasdb)--}}  of  {{--$metadatasdb->total()--}}  Results */ ?>
                                 
