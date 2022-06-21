@@ -1171,6 +1171,46 @@ class MetadataController extends Controller {
 
         return response($ftestxml2)->withHeaders(['Content-Type' => 'text/xml']);
     }
+    
+    public function apilist(Request $request) {
+        $metadataIds = explode(',',$request->metadataIds);
+        $metadataSearched = MetadataGeo::on('pgsql2')->whereIn('id',$metadataIds)->get();
+        $url = $request->fullUrl();
+        $uiPageUrl = $request->uiPageUrl;
+        $totalResults = $request->totalResults;
+        
+        $rac = new RestApiController;
+        $var = "";
+        
+//        echo "<pre>";
+//        var_dump($request->fullUrl());
+//        echo "</pre>";
+//        exit();
+//        dd(\Request::url(),\Request::getRequestUri(),$request);
+        
+        if($request->listType == "georss"){
+            $var = $rac->generateGeorss($metadataIds,$metadataSearched,$url);
+            return response($var)->withHeaders(['Content-Type' => 'text/xml']);
+        }elseif($request->listType == "atom"){
+            $var = $rac->generateAtom($metadataIds,$metadataSearched,$totalResults,$url,$uiPageUrl);
+            return response($var)->withHeaders(['Content-Type' => 'text/xml']);
+        }elseif($request->listType == "html"){
+            $var = $rac->generateHtml($metadataIds,$metadataSearched,$url,$uiPageUrl);
+            return response($var);
+        }elseif($request->listType == "fragment"){
+            $var = $rac->generateFragment($metadataIds,$metadataSearched,$url,$uiPageUrl);
+            return response($var);
+        }elseif($request->listType == "kml"){
+            $var = $rac->generateKml($metadataIds,$metadataSearched,$url,$uiPageUrl);
+            return response($var)->withHeaders(['Content-Type' => 'text/xml']);
+        }elseif($request->listType == "json"){
+            $var = $rac->generateJson($metadataIds,$metadataSearched,$totalResults,$url,$uiPageUrl);
+            return response()->json($var);
+        }elseif($request->listType == "csv"){
+            $var = $rac->generateCsv($metadataIds,$metadataSearched,$url);
+            return response($var)->withHeaders(['Content-Type' => 'text/xml']);
+        }
+    }
 
     public function downloadMetadataXml($id, $name) {
         $metadataSearched = MetadataGeo::on('pgsql2')->where('id', $id)->get()->first();

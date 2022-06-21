@@ -239,8 +239,10 @@ input[type=submit] {
                                     $rowCount = 0;
                                     $rows = 5;
                                     $bil = 1;
+                                    $metadataIdsForApi = [];
                                     if (count($metadatas) > 0) {
                                         foreach ($metadatas as $key => $val) {
+                                            $metadataIdsForApi[] = $key;
                                             if ($rowCount % $numCol == 0) { ?>
                                                 <div class="row">
                                                 <?php }
@@ -281,7 +283,7 @@ input[type=submit] {
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
                                                                 </form>
-                                                                <form method="post" action="{{ url('/lihat_xml_nologin') }}" id="formViewXml{{ $key }}" target="_blank">
+                                                                <form method="get" action="{{ url('/lihat_xml_nologin') }}" id="formViewXml{{ $key }}" target="_blank">
                                                                     @csrf
                                                                     <input type="hidden" name="metadata_id" value="{{ $key }}">
                                                                 </form>
@@ -328,6 +330,23 @@ input[type=submit] {
                                 <?php /* Showing {{--($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0)--}} to {{--($metadatasdb->currentPage()-1)*$metadatasdb->perPage()+count($metadatasdb)--}}  of  {{--$metadatasdb->total()--}}  Results */ ?>
                                 
                                 Paparan {{$metadatasdb->total()}} rekod ({{($metadatasdb->currentPage()-1)* $metadatasdb->perPage()+($metadatasdb->total() ? 1:0)}} hingga {{($metadatasdb->currentPage()-1)*$metadatasdb->perPage()+count($metadatasdb)}})
+                                
+                                <p style="margin-top:10px;">See results through REST</p>
+                                <p>API: <a href="#" onclick="return false;" class="apiType" data-listtype="georss">GEORSS</a>&nbsp;
+                                        <a href="#" onclick="return false;" class="apiType" data-listtype="atom">ATOM</a>&nbsp;
+                                        <a href="#" onclick="return false;" class="apiType" data-listtype="html">HTML</a>&nbsp;
+                                        <a href="#" onclick="return false;" class="apiType" data-listtype="fragment">FRAGMENT</a>&nbsp;
+                                        <a href="#" onclick="return false;" class="apiType" data-listtype="kml">KML</a>&nbsp;
+                                        <a href="#" onclick="return false;" class="apiType" data-listtype="json">JSON</a>&nbsp;
+                                        <a href="#" onclick="return false;" class="apiType" data-listtype="csv">CSV</a>
+                                </p>
+                                <form method="get" action="{{ url('/apilist') }}" id="formApi" target="_blank">
+                                    @csrf
+                                    <input type="hidden" name="metadataIds" value="{{ implode(',',$metadataIdsForApi) }}">
+                                    <input type="hidden" name="listType" id="listType">
+                                    <input type="hidden" name="uiPageUrl" id="uiPageUrl" value="{{ "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" }}">
+                                    <input type="hidden" name="totalResults" id="{{ $metadatasdb->total() }}">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -517,6 +536,11 @@ input[type=submit] {
     }
 
     $(document).ready(function() {
+        $(document).on('click','.apiType',function(){
+            $('#listType').val($(this).data('listtype'));
+            $('#formApi').submit();
+        });
+        
         var availableTags = <?php echo json_encode($metadataTitles); ?>;
         autocomplete(document.getElementById("carian"), availableTags);
 

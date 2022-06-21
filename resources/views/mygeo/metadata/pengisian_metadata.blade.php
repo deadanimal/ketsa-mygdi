@@ -335,6 +335,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
 
         $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
 
+        /*
         $(document).on("click", "#btnTestServiceUrl", function () {
             var mapurl = $.trim($('#c2_serviceUrl').val());
             checkServiceUrl(mapurl);
@@ -345,7 +346,8 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
             checkServiceUrl(mapurl);
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/leafletwms/examples/index.html?url='+mapurl);
         });
-        $(document).on("click", "#btnTestServiceUrl3_esri", function () {
+        */
+        $(document).on("click", "#btnTestServiceUrl3_wms", function () {
             var mapurl = $.trim($('#c2_serviceUrl').val());
             if(checkServiceUrl(mapurl)){
                 $('#mapiframe').attr('src', '<?php echo url("/"); ?>/azrunmap/esri.php?url='+mapurl);
@@ -354,7 +356,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 alert("Service URL is empty!");
             }
         });
-        $(document).on("click", "#btnTestServiceUrl3_wms", function () {
+        $(document).on("click", "#btnTestServiceUrl3_esri", function () {
             var mapurl = $.trim($('#c2_serviceUrl').val());
             if(checkServiceUrl(mapurl)){
                 var mapurl = $.trim($('#c2_serviceUrl').val());
