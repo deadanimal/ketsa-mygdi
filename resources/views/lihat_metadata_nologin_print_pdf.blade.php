@@ -1,45 +1,9 @@
-@extends('layouts.app_ketsa_pdf')
+@extends('layouts.app_ketsa_pdf2')
 
 @section('content')
     <style>
-        .card-primary:not(.card-outline)>.card-header {
-            background-color: #b3ecff;
-            color: black;
-        }
-
-        .card-primary:not(.card-outline)>.card-header a {
-            color: black;
-        }
-
-        .p-2 {
-            width: 150px;
-        }
-
-        .p-8 {
-            width: 285px;
-            padding-bottom: 3px;
-        }
-
-        .accordf .card-title {
-            width: 85%;
-        }
-
-        .card-header {
-            padding: 0.7rem 1.5rem;
-        }
-
-        .card-title {
-            margin-bottom: 0rem;
-        }
-
-        .card,
-        .card-header:first-child {
-            background-color: white;
-            border-radius: 10px;
-        }
-        .nav-item a{
-            color:black !important;
-            font-weight: bolder;
+        .pagebreakf{
+            page-break-after:always;
         }
     </style>
 
@@ -61,25 +25,6 @@
                                     </h1>
                                 </div>
                                 <div class="col-7 text-right">
-                                    <!--                            <a href="{{ url('downloadMetadataPdf') . '/' . $metadataSearched->id }}">
-                                        <button type="button" class="btn btn-sm btn-default mr-2">Muat Turun PDF</button>
-                                    </a>-->
-                                    <a href="#">
-                                        <button type="button" class="btn btn-sm btn-default mr-2 actionButtons"
-                                            data-action="pdf">Muat Turun PDF</button>
-                                    </a>
-                                    <a href="#">
-                                        <button type="button" class="btn btn-sm btn-default mr-2 actionButtons"
-                                            data-action="excel"
-                                            data-href='{{ url('downloadMetadataExcel') . '/' . $metadataSearched->id }}'>Muat
-                                            Turun Excel</button>
-                                    </a>
-                                    <a href="#">
-                                        <button type="button" class="btn btn-sm btn-default mr-2 actionButtons"
-                                            data-action="xml"
-                                            data-href='{{ url('downloadMetadataXml') . '/' . $metadataSearched->id . '/' . $metadataName }}'>Muat
-                                            Turun XML</button>
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -147,6 +92,7 @@
                                     @include('mygeo.metadata.pdf_metadata.aquisition_information')
                                     <?php //=== collapse9 =============================================================
                                     ?>
+                                    <div class="pagebreakf">&nbsp;&nbsp;</div>
                                     @include('mygeo.metadata.pdf_metadata.spatial_domain')
                                     <?php //=== collapse10 =============================================================
                                     ?>
@@ -182,16 +128,12 @@
 
     <script>
         $(document).ready(function() {
-            $(document).on('click', '.actionButtons', function() {
-                if ($(this).data('action') == 'pdf') {
-//                    window.location.href = "{{ url('lihat_metadata_nologin/').'/'.$id }}?print=1";
-                    window.location.href = "{{ url('lihat_metadata_nologin/').'/'.$id }}?printtype=pdf";
-                } else if ($(this).data('action') == 'xml') {
-                    window.open($(this).data('href'), '_blank');
-                } else if ($(this).data('action') == 'excel') {
-                    window.open($(this).data('href'), '_blank');
-                }
-            });
+            document.title = '{{ $metadataName }}';
+            window.print();
+
+            window.addEventListener("focus", function(event){
+                window.location.href = "{{ url('lihat_metadata_nologin/').'/'.$id }}";
+            }, false);
 
             <?php
     if(count($categories) > 0){
@@ -345,6 +287,7 @@
                 tileSize: 512,
                 zoomOffset: -1,
             }).addTo(map);
+            
         map.dragging.disable();
         map.touchZoom.disable();
         map.doubleClickZoom.disable();
@@ -353,6 +296,7 @@
         map.keyboard.disable();
         if (map.tap) map.tap.disable();
         document.getElementById('map').style.cursor = 'default';
+//        document.getElementById('map').style.width = '512px';
         $(".leaflet-control-zoom").css("visibility", "hidden");
         $(".leaflet-top").hide();
 
@@ -360,6 +304,7 @@
         var setWblgValue = document.getElementById("wblg").value = W;
         var serSbltValue = document.getElementById("sblt").value = S;
         var setEblgValue = document.getElementById("eblg").value = E;
+        
 
         // To trigger onchange function
         var el = document.getElementById('nblt');

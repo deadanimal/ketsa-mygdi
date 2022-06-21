@@ -1103,7 +1103,11 @@ class MetadataController extends Controller {
         
         $template = MetadataTemplate::where('status','active')->get()->first();
 
-        return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput','refSysSelected','template','elemenMetadata','id'));
+        if(isset($_GET['printtype']) && $_GET['printtype'] == 'pdf'){
+            return view('lihat_metadata_nologin_print_pdf', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput','refSysSelected','template','elemenMetadata','id'));
+        }else{
+            return view('lihat_metadata_nologin', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput','refSysSelected','template','elemenMetadata','id'));
+        }
 //        return view('mygeo.metadata.lihat_metadata', compact('categories', 'contacts', 'countries', 'states', 'refSys', 'metadataxml', 'metadataSearched', 'portal', 'customMetadataInput','refSysSelected','template','elemenMetadata'));
         
 //        return view('mygeo.metadata.lihat_metadata');

@@ -1,15 +1,7 @@
 <?php $flag = 1; ?>
-<link rel="stylesheet" href="{{ asset('intecxmap/css/leaflet@1.7.1/leaflet.css') }}"/>
 <script src="{{ asset('intecxmap/js/leaflet@1.7.1/dist/leaflet.js') }}"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<link href="{{ asset('intecxmap/css/leaflet.draw/0.2.3/leaflet.draw.css') }}" rel="stylesheet">
-<script src="{{ asset('intecxmap/js/leaflet.draw/0.2.3/leaflet.draw.js' ) }}"></script>
-<script src="{{ asset('intecxmap/js/esri-leaflet@3.0.2/dist/esri-leaflet-debug.js') }}"></script>
-<script src="{{ asset('intecxmap/js/esri-leaflet/0.0.1-beta.5/esri-leaflet.js') }}"></script>
-<script src="{{ asset('intecxmap/js/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js') }}"></script>
-<link rel="stylesheet" type="text/css" href="{{ asset('intecxmap/css/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css') }}">
 
-<div class="card card-primary div_c9" id="div_c9" style="page-break-before: always;">
+<div class="card card-primary div_c9" id="div_c9">
     <div class="card-header">
         <a data-toggle="collapse" href="#collapse9" class="fixMap">
             <h4 class="card-title">

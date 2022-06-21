@@ -106,10 +106,13 @@
             right: 0;
         }
 
+        @media print {
+         pagebreakf {page-break-after: always !important;}
+      }
     </style>
 </head>
 
-<body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0" style="height: auto;width:100%;">
+<body class="g-sidenav-show g-sidenav-pinned ng-tns-0-0" style="height: auto;width:40%;">
     <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark"
         style="background-color: #0563bb;">
         <div class="container-fluid">
@@ -134,27 +137,7 @@
             @yield('content')
         </div>
     </div>
-    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('/dist/js/demo.js') }}"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-
-    <!-- Vendor JS Files -->
-    <script src="assetsweb/vendor/jquery.easing/jquery.easing.min.js"></script>
-    <script src="assetsweb/vendor/php-email-form/validate.js"></script>
-    <script src="assetsweb/vendor/waypoints/jquery.waypoints.min.js"></script>
-    <script src="assetsweb/vendor/counterup/counterup.min.js"></script>
-    <script src="assetsweb/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assetsweb/vendor/venobox/venobox.min.js"></script>
-    <script src="assetsweb/vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="assetsweb/vendor/typed.js/typed.min.js"></script>
-    <script src="assetsweb/vendor/aos/aos.js"></script>
-
+    
     <!-- Template Main JS File -->
     <script src="assetsweb/js/main.js"></script>
 </body>
