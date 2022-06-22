@@ -699,7 +699,7 @@ class LaporanDashboardController extends Controller
             $bil_metadata_kategori = $bil_metadata_kategori_topik = $bil_metadata_content_type = $jumlah_metadata_mengikut_negeri = $var;
         }
 
-        //Jumlah Metadata Mengikut Kategori
+        //Jumlah Metadata Mengikut Kategori=====================================
         $metadata_kategori = [];
         libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
         foreach ($bil_metadata_kategori as $met) {
@@ -745,7 +745,7 @@ class LaporanDashboardController extends Controller
 
         // dd($chartkategori);
 
-        //Jumlah Metadata Mengikut Kategori Topik
+        //Jumlah Metadata Mengikut Kategori Topik===============================
         $metadata_kategori_topik = [];
         libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
         foreach ($bil_metadata_kategori_topik as $met) {
@@ -789,7 +789,7 @@ class LaporanDashboardController extends Controller
             $chartkategoritopik[] = ["country" => $k, 'visits' => count($v)];
         }
 
-        //Jumlah Metadata Mengikut Content Type
+        //Jumlah Metadata Mengikut Content Type=================================
         $metadata_content_type = [];
         libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
         foreach ($bil_metadata_content_type as $met) {
@@ -818,7 +818,7 @@ class LaporanDashboardController extends Controller
             $chartcontenttype[] = ["country" => $k, 'litres' => count($v)];
         }
 
-        //Jumlah Metadata Mengikut Negeri
+        //Jumlah Metadata Mengikut Negeri=======================================
         $metadatas = [];
         libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
         foreach ($jumlah_metadata_mengikut_negeri as $met) {

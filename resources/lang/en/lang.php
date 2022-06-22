@@ -278,6 +278,6 @@
     'compliance_level'=>'Compliance Level',
     'result'=>'Result',
     'conformance_result'=>'Conformance Result',
-
+    'c10_state'=>'State'
     ]
 ?>

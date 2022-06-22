@@ -75,11 +75,31 @@
                             <div class="col-7">
                                 <?php
                                 $fileName = "";
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString != "") {
-                                    $fileName = $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString;
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileName->CharacterString != "") {
+                                    $fileName = $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileName->CharacterString;
                                 }
                                 ?>
                                 <input type="text" name="c10_file_name" id="c10_file_name" class="form-control from-control-sm ml-3" value="{{ $fileName }}">
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    if($key == "c10_state"){
+                        ?>
+                        <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4" for="c10_state">
+                                    <?php echo __('lang.c10_state'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
+                                </label><label class="float-right">:</label>
+                            </div>
+                            <div class="col-7">
+                                <?php
+                                $state = "";
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileState->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileState->CharacterString != "") {
+                                    $state = $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileState->CharacterString;
+                                }
+                                ?>
+                                <input type="text" name="c10_state" id="c10_state" class="form-control from-control-sm ml-3" value="{{ $state }}">
                             </div>
                         </div>
                         <?php
@@ -95,8 +115,8 @@
                             <div class="col-7">
                                 <?php
                                 $fileType = "";
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString != "") {
-                                    $fileType = $metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString;
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileType->CharacterString != "") {
+                                    $fileType = $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileType->CharacterString;
                                 }
                                 ?>
                                 <input type="text" name="c10_file_type" id="c10_file_type" class="form-control form-control-sm ml-3" value="{{ $fileType }}">
@@ -115,8 +135,8 @@
                             <div class="col-6">
                                 <?php
                                 $url = "";
-                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != "") {
-                                    $url = $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString;
+                                if (isset($metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileURL->CharacterString != "") {
+                                    $url = $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileURL->CharacterString;
                                 }
                                 ?>
                                 <input type="text" name="c10_file_url" class="form-control form-control-sm ml-3 inputBrowsingInformationUrl urlToTest" value="{{ $url }}">

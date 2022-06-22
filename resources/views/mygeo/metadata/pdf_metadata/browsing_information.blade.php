@@ -51,8 +51,8 @@
                     }
                     if($key == "c10_file_name"){
                         $fileName = "";
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString != "") {
-                            $fileName = $metadataxml->identificationInfo->MD_DataIdentification->fileName->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileName->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileName->CharacterString != "") {
+                            $fileName = $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileName->CharacterString;
                         }
                         if($fileName != ""){
                             $flag1 *= 0;
@@ -71,10 +71,32 @@
                             <?php
                         }
                     }
+                    if($key == "c10_state"){
+                        $state = "";
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileState->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileState->CharacterString != "") {
+                            $state = $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileState->CharacterString;
+                        }
+                        if($state != ""){
+                            $flag1 *= 0;
+                            $flag *= 0;
+                            ?>
+                            <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <div class="col-3 pl-5">
+                                    <label class="form-control-label mr-4" for="c10_state">
+                                        <?php echo __('lang.c10_state'); ?>
+                                    </label><label class="float-right">:</label>
+                                </div>
+                                <div class="col-7">
+                                    <?php echo "&nbsp;&nbsp;" . $state; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
                     if($key == "c10_file_type"){
                         $fileType = "";
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString != "") {
-                            $fileType = $metadataxml->identificationInfo->MD_DataIdentification->fileType->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileType->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileType->CharacterString != "") {
+                            $fileType = $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileType->CharacterString;
                         }
                         if($fileType != ""){
                             $flag1 *= 0;
@@ -95,8 +117,8 @@
                     }
                     if($key == "c10_file_url"){
                         $url = "";
-                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString != "") {
-                            $url = $metadataxml->identificationInfo->MD_DataIdentification->fileURL->CharacterString;
+                        if (isset($metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileURL->CharacterString) && $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileURL->CharacterString != "") {
+                            $url = $metadataxml->identificationInfo->MD_DataIdentification->graphicOverview->MD_BrowseGraphic->fileURL->CharacterString;
                         }
                         if($url != ""){
                             $flag1 *= 0;

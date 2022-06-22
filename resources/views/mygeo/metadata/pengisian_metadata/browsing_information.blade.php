@@ -62,6 +62,21 @@
                         </div>
                         <?php
                     }
+                    if($key == "c10_state"){
+                        ?>
+                        <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div class="col-3 pl-5">
+                                <label class="form-control-label mr-4" for="c10_state">
+                                    <?php echo __('lang.c10_state'); ?>
+                                    <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
+                                </label><label class="float-right">:</label>
+                            </div>
+                            <div class="col-7">
+                                <input type="text" name="c10_state" id="c10_state" class="form-control form-control-sm ml-3" value="{{old('c10_state')}}">
+                            </div>
+                        </div>
+                        <?php
+                    }
                     if($key == "c10_file_type"){
                         ?>
                         <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>

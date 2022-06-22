@@ -292,6 +292,43 @@ class MetadataController extends Controller {
     }
 
     public function index_nologin(Request $request) {
+        //extract each metadata kategori to its own column in db. run once.==========================================================
+        /*
+        $metadatasdb = MetadataGeo::on('pgsql2')->get();
+        foreach ($metadatasdb as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+
+            $sxe = simplexml_load_string($ftestxml2);
+            if (false === $sxe) {
+                continue;
+            }
+            
+            $catSelected = "";
+            $arr = (array)$sxe->hierarchyLevel->MD_ScopeCode;
+            foreach($arr as $ar){
+                if(is_array($ar)){
+                    $catSelected = $ar['codeListValue'];
+                }
+            }
+            if($catSelected != "" && strtolower($catSelected) == "service"){
+                $catSelected = "services";
+            }
+            $mg = MetadataGeo::on('pgsql2')->where('id', $met->id)->get()->first();
+            $mg->kategori = strtolower($catSelected);
+            $mg->update();
+        }
+        */
+        //========================================================================================================================
         //extract each metadata content type to its own column in db. run once.==========================================================
         /*
         $metadatasdb = MetadataGeo::on('pgsql2')->get();
@@ -3156,6 +3193,8 @@ class MetadataController extends Controller {
             $mg->disahkan = "0";
             $mg->portal_user_id = auth::user()->id;
             $mg->title = $request->c2_metadataName;
+            $mg->content_type = $request->c1_content_info;
+            $mg->c10_state = $request->c10_state;
 
             if (strtolower($request->kategori) != 'services' && isset($request->file_contohJenisMetadata)) {
                 $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
@@ -3579,6 +3618,8 @@ class MetadataController extends Controller {
                 $mg->data = $xml;
                 $mg->changedate = date("Y-m-d H:i:s");
                 $mg->title = $request->c2_metadataName;
+                $mg->content_type = $request->c1_content_info;
+                $mg->c10_state = $request->c10_state;
 
                 if (strtolower($request->kategori) != 'services') {
                     if (isset($_FILES['file_contohJenisMetadata']['tmp_name']) && file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {

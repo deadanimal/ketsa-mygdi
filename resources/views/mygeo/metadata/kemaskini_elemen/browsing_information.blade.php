@@ -21,7 +21,7 @@
                             </div>
                             <div class="col-8">
                                 Textbox
-                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                                <?php /*<input class="form-control form-control-sm ml-3 sortable" type="text" name="{{-- $key --}}" data-status="<?php //echo $val['status']; ?>" data-mandatory="<?php //echo $val['mandatory']; ?>"/> */ ?>
                             </div>
                             <div class="col-1">
                                 <span class="close btnClose">Active/Disable</span>
@@ -52,6 +52,26 @@
                         ?>
                         <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div class="col-3 pl-5" data-toggle="tooltip" title="Pengisian nama fail mengambarkan maklumat geospatial secara grafik (sekiranya ada)">
+                                <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
+                                <label class="float-right">:</label>
+                            </div>
+                            <div class="col-3">
+                                Textbox
+                                <input class="form-control form-control-sm ml-3 sortable" type="text" name="{{ $key }}" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="checkbox" name="mandatory" class="mandatory" value="1" <?php if($val['mandatory'] == "yes"){ echo "checked"; } ?>> Mandatori
+                            </div>
+                            <div class="col-1">
+                                <span class="close btnClose">Active/Disable</span>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    if($key == "c10_state"){
+                        ?>
+                        <div class="row sortIt" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div class="col-3 pl-5" data-toggle="tooltip" title="Negeri">
                                 <label class="form-control-label mr-4" for="uname">{{ $val['label_'.$bhs] }}</label>
                                 <label class="float-right">:</label>
                             </div>

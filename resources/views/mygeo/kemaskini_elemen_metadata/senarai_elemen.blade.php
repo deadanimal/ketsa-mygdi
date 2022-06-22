@@ -343,8 +343,8 @@ $bhs = $langSelected;
         });
         $(document).on("click",".btnTambahElemenBaru",function(){
             var accordion = $(this).data('accordion');
-            //SMBG SINI - change to activate/disable button and add mandatory check box to appended item below
-            $('#collapse'+accordion+' .sortableContainer1').append('<div class="row mb-2 sortIt"><div class="col-3 pl-5"><label class="form-control-label mr-4" for="uname"><input type="text" name="newInputName" class="customInput_label"></label><label class="float-right">:</label></div><div class="col-8"><input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput" style="display:none;"/></div><span class="close btnClose">&times;</span></div>');
+//            $('#collapse'+accordion+' .sortableContainer1').append('<div class="row mb-2 sortIt"><div class="col-3 pl-5"><label class="form-control-label mr-4" for="uname"><input type="text" name="newInputName" class="customInput_label"></label><label class="float-right">:</label></div><div class="col-8"><input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput" style="display:none;"/></div><span class="close btnClose">&times;</span></div>');
+            $('#collapse'+accordion+' .sortableContainer1').append('<div class="row sortIt"><div class="col-3 pl-5"><input type="text" name="newInputName" class="customInput_label"><label class="float-right">:</label></div><div class="col-3">Textbox<input class="form-control form-control-sm ml-3 sortable newInput" type="text" name="torename" data-status="customInput" style="display:none;"/></div><div class="col-5"><!--<input type="checkbox" name="mandatory" class="mandatory" value="1"> Mandatori--></div><div class="col-1"><span class="close btnClose">Active/Disable</span></div></div>');
         });
         //================================
 

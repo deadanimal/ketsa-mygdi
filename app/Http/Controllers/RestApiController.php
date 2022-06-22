@@ -82,7 +82,7 @@ class RestApiController extends Controller {
                 <item>
                         <link>'.$msLink.'</link>
                         <guid isPermaLink="true">'.$msLink.'</guid>
-                        <title>'.$ms->title.'</title>
+                        <title><![CDATA['.$ms->title.']]></title>
                         <pubDate>'.$metDate.'</pubDate>
                         <source url="'.$urlFixed.'">Geoportal GeoRSS.</source>
                         <description>
@@ -198,7 +198,7 @@ class RestApiController extends Controller {
             
             $list .= '
                 <entry>
-                        <title>'.$ms->title.'</title>
+                        <title><![CDATA['.$ms->title.']]></title>
                         <link href="http://mygdix.mygeoportal.gov.my/mygdiexplorer/catalog/search/resource/details.page?uuid=%7B39FFBC37-2E41-4F09-93B9-EF68639D5348%7D"/>
                         <link href="'.url('lihat_xml_nologin').'?metadata_id='.$ms->id.'"/>
                         <id>urn:uuid:'.$ms->uuid.'</id>
@@ -396,7 +396,7 @@ class RestApiController extends Controller {
             
             $list .= '
                 <Placemark>
-                    <name>'.$ms->title.'</name>
+                    <name><![CDATA['.$ms->title.']]></name>
                     <description>
                         <![CDATA['.$abstract.']]>
                     </description>
@@ -616,7 +616,7 @@ class RestApiController extends Controller {
                 <item>
                         <link>'.$msLink.'</link>
                         <guid isPermaLink="true">'.$msLink.'</guid>
-                        <title>'.$ms->title.'</title>
+                        <title><![CDATA['.$ms->title.']]></title>
                         <pubDate>'.$metDate.'</pubDate>
                         <source url="'.$urlFixed.'">Geoportal GeoRSS.</source>
                         <description>

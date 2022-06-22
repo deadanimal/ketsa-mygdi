@@ -458,7 +458,25 @@ class XmlController extends Controller {
                                     </role>
                                 </CI_ResponsibleParty>
                             </pointOfContact>
-                            <graphicOverview></graphicOverview>
+                            <graphicOverview>
+                                <MD_BrowseGraphic>
+                                    <fileName>
+                                        <gco:CharacterString>$request->c10_file_name</gco:CharacterString>
+                                    </fileName>
+                                    <fileDescription>
+                                        <gco:CharacterString></gco:CharacterString>
+                                    </fileDescription>
+                                    <fileType>
+                                        <gco:CharacterString>$request->c10_file_type</gco:CharacterString>
+                                    </fileType>
+                                    <fileURL>
+                                        <gco:CharacterString>$request->c10_file_url</gco:CharacterString>
+                                    </fileURL>
+                                    <fileState>
+                                        <gco:CharacterString>$request->c10_state</gco:CharacterString>
+                                    </fileState>
+                                </MD_BrowseGraphic>
+                            </graphicOverview>
                             <descriptiveKeywords>
                                 <MD_Keywords>
                                     <keyword>
@@ -586,15 +604,6 @@ class XmlController extends Controller {
                                     </geographicElement>
                                 </EX_Extent>
                             </extent>
-                            <gmd:fileName>
-                                <gco:CharacterString>$request->c10_file_name</gco:CharacterString>
-                            </gmd:fileName>
-                            <gmd:fileType>
-                                <gco:CharacterString>$request->c10_file_type</gco:CharacterString>
-                            </gmd:fileType>
-                            <gmd:fileURL>
-                                <gco:CharacterString>$request->c10_file_url</gco:CharacterString>
-                            </gmd:fileURL>
                             <srv:couplingType>
                                 <!-- Mandated by ISO 19119-->
                                 <srv:SV_CouplingType codeList="#SV_CouplingType" codeListValue="">$request->c2_typeOfCouplingDataset</srv:SV_CouplingType>
