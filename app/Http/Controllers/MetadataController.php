@@ -292,6 +292,40 @@ class MetadataController extends Controller {
     }
 
     public function index_nologin(Request $request) {
+        //extract each metadata create date to its own column in db. run once.==========================================================
+        /*
+        $metadatasdb = MetadataGeo::on('pgsql2')->get();
+        foreach ($metadatasdb as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+
+            $sxe = simplexml_load_string($ftestxml2);
+            if (false === $sxe) {
+                continue;
+            }
+            
+            $metDate = '';
+            if (isset($sxe->dateStamp->Date) && $sxe->dateStamp->Date != '') {
+                $metDate = $sxe->dateStamp->Date;
+            }else{
+                $metDate = '1970-12-12 01:01:01';
+            }
+            
+            $mg = MetadataGeo::on('pgsql2')->where('id', $met->id)->get()->first();
+            $mg->createdate = date('Y-m-d H:i:s',strtotime($metDate));
+            $mg->update();
+        }
+        */
+        //========================================================================================================================
         //extract each metadata kategori to its own column in db. run once.==========================================================
         /*
         $metadatasdb = MetadataGeo::on('pgsql2')->get();
@@ -390,7 +424,7 @@ class MetadataController extends Controller {
           }
          */
         //=========================================================================================================================
-		// dd(date('d-m-y H:i:s',time()));
+
         $metadatas = $metadatasdb = [];
         $carian = isset($request->carian) ? $request->carian : "";
         $query = MetadataGeo::on('pgsql2');

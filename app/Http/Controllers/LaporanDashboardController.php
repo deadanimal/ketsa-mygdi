@@ -701,27 +701,12 @@ class LaporanDashboardController extends Controller
 
         //Jumlah Metadata Mengikut Kategori=====================================
         $metadata_kategori = [];
-        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        libxml_use_internal_errors(true);
         foreach ($bil_metadata_kategori as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
             $month = date('M-Y', strtotime($met->createdate));
-            $kategori = (string)(isset($xml2->hierarchyLevel->MD_ScopeCode) ? $xml2->hierarchyLevel->MD_ScopeCode : "");
 
-            if (strtolower($kategori) != null) {
-                $metadata_kategori[$month][ucfirst($kategori)][] = 'test';
+            if (strtolower($met->kategori) != null) {
+                $metadata_kategori[$month][ucfirst($met->kategori)][] = 'test';
             }
         }
         // dd($metadata_kategori);
@@ -791,25 +776,10 @@ class LaporanDashboardController extends Controller
 
         //Jumlah Metadata Mengikut Content Type=================================
         $metadata_content_type = [];
-        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        libxml_use_internal_errors(true);
         foreach ($bil_metadata_content_type as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
-
-            $content_type = (string)(isset($xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) ? $xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString : "");
-            if (strtolower($content_type) != null) {
+            if($met->content_type != null){
+                $content_type = $met->content_type;
                 $metadata_content_type['content'][ucfirst($content_type)][] = 'test';
             }
         }
@@ -819,40 +789,24 @@ class LaporanDashboardController extends Controller
         }
 
         //Jumlah Metadata Mengikut Negeri=======================================
+        /*
         $metadatas = [];
-        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        libxml_use_internal_errors(true);
         foreach ($jumlah_metadata_mengikut_negeri as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
-            // $penerbit = $this->getUser($met->portal_user_id);
-
-            $agensi = (string)(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString : "");
-            if (strtolower($agensi) != null) {
-                if ($agensi == 'wpPutrajaya') {
+            if (strtolower($met->c10_state) != null) {
+                if ($met->c10_state == 'wpPutrajaya') {
                     $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
                 } else {
-                    $metadatas['negeri'][ucfirst($agensi)][] = 'test';
+                    $metadatas['negeri'][ucfirst($met->c10_state)][] = 'test';
                 }
-                //count($metadatas['negeri']['selangor']);
-                // $metadatas[$met->id] = [$xml2, $met];
             }
         }
         $chartnegeri = [];
         foreach ($metadatas['negeri'] as $k => $v) {
             $chartnegeri[] = ["country" => $k, 'litres' => count($v)];
         }
+        */
+        $chartnegeri = [];
         return view('mygeo.dashboard_metadata', compact('bil_keseluruhan_metadata', 'chartkategori', 'chartnegeri', 'chartkategoritopik', 'chartcontenttype'));
     }
 
