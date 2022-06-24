@@ -14,7 +14,9 @@
     <div id="collapse15" class="panel-collapse collapse in show" data-parent="#div_c15">
         <div class="card-body">
             <div class="form-group row col-xl-6">
-                <b><?php echo __('lang.DQInformation'); ?></b>
+                <label class="form-control-label mr-4">
+                    <?php echo __('lang.DQInformation'); ?>
+                </label>
             </div>
             <div class="pl-lg-2">
                 <div class="row mb-2">
@@ -142,25 +144,25 @@
                                 }
                             </style>
                             <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
-                                <a class="nav-link active" id="tab_completeness" data-toggle="pill" href="#completeness"
+                                <a class="nav-link active form-control-label mr-4" id="tab_completeness" data-toggle="pill" href="#completeness"
                                    role="tab" aria-controls="completeness" aria-selected="true" style="color: black;"><b><?php echo __('lang.completeness'); ?></b></a>
                             </li>
                             <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
-                                <a class="nav-link" id="tab_consistency" data-toggle="pill" href="#consistency"
+                                <a class="nav-link form-control-label mr-4" id="tab_consistency" data-toggle="pill" href="#consistency"
                                     role="tab" aria-controls="consistency" aria-selected="false" style="color: black;"><b><?php echo __('lang.logicalConsistency'); ?></b></a>
                             </li>
                             <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
-                                <a class="nav-link" id="tab_position_accuracy" data-toggle="pill"
+                                <a class="nav-link form-control-label mr-4" id="tab_position_accuracy" data-toggle="pill"
                                     href="#position_accuracy" role="tab" aria-controls="position_accuracy"
                                     aria-selected="false" style="color: black;"><b><?php echo __('lang.positionalAccuracy'); ?></b></a>
                             </li>
                             <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
-                                <a class="nav-link" id="tab_temp_accuracy" data-toggle="pill"
+                                <a class="nav-link form-control-label mr-4" id="tab_temp_accuracy" data-toggle="pill"
                                     href="#temp_accuracy" role="tab" aria-controls="temp_accuracy"
                                     aria-selected="false" style="color: black;"><b><?php echo __('lang.temporalAccuracy'); ?></b></a>
                             </li>
                             <li class="nav-item" style="border-radius: 5px;border: 1px solid black;">
-                                <a class="nav-link" id="tab_thematic_accuracy" data-toggle="pill"
+                                <a class="nav-link form-control-label mr-4" id="tab_thematic_accuracy" data-toggle="pill"
                                     href="#thematic_accuracy" role="tab" aria-controls="thematic_accuracy"
                                     aria-selected="false" style="color: black;"><b><?php echo __('lang.thematicAccuracy'); ?></b></a>
                             </li>

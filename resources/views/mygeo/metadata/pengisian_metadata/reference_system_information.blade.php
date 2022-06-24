@@ -27,12 +27,10 @@
                     ?>
                     <div class="row mb-5" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-xl-4">
-                            <b for="input-system-identifier" data-toggle="tooltip"
-                                title="Sistem rujukan bagi maklumat geospatial">
-                                <?php echo __('lang.reference_system_identifier'); ?>
-                                <?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
-                            </b>
-                            <span style="float: right;">: </span>
+                            <label class="form-control-label mr-4" for="input-system-identifier" data-toggle="tooltip" title="Sistem rujukan bagi maklumat geospatial">
+                                <?php echo __('lang.reference_system_identifier'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
+                            </label>
+                            <label class="float-right">:</label>
                         </div>
                         <div class="col-xl-4">
                             <select class="form-control form-control-sm" name="c13_ref_sys_identify" id="c13_ref_sys_identify">
@@ -72,21 +70,29 @@
                 foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
                     if($key == "refsys_projection"){
                         ?>
-                        <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-6"><b><?php echo __('lang.projection'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></b></div>
-                            <div class="col-6">
-                                : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_projection"
-                                    id="refsys_projection" readonly value="{{ old('refsys_projection') }}">
+                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div>
+                                <label class="form-control-label mr-4" for="input-system-identifier">
+                                    <?php echo __('lang.projection'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
+                                </label>
+                            </div>
+                            <div>
+                                <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_projection" id="refsys_projection" readonly value="{{ old('refsys_projection') }}">
                             </div>
                         </div>
                         <?php
                     }
                     if($key == "refsys_axis_units"){
                         ?>
-                        <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-6"><b><?php echo __('lang.axis_units'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></b></div>
-                            <div class="col-6">: &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_axis_units"
-                                    id="refsys_axis_units" readonly value="{{ old('refsys_axis_units') }}"></div>
+                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div>
+                                <label class="form-control-label mr-4" for="input-system-identifier">
+                                    <?php echo __('lang.axis_units'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
+                                </label>
+                            </div>
+                            <div>
+                                <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_axis_units" id="refsys_axis_units" readonly value="{{ old('refsys_axis_units') }}">
+                            </div>
                         </div>
                         <?php
                     }
@@ -100,22 +106,28 @@
                 foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
                     if($key == "refsys_semiMajorAxis"){
                         ?>
-                        <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-6"><b><?php echo __('lang.semi_major_axis'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></b></div>
-                            <div class="col-6">
-                                : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_semiMajorAxis"
-                                    id="refsys_semiMajorAxis" readonly value="{{ old('refsys_semiMajorAxis') }}">
+                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div>
+                                <label class="form-control-label mr-4" for="input-system-identifier">
+                                    <?php echo __('lang.semi_major_axis'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
+                                </label>
+                            </div>
+                            <div>
+                                <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" readonly value="{{ old('refsys_semiMajorAxis') }}">
                             </div>
                         </div>
                         <?php
                     }
                     if($key == "refsys_axis_units"){
                         ?>
-                        <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-6"><b><?php echo __('lang.datum'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></b></div>
-                            <div class="col-6">
-                                : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_datum" id="refsys_datum"
-                                    readonly value="{{ old('refsys_datum') }}">
+                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div>
+                                <label class="form-control-label mr-4" for="input-system-identifier">
+                                    <?php echo __('lang.datum'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
+                                </label>
+                            </div>
+                            <div>
+                                <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_datum" id="refsys_datum" readonly value="{{ old('refsys_datum') }}">
                             </div>
                         </div>
                         <?php
@@ -130,22 +142,28 @@
                 foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
                     if($key == "refsys_ellipsoid"){
                         ?>
-                        <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-6"><b><?php echo __('lang.ellipsoid'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></b></div>
-                            <div class="col-6">
-                                : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_ellipsoid"
-                                    id="refsys_ellipsoid" readonly value="{{ old('refsys_ellipsoid') }}">
+                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div>
+                                <label class="form-control-label mr-4" for="input-system-identifier">
+                                    <?php echo __('lang.ellipsoid'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
+                                </label>
+                            </div>
+                            <div>
+                                <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_ellipsoid" id="refsys_ellipsoid" readonly value="{{ old('refsys_ellipsoid') }}">
                             </div>
                         </div>
                         <?php
                     }
                     if($key == "refsys_denomFlatRatio"){
                         ?>
-                        <div <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
-                            <div class="col-6"><b><?php echo __('lang.denominator_of_flattening_ratio'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?></b></div>
-                            <div class="col-6">
-                                : &nbsp; <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_denomFlatRatio"
-                                    id="refsys_denomFlatRatio" readonly value="{{ old('refsys_denomFlatRatio') }}">
+                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                            <div>
+                                <label class="form-control-label mr-4" for="input-system-identifier">
+                                    <?php echo __('lang.denominator_of_flattening_ratio'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
+                                </label>
+                            </div>
+                            <div>
+                                <input style="width: 290px;display:inline-block;" class="form-control form-control-sm" type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" readonly value="{{ old('refsys_denomFlatRatio') }}">
                             </div>
                         </div>
                         <?php

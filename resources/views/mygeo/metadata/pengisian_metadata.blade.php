@@ -483,7 +483,6 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 $('.refSys_Services').hide();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly', true);
                 $('.divDataQualityTabs').show();
-                $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').hide();
                 $('#content_info_dropdown').prop('disabled',false);
                 $('#content_info_text').prop('disabled',true);
@@ -505,7 +504,6 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 $('.refSys_Services').show();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly', true);
                 $('.divDataQualityTabs').hide();
-                $('.divUseLimitation').show();
                 $('.divMaintenanceInfo').hide();
                 $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
@@ -529,7 +527,6 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 $('.refSys_Services').hide();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly', true);
                 $('.divDataQualityTabs').show();
-                $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').show();
                 $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
@@ -553,7 +550,6 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 $('.refSys_Services').hide();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly', true);
                 $('.divDataQualityTabs').show();
-                $('.divUseLimitation').hide();
                 $('.divMaintenanceInfo').show();
                 $('#content_info_dropdown').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);

@@ -278,6 +278,7 @@
     'compliance_level'=>'Tahap Pematuhan',
     'result'=>'Keputusan Pematuhan',
     'conformance_result'=>'Pematuhan Kualiti Data',
-    'c10_state'=>'Negeri'
+    'c10_state'=>'Negeri',
+    'enviromentRecord'=>'Rekod Persekitaran'
  ]
 ?>

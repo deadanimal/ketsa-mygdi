@@ -607,7 +607,6 @@
                 $('.refSys_Services').hide();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').show();
-                $('.divUseLimitation').hide();
                 $('#c1_content_info').prop('disabled',false);
                 $('#content_info_text').prop('disabled',true);
                 $('#c1_content_info').show();
@@ -629,7 +628,6 @@
                 $('.refSys_Services').show();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').hide();
-                $('.divUseLimitation').show();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Live Data and Maps');
@@ -653,7 +651,6 @@
                 $('.refSys_Services').hide();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').show();
-                $('.divUseLimitation').hide();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Gridded');
@@ -677,7 +674,6 @@
                 $('.refSys_Services').hide();
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly',true);
                 $('.divDataQualityTabs').show();
-                $('.divUseLimitation').hide();
                 $('#c1_content_info').prop('disabled',true);
                 $('#content_info_text').prop('disabled',false);
                 $('.lblContentInfo').html('Imagery');

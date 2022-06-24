@@ -32,7 +32,7 @@
                     ?>
                     <div class="row mb-2" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                         <div class="col-xl-3">
-                            <label class="form-control-label" for="input-system-identifier">
+                            <label class="form-control-label mr-4" for="input-system-identifier">
                                 <?php echo __('lang.reference_system_identifier'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>
                             </label>
                         </div>
@@ -90,7 +90,7 @@
                                     $var = $metadataxml->referenceSystemInfo->MD_CRS->projection->RS_Identifier->codeSpace->CharacterString;
                                 }
                                 ?>
-                                <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <label class="form-control-label mr-4" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <b>Projection<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_projection" id="refsys_projection" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
@@ -102,7 +102,7 @@
                                     $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->semiMajorAxis->CharacterString;
                                 }
                                 ?>
-                                <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <label class="form-control-label mr-4" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <b>Semi Major Axis<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_semiMajorAxis" id="refsys_semiMajorAxis" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
@@ -114,7 +114,7 @@
                                     $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoid->RS_Identifier->codeSpace->CharacterString;
                                 }
                                 ?>
-                                <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <label class="form-control-label mr-4" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <b>Ellipsoid:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_ellipsoid" id="refsys_ellipsoid" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
@@ -126,7 +126,7 @@
                                     $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->axisUnits->UomLength;
                                 }
                                 ?>
-                                <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <label class="form-control-label mr-4" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <b>Axis Units<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_axis_units" id="refsys_axis_units" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
@@ -138,7 +138,7 @@
                                     $var = $metadataxml->referenceSystemInfo->MD_CRS->datum->RS_Identifier->codeSpace->CharacterString;
                                 }
                                 ?>
-                                <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <label class="form-control-label mr-4" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <b>Datum<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_datum" id="refsys_datum" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
@@ -150,7 +150,7 @@
                                     $var = $metadataxml->referenceSystemInfo->MD_CRS->ellipsoidParameters->MD_EllipsoidParameters->denominatorOfFlatteningRatio->CharacterString;
                                 }
                                 ?>
-                                <label class="form-check-label" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                                <label class="form-control-label mr-4" style="margin-left:20px;" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                     <b>Denominator of Flattening Ratio<?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>:</b>&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="refsys_denomFlatRatio" id="refsys_denomFlatRatio" class="form-control form-control-sm" readonly value="{{ $var }}">
                                 </label>
