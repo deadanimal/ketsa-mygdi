@@ -8,8 +8,6 @@
             width: auto;
         }
 
-
-
     </style>
 
     <!-- Content Wrapper. Contains page content -->

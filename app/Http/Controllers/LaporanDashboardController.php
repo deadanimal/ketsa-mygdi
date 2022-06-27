@@ -697,7 +697,36 @@ class LaporanDashboardController extends Controller
 
         $tarikh_akhir = $request->tarikh_akhir;
 
-        $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
+        //BILANGAN KESELURUHAN METADATA
+        if (auth::user()->assigned_roles == 'Pengesah Metadata') {
+            $ambik_metadata = MetadataGeo::on('pgsql2')->get();
+            libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+            foreach ($ambik_metadata as $met) {
+                $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+                $ftestxml2 = str_replace("\r", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+                $xml2 = simplexml_load_string($ftestxml2);
+                if (false === $xml2) {
+                    continue;
+                }
+
+                $agensi = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
+                if (strtolower($agensi) == strtolower(auth::user()->agensiOrganisasi->name)) {
+                    $bilmetadata[$met->id] = [$xml2, $met];
+                }
+            }
+            $bil_keseluruhan_metadata = count($bilmetadata);
+        } else {
+            $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
+        }
+
 
         if (!empty($tarikh_mula)) {
             $bil_metadata_kategori = MetadataGeo::on('pgsql2')->where('createdate', '>=', $tarikh_mula)->orderBy('createdate', 'asc')->get();
@@ -739,11 +768,25 @@ class LaporanDashboardController extends Controller
             if (false === $xml2) {
                 continue;
             }
-            $month = date('M-Y', strtotime($met->createdate));
-            $kategori = (string)(isset($xml2->hierarchyLevel->MD_ScopeCode) ? $xml2->hierarchyLevel->MD_ScopeCode : "");
 
-            if (strtolower($kategori) != null) {
-                $metadata_kategori[$month][ucfirst($kategori)][] = 'test';
+            if (auth::user()->assigned_roles == 'Pengesah Metadata') {
+                $agensi = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
+                if (strtolower($agensi) == strtolower(auth::user()->agensiOrganisasi->name)) {
+                    $bilmetadata[$met->id] = [$xml2];
+                    $month = date('M-Y', strtotime($met->createdate));
+                    $kategori = (string)(isset($xml2->hierarchyLevel->MD_ScopeCode) ? $xml2->hierarchyLevel->MD_ScopeCode : "");
+
+                    if (strtolower($kategori) != null) {
+                        $metadata_kategori[$month][ucfirst($kategori)][] = 'test';
+                    }
+                }
+            } else {
+                $month = date('M-Y', strtotime($met->createdate));
+                $kategori = (string)(isset($xml2->hierarchyLevel->MD_ScopeCode) ? $xml2->hierarchyLevel->MD_ScopeCode : "");
+
+                if (strtolower($kategori) != null) {
+                    $metadata_kategori[$month][ucfirst($kategori)][] = 'test';
+                }
             }
         }
         // dd($metadata_kategori);
@@ -786,21 +829,47 @@ class LaporanDashboardController extends Controller
                 continue;
             }
 
-            if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
-                if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
-                    foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
-                        if (trim($tcd->MD_TopicCategoryCode) != "") {
-                            $tc = trim($tcd->MD_TopicCategoryCode);
-                            $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
+            if (auth::user()->assigned_roles == 'Pengesah Metadata') {
+                $agensi = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
+                if (strtolower($agensi) == strtolower(auth::user()->agensiOrganisasi->name)) {
+                    $bilmetadata[$met->id] = [$xml2];
+                    if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
+                        if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
+                            foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
+                                if (trim($tcd->MD_TopicCategoryCode) != "") {
+                                    $tc = trim($tcd->MD_TopicCategoryCode);
+                                    $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
+                                }
+                            }
+                        }
+                    } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
+                        if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
+                            foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
+                                if (trim($tcd->MD_TopicCategoryCode) != "") {
+                                    $tc = trim($tcd->MD_TopicCategoryCode);
+                                    $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
+                                }
+                            }
                         }
                     }
                 }
-            } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
-                if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
-                    foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
-                        if (trim($tcd->MD_TopicCategoryCode) != "") {
-                            $tc = trim($tcd->MD_TopicCategoryCode);
-                            $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
+            } else {
+                if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
+                    if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
+                        foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
+                            if (trim($tcd->MD_TopicCategoryCode) != "") {
+                                $tc = trim($tcd->MD_TopicCategoryCode);
+                                $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
+                            }
+                        }
+                    }
+                } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
+                    if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
+                        foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
+                            if (trim($tcd->MD_TopicCategoryCode) != "") {
+                                $tc = trim($tcd->MD_TopicCategoryCode);
+                                $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
+                            }
                         }
                     }
                 }
@@ -830,9 +899,20 @@ class LaporanDashboardController extends Controller
                 continue;
             }
 
-            $content_type = (string)(isset($xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) ? $xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString : "");
-            if (strtolower($content_type) != null) {
-                $metadata_content_type['content'][ucfirst($content_type)][] = 'test';
+            if (auth::user()->assigned_roles == 'Pengesah Metadata') {
+                $agensi = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
+                if (strtolower($agensi) == strtolower(auth::user()->agensiOrganisasi->name)) {
+                    // $bilmetadata[$met->id] = [$xml2];
+                    $content_type = (string)(isset($xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) ? $xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString : "");
+                    if (strtolower($content_type) != null) {
+                        $metadata_content_type['content'][ucfirst($content_type)][] = 'test';
+                    }
+                }
+            } else {
+                $content_type = (string)(isset($xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString) ? $xml2->distributionInfo->MD_Distribution->transferOptions->MD_DigitalTransferOptions->onLine->CI_OnlineResource->description->CharacterString : "");
+                if (strtolower($content_type) != null) {
+                    $metadata_content_type['content'][ucfirst($content_type)][] = 'test';
+                }
             }
         }
         $chartcontenttype = [];
@@ -858,17 +938,29 @@ class LaporanDashboardController extends Controller
             if (false === $xml2) {
                 continue;
             }
-            // $penerbit = $this->getUser($met->portal_user_id);
 
-            $agensi = (string)(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString : "");
-            if (strtolower($agensi) != null) {
-                if ($agensi == 'wpPutrajaya') {
-                    $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
-                } else {
-                    $metadatas['negeri'][ucfirst($agensi)][] = 'test';
+            if (auth::user()->assigned_roles == 'Pengesah Metadata') {
+                $agensi = (isset($xml2->contact->CI_ResponsibleParty->organisationName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->organisationName->CharacterString : "");
+                if (strtolower($agensi) == strtolower(auth::user()->agensiOrganisasi->name)) {
+                    // $bilmetadata[$met->id] = [$xml2];
+                    $negeri = (string)(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString : "");
+                    if (strtolower($negeri) != null) {
+                        if ($negeri == 'wpPutrajaya') {
+                            $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
+                        } else {
+                            $metadatas['negeri'][ucfirst($negeri)][] = 'test';
+                        }
+                    }
                 }
-                //count($metadatas['negeri']['selangor']);
-                // $metadatas[$met->id] = [$xml2, $met];
+            } else {
+                $negeri = (string)(isset($xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString) ? $xml2->identificationInfo->MD_DataIdentification->pointOfContact->CI_ResponsibleParty->contactInfo->CI_Contact->address->CI_Address->administrativeArea->CharacterString : "");
+                if (strtolower($negeri) != null) {
+                    if ($negeri == 'wpPutrajaya') {
+                        $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
+                    } else {
+                        $metadatas['negeri'][ucfirst($negeri)][] = 'test';
+                    }
+                }
             }
         }
         $chartnegeri = [];
@@ -879,6 +971,80 @@ class LaporanDashboardController extends Controller
         return view('mygeo.dashboard_metadata', compact('bil_keseluruhan_metadata', 'chartkategori', 'chartnegeri', 'chartkategoritopik', 'chartcontenttype'));
     }
 
+    public function laporan_metadata_filter()
+    {
+        $agensi = AgensiOrganisasi::get();
+
+        $tarikh = date('Y-m-d');
+
+        //pengesah
+        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+        $metadatas = [];
+        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
+        foreach ($metadatasdb as $met) {
+            $ftestxml2 = <<<XML
+                    $met->data
+                    XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+            $ftestxml2 = str_replace("\r", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            $xml2 = simplexml_load_string($ftestxml2);
+            if (false === $xml2) {
+                continue;
+            }
+
+            $pengesah = (string)(isset($xml2->contact->CI_ResponsibleParty->individualName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->individualName->CharacterString : "");
+            array_push($metadatas, $pengesah);
+        }
+        $senarai_pengesah = array_unique($metadatas);
+        // dd($senarai_pengesah);
+
+        return view('mygeo.laporan_metadata_filter', compact('agensi', 'tarikh', 'senarai_pengesah'));
+    }
+
+    public function laporan_metadata_search(Request $request)
+    {
+        if (auth::user()->assigned_roles != 'Pengesah Metadata') {
+            $agensi = $request->agensi;
+        }
+        $tahun = $request->tahun;
+        $bulan = $request->bulan;
+        $kategori = $request->kategori;
+        $status = $request->status;
+        $tarikh_mula = $request->tarikh_mula;
+        $tarikh_akhir = $request->tarikh_akhir;
+        $pengesah = $request->pengesah;
+        $penerbit = $request->penerbit;
+
+        //perincian
+        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
+        $metadatas = [];
+        foreach ($metadatasdb as $met) {
+            $ftestxml2 = <<<XML
+                $met->data
+                XML;
+            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+
+            $xml2 = simplexml_load_string($ftestxml2);
+            $metadatas[$met->id] = [$xml2, $met];
+        }
+
+        if ($request->jenis_laporan == 'bil_metadata_diterbitkan') {
+
+            return view('mygeo.laporan_metadata_diterbitkan', compact('metadatas'));
+        } else {
+
+            return view('mygeo.laporan_metadata_belum_diterbitkan', compact('metadatas'));
+        }
+    }
+
     public function mygeo_dashboard_data_asas(Request $request)
     {
 
@@ -887,10 +1053,64 @@ class LaporanDashboardController extends Controller
 
         $tarikh_akhir = $request->tarikh_akhir;
 
-        // $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->get());
+        $bil_keseluruhan_data = MohonData::where('status', '!=', 'Draf')->count();
 
-        // $bil_metadata_kategori = MetadataGeo::on('pgsql2')->get();
+        $bil_keseluruhan_data_lulus = MohonData::where('status', '=', 'Dalam Proses')->orWhere('status', '=', 'Data Tersedia')->count();
 
-        return view('mygeo.dashboard_data_asas');
+        $bil_keseluruhan_data_tolak = MohonData::where('status', '=', 'Ditolak')->count();
+
+        return view('mygeo.dashboard_data_asas', compact('bil_keseluruhan_data', 'bil_keseluruhan_data_lulus', 'bil_keseluruhan_data_tolak'));
+    }
+
+    public function laporan_data_asas_filter()
+    {
+        $agensi = AgensiOrganisasi::get();
+
+        $tarikh = date('Y-m-d');
+
+        return view('mygeo.laporan_data_asas_filter', compact('agensi', 'tarikh'));
+    }
+
+    public function laporan_data_asas_searcb(Request $request)
+    {
+        $agensi = $request->agensi;
+        $tahun = $request->tahun;
+        $bulan = $request->bulan;
+        $kategori = $request->kategori;
+        $pemproses = $request->pemproses;
+
+        $permohonans = DB::table('users')
+            ->join('mohon_data', 'users.id', '=', 'mohon_data.user_id')
+            ->join('agensi_organisasi', DB::raw('CAST(users.agensi_organisasi AS INT)'), '=', 'agensi_organisasi.id')
+            ->select(
+                DB::raw('agensi_organisasi.name as agensi'),
+                DB::raw('count(*) as total')
+            )
+            ->groupBy('agensi')
+            ->get();
+
+
+        if ($request->jenis_laporan == 'laporan_perlepasan_data') {
+
+            return view('mygeo.laporan_data_asas_laporan_perlepasan_data', compact('permohonans'));
+        } elseif ($request->jenis_laporan == 'laporan_perkongsian_data') {
+
+            return view('mygeo.laporan_data_asas_laporan_perkongsian_data', compact('permohonans'));
+        } elseif ($request->jenis_laporan == 'anggaran_jimat_kos') {
+
+            return view('mygeo.laporan_data_asas_anggaran_jimat_kos', compact('permohonans'));
+        } elseif ($request->jenis_laporan == 'anggaran_jimat_kos_kategori') {
+
+            return view('mygeo.laporan_data_asas_anggaran_jimat_kos_kategori', compact('permohonans'));
+        } elseif ($request->jenis_laporan == 'pelepasan_data_tema') {
+
+            return view('mygeo.laporan_data_asas_pelepasan_data_tema', compact('permohonans'));
+        } elseif ($request->jenis_laporan == 'pelepasan_data_kategori_pemohon_data') {
+
+            return view('mygeo.laporan_data_asas_pelepasan_data_kategori_pemohon_data', compact('permohonans'));
+        } else {
+
+            return view('mygeo.laporan_data_asas_belum_pegawai_proses_permohonan', compact('permohonans'));
+        }
     }
 }

@@ -87,7 +87,6 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
-
     </style>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -141,8 +140,7 @@
                                                 <a class="nav-link active" href="#">
                                                     <i class="fa-desktop fas text-orange"></i>
                                                     <span class="nav-link-text">Dashboard</span>
-                                                    <span class="ml-auto"><i
-                                                            class="right fas fa-angle-left"></i></span>
+                                                    <span class="ml-auto"><i class="right fas fa-angle-left"></i></span>
                                                 </a>
                                                 <ul class="nav nav-sm nav-treeview">
                                                     <li class="nav-item">
@@ -253,7 +251,8 @@
                                                 </a>
                                                 <ul class="nav nav-sm nav-treeview">
                                                     <li class="nav-item">
-                                                        <a href="{{ url('senarai_data') }}" class="nav-link active">
+                                                        <a href="{{ url('senarai_data') }}"
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Senarai Data</span>
                                                         </a>
                                                     </li>
@@ -411,8 +410,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('pengumuman_edit') }}"
-                                                            class="nav-link">
+                                                        <a href="{{ url('pengumuman_edit') }}" class="nav-link">
                                                             <span class="nav-link-text">Pengumuman</span>
                                                         </a>
                                                     </li>
@@ -423,8 +421,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('mygeo_penafian') }}"
-                                                            class="nav-link">
+                                                        <a href="{{ url('mygeo_penafian') }}" class="nav-link">
                                                             <span class="nav-link-text">Penafian</span>
                                                         </a>
                                                     </li>
@@ -435,8 +432,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('portal_tetapan') }}"
-                                                            class="nav-link">
+                                                        <a href="{{ url('portal_tetapan') }}" class="nav-link">
                                                             <span class="nav-link-text">Tetapan Portal</span>
                                                         </a>
                                                     </li>
@@ -445,14 +441,13 @@
                                         @endif
                                         @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item">
-                                                <a href="{{ url('senarai_agensi_organisasi') }}"
-                                                    class="nav-link">
+                                                <a href="{{ url('senarai_agensi_organisasi') }}" class="nav-link">
                                                     <i class="fas fa-list-ul text-indigo"></i>
                                                     <span class="nav-link-text">Kemaskini Agensi / Organisasi</span>
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Aplikasi', 'Pentadbir Metadata', 'Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item has-treeview">
                                                 <a class="nav-link active" href="#">
                                                     <i class="fa-chart-bar fas text-purple"></i>
@@ -462,18 +457,54 @@
                                                 </a>
                                                 <ul class="nav nav-sm nav-treeview">
                                                     <li class="nav-item">
-                                                        <a href="{{ url('laporan_metadata') }}"
+                                                        {{-- <a href="{{ url('laporan_metadata') }}"
+                                                        class="nav-link active">
+                                                        <span class="nav-link-text">Laporan Metadata</span>
+                                                    </a> --}}
+                                                        <a href="{{ url('laporan_pilihan_metadata') }}"
                                                             class="nav-link active">
                                                             <span class="nav-link-text">Laporan Metadata</span>
                                                         </a>
                                                     </li>
+                                                    {{-- <li class="nav-item">
+                                                    <a href="{{ url('laporan_data_asas') }}"
+                                                        class="nav-link active">
+                                                        <span class="nav-link-text">Laporan Data Asas</span>
+                                                    </a>
+                                                </li> --}}
                                                     <li class="nav-item">
-                                                        <a href="{{ url('laporan_data_asas') }}"
-                                                            class="nav-link">
+                                                        <a href="{{ url('laporan_pilihan_data_asas') }}"
+                                                            class="nav-link active">
                                                             <span class="nav-link-text">Laporan Data Asas</span>
                                                         </a>
                                                     </li>
                                                 </ul>
+                                            </li>
+                                        @elseif (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Metadata']))
+                                            <li class="nav-item">
+                                                {{-- <a href="{{ url('laporan_metadata') }}" class="nav-link active">
+                                                <i class="fa-chart-bar fas text-purple"></i>
+                                                <span class="nav-link-text">Laporan Metadata</span>
+                                            </a> --}}
+                                                <a href="{{ url('laporan_pilihan_metadata') }}"
+                                                    class="nav-link active">
+                                                    <i class="fa-chart-bar fas text-purple"></i>
+                                                    <span class="nav-link-text">Laporan Metadata</span>
+                                                </a>
+                                            </li>
+                                        @elseif (auth::user()->hasRole(['Pentadbir Data']))
+                                            {{-- <li class="nav-item">
+                                            <a href="{{ url('laporan_data_asas') }}" class="nav-link active">
+                                                <i class="fa-chart-bar fas text-purple"></i>
+                                                <span class="nav-link-text">Laporan Data Asas</span>
+                                            </a>
+                                        </li> --}}
+                                            <li class="nav-item">
+                                                <a href="{{ url('laporan_pilihan_data_asas') }}"
+                                                    class="nav-link active">
+                                                    <i class="fa-chart-bar fas text-purple"></i>
+                                                    <span class="nav-link-text">Laporan Data Asas</span>
+                                                </a>
                                             </li>
                                         @endif
                                     </ul>
@@ -530,7 +561,8 @@
                                     <ul class="navbar-nav align-items-center ml-auto ml-md-0">
                                         <li placement="bottom-right" class="nav-item dropdown">
                                             <!--<a role="button" dropdowntoggle="" class="nav-link pr-0 dropdown-toggle" aria-haspopup="true">-->
-                                            <a class="nav-link pr-0 dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <a class="nav-link pr-0 dropdown-toggle" data-toggle="dropdown"
+                                                href="#">
                                                 <div class="media align-items-center pointer">
                                                     <div class="media-body ml-2 d-none d-lg-block"><span
                                                             class="mb-0 text-sm font-weight-bold ng-star-inserted">{{ strtoupper(auth::user()->name) }}
@@ -664,7 +696,8 @@
     </div>
 
     <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('/dist/js/adminlte.min.js') }}"></script>

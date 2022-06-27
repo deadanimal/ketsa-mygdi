@@ -44,6 +44,7 @@ class XmlController extends Controller {
                             <departmentName>
                                 <gco:CharacterString>$request->publisher_bahagian</gco:CharacterString>
                             </departmentName>
+                            <!-- penerbit -->
                             <individualName>
                                 <gco:CharacterString>$request->publisher_name</gco:CharacterString>
                             </individualName>

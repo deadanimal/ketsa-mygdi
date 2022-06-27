@@ -60,8 +60,12 @@ Route::post('/tunjuk_pengumuman', 'PortalController@show_pengumuman');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/laporan_data_asas', 'LaporanDashboardController@index_laporan_data');
-    Route::get('/laporan_metadata', 'LaporanDashboardController@index_laporan_metadata');
+    Route::get('/laporan_pilihan_data_asas', 'LaporanDashboardController@laporan_data_asas_filter');
+    // Route::get('/laporan_data_asas', 'LaporanDashboardController@index_laporan_data');
+    Route::get('/laporan_data_asas', 'LaporanDashboardController@laporan_data_asas_searcb');
+    Route::get('/laporan_pilihan_metadata', 'LaporanDashboardController@laporan_metadata_filter');
+    // Route::get('/laporan_metadata', 'LaporanDashboardController@index_laporan_metadata');
+    Route::get('/laporan_metadata', 'LaporanDashboardController@laporan_metadata_search');
     Route::post('/filter_by_agensi', 'LaporanDashboardController@filter_by_agensi');
 
     Route::get('/kemaskini_pengumuman', 'PortalController@edit_pengumuman');
