@@ -571,7 +571,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Aplikasi', 'Pentadbir Metadata', 'Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pentadbir Aplikasi', 'Super Admin']))
                                             <li class="nav-item has-treeview">
                                                 <a class="nav-link active" href="#">
                                                     <i class="fa-chart-bar fas text-purple"></i>
@@ -581,18 +581,53 @@
                                                 </a>
                                                 <ul class="nav nav-sm nav-treeview">
                                                     <li class="nav-item">
-                                                        <a href="{{ url('laporan_metadata') }}"
+                                                        {{-- <a href="{{ url('laporan_metadata') }}"
+                                                            class="nav-link active">
+                                                            <span class="nav-link-text">Laporan Metadata</span>
+                                                        </a> --}}
+                                                        <a href="{{ url('laporan_pilihan_metadata') }}"
                                                             class="nav-link active">
                                                             <span class="nav-link-text">Laporan Metadata</span>
                                                         </a>
                                                     </li>
-                                                    <li class="nav-item">
+                                                    {{-- <li class="nav-item">
                                                         <a href="{{ url('laporan_data_asas') }}"
+                                                            class="nav-link active">
+                                                            <span class="nav-link-text">Laporan Data Asas</span>
+                                                        </a>
+                                                    </li> --}}
+                                                    <li class="nav-item">
+                                                        <a href="{{ url('laporan_pilihan_data_asas') }}"
                                                             class="nav-link active">
                                                             <span class="nav-link-text">Laporan Data Asas</span>
                                                         </a>
                                                     </li>
                                                 </ul>
+                                            </li>
+                                        @elseif (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Metadata']))
+                                            <li class="nav-item">
+                                                {{-- <a href="{{ url('laporan_metadata') }}" class="nav-link active">
+                                                    <i class="fa-chart-bar fas text-purple"></i>
+                                                    <span class="nav-link-text">Laporan Metadata</span>
+                                                </a> --}}
+                                                <a href="{{ url('laporan_pilihan_metadata') }}"
+                                                    class="nav-link active">
+                                                    <i class="fa-chart-bar fas text-purple"></i>
+                                                    <span class="nav-link-text">Laporan Metadata</span>
+                                                </a>
+                                            </li>
+                                        @elseif (auth::user()->hasRole(['Pentadbir Data']))
+                                            {{-- <li class="nav-item">
+                                                <a href="{{ url('laporan_data_asas') }}" class="nav-link active">
+                                                    <i class="fa-chart-bar fas text-purple"></i>
+                                                    <span class="nav-link-text">Laporan Data Asas</span>
+                                                </a>
+                                            </li> --}}
+                                            <li class="nav-item">
+                                                <a href="{{ url('laporan_pilihan_data_asas') }}" class="nav-link active">
+                                                    <i class="fa-chart-bar fas text-purple"></i>
+                                                    <span class="nav-link-text">Laporan Data Asas</span>
+                                                </a>
                                             </li>
                                         @endif
                                     </ul>

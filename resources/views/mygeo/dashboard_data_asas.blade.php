@@ -89,7 +89,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 text-white mr-2">100
+                                    <span class="h2 text-white mr-2">{{ $bil_keseluruhan_data }}
                                     </span>
                                 </p>
                             </div>
@@ -114,7 +114,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 text-white mr-2">100
+                                    <span class="h2 text-white mr-2">{{ $bil_keseluruhan_data_lulus }}
                                     </span>
                                 </p>
                             </div>
@@ -139,7 +139,7 @@
                                 </div>
 
                                 <p class="mt-2 mb-0 text-sm">
-                                    <span class="h2 text-white mr-2">100
+                                    <span class="h2 text-white mr-2">{{ $bil_keseluruhan_data_tolak }}
                                     </span>
                                 </p>
                             </div>
@@ -149,7 +149,7 @@
                         <div class="card">
                             <div class="card-body p-3">
                                 <div class="row p-3 pl-0 mb-0">
-                                    <form style="width: 100%;" (ngSubmit)="filterCharts()">
+                                    <form style="width: 100%;" >
 
                                         <div class="row">
 
@@ -160,8 +160,8 @@
                                             </div>
                                             <div class="col-6">
                                                 <label>Tarikh Akhir</label>
-                                                <input class="form-control" type="date" name="tarikh_akhir" id="tahun"
-                                                    autocomplete="off" />
+                                                <input class="form-control" type="date" name="tarikh_akhir"
+                                                    id="tahun" autocomplete="off" />
                                             </div>
                                             <div class="col d-flex justify-content-end align-items-end mt-3">
 
