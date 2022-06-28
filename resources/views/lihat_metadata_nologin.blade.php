@@ -1,6 +1,7 @@
 @extends('layouts.app_ketsa_pdf')
 
 @section('content')
+<link href="{{ asset('css/afiq_mygeo.css') }}" rel="stylesheet">
     <style>
         .card-primary:not(.card-outline)>.card-header {
             background-color: #b3ecff;

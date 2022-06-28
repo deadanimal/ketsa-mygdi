@@ -70,7 +70,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
                     if($key == "refsys_projection"){
                         ?>
-                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                        <div class="col-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div>
                                 <label class="form-control-label mr-4" for="input-system-identifier">
                                     <?php echo __('lang.projection'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
@@ -84,7 +84,7 @@
                     }
                     if($key == "refsys_axis_units"){
                         ?>
-                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                        <div class="col-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div>
                                 <label class="form-control-label mr-4" for="input-system-identifier">
                                     <?php echo __('lang.axis_units'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
@@ -106,7 +106,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
                     if($key == "refsys_semiMajorAxis"){
                         ?>
-                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                        <div class="col-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div>
                                 <label class="form-control-label mr-4" for="input-system-identifier">
                                     <?php echo __('lang.semi_major_axis'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
@@ -120,7 +120,7 @@
                     }
                     if($key == "refsys_axis_units"){
                         ?>
-                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                        <div class="col-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div>
                                 <label class="form-control-label mr-4" for="input-system-identifier">
                                     <?php echo __('lang.datum'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
@@ -142,7 +142,7 @@
                 foreach($template->template[strtolower($catSelected)]['accordion13'] as $key=>$val){
                     if($key == "refsys_ellipsoid"){
                         ?>
-                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                        <div class="col-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div>
                                 <label class="form-control-label mr-4" for="input-system-identifier">
                                     <?php echo __('lang.ellipsoid'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
@@ -156,7 +156,7 @@
                     }
                     if($key == "refsys_denomFlatRatio"){
                         ?>
-                        <div class="col-3" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
+                        <div class="col-4" <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                             <div>
                                 <label class="form-control-label mr-4" for="input-system-identifier">
                                     <?php echo __('lang.denominator_of_flattening_ratio'); ?><?php if($val['mandatory'] == "yes"){ ?><span class="text-warning">*</span><?php } ?>&nbsp;:
