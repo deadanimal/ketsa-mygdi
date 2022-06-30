@@ -845,8 +845,10 @@ class LaporanDashboardController extends Controller
                 }
         }
         $chartnegeri = [];
-        foreach ($metadatas['negeri'] as $k => $v) {
-            $chartnegeri[] = ["country" => $k, 'litres' => count($v)];
+        if (array_key_exists("negeri",$metadatas)){
+            foreach ($metadatas['negeri'] as $k => $v) {
+                $chartnegeri[] = ["country" => $k, 'litres' => count($v)];
+            }
         }
 
         return view('mygeo.dashboard_metadata', compact('bil_keseluruhan_metadata', 'chartkategori', 'chartnegeri', 'chartkategoritopik', 'chartcontenttype'));
