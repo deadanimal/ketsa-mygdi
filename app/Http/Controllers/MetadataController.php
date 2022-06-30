@@ -294,7 +294,7 @@ class MetadataController extends Controller {
     public function index_nologin(Request $request) {
         //extract each metadata agensi/organisasi to its own column in db. run once.==========================================================
         /*
-        $metadatasdb = MetadataGeo::on('pgsql2')->get();
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','data')->get();
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
                     $met->data
@@ -328,7 +328,7 @@ class MetadataController extends Controller {
         //========================================================================================================================
         //extract each metadata create date to its own column in db. run once.==========================================================
         /*
-        $metadatasdb = MetadataGeo::on('pgsql2')->get();
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','data')->get();
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
                     $met->data
@@ -362,7 +362,7 @@ class MetadataController extends Controller {
         //========================================================================================================================
         //extract each metadata kategori to its own column in db. run once.==========================================================
         /*
-        $metadatasdb = MetadataGeo::on('pgsql2')->get();
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','data')->get();
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
                     $met->data
@@ -399,7 +399,7 @@ class MetadataController extends Controller {
         //========================================================================================================================
         //extract each metadata content type to its own column in db. run once.==========================================================
         /*
-        $metadatasdb = MetadataGeo::on('pgsql2')->get();
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','data')->get();
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
                     $met->data
@@ -429,7 +429,7 @@ class MetadataController extends Controller {
         //========================================================================================================================
         //extract each metadata title to its own column in db. run once.==========================================================
         /*
-          $metadatasdbtemp = MetadataGeo::on('pgsql2')->get();
+          $metadatasdbtemp = MetadataGeo::on('pgsql2')->select('id','data')->get();
           foreach ($metadatasdbtemp as $met) {
           $ftestxml2 = <<<XML
           $met->data
