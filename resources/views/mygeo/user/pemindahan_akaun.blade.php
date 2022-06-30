@@ -115,7 +115,7 @@
                             <br><br>
 
                             <h5>SENARAI METADATA DI BAWAH PENGGUNA</h5>
-                            <table id="table_metadata" class="table table-bordered table-striped">
+                            <table id="table_metadata" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <th>Bil</th>

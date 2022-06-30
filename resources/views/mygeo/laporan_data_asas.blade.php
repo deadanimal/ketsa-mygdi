@@ -109,7 +109,7 @@
                                     <canvas id="bar-chart-horizontal" class="chart-canvas"></canvas>
                                 </div>
                                 {{-- <input type="button" value="Add Data" onclick="addData()"> --}}
-                                <table id="laporan_perincian" class="table table-bordered table-striped" style="width:100%">
+                                <table id="laporan_perincian" class="table table-bordered table-striped table-sm" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -277,7 +277,7 @@
                             <div class="card-body">
                                 <h4 class="heading text-muted">Bilangan permohonan Data mengikut Kategori</h4>
                                 <div class="table-responsive">
-                                    <table id="laporan_kategori" class="display table table-bordered table-striped"
+                                    <table id="laporan_kategori" class="display table table-bordered table-striped table-sm"
                                         style="width:100%;">
                                         <thead>
                                             <tr>
@@ -311,7 +311,7 @@
                             <div class="card-body">
                                 <h4 class="heading text-muted">Statistik permohonan data mengikut tahun</h4>
                                 <div class="table-responsive">
-                                    <table id="laporan_statistik" class="display table table-bordered table-striped"
+                                    <table id="laporan_statistik" class="display table table-bordered table-striped table-sm"
                                         style="width:100%;">
                                         <thead>
                                             <tr>

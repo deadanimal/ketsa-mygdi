@@ -62,7 +62,7 @@
                                 <div class="mb-5" id="chartdiv"></div>
                                 <h4 class="heading text-muted">Bilangan keseluruhan metadata yang diterbitkan (Mengikut
                                     agensi)</h4>
-                                <table id="laporan_seluruh" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="laporan_seluruh" class="table table-bordered table-striped table-sm" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>

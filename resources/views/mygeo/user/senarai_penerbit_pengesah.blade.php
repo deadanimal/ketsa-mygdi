@@ -61,7 +61,7 @@
                         </div>
                         <div class="card-body">
                             <div style="overflow-x:auto;">
-                                <table id="table_newUsers" class="table table-bordered table-striped" style="overflow: auto;">
+                                <table id="table_newUsers" class="table table-bordered table-striped table-sm" style="overflow: auto;">
                                     <thead>
                                         <tr>
                                             <th>Bil</th>

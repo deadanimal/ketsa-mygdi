@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="table_metadatas" class="table table-bordered table-striped" style="width:100%;">
+                                <table id="table_metadatas" class="table table-bordered table-striped table-sm" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>

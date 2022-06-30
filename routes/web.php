@@ -90,8 +90,6 @@ Route::group(['middleware' => ['auth']], function () {
         return view('landing');
     });
 
-    Route::get('ftestdb', 'PeopleController@ftestdb');
-
     Route::get('/map', function () {
         return view('map');
     });
@@ -165,10 +163,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/kemaskini_draf_metadata', 'MetadataController@edit');
     Route::get('/kemaskini_metadata/{id}', 'MetadataController@edit');
 
-    Route::post('/lihat_draf_metadata', 'MetadataController@show_draf');
-    Route::post('/simpan_kemaskini_draf_metadata', 'MetadataController@update_draf');
-
-    Route::post('/delete_draf_metadata', 'MetadataController@delete_draf');
     Route::post('/delete_metadata', 'MetadataController@delete');
 
     Route::get('/landing_mygeo', 'UserController@show');

@@ -147,7 +147,7 @@
 
 
                             <div style="overflow-x:auto;">
-                                <table id="table_metadatas" class="table table-bordered table-striped"
+                                <table id="table_metadatas" class="table table-bordered table-striped table-sm"
                                     style="overflow: auto;">
                                     <thead>
                                         <tr>

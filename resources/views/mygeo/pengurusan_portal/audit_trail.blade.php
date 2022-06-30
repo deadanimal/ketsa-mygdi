@@ -50,7 +50,7 @@
                                 </form>
                                 <br><br>
                                 <div style="overflow-x:auto;">
-                                    <table id="table_audit_trail" class="table table-bordered table-striped" style="width:100%;">
+                                    <table id="table_audit_trail" class="table table-bordered table-striped table-sm" style="width:100%;">
                                         <thead>
                                             <tr>
                                                 <th>BIL</th>

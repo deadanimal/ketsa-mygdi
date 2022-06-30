@@ -97,7 +97,7 @@
                                 <input type="hidden" name="content_penafian" id="content_penafian">
                                 <input type="hidden" name="content_penyataan_privasi" id="content_penyataan_privasi">
                                 <input type="hidden" name="content_faq" id="content_faq">
-                                <table id="table_pengumuman" class="table table-bordered table-striped">
+                                <table id="table_pengumuman" class="table table-bordered table-striped table-sm">
                                     <thead>
                                         <tr>
                                             <th>Bil</th>

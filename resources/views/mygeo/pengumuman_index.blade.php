@@ -38,7 +38,7 @@ thead {
           <h1 class="card-title m-0"><i class="fa fa-bullhorn mr-3"></i>Senarai Pengumuman</h1>
        </div>
        <div class="card-body scroll mt-2">
-           <table id="table_pengumuman_index" class="table table-bordered table-striped">
+           <table id="table_pengumuman_index" class="table table-bordered table-striped table-sm">
             <thead>
               <tr>
                 <th></th>

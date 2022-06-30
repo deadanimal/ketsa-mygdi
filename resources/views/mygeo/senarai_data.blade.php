@@ -165,7 +165,7 @@
                                                 <div class="opacity-8" style="overflow-x:auto;">
 
                                                     <table id="senDataTable{{ $ksd->id }}"
-                                                        class="table table-bordered table-striped">
+                                                        class="table table-bordered table-striped table-sm">
                                                         <thead>
                                                             <tr>
                                                                 <th>BIL</th>

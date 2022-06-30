@@ -43,7 +43,7 @@
     <div class="col-lg-10 s pt-4 pb-6 divCenter">
         <div class="card mx-auto p-3 umum_senarai_card">
             <div class="card-body scroll mt-2">
-                <table id="table_pengumuman_index" class="table table-bordered table-striped">
+                <table id="table_pengumuman_index" class="table table-bordered table-striped table-sm">
                     <thead>
                         <tr>
                             <th></th>

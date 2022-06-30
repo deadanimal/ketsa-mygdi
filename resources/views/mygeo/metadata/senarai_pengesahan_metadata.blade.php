@@ -55,7 +55,7 @@
                         </div>
                         <div class="card-body">
                             <div style="overflow-x:auto;">
-                                <table id="table_metadatas" class="table table-bordered table-striped">
+                                <table id="table_metadatas" class="table table-bordered table-striped table-sm">
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" name="selectAll" id="selectAll"></th>

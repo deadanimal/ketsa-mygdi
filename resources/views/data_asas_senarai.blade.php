@@ -26,7 +26,7 @@
             <h1>Senarai Data-Data Asas</h1>
             <div class="row">
                 <div class="col-2">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <td class="heading">Kategori</td>
@@ -54,7 +54,7 @@
                     </table>
                 </div>
                 <div class="col-auto">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <td class="heading">Sub-Kategori</td>
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="col-6">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <td class="heading">Lapisan Data</td>

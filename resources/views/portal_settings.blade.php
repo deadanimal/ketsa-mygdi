@@ -146,7 +146,7 @@ img {
                   <h5 class="card-title m-0 col-lg-12">Pengumuman</h5>
                 </div>
                 <div class="card-body">
-                  <table id="table_pengumuman" class="table table-bordered table-striped">
+                  <table id="table_pengumuman" class="table table-bordered table-striped table-sm">
                     <colgroup>
                       <col width="50px;">
                   </colgroup>

@@ -170,7 +170,7 @@
                             </div>
                             <div class="card-body">
                                 <div style="overflow-x:auto;">
-                                    <table id="table_newUsers" class="table table-bordered table-striped"
+                                    <table id="table_newUsers" class="table table-bordered table-striped table-sm"
                                         style="overflow: auto;">
                                         <thead>
                                             <tr>
@@ -390,13 +390,17 @@
         // Setup - add a text input to each footer cell
         $('#table_newUsers thead tr').clone(true).appendTo('#table_newUsers thead');
         $('#table_newUsers thead tr:eq(1) th').each( function (i) {
-            var title = $(this).text();
-            $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
-            $('input',this).on('keyup change', function(){
-                if(table.column(i).search() !== this.value){
-                    table.column(i).search(this.value).draw();
-                }
-            });
+            if(i > 0 && i < 4){
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search '+title+'" class="form-control"/>');
+                $('input',this).on('keyup change', function(){
+                    if(table.column(i).search() !== this.value){
+                        table.column(i).search(this.value).draw();
+                    }
+                });
+            }else{
+                $(this).html('');
+            }
         });
 
         $(document).on("click", ".butiran", function() {

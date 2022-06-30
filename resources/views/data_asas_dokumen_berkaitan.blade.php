@@ -33,7 +33,7 @@
                     <div class="card">
                         <div class="card-body">
                             <br>
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-sm">
                                 <thead>
                                     <tr class="bg-light">
                                         <th>Senarai Borang (Dokumen)</th>
@@ -58,7 +58,7 @@
                                 </tbody>
                             </table>
                             <br>
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-sm">
                                 <thead>
                                     <tr class="bg-light">
                                         <th>Contoh Dokumen</th>

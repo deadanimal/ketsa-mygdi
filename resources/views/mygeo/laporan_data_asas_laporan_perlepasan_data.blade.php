@@ -66,7 +66,7 @@
                             <div class="card-body">
                                 <div class="mb-5" id="chartdiv"></div>
 
-                                <table id="laporan_perincian" class="table table-bordered table-striped" style="width:100%">
+                                <table id="laporan_perincian" class="table table-bordered table-striped table-sm" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>

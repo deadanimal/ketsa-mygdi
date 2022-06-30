@@ -125,7 +125,7 @@
                             </div>
                             <div class="card-body">
                                 <div style="overflow-x:auto;">
-                                    <table id="table_agensi_organisasi" class="table table-bordered table-striped"
+                                    <table id="table_agensi_organisasi" class="table table-bordered table-striped table-sm"
                                         style="width:100%;">
                                         <thead>
                                             <tr>
