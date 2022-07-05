@@ -857,55 +857,64 @@ class LaporanDashboardController extends Controller
     public function laporan_metadata_filter()
     {
         $agensi = AgensiOrganisasi::get();
-
         $tarikh = date('Y-m-d');
 
-        //pengesah
-        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
-        $metadatas = [];
-        libxml_use_internal_errors(true); //skips error page detected from simplexml_load_string in the foreach below
-        foreach ($metadatasdb as $met) {
-            $ftestxml2 = <<<XML
-                    $met->data
-                    XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+        $senarai_pengesah = User::select('id','name')->where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->get();
+        $senarai_penerbit = User::select('id','name')->where('assigned_roles', 'LIKE', '%Penerbit Metadata%')->get();
 
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
-
-            $pengesah = (string)(isset($xml2->contact->CI_ResponsibleParty->individualName->CharacterString) ? $xml2->contact->CI_ResponsibleParty->individualName->CharacterString : "");
-            array_push($metadatas, $pengesah);
-        }
-        $senarai_pengesah = array_unique($metadatas);
-        // dd($senarai_pengesah);
-
-        return view('mygeo.laporan_metadata_filter', compact('agensi', 'tarikh', 'senarai_pengesah'));
+        return view('mygeo.laporan_metadata_filter', compact('agensi', 'tarikh', 'senarai_pengesah','senarai_penerbit'));
     }
 
     public function laporan_metadata_search(Request $request)
     {
-        if (auth::user()->assigned_roles != 'Pengesah Metadata') {
-            $agensi = $request->agensi;
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','data','changedate','title','disahkan','agensi_organisasi','kategori');
+        if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
+            $metadatasdb = $metadatasdb->where('agensi_organisasi',auth::user()->agensiOrganisasi->name);
+        }else{
+            if(isset($request->agensi) && $request->agensi != ""){
+                $metadatasdb = $metadatasdb->where('agensi_organisasi',$request->agensi);
+            }
         }
-        $tahun = $request->tahun;
-        $bulan = $request->bulan;
-        $kategori = $request->kategori;
-        $status = $request->status;
-        $tarikh_mula = $request->tarikh_mula;
-        $tarikh_akhir = $request->tarikh_akhir;
-        $pengesah = $request->pengesah;
-        $penerbit = $request->penerbit;
+        
+        if($request->tahun !== null && $request->bulan !== null){
+            if($request->jenis_laporan == "yes"){ //diterbitkan
+                $metadatasdb = $metadatasdb->whereYear('changedate', '=', $request->tahun)->whereMonth('changedate', '=', $request->bulan);
+            }else{
+                $metadatasdb = $metadatasdb->whereYear('createdate', '=', $request->tahun)->whereMonth('createdate', '=', $request->bulan);
+            }
+        }elseif($request->tarikh_mula !== null && $request->tarikh_akhir){
+            if($request->jenis_laporan == "yes"){ //diterbitkan
+                $metadatasdb = $metadatasdb->where('changedate', '>=', $request->tarikh_mula)->where('changedate', '<=', $request->tarikh_akhir);
+            }else{
+                $metadatasdb = $metadatasdb->where('createdate', '>=', $request->tarikh_mula)->where('createdate', '<=', $request->tarikh_akhir);
+            }
+        }
+        
+        if($request->status !== null){
+            if($request->status == "Draf"){
+                $metadatasdb = $metadatasdb->where('is_draf','yes');
+            }elseif($request->status == "Perlu Pengesahan"){
+                $metadatasdb = $metadatasdb->where('disahkan','0');
+            }elseif($request->status == "Perlu Pembetulan"){
+                $metadatasdb = $metadatasdb->where('disahkan','no');
+            }elseif($request->status == "Diterbitkan"){
+                //no need to filter. already done by where('disahkan') line below
+            }
+        }
+        if($request->pengesah !== null){
+            $metadatasdb = $metadatasdb->where('pengesah',$request->pengesah);
+        }
+        if($request->penerbit !== null){
+            $metadatasdb = $metadatasdb->where('portal_user_id',$request->penerbit);
+        }
+        
+        $metadatasdb = $metadatasdb->where('kategori',strtolower($request->kategori));
+        $metadatasdb = $metadatasdb->where('disahkan',$request->jenis_laporan);
 
         //perincian
-        $metadatasdb = MetadataGeo::on('pgsql2')->orderBy('id', 'DESC')->get()->all();
-        $metadatas = [];
+        $metadatasdb = $metadatasdb->orderBy('id', 'DESC')->get()->all();
+
+        $metadatas = $chartArray = $chartArrayFixed = [];
         foreach ($metadatasdb as $met) {
             $ftestxml2 = <<<XML
                 $met->data
@@ -917,14 +926,18 @@ class LaporanDashboardController extends Controller
 
             $xml2 = simplexml_load_string($ftestxml2);
             $metadatas[$met->id] = [$xml2, $met];
+            $chartArray[date('F Y',strtotime($met->changedate))][] = 'test';
+        }
+        if(!empty($chartArray)){
+            foreach($chartArray as $key=>$val){
+                $chartArrayFixed[] = ["country"=>$key,"visits"=>count($val)];
+            }
         }
 
-        if ($request->jenis_laporan == 'bil_metadata_diterbitkan') {
-
-            return view('mygeo.laporan_metadata_diterbitkan', compact('metadatas'));
+        if ($request->jenis_laporan == 'yes') {
+            return view('mygeo.laporan_metadata_diterbitkan', compact('metadatas','chartArrayFixed'));
         } else {
-
-            return view('mygeo.laporan_metadata_belum_diterbitkan', compact('metadatas'));
+            return view('mygeo.laporan_metadata_belum_diterbitkan', compact('metadatas','chartArrayFixed'));
         }
     }
 

@@ -462,7 +462,7 @@
                                                 </a>
                                                 <ul class="nav nav-sm nav-treeview">
                                                     <li class="nav-item">
-                                                        <a href="{{ url('laporan_metadata') }}"
+                                                        <a href="{{ url('laporan_pilihan_metadata') }}"
                                                             class="nav-link active">
                                                             <span class="nav-link-text">Laporan Metadata</span>
                                                         </a>

@@ -47,7 +47,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="pl-lg-4 pb-lg-4">
-                                    <form action="/laporan_metadata" method="get">
+                                    <form action="{{ url('laporan_metadata') }}" method="get" id="formCarianLaporanMetadata">
                                         @method('GET')
                                         @csrf
                                         <div class="row mb-2">
@@ -59,11 +59,11 @@
                                             <label class="float-right">:</label>
                                             <div class="col-8">
                                                 <select name="jenis_laporan" class="form-control form-control-sm ml-3"
-                                                    id="cari" required>
+                                                    id="cari" required autocomplete="off">
                                                     <option hidden selected value="">Sila Pilih</option>
-                                                    <option value="bil_metadata_diterbitkan">Bilangan Metadata Diterbitkan
+                                                    <option value="yes">Bilangan Metadata Diterbitkan
                                                     </option>
-                                                    <option value="bil_metadata_belum_diterbitkan">Bilangan Metadata Belum
+                                                    <option value="0">Bilangan Metadata Belum
                                                         Diterbitkan</option>
                                                 </select>
                                             </div>
@@ -77,7 +77,7 @@
                                                 </div>
                                                 <label class="float-right">:</label>
                                                 <div class="col-8">
-                                                    <select name="agensi" class="form-control form-control-sm ml-3">
+                                                    <select name="agensi" class="form-control form-control-sm ml-3" autocomplete="off">
                                                         <option hidden selected value="">Sila Pilih</option>
                                                         @foreach ($agensi as $agen)
                                                             <option value="{{ $agen->name }}">{{ $agen->name }}</option>
@@ -86,6 +86,62 @@
                                                 </div>
                                             </div>
                                         @endunless
+                                        <div class="row mb-2">
+                                            <div class="col-3">
+                                                <label class="form-control-label mr-4">
+                                                    Kategori Metadata
+                                                </label>
+                                            </div>
+                                            <label class="float-right">:</label>
+                                            <div class="col-8">
+                                                <select name="kategori" id="kategori" class="form-control form-control-sm ml-3" autocomplete="off">
+                                                    <option hidden selected value="">Sila Pilih</option>
+                                                    <option value="Dataset">Dataset</option>
+                                                    <option value="Services">Services</option>
+                                                    <option value="Imagery">Imagery</option>
+                                                    <option value="Gridded">Gridded</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-3">
+                                                <label class="form-control-label mr-4">
+                                                    Status
+                                                </label>
+                                            </div>
+                                            <label class="float-right">:</label>
+                                            <div class="col-8">
+                                                <select name="status" class="form-control form-control-sm ml-3" id="status" disabled autocomplete="off">
+                                                    <option hidden selected value="">Sila Pilih</option>
+                                                    <option value="Draf">Draf</option>
+                                                    <option value="Perlu Pengesahan">Perlu Pengesahan</option>
+                                                    <option value="Perlu Pembetulan">Perlu Pembetulan</option>
+                                                    <option value="Diterbitkan">Diterbitkan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-3">
+                                                <label class="form-control-label mr-4">
+                                                    Sela Masa
+                                                </label>
+                                            </div>
+                                            <label class="float-right">:</label>
+                                            <div class="col-8">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input class="form-control form-control-sm ml-3" type="date"
+                                                            name="tarikh_mula" value="" id="tarikh_mula"
+                                                            autocomplete="off" />
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input class="form-control form-control-sm ml-3" type="date"
+                                                            name="tarikh_akhir" value="" id="tarikh_akhir"
+                                                            autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row mb-2">
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4">
@@ -113,71 +169,15 @@
                                         <div class="row mb-2">
                                             <div class="col-3">
                                                 <label class="form-control-label mr-4">
-                                                    Kategori Metadata
-                                                </label>
-                                            </div>
-                                            <label class="float-right">:</label>
-                                            <div class="col-8">
-                                                <select name="kategori" class="form-control form-control-sm ml-3">
-                                                    <option hidden selected value="">Sila Pilih</option>
-                                                    <option value="Dataset">Dataset</option>
-                                                    <option value="Services">Services</option>
-                                                    <option value="Imagery">Imagery</option>
-                                                    <option value="Gridded">Gridded</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4">
-                                                    Status
-                                                </label>
-                                            </div>
-                                            <label class="float-right">:</label>
-                                            <div class="col-8">
-                                                <select name="status" class="form-control form-control-sm ml-3">
-                                                    <option hidden selected value="">Sila Pilih</option>
-                                                    <option value="Draf">Draf</option>
-                                                    <option value="Perlu Pengesahan">Perlu Pengesahan</option>
-                                                    <option value="Perlu Pembetulan">Perlu Pembetulan</option>
-                                                    <option value="Diterbitkan">Diterbitkan</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4">
-                                                    Sela Masa
-                                                </label>
-                                            </div>
-                                            <label class="float-right">:</label>
-                                            <div class="col-8">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <input class="form-control form-control-sm ml-3" type="date"
-                                                            name="tarikh_mula" value="{{ $tarikh }}"
-                                                            autocomplete="off" />
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <input class="form-control form-control-sm ml-3" type="date"
-                                                            name="tarikh_akhir" value="{{ $tarikh }}"
-                                                            autocomplete="off" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-3">
-                                                <label class="form-control-label mr-4">
                                                     Pengesah
                                                 </label>
                                             </div>
                                             <label class="float-right">:</label>
                                             <div class="col-8">
-                                                <select name="pengesah" class="form-control form-control-sm ml-3">
+                                                <select name="pengesah" class="form-control form-control-sm ml-3" autocomplete="off">
                                                     <option hidden selected value="">Sila Pilih</option>
-                                                    @foreach ($senarai_pengesah as $key => $val)
-                                                        <option value="{{ $val }}">{{ $val }}</option>
+                                                    @foreach ($senarai_pengesah as $sp)
+                                                        <option value="{{ $sp->id }}">{{ $sp->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -190,18 +190,17 @@
                                             </div>
                                             <label class="float-right">:</label>
                                             <div class="col-8">
-                                                <select name="penerbit" class="form-control form-control-sm ml-3">
+                                                <select name="penerbit" class="form-control form-control-sm ml-3" autocomplete="off">
                                                     <option hidden selected value="">Sila Pilih</option>
-                                                    <option value="bil_metadata_diterbitkan">Bilangan Metadata Diterbitkan
-                                                    </option>
-                                                    <option value="bil_metadata_belum_diterbitkan">Bilangan Metadata Belum
-                                                        Diterbitkan</option>
+                                                    @foreach ($senarai_penerbit as $sp)
+                                                        <option value="{{ $sp->id }}">{{ $sp->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col d-flex justify-content-end align-items-end mt-3">
 
-                                            <button class="btn btn-primary btn-sm mr-3" type="submit"><i
+                                            <button class="btn btn-primary btn-sm mr-3" type="button" id="btnCari"><i
                                                     class="fas fa-search"></i> CARI</button>
                                         </div>
                                     </form>
@@ -220,12 +219,14 @@
 
     <script>
         $(document).ready(function() {
+            var dateChoice = '';
+            var dateCheck = 1;
             $("#year").datepicker({
                 format: "yyyy",
                 startView: "years",
                 minViewMode: "years",
                 minViewMode: "years",
-                updateViewDate: true,
+//                updateViewDate: true,
                 changeYear: true,
                 autoclose: true,
             });
@@ -235,10 +236,82 @@
                 startView: "months",
                 minViewMode: "months",
                 minViewMode: "months",
-                updateViewDate: true,
+//                updateViewDate: true,
                 changeYear: true,
                 autoclose: true,
-            })
+            });
+            
+            $(document).on('click','#btnCari',function(){
+                var jenisLaporan = $('#cari').val();
+                var kategori = $('#kategori').val();
+                var year = $('#year').val();
+                var month = $('#month').val();
+                var tarikh_mula = $('#tarikh_mula').val();
+                var tarikh_akhir = $('#tarikh_akhir').val();
+                
+                if(dateChoice != "" && dateChoice == "selaMasa"){
+                    if(tarikh_mula == "" || tarikh_akhir == ""){
+                        dateCheck *= 0;
+                    }
+                }else if(dateChoice != "" && dateChoice == "tahunBulan"){
+                    if(year == "" || month == ""){
+                        dateCheck *= 0;
+                    }
+                }
+                console.log(jenisLaporan == "",kategori == "",dateChoice,dateCheck);
+                
+                if(jenisLaporan == "" || kategori == "" || dateChoice == "" || dateCheck == 0){
+                    alert('Sila isi: \n- Jenis Laporan Metadata\n- Kategori Metadata\n- Tahun dan Bulan ATAU Sela Masa');
+                }else{
+                    $("#formCarianLaporanMetadata").submit();
+                }
+            });
+            $(document).on('change','#year',function(){
+                if($(this).val() != ""){
+                    $('#tarikh_mula,#tarikh_akhir').prop('disabled',true);
+                    dateChoice = "tahunBulan";
+                }else if($(this).val() == "" && $('#month').val() == ""){
+                    $('#tarikh_mula,#tarikh_akhir').prop('disabled',false);
+                    dateChoice = "";
+                }
+            });
+            $(document).on('change','#month',function(){
+                if($(this).val() != ""){
+                    $('#tarikh_mula,#tarikh_akhir').prop('disabled',true);
+                    dateChoice = "tahunBulan";
+                }else if($(this).val() == "" && $('#year').val() == ""){
+                    $('#tarikh_mula,#tarikh_akhir').prop('disabled',false);
+                    dateChoice = "";
+                }
+            });
+            $(document).on('change','#tarikh_mula',function(){
+                if($(this).val() != "" || $('#tarikh_akhir').val() != ""){
+                    $('#year,#month').prop('disabled',true);
+                    dateChoice = "selaMasa";
+                }else if($(this).val() == "" || $('#tarikh_akhir').val() == ""){
+                    $('#year,#month').prop('disabled',false);
+                    dateChoice = "";
+                }
+            });
+            $(document).on('change','#tarikh_akhir',function(){
+                if($(this).val() != "" || $('#tarikh_mula').val() != ""){
+                    $('#year,#month').prop('disabled',true);
+                    dateChoice = "selaMasa";
+                }else if($(this).val() == "" || $('#tarikh_mula').val() == ""){
+                    $('#year,#month').prop('disabled',false);
+                    dateChoice = "";
+                }
+            });
+            $(document).on('change','#cari',function(){
+                if($(this).val() != ""){
+                    if($(this).val() == "yes"){
+                        $('#status').find('option').remove().end().append('<option value="Diterbitkan" selected>Diterbitkan</option>');
+                    }else if($(this).val() == "0"){
+                        $('#status').find('option').remove().end().append('<option value="" disabled selected>Sila Pilih</option><option value="Draf">Draf</option><option value="Perlu Pengesahan">Perlu Pengesahan</option><option value="Perlu Pembetulan">Perlu Pembetulan</option>');
+                    }
+                    $('#status').prop('disabled',false);
+                }
+            });
         });
     </script>
 @stop

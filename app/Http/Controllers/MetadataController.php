@@ -483,7 +483,8 @@ class MetadataController extends Controller {
         }
 
         if (isset($request->tarikh_mula) && $request->tarikh_mula != "" && isset($request->tarikh_tamat) && $request->tarikh_tamat != "") {
-            $query = $query->orWhereBetween('createdate', [$request->tarikh_mula . ' 00:00:01', $request->tarikh_tamat . ' 59:59:59']);
+            $query = $query->where('createdate', '>=', date('Y-m-d H:i:s', strtotime($request->tarikh_mula . ' 00:00:01')));
+            $query = $query->where('createdate', '<=', date('Y-m-d H:i:s', strtotime($request->tarikh_tamat . ' 23:59:59')));
         } else {
             if (isset($request->tarikh_mula) && $request->tarikh_mula != "") {
                 $params['tarikh_mula'] = $request->tarikh_mula;
@@ -3263,6 +3264,8 @@ class MetadataController extends Controller {
             $mg->title = $request->c2_metadataName;
             $mg->content_type = $request->c1_content_info;
             $mg->c10_state = $request->c10_state;
+            $mg->kategori = strtolower($request->kategori);
+            $mg->agensi_organisasi = auth::user()->agensiOrganisasi->name;
 
             if (strtolower($request->kategori) != 'services' && isset($request->file_contohJenisMetadata)) {
                 $mg->file_contohjenismetadata = $this->muat_naik_contohJenisMetadata($request);
@@ -3470,9 +3473,6 @@ class MetadataController extends Controller {
             $this->store($request);
             return redirect('mygeo_senarai_metadata')->with('message', 'Metadata Berjaya Dihantar');
         }else{
-            
-
-
             $mt = MetadataTemplate::where('status','active')->get()->first();
     //        dd($mt,strtolower($request->kategori),$mt->template[strtolower($request->kategori)]);
             $mandatory_fields = [];
@@ -3688,6 +3688,8 @@ class MetadataController extends Controller {
                 $mg->title = $request->c2_metadataName;
                 $mg->content_type = $request->c1_content_info;
                 $mg->c10_state = $request->c10_state;
+                $mg->kategori = strtolower($request->kategori);
+                $mg->agensi_organisasi = auth::user()->agensiOrganisasi->name;
 
                 if (strtolower($request->kategori) != 'services') {
                     if (isset($_FILES['file_contohJenisMetadata']['tmp_name']) && file_exists($_FILES['file_contohJenisMetadata']['tmp_name'])) {
@@ -3824,6 +3826,7 @@ class MetadataController extends Controller {
                     $metadata = MetadataGeo::on('pgsql2')->find($mg->id);
                     $metadata->timestamps = false;
                     $metadata->disahkan = 'yes';
+                    $metadata->pengesah = auth::user()->id;
                     $metadata->changedate = date("Y-m-d H:i:s");
                     $metadata->update();
 
@@ -3904,6 +3907,7 @@ class MetadataController extends Controller {
                 $metadata->timestamps = false;
                 $metadata->changedate = date("Y-m-d H:i:s");
                 $metadata->disahkan = 'yes';
+                $metadata->pengesah = auth::user()->id;
                 $metadata->update();
 
                 $ftestxml2 = <<<XML
@@ -3954,6 +3958,7 @@ class MetadataController extends Controller {
             $metadata = MetadataGeo::on('pgsql2')->find($_POST['metadata_id']);
             $metadata->timestamps = false;
             $metadata->disahkan = 'yes';
+            $metadata->pengesah = auth::user()->id;
             $metadata->changedate = date("Y-m-d H:i:s");
             $metadata->update();
 

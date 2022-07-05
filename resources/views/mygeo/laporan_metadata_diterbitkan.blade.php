@@ -74,23 +74,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $counter = 0; ?>
                                         @foreach ($metadatas as $key => $val)
                                             @if ($val[1]->disahkan == 'yes')
-                                                <?php $counter++; ?>
                                                 <tr>
-                                                    <td>{{ $counter }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>
                                                         <?php echo $val[1]->title; ?>
                                                     </td>
                                                     <td>
-                                                        <?php
-                                                        $agency = '';
-                                                        if (isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != '') {
-                                                            $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
-                                                        }
-                                                        echo $agency;
-                                                        ?>
+                                                        <?php echo ucWords($val[1]->agensi_organisasi); ?>
                                                     </td>
                                                     <td>
                                                         <?php
@@ -102,13 +94,7 @@
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        <?php
-                                                        $category = '';
-                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != '') {
-                                                            $category = trim($val[0]->hierarchyLevel->MD_ScopeCode);
-                                                        }
-                                                        echo $category;
-                                                        ?>
+                                                        <?php echo ucWords($val[1]->kategori); ?>
                                                     </td>
                                                     <td>
                                                         {{ date('d/m/Y', strtotime($val[1]->changedate)) }}
@@ -119,7 +105,7 @@
                                     </tbody>
                                     <tfoot>
                                         <th>JUMLAH KESELURUHAN METADATA</th>
-                                        <th>{{ $counter }}</th>
+                                        <th>{{ count($metadatas) }}</th>
                                     </tfoot>
                                 </table>
                             </div>
@@ -169,11 +155,11 @@
                         className: 'btn btn-sm btn-primary',
                         title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
                     },
-                    {
-                        text: 'Word',
-                        className: 'btn btn-sm btn-primary btn_download_word_laporan_bil_metadata_terbit_ikut_agensi',
-                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)',
-                    }
+//                    {
+//                        text: 'Word',
+//                        className: 'btn btn-sm btn-primary btn_download_word_laporan_bil_metadata_terbit_ikut_agensi',
+//                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)',
+//                    }
                 ],
                 "scrollX": true,
                 "ordering": false,
@@ -241,46 +227,14 @@
             var chart = am4core.create("chartdiv", am4charts.XYChart);
 
             // Add data
-            chart.data = [{
-                "country": "USA",
-                "visits": 2025
-            }, {
-                "country": "China",
-                "visits": 1882
-            }, {
-                "country": "Japan",
-                "visits": 1809
-            }, {
-                "country": "Germany",
-                "visits": 1322
-            }, {
-                "country": "UK",
-                "visits": 1122
-            }, {
-                "country": "France",
-                "visits": 1114
-            }, {
-                "country": "India",
-                "visits": 984
-            }, {
-                "country": "Spain",
-                "visits": 711
-            }, {
-                "country": "Netherlands",
-                "visits": 665
-            }, {
-                "country": "Russia",
-                "visits": 580
-            }, {
-                "country": "South Korea",
-                "visits": 443
-            }, {
-                "country": "Canada",
-                "visits": 441
-            }, {
-                "country": "Brazil",
-                "visits": 395
-            }];
+            chart.data = {!! htmlspecialchars_decode(json_encode($chartArrayFixed)) !!};
+//            chart.data = [{
+//                "country": "USA",
+//                "visits": 2025
+//            }, {
+//                "country": "Brazil",
+//                "visits": 395
+//            }];
 
             // Create axes
 
