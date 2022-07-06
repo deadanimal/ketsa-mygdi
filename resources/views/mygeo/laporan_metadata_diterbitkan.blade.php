@@ -61,7 +61,7 @@
                             <div class="card-body mb-0">
                                 <div class="mb-5" id="chartdiv"></div>
                                 <h4 class="heading text-muted">Bilangan keseluruhan metadata yang diterbitkan (Mengikut
-                                    agensi)</h4>
+                                    agensi)howwwww</h4>
                                 <table id="laporan_seluruh2" class="table table-bordered table-striped table-sm" style="width:100%;">
                                     <thead>
                                         <tr>
