@@ -867,7 +867,7 @@ class LaporanDashboardController extends Controller
 
     public function laporan_metadata_search(Request $request)
     {
-        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','data','is_draf','disahkan','changedate','title','agensi_organisasi','kategori','portal_user_id')->with('penerbitDetail');
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','changedate');
         if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
             $metadatasdb = $metadatasdb->where('agensi_organisasi',auth::user()->agensiOrganisasi->name);
         }else{
@@ -914,11 +914,17 @@ class LaporanDashboardController extends Controller
         $metadatasdb = $metadatasdb->where('kategori',strtolower($request->kategori));
         $metadatasdb = $metadatasdb->orderBy('id', 'DESC')->get();
 
-        $metadatas = $chartArray = $chartArrayFixed = [];
-        $metadatas = $metadatasdb;
+        $chartArray = $chartArrayFixed = [];
         foreach ($metadatasdb as $met) {
             $chartArray[date('F Y',strtotime($met->changedate))][] = 'test';
         }
+        uksort($chartArray, function($a1, $a2) {
+            $time1 = strtotime($a1);
+            $time2 = strtotime($a2);
+
+            return $time1 - $time2;
+        });
+//        dd($chartArray);
         if(!empty($chartArray)){
             foreach($chartArray as $key=>$val){
                 $chartArrayFixed[] = ["country"=>$key,"visits"=>count($val)];
@@ -926,10 +932,107 @@ class LaporanDashboardController extends Controller
         }
 
         if ($request->jenis_laporan == 'yes') {
-            return view('mygeo.laporan_metadata_diterbitkan', compact('metadatas','chartArrayFixed'));
+            return view('mygeo.laporan_metadata_diterbitkan', compact('chartArrayFixed','request'));
         } else {
-            return view('mygeo.laporan_metadata_belum_diterbitkan', compact('metadatas','chartArrayFixed'));
+            return view('mygeo.laporan_metadata_belum_diterbitkan', compact('chartArrayFixed','request'));
         }
+    }
+    
+    public function getLaporanMetadata(){
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','data','is_draf','disahkan','changedate','title','agensi_organisasi','kategori','portal_user_id')->with('penerbitDetail');
+        if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
+            $metadatasdb = $metadatasdb->where('agensi_organisasi',auth::user()->agensiOrganisasi->name);
+        }else{
+            if(isset($_GET['agensi']) && $_GET['agensi'] != ""){
+                $metadatasdb = $metadatasdb->where('agensi_organisasi',$_GET['agensi']);
+            }
+        }
+        
+        if($_GET['tahun'] != "" && $_GET['bulan'] != ""){
+            if($_GET['jenis_laporan'] == "yes"){ //diterbitkan
+                $metadatasdb = $metadatasdb->whereYear('changedate', '=', $_GET['tahun'])->whereMonth('changedate', '=', $_GET['bulan']);
+            }else{
+                $metadatasdb = $metadatasdb->whereYear('createdate', '=', $_GET['tahun'])->whereMonth('createdate', '=', $_GET['bulan']);
+            }
+        }elseif($_GET['tarikh_mula'] != "" && $_GET['tarikh_akhir'] != ""){
+            if($_GET['jenis_laporan'] == "yes"){ //diterbitkan
+                $metadatasdb = $metadatasdb->where('changedate', '>=', $_GET['tarikh_mula'])->where('changedate', '<=', $_GET['tarikh_akhir']);
+            }else{
+                $metadatasdb = $metadatasdb->where('createdate', '>=', $_GET['tarikh_mula'])->where('createdate', '<=', $_GET['tarikh_akhir']);
+            }
+        }
+        
+        if($_GET['status'] != "" && $_GET['jenis_laporan'] != "yes"){
+            if($_GET['status'] == "Draf"){
+                $metadatasdb = $metadatasdb->where('is_draf','yes');
+            }elseif($_GET['status'] == "Perlu Pengesahan"){
+                $metadatasdb = $metadatasdb->where('disahkan','0');
+            }elseif($_GET['status'] == "Perlu Pembetulan"){
+                $metadatasdb = $metadatasdb->where('disahkan','no');
+            }elseif($_GET['status'] == "Diterbitkan"){
+                //no need to filter. already done by where('disahkan') line below
+            }
+        }else{
+            $metadatasdb = $metadatasdb->where('disahkan',$_GET['jenis_laporan']);
+        }
+        
+        if($_GET['pengesah'] != ""){
+            $metadatasdb = $metadatasdb->where('pengesah',$_GET['pengesah']);
+        }
+        if($_GET['penerbit'] != ""){
+            $metadatasdb = $metadatasdb->where('portal_user_id',$_GET['penerbit']);
+        }
+        
+        $metadatasdb = $metadatasdb->where('kategori',strtolower($_GET['kategori']));
+        $metadatasTotal = $metadatasdb;
+        
+        $metadatasTotal = $metadatasTotal->get();
+        $metadatasdb = $metadatasdb->orderBy('id', 'DESC')->skip($_GET['start'])->take($_GET['length'])->get();
+
+        $metadatas = $chartArray = $chartArrayFixed = [];
+        $metadatas = $metadatasdb;
+        $data = [];
+        $counter = 1;
+        foreach ($metadatasdb as $met) {
+            if($_GET['jenis_laporan'] == 'yes'){
+                $data[] = array(
+                    "bil"=>$counter,
+                    "namaMetadata"=>$met->title,
+                    "agensi"=>ucWords($met->agensi_organisasi),
+                    "penerbit"=>(isset($met->penerbitDetail) ? ucWords($met->penerbitDetail->name):""),
+                    "kategori"=>ucWords($met->kategori),
+                    "tarikhTerbit"=>date('d/m/Y', strtotime($met->changedate))
+                );
+            }elseif($_GET['jenis_laporan'] == '0'){
+                $stat = "";
+                if($met->is_isDraf == "yes"){
+                    $stat = "Draf";
+                }elseif($met->disahkan == "0"){
+                    $stat = "Perlu Pengesahan";
+                    
+                }elseif($met->disahkan == "no"){
+                    $stat = "Perlu Pembetulan";
+                }
+                $data[] = array(
+                    "bil"=>$counter,
+                    "namaMetadata"=>$met->title,
+                    "agensi"=>ucWords($met->agensi_organisasi),
+                    "status"=>$stat,
+                    "kategori"=>ucWords($met->kategori),
+                    "tarikhTerbit"=>date('d/m/Y', strtotime($met->changedate))
+                );
+            }
+            $counter++;
+        }
+        
+        $response = array(
+            "draw" => intval($_GET['draw']),
+            "iTotalRecords" => count($metadatasdb),
+            "iTotalDisplayRecords" => count($metadatasTotal),
+            "aaData" => $data
+        );
+
+        return response()->json($response);
     }
 
     public function mygeo_dashboard_data_asas(Request $request)

@@ -61,7 +61,7 @@
                             <div class="card-body">
                                 <div class="mb-5" id="chartdiv"></div>
                                 <h4 class="heading text-muted">Bilangan metadata yang belum diterbitkan</h4>
-                                <table id="laporan_lulus" class="table table-bordered table-striped table-sm" style="width:100%;">
+                                <table id="laporan_lulus2" class="table table-bordered table-striped table-sm" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -72,46 +72,6 @@
                                             <th>TARIKH DITERBITKAN</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach ($metadatas as $key => $val)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>
-                                                    <?php echo $val->title; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo ucWords($val->agensi_organisasi); ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    $status = '';
-                                                    if ($val->is_draf == 'yes') {
-                                                        $status = 'Draf';
-                                                    } else {
-                                                        if ($val->disahkan == '0') {
-                                                            $status = 'Perlu Pengesahan';
-                                                        } elseif ($val->disahkan == 'yes') {
-                                                            $status = 'Diterbitkan';
-                                                        } elseif ($val->disahkan == 'no') {
-                                                            $status = 'Perlu Pembetulan';
-                                                        }
-                                                    }
-                                                    echo $status;
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo ucWords($val->kategori); ?>
-                                                </td>
-                                                <td>
-                                                    {{ date('d/m/Y', strtotime($val->changedate)) }}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <th>JUMLAH KESELURUHAN METADATA</th>
-                                        <th>{{ count($metadatas) }}</th>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -140,6 +100,69 @@
 
     <script>
         $(document).ready(function() {
+            $('#laporan_lulus2').DataTable({
+                'processing': true,
+                'serverSide': true,
+                "scrollX": true,
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": false,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url':'{{ url("/getLaporanMetadata") }}',
+                    'type':'GET',
+                    'data' : {
+                        "csrf" : "{{ csrf_token() }}",
+                        "agensi" : "{{ $request->agensi }}",
+                        "tahun" : "{{ $request->tahun }}",
+                        "bulan" : "{{ $request->bulan }}",
+                        "tarikh_mula" : "{{ $request->tarikh_mula }}",
+                        "tarikh_akhir" : "{{ $request->tarikh_akhir }}",
+                        "jenis_laporan" : "{{ $request->jenis_laporan }}",
+                        "status" : "{{ $request->status }}",
+                        "pengesah" : "{{ $request->pengesah }}",
+                        "penerbit" : "{{ $request->penerbit }}",
+                        "kategori" : "{{ $request->kategori }}"
+                    }
+                },
+                'columns': [
+                    { data: 'bil' },
+                    { data: 'namaMetadata' },
+                    { data: 'agensi' },
+                    { data: 'status' },
+                    { data: 'kategori' },
+                    { data: 'tarikhTerbit' }
+                ],
+                "language": {
+                    "infoFiltered": ""
+                },
+                "buttons": [{
+                        extend: 'csv',
+                        className: 'btn btn-sm btn-danger',
+                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Cetak',
+                        className: 'btn btn-sm btn-primary',
+                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
+                    },
+//                    {
+//                        text: 'Word',
+//                        className: 'btn btn-sm btn-primary btn_download_word_laporan_bil_metadata_terbit_ikut_agensi',
+//                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)',
+//                    }
+                ],
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+            });
+            /*
             $("#laporan_lulus").DataTable({
                 "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
@@ -186,6 +209,7 @@
                     }
                 }
             });
+            */
         });
 
         $(document).ready(function() {

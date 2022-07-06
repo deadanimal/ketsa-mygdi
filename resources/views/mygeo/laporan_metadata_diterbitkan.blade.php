@@ -62,7 +62,7 @@
                                 <div class="mb-5" id="chartdiv"></div>
                                 <h4 class="heading text-muted">Bilangan keseluruhan metadata yang diterbitkan (Mengikut
                                     agensi)</h4>
-                                <table id="laporan_seluruh" class="table table-bordered table-striped table-sm" style="width:100%;">
+                                <table id="laporan_seluruh2" class="table table-bordered table-striped table-sm" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>BIL</th>
@@ -73,32 +73,6 @@
                                             <th>TARIKH DITERBITKAN</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach ($metadatas as $key => $val)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>
-                                                    <?php echo $val->title; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo ucWords($val->agensi_organisasi); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo (isset($val->penerbitDetail) ? ucWords($val->penerbitDetail->name):""); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo ucWords($val->kategori); ?>
-                                                </td>
-                                                <td>
-                                                    {{ date('d/m/Y', strtotime($val->changedate)) }}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <th>JUMLAH KESELURUHAN METADATA</th>
-                                        <th>{{ count($metadatas) }}</th>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -127,10 +101,42 @@
 
     <script>
         $(document).ready(function() {
-            $("#laporan_seluruh").DataTable({
-                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+            $('#laporan_seluruh2').DataTable({
+                'processing': true,
+                'serverSide': true,
+                "scrollX": true,
+                "ordering": false,
+                "responsive": true,
+                "autoWidth": false,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url':'{{ url("/getLaporanMetadata") }}',
+                    'type':'GET',
+                    'data' : {
+                        "csrf" : "{{ csrf_token() }}",
+                        "agensi" : "{{ $request->agensi }}",
+                        "tahun" : "{{ $request->tahun }}",
+                        "bulan" : "{{ $request->bulan }}",
+                        "tarikh_mula" : "{{ $request->tarikh_mula }}",
+                        "tarikh_akhir" : "{{ $request->tarikh_akhir }}",
+                        "jenis_laporan" : "{{ $request->jenis_laporan }}",
+                        "status" : "{{ $request->status }}",
+                        "pengesah" : "{{ $request->pengesah }}",
+                        "penerbit" : "{{ $request->penerbit }}",
+                        "kategori" : "{{ $request->kategori }}"
+                    }
+                },
+                'columns': [
+                    { data: 'bil' },
+                    { data: 'namaMetadata' },
+                    { data: 'agensi' },
+                    { data: 'penerbit' },
+                    { data: 'kategori' },
+                    { data: 'tarikhTerbit' }
+                ],
+                "language": {
+                    "infoFiltered": ""
+                },
                 "buttons": [{
                         extend: 'csv',
                         className: 'btn btn-sm btn-danger',
@@ -153,26 +159,57 @@
 //                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)',
 //                    }
                 ],
-                "scrollX": true,
-                "ordering": false,
-                "responsive": true,
-                "autoWidth": true,
-                "oLanguage": {
-                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
-                    "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
-                    "sEmptyTable": "Tiada rekod ditemui",
-                    "sZeroRecords": "Tiada rekod ditemui",
-                    "sLengthMenu": "Papar _MENU_ rekod",
-                    "sLoadingRecords": "Sila tunggu...",
-                    "sSearch": "Carian:",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": ">",
-                        "sPrevious": "<",
-                    }
-                }
+                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
             });
+            
+//            $("#laporan_seluruh").DataTable({
+//                "dom": "<'row'<'col-sm-3'i><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+//                    "<'row'<'col-sm-12'tr>>" +
+//                    "<'row mt-4'<'col-sm-5'l><'col-sm-7'p>>",
+//                "buttons": [{
+//                        extend: 'csv',
+//                        className: 'btn btn-sm btn-danger',
+//                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
+//                    },
+//                    {
+//                        extend: 'excel',
+//                        className: 'btn btn-sm btn-success',
+//                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
+//                    },
+//                    {
+//                        extend: 'print',
+//                        text: 'Cetak',
+//                        className: 'btn btn-sm btn-primary',
+//                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)'
+//                    },
+////                    {
+////                        text: 'Word',
+////                        className: 'btn btn-sm btn-primary btn_download_word_laporan_bil_metadata_terbit_ikut_agensi',
+////                        title: 'BILANGAN KESELURUHAN METADATA YANG DITERBITKAN (MENGIKUT AGENSI)',
+////                    }
+//                ],
+//                "scrollX": true,
+//                "ordering": false,
+//                "responsive": true,
+//                "autoWidth": true,
+//                "oLanguage": {
+//                    "sInfo": "Paparan _TOTAL_ rekod (_START_ hingga _END_)",
+//                    "sInfoEmpty": "Paparan 0 rekod (0 hingga 0)",
+//                    "sEmptyTable": "Tiada rekod ditemui",
+//                    "sZeroRecords": "Tiada rekod ditemui",
+//                    "sLengthMenu": "Papar _MENU_ rekod",
+//                    "sLoadingRecords": "Sila tunggu...",
+//                    "sSearch": "Carian:",
+//                    "oPaginate": {
+//                        "sFirst": "Pertama",
+//                        "sLast": "Terakhir",
+//                        "sNext": ">",
+//                        "sPrevious": "<",
+//                    }
+//                }
+//            });
         });
 
         $(document).ready(function() {
