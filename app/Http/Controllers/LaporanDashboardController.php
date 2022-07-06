@@ -867,7 +867,7 @@ class LaporanDashboardController extends Controller
 
     public function laporan_metadata_search(Request $request)
     {
-        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','data','changedate','title','disahkan','agensi_organisasi','kategori');
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','data','is_draf','disahkan','changedate','title','agensi_organisasi','kategori','portal_user_id')->with('penerbitDetail');
         if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
             $metadatasdb = $metadatasdb->where('agensi_organisasi',auth::user()->agensiOrganisasi->name);
         }else{
@@ -890,7 +890,7 @@ class LaporanDashboardController extends Controller
             }
         }
         
-        if($request->status !== null){
+        if($request->status !== null && $request->jenis_laporan != "yes"){
             if($request->status == "Draf"){
                 $metadatasdb = $metadatasdb->where('is_draf','yes');
             }elseif($request->status == "Perlu Pengesahan"){
@@ -900,7 +900,10 @@ class LaporanDashboardController extends Controller
             }elseif($request->status == "Diterbitkan"){
                 //no need to filter. already done by where('disahkan') line below
             }
+        }else{
+            $metadatasdb = $metadatasdb->where('disahkan',$request->jenis_laporan);
         }
+        
         if($request->pengesah !== null){
             $metadatasdb = $metadatasdb->where('pengesah',$request->pengesah);
         }
@@ -909,23 +912,11 @@ class LaporanDashboardController extends Controller
         }
         
         $metadatasdb = $metadatasdb->where('kategori',strtolower($request->kategori));
-        $metadatasdb = $metadatasdb->where('disahkan',$request->jenis_laporan);
-
-        //perincian
-        $metadatasdb = $metadatasdb->orderBy('id', 'DESC')->get()->all();
+        $metadatasdb = $metadatasdb->orderBy('id', 'DESC')->get();
 
         $metadatas = $chartArray = $chartArrayFixed = [];
+        $metadatas = $metadatasdb;
         foreach ($metadatasdb as $met) {
-            $ftestxml2 = <<<XML
-                $met->data
-                XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
-            $xml2 = simplexml_load_string($ftestxml2);
-            $metadatas[$met->id] = [$xml2, $met];
             $chartArray[date('F Y',strtotime($met->changedate))][] = 'test';
         }
         if(!empty($chartArray)){

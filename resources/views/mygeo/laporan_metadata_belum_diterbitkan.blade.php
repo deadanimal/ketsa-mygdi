@@ -73,60 +73,44 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $counter = 0; ?>
                                         @foreach ($metadatas as $key => $val)
-                                            @if ($val[1]->disahkan == 'no' || $val[1]->disahkan == '0' || $val[1]->is_draf == 'yes')
-                                                <?php $counter++; ?>
-                                                <tr>
-                                                    <td>{{ $counter }}</td>
-                                                    <td>
-                                                        <?php echo $val[1]->title; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                        $agency = '';
-                                                        if (isset($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString) != '') {
-                                                            $agency = $val[0]->contact->CI_ResponsibleParty->organisationName->CharacterString;
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <?php echo $val->title; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo ucWords($val->agensi_organisasi); ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    $status = '';
+                                                    if ($val->is_draf == 'yes') {
+                                                        $status = 'Draf';
+                                                    } else {
+                                                        if ($val->disahkan == '0') {
+                                                            $status = 'Perlu Pengesahan';
+                                                        } elseif ($val->disahkan == 'yes') {
+                                                            $status = 'Diterbitkan';
+                                                        } elseif ($val->disahkan == 'no') {
+                                                            $status = 'Perlu Pembetulan';
                                                         }
-                                                        echo $agency;
-                                                        ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                        $status = '';
-                                                        if ($val[1]->is_draf == 'yes') {
-                                                            $status = 'Draf';
-                                                        } else {
-                                                            if ($val[1]->disahkan == '0') {
-                                                                $status = 'Perlu Pengesahan';
-                                                            } elseif ($val[1]->disahkan == 'yes') {
-                                                                $status = 'Diterbitkan';
-                                                            } elseif ($val[1]->disahkan == 'yes') {
-                                                                $status = 'Perlu Pembetulan';
-                                                            }
-                                                        }
-                                                        echo $status;
-                                                        ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                        $category = '';
-                                                        if (isset($val[0]->hierarchyLevel->MD_ScopeCode) && $val[0]->hierarchyLevel->MD_ScopeCode != '') {
-                                                            $category = trim($val[0]->hierarchyLevel->MD_ScopeCode);
-                                                        }
-                                                        echo $category;
-                                                        ?>
-                                                    </td>
-                                                    <td>
-                                                        {{ date('d/m/Y', strtotime($val[1]->changedate)) }}
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                                    }
+                                                    echo $status;
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo ucWords($val->kategori); ?>
+                                                </td>
+                                                <td>
+                                                    {{ date('d/m/Y', strtotime($val->changedate)) }}
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
                                         <th>JUMLAH KESELURUHAN METADATA</th>
-                                        <th>{{ $counter }}</th>
+                                        <th>{{ count($metadatas) }}</th>
                                     </tfoot>
                                 </table>
                             </div>

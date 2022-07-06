@@ -10,4 +10,12 @@ class MetadataGeo extends Model
     protected $guard_name = 'web';
     public $table = 'metadata';
     public $timestamps = false;
+    
+    public function pengesahDetail(){
+        return $this->hasOne('App\User', 'id', 'pengesah');
+    }
+    
+    public function penerbitDetail(){
+        return $this->setConnection('pgsql')->hasOne('App\User', 'id', 'portal_user_id');
+    }
 }

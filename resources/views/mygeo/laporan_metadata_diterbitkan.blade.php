@@ -75,32 +75,24 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($metadatas as $key => $val)
-                                            @if ($val[1]->disahkan == 'yes')
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>
-                                                        <?php echo $val[1]->title; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo ucWords($val[1]->agensi_organisasi); ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                        $publisher = '';
-                                                        if (isset($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) && trim($val[0]->contact->CI_ResponsibleParty->individualName->CharacterString) != '') {
-                                                            $publisher = $val[0]->contact->CI_ResponsibleParty->individualName->CharacterString;
-                                                        }
-                                                        echo $publisher;
-                                                        ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo ucWords($val[1]->kategori); ?>
-                                                    </td>
-                                                    <td>
-                                                        {{ date('d/m/Y', strtotime($val[1]->changedate)) }}
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <?php echo $val->title; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo ucWords($val->agensi_organisasi); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo (isset($val->penerbitDetail) ? ucWords($val->penerbitDetail->name):""); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo ucWords($val->kategori); ?>
+                                                </td>
+                                                <td>
+                                                    {{ date('d/m/Y', strtotime($val->changedate)) }}
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
