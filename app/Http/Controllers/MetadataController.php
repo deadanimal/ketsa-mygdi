@@ -1367,8 +1367,14 @@ class MetadataController extends Controller {
 
         $category = '';
         if (isset($metadataxml->hierarchyLevel->MD_ScopeCode) && $metadataxml->hierarchyLevel->MD_ScopeCode != '') {
-            $category = $metadataxml->hierarchyLevel->MD_ScopeCode;
+            $cate = (array)$metadataxml->hierarchyLevel->MD_ScopeCode;
+            foreach($cate as $key=>$val){
+                if(!is_array($val)){
+                    $category = $val;
+                }
+            }
         }
+        
         $sheet->setCellValue('A' . $row, 'Kategori');
         $sheet->setCellValue('B' . $row, $category);
 
@@ -2915,7 +2921,11 @@ class MetadataController extends Controller {
         $row += 2;
         $sheet->setCellValue('A' . $row, 'Additional Elements');
 
-        $category = MCategory::where('name', $category)->get()->first();
+        if($category == ""){
+            $category = MCategory::where('name', "Dataset")->get()->first();
+        }else{
+            $category = MCategory::where('name', ucfirst($category))->get()->first();
+        }
         $customMetadataInput = CustomMetadataInput::where('kategori', $category->id)->get();
         $custom_inputs = "";
         foreach ($customMetadataInput as $cmi) {
