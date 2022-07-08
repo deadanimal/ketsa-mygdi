@@ -46,7 +46,7 @@
                         @csrf
                         <input type="hidden" name="metadata_id" value="{{ $pengumuman->metadata_id }}">
                     </form>
-                    <a href="#" class="aViewMetadata" onClick="return false;" data-metid="{{$pengumuman->metadata_id}}">Perincian Metadata</a>
+                    <a href="{{ url('lihat_metadata_nologin').'/'.$pengumuman->metadata_id }}" class="aViewMetadata" data-metid="{{$pengumuman->metadata_id}}">Perincian Metadata</a>
                 </div>
             </div>
         </div>
@@ -55,10 +55,6 @@
 
 <script>
     $(document).ready(function(){
-        $(document).on("click", ".aViewMetadata", function() {
-            var metid = $(this).data('metid');
-            $("#formViewMetadata").submit();
-        });
     });
 </script>
 
