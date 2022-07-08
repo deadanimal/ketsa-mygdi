@@ -4091,7 +4091,9 @@ class MetadataController extends Controller {
         $at->user_id = Auth::user()->id;
         $at->data = 'Delete';
         $at->save();
-
+        
+        Pengumuman::where('metadata_id',$request->metadata_id)->delete();
+        
         return redirect('mygeo_senarai_metadata')->with('message', 'Metadata berjaya dihapus.');
     }
 
