@@ -129,11 +129,22 @@
     <script>
         $(document).ready(function() {
             document.title = '{{ $metadataName }}';
-            window.print();
+            
+            setTimeout(function(){
+                  window.print();
+            }, 1500);
 
+            //works for localhost and pipe env=====================
             window.addEventListener("focus", function(event){
-                window.location.href = "{{ url('lihat_metadata_nologin/').'/'.$id }}";
+               window.location.href = "{{ url('lihat_metadata_nologin/').'/'.$id }}";
             }, false);
+
+            //works for ketsa env=====================
+            /*
+            window.addEventListener('afterprint', (event) => {
+                window.location.href = "{{ url('lihat_metadata_nologin/').'/'.$id }}";
+            });
+            */
 
             <?php
     if(count($categories) > 0){
@@ -310,7 +321,7 @@
         var el = document.getElementById('nblt');
         el.dispatchEvent(new Event('change'));
 
-        searchLocation();
+        //searchLocation();
 
         function updateLayer() {
             var nbltValue = document.getElementById("nblt").value;
@@ -327,6 +338,7 @@
             }
         }
 
+        /*
         function searchLocation() {
             var markerIcon = L.icon({
                 iconUrl: 'css/leaflet@1.7.1/images/marker-icon-2x.png',
@@ -348,6 +360,7 @@
                 }
             });
         }
+        */
 
 
         function showRectangle(nblt, wblg, sblt, eblg) {
