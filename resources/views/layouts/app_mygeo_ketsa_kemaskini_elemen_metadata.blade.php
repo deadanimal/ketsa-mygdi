@@ -504,13 +504,13 @@
                                                 </a>
                                                 <ul class="nav nav-sm nav-treeview">
                                                     <li class="nav-item">
-                                                        <a href="{{ url('laporan_metadata') }}"
+                                                        <a href="{{ url('laporan_pilihan_metadata') }}"
                                                             class="nav-link active">
                                                             <span class="nav-link-text">Laporan Metadata</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="{{ url('laporan_data_asas') }}"
+                                                        <a href="{{ url('laporan_pilihan_data_asas') }}"
                                                             class="nav-link">
                                                             <span class="nav-link-text">Laporan Data Asas</span>
                                                         </a>

@@ -26,6 +26,8 @@ use function GuzzleHttp\json_encode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
 
 class DataAsasController extends Controller
 {

@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                <select name="c11_dist_format" id="c11_dist_format" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                <select name="c11_dist_format" id="c11_dist_format" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>
@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                <select name="c11_distributor" id="c11_distributor" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                <select name="c11_units_of_dist" id="c11_units_of_dist" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>
@@ -125,7 +125,7 @@
                             </div>
                             <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                <select name="c11_size" id="c11_size" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>
@@ -147,7 +147,7 @@
                             </div>
                             <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                <select name="c11_link" id="c11_link" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>
@@ -169,7 +169,7 @@
                             </div>
                             <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                <select name="c11_fees" id="c11_fees" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>
@@ -191,7 +191,7 @@
                             </div>
                             <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                <select name="c11_order_instructions" id="c11_order_instructions" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>
@@ -213,7 +213,7 @@
                             </div>
                             <div class="col-3">
                                 Textbox
-                                <select name="c2_product_type" id="c2_product_type" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                <select name="c11_medium" id="c11_medium" class="form-control form-control-sm ml-3 sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                     <option value="" selected>Pilih...</option>
                                 </select>
                             </div>

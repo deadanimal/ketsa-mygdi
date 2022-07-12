@@ -1059,7 +1059,7 @@
                                                                 </tr>
                                                                 <?php
                                                             }
-                                                            if($key == "c15_t4_comply_level_3"){
+                                                            if($key == "c15_t4_date_3"){
                                                                 ?>
                                                                 <tr class='TemporalValidity sortIt' <?php if($val['status'] == "inactive"){ ?>style="display:none;"<?php } ?>>
                                                                     <td>
@@ -1067,7 +1067,7 @@
                                                                             <b data-toggle="tooltip" title="Tarikh penilaian kualiti data"><?php echo __('lang.date'); ?> :</b>
                                                                             <div class="input-group date" id="c15_t4_accuTimeMeasure_date_div" data-target-input="nearest">
                                                                                 Textbox
-                                                                                <input type="date" name="c15_t4_comply_level_3" id="c15_t4_date_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
+                                                                                <input type="date" name="c15_t4_date_3" id="c15_t4_date_3" class="form-control form-control-sm sortable" data-status="<?php echo $val['status']; ?>" data-mandatory="<?php echo $val['mandatory']; ?>">
                                                                             </div>
                                                                         </label>
                                                                     </td>

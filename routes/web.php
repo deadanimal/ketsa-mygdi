@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/laporan_pilihan_data_asas', 'LaporanDashboardController@laporan_data_asas_filter');
     // Route::get('/laporan_data_asas', 'LaporanDashboardController@index_laporan_data');
-    Route::get('/laporan_data_asas', 'LaporanDashboardController@laporan_data_asas_searcb');
+    Route::get('/laporan_data_asas', 'LaporanDashboardController@laporan_data_asas_search');
     Route::get('/laporan_pilihan_metadata', 'LaporanDashboardController@laporan_metadata_filter');
     // Route::get('/laporan_metadata', 'LaporanDashboardController@index_laporan_metadata');
     Route::get('/laporan_metadata', 'LaporanDashboardController@laporan_metadata_search');

@@ -145,7 +145,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+<!--                    <div class="col-12">
                         <div class="card">
                             <div class="card-body p-3">
                                 <div class="row p-3 pl-0 mb-0">
@@ -174,7 +174,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="row">
@@ -309,43 +309,14 @@
 
             var chart = am4core.create("chart_bil_tahun", am4charts.XYChart);
             // Add data
-            chart.data = [{
-                "country": "Januari",
-                "visits": 4025
-            }, {
-                "country": "Februari",
-                "visits": 1882
-            }, {
-                "country": "Mac",
-                "visits": 1809
-            }, {
-                "country": "April",
-                "visits": 1322
-            }, {
-                "country": "Mei",
-                "visits": 1122
-            }, {
-                "country": "Jun",
-                "visits": 1114
-            }, {
-                "country": "Julai",
-                "visits": 984
-            }, {
-                "country": "Ogos",
-                "visits": 711
-            }, {
-                "country": "September",
-                "visits": 665
-            }, {
-                "country": "Oktober",
-                "visits": 580
-            }, {
-                "country": "November",
-                "visits": 441
-            }, {
-                "country": "Disember",
-                "visits": 395
-            }, ];
+            chart.data = {!! json_encode($statSeluruhMohonData) !!}
+//            chart.data = [{
+//                "country": "Januari",
+//                "visits": 4025
+//            }, {
+//                "country": "Disember",
+//                "visits": 395
+//            }, ];
 
             // Create axes
             let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -433,40 +404,14 @@
             categoryAxis.sortBySeries = series;
 
             // Add data
-            chart.data = [{
-                "country": "Special Use",
-                "visits": 0
-            }, {
-                "country": "Hypsography",
-                "visits": 1
-            }, {
-                "country": "Utility",
-                "visits": 0
-            }, {
-                "country": "Soil",
-                "visits": 0
-            }, {
-                "country": "Vegetation",
-                "visits": 13
-            }, {
-                "country": "Transportation",
-                "visits": 19
-            }, {
-                "country": "Hydrography",
-                "visits": 8
-            }, {
-                "country": "Geology",
-                "visits": 0
-            }, {
-                "country": "General",
-                "visits": 0
-            }, {
-                "country": "Demarcation",
-                "visits": 29
-            }, {
-                "country": "Built Environment",
-                "visits": 90
-            }, ];
+            chart.data = {!! json_encode($statMohonMengikutCatData) !!};
+//            chart.data = [{
+//                "country": "Special Use",
+//                "visits": 0
+//            }, {
+//                "country": "Built Environment",
+//                "visits": 90
+//            }, ];
 
             // Cursor
             chart.cursor = new am4charts.XYCursor();
@@ -482,262 +427,18 @@
             var chart = am4core.create("chart_bil_lapisan_data", am4charts.XYChart);
 
             // Add data
-            chart.data = [{
-                    "region": "Built Environment",
-                    "state": "Bank",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Building of Worship",
-                    "sales": 4
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Cemetry",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Clinic",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Commercial Building",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Community Hall",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Court",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Educational Building",
-                    "sales": 6
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Government Office",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Hospital",
-                    "sales": 4
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Hotel",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Hypermarket/Supermarket",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Petrol Station",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Police Station",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Residential Building",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Restaurant",
-                    "sales": 4
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Sport Complex",
-                    "sales": 3
-                },
-                {
-                    "region": "Built Environment",
-                    "state": "Stadium",
-                    "sales": 3
-                },
-                {
-                    "region": "Demarcation",
-                    "state": "District or Jajahan Coverage",
-                    "sales": 4
-                },
-                {
-                    "region": "Demarcation",
-                    "state": "Existing Landuse",
-                    "sales": 7
-                },
-                {
-                    "region": "Demarcation",
-                    "state": "Mukim Coverage Administrative",
-                    "sales": 5
-                },
-                {
-                    "region": "Demarcation",
-                    "state": "State Coverage",
-                    "sales": 4
-                },
-                {
-                    "region": "Demarcation",
-                    "state": "Zoning Landuse",
-                    "sales": 5
-                },
-                {
-                    "region": "Hydrography",
-                    "state": "Lake",
-                    "sales": 1
-                },
-                {
-                    "region": "Hydrography",
-                    "state": "River",
-                    "sales": 2
-                },
-                {
-                    "region": "Hydrography",
-                    "state": "Water Body",
-                    "sales": 1
-                },
-                {
-                    "region": "Hydrography",
-                    "state": "Damk",
-                    "sales": 1
-                },
-                {
-                    "region": "Hydrography",
-                    "state": "Reservoir",
-                    "sales": 1
-                },
-                {
-                    "region": "Hydrography",
-                    "state": "River Bank",
-                    "sales": 1
-                },
-                {
-                    "region": "Hydrography",
-                    "state": "Waterfall",
-                    "sales": 1
-                },
-                {
-                    "region": "Hypsography",
-                    "state": "Contour Line",
-                    "sales": 1
-                },
-                {
-                    "region": "Transportation",
-                    "state": "Bridge",
-                    "sales": 2
-                },
-                {
-                    "region": "Transportation",
-                    "state": "Rail Line",
-                    "sales": 3
-                },
-                {
-                    "region": "Transportation",
-                    "state": "Rail Station",
-                    "sales": 3
-                },
-                {
-                    "region": "Transportation",
-                    "state": "Rest & Service Area",
-                    "sales": 2
-                },
-                {
-                    "region": "Transportation",
-                    "state": "Road",
-                    "sales": 4
-                },
-                {
-                    "region": "Transportation",
-                    "state": "Tunnel",
-                    "sales": 2
-                },
-                {
-                    "region": "Transportation",
-                    "state": "Toll Plaza",
-                    "sales": 2
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Annual Camp",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Cleared Land",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Grass",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Perennials Crop",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Cocoa",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Coconut",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Coffee",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Oil Palm",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Paddy",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Pineapple",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Rubber",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Rumbia",
-                    "sales": 1
-                },
-                {
-                    "region": "Vegetation",
-                    "state": "Tea",
-                    "sales": 1
-                },
-            ];
+            chart.data = {!! json_encode($statMohonMengikutLapisanData) !!};
+//            chart.data = [{
+//                    "region": "Built Environment",
+//                    "state": "Bank",
+//                    "sales": 3
+//                },
+//                {
+//                    "region": "Vegetation",
+//                    "state": "Tea",
+//                    "sales": 1
+//                },
+//            ];
 
             // Create axes
             var yAxis = chart.yAxes.push(new am4charts.CategoryAxis());
@@ -760,20 +461,14 @@
                         case "Built Environment":
                             return chart.colors.getIndex(0);
                             break;
-                        case "Demarcation":
+                        case "Soil":
                             return chart.colors.getIndex(1);
                             break;
-                        case "Hydrography":
+                        case "Geology":
                             return chart.colors.getIndex(2);
                             break;
-                        case "Hypsography":
+                        case "Aeronautical":
                             return chart.colors.getIndex(3);
-                            break;
-                        case "Transportation":
-                            return chart.colors.getIndex(3);
-                            break;
-                        case "Vegetation":
-                            return chart.colors.getIndex(4);
                             break;
                     }
                 }
@@ -823,12 +518,10 @@
                 });
             }
 
-            addRange("Built Environment", "Stadium", "Bank", chart.colors.getIndex(0));
-            addRange("Demarcation", "Zoning Landuse", "District or Jajahan Coverage", chart.colors.getIndex(1));
-            addRange("Hydrography", "Waterfall", "Lake", chart.colors.getIndex(2));
-            addRange("Hypsography", "Contour Line", chart.colors.getIndex(3));
-            addRange("Transportation", "Toll Plaza", "Bridge", chart.colors.getIndex(3));
-            addRange("Vegetation", "Tea", "Annual Camp", chart.colors.getIndex(4));
+            addRange("Built Environment", "Institusi (Institutional - BD)", "Bank", chart.colors.getIndex(0));
+            addRange("Soil", "(Soil Classification)", "District or Jajahan Coverage", chart.colors.getIndex(1));
+            addRange("Geology", "Jenis Batuan (Geolithology - GA)", "Lake", chart.colors.getIndex(2));
+            addRange("Aeronautical", "Lapangan Terbang (Aerodrome- AB)", "Ruang Udara (Air Space - AA)", chart.colors.getIndex(3));
 
             chart.cursor = new am4charts.XYCursor();
 
@@ -932,29 +625,14 @@
             // Add a legend
             chart.legend = new am4charts.Legend();
 
-            chart.data = [{
-                "country": "Agensi Persekutuan/Agensi Negeri",
-                "litres": 199
-            }, {
-                "country": "Badan Berkanun",
-                "litres": 165
-            }, {
-                "country": "GLC",
-                "litres": 139
-            }, {
-                "country": "IPTA Pelajar",
-                "litres": 128
-            }, {
-                "country": "IPTA Pensyarah/Penyelidik",
-                "litres": 99
-            }, {
-                "country": "IPTS Pelajar",
-                "litres": 60
-            }, {
-                "country": "IPTS Pensyarah/Penyelidik",
-                "litres": 54
-            }];
-
+            chart.data = {!! json_encode($statMohonMengikutCatPemohonData) !!}
+//            chart.data = [{
+//                "country": "Agensi Persekutuan/Agensi Negeri",
+//                "litres": 199
+//            }, {
+//                "country": "IPTS Pensyarah/Penyelidik",
+//                "litres": 54
+//            }];
         });
 
         am4core.ready(function() {
@@ -967,28 +645,14 @@
             var chart = am4core.create("chart_bil_pemproses_data", am4charts.XYChart);
 
             // Add data
-            chart.data = [{
-                "country": "A",
-                "visits": 25
-            }, {
-                "country": "B",
-                "visits": 18
-            }, {
-                "country": "C",
-                "visits": 18
-            }, {
-                "country": "D",
-                "visits": 13
-            }, {
-                "country": "E",
-                "visits": 12
-            }, {
-                "country": "F",
-                "visits": 11
-            }, {
-                "country": "G",
-                "visits": 9
-            }, ];
+            chart.data = {!! json_encode($statAgihanTugasPegawai) !!}
+//            chart.data = [{
+//                "country": "A",
+//                "visits": 25
+//            }, {
+//                "country": "G",
+//                "visits": 9
+//            }, ];
 
             // Create axes
 
@@ -1030,43 +694,14 @@
             var chart = am4core.create("chart_penjimatan_kos_tahun_bulan", am4charts.XYChart3D);
 
             // Add data
-            chart.data = [{
-                "country": "Januari",
-                "visits": 4025
-            }, {
-                "country": "Februari",
-                "visits": 1882
-            }, {
-                "country": "Mac",
-                "visits": 1809
-            }, {
-                "country": "April",
-                "visits": 1322
-            }, {
-                "country": "Mei",
-                "visits": 1122
-            }, {
-                "country": "Jun",
-                "visits": 1114
-            }, {
-                "country": "Julai",
-                "visits": 984
-            }, {
-                "country": "Ogos",
-                "visits": 711
-            }, {
-                "country": "September",
-                "visits": 665
-            }, {
-                "country": "Oktober",
-                "visits": 580
-            }, {
-                "country": "November",
-                "visits": 443
-            }, {
-                "country": "Disember",
-                "visits": 441
-            }, ];
+            chart.data = {!! json_encode($anggaranJimatKosTahunBulan) !!};
+//            chart.data = [{
+//                "country": "November",
+//                "visits": 443
+//            }, {
+//                "country": "Disember",
+//                "visits": 441
+//            }, ];
 
             // Create axes
             let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -1122,40 +757,14 @@
             chart.scrollbarX = new am4core.Scrollbar();
 
             // Add data
-            chart.data = [{
-                "country": "Special Use",
-                "visits": 3025
-            }, {
-                "country": "Hypsography",
-                "visits": 1882
-            }, {
-                "country": "Utility",
-                "visits": 1809
-            }, {
-                "country": "Soil",
-                "visits": 1322
-            }, {
-                "country": "Vegetation",
-                "visits": 1122
-            }, {
-                "country": "Transportation",
-                "visits": 1114
-            }, {
-                "country": "Hydrography",
-                "visits": 984
-            }, {
-                "country": "Geology",
-                "visits": 711
-            }, {
-                "country": "General",
-                "visits": 665
-            }, {
-                "country": "Demarcation",
-                "visits": 580
-            }, {
-                "country": "Built Environment",
-                "visits": 443
-            }, ];
+            chart.data = {!! json_encode($anggaranJimatKosCat) !!};
+//            chart.data = [{
+//                "country": "Special Use",
+//                "visits": 3025
+//            }, {
+//                "country": "Built Environment",
+//                "visits": 443
+//            }, ];
 
             // Create axes
             var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());

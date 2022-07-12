@@ -47,7 +47,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="pl-lg-4 pb-lg-4">
-                                    <form action="/laporan_data_asas" method="get">
+                                    <form action="{{ url('/laporan_data_asas') }}" method="get">
                                         @method('GET')
                                         @csrf
                                         <div class="row mb-2">
@@ -62,8 +62,7 @@
                                                     required>
                                                     <option hidden selected value="">Sila Pilih</option>
                                                     <option value="laporan_perlepasan_data">Laporan Perlepasan Data</option>
-                                                    <option value="laporan_perkongsian_data">Laporan Perkongsian Data
-                                                    </option>
+                                                    <!--<option value="laporan_perkongsian_data">Laporan Perkongsian Data</option>-->
                                                     <option value="anggaran_jimat_kos">Anggaran Penjimatan Kos</option>
                                                     <option value="anggaran_jimat_kos_kategori">Anggaran Penjimatan Kos
                                                         Mengikut Kategori</option>
@@ -87,7 +86,7 @@
                                                 <select name="agensi" class="form-control form-control-sm ml-3">
                                                     <option hidden selected value="">Sila Pilih</option>
                                                     @foreach ($agensi as $agen)
-                                                        <option value="{{ $agen->name }}">{{ $agen->name }}</option>
+                                                        <option value="{{ $agen->id }}">{{ $agen->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -126,10 +125,9 @@
                                             <div class="col-8">
                                                 <select name="pemproses" class="form-control form-control-sm ml-3">
                                                     <option hidden selected value="">Sila Pilih</option>
-                                                    <option value="Dataset">Dataset</option>
-                                                    <option value="Services">Services</option>
-                                                    <option value="Imagery">Imagery</option>
-                                                    <option value="Gridded">Gridded</option>
+                                                    @foreach($pemproses as $p)
+                                                        <option value="{{ $p->name }}">{{ $p->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -143,10 +141,9 @@
                                             <div class="col-8">
                                                 <select name="kategori" class="form-control form-control-sm ml-3">
                                                     <option hidden selected value="">Sila Pilih</option>
-                                                    <option value="Draf">Draf</option>
-                                                    <option value="Perlu Pengesahan">Perlu Pengesahan</option>
-                                                    <option value="Perlu Pembetulan">Perlu Pembetulan</option>
-                                                    <option value="Diterbitkan">Diterbitkan</option>
+                                                    @foreach($kategori as $k)
+                                                        <option value="{{ $k->name }}">{{ $k->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>

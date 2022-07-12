@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\LaporanDashboard;
 use App\MohonData;
 use App\SenaraiKawasanData;
+use App\KategoriSenaraiData;
 use Illuminate\Http\Request;
 use DB;
 use PDF;
@@ -882,7 +883,7 @@ class LaporanDashboardController extends Controller
             }else{
                 $metadatasdb = $metadatasdb->whereYear('createdate', '=', $request->tahun)->whereMonth('createdate', '=', $request->bulan);
             }
-        }elseif($request->tarikh_mula !== null && $request->tarikh_akhir){
+        }elseif($request->tarikh_mula !== null && $request->tarikh_akhir != null){
             if($request->jenis_laporan == "yes"){ //diterbitkan
                 $metadatasdb = $metadatasdb->where('changedate', '>=', $request->tarikh_mula)->where('changedate', '<=', $request->tarikh_akhir);
             }else{
@@ -1037,19 +1038,202 @@ class LaporanDashboardController extends Controller
 
     public function mygeo_dashboard_data_asas(Request $request)
     {
-
-        //request range tarikh
         $tarikh_mula = $request->tarikh_mula;
-
         $tarikh_akhir = $request->tarikh_akhir;
+        
+        //=====================================================
+        $mohondatadb = MohonData::select('id','created_at');
+        
+        if(isset($request->tarikh_mula) && $request->tarikh_mula !== null && isset($request->tarikh_akhir) && $request->tarikh_akhir != null){
+            $mohondatadb = $mohondatadb->where('created_at', '>=', $tarikh_mula)->where('created_at', '<=', $tarikh_akhir);
+        }
+        
+        $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
 
-        $bil_keseluruhan_data = MohonData::where('status', '!=', 'Draf')->count();
+        $chartArray = $statSeluruhMohonData = [];
+        foreach ($mohondatadb as $met) {
+            $chartArray[date('F Y',strtotime($met->created_at))][] = 'test';
+        }
+        uksort($chartArray, function($a1, $a2) {
+            $time1 = strtotime($a1);
+            $time2 = strtotime($a2);
 
-        $bil_keseluruhan_data_lulus = MohonData::where('status', '=', 'Dalam Proses')->orWhere('status', '=', 'Data Tersedia')->count();
+            return $time1 - $time2;
+        });
+        if(!empty($chartArray)){
+            foreach($chartArray as $key=>$val){
+                $statSeluruhMohonData[] = ["country"=>$key,"visits"=>count($val)];
+            }
+        }
+        //=====================================================
+        $mohondatadb = MohonData::select('id');
+        
+        if(isset($request->tarikh_mula) && $request->tarikh_mula !== null && isset($request->tarikh_akhir) && $request->tarikh_akhir != null){
+            $mohondatadb = $mohondatadb->where('created_at', '>=', $tarikh_mula)->where('created_at', '<=', $tarikh_akhir);
+        }
+        
+        $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
 
-        $bil_keseluruhan_data_tolak = MohonData::where('status', '=', 'Ditolak')->count();
+        $chartArray = $statMohonMengikutCatData = [];
+        foreach ($mohondatadb as $met) {
+            $skdatas = SenaraiKawasanData::where('permohonan_id', $met->id)->get();
+            foreach($skdatas as $sk){
+                $chartArray[ucWords($sk->kategori)][] = 'test';
+            }
+        }
+        uksort($chartArray, function($a1, $a2) {
+            $time1 = strtotime($a1);
+            $time2 = strtotime($a2);
 
-        return view('mygeo.dashboard_data_asas', compact('bil_keseluruhan_data', 'bil_keseluruhan_data_lulus', 'bil_keseluruhan_data_tolak'));
+            return $time1 - $time2;
+        });
+        if(!empty($chartArray)){
+            foreach($chartArray as $key=>$val){
+                $statMohonMengikutCatData[] = ["country"=>$key,"visits"=>count($val)];
+            }
+        }
+        //=====================================================
+        $mohondatadb = MohonData::select('id');
+        
+        if(isset($request->tarikh_mula) && $request->tarikh_mula !== null && isset($request->tarikh_akhir) && $request->tarikh_akhir != null){
+            $mohondatadb = $mohondatadb->where('created_at', '>=', $tarikh_mula)->where('created_at', '<=', $tarikh_akhir);
+        }
+        
+        $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+
+        $chartArray = $statMohonMengikutLapisanData = [];
+        foreach ($mohondatadb as $met) {
+            $skdatas = SenaraiKawasanData::where('permohonan_id', $met->id)->get();
+            foreach($skdatas as $sk){
+                $chartArray[ucWords($sk->kategori)][ucWords($sk->subkategori)][] = 'test';
+            }
+        }
+        uksort($chartArray, function($a1, $a2) {
+            $time1 = strtotime($a1);
+            $time2 = strtotime($a2);
+
+            return $time1 - $time2;
+        });
+        if(!empty($chartArray)){
+            foreach($chartArray as $key=>$val){
+                foreach($val as $key2=>$val2){
+                    $statMohonMengikutLapisanData[] = ["region"=>$key,"state"=>$key2,"sales"=>count($val2)];
+                }
+            }
+        }
+        //=====================================================
+        $mohondatadb = MohonData::select('id','user_id');
+        
+        if(isset($request->tarikh_mula) && $request->tarikh_mula !== null && isset($request->tarikh_akhir) && $request->tarikh_akhir != null){
+            $mohondatadb = $mohondatadb->where('created_at', '>=', $tarikh_mula)->where('created_at', '<=', $tarikh_akhir);
+        }
+        
+        $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+
+        $chartArray = $statMohonMengikutCatPemohonData = [];
+        foreach ($mohondatadb as $met) {
+            if(trim($met->users->kategori) != ""){   
+                $chartArray[ucWords($met->users->kategori)][] = 'test';
+            }
+        }
+        uksort($chartArray, function($a1, $a2) {
+            $time1 = strtotime($a1);
+            $time2 = strtotime($a2);
+
+            return $time1 - $time2;
+        });
+        if(!empty($chartArray)){
+            foreach($chartArray as $key=>$val){
+                $statMohonMengikutCatPemohonData[] = ["country"=>$key,"litres"=>count($val)];
+            }
+        }
+        //=====================================================
+        $mohondatadb = MohonData::select('id','user_id')->where('dihantar','1')->whereNotNull('assign_admin');
+        
+        if(isset($request->tarikh_mula) && $request->tarikh_mula !== null && isset($request->tarikh_akhir) && $request->tarikh_akhir != null){
+            $mohondatadb = $mohondatadb->where('created_at', '>=', $tarikh_mula)->where('created_at', '<=', $tarikh_akhir);
+        }
+        
+        $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+
+        $chartArray = $statAgihanTugasPegawai = [];
+        foreach ($mohondatadb as $met) {
+            $chartArray[ucWords($met->assign_admin)][] = 'test';
+        }
+        uksort($chartArray, function($a1, $a2) {
+            $time1 = strtotime($a1);
+            $time2 = strtotime($a2);
+
+            return $time1 - $time2;
+        });
+        if(!empty($chartArray)){
+            foreach($chartArray as $key=>$val){
+                $statAgihanTugasPegawai[] = ["country"=>$key,"visits"=>count($val)];
+            }
+        }
+        //=====================================================
+        $mohondatadb = MohonData::select('id','created_at');
+        
+        if(isset($request->tarikh_mula) && $request->tarikh_mula !== null && isset($request->tarikh_akhir) && $request->tarikh_akhir != null){
+            $mohondatadb = $mohondatadb->where('created_at', '>=', $tarikh_mula)->where('created_at', '<=', $tarikh_akhir);
+        }
+        
+        $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+
+        $chartArray = $anggaranJimatKosTahunBulan = [];
+        foreach ($mohondatadb as $met) {
+            $skdatas = SenaraiKawasanData::where('permohonan_id', $met->id)->get();
+            foreach($skdatas as $sk){
+                $chartArray[date('F Y',strtotime($met->created_at))][] = $sk->harga_data;
+            }
+        }
+        uksort($chartArray, function($a1, $a2) {
+            $time1 = strtotime($a1);
+            $time2 = strtotime($a2);
+
+            return $time1 - $time2;
+        });
+        if(!empty($chartArray)){
+            foreach($chartArray as $key=>$val){
+                $anggaranJimatKosTahunBulan[] = ["country"=>$key,"visits"=>array_sum($val)];
+            }
+        }
+        //=====================================================
+        $mohondatadb = MohonData::select('id','created_at');
+        
+        if(isset($request->tarikh_mula) && $request->tarikh_mula !== null && isset($request->tarikh_akhir) && $request->tarikh_akhir != null){
+            $mohondatadb = $mohondatadb->where('created_at', '>=', $tarikh_mula)->where('created_at', '<=', $tarikh_akhir);
+        }
+        
+        $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+
+        $chartArray = $anggaranJimatKosCat = [];
+        foreach ($mohondatadb as $met) {
+            $skdatas = SenaraiKawasanData::where('permohonan_id', $met->id)->get();
+            foreach($skdatas as $sk){
+                $chartArray[$sk->kategori][] = $sk->harga_data;
+            }
+        }
+        uksort($chartArray, function($a1, $a2) {
+            $time1 = strtotime($a1);
+            $time2 = strtotime($a2);
+
+            return $time1 - $time2;
+        });
+        if(!empty($chartArray)){
+            foreach($chartArray as $key=>$val){
+                $anggaranJimatKosCat[] = ["country"=>$key,"visits"=>array_sum($val)];
+            }
+        }
+        //=====================================================
+
+        $bil_keseluruhan_data = MohonData::where('dihantar', '1')->count();
+
+        $bil_keseluruhan_data_lulus = MohonData::where('dihantar','1')->where('status','1')->orWhere('status','3')->count();
+
+        $bil_keseluruhan_data_tolak = MohonData::where('dihantar','1')->where('status','2')->count();
+
+        return view('mygeo.dashboard_data_asas', compact('bil_keseluruhan_data', 'bil_keseluruhan_data_lulus', 'bil_keseluruhan_data_tolak','statSeluruhMohonData','statMohonMengikutCatData','statMohonMengikutLapisanData','statMohonMengikutCatPemohonData','statAgihanTugasPegawai','anggaranJimatKosTahunBulan','anggaranJimatKosCat'));
     }
 
     public function laporan_data_asas_filter()
@@ -1057,11 +1241,17 @@ class LaporanDashboardController extends Controller
         $agensi = AgensiOrganisasi::get();
 
         $tarikh = date('Y-m-d');
+        
+        $pemproses = User::whereHas("roles", function ($q) {
+                    $q->where("name", "Pentadbir Data");
+                })->get();
 
-        return view('mygeo.laporan_data_asas_filter', compact('agensi', 'tarikh'));
+        $kategori = KategoriSenaraiData::get();
+                
+        return view('mygeo.laporan_data_asas_filter', compact('agensi', 'tarikh','pemproses','kategori'));
     }
 
-    public function laporan_data_asas_searcb(Request $request)
+    public function laporan_data_asas_search(Request $request)
     {
         $agensi = $request->agensi;
         $tahun = $request->tahun;
@@ -1069,38 +1259,274 @@ class LaporanDashboardController extends Controller
         $kategori = $request->kategori;
         $pemproses = $request->pemproses;
 
-        $permohonans = DB::table('users')
-            ->join('mohon_data', 'users.id', '=', 'mohon_data.user_id')
-            ->join('agensi_organisasi', DB::raw('CAST(users.agensi_organisasi AS INT)'), '=', 'agensi_organisasi.id')
-            ->select(
-                DB::raw('agensi_organisasi.name as agensi'),
-                DB::raw('count(*) as total')
-            )
-            ->groupBy('agensi')
-            ->get();
-
-
         if ($request->jenis_laporan == 'laporan_perlepasan_data') {
+            $mohondatadb = MohonData::select('id','user_id','name')->where('dihantar','1')->whereNotNull('assign_admin');
+        
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
+            if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
+                $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
+                    $q->where("agensi_organisasi", $agensi);
+                });
+            }
+            if(isset($request->kategori) && $request->kategori !== null && isset($request->kategori) && $request->kategori != null){
+                $mohondatadb = $mohondatadb->whereHas("mohonSenaraiKawasan", function ($q) use($kategori){
+                    $q->where("kategori", $kategori);
+                });
+            }
+            if(isset($request->pemproses) && $request->pemproses !== null && isset($request->pemproses) && $request->pemproses != null){
+                $mohondatadb = $mohondatadb->where('assign_admin', '=', $pemproses);
+            }
 
-            return view('mygeo.laporan_data_asas_laporan_perlepasan_data', compact('permohonans'));
+            $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+            $permohonans = $mohondatadb;
+            $chartArray = $laporanPerlepasanData = [];
+            foreach ($mohondatadb as $met) {
+                $chartArray[ucWords($met->assign_admin)][] = 'test';
+            }
+            uksort($chartArray, function($a1, $a2) {
+                $time1 = strtotime($a1);
+                $time2 = strtotime($a2);
+
+                return $time1 - $time2;
+            });
+            if(!empty($chartArray)){
+                foreach($chartArray as $key=>$val){
+                    $laporanPerlepasanData[] = ["country"=>$key,"visits"=>count($val)];
+                }
+            }
+            return view('mygeo.laporan_data_asas_laporan_perlepasan_data', compact('permohonans','laporanPerlepasanData'));
+            //==================================================================
         } elseif ($request->jenis_laporan == 'laporan_perkongsian_data') {
-
             return view('mygeo.laporan_data_asas_laporan_perkongsian_data', compact('permohonans'));
+            //==================================================================
         } elseif ($request->jenis_laporan == 'anggaran_jimat_kos') {
+            $mohondatadb = MohonData::where('dihantar','1')->whereIn('status',['1','3']);
+            
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
+            if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
+                $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
+                    $q->where("agensi_organisasi", $agensi);
+                });
+            }
+            if(isset($request->kategori) && $request->kategori !== null && isset($request->kategori) && $request->kategori != null){
+                $mohondatadb = $mohondatadb->whereHas("mohonSenaraiKawasan", function ($q) use($kategori){
+                    $q->where("kategori", $kategori);
+                });
+            }
+            if(isset($request->pemproses) && $request->pemproses !== null && isset($request->pemproses) && $request->pemproses != null){
+                $mohondatadb = $mohondatadb->where('assign_admin', '=', $pemproses);
+            }
+        
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
 
-            return view('mygeo.laporan_data_asas_anggaran_jimat_kos', compact('permohonans'));
+            $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+            $permohonans = $mohondatadb;
+            $chartArray = $anggaranJimatKosTahunBulan = [];
+            foreach ($mohondatadb as $met) {
+                $skdatas = SenaraiKawasanData::where('permohonan_id', $met->id)->get();
+                foreach($skdatas as $sk){
+                    $chartArray[date('F Y',strtotime($met->created_at))][] = $sk->harga_data;
+                }
+            }
+            uksort($chartArray, function($a1, $a2) {
+                $time1 = strtotime($a1);
+                $time2 = strtotime($a2);
+
+                return $time1 - $time2;
+            });
+            if(!empty($chartArray)){
+                foreach($chartArray as $key=>$val){
+                    $anggaranJimatKosTahunBulan[] = ["country"=>$key,"visits"=>array_sum($val)];
+                }
+            }
+            return view('mygeo.laporan_data_asas_anggaran_jimat_kos', compact('permohonans','anggaranJimatKosTahunBulan'));
+            //==================================================================
         } elseif ($request->jenis_laporan == 'anggaran_jimat_kos_kategori') {
+            $mohondatadb = MohonData::where('dihantar','1')->whereIn('status',['1','3']);
+            
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
+            if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
+                $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
+                    $q->where("agensi_organisasi", $agensi);
+                });
+            }
+            if(isset($request->kategori) && $request->kategori !== null && isset($request->kategori) && $request->kategori != null){
+                $mohondatadb = $mohondatadb->whereHas("mohonSenaraiKawasan", function ($q) use($kategori){
+                    $q->where("kategori", $kategori);
+                });
+            }
+            if(isset($request->pemproses) && $request->pemproses !== null && isset($request->pemproses) && $request->pemproses != null){
+                $mohondatadb = $mohondatadb->where('assign_admin', '=', $pemproses);
+            }
+        
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
 
-            return view('mygeo.laporan_data_asas_anggaran_jimat_kos_kategori', compact('permohonans'));
+            $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+            $permohonans = $mohondatadb;
+            $chartArray = $anggaranJimatKosCat = [];
+            foreach ($mohondatadb as $met) {
+                $skdatas = SenaraiKawasanData::where('permohonan_id', $met->id)->get();
+                foreach($skdatas as $sk){
+                    $chartArray[$sk->kategori][] = $sk->harga_data;
+                }
+            }
+            uksort($chartArray, function($a1, $a2) {
+                $time1 = strtotime($a1);
+                $time2 = strtotime($a2);
+
+                return $time1 - $time2;
+            });
+            if(!empty($chartArray)){
+                foreach($chartArray as $key=>$val){
+                    $anggaranJimatKosCat[] = ["country"=>$key,"visits"=>array_sum($val)];
+                }
+            }
+            return view('mygeo.laporan_data_asas_anggaran_jimat_kos_kategori', compact('permohonans','anggaranJimatKosCat'));
+            //==================================================================
         } elseif ($request->jenis_laporan == 'pelepasan_data_tema') {
+            $mohondatadb = MohonData::select('id','user_id','name');
+        
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
+            if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
+                $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
+                    $q->where("agensi_organisasi", $agensi);
+                });
+            }
+            if(isset($request->kategori) && $request->kategori !== null && isset($request->kategori) && $request->kategori != null){
+                $mohondatadb = $mohondatadb->whereHas("mohonSenaraiKawasan", function ($q) use($kategori){
+                    $q->where("kategori", $kategori);
+                });
+            }
+            if(isset($request->pemproses) && $request->pemproses !== null && isset($request->pemproses) && $request->pemproses != null){
+                $mohondatadb = $mohondatadb->where('assign_admin', '=', $pemproses);
+            }
+        
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
 
-            return view('mygeo.laporan_data_asas_pelepasan_data_tema', compact('permohonans'));
+            $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+            $permohonans = $mohondatadb;
+            $chartArray = $statMohonMengikutLapisanData = [];
+            foreach ($mohondatadb as $met) {
+                $skdatas = SenaraiKawasanData::where('permohonan_id', $met->id)->get();
+                foreach($skdatas as $sk){
+                    $chartArray[ucWords($sk->lapisan_data)][] = 'test';
+                }
+            }
+            uksort($chartArray, function($a1, $a2) {
+                $time1 = strtotime($a1);
+                $time2 = strtotime($a2);
+
+                return $time1 - $time2;
+            });
+            if(!empty($chartArray)){
+                foreach($chartArray as $key=>$val){
+                    $statMohonMengikutLapisanData[] = ["country"=>$key,"visits"=>count($val)];
+                }
+            }
+            return view('mygeo.laporan_data_asas_pelepasan_data_tema', compact('permohonans','statMohonMengikutLapisanData'));
+            //==================================================================
         } elseif ($request->jenis_laporan == 'pelepasan_data_kategori_pemohon_data') {
+            $mohondatadb = MohonData::where('dihantar','1')->whereIn('status',['1','3']);
+            
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
+            if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
+                $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
+                    $q->where("agensi_organisasi", $agensi);
+                });
+            }
+            if(isset($request->kategori) && $request->kategori !== null && isset($request->kategori) && $request->kategori != null){
+                $mohondatadb = $mohondatadb->whereHas("mohonSenaraiKawasan", function ($q) use($kategori){
+                    $q->where("kategori", $kategori);
+                });
+            }
+            if(isset($request->pemproses) && $request->pemproses !== null && isset($request->pemproses) && $request->pemproses != null){
+                $mohondatadb = $mohondatadb->where('assign_admin', '=', $pemproses);
+            }
+        
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
 
-            return view('mygeo.laporan_data_asas_pelepasan_data_kategori_pemohon_data', compact('permohonans'));
+            $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+            $permohonans = $mohondatadb;
+            $chartArray = $statMohonMengikutCatPemohonData = [];
+            foreach ($mohondatadb as $met) {
+                if(trim($met->users->kategori) != ""){   
+                    $chartArray[ucWords($met->users->kategori)][] = 'test';
+                }
+            }
+            uksort($chartArray, function($a1, $a2) {
+                $time1 = strtotime($a1);
+                $time2 = strtotime($a2);
+
+                return $time1 - $time2;
+            });
+            if(!empty($chartArray)){
+                foreach($chartArray as $key=>$val){
+                    $statMohonMengikutCatPemohonData[] = ["country"=>$key,"visits"=>count($val)];
+                }
+            }
+            return view('mygeo.laporan_data_asas_pelepasan_data_kategori_pemohon_data', compact('permohonans','statMohonMengikutCatPemohonData'));
+            //==================================================================
         } else {
+            $mohondatadb = MohonData::where('dihantar','1')->whereNotNull('assign_admin');
+            
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
+            if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
+                $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
+                    $q->where("agensi_organisasi", $agensi);
+                });
+            }
+            if(isset($request->kategori) && $request->kategori !== null && isset($request->kategori) && $request->kategori != null){
+                $mohondatadb = $mohondatadb->whereHas("mohonSenaraiKawasan", function ($q) use($kategori){
+                    $q->where("kategori", $kategori);
+                });
+            }
+            if(isset($request->pemproses) && $request->pemproses !== null && isset($request->pemproses) && $request->pemproses != null){
+                $mohondatadb = $mohondatadb->where('assign_admin', '=', $pemproses);
+            }
+        
+            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            }
 
-            return view('mygeo.laporan_data_asas_belum_pegawai_proses_permohonan', compact('permohonans'));
+            $mohondatadb = $mohondatadb->orderBy('id', 'DESC')->get();
+            $permohonans = $mohondatadb;
+            $chartArray = $statAgihanTugasPegawai = [];
+            foreach ($mohondatadb as $met) {
+                $chartArray[ucWords($met->assign_admin)][] = 'test';
+            }
+            uksort($chartArray, function($a1, $a2) {
+                $time1 = strtotime($a1);
+                $time2 = strtotime($a2);
+
+                return $time1 - $time2;
+            });
+            if(!empty($chartArray)){
+                foreach($chartArray as $key=>$val){
+                    $statAgihanTugasPegawai[] = ["country"=>$key,"visits"=>count($val)];
+                }
+            }
+            return view('mygeo.laporan_data_asas_belum_pegawai_proses_permohonan', compact('permohonans','statAgihanTugasPegawai'));
+            //==================================================================
         }
     }
 }
