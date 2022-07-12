@@ -683,12 +683,11 @@ class LaporanDashboardController extends Controller
         $tarikh_akhir = $request->tarikh_akhir;
 
         //BILANGAN KESELURUHAN METADATA
-        if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
-            $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->select('id')->where('agensi_organisasi','ilike',strtolower(auth::user()->agensiOrganisasi->name))->get());
+        if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
+            $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->select('id')->whereNotNull('agensi_organisasi')->get());
         } else {
-            $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->select('id')->get());
+            $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->select('id')->where('agensi_organisasi','ilike',strtolower(auth::user()->agensiOrganisasi->name))->get());
         }
-
         
         if (!empty($tarikh_mula)) {
             $bil_metadata_kategori = MetadataGeo::on('pgsql2')->select('id','data','createdate','kategori','c10_state')->where('createdate', '>=', $tarikh_mula);
@@ -704,9 +703,9 @@ class LaporanDashboardController extends Controller
             $bil_metadata_kategori = $bil_metadata_kategori->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
         }
         
+        $jumlah_metadata_mengikut_negeri = $bil_metadata_kategori->where('disahkan','yes')->get();;
         $bil_metadata_kategori = $bil_metadata_kategori->orderBy('createdate', 'asc')->get();
         $bil_metadata_kategori_topik = $bil_metadata_kategori;
-        $jumlah_metadata_mengikut_negeri = $bil_metadata_kategori;
 
         //Jumlah Metadata Mengikut Kategori
         $metadata_kategori = [];
