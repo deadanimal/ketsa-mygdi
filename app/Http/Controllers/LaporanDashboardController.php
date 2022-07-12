@@ -867,7 +867,7 @@ class LaporanDashboardController extends Controller
 
     public function laporan_metadata_search(Request $request)
     {
-        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','changedate');
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','changedate','title','agensi_organisasi');
         if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
             $metadatasdb = $metadatasdb->where('agensi_organisasi',auth::user()->agensiOrganisasi->name);
         }else{
@@ -877,17 +877,17 @@ class LaporanDashboardController extends Controller
         }
         
         if($request->tahun !== null && $request->bulan !== null){
-            if($request->jenis_laporan == "yes"){ //diterbitkan
-                $metadatasdb = $metadatasdb->whereYear('changedate', '=', $request->tahun)->whereMonth('changedate', '=', $request->bulan);
-            }else{
+//            if($request->jenis_laporan == "yes"){ //diterbitkan
+//                $metadatasdb = $metadatasdb->whereYear('changedate', '=', $request->tahun)->whereMonth('changedate', '=', $request->bulan);
+//            }else{
                 $metadatasdb = $metadatasdb->whereYear('createdate', '=', $request->tahun)->whereMonth('createdate', '=', $request->bulan);
-            }
+//            }
         }elseif($request->tarikh_mula !== null && $request->tarikh_akhir != null){
-            if($request->jenis_laporan == "yes"){ //diterbitkan
-                $metadatasdb = $metadatasdb->where('changedate', '>=', $request->tarikh_mula)->where('changedate', '<=', $request->tarikh_akhir);
-            }else{
+//            if($request->jenis_laporan == "yes"){ //diterbitkan
+//                $metadatasdb = $metadatasdb->where('changedate', '>=', $request->tarikh_mula)->where('changedate', '<=', $request->tarikh_akhir);
+//            }else{
                 $metadatasdb = $metadatasdb->where('createdate', '>=', $request->tarikh_mula)->where('createdate', '<=', $request->tarikh_akhir);
-            }
+//            }
         }
         
         if($request->status !== null && $request->jenis_laporan != "yes"){
@@ -949,17 +949,17 @@ class LaporanDashboardController extends Controller
         }
         
         if($_GET['tahun'] != "" && $_GET['bulan'] != ""){
-            if($_GET['jenis_laporan'] == "yes"){ //diterbitkan
-                $metadatasdb = $metadatasdb->whereYear('changedate', '=', $_GET['tahun'])->whereMonth('changedate', '=', $_GET['bulan']);
-            }else{
+//            if($_GET['jenis_laporan'] == "yes"){ //diterbitkan
+//                $metadatasdb = $metadatasdb->whereYear('changedate', '=', $_GET['tahun'])->whereMonth('changedate', '=', $_GET['bulan']);
+//            }else{
                 $metadatasdb = $metadatasdb->whereYear('createdate', '=', $_GET['tahun'])->whereMonth('createdate', '=', $_GET['bulan']);
-            }
+//            }
         }elseif($_GET['tarikh_mula'] != "" && $_GET['tarikh_akhir'] != ""){
-            if($_GET['jenis_laporan'] == "yes"){ //diterbitkan
-                $metadatasdb = $metadatasdb->where('changedate', '>=', $_GET['tarikh_mula'])->where('changedate', '<=', $_GET['tarikh_akhir']);
-            }else{
+//            if($_GET['jenis_laporan'] == "yes"){ //diterbitkan
+//                $metadatasdb = $metadatasdb->where('changedate', '>=', $_GET['tarikh_mula'])->where('changedate', '<=', $_GET['tarikh_akhir']);
+//            }else{
                 $metadatasdb = $metadatasdb->where('createdate', '>=', $_GET['tarikh_mula'])->where('createdate', '<=', $_GET['tarikh_akhir']);
-            }
+//            }
         }
         
         if($_GET['status'] != "" && $_GET['jenis_laporan'] != "yes"){

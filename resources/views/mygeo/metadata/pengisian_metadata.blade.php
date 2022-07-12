@@ -179,7 +179,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
-                            <li>ftest_{{ $error }}</li>
+                            <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>

@@ -752,7 +752,7 @@
                         mohons = mohons + key + ",";
                     });
                     swal({
-                        title: "Adakah ",
+                        title: "Adakah anda berjaya memuat turun data?",
                         html: msg,
                         type: "warning",
                         input: "checkbox",
