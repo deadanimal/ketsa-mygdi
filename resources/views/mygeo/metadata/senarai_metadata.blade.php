@@ -196,7 +196,7 @@
                           <td>{{ $bil }}</td>
                           <td>
                               <?php
-                                echo $val[1]->title;
+                                echo strtoupper($val[1]->title);
                                ?>
                           </td>
                           @if(Auth::user()->hasRole(['Pengesah Metadata']))
