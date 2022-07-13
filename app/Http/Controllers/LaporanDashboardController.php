@@ -1131,7 +1131,7 @@ class LaporanDashboardController extends Controller
 
         $chartArray = $statMohonMengikutCatPemohonData = [];
         foreach ($mohondatadb as $met) {
-            if(trim($met->users->kategori) != ""){   
+            if(isset($met->users->kategori) && trim($met->users->kategori) != ""){   
                 $chartArray[ucWords($met->users->kategori)][] = 'test';
             }
         }
