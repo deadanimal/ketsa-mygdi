@@ -265,7 +265,7 @@
                         <div class="card">
                             <div class=" card-header bg-secondary">
                                 <h6 class="surtitle">Bar Chart</h6>
-                                <h5 class=" h2 mb-0">Anggaran Penjimatan Kos Sehingga Tahun dan Bulan</h5>
+                                <h5 class=" h2 mb-0">Anggaran Penjimatan Kos Mengikut Tahun dan Bulan</h5>
                             </div>
                             <div class="card-body">
                                 <div class="amchart">
@@ -280,7 +280,7 @@
                         <div class="card">
                             <div class=" card-header bg-secondary">
                                 <h6 class="surtitle">Bar Chart</h6>
-                                <h5 class=" h2 mb-0">Anggaran Penjimatan Kos Sehingga Tahun dan Kategori</h5>
+                                <h5 class=" h2 mb-0">Anggaran Penjimatan Kos Mengikut Tahun dan Kategori</h5>
                             </div>
                             <div class="card-body">
                                 <div class="amchart">
