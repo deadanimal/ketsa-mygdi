@@ -452,7 +452,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Aplikasi', 'Pentadbir Metadata', 'Pentadbir Data', 'Super Admin']))
+                                        @if (auth::user()->hasRole(['Pengesah Metadata', 'Pentadbir Aplikasi', 'Pentadbir Metadata', 'Super Admin']))
                                             <li class="nav-item has-treeview">
                                                 <a class="nav-link active" href="#">
                                                     <i class="fa-chart-bar fas text-purple"></i>
@@ -467,6 +467,18 @@
                                                             <span class="nav-link-text">Laporan Metadata</span>
                                                         </a>
                                                     </li>
+                                                </ul>
+                                            </li>
+                                        @endif
+                                        @if (auth::user()->hasRole(['Pentadbir Data', 'Pentadbir Aplikasi', 'Super Admin']))
+                                            <li class="nav-item has-treeview">
+                                                <a class="nav-link active" href="#">
+                                                    <i class="fa-chart-bar fas text-purple"></i>
+                                                    <span class="nav-link-text">Laporan</span>
+                                                    <span class="ml-auto"><i
+                                                            class="right fas fa-angle-left"></i></span>
+                                                </a>
+                                                <ul class="nav nav-sm nav-treeview">
                                                     <li class="nav-item">
                                                         <a href="{{ url('laporan_pilihan_data_asas') }}"
                                                             class="nav-link">
