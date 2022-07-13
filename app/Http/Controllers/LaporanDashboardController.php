@@ -682,39 +682,44 @@ class LaporanDashboardController extends Controller
         $tarikh_mula = $request->tarikh_mula;
         $tarikh_akhir = $request->tarikh_akhir;
 
-        //BILANGAN KESELURUHAN METADATA
+        
+        
+        //BILANGAN KESELURUHAN METADATA ========================================
         if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
-            $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->select('id')->whereNotNull('agensi_organisasi')->get());
+            $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->select('id')->get());
         } else {
             $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->select('id')->where('agensi_organisasi','ilike',strtolower(auth::user()->agensiOrganisasi->name))->get());
         }
         
+        
+        
+        //Jumlah Metadata Mengikut Kategori ====================================
+        $bil_metadata_kategori = MetadataGeo::on('pgsql2')->select('createdate','kategori');
+        
         if (!empty($tarikh_mula)) {
-            $bil_metadata_kategori = MetadataGeo::on('pgsql2')->select('id','data','createdate','kategori','c10_state')->where('createdate', '>=', $tarikh_mula);
-        } elseif (!empty($tarikh_akhir)) {
-            $bil_metadata_kategori = MetadataGeo::on('pgsql2')->select('id','data','createdate','kategori','c10_state')->where('createdate', '<=', $tarikh_akhir);
-        } elseif (!empty($tarikh_mula) && !empty($tarikh_akhir)) {
-            $bil_metadata_kategori = MetadataGeo::on('pgsql2')->select('id','data','createdate','kategori','c10_state')->where('createdate', '>=', $tarikh_mula)->where('createdate', '<=', $tarikh_akhir);
-        } else {
-            $bil_metadata_kategori = MetadataGeo::on('pgsql2')->select('id','data','createdate','kategori','c10_state');
+            $bil_metadata_kategori = $bil_metadata_kategori->where('createdate', '>=', $tarikh_mula);
+        }
+        if (!empty($tarikh_akhir)) {
+            $bil_metadata_kategori = $bil_metadata_kategori->where('createdate', '<=', $tarikh_akhir);
         }
         
-        if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
-            $bil_metadata_kategori = $bil_metadata_kategori->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
+        if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
+            
+        }else{
+            if(isset(auth::user()->agensiOrganisasi->name)){
+                $bil_metadata_kategori = $bil_metadata_kategori->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
+            }
         }
         
-        $jumlah_metadata_mengikut_negeri = $bil_metadata_kategori->where('disahkan','yes')->get();;
         $bil_metadata_kategori = $bil_metadata_kategori->orderBy('createdate', 'asc')->get();
-        $bil_metadata_kategori_topik = $bil_metadata_kategori;
 
-        //Jumlah Metadata Mengikut Kategori
         $metadata_kategori = [];
         foreach ($bil_metadata_kategori as $met) {
             $month = date('M-Y', strtotime($met->createdate));
             $kategori = $met->kategori;
 
             if ($kategori != null) {
-                $metadata_kategori[$month][ucfirst($kategori)][] = 'test';
+                $metadata_kategori[$month][ucfirst($kategori)][] = '0';
             }
         }
         
@@ -736,7 +741,28 @@ class LaporanDashboardController extends Controller
             $chartkategori[] = ["month" => $k, "first" => $dataset, "second" => $services, "third" => $imagery, "forth" => $gridded];
         }
 
-        //Jumlah Metadata Mengikut Kategori Topik
+        
+        
+        //Jumlah Metadata Mengikut Kategori Topik ==============================
+        $bil_metadata_kategori_topik = MetadataGeo::on('pgsql2')->select('data');
+        
+        if (!empty($tarikh_mula)) {
+            $bil_metadata_kategori_topik = $bil_metadata_kategori_topik->where('createdate', '>=', $tarikh_mula);
+        }
+        if (!empty($tarikh_akhir)) {
+            $bil_metadata_kategori_topik = $bil_metadata_kategori_topik->where('createdate', '<=', $tarikh_akhir);
+        }
+        
+        if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
+            
+        }else{
+            if(isset(auth::user()->agensiOrganisasi->name)){
+                $bil_metadata_kategori_topik = $bil_metadata_kategori_topik->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
+            }
+        }
+        
+        $bil_metadata_kategori_topik = $bil_metadata_kategori_topik->orderBy('createdate', 'asc')->get();
+        
         $metadata_kategori_topik = [];
         libxml_use_internal_errors(true);
         foreach ($bil_metadata_kategori_topik as $met) {
@@ -755,44 +781,21 @@ class LaporanDashboardController extends Controller
                 continue;
             }
 
-            if (auth::user()->assigned_roles == 'Pengesah Metadata') {
-                    $bilmetadata[$met->id] = [$xml2];
-                    if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
-                        if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
-                            foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
-                                if (trim($tcd->MD_TopicCategoryCode) != "") {
-                                    $tc = trim($tcd->MD_TopicCategoryCode);
-                                    $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
-                                }
-                            }
-                        }
-                    } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
-                        if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
-                            foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
-                                if (trim($tcd->MD_TopicCategoryCode) != "") {
-                                    $tc = trim($tcd->MD_TopicCategoryCode);
-                                    $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
-                                }
-                            }
+            if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
+                if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
+                    foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
+                        if (trim($tcd->MD_TopicCategoryCode) != "") {
+                            $tc = trim($tcd->MD_TopicCategoryCode);
+                            $metadata_kategori_topik['kategoritopik'][$tc][] = '0';
                         }
                     }
-            } else {
-                if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
-                    if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
-                        foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
-                            if (trim($tcd->MD_TopicCategoryCode) != "") {
-                                $tc = trim($tcd->MD_TopicCategoryCode);
-                                $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
-                            }
-                        }
-                    }
-                } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
-                    if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
-                        foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
-                            if (trim($tcd->MD_TopicCategoryCode) != "") {
-                                $tc = trim($tcd->MD_TopicCategoryCode);
-                                $metadata_kategori_topik['kategoritopik'][$tc][] = 'test';
-                            }
+                }
+            } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
+                if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
+                    foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
+                        if (trim($tcd->MD_TopicCategoryCode) != "") {
+                            $tc = trim($tcd->MD_TopicCategoryCode);
+                            $metadata_kategori_topik['kategoritopik'][$tc][] = '0';
                         }
                     }
                 }
@@ -804,20 +807,25 @@ class LaporanDashboardController extends Controller
                 $chartkategoritopik[] = ["country" => $k, 'visits' => count($v)];
             }
         }
+        
+        
 
-        //Jumlah Metadata Mengikut Content Type
+        //Jumlah Metadata Mengikut Content Type ================================
+        $bil_metadata_content_type = MetadataGeo::on('pgsql2')->select('content_type');
+        
         if (!empty($tarikh_mula)) {
-            $bil_metadata_content_type = MetadataGeo::on('pgsql2')->select('content_type')->where('createdate', '>=', $tarikh_mula)->whereNotNull('content_type');
-        } elseif (!empty($tarikh_akhir)) {
-            $bil_metadata_content_type = MetadataGeo::on('pgsql2')->select('content_type')->where('createdate', '<=', $tarikh_akhir)->whereNotNull('content_type');
-        } elseif (!empty($tarikh_mula) && !empty($tarikh_akhir)) {
-            $bil_metadata_content_type = MetadataGeo::on('pgsql2')->select('content_type')->where('createdate', '>=', $tarikh_mula)->whereNotNull('content_type')->where('createdate', '<=', $tarikh_akhir);
-        } else {
-            $bil_metadata_content_type = MetadataGeo::on('pgsql2')->select('content_type')->whereNotNull('content_type');
+            $bil_metadata_content_type = $bil_metadata_content_type->where('createdate', '>=', $tarikh_mula);
+        }
+        if (!empty($tarikh_akhir)) {
+            $bil_metadata_content_type = $bil_metadata_content_type->where('createdate', '<=', $tarikh_akhir);
         }
         
-        if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
-            $bil_metadata_content_type = $bil_metadata_content_type->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
+        if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
+            
+        }else{
+            if(isset(auth::user()->agensiOrganisasi->name)){
+                $bil_metadata_content_type = $bil_metadata_content_type->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
+            }
         }
         
         $bil_metadata_content_type = $bil_metadata_content_type->orderBy('createdate', 'asc')->get();
@@ -825,14 +833,35 @@ class LaporanDashboardController extends Controller
         $metadata_content_type = [];
         foreach ($bil_metadata_content_type as $met) {
                 $content_type = $met->content_type;
-                $metadata_content_type['content'][ucfirst($content_type)][] = 'test';
+                $metadata_content_type['content'][ucfirst($content_type)][] = '0';
         }
         $chartcontenttype = [];
         foreach ($metadata_content_type['content'] as $k => $v) {
             $chartcontenttype[] = ["country" => $k, 'litres' => count($v)];
         }
 
-        //Jumlah Metadata Mengikut Negeri
+        
+        
+        //Jumlah Metadata Mengikut Negeri ======================================
+        $jumlah_metadata_mengikut_negeri = MetadataGeo::on('pgsql2')->select('c10_state');
+        
+        if (!empty($tarikh_mula)) {
+            $jumlah_metadata_mengikut_negeri = $jumlah_metadata_mengikut_negeri->where('createdate', '>=', $tarikh_mula);
+        }
+        if (!empty($tarikh_akhir)) {
+            $jumlah_metadata_mengikut_negeri = $jumlah_metadata_mengikut_negeri->where('createdate', '<=', $tarikh_akhir);
+        }
+        
+        if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
+            
+        }else{
+            if(isset(auth::user()->agensiOrganisasi->name)){
+                $jumlah_metadata_mengikut_negeri = $jumlah_metadata_mengikut_negeri->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
+            }
+        }
+        
+        $jumlah_metadata_mengikut_negeri = $jumlah_metadata_mengikut_negeri->orderBy('createdate', 'asc')->get();
+        
         $metadatas = [];
         foreach ($jumlah_metadata_mengikut_negeri as $met) {
                 $negeri = $met->c10_state;
@@ -852,90 +881,6 @@ class LaporanDashboardController extends Controller
         }
 
         return view('mygeo.dashboard_metadata', compact('bil_keseluruhan_metadata', 'chartkategori', 'chartnegeri', 'chartkategoritopik', 'chartcontenttype'));
-    }
-
-    public function laporan_metadata_filter()
-    {
-        $agensi = AgensiOrganisasi::get();
-        $tarikh = date('Y-m-d');
-
-        $senarai_pengesah = User::select('id','name')->where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->get();
-        $senarai_penerbit = User::select('id','name')->where('assigned_roles', 'LIKE', '%Penerbit Metadata%')->get();
-
-        return view('mygeo.laporan_metadata_filter', compact('agensi', 'tarikh', 'senarai_pengesah','senarai_penerbit'));
-    }
-
-    public function laporan_metadata_search(Request $request)
-    {
-        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','changedate','title','agensi_organisasi');
-        if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
-            $metadatasdb = $metadatasdb->where('agensi_organisasi',auth::user()->agensiOrganisasi->name);
-        }else{
-            if(isset($request->agensi) && $request->agensi != ""){
-                $metadatasdb = $metadatasdb->where('agensi_organisasi',$request->agensi);
-            }
-        }
-        
-        if($request->tahun !== null && $request->bulan !== null){
-//            if($request->jenis_laporan == "yes"){ //diterbitkan
-//                $metadatasdb = $metadatasdb->whereYear('changedate', '=', $request->tahun)->whereMonth('changedate', '=', $request->bulan);
-//            }else{
-                $metadatasdb = $metadatasdb->whereYear('createdate', '=', $request->tahun)->whereMonth('createdate', '=', $request->bulan);
-//            }
-        }elseif($request->tarikh_mula !== null && $request->tarikh_akhir != null){
-//            if($request->jenis_laporan == "yes"){ //diterbitkan
-//                $metadatasdb = $metadatasdb->where('changedate', '>=', $request->tarikh_mula)->where('changedate', '<=', $request->tarikh_akhir);
-//            }else{
-                $metadatasdb = $metadatasdb->where('createdate', '>=', $request->tarikh_mula)->where('createdate', '<=', $request->tarikh_akhir);
-//            }
-        }
-        
-        if($request->status !== null && $request->jenis_laporan != "yes"){
-            if($request->status == "Draf"){
-                $metadatasdb = $metadatasdb->where('is_draf','yes');
-            }elseif($request->status == "Perlu Pengesahan"){
-                $metadatasdb = $metadatasdb->where('disahkan','0');
-            }elseif($request->status == "Perlu Pembetulan"){
-                $metadatasdb = $metadatasdb->where('disahkan','no');
-            }elseif($request->status == "Diterbitkan"){
-                //no need to filter. already done by where('disahkan') line below
-            }
-        }else{
-            $metadatasdb = $metadatasdb->where('disahkan',$request->jenis_laporan);
-        }
-        
-        if($request->pengesah !== null){
-            $metadatasdb = $metadatasdb->where('pengesah',$request->pengesah);
-        }
-        if($request->penerbit !== null){
-            $metadatasdb = $metadatasdb->where('portal_user_id',$request->penerbit);
-        }
-        
-        $metadatasdb = $metadatasdb->where('kategori',strtolower($request->kategori));
-        $metadatasdb = $metadatasdb->orderBy('id', 'DESC')->get();
-
-        $chartArray = $chartArrayFixed = [];
-        foreach ($metadatasdb as $met) {
-            $chartArray[date('F Y',strtotime($met->changedate))][] = 'test';
-        }
-        uksort($chartArray, function($a1, $a2) {
-            $time1 = strtotime($a1);
-            $time2 = strtotime($a2);
-
-            return $time1 - $time2;
-        });
-//        dd($chartArray);
-        if(!empty($chartArray)){
-            foreach($chartArray as $key=>$val){
-                $chartArrayFixed[] = ["country"=>$key,"visits"=>count($val)];
-            }
-        }
-
-        if ($request->jenis_laporan == 'yes') {
-            return view('mygeo.laporan_metadata_diterbitkan', compact('chartArrayFixed','request'));
-        } else {
-            return view('mygeo.laporan_metadata_belum_diterbitkan', compact('chartArrayFixed','request'));
-        }
     }
     
     public function getLaporanMetadata(){
@@ -1033,6 +978,90 @@ class LaporanDashboardController extends Controller
         );
 
         return response()->json($response);
+    }
+
+    public function laporan_metadata_filter()
+    {
+        $agensi = AgensiOrganisasi::get();
+        $tarikh = date('Y-m-d');
+
+        $senarai_pengesah = User::select('id','name')->where('assigned_roles', 'LIKE', '%Pengesah Metadata%')->get();
+        $senarai_penerbit = User::select('id','name')->where('assigned_roles', 'LIKE', '%Penerbit Metadata%')->get();
+
+        return view('mygeo.laporan_metadata_filter', compact('agensi', 'tarikh', 'senarai_pengesah','senarai_penerbit'));
+    }
+
+    public function laporan_metadata_search(Request $request)
+    {
+        $metadatasdb = MetadataGeo::on('pgsql2')->select('id','changedate','title','agensi_organisasi');
+        if (strpos(auth::user()->assigned_roles, 'Pengesah Metadata') !== false) {
+            $metadatasdb = $metadatasdb->where('agensi_organisasi',auth::user()->agensiOrganisasi->name);
+        }else{
+            if(isset($request->agensi) && $request->agensi != ""){
+                $metadatasdb = $metadatasdb->where('agensi_organisasi',$request->agensi);
+            }
+        }
+        
+        if($request->tahun !== null && $request->bulan !== null){
+//            if($request->jenis_laporan == "yes"){ //diterbitkan
+//                $metadatasdb = $metadatasdb->whereYear('changedate', '=', $request->tahun)->whereMonth('changedate', '=', $request->bulan);
+//            }else{
+                $metadatasdb = $metadatasdb->whereYear('createdate', '=', $request->tahun)->whereMonth('createdate', '=', $request->bulan);
+//            }
+        }elseif($request->tarikh_mula !== null && $request->tarikh_akhir != null){
+//            if($request->jenis_laporan == "yes"){ //diterbitkan
+//                $metadatasdb = $metadatasdb->where('changedate', '>=', $request->tarikh_mula)->where('changedate', '<=', $request->tarikh_akhir);
+//            }else{
+                $metadatasdb = $metadatasdb->where('createdate', '>=', $request->tarikh_mula)->where('createdate', '<=', $request->tarikh_akhir);
+//            }
+        }
+        
+        if($request->status !== null && $request->jenis_laporan != "yes"){
+            if($request->status == "Draf"){
+                $metadatasdb = $metadatasdb->where('is_draf','yes');
+            }elseif($request->status == "Perlu Pengesahan"){
+                $metadatasdb = $metadatasdb->where('disahkan','0');
+            }elseif($request->status == "Perlu Pembetulan"){
+                $metadatasdb = $metadatasdb->where('disahkan','no');
+            }elseif($request->status == "Diterbitkan"){
+                //no need to filter. already done by where('disahkan') line below
+            }
+        }else{
+            $metadatasdb = $metadatasdb->where('disahkan',$request->jenis_laporan);
+        }
+        
+        if($request->pengesah !== null){
+            $metadatasdb = $metadatasdb->where('pengesah',$request->pengesah);
+        }
+        if($request->penerbit !== null){
+            $metadatasdb = $metadatasdb->where('portal_user_id',$request->penerbit);
+        }
+        
+        $metadatasdb = $metadatasdb->where('kategori',strtolower($request->kategori));
+        $metadatasdb = $metadatasdb->orderBy('id', 'DESC')->get();
+
+        $chartArray = $chartArrayFixed = [];
+        foreach ($metadatasdb as $met) {
+            $chartArray[date('F Y',strtotime($met->changedate))][] = 'test';
+        }
+        uksort($chartArray, function($a1, $a2) {
+            $time1 = strtotime($a1);
+            $time2 = strtotime($a2);
+
+            return $time1 - $time2;
+        });
+//        dd($chartArray);
+        if(!empty($chartArray)){
+            foreach($chartArray as $key=>$val){
+                $chartArrayFixed[] = ["country"=>$key,"visits"=>count($val)];
+            }
+        }
+
+        if ($request->jenis_laporan == 'yes') {
+            return view('mygeo.laporan_metadata_diterbitkan', compact('chartArrayFixed','request'));
+        } else {
+            return view('mygeo.laporan_metadata_belum_diterbitkan', compact('chartArrayFixed','request'));
+        }
     }
 
     public function mygeo_dashboard_data_asas(Request $request)
