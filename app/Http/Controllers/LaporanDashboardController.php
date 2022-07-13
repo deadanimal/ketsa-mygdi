@@ -711,47 +711,50 @@ class LaporanDashboardController extends Controller
             }
         }
         
-        $bil_metadata_kategori_topik = $bil_metadata_kategori_topik->orderBy('createdate', 'asc')->get();
+        $bil_metadata_kategori_topik = $bil_metadata_kategori_topik->orderBy('createdate', 'asc');
         
         $metadata_kategori_topik = [];
+        $chartkategoritopik = [];
         libxml_use_internal_errors(true);
-        foreach ($bil_metadata_kategori_topik as $met) {
-            $ftestxml2 = <<<XML
+        $bil_metadata_kategori_topik->chunk(500, function( $var ) use(&$metadata_kategori_topik) {
+            foreach( $var as $met ) {
+                $ftestxml2 = <<<XML
                     $met->data
                     XML;
-            $ftestxml2 = str_replace("gco:", "", $ftestxml2);
-            $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
-            $ftestxml2 = str_replace("srv:", "", $ftestxml2);
-            $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
-            $ftestxml2 = str_replace("\r", "", $ftestxml2);
-            $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
+                $ftestxml2 = str_replace("gco:", "", $ftestxml2);
+                $ftestxml2 = str_replace("gmd:", "", $ftestxml2);
+                $ftestxml2 = str_replace("srv:", "", $ftestxml2);
+                $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+                $ftestxml2 = str_replace("\r", "", $ftestxml2);
+                $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
 
-            $xml2 = simplexml_load_string($ftestxml2);
-            if (false === $xml2) {
-                continue;
-            }
+                $xml2 = simplexml_load_string($ftestxml2);
+                if (false === $xml2) {
+                    continue;
+                }
 
-            if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
-                if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
-                    foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
-                        if (trim($tcd->MD_TopicCategoryCode) != "") {
-                            $tc = trim($tcd->MD_TopicCategoryCode);
-                            $metadata_kategori_topik['kategoritopik'][$tc][] = '0';
+                if (isset($xml2->identificationInfo->MD_DataIdentification->topicCategory)) {
+                    if (count($xml2->identificationInfo->MD_DataIdentification->topicCategory) > 0) {
+                        foreach ($xml2->identificationInfo->MD_DataIdentification->topicCategory as $tcd) {
+                            if (trim($tcd->MD_TopicCategoryCode) != "") {
+                                $tc = trim($tcd->MD_TopicCategoryCode);
+                                $metadata_kategori_topik['kategoritopik'][$tc][] = '0';
+                            }
+                        }
+                    }
+                } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
+                    if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
+                        foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
+                            if (trim($tcd->MD_TopicCategoryCode) != "") {
+                                $tc = trim($tcd->MD_TopicCategoryCode);
+                                $metadata_kategori_topik['kategoritopik'][$tc][] = '0';
+                            }
                         }
                     }
                 }
-            } elseif (isset($xml2->identificationInfo->SV_ServiceIdentification->topicCategory)) {
-                if (count($xml2->identificationInfo->SV_ServiceIdentification->topicCategory) > 0) {
-                    foreach ($xml2->identificationInfo->SV_ServiceIdentification->topicCategory as $tcd) {
-                        if (trim($tcd->MD_TopicCategoryCode) != "") {
-                            $tc = trim($tcd->MD_TopicCategoryCode);
-                            $metadata_kategori_topik['kategoritopik'][$tc][] = '0';
-                        }
-                    }
-                }
             }
-        }
-        $chartkategoritopik = [];
+        });
+        
         if (array_key_exists("kategoritopik",$metadata_kategori_topik)){
             foreach ($metadata_kategori_topik['kategoritopik'] as $k => $v) {
                 $chartkategoritopik[] = ["country" => $k, 'visits' => count($v)];
@@ -779,34 +782,35 @@ class LaporanDashboardController extends Controller
         }
         
         $bil_metadata_kategori = $bil_metadata_kategori->orderBy('createdate', 'asc')->get();
-        $jumlah_metadata_mengikut_negeri = $bil_metadata_kategori;
-        $bil_metadata_content_type = $bil_metadata_kategori;
-
+        
         $metadata_kategori = [];
         $metadata_content_type = [];
         $metadatas = [];
-        foreach ($bil_metadata_kategori as $met) {
-            $month = date('M-Y', strtotime($met->createdate));
-            $kategori = $met->kategori;
+        
+        $bil_metadata_kategori_topik->chunk(500, function( $var ) use(&$metadata_kategori,&$metadata_content_type,&$metadatas) {
+            foreach( $var as $met ) {
+                $month = date('M-Y', strtotime($met->createdate));
+                $kategori = $met->kategori;
 
-            if ($kategori != null) {
-                $metadata_kategori[$month][ucfirst($kategori)][] = '0';
-            }
-            
-            //Jumlah Metadata Mengikut Content Type ==============================================================
-            $content_type = $met->content_type;
-            $metadata_content_type['content'][ucfirst($content_type)][] = '0';
+                if ($kategori != null) {
+                    $metadata_kategori[$month][ucfirst($kategori)][] = '0';
+                }
 
-            //Jumlah Metadata Mengikut Negeri ====================================================================
-            $negeri = $met->c10_state;
-            if ($negeri != null) {
-                if ($negeri == 'wpPutrajaya') {
-                    $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
-                } else {
-                    $metadatas['negeri'][ucfirst($negeri)][] = 'test';
+                //Jumlah Metadata Mengikut Content Type ==============================================================
+                $content_type = $met->content_type;
+                $metadata_content_type['content'][ucfirst($content_type)][] = '0';
+
+                //Jumlah Metadata Mengikut Negeri ====================================================================
+                $negeri = $met->c10_state;
+                if ($negeri != null) {
+                    if ($negeri == 'wpPutrajaya') {
+                        $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
+                    } else {
+                        $metadatas['negeri'][ucfirst($negeri)][] = 'test';
+                    }
                 }
             }
-        }
+        });
         
         $chartkategori = [];
         foreach ($metadata_kategori as $k => $v) {
