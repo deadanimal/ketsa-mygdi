@@ -61,7 +61,7 @@
                                                 <select name="jenis_laporan" class="form-control form-control-sm ml-3"
                                                     required>
                                                     <option hidden selected value="">Sila Pilih</option>
-                                                    <option value="laporan_perlepasan_data">Laporan Perlepasan Data</option>
+                                                    <option value="laporan_perlepasan_data">Laporan Pelepasan Data</option>
                                                     <!--<option value="laporan_perkongsian_data">Laporan Perkongsian Data</option>-->
                                                     <option value="anggaran_jimat_kos">Anggaran Penjimatan Kos</option>
                                                     <option value="anggaran_jimat_kos_kategori">Anggaran Penjimatan Kos
